@@ -10,7 +10,7 @@ import { logger } from '@/lib/utils/logger';
 export default withAuth(
   function middleware(req: NextRequest) {
     // Performance optimizations
-    const response = NextResponse.next();
+    let response = NextResponse.next();
     
     // Add performance hints and prefetch headers
     if (req.nextUrl.pathname.startsWith('/listings')) {
@@ -48,7 +48,7 @@ export default withAuth(
           resetTime: new Date(rateLimit.resetTime).toISOString(),
         });
 
-        const response = NextResponse.json(
+        const rateLimitResponse = NextResponse.json(
           {
             success: false,
             error: {
@@ -60,30 +60,29 @@ export default withAuth(
           { status: 429 }
         );
 
-        response.headers.set('X-RateLimit-Limit', '100');
-        response.headers.set('X-RateLimit-Remaining', '0');
-        response.headers.set(
+        rateLimitResponse.headers.set('X-RateLimit-Limit', '100');
+        rateLimitResponse.headers.set('X-RateLimit-Remaining', '0');
+        rateLimitResponse.headers.set(
           'X-RateLimit-Reset',
           rateLimit.resetTime.toString()
         );
 
-        return response;
+        return rateLimitResponse;
       }
 
       // Add rate limit headers to response
-      const response = NextResponse.next();
-      response.headers.set('X-RateLimit-Limit', '100');
-      response.headers.set(
+      const apiResponse = NextResponse.next();
+      apiResponse.headers.set('X-RateLimit-Limit', '100');
+      apiResponse.headers.set(
         'X-RateLimit-Remaining',
         rateLimit.remaining.toString()
       );
-      response.headers.set('X-RateLimit-Reset', rateLimit.resetTime.toString());
+      apiResponse.headers.set('X-RateLimit-Reset', rateLimit.resetTime.toString());
 
-      return applySecurityHeaders(response, req);
+      return applySecurityHeaders(apiResponse, req);
     }
 
     // Apply security headers to all responses
-    const response = NextResponse.next();
     return applySecurityHeaders(response, req);
   },
   {

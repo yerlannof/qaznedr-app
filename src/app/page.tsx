@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import Navigation from '@/components/layouts/Navigation';
 import SearchHero from '@/components/features/SearchHero';
 
@@ -39,7 +40,15 @@ export default function Home() {
       </section>
 
       {/* Search Hero */}
-      <SearchHero />
+      <Suspense fallback={
+        <div className="py-10">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
+          </div>
+        </div>
+      }>
+        <SearchHero />
+      </Suspense>
 
       {/* Statistics Section */}
       <section className="py-20 bg-gray-50">

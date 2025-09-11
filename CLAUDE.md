@@ -140,27 +140,21 @@ type ListingType =
 
 ## MCP Server Integration
 
-**Total configured**: 14 MCP servers (все серверы протестированы и работают)
+MCP servers extend Claude's capabilities. See `MCP_SETUP_GUIDE.md` for installation instructions.
 
-### Active MCP Stack (14 servers):
+### Recommended MCP Servers for this project:
 
-1. **brave-search** - веб-поиск и исследования
-2. **context7** - документация библиотек и фреймворков
-3. **desktop-commander** - файловые операции и команды системы
-4. **docker** - управление контейнерами
-5. **fetch** - загрузка содержимого по URL
-6. **firecrawl** - веб-скрапинг и извлечение данных
-7. **git** - git операции и управление версиями
-8. **memory-keeper** - структурированная память между сессиями
-9. **puppeteer** - автоматизация браузера
-10. **sqlite** - работа с базой данных SQLite (./prisma/dev.db)
-11. **supabase** - интеграция с Supabase
-12. **task-manager** - управление задачами проекта
-13. **thread-continuity** - память между сессиями разработки
-14. **time** - работа с временем и датами
+1. **filesystem** - Access to project files
+2. **supabase** - Database operations (PRIMARY DATABASE)
+3. **github** - Version control and repository management
+4. **brave-search** - Web search capabilities
+5. **memory** - Persistent context between sessions
 
-### MCP Usage Notes:
+### Setup Instructions:
 
-- Все серверы настроены через `claude mcp add`
-- Разрешения настроены в `.claude/settings.local.json`
-- SQLite MCP настроен для работы с локальной Prisma БД
+1. Run `./scripts/install-mcp-servers.sh` for guided setup
+2. Configure servers in Claude Desktop settings
+3. Add your Supabase credentials (URL and service role key)
+4. Restart Claude Desktop to activate servers
+
+For detailed configuration, see `MCP_SETUP_GUIDE.md`

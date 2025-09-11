@@ -1,58 +1,149 @@
 #!/bin/bash
 
-echo "🚀 Устанавливаем все MCP серверы для проекта QAZNEDR..."
+# MCP Server Installation Script for Claude Code CLI
+# This script installs MCP servers for Claude Code (terminal-based Claude)
 
-# Цвета для вывода
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-RED='\033[0;31m'
-NC='\033[0m' # No Color
+echo "🚀 Installing MCP Servers for Claude Code CLI"
+echo "=============================================="
+echo ""
 
-# Функция для установки MCP сервера
-install_mcp() {
-    local name=$1
-    local command=$2
-    echo -e "${YELLOW}Installing $name...${NC}"
-    if claude mcp add "$name" "$command"; then
-        echo -e "${GREEN}✅ $name installed successfully${NC}"
-    else
-        echo -e "${RED}❌ Failed to install $name${NC}"
-    fi
+# Check if claude CLI is available
+if ! command -v claude &> /dev/null; then
+    echo "❌ Claude Code CLI not found!"
     echo ""
-}
+    echo "Please install Claude Code first:"
+    echo "1. Visit: https://claude.ai/download"
+    echo "2. Download and install Claude Code for your platform"
+    echo "3. Run 'claude' in terminal to verify installation"
+    exit 1
+fi
 
-# Базовые MCP серверы
-install_mcp "brave-search" "npx @modelcontextprotocol/server-brave-search"
-install_mcp "memory-keeper" "npx @modelcontextprotocol/server-memory"
-install_mcp "puppeteer" "npx @modelcontextprotocol/server-puppeteer"
-install_mcp "desktop-commander" "npx @modelcontextprotocol/server-filesystem"
-install_mcp "docker" "npx docker-mcp"
-install_mcp "task-manager" "npx @modelcontextprotocol/server-everything"
-install_mcp "firecrawl" "npx firecrawl-mcp"
-install_mcp "thread-continuity" "npx @modelcontextprotocol/server-sequential-thinking"
-install_mcp "git" "npx mcp-git"
-install_mcp "context7" "npx @modelcontextprotocol/server-github"
+echo "✅ Claude Code CLI detected"
+echo ""
+echo "📦 Installing MCP Servers..."
+echo "============================"
+echo ""
 
-# Серверы с дублированными командами (переименованы для уникальности)
-install_mcp "fetch" "npx @modelcontextprotocol/server-memory"
-install_mcp "sqlite" "npx @modelcontextprotocol/server-puppeteer"
-install_mcp "supabase" "npx @modelcontextprotocol/server-filesystem"
-install_mcp "time" "npx docker-mcp"
+# List of available MCP servers for Claude Code
+declare -A servers=(
+    ["filesystem"]="File system operations"
+    ["github"]="GitHub integration" 
+    ["gitlab"]="GitLab integration"
+    ["git"]="Git operations"
+    ["google-drive"]="Google Drive access"
+    ["slack"]="Slack integration"
+    ["postgres"]="PostgreSQL database"
+    ["sqlite"]="SQLite database"
+    ["fetch"]="Fetch web content"
+    ["puppeteer"]="Browser automation"
+    ["brave-search"]="Web search"
+    ["google-maps"]="Maps and location"
+    ["memory"]="Persistent memory"
+    ["everart"]="Image generation"
+    ["sequentialthinking"]="Complex reasoning"
+    ["youtube-transcript"]="YouTube transcripts"
+)
 
-echo -e "${YELLOW}======================================${NC}"
-echo -e "${YELLOW}⚠️  Shopify серверы требуют токены!${NC}"
-echo -e "${YELLOW}======================================${NC}"
+echo "Available MCP servers for installation:"
 echo ""
-echo "Для установки Shopify серверов выполните вручную:"
+
+for server in "${!servers[@]}"; do
+    echo "  • $server - ${servers[$server]}"
+done
+
 echo ""
-echo -e "${GREEN}1. Shopify API:${NC}"
-echo '   claude mcp add shopify-api "npx shopify-mcp --accessToken YOUR_TOKEN --domain YOUR_DOMAIN.myshopify.com"'
+echo "🔧 Installing recommended servers for QAZNEDR.KZ project..."
 echo ""
-echo -e "${GREEN}2. Shopify Dev:${NC}"
-echo '   claude mcp add shopify-dev "npx -y @shopify/dev-mcp@latest"'
+
+# Recommended servers for this project
+recommended=(
+    "filesystem"
+    "github"
+    "postgres"  # For Supabase PostgreSQL
+    "fetch"
+    "brave-search"
+    "memory"
+)
+
+installed=0
+failed=0
+
+for server in "${recommended[@]}"; do
+    echo -n "Installing $server... "
+    if claude mcp install "$server" 2>/dev/null; then
+        echo "✅"
+        ((installed++))
+    else
+        # Try alternative installation method
+        if claude mcp add "$server" 2>/dev/null; then
+            echo "✅"
+            ((installed++))
+        else
+            echo "⚠️  (may already be installed or not available)"
+            ((failed++))
+        fi
+    fi
+done
+
 echo ""
-echo "Токены можно найти в файле ~/CLAUDE.md на основном компьютере"
+echo "📊 Installation Summary:"
+echo "========================"
+echo "✅ Successfully installed: $installed servers"
+if [ $failed -gt 0 ]; then
+    echo "⚠️  Skipped or failed: $failed servers"
+fi
+
 echo ""
-echo -e "${GREEN}✅ Установка базовых MCP серверов завершена!${NC}"
+echo "🔍 Checking installed MCP servers..."
 echo ""
-echo "Проверить установленные серверы: claude mcp list"
+claude mcp list 2>/dev/null || echo "Unable to list servers. They will be available in your next Claude session."
+
+echo ""
+echo "⚙️  Supabase Configuration for Claude Code"
+echo "==========================================="
+echo ""
+echo "Since Claude Code doesn't have a direct Supabase MCP server,"
+echo "you should use the 'postgres' MCP server with your Supabase credentials:"
+echo ""
+echo "1. Get your Supabase database connection string from:"
+echo "   https://app.supabase.com/project/_/settings/database"
+echo ""
+echo "2. Configure the postgres MCP server:"
+echo "   claude mcp configure postgres"
+echo ""
+echo "3. Enter your Supabase PostgreSQL connection details:"
+echo "   - Host: db.xxxx.supabase.co"
+echo "   - Port: 5432"
+echo "   - Database: postgres"
+echo "   - User: postgres"
+echo "   - Password: [your-database-password]"
+echo ""
+
+echo "📝 Configuration File Location"
+echo "=============================="
+echo ""
+echo "MCP server configurations are stored in:"
+echo "  ~/.claude/mcp_servers.json"
+echo ""
+echo "You can manually edit this file to add server configurations."
+echo ""
+
+echo "🎯 Next Steps:"
+echo "=============="
+echo "1. Start a new Claude Code session: 'claude'"
+echo "2. Test MCP servers with: '/mcp list'"
+echo "3. Configure postgres server for Supabase access"
+echo "4. Use '/help' to see all available commands"
+echo ""
+
+echo "💡 Quick Test Commands:"
+echo "======================"
+echo "  /mcp list                    # List installed servers"
+echo "  /mcp test filesystem         # Test filesystem access"
+echo "  /mcp test postgres           # Test database connection"
+echo "  /mcp configure [server]      # Configure a server"
+echo ""
+
+echo "✨ MCP Server installation script complete!"
+echo ""
+echo "For more help, visit: https://docs.anthropic.com/claude/docs/mcp"

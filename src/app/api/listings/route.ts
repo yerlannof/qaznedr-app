@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/services/auth.config';
 import { getListingsCache, revalidateListings } from '@/lib/cache';
 import { prisma } from '@/lib/prisma';
-import type { SearchParams } from '@/lib/types/listing';
+import type { SearchParams, RegionType, MineralType } from '@/lib/types/listing';
 
 // GET /api/listings - получить все объявления с пагинацией и фильтрацией (с кэшированием)
 export async function GET(request: NextRequest) {
@@ -18,8 +18,8 @@ export async function GET(request: NextRequest) {
       sortOrder: (searchParams.get('sortOrder') as 'asc' | 'desc') || 'desc',
       query: searchParams.get('query') || undefined,
       filters: {
-        region: searchParams.get('region') ? [searchParams.get('region')!] : undefined,
-        mineral: searchParams.get('mineral') ? [searchParams.get('mineral')!] : undefined,
+        region: searchParams.get('region') ? [searchParams.get('region')! as RegionType] : undefined,
+        mineral: searchParams.get('mineral') ? [searchParams.get('mineral')! as MineralType] : undefined,
         type: searchParams.get('type') ? [searchParams.get('type')! as any] : undefined,
         verified: searchParams.get('verified') ? searchParams.get('verified') === 'true' : undefined,
         featured: searchParams.get('featured') ? searchParams.get('featured') === 'true' : undefined,

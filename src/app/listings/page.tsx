@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
@@ -16,7 +16,7 @@ import type {
   ListingType,
 } from '@/lib/types/listing';
 
-export default function ListingsPage() {
+function ListingsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -300,5 +300,17 @@ export default function ListingsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ListingsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-lg text-gray-600">Загрузка...</div>
+      </div>
+    }>
+      <ListingsContent />
+    </Suspense>
   );
 }

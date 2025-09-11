@@ -44,7 +44,7 @@ class MetricsCollector {
   }
 }
 
-export const metrics = MetricsCollector.getInstance();
+const metrics = MetricsCollector.getInstance();
 
 // Collect database metrics
 async function collectDatabaseMetrics(): Promise<Record<string, number>> {
@@ -157,6 +157,3 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     );
   }
 }
-
-// Export metrics collector for use in other parts of the app
-export { metrics as metricsCollector };

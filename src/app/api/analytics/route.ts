@@ -130,7 +130,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       data: {
         events,
         totalEvents,
-        eventCounts: eventCounts.map(item => ({
+        eventCounts: eventCounts.map((item: any) => ({
           name: item.name,
           count: item._count.name,
         })),

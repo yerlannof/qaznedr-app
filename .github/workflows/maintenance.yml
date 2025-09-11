@@ -1,0 +1,254 @@
+# Maintenance and Monitoring Workflows for QAZNEDR.KZ
+name: Maintenance
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Maintenance task to run'
+        required: true
+        type: choice
+        options:
+          - database-backup
+          - security-scan
+          - dependency-update
+          - performance-check
+          - cleanup
+
+jobs:
+  # Automated Database Backup
+  database-backup:
+    name: Database Backup
+    runs-on: ubuntu-latest
+    if: github.event.schedule || github.event.inputs.task == 'database-backup'
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.PRODUCTION_SSH_KEY }}
+
+      - name: Create database backup
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} << 'EOF'
+            cd /opt/qaznedr-app
+            
+            # Create backup
+            backup_file="qaznedr_backup_$(date +%Y%m%d_%H%M%S).sql"
+            docker-compose exec -T postgres pg_dump -U qaznedr qaznedr > "backups/$backup_file"
+            
+            # Compress backup
+            gzip "backups/$backup_file"
+            
+            # Upload to S3 (if configured)
+            if [ ! -z "$AWS_S3_BACKUP_BUCKET" ]; then
+              aws s3 cp "backups/${backup_file}.gz" "s3://$AWS_S3_BACKUP_BUCKET/databases/"
+            fi
+            
+            # Keep only last 7 days of local backups
+            find backups/ -name "*.gz" -mtime +7 -delete
+            
+            echo "Database backup completed: ${backup_file}.gz"
+          EOF
+
+  # Security Scanning
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    if: github.event.schedule || github.event.inputs.task == 'security-scan'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run security audit
+        run: |
+          npm audit --audit-level moderate
+          npm audit fix --dry-run > audit-report.txt || true
+
+      - name: Docker security scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'ghcr.io/${{ github.repository }}:latest'
+          format: 'table'
+
+      - name: Upload security report
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-report
+          path: |
+            audit-report.txt
+          retention-days: 30
+
+  # Dependency Updates
+  dependency-update:
+    name: Update Dependencies
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'dependency-update'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Update dependencies
+        run: |
+          npm update
+          npm audit fix --force || true
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet package-lock.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          commit-message: 'chore: update dependencies'
+          title: 'Automated dependency updates'
+          body: |
+            This PR contains automated dependency updates.
+
+            Please review the changes and test thoroughly before merging.
+          branch: 'dependency-updates'
+          delete-branch: true
+
+  # Performance Monitoring
+  performance-check:
+    name: Performance Check
+    runs-on: ubuntu-latest
+    if: github.event.schedule || github.event.inputs.task == 'performance-check'
+    steps:
+      - name: Check website performance
+        run: |
+          # Check response times
+          echo "Checking response times..."
+          main_response=$(curl -o /dev/null -s -w "%{time_total}" https://qaznedr.kz)
+          api_response=$(curl -o /dev/null -s -w "%{time_total}" https://qaznedr.kz/api/health)
+
+          echo "Main page: ${main_response}s"
+          echo "API health: ${api_response}s"
+
+          # Alert if response times are too slow
+          if (( $(echo "$main_response > 3.0" | bc -l) )); then
+            echo "::warning::Main page response time is slow: ${main_response}s"
+          fi
+
+          if (( $(echo "$api_response > 1.0" | bc -l) )); then
+            echo "::warning::API response time is slow: ${api_response}s"
+          fi
+
+      - name: Check SSL certificate
+        run: |
+          expiry_date=$(echo | openssl s_client -servername qaznedr.kz -connect qaznedr.kz:443 2>/dev/null | openssl x509 -noout -dates | grep notAfter | cut -d= -f2)
+          expiry_timestamp=$(date -d "$expiry_date" +%s)
+          current_timestamp=$(date +%s)
+          days_until_expiry=$(( (expiry_timestamp - current_timestamp) / 86400 ))
+
+          echo "SSL certificate expires in $days_until_expiry days"
+
+          if [ $days_until_expiry -lt 30 ]; then
+            echo "::warning::SSL certificate expires soon: $days_until_expiry days"
+          fi
+
+      - name: Check disk space
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} << 'EOF'
+            disk_usage=$(df / | awk 'NR==2 {print $5}' | sed 's/%//')
+            echo "Disk usage: ${disk_usage}%"
+            
+            if [ $disk_usage -gt 80 ]; then
+              echo "::warning::Disk usage is high: ${disk_usage}%"
+            fi
+          EOF
+
+  # Cleanup Tasks
+  cleanup:
+    name: System Cleanup
+    runs-on: ubuntu-latest
+    if: github.event.schedule || github.event.inputs.task == 'cleanup'
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.PRODUCTION_SSH_KEY }}
+
+      - name: Clean up server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} << 'EOF'
+            cd /opt/qaznedr-app
+            
+            # Clean up Docker
+            echo "Cleaning up Docker resources..."
+            docker system prune -f
+            docker volume prune -f
+            docker image prune -a -f
+            
+            # Clean up old log files
+            echo "Cleaning up log files..."
+            find /var/log -name "*.log" -mtime +30 -delete || true
+            
+            # Clean up temporary files
+            echo "Cleaning up temporary files..."
+            find /tmp -mtime +7 -delete || true
+            
+            # Clean up old backups (keep last 30 days)
+            echo "Cleaning up old backups..."
+            find backups/ -name "*.gz" -mtime +30 -delete || true
+            
+            echo "Cleanup completed"
+          EOF
+
+  # Health Check and Alerting
+  health-check:
+    name: Health Check
+    runs-on: ubuntu-latest
+    if: github.event.schedule
+    steps:
+      - name: Check all endpoints
+        run: |
+          endpoints=(
+            "https://qaznedr.kz"
+            "https://qaznedr.kz/api/health"
+            "https://qaznedr.kz/listings/mining-licenses"
+          )
+
+          failed_endpoints=()
+
+          for endpoint in "${endpoints[@]}"; do
+            echo "Checking $endpoint..."
+            if ! curl -f -s "$endpoint" > /dev/null; then
+              echo "❌ $endpoint is down"
+              failed_endpoints+=("$endpoint")
+            else
+              echo "✅ $endpoint is up"
+            fi
+          done
+
+          if [ ${#failed_endpoints[@]} -gt 0 ]; then
+            echo "::error::Some endpoints are down: ${failed_endpoints[*]}"
+            exit 1
+          fi
+
+      - name: Notify on failure
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          channel: '#alerts'
+          text: ':exclamation: QAZNEDR.KZ health check failed!'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

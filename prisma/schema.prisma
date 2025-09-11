@@ -1,0 +1,264 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("BUYER") // BUYER, SELLER, ADMIN
+  company       String?
+  phone         String?
+  verified      Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Аутентификация
+  accounts      Account[]
+  sessions      Session[]
+  
+  // Бизнес-связи
+  deposits         KazakhstanDeposit[]
+  favorites        Favorite[]
+  views            View[]
+  uploadedDocuments Document[]
+  sentRequests     ContactRequest[] @relation("SentRequests")
+  receivedRequests ContactRequest[] @relation("ReceivedRequests")
+  notifications    Notification[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Основная модель месторождения Казахстана
+model KazakhstanDeposit {
+  id          String      @id @default(cuid())
+  title       String
+  description String
+  type        String      // MINING_LICENSE, EXPLORATION_LICENSE, MINERAL_OCCURRENCE
+  mineral     String      // Нефть, Газ, Золото, Медь, Уголь, Уран, Железо
+  region      String      // Мангистауская, Атырауская, и т.д.
+  city        String
+  area        Float       // км²
+  price       Float?      // в тенге
+  coordinates String      // JSON: [lat, lng]
+  verified    Boolean     @default(false)
+  featured    Boolean     @default(false)
+  views       Int         @default(0)
+  status      String      @default("ACTIVE") // ACTIVE, SOLD, PENDING, DRAFT
+  images      String      // JSON массив URL изображений
+  documents   String      // JSON массив URL документов
+  userId      String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Специфичные поля для лицензий на добычу
+  licenseSubtype         String?   // EXTRACTION_RIGHT, PROCESSING_RIGHT, etc.
+  licenseNumber          String?
+  licenseExpiry          DateTime?
+  annualProductionLimit  Float?
+
+  // Специфичные поля для лицензий на разведку
+  explorationStage  String?   // PRELIMINARY, DETAILED, FEASIBILITY, ENVIRONMENTAL
+  explorationStart  DateTime?
+  explorationEnd    DateTime?
+  explorationBudget Float?
+
+  // Специфичные поля для рудопроявлений
+  discoveryDate        DateTime?
+  geologicalConfidence String?   // INFERRED, INDICATED, MEASURED
+  estimatedReserves    Float?
+  accessibilityRating  String?   // EASY, MODERATE, DIFFICULT, VERY_DIFFICULT
+
+  // Связи
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  favorites    Favorite[]
+  views_       View[]
+  documents_   Document[]
+  contactRequests ContactRequest[]
+
+  @@index([region])
+  @@index([mineral])
+  @@index([type])
+  @@index([status])
+  @@index([verified])
+  @@index([featured])
+  @@index([createdAt])
+}
+
+// Избранные месторождения
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  depositId String
+  createdAt DateTime @default(now())
+
+  user    User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deposit KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, depositId])
+}
+
+// История просмотров
+model View {
+  id        String   @id @default(cuid())
+  depositId String
+  userId    String?
+  ipAddress String
+  userAgent String
+  createdAt DateTime @default(now())
+
+  user    User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  deposit KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+
+  @@index([depositId])
+  @@index([createdAt])
+}
+
+// Документы месторождения
+model Document {
+  id         String   @id @default(cuid())
+  depositId  String
+  name       String
+  type       String   // LICENSE, GEOLOGICAL_SURVEY, ENVIRONMENTAL, FINANCIAL, LEGAL, OTHER
+  url        String
+  size       Int
+  uploadedBy String
+  createdAt  DateTime @default(now())
+
+  deposit KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  uploader User             @relation(fields: [uploadedBy], references: [id])
+
+  @@index([depositId])
+  @@index([type])
+}
+
+// Запросы на контакт
+model ContactRequest {
+  id         String   @id @default(cuid())
+  depositId  String
+  fromUserId String
+  toUserId   String
+  message    String
+  phone      String?
+  email      String?
+  status     String   @default("PENDING") // PENDING, RESPONDED, CLOSED
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  deposit  KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  fromUser User              @relation("SentRequests", fields: [fromUserId], references: [id])
+  toUser   User              @relation("ReceivedRequests", fields: [toUserId], references: [id])
+
+  @@index([depositId])
+  @@index([fromUserId])
+  @@index([toUserId])
+  @@index([status])
+}
+
+// Уведомления
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // NEW_DEPOSIT, PRICE_CHANGE, AUCTION_START, AUCTION_END, MESSAGE, SYSTEM
+  title     String
+  message   String
+  data      String?  // JSON дополнительные данные
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([read])
+  @@index([createdAt])
+}
+
+// Analytics Events
+model AnalyticsEvent {
+  id         String   @id @default(cuid())
+  name       String
+  properties Json?
+  userId     String?
+  sessionId  String?
+  timestamp  DateTime
+  clientIP   String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  @@index([name])
+  @@index([userId])
+  @@index([sessionId])
+  @@index([timestamp])
+  @@index([createdAt])
+}
+
+// Error Logs
+model ErrorLog {
+  id          String   @id @default(cuid())
+  message     String
+  stack       String?
+  severity    String   // low, medium, high, critical
+  fingerprint String
+  count       Int      @default(1)
+  context     Json?
+  timestamp   DateTime
+  clientIP    String?
+  userAgent   String?
+  userId      String?
+  sessionId   String?
+  url         String?
+  component   String?
+  action      String?
+  createdAt   DateTime @default(now())
+
+  @@index([severity])
+  @@index([fingerprint])
+  @@index([component])
+  @@index([timestamp])
+  @@index([createdAt])
+  @@index([userId])
+}

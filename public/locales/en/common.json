@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "auth": {
+    "loginTitle": "Sign in to your account",
+    "registerTitle": "Create a new account",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Name",
+    "nameOptional": "Name (optional)",
+    "loginButton": "Sign in",
+    "registerButton": "Create account",
+    "loggingIn": "Signing in...",
+    "registering": "Creating account...",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "signInLink": "sign in to your existing account",
+    "createAccountLink": "create a new account",
+    "error": "Error",
+    "passwordMismatch": "Passwords do not match",
+    "passwordTooShort": "Password must be at least 6 characters long"
+  },
+  "dashboard": {
+    "welcome": "Welcome to Dashboard",
+    "loggedInAs": "Logged in as:",
+    "signOut": "Sign out"
+  }
+}

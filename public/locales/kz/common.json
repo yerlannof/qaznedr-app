@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "home": "Басты бет",
+    "dashboard": "Басқару панелі",
+    "login": "Кіру",
+    "register": "Тіркелу",
+    "logout": "Шығу"
+  },
+  "auth": {
+    "loginTitle": "Аккаунтыңызға кіріңіз",
+    "registerTitle": "Жаңа аккаунт құру",
+    "email": "Электрондық пошта",
+    "password": "Құпия сөз",
+    "confirmPassword": "Құпия сөзді растаңыз",
+    "name": "Аты",
+    "nameOptional": "Аты (міндетті емес)",
+    "loginButton": "Кіру",
+    "registerButton": "Аккаунт құру",
+    "loggingIn": "Кіру...",
+    "registering": "Аккаунт құрылуда...",
+    "alreadyHaveAccount": "Аккаунт бар ма?",
+    "dontHaveAccount": "Аккаунт жоқ па?",
+    "signInLink": "бар аккаунтқа кіріңіз",
+    "createAccountLink": "жаңа аккаунт құрыңыз",
+    "error": "Қате",
+    "passwordMismatch": "Құпия сөздер сәйкес келмейді",
+    "passwordTooShort": "Құпия сөз кемінде 6 таңбадан тұруы керек"
+  },
+  "dashboard": {
+    "welcome": "Басқару панеліне қош келдіңіз",
+    "loggedInAs": "Сіз кірдіңіз:",
+    "signOut": "Шығу"
+  }
+}

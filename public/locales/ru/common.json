@@ -1,0 +1,34 @@
+{
+  "nav": {
+    "home": "Главная",
+    "dashboard": "Панель управления",
+    "login": "Вход",
+    "register": "Регистрация",
+    "logout": "Выйти"
+  },
+  "auth": {
+    "loginTitle": "Войдите в свой аккаунт",
+    "registerTitle": "Создать новый аккаунт",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "name": "Имя",
+    "nameOptional": "Имя (необязательно)",
+    "loginButton": "Войти",
+    "registerButton": "Создать аккаунт",
+    "loggingIn": "Вход...",
+    "registering": "Создание аккаунта...",
+    "alreadyHaveAccount": "Уже есть аккаунт?",
+    "dontHaveAccount": "Нет аккаунта?",
+    "signInLink": "войдите в существующий аккаунт",
+    "createAccountLink": "создайте новый аккаунт",
+    "error": "Ошибка",
+    "passwordMismatch": "Пароли не совпадают",
+    "passwordTooShort": "Пароль должен быть не менее 6 символов"
+  },
+  "dashboard": {
+    "welcome": "Добро пожаловать в панель управления",
+    "loggedInAs": "Вы вошли как:",
+    "signOut": "Выйти"
+  }
+}

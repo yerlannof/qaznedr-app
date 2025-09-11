@@ -1,0 +1,170 @@
+'use client';
+
+import { KazakhstanDeposit } from '@/lib/types/listing';
+
+interface MineralOccurrenceDetailsProps {
+  deposit: KazakhstanDeposit;
+}
+
+export default function MineralOccurrenceDetails({
+  deposit,
+}: MineralOccurrenceDetailsProps) {
+  const getConfidenceText = (confidence?: string) => {
+    const confidences: Record<string, string> = {
+      INFERRED: 'Предполагаемые',
+      INDICATED: 'Вероятные',
+      MEASURED: 'Достоверные',
+    };
+    return confidences[confidence || ''] || 'Не определена';
+  };
+
+  const getConfidenceColor = (confidence?: string) => {
+    const colors: Record<string, string> = {
+      INFERRED: 'bg-yellow-100 text-yellow-800',
+      INDICATED: 'bg-blue-100 text-blue-800',
+      MEASURED: 'bg-green-100 text-green-800',
+    };
+    return colors[confidence || ''] || 'bg-gray-100 text-gray-800';
+  };
+
+  const getAccessibilityText = (rating?: string) => {
+    const ratings: Record<string, string> = {
+      EASY: 'Легкий доступ',
+      MODERATE: 'Умеренный доступ',
+      DIFFICULT: 'Сложный доступ',
+      VERY_DIFFICULT: 'Очень сложный доступ',
+    };
+    return ratings[rating || ''] || 'Не оценен';
+  };
+
+  const getAccessibilityColor = (rating?: string) => {
+    const colors: Record<string, string> = {
+      EASY: 'text-green-600',
+      MODERATE: 'text-yellow-600',
+      DIFFICULT: 'text-orange-600',
+      VERY_DIFFICULT: 'text-red-600',
+    };
+    return colors[rating || ''] || 'text-gray-600';
+  };
+
+  const getAccessibilityDescription = (rating?: string) => {
+    const descriptions: Record<string, string> = {
+      EASY: 'Хорошая транспортная доступность, развитая инфраструктура',
+      MODERATE: 'Умеренная доступность, потребуется развитие инфраструктуры',
+      DIFFICULT: 'Ограниченная доступность, сложная логистика',
+      VERY_DIFFICULT:
+        'Крайне сложная доступность, требует значительных инвестиций',
+    };
+    return descriptions[rating || ''] || '';
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <h2 className="text-xl font-semibold text-gray-900 mb-4">
+        💎 Информация о рудопроявлении
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-4">
+          {deposit.discoveryDate && (
+            <div>
+              <h3 className="font-medium text-gray-900 mb-2">Дата открытия</h3>
+              <p className="text-gray-700">
+                {new Date(deposit.discoveryDate).toLocaleDateString('ru-RU', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </p>
+            </div>
+          )}
+
+          <div>
+            <h3 className="font-medium text-gray-900 mb-2">
+              Достоверность запасов
+            </h3>
+            <span
+              className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getConfidenceColor(deposit.geologicalConfidence)}`}
+            >
+              {getConfidenceText(deposit.geologicalConfidence)}
+            </span>
+          </div>
+
+          {deposit.estimatedReserves && (
+            <div>
+              <h3 className="font-medium text-gray-900 mb-2">
+                Оценочные запасы
+              </h3>
+              <p className="text-gray-700">
+                <span className="text-2xl font-bold text-purple-600">
+                  {deposit.estimatedReserves.toLocaleString()}
+                </span>{' '}
+                тонн
+              </p>
+            </div>
+          )}
+
+          <div>
+            <h3 className="font-medium text-gray-900 mb-2">
+              Полезное ископаемое
+            </h3>
+            <p className="text-gray-700 text-lg font-medium">
+              {deposit.mineral}
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <h3 className="font-medium text-gray-900 mb-2">
+              Транспортная доступность
+            </h3>
+            <div className="space-y-2">
+              <p
+                className={`font-medium ${getAccessibilityColor(deposit.accessibilityRating)}`}
+              >
+                {getAccessibilityText(deposit.accessibilityRating)}
+              </p>
+              <p className="text-gray-600 text-sm">
+                {getAccessibilityDescription(deposit.accessibilityRating)}
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-medium text-gray-900 mb-2">Площадь участка</h3>
+            <p className="text-gray-700">
+              <span className="text-xl font-bold text-purple-600">
+                {deposit.area.toLocaleString()}
+              </span>{' '}
+              км²
+            </p>
+          </div>
+
+          <div>
+            <h3 className="font-medium text-gray-900 mb-2">Статус участка</h3>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+              💎 Рудопроявление
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Investment Potential */}
+      <div className="mt-6 pt-6 border-t border-gray-200">
+        <h3 className="font-medium text-gray-900 mb-3">
+          📈 Инвестиционный потенциал
+        </h3>
+        <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+          <ul className="space-y-2 text-sm text-purple-800">
+            <li>💡 Возможность дальнейшей разведки и оценки запасов</li>
+            <li>🔬 Потенциал для научных исследований</li>
+            <li>📊 База для инвестиционных решений</li>
+            <li>🏗️ Планирование инфраструктурных проектов</li>
+            <li>⚖️ Соблюдение требований экологической безопасности</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}

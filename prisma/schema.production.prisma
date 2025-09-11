@@ -1,0 +1,199 @@
+// Production Prisma Schema for PostgreSQL
+// This schema is optimized for production use with proper indexing and constraints
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("BUYER") // BUYER, SELLER, ADMIN
+  company       String?
+  phone         String?
+  verified      Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Аутентификация
+  accounts      Account[]
+  sessions      Session[]
+  
+  // Объявления пользователя
+  deposits      KazakhstanDeposit[]
+  
+  // Избранное
+  favorites     Favorite[]
+  
+  // Просмотры
+  views         View[]
+
+  @@index([email])
+  @@index([verified])
+  @@index([createdAt])
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expires])
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model KazakhstanDeposit {
+  id                      String    @id @default(cuid())
+  title                   String
+  description             String    @db.Text
+  type                    String    // MINING_LICENSE, EXPLORATION_LICENSE, MINERAL_OCCURRENCE
+  mineral                 String
+  region                  String
+  city                    String
+  area                    Float?
+  price                   Float?
+  coordinates             String    @db.Text // JSON: [lat, lng]
+  images                  String    @db.Text // JSON array
+  documents               String    @db.Text // JSON array
+  status                  String    @default("ACTIVE") // ACTIVE, SOLD, PENDING, DRAFT
+  featured                Boolean   @default(false)
+  verified                Boolean   @default(false)
+  views                   Int       @default(0)
+  
+  // Ownership
+  ownerId                 String
+  user                    User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  
+  // Mining License specific fields
+  licenseSubtype          String?
+  licenseNumber           String?
+  licenseExpiry           DateTime?
+  annualProductionLimit   Float?
+  
+  // Exploration License specific fields
+  explorationStage        String?
+  explorationStart        DateTime?
+  explorationEnd          DateTime?
+  explorationBudget       Float?
+  
+  // Mineral Occurrence specific fields
+  discoveryDate           DateTime?
+  geologicalConfidence    String?
+  estimatedReserves       Float?
+  accessibilityRating     String?
+  
+  // Relations
+  favorites               Favorite[]
+  views_                  View[]
+  documents_              Document[]
+
+  @@index([type])
+  @@index([mineral])
+  @@index([region])
+  @@index([status])
+  @@index([featured])
+  @@index([verified])
+  @@index([price])
+  @@index([area])
+  @@index([createdAt])
+  @@index([ownerId])
+  @@fulltext([title, description])
+  @@map("kazakhstan_deposits")
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  depositId String
+  createdAt DateTime @default(now())
+  
+  user    User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deposit KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, depositId])
+  @@index([userId])
+  @@index([depositId])
+  @@map("favorites")
+}
+
+model View {
+  id        String   @id @default(cuid())
+  depositId String
+  userId    String?
+  ipAddress String
+  userAgent String
+  createdAt DateTime @default(now())
+  
+  deposit KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  user    User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  @@index([depositId])
+  @@index([userId])
+  @@index([createdAt])
+  @@index([ipAddress])
+  @@map("views")
+}
+
+model Document {
+  id        String   @id @default(cuid())
+  name      String
+  type      String
+  url       String
+  size      Int
+  depositId String
+  createdAt DateTime @default(now())
+  
+  deposit KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  
+  @@index([depositId])
+  @@index([type])
+  @@map("documents")
+}

@@ -3,3 +3,4 @@ export { LanguageSwitcher } from './LanguageSwitcher';
 export { ThemeToggle } from './ThemeToggle';
 export * from './card';
 export * from './badge';
+export * from './button';

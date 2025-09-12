@@ -78,7 +78,10 @@ export interface Database {
           id?: string;
           title?: string;
           description?: string | null;
-          type?: 'MINING_LICENSE' | 'EXPLORATION_LICENSE' | 'MINERAL_OCCURRENCE';
+          type?:
+            | 'MINING_LICENSE'
+            | 'EXPLORATION_LICENSE'
+            | 'MINERAL_OCCURRENCE';
           mineral?: string;
           region?: string;
           city?: string | null;

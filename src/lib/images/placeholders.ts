@@ -65,7 +65,8 @@ export const categoryPlaceholders = {
 export function getPlaceholderImage(mineral: string, type?: string): string {
   // Try to get mineral-specific placeholder
   const mineralImages =
-    mineralPlaceholders[mineral as keyof typeof mineralPlaceholders] || mineralPlaceholders.default;
+    mineralPlaceholders[mineral as keyof typeof mineralPlaceholders] ||
+    mineralPlaceholders.default;
 
   // If type is provided, mix with category placeholders
   if (type && categoryPlaceholders[type as keyof typeof categoryPlaceholders]) {

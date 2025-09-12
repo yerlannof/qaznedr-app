@@ -5,16 +5,19 @@
 Я установил и настроил следующие MCP серверы для вашего проекта:
 
 ### 1. **filesystem** - Доступ к файловой системе
+
 - **Команда**: `npx @modelcontextprotocol/server-filesystem`
 - **Путь**: `/Users/yerlankulumgariyev/Documents/qaznedr-app`
 - **Статус**: ✅ Настроен
 
 ### 2. **postgres** - PostgreSQL для Supabase
+
 - **Команда**: `npx enhanced-postgres-mcp-server`
 - **Статус**: ⚠️ Требует настройки credentials
 - **Необходимо**: Добавить данные Supabase в `.env.mcp`
 
 ### 3. **git** - Git операции
+
 - **Команда**: `npx @cyanheads/git-mcp-server`
 - **Статус**: ✅ Настроен
 
@@ -44,6 +47,7 @@ https://app.supabase.com/project/_/settings/database
 ### 2. Обновите .mcp.json
 
 Откройте `.mcp.json` и замените placeholder'ы на реальные значения:
+
 - `YOUR_PROJECT_ID` → ваш ID проекта Supabase
 - `YOUR_DATABASE_PASSWORD` → ваш пароль от БД
 
@@ -68,6 +72,7 @@ claude
 ```
 
 Вы должны увидеть:
+
 - filesystem ✓
 - postgres ✓
 - git ✓
@@ -90,13 +95,15 @@ claude
 ## Установленные npm пакеты
 
 Глобально установлены:
+
 - `@modelcontextprotocol/server-filesystem`
-- `enhanced-postgres-mcp-server` 
+- `enhanced-postgres-mcp-server`
 - `@cyanheads/git-mcp-server`
 
 ## Файлы конфигурации
 
 Созданы следующие файлы:
+
 - `.mcp.json` - локальная конфигурация MCP для проекта
 - `.env.mcp.example` - пример переменных окружения
 - `MCP_SETUP_GUIDE.md` - полное руководство
@@ -105,6 +112,7 @@ claude
 ## Важно!
 
 ⚠️ **Не коммитьте файлы с credentials:**
+
 - `.env.mcp` (добавьте в .gitignore)
 - `.mcp.json` с реальными паролями
 
@@ -113,6 +121,7 @@ claude
 Если MCP серверы не работают:
 
 1. Убедитесь, что npm пакеты установлены:
+
 ```bash
 npm list -g | grep modelcontextprotocol
 npm list -g | grep postgres-mcp
@@ -120,11 +129,13 @@ npm list -g | grep git-mcp
 ```
 
 2. Проверьте конфигурацию:
+
 ```bash
 claude mcp list
 ```
 
 3. Переустановите сервер:
+
 ```bash
 claude mcp remove [имя]
 claude mcp add [имя] "npx @package/name"

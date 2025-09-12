@@ -220,12 +220,14 @@ export class SearchService {
   }
 
   async saveSearch(userId: string, filters: SearchFilters, name?: string) {
-    const { error } = await (this.supabase as any).from('saved_searches').insert({
-      user_id: userId,
-      name: name || `Search ${new Date().toLocaleDateString()}`,
-      filters: filters as any,
-      created_at: new Date().toISOString(),
-    });
+    const { error } = await (this.supabase as any)
+      .from('saved_searches')
+      .insert({
+        user_id: userId,
+        name: name || `Search ${new Date().toLocaleDateString()}`,
+        filters: filters as any,
+        created_at: new Date().toISOString(),
+      });
 
     if (error) throw error;
   }

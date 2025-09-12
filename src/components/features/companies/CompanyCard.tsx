@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Building2,
   Star,
@@ -15,7 +16,6 @@ import {
 } from 'lucide-react';
 import { Card, CardBadge } from '@/components/ui/card-new';
 import { Button } from '@/components/ui/button-new';
-import { cn } from '@/lib/utils';
 
 interface CompanyCardProps {
   company: {
@@ -103,12 +103,14 @@ export function CompanyCard({ company }: CompanyCardProps) {
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-start gap-4">
           {/* Logo */}
-          <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+          <div className="relative w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
             {company.logo ? (
-              <img
+              <Image
                 src={company.logo}
                 alt={company.name}
-                className="w-full h-full object-cover rounded-lg"
+                fill
+                className="object-cover"
+                sizes="64px"
               />
             ) : (
               <Building2 className="w-8 h-8 text-gray-400" />

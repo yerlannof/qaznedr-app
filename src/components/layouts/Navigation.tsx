@@ -13,6 +13,7 @@ import {
   User,
   LogOut,
   ChevronDown,
+  Briefcase,
 } from 'lucide-react';
 
 export default function Navigation() {
@@ -23,6 +24,7 @@ export default function Navigation() {
   const navigation = [
     { name: 'Объявления', href: '/listings', icon: MapPin },
     { name: 'Карта', href: '/map', icon: MapPin },
+    { name: 'Услуги', href: '/services', icon: Briefcase },
     { name: 'Аукционы', href: '/auctions', icon: Gavel },
     { name: 'Компании', href: '/companies', icon: Building2 },
     { name: 'Сообщения', href: '/messages', icon: MessageSquare },
@@ -78,7 +80,7 @@ export default function Navigation() {
             >
               Создать объявление
             </Link>
-            
+
             <div className="relative">
               <button
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
@@ -134,62 +136,62 @@ export default function Navigation() {
           </div>
         </div>
 
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navigation.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`
-                    block px-3 py-2 rounded-lg text-base font-medium
-                    ${
-                      isActive(item.href)
-                        ? 'bg-blue-50 text-blue-600'
-                        : 'text-gray-700 hover:bg-gray-50'
-                    }
-                  `}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <div className="flex items-center space-x-2">
-                    <Icon className="w-5 h-5" />
-                    <span>{item.name}</span>
-                  </div>
-                </Link>
-              );
-            })}
-            
-            <hr className="my-2" />
-            
-            <Link
-              href="/listings/create"
-              className="block px-3 py-2 bg-blue-600 text-white rounded-lg text-center font-medium"
-              onClick={() => setIsOpen(false)}
-            >
-              Создать объявление
-            </Link>
-            
-            <Link
-              href="/dashboard"
-              className="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50"
-              onClick={() => setIsOpen(false)}
-            >
-              Личный кабинет
-            </Link>
-            
-            <Link
-              href="/favorites"
-              className="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50"
-              onClick={() => setIsOpen(false)}
-            >
-              Избранное
-            </Link>
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navigation.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`
+                      block px-3 py-2 rounded-lg text-base font-medium
+                      ${
+                        isActive(item.href)
+                          ? 'bg-blue-50 text-blue-600'
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }
+                    `}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <Icon className="w-5 h-5" />
+                      <span>{item.name}</span>
+                    </div>
+                  </Link>
+                );
+              })}
+
+              <hr className="my-2" />
+
+              <Link
+                href="/listings/create"
+                className="block px-3 py-2 bg-blue-600 text-white rounded-lg text-center font-medium"
+                onClick={() => setIsOpen(false)}
+              >
+                Создать объявление
+              </Link>
+
+              <Link
+                href="/dashboard"
+                className="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50"
+                onClick={() => setIsOpen(false)}
+              >
+                Личный кабинет
+              </Link>
+
+              <Link
+                href="/favorites"
+                className="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50"
+                onClick={() => setIsOpen(false)}
+              >
+                Избранное
+              </Link>
+            </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
     </nav>
   );

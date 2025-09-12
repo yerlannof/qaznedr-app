@@ -1,6 +1,7 @@
 # 🔐 Получение Supabase Access Token
 
 ## ✅ Уже настроено:
+
 - **Project URL**: `https://uajyafmysdebrrfwwvpc.supabase.co`
 - **Project Ref**: `uajyafmysdebrrfwwvpc`
 
@@ -25,6 +26,7 @@
    Замените `YOUR_SUPABASE_ACCESS_TOKEN` на ваш токен
 
 ## 📝 Пример токена:
+
 ```
 sbp_0123456789abcdef0123456789abcdef01234567
 ```
@@ -33,6 +35,7 @@ sbp_0123456789abcdef0123456789abcdef01234567
 
 1. Сохраните файлы
 2. Перезапустите Claude Code:
+
    ```bash
    exit
    claude

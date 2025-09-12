@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Navigation from '@/components/layouts/Navigation';
+import { ImageUpload } from '@/components/ui/image-upload';
 import { depositApi } from '@/lib/api/deposits';
 import { ListingType, MineralType, RegionType } from '@/lib/types/listing';
 import Link from 'next/link';
@@ -18,6 +19,7 @@ type FormData = {
   price: number | null;
   area: number;
   coordinates: [number, number];
+  images: string[];
 
   // Mining License fields
   licenseSubtype?: string;
@@ -76,6 +78,7 @@ export default function CreateListingPage() {
     price: null,
     area: 0,
     coordinates: [0, 0],
+    images: [],
   });
 
   const [loading, setLoading] = useState(false);
@@ -235,7 +238,7 @@ export default function CreateListingPage() {
         verified: false,
         featured: false,
         views: 0,
-        images: [],
+        images: formData.images,
         documents: [],
 
         // Type-specific fields
@@ -750,6 +753,28 @@ export default function CreateListingPage() {
               {renderTypeSpecificFields()}
             </div>
           )}
+
+          {/* Images */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">
+              Изображения месторождения
+            </h2>
+            <p className="text-sm text-gray-600 mb-4">
+              Добавьте фотографии месторождения, карты, схемы или другие
+              визуальные материалы
+            </p>
+            <ImageUpload
+              value={formData.images}
+              onChange={(images) =>
+                setFormData((prev) => ({ ...prev, images }))
+              }
+              maxFiles={10}
+              maxSize={5}
+              bucket="images"
+              folder="listings"
+              disabled={loading}
+            />
+          </div>
 
           {/* Submit */}
           <div className="flex justify-end space-x-4">

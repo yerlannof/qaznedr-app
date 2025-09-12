@@ -19,6 +19,7 @@ Run the installation script:
 ```
 
 This will:
+
 1. Check for Claude Code CLI installation
 2. Install recommended MCP servers
 3. Provide configuration instructions
@@ -52,6 +53,7 @@ claude mcp list
 ```
 
 Or within a Claude session:
+
 ```
 /mcp list
 ```
@@ -79,6 +81,7 @@ claude mcp configure postgres
 ```
 
 Enter your Supabase connection details when prompted:
+
 - **Host**: Your Supabase host (db.xxxx.supabase.co)
 - **Port**: 5432
 - **Database**: postgres
@@ -88,11 +91,13 @@ Enter your Supabase connection details when prompted:
 ### 3. Test Connection
 
 In a Claude session:
+
 ```
 /mcp test postgres
 ```
 
 Or query your database:
+
 ```
 Can you show me the tables in my Supabase database?
 ```
@@ -117,11 +122,13 @@ Enter your GitHub token when prompted.
 ### 3. Test GitHub Access
 
 In a Claude session:
+
 ```
 /mcp test github
 ```
 
 Or:
+
 ```
 Show me the recent commits in this repository
 ```
@@ -174,6 +181,7 @@ Available MCP servers:
 ## Configuration Files
 
 MCP configurations are stored in:
+
 - `~/.claude/mcp_servers.json` - Server configurations
 - `~/.claude/settings.json` - General Claude settings
 
@@ -202,9 +210,7 @@ Edit `~/.claude/mcp_servers.json`:
   "filesystem": {
     "enabled": true,
     "config": {
-      "allowed_paths": [
-        "/Users/yourname/Documents/qaznedr-app"
-      ]
+      "allowed_paths": ["/Users/yourname/Documents/qaznedr-app"]
     }
   }
 }
@@ -292,6 +298,7 @@ echo "SELECT * FROM listings WHERE status = 'ACTIVE';" | \
 ## Support
 
 For issues specific to this project:
+
 1. Check this guide
 2. Run `./scripts/install-mcp-servers.sh` for automated setup
 3. Use `/help` in Claude Code for general help

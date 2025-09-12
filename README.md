@@ -7,9 +7,10 @@ QAZNEDR.KZ is a specialized marketplace platform for buying and selling mineral 
 ## Features
 
 ### Core Functionality
+
 - **Three types of listings:**
   - Mining Licenses - Active extraction rights with operational permits
-  - Exploration Licenses - Geological exploration and survey permits  
+  - Exploration Licenses - Geological exploration and survey permits
   - Mineral Occurrences - Documented mineral findings and prospects
 
 - **Advanced Search & Filtering:**
@@ -27,7 +28,8 @@ QAZNEDR.KZ is a specialized marketplace platform for buying and selling mineral 
 ## Quick Start
 
 ### Prerequisites
-- Node.js 20+ 
+
+- Node.js 20+
 - npm or yarn
 - SQLite
 
@@ -86,7 +88,7 @@ src/
 ## Documentation
 
 - [Technical Guide](./CLAUDE_TECHNICAL_GUIDE.md) - Detailed implementation guide
-- [Deployment Instructions](./DEPLOY_INSTRUCTIONS.md) - Production deployment steps  
+- [Deployment Instructions](./DEPLOY_INSTRUCTIONS.md) - Production deployment steps
 - [Production Checklist](./PRODUCTION_READINESS.md) - Pre-launch checklist
 - [Quick Commands](./START_COMMANDS.md) - Common development commands
 

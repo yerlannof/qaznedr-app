@@ -30,27 +30,27 @@ CREATE TABLE listings (
   status VARCHAR(50) DEFAULT 'ACTIVE',
   price DECIMAL(15, 2),
   currency VARCHAR(10) DEFAULT 'KZT',
-  
+
   -- Location fields
   region VARCHAR(100),
   coordinates JSONB,
   area_size DECIMAL(10, 2),
-  
+
   -- Mineral information
   mineral_type VARCHAR(50),
   estimated_reserves TEXT,
   geological_confidence VARCHAR(50),
-  
+
   -- License specific fields
   license_number VARCHAR(100),
   license_expiry DATE,
   license_subtype VARCHAR(50),
-  
+
   -- Exploration specific fields
   exploration_stage VARCHAR(50),
   exploration_period INTEGER,
   exploration_budget DECIMAL(15, 2),
-  
+
   -- Metadata
   user_id UUID REFERENCES auth.users(id),
   created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -116,41 +116,41 @@ npm install @supabase/supabase-js @supabase/auth-helpers-nextjs
 Create `src/lib/supabase/client.ts`:
 
 ```typescript
-import { createBrowserClient } from '@supabase/ssr'
+import { createBrowserClient } from '@supabase/ssr';
 
 export function createClient() {
   return createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  );
 }
 ```
 
 Create `src/lib/supabase/server.ts`:
 
 ```typescript
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
 
 export async function createClient() {
-  const cookieStore = await cookies()
-  
+  const cookieStore = await cookies();
+
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
         getAll() {
-          return cookieStore.getAll()
+          return cookieStore.getAll();
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) =>
             cookieStore.set(name, value, options)
-          )
+          );
         },
       },
     }
-  )
+  );
 }
 ```
 
@@ -159,43 +159,46 @@ export async function createClient() {
 ### Example: Fetching Listings
 
 Before (Prisma):
+
 ```typescript
 // app/api/listings/route.ts
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   const listings = await prisma.listing.findMany({
-    where: { status: 'ACTIVE' }
-  })
-  return Response.json(listings)
+    where: { status: 'ACTIVE' },
+  });
+  return Response.json(listings);
 }
 ```
 
 After (Supabase):
+
 ```typescript
 // app/api/listings/route.ts
-import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server';
 
 export async function GET() {
-  const supabase = await createClient()
-  
+  const supabase = await createClient();
+
   const { data: listings, error } = await supabase
     .from('listings')
     .select('*')
     .eq('status', 'ACTIVE')
-    .order('created_at', { ascending: false })
-  
+    .order('created_at', { ascending: false });
+
   if (error) {
-    return Response.json({ error: error.message }, { status: 500 })
+    return Response.json({ error: error.message }, { status: 500 });
   }
-  
-  return Response.json(listings)
+
+  return Response.json(listings);
 }
 ```
 
 ## Authentication
 
 ### Sign Up
+
 ```typescript
 const { data, error } = await supabase.auth.signUp({
   email: 'user@example.com',
@@ -203,23 +206,27 @@ const { data, error } = await supabase.auth.signUp({
   options: {
     data: {
       full_name: 'John Doe',
-      company: 'Mining Corp'
-    }
-  }
-})
+      company: 'Mining Corp',
+    },
+  },
+});
 ```
 
 ### Sign In
+
 ```typescript
 const { data, error } = await supabase.auth.signInWithPassword({
   email: 'user@example.com',
-  password: 'password'
-})
+  password: 'password',
+});
 ```
 
 ### Get Current User
+
 ```typescript
-const { data: { user } } = await supabase.auth.getUser()
+const {
+  data: { user },
+} = await supabase.auth.getUser();
 ```
 
 ## Real-time Subscriptions
@@ -236,19 +243,19 @@ useEffect(() => {
       {
         event: '*',
         schema: 'public',
-        table: 'listings'
+        table: 'listings',
       },
       (payload) => {
-        console.log('Change received!', payload)
+        console.log('Change received!', payload);
         // Update your state here
       }
     )
-    .subscribe()
+    .subscribe();
 
   return () => {
-    supabase.removeChannel(channel)
-  }
-}, [])
+    supabase.removeChannel(channel);
+  };
+}, []);
 ```
 
 ## Row Level Security (RLS)
@@ -262,33 +269,33 @@ ALTER TABLE favorites ENABLE ROW LEVEL SECURITY;
 ALTER TABLE inquiries ENABLE ROW LEVEL SECURITY;
 
 -- Listings policies
-CREATE POLICY "Listings are viewable by everyone" 
-  ON listings FOR SELECT 
+CREATE POLICY "Listings are viewable by everyone"
+  ON listings FOR SELECT
   USING (true);
 
-CREATE POLICY "Users can create their own listings" 
-  ON listings FOR INSERT 
+CREATE POLICY "Users can create their own listings"
+  ON listings FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Users can update their own listings" 
-  ON listings FOR UPDATE 
+CREATE POLICY "Users can update their own listings"
+  ON listings FOR UPDATE
   USING (auth.uid() = user_id);
 
-CREATE POLICY "Users can delete their own listings" 
-  ON listings FOR DELETE 
+CREATE POLICY "Users can delete their own listings"
+  ON listings FOR DELETE
   USING (auth.uid() = user_id);
 
 -- Favorites policies
-CREATE POLICY "Users can view their own favorites" 
-  ON favorites FOR SELECT 
+CREATE POLICY "Users can view their own favorites"
+  ON favorites FOR SELECT
   USING (auth.uid() = user_id);
 
-CREATE POLICY "Users can add favorites" 
-  ON favorites FOR INSERT 
+CREATE POLICY "Users can add favorites"
+  ON favorites FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
-CREATE POLICY "Users can remove their favorites" 
-  ON favorites FOR DELETE 
+CREATE POLICY "Users can remove their favorites"
+  ON favorites FOR DELETE
   USING (auth.uid() = user_id);
 ```
 
@@ -300,12 +307,12 @@ Set up storage buckets for listing documents:
 // Upload a document
 const { data, error } = await supabase.storage
   .from('listing-documents')
-  .upload(`listings/${listingId}/${fileName}`, file)
+  .upload(`listings/${listingId}/${fileName}`, file);
 
 // Get public URL
 const { data } = supabase.storage
   .from('listing-documents')
-  .getPublicUrl(`listings/${listingId}/${fileName}`)
+  .getPublicUrl(`listings/${listingId}/${fileName}`);
 ```
 
 ## Migration Checklist
@@ -333,6 +340,7 @@ With the Supabase MCP server configured, you can:
 4. Debug issues with direct database access
 
 Example commands in Claude with MCP:
+
 - "Show me all listings in the Supabase database"
 - "Create a new table for bid history"
 - "Update the listing status to SOLD where id = ..."

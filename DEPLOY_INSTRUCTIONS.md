@@ -10,6 +10,7 @@ Follow these step-by-step instructions to deploy QAZNEDR.KZ to GitHub and Vercel
 ## 🔧 Step 1: Prepare Local Repository
 
 The git repository has already been initialized and committed. Current status:
+
 - ✅ Git initialized
 - ✅ Initial commit made
 - ✅ Deployment configuration added
@@ -72,6 +73,7 @@ gh repo create qaznedr-app --public --source=. --remote=origin --push
    ```
 
    To generate NEXTAUTH_SECRET:
+
    ```bash
    openssl rand -base64 32
    ```
@@ -105,6 +107,7 @@ gh repo create qaznedr-app --public --source=. --remote=origin --push
 After first deployment:
 
 1. **Option A: Using Vercel CLI** (if installed):
+
    ```bash
    vercel env pull .env.local
    npx prisma db push

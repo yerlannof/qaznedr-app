@@ -2,22 +2,8 @@
 
 import Link from 'next/link';
 import { KazakhstanDeposit } from '@/lib/types/listing';
-import {
-  getMineralIcon,
-  ListingTypeIcons,
-  StatusIcons,
-  ActionIcons,
-} from '@/components/icons';
-import {
-  ShieldCheck,
-  Star,
-  Eye,
-  Calendar,
-  MapPin,
-  Ruler,
-  FileText,
-  Factory,
-} from 'lucide-react';
+import { getMineralIcon } from '@/components/icons';
+import { ShieldCheck, Star, Eye, MapPin, Factory } from 'lucide-react';
 
 interface MiningLicenseCardProps {
   deposit: KazakhstanDeposit;

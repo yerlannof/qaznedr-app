@@ -101,13 +101,17 @@ export default function AnalyticsDashboard() {
 
       // Calculate total value
       const totalValue =
-        allListings?.reduce((sum: number, listing: any) => sum + (listing.price || 0), 0) ||
-        0;
+        allListings?.reduce(
+          (sum: number, listing: any) => sum + (listing.price || 0),
+          0
+        ) || 0;
 
       // Calculate total views
       const totalViews =
-        allListings?.reduce((sum: number, listing: any) => sum + (listing.views || 0), 0) ||
-        0;
+        allListings?.reduce(
+          (sum: number, listing: any) => sum + (listing.views || 0),
+          0
+        ) || 0;
 
       // Generate price history (mock data for demo)
       const priceHistory = generatePriceHistory(days);

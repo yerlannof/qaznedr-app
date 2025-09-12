@@ -1,13 +1,17 @@
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
+import { createClient } from '@/lib/supabase/server';
 import bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient();
+interface User {
+  id: string;
+  email: string;
+  name: string | null;
+  password: string;
+  image: string | null;
+}
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -20,13 +24,15 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Invalid credentials');
         }
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
+        const supabase = await createClient();
 
-        if (!user || !user.password) {
+        const { data: user, error } = (await supabase
+          .from('users')
+          .select('*')
+          .eq('email', credentials.email)
+          .single()) as { data: User | null; error: any };
+
+        if (error || !user || !user.password) {
           throw new Error('Invalid credentials');
         }
 

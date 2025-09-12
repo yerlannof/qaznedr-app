@@ -1,6 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import NextImage from 'next/image';
+import { formatDistanceToNow } from 'date-fns';
+import { ru } from 'date-fns/locale';
 import { createClient } from '@/lib/supabase/client';
 import { Card } from '@/components/ui/card-new';
 import { Button } from '@/components/ui/button-new';
@@ -15,14 +18,11 @@ import {
   ChevronLeft,
   Check,
   CheckCheck,
-  Edit2,
   Reply,
   Smile,
   Mic,
   X,
 } from 'lucide-react';
-import { formatDistanceToNow } from 'date-fns';
-import { ru } from 'date-fns/locale';
 
 interface Message {
   id: string;
@@ -222,11 +222,14 @@ export function ChatWindow({
   const createOrGetConversation = async () => {
     if (!recipientId || !currentUserId) return;
 
-    const { data, error } = await (supabase as any).rpc('create_direct_conversation', {
-      p_user1_id: currentUserId,
-      p_user2_id: recipientId,
-      p_deposit_id: depositId,
-    });
+    const { data, error } = await (supabase as any).rpc(
+      'create_direct_conversation',
+      {
+        p_user1_id: currentUserId,
+        p_user2_id: recipientId,
+        p_deposit_id: depositId,
+      }
+    );
 
     if (!error && data) {
       loadConversation(data);
@@ -330,12 +333,14 @@ export function ChatWindow({
             </Button>
           )}
 
-          <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+          <div className="relative w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
             {otherUser?.avatar_url ? (
-              <img
+              <NextImage
                 src={otherUser.avatar_url}
                 alt={otherUser.name}
-                className="w-full h-full rounded-full object-cover"
+                fill
+                className="object-cover"
+                sizes="40px"
               />
             ) : (
               <span className="text-gray-600 font-medium">

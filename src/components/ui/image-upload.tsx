@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback, useRef } from 'react';
+import Image from 'next/image';
 import {
   Upload,
   X,
@@ -215,10 +216,12 @@ export function ImageUpload({
               className="relative group aspect-square rounded-lg overflow-hidden bg-gray-100"
             >
               {image.url ? (
-                <img
+                <Image
                   src={image.url}
                   alt={`Upload ${index + 1}`}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">

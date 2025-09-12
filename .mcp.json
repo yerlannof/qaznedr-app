@@ -10,10 +10,7 @@
     },
     "git": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@cyanheads/git-mcp-server"
-      ],
+      "args": ["-y", "@cyanheads/git-mcp-server"],
       "env": {
         "GIT_REPO_PATH": "/Users/yerlankulumgariyev/Documents/qaznedr-app"
       }
@@ -33,58 +30,37 @@
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ]
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     },
     "brave-search": {
       "command": "npx",
-      "args": [
-        "-y",
-        "brave-search-mcp"
-      ],
+      "args": ["-y", "brave-search-mcp"],
       "env": {
         "BRAVE_API_KEY": "BSAUf8o2e8pkNQ-5EJLh5K-ZbCt_KgX"
       }
     },
     "github": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-github"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "YOUR_GITHUB_TOKEN"
       }
     },
     "puppeteer": {
       "command": "npx",
-      "args": [
-        "-y",
-        "puppeteer-mcp-server"
-      ]
+      "args": ["-y", "puppeteer-mcp-server"]
     },
     "context7": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp"
-      ]
+      "args": ["-y", "@upstash/context7-mcp"]
     },
     "task-manager": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@blizzy/mcp-task-manager"
-      ]
+      "args": ["-y", "@blizzy/mcp-task-manager"]
     },
     "firecrawl": {
       "command": "npx",
-      "args": [
-        "-y",
-        "firecrawl-mcp"
-      ],
+      "args": ["-y", "firecrawl-mcp"],
       "env": {
         "FIRECRAWL_API_KEY": "fc-51b56e38d09c48b3a8fa11cb4c46d234"
       }

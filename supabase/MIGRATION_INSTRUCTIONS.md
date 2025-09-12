@@ -47,6 +47,7 @@
 ## Next Steps
 
 After the migration is complete:
+
 1. Test the connection from the application
 2. Migrate existing data from SQLite
 3. Update API endpoints to use Supabase client

@@ -76,11 +76,15 @@ export async function GET(request: NextRequest) {
     }
 
     const result = {
-      items: data || [],
-      total: count || 0,
-      page,
-      limit,
-      totalPages: Math.ceil((count || 0) / limit),
+      deposits: data || [],
+      pagination: {
+        page,
+        limit,
+        total: count || 0,
+        totalPages: Math.ceil((count || 0) / limit),
+        hasNext: page < Math.ceil((count || 0) / limit),
+        hasPrev: page > 1,
+      },
     };
 
     return NextResponse.json({
@@ -136,7 +140,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const insertData: Database['public']['Tables']['kazakhstan_deposits']['Insert'] = {
+    const insertData: Database['public']['Tables']['kazakhstan_deposits']['Insert'] =
+      {
         title: body.title,
         description: body.description,
         type: body.type,
@@ -174,7 +179,7 @@ export async function POST(request: NextRequest) {
           ? parseFloat(body.estimatedReserves)
           : null,
         accessibility_rating: body.accessibilityRating,
-    };
+      };
 
     const { data: newDeposit, error: insertError } = await supabase
       .from('kazakhstan_deposits')

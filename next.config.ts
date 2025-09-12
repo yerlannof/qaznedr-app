@@ -68,7 +68,6 @@ const nextConfig: NextConfig = {
     ];
   },
 
-
   // Environment variables for client
   env: {
     CUSTOM_KEY: process.env.CUSTOM_KEY,
@@ -79,12 +78,12 @@ const nextConfig: NextConfig = {
 
   // PoweredBy header removal
   poweredByHeader: false,
-  
+
   // Temporarily skip ESLint during builds to deploy quickly
   eslint: {
     ignoreDuringBuilds: true,
   },
-  
+
   // Temporarily skip TypeScript errors to deploy quickly
   // IMPORTANT: Fix these in Phase 2 after initial deployment
   typescript: {

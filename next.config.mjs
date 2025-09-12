@@ -4,8 +4,7 @@ import crypto from 'crypto';
 const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
-  
-  
+
   // Image optimization
   images: {
     domains: [
@@ -13,24 +12,24 @@ const nextConfig = {
       'source.unsplash.com',
       'picsum.photos',
       'localhost',
-      'your-supabase-project.supabase.co' // Replace with your Supabase URL
+      'your-supabase-project.supabase.co', // Replace with your Supabase URL
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-  
+
   // Compiler options
   compiler: {
     // Remove console logs in production
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  
+
   // Experimental features
   experimental: {
     // Add experimental features if needed
   },
-  
+
   // Headers for security and caching
   async headers() {
     return [
@@ -39,46 +38,46 @@ const nextConfig = {
         headers: [
           {
             key: 'X-DNS-Prefetch-Control',
-            value: 'on'
+            value: 'on',
           },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload'
+            value: 'max-age=63072000; includeSubDomains; preload',
           },
           {
             key: 'X-Content-Type-Options',
-            value: 'nosniff'
+            value: 'nosniff',
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
+            value: 'SAMEORIGIN',
           },
           {
             key: 'X-XSS-Protection',
-            value: '1; mode=block'
+            value: '1; mode=block',
           },
           {
             key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
+            value: 'origin-when-cross-origin',
           },
           {
             key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()'
-          }
-        ]
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
       },
       {
         source: '/static/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      }
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
     ];
   },
-  
+
   // Webpack configuration
   webpack: (config, { isServer }) => {
     // Optimization for client-side bundle
@@ -99,8 +98,10 @@ const nextConfig = {
             },
             lib: {
               test(module) {
-                return module.size() > 160000 &&
-                  /node_modules[/\\]/.test(module.identifier());
+                return (
+                  module.size() > 160000 &&
+                  /node_modules[/\\]/.test(module.identifier())
+                );
               },
               name(module) {
                 const hash = crypto.createHash('sha1');
@@ -119,10 +120,12 @@ const nextConfig = {
             },
             shared: {
               name(module, chunks) {
-                return crypto
-                  .createHash('sha1')
-                  .update(chunks.reduce((acc, chunk) => acc + chunk.name, ''))
-                  .digest('hex') + (isServer ? '-server' : '');
+                return (
+                  crypto
+                    .createHash('sha1')
+                    .update(chunks.reduce((acc, chunk) => acc + chunk.name, ''))
+                    .digest('hex') + (isServer ? '-server' : '')
+                );
               },
               priority: 10,
               minChunks: 2,
@@ -134,7 +137,7 @@ const nextConfig = {
         },
       };
     }
-    
+
     return config;
   },
 };

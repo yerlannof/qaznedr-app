@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { Card } from '@/components/ui/card-new';
 import { Button } from '@/components/ui/button-new';
@@ -8,16 +9,10 @@ import {
   MessageCircle,
   Search,
   Plus,
-  Filter,
-  Archive,
   Pin,
-  Bell,
-  BellOff,
-  MoreVertical,
   Circle,
+  BellOff,
 } from 'lucide-react';
-import { formatDistanceToNow } from 'date-fns';
-import { ru } from 'date-fns/locale';
 
 interface Conversation {
   id: string;
@@ -353,12 +348,14 @@ export function ConversationsList({
                 <div className="flex items-start gap-3">
                   {/* Avatar */}
                   <div className="relative">
-                    <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                    <div className="relative w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                       {avatar ? (
-                        <img
+                        <Image
                           src={avatar}
                           alt=""
-                          className="w-full h-full rounded-full object-cover"
+                          fill
+                          className="object-cover"
+                          sizes="48px"
                         />
                       ) : (
                         <span className="text-gray-600 font-medium">

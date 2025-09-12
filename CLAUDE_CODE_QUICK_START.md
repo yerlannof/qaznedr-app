@@ -27,7 +27,7 @@ chmod +x scripts/install-mcp-servers.sh
 ```bash
 # Essential servers for this project
 claude mcp install filesystem
-claude mcp install github  
+claude mcp install github
 claude mcp install postgres
 claude mcp install fetch
 claude mcp install brave-search
@@ -42,6 +42,7 @@ claude mcp configure postgres
 ```
 
 When prompted, enter:
+
 - Host: `db.[YOUR-PROJECT-ID].supabase.co`
 - Port: `5432`
 - Database: `postgres`
@@ -78,12 +79,14 @@ In the Claude session, test servers:
 ## Common Commands in Claude Code
 
 ### MCP Commands
+
 - `/mcp list` - Show installed servers
 - `/mcp test [server]` - Test server connection
 - `/mcp status` - Check all server statuses
 - `/mcp configure [server]` - Configure a server
 
 ### Session Commands
+
 - `/help` - Show all commands
 - `/clear` - Clear conversation
 - `/exit` - Exit Claude
@@ -144,6 +147,7 @@ Claude: [Uses github MCP to create branch]
 ## Configuration Files
 
 Your MCP settings are stored in:
+
 - `~/.claude/mcp_servers.json` - Server configurations
 - `~/.claude/settings.json` - General settings
 

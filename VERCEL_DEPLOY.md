@@ -7,6 +7,7 @@ Vercel работает напрямую с GitHub через собственн
 ## Шаги для деплоя:
 
 ### 1. Подготовка кода
+
 ```bash
 # Закоммитить все изменения
 git add .
@@ -24,6 +25,7 @@ git push origin master
    - `yerlannof/qaznedr-app`
 
 4. **Настройте Environment Variables:**
+
    ```
    NEXT_PUBLIC_SUPABASE_URL = https://uajyafmysdebrrfwwvpc.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
@@ -44,11 +46,13 @@ git push origin master
 ## 🔐 Безопасность на Vercel
 
 ### Environment Variables в Vercel Dashboard:
+
 - Production - для основного домена
-- Preview - для preview деплоев  
+- Preview - для preview деплоев
 - Development - для локальной разработки
 
 ### Домены:
+
 - `your-app.vercel.app` - автоматический
 - `qaznedr.kz` - можно подключить custom домен
 
@@ -59,7 +63,7 @@ git push origin master
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "regions": ["fra1"],  // Европа, ближе к Казахстану
+  "regions": ["fra1"], // Европа, ближе к Казахстану
   "functions": {
     "app/api/*": {
       "maxDuration": 10
@@ -85,6 +89,7 @@ git push origin master
 **GitHub MCP токен НЕ нужен для Vercel!**
 
 Нужны только:
+
 - ✅ GitHub репозиторий (есть)
 - ✅ Supabase ключи (есть)
 - ✅ Vercel аккаунт (бесплатный)

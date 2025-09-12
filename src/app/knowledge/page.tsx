@@ -256,7 +256,7 @@ export default function KnowledgePage() {
   const [sortBy, setSortBy] = useState<'publishedAt' | 'views' | 'rating' | 'downloads'>('publishedAt');
 
   const filteredArticles = useMemo(() => {
-    let filtered = knowledgeArticles.filter(article => {
+    const filtered = knowledgeArticles.filter(article => {
       const matchesSearch = !searchQuery || 
         article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         article.description.toLowerCase().includes(searchQuery.toLowerCase()) ||

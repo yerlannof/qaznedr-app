@@ -224,7 +224,7 @@ export default function NewsPage() {
   const [sortBy, setSortBy] = useState<'publishedAt' | 'views' | 'shares'>('publishedAt');
 
   const filteredArticles = useMemo(() => {
-    let filtered = newsArticles.filter(article => {
+    const filtered = newsArticles.filter(article => {
       const matchesSearch = !searchQuery || 
         article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         article.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -240,8 +240,8 @@ export default function NewsPage() {
              matchesFeatured && matchesTrending;
     });
 
-    // Сортировка
-    filtered.sort((a, b) => {
+    // Сортировка - создаем отсортированную копию
+    const sorted = [...filtered].sort((a, b) => {
       switch (sortBy) {
         case 'publishedAt':
           return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
@@ -254,7 +254,7 @@ export default function NewsPage() {
       }
     });
 
-    return filtered;
+    return sorted;
   }, [searchQuery, selectedCategory, selectedSource, selectedPriority, featuredOnly, trendingOnly, sortBy]);
 
   const getPriorityColor = (priority: string) => {

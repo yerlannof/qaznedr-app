@@ -19,7 +19,6 @@ export async function POST(request: NextRequest) {
     if (process.env.NODE_ENV === 'production') {
       // Отправка в Sentry (если настроен)
       // await sendToSentry(errorData);
-      
       // Отправка в собственную систему логирования
       // await sendToErrorLogging(errorData);
     }
@@ -47,7 +46,7 @@ async function sendToSentry(errorData: any) {
     if (!dsnMatch) return;
 
     const [, key, host, projectId] = dsnMatch;
-    
+
     await fetch(`https://${host}/api/${projectId}/store/`, {
       method: 'POST',
       headers: {
@@ -86,7 +85,7 @@ async function sendToSentry(errorData: any) {
 // Функция для парсинга stack trace
 function parseStackTrace(stack: string) {
   if (!stack) return [];
-  
+
   return stack
     .split('\n')
     .slice(1) // Убираем первую строку с сообщением

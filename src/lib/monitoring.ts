@@ -11,7 +11,6 @@ export function trackWebVitals(metric: NextWebVitalsMetric) {
       value: metric.value,
       id: metric.id,
       label: metric.label,
-      delta: metric.delta,
     });
   }
 
@@ -21,7 +20,9 @@ export function trackWebVitals(metric: NextWebVitalsMetric) {
     if (typeof gtag !== 'undefined') {
       gtag('event', metric.name, {
         custom_map: { metric_id: 'custom_metric_id' },
-        value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+        value: Math.round(
+          metric.name === 'CLS' ? metric.value * 1000 : metric.value
+        ),
         event_category: 'Web Vitals',
         event_label: metric.id,
         non_interaction: true,
@@ -49,7 +50,6 @@ export function trackWebVitals(metric: NextWebVitalsMetric) {
         value: metric.value,
         id: metric.id,
         label: metric.label,
-        delta: metric.delta,
         timestamp: Date.now(),
         url: window.location.href,
         userAgent: navigator.userAgent,
@@ -60,7 +60,8 @@ export function trackWebVitals(metric: NextWebVitalsMetric) {
 
 // Performance observer для кастомных метрик
 export function initPerformanceObserver() {
-  if (typeof window === 'undefined' || !('PerformanceObserver' in window)) return;
+  if (typeof window === 'undefined' || !('PerformanceObserver' in window))
+    return;
 
   try {
     // Наблюдаем за navigation timing
@@ -68,12 +69,24 @@ export function initPerformanceObserver() {
       for (const entry of list.getEntries()) {
         if (entry.entryType === 'navigation') {
           const navEntry = entry as PerformanceNavigationTiming;
-          
+
           // Track custom navigation metrics
-          trackCustomMetric('DNS Lookup', navEntry.domainLookupEnd - navEntry.domainLookupStart);
-          trackCustomMetric('TCP Connection', navEntry.connectEnd - navEntry.connectStart);
-          trackCustomMetric('Server Response', navEntry.responseStart - navEntry.requestStart);
-          trackCustomMetric('DOM Parse', navEntry.domContentLoadedEventEnd - navEntry.responseEnd);
+          trackCustomMetric(
+            'DNS Lookup',
+            navEntry.domainLookupEnd - navEntry.domainLookupStart
+          );
+          trackCustomMetric(
+            'TCP Connection',
+            navEntry.connectEnd - navEntry.connectStart
+          );
+          trackCustomMetric(
+            'Server Response',
+            navEntry.responseStart - navEntry.requestStart
+          );
+          trackCustomMetric(
+            'DOM Parse',
+            navEntry.domContentLoadedEventEnd - navEntry.responseEnd
+          );
         }
       }
     });
@@ -84,9 +97,10 @@ export function initPerformanceObserver() {
       for (const entry of list.getEntries()) {
         if (entry.entryType === 'resource') {
           const resourceEntry = entry as PerformanceResourceTiming;
-          
+
           // Track slow resources
-          if (resourceEntry.duration > 1000) { // > 1 second
+          if (resourceEntry.duration > 1000) {
+            // > 1 second
             trackCustomMetric('Slow Resource', resourceEntry.duration, {
               resource: resourceEntry.name,
               type: getResourceType(resourceEntry.name),
@@ -108,14 +122,17 @@ export function initPerformanceObserver() {
       }
     });
     longTaskObserver.observe({ entryTypes: ['longtask'] });
-
   } catch (error) {
     console.error('Performance Observer initialization failed:', error);
   }
 }
 
 // Track custom metrics
-function trackCustomMetric(name: string, value: number, metadata?: Record<string, any>) {
+function trackCustomMetric(
+  name: string,
+  value: number,
+  metadata?: Record<string, any>
+) {
   if (process.env.NODE_ENV === 'development') {
     console.log('[Custom Metric]', { name, value, metadata });
   }
@@ -171,7 +188,11 @@ export function trackError(error: Error, errorInfo?: any) {
 }
 
 // User interaction tracking
-export function trackUserInteraction(action: string, label?: string, value?: number) {
+export function trackUserInteraction(
+  action: string,
+  label?: string,
+  value?: number
+) {
   if (typeof window === 'undefined') return;
 
   if (process.env.NODE_ENV === 'development') {

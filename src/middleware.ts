@@ -10,23 +10,26 @@ import { logger } from '@/lib/utils/logger';
 export default withAuth(
   function middleware(req: NextRequest) {
     // Performance optimizations
-    let response = NextResponse.next();
-    
+    const response = NextResponse.next();
+
     // Add performance hints and prefetch headers
     if (req.nextUrl.pathname.startsWith('/listings')) {
       response.headers.set('Link', '</api/listings>; rel=prefetch');
       response.headers.set('X-DNS-Prefetch-Control', 'on');
     }
-    
+
     // Early hints for critical resources
     if (req.nextUrl.pathname === '/') {
-      response.headers.set('Link', [
-        '</api/listings>; rel=prefetch',
-        '</api/stats>; rel=prefetch',
-        '</images/hero.webp>; rel=preload; as=image'
-      ].join(', '));
+      response.headers.set(
+        'Link',
+        [
+          '</api/listings>; rel=prefetch',
+          '</api/stats>; rel=prefetch',
+          '</images/hero.webp>; rel=preload; as=image',
+        ].join(', ')
+      );
     }
-    
+
     // Apply security checks first
     const securityResponse = withSecurity(req);
     if (securityResponse) {
@@ -77,7 +80,10 @@ export default withAuth(
         'X-RateLimit-Remaining',
         rateLimit.remaining.toString()
       );
-      apiResponse.headers.set('X-RateLimit-Reset', rateLimit.resetTime.toString());
+      apiResponse.headers.set(
+        'X-RateLimit-Reset',
+        rateLimit.resetTime.toString()
+      );
 
       return applySecurityHeaders(apiResponse, req);
     }

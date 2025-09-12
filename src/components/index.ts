@@ -4,4 +4,8 @@ export * from './features';
 export * from './layouts';
 
 // Performance and Error Handling Components
-export { ErrorBoundary, AsyncErrorBoundary, withErrorBoundary } from './ErrorBoundary';
+export {
+  ErrorBoundary,
+  AsyncErrorBoundary,
+  withErrorBoundary,
+} from './ErrorBoundary';

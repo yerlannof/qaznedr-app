@@ -9,19 +9,19 @@ export async function POST(request: NextRequest) {
     if (process.env.NODE_ENV === 'production') {
       // Отправка в Google Analytics
       // await sendToGoogleAnalytics(metrics);
-      
+
       // Отправка в собственную систему аналитики
       // await sendToCustomAnalytics(metrics);
-      
+
       // Логирование критических метрик
       if (metrics.name === 'CLS' && metrics.value > 0.25) {
         console.warn('High CLS detected:', metrics);
       }
-      
+
       if (metrics.name === 'FCP' && metrics.value > 3000) {
         console.warn('Slow FCP detected:', metrics);
       }
-      
+
       if (metrics.name === 'LCP' && metrics.value > 4000) {
         console.warn('Slow LCP detected:', metrics);
       }

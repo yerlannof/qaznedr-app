@@ -1,37 +1,87 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/services/auth.config';
-import { getListingsCache, revalidateListings } from '@/lib/cache';
-import { prisma } from '@/lib/prisma';
-import type { SearchParams, RegionType, MineralType } from '@/lib/types/listing';
+import { createClient } from '@/lib/supabase/server';
+import type { Database } from '@/lib/supabase/database.types';
 
-// GET /api/listings - получить все объявления с пагинацией и фильтрацией (с кэшированием)
+// GET /api/listings - Get all listings with pagination and filtering
 export async function GET(request: NextRequest) {
   try {
+    const supabase = await createClient();
     const { searchParams } = new URL(request.url);
 
-    // Построение параметров запроса
-    const params: SearchParams = {
-      page: parseInt(searchParams.get('page') || '1'),
-      limit: parseInt(searchParams.get('limit') || '12'),
-      sortBy: (searchParams.get('sortBy') as any) || 'createdAt',
-      sortOrder: (searchParams.get('sortOrder') as 'asc' | 'desc') || 'desc',
-      query: searchParams.get('query') || undefined,
-      filters: {
-        region: searchParams.get('region') ? [searchParams.get('region')! as RegionType] : undefined,
-        mineral: searchParams.get('mineral') ? [searchParams.get('mineral')! as MineralType] : undefined,
-        type: searchParams.get('type') ? [searchParams.get('type')! as any] : undefined,
-        verified: searchParams.get('verified') ? searchParams.get('verified') === 'true' : undefined,
-        featured: searchParams.get('featured') ? searchParams.get('featured') === 'true' : undefined,
-        priceMin: searchParams.get('priceMin') ? parseInt(searchParams.get('priceMin')!) : undefined,
-        priceMax: searchParams.get('priceMax') ? parseInt(searchParams.get('priceMax')!) : undefined,
-        areaMin: searchParams.get('areaMin') ? parseInt(searchParams.get('areaMin')!) : undefined,
-        areaMax: searchParams.get('areaMax') ? parseInt(searchParams.get('areaMax')!) : undefined,
-      },
-    };
+    // Build query parameters
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '12');
+    const offset = (page - 1) * limit;
+    const sortBy = searchParams.get('sortBy') || 'created_at';
+    const sortOrder = searchParams.get('sortOrder') || 'desc';
+    const query = searchParams.get('query');
+    const region = searchParams.get('region');
+    const mineral = searchParams.get('mineral');
+    const type = searchParams.get('type');
+    const verified = searchParams.get('verified');
+    const featured = searchParams.get('featured');
+    const priceMin = searchParams.get('priceMin');
+    const priceMax = searchParams.get('priceMax');
+    const areaMin = searchParams.get('areaMin');
+    const areaMax = searchParams.get('areaMax');
 
-    // Используем кэшированную функцию
-    const result = await getListingsCache(params);
+    // Build Supabase query
+    let queryBuilder = supabase
+      .from('kazakhstan_deposits')
+      .select('*', { count: 'exact' });
+
+    // Apply filters
+    if (query) {
+      queryBuilder = queryBuilder.or(
+        `title.ilike.%${query}%,description.ilike.%${query}%`
+      );
+    }
+    if (region) {
+      queryBuilder = queryBuilder.eq('region', region);
+    }
+    if (mineral) {
+      queryBuilder = queryBuilder.eq('mineral', mineral);
+    }
+    if (type) {
+      queryBuilder = queryBuilder.eq('type', type);
+    }
+    if (verified !== null) {
+      queryBuilder = queryBuilder.eq('verified', verified === 'true');
+    }
+    if (featured !== null) {
+      queryBuilder = queryBuilder.eq('featured', featured === 'true');
+    }
+    if (priceMin) {
+      queryBuilder = queryBuilder.gte('price', parseInt(priceMin));
+    }
+    if (priceMax) {
+      queryBuilder = queryBuilder.lte('price', parseInt(priceMax));
+    }
+    if (areaMin) {
+      queryBuilder = queryBuilder.gte('area', parseInt(areaMin));
+    }
+    if (areaMax) {
+      queryBuilder = queryBuilder.lte('area', parseInt(areaMax));
+    }
+
+    // Apply sorting, pagination
+    queryBuilder = queryBuilder
+      .order(sortBy, { ascending: sortOrder === 'asc' })
+      .range(offset, offset + limit - 1);
+
+    const { data, error, count } = await queryBuilder;
+
+    if (error) {
+      throw error;
+    }
+
+    const result = {
+      items: data || [],
+      total: count || 0,
+      page,
+      limit,
+      totalPages: Math.ceil((count || 0) / limit),
+    };
 
     return NextResponse.json({
       success: true,
@@ -46,32 +96,27 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/listings - создать новое объявление
+// POST /api/listings - Create new listing
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const supabase = await createClient();
 
-    if (!session?.user?.email) {
+    // Get authenticated user
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
-    });
-
-    if (!user) {
-      return NextResponse.json(
-        { success: false, error: 'User not found' },
-        { status: 404 }
-      );
-    }
-
     const body = await request.json();
 
-    // Валидация обязательных полей
+    // Validate required fields
     const requiredFields = [
       'title',
       'description',
@@ -91,8 +136,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const newDeposit = await prisma.kazakhstanDeposit.create({
-      data: {
+    const insertData: Database['public']['Tables']['kazakhstan_deposits']['Insert'] = {
         title: body.title,
         description: body.description,
         type: body.type,
@@ -101,64 +145,50 @@ export async function POST(request: NextRequest) {
         city: body.city,
         area: parseFloat(body.area),
         price: body.price ? parseFloat(body.price) : null,
-        coordinates: JSON.stringify(body.coordinates),
-        images: JSON.stringify(body.images || []),
-        documents: JSON.stringify(body.documents || []),
-        verified: false, // по умолчанию требует проверки
+        coordinates: body.coordinates,
+        images: body.images || [],
+        documents: body.documents || [],
+        verified: false, // Default requires verification
         featured: false,
-        status: 'DRAFT', // сначала черновик
-        userId: user.id,
+        status: 'DRAFT', // Start as draft
+        user_id: user.id,
 
-        // Условные поля в зависимости от типа
-        licenseSubtype: body.licenseSubtype,
-        licenseNumber: body.licenseNumber,
-        licenseExpiry: body.licenseExpiry ? new Date(body.licenseExpiry) : null,
-        annualProductionLimit: body.annualProductionLimit
+        // Conditional fields based on type
+        license_subtype: body.licenseSubtype,
+        license_number: body.licenseNumber,
+        license_expiry: body.licenseExpiry || null,
+        annual_production_limit: body.annualProductionLimit
           ? parseFloat(body.annualProductionLimit)
           : null,
 
-        explorationStage: body.explorationStage,
-        explorationStart: body.explorationStart
-          ? new Date(body.explorationStart)
-          : null,
-        explorationEnd: body.explorationEnd
-          ? new Date(body.explorationEnd)
-          : null,
-        explorationBudget: body.explorationBudget
+        exploration_stage: body.explorationStage,
+        exploration_start: body.explorationStart || null,
+        exploration_end: body.explorationEnd || null,
+        exploration_budget: body.explorationBudget
           ? parseFloat(body.explorationBudget)
           : null,
 
-        discoveryDate: body.discoveryDate ? new Date(body.discoveryDate) : null,
-        geologicalConfidence: body.geologicalConfidence,
-        estimatedReserves: body.estimatedReserves
+        discovery_date: body.discoveryDate || null,
+        geological_confidence: body.geologicalConfidence,
+        estimated_reserves: body.estimatedReserves
           ? parseFloat(body.estimatedReserves)
           : null,
-        accessibilityRating: body.accessibilityRating,
-      },
-      include: {
-        user: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            company: true,
-            verified: true,
-          },
-        },
-      },
-    });
+        accessibility_rating: body.accessibilityRating,
+    };
 
-    // Инвалидируем кэш после создания нового объявления
-    revalidateListings();
+    const { data: newDeposit, error: insertError } = await supabase
+      .from('kazakhstan_deposits')
+      .insert([insertData] as any)
+      .select()
+      .single();
+
+    if (insertError) {
+      throw insertError;
+    }
 
     return NextResponse.json({
       success: true,
-      data: {
-        ...newDeposit,
-        coordinates: JSON.parse(newDeposit.coordinates),
-        images: JSON.parse(newDeposit.images),
-        documents: JSON.parse(newDeposit.documents),
-      },
+      data: newDeposit,
     });
   } catch (error) {
     console.error('Error creating listing:', error);

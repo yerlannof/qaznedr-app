@@ -11,7 +11,7 @@ interface UseInViewOptions {
 }
 
 interface UseInViewResult {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   inView: boolean;
   entry?: IntersectionObserverEntry;
 }
@@ -34,7 +34,7 @@ export function useInView(options: UseInViewOptions = {}): UseInViewResult {
   const callback = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const [observerEntry] = entries;
-      
+
       if (!frozen) {
         setInView(observerEntry.isIntersecting);
         setEntry(observerEntry);
@@ -45,7 +45,7 @@ export function useInView(options: UseInViewOptions = {}): UseInViewResult {
 
   useEffect(() => {
     const element = ref.current;
-    
+
     // Fallback for environments without IntersectionObserver
     if (!element || !('IntersectionObserver' in window)) {
       if (fallbackInView) {
@@ -130,7 +130,9 @@ export function useLazyComponent<T>(
     ...options,
   });
 
-  const [Component, setComponent] = useState<React.ComponentType<T> | null>(null);
+  const [Component, setComponent] = useState<React.ComponentType<T> | null>(
+    null
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 

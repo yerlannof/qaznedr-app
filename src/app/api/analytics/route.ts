@@ -20,7 +20,7 @@ interface AnalyticsEvent {
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
-    
+
     // Validate required fields
     validateRequired(body, ['name', 'timestamp']);
 
@@ -33,9 +33,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     };
 
     // Get client IP and user agent
-    const clientIP = request.headers.get('x-forwarded-for') || 
-                     request.headers.get('x-real-ip') || 
-                     'unknown';
+    const clientIP =
+      request.headers.get('x-forwarded-for') ||
+      request.headers.get('x-real-ip') ||
+      'unknown';
     const userAgent = request.headers.get('user-agent') || '';
 
     // Store analytics event in database
@@ -63,8 +64,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    logger.error('Analytics API error', error instanceof Error ? error : new Error(String(error)));
-    return handleApiError(error, request.headers.get('x-request-id') || undefined);
+    logger.error(
+      'Analytics API error',
+      error instanceof Error ? error : new Error(String(error))
+    );
+    return handleApiError(
+      error,
+      request.headers.get('x-request-id') || undefined
+    );
   }
 }
 
@@ -80,19 +87,19 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     // Build where clause
     const where: any = {};
-    
+
     if (startDate) {
       where.timestamp = { ...where.timestamp, gte: new Date(startDate) };
     }
-    
+
     if (endDate) {
       where.timestamp = { ...where.timestamp, lte: new Date(endDate) };
     }
-    
+
     if (eventName) {
       where.name = eventName;
     }
-    
+
     if (userId) {
       where.userId = userId;
     }
@@ -116,7 +123,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     // Get summary statistics
     const totalEvents = await prisma.analyticsEvent.count({ where });
-    
+
     const eventCounts = await prisma.analyticsEvent.groupBy({
       by: ['name'],
       where,
@@ -137,8 +144,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       },
     });
   } catch (error) {
-    logger.error('Analytics GET API error', error instanceof Error ? error : new Error(String(error)));
-    return handleApiError(error, request.headers.get('x-request-id') || undefined);
+    logger.error(
+      'Analytics GET API error',
+      error instanceof Error ? error : new Error(String(error))
+    );
+    return handleApiError(
+      error,
+      request.headers.get('x-request-id') || undefined
+    );
   }
 }
 

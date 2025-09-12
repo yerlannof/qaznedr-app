@@ -25,8 +25,18 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'QAZNEDR.KZ',
   description: 'Kazakhstan Mining Rights Portal',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://qaznedr.kz'),
-  keywords: ['Kazakhstan', 'mining', 'deposits', 'licenses', 'geology', 'oil', 'gas'],
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL || 'https://qaznedr.kz'
+  ),
+  keywords: [
+    'Kazakhstan',
+    'mining',
+    'deposits',
+    'licenses',
+    'geology',
+    'oil',
+    'gas',
+  ],
   authors: [{ name: 'QAZNEDR.KZ Team' }],
   creator: 'QAZNEDR.KZ',
   publisher: 'QAZNEDR.KZ',
@@ -60,7 +70,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//vercel.live" />
       </head>

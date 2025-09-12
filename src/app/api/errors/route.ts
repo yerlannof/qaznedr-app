@@ -13,14 +13,20 @@ const prisma = new PrismaClient();
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body: MonitoredError = await request.json();
-    
+
     // Validate required fields
-    validateRequired(body, ['message', 'severity', 'fingerprint', 'timestamp']);
+    validateRequired(body as unknown as Record<string, unknown>, [
+      'message',
+      'severity',
+      'fingerprint',
+      'timestamp',
+    ]);
 
     // Get client information
-    const clientIP = request.headers.get('x-forwarded-for') || 
-                     request.headers.get('x-real-ip') || 
-                     'unknown';
+    const clientIP =
+      request.headers.get('x-forwarded-for') ||
+      request.headers.get('x-real-ip') ||
+      'unknown';
     const userAgent = request.headers.get('user-agent') || '';
 
     // Store error in database
@@ -54,8 +60,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    logger.error('Error reporting API error', error instanceof Error ? error : new Error(String(error)));
-    return handleApiError(error, request.headers.get('x-request-id') || undefined);
+    logger.error(
+      'Error reporting API error',
+      error instanceof Error ? error : new Error(String(error))
+    );
+    return handleApiError(
+      error,
+      request.headers.get('x-request-id') || undefined
+    );
   }
 }
 
@@ -71,19 +83,19 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     // Build where clause
     const where: any = {};
-    
+
     if (startDate) {
       where.timestamp = { ...where.timestamp, gte: new Date(startDate) };
     }
-    
+
     if (endDate) {
       where.timestamp = { ...where.timestamp, lte: new Date(endDate) };
     }
-    
+
     if (severity) {
       where.severity = severity;
     }
-    
+
     if (component) {
       where.component = component;
     }
@@ -109,7 +121,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     // Get error statistics
     const totalErrors = await prisma.errorLog.count({ where });
-    
+
     // Get error counts by severity
     const errorsBySeverity = await prisma.errorLog.groupBy({
       by: ['severity'],
@@ -141,15 +153,15 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         recentErrors,
         statistics: {
           totalErrors,
-          errorsBySeverity: errorsBySeverity.map(item => ({
+          errorsBySeverity: errorsBySeverity.map((item) => ({
             severity: item.severity,
             count: item._count.severity,
           })),
-          errorsByComponent: errorsByComponent.map(item => ({
+          errorsByComponent: errorsByComponent.map((item) => ({
             component: item.component,
             count: item._count.component,
           })),
-          frequentErrors: frequentErrors.map(item => ({
+          frequentErrors: frequentErrors.map((item) => ({
             fingerprint: item.fingerprint,
             message: item.message,
             count: item._sum.count || 0,
@@ -158,7 +170,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       },
     });
   } catch (error) {
-    logger.error('Error statistics API error', error instanceof Error ? error : new Error(String(error)));
-    return handleApiError(error, request.headers.get('x-request-id') || undefined);
+    logger.error(
+      'Error statistics API error',
+      error instanceof Error ? error : new Error(String(error))
+    );
+    return handleApiError(
+      error,
+      request.headers.get('x-request-id') || undefined
+    );
   }
 }

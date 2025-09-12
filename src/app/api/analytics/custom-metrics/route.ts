@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
           timestamp: new Date(metric.timestamp).toISOString(),
         });
       }
-      
+
       // Логируем длительные задачи
       if (metric.name === 'Long Task' && metric.value > 100) {
         console.warn('Long task detected:', {
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
           timestamp: new Date(metric.timestamp).toISOString(),
         });
       }
-      
+
       // Логируем медленные DNS запросы
       if (metric.name === 'DNS Lookup' && metric.value > 200) {
         console.warn('Slow DNS lookup:', {
@@ -80,7 +80,9 @@ async function sendToMonitoringService(metric: any) {
               points: [[Math.floor(metric.timestamp / 1000), metric.value]],
               tags: [
                 `url:${metric.url}`,
-                ...(metric.metadata ? Object.entries(metric.metadata).map(([k, v]) => `${k}:${v}`) : []),
+                ...(metric.metadata
+                  ? Object.entries(metric.metadata).map(([k, v]) => `${k}:${v}`)
+                  : []),
               ],
             },
           ],

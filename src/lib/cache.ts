@@ -101,9 +101,9 @@ export const getListingsCache = unstable_cache(
     };
   },
   ['listings'],
-  { 
+  {
     revalidate: 3600, // 1 час
-    tags: ['listings'] 
+    tags: ['listings'],
   }
 );
 
@@ -143,40 +143,34 @@ export const getListingByIdCache = unstable_cache(
     };
   },
   ['listing-detail'],
-  { 
+  {
     revalidate: 1800, // 30 минут
-    tags: ['listing-detail'] 
+    tags: ['listing-detail'],
   }
 );
 
 // Cache для статистики
 export const getStatsCache = unstable_cache(
   async () => {
-    const [
-      total,
-      verified,
-      featured,
-      active,
-      regionStats,
-      mineralStats,
-    ] = await Promise.all([
-      prisma.kazakhstanDeposit.count(),
-      prisma.kazakhstanDeposit.count({ where: { verified: true } }),
-      prisma.kazakhstanDeposit.count({ where: { featured: true } }),
-      prisma.kazakhstanDeposit.count({ where: { status: 'ACTIVE' } }),
-      prisma.kazakhstanDeposit.groupBy({
-        by: ['region'],
-        _count: true,
-        _avg: { price: true },
-        where: { status: 'ACTIVE' },
-      }),
-      prisma.kazakhstanDeposit.groupBy({
-        by: ['mineral'],
-        _count: true,
-        _avg: { price: true, area: true },
-        where: { status: 'ACTIVE' },
-      }),
-    ]);
+    const [total, verified, featured, active, regionStats, mineralStats] =
+      await Promise.all([
+        prisma.kazakhstanDeposit.count(),
+        prisma.kazakhstanDeposit.count({ where: { verified: true } }),
+        prisma.kazakhstanDeposit.count({ where: { featured: true } }),
+        prisma.kazakhstanDeposit.count({ where: { status: 'ACTIVE' } }),
+        prisma.kazakhstanDeposit.groupBy({
+          by: ['region'],
+          _count: true,
+          _avg: { price: true },
+          where: { status: 'ACTIVE' },
+        }),
+        prisma.kazakhstanDeposit.groupBy({
+          by: ['mineral'],
+          _count: true,
+          _avg: { price: true, area: true },
+          where: { status: 'ACTIVE' },
+        }),
+      ]);
 
     const totalValue = await prisma.kazakhstanDeposit.aggregate({
       _sum: { price: true },
@@ -191,12 +185,12 @@ export const getStatsCache = unstable_cache(
       regions: regionStats.length,
       minerals: mineralStats.length,
       totalValue: totalValue._sum.price || 0,
-      regionStats: regionStats.map(stat => ({
+      regionStats: regionStats.map((stat) => ({
         region: stat.region,
         count: stat._count,
         avgPrice: stat._avg.price || 0,
       })),
-      mineralStats: mineralStats.map(stat => ({
+      mineralStats: mineralStats.map((stat) => ({
         mineral: stat.mineral,
         count: stat._count,
         avgPrice: stat._avg.price || 0,
@@ -205,9 +199,9 @@ export const getStatsCache = unstable_cache(
     };
   },
   ['stats'],
-  { 
+  {
     revalidate: 7200, // 2 часа
-    tags: ['stats'] 
+    tags: ['stats'],
   }
 );
 

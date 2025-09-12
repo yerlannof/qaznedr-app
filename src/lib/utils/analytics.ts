@@ -208,7 +208,7 @@ class InternalAnalytics implements AnalyticsProvider {
 
   identify(userId: string, properties?: UserProperties): void {
     this.userId = userId;
-    this.track('user_identified', properties);
+    this.track('user_identified', properties as Record<string, unknown>);
   }
 
   track(event: string, properties?: Record<string, unknown>): void {
@@ -221,7 +221,7 @@ class InternalAnalytics implements AnalyticsProvider {
     };
 
     this.events.push(analyticsEvent);
-    
+
     // Keep only last 100 events in memory
     if (this.events.length > 100) {
       this.events = this.events.slice(-100);
@@ -229,7 +229,7 @@ class InternalAnalytics implements AnalyticsProvider {
 
     // Log important events
     if (this.isImportantEvent(event)) {
-      logger.info('Analytics event', analyticsEvent);
+      logger.info('Analytics event', analyticsEvent as any);
     }
 
     // Send to server if needed
@@ -305,7 +305,7 @@ class AnalyticsManager {
     this.providers.push(new InternalAnalytics());
 
     // Initialize all providers
-    this.providers.forEach(provider => provider.init());
+    this.providers.forEach((provider) => provider.init());
 
     this.isInitialized = true;
     logger.info('Analytics manager initialized with providers', {
@@ -314,15 +314,15 @@ class AnalyticsManager {
   }
 
   identify(userId: string, properties?: UserProperties): void {
-    this.providers.forEach(provider => provider.identify(userId, properties));
+    this.providers.forEach((provider) => provider.identify(userId, properties));
   }
 
   track(event: string, properties?: Record<string, unknown>): void {
-    this.providers.forEach(provider => provider.track(event, properties));
+    this.providers.forEach((provider) => provider.track(event, properties));
   }
 
   page(name?: string, properties?: Record<string, unknown>): void {
-    this.providers.forEach(provider => provider.page(name, properties));
+    this.providers.forEach((provider) => provider.page(name, properties));
   }
 }
 
@@ -330,11 +330,17 @@ class AnalyticsManager {
 export const analytics = new AnalyticsManager();
 
 // Utility functions for common tracking events
-export const trackEvent = (event: string, properties?: Record<string, unknown>) => {
+export const trackEvent = (
+  event: string,
+  properties?: Record<string, unknown>
+) => {
   analytics.track(event, properties);
 };
 
-export const trackPageView = (name?: string, properties?: Record<string, unknown>) => {
+export const trackPageView = (
+  name?: string,
+  properties?: Record<string, unknown>
+) => {
   analytics.page(name, properties);
 };
 
@@ -343,7 +349,11 @@ export const identifyUser = (userId: string, properties?: UserProperties) => {
 };
 
 // Mining-specific tracking functions
-export const trackListingEvent = (action: string, listingId: string, listingType: string) => {
+export const trackListingEvent = (
+  action: string,
+  listingId: string,
+  listingType: string
+) => {
   trackEvent('listing_interaction', {
     action,
     listing_id: listingId,
@@ -352,7 +362,11 @@ export const trackListingEvent = (action: string, listingId: string, listingType
   });
 };
 
-export const trackSearchEvent = (query: string, filters: Record<string, unknown>, resultsCount: number) => {
+export const trackSearchEvent = (
+  query: string,
+  filters: Record<string, unknown>,
+  resultsCount: number
+) => {
   trackEvent('search_performed', {
     query,
     filters,
@@ -361,14 +375,20 @@ export const trackSearchEvent = (query: string, filters: Record<string, unknown>
   });
 };
 
-export const trackAuthEvent = (action: 'login' | 'register' | 'logout', method?: string) => {
+export const trackAuthEvent = (
+  action: 'login' | 'register' | 'logout',
+  method?: string
+) => {
   trackEvent(`user_${action}`, {
     method,
     category: 'authentication',
   });
 };
 
-export const trackErrorEvent = (error: Error, context?: Record<string, unknown>) => {
+export const trackErrorEvent = (
+  error: Error,
+  context?: Record<string, unknown>
+) => {
   trackEvent('error_occurred', {
     error_message: error.message,
     error_stack: error.stack,

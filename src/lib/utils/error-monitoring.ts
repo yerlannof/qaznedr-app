@@ -37,18 +37,24 @@ export interface MonitoredError {
 }
 
 // Error fingerprinting for grouping similar errors
-function generateErrorFingerprint(error: Error, context?: ErrorContext): string {
+function generateErrorFingerprint(
+  error: Error,
+  context?: ErrorContext
+): string {
   const message = error.message.replace(/\d+/g, 'N'); // Replace numbers with 'N'
   const component = context?.component || 'unknown';
   const action = context?.action || 'unknown';
-  
+
   return btoa(`${message}:${component}:${action}`).substring(0, 16);
 }
 
 // Determine error severity based on error type and context
-function determineErrorSeverity(error: Error, context?: ErrorContext): ErrorSeverity {
+function determineErrorSeverity(
+  error: Error,
+  context?: ErrorContext
+): ErrorSeverity {
   const errorMessage = error.message.toLowerCase();
-  
+
   // Critical errors
   if (
     errorMessage.includes('database') ||
@@ -58,7 +64,7 @@ function determineErrorSeverity(error: Error, context?: ErrorContext): ErrorSeve
   ) {
     return ErrorSeverity.CRITICAL;
   }
-  
+
   // High severity errors
   if (
     errorMessage.includes('api') ||
@@ -68,7 +74,7 @@ function determineErrorSeverity(error: Error, context?: ErrorContext): ErrorSeve
   ) {
     return ErrorSeverity.HIGH;
   }
-  
+
   // Medium severity errors
   if (
     errorMessage.includes('validation') ||
@@ -77,7 +83,7 @@ function determineErrorSeverity(error: Error, context?: ErrorContext): ErrorSeve
   ) {
     return ErrorSeverity.MEDIUM;
   }
-  
+
   // Default to low severity
   return ErrorSeverity.LOW;
 }
@@ -100,11 +106,11 @@ class ErrorMonitor {
     const fingerprint = generateErrorFingerprint(error, context);
     const severity = determineErrorSeverity(error, context);
     const timestamp = Date.now();
-    
+
     // Update error count
     const currentCount = this.errorCounts.get(fingerprint) || 0;
     this.errorCounts.set(fingerprint, currentCount + 1);
-    
+
     // Create or update monitored error
     const monitoredError: MonitoredError = {
       id: `error_${timestamp}_${Math.random().toString(36).substr(2, 9)}`,
@@ -113,22 +119,26 @@ class ErrorMonitor {
       severity,
       context: {
         ...context,
-        url: typeof window !== 'undefined' ? window.location.href : context?.url,
-        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : context?.userAgent,
+        url:
+          typeof window !== 'undefined' ? window.location.href : context?.url,
+        userAgent:
+          typeof navigator !== 'undefined'
+            ? navigator.userAgent
+            : context?.userAgent,
       },
       timestamp,
       fingerprint,
       count: this.errorCounts.get(fingerprint) || 1,
     };
-    
+
     this.errors.set(fingerprint, monitoredError);
-    
+
     // Log error with appropriate level
     this.logError(monitoredError);
-    
+
     // Send to external services if configured
     this.sendToExternalServices(monitoredError);
-    
+
     // Clean up old errors (keep last 100 unique errors)
     if (this.errors.size > 100) {
       const oldestFingerprint = Array.from(this.errors.keys())[0];
@@ -149,10 +159,18 @@ class ErrorMonitor {
 
     switch (monitoredError.severity) {
       case ErrorSeverity.CRITICAL:
-        logger.error(`CRITICAL ERROR: ${monitoredError.message}`, new Error(monitoredError.message), logData);
+        logger.error(
+          `CRITICAL ERROR: ${monitoredError.message}`,
+          new Error(monitoredError.message),
+          logData
+        );
         break;
       case ErrorSeverity.HIGH:
-        logger.error(`HIGH SEVERITY: ${monitoredError.message}`, new Error(monitoredError.message), logData);
+        logger.error(
+          `HIGH SEVERITY: ${monitoredError.message}`,
+          new Error(monitoredError.message),
+          logData
+        );
         break;
       case ErrorSeverity.MEDIUM:
         logger.warn(`MEDIUM SEVERITY: ${monitoredError.message}`, logData);
@@ -164,7 +182,9 @@ class ErrorMonitor {
   }
 
   // Send error to external monitoring services
-  private async sendToExternalServices(monitoredError: MonitoredError): Promise<void> {
+  private async sendToExternalServices(
+    monitoredError: MonitoredError
+  ): Promise<void> {
     // Send to Sentry if configured
     if (config.monitoring.sentryDsn) {
       await this.sendToSentry(monitoredError);
@@ -210,7 +230,9 @@ class ErrorMonitor {
   }
 
   // Send error to internal API
-  private async sendToInternalAPI(monitoredError: MonitoredError): Promise<void> {
+  private async sendToInternalAPI(
+    monitoredError: MonitoredError
+  ): Promise<void> {
     try {
       await fetch('/api/errors', {
         method: 'POST',
@@ -220,7 +242,10 @@ class ErrorMonitor {
         body: JSON.stringify(monitoredError),
       });
     } catch (error) {
-      logger.warn('Failed to send error to internal API', { error, monitoredError });
+      logger.warn('Failed to send error to internal API', {
+        error,
+        monitoredError,
+      });
     }
   }
 
@@ -243,7 +268,7 @@ class ErrorMonitor {
   // Parse stack trace for Sentry format
   private parseStackTrace(stack?: string): any[] {
     if (!stack) return [];
-    
+
     return stack
       .split('\n')
       .slice(1) // Remove first line (error message)
@@ -276,8 +301,13 @@ class ErrorMonitor {
     recentErrors: MonitoredError[];
   } {
     const errors = Array.from(this.errors.values());
-    const totalErrors = Array.from(this.errorCounts.values()).reduce((sum, count) => sum + count, 0);
-    const criticalErrors = errors.filter(e => e.severity === ErrorSeverity.CRITICAL).length;
+    const totalErrors = Array.from(this.errorCounts.values()).reduce(
+      (sum, count) => sum + count,
+      0
+    );
+    const criticalErrors = errors.filter(
+      (e) => e.severity === ErrorSeverity.CRITICAL
+    ).length;
     const recentErrors = errors
       .sort((a, b) => b.timestamp - a.timestamp)
       .slice(0, 10);
@@ -306,7 +336,14 @@ export const reportError = (error: Error, context?: ErrorContext) => {
 };
 
 export const reportCriticalError = (error: Error, context?: ErrorContext) => {
-  errorMonitor.reportError(error, { ...context, severity: ErrorSeverity.CRITICAL });
+  // For critical errors, add additional context
+  errorMonitor.reportError(error, {
+    ...context,
+    additionalData: {
+      ...context?.additionalData,
+      severity: 'critical',
+    },
+  });
 };
 
 export const getErrorStats = () => {
@@ -341,20 +378,23 @@ if (typeof window !== 'undefined') {
   window.fetch = async (...args) => {
     try {
       const response = await originalFetch(...args);
-      
+
       // Report API errors
       if (!response.ok) {
-        reportError(new Error(`HTTP ${response.status}: ${response.statusText}`), {
-          component: 'api',
-          action: 'fetch_error',
-          url: args[0]?.toString(),
-          additionalData: {
-            status: response.status,
-            statusText: response.statusText,
-          },
-        });
+        reportError(
+          new Error(`HTTP ${response.status}: ${response.statusText}`),
+          {
+            component: 'api',
+            action: 'fetch_error',
+            url: args[0]?.toString(),
+            additionalData: {
+              status: response.status,
+              statusText: response.statusText,
+            },
+          }
+        );
       }
-      
+
       return response;
     } catch (error) {
       reportError(error instanceof Error ? error : new Error(String(error)), {

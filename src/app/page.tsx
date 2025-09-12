@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { ArrowRight } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import SearchHero from '@/components/features/SearchHero';
 
@@ -40,13 +41,15 @@ export default function Home() {
       </section>
 
       {/* Search Hero */}
-      <Suspense fallback={
-        <div className="py-10">
-          <div className="max-w-4xl mx-auto px-4">
-            <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
+      <Suspense
+        fallback={
+          <div className="py-10">
+            <div className="max-w-4xl mx-auto px-4">
+              <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
+            </div>
           </div>
-        </div>
-      }>
+        }
+      >
         <SearchHero />
       </Suspense>
 
@@ -132,9 +135,10 @@ export default function Home() {
           </p>
           <Link
             href="/auth/register"
-            className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:shadow-md transition-shadow"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:shadow-md transition-all group"
           >
             Начать работу
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </section>

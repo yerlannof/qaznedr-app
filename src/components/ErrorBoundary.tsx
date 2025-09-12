@@ -29,7 +29,7 @@ export class ErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Log error to monitoring service
     trackError(error, errorInfo);
-    
+
     // Call custom error handler if provided
     if (this.props.onError) {
       this.props.onError(error, errorInfo);
@@ -73,7 +73,8 @@ export class ErrorBoundary extends Component<Props, State> {
               Что-то пошло не так
             </h2>
             <p className="text-sm text-muted-foreground mb-4">
-              Произошла ошибка при загрузке этой части страницы. Мы уже уведомлены о проблеме.
+              Произошла ошибка при загрузке этой части страницы. Мы уже
+              уведомлены о проблеме.
             </p>
             <div className="space-y-2">
               <button
@@ -84,14 +85,20 @@ export class ErrorBoundary extends Component<Props, State> {
               </button>
               <div>
                 <button
-                  onClick={() => this.setState({ hasError: false, error: undefined, errorInfo: undefined })}
+                  onClick={() =>
+                    this.setState({
+                      hasError: false,
+                      error: undefined,
+                      errorInfo: undefined,
+                    })
+                  }
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Попробовать снова
                 </button>
               </div>
             </div>
-            
+
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <details className="mt-6 text-left">
                 <summary className="cursor-pointer text-sm font-medium text-muted-foreground hover:text-foreground">
@@ -133,17 +140,17 @@ export function withErrorBoundary<T extends object>(
   );
 
   WrappedComponent.displayName = `withErrorBoundary(${Component.displayName || Component.name})`;
-  
+
   return WrappedComponent;
 }
 
 // Async Error Boundary для Server Components
-export function AsyncErrorBoundary({ 
-  children, 
-  fallback 
-}: { 
-  children: ReactNode; 
-  fallback?: ReactNode; 
+export function AsyncErrorBoundary({
+  children,
+  fallback,
+}: {
+  children: ReactNode;
+  fallback?: ReactNode;
 }) {
   return (
     <ErrorBoundary

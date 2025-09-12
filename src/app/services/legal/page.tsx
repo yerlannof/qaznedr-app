@@ -243,7 +243,7 @@ export default function LegalServicesPage() {
   const [sortBy, setSortBy] = useState<'rating' | 'experience' | 'rate' | 'reviews'>('rating');
 
   const filteredExperts = useMemo(() => {
-    let filtered = legalExperts.filter(expert => {
+    const filtered = legalExperts.filter(expert => {
       const matchesSearch = !searchQuery || 
         expert.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         expert.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -261,8 +261,8 @@ export default function LegalServicesPage() {
              matchesVerified && matchesAvailable && matchesRating && matchesRate;
     });
 
-    // Сортировка
-    filtered.sort((a, b) => {
+    // Сортировка - создаем отсортированную копию
+    const sorted = [...filtered].sort((a, b) => {
       switch (sortBy) {
         case 'rating':
           return b.rating - a.rating;
@@ -277,7 +277,7 @@ export default function LegalServicesPage() {
       }
     });
 
-    return filtered;
+    return sorted;
   }, [searchQuery, selectedRegion, selectedSpecialization, verifiedOnly, availableOnly, ratingFilter, maxRate, sortBy]);
 
   return (

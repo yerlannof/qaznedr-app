@@ -271,7 +271,7 @@ export default function InvestorsPage() {
   const [sortBy, setSortBy] = useState<'rating' | 'totalInvested' | 'activeProjects' | 'successRate'>('rating');
 
   const filteredInvestors = useMemo(() => {
-    let filtered = investors.filter(investor => {
+    const filtered = investors.filter(investor => {
       const matchesSearch = !searchQuery || 
         investor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         investor.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -293,8 +293,8 @@ export default function InvestorsPage() {
              matchesVerified && matchesAvailable && matchesRating && matchesInvestmentRange;
     });
 
-    // Сортировка
-    filtered.sort((a, b) => {
+    // Сортировка - создаем отсортированную копию
+    const sorted = [...filtered].sort((a, b) => {
       switch (sortBy) {
         case 'rating':
           return b.rating - a.rating;
@@ -309,7 +309,7 @@ export default function InvestorsPage() {
       }
     });
 
-    return filtered;
+    return sorted;
   }, [searchQuery, selectedRegion, selectedType, selectedFocus, verifiedOnly, availableOnly, ratingFilter, minInvestment, maxInvestment, sortBy]);
 
   const formatAmount = (amount: number) => {

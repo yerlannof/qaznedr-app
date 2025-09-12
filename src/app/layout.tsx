@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { SessionProvider, ThemeProvider } from '@/components';
-import { Header } from '@/components/layouts';
 import { FavoritesProvider } from '@/contexts';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
@@ -85,7 +84,6 @@ export default function RootLayout({
           <ThemeProvider>
             <SessionProvider>
               <FavoritesProvider>
-                <Header />
                 <main className="min-h-screen">{children}</main>
               </FavoritesProvider>
             </SessionProvider>

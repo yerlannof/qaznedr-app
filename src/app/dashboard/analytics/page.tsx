@@ -1,5 +1,8 @@
 'use client';
 
+// Force dynamic rendering to avoid build-time Supabase initialization
+export const dynamic = 'force-dynamic';
+
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Navigation from '@/components/layouts/Navigation';

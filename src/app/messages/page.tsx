@@ -1,5 +1,8 @@
 'use client';
 
+// Force dynamic rendering to avoid build-time Supabase initialization
+export const dynamic = 'force-dynamic';
+
 import { useState } from 'react';
 import Navigation from '@/components/layouts/Navigation';
 import { ConversationsList } from '@/components/features/messaging/ConversationsList';

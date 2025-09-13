@@ -315,7 +315,6 @@ export function ComparisonModal({
                         className="bg-white border rounded-xl p-4 relative"
                         whileHover={{
                           y: -2,
-                          shadow: '0 10px 25px rgba(0,0,0,0.1)',
                         }}
                       >
                         <button

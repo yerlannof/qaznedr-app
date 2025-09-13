@@ -3,7 +3,6 @@
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import L from 'leaflet';
 import { KazakhstanDeposit } from '@/lib/types/listing';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -56,6 +55,9 @@ const KAZAKHSTAN_BOUNDS: [[number, number], [number, number]] = [
 // Create custom marker icons for different deposit types
 const createCustomIcon = (type: string, isSelected?: boolean) => {
   if (typeof window === 'undefined') return null;
+  
+  const L = typeof window !== 'undefined' ? require('leaflet') : null;
+  if (!L) return null;
 
   const colors = {
     MINING_LICENSE: '#3B82F6', // Blue

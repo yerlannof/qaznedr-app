@@ -28,24 +28,22 @@ const basicInfoSchema = z.object({
   description: z
     .string()
     .min(10, 'Описание должно содержать минимум 10 символов'),
-  type: z.enum(
-    ['MINING_LICENSE', 'EXPLORATION_LICENSE', 'MINERAL_OCCURRENCE'] as const,
-    {
-      errorMap: () => ({ message: 'Выберите тип объявления' }),
-    }
-  ),
-  mineral: z.enum(
-    ['Нефть', 'Газ', 'Золото', 'Медь', 'Уголь', 'Уран', 'Железо'] as const,
-    {
-      errorMap: () => ({ message: 'Выберите полезное ископаемое' }),
-    }
-  ),
+  type: z
+    .enum(['MINING_LICENSE', 'EXPLORATION_LICENSE', 'MINERAL_OCCURRENCE'] as const)
+    .refine((val) => val, {
+      message: 'Выберите тип объявления',
+    }),
+  mineral: z
+    .enum(['Нефть', 'Газ', 'Золото', 'Медь', 'Уголь', 'Уран', 'Железо'] as const)
+    .refine((val) => val, {
+      message: 'Выберите полезное ископаемое',
+    }),
   price: z.number().optional(),
 });
 
 const locationSchema = z.object({
-  region: z.enum(
-    [
+  region: z
+    .enum([
       'Мангистауская',
       'Атырауская',
       'Западно-Казахстанская',
@@ -60,11 +58,10 @@ const locationSchema = z.object({
       'Туркестанская',
       'Кызылординская',
       'Улытауская',
-    ] as const,
-    {
-      errorMap: () => ({ message: 'Выберите регион' }),
-    }
-  ),
+    ] as const)
+    .refine((val) => val, {
+      message: 'Выберите регион',
+    }),
   city: z.string().min(1, 'Город обязателен'),
   area: z.number().min(0.01, 'Площадь должна быть больше 0'),
   coordinates: z.tuple([z.number(), z.number()]).optional(),
@@ -88,7 +85,7 @@ const typeSpecificSchema = z.object({
 });
 
 const finalSchema = z.object({
-  images: z.array(z.string()).default([]),
+  images: z.array(z.string()).optional(),
 });
 
 // Combined schema
@@ -849,7 +846,7 @@ const BasicInfoStep = () => {
             min="0"
           />
           <p className="text-xs text-gray-500 mt-2">
-            Оставьте пустым для "По запросу"
+            Оставьте пустым для &ldquo;По запросу&rdquo;
           </p>
         </div>
       </div>

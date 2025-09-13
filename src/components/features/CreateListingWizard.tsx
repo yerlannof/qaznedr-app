@@ -29,12 +29,24 @@ const basicInfoSchema = z.object({
     .string()
     .min(10, 'Описание должно содержать минимум 10 символов'),
   type: z
-    .enum(['MINING_LICENSE', 'EXPLORATION_LICENSE', 'MINERAL_OCCURRENCE'] as const)
+    .enum([
+      'MINING_LICENSE',
+      'EXPLORATION_LICENSE',
+      'MINERAL_OCCURRENCE',
+    ] as const)
     .refine((val) => val, {
       message: 'Выберите тип объявления',
     }),
   mineral: z
-    .enum(['Нефть', 'Газ', 'Золото', 'Медь', 'Уголь', 'Уран', 'Железо'] as const)
+    .enum([
+      'Нефть',
+      'Газ',
+      'Золото',
+      'Медь',
+      'Уголь',
+      'Уран',
+      'Железо',
+    ] as const)
     .refine((val) => val, {
       message: 'Выберите полезное ископаемое',
     }),

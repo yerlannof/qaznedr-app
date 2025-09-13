@@ -55,8 +55,6 @@ const KAZAKHSTAN_BOUNDS: [[number, number], [number, number]] = [
 // Create custom marker icons for different deposit types
 const createCustomIcon = (type: string, isSelected?: boolean) => {
   if (typeof window === 'undefined') return null;
-  
-  // @ts-expect-error
   const L = typeof window !== 'undefined' ? window.L : null;
   if (!L) return null;
 
@@ -233,6 +231,7 @@ function MapContent({
         className="w-full rounded-lg overflow-hidden"
         style={{ height: isFullscreen ? '100vh' : height }}
       >
+        {/* @ts-ignore React Leaflet dynamic import type issues */}
         <MapContainer
           ref={mapRef}
           center={KAZAKHSTAN_CENTER}

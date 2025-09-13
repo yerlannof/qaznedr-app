@@ -15,7 +15,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { Card, CardBadge } from '@/components/ui/card-new';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 
 interface CompanyCardProps {
   company: {

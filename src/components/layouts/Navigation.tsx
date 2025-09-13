@@ -7,7 +7,6 @@ import {
   Menu,
   MapPin,
   Building2,
-  Gavel,
   MessageSquare,
   User,
   LogOut,
@@ -51,7 +50,6 @@ export default function Navigation() {
     { name: 'Объявления', href: '/listings', icon: MapPin },
     { name: 'Карта', href: '/map', icon: MapPin },
     { name: 'Услуги', href: '/services', icon: Briefcase },
-    { name: 'Аукционы', href: '/auctions', icon: Gavel },
     { name: 'Компании', href: '/companies', icon: Building2 },
     { name: 'Сообщения', href: '/messages', icon: MessageSquare },
   ];

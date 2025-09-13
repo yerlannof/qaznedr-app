@@ -15,7 +15,7 @@ import {
   Briefcase,
   Plus,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 const SERVICE_CATEGORIES = [
@@ -119,7 +119,7 @@ export default function CompaniesPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-gray-800 to-gray-900 text-white pt-20 pb-16">
+      <div className="bg-gray-800 text-white pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-4">
             <Building2 className="w-8 h-8" />

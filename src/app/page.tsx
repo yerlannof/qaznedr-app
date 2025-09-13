@@ -50,7 +50,7 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section - Simplified and Impactful */}
-      <section className="pt-24 pb-16 px-4 bg-gradient-to-b from-white to-gray-50">
+      <section className="pt-24 pb-16 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           {/* Main Content */}
           <div className="text-center">
@@ -75,16 +75,16 @@ export default function Home() {
             {/* 3 Key Value Props */}
             <div className="mt-8 flex flex-wrap justify-center gap-4 text-gray-600">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-600" />
+                <CheckCircle className="w-5 h-5 text-blue-600" />
                 <span>Проверенные продавцы</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-600" />
+                <CheckCircle className="w-5 h-5 text-blue-600" />
                 <span>Юридическая поддержка</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-600" />
-                <span>Онлайн-аукционы</span>
+                <CheckCircle className="w-5 h-5 text-blue-600" />
+                <span>Прямые контакты</span>
               </div>
             </div>
 
@@ -157,10 +157,10 @@ export default function Home() {
                 <TrendingUp className="w-7 h-7 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Онлайн-аукционы
+                Аналитика рынка
               </h3>
               <p className="text-gray-600 text-sm">
-                Прозрачные торги с автоматическим оформлением документов
+                Актуальные данные и тренды по месторождениям Казахстана
               </p>
             </div>
 
@@ -235,14 +235,14 @@ export default function Home() {
             </Link>
 
             <Link
-              href="/auctions"
+              href="/listings?mineral=Медь"
               className="group p-5 bg-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             >
               <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-100 transition-colors">
-                <span className="text-2xl">⚖️</span>
+                <span className="text-2xl">🔶</span>
               </div>
-              <div className="font-semibold text-gray-900">Аукционы</div>
-              <div className="text-sm text-gray-500 mt-1">12 активных</div>
+              <div className="font-semibold text-gray-900">Медь</div>
+              <div className="text-sm text-gray-500 mt-1">67 объявлений</div>
             </Link>
           </div>
         </div>

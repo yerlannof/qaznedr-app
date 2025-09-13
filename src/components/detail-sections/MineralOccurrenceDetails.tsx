@@ -20,9 +20,9 @@ export default function MineralOccurrenceDetails({
 
   const getConfidenceColor = (confidence?: string) => {
     const colors: Record<string, string> = {
-      INFERRED: 'bg-yellow-100 text-yellow-800',
+      INFERRED: 'bg-gray-100 text-gray-800',
       INDICATED: 'bg-blue-100 text-blue-800',
-      MEASURED: 'bg-green-100 text-green-800',
+      MEASURED: 'bg-blue-100 text-blue-800',
     };
     return colors[confidence || ''] || 'bg-gray-100 text-gray-800';
   };
@@ -39,10 +39,10 @@ export default function MineralOccurrenceDetails({
 
   const getAccessibilityColor = (rating?: string) => {
     const colors: Record<string, string> = {
-      EASY: 'text-green-600',
-      MODERATE: 'text-yellow-600',
-      DIFFICULT: 'text-orange-600',
-      VERY_DIFFICULT: 'text-red-600',
+      EASY: 'text-blue-600',
+      MODERATE: 'text-gray-600',
+      DIFFICULT: 'text-gray-700',
+      VERY_DIFFICULT: 'text-gray-800',
     };
     return colors[rating || ''] || 'text-gray-600';
   };
@@ -96,7 +96,7 @@ export default function MineralOccurrenceDetails({
                 Оценочные запасы
               </h3>
               <p className="text-gray-700">
-                <span className="text-2xl font-bold text-purple-600">
+                <span className="text-2xl font-bold text-blue-600">
                   {deposit.estimatedReserves.toLocaleString()}
                 </span>{' '}
                 тонн
@@ -134,7 +134,7 @@ export default function MineralOccurrenceDetails({
           <div>
             <h3 className="font-medium text-gray-900 mb-2">Площадь участка</h3>
             <p className="text-gray-700">
-              <span className="text-xl font-bold text-purple-600">
+              <span className="text-xl font-bold text-blue-600">
                 {deposit.area.toLocaleString()}
               </span>{' '}
               км²
@@ -143,7 +143,7 @@ export default function MineralOccurrenceDetails({
 
           <div>
             <h3 className="font-medium text-gray-900 mb-2">Статус участка</h3>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
               💎 Рудопроявление
             </span>
           </div>
@@ -155,8 +155,8 @@ export default function MineralOccurrenceDetails({
         <h3 className="font-medium text-gray-900 mb-3">
           📈 Инвестиционный потенциал
         </h3>
-        <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-          <ul className="space-y-2 text-sm text-purple-800">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <ul className="space-y-2 text-sm text-blue-800">
             <li>💡 Возможность дальнейшей разведки и оценки запасов</li>
             <li>🔬 Потенциал для научных исследований</li>
             <li>📊 База для инвестиционных решений</li>

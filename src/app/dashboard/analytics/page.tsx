@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Navigation from '@/components/layouts/Navigation';
 import { Card } from '@/components/ui/card-new';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 import {
   AreaChart,
   Area,

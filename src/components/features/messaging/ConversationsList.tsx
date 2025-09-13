@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { Card } from '@/components/ui/card-new';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 import {
   MessageCircle,
   Search,

@@ -25,7 +25,7 @@ import {
   Lightbulb,
 } from 'lucide-react';
 import { Card } from '@/components/ui/card-new';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 
 const knowledgeArticles = [
   {
@@ -350,7 +350,7 @@ export default function KnowledgePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+      <div className="bg-blue-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <BookOpen className="w-16 h-16 mx-auto mb-6 text-blue-200" />
@@ -486,7 +486,7 @@ export default function KnowledgePage() {
                   onChange={(e) => setFeaturedOnly(e.target.checked)}
                   className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
-                <Award className="w-4 h-4 text-yellow-500" />
+                <Award className="w-4 h-4 text-gray-600" />
                 <span className="text-sm text-gray-700">
                   Только рекомендуемые
                 </span>
@@ -551,7 +551,7 @@ export default function KnowledgePage() {
                       />
                       {article.featured && (
                         <div className="absolute top-2 left-2">
-                          <div className="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                          <div className="bg-gray-600 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
                             <Award className="w-3 h-3" />
                             Рекомендуемое
                           </div>

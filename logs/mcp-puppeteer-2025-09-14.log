@@ -1,0 +1,1 @@
+{"arguments":{"targetUrl":"http://localhost:3000"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-14 01:07:22.569","tool":"puppeteer_connect_active_tab"}

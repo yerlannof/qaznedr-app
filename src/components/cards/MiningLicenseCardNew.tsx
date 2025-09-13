@@ -25,7 +25,7 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui/card-new';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 
 interface MiningLicenseCardProps {
   deposit: KazakhstanDeposit;
@@ -69,8 +69,6 @@ export default function MiningLicenseCardNew({
       <div className="relative">
         <CardImage src={imageUrl} alt={deposit.title} aspectRatio="video" />
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
@@ -84,7 +82,7 @@ export default function MiningLicenseCardNew({
           {deposit.featured && (
             <CardBadge
               variant="warning"
-              className="bg-yellow-500 text-white border-0"
+              className="bg-gray-600 text-white border-0"
             >
               <Star className="w-3 h-3" fill="currentColor" />
               Рекомендуем
@@ -93,7 +91,7 @@ export default function MiningLicenseCardNew({
           {deposit.verified && (
             <CardBadge
               variant="success"
-              className="bg-green-600 text-white border-0"
+              className="bg-blue-600 text-white border-0"
             >
               <ShieldCheck className="w-3 h-3" />
               Проверено

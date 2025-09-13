@@ -88,11 +88,7 @@ export default function MiningLicenseCard({
       whileTap={{ scale: 0.98 }}
     >
       {/* Image Section with Improved Design */}
-      <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
-        {/* Animated Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,theme(colors.blue.400),transparent)]" />
-        </div>
+      <div className="aspect-[4/3] relative overflow-hidden bg-gray-50">
 
         {/* Main Icon with Animation */}
         <motion.div
@@ -130,7 +126,7 @@ export default function MiningLicenseCard({
               transition={{ duration: 0.3 }}
             >
               <Heart
-                className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-600'}`}
+                className={`w-4 h-4 ${isFavorite ? 'fill-blue-600 text-blue-600' : 'text-gray-600'}`}
               />
             </motion.div>
           </motion.button>
@@ -168,7 +164,7 @@ export default function MiningLicenseCard({
           )}
           {isHot() && (
             <motion.span
-              className="px-2 py-1 bg-red-500 text-white rounded-full text-xs font-semibold flex items-center gap-1"
+              className="px-2 py-1 bg-gray-700 text-white rounded-full text-xs font-semibold flex items-center gap-1"
               animate={{
                 boxShadow: [
                   '0 0 0 0 rgba(239, 68, 68, 0.7)',
@@ -188,7 +184,7 @@ export default function MiningLicenseCard({
           )}
           {deposit.verified && (
             <motion.span
-              className="px-2 py-1 bg-green-600 text-white rounded-full text-xs font-semibold flex items-center gap-1"
+              className="px-2 py-1 bg-blue-600 text-white rounded-full text-xs font-semibold flex items-center gap-1"
               whileHover={{ scale: 1.05 }}
             >
               <ShieldCheck className="w-3 h-3" />
@@ -262,7 +258,7 @@ export default function MiningLicenseCard({
               {deposit.views} просмотров
             </span>
             <motion.span
-              className="flex items-center gap-1 text-orange-600"
+              className="flex items-center gap-1 text-gray-600"
               whileHover={{ scale: 1.05 }}
             >
               <Users className="w-3.5 h-3.5" />

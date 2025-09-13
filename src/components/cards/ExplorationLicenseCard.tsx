@@ -42,14 +42,14 @@ export default function ExplorationLicenseCard({
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
       {/* Image */}
-      <div className="aspect-[4/3] relative bg-gradient-to-br from-green-50 to-green-100">
+      <div className="aspect-[4/3] relative bg-gray-50">
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-6xl">{getMineralIcon(deposit.mineral)}</span>
         </div>
 
         {/* Type Badge */}
         <div className="absolute top-2 left-2">
-          <span className="bg-green-600 text-white px-3 py-1 rounded-md text-xs font-medium">
+          <span className="bg-blue-600 text-white px-3 py-1 rounded-md text-xs font-medium">
             🔍 Лицензия на разведку
           </span>
         </div>
@@ -57,7 +57,7 @@ export default function ExplorationLicenseCard({
         {/* Badges */}
         <div className="absolute top-2 right-2 flex flex-col gap-1">
           {deposit.featured && (
-            <span className="bg-yellow-500 text-white px-2 py-1 rounded-md text-xs font-medium">
+            <span className="bg-gray-600 text-white px-2 py-1 rounded-md text-xs font-medium">
               ⭐ Рекомендуем
             </span>
           )}

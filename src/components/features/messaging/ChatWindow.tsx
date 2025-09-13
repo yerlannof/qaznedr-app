@@ -6,7 +6,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { createClient } from '@/lib/supabase/client';
 import { Card } from '@/components/ui/card-new';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 import {
   Send,
   Paperclip,

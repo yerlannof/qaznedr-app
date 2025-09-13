@@ -12,7 +12,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { searchService, SearchFilters } from '@/lib/search/search-service';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 import { useDebounce } from '@/hooks/useDebounce';
 import { cn } from '@/lib/utils';
 

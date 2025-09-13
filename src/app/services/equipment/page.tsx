@@ -26,7 +26,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { Card, CardBadge } from '@/components/ui/card-new';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 
 interface EquipmentItem {
   id: string;
@@ -503,7 +503,7 @@ export default function EquipmentRentalPage() {
           <div
             className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${
               availability.color === 'green'
-                ? 'bg-green-100 text-green-800'
+                ? 'bg-blue-100 text-blue-800'
                 : availability.color === 'red'
                   ? 'bg-red-100 text-red-800'
                   : availability.color === 'yellow'
@@ -528,7 +528,7 @@ export default function EquipmentRentalPage() {
               </p>
             </div>
             {item.certified && (
-              <Shield className="w-5 h-5 text-green-600 flex-shrink-0 ml-2" />
+              <Shield className="w-5 h-5 text-blue-600 flex-shrink-0 ml-2" />
             )}
           </div>
 
@@ -585,7 +585,7 @@ export default function EquipmentRentalPage() {
             <div className="flex items-center gap-2">
               <span className="font-medium text-sm">{item.owner.name}</span>
               {item.owner.verified && (
-                <Shield className="w-4 h-4 text-green-600" />
+                <Shield className="w-4 h-4 text-blue-600" />
               )}
             </div>
             <div className="flex items-center gap-1 text-xs text-gray-600">
@@ -647,8 +647,8 @@ export default function EquipmentRentalPage() {
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center">
-              <Truck className="w-6 h-6 text-green-600" />
+            <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
+              <Truck className="w-6 h-6 text-blue-600" />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
@@ -668,7 +668,7 @@ export default function EquipmentRentalPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Поиск по технике, брендам..."
-                className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             </div>
@@ -676,7 +676,7 @@ export default function EquipmentRentalPage() {
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">Все категории</option>
               {EQUIPMENT_CATEGORIES.map((category) => (
@@ -689,7 +689,7 @@ export default function EquipmentRentalPage() {
             <select
               value={selectedRegion}
               onChange={(e) => setSelectedRegion(e.target.value)}
-              className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">Все регионы</option>
               {REGIONS.map((region) => (
@@ -702,7 +702,7 @@ export default function EquipmentRentalPage() {
             <select
               value={selectedAvailability}
               onChange={(e) => setSelectedAvailability(e.target.value)}
-              className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">Все статусы</option>
               <option value="available">Доступно</option>
@@ -735,7 +735,7 @@ export default function EquipmentRentalPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="price">По цене</option>
               <option value="rating">По рейтингу</option>

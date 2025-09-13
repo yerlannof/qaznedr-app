@@ -18,7 +18,7 @@ import {
   Navigation,
   Maximize,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card-new';
 import { getMineralIcon } from '@/components/icons';
 import 'maplibre-gl/dist/maplibre-gl.css';

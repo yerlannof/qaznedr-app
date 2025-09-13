@@ -22,7 +22,7 @@ import {
   Shield,
 } from 'lucide-react';
 import { Card, CardBadge } from '@/components/ui/card-new';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 
 interface GeologicalProvider {
   id: string;

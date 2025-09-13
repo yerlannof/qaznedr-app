@@ -21,7 +21,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { Card } from '@/components/ui/card-new';
-import { Button } from '@/components/ui/button-new';
+import { Button } from '@/components/ui/button';
 
 const newsArticles = [
   {

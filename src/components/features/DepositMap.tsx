@@ -56,7 +56,8 @@ const KAZAKHSTAN_BOUNDS: [[number, number], [number, number]] = [
 const createCustomIcon = (type: string, isSelected?: boolean) => {
   if (typeof window === 'undefined') return null;
   
-  const L = typeof window !== 'undefined' ? require('leaflet') : null;
+  // @ts-expect-error
+  const L = typeof window !== 'undefined' ? window.L : null;
   if (!L) return null;
 
   const colors = {

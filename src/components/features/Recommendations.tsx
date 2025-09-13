@@ -91,7 +91,7 @@ const generateRecommendations = (
       type: 'MINING_LICENSE' as const,
       verified: true,
       views: 1247,
-      createdAt: new Date('2025-01-10').toISOString(),
+      createdAt: new Date('2025-01-10'),
       coordinates: [48.0196, 66.9237],
       featured: false,
       status: 'active',
@@ -102,7 +102,7 @@ const generateRecommendations = (
       reason: 'similar',
       score: 0.92,
       licenseNumber: 'KZ-ML-2025-001',
-      licenseExpiry: new Date('2030-01-01').toISOString(),
+      licenseExpiry: new Date('2030-01-01'),
       licenseSubtype: 'GOLD' as const,
     },
     {
@@ -118,7 +118,7 @@ const generateRecommendations = (
       type: 'EXPLORATION_LICENSE' as const,
       verified: true,
       views: 2156,
-      createdAt: new Date('2025-01-08').toISOString(),
+      createdAt: new Date('2025-01-08'),
       coordinates: [43.6532, 51.1605],
       featured: false,
       status: 'active',
@@ -145,7 +145,7 @@ const generateRecommendations = (
       type: 'MINING_LICENSE' as const,
       verified: false,
       views: 892,
-      createdAt: new Date('2025-01-06').toISOString(),
+      createdAt: new Date('2025-01-06'),
       coordinates: [49.9480, 82.6274],
       featured: false,
       status: 'active',
@@ -156,7 +156,7 @@ const generateRecommendations = (
       reason: 'personalized',
       score: 0.85,
       licenseNumber: 'KZ-ML-2025-003',
-      licenseExpiry: new Date('2029-06-01').toISOString(),
+      licenseExpiry: new Date('2029-06-01'),
       licenseSubtype: 'COPPER' as const,
     },
   ];
@@ -299,7 +299,7 @@ export function RecentlyViewed({
         verified: true,
         views: 456,
         description: 'Перспективное золотое месторождение',
-        createdAt: new Date().toISOString(),
+        createdAt: new Date(),
       },
       {
         id: 'recent-2',
@@ -313,7 +313,7 @@ export function RecentlyViewed({
         verified: true,
         views: 789,
         description: 'Крупное угольное месторождение',
-        createdAt: new Date().toISOString(),
+        createdAt: new Date(),
       },
     ];
 

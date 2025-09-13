@@ -251,12 +251,12 @@ function MapContent({
 
           {deposits.map((deposit) => {
             // Generate random coordinates within Kazakhstan bounds if not provided
-            const lat =
-              deposit.coordinates?.lat ||
-              40.5686 + Math.random() * (55.4421 - 40.5686);
-            const lng =
-              deposit.coordinates?.lng ||
-              46.4662 + Math.random() * (87.3599 - 46.4662);
+            const lat = deposit.coordinates
+              ? deposit.coordinates[0]
+              : 40.5686 + Math.random() * (55.4421 - 40.5686);
+            const lng = deposit.coordinates
+              ? deposit.coordinates[1]
+              : 46.4662 + Math.random() * (87.3599 - 46.4662);
 
             return (
               <MarkerAny

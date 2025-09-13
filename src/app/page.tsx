@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ArrowRight, Search, MapPin, TrendingUp, Building2, Users, CheckCircle } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
+import Recommendations from '@/components/features/Recommendations';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -165,6 +166,20 @@ export default function Home() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Personalized Recommendations */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <Recommendations 
+            userPreferences={{
+              preferredMinerals: ['Gold', 'Oil', 'Copper'],
+              preferredRegions: ['Мангистауская', 'Атырауская'],
+              priceRange: { min: 1000000000, max: 10000000000 },
+              viewHistory: ['deposit-1', 'deposit-2']
+            }}
+          />
         </div>
       </section>
 

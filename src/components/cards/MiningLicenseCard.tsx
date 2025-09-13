@@ -78,6 +78,7 @@ export default function MiningLicenseCard({
         boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
       }}
       whileTap={{ scale: 0.98 }}
+    >
       {/* Image Section with Improved Design */}
       <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
         {/* Animated Background Pattern */}

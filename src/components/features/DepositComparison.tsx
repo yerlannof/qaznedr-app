@@ -488,4 +488,4 @@ export default function DepositComparison({ className = '' }: DepositComparisonP
   );
 }
 
-export { useComparison, AddToComparisonButton };
+export { useComparison };

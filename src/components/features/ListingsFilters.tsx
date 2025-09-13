@@ -138,7 +138,7 @@ function FiltersContent() {
   const toggleSection = (section: string) => {
     setExpandedSections((prev) => ({
       ...prev,
-      [section]: !prev[section],
+      [section]: !prev[section as keyof typeof prev],
     }));
   };
 

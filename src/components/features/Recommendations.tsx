@@ -77,7 +77,7 @@ const generateRecommendations = (
   userPreferences?: any
 ): Array<KazakhstanDeposit & { reason: string; score: number }> => {
   // This would normally come from an AI recommendation engine
-  const baseRecommendations = [
+  const baseRecommendations: Array<KazakhstanDeposit & { reason: string; score: number }> = [
     {
       id: 'rec-1',
       title: 'Месторождение Актюбинск Голд',
@@ -92,8 +92,18 @@ const generateRecommendations = (
       verified: true,
       views: 1247,
       createdAt: new Date('2025-01-10').toISOString(),
+      coordinates: [48.0196, 66.9237],
+      featured: false,
+      status: 'active',
+      images: [],
+      owner: 'ТОО Актюбинск Голд',
+      contactPerson: 'Иванов И.И.',
+      contactPhone: '+7 (7132) 12-34-56',
       reason: 'similar',
       score: 0.92,
+      licenseNumber: 'KZ-ML-2025-001',
+      licenseExpiry: new Date('2030-01-01').toISOString(),
+      licenseSubtype: 'GOLD' as const,
     },
     {
       id: 'rec-2',
@@ -109,8 +119,18 @@ const generateRecommendations = (
       verified: true,
       views: 2156,
       createdAt: new Date('2025-01-08').toISOString(),
+      coordinates: [43.6532, 51.1605],
+      featured: false,
+      status: 'active',
+      images: [],
+      owner: 'АО Западный Прикаспий',
+      contactPerson: 'Петров П.П.',
+      contactPhone: '+7 (7292) 98-76-54',
       reason: 'trending',
       score: 0.88,
+      explorationStage: 'ADVANCED',
+      explorationPeriod: '2025-2028',
+      explorationBudget: 500000000,
     },
     {
       id: 'rec-3',
@@ -126,8 +146,18 @@ const generateRecommendations = (
       verified: false,
       views: 892,
       createdAt: new Date('2025-01-06').toISOString(),
+      coordinates: [49.9480, 82.6274],
+      featured: false,
+      status: 'active',
+      images: [],
+      owner: 'ТОО Медный Альтай',
+      contactPerson: 'Сидоров С.С.',
+      contactPhone: '+7 (7232) 55-66-77',
       reason: 'personalized',
       score: 0.85,
+      licenseNumber: 'KZ-ML-2025-003',
+      licenseExpiry: new Date('2029-06-01').toISOString(),
+      licenseSubtype: 'COPPER' as const,
     },
   ];
 

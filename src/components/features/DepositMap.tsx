@@ -231,6 +231,7 @@ function MapContent({
         className="w-full rounded-lg overflow-hidden"
         style={{ height: isFullscreen ? '100vh' : height }}
       >
+        {/* @ts-expect-error MapContainer dynamic import type issues */}
         <MapContainer
           ref={mapRef}
           center={KAZAKHSTAN_CENTER}

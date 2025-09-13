@@ -103,7 +103,7 @@ const generateRecommendations = (
       score: 0.92,
       licenseNumber: 'KZ-ML-2025-001',
       licenseExpiry: new Date('2030-01-01'),
-      licenseSubtype: 'GOLD' as const,
+      licenseSubtype: 'EXTRACTION_RIGHT' as const,
     },
     {
       id: 'rec-2',
@@ -128,7 +128,7 @@ const generateRecommendations = (
       contactPhone: '+7 (7292) 98-76-54',
       reason: 'trending',
       score: 0.88,
-      explorationStage: 'ADVANCED',
+      explorationStage: 'DETAILED' as const,
       explorationPeriod: '2025-2028',
       explorationBudget: 500000000,
     },
@@ -157,7 +157,7 @@ const generateRecommendations = (
       score: 0.85,
       licenseNumber: 'KZ-ML-2025-003',
       licenseExpiry: new Date('2029-06-01'),
-      licenseSubtype: 'COPPER' as const,
+      licenseSubtype: 'EXTRACTION_RIGHT' as const,
     },
   ];
 
@@ -312,7 +312,7 @@ export function RecentlyViewed({
         contactPhone: '+7 (7182) 65-43-21',
         licenseNumber: 'KZ-ML-2025-003',
         licenseExpiry: new Date('2031-01-01'),
-        licenseSubtype: 'EXTRACTION_RIGHT' as const
+        licenseSubtype: 'EXTRACTION_RIGHT' as const,
       },
       {
         id: 'recent-2',
@@ -339,7 +339,7 @@ export function RecentlyViewed({
         contactPhone: '+7 (7212) 42-15-78',
         licenseNumber: 'KZ-ML-2025-004',
         licenseExpiry: new Date('2032-01-01'),
-        licenseSubtype: 'EXTRACTION_RIGHT' as const
+        licenseSubtype: 'EXTRACTION_RIGHT' as const,
       },
     ];
 

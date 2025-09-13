@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Navigation from '@/components/layouts/Navigation';
 import Image from 'next/image';
 import {
   Mountain,
@@ -98,9 +99,10 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navigation />
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="bg-blue-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl font-bold mb-4">
               Экосистема горнодобывающих услуг

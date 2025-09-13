@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Navigation from '@/components/layouts/Navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -349,9 +350,11 @@ export default function KnowledgePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navigation />
+      
       {/* Hero Section */}
-      <div className="bg-blue-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="bg-blue-600 text-white mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
           <div className="text-center">
             <BookOpen className="w-16 h-16 mx-auto mb-6 text-blue-200" />
             <h1 className="text-4xl sm:text-5xl font-bold mb-4">База знаний</h1>

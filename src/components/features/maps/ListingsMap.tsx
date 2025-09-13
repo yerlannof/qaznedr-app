@@ -79,7 +79,7 @@ export default function ListingsMap({
     null
   );
   const [mapStyle, setMapStyle] = useState(
-    'https://api.maptiler.com/maps/streets/style.json?key=YOUR_MAPTILER_KEY'
+    'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'
   );
   const [showClusters, setShowClusters] = useState(true);
   const mapRef = useRef<any>(null);

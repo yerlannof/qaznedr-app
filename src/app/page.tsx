@@ -9,6 +9,10 @@ import {
   Building2,
   Users,
   CheckCircle,
+  Droplet,
+  Flame,
+  Coins,
+  Cpu,
 } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Recommendations from '@/components/features/Recommendations';
@@ -67,9 +71,9 @@ export default function Home() {
 
             {/* Headline - Short and Clear */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Месторождения Казахстана
+              Цифровая платформа
               <br />
-              <span className="text-blue-600">в одном клике</span>
+              <span className="text-blue-600">недропользования Казахстана</span>
             </h1>
 
             {/* 3 Key Value Props */}
@@ -206,7 +210,7 @@ export default function Home() {
               className="group p-5 bg-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             >
               <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-100 transition-colors">
-                <span className="text-2xl">🛢️</span>
+                <Droplet className="w-6 h-6 text-gray-700 group-hover:text-blue-600" />
               </div>
               <div className="font-semibold text-gray-900">Нефть</div>
               <div className="text-sm text-gray-500 mt-1">234 объявления</div>
@@ -217,7 +221,7 @@ export default function Home() {
               className="group p-5 bg-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             >
               <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-100 transition-colors">
-                <span className="text-2xl">🔥</span>
+                <Flame className="w-6 h-6 text-gray-700 group-hover:text-blue-600" />
               </div>
               <div className="font-semibold text-gray-900">Газ</div>
               <div className="text-sm text-gray-500 mt-1">156 объявлений</div>
@@ -228,7 +232,7 @@ export default function Home() {
               className="group p-5 bg-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             >
               <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-100 transition-colors">
-                <span className="text-2xl">🥇</span>
+                <Coins className="w-6 h-6 text-gray-700 group-hover:text-blue-600" />
               </div>
               <div className="font-semibold text-gray-900">Золото</div>
               <div className="text-sm text-gray-500 mt-1">89 объявлений</div>
@@ -239,7 +243,7 @@ export default function Home() {
               className="group p-5 bg-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             >
               <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-100 transition-colors">
-                <span className="text-2xl">🔶</span>
+                <Cpu className="w-6 h-6 text-gray-700 group-hover:text-blue-600" />
               </div>
               <div className="font-semibold text-gray-900">Медь</div>
               <div className="text-sm text-gray-500 mt-1">67 объявлений</div>

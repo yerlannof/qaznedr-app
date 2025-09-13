@@ -130,6 +130,7 @@ function MapContent({
 }: DepositMapProps) {
   const mapRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const MapContainerAny = MapContainer as any;
 
   // Reset map view to Kazakhstan
   const resetView = () => {
@@ -231,9 +232,7 @@ function MapContent({
         className="w-full rounded-lg overflow-hidden"
         style={{ height: isFullscreen ? '100vh' : height }}
       >
-        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-        {/* @ts-ignore */}
-        <MapContainer
+        <MapContainerAny
           ref={mapRef}
           center={KAZAKHSTAN_CENTER}
           zoom={6}
@@ -334,7 +333,7 @@ function MapContent({
               </Marker>
             );
           })}
-        </MapContainer>
+        </MapContainerAny>
       </div>
     </div>
   );

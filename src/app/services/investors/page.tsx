@@ -46,19 +46,41 @@ const investors = [
     avatar: '/images/investors/investor-1.jpg',
     investmentRange: { min: 500000000, max: 5000000000 }, // в тенге
     responseTime: '< 24 часов',
-    description: 'Опытный инвестор в горнодобывающий сектор с портфолио из 12 активных проектов. Специализируется на золотодобыче и медных месторождениях.',
+    description:
+      'Опытный инвестор в горнодобывающий сектор с портфолио из 12 активных проектов. Специализируется на золотодобыче и медных месторождениях.',
     focusAreas: ['Золото', 'Медь', 'Цинк', 'Полиметаллы'],
-    investmentStages: ['Разведка', 'Подготовка к добыче', 'Действующие рудники'],
-    regions: ['Восточно-Казахстанская обл.', 'Карагандинская обл.', 'Павлодарская обл.'],
+    investmentStages: [
+      'Разведка',
+      'Подготовка к добыче',
+      'Действующие рудники',
+    ],
+    regions: [
+      'Восточно-Казахстанская обл.',
+      'Карагандинская обл.',
+      'Павлодарская обл.',
+    ],
     recentInvestments: [
-      { project: 'Золоторудное месторождение "Жолымбет"', amount: 2500000000, year: 2023 },
-      { project: 'Медный рудник "Актогай-Восток"', amount: 3200000000, year: 2022 },
-      { project: 'Полиметаллическое месторождение "Шалкия"', amount: 1800000000, year: 2022 }
+      {
+        project: 'Золоторудное месторождение "Жолымбет"',
+        amount: 2500000000,
+        year: 2023,
+      },
+      {
+        project: 'Медный рудник "Актогай-Восток"',
+        amount: 3200000000,
+        year: 2022,
+      },
+      {
+        project: 'Полиметаллическое месторождение "Шалкия"',
+        amount: 1800000000,
+        year: 2022,
+      },
     ],
     contactPhone: '+7 727 123 4567',
     contactEmail: 'n.smagulov@kazinvest-mining.kz',
     available: true,
-    lookingFor: 'Ищу перспективные золотые и медные месторождения на стадии завершения разведки'
+    lookingFor:
+      'Ищу перспективные золотые и медные месторождения на стадии завершения разведки',
   },
   {
     id: '2',
@@ -76,19 +98,38 @@ const investors = [
     avatar: '/images/investors/investor-2.jpg',
     investmentRange: { min: 1000000000, max: 15000000000 },
     responseTime: '< 48 часов',
-    description: 'Ведущий казахстанский фонд прямых инвестиций, специализирующийся на горнодобывающих проектах. Управляет активами на сумму более 50 млрд тенге.',
+    description:
+      'Ведущий казахстанский фонд прямых инвестиций, специализирующийся на горнодобывающих проектах. Управляет активами на сумму более 50 млрд тенге.',
     focusAreas: ['Золото', 'Серебро', 'Медь', 'Железная руда', 'Уголь'],
-    investmentStages: ['Геологическая разведка', 'Технико-экономическое обоснование', 'Строительство', 'Действующее производство'],
+    investmentStages: [
+      'Геологическая разведка',
+      'Технико-экономическое обоснование',
+      'Строительство',
+      'Действующее производство',
+    ],
     regions: ['Вся территория Казахстана'],
     recentInvestments: [
-      { project: 'ГОК "Бозшаколь" - расширение', amount: 12000000000, year: 2023 },
-      { project: 'Угольное месторождение "Майкубен-Запад"', amount: 7500000000, year: 2023 },
-      { project: 'Железорудное месторождение "Соколовское-2"', amount: 9200000000, year: 2022 }
+      {
+        project: 'ГОК "Бозшаколь" - расширение',
+        amount: 12000000000,
+        year: 2023,
+      },
+      {
+        project: 'Угольное месторождение "Майкубен-Запад"',
+        amount: 7500000000,
+        year: 2023,
+      },
+      {
+        project: 'Железорудное месторождение "Соколовское-2"',
+        amount: 9200000000,
+        year: 2022,
+      },
     ],
     contactPhone: '+7 7172 234 5678',
     contactEmail: 'info@altyn-fund.kz',
     available: true,
-    lookingFor: 'Рассматриваем крупные проекты с потенциалом IRR свыше 18% и сроком окупаемости до 7 лет'
+    lookingFor:
+      'Рассматриваем крупные проекты с потенциалом IRR свыше 18% и сроком окупаемости до 7 лет',
   },
   {
     id: '3',
@@ -106,19 +147,42 @@ const investors = [
     avatar: '/images/investors/investor-3.jpg',
     investmentRange: { min: 2000000000, max: 25000000000 },
     responseTime: '< 72 часов',
-    description: 'Национальный институт развития, обеспечивающий долгосрочное финансирование производственной инфраструктуры и промышленных проектов.',
-    focusAreas: ['Все минералы', 'Инфраструктурные проекты', 'Обогатительные комплексы'],
-    investmentStages: ['ТЭО', 'Строительство', 'Модернизация действующих предприятий'],
+    description:
+      'Национальный институт развития, обеспечивающий долгосрочное финансирование производственной инфраструктуры и промышленных проектов.',
+    focusAreas: [
+      'Все минералы',
+      'Инфраструктурные проекты',
+      'Обогатительные комплексы',
+    ],
+    investmentStages: [
+      'ТЭО',
+      'Строительство',
+      'Модернизация действующих предприятий',
+    ],
     regions: ['Вся территория Казахстана', 'Приоритет - индустриальные зоны'],
     recentInvestments: [
-      { project: 'Модернизация Жезказганского медеплавильного завода', amount: 18000000000, year: 2023 },
-      { project: 'Строительство обогатительной фабрики "Костанай Минералс"', amount: 15600000000, year: 2023 },
-      { project: 'Развитие железнодорожной инфраструктуры месторождения "Кокжайлау"', amount: 11200000000, year: 2022 }
+      {
+        project: 'Модернизация Жезказганского медеплавильного завода',
+        amount: 18000000000,
+        year: 2023,
+      },
+      {
+        project: 'Строительство обогатительной фабрики "Костанай Минералс"',
+        amount: 15600000000,
+        year: 2023,
+      },
+      {
+        project:
+          'Развитие железнодорожной инфраструктуры месторождения "Кокжайлау"',
+        amount: 11200000000,
+        year: 2022,
+      },
     ],
     contactPhone: '+7 727 345 6789',
     contactEmail: 'mining@kdb.kz',
     available: true,
-    lookingFor: 'Финансируем проекты по диверсификации экономики с высоким экспортным потенциалом'
+    lookingFor:
+      'Финансируем проекты по диверсификации экономики с высоким экспортным потенциалом',
   },
   {
     id: '4',
@@ -136,19 +200,41 @@ const investors = [
     avatar: '/images/investors/investor-4.jpg',
     investmentRange: { min: 300000000, max: 2500000000 },
     responseTime: '< 12 часов',
-    description: 'Частный инвестор с 8-летним опытом в горнодобывающей отрасли. Фокусируется на средних и малых месторождениях с быстрой окупаемостью.',
-    focusAreas: ['Россыпное золото', 'Строительные материалы', 'Техногенные месторождения'],
-    investmentStages: ['Начальная разведка', 'Опытная добыча', 'Малая горная техника'],
-    regions: ['Акмолинская обл.', 'Северо-Казахстанская обл.', 'Костанайская обл.'],
+    description:
+      'Частный инвестор с 8-летним опытом в горнодобывающей отрасли. Фокусируется на средних и малых месторождениях с быстрой окупаемостью.',
+    focusAreas: [
+      'Россыпное золото',
+      'Строительные материалы',
+      'Техногенные месторождения',
+    ],
+    investmentStages: [
+      'Начальная разведка',
+      'Опытная добыча',
+      'Малая горная техника',
+    ],
+    regions: [
+      'Акмолинская обл.',
+      'Северо-Казахстанская обл.',
+      'Костанайская обл.',
+    ],
     recentInvestments: [
       { project: 'Россыпное золото "Жана-Жол"', amount: 850000000, year: 2023 },
-      { project: 'Песчано-гравийное месторождение "Сарыарка"', amount: 650000000, year: 2023 },
-      { project: 'Техногенное месторождение "Балхаш-Золото"', amount: 1200000000, year: 2022 }
+      {
+        project: 'Песчано-гравийное месторождение "Сарыарка"',
+        amount: 650000000,
+        year: 2023,
+      },
+      {
+        project: 'Техногенное месторождение "Балхаш-Золото"',
+        amount: 1200000000,
+        year: 2022,
+      },
     ],
     contactPhone: '+7 7172 456 7890',
     contactEmail: 'd.volkova@nedra-capital.kz',
     available: false,
-    lookingFor: 'Интересуют проекты сроком окупаемости до 3 лет с минимальными экологическими рисками'
+    lookingFor:
+      'Интересуют проекты сроком окупаемости до 3 лет с минимальными экологическими рисками',
   },
   {
     id: '5',
@@ -166,19 +252,46 @@ const investors = [
     avatar: '/images/investors/investor-5.jpg',
     investmentRange: { min: 400000000, max: 3000000000 },
     responseTime: '< 36 часов',
-    description: 'Региональный инвестиционный фонд, специализирующийся на развитии горнодобывающих проектов южного Казахстана. Поддерживаем местных предпринимателей.',
-    focusAreas: ['Свинцово-цинковые руды', 'Барит', 'Плавиковый шпат', 'Каолин'],
-    investmentStages: ['Детальная разведка', 'Подготовка к эксплуатации', 'Первые годы эксплуатации'],
-    regions: ['Южно-Казахстанская обл.', 'Жамбылская обл.', 'Кызылординская обл.'],
+    description:
+      'Региональный инвестиционный фонд, специализирующийся на развитии горнодобывающих проектов южного Казахстана. Поддерживаем местных предпринимателей.',
+    focusAreas: [
+      'Свинцово-цинковые руды',
+      'Барит',
+      'Плавиковый шпат',
+      'Каолин',
+    ],
+    investmentStages: [
+      'Детальная разведка',
+      'Подготовка к эксплуатации',
+      'Первые годы эксплуатации',
+    ],
+    regions: [
+      'Южно-Казахстанская обл.',
+      'Жамбылская обл.',
+      'Кызылординская обл.',
+    ],
     recentInvestments: [
-      { project: 'Свинцово-цинковое месторождение "Жайрем-Южное"', amount: 2100000000, year: 2023 },
-      { project: 'Баритовое месторождение "Жезды"', amount: 980000000, year: 2022 },
-      { project: 'Каолиновое месторождение "Криворожское"', amount: 1450000000, year: 2022 }
+      {
+        project: 'Свинцово-цинковое месторождение "Жайрем-Южное"',
+        amount: 2100000000,
+        year: 2023,
+      },
+      {
+        project: 'Баритовое месторождение "Жезды"',
+        amount: 980000000,
+        year: 2022,
+      },
+      {
+        project: 'Каолиновое месторождение "Криворожское"',
+        amount: 1450000000,
+        year: 2022,
+      },
     ],
     contactPhone: '+7 7252 567 8901',
     contactEmail: 'm.altynbekov@qazaq-mining.kz',
     available: true,
-    lookingFor: 'Ищем проекты по редким и редкоземельным металлам в южных регионах'
+    lookingFor:
+      'Ищем проекты по редким и редкоземельным металлам в южных регионах',
   },
   {
     id: '6',
@@ -196,20 +309,47 @@ const investors = [
     avatar: '/images/investors/investor-6.jpg',
     investmentRange: { min: 3000000000, max: 20000000000 },
     responseTime: '< 5 дней',
-    description: 'Международный фонд с капиталом более 100 млрд тенге. Инвестируем в крупные горнодобывающие проекты с международным потенциалом экспорта.',
-    focusAreas: ['Медь', 'Золото', 'Уран', 'Редкоземельные металлы', 'Калийные соли'],
-    investmentStages: ['Подтвержденные запасы', 'Строительство ГОКов', 'Модернизация действующих предприятий'],
-    regions: ['Вся территория Казахстана', 'Фокус на экспортно-ориентированных проектах'],
+    description:
+      'Международный фонд с капиталом более 100 млрд тенге. Инвестируем в крупные горнодобывающие проекты с международным потенциалом экспорта.',
+    focusAreas: [
+      'Медь',
+      'Золото',
+      'Уран',
+      'Редкоземельные металлы',
+      'Калийные соли',
+    ],
+    investmentStages: [
+      'Подтвержденные запасы',
+      'Строительство ГОКов',
+      'Модернизация действующих предприятий',
+    ],
+    regions: [
+      'Вся территория Казахстана',
+      'Фокус на экспортно-ориентированных проектах',
+    ],
     recentInvestments: [
-      { project: 'Урановое месторождение "Инкай" - расширение', amount: 19500000000, year: 2023 },
-      { project: 'Медно-порфировое месторождение "Актогай-Север"', amount: 16800000000, year: 2023 },
-      { project: 'Золоторудное месторождение "Васильковское" - модернизация', amount: 12300000000, year: 2022 }
+      {
+        project: 'Урановое месторождение "Инкай" - расширение',
+        amount: 19500000000,
+        year: 2023,
+      },
+      {
+        project: 'Медно-порфировое месторождение "Актогай-Север"',
+        amount: 16800000000,
+        year: 2023,
+      },
+      {
+        project: 'Золоторудное месторождение "Васильковское" - модернизация',
+        amount: 12300000000,
+        year: 2022,
+      },
     ],
     contactPhone: '+7 727 678 9012',
     contactEmail: 'investment@eurasian-mining.kz',
     available: true,
-    lookingFor: 'Крупные проекты мирового класса с запасами категории С1+С2 и экспортным потенциалом'
-  }
+    lookingFor:
+      'Крупные проекты мирового класса с запасами категории С1+С2 и экспортным потенциалом',
+  },
 ];
 
 const regions = [
@@ -227,20 +367,15 @@ const regions = [
   'Мангистауская обл.',
   'Актюбинская обл.',
   'Жамбылская обл.',
-  'Кызылординская обл.'
+  'Кызылординская обл.',
 ];
 
-const investorTypes = [
-  'Все типы',
-  'individual',
-  'fund',
-  'bank'
-];
+const investorTypes = ['Все типы', 'individual', 'fund', 'bank'];
 
 const investorTypeNames = {
-  'individual': 'Частный инвестор',
-  'fund': 'Инвестиционный фонд',
-  'bank': 'Банк/Финансовая организация'
+  individual: 'Частный инвестор',
+  fund: 'Инвестиционный фонд',
+  bank: 'Банк/Финансовая организация',
 };
 
 const focusAreas = [
@@ -254,7 +389,7 @@ const focusAreas = [
   'Уголь',
   'Редкоземельные металлы',
   'Строительные материалы',
-  'Полиметаллы'
+  'Полиметаллы',
 ];
 
 export default function InvestorsPage() {
@@ -268,29 +403,46 @@ export default function InvestorsPage() {
   const [minInvestment, setMinInvestment] = useState(0);
   const [maxInvestment, setMaxInvestment] = useState(50000000000);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [sortBy, setSortBy] = useState<'rating' | 'totalInvested' | 'activeProjects' | 'successRate'>('rating');
+  const [sortBy, setSortBy] = useState<
+    'rating' | 'totalInvested' | 'activeProjects' | 'successRate'
+  >('rating');
 
   const filteredInvestors = useMemo(() => {
-    const filtered = investors.filter(investor => {
-      const matchesSearch = !searchQuery || 
+    const filtered = investors.filter((investor) => {
+      const matchesSearch =
+        !searchQuery ||
         investor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         investor.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        investor.focusAreas.some(area => area.toLowerCase().includes(searchQuery.toLowerCase()));
-      
-      const matchesRegion = selectedRegion === 'Все регионы' || 
+        investor.focusAreas.some((area) =>
+          area.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
+      const matchesRegion =
+        selectedRegion === 'Все регионы' ||
         investor.location === selectedRegion ||
         investor.regions.includes(selectedRegion);
-      const matchesType = selectedType === 'Все типы' || investor.type === selectedType;
-      const matchesFocus = selectedFocus === 'Все области' || 
+      const matchesType =
+        selectedType === 'Все типы' || investor.type === selectedType;
+      const matchesFocus =
+        selectedFocus === 'Все области' ||
         investor.focusAreas.includes(selectedFocus);
       const matchesVerified = !verifiedOnly || investor.verified;
       const matchesAvailable = !availableOnly || investor.available;
       const matchesRating = investor.rating >= ratingFilter;
-      const matchesInvestmentRange = investor.investmentRange.min <= maxInvestment && 
-                                   investor.investmentRange.max >= minInvestment;
+      const matchesInvestmentRange =
+        investor.investmentRange.min <= maxInvestment &&
+        investor.investmentRange.max >= minInvestment;
 
-      return matchesSearch && matchesRegion && matchesType && matchesFocus && 
-             matchesVerified && matchesAvailable && matchesRating && matchesInvestmentRange;
+      return (
+        matchesSearch &&
+        matchesRegion &&
+        matchesType &&
+        matchesFocus &&
+        matchesVerified &&
+        matchesAvailable &&
+        matchesRating &&
+        matchesInvestmentRange
+      );
     });
 
     // Сортировка - создаем отсортированную копию
@@ -310,7 +462,18 @@ export default function InvestorsPage() {
     });
 
     return sorted;
-  }, [searchQuery, selectedRegion, selectedType, selectedFocus, verifiedOnly, availableOnly, ratingFilter, minInvestment, maxInvestment, sortBy]);
+  }, [
+    searchQuery,
+    selectedRegion,
+    selectedType,
+    selectedFocus,
+    verifiedOnly,
+    availableOnly,
+    ratingFilter,
+    minInvestment,
+    maxInvestment,
+    sortBy,
+  ]);
 
   const formatAmount = (amount: number) => {
     if (amount >= 1000000000) {
@@ -332,10 +495,11 @@ export default function InvestorsPage() {
               Инвесторы и фонды
             </h1>
             <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              Найдите инвесторов для финансирования вашего горнодобывающего проекта. 
-              От частных инвесторов до крупных фондов и банков развития.
+              Найдите инвесторов для финансирования вашего горнодобывающего
+              проекта. От частных инвесторов до крупных фондов и банков
+              развития.
             </p>
-            
+
             {/* Search */}
             <div className="max-w-2xl mx-auto relative">
               <input
@@ -362,15 +526,19 @@ export default function InvestorsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Region Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Регион</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Регион
+              </label>
               <div className="relative">
                 <select
                   value={selectedRegion}
                   onChange={(e) => setSelectedRegion(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                 >
-                  {regions.map(region => (
-                    <option key={region} value={region}>{region}</option>
+                  {regions.map((region) => (
+                    <option key={region} value={region}>
+                      {region}
+                    </option>
                   ))}
                 </select>
                 <ChevronDown className="absolute right-3 top-3 w-4 h-4 text-gray-400 pointer-events-none" />
@@ -379,16 +547,22 @@ export default function InvestorsPage() {
 
             {/* Type Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Тип инвестора</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Тип инвестора
+              </label>
               <div className="relative">
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                 >
-                  {investorTypes.map(type => (
+                  {investorTypes.map((type) => (
                     <option key={type} value={type}>
-                      {type === 'Все типы' ? type : investorTypeNames[type as keyof typeof investorTypeNames]}
+                      {type === 'Все типы'
+                        ? type
+                        : investorTypeNames[
+                            type as keyof typeof investorTypeNames
+                          ]}
                     </option>
                   ))}
                 </select>
@@ -398,15 +572,19 @@ export default function InvestorsPage() {
 
             {/* Focus Area Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Сфера интересов</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Сфера интересов
+              </label>
               <div className="relative">
                 <select
                   value={selectedFocus}
                   onChange={(e) => setSelectedFocus(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                 >
-                  {focusAreas.map(area => (
-                    <option key={area} value={area}>{area}</option>
+                  {focusAreas.map((area) => (
+                    <option key={area} value={area}>
+                      {area}
+                    </option>
                   ))}
                 </select>
                 <ChevronDown className="absolute right-3 top-3 w-4 h-4 text-gray-400 pointer-events-none" />
@@ -415,7 +593,9 @@ export default function InvestorsPage() {
 
             {/* Rating Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Мин. рейтинг</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Мин. рейтинг
+              </label>
               <div className="flex items-center gap-2">
                 <input
                   type="range"
@@ -436,22 +616,30 @@ export default function InvestorsPage() {
           {/* Investment Range */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Мин. инвестиция, млн ₸</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Мин. инвестиция, млн ₸
+              </label>
               <input
                 type="number"
                 value={minInvestment / 1000000}
-                onChange={(e) => setMinInvestment(Number(e.target.value) * 1000000)}
+                onChange={(e) =>
+                  setMinInvestment(Number(e.target.value) * 1000000)
+                }
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 min="0"
                 step="100"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Макс. инвестиция, млн ₸</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Макс. инвестиция, млн ₸
+              </label>
               <input
                 type="number"
                 value={maxInvestment / 1000000}
-                onChange={(e) => setMaxInvestment(Number(e.target.value) * 1000000)}
+                onChange={(e) =>
+                  setMaxInvestment(Number(e.target.value) * 1000000)
+                }
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 min="0"
                 step="500"
@@ -470,9 +658,11 @@ export default function InvestorsPage() {
                   className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
                 <Shield className="w-4 h-4 text-green-600" />
-                <span className="text-sm text-gray-700">Только верифицированные</span>
+                <span className="text-sm text-gray-700">
+                  Только верифицированные
+                </span>
               </label>
-              
+
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
@@ -522,18 +712,37 @@ export default function InvestorsPage() {
         {/* Results */}
         <div className="mb-6">
           <p className="text-gray-600">
-            Найдено <span className="font-semibold text-gray-900">{filteredInvestors.length}</span> инвесторов
+            Найдено{' '}
+            <span className="font-semibold text-gray-900">
+              {filteredInvestors.length}
+            </span>{' '}
+            инвесторов
           </p>
         </div>
 
         {/* Investors Grid/List */}
-        <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6' : 'space-y-6'}>
+        <div
+          className={
+            viewMode === 'grid'
+              ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'
+              : 'space-y-6'
+          }
+        >
           {filteredInvestors.map((investor) => (
-            <Card key={investor.id} className={`group hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'p-6' : ''}`}>
-              <div className={`${viewMode === 'list' ? 'flex gap-6' : 'text-center'}`}>
+            <Card
+              key={investor.id}
+              className={`group hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'p-6' : ''}`}
+            >
+              <div
+                className={`${viewMode === 'list' ? 'flex gap-6' : 'text-center'}`}
+              >
                 {/* Avatar and Basic Info */}
-                <div className={`${viewMode === 'list' ? 'flex-shrink-0' : 'mb-4'}`}>
-                  <div className={`relative ${viewMode === 'list' ? 'w-24 h-24' : 'w-20 h-20 mx-auto'} mb-3`}>
+                <div
+                  className={`${viewMode === 'list' ? 'flex-shrink-0' : 'mb-4'}`}
+                >
+                  <div
+                    className={`relative ${viewMode === 'list' ? 'w-24 h-24' : 'w-20 h-20 mx-auto'} mb-3`}
+                  >
                     <Image
                       src="/images/placeholder-avatar.jpg"
                       alt={investor.name}
@@ -551,66 +760,105 @@ export default function InvestorsPage() {
                       </div>
                     )}
                   </div>
-                  
-                  <div className={`${viewMode === 'list' ? 'text-center' : ''}`}>
-                    <div className={`inline-flex px-2 py-1 rounded-full text-xs ${
-                      investor.type === 'fund' ? 'bg-blue-100 text-blue-700' :
-                      investor.type === 'bank' ? 'bg-green-100 text-green-700' :
-                      'bg-purple-100 text-purple-700'
-                    }`}>
-                      {investorTypeNames[investor.type as keyof typeof investorTypeNames]}
+
+                  <div
+                    className={`${viewMode === 'list' ? 'text-center' : ''}`}
+                  >
+                    <div
+                      className={`inline-flex px-2 py-1 rounded-full text-xs ${
+                        investor.type === 'fund'
+                          ? 'bg-blue-100 text-blue-700'
+                          : investor.type === 'bank'
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-purple-100 text-purple-700'
+                      }`}
+                    >
+                      {
+                        investorTypeNames[
+                          investor.type as keyof typeof investorTypeNames
+                        ]
+                      }
                     </div>
                   </div>
                 </div>
 
                 <div className={`${viewMode === 'list' ? 'flex-1' : ''}`}>
                   {/* Header */}
-                  <div className={`${viewMode === 'list' ? 'flex justify-between items-start mb-3' : 'mb-3'}`}>
+                  <div
+                    className={`${viewMode === 'list' ? 'flex justify-between items-start mb-3' : 'mb-3'}`}
+                  >
                     <div className={viewMode === 'list' ? '' : 'text-center'}>
                       <h3 className="text-xl font-semibold text-gray-900 mb-1">
                         {investor.name}
                       </h3>
-                      <p className="text-gray-600 text-sm mb-1">{investor.position}</p>
-                      <p className="font-medium text-blue-600 text-sm">{investor.company}</p>
+                      <p className="text-gray-600 text-sm mb-1">
+                        {investor.position}
+                      </p>
+                      <p className="font-medium text-blue-600 text-sm">
+                        {investor.company}
+                      </p>
                     </div>
 
-                    <div className={`${viewMode === 'list' ? 'text-right' : 'flex justify-center items-center gap-4 mt-3'}`}>
+                    <div
+                      className={`${viewMode === 'list' ? 'text-right' : 'flex justify-center items-center gap-4 mt-3'}`}
+                    >
                       <div className="flex items-center gap-1">
                         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                         <span className="font-medium">{investor.rating}</span>
-                        <span className="text-gray-500 text-sm">({investor.reviews})</span>
+                        <span className="text-gray-500 text-sm">
+                          ({investor.reviews})
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   {/* Location and Availability */}
-                  <div className={`flex ${viewMode === 'list' ? 'justify-between' : 'justify-center'} items-center gap-4 mb-4 text-sm text-gray-600`}>
+                  <div
+                    className={`flex ${viewMode === 'list' ? 'justify-between' : 'justify-center'} items-center gap-4 mb-4 text-sm text-gray-600`}
+                  >
                     <div className="flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
                       <span>{investor.location}</span>
                     </div>
-                    <div className={`flex items-center gap-1 ${investor.available ? 'text-green-600' : 'text-red-600'}`}>
+                    <div
+                      className={`flex items-center gap-1 ${investor.available ? 'text-green-600' : 'text-red-600'}`}
+                    >
                       <Clock className="w-4 h-4" />
-                      <span>{investor.available ? investor.responseTime : 'Недоступен'}</span>
+                      <span>
+                        {investor.available
+                          ? investor.responseTime
+                          : 'Недоступен'}
+                      </span>
                     </div>
                   </div>
 
                   {/* Stats */}
-                  <div className={`${viewMode === 'list' ? 'grid grid-cols-4 gap-4' : 'grid grid-cols-2 gap-2'} mb-4 text-center text-sm`}>
+                  <div
+                    className={`${viewMode === 'list' ? 'grid grid-cols-4 gap-4' : 'grid grid-cols-2 gap-2'} mb-4 text-center text-sm`}
+                  >
                     <div>
-                      <div className="font-semibold text-gray-900">{formatAmount(investor.totalInvested)}</div>
+                      <div className="font-semibold text-gray-900">
+                        {formatAmount(investor.totalInvested)}
+                      </div>
                       <div className="text-gray-600">инвестировано</div>
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">{investor.activeProjects}</div>
+                      <div className="font-semibold text-gray-900">
+                        {investor.activeProjects}
+                      </div>
                       <div className="text-gray-600">проектов</div>
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">{investor.successRate}%</div>
+                      <div className="font-semibold text-gray-900">
+                        {investor.successRate}%
+                      </div>
                       <div className="text-gray-600">успех</div>
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">{formatAmount(investor.investmentRange.min)} - {formatAmount(investor.investmentRange.max)}</div>
+                      <div className="font-semibold text-gray-900">
+                        {formatAmount(investor.investmentRange.min)} -{' '}
+                        {formatAmount(investor.investmentRange.max)}
+                      </div>
                       <div className="text-gray-600">диапазон</div>
                     </div>
                   </div>
@@ -637,12 +885,16 @@ export default function InvestorsPage() {
                   {/* Looking For */}
                   {viewMode === 'list' && (
                     <div className="mb-4 p-3 bg-blue-50 rounded-lg">
-                      <p className="text-sm text-blue-800 italic">{investor.lookingFor}</p>
+                      <p className="text-sm text-blue-800 italic">
+                        {investor.lookingFor}
+                      </p>
                     </div>
                   )}
 
                   {/* Contact Buttons */}
-                  <div className={`${viewMode === 'list' ? 'flex' : 'grid grid-cols-2'} gap-2`}>
+                  <div
+                    className={`${viewMode === 'list' ? 'flex' : 'grid grid-cols-2'} gap-2`}
+                  >
                     <Button
                       variant="outline"
                       size="sm"
@@ -652,10 +904,7 @@ export default function InvestorsPage() {
                       <Phone className="w-4 h-4 mr-2" />
                       Позвонить
                     </Button>
-                    <Button
-                      size="sm"
-                      disabled={!investor.available}
-                    >
+                    <Button size="sm" disabled={!investor.available}>
                       <Mail className="w-4 h-4 mr-2" />
                       Написать
                     </Button>
@@ -673,18 +922,19 @@ export default function InvestorsPage() {
             Ищете финансирование для проекта?
           </h2>
           <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-            Создайте профиль проекта и привлеките внимание инвесторов к вашему горнодобывающему предприятию
+            Создайте профиль проекта и привлеките внимание инвесторов к вашему
+            горнодобывающему предприятию
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              variant="secondary" 
+            <Button
+              variant="secondary"
               className="bg-white text-blue-600 hover:bg-gray-100"
             >
               <Plus className="w-4 h-4 mr-2" />
               Создать профиль проекта
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="border-blue-400 text-white hover:bg-blue-700"
             >
               <BarChart3 className="w-4 h-4 mr-2" />

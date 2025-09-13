@@ -31,7 +31,8 @@ function ListingsContent() {
   const [totalCount, setTotalCount] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
-  const [selectedDeposit, setSelectedDeposit] = useState<KazakhstanDeposit | null>(null);
+  const [selectedDeposit, setSelectedDeposit] =
+    useState<KazakhstanDeposit | null>(null);
 
   const [_filters, _setFilters] = useState<ListingFilters>({
     region: [],
@@ -207,18 +208,18 @@ function ListingsContent() {
                   >
                     🗺️ Карта
                   </motion.button>
-                  
+
                   {/* Animated background slider */}
                   <motion.div
                     className="absolute top-1 h-8 bg-white shadow-sm rounded-md"
                     animate={{
                       x: viewMode === 'list' ? 4 : '100%',
-                      width: viewMode === 'list' ? 78 : 70
+                      width: viewMode === 'list' ? 78 : 70,
                     }}
                     transition={{
-                      type: "spring",
+                      type: 'spring',
                       stiffness: 300,
-                      damping: 30
+                      damping: 30,
                     }}
                     style={{ left: 0 }}
                   />
@@ -228,16 +229,16 @@ function ListingsContent() {
 
             {/* Loading State */}
             {loading && (
-              <motion.div 
+              <motion.div
                 className="grid grid-cols-1 md:grid-cols-2 gap-6"
                 initial="hidden"
                 animate="visible"
                 variants={{
                   visible: {
                     transition: {
-                      staggerChildren: 0.1
-                    }
-                  }
+                      staggerChildren: 0.1,
+                    },
+                  },
                 }}
               >
                 {Array.from({ length: 6 }).map((_, i) => (
@@ -245,7 +246,7 @@ function ListingsContent() {
                     key={i}
                     variants={{
                       hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 }
+                      visible: { opacity: 1, y: 0 },
                     }}
                   >
                     <SkeletonCard />
@@ -275,16 +276,16 @@ function ListingsContent() {
             {!loading && !error && (
               <>
                 {viewMode === 'list' ? (
-                  <motion.div 
+                  <motion.div
                     className="grid grid-cols-1 md:grid-cols-2 gap-6"
                     initial="hidden"
                     animate="visible"
                     variants={{
                       visible: {
                         transition: {
-                          staggerChildren: 0.1
-                        }
-                      }
+                          staggerChildren: 0.1,
+                        },
+                      },
                     }}
                   >
                     {deposits.map((deposit, index) => (
@@ -292,13 +293,11 @@ function ListingsContent() {
                         key={deposit.id}
                         variants={{
                           hidden: { opacity: 0, y: 20 },
-                          visible: { opacity: 1, y: 0 }
+                          visible: { opacity: 1, y: 0 },
                         }}
                         transition={{ duration: 0.4, delay: index * 0.05 }}
                       >
-                        <ListingCard 
-                          deposit={deposit}
-                        />
+                        <ListingCard deposit={deposit} />
                       </motion.div>
                     ))}
                   </motion.div>
@@ -311,7 +310,7 @@ function ListingsContent() {
                       height="600px"
                       className="rounded-lg shadow-sm border border-gray-200"
                     />
-                    
+
                     {/* Selected Deposit Card */}
                     {selectedDeposit && (
                       <div className="mt-6">
@@ -327,9 +326,7 @@ function ListingsContent() {
                           </button>
                         </div>
                         <div className="max-w-md">
-                          <ListingCard 
-                            deposit={selectedDeposit}
-                          />
+                          <ListingCard deposit={selectedDeposit} />
                         </div>
                       </div>
                     )}
@@ -428,7 +425,7 @@ function ListingsContent() {
           </div>
         )}
       </div>
-      
+
       {/* Live Activity Indicator */}
       <LiveActivityIndicator />
     </div>

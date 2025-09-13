@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { 
-  User, 
-  Settings, 
+import {
+  User,
+  Settings,
   Bell,
   Heart,
   Eye,
@@ -18,7 +18,7 @@ import {
   Search,
   ChevronDown,
   Target,
-  Zap
+  Zap,
 } from 'lucide-react';
 import { KazakhstanDeposit } from '@/lib/types/listing';
 import Recommendations, { RecentlyViewed } from './Recommendations';
@@ -55,25 +55,25 @@ const MOCK_USER_PROFILE: UserProfile = {
     minerals: ['Gold', 'Copper', 'Oil'],
     regions: ['Мангистауская', 'Атырауская'],
     priceRange: { min: 1000000000, max: 10000000000 },
-    notifications: true
+    notifications: true,
   },
   stats: {
     viewedCount: 24,
     savedCount: 8,
     comparisonsCount: 3,
-    completeness: 75
-  }
+    completeness: 75,
+  },
 };
 
-function UserProfileCard({ 
-  profile, 
-  className = '' 
-}: { 
+function UserProfileCard({
+  profile,
+  className = '',
+}: {
   profile: UserProfile;
   className?: string;
 }) {
   return (
-    <motion.div 
+    <motion.div
       className={`bg-gradient-to-br from-blue-50 to-gray-50 rounded-xl p-6 border border-gray-100 ${className}`}
       whileHover={{ scale: 1.02 }}
     >
@@ -98,46 +98,47 @@ function UserProfileCard({
       {/* Profile Completeness */}
       <div className="mb-4">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium text-gray-700">Завершенность профиля</span>
-          <span className="text-sm text-gray-600">{profile.stats.completeness}%</span>
+          <span className="text-sm font-medium text-gray-700">
+            Завершенность профиля
+          </span>
+          <span className="text-sm text-gray-600">
+            {profile.stats.completeness}%
+          </span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
           <motion.div
             className="bg-blue-600 h-2 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${profile.stats.completeness}%` }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 1, ease: 'easeOut' }}
           />
         </div>
       </div>
 
       {/* Quick Stats */}
       <div className="grid grid-cols-3 gap-4">
-        <motion.div 
-          className="text-center"
-          whileHover={{ scale: 1.05 }}
-        >
-          <div className="text-lg font-semibold text-gray-900">{profile.stats.viewedCount}</div>
+        <motion.div className="text-center" whileHover={{ scale: 1.05 }}>
+          <div className="text-lg font-semibold text-gray-900">
+            {profile.stats.viewedCount}
+          </div>
           <div className="text-xs text-gray-600 flex items-center justify-center">
             <Eye className="w-3 h-3 mr-1" />
             Просмотрено
           </div>
         </motion.div>
-        <motion.div 
-          className="text-center"
-          whileHover={{ scale: 1.05 }}
-        >
-          <div className="text-lg font-semibold text-gray-900">{profile.stats.savedCount}</div>
+        <motion.div className="text-center" whileHover={{ scale: 1.05 }}>
+          <div className="text-lg font-semibold text-gray-900">
+            {profile.stats.savedCount}
+          </div>
           <div className="text-xs text-gray-600 flex items-center justify-center">
             <Heart className="w-3 h-3 mr-1" />
             Сохранено
           </div>
         </motion.div>
-        <motion.div 
-          className="text-center"
-          whileHover={{ scale: 1.05 }}
-        >
-          <div className="text-lg font-semibold text-gray-900">{profile.stats.comparisonsCount}</div>
+        <motion.div className="text-center" whileHover={{ scale: 1.05 }}>
+          <div className="text-lg font-semibold text-gray-900">
+            {profile.stats.comparisonsCount}
+          </div>
           <div className="text-xs text-gray-600 flex items-center justify-center">
             <TrendingUp className="w-3 h-3 mr-1" />
             Сравнений
@@ -156,7 +157,7 @@ function SavedSearches({ className = '' }: { className?: string }) {
       filters: { mineral: 'Gold', region: 'Восточно-Казахстанская' },
       results: 12,
       lastUpdated: '2 часа назад',
-      hasNewResults: true
+      hasNewResults: true,
     },
     {
       id: 'search-2',
@@ -164,7 +165,7 @@ function SavedSearches({ className = '' }: { className?: string }) {
       filters: { mineral: 'Oil', maxPrice: 5000000000 },
       results: 8,
       lastUpdated: '1 день назад',
-      hasNewResults: false
+      hasNewResults: false,
     },
     {
       id: 'search-3',
@@ -172,18 +173,20 @@ function SavedSearches({ className = '' }: { className?: string }) {
       filters: { region: 'Мангистауская' },
       results: 15,
       lastUpdated: '3 дня назад',
-      hasNewResults: true
-    }
+      hasNewResults: true,
+    },
   ]);
 
   return (
-    <div className={`bg-white rounded-xl border border-gray-100 p-4 ${className}`}>
+    <div
+      className={`bg-white rounded-xl border border-gray-100 p-4 ${className}`}
+    >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <Bookmark className="w-5 h-5 text-gray-600" />
           <h3 className="font-semibold text-gray-900">Сохраненные поиски</h3>
         </div>
-        <Link 
+        <Link
           href="/dashboard/searches"
           className="text-sm text-blue-600 hover:text-blue-700"
         >
@@ -219,7 +222,7 @@ function SavedSearches({ className = '' }: { className?: string }) {
                   {search.results} результатов • {search.lastUpdated}
                 </div>
               </div>
-              
+
               <button className="p-1 text-gray-400 hover:text-gray-600">
                 <Bell className="w-4 h-4" />
               </button>
@@ -239,7 +242,7 @@ function PriceAlerts({ className = '' }: { className?: string }) {
       currentPrice: 8500000000,
       targetPrice: 8000000000,
       change: -2.1,
-      active: true
+      active: true,
     },
     {
       id: 'alert-2',
@@ -247,8 +250,8 @@ function PriceAlerts({ className = '' }: { className?: string }) {
       currentPrice: 2800000000,
       targetPrice: 3000000000,
       change: 1.5,
-      active: true
-    }
+      active: true,
+    },
   ]);
 
   const formatPrice = (price: number) => {
@@ -261,7 +264,9 @@ function PriceAlerts({ className = '' }: { className?: string }) {
   };
 
   return (
-    <div className={`bg-white rounded-xl border border-gray-100 p-4 ${className}`}>
+    <div
+      className={`bg-white rounded-xl border border-gray-100 p-4 ${className}`}
+    >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <Target className="w-5 h-5 text-gray-600" />
@@ -285,17 +290,21 @@ function PriceAlerts({ className = '' }: { className?: string }) {
               <span className="font-medium text-gray-900 text-sm">
                 {alert.deposit}
               </span>
-              <div className={`flex items-center space-x-1 text-xs ${
-                alert.change > 0 ? 'text-green-600' : 'text-red-600'
-              }`}>
-                <TrendingUp className={`w-3 h-3 ${alert.change < 0 ? 'rotate-180' : ''}`} />
+              <div
+                className={`flex items-center space-x-1 text-xs ${
+                  alert.change > 0 ? 'text-green-600' : 'text-red-600'
+                }`}
+              >
+                <TrendingUp
+                  className={`w-3 h-3 ${alert.change < 0 ? 'rotate-180' : ''}`}
+                />
                 {Math.abs(alert.change)}%
               </div>
             </div>
-            
+
             <div className="text-sm text-gray-600">
-              Текущая: {formatPrice(alert.currentPrice)} • 
-              Цель: {formatPrice(alert.targetPrice)}
+              Текущая: {formatPrice(alert.currentPrice)} • Цель:{' '}
+              {formatPrice(alert.targetPrice)}
             </div>
           </motion.div>
         ))}
@@ -311,36 +320,36 @@ function QuickActions({ className = '' }: { className?: string }) {
       label: 'Создать объявление',
       icon: Zap,
       color: 'blue',
-      href: '/listings/create'
+      href: '/listings/create',
     },
     {
       id: 'saved',
       label: 'Избранное',
       icon: Heart,
       color: 'red',
-      href: '/dashboard/favorites'
+      href: '/dashboard/favorites',
     },
     {
       id: 'compare',
       label: 'Сравнения',
       icon: TrendingUp,
       color: 'green',
-      href: '/dashboard/comparisons'
+      href: '/dashboard/comparisons',
     },
     {
       id: 'analytics',
       label: 'Аналитика',
       icon: Target,
       color: 'purple',
-      href: '/dashboard/analytics'
-    }
+      href: '/dashboard/analytics',
+    },
   ];
 
   return (
     <div className={`grid grid-cols-2 gap-3 ${className}`}>
       {actions.map((action, index) => {
         const Icon = action.icon;
-        
+
         return (
           <motion.div
             key={action.id}
@@ -351,18 +360,26 @@ function QuickActions({ className = '' }: { className?: string }) {
             <Link
               href={action.href}
               className={`block p-4 bg-white border border-gray-100 rounded-xl hover:shadow-md transition-all group ${
-                action.color === 'blue' ? 'hover:border-blue-200' :
-                action.color === 'red' ? 'hover:border-red-200' :
-                action.color === 'green' ? 'hover:border-green-200' :
-                'hover:border-purple-200'
+                action.color === 'blue'
+                  ? 'hover:border-blue-200'
+                  : action.color === 'red'
+                    ? 'hover:border-red-200'
+                    : action.color === 'green'
+                      ? 'hover:border-green-200'
+                      : 'hover:border-purple-200'
               }`}
             >
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center mb-3 ${
-                action.color === 'blue' ? 'bg-blue-50 text-blue-600' :
-                action.color === 'red' ? 'bg-red-50 text-red-600' :
-                action.color === 'green' ? 'bg-green-50 text-green-600' :
-                'bg-purple-50 text-purple-600'
-              }`}>
+              <div
+                className={`w-8 h-8 rounded-lg flex items-center justify-center mb-3 ${
+                  action.color === 'blue'
+                    ? 'bg-blue-50 text-blue-600'
+                    : action.color === 'red'
+                      ? 'bg-red-50 text-red-600'
+                      : action.color === 'green'
+                        ? 'bg-green-50 text-green-600'
+                        : 'bg-purple-50 text-purple-600'
+                }`}
+              >
                 <Icon className="w-4 h-4" />
               </div>
               <span className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
@@ -376,9 +393,9 @@ function QuickActions({ className = '' }: { className?: string }) {
   );
 }
 
-export default function PersonalizedFeed({ 
+export default function PersonalizedFeed({
   className = '',
-  userId = 'user-1'
+  userId = 'user-1',
 }: PersonalizedFeedProps) {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -387,7 +404,7 @@ export default function PersonalizedFeed({
     // Simulate loading user profile
     const loadProfile = async () => {
       setIsLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setUserProfile(MOCK_USER_PROFILE);
       setIsLoading(false);
     };
@@ -429,7 +446,7 @@ export default function PersonalizedFeed({
 
         {/* Right Column - Recommendations */}
         <div className="lg:col-span-1">
-          <Recommendations 
+          <Recommendations
             userPreferences={userProfile.preferences}
             className="lg:sticky lg:top-4"
           />

@@ -3,28 +3,40 @@
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
+import L from 'leaflet';
 import { KazakhstanDeposit } from '@/lib/types/listing';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { 
-  MapPin, 
-  Eye, 
-  DollarSign, 
-  Factory, 
-  RotateCcw, 
-  ZoomIn, 
+import {
+  MapPin,
+  Eye,
+  DollarSign,
+  Factory,
+  RotateCcw,
+  ZoomIn,
   ZoomOut,
   Maximize2,
-  X
+  X,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Dynamically import Leaflet components to avoid SSR issues
-const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
-const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), { ssr: false });
-const Marker = dynamic(() => import('react-leaflet').then(mod => mod.Marker), { ssr: false });
-const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), { ssr: false });
+const MapContainer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  { ssr: false }
+);
+const TileLayer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  { ssr: false }
+);
+const Marker = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Marker),
+  { ssr: false }
+);
+const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), {
+  ssr: false,
+});
 
 interface DepositMapProps {
   deposits: KazakhstanDeposit[];
@@ -38,25 +50,23 @@ interface DepositMapProps {
 const KAZAKHSTAN_CENTER: [number, number] = [48.0196, 66.9237];
 const KAZAKHSTAN_BOUNDS: [[number, number], [number, number]] = [
   [40.5686, 46.4662], // Southwest corner
-  [55.4421, 87.3599]  // Northeast corner
+  [55.4421, 87.3599], // Northeast corner
 ];
 
 // Create custom marker icons for different deposit types
 const createCustomIcon = (type: string, isSelected?: boolean) => {
   if (typeof window === 'undefined') return null;
-  
-  const L = require('leaflet');
-  
+
   const colors = {
     MINING_LICENSE: '#3B82F6', // Blue
-    EXPLORATION_LICENSE: '#10B981', // Green  
+    EXPLORATION_LICENSE: '#10B981', // Green
     MINERAL_OCCURRENCE: '#F59E0B', // Yellow
   };
-  
+
   const color = colors[type as keyof typeof colors] || '#6B7280';
   const size = isSelected ? 40 : 30;
   const opacity = isSelected ? 1 : 0.8;
-  
+
   return L.divIcon({
     html: `
       <div style="
@@ -73,20 +83,20 @@ const createCustomIcon = (type: string, isSelected?: boolean) => {
         align-items: center;
         justify-content: center;
       ">
-        <div style="color: white; font-size: ${size/3}px; font-weight: bold;">
+        <div style="color: white; font-size: ${size / 3}px; font-weight: bold;">
           ${type === 'MINING_LICENSE' ? '⛏️' : type === 'EXPLORATION_LICENSE' ? '🔍' : '📍'}
         </div>
       </div>
     `,
     className: '',
     iconSize: [size, size],
-    iconAnchor: [size/2, size/2],
+    iconAnchor: [size / 2, size / 2],
   });
 };
 
 const formatPrice = (price: number | null) => {
   if (!price) return 'По запросу';
-  
+
   if (price >= 1000000000000) {
     return `${(price / 1000000000000).toFixed(1)} трлн ₸`;
   } else if (price >= 1000000000) {
@@ -111,11 +121,11 @@ const getTypeLabel = (type: string) => {
   }
 };
 
-function MapContent({ 
-  deposits, 
-  selectedDeposit, 
+function MapContent({
+  deposits,
+  selectedDeposit,
   onDepositClick,
-  height = '400px' 
+  height = '400px',
 }: DepositMapProps) {
   const mapRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -144,7 +154,9 @@ function MapContent({
   };
 
   return (
-    <div className={cn("relative", isFullscreen && "fixed inset-0 z-50 bg-white")}>
+    <div
+      className={cn('relative', isFullscreen && 'fixed inset-0 z-50 bg-white')}
+    >
       {/* Map Controls */}
       <div className="absolute top-4 right-4 z-[1000] flex flex-col gap-2">
         <Button
@@ -153,7 +165,11 @@ function MapContent({
           onClick={() => setIsFullscreen(!isFullscreen)}
           className="h-10 w-10 bg-white shadow-md hover:bg-gray-50"
         >
-          {isFullscreen ? <X className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+          {isFullscreen ? (
+            <X className="h-4 w-4" />
+          ) : (
+            <Maximize2 className="h-4 w-4" />
+          )}
         </Button>
         <Button
           variant="secondary"
@@ -210,8 +226,8 @@ function MapContent({
         </Card>
       </div>
 
-      <div 
-        className="w-full rounded-lg overflow-hidden" 
+      <div
+        className="w-full rounded-lg overflow-hidden"
         style={{ height: isFullscreen ? '100vh' : height }}
       >
         <MapContainer
@@ -227,19 +243,24 @@ function MapContent({
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          
+
           {deposits.map((deposit) => {
             // Generate random coordinates within Kazakhstan bounds if not provided
-            const lat = deposit.coordinates?.lat || 
-              (40.5686 + Math.random() * (55.4421 - 40.5686));
-            const lng = deposit.coordinates?.lng || 
-              (46.4662 + Math.random() * (87.3599 - 46.4662));
+            const lat =
+              deposit.coordinates?.lat ||
+              40.5686 + Math.random() * (55.4421 - 40.5686);
+            const lng =
+              deposit.coordinates?.lng ||
+              46.4662 + Math.random() * (87.3599 - 46.4662);
 
             return (
               <Marker
                 key={deposit.id}
                 position={[lat, lng]}
-                icon={createCustomIcon(deposit.type, selectedDeposit?.id === deposit.id)}
+                icon={createCustomIcon(
+                  deposit.type,
+                  selectedDeposit?.id === deposit.id
+                )}
                 eventHandlers={{
                   click: () => onDepositClick?.(deposit),
                 }}
@@ -251,14 +272,17 @@ function MapContent({
                         {deposit.title}
                       </h3>
                     </div>
-                    
+
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <Badge variant="secondary" className="text-xs">
                           {getTypeLabel(deposit.type)}
                         </Badge>
                         {deposit.verified && (
-                          <Badge variant="default" className="text-xs bg-green-600">
+                          <Badge
+                            variant="default"
+                            className="text-xs bg-green-600"
+                          >
                             ✓ Проверено
                           </Badge>
                         )}
@@ -266,7 +290,9 @@ function MapContent({
 
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <MapPin className="w-4 h-4" />
-                        <span>{deposit.region}, {deposit.city}</span>
+                        <span>
+                          {deposit.region}, {deposit.city}
+                        </span>
                       </div>
 
                       <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -290,10 +316,12 @@ function MapContent({
                         {deposit.description}
                       </p>
 
-                      <Button 
-                        size="sm" 
-                        className="w-full mt-2" 
-                        onClick={() => window.open(`/listings/${deposit.id}`, '_blank')}
+                      <Button
+                        size="sm"
+                        className="w-full mt-2"
+                        onClick={() =>
+                          window.open(`/listings/${deposit.id}`, '_blank')
+                        }
                       >
                         Подробнее
                       </Button>
@@ -318,9 +346,9 @@ export default function DepositMap(props: DepositMapProps) {
 
   if (!mounted) {
     return (
-      <div 
+      <div
         className={cn(
-          "w-full bg-gray-100 rounded-lg flex items-center justify-center",
+          'w-full bg-gray-100 rounded-lg flex items-center justify-center',
           props.className
         )}
         style={{ height: props.height || '400px' }}

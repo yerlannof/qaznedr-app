@@ -51,12 +51,10 @@ export default function CreateListingPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
-      
+
       {/* Main content with wizard */}
       <div className="pt-16 px-4 sm:px-6 lg:px-8 py-8">
-        <CreateListingWizard 
-          onCancel={() => router.push('/listings')}
-        />
+        <CreateListingWizard onCancel={() => router.push('/listings')} />
       </div>
     </div>
   );

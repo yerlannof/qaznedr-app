@@ -84,7 +84,7 @@ const EQUIPMENT_CATEGORIES = [
   'Транспортная техника',
   'Лабораторное оборудование',
   'Генераторы и компрессоры',
-  'Насосное оборудование'
+  'Насосное оборудование',
 ];
 
 const REGIONS = [
@@ -101,7 +101,7 @@ const REGIONS = [
   'Западно-Казахстанская область',
   'Актюбинская область',
   'Костанайская область',
-  'Северо-Казахстанская область'
+  'Северо-Казахстанская область',
 ];
 
 const equipmentData: EquipmentItem[] = [
@@ -114,13 +114,14 @@ const equipmentData: EquipmentItem[] = [
     model: 'ROC D7',
     year: 2019,
     condition: 'excellent',
-    description: 'Высокопроизводительная буровая установка для открытых горных работ. Оснащена современной системой управления и GPS навигацией.',
+    description:
+      'Высокопроизводительная буровая установка для открытых горных работ. Оснащена современной системой управления и GPS навигацией.',
     specifications: {
       power: '350 кВт',
       capacity: 'диаметр бурения до 152 мм',
       weight: '45 тонн',
       fuel: 'дизель',
-      operatingHours: 2840
+      operatingHours: 2840,
     },
     images: [],
     dailyRate: 180000,
@@ -131,7 +132,7 @@ const equipmentData: EquipmentItem[] = [
     location: {
       city: 'Караганда',
       region: 'Карагандинская область',
-      coordinates: [73.1526, 49.8047]
+      coordinates: [73.1526, 49.8047],
     },
     owner: {
       id: 'owner1',
@@ -143,11 +144,11 @@ const equipmentData: EquipmentItem[] = [
       contact: {
         phone: '+7 721 456 7890',
         email: 'rent@techrent.kz',
-        website: 'https://techrent.kz'
-      }
+        website: 'https://techrent.kz',
+      },
     },
     services: ['Доставка', 'Техобслуживание', 'Оператор'],
-    certified: true
+    certified: true,
   },
   {
     id: '2',
@@ -158,13 +159,14 @@ const equipmentData: EquipmentItem[] = [
     model: '336',
     year: 2020,
     condition: 'excellent',
-    description: 'Мощный гусеничный экскаватор для тяжелых горных работ. Надежность и производительность Caterpillar.',
+    description:
+      'Мощный гусеничный экскаватор для тяжелых горных работ. Надежность и производительность Caterpillar.',
     specifications: {
       power: '268 кВт',
       capacity: 'ковш 2.2 м³',
       weight: '36 тонн',
       fuel: 'дизель',
-      operatingHours: 1850
+      operatingHours: 1850,
     },
     images: [],
     dailyRate: 150000,
@@ -175,7 +177,7 @@ const equipmentData: EquipmentItem[] = [
     location: {
       city: 'Алматы',
       region: 'Алматинская область',
-      coordinates: [76.9129, 43.2567]
+      coordinates: [76.9129, 43.2567],
     },
     owner: {
       id: 'owner2',
@@ -187,11 +189,11 @@ const equipmentData: EquipmentItem[] = [
       contact: {
         phone: '+7 727 345 6789',
         email: 'info@mining-tech.kz',
-        website: 'https://mining-tech.kz'
-      }
+        website: 'https://mining-tech.kz',
+      },
     },
     services: ['Доставка', 'Техобслуживание'],
-    certified: true
+    certified: true,
   },
   {
     id: '3',
@@ -202,13 +204,14 @@ const equipmentData: EquipmentItem[] = [
     model: '75131',
     year: 2018,
     condition: 'good',
-    description: 'Карьерный самосвал грузоподъемностью 130 тонн. Идеален для транспортировки горной массы на большие расстояния.',
+    description:
+      'Карьерный самосвал грузоподъемностью 130 тонн. Идеален для транспортировки горной массы на большие расстояния.',
     specifications: {
       power: '1800 кВт',
       capacity: 'грузоподъемность 130 тонн',
       weight: '75 тонн',
       fuel: 'дизель',
-      operatingHours: 4200
+      operatingHours: 4200,
     },
     images: [],
     dailyRate: 200000,
@@ -219,7 +222,7 @@ const equipmentData: EquipmentItem[] = [
     location: {
       city: 'Костанай',
       region: 'Костанайская область',
-      coordinates: [63.6353, 53.2138]
+      coordinates: [63.6353, 53.2138],
     },
     owner: {
       id: 'owner3',
@@ -230,11 +233,11 @@ const equipmentData: EquipmentItem[] = [
       verified: true,
       contact: {
         phone: '+7 714 567 8901',
-        email: 'heavy@kaztrans.kz'
-      }
+        email: 'heavy@kaztrans.kz',
+      },
     },
     services: ['Доставка', 'Оператор'],
-    certified: false
+    certified: false,
   },
   {
     id: '4',
@@ -245,13 +248,14 @@ const equipmentData: EquipmentItem[] = [
     model: 'NP1213',
     year: 2021,
     condition: 'excellent',
-    description: 'Мобильная конусная дробилка для производства щебня и обогащения руды. Высокая производительность до 400 т/ч.',
+    description:
+      'Мобильная конусная дробилка для производства щебня и обогащения руды. Высокая производительность до 400 т/ч.',
     specifications: {
       power: '315 кВт',
       capacity: 'производительность до 400 т/ч',
       weight: '42 тонны',
       fuel: 'электричество',
-      operatingHours: 980
+      operatingHours: 980,
     },
     images: [],
     dailyRate: 220000,
@@ -262,7 +266,7 @@ const equipmentData: EquipmentItem[] = [
     location: {
       city: 'Шымкент',
       region: 'Туркестанская область',
-      coordinates: [69.5992, 42.3417]
+      coordinates: [69.5992, 42.3417],
     },
     owner: {
       id: 'owner4',
@@ -274,11 +278,11 @@ const equipmentData: EquipmentItem[] = [
       contact: {
         phone: '+7 725 678 9012',
         email: 'south@spectech.kz',
-        website: 'https://spectech-south.kz'
-      }
+        website: 'https://spectech-south.kz',
+      },
     },
     services: ['Доставка', 'Монтаж', 'Техобслуживание'],
-    certified: true
+    certified: true,
   },
   {
     id: '5',
@@ -289,13 +293,14 @@ const equipmentData: EquipmentItem[] = [
     model: 'D375A',
     year: 2017,
     condition: 'good',
-    description: 'Тяжелый гусеничный бульдозер для планировки и перемещения больших объемов грунта в карьерах.',
+    description:
+      'Тяжелый гусеничный бульдозер для планировки и перемещения больших объемов грунта в карьерах.',
     specifications: {
       power: '410 кВт',
       capacity: 'отвал 7.4 м³',
       weight: '50 тонн',
       fuel: 'дизель',
-      operatingHours: 5100
+      operatingHours: 5100,
     },
     images: [],
     dailyRate: 160000,
@@ -306,7 +311,7 @@ const equipmentData: EquipmentItem[] = [
     location: {
       city: 'Павлодар',
       region: 'Павлодарская область',
-      coordinates: [76.9574, 52.3038]
+      coordinates: [76.9574, 52.3038],
     },
     owner: {
       id: 'owner5',
@@ -317,11 +322,11 @@ const equipmentData: EquipmentItem[] = [
       verified: false,
       contact: {
         phone: '+7 718 789 0123',
-        email: 'info@pavlodar-tech.kz'
-      }
+        email: 'info@pavlodar-tech.kz',
+      },
     },
     services: ['Доставка', 'Оператор'],
-    certified: true
+    certified: true,
   },
   {
     id: '6',
@@ -332,13 +337,14 @@ const equipmentData: EquipmentItem[] = [
     model: 'PM100',
     year: 2022,
     condition: 'excellent',
-    description: 'Планетарная шаровая мельница для тонкого измельчения образцов руды и минералов в лабораторных условиях.',
+    description:
+      'Планетарная шаровая мельница для тонкого измельчения образцов руды и минералов в лабораторных условиях.',
     specifications: {
       power: '1.5 кВт',
       capacity: 'объем помола до 220 мл',
       weight: '85 кг',
       fuel: 'электричество',
-      operatingHours: 340
+      operatingHours: 340,
     },
     images: [],
     dailyRate: 12000,
@@ -349,7 +355,7 @@ const equipmentData: EquipmentItem[] = [
     location: {
       city: 'Нур-Султан',
       region: 'Акмолинская область',
-      coordinates: [71.4704, 51.1694]
+      coordinates: [71.4704, 51.1694],
     },
     owner: {
       id: 'owner6',
@@ -361,12 +367,12 @@ const equipmentData: EquipmentItem[] = [
       contact: {
         phone: '+7 717 890 1234',
         email: 'lab@kazlab.kz',
-        website: 'https://kazlab.kz'
-      }
+        website: 'https://kazlab.kz',
+      },
     },
     services: ['Доставка', 'Обучение персонала', 'Калибровка'],
-    certified: true
-  }
+    certified: true,
+  },
 ];
 
 export default function EquipmentRentalPage() {
@@ -385,32 +391,38 @@ export default function EquipmentRentalPage() {
 
     // Search filter
     if (searchQuery) {
-      filtered = filtered.filter(item =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.owner.name.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        (item) =>
+          item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.owner.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
     // Category filter
     if (selectedCategory !== 'all') {
-      filtered = filtered.filter(item => item.category === selectedCategory);
+      filtered = filtered.filter((item) => item.category === selectedCategory);
     }
 
     // Region filter
     if (selectedRegion !== 'all') {
-      filtered = filtered.filter(item => item.location.region === selectedRegion);
+      filtered = filtered.filter(
+        (item) => item.location.region === selectedRegion
+      );
     }
 
     // Availability filter
     if (selectedAvailability !== 'all') {
-      filtered = filtered.filter(item => item.availability === selectedAvailability);
+      filtered = filtered.filter(
+        (item) => item.availability === selectedAvailability
+      );
     }
 
     // Price range filter
-    filtered = filtered.filter(item => 
-      item.dailyRate >= priceRange[0] && item.dailyRate <= priceRange[1]
+    filtered = filtered.filter(
+      (item) =>
+        item.dailyRate >= priceRange[0] && item.dailyRate <= priceRange[1]
     );
 
     // Sort
@@ -429,10 +441,20 @@ export default function EquipmentRentalPage() {
     }
 
     setEquipment(filtered);
-  }, [searchQuery, selectedCategory, selectedRegion, selectedAvailability, sortBy, priceRange]);
+  }, [
+    searchQuery,
+    selectedCategory,
+    selectedRegion,
+    selectedAvailability,
+    sortBy,
+    priceRange,
+  ]);
 
   const formatPrice = (price: number, currency: string) => {
-    return new Intl.NumberFormat('ru-KZ').format(price) + (currency === 'KZT' ? ' ₸' : ' $');
+    return (
+      new Intl.NumberFormat('ru-KZ').format(price) +
+      (currency === 'KZT' ? ' ₸' : ' $')
+    );
   };
 
   const getAvailabilityStatus = (availability: string) => {
@@ -450,10 +472,14 @@ export default function EquipmentRentalPage() {
 
   const getConditionLabel = (condition: string) => {
     switch (condition) {
-      case 'excellent': return 'Отличное';
-      case 'good': return 'Хорошее';
-      case 'fair': return 'Удовлетворительное';
-      default: return condition;
+      case 'excellent':
+        return 'Отличное';
+      case 'good':
+        return 'Хорошее';
+      case 'fair':
+        return 'Удовлетворительное';
+      default:
+        return condition;
     }
   };
 
@@ -462,20 +488,29 @@ export default function EquipmentRentalPage() {
     const AvailabilityIcon = availability.icon;
 
     return (
-      <Card key={item.id} variant="elevated" className="hover:shadow-xl transition-all duration-300">
+      <Card
+        key={item.id}
+        variant="elevated"
+        className="hover:shadow-xl transition-all duration-300"
+      >
         {/* Image Placeholder */}
         <div className="relative h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
             <Truck className="w-16 h-16 text-gray-400" />
           </div>
-          
+
           {/* Availability Badge */}
-          <div className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${
-            availability.color === 'green' ? 'bg-green-100 text-green-800' :
-            availability.color === 'red' ? 'bg-red-100 text-red-800' :
-            availability.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
-            'bg-gray-100 text-gray-800'
-          }`}>
+          <div
+            className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${
+              availability.color === 'green'
+                ? 'bg-green-100 text-green-800'
+                : availability.color === 'red'
+                  ? 'bg-red-100 text-red-800'
+                  : availability.color === 'yellow'
+                    ? 'bg-yellow-100 text-yellow-800'
+                    : 'bg-gray-100 text-gray-800'
+            }`}
+          >
             <AvailabilityIcon className="w-3 h-3" />
             {availability.label}
           </div>
@@ -583,16 +618,16 @@ export default function EquipmentRentalPage() {
             </div>
             <div className="text-sm text-blue-600">за сутки</div>
             <div className="text-xs text-gray-600 mt-1">
-              Неделя: {formatPrice(item.weeklyRate, item.currency)} • 
-              Месяц: {formatPrice(item.monthlyRate, item.currency)}
+              Неделя: {formatPrice(item.weeklyRate, item.currency)} • Месяц:{' '}
+              {formatPrice(item.monthlyRate, item.currency)}
             </div>
           </div>
         </div>
 
         {/* Actions */}
         <div className="flex gap-2">
-          <Button 
-            variant="default" 
+          <Button
+            variant="default"
             className="flex-1"
             disabled={item.availability !== 'available'}
           >
@@ -637,15 +672,17 @@ export default function EquipmentRentalPage() {
               />
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             </div>
-            
+
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               <option value="all">Все категории</option>
-              {EQUIPMENT_CATEGORIES.map(category => (
-                <option key={category} value={category}>{category}</option>
+              {EQUIPMENT_CATEGORIES.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
               ))}
             </select>
 
@@ -655,8 +692,10 @@ export default function EquipmentRentalPage() {
               className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               <option value="all">Все регионы</option>
-              {REGIONS.map(region => (
-                <option key={region} value={region}>{region}</option>
+              {REGIONS.map((region) => (
+                <option key={region} value={region}>
+                  {region}
+                </option>
               ))}
             </select>
 

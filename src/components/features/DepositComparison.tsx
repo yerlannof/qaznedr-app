@@ -2,19 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  X, 
-  CheckCircle, 
-  AlertCircle, 
-  TrendingUp, 
-  MapPin, 
-  Factory, 
+import {
+  X,
+  CheckCircle,
+  AlertCircle,
+  TrendingUp,
+  MapPin,
+  Factory,
   Calendar,
   Download,
   Share2,
   Plus,
   Minus,
-  Scale
+  Scale,
 } from 'lucide-react';
 import Link from 'next/link';
 import { KazakhstanDeposit } from '@/lib/types/listing';
@@ -33,37 +33,37 @@ interface DepositComparisonProps {
 const useComparison = () => {
   const [comparison, setComparison] = useState<ComparisonState>({
     deposits: [],
-    isOpen: false
+    isOpen: false,
   });
 
   const addToComparison = (deposit: KazakhstanDeposit) => {
-    setComparison(prev => {
+    setComparison((prev) => {
       if (prev.deposits.length >= 3) {
         return prev; // Max 3 deposits
       }
-      if (prev.deposits.find(d => d.id === deposit.id)) {
+      if (prev.deposits.find((d) => d.id === deposit.id)) {
         return prev; // Already exists
       }
       return {
         ...prev,
-        deposits: [...prev.deposits, deposit]
+        deposits: [...prev.deposits, deposit],
       };
     });
   };
 
   const removeFromComparison = (depositId: string) => {
-    setComparison(prev => ({
+    setComparison((prev) => ({
       ...prev,
-      deposits: prev.deposits.filter(d => d.id !== depositId)
+      deposits: prev.deposits.filter((d) => d.id !== depositId),
     }));
   };
 
   const openComparison = () => {
-    setComparison(prev => ({ ...prev, isOpen: true }));
+    setComparison((prev) => ({ ...prev, isOpen: true }));
   };
 
   const closeComparison = () => {
-    setComparison(prev => ({ ...prev, isOpen: false }));
+    setComparison((prev) => ({ ...prev, isOpen: false }));
   };
 
   const clearComparison = () => {
@@ -76,15 +76,15 @@ const useComparison = () => {
     removeFromComparison,
     openComparison,
     closeComparison,
-    clearComparison
+    clearComparison,
   };
 };
 
 // Floating Comparison Badge
-export function ComparisonBadge({ 
-  count, 
+export function ComparisonBadge({
+  count,
   onClick,
-  className = '' 
+  className = '',
 }: {
   count: number;
   onClick: () => void;
@@ -108,7 +108,7 @@ export function ComparisonBadge({
           <div className="text-xs opacity-90">месторождений</div>
         </div>
       </div>
-      
+
       {/* Notification dot */}
       <motion.div
         className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold"
@@ -118,7 +118,7 @@ export function ComparisonBadge({
         transition={{
           duration: 2,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: 'easeInOut',
         }}
       >
         {count}
@@ -133,7 +133,7 @@ export function ComparisonModal({
   isOpen,
   onClose,
   onRemove,
-  className = ''
+  className = '',
 }: {
   deposits: KazakhstanDeposit[];
   isOpen: boolean;
@@ -156,74 +156,85 @@ export function ComparisonModal({
       {
         label: 'Название',
         getValue: (deposit: KazakhstanDeposit) => deposit.title,
-        type: 'text' as const
+        type: 'text' as const,
       },
       {
         label: 'Цена',
         getValue: (deposit: KazakhstanDeposit) => formatPrice(deposit.price),
         type: 'price' as const,
-        compare: true
+        compare: true,
       },
       {
         label: 'Площадь',
-        getValue: (deposit: KazakhstanDeposit) => `${deposit.area.toLocaleString()} км²`,
+        getValue: (deposit: KazakhstanDeposit) =>
+          `${deposit.area.toLocaleString()} км²`,
         type: 'area' as const,
-        compare: true
+        compare: true,
       },
       {
         label: 'Тип',
         getValue: (deposit: KazakhstanDeposit) => {
           const types = {
-            'MINING_LICENSE': 'Лицензия на добычу',
-            'EXPLORATION_LICENSE': 'Лицензия на разведку', 
-            'MINERAL_OCCURRENCE': 'Рудопроявление'
+            MINING_LICENSE: 'Лицензия на добычу',
+            EXPLORATION_LICENSE: 'Лицензия на разведку',
+            MINERAL_OCCURRENCE: 'Рудопроявление',
           };
           return types[deposit.type] || deposit.type;
         },
-        type: 'text' as const
+        type: 'text' as const,
       },
       {
         label: 'Полезное ископаемое',
         getValue: (deposit: KazakhstanDeposit) => deposit.mineral,
-        type: 'mineral' as const
+        type: 'mineral' as const,
       },
       {
         label: 'Регион',
         getValue: (deposit: KazakhstanDeposit) => deposit.region,
-        type: 'location' as const
+        type: 'location' as const,
       },
       {
         label: 'Город',
         getValue: (deposit: KazakhstanDeposit) => deposit.city,
-        type: 'text' as const
+        type: 'text' as const,
       },
       {
         label: 'Просмотры',
-        getValue: (deposit: KazakhstanDeposit) => deposit.views.toLocaleString(),
+        getValue: (deposit: KazakhstanDeposit) =>
+          deposit.views.toLocaleString(),
         type: 'number' as const,
-        compare: true
+        compare: true,
       },
       {
         label: 'Статус',
-        getValue: (deposit: KazakhstanDeposit) => deposit.verified ? 'Проверено' : 'На проверке',
-        type: 'status' as const
-      }
+        getValue: (deposit: KazakhstanDeposit) =>
+          deposit.verified ? 'Проверено' : 'На проверке',
+        type: 'status' as const,
+      },
     ];
-    
+
     return rows;
   };
 
-  const getBestValue = (deposits: KazakhstanDeposit[], getValue: (d: KazakhstanDeposit) => any, type: string) => {
+  const getBestValue = (
+    deposits: KazakhstanDeposit[],
+    getValue: (d: KazakhstanDeposit) => any,
+    type: string
+  ) => {
     if (type === 'price') {
-      const prices = deposits.map(d => d.price).filter(p => p !== null) as number[];
+      const prices = deposits
+        .map((d) => d.price)
+        .filter((p) => p !== null) as number[];
       return prices.length > 0 ? Math.min(...prices) : null;
     }
     if (type === 'area') {
-      const areas = deposits.map(d => d.area);
+      const areas = deposits.map((d) => d.area);
       return Math.max(...areas);
     }
     if (type === 'number') {
-      const numbers = deposits.map(d => getValue(d)).map(v => parseInt(v.replace(/,/g, '')));
+      const numbers = deposits
+        .map((d) => getValue(d))
+        .map((v) => parseInt(v.replace(/,/g, '')));
       return Math.max(...numbers);
     }
     return null;
@@ -256,10 +267,11 @@ export function ComparisonModal({
                   Сравнение месторождений
                 </h2>
                 <p className="text-gray-600 mt-1">
-                  Сравните до {deposits.length} месторождений по ключевым параметрам
+                  Сравните до {deposits.length} месторождений по ключевым
+                  параметрам
                 </p>
               </div>
-              
+
               <div className="flex items-center space-x-3">
                 <button className="flex items-center space-x-2 px-4 py-2 text-gray-700 bg-white rounded-lg border hover:bg-gray-50 transition-colors">
                   <Download className="w-4 h-4" />
@@ -290,13 +302,21 @@ export function ComparisonModal({
               ) : (
                 <div className="p-6">
                   {/* Deposit Headers */}
-                  <div className="grid gap-4 mb-6" style={{ gridTemplateColumns: `200px repeat(${deposits.length}, 1fr)` }}>
+                  <div
+                    className="grid gap-4 mb-6"
+                    style={{
+                      gridTemplateColumns: `200px repeat(${deposits.length}, 1fr)`,
+                    }}
+                  >
                     <div /> {/* Empty cell for labels */}
                     {deposits.map((deposit) => (
                       <motion.div
                         key={deposit.id}
                         className="bg-white border rounded-xl p-4 relative"
-                        whileHover={{ y: -2, shadow: "0 10px 25px rgba(0,0,0,0.1)" }}
+                        whileHover={{
+                          y: -2,
+                          shadow: '0 10px 25px rgba(0,0,0,0.1)',
+                        }}
                       >
                         <button
                           onClick={() => onRemove(deposit.id)}
@@ -304,14 +324,14 @@ export function ComparisonModal({
                         >
                           <X className="w-4 h-4" />
                         </button>
-                        
+
                         <div className="mb-3">
                           {(() => {
                             const Icon = getMineralIcon(deposit.mineral);
                             return <Icon className="w-8 h-8 text-blue-600" />;
                           })()}
                         </div>
-                        
+
                         <h3 className="font-semibold text-gray-900 text-sm mb-1 line-clamp-2">
                           {deposit.title}
                         </h3>
@@ -326,13 +346,17 @@ export function ComparisonModal({
                   {/* Comparison Table */}
                   <div className="space-y-1">
                     {getComparisonRows().map((row, index) => {
-                      const bestValue = row.compare ? getBestValue(deposits, row.getValue, row.type) : null;
-                      
+                      const bestValue = row.compare
+                        ? getBestValue(deposits, row.getValue, row.type)
+                        : null;
+
                       return (
                         <motion.div
                           key={row.label}
                           className="grid gap-4 py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors"
-                          style={{ gridTemplateColumns: `200px repeat(${deposits.length}, 1fr)` }}
+                          style={{
+                            gridTemplateColumns: `200px repeat(${deposits.length}, 1fr)`,
+                          }}
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.05 }}
@@ -342,18 +366,22 @@ export function ComparisonModal({
                           </div>
                           {deposits.map((deposit) => {
                             const value = row.getValue(deposit);
-                            const isBest = row.compare && (
-                              (row.type === 'price' && deposit.price === bestValue) ||
-                              (row.type === 'area' && deposit.area === bestValue) ||
-                              (row.type === 'number' && parseInt(value.replace(/,/g, '')) === bestValue)
-                            );
+                            const isBest =
+                              row.compare &&
+                              ((row.type === 'price' &&
+                                deposit.price === bestValue) ||
+                                (row.type === 'area' &&
+                                  deposit.area === bestValue) ||
+                                (row.type === 'number' &&
+                                  parseInt(value.replace(/,/g, '')) ===
+                                    bestValue));
 
                             return (
                               <div
                                 key={deposit.id}
                                 className={`text-sm p-2 rounded-md ${
-                                  isBest 
-                                    ? 'bg-green-100 text-green-800 font-semibold border border-green-200' 
+                                  isBest
+                                    ? 'bg-green-100 text-green-800 font-semibold border border-green-200'
                                     : 'text-gray-800'
                                 }`}
                               >
@@ -370,8 +398,12 @@ export function ComparisonModal({
                                 {row.type === 'mineral' && (
                                   <div className="flex items-center space-x-2">
                                     {(() => {
-                                      const Icon = getMineralIcon(deposit.mineral);
-                                      return <Icon className="w-4 h-4 text-blue-600" />;
+                                      const Icon = getMineralIcon(
+                                        deposit.mineral
+                                      );
+                                      return (
+                                        <Icon className="w-4 h-4 text-blue-600" />
+                                      );
                                     })()}
                                     <span>{value}</span>
                                   </div>
@@ -424,7 +456,7 @@ export function AddToComparisonButton({
   isAdded,
   onAdd,
   onRemove,
-  className = ''
+  className = '',
 }: {
   deposit: KazakhstanDeposit;
   isAdded: boolean;
@@ -451,33 +483,31 @@ export function AddToComparisonButton({
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
-      {isAdded ? (
-        <Minus className="w-4 h-4" />
-      ) : (
-        <Plus className="w-4 h-4" />
-      )}
+      {isAdded ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
     </motion.button>
   );
 }
 
 // Main Export
-export default function DepositComparison({ className = '' }: DepositComparisonProps) {
+export default function DepositComparison({
+  className = '',
+}: DepositComparisonProps) {
   const {
     comparison,
     addToComparison,
     removeFromComparison,
     openComparison,
     closeComparison,
-    clearComparison
+    clearComparison,
   } = useComparison();
 
   return (
     <div className={className}>
-      <ComparisonBadge 
+      <ComparisonBadge
         count={comparison.deposits.length}
         onClick={openComparison}
       />
-      
+
       <ComparisonModal
         deposits={comparison.deposits}
         isOpen={comparison.isOpen}

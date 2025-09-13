@@ -33,8 +33,11 @@ export default function Navigation() {
   // Handle scroll progress and sticky header effect
   useEffect(() => {
     const handleScroll = () => {
-      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const winScroll =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
       setScrollProgress(scrolled);
       setIsScrolled(winScroll > 10);
@@ -57,17 +60,19 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className={`fixed top-0 w-full bg-white z-50 border-b border-gray-200 transition-all duration-300 ${
-        isScrolled ? 'shadow-md' : ''
-      }`}>
+      <nav
+        className={`fixed top-0 w-full bg-white z-50 border-b border-gray-200 transition-all duration-300 ${
+          isScrolled ? 'shadow-md' : ''
+        }`}
+      >
         {/* Progress bar */}
         <div className="absolute top-0 left-0 w-full h-0.5 bg-gray-200">
-          <div 
+          <div
             className="h-full bg-blue-600 transition-all duration-150"
             style={{ width: `${scrollProgress}%` }}
           />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -84,7 +89,7 @@ export default function Navigation() {
             <div className="hidden md:flex items-center space-x-4">
               {/* Global Search */}
               <GlobalSearch />
-              
+
               {/* Navigation Links */}
               <div className="flex items-center space-x-1">
                 {navigation.map((item) => {
@@ -169,17 +174,20 @@ export default function Navigation() {
                     <Menu className="w-6 h-6 text-gray-600" />
                   </button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[320px] sm:w-[400px] p-0">
+                <SheetContent
+                  side="right"
+                  className="w-[320px] sm:w-[400px] p-0"
+                >
                   <SheetHeader className="border-b px-6 py-4">
                     <SheetTitle className="text-left">Меню</SheetTitle>
                   </SheetHeader>
-                  
+
                   <div className="flex flex-col h-full">
                     {/* Mobile Search */}
                     <div className="px-6 py-4 border-b">
                       <GlobalSearch />
                     </div>
-                    
+
                     {/* Navigation Links */}
                     <div className="flex-1 overflow-y-auto py-4">
                       <div className="px-3 space-y-1">
@@ -204,7 +212,7 @@ export default function Navigation() {
                           );
                         })}
                       </div>
-                      
+
                       <div className="mt-4 px-3 pt-4 border-t space-y-1">
                         <Link
                           href="/dashboard"
@@ -213,19 +221,29 @@ export default function Navigation() {
                           <User className="w-5 h-5" />
                           <span>Личный кабинет</span>
                         </Link>
-                        
+
                         <Link
                           href="/favorites"
                           className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
                         >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                            />
                           </svg>
                           <span>Избранное</span>
                         </Link>
                       </div>
                     </div>
-                    
+
                     {/* Bottom Actions */}
                     <div className="border-t p-4 space-y-3">
                       <Link
@@ -235,7 +253,7 @@ export default function Navigation() {
                         <Plus className="w-4 h-4" />
                         <span>Создать объявление</span>
                       </Link>
-                      
+
                       <button className="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
                         <LogOut className="w-4 h-4" />
                         <span>Выйти</span>

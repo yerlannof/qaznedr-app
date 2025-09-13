@@ -60,7 +60,7 @@ const GEOLOGICAL_SERVICES = [
   'Петрографический анализ',
   'Подсчет запасов',
   'Экологическое картирование',
-  'Гидрогеологические изыскания'
+  'Гидрогеологические изыскания',
 ];
 
 const REGIONS = [
@@ -77,22 +77,28 @@ const REGIONS = [
   'Западно-Казахстанская область',
   'Актюбинская область',
   'Костанайская область',
-  'Северо-Казахстанская область'
+  'Северо-Казахстанская область',
 ];
 
 const geologicalProviders: GeologicalProvider[] = [
   {
     id: '1',
     name: 'КазГеоСервис',
-    description: 'Ведущая геологоразведочная компания с 25-летним опытом работы. Специализируемся на комплексных геологических исследованиях и разведке месторождений полезных ископаемых.',
+    description:
+      'Ведущая геологоразведочная компания с 25-летним опытом работы. Специализируемся на комплексных геологических исследованиях и разведке месторождений полезных ископаемых.',
     rating: 4.8,
     reviewCount: 34,
     location: {
       city: 'Алматы',
       region: 'Алматинская область',
-      coordinates: [76.9129, 43.2567]
+      coordinates: [76.9129, 43.2567],
     },
-    services: ['Геологическая разведка', 'Геофизические исследования', 'Бурение разведочных скважин', 'Подсчет запасов'],
+    services: [
+      'Геологическая разведка',
+      'Геофизические исследования',
+      'Бурение разведочных скважин',
+      'Подсчет запасов',
+    ],
     specializations: ['Золото', 'Медь', 'Уголь'],
     experience: 25,
     projectsCount: 187,
@@ -100,23 +106,29 @@ const geologicalProviders: GeologicalProvider[] = [
     contact: {
       phone: '+7 727 345 6789',
       email: 'info@kazgeoservice.kz',
-      website: 'https://kazgeoservice.kz'
+      website: 'https://kazgeoservice.kz',
     },
     established: 1999,
-    teamSize: 67
+    teamSize: 67,
   },
   {
     id: '2',
     name: 'Геопроспект КЗ',
-    description: 'Инновационная геологическая компания, применяющая современные методы дистанционного зондирования и 3D-моделирования для геологической разведки.',
+    description:
+      'Инновационная геологическая компания, применяющая современные методы дистанционного зондирования и 3D-моделирования для геологической разведки.',
     rating: 4.9,
     reviewCount: 28,
     location: {
       city: 'Нур-Султан',
       region: 'Акмолинская область',
-      coordinates: [71.4704, 51.1694]
+      coordinates: [71.4704, 51.1694],
     },
-    services: ['Геохимический анализ', 'Картографирование', 'Сейсмическое зондирование', 'Экологическое картирование'],
+    services: [
+      'Геохимический анализ',
+      'Картографирование',
+      'Сейсмическое зондирование',
+      'Экологическое картирование',
+    ],
     specializations: ['Нефть', 'Газ', 'Уран'],
     experience: 18,
     projectsCount: 143,
@@ -124,69 +136,85 @@ const geologicalProviders: GeologicalProvider[] = [
     contact: {
       phone: '+7 717 234 5678',
       email: 'contact@geoprospect.kz',
-      website: 'https://geoprospect.kz'
+      website: 'https://geoprospect.kz',
     },
     established: 2006,
-    teamSize: 45
+    teamSize: 45,
   },
   {
     id: '3',
     name: 'Недра-Геология',
-    description: 'Специализируемся на комплексном геологическом изучении недр, включая поиски и разведку твердых полезных ископаемых на территории Казахстана.',
+    description:
+      'Специализируемся на комплексном геологическом изучении недр, включая поиски и разведку твердых полезных ископаемых на территории Казахстана.',
     rating: 4.7,
     reviewCount: 19,
     location: {
       city: 'Караганда',
       region: 'Карагандинская область',
-      coordinates: [73.1526, 49.8047]
+      coordinates: [73.1526, 49.8047],
     },
-    services: ['Петрографический анализ', 'Гидрогеологические изыскания', 'Геологическая разведка', 'Подсчет запасов'],
+    services: [
+      'Петрографический анализ',
+      'Гидрогеологические изыскания',
+      'Геологическая разведка',
+      'Подсчет запасов',
+    ],
     specializations: ['Железная руда', 'Марганец', 'Титан'],
     experience: 22,
     projectsCount: 165,
     certified: true,
     contact: {
       phone: '+7 721 456 7890',
-      email: 'info@nedra-geology.kz'
+      email: 'info@nedra-geology.kz',
     },
     established: 2002,
-    teamSize: 53
+    teamSize: 53,
   },
   {
     id: '4',
     name: 'АлтайГео',
-    description: 'Региональная геологическая компания, специализирующаяся на геологической разведке месторождений драгоценных и цветных металлов в Восточном Казахстане.',
+    description:
+      'Региональная геологическая компания, специализирующаяся на геологической разведке месторождений драгоценных и цветных металлов в Восточном Казахстане.',
     rating: 4.6,
     reviewCount: 15,
     location: {
       city: 'Усть-Каменогорск',
       region: 'Восточно-Казахстанская область',
-      coordinates: [82.6133, 49.9481]
+      coordinates: [82.6133, 49.9481],
     },
-    services: ['Геологическая разведка', 'Геофизические исследования', 'Бурение разведочных скважин'],
+    services: [
+      'Геологическая разведка',
+      'Геофизические исследования',
+      'Бурение разведочных скважин',
+    ],
     specializations: ['Золото', 'Серебро', 'Свинец', 'Цинк'],
     experience: 16,
     projectsCount: 89,
     certified: false,
     contact: {
       phone: '+7 723 567 8901',
-      email: 'altaigeo@mail.kz'
+      email: 'altaigeo@mail.kz',
     },
     established: 2008,
-    teamSize: 31
+    teamSize: 31,
   },
   {
     id: '5',
     name: 'КаспийГеология',
-    description: 'Ведущий поставщик геологических услуг в Западном Казахстане. Специализируемся на нефтегазовой геологии и морских геологических исследованиях.',
+    description:
+      'Ведущий поставщик геологических услуг в Западном Казахстане. Специализируемся на нефтегазовой геологии и морских геологических исследованиях.',
     rating: 4.8,
     reviewCount: 22,
     location: {
       city: 'Актау',
       region: 'Мангистауская область',
-      coordinates: [51.2133, 43.6564]
+      coordinates: [51.2133, 43.6564],
     },
-    services: ['Сейсмическое зондирование', 'Геохимический анализ', 'Экологическое картирование'],
+    services: [
+      'Сейсмическое зондирование',
+      'Геохимический анализ',
+      'Экологическое картирование',
+    ],
     specializations: ['Нефть', 'Газ'],
     experience: 20,
     projectsCount: 124,
@@ -194,15 +222,16 @@ const geologicalProviders: GeologicalProvider[] = [
     contact: {
       phone: '+7 729 678 9012',
       email: 'info@caspiangeology.kz',
-      website: 'https://caspiangeology.kz'
+      website: 'https://caspiangeology.kz',
     },
     established: 2004,
-    teamSize: 38
-  }
+    teamSize: 38,
+  },
 ];
 
 export default function GeologicalServicesPage() {
-  const [providers, setProviders] = useState<GeologicalProvider[]>(geologicalProviders);
+  const [providers, setProviders] =
+    useState<GeologicalProvider[]>(geologicalProviders);
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('all');
@@ -216,25 +245,28 @@ export default function GeologicalServicesPage() {
 
     // Search filter
     if (searchQuery) {
-      filtered = filtered.filter(provider =>
-        provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        provider.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        provider.specializations.some(spec => 
-          spec.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+      filtered = filtered.filter(
+        (provider) =>
+          provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          provider.description
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          provider.specializations.some((spec) =>
+            spec.toLowerCase().includes(searchQuery.toLowerCase())
+          )
       );
     }
 
     // Region filter
     if (selectedRegion !== 'all') {
-      filtered = filtered.filter(provider => 
-        provider.location.region === selectedRegion
+      filtered = filtered.filter(
+        (provider) => provider.location.region === selectedRegion
       );
     }
 
     // Service filter
     if (selectedService !== 'all') {
-      filtered = filtered.filter(provider =>
+      filtered = filtered.filter((provider) =>
         provider.services.includes(selectedService)
       );
     }
@@ -258,7 +290,11 @@ export default function GeologicalServicesPage() {
   }, [searchQuery, selectedRegion, selectedService, sortBy]);
 
   const renderProviderCard = (provider: GeologicalProvider) => (
-    <Card key={provider.id} variant="elevated" className="hover:shadow-xl transition-all duration-300">
+    <Card
+      key={provider.id}
+      variant="elevated"
+      className="hover:shadow-xl transition-all duration-300"
+    >
       <div className="flex items-start gap-4 mb-4">
         <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
           {provider.logo ? (
@@ -273,7 +309,7 @@ export default function GeologicalServicesPage() {
             <Mountain className="w-8 h-8 text-gray-400" />
           )}
         </div>
-        
+
         <div className="flex-1">
           <div className="flex items-start justify-between mb-2">
             <div>
@@ -285,13 +321,17 @@ export default function GeologicalServicesPage() {
               </h3>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <MapPin className="w-4 h-4" />
-                <span>{provider.location.city}, {provider.location.region}</span>
+                <span>
+                  {provider.location.city}, {provider.location.region}
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-1">
               <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
               <span className="font-medium">{provider.rating}</span>
-              <span className="text-sm text-gray-500">({provider.reviewCount})</span>
+              <span className="text-sm text-gray-500">
+                ({provider.reviewCount})
+              </span>
             </div>
           </div>
         </div>
@@ -326,7 +366,7 @@ export default function GeologicalServicesPage() {
           </div>
           <div className="text-xs text-gray-500">лет опыта</div>
         </div>
-        
+
         <div className="text-center">
           <div className="flex items-center justify-center gap-1 text-gray-500 mb-1">
             <Briefcase className="w-4 h-4" />
@@ -357,7 +397,7 @@ export default function GeologicalServicesPage() {
           <Phone className="w-4 h-4" />
           <span>{provider.contact.phone}</span>
         </a>
-        
+
         <a
           href={`mailto:${provider.contact.email}`}
           className="flex items-center gap-2 text-sm text-gray-600 hover:text-blue-600 transition-colors"
@@ -421,15 +461,17 @@ export default function GeologicalServicesPage() {
               />
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             </div>
-            
+
             <select
               value={selectedRegion}
               onChange={(e) => setSelectedRegion(e.target.value)}
               className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">Все регионы</option>
-              {REGIONS.map(region => (
-                <option key={region} value={region}>{region}</option>
+              {REGIONS.map((region) => (
+                <option key={region} value={region}>
+                  {region}
+                </option>
               ))}
             </select>
 
@@ -439,8 +481,10 @@ export default function GeologicalServicesPage() {
               className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="all">Все услуги</option>
-              {GEOLOGICAL_SERVICES.map(service => (
-                <option key={service} value={service}>{service}</option>
+              {GEOLOGICAL_SERVICES.map((service) => (
+                <option key={service} value={service}>
+                  {service}
+                </option>
               ))}
             </select>
           </div>

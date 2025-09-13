@@ -151,19 +151,25 @@ export function GlobalSearch() {
     setResults(filtered);
   }, [searchQuery]);
 
-  const handleSelect = useCallback((href: string) => {
-    setOpen(false);
-    router.push(href);
-  }, [router]);
+  const handleSelect = useCallback(
+    (href: string) => {
+      setOpen(false);
+      router.push(href);
+    },
+    [router]
+  );
 
   // Group results by type
-  const groupedResults = results.reduce((acc, result) => {
-    if (!acc[result.type]) {
-      acc[result.type] = [];
-    }
-    acc[result.type].push(result);
-    return acc;
-  }, {} as Record<string, SearchResult[]>);
+  const groupedResults = results.reduce(
+    (acc, result) => {
+      if (!acc[result.type]) {
+        acc[result.type] = [];
+      }
+      acc[result.type].push(result);
+      return acc;
+    },
+    {} as Record<string, SearchResult[]>
+  );
 
   return (
     <>
@@ -188,9 +194,12 @@ export function GlobalSearch() {
         />
         <CommandList>
           <CommandEmpty>Ничего не найдено.</CommandEmpty>
-          
+
           {Object.entries(groupedResults).map(([type, items]) => (
-            <CommandGroup key={type} heading={typeLabels[type as keyof typeof typeLabels]}>
+            <CommandGroup
+              key={type}
+              heading={typeLabels[type as keyof typeof typeLabels]}
+            >
               {items.map((item) => (
                 <CommandItem
                   key={item.id}
@@ -198,13 +207,15 @@ export function GlobalSearch() {
                   onSelect={() => handleSelect(item.href)}
                   className="flex items-start gap-3 py-3"
                 >
-                  <div className="flex-shrink-0 mt-0.5">
-                    {item.icon}
-                  </div>
+                  <div className="flex-shrink-0 mt-0.5">{item.icon}</div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-medium text-gray-900">{item.title}</div>
+                    <div className="font-medium text-gray-900">
+                      {item.title}
+                    </div>
                     {item.description && (
-                      <div className="text-sm text-gray-500 truncate">{item.description}</div>
+                      <div className="text-sm text-gray-500 truncate">
+                        {item.description}
+                      </div>
                     )}
                   </div>
                   {item.meta && (
@@ -216,7 +227,7 @@ export function GlobalSearch() {
               ))}
             </CommandGroup>
           ))}
-          
+
           <CommandSeparator />
           <CommandGroup heading="Быстрые действия">
             <CommandItem onSelect={() => handleSelect('/listings/create')}>

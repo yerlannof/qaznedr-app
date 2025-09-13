@@ -5,15 +5,15 @@ import { motion } from 'framer-motion';
 import Navigation from '@/components/layouts/Navigation';
 import PersonalizedFeed from '@/components/features/PersonalizedFeed';
 import { LiveActivityIndicator } from '@/components/features/SocialProof';
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Users, 
+import {
+  BarChart3,
+  TrendingUp,
+  Users,
   Eye,
   Calendar,
   Filter,
   Download,
-  Settings
+  Settings,
 } from 'lucide-react';
 
 interface DashboardStats {
@@ -41,29 +41,29 @@ const MOCK_STATS: DashboardStats = {
       id: '1',
       type: 'view',
       depositTitle: 'Месторождение Тенгиз',
-      timestamp: '5 минут назад'
+      timestamp: '5 минут назад',
     },
     {
       id: '2',
       type: 'inquiry',
       depositTitle: 'Золотое месторождение Алтын',
-      timestamp: '15 минут назад'
+      timestamp: '15 минут назад',
     },
     {
       id: '3',
       type: 'favorite',
       depositTitle: 'Угольный разрез Экибастуз',
-      timestamp: '1 час назад'
-    }
-  ]
+      timestamp: '1 час назад',
+    },
+  ],
 };
 
-function StatsCard({ 
-  title, 
-  value, 
-  change, 
+function StatsCard({
+  title,
+  value,
+  change,
   icon: Icon,
-  color = 'blue' 
+  color = 'blue',
 }: {
   title: string;
   value: string | number;
@@ -75,28 +75,34 @@ function StatsCard({
     blue: 'bg-blue-50 text-blue-600',
     green: 'bg-green-50 text-green-600',
     purple: 'bg-purple-50 text-purple-600',
-    orange: 'bg-orange-50 text-orange-600'
+    orange: 'bg-orange-50 text-orange-600',
   };
 
   return (
     <motion.div
       className="bg-white rounded-xl border border-gray-100 p-6"
-      whileHover={{ scale: 1.02, boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }}
+      whileHover={{ scale: 1.02, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
     >
       <div className="flex items-center justify-between">
         <div>
           <div className="text-sm font-medium text-gray-600 mb-1">{title}</div>
           <div className="text-2xl font-bold text-gray-900">{value}</div>
           {change !== undefined && (
-            <div className={`flex items-center text-sm mt-1 ${
-              change >= 0 ? 'text-green-600' : 'text-red-600'
-            }`}>
-              <TrendingUp className={`w-4 h-4 mr-1 ${change < 0 ? 'rotate-180' : ''}`} />
+            <div
+              className={`flex items-center text-sm mt-1 ${
+                change >= 0 ? 'text-green-600' : 'text-red-600'
+              }`}
+            >
+              <TrendingUp
+                className={`w-4 h-4 mr-1 ${change < 0 ? 'rotate-180' : ''}`}
+              />
               {Math.abs(change)}% за месяц
             </div>
           )}
         </div>
-        <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${colorClasses[color]}`}>
+        <div
+          className={`w-12 h-12 rounded-lg flex items-center justify-center ${colorClasses[color]}`}
+        >
           <Icon className="w-6 h-6" />
         </div>
       </div>
@@ -104,18 +110,14 @@ function StatsCard({
   );
 }
 
-function TrendingSearches({ 
-  searches 
-}: { 
-  searches: string[] 
-}) {
+function TrendingSearches({ searches }: { searches: string[] }) {
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-6">
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-semibold text-gray-900">Популярные поиски</h3>
         <Filter className="w-5 h-5 text-gray-500" />
       </div>
-      
+
       <div className="space-y-3">
         {searches.map((search, index) => (
           <motion.div
@@ -127,8 +129,7 @@ function TrendingSearches({
           >
             <span className="font-medium text-gray-900">{search}</span>
             <div className="flex items-center text-sm text-gray-600">
-              <TrendingUp className="w-4 h-4 mr-1" />
-              #{index + 1}
+              <TrendingUp className="w-4 h-4 mr-1" />#{index + 1}
             </div>
           </motion.div>
         ))}
@@ -137,10 +138,10 @@ function TrendingSearches({
   );
 }
 
-function RecentActivity({ 
-  activities 
-}: { 
-  activities: DashboardStats['recentActivity'] 
+function RecentActivity({
+  activities,
+}: {
+  activities: DashboardStats['recentActivity'];
 }) {
   const getActivityIcon = (type: string) => {
     switch (type) {
@@ -187,12 +188,12 @@ function RecentActivity({
         <h3 className="font-semibold text-gray-900">Недавняя активность</h3>
         <Calendar className="w-5 h-5 text-gray-500" />
       </div>
-      
+
       <div className="space-y-4">
         {activities.map((activity, index) => {
           const Icon = getActivityIcon(activity.type);
           const colorClass = getActivityColor(activity.type);
-          
+
           return (
             <motion.div
               key={activity.id}
@@ -201,21 +202,27 @@ function RecentActivity({
               transition={{ delay: index * 0.1 }}
               className="flex items-start space-x-3"
             >
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${colorClass}`}>
+              <div
+                className={`w-8 h-8 rounded-lg flex items-center justify-center ${colorClass}`}
+              >
                 <Icon className="w-4 h-4" />
               </div>
               <div className="flex-1">
                 <div className="text-sm font-medium text-gray-900">
                   {getActivityLabel(activity.type)}
                 </div>
-                <div className="text-sm text-gray-600">{activity.depositTitle}</div>
-                <div className="text-xs text-gray-500 mt-1">{activity.timestamp}</div>
+                <div className="text-sm text-gray-600">
+                  {activity.depositTitle}
+                </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {activity.timestamp}
+                </div>
               </div>
             </motion.div>
           );
         })}
       </div>
-      
+
       <div className="mt-4 pt-4 border-t border-gray-100">
         <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
           Посмотреть всю активность →
@@ -233,7 +240,7 @@ export default function PersonalDashboardPage() {
     // Simulate loading dashboard data
     const loadDashboard = async () => {
       setIsLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setStats(MOCK_STATS);
       setIsLoading(false);
     };
@@ -256,7 +263,10 @@ export default function PersonalDashboardPage() {
             {/* Loading Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="bg-gray-200 rounded-xl h-32 animate-pulse" />
+                <div
+                  key={i}
+                  className="bg-gray-200 rounded-xl h-32 animate-pulse"
+                />
               ))}
             </div>
 
@@ -271,20 +281,20 @@ export default function PersonalDashboardPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
-      
+
       {/* Header */}
       <div className="pt-16 px-4 sm:px-6 lg:px-8 py-8 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-start">
             <div>
-              <motion.h1 
+              <motion.h1
                 className="text-3xl font-bold text-gray-900 mb-2"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
               >
                 Персональная панель
               </motion.h1>
-              <motion.p 
+              <motion.p
                 className="text-gray-600"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -320,22 +330,22 @@ export default function PersonalDashboardPage() {
         {stats && (
           <>
             {/* Stats Cards */}
-            <motion.div 
+            <motion.div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
               initial="hidden"
               animate="visible"
               variants={{
                 visible: {
                   transition: {
-                    staggerChildren: 0.1
-                  }
-                }
+                    staggerChildren: 0.1,
+                  },
+                },
               }}
             >
               <motion.div
                 variants={{
                   hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
+                  visible: { opacity: 1, y: 0 },
                 }}
               >
                 <StatsCard
@@ -349,7 +359,7 @@ export default function PersonalDashboardPage() {
               <motion.div
                 variants={{
                   hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
+                  visible: { opacity: 1, y: 0 },
                 }}
               >
                 <StatsCard
@@ -363,7 +373,7 @@ export default function PersonalDashboardPage() {
               <motion.div
                 variants={{
                   hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
+                  visible: { opacity: 1, y: 0 },
                 }}
               >
                 <StatsCard
@@ -377,7 +387,7 @@ export default function PersonalDashboardPage() {
               <motion.div
                 variants={{
                   hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
+                  visible: { opacity: 1, y: 0 },
                 }}
               >
                 <StatsCard

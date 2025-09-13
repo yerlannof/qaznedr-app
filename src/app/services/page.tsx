@@ -32,7 +32,7 @@ const serviceCategories = [
     featured: [
       { name: 'КазГеоСервис', rating: 4.8, location: 'Алматы' },
       { name: 'Геопроспект КЗ', rating: 4.9, location: 'Нур-Султан' },
-    ]
+    ],
   },
   {
     id: 'equipment',
@@ -45,7 +45,7 @@ const serviceCategories = [
     featured: [
       { name: 'ТехРент Казахстан', rating: 4.7, location: 'Караганда' },
       { name: 'Горная Техника Ко', rating: 4.8, location: 'Алматы' },
-    ]
+    ],
   },
   {
     id: 'legal',
@@ -58,7 +58,7 @@ const serviceCategories = [
     featured: [
       { name: 'Юр-Центр Недра', rating: 4.9, location: 'Алматы' },
       { name: 'Горное Право КЗ', rating: 4.8, location: 'Нур-Султан' },
-    ]
+    ],
   },
   {
     id: 'investors',
@@ -71,8 +71,8 @@ const serviceCategories = [
     featured: [
       { name: 'КазИнвест Майнинг', rating: 4.8, location: 'Алматы' },
       { name: 'Altyn Invest Fund', rating: 4.9, location: 'Нур-Султан' },
-    ]
-  }
+    ],
+  },
 ];
 
 const knowledgeCenter = [
@@ -81,15 +81,15 @@ const knowledgeCenter = [
     description: 'Техническая документация, стандарты, регламенты',
     icon: BookOpen,
     href: '/knowledge',
-    articles: 234
+    articles: 234,
   },
   {
     title: 'Новости отрасли',
     description: 'Актуальные новости горнодобывающей промышленности Казахстана',
     icon: Newspaper,
     href: '/news',
-    articles: 156
-  }
+    articles: 156,
+  },
 ];
 
 export default function ServicesPage() {
@@ -106,10 +106,11 @@ export default function ServicesPage() {
               Экосистема горнодобывающих услуг
             </h1>
             <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              Полный спектр профессиональных услуг для горнодобывающей отрасли Казахстана. 
-              От геологической разведки до инвестиционного сопровождения.
+              Полный спектр профессиональных услуг для горнодобывающей отрасли
+              Казахстана. От геологической разведки до инвестиционного
+              сопровождения.
             </p>
-            
+
             {/* Search */}
             <div className="max-w-2xl mx-auto relative">
               <input
@@ -138,7 +139,8 @@ export default function ServicesPage() {
               Категории услуг
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Выберите категорию услуг и найдите проверенных поставщиков в вашем регионе
+              Выберите категорию услуг и найдите проверенных поставщиков в вашем
+              регионе
             </p>
           </div>
 
@@ -149,30 +151,48 @@ export default function ServicesPage() {
                 <Link key={category.id} href={category.href}>
                   <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer">
                     <div className="text-center">
-                      <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-${category.color}-100 mb-4`}>
-                        <Icon className={`w-8 h-8 text-${category.color}-600`} />
+                      <div
+                        className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-${category.color}-100 mb-4`}
+                      >
+                        <Icon
+                          className={`w-8 h-8 text-${category.color}-600`}
+                        />
                       </div>
-                      
+
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">
                         {category.title}
                       </h3>
                       <p className="text-gray-600 text-sm mb-4">
                         {category.description}
                       </p>
-                      
+
                       {/* Stats */}
                       <div className="flex justify-between text-sm text-gray-500 mb-4">
-                        <span>{category.stats.providers || category.stats.specialists} поставщиков</span>
-                        <span>{category.stats.projects || category.stats.items || category.stats.funded} проектов</span>
+                        <span>
+                          {category.stats.providers ||
+                            category.stats.specialists}{' '}
+                          поставщиков
+                        </span>
+                        <span>
+                          {category.stats.projects ||
+                            category.stats.items ||
+                            category.stats.funded}{' '}
+                          проектов
+                        </span>
                       </div>
-                      
+
                       {/* Featured providers */}
                       <div className="space-y-2 mb-4">
                         {category.featured.map((provider, index) => (
-                          <div key={index} className="flex items-center justify-between text-xs">
+                          <div
+                            key={index}
+                            className="flex items-center justify-between text-xs"
+                          >
                             <div className="flex items-center gap-2">
                               <Building2 className="w-3 h-3" />
-                              <span className="font-medium">{provider.name}</span>
+                              <span className="font-medium">
+                                {provider.name}
+                              </span>
                             </div>
                             <div className="flex items-center gap-1">
                               <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
@@ -181,9 +201,9 @@ export default function ServicesPage() {
                           </div>
                         ))}
                       </div>
-                      
-                      <Button 
-                        variant="outline" 
+
+                      <Button
+                        variant="outline"
                         className="w-full group-hover:bg-blue-600 group-hover:text-white transition-colors"
                         rightIcon={<ArrowRight className="w-4 h-4" />}
                       >
@@ -204,7 +224,8 @@ export default function ServicesPage() {
               Информационный центр
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Актуальная информация, новости отрасли и база знаний для профессионалов
+              Актуальная информация, новости отрасли и база знаний для
+              профессионалов
             </p>
           </div>
 
@@ -224,9 +245,7 @@ export default function ServicesPage() {
                         <h3 className="text-xl font-semibold text-gray-900 mb-2">
                           {item.title}
                         </h3>
-                        <p className="text-gray-600 mb-4">
-                          {item.description}
-                        </p>
+                        <p className="text-gray-600 mb-4">{item.description}</p>
                         <div className="flex items-center justify-between">
                           <span className="text-sm text-gray-500">
                             {item.articles} материалов
@@ -248,17 +267,18 @@ export default function ServicesPage() {
             Хотите разместить свои услуги?
           </h2>
           <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-            Присоединяйтесь к нашей экосистеме и найдите новых клиентов в горнодобывающей отрасли Казахстана
+            Присоединяйтесь к нашей экосистеме и найдите новых клиентов в
+            горнодобывающей отрасли Казахстана
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              variant="secondary" 
+            <Button
+              variant="secondary"
               className="bg-white text-blue-600 hover:bg-gray-100"
             >
               Разместить услуги
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="border-blue-400 text-white hover:bg-blue-700"
             >
               Связаться с нами

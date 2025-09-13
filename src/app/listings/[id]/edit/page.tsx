@@ -726,7 +726,7 @@ export default function EditListingPage() {
                     min="0"
                   />
                   <p className="text-xs text-gray-500 mt-1">
-                    Оставьте пустым для &quot;По запросу&quot;
+                    Оставьте пустым для &ldquo;По запросу&rdquo;
                   </p>
                 </div>
               </div>

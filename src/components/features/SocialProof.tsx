@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Eye, 
-  Users, 
-  Clock, 
-  TrendingUp, 
-  Shield, 
+import {
+  Eye,
+  Users,
+  Clock,
+  TrendingUp,
+  Shield,
   CheckCircle,
   Star,
   MessageCircle,
-  Heart
+  Heart,
 } from 'lucide-react';
 
 // Mock data for real-time activity
@@ -34,14 +34,18 @@ interface SocialProofProps {
 }
 
 // Real-time Activity Indicator
-export function LiveActivityIndicator({ className = '' }: { className?: string }) {
+export function LiveActivityIndicator({
+  className = '',
+}: {
+  className?: string;
+}) {
   const [currentMessage, setCurrentMessage] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setIsVisible(false);
-      
+
       setTimeout(() => {
         setCurrentMessage((prev) => (prev + 1) % ACTIVITY_MESSAGES.length);
         setIsVisible(true);
@@ -81,10 +85,10 @@ export function LiveActivityIndicator({ className = '' }: { className?: string }
 }
 
 // Viewing Count Component
-export function ViewingNowIndicator({ 
-  depositId, 
-  className = '' 
-}: { 
+export function ViewingNowIndicator({
+  depositId,
+  className = '',
+}: {
   depositId?: string;
   className?: string;
 }) {
@@ -97,7 +101,7 @@ export function ViewingNowIndicator({
 
     const interval = setInterval(() => {
       const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
-      setViewingCount(prev => Math.max(1, prev + change));
+      setViewingCount((prev) => Math.max(1, prev + change));
     }, 8000);
 
     return () => clearInterval(interval);
@@ -118,15 +122,16 @@ export function ViewingNowIndicator({
 }
 
 // Interest Level Indicator
-export function InterestLevelIndicator({ 
+export function InterestLevelIndicator({
   interestedCount = 0,
-  className = '' 
+  className = '',
 }: {
   interestedCount?: number;
   className?: string;
 }) {
   const getInterestLevel = (count: number) => {
-    if (count >= 50) return { level: 'Очень высокий', color: 'red', icon: '🔥' };
+    if (count >= 50)
+      return { level: 'Очень высокий', color: 'red', icon: '🔥' };
     if (count >= 20) return { level: 'Высокий', color: 'orange', icon: '📈' };
     if (count >= 10) return { level: 'Умеренный', color: 'yellow', icon: '👀' };
     return { level: 'Низкий', color: 'gray', icon: '👁️' };
@@ -139,29 +144,45 @@ export function InterestLevelIndicator({
       whileHover={{ scale: 1.05 }}
       className={`inline-flex items-center space-x-2 px-3 py-2 rounded-lg border ${className}`}
       style={{
-        backgroundColor: `${interest.color === 'red' ? '#fee2e2' : 
-                         interest.color === 'orange' ? '#fed7aa' :
-                         interest.color === 'yellow' ? '#fef3c7' : '#f3f4f6'}`,
-        borderColor: `${interest.color === 'red' ? '#fecaca' : 
-                      interest.color === 'orange' ? '#fdba74' :
-                      interest.color === 'yellow' ? '#fde68a' : '#e5e7eb'}`,
+        backgroundColor: `${
+          interest.color === 'red'
+            ? '#fee2e2'
+            : interest.color === 'orange'
+              ? '#fed7aa'
+              : interest.color === 'yellow'
+                ? '#fef3c7'
+                : '#f3f4f6'
+        }`,
+        borderColor: `${
+          interest.color === 'red'
+            ? '#fecaca'
+            : interest.color === 'orange'
+              ? '#fdba74'
+              : interest.color === 'yellow'
+                ? '#fde68a'
+                : '#e5e7eb'
+        }`,
       }}
     >
       <span className="text-lg">{interest.icon}</span>
       <div className="text-sm">
-        <div className="font-medium text-gray-800">Интерес: {interest.level}</div>
-        <div className="text-gray-600">{interestedCount} человек заинтересованы</div>
+        <div className="font-medium text-gray-800">
+          Интерес: {interest.level}
+        </div>
+        <div className="text-gray-600">
+          {interestedCount} человек заинтересованы
+        </div>
       </div>
     </motion.div>
   );
 }
 
 // Trust Badge Component
-export function TrustBadge({ 
-  type, 
+export function TrustBadge({
+  type,
   verified = false,
   rating,
-  className = '' 
+  className = '',
 }: {
   type: 'seller' | 'listing' | 'company';
   verified?: boolean;
@@ -175,28 +196,32 @@ export function TrustBadge({
           icon: Shield,
           title: verified ? 'Проверенный продавец' : 'Новый продавец',
           color: verified ? 'green' : 'gray',
-          description: verified ? 'Документы подтверждены' : 'Проходит проверку'
+          description: verified
+            ? 'Документы подтверждены'
+            : 'Проходит проверку',
         };
       case 'listing':
         return {
           icon: CheckCircle,
           title: verified ? 'Проверенное объявление' : 'На проверке',
           color: verified ? 'blue' : 'yellow',
-          description: verified ? 'Лицензия подтверждена' : 'Документы на проверке'
+          description: verified
+            ? 'Лицензия подтверждена'
+            : 'Документы на проверке',
         };
       case 'company':
         return {
           icon: Star,
           title: 'Рейтинг компании',
           color: 'gold',
-          description: rating ? `${rating.toFixed(1)} из 5.0` : 'Нет рейтинга'
+          description: rating ? `${rating.toFixed(1)} из 5.0` : 'Нет рейтинга',
         };
       default:
         return {
           icon: Shield,
           title: 'Статус не определен',
           color: 'gray',
-          description: ''
+          description: '',
         };
     }
   };
@@ -209,13 +234,17 @@ export function TrustBadge({
       whileHover={{ scale: 1.02 }}
       className={`inline-flex items-center space-x-2 px-3 py-2 rounded-lg border bg-white shadow-sm ${className}`}
     >
-      <Icon 
+      <Icon
         className={`w-4 h-4 ${
-          badge.color === 'green' ? 'text-green-600' :
-          badge.color === 'blue' ? 'text-blue-600' :
-          badge.color === 'gold' ? 'text-yellow-500' :
-          badge.color === 'yellow' ? 'text-yellow-600' :
-          'text-gray-500'
+          badge.color === 'green'
+            ? 'text-green-600'
+            : badge.color === 'blue'
+              ? 'text-blue-600'
+              : badge.color === 'gold'
+                ? 'text-yellow-500'
+                : badge.color === 'yellow'
+                  ? 'text-yellow-600'
+                  : 'text-gray-500'
         }`}
       />
       <div className="text-sm">
@@ -230,8 +259,8 @@ export function TrustBadge({
             <Star
               key={i}
               className={`w-3 h-3 ${
-                i < Math.floor(rating) 
-                  ? 'text-yellow-400 fill-current' 
+                i < Math.floor(rating)
+                  ? 'text-yellow-400 fill-current'
                   : 'text-gray-300'
               }`}
             />
@@ -243,9 +272,9 @@ export function TrustBadge({
 }
 
 // Recent Activity Feed
-export function RecentActivityFeed({ 
+export function RecentActivityFeed({
   depositId,
-  className = '' 
+  className = '',
 }: {
   depositId?: string;
   className?: string;
@@ -257,7 +286,7 @@ export function RecentActivityFeed({
       user: 'Анонимный пользователь',
       action: 'просмотрел объявление',
       time: '2 минуты назад',
-      icon: Eye
+      icon: Eye,
     },
     {
       id: 2,
@@ -265,7 +294,7 @@ export function RecentActivityFeed({
       user: 'ТОО "НедраИнвест"',
       action: 'проявил интерес',
       time: '15 минут назад',
-      icon: Heart
+      icon: Heart,
     },
     {
       id: 3,
@@ -273,7 +302,7 @@ export function RecentActivityFeed({
       user: 'Марат К.',
       action: 'отправил сообщение',
       time: '1 час назад',
-      icon: MessageCircle
+      icon: MessageCircle,
     },
     {
       id: 4,
@@ -281,17 +310,19 @@ export function RecentActivityFeed({
       user: 'Айгуль С.',
       action: 'добавил в сравнение',
       time: '2 часа назад',
-      icon: TrendingUp
-    }
+      icon: TrendingUp,
+    },
   ]);
 
   return (
-    <div className={`bg-white rounded-lg border border-gray-200 p-4 ${className}`}>
+    <div
+      className={`bg-white rounded-lg border border-gray-200 p-4 ${className}`}
+    >
       <h4 className="font-semibold text-gray-900 mb-3 flex items-center space-x-2">
         <Users className="w-4 h-4" />
         <span>Недавняя активность</span>
       </h4>
-      
+
       <div className="space-y-3">
         {activities.map((activity, index) => {
           const Icon = activity.icon;
@@ -307,12 +338,12 @@ export function RecentActivityFeed({
                 <Icon className="w-4 h-4 text-gray-500" />
               </div>
               <div className="flex-1">
-                <span className="font-medium text-gray-900">{activity.user}</span>
+                <span className="font-medium text-gray-900">
+                  {activity.user}
+                </span>
                 <span className="text-gray-600 ml-1">{activity.action}</span>
               </div>
-              <div className="text-gray-500 text-xs">
-                {activity.time}
-              </div>
+              <div className="text-gray-500 text-xs">{activity.time}</div>
             </motion.div>
           );
         })}
@@ -322,11 +353,11 @@ export function RecentActivityFeed({
 }
 
 // Main Social Proof Container
-export default function SocialProof({ 
+export default function SocialProof({
   depositId,
   viewCount = 0,
   interestedCount = 0,
-  className = ''
+  className = '',
 }: SocialProofProps) {
   return (
     <div className={`space-y-4 ${className}`}>
@@ -336,9 +367,9 @@ export default function SocialProof({
         <TrustBadge type="seller" verified={true} />
         <TrustBadge type="company" rating={4.2} />
       </div>
-      
+
       <InterestLevelIndicator interestedCount={interestedCount} />
-      
+
       <RecentActivityFeed depositId={depositId} />
     </div>
   );

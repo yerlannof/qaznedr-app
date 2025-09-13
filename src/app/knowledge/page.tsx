@@ -31,7 +31,8 @@ const knowledgeArticles = [
   {
     id: '1',
     title: 'Руководство по получению лицензий на недропользование в Казахстане',
-    description: 'Пошаговое руководство по всем этапам получения лицензий на геологическое изучение и добычу полезных ископаемых.',
+    description:
+      'Пошаговое руководство по всем этапам получения лицензий на геологическое изучение и добычу полезных ископаемых.',
     category: 'Лицензирование',
     type: 'article', // 'article' | 'video' | 'document' | 'guide'
     difficulty: 'beginner', // 'beginner' | 'intermediate' | 'advanced'
@@ -41,19 +42,25 @@ const knowledgeArticles = [
     author: 'Министерство энергетики РК',
     publishedAt: '2024-01-15',
     updatedAt: '2024-03-10',
-    tags: ['лицензирование', 'недропользование', 'законодательство', 'процедуры'],
+    tags: [
+      'лицензирование',
+      'недропользование',
+      'законодательство',
+      'процедуры',
+    ],
     featured: true,
     rating: 4.8,
     reviews: 234,
     content: 'Подробное описание всех этапов лицензирования...',
     thumbnail: '/images/knowledge/licensing-guide.jpg',
     fileUrl: '/documents/licensing-guide.pdf',
-    fileSize: '2.4 MB'
+    fileSize: '2.4 MB',
   },
   {
     id: '2',
     title: 'Современные методы геологоразведки: от сейсморазведки до геохимии',
-    description: 'Обзор современных технологий и методов геологической разведки, применяемых в Казахстане.',
+    description:
+      'Обзор современных технологий и методов геологической разведки, применяемых в Казахстане.',
     category: 'Геологоразведка',
     type: 'video',
     difficulty: 'intermediate',
@@ -70,12 +77,13 @@ const knowledgeArticles = [
     content: 'Видеолекция о современных методах...',
     thumbnail: '/images/knowledge/geology-methods.jpg',
     fileUrl: '/videos/geology-methods.mp4',
-    fileSize: '245 MB'
+    fileSize: '245 MB',
   },
   {
     id: '3',
     title: 'Экологические требования к горнодобывающим предприятиям',
-    description: 'Полный перечень экологических требований, нормативов и процедур для горнодобывающих компаний.',
+    description:
+      'Полный перечень экологических требований, нормативов и процедур для горнодобывающих компаний.',
     category: 'Экология',
     type: 'document',
     difficulty: 'advanced',
@@ -92,12 +100,13 @@ const knowledgeArticles = [
     content: 'Документ содержит все экологические требования...',
     thumbnail: '/images/knowledge/ecology-requirements.jpg',
     fileUrl: '/documents/ecology-requirements.pdf',
-    fileSize: '5.2 MB'
+    fileSize: '5.2 MB',
   },
   {
     id: '4',
     title: 'Технико-экономическое обоснование горнодобывающих проектов',
-    description: 'Методология составления ТЭО для проектов разработки месторождений полезных ископаемых.',
+    description:
+      'Методология составления ТЭО для проектов разработки месторождений полезных ископаемых.',
     category: 'Экономика',
     type: 'guide',
     difficulty: 'advanced',
@@ -114,12 +123,13 @@ const knowledgeArticles = [
     content: 'Практическое руководство по составлению ТЭО...',
     thumbnail: '/images/knowledge/teo-guide.jpg',
     fileUrl: '/documents/teo-methodology.pdf',
-    fileSize: '8.1 MB'
+    fileSize: '8.1 MB',
   },
   {
     id: '5',
     title: 'Безопасность труда на открытых горных работах',
-    description: 'Требования и рекомендации по обеспечению безопасности при ведении открытых горных работ.',
+    description:
+      'Требования и рекомендации по обеспечению безопасности при ведении открытых горных работ.',
     category: 'Безопасность',
     type: 'article',
     difficulty: 'intermediate',
@@ -136,12 +146,13 @@ const knowledgeArticles = [
     content: 'Статья о мерах безопасности...',
     thumbnail: '/images/knowledge/safety-openpit.jpg',
     fileUrl: '/documents/safety-openpit.pdf',
-    fileSize: '3.7 MB'
+    fileSize: '3.7 MB',
   },
   {
     id: '6',
     title: 'Цифровые технологии в горной промышленности',
-    description: 'Применение IoT, Big Data и ИИ в современной горнодобывающей промышленности Казахстана.',
+    description:
+      'Применение IoT, Big Data и ИИ в современной горнодобывающей промышленности Казахстана.',
     category: 'Технологии',
     type: 'video',
     difficulty: 'intermediate',
@@ -158,12 +169,13 @@ const knowledgeArticles = [
     content: 'Видео о цифровых технологиях...',
     thumbnail: '/images/knowledge/digital-mining.jpg',
     fileUrl: '/videos/digital-mining.mp4',
-    fileSize: '189 MB'
+    fileSize: '189 MB',
   },
   {
     id: '7',
     title: 'Подсчет запасов полезных ископаемых: методы и стандарты',
-    description: 'Российские и международные стандарты подсчета и классификации запасов минерального сырья.',
+    description:
+      'Российские и международные стандарты подсчета и классификации запасов минерального сырья.',
     category: 'Геология',
     type: 'document',
     difficulty: 'advanced',
@@ -180,12 +192,13 @@ const knowledgeArticles = [
     content: 'Методические указания по подсчету запасов...',
     thumbnail: '/images/knowledge/reserves-calculation.jpg',
     fileUrl: '/documents/reserves-standards.pdf',
-    fileSize: '6.8 MB'
+    fileSize: '6.8 MB',
   },
   {
     id: '8',
     title: 'Инвестиционная привлекательность горнодобывающих проектов',
-    description: 'Анализ факторов, влияющих на инвестиционную привлекательность проектов в горной отрасли.',
+    description:
+      'Анализ факторов, влияющих на инвестиционную привлекательность проектов в горной отрасли.',
     category: 'Инвестиции',
     type: 'article',
     difficulty: 'intermediate',
@@ -202,8 +215,8 @@ const knowledgeArticles = [
     content: 'Исследование инвестиционной привлекательности...',
     thumbnail: '/images/knowledge/investment-attractiveness.jpg',
     fileUrl: '/documents/investment-analysis.pdf',
-    fileSize: '4.3 MB'
-  }
+    fileSize: '4.3 MB',
+  },
 ];
 
 const categories = [
@@ -215,35 +228,24 @@ const categories = [
   'Безопасность',
   'Технологии',
   'Геология',
-  'Инвестиции'
+  'Инвестиции',
 ];
 
-const contentTypes = [
-  'Все типы',
-  'article',
-  'video',
-  'document',
-  'guide'
-];
+const contentTypes = ['Все типы', 'article', 'video', 'document', 'guide'];
 
 const contentTypeNames = {
-  'article': 'Статья',
-  'video': 'Видео',
-  'document': 'Документ',
-  'guide': 'Руководство'
+  article: 'Статья',
+  video: 'Видео',
+  document: 'Документ',
+  guide: 'Руководство',
 };
 
-const difficultyLevels = [
-  'Все уровни',
-  'beginner',
-  'intermediate',
-  'advanced'
-];
+const difficultyLevels = ['Все уровни', 'beginner', 'intermediate', 'advanced'];
 
 const difficultyNames = {
-  'beginner': 'Начальный',
-  'intermediate': 'Средний',
-  'advanced': 'Продвинутый'
+  beginner: 'Начальный',
+  intermediate: 'Средний',
+  advanced: 'Продвинутый',
 };
 
 export default function KnowledgePage() {
@@ -253,28 +255,47 @@ export default function KnowledgePage() {
   const [selectedDifficulty, setSelectedDifficulty] = useState('Все уровни');
   const [featuredOnly, setFeaturedOnly] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [sortBy, setSortBy] = useState<'publishedAt' | 'views' | 'rating' | 'downloads'>('publishedAt');
+  const [sortBy, setSortBy] = useState<
+    'publishedAt' | 'views' | 'rating' | 'downloads'
+  >('publishedAt');
 
   const filteredArticles = useMemo(() => {
-    const filtered = knowledgeArticles.filter(article => {
-      const matchesSearch = !searchQuery || 
+    const filtered = knowledgeArticles.filter((article) => {
+      const matchesSearch =
+        !searchQuery ||
         article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         article.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        article.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-      
-      const matchesCategory = selectedCategory === 'Все категории' || article.category === selectedCategory;
-      const matchesType = selectedType === 'Все типы' || article.type === selectedType;
-      const matchesDifficulty = selectedDifficulty === 'Все уровни' || article.difficulty === selectedDifficulty;
+        article.tags.some((tag) =>
+          tag.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
+      const matchesCategory =
+        selectedCategory === 'Все категории' ||
+        article.category === selectedCategory;
+      const matchesType =
+        selectedType === 'Все типы' || article.type === selectedType;
+      const matchesDifficulty =
+        selectedDifficulty === 'Все уровни' ||
+        article.difficulty === selectedDifficulty;
       const matchesFeatured = !featuredOnly || article.featured;
 
-      return matchesSearch && matchesCategory && matchesType && matchesDifficulty && matchesFeatured;
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesType &&
+        matchesDifficulty &&
+        matchesFeatured
+      );
     });
 
     // Сортировка
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'publishedAt':
-          return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+          return (
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime()
+          );
         case 'views':
           return b.views - a.views;
         case 'rating':
@@ -287,7 +308,14 @@ export default function KnowledgePage() {
     });
 
     return filtered;
-  }, [searchQuery, selectedCategory, selectedType, selectedDifficulty, featuredOnly, sortBy]);
+  }, [
+    searchQuery,
+    selectedCategory,
+    selectedType,
+    selectedDifficulty,
+    featuredOnly,
+    sortBy,
+  ]);
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -326,14 +354,12 @@ export default function KnowledgePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <BookOpen className="w-16 h-16 mx-auto mb-6 text-blue-200" />
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-              База знаний
-            </h1>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-4">База знаний</h1>
             <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              Техническая документация, руководства, стандарты и лучшие практики 
+              Техническая документация, руководства, стандарты и лучшие практики
               для профессионалов горнодобывающей отрасли Казахстана.
             </p>
-            
+
             {/* Search */}
             <div className="max-w-2xl mx-auto relative">
               <input
@@ -360,15 +386,19 @@ export default function KnowledgePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Category Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Категория</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Категория
+              </label>
               <div className="relative">
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                 >
-                  {categories.map(category => (
-                    <option key={category} value={category}>{category}</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
                   ))}
                 </select>
                 <ChevronDown className="absolute right-3 top-3 w-4 h-4 text-gray-400 pointer-events-none" />
@@ -377,16 +407,22 @@ export default function KnowledgePage() {
 
             {/* Type Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Тип контента</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Тип контента
+              </label>
               <div className="relative">
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                 >
-                  {contentTypes.map(type => (
+                  {contentTypes.map((type) => (
                     <option key={type} value={type}>
-                      {type === 'Все типы' ? type : contentTypeNames[type as keyof typeof contentTypeNames]}
+                      {type === 'Все типы'
+                        ? type
+                        : contentTypeNames[
+                            type as keyof typeof contentTypeNames
+                          ]}
                     </option>
                   ))}
                 </select>
@@ -396,16 +432,22 @@ export default function KnowledgePage() {
 
             {/* Difficulty Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Уровень сложности</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Уровень сложности
+              </label>
               <div className="relative">
                 <select
                   value={selectedDifficulty}
                   onChange={(e) => setSelectedDifficulty(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
                 >
-                  {difficultyLevels.map(level => (
+                  {difficultyLevels.map((level) => (
                     <option key={level} value={level}>
-                      {level === 'Все уровни' ? level : difficultyNames[level as keyof typeof difficultyNames]}
+                      {level === 'Все уровни'
+                        ? level
+                        : difficultyNames[
+                            level as keyof typeof difficultyNames
+                          ]}
                     </option>
                   ))}
                 </select>
@@ -415,7 +457,9 @@ export default function KnowledgePage() {
 
             {/* Sort Filter */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Сортировка</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Сортировка
+              </label>
               <div className="relative">
                 <select
                   value={sortBy}
@@ -443,14 +487,18 @@ export default function KnowledgePage() {
                   className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
                 <Award className="w-4 h-4 text-yellow-500" />
-                <span className="text-sm text-gray-700">Только рекомендуемые</span>
+                <span className="text-sm text-gray-700">
+                  Только рекомендуемые
+                </span>
               </label>
             </div>
 
             {/* View Controls */}
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600">
-                Найдено: <span className="font-semibold">{filteredArticles.length}</span> материалов
+                Найдено:{' '}
+                <span className="font-semibold">{filteredArticles.length}</span>{' '}
+                материалов
               </span>
 
               <div className="flex items-center border border-gray-300 rounded-lg">
@@ -472,16 +520,29 @@ export default function KnowledgePage() {
         </Card>
 
         {/* Articles Grid/List */}
-        <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6' : 'space-y-6'}>
+        <div
+          className={
+            viewMode === 'grid'
+              ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'
+              : 'space-y-6'
+          }
+        >
           {filteredArticles.map((article) => {
             const TypeIcon = getTypeIcon(article.type);
-            
+
             return (
-              <Card key={article.id} className={`group hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'p-6' : ''}`}>
+              <Card
+                key={article.id}
+                className={`group hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'p-6' : ''}`}
+              >
                 <div className={`${viewMode === 'list' ? 'flex gap-6' : ''}`}>
                   {/* Thumbnail */}
-                  <div className={`${viewMode === 'list' ? 'flex-shrink-0 w-48' : 'mb-4'} relative`}>
-                    <div className={`relative ${viewMode === 'list' ? 'h-32' : 'h-48'} bg-gray-200 rounded-lg overflow-hidden`}>
+                  <div
+                    className={`${viewMode === 'list' ? 'flex-shrink-0 w-48' : 'mb-4'} relative`}
+                  >
+                    <div
+                      className={`relative ${viewMode === 'list' ? 'h-32' : 'h-48'} bg-gray-200 rounded-lg overflow-hidden`}
+                    >
                       <Image
                         src="/images/placeholder-document.jpg"
                         alt={article.title}
@@ -499,7 +560,11 @@ export default function KnowledgePage() {
                       <div className="absolute top-2 right-2">
                         <div className="bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
                           <TypeIcon className="w-3 h-3" />
-                          {contentTypeNames[article.type as keyof typeof contentTypeNames]}
+                          {
+                            contentTypeNames[
+                              article.type as keyof typeof contentTypeNames
+                            ]
+                          }
                         </div>
                       </div>
                     </div>
@@ -507,12 +572,22 @@ export default function KnowledgePage() {
 
                   <div className={`${viewMode === 'list' ? 'flex-1' : ''}`}>
                     {/* Header */}
-                    <div className={`${viewMode === 'list' ? 'flex justify-between items-start mb-3' : 'mb-3'}`}>
+                    <div
+                      className={`${viewMode === 'list' ? 'flex justify-between items-start mb-3' : 'mb-3'}`}
+                    >
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs text-blue-600 font-medium">{article.category}</span>
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(article.difficulty)}`}>
-                            {difficultyNames[article.difficulty as keyof typeof difficultyNames]}
+                          <span className="text-xs text-blue-600 font-medium">
+                            {article.category}
+                          </span>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(article.difficulty)}`}
+                          >
+                            {
+                              difficultyNames[
+                                article.difficulty as keyof typeof difficultyNames
+                              ]
+                            }
                           </span>
                         </div>
                         <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
@@ -525,7 +600,9 @@ export default function KnowledgePage() {
                     </div>
 
                     {/* Stats */}
-                    <div className={`${viewMode === 'list' ? 'flex gap-6' : 'grid grid-cols-2 gap-2'} mb-4 text-sm text-gray-500`}>
+                    <div
+                      className={`${viewMode === 'list' ? 'flex gap-6' : 'grid grid-cols-2 gap-2'} mb-4 text-sm text-gray-500`}
+                    >
                       <div className="flex items-center gap-1">
                         <Eye className="w-4 h-4" />
                         <span>{article.views.toLocaleString()}</span>
@@ -573,7 +650,9 @@ export default function KnowledgePage() {
                     </div>
 
                     {/* Actions */}
-                    <div className={`${viewMode === 'list' ? 'flex' : 'grid grid-cols-2'} gap-2`}>
+                    <div
+                      className={`${viewMode === 'list' ? 'flex' : 'grid grid-cols-2'} gap-2`}
+                    >
                       <Button
                         variant="outline"
                         size="sm"
@@ -582,9 +661,7 @@ export default function KnowledgePage() {
                         <BookOpen className="w-4 h-4 mr-2" />
                         Читать
                       </Button>
-                      <Button
-                        size="sm"
-                      >
+                      <Button size="sm">
                         <Download className="w-4 h-4 mr-2" />
                         {article.fileSize}
                       </Button>
@@ -603,19 +680,19 @@ export default function KnowledgePage() {
             Расширяем базу знаний вместе
           </h2>
           <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-            У вас есть экспертные знания или полезные материалы? 
-            Поделитесь ими с сообществом профессионалов горнодобывающей отрасли.
+            У вас есть экспертные знания или полезные материалы? Поделитесь ими
+            с сообществом профессионалов горнодобывающей отрасли.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              variant="secondary" 
+            <Button
+              variant="secondary"
               className="bg-white text-blue-600 hover:bg-gray-100"
             >
               <Lightbulb className="w-4 h-4 mr-2" />
               Предложить статью
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="border-blue-400 text-white hover:bg-blue-700"
             >
               <FileText className="w-4 h-4 mr-2" />

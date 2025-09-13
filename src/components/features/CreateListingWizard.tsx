@@ -7,15 +7,15 @@ import { Wizard, useWizard } from 'react-use-wizard';
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { 
-  CheckCircle, 
-  ArrowRight, 
-  ArrowLeft, 
-  FileText, 
-  MapPin, 
+import {
+  CheckCircle,
+  ArrowRight,
+  ArrowLeft,
+  FileText,
+  MapPin,
   Image as ImageIcon,
   Settings,
-  AlertTriangle
+  AlertTriangle,
 } from 'lucide-react';
 
 import { depositApi } from '@/lib/api/deposits';
@@ -25,25 +25,46 @@ import { ImageUpload } from '@/components/ui/image-upload';
 // Validation schemas for each step
 const basicInfoSchema = z.object({
   title: z.string().min(1, 'Название обязательно'),
-  description: z.string().min(10, 'Описание должно содержать минимум 10 символов'),
-  type: z.enum(['MINING_LICENSE', 'EXPLORATION_LICENSE', 'MINERAL_OCCURRENCE'] as const, {
-    errorMap: () => ({ message: 'Выберите тип объявления' }),
-  }),
-  mineral: z.enum(['Нефть', 'Газ', 'Золото', 'Медь', 'Уголь', 'Уран', 'Железо'] as const, {
-    errorMap: () => ({ message: 'Выберите полезное ископаемое' }),
-  }),
+  description: z
+    .string()
+    .min(10, 'Описание должно содержать минимум 10 символов'),
+  type: z.enum(
+    ['MINING_LICENSE', 'EXPLORATION_LICENSE', 'MINERAL_OCCURRENCE'] as const,
+    {
+      errorMap: () => ({ message: 'Выберите тип объявления' }),
+    }
+  ),
+  mineral: z.enum(
+    ['Нефть', 'Газ', 'Золото', 'Медь', 'Уголь', 'Уран', 'Железо'] as const,
+    {
+      errorMap: () => ({ message: 'Выберите полезное ископаемое' }),
+    }
+  ),
   price: z.number().optional(),
 });
 
 const locationSchema = z.object({
-  region: z.enum([
-    'Мангистауская', 'Атырауская', 'Западно-Казахстанская', 'Актюбинская',
-    'Костанайская', 'Акмолинская', 'Павлодарская', 'Карагандинская',
-    'Восточно-Казахстанская', 'Алматинская', 'Жамбылская', 'Туркестанская',
-    'Кызылординская', 'Улытауская',
-  ] as const, {
-    errorMap: () => ({ message: 'Выберите регион' }),
-  }),
+  region: z.enum(
+    [
+      'Мангистауская',
+      'Атырауская',
+      'Западно-Казахстанская',
+      'Актюбинская',
+      'Костанайская',
+      'Акмолинская',
+      'Павлодарская',
+      'Карагандинская',
+      'Восточно-Казахстанская',
+      'Алматинская',
+      'Жамбылская',
+      'Туркестанская',
+      'Кызылординская',
+      'Улытауская',
+    ] as const,
+    {
+      errorMap: () => ({ message: 'Выберите регион' }),
+    }
+  ),
   city: z.string().min(1, 'Город обязателен'),
   area: z.number().min(0.01, 'Площадь должна быть больше 0'),
   coordinates: z.tuple([z.number(), z.number()]).optional(),
@@ -54,12 +75,12 @@ const typeSpecificSchema = z.object({
   licenseSubtype: z.string().optional(),
   licenseNumber: z.string().optional(),
   licenseExpiry: z.string().optional(),
-  
-  // Exploration License  
+
+  // Exploration License
   explorationStage: z.string().optional(),
   explorationStart: z.string().optional(),
   explorationBudget: z.number().optional(),
-  
+
   // Mineral Occurrence
   discoveryDate: z.string().optional(),
   geologicalConfidence: z.string().optional(),
@@ -79,20 +100,36 @@ const formSchema = basicInfoSchema
 type FormData = z.infer<typeof formSchema>;
 
 const REGIONS: RegionType[] = [
-  'Мангистауская', 'Атырауская', 'Западно-Казахстанская', 'Актюбинская',
-  'Костанайская', 'Акмолинская', 'Павлодарская', 'Карагандинская',
-  'Восточно-Казахстанская', 'Алматинская', 'Жамбылская', 'Туркестанская',
-  'Кызылординская', 'Улытауская',
+  'Мангистауская',
+  'Атырауская',
+  'Западно-Казахстанская',
+  'Актюбинская',
+  'Костанайская',
+  'Акмолинская',
+  'Павлодарская',
+  'Карагандинская',
+  'Восточно-Казахстанская',
+  'Алматинская',
+  'Жамбылская',
+  'Туркестанская',
+  'Кызылординская',
+  'Улытауская',
 ];
 
 const MINERALS: MineralType[] = [
-  'Нефть', 'Газ', 'Золото', 'Медь', 'Уголь', 'Уран', 'Железо',
+  'Нефть',
+  'Газ',
+  'Золото',
+  'Медь',
+  'Уголь',
+  'Уран',
+  'Железо',
 ];
 
 // Step components
 const StepIndicator = () => {
   const { activeStep, stepCount } = useWizard();
-  
+
   const steps = [
     { title: 'Основное', icon: FileText },
     { title: 'Местоположение', icon: MapPin },
@@ -107,7 +144,7 @@ const StepIndicator = () => {
           const Icon = step.icon;
           const isActive = index === activeStep;
           const isCompleted = index < activeStep;
-          
+
           return (
             <div key={index} className="flex items-center">
               <div className="flex flex-col items-center">
@@ -116,17 +153,17 @@ const StepIndicator = () => {
                     isCompleted
                       ? 'bg-green-500 border-green-500 text-white'
                       : isActive
-                      ? 'bg-blue-600 border-blue-600 text-white'
-                      : 'bg-white border-gray-300 text-gray-400'
+                        ? 'bg-blue-600 border-blue-600 text-white'
+                        : 'bg-white border-gray-300 text-gray-400'
                   }`}
                   whileHover={{ scale: 1.05 }}
                   animate={{
                     scale: isActive ? [1, 1.1, 1] : 1,
                     rotate: isCompleted ? [0, 360] : 0,
                   }}
-                  transition={{ 
+                  transition={{
                     scale: { repeat: isActive ? Infinity : 0, duration: 2 },
-                    rotate: { duration: 0.5 }
+                    rotate: { duration: 0.5 },
                   }}
                 >
                   {isCompleted ? (
@@ -135,37 +172,52 @@ const StepIndicator = () => {
                     <Icon className="w-6 h-6" />
                   )}
                 </motion.div>
-                <span className={`text-sm mt-2 font-medium ${
-                  isActive ? 'text-blue-600' : isCompleted ? 'text-green-600' : 'text-gray-500'
-                }`}>
+                <span
+                  className={`text-sm mt-2 font-medium ${
+                    isActive
+                      ? 'text-blue-600'
+                      : isCompleted
+                        ? 'text-green-600'
+                        : 'text-gray-500'
+                  }`}
+                >
                   {step.title}
                 </span>
               </div>
               {index < steps.length - 1 && (
-                <div className={`flex-1 h-0.5 mx-4 ${
-                  isCompleted ? 'bg-green-500' : 'bg-gray-200'
-                } transition-colors duration-300`} />
+                <div
+                  className={`flex-1 h-0.5 mx-4 ${
+                    isCompleted ? 'bg-green-500' : 'bg-gray-200'
+                  } transition-colors duration-300`}
+                />
               )}
             </div>
           );
         })}
       </div>
-      
+
       {/* Progress bar */}
       <div className="mt-6 bg-gray-200 rounded-full h-2 overflow-hidden">
         <motion.div
           className="h-full bg-gradient-to-r from-blue-500 to-green-500"
           initial={{ width: 0 }}
           animate={{ width: `${((activeStep + 1) / stepCount) * 100}%` }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
         />
       </div>
     </div>
   );
 };
 
-const StepNavigation = ({ onSubmit, isLoading }: { onSubmit: () => void, isLoading: boolean }) => {
-  const { previousStep, nextStep, activeStep, isFirstStep, isLastStep } = useWizard();
+const StepNavigation = ({
+  onSubmit,
+  isLoading,
+}: {
+  onSubmit: () => void;
+  isLoading: boolean;
+}) => {
+  const { previousStep, nextStep, activeStep, isFirstStep, isLastStep } =
+    useWizard();
 
   return (
     <div className="flex justify-between items-center pt-8 border-t border-gray-200">
@@ -190,16 +242,26 @@ const StepNavigation = ({ onSubmit, isLoading }: { onSubmit: () => void, isLoadi
       </div>
 
       <motion.button
-        type={isLastStep ? "submit" : "button"}
+        type={isLastStep ? 'submit' : 'button'}
         onClick={isLastStep ? onSubmit : nextStep}
         disabled={isLoading}
         className={`flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all ${
           isLoading ? 'opacity-50 cursor-not-allowed' : ''
         }`}
-        whileHover={!isLoading ? { scale: 1.02, boxShadow: "0 10px 25px rgba(59, 130, 246, 0.3)" } : {}}
+        whileHover={
+          !isLoading
+            ? { scale: 1.02, boxShadow: '0 10px 25px rgba(59, 130, 246, 0.3)' }
+            : {}
+        }
         whileTap={!isLoading ? { scale: 0.98 } : {}}
       >
-        <span>{isLastStep ? (isLoading ? 'Создание...' : 'Создать объявление') : 'Далее'}</span>
+        <span>
+          {isLastStep
+            ? isLoading
+              ? 'Создание...'
+              : 'Создать объявление'
+            : 'Далее'}
+        </span>
         {!isLastStep && <ArrowRight className="w-4 h-4" />}
       </motion.button>
     </div>
@@ -208,7 +270,10 @@ const StepNavigation = ({ onSubmit, isLoading }: { onSubmit: () => void, isLoadi
 
 // Step 2: Location Information
 const LocationStep = () => {
-  const { formState: { errors }, register } = useFormContext<FormData>();
+  const {
+    formState: { errors },
+    register,
+  } = useFormContext<FormData>();
 
   return (
     <motion.div
@@ -247,7 +312,7 @@ const LocationStep = () => {
               ))}
             </select>
             {errors.region && (
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-red-500 text-sm mt-2 flex items-center space-x-1"
@@ -271,7 +336,7 @@ const LocationStep = () => {
               placeholder="Город или населенный пункт"
             />
             {errors.city && (
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-red-500 text-sm mt-2 flex items-center space-x-1"
@@ -298,7 +363,7 @@ const LocationStep = () => {
             step="0.01"
           />
           {errors.area && (
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-red-500 text-sm mt-2 flex items-center space-x-1"
@@ -310,7 +375,9 @@ const LocationStep = () => {
         </div>
 
         <div className="bg-blue-50 p-4 rounded-lg">
-          <h4 className="text-sm font-medium text-blue-900 mb-3">Координаты (необязательно)</h4>
+          <h4 className="text-sm font-medium text-blue-900 mb-3">
+            Координаты (необязательно)
+          </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-medium text-blue-700 mb-1">
@@ -343,9 +410,13 @@ const LocationStep = () => {
   );
 };
 
-// Step 3: Type-specific Information  
+// Step 3: Type-specific Information
 const TypeSpecificStep = () => {
-  const { formState: { errors }, register, watch } = useFormContext<FormData>();
+  const {
+    formState: { errors },
+    register,
+    watch,
+  } = useFormContext<FormData>();
   const watchedType = watch('type');
 
   const renderTypeSpecificFields = () => {
@@ -381,7 +452,9 @@ const TypeSpecificStep = () => {
                   placeholder="Например: KZ1234567890"
                 />
                 {errors.licenseNumber && (
-                  <p className="text-red-500 text-sm mt-1">{errors.licenseNumber.message}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.licenseNumber.message}
+                  </p>
                 )}
               </div>
 
@@ -397,7 +470,9 @@ const TypeSpecificStep = () => {
                   }`}
                 />
                 {errors.licenseExpiry && (
-                  <p className="text-red-500 text-sm mt-1">{errors.licenseExpiry.message}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.licenseExpiry.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -415,16 +490,22 @@ const TypeSpecificStep = () => {
                 <select
                   {...register('explorationStage')}
                   className={`w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.explorationStage ? 'border-red-500' : 'border-gray-300'
+                    errors.explorationStage
+                      ? 'border-red-500'
+                      : 'border-gray-300'
                   }`}
                 >
                   <option value="">Выберите стадию</option>
-                  <option value="Предварительная разведка">Предварительная разведка</option>
+                  <option value="Предварительная разведка">
+                    Предварительная разведка
+                  </option>
                   <option value="Детальная разведка">Детальная разведка</option>
                   <option value="Доразведка">Доразведка</option>
                 </select>
                 {errors.explorationStage && (
-                  <p className="text-red-500 text-sm mt-1">{errors.explorationStage.message}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.explorationStage.message}
+                  </p>
                 )}
               </div>
 
@@ -436,12 +517,16 @@ const TypeSpecificStep = () => {
                   type="text"
                   {...register('explorationStart')}
                   className={`w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.explorationStart ? 'border-red-500' : 'border-gray-300'
+                    errors.explorationStart
+                      ? 'border-red-500'
+                      : 'border-gray-300'
                   }`}
                   placeholder="Например: 3 года"
                 />
                 {errors.explorationStart && (
-                  <p className="text-red-500 text-sm mt-1">{errors.explorationStart.message}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.explorationStart.message}
+                  </p>
                 )}
               </div>
 
@@ -477,7 +562,9 @@ const TypeSpecificStep = () => {
                   }`}
                 />
                 {errors.discoveryDate && (
-                  <p className="text-red-500 text-sm mt-1">{errors.discoveryDate.message}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.discoveryDate.message}
+                  </p>
                 )}
               </div>
 
@@ -488,7 +575,9 @@ const TypeSpecificStep = () => {
                 <select
                   {...register('geologicalConfidence')}
                   className={`w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.geologicalConfidence ? 'border-red-500' : 'border-gray-300'
+                    errors.geologicalConfidence
+                      ? 'border-red-500'
+                      : 'border-gray-300'
                   }`}
                 >
                   <option value="">Выберите уровень</option>
@@ -497,7 +586,9 @@ const TypeSpecificStep = () => {
                   <option value="Низкая">Низкая</option>
                 </select>
                 {errors.geologicalConfidence && (
-                  <p className="text-red-500 text-sm mt-1">{errors.geologicalConfidence.message}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.geologicalConfidence.message}
+                  </p>
                 )}
               </div>
 
@@ -576,9 +667,10 @@ const ImagesStep = () => {
           <span>Загрузка изображений</span>
         </h4>
         <p className="text-sm text-blue-700 mb-4">
-          Хорошие изображения повышают интерес к объявлению. Рекомендуется добавить минимум 3-5 фотографий.
+          Хорошие изображения повышают интерес к объявлению. Рекомендуется
+          добавить минимум 3-5 фотографий.
         </p>
-        
+
         <ImageUpload
           value={images}
           onChange={(newImages) => setValue('images', newImages)}
@@ -612,7 +704,11 @@ const ImagesStep = () => {
 
 // Step 1: Basic Information
 const BasicInfoStep = () => {
-  const { formState: { errors }, register, watch } = useFormContext<FormData>();
+  const {
+    formState: { errors },
+    register,
+    watch,
+  } = useFormContext<FormData>();
   const watchedType = watch('type');
 
   return (
@@ -646,7 +742,7 @@ const BasicInfoStep = () => {
             placeholder="Например: Месторождение нефти в Мангистауской области"
           />
           {errors.title && (
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-red-500 text-sm mt-2 flex items-center space-x-1"
@@ -665,12 +761,14 @@ const BasicInfoStep = () => {
             {...register('description')}
             rows={4}
             className={`w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none ${
-              errors.description ? 'border-red-500 bg-red-50' : 'border-gray-300'
+              errors.description
+                ? 'border-red-500 bg-red-50'
+                : 'border-gray-300'
             }`}
             placeholder="Подробное описание месторождения, его характеристик и особенностей"
           />
           {errors.description && (
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-red-500 text-sm mt-2 flex items-center space-x-1"
@@ -698,7 +796,7 @@ const BasicInfoStep = () => {
               <option value="MINERAL_OCCURRENCE">Рудопроявление</option>
             </select>
             {errors.type && (
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-red-500 text-sm mt-2 flex items-center space-x-1"
@@ -727,7 +825,7 @@ const BasicInfoStep = () => {
               ))}
             </select>
             {errors.mineral && (
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-red-500 text-sm mt-2 flex items-center space-x-1"
@@ -763,7 +861,9 @@ interface CreateListingWizardProps {
   onCancel: () => void;
 }
 
-export default function CreateListingWizard({ onCancel }: CreateListingWizardProps) {
+export default function CreateListingWizard({
+  onCancel,
+}: CreateListingWizardProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -808,7 +908,9 @@ export default function CreateListingWizard({ onCancel }: CreateListingWizardPro
         ...(data.type === 'MINING_LICENSE' && {
           licenseSubtype: data.licenseSubtype || 'Добычная',
           licenseNumber: data.licenseNumber,
-          licenseExpiry: data.licenseExpiry ? new Date(data.licenseExpiry) : null,
+          licenseExpiry: data.licenseExpiry
+            ? new Date(data.licenseExpiry)
+            : null,
         }),
 
         ...(data.type === 'EXPLORATION_LICENSE' && {
@@ -818,7 +920,9 @@ export default function CreateListingWizard({ onCancel }: CreateListingWizardPro
         }),
 
         ...(data.type === 'MINERAL_OCCURRENCE' && {
-          discoveryDate: data.discoveryDate ? new Date(data.discoveryDate) : null,
+          discoveryDate: data.discoveryDate
+            ? new Date(data.discoveryDate)
+            : null,
           geologicalConfidence: data.geologicalConfidence,
           estimatedReserves: data.estimatedReserves,
         }),
@@ -851,7 +955,7 @@ export default function CreateListingWizard({ onCancel }: CreateListingWizardPro
           {/* Content */}
           <div className="px-8 py-8">
             <StepIndicator />
-            
+
             <Wizard>
               <BasicInfoStep />
               <LocationStep />
@@ -859,7 +963,7 @@ export default function CreateListingWizard({ onCancel }: CreateListingWizardPro
               <ImagesStep />
             </Wizard>
 
-            <StepNavigation 
+            <StepNavigation
               onSubmit={methods.handleSubmit(onSubmit)}
               isLoading={isLoading}
             />

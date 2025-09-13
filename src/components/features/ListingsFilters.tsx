@@ -5,19 +5,25 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 import { REGIONS, MINERALS } from '@/lib/types/listing';
 import AdvancedSearch from './AdvancedSearch';
-import { 
-  Filter, 
-  X, 
-  ChevronDown, 
+import {
+  Filter,
+  X,
+  ChevronDown,
   ChevronUp,
   SlidersHorizontal,
   MapPin,
   Gem,
   DollarSign,
   Shield,
-  TrendingUp
+  TrendingUp,
 } from 'lucide-react';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -30,14 +36,20 @@ const getResultCounts = () => ({
     EXPLORATION_LICENSE: 23,
     MINERAL_OCCURRENCE: 12,
   },
-  regions: REGIONS.reduce((acc, region) => {
-    acc[region] = Math.floor(Math.random() * 20) + 1;
-    return acc;
-  }, {} as Record<string, number>),
-  minerals: MINERALS.reduce((acc, mineral) => {
-    acc[mineral] = Math.floor(Math.random() * 15) + 1;
-    return acc;
-  }, {} as Record<string, number>),
+  regions: REGIONS.reduce(
+    (acc, region) => {
+      acc[region] = Math.floor(Math.random() * 20) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  ),
+  minerals: MINERALS.reduce(
+    (acc, mineral) => {
+      acc[mineral] = Math.floor(Math.random() * 15) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  ),
 });
 
 function FiltersContent() {
@@ -124,7 +136,7 @@ function FiltersContent() {
   };
 
   const toggleSection = (section: string) => {
-    setExpandedSections(prev => ({
+    setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
     }));
@@ -218,12 +230,18 @@ function FiltersContent() {
                     name="type"
                     value="MINING_LICENSE"
                     checked={currentFilters.type === 'MINING_LICENSE'}
-                    onChange={() => handleFilterChange('type', 'MINING_LICENSE')}
+                    onChange={() =>
+                      handleFilterChange('type', 'MINING_LICENSE')
+                    }
                     className="mr-3 text-blue-600 focus:ring-blue-500"
                   />
-                  <span className="text-sm text-gray-700">Лицензии на добычу</span>
+                  <span className="text-sm text-gray-700">
+                    Лицензии на добычу
+                  </span>
                 </div>
-                <span className="text-xs text-gray-500">{resultCounts.types.MINING_LICENSE}</span>
+                <span className="text-xs text-gray-500">
+                  {resultCounts.types.MINING_LICENSE}
+                </span>
               </label>
               <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
                 <div className="flex items-center">
@@ -232,12 +250,18 @@ function FiltersContent() {
                     name="type"
                     value="EXPLORATION_LICENSE"
                     checked={currentFilters.type === 'EXPLORATION_LICENSE'}
-                    onChange={() => handleFilterChange('type', 'EXPLORATION_LICENSE')}
+                    onChange={() =>
+                      handleFilterChange('type', 'EXPLORATION_LICENSE')
+                    }
                     className="mr-3 text-blue-600 focus:ring-blue-500"
                   />
-                  <span className="text-sm text-gray-700">Лицензии на разведку</span>
+                  <span className="text-sm text-gray-700">
+                    Лицензии на разведку
+                  </span>
                 </div>
-                <span className="text-xs text-gray-500">{resultCounts.types.EXPLORATION_LICENSE}</span>
+                <span className="text-xs text-gray-500">
+                  {resultCounts.types.EXPLORATION_LICENSE}
+                </span>
               </label>
               <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
                 <div className="flex items-center">
@@ -246,12 +270,16 @@ function FiltersContent() {
                     name="type"
                     value="MINERAL_OCCURRENCE"
                     checked={currentFilters.type === 'MINERAL_OCCURRENCE'}
-                    onChange={() => handleFilterChange('type', 'MINERAL_OCCURRENCE')}
+                    onChange={() =>
+                      handleFilterChange('type', 'MINERAL_OCCURRENCE')
+                    }
                     className="mr-3 text-blue-600 focus:ring-blue-500"
                   />
                   <span className="text-sm text-gray-700">Рудопроявления</span>
                 </div>
-                <span className="text-xs text-gray-500">{resultCounts.types.MINERAL_OCCURRENCE}</span>
+                <span className="text-xs text-gray-500">
+                  {resultCounts.types.MINERAL_OCCURRENCE}
+                </span>
               </label>
             </div>
           )}
@@ -277,7 +305,9 @@ function FiltersContent() {
             <div className="mt-4 px-2">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm text-gray-600">{priceRange[0]}</span>
-                <span className="text-sm text-gray-600">{priceRange[1] === 10000 ? '10000+' : priceRange[1]}</span>
+                <span className="text-sm text-gray-600">
+                  {priceRange[1] === 10000 ? '10000+' : priceRange[1]}
+                </span>
               </div>
               <Slider
                 value={priceRange}
@@ -290,7 +320,9 @@ function FiltersContent() {
                 <input
                   type="number"
                   value={priceRange[0]}
-                  onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
+                  onChange={(e) =>
+                    setPriceRange([Number(e.target.value), priceRange[1]])
+                  }
                   className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Мин"
                 />
@@ -298,7 +330,9 @@ function FiltersContent() {
                 <input
                   type="number"
                   value={priceRange[1]}
-                  onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
+                  onChange={(e) =>
+                    setPriceRange([priceRange[0], Number(e.target.value)])
+                  }
                   className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Макс"
                 />
@@ -362,7 +396,9 @@ function FiltersContent() {
                     />
                     <span className="text-sm text-gray-700">{region}</span>
                   </div>
-                  <span className="text-xs text-gray-500">{resultCounts.regions[region]}</span>
+                  <span className="text-xs text-gray-500">
+                    {resultCounts.regions[region]}
+                  </span>
                 </label>
               ))}
             </div>
@@ -416,7 +452,9 @@ function FiltersContent() {
                     />
                     <span className="text-sm text-gray-700">{mineral}</span>
                   </div>
-                  <span className="text-xs text-gray-500">{resultCounts.minerals[mineral]}</span>
+                  <span className="text-xs text-gray-500">
+                    {resultCounts.minerals[mineral]}
+                  </span>
                 </label>
               ))}
             </div>
@@ -445,7 +483,9 @@ function FiltersContent() {
                   type="checkbox"
                   className="mr-3 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   checked={currentFilters.verified}
-                  onChange={(e) => handleFilterChange('verified', e.target.checked)}
+                  onChange={(e) =>
+                    handleFilterChange('verified', e.target.checked)
+                  }
                 />
                 <span className="text-sm text-gray-700 flex items-center gap-2">
                   <Shield className="w-4 h-4" />
@@ -492,8 +532,15 @@ function FiltersContent() {
           ].map(({ mineral, icon }) => (
             <Button
               key={mineral}
-              onClick={() => handleFilterChange('mineral', currentFilters.mineral === mineral ? '' : mineral)}
-              variant={currentFilters.mineral === mineral ? 'default' : 'outline'}
+              onClick={() =>
+                handleFilterChange(
+                  'mineral',
+                  currentFilters.mineral === mineral ? '' : mineral
+                )
+              }
+              variant={
+                currentFilters.mineral === mineral ? 'default' : 'outline'
+              }
               size="sm"
               className="text-xs"
             >
@@ -511,8 +558,8 @@ function FiltersContent() {
       <div className="hidden lg:block">
         <div
           className={cn(
-            "bg-white rounded-lg shadow-sm border border-gray-200 p-6 transition-all",
-            isSticky && "sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto"
+            'bg-white rounded-lg shadow-sm border border-gray-200 p-6 transition-all',
+            isSticky && 'sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto'
           )}
         >
           <FilterContent />

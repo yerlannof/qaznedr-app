@@ -17,7 +17,7 @@ import {
   Target,
   Zap,
 } from 'lucide-react';
-import { KazakhstanDeposit } from '@/lib/types/listing';
+import { KazakhstanDeposit, MineralType } from '@/lib/types/listing';
 import { getMineralIcon } from '@/components/icons';
 
 interface RecommendationsProps {

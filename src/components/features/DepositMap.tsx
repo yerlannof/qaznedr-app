@@ -131,6 +131,9 @@ function MapContent({
   const mapRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const MapContainerAny = MapContainer as any;
+  const TileLayerAny = TileLayer as any;
+  const MarkerAny = Marker as any;
+  const PopupAny = Popup as any;
 
   // Reset map view to Kazakhstan
   const resetView = () => {
@@ -241,7 +244,7 @@ function MapContent({
           minZoom={5}
           maxZoom={15}
         >
-          <TileLayer
+          <TileLayerAny
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
@@ -256,7 +259,7 @@ function MapContent({
               46.4662 + Math.random() * (87.3599 - 46.4662);
 
             return (
-              <Marker
+              <MarkerAny
                 key={deposit.id}
                 position={[lat, lng]}
                 icon={createCustomIcon(
@@ -267,7 +270,7 @@ function MapContent({
                   click: () => onDepositClick?.(deposit),
                 }}
               >
-                <Popup>
+                <PopupAny>
                   <div className="p-2 max-w-xs">
                     <div className="flex items-start justify-between mb-2">
                       <h3 className="font-semibold text-sm text-gray-900">
@@ -329,8 +332,8 @@ function MapContent({
                       </Button>
                     </div>
                   </div>
-                </Popup>
-              </Marker>
+                </PopupAny>
+              </MarkerAny>
             );
           })}
         </MapContainerAny>

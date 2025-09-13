@@ -2,10 +2,14 @@
 
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
 import ListingsFilters from '@/components/features/ListingsFilters';
 import ListingCard from '@/components/cards/ListingCard';
+import DepositMap from '@/components/features/DepositMap';
+import SkeletonCard from '@/components/ui/SkeletonCard';
+import { LiveActivityIndicator } from '@/components/features/SocialProof';
 import { depositApi } from '@/lib/api/deposits';
 import type {
   KazakhstanDeposit,
@@ -26,6 +30,8 @@ function ListingsContent() {
   const [error, setError] = useState<string | null>(null);
   const [totalCount, setTotalCount] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
+  const [selectedDeposit, setSelectedDeposit] = useState<KazakhstanDeposit | null>(null);
 
   const [_filters, _setFilters] = useState<ListingFilters>({
     region: [],
@@ -151,78 +157,201 @@ function ListingsContent() {
         </div>
       </div>
 
-      {/* Filters */}
+      {/* Main Content with Filters and Results */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <ListingsFilters />
-
-        {/* Результаты и сортировка */}
-        {!loading && !error && (
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <p className="text-gray-600">
-                Показано {deposits.length} из {totalCount} месторождений
-                {currentPage > 1 &&
-                  ` (страница ${currentPage} из ${totalPages})`}
-              </p>
-            </div>
+        <div className="lg:grid lg:grid-cols-4 lg:gap-8">
+          {/* Filters Sidebar */}
+          <div className="lg:col-span-1">
+            <ListingsFilters />
           </div>
-        )}
 
-        {/* Loading State */}
-        {loading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 animate-pulse"
-              >
-                <div className="h-4 bg-gray-200 rounded mb-4"></div>
-                <div className="h-3 bg-gray-200 rounded mb-2"></div>
-                <div className="h-3 bg-gray-200 rounded mb-4 w-2/3"></div>
-                <div className="h-8 bg-gray-200 rounded"></div>
+          {/* Results */}
+          <div className="lg:col-span-3">
+            {/* Results Count and View Options */}
+            {!loading && !error && (
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <p className="text-gray-900 font-medium">
+                    {totalCount} месторождений
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    Показано {deposits.length} результатов
+                    {currentPage > 1 &&
+                      ` (страница ${currentPage} из ${totalPages})`}
+                  </p>
+                </div>
+
+                {/* View Toggle */}
+                <div className="relative flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+                  <motion.button
+                    onClick={() => setViewMode('list')}
+                    className={`relative z-10 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                      viewMode === 'list'
+                        ? 'text-gray-900'
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    📋 Список
+                  </motion.button>
+                  <motion.button
+                    onClick={() => setViewMode('map')}
+                    className={`relative z-10 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                      viewMode === 'map'
+                        ? 'text-gray-900'
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    🗺️ Карта
+                  </motion.button>
+                  
+                  {/* Animated background slider */}
+                  <motion.div
+                    className="absolute top-1 h-8 bg-white shadow-sm rounded-md"
+                    animate={{
+                      x: viewMode === 'list' ? 4 : '100%',
+                      width: viewMode === 'list' ? 78 : 70
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 30
+                    }}
+                    style={{ left: 0 }}
+                  />
+                </div>
               </div>
-            ))}
-          </div>
-        )}
+            )}
 
-        {/* Error State */}
-        {error && (
-          <div className="text-center py-12">
-            <div className="text-red-400 text-6xl mb-4">⚠️</div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
-              Ошибка загрузки
-            </h3>
-            <p className="text-gray-600 mb-4">{error}</p>
-            <button
-              onClick={loadDeposits}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Попробовать снова
-            </button>
-          </div>
-        )}
+            {/* Loading State */}
+            {loading && (
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.1
+                    }
+                  }
+                }}
+              >
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0 }
+                    }}
+                  >
+                    <SkeletonCard />
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
 
-        {/* Listings Grid */}
-        {!loading && !error && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {deposits.map((deposit) => (
-              <ListingCard key={deposit.id} deposit={deposit} />
-            ))}
-          </div>
-        )}
+            {/* Error State */}
+            {error && (
+              <div className="text-center py-12">
+                <div className="text-red-400 text-6xl mb-4">⚠️</div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  Ошибка загрузки
+                </h3>
+                <p className="text-gray-600 mb-4">{error}</p>
+                <button
+                  onClick={loadDeposits}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Попробовать снова
+                </button>
+              </div>
+            )}
 
-        {/* No Results */}
-        {!loading && !error && deposits.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-gray-400 text-6xl mb-4">🔍</div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
-              Месторождения не найдены
-            </h3>
-            <p className="text-gray-600">
-              Попробуйте изменить параметры фильтра
-            </p>
+            {/* Content based on view mode */}
+            {!loading && !error && (
+              <>
+                {viewMode === 'list' ? (
+                  <motion.div 
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      visible: {
+                        transition: {
+                          staggerChildren: 0.1
+                        }
+                      }
+                    }}
+                  >
+                    {deposits.map((deposit, index) => (
+                      <motion.div
+                        key={deposit.id}
+                        variants={{
+                          hidden: { opacity: 0, y: 20 },
+                          visible: { opacity: 1, y: 0 }
+                        }}
+                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                      >
+                        <ListingCard 
+                          deposit={deposit}
+                        />
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                ) : (
+                  <div className="mb-8">
+                    <DepositMap
+                      deposits={deposits}
+                      selectedDeposit={selectedDeposit}
+                      onDepositClick={setSelectedDeposit}
+                      height="600px"
+                      className="rounded-lg shadow-sm border border-gray-200"
+                    />
+                    
+                    {/* Selected Deposit Card */}
+                    {selectedDeposit && (
+                      <div className="mt-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            Выбранное месторождение
+                          </h3>
+                          <button
+                            onClick={() => setSelectedDeposit(null)}
+                            className="text-gray-500 hover:text-gray-700"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                        <div className="max-w-md">
+                          <ListingCard 
+                            deposit={selectedDeposit}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </>
+            )}
+
+            {/* No Results */}
+            {!loading && !error && deposits.length === 0 && (
+              <div className="text-center py-12">
+                <div className="text-gray-400 text-6xl mb-4">🔍</div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  Месторождения не найдены
+                </h3>
+                <p className="text-gray-600">
+                  Попробуйте изменить параметры фильтра
+                </p>
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
         {/* Pagination */}
         {!loading && !error && totalPages > 1 && (
@@ -299,6 +428,9 @@ function ListingsContent() {
           </div>
         )}
       </div>
+      
+      {/* Live Activity Indicator */}
+      <LiveActivityIndicator />
     </div>
   );
 }

@@ -5,13 +5,10 @@ export default createMiddleware({
   locales: ['ru', 'kz', 'en', 'zh'],
   
   // Used when no locale matches
-  defaultLocale: 'ru',
-  
-  // Disable automatic locale detection for now
-  localeDetection: false
+  defaultLocale: 'ru'
 });
 
 export const config = {
   // Match only internationalized pathnames
-  matcher: ['/', '/(ru|kz|en|zh)/:path*']
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };

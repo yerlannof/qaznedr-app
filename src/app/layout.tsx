@@ -67,34 +67,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="//www.google-analytics.com" />
-        <link rel="dns-prefetch" href="//vercel.live" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ErrorBoundary>
-          <ThemeProvider>
-            <SessionProvider>
-              <FavoritesProvider>
-                <Onboarding />
-                <main className="min-h-screen">{children}</main>
-              </FavoritesProvider>
-            </SessionProvider>
-          </ThemeProvider>
-        </ErrorBoundary>
-        <Analytics />
-        <SpeedInsights />
-      </body>
-    </html>
-  );
+  // This root layout should not contain html/body since we have locale-specific layouts
+  return children;
 }

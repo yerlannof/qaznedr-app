@@ -1,6 +1,31 @@
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { Geist, Geist_Mono } from 'next/font/google';
+import Navigation from '@/components/layouts/Navigation';
+import QueryProvider from '@/providers/QueryProvider';
+import { SessionProvider } from '@/components';
+import { FavoritesProvider } from '@/contexts';
+import { ThemeProvider } from '@/providers/ThemeProvider';
+import ErrorBoundary from '@/components/ui/ErrorBoundary';
+import Onboarding from '@/components/features/Onboarding';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import '@/styles/globals.css';
+
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+});
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+  display: 'swap',
+  preload: false,
+});
 
 // Define locales directly to avoid build issues
 const locales = ['ru', 'kz', 'en', 'zh'] as const;
@@ -30,8 +55,42 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        <link rel="dns-prefetch" href="//vercel.live" />
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ErrorBoundary>
+          <ThemeProvider>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              <SessionProvider>
+                <FavoritesProvider>
+                  <QueryProvider>
+                    <Onboarding />
+                    <div className="flex min-h-screen flex-col">
+                      <Navigation />
+                      <main className="flex-1">
+                        {children}
+                      </main>
+                    </div>
+                  </QueryProvider>
+                </FavoritesProvider>
+              </SessionProvider>
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }

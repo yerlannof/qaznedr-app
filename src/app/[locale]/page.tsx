@@ -14,14 +14,21 @@ import {
   Coins,
   Cpu,
 } from 'lucide-react';
-import Navigation from '@/components/layouts/Navigation';
 import Recommendations from '@/components/features/Recommendations';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
+// Force dynamic rendering to avoid SSR issues with animations
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
   // Animated counters for social proof
   const [counts, setCounts] = useState({ listings: 0, companies: 0, deals: 0 });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const targets = { listings: 2345, companies: 128, deals: 89 };
@@ -51,7 +58,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
 
       {/* Hero Section - Simplified and Impactful */}
       <section className="pt-24 pb-16 px-4 bg-gray-50">
@@ -59,15 +65,22 @@ export default function Home() {
           {/* Main Content */}
           <div className="text-center">
             {/* Trust Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-            >
-              <CheckCircle className="w-4 h-4" />
-              <span>Официальная платформа • Защищенные сделки</span>
-            </motion.div>
+            {mounted ? (
+              <motion.div
+                className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+              >
+                <CheckCircle className="w-4 h-4" />
+                <span>Официальная платформа • Защищенные сделки</span>
+              </motion.div>
+            ) : (
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-6">
+                <CheckCircle className="w-4 h-4" />
+                <span>Официальная платформа • Защищенные сделки</span>
+              </div>
+            )}
 
             {/* Headline - Short and Clear */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">

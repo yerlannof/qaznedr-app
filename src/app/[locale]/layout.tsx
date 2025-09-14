@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import Navigation from '@/components/layouts/Navigation';
 import QueryProvider from '@/providers/QueryProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { SessionProvider } from '@/components/features/SessionProvider';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -67,18 +68,20 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ErrorBoundary>
-          <ThemeProvider>
-            <NextIntlClientProvider locale={locale} messages={messages}>
-              <QueryProvider>
-                <div className="flex min-h-screen flex-col">
-                  <Navigation />
-                  <main className="flex-1">
-                    {children}
-                  </main>
-                </div>
-              </QueryProvider>
-            </NextIntlClientProvider>
-          </ThemeProvider>
+          <SessionProvider>
+            <ThemeProvider>
+              <NextIntlClientProvider locale={locale} messages={messages}>
+                <QueryProvider>
+                  <div className="flex min-h-screen flex-col">
+                    <Navigation />
+                    <main className="flex-1">
+                      {children}
+                    </main>
+                  </div>
+                </QueryProvider>
+              </NextIntlClientProvider>
+            </ThemeProvider>
+          </SessionProvider>
         </ErrorBoundary>
         <Analytics />
         <SpeedInsights />

@@ -1,12 +1,17 @@
-// Temporarily disabled to debug SSR issues
-// import createMiddleware from 'next-intl/middleware';
+import createMiddleware from 'next-intl/middleware';
 
-// export default createMiddleware({
-//   locales: ['ru', 'kz', 'en', 'zh'],
-//   defaultLocale: 'ru',
-//   localeDetection: true,
-// });
+export default createMiddleware({
+  // A list of all locales that are supported
+  locales: ['ru', 'kz', 'en', 'zh'],
+  
+  // Used when no locale matches
+  defaultLocale: 'ru',
+  
+  // Disable automatic locale detection for now
+  localeDetection: false
+});
 
 export const config = {
-  matcher: []  // Disable middleware entirely
+  // Match only internationalized pathnames
+  matcher: ['/', '/(ru|kz|en|zh)/:path*']
 };

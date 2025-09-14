@@ -13,7 +13,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   try {
     return {
       locale: finalLocale,
-      messages: (await import(`./messages/${finalLocale}.json`)).default,
+      messages: (await import(`../messages/${finalLocale}.json`)).default,
       timeZone: 'Asia/Almaty',
       now: new Date()
     };
@@ -21,7 +21,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     // Fallback to Russian if there's any error
     return {
       locale: 'ru',
-      messages: (await import(`./messages/ru.json`)).default,
+      messages: (await import(`../messages/ru.json`)).default,
       timeZone: 'Asia/Almaty',
       now: new Date()
     };

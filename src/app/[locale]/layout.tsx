@@ -1,6 +1,7 @@
-import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
+// import { notFound } from 'next/navigation';
+// import { NextIntlClientProvider } from 'next-intl';
 import { Geist, Geist_Mono } from 'next/font/google';
+import ruMessages from '../../../messages/ru.json';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,11 +17,6 @@ const geistMono = Geist_Mono({
   preload: false,
 });
 
-// Temporarily use dynamic rendering to avoid build issues
-// export function generateStaticParams() {
-//   return locales.map((locale) => ({ locale }));
-// }
-
 export default async function LocaleLayout({
   children,
   params,
@@ -28,31 +24,12 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  // const { locale } = await params;
   
-  // Validate locale
-  const locales = ['ru', 'kz', 'en', 'zh'];
-  if (!locales.includes(locale as any)) {
-    notFound();
-  }
-  
-  // Load messages directly
-  let messages;
-  try {
-    messages = (await import(`../../../messages/${locale}.json`)).default;
-  } catch (error) {
-    notFound();
-  }
-
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang="ru" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <NextIntlClientProvider 
-          locale={locale}
-          messages={messages}
-        >
-          {children}
-        </NextIntlClientProvider>
+        {children}
       </body>
     </html>
   );

@@ -143,3 +143,6 @@ export function ThemeToggleDropdown() {
     </div>
   );
 }
+
+// Default export
+export default ThemeToggle;

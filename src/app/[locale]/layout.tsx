@@ -1,6 +1,21 @@
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { locales } from '@/i18n/config';
+import { Geist, Geist_Mono } from 'next/font/google';
+
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+});
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+  display: 'swap',
+  preload: false,
+});
 
 // Temporarily use dynamic rendering to avoid build issues
 // export function generateStaticParams() {
@@ -30,20 +45,15 @@ export default async function LocaleLayout({
   }
 
   return (
-    <NextIntlClientProvider 
-      locale={locale}
-      messages={messages}
-    >
-      <div style={{ padding: '20px', fontFamily: 'system-ui' }}>
-        <h1>QAZNEDR.KZ - {locale.toUpperCase()}</h1>
-        <nav style={{ marginBottom: '20px' }}>
-          <a href="/ru" style={{ marginRight: '10px' }}>RU</a>
-          <a href="/kz" style={{ marginRight: '10px' }}>KZ</a>
-          <a href="/en" style={{ marginRight: '10px' }}>EN</a>
-          <a href="/zh">ZH</a>
-        </nav>
-        <main>{children}</main>
-      </div>
-    </NextIntlClientProvider>
+    <html lang={locale} suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <NextIntlClientProvider 
+          locale={locale}
+          messages={messages}
+        >
+          {children}
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }

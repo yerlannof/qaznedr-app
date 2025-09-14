@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Navigation from '@/components/layouts/Navigation';
+import PriceTrendAnalytics from '@/components/features/PriceTrendAnalytics';
 import {
   kazakhstanDeposits,
   getDepositStats,
@@ -9,7 +10,7 @@ import {
 import { REGIONS, MINERALS } from '@/lib/types/listing';
 
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('analytics');
 
   const stats = getDepositStats();
 
@@ -96,7 +97,8 @@ export default function DashboardPage() {
   };
 
   const tabs = [
-    { id: 'overview', name: 'Обзор', icon: '📊' },
+    { id: 'analytics', name: 'Аналитика цен', icon: '📊' },
+    { id: 'overview', name: 'Обзор', icon: '📈' },
     { id: 'regions', name: 'По регионам', icon: '🗺️' },
     { id: 'minerals', name: 'По минералам', icon: '💎' },
     { id: 'trends', name: 'Тренды', icon: '📈' },
@@ -140,6 +142,11 @@ export default function DashboardPage() {
             </div>
 
             <div className="p-6">
+              {/* Analytics Tab */}
+              {activeTab === 'analytics' && (
+                <PriceTrendAnalytics />
+              )}
+
               {/* Overview Tab */}
               {activeTab === 'overview' && (
                 <div className="space-y-8">

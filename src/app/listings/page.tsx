@@ -5,6 +5,7 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import ListingsFilters from '@/components/features/ListingsFilters';
 import ListingCard from '@/components/cards/ListingCard';
 import DepositMap from '@/components/features/DepositMap';

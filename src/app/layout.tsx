@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { SessionProvider, ThemeProvider } from '@/components';
+import { SessionProvider } from '@/components';
 import { FavoritesProvider } from '@/contexts';
-import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { ThemeProvider } from '@/providers/ThemeProvider';
+import ErrorBoundary from '@/components/ui/ErrorBoundary';
+import Onboarding from '@/components/features/Onboarding';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import '@/styles/globals.css';
@@ -84,6 +86,7 @@ export default function RootLayout({
           <ThemeProvider>
             <SessionProvider>
               <FavoritesProvider>
+                <Onboarding />
                 <main className="min-h-screen">{children}</main>
               </FavoritesProvider>
             </SessionProvider>

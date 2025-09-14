@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Geist, Geist_Mono } from 'next/font/google';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import QueryProvider from '@/providers/QueryProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { SessionProvider } from '@/components/features/SessionProvider';
@@ -75,7 +75,7 @@ export default async function LocaleLayout({
                 <NextIntlClientProvider locale={locale} messages={messages}>
                   <QueryProvider>
                     <div className="flex min-h-screen flex-col">
-                      <Navigation />
+                      <NavigationSimple />
                       <main className="flex-1">
                         {children}
                       </main>

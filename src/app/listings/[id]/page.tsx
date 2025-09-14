@@ -7,9 +7,11 @@ import Navigation from '@/components/layouts/Navigation';
 import MiningLicenseDetails from '@/components/detail-sections/MiningLicenseDetails';
 import ExplorationLicenseDetails from '@/components/detail-sections/ExplorationLicenseDetails';
 import MineralOccurrenceDetails from '@/components/detail-sections/MineralOccurrenceDetails';
+import SocialShare from '@/components/features/SocialShare';
 import { depositApi } from '@/lib/api/deposits';
 import { favoritesApi } from '@/lib/api/favorites';
 import type { KazakhstanDeposit } from '@/lib/types/listing';
+import { Bookmark, Heart, MapPin, Calendar, Eye, FileText, AlertTriangle, Phone, MessageSquare } from 'lucide-react';
 
 export default function DepositDetailPage() {
   const params = useParams();
@@ -99,7 +101,7 @@ export default function DepositDetailPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-6xl mb-4">❌</div>
+          <AlertTriangle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
             {error || 'Объявление не найдено'}
           </h1>
@@ -136,11 +138,11 @@ export default function DepositDetailPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'ACTIVE':
-        return 'bg-green-100 text-green-800';
+        return 'bg-blue-100 text-blue-800';
       case 'PENDING':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-gray-100 text-gray-700';
       case 'SOLD':
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-200 text-gray-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -159,26 +161,6 @@ export default function DepositDetailPage() {
     }
   };
 
-  const getMineralIcon = (mineral: string) => {
-    switch (mineral) {
-      case 'Нефть':
-        return '🛢️';
-      case 'Газ':
-        return '⛽';
-      case 'Золото':
-        return '🥇';
-      case 'Медь':
-        return '🔶';
-      case 'Уголь':
-        return '⚫';
-      case 'Уран':
-        return '☢️';
-      case 'Железо':
-        return '🔩';
-      default:
-        return '⛏️';
-    }
-  };
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -233,10 +215,7 @@ export default function DepositDetailPage() {
             {/* Header */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center space-x-4">
-                  <div className="text-4xl">
-                    {getMineralIcon(deposit.mineral)}
-                  </div>
+                <div>
                   <div>
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">
                       {deposit.title}
@@ -253,8 +232,8 @@ export default function DepositDetailPage() {
                     {getStatusText(deposit.status)}
                   </span>
                   {deposit.verified && (
-                    <span className="bg-green-600 text-white px-3 py-1 rounded-md text-sm font-medium">
-                      ✓ Проверено
+                    <span className="bg-blue-600 text-white px-3 py-1 rounded-md text-sm font-medium">
+                      Проверено
                     </span>
                   )}
                   {deposit.featured && (
@@ -265,8 +244,15 @@ export default function DepositDetailPage() {
                 </div>
               </div>
 
-              <div className="text-4xl font-bold text-blue-600 mb-4">
-                {formatPrice(deposit.price)}
+              <div className="flex items-center justify-between mb-4">
+                <div className="text-4xl font-bold text-blue-600">
+                  {formatPrice(deposit.price)}
+                </div>
+                <SocialShare 
+                  url={`/listings/${deposit.id}`}
+                  title={deposit.title}
+                  description={deposit.description}
+                />
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
@@ -343,7 +329,7 @@ export default function DepositDetailPage() {
                 </div>
                 <div className="bg-gray-100 rounded-lg h-48 flex items-center justify-center">
                   <div className="text-center text-gray-500">
-                    <div className="text-4xl mb-2">🗺️</div>
+                    <MapPin className="w-8 h-8 mx-auto mb-2" />
                     <p>Интерактивная карта</p>
                     <p className="text-sm">(в разработке)</p>
                   </div>
@@ -364,7 +350,7 @@ export default function DepositDetailPage() {
                       className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
                     >
                       <div className="flex items-center space-x-3">
-                        <div className="text-2xl">📄</div>
+                        <FileText className="w-5 h-5 text-gray-600" />
                         <span className="font-medium text-gray-900">{doc}</span>
                       </div>
                       <button className="text-blue-600 hover:text-blue-700 font-medium">
@@ -393,8 +379,9 @@ export default function DepositDetailPage() {
                   >
                     Отправить сообщение
                   </button>
-                  <button className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors">
-                    📞 Позвонить
+                  <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    Позвонить
                   </button>
                   <button
                     onClick={handleFavoriteToggle}
@@ -405,11 +392,19 @@ export default function DepositDetailPage() {
                         : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                     } ${favoriteLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
-                    {favoriteLoading
-                      ? '⏳ Загрузка...'
-                      : isFavorite
-                        ? '❤️ Удалить из избранного'
-                        : '💾 Добавить в избранное'}
+                    {favoriteLoading ? (
+                      <span>Загрузка...</span>
+                    ) : isFavorite ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <Heart className="w-4 h-4 fill-current" />
+                        Удалить из избранного
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        <Bookmark className="w-4 h-4" />
+                        Добавить в избранное
+                      </span>
+                    )}
                   </button>
                 </div>
               ) : (
@@ -536,14 +531,14 @@ export default function DepositDetailPage() {
             </div>
 
             {/* Warning */}
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
               <div className="flex items-start space-x-3">
-                <div className="text-yellow-600 text-xl">⚠️</div>
+                <AlertTriangle className="w-5 h-5 text-gray-600 mt-0.5" />
                 <div>
-                  <h4 className="font-medium text-yellow-800 mb-1">
+                  <h4 className="font-medium text-gray-800 mb-1">
                     Важное предупреждение
                   </h4>
-                  <p className="text-yellow-700 text-sm">
+                  <p className="text-gray-700 text-sm">
                     Проверяйте все документы и лицензии перед совершением
                     сделки. QAZNEDR.KZ не несет ответственности за достоверность
                     информации.

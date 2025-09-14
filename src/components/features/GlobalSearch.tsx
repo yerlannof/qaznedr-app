@@ -185,8 +185,14 @@ export function GlobalSearch() {
         </kbd>
       </button>
 
-      {/* Search dialog */}
-      <CommandDialog open={open} onOpenChange={setOpen} modal={true}>
+      {/* Search dialog - Only render when open */}
+      {open && (
+        <CommandDialog 
+          open={open} 
+          onOpenChange={setOpen}
+          title="Поиск" 
+          description="Найдите месторождения, компании и услуги"
+        >
         <CommandInput
           placeholder="Поиск месторождений, компаний, услуг..."
           value={searchQuery}
@@ -245,6 +251,7 @@ export function GlobalSearch() {
           </CommandGroup>
         </CommandList>
       </CommandDialog>
+      )}
     </>
   );
 }

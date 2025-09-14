@@ -30,11 +30,12 @@ function Command({
 }
 
 function CommandDialog({
-  title = 'Command Palette',
-  description = 'Search for a command to run...',
+  title,
+  description,
   children,
   className,
   showCloseButton = true,
+  open = false,
   ...props
 }: React.ComponentProps<typeof Dialog> & {
   title?: string;
@@ -42,12 +43,17 @@ function CommandDialog({
   className?: string;
   showCloseButton?: boolean;
 }) {
+  // Don't render anything if dialog is not open
+  if (!open) return null;
+  
   return (
-    <Dialog {...props}>
-      <DialogHeader className="sr-only">
-        <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>{description}</DialogDescription>
-      </DialogHeader>
+    <Dialog open={open} {...props}>
+      {title && description && (
+        <DialogHeader className="sr-only">
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
+      )}
       <DialogContent
         className={cn('overflow-hidden p-0', className)}
         showCloseButton={showCloseButton}

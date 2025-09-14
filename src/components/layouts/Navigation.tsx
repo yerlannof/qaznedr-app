@@ -15,7 +15,7 @@ import {
   Briefcase,
   Plus,
 } from 'lucide-react';
-import { GlobalSearch } from '@/components/features/GlobalSearch';
+// import { GlobalSearch } from '@/components/features/GlobalSearch'; // Temporarily disabled
 import ThemeToggleNew from '@/components/ui/ThemeToggleNew';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcherNew';
 import {
@@ -90,8 +90,8 @@ export default function Navigation() {
 
             {/* Desktop Navigation with Search */}
             <div className="hidden md:flex items-center space-x-4">
-              {/* Global Search */}
-              <GlobalSearch />
+              {/* Global Search - Temporarily disabled due to rendering issue */}
+              {/* <GlobalSearch /> */}
 
               {/* Navigation Links */}
               <div className="flex items-center space-x-1">
@@ -188,10 +188,10 @@ export default function Navigation() {
                   </SheetHeader>
 
                   <div className="flex flex-col h-full">
-                    {/* Mobile Search */}
-                    <div className="px-6 py-4 border-b">
+                    {/* Mobile Search - Temporarily disabled due to rendering issue */}
+                    {/* <div className="px-6 py-4 border-b">
                       <GlobalSearch />
-                    </div>
+                    </div> */}
 
                     {/* Navigation Links */}
                     <div className="flex-1 overflow-y-auto py-4">

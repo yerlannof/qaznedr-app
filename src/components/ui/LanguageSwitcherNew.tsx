@@ -41,7 +41,13 @@ export default function LanguageSwitcher({ currentLocale, className = '' }: Lang
 
     // Replace the locale in the current path
     const segments = pathname.split('/');
-    segments[1] = locale;
+    // Check if first segment is a locale
+    if (segments[1] && locales.includes(segments[1] as Locale)) {
+      segments[1] = locale;
+    } else {
+      // If no locale in path, add it
+      segments.splice(1, 0, locale);
+    }
     const newPath = segments.join('/') || `/${locale}`;
     
     router.push(newPath);

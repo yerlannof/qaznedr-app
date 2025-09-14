@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function RootPage() {
   return (
     <html>
@@ -9,9 +11,15 @@ export default function RootPage() {
           <br />
           <h2>Test Links:</h2>
           <ul>
-            <li><a href="/debug">Debug Page</a></li>
-            <li><a href="/ru">Russian Version (currently disabled)</a></li>
-            <li><a href="/en">English Version (currently disabled)</a></li>
+            <li>
+              <Link href="/debug">Debug Page</Link>
+            </li>
+            <li>
+              <Link href="/ru">Russian Version (currently disabled)</Link>
+            </li>
+            <li>
+              <Link href="/en">English Version (currently disabled)</Link>
+            </li>
           </ul>
         </div>
       </body>

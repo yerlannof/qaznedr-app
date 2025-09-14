@@ -20,7 +20,8 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "@next/next/no-html-link-for-pages": "warn"
   },
   "env": {
     "browser": true,

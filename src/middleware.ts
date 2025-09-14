@@ -1,8 +1,8 @@
 import createMiddleware from 'next-intl/middleware';
 
 export default createMiddleware({
-  // A list of all locales that are supported
-  locales: ['ru', 'kz', 'en', 'zh'],
+  // Temporarily use only Russian locale
+  locales: ['ru'],
   
   // Used when no locale matches
   defaultLocale: 'ru'

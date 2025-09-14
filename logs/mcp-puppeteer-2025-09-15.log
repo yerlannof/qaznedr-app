@@ -1,0 +1,1 @@
+{"arguments":{},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-15 00:21:51.126","tool":"puppeteer_connect_active_tab"}

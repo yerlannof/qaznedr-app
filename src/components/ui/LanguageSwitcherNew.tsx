@@ -4,7 +4,15 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, Check, ChevronDown } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
-import { locales, localeNames, type Locale } from '@/i18n/config';
+
+type Locale = 'ru' | 'kz' | 'en' | 'zh';
+const locales: Locale[] = ['ru', 'kz', 'en', 'zh'];
+const localeNames: Record<Locale, string> = {
+  ru: 'Русский',
+  kz: 'Қазақша',
+  en: 'English',
+  zh: '中文'
+};
 
 interface LanguageSwitcherProps {
   currentLocale: Locale;

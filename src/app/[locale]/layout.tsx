@@ -28,21 +28,17 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <div style={{ padding: '20px', fontFamily: 'system-ui' }}>
-            <h1>QAZNEDR.KZ - {locale.toUpperCase()}</h1>
-            <nav style={{ marginBottom: '20px' }}>
-              <a href="/ru" style={{ marginRight: '10px' }}>RU</a>
-              <a href="/kz" style={{ marginRight: '10px' }}>KZ</a>
-              <a href="/en" style={{ marginRight: '10px' }}>EN</a>
-              <a href="/zh">ZH</a>
-            </nav>
-            <main>{children}</main>
-          </div>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <div style={{ padding: '20px', fontFamily: 'system-ui' }}>
+        <h1>QAZNEDR.KZ - {locale.toUpperCase()}</h1>
+        <nav style={{ marginBottom: '20px' }}>
+          <a href="/ru" style={{ marginRight: '10px' }}>RU</a>
+          <a href="/kz" style={{ marginRight: '10px' }}>KZ</a>
+          <a href="/en" style={{ marginRight: '10px' }}>EN</a>
+          <a href="/zh">ZH</a>
+        </nav>
+        <main>{children}</main>
+      </div>
+    </NextIntlClientProvider>
   );
 }

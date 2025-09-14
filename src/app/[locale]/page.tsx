@@ -1,3 +1,10 @@
+// import { locales } from '@/i18n/config';
+
+// Temporarily use dynamic rendering to avoid build issues  
+// export async function generateStaticParams() {
+//   return locales.map((locale) => ({ locale }));
+// }
+
 export default function Home() {
   return (
     <div>

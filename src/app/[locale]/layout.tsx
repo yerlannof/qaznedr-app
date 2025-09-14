@@ -1,8 +1,11 @@
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import { NextIntlClientProvider } from 'next-intl';
+import { locales } from '@/i18n/config';
 
-const locales = ['ru', 'kz', 'en', 'zh'] as const;
+// Temporarily use dynamic rendering to avoid build issues
+// export function generateStaticParams() {
+//   return locales.map((locale) => ({ locale }));
+// }
 
 export default async function LocaleLayout({
   children,
@@ -13,22 +16,24 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   
-  // Ensure the locale is valid
+  // Validate locale
   if (!locales.includes(locale as any)) {
     notFound();
   }
-
-  // Get messages for the locale
+  
+  // Load messages directly
   let messages;
   try {
-    messages = await getMessages({ locale });
+    messages = (await import(`../../../messages/${locale}.json`)).default;
   } catch (error) {
-    console.error('Error loading messages for locale:', locale, error);
     notFound();
   }
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider 
+      locale={locale}
+      messages={messages}
+    >
       <div style={{ padding: '20px', fontFamily: 'system-ui' }}>
         <h1>QAZNEDR.KZ - {locale.toUpperCase()}</h1>
         <nav style={{ marginBottom: '20px' }}>

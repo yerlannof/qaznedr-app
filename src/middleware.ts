@@ -1,26 +1,15 @@
 import createMiddleware from 'next-intl/middleware';
-import { NextRequest } from 'next/server';
+import {locales, defaultLocale} from './i18n/config';
 
-const intlMiddleware = createMiddleware({
+export default createMiddleware({
   // A list of all locales that are supported
-  locales: ['ru', 'kz', 'en', 'zh'],
+  locales: [...locales],
   
   // Used when no locale matches
-  defaultLocale: 'ru',
-  
-  // Always use the default locale if no other matches
-  localePrefix: 'always'
+  defaultLocale
 });
-
-export default function middleware(request: NextRequest) {
-  return intlMiddleware(request);
-}
 
 export const config = {
   // Match only internationalized pathnames
-  matcher: [
-    '/',
-    '/(ru|kz|en|zh)/:path*',
-    '/((?!_next|_vercel|api|.*\\..*).*)'
-  ]
+  matcher: ['/', '/(ru|kz|en|zh)/:path*']
 };

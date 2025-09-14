@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import Image from 'next/image';
 import {
   Mountain,
@@ -99,7 +99,7 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
+      <NavigationSimple />
       {/* Hero Section */}
       <div className="bg-blue-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">

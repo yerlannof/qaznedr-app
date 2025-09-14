@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Building2, TrendingUp, Shield } from 'lucide-react';
 
@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <>
-      <Navigation />
+      <NavigationSimple />
       <div className="min-h-screen bg-gray-50 pt-16">
         {/* Hero Section */}
         <div className="bg-gradient-to-b from-white to-gray-50 pt-24 pb-16">

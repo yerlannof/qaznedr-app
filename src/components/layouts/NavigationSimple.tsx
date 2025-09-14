@@ -1,11 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-// import { useLocale } from 'next-intl';
 
 export default function NavigationSimple() {
-  const locale = 'ru'; // hardcoded locale
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4">
@@ -30,7 +27,7 @@ export default function NavigationSimple() {
               Услуги
             </Link>
             <Link 
-              href={`/${locale}/companies`}
+              href="/companies"
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
               Компании
@@ -39,7 +36,12 @@ export default function NavigationSimple() {
 
           {/* Right side */}
           <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-600">{locale.toUpperCase()}</span>
+            <Link
+              href="/listings/create"
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Создать объявление
+            </Link>
           </div>
         </div>
       </div>

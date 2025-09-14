@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import ListingsFilters from '@/components/features/ListingsFilters';
 import ListingCard from '@/components/cards/ListingCard';
@@ -134,7 +134,7 @@ function ListingsContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
+      <NavigationSimple />
 
       {/* Header */}
       <div className="bg-white border-b border-gray-200 pt-16">

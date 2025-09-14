@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
-import { locales } from '@/i18n/config';
 import { Geist, Geist_Mono } from 'next/font/google';
 
 const geistSans = Geist({
@@ -32,6 +31,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
   
   // Validate locale
+  const locales = ['ru', 'kz', 'en', 'zh'];
   if (!locales.includes(locale as any)) {
     notFound();
   }

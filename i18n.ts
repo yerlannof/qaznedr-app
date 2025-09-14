@@ -8,12 +8,12 @@ export default getRequestConfig(async ({ requestLocale }) => {
   if (!locale || !locales.includes(locale as any)) {
     return {
       locale: 'ru',
-      messages: (await import(`../../messages/ru.json`)).default,
+      messages: (await import(`./messages/ru.json`)).default,
     };
   }
 
   return {
     locale,
-    messages: (await import(`../../messages/${locale}.json`)).default,
+    messages: (await import(`./messages/${locale}.json`)).default,
   };
 });

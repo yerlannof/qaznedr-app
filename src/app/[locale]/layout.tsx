@@ -69,22 +69,14 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ErrorBoundary>
-          <SessionProvider>
-            <FavoritesProvider>
-              <ThemeProvider>
-                <NextIntlClientProvider locale={locale} messages={messages}>
-                  <QueryProvider>
-                    <div className="flex min-h-screen flex-col">
-                      <NavigationSimple />
-                      <main className="flex-1">
-                        {children}
-                      </main>
-                    </div>
-                  </QueryProvider>
-                </NextIntlClientProvider>
-              </ThemeProvider>
-            </FavoritesProvider>
-          </SessionProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <div className="flex min-h-screen flex-col">
+              <NavigationSimple />
+              <main className="flex-1">
+                {children}
+              </main>
+            </div>
+          </NextIntlClientProvider>
         </ErrorBoundary>
         <Analytics />
         <SpeedInsights />

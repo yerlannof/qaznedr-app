@@ -14,7 +14,6 @@ import {
   Coins,
   Cpu,
 } from 'lucide-react';
-import Recommendations from '@/components/features/Recommendations';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -55,6 +54,29 @@ export default function Home() {
 
     return () => clearInterval(timer);
   }, []);
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="pt-24 pb-16 px-4 bg-gray-50">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-6">
+                <CheckCircle className="w-4 h-4" />
+                <span>Официальная платформа • Защищенные сделки</span>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                Цифровая платформа
+                <br />
+                <span className="text-blue-600">недропользования Казахстана</span>
+              </h1>
+              <div className="mt-8 text-gray-600">Загрузка...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -199,14 +221,10 @@ export default function Home() {
       {/* Personalized Recommendations */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <Recommendations
-            userPreferences={{
-              preferredMinerals: ['Gold', 'Oil', 'Copper'],
-              preferredRegions: ['Мангистауская', 'Атырауская'],
-              priceRange: { min: 1000000000, max: 10000000000 },
-              viewHistory: ['deposit-1', 'deposit-2'],
-            }}
-          />
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Рекомендации</h2>
+            <p className="text-gray-600">Персональные рекомендации на основе ваших предпочтений</p>
+          </div>
         </div>
       </section>
 

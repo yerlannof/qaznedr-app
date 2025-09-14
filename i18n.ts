@@ -1,29 +1,14 @@
+import { notFound } from 'next/navigation';
 import { getRequestConfig } from 'next-intl/server';
 
-export default getRequestConfig(async ({ requestLocale }) => {
-  // Get the requested locale
-  const locale = await requestLocale;
-  
-  // List of supported locales
-  const locales = ['ru', 'kz', 'en', 'zh'];
-  
-  // Use 'ru' as fallback if locale is invalid
-  const finalLocale = (locale && locales.includes(locale)) ? locale : 'ru';
+// Can be imported from a shared config
+const locales = ['ru', 'kz', 'en', 'zh'];
 
-  try {
-    return {
-      locale: finalLocale,
-      messages: (await import(`./messages/${finalLocale}.json`)).default,
-      timeZone: 'Asia/Almaty',
-      now: new Date()
-    };
-  } catch (error) {
-    // Fallback to Russian if there's any error
-    return {
-      locale: 'ru',
-      messages: (await import(`./messages/ru.json`)).default,
-      timeZone: 'Asia/Almaty',
-      now: new Date()
-    };
-  }
+export default getRequestConfig(async ({ locale }) => {
+  // Validate that the incoming `locale` parameter is valid
+  if (!locales.includes(locale as any)) notFound();
+
+  return {
+    messages: (await import(`./messages/${locale}.json`)).default
+  };
 });

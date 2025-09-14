@@ -52,11 +52,11 @@ export default function Navigation() {
   }, []);
 
   const navigation = [
-    { name: t('listings'), href: `/${locale}/listings`, icon: MapPin },
-    { name: t('map'), href: `/${locale}/map`, icon: MapPin },
-    { name: t('services'), href: `/${locale}/services`, icon: Briefcase },
-    { name: t('companies'), href: `/${locale}/companies`, icon: Building2 },
-    { name: t('messages'), href: `/${locale}/messages`, icon: MessageSquare },
+    { name: 'Объявления', href: '/listings', icon: MapPin },
+    { name: 'Карта', href: '/map', icon: MapPin },
+    { name: 'Услуги', href: '/services', icon: Briefcase },
+    { name: 'Компании', href: '/companies', icon: Building2 },
+    { name: 'Сообщения', href: '/messages', icon: MessageSquare },
   ];
 
   const isActive = (href: string) => pathname === href;
@@ -80,7 +80,7 @@ export default function Navigation() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <Link href={`/${locale}`} className="flex items-center space-x-2">
+              <Link href="/" className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-xl">Q</span>
                 </div>
@@ -158,7 +158,7 @@ export default function Navigation() {
                     </Link>
                     <hr className="my-1" />
                     <Link
-                      href={`/${locale}/auth/login`}
+                      href="/auth/login"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
                       <div className="flex items-center space-x-2">

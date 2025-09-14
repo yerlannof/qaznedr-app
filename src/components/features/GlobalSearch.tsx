@@ -116,7 +116,7 @@ const typeLabels = {
 };
 
 export function GlobalSearch() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // Ensure dialog starts closed
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const router = useRouter();
@@ -186,7 +186,7 @@ export function GlobalSearch() {
       </button>
 
       {/* Search dialog */}
-      <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandDialog open={open} onOpenChange={setOpen} modal={true}>
         <CommandInput
           placeholder="Поиск месторождений, компаний, услуг..."
           value={searchQuery}

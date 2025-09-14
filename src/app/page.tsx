@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Navigation />
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-16">
         {/* Hero Section */}
         <div className="bg-gradient-to-b from-white to-gray-50 pt-24 pb-16">
           <div className="max-w-6xl mx-auto px-4">

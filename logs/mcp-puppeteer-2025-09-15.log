@@ -1,1 +1,5 @@
 {"arguments":{},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-15 00:21:51.126","tool":"puppeteer_connect_active_tab"}
+{"arguments":{"url":"https://qaznedr.vercel.app"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-15 01:48:39.996","tool":"puppeteer_navigate"}
+{"level":"info","message":"Navigating to URL","service":"mcp-puppeteer","timestamp":"2025-09-15 01:48:40.002","url":"https://qaznedr.vercel.app"}
+{"error":"Attempted to use detached Frame 'D189D679DCAF09C00AF36DE2A5EA4901'.","level":"error","message":"Navigation failed","service":"mcp-puppeteer","timestamp":"2025-09-15 01:48:40.009","url":"https://qaznedr.vercel.app"}
+{"arguments":{"debugPort":9222},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-15 01:48:45.909","tool":"puppeteer_connect_active_tab"}

@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin('./i18n.ts');
 const nextConfig: NextConfig = {
   // Enable standalone output for Docker
   output: 'standalone',
-
+  
   // Optimize images
   images: {
     remotePatterns: [

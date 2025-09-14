@@ -1,5 +1,7 @@
 import { getRequestConfig } from 'next-intl/server';
-import { locales } from './src/i18n/config';
+
+// Define locales directly to avoid import issues during build
+const locales = ['ru', 'kz', 'en', 'zh'] as const;
 
 export default getRequestConfig(async ({ requestLocale }) => {
   const locale = await requestLocale;
@@ -7,7 +9,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   // Validate that the incoming locale is valid
   if (!locale || !locales.includes(locale as any)) {
     return {
-      locale: 'ru',
+      locale: 'ru' as const,
       messages: (await import(`./messages/ru.json`)).default,
     };
   }

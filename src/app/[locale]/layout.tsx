@@ -1,18 +1,17 @@
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
-import { locales } from '@/i18n/config';
+import { getMessages } from 'next-intl/server';
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
+// Define locales directly to avoid build issues
+const locales = ['ru', 'kz', 'en', 'zh'] as const;
 
-async function getMessages(locale: string) {
-  try {
-    return (await import(`../../../messages/${locale}.json`)).default;
-  } catch (error) {
-    notFound();
-  }
-}
+// Temporarily disable static generation to fix deployment
+// export function generateStaticParams() {
+//   return locales.map((locale) => ({ locale }));
+// }
+
+// Force dynamic rendering to avoid static generation issues
+export const dynamic = 'force-dynamic';
 
 export default async function LocaleLayout({
   children,
@@ -28,7 +27,7 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  const messages = await getMessages(locale);
+  const messages = await getMessages({ locale });
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>

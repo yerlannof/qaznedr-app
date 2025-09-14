@@ -1,1 +1,3 @@
 {"arguments":{"targetUrl":"http://localhost:3000"},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-14 01:07:22.569","tool":"puppeteer_connect_active_tab"}
+{"level":"info","message":"Starting MCP server","service":"mcp-puppeteer","timestamp":"2025-09-14 14:34:19.935"}
+{"level":"info","message":"MCP server started successfully","service":"mcp-puppeteer","timestamp":"2025-09-14 14:34:19.936"}

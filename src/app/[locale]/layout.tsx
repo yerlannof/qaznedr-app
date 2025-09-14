@@ -6,6 +6,7 @@ import Navigation from '@/components/layouts/Navigation';
 import QueryProvider from '@/providers/QueryProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { SessionProvider } from '@/components/features/SessionProvider';
+import { FavoritesProvider } from '@/contexts/favorites-context';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -69,18 +70,20 @@ export default async function LocaleLayout({
       >
         <ErrorBoundary>
           <SessionProvider>
-            <ThemeProvider>
-              <NextIntlClientProvider locale={locale} messages={messages}>
-                <QueryProvider>
-                  <div className="flex min-h-screen flex-col">
-                    <Navigation />
-                    <main className="flex-1">
-                      {children}
-                    </main>
-                  </div>
-                </QueryProvider>
-              </NextIntlClientProvider>
-            </ThemeProvider>
+            <FavoritesProvider>
+              <ThemeProvider>
+                <NextIntlClientProvider locale={locale} messages={messages}>
+                  <QueryProvider>
+                    <div className="flex min-h-screen flex-col">
+                      <Navigation />
+                      <main className="flex-1">
+                        {children}
+                      </main>
+                    </div>
+                  </QueryProvider>
+                </NextIntlClientProvider>
+              </ThemeProvider>
+            </FavoritesProvider>
           </SessionProvider>
         </ErrorBoundary>
         <Analytics />

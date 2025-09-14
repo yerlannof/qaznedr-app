@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useLocale, useTranslations } from 'next-intl';
+// import { useLocale, useTranslations } from 'next-intl';
 import {
   Menu,
   MapPin,
@@ -31,8 +31,8 @@ export default function Navigation() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const locale = useLocale();
-  const t = useTranslations('navigation');
+  const locale = 'ru'; // hardcoded locale
+  const t = (key: string) => key; // temporary translation function
 
   // Handle scroll progress and sticky header effect
   useEffect(() => {

@@ -1,6 +1,7 @@
 // import { notFound } from 'next/navigation';
 // import { NextIntlClientProvider } from 'next-intl';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { AuthProvider } from '@/providers/AuthProvider';
 // import ruMessages from '../../../messages/ru.json';
 
 const geistSans = Geist({
@@ -25,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="ru" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

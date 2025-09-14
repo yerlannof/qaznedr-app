@@ -12,11 +12,19 @@ const messages: Record<string, any> = {
 };
 
 export default getRequestConfig(async ({ requestLocale }) => {
-  const locale = await requestLocale;
-  const finalLocale = locale || 'ru';
+  let locale = 'ru';
+  
+  try {
+    const requested = await requestLocale;
+    if (requested && messages[requested]) {
+      locale = requested;
+    }
+  } catch (error) {
+    console.error('Error getting locale:', error);
+  }
 
   return {
-    locale: finalLocale,
-    messages: messages[finalLocale] || messages.ru
+    locale,
+    messages: messages[locale] || ruMessages
   };
 });

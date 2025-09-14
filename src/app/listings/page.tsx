@@ -11,6 +11,7 @@ import DepositMap from '@/components/features/DepositMap';
 import SkeletonCard from '@/components/ui/SkeletonCard';
 import { LiveActivityIndicator } from '@/components/features/SocialProof';
 import { depositApi } from '@/lib/api/deposits';
+import { List, Map } from 'lucide-react';
 import type {
   KazakhstanDeposit,
   SearchParams,
@@ -186,7 +187,7 @@ function ListingsContent() {
                 <div className="relative flex items-center gap-2 bg-gray-100 rounded-lg p-1">
                   <motion.button
                     onClick={() => setViewMode('list')}
-                    className={`relative z-10 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                    className={`relative z-10 px-4 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-2 ${
                       viewMode === 'list'
                         ? 'text-gray-900'
                         : 'text-gray-600 hover:text-gray-900'
@@ -194,11 +195,12 @@ function ListingsContent() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    📋 Список
+                    <List className="w-4 h-4" />
+                    Список
                   </motion.button>
                   <motion.button
                     onClick={() => setViewMode('map')}
-                    className={`relative z-10 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                    className={`relative z-10 px-4 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-2 ${
                       viewMode === 'map'
                         ? 'text-gray-900'
                         : 'text-gray-600 hover:text-gray-900'
@@ -206,7 +208,8 @@ function ListingsContent() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    🗺️ Карта
+                    <Map className="w-4 h-4" />
+                    Карта
                   </motion.button>
 
                   {/* Animated background slider */}

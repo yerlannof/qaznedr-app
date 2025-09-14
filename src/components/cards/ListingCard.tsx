@@ -1,6 +1,7 @@
 'use client';
 
 import { KazakhstanDeposit } from '@/lib/types/listing';
+import { formatPrice } from '@/lib/utils/format';
 import MiningLicenseCard from './MiningLicenseCard';
 import ExplorationLicenseCard from './ExplorationLicenseCard';
 import MineralOccurrenceCard from './MineralOccurrenceCard';
@@ -10,28 +11,15 @@ interface ListingCardProps {
 }
 
 export default function ListingCard({ deposit }: ListingCardProps) {
-  const formatPrice = (price: number | null) => {
-    if (!price) return 'По запросу';
-
-    if (price >= 1000000000000) {
-      return `${(price / 1000000000000).toFixed(1)} трлн ₸`;
-    } else if (price >= 1000000000) {
-      return `${(price / 1000000000).toFixed(1)} млрд ₸`;
-    } else if (price >= 1000000) {
-      return `${(price / 1000000).toFixed(1)} млн ₸`;
-    } else {
-      return `${price.toLocaleString()} ₸`;
-    }
-  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'ACTIVE':
-        return 'bg-green-100 text-green-800';
+        return 'bg-blue-100 text-blue-800';
       case 'PENDING':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-gray-100 text-gray-700';
       case 'SOLD':
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-200 text-gray-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -52,7 +40,6 @@ export default function ListingCard({ deposit }: ListingCardProps) {
 
   const cardProps = {
     deposit,
-    formatPrice,
     getStatusColor,
     getStatusText,
   };

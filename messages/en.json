@@ -1,0 +1,277 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "all": "All",
+    "none": "None",
+    "select": "Select",
+    "selected": "Selected",
+    "of": "of",
+    "results": "results",
+    "noResults": "No results",
+    "priceOnRequest": "Price on request",
+    "more": "More",
+    "less": "Less",
+    "showMore": "Show more",
+    "showLess": "Show less"
+  },
+  "navigation": {
+    "home": "Home",
+    "listings": "Listings",
+    "map": "Map",
+    "companies": "Companies",
+    "services": "Services",
+    "knowledge": "Knowledge Base",
+    "news": "News",
+    "about": "About",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "favorites": "Favorites",
+    "messages": "Messages",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  },
+  "hero": {
+    "title": "Kazakhstan Mining Digital Platform",
+    "subtitle": "Find the perfect deposit for your business",
+    "searchPlaceholder": "Search by name, region or mineral",
+    "searchButton": "Find deposits",
+    "createListing": "List a license",
+    "trustedBadge": "Official platform • Secure transactions",
+    "features": {
+      "verified": "Verified sellers",
+      "legal": "Legal support",
+      "direct": "Direct contacts"
+    },
+    "stats": {
+      "listings": "Active listings",
+      "companies": "Companies",
+      "deals": "Successful deals"
+    }
+  },
+  "listings": {
+    "title": "Mineral Deposits",
+    "found": "Found {count} deposits",
+    "showing": "Showing {shown} results",
+    "page": "page {current} of {total}",
+    "viewMode": {
+      "list": "List",
+      "map": "Map"
+    },
+    "sort": {
+      "label": "Sort by",
+      "newest": "Newest first",
+      "oldest": "Oldest first",
+      "priceAsc": "Price ascending",
+      "priceDesc": "Price descending",
+      "areaAsc": "Area ascending",
+      "areaDesc": "Area descending",
+      "views": "Most popular"
+    },
+    "filters": {
+      "title": "Filters",
+      "reset": "Reset",
+      "apply": "Apply",
+      "region": "Region",
+      "mineral": "Mineral",
+      "type": "License type",
+      "price": "Price",
+      "priceMin": "From",
+      "priceMax": "To",
+      "area": "Area",
+      "areaMin": "From km²",
+      "areaMax": "To km²",
+      "status": "Status",
+      "verified": "Verified only",
+      "featured": "Featured only"
+    },
+    "types": {
+      "MINING_LICENSE": "Mining License",
+      "EXPLORATION_LICENSE": "Exploration License",
+      "MINERAL_OCCURRENCE": "Mineral Occurrence"
+    },
+    "status": {
+      "ACTIVE": "Active",
+      "PENDING": "Pending",
+      "SOLD": "Sold"
+    },
+    "card": {
+      "area": "Area",
+      "license": "License",
+      "reserves": "Reserves",
+      "perSquareKm": "per km²",
+      "views": "views",
+      "interested": "interested",
+      "questions": "questions",
+      "expires": "until",
+      "perpetual": "Perpetual",
+      "verified": "Verified",
+      "featured": "Featured",
+      "new": "New",
+      "hot": "Hot",
+      "details": "Details",
+      "compare": "Compare",
+      "favorite": "Favorite"
+    }
+  },
+  "minerals": {
+    "oil": "Oil",
+    "gas": "Gas",
+    "gold": "Gold",
+    "copper": "Copper",
+    "coal": "Coal",
+    "uranium": "Uranium",
+    "iron": "Iron",
+    "other": "Other"
+  },
+  "regions": {
+    "mangystau": "Mangystau",
+    "atyrau": "Atyrau",
+    "aktobe": "Aktobe",
+    "karaganda": "Karaganda",
+    "eastkz": "East Kazakhstan",
+    "pavlodar": "Pavlodar",
+    "kostanay": "Kostanay",
+    "northkz": "North Kazakhstan",
+    "akmola": "Akmola",
+    "almaty": "Almaty",
+    "zhambyl": "Zhambyl",
+    "turkestan": "Turkestan",
+    "kyzylorda": "Kyzylorda",
+    "westkz": "West Kazakhstan"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "email": "Email",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign In",
+      "noAccount": "Don't have an account?",
+      "register": "Sign Up",
+      "orContinueWith": "Or continue with",
+      "errors": {
+        "invalidCredentials": "Invalid email or password",
+        "accountLocked": "Account is locked",
+        "networkError": "Network error"
+      }
+    },
+    "register": {
+      "title": "Sign Up",
+      "name": "Name",
+      "company": "Company",
+      "email": "Email",
+      "phone": "Phone",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "accountType": "Account Type",
+      "buyer": "Buyer",
+      "seller": "Seller",
+      "both": "Buyer and Seller",
+      "agreeToTerms": "I agree to the terms of service",
+      "submit": "Sign Up",
+      "haveAccount": "Already have an account?",
+      "login": "Sign In",
+      "errors": {
+        "emailExists": "Email already registered",
+        "passwordMismatch": "Passwords do not match",
+        "weakPassword": "Password is too weak",
+        "termsRequired": "You must accept the terms"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome, {name}!",
+    "overview": "Overview",
+    "myListings": "My Listings",
+    "analytics": "Analytics",
+    "messages": "Messages",
+    "favorites": "Favorites",
+    "settings": "Settings",
+    "stats": {
+      "totalListings": "Total Listings",
+      "activeListings": "Active",
+      "totalViews": "Total Views",
+      "todayViews": "Today",
+      "totalInquiries": "Total Inquiries",
+      "pendingInquiries": "Pending Response"
+    },
+    "recentActivity": "Recent Activity",
+    "quickActions": {
+      "title": "Quick Actions",
+      "createListing": "Create Listing",
+      "viewAnalytics": "View Analytics",
+      "manageProfile": "Manage Profile",
+      "support": "Support"
+    }
+  },
+  "services": {
+    "title": "Services for Mining Companies",
+    "subtitle": "Comprehensive solutions for the mining industry",
+    "categories": {
+      "geological": {
+        "title": "Geological Services",
+        "description": "Exploration, reserve assessment, geological surveys"
+      },
+      "legal": {
+        "title": "Legal Services",
+        "description": "License registration, contracts, consulting"
+      },
+      "equipment": {
+        "title": "Equipment",
+        "description": "Mining equipment rental and sales"
+      },
+      "investors": {
+        "title": "Investors",
+        "description": "Investment search, partnerships, financing"
+      }
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "About Platform",
+      "description": "QAZNEDR.KZ - Kazakhstan's first digital B2B platform for the mining industry"
+    },
+    "links": {
+      "title": "Useful Links",
+      "about": "About Us",
+      "howItWorks": "How It Works",
+      "pricing": "Pricing",
+      "blog": "Blog",
+      "support": "Support"
+    },
+    "legal": {
+      "title": "Legal Information",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
+    },
+    "contact": {
+      "title": "Contact",
+      "address": "Almaty, Kazakhstan",
+      "phone": "+7 (727) 123-45-67",
+      "email": "info@qaznedr.kz"
+    },
+    "copyright": "© 2025 QAZNEDR.KZ. All rights reserved."
+  }
+}

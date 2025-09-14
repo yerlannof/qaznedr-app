@@ -1,0 +1,277 @@
+{
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "view": "Просмотр",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "sort": "Сортировка",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Назад",
+    "close": "Закрыть",
+    "confirm": "Подтвердить",
+    "yes": "Да",
+    "no": "Нет",
+    "all": "Все",
+    "none": "Ничего",
+    "select": "Выбрать",
+    "selected": "Выбрано",
+    "of": "из",
+    "results": "результатов",
+    "noResults": "Нет результатов",
+    "priceOnRequest": "По запросу",
+    "more": "Еще",
+    "less": "Меньше",
+    "showMore": "Показать больше",
+    "showLess": "Показать меньше"
+  },
+  "navigation": {
+    "home": "Главная",
+    "listings": "Объявления",
+    "map": "Карта",
+    "companies": "Компании",
+    "services": "Услуги",
+    "knowledge": "База знаний",
+    "news": "Новости",
+    "about": "О нас",
+    "contact": "Контакты",
+    "dashboard": "Личный кабинет",
+    "favorites": "Избранное",
+    "messages": "Сообщения",
+    "settings": "Настройки",
+    "profile": "Профиль",
+    "logout": "Выход",
+    "login": "Вход",
+    "register": "Регистрация"
+  },
+  "hero": {
+    "title": "Цифровая платформа недропользования Казахстана",
+    "subtitle": "Найдите идеальное месторождение для вашего бизнеса",
+    "searchPlaceholder": "Поиск по названию, региону или минералу",
+    "searchButton": "Найти месторождение",
+    "createListing": "Разместить лицензию",
+    "trustedBadge": "Официальная платформа • Защищенные сделки",
+    "features": {
+      "verified": "Проверенные продавцы",
+      "legal": "Юридическая поддержка",
+      "direct": "Прямые контакты"
+    },
+    "stats": {
+      "listings": "Активных объявлений",
+      "companies": "Компаний",
+      "deals": "Успешных сделок"
+    }
+  },
+  "listings": {
+    "title": "Месторождения полезных ископаемых",
+    "found": "Найдено {count} месторождений",
+    "showing": "Показано {shown} результатов",
+    "page": "страница {current} из {total}",
+    "viewMode": {
+      "list": "Список",
+      "map": "Карта"
+    },
+    "sort": {
+      "label": "Сортировка",
+      "newest": "Сначала новые",
+      "oldest": "Сначала старые",
+      "priceAsc": "Цена по возрастанию",
+      "priceDesc": "Цена по убыванию",
+      "areaAsc": "Площадь по возрастанию",
+      "areaDesc": "Площадь по убыванию",
+      "views": "По популярности"
+    },
+    "filters": {
+      "title": "Фильтры",
+      "reset": "Сбросить",
+      "apply": "Применить",
+      "region": "Регион",
+      "mineral": "Минерал",
+      "type": "Тип лицензии",
+      "price": "Цена",
+      "priceMin": "От",
+      "priceMax": "До",
+      "area": "Площадь",
+      "areaMin": "От км²",
+      "areaMax": "До км²",
+      "status": "Статус",
+      "verified": "Только проверенные",
+      "featured": "Только рекомендуемые"
+    },
+    "types": {
+      "MINING_LICENSE": "Лицензия на добычу",
+      "EXPLORATION_LICENSE": "Лицензия на разведку",
+      "MINERAL_OCCURRENCE": "Рудопроявление"
+    },
+    "status": {
+      "ACTIVE": "Активно",
+      "PENDING": "В ожидании",
+      "SOLD": "Продано"
+    },
+    "card": {
+      "area": "Площадь",
+      "license": "Лицензия",
+      "reserves": "Запасы",
+      "perSquareKm": "за км²",
+      "views": "просмотров",
+      "interested": "интересуются",
+      "questions": "вопросов",
+      "expires": "до",
+      "perpetual": "Бессрочно",
+      "verified": "Проверено",
+      "featured": "Рекомендуем",
+      "new": "Новое",
+      "hot": "Популярное",
+      "details": "Подробнее",
+      "compare": "Сравнить",
+      "favorite": "В избранное"
+    }
+  },
+  "minerals": {
+    "oil": "Нефть",
+    "gas": "Газ",
+    "gold": "Золото",
+    "copper": "Медь",
+    "coal": "Уголь",
+    "uranium": "Уран",
+    "iron": "Железо",
+    "other": "Другое"
+  },
+  "regions": {
+    "mangystau": "Мангистауская",
+    "atyrau": "Атырауская",
+    "aktobe": "Актюбинская",
+    "karaganda": "Карагандинская",
+    "eastkz": "Восточно-Казахстанская",
+    "pavlodar": "Павлодарская",
+    "kostanay": "Костанайская",
+    "northkz": "Северо-Казахстанская",
+    "akmola": "Акмолинская",
+    "almaty": "Алматинская",
+    "zhambyl": "Жамбылская",
+    "turkestan": "Туркестанская",
+    "kyzylorda": "Кызылординская",
+    "westkz": "Западно-Казахстанская"
+  },
+  "auth": {
+    "login": {
+      "title": "Вход в систему",
+      "email": "Email",
+      "password": "Пароль",
+      "rememberMe": "Запомнить меня",
+      "forgotPassword": "Забыли пароль?",
+      "submit": "Войти",
+      "noAccount": "Нет аккаунта?",
+      "register": "Зарегистрироваться",
+      "orContinueWith": "Или продолжить с",
+      "errors": {
+        "invalidCredentials": "Неверный email или пароль",
+        "accountLocked": "Аккаунт заблокирован",
+        "networkError": "Ошибка сети"
+      }
+    },
+    "register": {
+      "title": "Регистрация",
+      "name": "Имя",
+      "company": "Компания",
+      "email": "Email",
+      "phone": "Телефон",
+      "password": "Пароль",
+      "confirmPassword": "Подтвердите пароль",
+      "accountType": "Тип аккаунта",
+      "buyer": "Покупатель",
+      "seller": "Продавец",
+      "both": "Покупатель и продавец",
+      "agreeToTerms": "Я согласен с условиями использования",
+      "submit": "Зарегистрироваться",
+      "haveAccount": "Уже есть аккаунт?",
+      "login": "Войти",
+      "errors": {
+        "emailExists": "Email уже зарегистрирован",
+        "passwordMismatch": "Пароли не совпадают",
+        "weakPassword": "Пароль слишком простой",
+        "termsRequired": "Необходимо принять условия"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Личный кабинет",
+    "welcome": "Добро пожаловать, {name}!",
+    "overview": "Обзор",
+    "myListings": "Мои объявления",
+    "analytics": "Аналитика",
+    "messages": "Сообщения",
+    "favorites": "Избранное",
+    "settings": "Настройки",
+    "stats": {
+      "totalListings": "Всего объявлений",
+      "activeListings": "Активных",
+      "totalViews": "Всего просмотров",
+      "todayViews": "Сегодня",
+      "totalInquiries": "Всего запросов",
+      "pendingInquiries": "Ожидают ответа"
+    },
+    "recentActivity": "Последняя активность",
+    "quickActions": {
+      "title": "Быстрые действия",
+      "createListing": "Создать объявление",
+      "viewAnalytics": "Смотреть аналитику",
+      "manageProfile": "Управление профилем",
+      "support": "Поддержка"
+    }
+  },
+  "services": {
+    "title": "Услуги для недропользователей",
+    "subtitle": "Комплексные решения для горнодобывающей отрасли",
+    "categories": {
+      "geological": {
+        "title": "Геологические услуги",
+        "description": "Разведка, оценка запасов, геологические исследования"
+      },
+      "legal": {
+        "title": "Юридические услуги",
+        "description": "Оформление лицензий, договоры, консультации"
+      },
+      "equipment": {
+        "title": "Оборудование",
+        "description": "Аренда и продажа горнодобывающего оборудования"
+      },
+      "investors": {
+        "title": "Инвесторы",
+        "description": "Поиск инвестиций, партнерство, финансирование"
+      }
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "О платформе",
+      "description": "QAZNEDR.KZ - первая в Казахстане цифровая B2B платформа для горнодобывающей отрасли"
+    },
+    "links": {
+      "title": "Полезные ссылки",
+      "about": "О нас",
+      "howItWorks": "Как это работает",
+      "pricing": "Тарифы",
+      "blog": "Блог",
+      "support": "Поддержка"
+    },
+    "legal": {
+      "title": "Правовая информация",
+      "terms": "Условия использования",
+      "privacy": "Политика конфиденциальности",
+      "cookies": "Политика cookies"
+    },
+    "contact": {
+      "title": "Контакты",
+      "address": "Алматы, Казахстан",
+      "phone": "+7 (727) 123-45-67",
+      "email": "info@qaznedr.kz"
+    },
+    "copyright": "© 2025 QAZNEDR.KZ. Все права защищены."
+  }
+}

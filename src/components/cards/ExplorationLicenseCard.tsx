@@ -2,32 +2,20 @@
 
 import Link from 'next/link';
 import { KazakhstanDeposit } from '@/lib/types/listing';
+import { formatPrice } from '@/lib/utils/format';
+import { getMineralIcon } from '@/components/icons';
 
 interface ExplorationLicenseCardProps {
   deposit: KazakhstanDeposit;
-  formatPrice: (price: number | null) => string;
   getStatusColor: (status: string) => string;
   getStatusText: (status: string) => string;
 }
 
 export default function ExplorationLicenseCard({
   deposit,
-  formatPrice,
   getStatusColor,
   getStatusText,
 }: ExplorationLicenseCardProps) {
-  const getMineralIcon = (mineral: string) => {
-    const icons: Record<string, string> = {
-      Нефть: '🛢️',
-      Газ: '⛽',
-      Золото: '🥇',
-      Медь: '🔶',
-      Уголь: '⚫',
-      Уран: '☢️',
-      Железо: '🔩',
-    };
-    return icons[mineral] || '⛏️';
-  };
 
   const getExplorationStageText = (stage?: string) => {
     const stages: Record<string, string> = {
@@ -44,7 +32,10 @@ export default function ExplorationLicenseCard({
       {/* Image */}
       <div className="aspect-[4/3] relative bg-gray-50">
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-6xl">{getMineralIcon(deposit.mineral)}</span>
+          {(() => {
+            const Icon = getMineralIcon(deposit.mineral);
+            return <Icon className="w-20 h-20 text-blue-600 opacity-60" />;
+          })()}
         </div>
 
         {/* Type Badge */}

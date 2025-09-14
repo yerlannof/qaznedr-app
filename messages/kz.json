@@ -1,0 +1,277 @@
+{
+  "common": {
+    "loading": "Жүктелуде...",
+    "error": "Қате",
+    "save": "Сақтау",
+    "cancel": "Болдырмау",
+    "delete": "Жою",
+    "edit": "Өңдеу",
+    "view": "Қарау",
+    "search": "Іздеу",
+    "filter": "Сүзгі",
+    "sort": "Сұрыптау",
+    "back": "Артқа",
+    "next": "Келесі",
+    "previous": "Алдыңғы",
+    "close": "Жабу",
+    "confirm": "Растау",
+    "yes": "Иә",
+    "no": "Жоқ",
+    "all": "Барлығы",
+    "none": "Ешқайсысы",
+    "select": "Таңдау",
+    "selected": "Таңдалған",
+    "of": "ішінен",
+    "results": "нәтижелер",
+    "noResults": "Нәтиже жоқ",
+    "priceOnRequest": "Сұрау бойынша",
+    "more": "Көбірек",
+    "less": "Азырақ",
+    "showMore": "Көбірек көрсету",
+    "showLess": "Азырақ көрсету"
+  },
+  "navigation": {
+    "home": "Басты бет",
+    "listings": "Хабарландырулар",
+    "map": "Карта",
+    "companies": "Компаниялар",
+    "services": "Қызметтер",
+    "knowledge": "Білім базасы",
+    "news": "Жаңалықтар",
+    "about": "Біз туралы",
+    "contact": "Байланыс",
+    "dashboard": "Жеке кабинет",
+    "favorites": "Таңдаулылар",
+    "messages": "Хабарламалар",
+    "settings": "Баптаулар",
+    "profile": "Профиль",
+    "logout": "Шығу",
+    "login": "Кіру",
+    "register": "Тіркелу"
+  },
+  "hero": {
+    "title": "Қазақстанның жер қойнауын пайдалану цифрлық платформасы",
+    "subtitle": "Бизнесіңіз үшін тамаша кен орнын табыңыз",
+    "searchPlaceholder": "Атауы, аймағы немесе минерал бойынша іздеу",
+    "searchButton": "Кен орнын табу",
+    "createListing": "Лицензия орналастыру",
+    "trustedBadge": "Ресми платформа • Қорғалған мәмілелер",
+    "features": {
+      "verified": "Тексерілген сатушылар",
+      "legal": "Заңды қолдау",
+      "direct": "Тікелей байланыстар"
+    },
+    "stats": {
+      "listings": "Белсенді хабарландырулар",
+      "companies": "Компаниялар",
+      "deals": "Сәтті мәмілелер"
+    }
+  },
+  "listings": {
+    "title": "Пайдалы қазбалар кен орындары",
+    "found": "{count} кен орны табылды",
+    "showing": "{shown} нәтиже көрсетілуде",
+    "page": "{total} ішінен {current} бет",
+    "viewMode": {
+      "list": "Тізім",
+      "map": "Карта"
+    },
+    "sort": {
+      "label": "Сұрыптау",
+      "newest": "Жаңадан бастап",
+      "oldest": "Ескіден бастап",
+      "priceAsc": "Баға өсу ретімен",
+      "priceDesc": "Баға кему ретімен",
+      "areaAsc": "Аумақ өсу ретімен",
+      "areaDesc": "Аумақ кему ретімен",
+      "views": "Танымалдылығы бойынша"
+    },
+    "filters": {
+      "title": "Сүзгілер",
+      "reset": "Тазалау",
+      "apply": "Қолдану",
+      "region": "Аймақ",
+      "mineral": "Минерал",
+      "type": "Лицензия түрі",
+      "price": "Баға",
+      "priceMin": "Бастап",
+      "priceMax": "Дейін",
+      "area": "Аумақ",
+      "areaMin": "км² бастап",
+      "areaMax": "км² дейін",
+      "status": "Мәртебе",
+      "verified": "Тек тексерілген",
+      "featured": "Тек ұсынылған"
+    },
+    "types": {
+      "MINING_LICENSE": "Өндіру лицензиясы",
+      "EXPLORATION_LICENSE": "Барлау лицензиясы",
+      "MINERAL_OCCURRENCE": "Кен көрінісі"
+    },
+    "status": {
+      "ACTIVE": "Белсенді",
+      "PENDING": "Күтуде",
+      "SOLD": "Сатылған"
+    },
+    "card": {
+      "area": "Аумақ",
+      "license": "Лицензия",
+      "reserves": "Қорлар",
+      "perSquareKm": "км² үшін",
+      "views": "қаралым",
+      "interested": "қызығушылық танытуда",
+      "questions": "сұрақтар",
+      "expires": "дейін",
+      "perpetual": "Мерзімсіз",
+      "verified": "Тексерілген",
+      "featured": "Ұсынылған",
+      "new": "Жаңа",
+      "hot": "Танымал",
+      "details": "Толығырақ",
+      "compare": "Салыстыру",
+      "favorite": "Таңдаулыларға"
+    }
+  },
+  "minerals": {
+    "oil": "Мұнай",
+    "gas": "Газ",
+    "gold": "Алтын",
+    "copper": "Мыс",
+    "coal": "Көмір",
+    "uranium": "Уран",
+    "iron": "Темір",
+    "other": "Басқа"
+  },
+  "regions": {
+    "mangystau": "Маңғыстау",
+    "atyrau": "Атырау",
+    "aktobe": "Ақтөбе",
+    "karaganda": "Қарағанды",
+    "eastkz": "Шығыс Қазақстан",
+    "pavlodar": "Павлодар",
+    "kostanay": "Қостанай",
+    "northkz": "Солтүстік Қазақстан",
+    "akmola": "Ақмола",
+    "almaty": "Алматы",
+    "zhambyl": "Жамбыл",
+    "turkestan": "Түркістан",
+    "kyzylorda": "Қызылорда",
+    "westkz": "Батыс Қазақстан"
+  },
+  "auth": {
+    "login": {
+      "title": "Жүйеге кіру",
+      "email": "Email",
+      "password": "Құпия сөз",
+      "rememberMe": "Мені есте сақта",
+      "forgotPassword": "Құпия сөзді ұмыттыңыз ба?",
+      "submit": "Кіру",
+      "noAccount": "Тіркелгіңіз жоқ па?",
+      "register": "Тіркелу",
+      "orContinueWith": "Немесе мынамен жалғастыру",
+      "errors": {
+        "invalidCredentials": "Қате email немесе құпия сөз",
+        "accountLocked": "Тіркелгі бұғатталған",
+        "networkError": "Желі қатесі"
+      }
+    },
+    "register": {
+      "title": "Тіркелу",
+      "name": "Аты",
+      "company": "Компания",
+      "email": "Email",
+      "phone": "Телефон",
+      "password": "Құпия сөз",
+      "confirmPassword": "Құпия сөзді растау",
+      "accountType": "Тіркелгі түрі",
+      "buyer": "Сатып алушы",
+      "seller": "Сатушы",
+      "both": "Сатып алушы және сатушы",
+      "agreeToTerms": "Пайдалану шарттарымен келісемін",
+      "submit": "Тіркелу",
+      "haveAccount": "Тіркелгіңіз бар ма?",
+      "login": "Кіру",
+      "errors": {
+        "emailExists": "Email тіркелген",
+        "passwordMismatch": "Құпия сөздер сәйкес келмейді",
+        "weakPassword": "Құпия сөз тым қарапайым",
+        "termsRequired": "Шарттарды қабылдау керек"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Жеке кабинет",
+    "welcome": "Қош келдіңіз, {name}!",
+    "overview": "Шолу",
+    "myListings": "Менің хабарландыруларым",
+    "analytics": "Талдау",
+    "messages": "Хабарламалар",
+    "favorites": "Таңдаулылар",
+    "settings": "Баптаулар",
+    "stats": {
+      "totalListings": "Барлық хабарландырулар",
+      "activeListings": "Белсенді",
+      "totalViews": "Барлық қаралымдар",
+      "todayViews": "Бүгін",
+      "totalInquiries": "Барлық сұраулар",
+      "pendingInquiries": "Жауап күтуде"
+    },
+    "recentActivity": "Соңғы белсенділік",
+    "quickActions": {
+      "title": "Жылдам әрекеттер",
+      "createListing": "Хабарландыру құру",
+      "viewAnalytics": "Талдауды қарау",
+      "manageProfile": "Профильді басқару",
+      "support": "Қолдау"
+    }
+  },
+  "services": {
+    "title": "Жер қойнауын пайдаланушыларға арналған қызметтер",
+    "subtitle": "Тау-кен өнеркәсібі үшін кешенді шешімдер",
+    "categories": {
+      "geological": {
+        "title": "Геологиялық қызметтер",
+        "description": "Барлау, қорларды бағалау, геологиялық зерттеулер"
+      },
+      "legal": {
+        "title": "Заң қызметтері",
+        "description": "Лицензияларды рәсімдеу, келісімшарттар, кеңес беру"
+      },
+      "equipment": {
+        "title": "Жабдықтар",
+        "description": "Тау-кен жабдықтарын жалға беру және сату"
+      },
+      "investors": {
+        "title": "Инвесторлар",
+        "description": "Инвестиция іздеу, серіктестік, қаржыландыру"
+      }
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "Платформа туралы",
+      "description": "QAZNEDR.KZ - Қазақстандағы тау-кен өнеркәсібіне арналған алғашқы цифрлық B2B платформа"
+    },
+    "links": {
+      "title": "Пайдалы сілтемелер",
+      "about": "Біз туралы",
+      "howItWorks": "Қалай жұмыс істейді",
+      "pricing": "Тарифтер",
+      "blog": "Блог",
+      "support": "Қолдау"
+    },
+    "legal": {
+      "title": "Құқықтық ақпарат",
+      "terms": "Пайдалану шарттары",
+      "privacy": "Құпиялық саясаты",
+      "cookies": "Cookie саясаты"
+    },
+    "contact": {
+      "title": "Байланыс",
+      "address": "Алматы, Қазақстан",
+      "phone": "+7 (727) 123-45-67",
+      "email": "info@qaznedr.kz"
+    },
+    "copyright": "© 2025 QAZNEDR.KZ. Барлық құқықтар қорғалған."
+  }
+}

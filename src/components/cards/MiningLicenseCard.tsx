@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { KazakhstanDeposit } from '@/lib/types/listing';
+import { formatPrice } from '@/lib/utils/format';
 import { getMineralIcon } from '@/components/icons';
 import {
   ViewingNowIndicator,
@@ -27,7 +28,6 @@ import {
 
 interface MiningLicenseCardProps {
   deposit: KazakhstanDeposit;
-  formatPrice: (price: number | null) => string;
   getStatusColor: (status: string) => string;
   getStatusText: (status: string) => string;
   onAddToComparison?: (deposit: KazakhstanDeposit) => void;
@@ -37,7 +37,6 @@ interface MiningLicenseCardProps {
 
 export default function MiningLicenseCard({
   deposit,
-  formatPrice,
   getStatusColor,
   getStatusText,
   onAddToComparison,
@@ -167,9 +166,9 @@ export default function MiningLicenseCard({
               className="px-2 py-1 bg-gray-700 text-white rounded-full text-xs font-semibold flex items-center gap-1"
               animate={{
                 boxShadow: [
-                  '0 0 0 0 rgba(239, 68, 68, 0.7)',
-                  '0 0 0 4px rgba(239, 68, 68, 0)',
-                  '0 0 0 0 rgba(239, 68, 68, 0)',
+                  '0 0 0 0 rgba(59, 130, 246, 0.7)',
+                  '0 0 0 4px rgba(59, 130, 246, 0)',
+                  '0 0 0 0 rgba(59, 130, 246, 0)',
                 ],
               }}
               transition={{

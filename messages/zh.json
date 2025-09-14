@@ -1,0 +1,277 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "view": "查看",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "close": "关闭",
+    "confirm": "确认",
+    "yes": "是",
+    "no": "否",
+    "all": "全部",
+    "none": "无",
+    "select": "选择",
+    "selected": "已选择",
+    "of": "共",
+    "results": "结果",
+    "noResults": "无结果",
+    "priceOnRequest": "价格面议",
+    "more": "更多",
+    "less": "更少",
+    "showMore": "显示更多",
+    "showLess": "显示更少"
+  },
+  "navigation": {
+    "home": "首页",
+    "listings": "矿产列表",
+    "map": "地图",
+    "companies": "公司",
+    "services": "服务",
+    "knowledge": "知识库",
+    "news": "新闻",
+    "about": "关于我们",
+    "contact": "联系方式",
+    "dashboard": "控制面板",
+    "favorites": "收藏",
+    "messages": "消息",
+    "settings": "设置",
+    "profile": "个人资料",
+    "logout": "退出",
+    "login": "登录",
+    "register": "注册"
+  },
+  "hero": {
+    "title": "哈萨克斯坦矿产资源数字平台",
+    "subtitle": "为您的业务找到完美的矿床",
+    "searchPlaceholder": "按名称、地区或矿物搜索",
+    "searchButton": "查找矿床",
+    "createListing": "发布许可证",
+    "trustedBadge": "官方平台 • 安全交易",
+    "features": {
+      "verified": "认证卖家",
+      "legal": "法律支持",
+      "direct": "直接联系"
+    },
+    "stats": {
+      "listings": "活跃列表",
+      "companies": "公司",
+      "deals": "成功交易"
+    }
+  },
+  "listings": {
+    "title": "矿产资源",
+    "found": "找到 {count} 个矿床",
+    "showing": "显示 {shown} 个结果",
+    "page": "第 {current} 页，共 {total} 页",
+    "viewMode": {
+      "list": "列表",
+      "map": "地图"
+    },
+    "sort": {
+      "label": "排序方式",
+      "newest": "最新优先",
+      "oldest": "最早优先",
+      "priceAsc": "价格升序",
+      "priceDesc": "价格降序",
+      "areaAsc": "面积升序",
+      "areaDesc": "面积降序",
+      "views": "最受欢迎"
+    },
+    "filters": {
+      "title": "筛选器",
+      "reset": "重置",
+      "apply": "应用",
+      "region": "地区",
+      "mineral": "矿物",
+      "type": "许可证类型",
+      "price": "价格",
+      "priceMin": "最低",
+      "priceMax": "最高",
+      "area": "面积",
+      "areaMin": "最小 km²",
+      "areaMax": "最大 km²",
+      "status": "状态",
+      "verified": "仅认证",
+      "featured": "仅推荐"
+    },
+    "types": {
+      "MINING_LICENSE": "开采许可证",
+      "EXPLORATION_LICENSE": "勘探许可证",
+      "MINERAL_OCCURRENCE": "矿点"
+    },
+    "status": {
+      "ACTIVE": "活跃",
+      "PENDING": "待定",
+      "SOLD": "已售"
+    },
+    "card": {
+      "area": "面积",
+      "license": "许可证",
+      "reserves": "储量",
+      "perSquareKm": "每平方公里",
+      "views": "浏览",
+      "interested": "感兴趣",
+      "questions": "问题",
+      "expires": "有效期至",
+      "perpetual": "永久",
+      "verified": "已认证",
+      "featured": "推荐",
+      "new": "新",
+      "hot": "热门",
+      "details": "详情",
+      "compare": "比较",
+      "favorite": "收藏"
+    }
+  },
+  "minerals": {
+    "oil": "石油",
+    "gas": "天然气",
+    "gold": "黄金",
+    "copper": "铜",
+    "coal": "煤炭",
+    "uranium": "铀",
+    "iron": "铁",
+    "other": "其他"
+  },
+  "regions": {
+    "mangystau": "曼格斯套州",
+    "atyrau": "阿特劳州",
+    "aktobe": "阿克托别州",
+    "karaganda": "卡拉干达州",
+    "eastkz": "东哈萨克斯坦州",
+    "pavlodar": "巴甫洛达尔州",
+    "kostanay": "库斯塔奈州",
+    "northkz": "北哈萨克斯坦州",
+    "akmola": "阿克莫拉州",
+    "almaty": "阿拉木图州",
+    "zhambyl": "江布尔州",
+    "turkestan": "突厥斯坦州",
+    "kyzylorda": "克孜勒奥尔达州",
+    "westkz": "西哈萨克斯坦州"
+  },
+  "auth": {
+    "login": {
+      "title": "登录",
+      "email": "电子邮箱",
+      "password": "密码",
+      "rememberMe": "记住我",
+      "forgotPassword": "忘记密码？",
+      "submit": "登录",
+      "noAccount": "没有账户？",
+      "register": "注册",
+      "orContinueWith": "或继续使用",
+      "errors": {
+        "invalidCredentials": "邮箱或密码无效",
+        "accountLocked": "账户已锁定",
+        "networkError": "网络错误"
+      }
+    },
+    "register": {
+      "title": "注册",
+      "name": "姓名",
+      "company": "公司",
+      "email": "电子邮箱",
+      "phone": "电话",
+      "password": "密码",
+      "confirmPassword": "确认密码",
+      "accountType": "账户类型",
+      "buyer": "买家",
+      "seller": "卖家",
+      "both": "买家和卖家",
+      "agreeToTerms": "我同意服务条款",
+      "submit": "注册",
+      "haveAccount": "已有账户？",
+      "login": "登录",
+      "errors": {
+        "emailExists": "邮箱已注册",
+        "passwordMismatch": "密码不匹配",
+        "weakPassword": "密码太弱",
+        "termsRequired": "必须接受条款"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "控制面板",
+    "welcome": "欢迎，{name}！",
+    "overview": "概览",
+    "myListings": "我的列表",
+    "analytics": "分析",
+    "messages": "消息",
+    "favorites": "收藏",
+    "settings": "设置",
+    "stats": {
+      "totalListings": "总列表",
+      "activeListings": "活跃",
+      "totalViews": "总浏览量",
+      "todayViews": "今日",
+      "totalInquiries": "总询问",
+      "pendingInquiries": "待回复"
+    },
+    "recentActivity": "最近活动",
+    "quickActions": {
+      "title": "快速操作",
+      "createListing": "创建列表",
+      "viewAnalytics": "查看分析",
+      "manageProfile": "管理资料",
+      "support": "支持"
+    }
+  },
+  "services": {
+    "title": "矿业公司服务",
+    "subtitle": "采矿业综合解决方案",
+    "categories": {
+      "geological": {
+        "title": "地质服务",
+        "description": "勘探、储量评估、地质调查"
+      },
+      "legal": {
+        "title": "法律服务",
+        "description": "许可证注册、合同、咨询"
+      },
+      "equipment": {
+        "title": "设备",
+        "description": "采矿设备租赁和销售"
+      },
+      "investors": {
+        "title": "投资者",
+        "description": "寻找投资、合作伙伴、融资"
+      }
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "关于平台",
+      "description": "QAZNEDR.KZ - 哈萨克斯坦首个采矿业数字B2B平台"
+    },
+    "links": {
+      "title": "有用链接",
+      "about": "关于我们",
+      "howItWorks": "如何运作",
+      "pricing": "定价",
+      "blog": "博客",
+      "support": "支持"
+    },
+    "legal": {
+      "title": "法律信息",
+      "terms": "服务条款",
+      "privacy": "隐私政策",
+      "cookies": "Cookie政策"
+    },
+    "contact": {
+      "title": "联系方式",
+      "address": "哈萨克斯坦，阿拉木图",
+      "phone": "+7 (727) 123-45-67",
+      "email": "info@qaznedr.kz"
+    },
+    "copyright": "© 2025 QAZNEDR.KZ。保留所有权利。"
+  }
+}

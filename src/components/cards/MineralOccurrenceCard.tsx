@@ -2,32 +2,20 @@
 
 import Link from 'next/link';
 import { KazakhstanDeposit } from '@/lib/types/listing';
+import { formatPrice } from '@/lib/utils/format';
+import { getMineralIcon } from '@/components/icons';
 
 interface MineralOccurrenceCardProps {
   deposit: KazakhstanDeposit;
-  formatPrice: (price: number | null) => string;
   getStatusColor: (status: string) => string;
   getStatusText: (status: string) => string;
 }
 
 export default function MineralOccurrenceCard({
   deposit,
-  formatPrice,
   getStatusColor,
   getStatusText,
 }: MineralOccurrenceCardProps) {
-  const getMineralIcon = (mineral: string) => {
-    const icons: Record<string, string> = {
-      Нефть: '🛢️',
-      Газ: '⛽',
-      Золото: '🥇',
-      Медь: '🔶',
-      Уголь: '⚫',
-      Уран: '☢️',
-      Железо: '🔩',
-    };
-    return icons[mineral] || '⛏️';
-  };
 
   const getConfidenceText = (confidence?: string) => {
     const confidences: Record<string, string> = {
@@ -61,27 +49,30 @@ export default function MineralOccurrenceCard({
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
       {/* Image */}
-      <div className="aspect-[4/3] relative bg-gradient-to-br from-purple-50 to-purple-100">
+      <div className="aspect-[4/3] relative bg-gray-50">
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-6xl">{getMineralIcon(deposit.mineral)}</span>
+          {(() => {
+            const Icon = getMineralIcon(deposit.mineral);
+            return <Icon className="w-20 h-20 text-blue-600 opacity-60" />;
+          })()}
         </div>
 
         {/* Type Badge */}
         <div className="absolute top-2 left-2">
-          <span className="bg-purple-600 text-white px-3 py-1 rounded-md text-xs font-medium">
-            💎 Рудопроявление
+          <span className="bg-blue-600 text-white px-3 py-1 rounded-md text-xs font-medium">
+            Рудопроявление
           </span>
         </div>
 
         {/* Badges */}
         <div className="absolute top-2 right-2 flex flex-col gap-1">
           {deposit.featured && (
-            <span className="bg-yellow-500 text-white px-2 py-1 rounded-md text-xs font-medium">
-              ⭐ Рекомендуем
+            <span className="bg-gray-700 text-white px-2 py-1 rounded-md text-xs font-medium">
+              Рекомендуем
             </span>
           )}
           {deposit.verified && (
-            <span className="bg-green-600 text-white px-2 py-1 rounded-md text-xs font-medium">
+            <span className="bg-blue-600 text-white px-2 py-1 rounded-md text-xs font-medium">
               ✓ Проверено
             </span>
           )}

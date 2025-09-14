@@ -54,32 +54,12 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="//www.google-analytics.com" />
-        <link rel="dns-prefetch" href="//vercel.live" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ErrorBoundary>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <div className="flex min-h-screen flex-col">
-              <NavigationSimple />
-              <main className="flex-1">
-                {children}
-              </main>
-            </div>
-          </NextIntlClientProvider>
-        </ErrorBoundary>
-        <Analytics />
-        <SpeedInsights />
+    <html lang={locale}>
+      <body>
+        <h1>Test Page - Locale: {locale}</h1>
+        <div>
+          {children}
+        </div>
       </body>
     </html>
   );

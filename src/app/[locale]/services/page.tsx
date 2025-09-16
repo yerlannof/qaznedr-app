@@ -109,12 +109,10 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-              Экосистема горнодобывающих услуг
+              {t('services.hero.title')}
             </h1>
             <p className="text-xl text-blue-100 dark:text-blue-200 mb-8 max-w-3xl mx-auto">
-              Полный спектр профессиональных услуг для горнодобывающей отрасли
-              Казахстана. От геологической разведки до инвестиционного
-              сопровождения.
+              {t('services.hero.subtitle')}
             </p>
 
             {/* Search */}
@@ -123,7 +121,7 @@ export default function ServicesPage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Найдите нужную услугу или поставщика..."
+                placeholder={t('services.hero.searchPlaceholder')}
                 className="w-full px-6 py-4 rounded-full text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-600"
               />
               <Button
@@ -142,11 +140,10 @@ export default function ServicesPage() {
         <section className="mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Категории услуг
+              {t('services.sections.categories')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Выберите категорию услуг и найдите проверенных поставщиков в вашем
-              регионе
+              {t('services.sections.categoriesSubtitle')}
             </p>
           </div>
 

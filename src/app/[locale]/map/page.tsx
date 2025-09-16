@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Navigation from '@/components/layouts/Navigation';
 import { Map as MapIcon, Loader2 } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
 
 // Dynamic import for map component to avoid SSR issues
 const ListingsMap = dynamic(
@@ -22,6 +23,8 @@ const ListingsMap = dynamic(
 );
 
 export default function MapPage() {
+  const { t } = useTranslation();
+
   return (
     <div className="h-screen flex flex-col">
       <Navigation />
@@ -32,12 +35,12 @@ export default function MapPage() {
           <div className="flex items-center gap-2">
             <MapIcon className="w-5 h-5 text-gray-600" />
             <h1 className="text-lg font-semibold text-gray-900">
-              Карта месторождений Казахстана
+              {t('map.title')}
             </h1>
           </div>
 
           <div className="text-sm text-gray-600">
-            Используйте карту для поиска месторождений по регионам
+            {t('map.subtitle')}
           </div>
         </div>
       </div>
@@ -47,7 +50,10 @@ export default function MapPage() {
         <Suspense
           fallback={
             <div className="w-full h-full flex items-center justify-center bg-gray-100">
-              <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+              <div className="text-center">
+                <Loader2 className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-2" />
+                <p className="text-gray-600">{t('common.loading')}</p>
+              </div>
             </div>
           }
         >

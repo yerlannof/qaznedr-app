@@ -28,7 +28,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   // Validate that the incoming locale is valid
-  const validLocales = ['ru', 'kz', 'en'];
+  const validLocales = ['ru', 'kz', 'en', 'zh'];
   if (!validLocales.includes(locale)) {
     notFound();
   }

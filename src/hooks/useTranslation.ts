@@ -86,6 +86,10 @@ const translations = {
       dataLoadFailed:
         'Не удалось загрузить данные. Попробуйте обновить страницу.',
     },
+    map: {
+      title: 'Карта месторождений Казахстана',
+      subtitle: 'Используйте карту для поиска месторождений по регионам',
+    },
     common: {
       dashboard: 'Личный кабинет',
       favorites: 'Избранное',
@@ -98,6 +102,35 @@ const translations = {
       close: 'Закрыть',
     },
     services: {
+      hero: {
+        title: 'Экосистема горнодобывающих услуг',
+        subtitle: 'Полный спектр профессиональных услуг для горнодобывающей отрасли Казахстана. От геологической разведки до инвестиционного сопровождения.',
+        searchPlaceholder: 'Найдите нужную услугу или поставщика...',
+      },
+      sections: {
+        categories: 'Категории услуг',
+        categoriesSubtitle: 'Выберите категорию услуг и найдите проверенных поставщиков в вашем регионе',
+        informationCenter: 'Информационный центр',
+        informationCenterSubtitle: 'Актуальная информация, новости отрасли и база знаний для профессионалов',
+      },
+      knowledge: {
+        knowledgeBase: 'База знаний',
+        knowledgeBaseDesc: 'Техническая документация, стандарты, регламенты',
+        industryNews: 'Новости отрасли',
+        industryNewsDesc: 'Актуальные новости горнодобывающей промышленности Казахстана',
+        materials: 'материалов',
+      },
+      cta: {
+        title: 'Хотите разместить свои услуги?',
+        subtitle: 'Присоединяйтесь к нашей экосистеме и найдите новых клиентов в горнодобывающей отрасли Казахстана',
+        listServices: 'Разместить услуги',
+        contactUs: 'Связаться с нами',
+      },
+      stats: {
+        providers: 'поставщиков',
+        projects: 'проектов',
+        viewAll: 'Смотреть все',
+      },
       categories: {
         drilling: 'Бурение',
         exploration: 'Геологоразведка',
@@ -304,6 +337,10 @@ const translations = {
       dataLoadFailed:
         'Деректерді жүктеу мүмкін болмады. Бетті жаңартып көріңіз.',
     },
+    map: {
+      title: 'Қазақстанның кен орындарының картасы',
+      subtitle: 'Аймақтар бойынша кен орындарын іздеу үшін картаны пайдаланыңыз',
+    },
     common: {
       dashboard: 'Жеке кабинет',
       favorites: 'Таңдаулылар',
@@ -443,6 +480,10 @@ const translations = {
       loadingError: 'Loading Error',
       dataLoadFailed: 'Failed to load data. Please try refreshing the page.',
     },
+    map: {
+      title: 'Kazakhstan Mineral Deposits Map',
+      subtitle: 'Use the map to search for deposits by regions',
+    },
     common: {
       dashboard: 'Dashboard',
       favorites: 'Favorites',
@@ -579,6 +620,10 @@ const translations = {
       errorDetails: '错误详情（仅限开发）',
       loadingError: '加载错误',
       dataLoadFailed: '数据加载失败。请尝试刷新页面。',
+    },
+    map: {
+      title: '哈萨克斯坦矿物资源分布图',
+      subtitle: '使用地图按地区搜索矿物资源',
     },
     common: {
       dashboard: '仪表板',

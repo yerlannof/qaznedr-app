@@ -10,16 +10,16 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-blue-600 text-white shadow hover:bg-blue-700 hover:shadow-md focus-visible:ring-blue-600',
+          'bg-blue-600 text-white shadow hover:bg-blue-700 hover:shadow-md focus-visible:ring-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700',
         destructive:
-          'bg-gray-700 text-white shadow-sm hover:bg-gray-800 hover:shadow-md focus-visible:ring-gray-700',
+          'bg-gray-700 text-white shadow-sm hover:bg-gray-800 hover:shadow-md focus-visible:ring-gray-700 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700',
         outline:
-          'border border-gray-300 bg-white text-gray-900 shadow-sm hover:bg-gray-50 hover:border-gray-400 focus-visible:ring-gray-400',
+          'border border-gray-300 bg-white text-gray-900 shadow-sm hover:bg-gray-50 hover:border-gray-400 focus-visible:ring-gray-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:border-gray-500',
         secondary:
-          'bg-gray-100 text-gray-900 shadow-sm hover:bg-gray-200 hover:shadow-md focus-visible:ring-gray-400',
+          'bg-gray-100 text-gray-900 shadow-sm hover:bg-gray-200 hover:shadow-md focus-visible:ring-gray-400 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600',
         ghost:
-          'text-gray-900 hover:bg-gray-100 hover:text-gray-900 focus-visible:ring-gray-400',
-        link: 'text-blue-600 underline-offset-4 hover:underline hover:text-blue-700 focus-visible:ring-blue-600',
+          'text-gray-900 hover:bg-gray-100 hover:text-gray-900 focus-visible:ring-gray-400 dark:text-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-100',
+        link: 'text-blue-600 underline-offset-4 hover:underline hover:text-blue-700 focus-visible:ring-blue-600 dark:text-blue-400 dark:hover:text-blue-300',
       },
       size: {
         default: 'h-10 px-4 py-2',

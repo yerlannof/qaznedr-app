@@ -30,20 +30,22 @@ export default function ExplorationLicenseDetails({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-      <h2 className="text-xl font-semibold text-gray-900 mb-4">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
         🔍 Информация о лицензии на разведку
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">Стадия разведки</h3>
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="text-green-800 font-medium">
+            <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
+              Стадия разведки
+            </h3>
+            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3">
+              <p className="text-green-800 dark:text-green-300 font-medium">
                 {getExplorationStageText(deposit.explorationStage)}
               </p>
-              <p className="text-green-700 text-sm mt-1">
+              <p className="text-green-700 dark:text-green-400 text-sm mt-1">
                 {getStageDescription(deposit.explorationStage)}
               </p>
             </div>
@@ -51,11 +53,11 @@ export default function ExplorationLicenseDetails({
 
           {deposit.explorationPeriod && (
             <div>
-              <h3 className="font-medium text-gray-900 mb-2">
+              <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
                 Период проведения работ
               </h3>
               <div className="space-y-2">
-                <p className="text-gray-700">
+                <p className="text-gray-700 dark:text-gray-300">
                   <span className="font-medium">Начало:</span>{' '}
                   {new Date(deposit.explorationPeriod.start).toLocaleDateString(
                     'ru-RU',
@@ -66,7 +68,7 @@ export default function ExplorationLicenseDetails({
                     }
                   )}
                 </p>
-                <p className="text-gray-700">
+                <p className="text-gray-700 dark:text-gray-300">
                   <span className="font-medium">Окончание:</span>{' '}
                   {new Date(deposit.explorationPeriod.end).toLocaleDateString(
                     'ru-RU',
@@ -82,7 +84,7 @@ export default function ExplorationLicenseDetails({
           )}
 
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">
+            <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
               Полезное ископаемое
             </h3>
             <p className="text-gray-700 text-lg font-medium">
@@ -94,7 +96,7 @@ export default function ExplorationLicenseDetails({
         <div className="space-y-4">
           {deposit.explorationBudget && (
             <div>
-              <h3 className="font-medium text-gray-900 mb-2">
+              <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
                 Бюджет разведки
               </h3>
               <p className="text-gray-700">
@@ -107,7 +109,9 @@ export default function ExplorationLicenseDetails({
           )}
 
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">Площадь участка</h3>
+            <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
+              Площадь участка
+            </h3>
             <p className="text-gray-700">
               <span className="text-xl font-bold text-green-600">
                 {deposit.area.toLocaleString()}
@@ -117,8 +121,10 @@ export default function ExplorationLicenseDetails({
           </div>
 
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">Статус участка</h3>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+            <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
+              Статус участка
+            </h3>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
               🔍 Разведка
             </span>
           </div>
@@ -126,12 +132,12 @@ export default function ExplorationLicenseDetails({
       </div>
 
       {/* Exploration Requirements */}
-      <div className="mt-6 pt-6 border-t border-gray-200">
+      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
         <h3 className="font-medium text-gray-900 mb-3">
           📊 Особенности разведочных работ
         </h3>
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-          <ul className="space-y-2 text-sm text-green-800">
+        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+          <ul className="space-y-2 text-sm text-green-800 dark:text-green-300">
             <li>✅ Геологическое изучение месторождения</li>
             <li>✅ Оценка запасов полезных ископаемых</li>
             <li>✅ Экологический мониторинг</li>

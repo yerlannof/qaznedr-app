@@ -3,14 +3,18 @@ import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const cardVariants = cva(
-  'rounded-xl border bg-white text-gray-900 transition-all',
+  'rounded-xl border bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-all',
   {
     variants: {
       variant: {
-        default: 'border-gray-200 shadow-sm hover:shadow-md',
-        elevated: 'border-gray-200 shadow-md hover:shadow-lg',
-        outline: 'border-gray-300 shadow-none hover:border-gray-400',
-        ghost: 'border-transparent shadow-none hover:bg-gray-50',
+        default:
+          'border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md dark:shadow-gray-900/20',
+        elevated:
+          'border-gray-200 dark:border-gray-700 shadow-md hover:shadow-lg dark:shadow-gray-900/30',
+        outline:
+          'border-gray-300 dark:border-gray-600 shadow-none hover:border-gray-400 dark:hover:border-gray-500',
+        ghost:
+          'border-transparent shadow-none hover:bg-gray-50 dark:hover:bg-gray-700/50',
       },
       padding: {
         none: 'p-0',
@@ -74,7 +78,11 @@ const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn('text-sm text-gray-600', className)} {...props} />
+  <p
+    ref={ref}
+    className={cn('text-sm text-gray-600 dark:text-gray-400', className)}
+    {...props}
+  />
 ));
 CardDescription.displayName = 'CardDescription';
 
@@ -112,7 +120,7 @@ const CardImage = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        'relative overflow-hidden rounded-t-xl bg-gray-100',
+        'relative overflow-hidden rounded-t-xl bg-gray-100 dark:bg-gray-700',
         aspectClass,
         className
       )}
@@ -139,11 +147,13 @@ const CardBadge = React.forwardRef<
   }
 >(({ className, variant = 'default', ...props }, ref) => {
   const variantClasses = {
-    default: 'bg-gray-100 text-gray-800',
-    success: 'bg-green-100 text-green-800',
-    warning: 'bg-yellow-100 text-yellow-800',
-    error: 'bg-red-100 text-red-800',
-    info: 'bg-blue-100 text-blue-800',
+    default: 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200',
+    success:
+      'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400',
+    warning:
+      'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400',
+    error: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400',
+    info: 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400',
   }[variant];
 
   return (

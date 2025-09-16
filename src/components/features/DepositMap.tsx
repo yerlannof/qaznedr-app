@@ -160,7 +160,10 @@ function MapContent({
 
   return (
     <div
-      className={cn('relative', isFullscreen && 'fixed inset-0 z-50 bg-white')}
+      className={cn(
+        'relative',
+        isFullscreen && 'fixed inset-0 z-50 bg-white dark:bg-gray-900'
+      )}
     >
       {/* Map Controls */}
       <div className="absolute top-4 right-4 z-[1000] flex flex-col gap-2">
@@ -168,7 +171,7 @@ function MapContent({
           variant="secondary"
           size="icon"
           onClick={() => setIsFullscreen(!isFullscreen)}
-          className="h-10 w-10 bg-white shadow-md hover:bg-gray-50"
+          className="h-10 w-10 bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700"
         >
           {isFullscreen ? (
             <X className="h-4 w-4" />
@@ -180,7 +183,7 @@ function MapContent({
           variant="secondary"
           size="icon"
           onClick={resetView}
-          className="h-10 w-10 bg-white shadow-md hover:bg-gray-50"
+          className="h-10 w-10 bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700"
         >
           <RotateCcw className="h-4 w-4" />
         </Button>
@@ -188,7 +191,7 @@ function MapContent({
           variant="secondary"
           size="icon"
           onClick={zoomIn}
-          className="h-10 w-10 bg-white shadow-md hover:bg-gray-50"
+          className="h-10 w-10 bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700"
         >
           <ZoomIn className="h-4 w-4" />
         </Button>
@@ -196,7 +199,7 @@ function MapContent({
           variant="secondary"
           size="icon"
           onClick={zoomOut}
-          className="h-10 w-10 bg-white shadow-md hover:bg-gray-50"
+          className="h-10 w-10 bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700"
         >
           <ZoomOut className="h-4 w-4" />
         </Button>
@@ -204,7 +207,7 @@ function MapContent({
 
       {/* Legend */}
       <div className="absolute bottom-4 left-4 z-[1000]">
-        <Card className="p-3 bg-white/95 backdrop-blur-sm">
+        <Card className="p-3 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm">
           <div className="space-y-2">
             <h4 className="text-sm font-medium">Типы месторождений</h4>
             <div className="flex flex-col gap-1 text-xs">

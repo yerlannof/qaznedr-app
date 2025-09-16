@@ -1,33 +1,12 @@
-// import { notFound } from 'next/navigation';
-// import { NextIntlClientProvider } from 'next-intl';
-import { Geist, Geist_Mono } from 'next/font/google';
-import { AuthProvider } from '@/providers/AuthProvider';
-// import ruMessages from '../../../messages/ru.json';
+import { ReactNode } from 'react';
+import type { Metadata } from 'next';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-  display: 'swap',
-  preload: true,
-});
+export const metadata: Metadata = {
+  title: 'QAZNEDR.KZ - Kazakhstan Mining Platform',
+  description:
+    'Platform for buying and selling mineral deposits and licenses in Kazakhstan',
+};
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  display: 'swap',
-  preload: false,
-});
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="ru" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <AuthProvider>{children}</AuthProvider>
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return children;
 }

@@ -1,30 +1,35 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 14
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/.db5f93422384aac84324693defe44678e21d5975-audit.json",
+  "files": [
+    {
+      "date": 1757621236489,
+      "name": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/mcp-puppeteer-2025-09-12.log",
+      "hash": "5d5089b6a279f5fba6fe33e2854b28c52c0beac7ebeecb50e70ad2a6f17c5d7c"
     },
-    "auditLog": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/.db5f93422384aac84324693defe44678e21d5975-audit.json",
-    "files": [
-        {
-            "date": 1757621236489,
-            "name": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/mcp-puppeteer-2025-09-12.log",
-            "hash": "5d5089b6a279f5fba6fe33e2854b28c52c0beac7ebeecb50e70ad2a6f17c5d7c"
-        },
-        {
-            "date": 1757708274148,
-            "name": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/mcp-puppeteer-2025-09-13.log",
-            "hash": "f18df240f85035a29e1ac643b09f137dd3b45b4387bf29a1fc484ae32029abb8"
-        },
-        {
-            "date": 1757794042580,
-            "name": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/mcp-puppeteer-2025-09-14.log",
-            "hash": "7a58e0e09c12cab82b1bd572fd4d47e056e814986155925c3a4d0dd26fbcaf85"
-        },
-        {
-            "date": 1757877711133,
-            "name": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/mcp-puppeteer-2025-09-15.log",
-            "hash": "2294559e369dbf1e3a59cfce0d4f3b85a3ec7bf4e0b5af843e674913eb78fc08"
-        }
-    ],
-    "hashType": "sha256"
+    {
+      "date": 1757708274148,
+      "name": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/mcp-puppeteer-2025-09-13.log",
+      "hash": "f18df240f85035a29e1ac643b09f137dd3b45b4387bf29a1fc484ae32029abb8"
+    },
+    {
+      "date": 1757794042580,
+      "name": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/mcp-puppeteer-2025-09-14.log",
+      "hash": "7a58e0e09c12cab82b1bd572fd4d47e056e814986155925c3a4d0dd26fbcaf85"
+    },
+    {
+      "date": 1757877711133,
+      "name": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/mcp-puppeteer-2025-09-15.log",
+      "hash": "2294559e369dbf1e3a59cfce0d4f3b85a3ec7bf4e0b5af843e674913eb78fc08"
+    },
+    {
+      "date": 1758003948241,
+      "name": "/Users/yerlankulumgariyev/Documents/qaznedr-app/logs/mcp-puppeteer-2025-09-16.log",
+      "hash": "fa878a91bd8159d0e64b990b8424381c79bc5cabf9ca3033576a9f790c19fe4f"
+    }
+  ],
+  "hashType": "sha256"
 }

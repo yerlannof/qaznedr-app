@@ -160,7 +160,9 @@ function FiltersContent() {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <Filter className="w-5 h-5 text-gray-600" />
-          <h2 className="text-lg font-semibold text-gray-900">Фильтры</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            Фильтры
+          </h2>
           {activeFiltersCount > 0 && (
             <Badge variant="secondary" className="ml-2">
               {activeFiltersCount}
@@ -191,12 +193,12 @@ function FiltersContent() {
       {/* Filter Sections */}
       <div className="space-y-4">
         {/* Type Filter */}
-        <div className="border-b border-gray-200 pb-4">
+        <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
           <button
             onClick={() => toggleSection('type')}
             className="flex items-center justify-between w-full text-left"
           >
-            <span className="text-sm font-medium text-gray-900">
+            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
               Тип объявления
             </span>
             {expandedSections.type ? (
@@ -207,7 +209,7 @@ function FiltersContent() {
           </button>
           {expandedSections.type && (
             <div className="mt-3 space-y-2">
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -223,7 +225,7 @@ function FiltersContent() {
                   {Object.values(resultCounts.types).reduce((a, b) => a + b, 0)}
                 </span>
               </label>
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -243,7 +245,7 @@ function FiltersContent() {
                   {resultCounts.types.MINING_LICENSE}
                 </span>
               </label>
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -263,7 +265,7 @@ function FiltersContent() {
                   {resultCounts.types.EXPLORATION_LICENSE}
                 </span>
               </label>
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -286,12 +288,12 @@ function FiltersContent() {
         </div>
 
         {/* Price Range Filter */}
-        <div className="border-b border-gray-200 pb-4">
+        <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
           <button
             onClick={() => toggleSection('price')}
             className="flex items-center justify-between w-full text-left"
           >
-            <span className="text-sm font-medium text-gray-900 flex items-center gap-2">
+            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 flex items-center gap-2">
               <DollarSign className="w-4 h-4" />
               Цена (млрд ₸)
             </span>
@@ -350,12 +352,12 @@ function FiltersContent() {
         </div>
 
         {/* Region Filter */}
-        <div className="border-b border-gray-200 pb-4">
+        <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
           <button
             onClick={() => toggleSection('region')}
             className="flex items-center justify-between w-full text-left"
           >
-            <span className="text-sm font-medium text-gray-900 flex items-center gap-2">
+            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 flex items-center gap-2">
               <MapPin className="w-4 h-4" />
               Регион
             </span>
@@ -367,7 +369,7 @@ function FiltersContent() {
           </button>
           {expandedSections.region && (
             <div className="mt-3 max-h-60 overflow-y-auto space-y-1">
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -383,7 +385,7 @@ function FiltersContent() {
               {REGIONS.map((region) => (
                 <label
                   key={region}
-                  className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors"
+                  className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors"
                 >
                   <div className="flex items-center">
                     <input
@@ -406,12 +408,12 @@ function FiltersContent() {
         </div>
 
         {/* Mineral Filter */}
-        <div className="border-b border-gray-200 pb-4">
+        <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
           <button
             onClick={() => toggleSection('mineral')}
             className="flex items-center justify-between w-full text-left"
           >
-            <span className="text-sm font-medium text-gray-900 flex items-center gap-2">
+            <span className="text-sm font-medium text-gray-900 dark:text-gray-100 flex items-center gap-2">
               <Gem className="w-4 h-4" />
               Полезное ископаемое
             </span>
@@ -423,7 +425,7 @@ function FiltersContent() {
           </button>
           {expandedSections.mineral && (
             <div className="mt-3 space-y-1">
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -439,7 +441,7 @@ function FiltersContent() {
               {MINERALS.map((mineral) => (
                 <label
                   key={mineral}
-                  className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors"
+                  className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors"
                 >
                   <div className="flex items-center">
                     <input
@@ -467,7 +469,7 @@ function FiltersContent() {
             onClick={() => toggleSection('other')}
             className="flex items-center justify-between w-full text-left"
           >
-            <span className="text-sm font-medium text-gray-900">
+            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
               Дополнительные фильтры
             </span>
             {expandedSections.other ? (
@@ -478,7 +480,7 @@ function FiltersContent() {
           </button>
           {expandedSections.other && (
             <div className="mt-3 space-y-3">
-              <label className="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
+              <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
                 <input
                   type="checkbox"
                   className="mr-3 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
@@ -498,8 +500,8 @@ function FiltersContent() {
       </div>
 
       {/* Sorting */}
-      <div className="border-t border-gray-200 pt-4">
-        <label className="block text-sm font-medium text-gray-900 mb-3 flex items-center gap-2">
+      <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+        <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
           <TrendingUp className="w-4 h-4" />
           Сортировка
         </label>
@@ -519,8 +521,8 @@ function FiltersContent() {
       </div>
 
       {/* Quick Filter Tags */}
-      <div className="border-t border-gray-200 pt-4 mt-4">
-        <label className="block text-sm font-medium text-gray-900 mb-3">
+      <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
+        <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">
           Быстрые фильтры
         </label>
         <div className="flex flex-wrap gap-2">
@@ -558,7 +560,7 @@ function FiltersContent() {
       <div className="hidden lg:block">
         <div
           className={cn(
-            'bg-white rounded-lg shadow-sm border border-gray-200 p-6 transition-all',
+            'bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-all',
             isSticky && 'sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto'
           )}
         >
@@ -596,7 +598,7 @@ function FiltersContent() {
 
 function FiltersFallback() {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 dark:border-gray-700 p-6">
       <div className="animate-pulse">
         <div className="h-6 bg-gray-200 rounded-md w-32 mb-6"></div>
         <div className="space-y-4">

@@ -26,7 +26,7 @@ export default class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('ErrorBoundary caught an error:', error, errorInfo);
-    
+
     // Log to error tracking service in production
     if (process.env.NODE_ENV === 'production') {
       // Send to error tracking service (e.g., Sentry)
@@ -54,13 +54,14 @@ export default class ErrorBoundary extends Component<Props, State> {
               <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mb-4">
                 <AlertTriangle className="w-8 h-8 text-red-600 dark:text-red-400" />
               </div>
-              
+
               <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                 Что-то пошло не так
               </h1>
-              
+
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Произошла непредвиденная ошибка. Мы уже работаем над ее устранением.
+                Произошла непредвиденная ошибка. Мы уже работаем над ее
+                устранением.
               </p>
 
               {process.env.NODE_ENV === 'development' && this.state.error && (
@@ -82,7 +83,7 @@ export default class ErrorBoundary extends Component<Props, State> {
                   <RefreshCw className="w-4 h-4" />
                   Перезагрузить
                 </button>
-                
+
                 <Link
                   href="/"
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
@@ -113,7 +114,9 @@ export function AsyncErrorBoundary({ children }: { children: ReactNode }) {
               Не удалось загрузить данные
             </p>
             <button
-              onClick={() => typeof window !== 'undefined' && window.location.reload()}
+              onClick={() =>
+                typeof window !== 'undefined' && window.location.reload()
+              }
               className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               Попробовать снова

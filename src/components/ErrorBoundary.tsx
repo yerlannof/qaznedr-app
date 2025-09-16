@@ -2,11 +2,21 @@
 
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { trackError } from '@/lib/monitoring';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface Props {
   children: ReactNode;
   fallback?: ReactNode;
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
+  translations?: {
+    somethingWentWrong: string;
+    pageLoadError: string;
+    reloadPage: string;
+    tryAgain: string;
+    errorDetails: string;
+    loadingError: string;
+    dataLoadFailed: string;
+  };
 }
 
 interface State {
@@ -70,18 +80,20 @@ export class ErrorBoundary extends Component<Props, State> {
               </svg>
             </div>
             <h2 className="text-lg font-medium text-foreground mb-2">
-              Что-то пошло не так
+              {this.props.translations?.somethingWentWrong ||
+                'Что-то пошло не так'}
             </h2>
             <p className="text-sm text-muted-foreground mb-4">
-              Произошла ошибка при загрузке этой части страницы. Мы уже
-              уведомлены о проблеме.
+              {this.props.translations?.pageLoadError ||
+                'Произошла ошибка при загрузке этой части страницы. Мы уже уведомлены о проблеме.'}
             </p>
             <div className="space-y-2">
               <button
                 onClick={() => window.location.reload()}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors"
               >
-                Перезагрузить страницу
+                {this.props.translations?.reloadPage ||
+                  'Перезагрузить страницу'}
               </button>
               <div>
                 <button
@@ -94,7 +106,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   }
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Попробовать снова
+                  {this.props.translations?.tryAgain || 'Попробовать снова'}
                 </button>
               </div>
             </div>
@@ -102,7 +114,8 @@ export class ErrorBoundary extends Component<Props, State> {
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <details className="mt-6 text-left">
                 <summary className="cursor-pointer text-sm font-medium text-muted-foreground hover:text-foreground">
-                  Детали ошибки (только в разработке)
+                  {this.props.translations?.errorDetails ||
+                    'Детали ошибки (только в разработке)'}
                 </summary>
                 <div className="mt-2 p-3 bg-muted rounded-md">
                   <pre className="text-xs text-muted-foreground whitespace-pre-wrap">
@@ -174,4 +187,28 @@ export function AsyncErrorBoundary({
   );
 }
 
-export default ErrorBoundary;
+// Functional wrapper component that provides translations to ErrorBoundary
+export function ErrorBoundaryWithTranslations({
+  children,
+  ...props
+}: Omit<Props, 'translations'>) {
+  const { t } = useTranslation();
+
+  const translations = {
+    somethingWentWrong: t('errors.somethingWentWrong'),
+    pageLoadError: t('errors.pageLoadError'),
+    reloadPage: t('errors.reloadPage'),
+    tryAgain: t('errors.tryAgain'),
+    errorDetails: t('errors.errorDetails'),
+    loadingError: t('errors.loadingError'),
+    dataLoadFailed: t('errors.dataLoadFailed'),
+  };
+
+  return (
+    <ErrorBoundary translations={translations} {...props}>
+      {children}
+    </ErrorBoundary>
+  );
+}
+
+export default ErrorBoundaryWithTranslations;

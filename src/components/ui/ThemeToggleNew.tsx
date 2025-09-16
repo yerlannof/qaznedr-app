@@ -68,7 +68,10 @@ export function ThemeToggleDropdown() {
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -97,9 +100,15 @@ export function ThemeToggleDropdown() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        {theme === 'dark' && <Moon className="w-5 h-5 text-gray-700 dark:text-gray-300" />}
-        {theme === 'light' && <Sun className="w-5 h-5 text-gray-700 dark:text-gray-300" />}
-        {theme === 'system' && <Monitor className="w-5 h-5 text-gray-700 dark:text-gray-300" />}
+        {theme === 'dark' && (
+          <Moon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+        )}
+        {theme === 'light' && (
+          <Sun className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+        )}
+        {theme === 'system' && (
+          <Monitor className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+        )}
       </motion.button>
 
       <AnimatePresence>
@@ -124,9 +133,10 @@ export function ThemeToggleDropdown() {
                     className={`
                       w-full px-4 py-2 text-left text-sm flex items-center gap-3
                       transition-colors
-                      ${theme === t.value
-                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      ${
+                        theme === t.value
+                          ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                       }
                     `}
                     whileHover={{ x: 2 }}

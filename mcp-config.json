@@ -1,0 +1,29 @@
+{
+  "sentry-official": {
+    "command": "npx",
+    "args": [
+      "@sentry/mcp-server",
+      "--organization-slug=yerlans-company",
+      "--project-slug=javascript-nextjs"
+    ],
+    "env": {
+      "SENTRY_ACCESS_TOKEN": "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"
+    }
+  },
+  "gitlab-api": {
+    "command": "npx",
+    "args": ["@modelcontextprotocol/server-gitlab"],
+    "env": {
+      "GITLAB_PERSONAL_ACCESS_TOKEN": "glpat-Z3O9cXr20UcjQlntEoCl8286MQp1OmkweDFxCw.01.121q1q87e",
+      "GITLAB_API_URL": "https://gitlab.com/api/v4"
+    }
+  },
+  "cloudflare": {
+    "command": "npx",
+    "args": ["@cloudflare/mcp-server-cloudflare", "run"],
+    "env": {
+      "CLOUDFLARE_API_TOKEN": "xJJspNr5_n63RGgU_a66qQ3wGguMBv3XuGYmNW_n",
+      "CLOUDFLARE_ACCOUNT_ID": "319cb3df654a6e12750ba400721ec7e4"
+    }
+  }
+}

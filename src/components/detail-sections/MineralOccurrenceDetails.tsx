@@ -1,6 +1,7 @@
 'use client';
 
 import { KazakhstanDeposit } from '@/lib/types/listing';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface MineralOccurrenceDetailsProps {
   deposit: KazakhstanDeposit;
@@ -20,11 +21,16 @@ export default function MineralOccurrenceDetails({
 
   const getConfidenceColor = (confidence?: string) => {
     const colors: Record<string, string> = {
-      INFERRED: 'bg-gray-100 text-gray-800',
-      INDICATED: 'bg-blue-100 text-blue-800',
-      MEASURED: 'bg-blue-100 text-blue-800',
+      INFERRED: 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200',
+      INDICATED:
+        'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300',
+      MEASURED:
+        'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300',
     };
-    return colors[confidence || ''] || 'bg-gray-100 text-gray-800';
+    return (
+      colors[confidence || ''] ||
+      'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
+    );
   };
 
   const getAccessibilityText = (rating?: string) => {
@@ -39,12 +45,12 @@ export default function MineralOccurrenceDetails({
 
   const getAccessibilityColor = (rating?: string) => {
     const colors: Record<string, string> = {
-      EASY: 'text-blue-600',
-      MODERATE: 'text-gray-600',
-      DIFFICULT: 'text-gray-700',
-      VERY_DIFFICULT: 'text-gray-800',
+      EASY: 'text-blue-600 dark:text-blue-400',
+      MODERATE: 'text-gray-600 dark:text-gray-400',
+      DIFFICULT: 'text-gray-700 dark:text-gray-300',
+      VERY_DIFFICULT: 'text-gray-800 dark:text-gray-200',
     };
-    return colors[rating || ''] || 'text-gray-600';
+    return colors[rating || ''] || 'text-gray-600 dark:text-gray-400';
   };
 
   const getAccessibilityDescription = (rating?: string) => {
@@ -59,8 +65,8 @@ export default function MineralOccurrenceDetails({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-      <h2 className="text-xl font-semibold text-gray-900 mb-4">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
         💎 Информация о рудопроявлении
       </h2>
 
@@ -68,8 +74,10 @@ export default function MineralOccurrenceDetails({
         <div className="space-y-4">
           {deposit.discoveryDate && (
             <div>
-              <h3 className="font-medium text-gray-900 mb-2">Дата открытия</h3>
-              <p className="text-gray-700">
+              <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
+                Дата открытия
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300">
                 {new Date(deposit.discoveryDate).toLocaleDateString('ru-RU', {
                   year: 'numeric',
                   month: 'long',
@@ -92,10 +100,10 @@ export default function MineralOccurrenceDetails({
 
           {deposit.estimatedReserves && (
             <div>
-              <h3 className="font-medium text-gray-900 mb-2">
+              <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
                 Оценочные запасы
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 dark:text-gray-300">
                 <span className="text-2xl font-bold text-blue-600">
                   {deposit.estimatedReserves.toLocaleString()}
                 </span>{' '}
@@ -125,7 +133,7 @@ export default function MineralOccurrenceDetails({
               >
                 {getAccessibilityText(deposit.accessibilityRating)}
               </p>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
                 {getAccessibilityDescription(deposit.accessibilityRating)}
               </p>
             </div>
@@ -143,7 +151,7 @@ export default function MineralOccurrenceDetails({
 
           <div>
             <h3 className="font-medium text-gray-900 mb-2">Статус участка</h3>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300">
               💎 Рудопроявление
             </span>
           </div>
@@ -151,12 +159,12 @@ export default function MineralOccurrenceDetails({
       </div>
 
       {/* Investment Potential */}
-      <div className="mt-6 pt-6 border-t border-gray-200">
+      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
         <h3 className="font-medium text-gray-900 mb-3">
           📈 Инвестиционный потенциал
         </h3>
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <ul className="space-y-2 text-sm text-blue-800">
+        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+          <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-300">
             <li>💡 Возможность дальнейшей разведки и оценки запасов</li>
             <li>🔬 Потенциал для научных исследований</li>
             <li>📊 База для инвестиционных решений</li>

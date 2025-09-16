@@ -16,7 +16,6 @@ export default function MineralOccurrenceCard({
   getStatusColor,
   getStatusText,
 }: MineralOccurrenceCardProps) {
-
   const getConfidenceText = (confidence?: string) => {
     const confidences: Record<string, string> = {
       INFERRED: 'Предполагаемые',

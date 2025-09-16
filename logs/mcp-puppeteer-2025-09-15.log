@@ -3,3 +3,12 @@
 {"level":"info","message":"Navigating to URL","service":"mcp-puppeteer","timestamp":"2025-09-15 01:48:40.002","url":"https://qaznedr.vercel.app"}
 {"error":"Attempted to use detached Frame 'D189D679DCAF09C00AF36DE2A5EA4901'.","level":"error","message":"Navigation failed","service":"mcp-puppeteer","timestamp":"2025-09-15 01:48:40.009","url":"https://qaznedr.vercel.app"}
 {"arguments":{"debugPort":9222},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-15 01:48:45.909","tool":"puppeteer_connect_active_tab"}
+{"arguments":{"debugPort":9222},"level":"debug","message":"Tool call received","service":"mcp-puppeteer","timestamp":"2025-09-15 18:04:46.017","tool":"puppeteer_connect_active_tab"}
+{"level":"info","message":"Starting MCP server","service":"mcp-puppeteer","timestamp":"2025-09-15 21:17:33.480"}
+{"level":"info","message":"MCP server started successfully","service":"mcp-puppeteer","timestamp":"2025-09-15 21:17:33.481"}
+{"level":"info","message":"Puppeteer MCP Server closing","service":"mcp-puppeteer","timestamp":"2025-09-15 21:17:41.633"}
+{"level":"info","message":"Starting MCP server","service":"mcp-puppeteer","timestamp":"2025-09-15 21:25:26.478"}
+{"level":"info","message":"MCP server started successfully","service":"mcp-puppeteer","timestamp":"2025-09-15 21:25:26.479"}
+{"level":"info","message":"Puppeteer MCP Server closing","service":"mcp-puppeteer","timestamp":"2025-09-15 21:25:35.572"}
+{"level":"info","message":"Starting MCP server","service":"mcp-puppeteer","timestamp":"2025-09-15 22:36:52.933"}
+{"level":"info","message":"MCP server started successfully","service":"mcp-puppeteer","timestamp":"2025-09-15 22:36:52.934"}

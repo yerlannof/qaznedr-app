@@ -65,7 +65,10 @@ export default function InfiniteListings({
 
   useEffect(() => {
     if (data) {
-      const total = data.pages.reduce((acc, page) => acc + page.deposits.length, 0);
+      const total = data.pages.reduce(
+        (acc, page) => acc + page.deposits.length,
+        0
+      );
       setTotalLoaded(total);
     }
   }, [data]);
@@ -124,7 +127,8 @@ export default function InfiniteListings({
           Объявления не найдены
         </h3>
         <p className="text-gray-600 text-center max-w-md">
-          Попробуйте изменить параметры поиска или фильтры для получения результатов
+          Попробуйте изменить параметры поиска или фильтры для получения
+          результатов
         </p>
       </motion.div>
     );
@@ -200,7 +204,7 @@ export default function InfiniteListings({
             <p className="text-sm text-gray-600">Загрузка объявлений...</p>
           </motion.div>
         )}
-        
+
         {!hasNextPage && allDeposits.length > 0 && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}

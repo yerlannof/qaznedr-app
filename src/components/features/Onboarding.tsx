@@ -2,7 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronRight, ChevronLeft, Check, Search, MapPin, TrendingUp, Shield } from 'lucide-react';
+import {
+  X,
+  ChevronRight,
+  ChevronLeft,
+  Check,
+  Search,
+  MapPin,
+  TrendingUp,
+  Shield,
+} from 'lucide-react';
 
 interface OnboardingStep {
   title: string;
@@ -14,22 +23,26 @@ interface OnboardingStep {
 const onboardingSteps: OnboardingStep[] = [
   {
     title: 'Добро пожаловать в QAZNEDR',
-    description: 'Первая в Казахстане цифровая B2B платформа для горнодобывающей отрасли',
+    description:
+      'Первая в Казахстане цифровая B2B платформа для горнодобывающей отрасли',
     icon: TrendingUp,
   },
   {
     title: 'Найдите месторождения',
-    description: 'Используйте расширенный поиск и фильтры для поиска лицензий и рудопроявлений',
+    description:
+      'Используйте расширенный поиск и фильтры для поиска лицензий и рудопроявлений',
     icon: Search,
   },
   {
     title: 'Интерактивная карта',
-    description: 'Просматривайте все месторождения Казахстана на интерактивной карте',
+    description:
+      'Просматривайте все месторождения Казахстана на интерактивной карте',
     icon: MapPin,
   },
   {
     title: 'Безопасные сделки',
-    description: 'Мы проверяем все объявления и документы для вашей безопасности',
+    description:
+      'Мы проверяем все объявления и документы для вашей безопасности',
     icon: Shield,
   },
 ];
@@ -102,7 +115,7 @@ export default function Onboarding() {
             >
               <X className="w-5 h-5" />
             </button>
-            
+
             <div className="flex flex-col items-center text-center">
               <div className="w-20 h-20 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center mb-4">
                 <CurrentIcon className="w-10 h-10 text-white" />
@@ -126,8 +139,8 @@ export default function Onboarding() {
                   index === currentStep
                     ? 'w-8 bg-blue-600'
                     : index < currentStep
-                    ? 'w-2 bg-blue-400'
-                    : 'w-2 bg-gray-300 dark:bg-gray-700'
+                      ? 'w-2 bg-blue-400'
+                      : 'w-2 bg-gray-300 dark:bg-gray-700'
                 }`}
               />
             ))}
@@ -144,7 +157,7 @@ export default function Onboarding() {
                 Назад
               </button>
             )}
-            
+
             <button
               onClick={handleNext}
               className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
@@ -161,7 +174,7 @@ export default function Onboarding() {
                 </>
               )}
             </button>
-            
+
             {currentStep < onboardingSteps.length - 1 && (
               <button
                 onClick={handleSkip}
@@ -178,11 +191,11 @@ export default function Onboarding() {
 }
 
 // Mini tutorial tooltips
-export function TutorialTooltip({ 
-  target, 
-  title, 
+export function TutorialTooltip({
+  target,
+  title,
   description,
-  position = 'bottom'
+  position = 'bottom',
 }: {
   target: string;
   title: string;

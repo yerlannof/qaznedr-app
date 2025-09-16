@@ -77,7 +77,9 @@ const generateRecommendations = (
   userPreferences?: any
 ): Array<KazakhstanDeposit & { reason: string; score: number }> => {
   // This would normally come from an AI recommendation engine
-  const baseRecommendations: Array<KazakhstanDeposit & { reason: string; score: number }> = [
+  const baseRecommendations: Array<
+    KazakhstanDeposit & { reason: string; score: number }
+  > = [
     {
       id: 'rec-1',
       title: 'Месторождение Актюбинск Голд',
@@ -131,7 +133,7 @@ const generateRecommendations = (
       explorationStage: 'DETAILED' as const,
       explorationPeriod: {
         start: new Date('2025-01-01'),
-        end: new Date('2028-12-31')
+        end: new Date('2028-12-31'),
       },
       explorationBudget: 500000000,
     },
@@ -149,7 +151,7 @@ const generateRecommendations = (
       verified: false,
       views: 892,
       createdAt: new Date('2025-01-06'),
-      coordinates: [49.9480, 82.6274],
+      coordinates: [49.948, 82.6274],
       featured: false,
       status: 'ACTIVE' as const,
       images: [],
@@ -193,7 +195,7 @@ export function RecommendationCard({
 
   return (
     <motion.div
-      className="group bg-white rounded-xl border border-gray-100 overflow-hidden cursor-pointer"
+      className="group bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden cursor-pointer"
       whileHover={{
         y: -4,
         boxShadow:
@@ -347,7 +349,7 @@ export function RecentlyViewed({
 
   return (
     <div
-      className={`bg-white rounded-xl border border-gray-100 p-4 ${className}`}
+      className={`bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-4 ${className}`}
     >
       <div className="flex items-center space-x-2 mb-4">
         <History className="w-5 h-5 text-gray-600" />

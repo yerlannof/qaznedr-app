@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-// import { useLocale, useTranslations } from 'next-intl';
+import { useTranslation } from '@/hooks/useTranslation';
 import {
   Menu,
   MapPin,
@@ -31,8 +31,7 @@ export default function Navigation() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const locale = 'ru'; // hardcoded locale
-  const t = (key: string) => key; // temporary translation function
+  const { t, locale } = useTranslation();
 
   // Handle scroll progress and sticky header effect
   useEffect(() => {
@@ -52,11 +51,11 @@ export default function Navigation() {
   }, []);
 
   const navigation = [
-    { name: 'Объявления', href: '/listings', icon: MapPin },
-    { name: 'Карта', href: '/map', icon: MapPin },
-    { name: 'Услуги', href: '/services', icon: Briefcase },
-    { name: 'Компании', href: '/companies', icon: Building2 },
-    { name: 'Сообщения', href: '/messages', icon: MessageSquare },
+    { name: t('navigation.listings'), href: `/listings`, icon: MapPin },
+    { name: t('navigation.map'), href: `/map`, icon: MapPin },
+    { name: t('navigation.services'), href: `/services`, icon: Briefcase },
+    { name: t('navigation.companies'), href: `/companies`, icon: Building2 },
+    { name: t('navigation.messages'), href: `/messages`, icon: MessageSquare },
   ];
 
   const isActive = (href: string) => pathname === href;
@@ -64,12 +63,12 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 w-full bg-white z-50 border-b border-gray-200 transition-all duration-300 ${
+        className={`fixed top-0 w-full bg-white dark:bg-gray-900 z-50 border-b border-gray-200 dark:border-gray-700 transition-all duration-300 ${
           isScrolled ? 'shadow-md' : ''
         }`}
       >
         {/* Progress bar */}
-        <div className="absolute top-0 left-0 w-full h-0.5 bg-gray-200">
+        <div className="absolute top-0 left-0 w-full h-0.5 bg-gray-200 dark:bg-gray-700">
           <div
             className="h-full bg-blue-600 transition-all duration-150"
             style={{ width: `${scrollProgress}%` }}
@@ -84,7 +83,9 @@ export default function Navigation() {
                 <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-xl">Q</span>
                 </div>
-                <span className="font-bold text-xl text-gray-900">QAZNEDR</span>
+                <span className="font-bold text-xl text-gray-900 dark:text-gray-100">
+                  QAZNEDR
+                </span>
               </Link>
             </div>
 
@@ -105,8 +106,8 @@ export default function Navigation() {
                         px-4 py-2 rounded-lg text-sm font-medium transition-all
                         ${
                           isActive(item.href)
-                            ? 'bg-blue-50 text-blue-600'
-                            : 'text-gray-700 hover:bg-gray-50'
+                            ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                         }
                       `}
                     >
@@ -128,42 +129,42 @@ export default function Navigation() {
                 href={`/${locale}/listings/create`}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
               >
-                Создать объявление
+                {t('navigation.createListing')}
               </Link>
 
               <div className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                 >
-                  <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                    <User className="w-5 h-5 text-gray-600" />
+                  <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                    <User className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                   </div>
-                  <ChevronDown className="w-4 h-4 text-gray-600" />
+                  <ChevronDown className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                 </button>
 
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 border border-gray-200">
+                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-1 border border-gray-200 dark:border-gray-700">
                     <Link
                       href={`/${locale}/dashboard`}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
-                      Личный кабинет
+                      {t('common.dashboard')}
                     </Link>
                     <Link
                       href={`/${locale}/favorites`}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
-                      Избранное
+                      {t('common.favorites')}
                     </Link>
                     <hr className="my-1" />
                     <Link
                       href="/auth/login"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
                       <div className="flex items-center space-x-2">
                         <LogOut className="w-4 h-4" />
-                        <span>Выйти</span>
+                        <span>{t('common.logout')}</span>
                       </div>
                     </Link>
                   </div>
@@ -175,8 +176,8 @@ export default function Navigation() {
             <div className="flex md:hidden items-center gap-2">
               <Sheet>
                 <SheetTrigger asChild>
-                  <button className="p-2 rounded-lg hover:bg-gray-50 transition-colors">
-                    <Menu className="w-6 h-6 text-gray-600" />
+                  <button className="p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                    <Menu className="w-6 h-6 text-gray-600 dark:text-gray-400" />
                   </button>
                 </SheetTrigger>
                 <SheetContent
@@ -184,7 +185,9 @@ export default function Navigation() {
                   className="w-[320px] sm:w-[400px] p-0"
                 >
                   <SheetHeader className="border-b px-6 py-4">
-                    <SheetTitle className="text-left">Меню</SheetTitle>
+                    <SheetTitle className="text-left">
+                      {t('common.menu')}
+                    </SheetTitle>
                   </SheetHeader>
 
                   <div className="flex flex-col h-full">
@@ -224,7 +227,7 @@ export default function Navigation() {
                           className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
                         >
                           <User className="w-5 h-5" />
-                          <span>Личный кабинет</span>
+                          <span>{t('common.dashboard')}</span>
                         </Link>
 
                         <Link
@@ -244,7 +247,7 @@ export default function Navigation() {
                               d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                             />
                           </svg>
-                          <span>Избранное</span>
+                          <span>{t('common.favorites')}</span>
                         </Link>
                       </div>
                     </div>
@@ -260,12 +263,12 @@ export default function Navigation() {
                         className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
                       >
                         <Plus className="w-4 h-4" />
-                        <span>Создать объявление</span>
+                        <span>{t('navigation.createListing')}</span>
                       </Link>
 
                       <button className="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
                         <LogOut className="w-4 h-4" />
-                        <span>Выйти</span>
+                        <span>{t('common.logout')}</span>
                       </button>
                     </div>
                   </div>

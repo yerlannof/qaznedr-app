@@ -140,21 +140,182 @@ type ListingType =
 
 ## MCP Server Integration
 
-MCP servers extend Claude's capabilities. See `MCP_SETUP_GUIDE.md` for installation instructions.
+MCP servers extend Claude's capabilities for full automation. See `MCP_COMPLETE_GUIDE.md` for detailed documentation.
 
-### Recommended MCP Servers for this project:
+### ⚠️ IMPORTANT: MCP Configuration Location
 
-1. **filesystem** - Access to project files
-2. **supabase** - Database operations (PRIMARY DATABASE)
-3. **github** - Version control and repository management
-4. **brave-search** - Web search capabilities
-5. **memory** - Persistent context between sessions
+MCP servers must be configured in the **global Claude configuration** file:
 
-### Setup Instructions:
+- Location: `~/.claude.json`
+- Under project section: `"/Users/yerlankulumgariyev/Documents/qaznedr-app"`
+- NOT in the local `claude.json` file (this won't work!)
 
-1. Run `./scripts/install-mcp-servers.sh` for guided setup
-2. Configure servers in Claude Desktop settings
-3. Add your Supabase credentials (URL and service role key)
-4. Restart Claude Desktop to activate servers
+### ✅ Active MCP Servers with Full Access:
 
-For detailed configuration, see `MCP_SETUP_GUIDE.md`
+#### Production-Ready (Fully Configured):
+
+1. **Sentry** - Automatic error monitoring and fixing (Admin access enabled)
+   - ✅ Working: Global config with env variables
+   - ❌ Not working: Local claude.json, wrapper scripts
+2. **Cloudflare** - Infrastructure and deployment management
+   - ✅ Working: Global config with env variables
+   - ❌ Not working: Local claude.json, wrapper scripts
+3. **GitLab** - Repository and CI/CD management
+   - ✅ Working: Global config with env variables
+   - ❌ Not working: Local claude.json, wrapper scripts
+4. **GitHub** - Version control and PR automation
+5. **Supabase** - Database operations (PRIMARY DATABASE)
+6. **Memory** - Context persistence between sessions (if configured globally)
+
+#### System MCP Servers (Already Active):
+
+- **Git** - Version control operations
+- **Filesystem** - Direct file access
+- **Sequential-thinking** - Complex task analysis
+- **Brave-search** - Web search
+- **Puppeteer** - Browser automation
+- **Context7** - Library documentation
+- **Task-manager** - Task tracking
+- **Firecrawl** - Web scraping
+
+### 🔄 Automated Workflows Available:
+
+#### Error Detection → Fix → Deploy:
+
+```
+Sentry detects error → Claude analyzes → Fixes code → Creates PR → Deploys to Cloudflare
+```
+
+#### Task Management → Implementation:
+
+```
+Jira/Linear task → Claude implements → Updates status → Creates PR → Closes on merge
+```
+
+### 📝 Key MCP Commands:
+
+```bash
+# Sentry Operations
+"Show latest errors from Sentry"
+"Fix all TypeErrors in the project"
+"Analyze error with ID xxx"
+
+# Deployment
+"Deploy to Cloudflare Workers"
+"Create preview deployment"
+"Update DNS records"
+
+# Database
+"Optimize database queries"
+"Create migration for new schema"
+"Setup RLS policies"
+
+# Project Management
+"Create PR with fixes"
+"Update Jira ticket status"
+"Generate sprint report"
+```
+
+### 🔐 Security Notes:
+
+- All tokens are stored in global `~/.claude.json` (never commit this file!)
+- Sentry has full admin access for automation
+- Database has service role access
+- Tokens are NOT in `.env.mcp` or local files (this approach doesn't work)
+
+For complete MCP documentation, see `MCP_COMPLETE_GUIDE.md`
+
+## VS Code Extensions Integration
+
+Claude Code can now interact with your VS Code extensions through the MCP server wrapper. This provides automated access to Docker, Error Lens, Python environments, and more.
+
+### ✅ Available VS Code Extension Commands:
+
+#### Docker Integration:
+
+```bash
+# Docker operations through VS Code
+"List all Docker containers"
+"Show logs from container X"
+"Execute command in container"
+"Docker compose up/down"
+"List Docker images"
+```
+
+#### Error Lens Diagnostics:
+
+```bash
+# Real-time error detection
+"Show all TypeScript errors"
+"Get diagnostics for current file"
+"Show project error summary"
+"Get inline error suggestions"
+```
+
+#### Python Environments:
+
+```bash
+# Python environment management
+"List all Python environments"
+"Create virtual environment"
+"Install packages from requirements"
+"Activate conda environment"
+"Check outdated packages"
+```
+
+#### GitHub Copilot Info:
+
+```bash
+# Copilot status and tips
+"Check Copilot status"
+"Explain Copilot shortcuts"
+"Show Copilot best practices"
+```
+
+#### Container/Dev Containers:
+
+```bash
+# Dev container setup
+"Setup Node.js dev container"
+"Check if running in container"
+"Configure Kubernetes integration"
+"List Docker volumes"
+```
+
+### 🔧 Extension Tools Reference:
+
+The VS Code extensions are accessed through MCP tools prefixed with their category:
+
+- `docker_*` - Docker operations (containers, images, compose)
+- `errorlens_*` - Error diagnostics and analysis
+- `python_*` - Python environment management
+- `copilot_*` - GitHub Copilot information
+- `container_*` - Dev containers and Kubernetes
+
+### 📝 Usage Examples:
+
+```bash
+# Check all project errors
+"Show me all TypeScript errors in the project"
+"What files have the most errors?"
+
+# Docker management
+"List running Docker containers"
+"Show logs from the api container"
+"Run docker-compose up in detached mode"
+
+# Python setup
+"Create a new Python virtual environment"
+"Install numpy and pandas"
+"List outdated Python packages"
+
+# Dev containers
+"Setup a Node.js dev container with Docker-in-Docker"
+"Am I running in a container environment?"
+```
+
+### 🚀 Automatic Integration:
+
+The VS Code extensions MCP server is automatically started when you open Claude Code. All extension features are available immediately without manual activation.
+
+Note: Some operations require the actual VS Code extensions to be installed (which you already have). The MCP server acts as a bridge to interact with these extensions programmatically

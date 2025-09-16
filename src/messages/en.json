@@ -1,0 +1,24 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search"
+  },
+  "nav": {
+    "home": "Home",
+    "listings": "Listings",
+    "dashboard": "Dashboard",
+    "favorites": "Favorites",
+    "messages": "Messages",
+    "profile": "Profile"
+  },
+  "home": {
+    "title": "Welcome to QAZNEDR",
+    "subtitle": "Kazakhstan Mining License Trading Platform"
+  }
+}

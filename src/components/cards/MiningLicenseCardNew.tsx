@@ -69,7 +69,6 @@ export default function MiningLicenseCardNew({
       <div className="relative">
         <CardImage src={imageUrl} alt={deposit.title} aspectRatio="video" />
 
-
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           <CardBadge variant="info" className="bg-blue-600 text-white border-0">

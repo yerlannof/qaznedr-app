@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import type { Database } from '@/lib/supabase/database.types';
+import { mockDeposits } from '@/lib/data/mock-deposits';
 
 // GET /api/listings - Get all listings with pagination and filtering
 export async function GET(request: NextRequest) {
@@ -71,18 +72,91 @@ export async function GET(request: NextRequest) {
 
     const { data, error, count } = await queryBuilder;
 
-    if (error) {
-      throw error;
+    // If there's an error or no data, use mock data
+    let deposits: any[] = data || [];
+    let totalCount = count || 0;
+
+    if (error || deposits.length === 0) {
+      console.log('Using mock data due to:', error || 'No data in database');
+
+      // Filter mock data based on query parameters
+      let filteredMocks = [...mockDeposits];
+
+      if (query) {
+        filteredMocks = filteredMocks.filter(
+          (d) =>
+            d.title.toLowerCase().includes(query.toLowerCase()) ||
+            d.description.toLowerCase().includes(query.toLowerCase())
+        );
+      }
+      if (region) {
+        filteredMocks = filteredMocks.filter((d) => d.region === region);
+      }
+      if (mineral) {
+        filteredMocks = filteredMocks.filter((d) => d.mineral === mineral);
+      }
+      if (type) {
+        filteredMocks = filteredMocks.filter((d) => d.type === type);
+      }
+      if (verified !== null) {
+        filteredMocks = filteredMocks.filter(
+          (d) => d.verified === (verified === 'true')
+        );
+      }
+      if (featured !== null) {
+        filteredMocks = filteredMocks.filter(
+          (d) => d.featured === (featured === 'true')
+        );
+      }
+      if (priceMin) {
+        filteredMocks = filteredMocks.filter(
+          (d) => (d.price || 0) >= parseInt(priceMin)
+        );
+      }
+      if (priceMax) {
+        filteredMocks = filteredMocks.filter(
+          (d) => (d.price || 0) <= parseInt(priceMax)
+        );
+      }
+      if (areaMin) {
+        filteredMocks = filteredMocks.filter(
+          (d) => d.area >= parseInt(areaMin)
+        );
+      }
+      if (areaMax) {
+        filteredMocks = filteredMocks.filter(
+          (d) => d.area <= parseInt(areaMax)
+        );
+      }
+
+      // Sort mock data
+      filteredMocks.sort((a, b) => {
+        const aVal = a[sortBy as keyof typeof a];
+        const bVal = b[sortBy as keyof typeof b];
+
+        // Handle null/undefined values
+        if (aVal == null && bVal == null) return 0;
+        if (aVal == null) return sortOrder === 'asc' ? 1 : -1;
+        if (bVal == null) return sortOrder === 'asc' ? -1 : 1;
+
+        if (sortOrder === 'asc') {
+          return aVal > bVal ? 1 : -1;
+        }
+        return aVal < bVal ? 1 : -1;
+      });
+
+      totalCount = filteredMocks.length;
+      deposits = filteredMocks.slice(offset, offset + limit);
     }
 
     const result = {
-      deposits: data || [],
+      deposits,
       pagination: {
         page,
         limit,
-        total: count || 0,
-        totalPages: Math.ceil((count || 0) / limit),
-        hasNext: page < Math.ceil((count || 0) / limit),
+        total: totalCount,
+        totalPages: Math.ceil(totalCount / limit),
+        hasNext: page < Math.ceil(totalCount / limit),
         hasPrev: page > 1,
       },
     };

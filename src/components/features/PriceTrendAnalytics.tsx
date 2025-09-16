@@ -18,7 +18,13 @@ import {
   Pie,
   Cell,
 } from 'recharts';
-import { TrendingUp, TrendingDown, Minus, Calendar, Filter } from 'lucide-react';
+import {
+  TrendingUp,
+  TrendingDown,
+  Minus,
+  Calendar,
+  Filter,
+} from 'lucide-react';
 import { formatPrice } from '@/lib/utils/format';
 
 interface PriceTrendData {
@@ -36,12 +42,48 @@ interface MineralDistribution {
 }
 
 const mockPriceTrendData: PriceTrendData[] = [
-  { month: 'Янв', avgPrice: 450000000, minPrice: 350000000, maxPrice: 550000000, volume: 12 },
-  { month: 'Фев', avgPrice: 465000000, minPrice: 360000000, maxPrice: 570000000, volume: 15 },
-  { month: 'Мар', avgPrice: 480000000, minPrice: 380000000, maxPrice: 580000000, volume: 18 },
-  { month: 'Апр', avgPrice: 475000000, minPrice: 375000000, maxPrice: 575000000, volume: 14 },
-  { month: 'Май', avgPrice: 490000000, minPrice: 390000000, maxPrice: 590000000, volume: 20 },
-  { month: 'Июн', avgPrice: 510000000, minPrice: 410000000, maxPrice: 610000000, volume: 22 },
+  {
+    month: 'Янв',
+    avgPrice: 450000000,
+    minPrice: 350000000,
+    maxPrice: 550000000,
+    volume: 12,
+  },
+  {
+    month: 'Фев',
+    avgPrice: 465000000,
+    minPrice: 360000000,
+    maxPrice: 570000000,
+    volume: 15,
+  },
+  {
+    month: 'Мар',
+    avgPrice: 480000000,
+    minPrice: 380000000,
+    maxPrice: 580000000,
+    volume: 18,
+  },
+  {
+    month: 'Апр',
+    avgPrice: 475000000,
+    minPrice: 375000000,
+    maxPrice: 575000000,
+    volume: 14,
+  },
+  {
+    month: 'Май',
+    avgPrice: 490000000,
+    minPrice: 390000000,
+    maxPrice: 590000000,
+    volume: 20,
+  },
+  {
+    month: 'Июн',
+    avgPrice: 510000000,
+    minPrice: 410000000,
+    maxPrice: 610000000,
+    volume: 22,
+  },
 ];
 
 const mineralDistribution: MineralDistribution[] = [
@@ -54,16 +96,27 @@ const mineralDistribution: MineralDistribution[] = [
   { name: 'Железо', value: 2, percentage: 2 },
 ];
 
-const COLORS = ['#3B82F6', '#60A5FA', '#93C5FD', '#BFDBFE', '#DBEAFE', '#EFF6FF', '#F3F4F6'];
+const COLORS = [
+  '#3B82F6',
+  '#60A5FA',
+  '#93C5FD',
+  '#BFDBFE',
+  '#DBEAFE',
+  '#EFF6FF',
+  '#F3F4F6',
+];
 
 export default function PriceTrendAnalytics() {
-  const [selectedPeriod, setSelectedPeriod] = useState<'6m' | '1y' | 'all'>('6m');
+  const [selectedPeriod, setSelectedPeriod] = useState<'6m' | '1y' | 'all'>(
+    '6m'
+  );
   const [selectedMineral, setSelectedMineral] = useState<string>('all');
 
   const priceChange = useMemo(() => {
     const lastMonth = mockPriceTrendData[mockPriceTrendData.length - 1];
     const firstMonth = mockPriceTrendData[0];
-    const change = ((lastMonth.avgPrice - firstMonth.avgPrice) / firstMonth.avgPrice) * 100;
+    const change =
+      ((lastMonth.avgPrice - firstMonth.avgPrice) / firstMonth.avgPrice) * 100;
     return change;
   }, []);
 
@@ -72,7 +125,10 @@ export default function PriceTrendAnalytics() {
   }, []);
 
   const avgPrice = useMemo(() => {
-    const sum = mockPriceTrendData.reduce((acc, item) => acc + item.avgPrice, 0);
+    const sum = mockPriceTrendData.reduce(
+      (acc, item) => acc + item.avgPrice,
+      0
+    );
     return sum / mockPriceTrendData.length;
   }, []);
 
@@ -80,7 +136,9 @@ export default function PriceTrendAnalytics() {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
-          <p className="font-semibold text-gray-900 dark:text-gray-100">{label}</p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">
+            {label}
+          </p>
           {payload.map((entry: any, index: number) => (
             <p key={index} className="text-sm text-gray-600 dark:text-gray-400">
               {entry.name}: {formatPrice(entry.value)}
@@ -99,7 +157,9 @@ export default function PriceTrendAnalytics() {
         <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Средняя цена</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Средняя цена
+              </p>
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {formatPrice(avgPrice)}
               </p>
@@ -113,14 +173,27 @@ export default function PriceTrendAnalytics() {
         <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Изменение цены</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Изменение цены
+              </p>
               <p className="text-2xl font-bold">
-                <span className={priceChange > 0 ? 'text-blue-600' : priceChange < 0 ? 'text-gray-600' : 'text-gray-500'}>
-                  {priceChange > 0 ? '+' : ''}{priceChange.toFixed(1)}%
+                <span
+                  className={
+                    priceChange > 0
+                      ? 'text-blue-600'
+                      : priceChange < 0
+                        ? 'text-gray-600'
+                        : 'text-gray-500'
+                  }
+                >
+                  {priceChange > 0 ? '+' : ''}
+                  {priceChange.toFixed(1)}%
                 </span>
               </p>
             </div>
-            <div className={`p-2 rounded-lg ${priceChange > 0 ? 'bg-blue-100 dark:bg-blue-900/20' : 'bg-gray-100 dark:bg-gray-800'}`}>
+            <div
+              className={`p-2 rounded-lg ${priceChange > 0 ? 'bg-blue-100 dark:bg-blue-900/20' : 'bg-gray-100 dark:bg-gray-800'}`}
+            >
               {priceChange > 0 ? (
                 <TrendingUp className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               ) : priceChange < 0 ? (
@@ -135,8 +208,12 @@ export default function PriceTrendAnalytics() {
         <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Объем сделок</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{totalVolume}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Объем сделок
+              </p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                {totalVolume}
+              </p>
             </div>
             <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <Calendar className="w-5 h-5 text-gray-600 dark:text-gray-400" />
@@ -150,7 +227,9 @@ export default function PriceTrendAnalytics() {
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2">
             <Filter className="w-4 h-4 text-gray-500" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Период:</span>
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Период:
+            </span>
             <div className="flex gap-2">
               {(['6m', '1y', 'all'] as const).map((period) => (
                 <button
@@ -162,14 +241,20 @@ export default function PriceTrendAnalytics() {
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
-                  {period === '6m' ? '6 мес.' : period === '1y' ? '1 год' : 'Все'}
+                  {period === '6m'
+                    ? '6 мес.'
+                    : period === '1y'
+                      ? '1 год'
+                      : 'Все'}
                 </button>
               ))}
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Минерал:</span>
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Минерал:
+            </span>
             <select
               value={selectedMineral}
               onChange={(e) => setSelectedMineral(e.target.value)}
@@ -200,7 +285,10 @@ export default function PriceTrendAnalytics() {
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
             <XAxis dataKey="month" stroke="#6B7280" />
-            <YAxis stroke="#6B7280" tickFormatter={(value) => formatPrice(value)} />
+            <YAxis
+              stroke="#6B7280"
+              tickFormatter={(value) => formatPrice(value)}
+            />
             <Tooltip content={customTooltip} />
             <Legend />
             <Area
@@ -240,7 +328,12 @@ export default function PriceTrendAnalytics() {
             <XAxis dataKey="month" stroke="#6B7280" />
             <YAxis stroke="#6B7280" />
             <Tooltip />
-            <Bar dataKey="volume" name="Количество сделок" fill="#3B82F6" radius={[8, 8, 0, 0]} />
+            <Bar
+              dataKey="volume"
+              name="Количество сделок"
+              fill="#3B82F6"
+              radius={[8, 8, 0, 0]}
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -264,7 +357,10 @@ export default function PriceTrendAnalytics() {
                 dataKey="value"
               >
                 {mineralDistribution.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
               <Tooltip />
@@ -278,7 +374,10 @@ export default function PriceTrendAnalytics() {
           </h3>
           <div className="space-y-3">
             {mineralDistribution.slice(0, 5).map((mineral, index) => (
-              <div key={mineral.name} className="flex items-center justify-between">
+              <div
+                key={mineral.name}
+                className="flex items-center justify-between"
+              >
                 <div className="flex items-center gap-3">
                   <div
                     className="w-3 h-3 rounded-full"

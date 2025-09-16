@@ -187,70 +187,70 @@ export function GlobalSearch() {
 
       {/* Search dialog - Only render when open */}
       {open && (
-        <CommandDialog 
-          open={open} 
+        <CommandDialog
+          open={open}
           onOpenChange={setOpen}
-          title="Поиск" 
+          title="Поиск"
           description="Найдите месторождения, компании и услуги"
         >
-        <CommandInput
-          placeholder="Поиск месторождений, компаний, услуг..."
-          value={searchQuery}
-          onValueChange={setSearchQuery}
-        />
-        <CommandList>
-          <CommandEmpty>Ничего не найдено.</CommandEmpty>
+          <CommandInput
+            placeholder="Поиск месторождений, компаний, услуг..."
+            value={searchQuery}
+            onValueChange={setSearchQuery}
+          />
+          <CommandList>
+            <CommandEmpty>Ничего не найдено.</CommandEmpty>
 
-          {Object.entries(groupedResults).map(([type, items]) => (
-            <CommandGroup
-              key={type}
-              heading={typeLabels[type as keyof typeof typeLabels]}
-            >
-              {items.map((item) => (
-                <CommandItem
-                  key={item.id}
-                  value={item.title}
-                  onSelect={() => handleSelect(item.href)}
-                  className="flex items-start gap-3 py-3"
-                >
-                  <div className="flex-shrink-0 mt-0.5">{item.icon}</div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium text-gray-900">
-                      {item.title}
+            {Object.entries(groupedResults).map(([type, items]) => (
+              <CommandGroup
+                key={type}
+                heading={typeLabels[type as keyof typeof typeLabels]}
+              >
+                {items.map((item) => (
+                  <CommandItem
+                    key={item.id}
+                    value={item.title}
+                    onSelect={() => handleSelect(item.href)}
+                    className="flex items-start gap-3 py-3"
+                  >
+                    <div className="flex-shrink-0 mt-0.5">{item.icon}</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-gray-900">
+                        {item.title}
+                      </div>
+                      {item.description && (
+                        <div className="text-sm text-gray-500 truncate">
+                          {item.description}
+                        </div>
+                      )}
                     </div>
-                    {item.description && (
-                      <div className="text-sm text-gray-500 truncate">
-                        {item.description}
+                    {item.meta && (
+                      <div className="flex-shrink-0 text-sm text-gray-500">
+                        {item.meta}
                       </div>
                     )}
-                  </div>
-                  {item.meta && (
-                    <div className="flex-shrink-0 text-sm text-gray-500">
-                      {item.meta}
-                    </div>
-                  )}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          ))}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            ))}
 
-          <CommandSeparator />
-          <CommandGroup heading="Быстрые действия">
-            <CommandItem onSelect={() => handleSelect('/listings/create')}>
-              <DollarSign className="w-4 h-4 mr-2" />
-              Разместить объявление
-            </CommandItem>
-            <CommandItem onSelect={() => handleSelect('/dashboard')}>
-              <Users className="w-4 h-4 mr-2" />
-              Мой кабинет
-            </CommandItem>
-            <CommandItem onSelect={() => handleSelect('/services')}>
-              <Briefcase className="w-4 h-4 mr-2" />
-              Все услуги
-            </CommandItem>
-          </CommandGroup>
-        </CommandList>
-      </CommandDialog>
+            <CommandSeparator />
+            <CommandGroup heading="Быстрые действия">
+              <CommandItem onSelect={() => handleSelect('/listings/create')}>
+                <DollarSign className="w-4 h-4 mr-2" />
+                Разместить объявление
+              </CommandItem>
+              <CommandItem onSelect={() => handleSelect('/dashboard')}>
+                <Users className="w-4 h-4 mr-2" />
+                Мой кабинет
+              </CommandItem>
+              <CommandItem onSelect={() => handleSelect('/services')}>
+                <Briefcase className="w-4 h-4 mr-2" />
+                Все услуги
+              </CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </CommandDialog>
       )}
     </>
   );

@@ -75,7 +75,7 @@ export default function MiningLicenseCard({
 
   return (
     <motion.div
-      className="group bg-white rounded-xl overflow-hidden border border-gray-100 cursor-pointer"
+      className="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-700 cursor-pointer"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
@@ -87,8 +87,7 @@ export default function MiningLicenseCard({
       whileTap={{ scale: 0.98 }}
     >
       {/* Image Section with Improved Design */}
-      <div className="aspect-[4/3] relative overflow-hidden bg-gray-50">
-
+      <div className="aspect-[4/3] relative overflow-hidden bg-gray-50 dark:bg-gray-900">
         {/* Main Icon with Animation */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
@@ -113,7 +112,7 @@ export default function MiningLicenseCard({
               e.preventDefault();
               setIsFavorite(!isFavorite);
             }}
-            className="p-2 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-white transition-colors"
+            className="p-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg hover:bg-white dark:hover:bg-gray-700 transition-colors"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -125,16 +124,16 @@ export default function MiningLicenseCard({
               transition={{ duration: 0.3 }}
             >
               <Heart
-                className={`w-4 h-4 ${isFavorite ? 'fill-blue-600 text-blue-600' : 'text-gray-600'}`}
+                className={`w-4 h-4 ${isFavorite ? 'fill-blue-600 text-blue-600' : 'text-gray-600 dark:text-gray-400'}`}
               />
             </motion.div>
           </motion.button>
           <motion.button
-            className="p-2 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-white transition-colors"
+            className="p-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg hover:bg-white dark:hover:bg-gray-700 transition-colors"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Share2 className="w-4 h-4 text-gray-600" />
+            <Share2 className="w-4 h-4 text-gray-600 dark:text-gray-400" />
           </motion.button>
         </motion.div>
 
@@ -163,7 +162,7 @@ export default function MiningLicenseCard({
           )}
           {isHot() && (
             <motion.span
-              className="px-2 py-1 bg-gray-700 text-white rounded-full text-xs font-semibold flex items-center gap-1"
+              className="px-2 py-1 bg-gray-700 dark:bg-gray-600 text-white rounded-full text-xs font-semibold flex items-center gap-1"
               animate={{
                 boxShadow: [
                   '0 0 0 0 rgba(59, 130, 246, 0.7)',
@@ -201,10 +200,10 @@ export default function MiningLicenseCard({
         {/* Header */}
         <div className="mb-3">
           {/* Title and Location */}
-          <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-1 group-hover:text-blue-600 transition-colors">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
             {deposit.title}
           </h3>
-          <div className="flex items-center gap-4 text-sm text-gray-600">
+          <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
             <span className="flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5" />
               {deposit.city}
@@ -218,46 +217,50 @@ export default function MiningLicenseCard({
 
         {/* Key Metrics - Grid Layout */}
         <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="bg-gray-50 rounded-lg p-2.5">
-            <div className="text-xs text-gray-500 mb-0.5">Площадь</div>
-            <div className="text-sm font-semibold text-gray-900">
+          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-2.5">
+            <div className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">
+              Площадь
+            </div>
+            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
               {deposit.area.toLocaleString()} км²
             </div>
           </div>
-          <div className="bg-gray-50 rounded-lg p-2.5">
-            <div className="text-xs text-gray-500 mb-0.5">Лицензия</div>
-            <div className="text-sm font-semibold text-gray-900">
+          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-2.5">
+            <div className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">
+              Лицензия
+            </div>
+            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
               {deposit.licenseNumber || 'Не указан'}
             </div>
           </div>
         </div>
 
         {/* Description - Truncated */}
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
           {deposit.description}
         </p>
 
         {/* Price Section */}
         <div className="mb-4">
-          <div className="text-2xl font-bold text-gray-900">
+          <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
             {formatPrice(deposit.price)}
           </div>
           {deposit.price && deposit.area > 0 && (
-            <div className="text-xs text-gray-500 mt-0.5">
+            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
               {formatPrice(Math.round(deposit.price / deposit.area))} за км²
             </div>
           )}
         </div>
 
         {/* Social Activity Bar */}
-        <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
+        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-3">
           <div className="flex items-center space-x-4">
             <span className="flex items-center gap-1">
               <Eye className="w-3.5 h-3.5" />
               {deposit.views} просмотров
             </span>
             <motion.span
-              className="flex items-center gap-1 text-gray-600"
+              className="flex items-center gap-1 text-gray-600 dark:text-gray-400"
               whileHover={{ scale: 1.05 }}
             >
               <Users className="w-3.5 h-3.5" />
@@ -274,7 +277,7 @@ export default function MiningLicenseCard({
         </div>
 
         {/* Footer Info */}
-        <div className="flex items-center justify-between text-xs text-gray-500 pb-3 border-b border-gray-100">
+        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pb-3 border-b border-gray-100 dark:border-gray-700">
           <span className="flex items-center gap-1">
             <Calendar className="w-3.5 h-3.5" />
             {deposit.licenseExpiry
@@ -298,8 +301,8 @@ export default function MiningLicenseCard({
           >
             Подробнее
           </Link>
-          <button className="px-3 py-2.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-            <MapPin className="w-4 h-4 text-gray-600" />
+          <button className="px-3 py-2.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <MapPin className="w-4 h-4 text-gray-600 dark:text-gray-400" />
           </button>
 
           {/* Comparison Button */}

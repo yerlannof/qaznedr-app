@@ -16,7 +16,6 @@ export default function ExplorationLicenseCard({
   getStatusColor,
   getStatusText,
 }: ExplorationLicenseCardProps) {
-
   const getExplorationStageText = (stage?: string) => {
     const stages: Record<string, string> = {
       PRELIMINARY: 'Предварительная разведка',

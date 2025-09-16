@@ -1,0 +1,81 @@
+{
+  "navigation": {
+    "listings": "发布信息",
+    "map": "地图",
+    "services": "服务",
+    "companies": "公司",
+    "messages": "消息",
+    "createListing": "创建发布"
+  },
+  "home": {
+    "title": "欢迎来到 QAZNEDR.KZ",
+    "subtitle": "您的哈萨克斯坦采矿业平台",
+    "description": "在哈萨克斯坦境内寻找、购买和销售采矿许可证、勘探许可证和矿物储量。"
+  },
+  "listings": {
+    "title": "采矿发布信息",
+    "searchPlaceholder": "按地区、矿物或许可证类型搜索...",
+    "filterByType": "按类型筛选",
+    "filterByRegion": "按地区筛选",
+    "filterByMineral": "按矿物筛选",
+    "allTypes": "所有类型",
+    "allRegions": "所有地区",
+    "allMinerals": "所有矿物",
+    "noResults": "未找到发布信息",
+    "priceRange": "价格区间",
+    "showMore": "显示更多",
+    "showLess": "显示较少"
+  },
+  "listingTypes": {
+    "MINING_LICENSE": "开采许可证",
+    "EXPLORATION_LICENSE": "勘探许可证",
+    "MINERAL_OCCURRENCE": "矿物赋存"
+  },
+  "minerals": {
+    "oil": "石油",
+    "gas": "天然气",
+    "gold": "黄金",
+    "copper": "铜",
+    "coal": "煤",
+    "uranium": "铀",
+    "iron": "铁"
+  },
+  "regions": {
+    "almaty": "阿拉木图州",
+    "astana": "努尔苏丹",
+    "shymkent": "奇姆肯特",
+    "atyrau": "阿特劳州",
+    "mangistau": "曼格斯套州",
+    "aktobe": "阿克托别州",
+    "west_kazakhstan": "西哈萨克斯坦州",
+    "karaganda": "卡拉干达州",
+    "kostanay": "库斯塔奈州",
+    "pavlodar": "巴甫洛达尔州",
+    "east_kazakhstan": "东哈萨克斯坦州",
+    "north_kazakhstan": "北哈萨克斯坦州",
+    "akmola": "阿克莫拉州",
+    "zhambyl": "江布尔州"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "retry": "重试",
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "view": "查看",
+    "close": "关闭",
+    "back": "返回",
+    "next": "下一个",
+    "previous": "上一个",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "price": "价格",
+    "area": "面积",
+    "location": "位置",
+    "contact": "联系",
+    "details": "详情"
+  }
+}

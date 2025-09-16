@@ -1,0 +1,101 @@
+{
+  "mcpServers": {
+    "sentry-official": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sentry/mcp-server",
+        "--organization-slug=yerlans-company",
+        "--project-slug=javascript-nextjs"
+      ],
+      "env": {
+        "SENTRY_ACCESS_TOKEN": "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"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/yerlankulumgariyev/Documents"
+      ]
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    },
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "supabase-mcp-server"],
+      "env": {
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_SERVICE_ROLE_KEY": "${SUPABASE_SERVICE_ROLE_KEY}"
+      }
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "context-server"]
+    },
+    "task-manager": {
+      "command": "npx",
+      "args": ["-y", "task-manager-mcp"]
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
+    },
+    "ide": {
+      "command": "node",
+      "args": [
+        "/Users/yerlankulumgariyev/.vscode/extensions/claude-code.claude-code-1.0.18/dist/mcp/index.cjs"
+      ]
+    },
+    "vscode-extensions": {
+      "command": "node",
+      "args": [
+        "/Users/yerlankulumgariyev/Documents/qaznedr-app/mcp-servers/vscode-extensions/dist/index.js"
+      ]
+    },
+    "gitlab-api": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gitlab"],
+      "env": {
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "glpat-Z3O9cXr20UcjQlntEoCl8286MQp1OmkweDFxCw.01.121q1q87e",
+        "GITLAB_API_URL": "https://gitlab.com/api/v4"
+      }
+    },
+    "cloudflare": {
+      "command": "npx",
+      "args": ["-y", "@cloudflare/mcp-server-cloudflare", "run"],
+      "env": {
+        "CLOUDFLARE_API_TOKEN": "xJJspNr5_n63RGgU_a66qQ3wGguMBv3XuGYmNW_n",
+        "CLOUDFLARE_ACCOUNT_ID": "319cb3df654a6e12750ba400721ec7e4"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "sentry": {
+    "organization": "yerlans-company",
+    "project": "javascript-nextjs",
+    "region": "https://de.sentry.io",
+    "automations": [
+      "error_detection",
+      "performance_monitoring",
+      "release_tracking"
+    ]
+  },
+  "supabase": {
+    "project_url": "https://your-project.supabase.co",
+    "automations": [
+      "database_migrations",
+      "schema_validation",
+      "backup_management"
+    ]
+  },
+  "cloudflare": {
+    "project_name": "qaznedr-kz",
+    "automations": ["deployment", "dns_management", "performance_optimization"]
+  }
+}

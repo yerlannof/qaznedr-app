@@ -38,7 +38,7 @@ export interface Database {
           discovery_date: string | null;
           geological_confidence: string | null;
           estimated_reserves: number | null;
-          accessibility_rating: number | null;
+          accessibility_rating: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -70,7 +70,7 @@ export interface Database {
           discovery_date?: string | null;
           geological_confidence?: string | null;
           estimated_reserves?: number | null;
-          accessibility_rating?: number | null;
+          accessibility_rating?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -105,329 +105,283 @@ export interface Database {
           discovery_date?: string | null;
           geological_confidence?: string | null;
           estimated_reserves?: number | null;
-          accessibility_rating?: number | null;
+          accessibility_rating?: string | null;
           created_at?: string;
           updated_at?: string;
-        };
-      };
-      companies: {
-        Row: {
-          id: string;
-          name: string;
-          description: string | null;
-          logo_url: string | null;
-          website: string | null;
-          email: string | null;
-          phone: string | null;
-          address: string | null;
-          established_year: number | null;
-          employee_count: number | null;
-          specializations: string[] | null;
-          certifications: string[] | null;
-          rating: number;
-          verified: boolean;
-          user_id: string | null;
-          created_at: string;
-          updated_at: string;
-        };
-        Insert: {
-          id?: string;
-          name: string;
-          description?: string | null;
-          logo_url?: string | null;
-          website?: string | null;
-          email?: string | null;
-          phone?: string | null;
-          address?: string | null;
-          established_year?: number | null;
-          employee_count?: number | null;
-          specializations?: string[] | null;
-          certifications?: string[] | null;
-          rating?: number;
-          verified?: boolean;
-          user_id?: string | null;
-          created_at?: string;
-          updated_at?: string;
-        };
-        Update: {
-          id?: string;
-          name?: string;
-          description?: string | null;
-          logo_url?: string | null;
-          website?: string | null;
-          email?: string | null;
-          phone?: string | null;
-          address?: string | null;
-          established_year?: number | null;
-          employee_count?: number | null;
-          specializations?: string[] | null;
-          certifications?: string[] | null;
-          rating?: number;
-          verified?: boolean;
-          user_id?: string | null;
-          created_at?: string;
-          updated_at?: string;
-        };
-      };
-      auctions: {
-        Row: {
-          id: string;
-          deposit_id: string | null;
-          title: string;
-          description: string | null;
-          starting_price: number;
-          current_bid: number | null;
-          bid_increment: number;
-          reserve_price: number | null;
-          start_date: string;
-          end_date: string;
-          status: 'SCHEDULED' | 'ACTIVE' | 'ENDED' | 'CANCELLED';
-          winner_id: string | null;
-          total_bids: number;
-          created_at: string;
-          updated_at: string;
-        };
-        Insert: {
-          id?: string;
-          deposit_id?: string | null;
-          title: string;
-          description?: string | null;
-          starting_price: number;
-          current_bid?: number | null;
-          bid_increment?: number;
-          reserve_price?: number | null;
-          start_date: string;
-          end_date: string;
-          status?: 'SCHEDULED' | 'ACTIVE' | 'ENDED' | 'CANCELLED';
-          winner_id?: string | null;
-          total_bids?: number;
-          created_at?: string;
-          updated_at?: string;
-        };
-        Update: {
-          id?: string;
-          deposit_id?: string | null;
-          title?: string;
-          description?: string | null;
-          starting_price?: number;
-          current_bid?: number | null;
-          bid_increment?: number;
-          reserve_price?: number | null;
-          start_date?: string;
-          end_date?: string;
-          status?: 'SCHEDULED' | 'ACTIVE' | 'ENDED' | 'CANCELLED';
-          winner_id?: string | null;
-          total_bids?: number;
-          created_at?: string;
-          updated_at?: string;
-        };
-      };
-      auction_bids: {
-        Row: {
-          id: string;
-          auction_id: string | null;
-          bidder_id: string | null;
-          amount: number;
-          is_winning: boolean;
-          created_at: string;
-        };
-        Insert: {
-          id?: string;
-          auction_id?: string | null;
-          bidder_id?: string | null;
-          amount: number;
-          is_winning?: boolean;
-          created_at?: string;
-        };
-        Update: {
-          id?: string;
-          auction_id?: string | null;
-          bidder_id?: string | null;
-          amount?: number;
-          is_winning?: boolean;
-          created_at?: string;
-        };
-      };
-      conversations: {
-        Row: {
-          id: string;
-          type: 'direct' | 'group' | 'support';
-          title: string | null;
-          description: string | null;
-          avatar_url: string | null;
-          created_at: string;
-          updated_at: string;
-          last_message_at: string | null;
-          last_message_text: string | null;
-          deposit_id: string | null;
-          is_archived: boolean;
-        };
-        Insert: {
-          id?: string;
-          type?: 'direct' | 'group' | 'support';
-          title?: string | null;
-          description?: string | null;
-          avatar_url?: string | null;
-          created_at?: string;
-          updated_at?: string;
-          last_message_at?: string | null;
-          last_message_text?: string | null;
-          deposit_id?: string | null;
-          is_archived?: boolean;
-        };
-        Update: {
-          id?: string;
-          type?: 'direct' | 'group' | 'support';
-          title?: string | null;
-          description?: string | null;
-          avatar_url?: string | null;
-          created_at?: string;
-          updated_at?: string;
-          last_message_at?: string | null;
-          last_message_text?: string | null;
-          deposit_id?: string | null;
-          is_archived?: boolean;
-        };
-      };
-      messages: {
-        Row: {
-          id: string;
-          conversation_id: string;
-          sender_id: string;
-          content: string;
-          type: 'text' | 'image' | 'file' | 'system' | 'offer';
-          attachments: Json | null;
-          created_at: string;
-          updated_at: string;
-          is_edited: boolean;
-          is_deleted: boolean;
-          reply_to_id: string | null;
-        };
-        Insert: {
-          id?: string;
-          conversation_id: string;
-          sender_id: string;
-          content: string;
-          type?: 'text' | 'image' | 'file' | 'system' | 'offer';
-          attachments?: Json | null;
-          created_at?: string;
-          updated_at?: string;
-          is_edited?: boolean;
-          is_deleted?: boolean;
-          reply_to_id?: string | null;
-        };
-        Update: {
-          id?: string;
-          conversation_id?: string;
-          sender_id?: string;
-          content?: string;
-          type?: 'text' | 'image' | 'file' | 'system' | 'offer';
-          attachments?: Json | null;
-          created_at?: string;
-          updated_at?: string;
-          is_edited?: boolean;
-          is_deleted?: boolean;
-          reply_to_id?: string | null;
-        };
-      };
-      conversation_participants: {
-        Row: {
-          id: string;
-          conversation_id: string;
-          user_id: string;
-          role: string;
-          joined_at: string;
-          last_read_at: string | null;
-          is_muted: boolean;
-          is_pinned: boolean;
-          unread_count: number;
-        };
-        Insert: {
-          id?: string;
-          conversation_id: string;
-          user_id: string;
-          role?: string;
-          joined_at?: string;
-          last_read_at?: string | null;
-          is_muted?: boolean;
-          is_pinned?: boolean;
-          unread_count?: number;
-        };
-        Update: {
-          id?: string;
-          conversation_id?: string;
-          user_id?: string;
-          role?: string;
-          joined_at?: string;
-          last_read_at?: string | null;
-          is_muted?: boolean;
-          is_pinned?: boolean;
-          unread_count?: number;
-        };
-      };
-      message_read_receipts: {
-        Row: {
-          id: string;
-          message_id: string;
-          user_id: string;
-          read_at: string;
-        };
-        Insert: {
-          id?: string;
-          message_id: string;
-          user_id: string;
-          read_at?: string;
-        };
-        Update: {
-          id?: string;
-          message_id?: string;
-          user_id?: string;
-          read_at?: string;
         };
       };
       favorites: {
         Row: {
           id: string;
-          user_id: string | null;
-          deposit_id: string | null;
+          user_id: string;
+          deposit_id: string;
           created_at: string;
         };
         Insert: {
           id?: string;
-          user_id?: string | null;
-          deposit_id?: string | null;
+          user_id: string;
+          deposit_id: string;
           created_at?: string;
         };
         Update: {
           id?: string;
+          user_id?: string;
+          deposit_id?: string;
+          created_at?: string;
+        };
+      };
+      views: {
+        Row: {
+          id: string;
+          deposit_id: string;
+          user_id: string | null;
+          ip_address: string;
+          user_agent: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          deposit_id: string;
           user_id?: string | null;
-          deposit_id?: string | null;
+          ip_address: string;
+          user_agent: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          deposit_id?: string;
+          user_id?: string | null;
+          ip_address?: string;
+          user_agent?: string;
+          created_at?: string;
+        };
+      };
+      documents: {
+        Row: {
+          id: string;
+          deposit_id: string;
+          name: string;
+          type:
+            | 'LICENSE'
+            | 'GEOLOGICAL_SURVEY'
+            | 'ENVIRONMENTAL'
+            | 'FINANCIAL'
+            | 'LEGAL'
+            | 'OTHER';
+          url: string;
+          size: number;
+          uploaded_by: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          deposit_id: string;
+          name: string;
+          type:
+            | 'LICENSE'
+            | 'GEOLOGICAL_SURVEY'
+            | 'ENVIRONMENTAL'
+            | 'FINANCIAL'
+            | 'LEGAL'
+            | 'OTHER';
+          url: string;
+          size: number;
+          uploaded_by: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          deposit_id?: string;
+          name?: string;
+          type?:
+            | 'LICENSE'
+            | 'GEOLOGICAL_SURVEY'
+            | 'ENVIRONMENTAL'
+            | 'FINANCIAL'
+            | 'LEGAL'
+            | 'OTHER';
+          url?: string;
+          size?: number;
+          uploaded_by?: string;
+          created_at?: string;
+        };
+      };
+      contact_requests: {
+        Row: {
+          id: string;
+          deposit_id: string;
+          from_user_id: string;
+          to_user_id: string;
+          message: string;
+          phone: string | null;
+          email: string | null;
+          status: 'PENDING' | 'RESPONDED' | 'CLOSED';
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          deposit_id: string;
+          from_user_id: string;
+          to_user_id: string;
+          message: string;
+          phone?: string | null;
+          email?: string | null;
+          status?: 'PENDING' | 'RESPONDED' | 'CLOSED';
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          deposit_id?: string;
+          from_user_id?: string;
+          to_user_id?: string;
+          message?: string;
+          phone?: string | null;
+          email?: string | null;
+          status?: 'PENDING' | 'RESPONDED' | 'CLOSED';
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      notifications: {
+        Row: {
+          id: string;
+          user_id: string;
+          type:
+            | 'NEW_DEPOSIT'
+            | 'PRICE_CHANGE'
+            | 'AUCTION_START'
+            | 'AUCTION_END'
+            | 'MESSAGE'
+            | 'SYSTEM';
+          title: string;
+          message: string;
+          data: Json | null;
+          read: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          type:
+            | 'NEW_DEPOSIT'
+            | 'PRICE_CHANGE'
+            | 'AUCTION_START'
+            | 'AUCTION_END'
+            | 'MESSAGE'
+            | 'SYSTEM';
+          title: string;
+          message: string;
+          data?: Json | null;
+          read?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          type?:
+            | 'NEW_DEPOSIT'
+            | 'PRICE_CHANGE'
+            | 'AUCTION_START'
+            | 'AUCTION_END'
+            | 'MESSAGE'
+            | 'SYSTEM';
+          title?: string;
+          message?: string;
+          data?: Json | null;
+          read?: boolean;
           created_at?: string;
         };
       };
       analytics_events: {
         Row: {
           id: string;
-          event_type: string;
-          event_data: Json | null;
+          name: string;
+          properties: Json | null;
           user_id: string | null;
           session_id: string | null;
+          timestamp: string;
+          client_ip: string | null;
+          user_agent: string | null;
           created_at: string;
         };
         Insert: {
           id?: string;
-          event_type: string;
-          event_data?: Json | null;
+          name: string;
+          properties?: Json | null;
           user_id?: string | null;
           session_id?: string | null;
+          timestamp: string;
+          client_ip?: string | null;
+          user_agent?: string | null;
           created_at?: string;
         };
         Update: {
           id?: string;
-          event_type?: string;
-          event_data?: Json | null;
+          name?: string;
+          properties?: Json | null;
           user_id?: string | null;
           session_id?: string | null;
+          timestamp?: string;
+          client_ip?: string | null;
+          user_agent?: string | null;
+          created_at?: string;
+        };
+      };
+      error_logs: {
+        Row: {
+          id: string;
+          message: string;
+          stack: string | null;
+          severity: 'low' | 'medium' | 'high' | 'critical';
+          fingerprint: string;
+          count: number;
+          context: Json | null;
+          timestamp: string;
+          client_ip: string | null;
+          user_agent: string | null;
+          user_id: string | null;
+          session_id: string | null;
+          url: string | null;
+          component: string | null;
+          action: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          message: string;
+          stack?: string | null;
+          severity: 'low' | 'medium' | 'high' | 'critical';
+          fingerprint: string;
+          count?: number;
+          context?: Json | null;
+          timestamp: string;
+          client_ip?: string | null;
+          user_agent?: string | null;
+          user_id?: string | null;
+          session_id?: string | null;
+          url?: string | null;
+          component?: string | null;
+          action?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          message?: string;
+          stack?: string | null;
+          severity?: 'low' | 'medium' | 'high' | 'critical';
+          fingerprint?: string;
+          count?: number;
+          context?: Json | null;
+          timestamp?: string;
+          client_ip?: string | null;
+          user_agent?: string | null;
+          user_id?: string | null;
+          session_id?: string | null;
+          url?: string | null;
+          component?: string | null;
+          action?: string | null;
           created_at?: string;
         };
       };
@@ -436,21 +390,7 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      create_direct_conversation: {
-        Args: {
-          p_user1_id: string;
-          p_user2_id: string;
-          p_deposit_id?: string;
-        };
-        Returns: string;
-      };
-      mark_messages_as_read: {
-        Args: {
-          p_conversation_id: string;
-          p_user_id: string;
-        };
-        Returns: void;
-      };
+      [_ in never]: never;
     };
     Enums: {
       [_ in never]: never;

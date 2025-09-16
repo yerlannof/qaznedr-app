@@ -45,7 +45,7 @@ function CommandDialog({
 }) {
   // Don't render anything if dialog is not open
   if (!open) return null;
-  
+
   return (
     <Dialog open={open} {...props}>
       {title && description && (

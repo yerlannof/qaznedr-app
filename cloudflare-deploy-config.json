@@ -1,0 +1,12 @@
+{
+  "name": "qaznedr-kz",
+  "production_branch": "master",
+  "build": {
+    "command": "npm run build",
+    "output_directory": ".next"
+  },
+  "env_vars": {
+    "NODE_ENV": "production",
+    "NEXT_PUBLIC_APP_ENV": "production"
+  }
+}

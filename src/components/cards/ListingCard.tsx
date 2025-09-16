@@ -11,7 +11,6 @@ interface ListingCardProps {
 }
 
 export default function ListingCard({ deposit }: ListingCardProps) {
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'ACTIVE':

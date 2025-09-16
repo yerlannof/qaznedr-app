@@ -1,0 +1,36 @@
+{
+  "name": "QAZNEDR.KZ Monitoring Dashboard",
+  "components": {
+    "sentry": {
+      "url": "https://yerlans-company.sentry.io/projects/javascript-nextjs/",
+      "metrics": ["error_rate", "performance", "releases"]
+    },
+    "cloudflare": {
+      "url": "https://dash.cloudflare.com/",
+      "metrics": ["uptime", "response_time", "bandwidth"]
+    },
+    "supabase": {
+      "url": "https://supabase.com/dashboard/",
+      "metrics": ["database_health", "api_requests", "storage"]
+    }
+  },
+  "alerts": {
+    "error_threshold": "5%",
+    "response_time_threshold": "2s",
+    "uptime_threshold": "99.9%"
+  },
+  "automation_triggers": [
+    {
+      "condition": "error_rate > 5%",
+      "action": "notify_team_and_rollback"
+    },
+    {
+      "condition": "response_time > 2s",
+      "action": "scale_resources"
+    },
+    {
+      "condition": "uptime < 99.9%",
+      "action": "emergency_response"
+    }
+  ]
+}

@@ -99,7 +99,7 @@ export const formatDate = (
     kz: 'kk-KZ',
     zh: 'zh-CN',
   };
-  
+
   return d.toLocaleDateString(localeMap[locale], {
     year: 'numeric',
     month: 'long',
@@ -121,7 +121,7 @@ export const formatShortDate = (
     kz: 'kk-KZ',
     zh: 'zh-CN',
   };
-  
+
   return d.toLocaleDateString(localeMap[locale], {
     year: 'numeric',
     month: 'short',
@@ -139,7 +139,7 @@ export const formatRelativeTime = (
   const d = new Date(date);
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - d.getTime()) / 1000);
-  
+
   const intervals = {
     ru: {
       year: ['год', 'года', 'лет'],
@@ -196,7 +196,10 @@ export const formatRelativeTime = (
       } else if (locale === 'kz') {
         return `${interval} ${intervals.kz[unit as keyof typeof intervals.kz][0]} бұрын`;
       } else {
-        const form = interval === 1 ? intervals.en[unit as keyof typeof intervals.en][0] : intervals.en[unit as keyof typeof intervals.en][1];
+        const form =
+          interval === 1
+            ? intervals.en[unit as keyof typeof intervals.en][0]
+            : intervals.en[unit as keyof typeof intervals.en][1];
         return `${interval} ${form} ago`;
       }
     }
@@ -208,7 +211,7 @@ export const formatRelativeTime = (
     kz: 'жаңа ғана',
     zh: '刚刚',
   };
-  
+
   return justNow[locale];
 };
 
@@ -218,26 +221,29 @@ export const formatRelativeTime = (
 function getPlural(n: number, forms: string[]): string {
   const lastDigit = n % 10;
   const lastTwoDigits = n % 100;
-  
+
   if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
     return forms[2];
   }
-  
+
   if (lastDigit === 1) {
     return forms[0];
   }
-  
+
   if (lastDigit >= 2 && lastDigit <= 4) {
     return forms[1];
   }
-  
+
   return forms[2];
 }
 
 /**
  * Format percentage
  */
-export const formatPercentage = (value: number, decimals: number = 1): string => {
+export const formatPercentage = (
+  value: number,
+  decimals: number = 1
+): string => {
   return `${value.toFixed(decimals)}%`;
 };
 
@@ -254,7 +260,7 @@ export const formatNumber = (
     kz: 'kk-KZ',
     zh: 'zh-CN',
   };
-  
+
   return value.toLocaleString(localeMap[locale]);
 };
 
@@ -263,11 +269,11 @@ export const formatNumber = (
  */
 export const formatFileSize = (bytes: number): string => {
   if (bytes === 0) return '0 Байт';
-  
+
   const k = 1024;
   const sizes = ['Байт', 'КБ', 'МБ', 'ГБ', 'ТБ'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  
+
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
 };
 
@@ -311,7 +317,7 @@ export const formatReserves = (
   };
 
   const localizedUnit = units[locale][unit as keyof typeof units.ru] || unit;
-  
+
   if (amount >= 1000000) {
     const millions = {
       ru: 'млн',
@@ -329,6 +335,6 @@ export const formatReserves = (
     };
     return `${(amount / 1000).toFixed(1)} ${thousands[locale]} ${localizedUnit}`;
   }
-  
+
   return `${amount.toLocaleString()} ${localizedUnit}`;
 };

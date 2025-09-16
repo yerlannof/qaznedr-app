@@ -42,7 +42,7 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onAnimationEnd' | 'onDrag' | 'onDragStart' | 'onDragEnd'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   loading?: boolean;
@@ -63,10 +63,10 @@ const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonProps>(
     disabled,
     ...props 
   }, ref) => {
-    const Comp = asChild ? Slot : motion.button;
+    const Comp = asChild ? Slot : 'button';
     
     return (
-      <Comp
+      <motion.button
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         disabled={disabled || loading}
@@ -95,7 +95,7 @@ const ButtonEnhanced = React.forwardRef<HTMLButtonElement, ButtonProps>(
           {children}
           {!loading && rightIcon}
         </span>
-      </Comp>
+      </motion.button>
     );
   }
 );

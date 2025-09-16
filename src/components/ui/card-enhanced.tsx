@@ -43,16 +43,13 @@ const CardHeaderEnhanced = React.forwardRef<
     animated?: boolean;
   }
 >(({ className, animated = false, children, ...props }, ref) => (
-  <motion.div
+  <div
     ref={ref}
     className={cn('flex flex-col space-y-1.5 p-6', className)}
-    initial={animated ? { opacity: 0, y: -10 } : {}}
-    animate={animated ? { opacity: 1, y: 0 } : {}}
-    transition={{ duration: 0.3 }}
     {...props}
   >
     {children}
-  </motion.div>
+  </div>
 ));
 CardHeaderEnhanced.displayName = 'CardHeaderEnhanced';
 
@@ -97,16 +94,13 @@ const CardContentEnhanced = React.forwardRef<
     animated?: boolean;
   }
 >(({ className, animated = false, children, ...props }, ref) => (
-  <motion.div
+  <div
     ref={ref}
     className={cn('p-6 pt-0', className)}
-    initial={animated ? { opacity: 0 } : {}}
-    animate={animated ? { opacity: 1 } : {}}
-    transition={{ duration: 0.4, delay: 0.1 }}
     {...props}
   >
     {children}
-  </motion.div>
+  </div>
 ));
 CardContentEnhanced.displayName = 'CardContentEnhanced';
 

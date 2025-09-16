@@ -73,6 +73,7 @@ export default function LanguageSwitcher({
       ru: '🇷🇺',
       en: '🇬🇧',
       kz: '🇰🇿',
+      zh: '🇨🇳',
     };
     return icons[locale];
   };

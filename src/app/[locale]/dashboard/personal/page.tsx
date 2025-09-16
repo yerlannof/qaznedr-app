@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import PersonalizedFeed from '@/components/features/PersonalizedFeed';
 import { LiveActivityIndicator } from '@/components/features/SocialProof';
 import {
@@ -251,7 +251,7 @@ export default function PersonalDashboardPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Navigation />
+        <NavigationSimple />
         <div className="pt-16 px-4 sm:px-6 lg:px-8 py-8">
           <div className="max-w-7xl mx-auto">
             {/* Loading Header */}
@@ -280,7 +280,7 @@ export default function PersonalDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
+      <NavigationSimple />
 
       {/* Header */}
       <div className="pt-16 px-4 sm:px-6 lg:px-8 py-8 bg-white border-b border-gray-200">

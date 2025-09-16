@@ -4,7 +4,7 @@
 export const dynamic = 'force-dynamic';
 
 import { useState } from 'react';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import { ConversationsList } from '@/components/features/messaging/ConversationsList';
 import { ChatWindow } from '@/components/features/messaging/ChatWindow';
 import { MessageCircle } from 'lucide-react';
@@ -26,7 +26,7 @@ export default function MessagesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
+      <NavigationSimple />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mt-16">
         <div className="bg-white rounded-lg shadow-sm h-[calc(100vh-120px)]">

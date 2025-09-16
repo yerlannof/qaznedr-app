@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import Head from 'next/head';
 import Link from 'next/link';
 import NavigationSimple from '@/components/layouts/NavigationSimple';
 import MiningLicenseDetails from '@/components/detail-sections/MiningLicenseDetails';
@@ -27,7 +28,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 export default function DepositDetailPage() {
   const params = useParams();
   const depositId = params.id as string;
-  const { locale } = useTranslation();
+  const { locale, t } = useTranslation();
 
   const [deposit, setDeposit] = useState<KazakhstanDeposit | null>(null);
   const [loading, setLoading] = useState(true);
@@ -123,7 +124,7 @@ export default function DepositDetailPage() {
               : 'Произошла ошибка при загрузке данных'}
           </p>
           <Link
-            href="/listings"
+            href={`/${locale}/listings`}
             className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
           >
             Вернуться к каталогу
@@ -182,8 +183,17 @@ export default function DepositDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <NavigationSimple />
+    <>
+      <Head>
+        <title>{deposit.title} - QAZNEDR.KZ</title>
+        <meta name="description" content={deposit.description} />
+        <meta property="og:title" content={deposit.title} />
+        <meta property="og:description" content={deposit.description} />
+        <meta property="og:type" content="website" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <div className="min-h-screen bg-gray-50">
+        <NavigationSimple />
 
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-200 pt-16">
@@ -203,7 +213,7 @@ export default function DepositDetailPage() {
               </li>
               <li>
                 <Link
-                  href="/listings"
+                  href={`/${locale}/listings`}
                   className="text-gray-500 hover:text-gray-700"
                 >
                   Объявления
@@ -563,6 +573,7 @@ export default function DepositDetailPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

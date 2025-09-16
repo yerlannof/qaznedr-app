@@ -28,14 +28,50 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // If the pathname doesn't have a locale, redirect to the default locale
+  // If the pathname doesn't have a locale, redirect with proper locale
   if (!hasLocale(pathname)) {
-    const locale = defaultLocale;
+    // Try to get locale from cookie first
+    const cookieLocale = request.cookies.get('locale')?.value;
+    
+    // Then check the referer header to preserve current locale
+    const referer = request.headers.get('referer');
+    let locale = defaultLocale;
+    
+    if (cookieLocale && locales.includes(cookieLocale)) {
+      locale = cookieLocale;
+    } else if (referer) {
+      const refererUrl = new URL(referer);
+      const refererLocale = getLocale(refererUrl.pathname);
+      if (locales.includes(refererLocale)) {
+        locale = refererLocale;
+      }
+    }
+    
     const newUrl = new URL(`/${locale}${pathname}`, request.url);
-    return NextResponse.redirect(newUrl, 302);
+    const response = NextResponse.redirect(newUrl, 302);
+    
+    // Set the locale cookie for future requests
+    response.cookies.set('locale', locale, {
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+      sameSite: 'lax',
+      path: '/'
+    });
+    
+    return response;
   }
 
-  return NextResponse.next();
+  // If we have a locale in the path, save it to cookie
+  const currentLocale = getLocale(pathname);
+  const response = NextResponse.next();
+  
+  // Update the locale cookie with current locale
+  response.cookies.set('locale', currentLocale, {
+    maxAge: 60 * 60 * 24 * 365, // 1 year
+    sameSite: 'lax',
+    path: '/'
+  });
+
+  return response;
 }
 
 export const config = {

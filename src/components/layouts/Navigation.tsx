@@ -51,11 +51,11 @@ export default function Navigation() {
   }, []);
 
   const navigation = [
-    { name: t('navigation.listings'), href: `/listings`, icon: MapPin },
-    { name: t('navigation.map'), href: `/map`, icon: MapPin },
-    { name: t('navigation.services'), href: `/services`, icon: Briefcase },
-    { name: t('navigation.companies'), href: `/companies`, icon: Building2 },
-    { name: t('navigation.messages'), href: `/messages`, icon: MessageSquare },
+    { name: t('navigation.listings'), href: `/${locale}/listings`, icon: MapPin },
+    { name: t('navigation.map'), href: `/${locale}/map`, icon: MapPin },
+    { name: t('navigation.services'), href: `/${locale}/services`, icon: Briefcase },
+    { name: t('navigation.companies'), href: `/${locale}/companies`, icon: Building2 },
+    { name: t('navigation.messages'), href: `/${locale}/messages`, icon: MessageSquare },
   ];
 
   const isActive = (href: string) => pathname === href;
@@ -79,7 +79,7 @@ export default function Navigation() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <Link href="/" className="flex items-center space-x-2">
+              <Link href={`/${locale}`} className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-xl">Q</span>
                 </div>

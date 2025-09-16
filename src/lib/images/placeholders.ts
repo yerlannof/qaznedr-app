@@ -13,29 +13,39 @@ export const mineralPlaceholders = {
     'https://images.unsplash.com/photo-1581093450021-4a7360e7c6b7?w=800&h=600&fit=crop', // Gas storage
   ],
   Золото: [
-    'https://images.unsplash.com/photo-1610375461246-83df859d849d?w=800&h=600&fit=crop', // Gold mine
+    'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop', // Gold mining operation
     'https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=800&h=600&fit=crop', // Gold bars
-    'https://images.unsplash.com/photo-1624365168968-f281d0b3b3f8?w=800&h=600&fit=crop', // Gold mining
+    'https://images.unsplash.com/photo-1624365168968-f281d0b3b3f8?w=800&h=600&fit=crop', // Gold mining equipment
   ],
   Медь: [
-    'https://images.unsplash.com/photo-1590736969955-71cc94901144?w=800&h=600&fit=crop', // Copper mine
+    'https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?w=800&h=600&fit=crop', // Copper mine
     'https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?w=800&h=600&fit=crop', // Copper ore
     'https://images.unsplash.com/photo-1617638924541-8f7e77b2b4e5?w=800&h=600&fit=crop', // Mining equipment
   ],
   Уголь: [
+    'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?w=800&h=600&fit=crop', // Coal mining facility
     'https://images.unsplash.com/photo-1564866652315-b64bbfadf820?w=800&h=600&fit=crop', // Coal mine
-    'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?w=800&h=600&fit=crop', // Coal facility
     'https://images.unsplash.com/photo-1598965402089-897ce52e8355?w=800&h=600&fit=crop', // Mining operation
   ],
   Уран: [
-    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop', // Nuclear facility
+    'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=600&fit=crop', // Geological exploration
     'https://images.unsplash.com/photo-1586974726553-8b9190c03cc5?w=800&h=600&fit=crop', // Industrial complex
     'https://images.unsplash.com/photo-1569163139394-de4798aa62b6?w=800&h=600&fit=crop', // Mining site
   ],
   Железо: [
-    'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&h=600&fit=crop', // Iron mine
+    'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=600&fit=crop', // Iron ore mining trucks
     'https://images.unsplash.com/photo-1565514943780-4ee78a6936dd?w=800&h=600&fit=crop', // Iron ore
-    'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=600&fit=crop', // Mining trucks
+    'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&h=600&fit=crop', // Iron mine
+  ],
+  Свинец: [
+    'https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?w=800&h=600&fit=crop', // Metal ore mining
+    'https://images.unsplash.com/photo-1617638924541-8f7e77b2b4e5?w=800&h=600&fit=crop', // Mining equipment
+    'https://images.unsplash.com/photo-1540080106973-411a95b50e57?w=800&h=600&fit=crop', // General mining
+  ],
+  Хром: [
+    'https://images.unsplash.com/photo-1617638924541-8f7e77b2b4e5?w=800&h=600&fit=crop', // Mining equipment
+    'https://images.unsplash.com/photo-1540080106973-411a95b50e57?w=800&h=600&fit=crop', // General mining
+    'https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?w=800&h=600&fit=crop', // Mining operation
   ],
   default: [
     'https://images.unsplash.com/photo-1540080106973-411a95b50e57?w=800&h=600&fit=crop', // General mining

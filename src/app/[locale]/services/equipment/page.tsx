@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import Image from 'next/image';
 import {
   Truck,
@@ -124,7 +124,7 @@ const equipmentData: EquipmentItem[] = [
       fuel: 'дизель',
       operatingHours: 2840,
     },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1615671524827-c1fe3973b648?w=800&h=600&fit=crop&auto=format&q=80'],
     dailyRate: 180000,
     weeklyRate: 1200000,
     monthlyRate: 4500000,
@@ -169,7 +169,7 @@ const equipmentData: EquipmentItem[] = [
       fuel: 'дизель',
       operatingHours: 1850,
     },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&auto=format&q=80'],
     dailyRate: 150000,
     weeklyRate: 1000000,
     monthlyRate: 3800000,
@@ -214,7 +214,7 @@ const equipmentData: EquipmentItem[] = [
       fuel: 'дизель',
       operatingHours: 4200,
     },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1599586120429-48281b6f0ece?w=800&h=600&fit=crop&auto=format&q=80'],
     dailyRate: 200000,
     weeklyRate: 1350000,
     monthlyRate: 5200000,
@@ -258,7 +258,7 @@ const equipmentData: EquipmentItem[] = [
       fuel: 'электричество',
       operatingHours: 980,
     },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=800&h=600&fit=crop&auto=format&q=80'],
     dailyRate: 220000,
     weeklyRate: 1500000,
     monthlyRate: 5800000,
@@ -303,7 +303,7 @@ const equipmentData: EquipmentItem[] = [
       fuel: 'дизель',
       operatingHours: 5100,
     },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&auto=format&q=80'],
     dailyRate: 160000,
     weeklyRate: 1080000,
     monthlyRate: 4100000,
@@ -347,7 +347,7 @@ const equipmentData: EquipmentItem[] = [
       fuel: 'электричество',
       operatingHours: 340,
     },
-    images: [],
+    images: ['https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&auto=format&q=80'],
     dailyRate: 12000,
     weeklyRate: 75000,
     monthlyRate: 280000,
@@ -494,11 +494,21 @@ export default function EquipmentRentalPage() {
         variant="elevated"
         className="hover:shadow-xl transition-all duration-300"
       >
-        {/* Image Placeholder */}
+        {/* Equipment Image */}
         <div className="relative h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Truck className="w-16 h-16 text-gray-400" />
-          </div>
+          {item.images && item.images.length > 0 ? (
+            <Image
+              src={item.images[0]}
+              alt={item.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Truck className="w-16 h-16 text-gray-400" />
+            </div>
+          )}
 
           {/* Availability Badge */}
           <div
@@ -644,7 +654,7 @@ export default function EquipmentRentalPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
+      <NavigationSimple />
 
       {/* Header */}
       <div className="bg-white border-b border-gray-200 mt-16">

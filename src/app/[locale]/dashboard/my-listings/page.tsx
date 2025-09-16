@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import { depositApi } from '@/lib/api/deposits';
 import type { KazakhstanDeposit } from '@/lib/types/listing';
 
@@ -59,7 +59,7 @@ export default function MyListingsPage() {
   if (status === 'loading') {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Navigation />
+        <NavigationSimple />
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
         </div>
@@ -70,7 +70,7 @@ export default function MyListingsPage() {
   if (!session) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Navigation />
+        <NavigationSimple />
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="text-6xl mb-4">🔒</div>
@@ -192,7 +192,7 @@ export default function MyListingsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
+      <NavigationSimple />
 
       {/* Header */}
       <div className="bg-white border-b border-gray-200 pt-16">

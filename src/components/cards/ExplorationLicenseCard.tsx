@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { KazakhstanDeposit } from '@/lib/types/listing';
 import { formatPrice } from '@/lib/utils/format';
 import { getMineralIcon } from '@/components/icons';
+import { getPlaceholderImage } from '@/lib/images/placeholders';
 
 interface ExplorationLicenseCardProps {
   deposit: KazakhstanDeposit;
@@ -26,11 +27,29 @@ export default function ExplorationLicenseCard({
     return stages[stage || ''] || 'Не указан';
   };
 
+  // Get image URL - use first image from array or placeholder
+  const imageUrl =
+    deposit.images && Array.isArray(deposit.images) && deposit.images.length > 0
+      ? deposit.images[0]
+      : getPlaceholderImage(deposit.mineral, deposit.type);
+
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
       {/* Image */}
       <div className="aspect-[4/3] relative bg-gray-50">
-        <div className="absolute inset-0 flex items-center justify-center">
+        <img 
+          src={imageUrl} 
+          alt={deposit.title}
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            // Fallback to icon if image fails to load
+            const target = e.target as HTMLImageElement;
+            target.style.display = 'none';
+            const iconDiv = target.nextElementSibling as HTMLDivElement;
+            if (iconDiv) iconDiv.style.display = 'flex';
+          }}
+        />
+        <div className="absolute inset-0 hidden items-center justify-center">
           {(() => {
             const Icon = getMineralIcon(deposit.mineral);
             return <Icon className="w-20 h-20 text-blue-600 opacity-60" />;

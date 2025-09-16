@@ -5,12 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, Check, ChevronDown } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
-type Locale = 'ru' | 'kz' | 'en';
-const locales: Locale[] = ['ru', 'kz', 'en'];
+type Locale = 'ru' | 'kz' | 'en' | 'zh';
+const locales: Locale[] = ['ru', 'kz', 'en', 'zh'];
 const localeNames: Record<Locale, string> = {
   ru: 'Русский',
   kz: 'Қазақша',
   en: 'English',
+  zh: '中文',
 };
 
 interface LanguageSwitcherProps {

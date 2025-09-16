@@ -85,16 +85,15 @@ export default function ServicesPage() {
 
   const knowledgeCenter = [
     {
-      title: 'База знаний',
-      description: 'Техническая документация, стандарты, регламенты',
+      title: t('services.knowledge.knowledgeBase'),
+      description: t('services.knowledge.knowledgeBaseDesc'),
       icon: BookOpen,
       href: '/knowledge',
       articles: 234,
     },
     {
-      title: 'Новости отрасли',
-      description:
-        'Актуальные новости горнодобывающей промышленности Казахстана',
+      title: t('services.knowledge.industryNews'),
+      description: t('services.knowledge.industryNewsDesc'),
       icon: Newspaper,
       href: '/news',
       articles: 156,
@@ -182,13 +181,13 @@ export default function ServicesPage() {
                         <span>
                           {category.stats.providers ||
                             category.stats.specialists}{' '}
-                          поставщиков
+                          {t('services.labels.providers')}
                         </span>
                         <span>
                           {category.stats.projects ||
                             category.stats.items ||
                             category.stats.funded}{' '}
-                          проектов
+                          {t('services.labels.projects')}
                         </span>
                       </div>
 
@@ -218,7 +217,7 @@ export default function ServicesPage() {
                         className="w-full group-hover:bg-blue-600 group-hover:text-white transition-colors"
                         rightIcon={<ArrowRight className="w-4 h-4" />}
                       >
-                        Смотреть все
+                        {t('services.labels.viewAll')}
                       </Button>
                     </div>
                   </Card>
@@ -232,11 +231,10 @@ export default function ServicesPage() {
         <section className="mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Информационный центр
+              {t('services.sections.informationCenter')}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Актуальная информация, новости отрасли и база знаний для
-              профессионалов
+              {t('services.sections.informationCenterSubtitle')}
             </p>
           </div>
 
@@ -261,7 +259,7 @@ export default function ServicesPage() {
                         </p>
                         <div className="flex items-center justify-between">
                           <span className="text-sm text-gray-500 dark:text-gray-400">
-                            {item.articles} материалов
+                            {item.articles} {t('services.labels.materials')}
                           </span>
                           <ArrowRight className="w-5 h-5 text-blue-600 group-hover:translate-x-1 transition-transform" />
                         </div>
@@ -277,24 +275,23 @@ export default function ServicesPage() {
         {/* CTA Section */}
         <section className="bg-blue-600 dark:bg-blue-700 rounded-2xl p-8 text-center text-white">
           <h2 className="text-2xl font-bold mb-4">
-            Хотите разместить свои услуги?
+            {t('services.cta.title')}
           </h2>
           <p className="text-blue-100 dark:text-blue-200 mb-6 max-w-2xl mx-auto">
-            Присоединяйтесь к нашей экосистеме и найдите новых клиентов в
-            горнодобывающей отрасли Казахстана
+            {t('services.cta.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               variant="secondary"
               className="bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
-              Разместить услуги
+              {t('services.cta.postService')}
             </Button>
             <Button
               variant="outline"
               className="border-blue-400 dark:border-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-800"
             >
-              Связаться с нами
+              {t('services.cta.contactUs')}
             </Button>
           </div>
         </section>

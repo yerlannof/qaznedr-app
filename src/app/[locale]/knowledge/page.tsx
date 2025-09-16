@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -351,7 +351,7 @@ export default function KnowledgePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
+      <NavigationSimple />
 
       {/* Hero Section */}
       <div className="bg-blue-600 text-white mt-16">

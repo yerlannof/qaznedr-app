@@ -1,12 +1,22 @@
 'use client';
 
 import { useSession, signIn, signOut } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 
 export function useAuth() {
   const { data: session, status, update } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
+  
+  // Extract current locale from pathname
+  const getCurrentLocale = () => {
+    const segments = pathname.split('/');
+    const locale = segments[1];
+    return ['ru', 'kz', 'en', 'zh'].includes(locale) ? locale : 'ru';
+  };
+  
+  const locale = getCurrentLocale();
 
   const login = useCallback(
     async (email: string, password: string) => {
@@ -21,7 +31,7 @@ export function useAuth() {
           throw new Error(result.error);
         }
 
-        router.push('/dashboard');
+        router.push(`/${locale}/dashboard`);
         return { success: true };
       } catch (error) {
         return {
@@ -30,13 +40,13 @@ export function useAuth() {
         };
       }
     },
-    [router]
+    [router, locale]
   );
 
   const logout = useCallback(async () => {
     await signOut({ redirect: false });
-    router.push('/');
-  }, [router]);
+    router.push(`/${locale}`);
+  }, [router, locale]);
 
   const register = useCallback(
     async (email: string, password: string, name?: string) => {

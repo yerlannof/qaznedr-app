@@ -18,25 +18,55 @@ const translations = {
       officialPlatform: 'Официальная цифровая платформа',
       title: 'Единая цифровая экосистема недропользования Казахстана',
       subtitle:
-        'Инновационная платформа для прозрачного взаимодействия между инвесторами, геологами, горнодобывающими компаниями и государственными органами. Обеспечиваем цифровизацию отрасли через лицензии, разведку и рудопроявления.',
-      viewListings: 'Просмотреть объявления',
-      postListing: 'Разместить объявление',
+        'Инновационная платформа, обеспечивающая прозрачное взаимодействие между инвесторами, геологами, горнодобывающими компаниями и государственными органами. Способствуем цифровизации отрасли через комплексное управление лицензированием, разведкой и минеральными ресурсами.',
+      viewListings: 'Смотреть объявления',
+      postListing: 'Подать объявление',
       miningLicenses: 'Лицензии на добычу',
-      miningLicensesDesc: 'Права на добычу полезных ископаемых',
+      miningLicensesDesc: 'Готовые к добыче лицензии',
       explorationLicenses: 'Лицензии на разведку',
-      explorationLicensesDesc: 'Разрешения на геологическую разведку',
-      mineralOccurrences: 'Рудопроявления',
-      mineralOccurrencesDesc: 'Проявления полезных ископаемых',
+      explorationLicensesDesc: 'Лицензии для геологической разведки',
+      mineralOccurrences: 'Месторождения',
+      mineralOccurrencesDesc: 'Обнаруженные месторождения полезных ископаемых',
       getStarted: 'Начать работу',
       getStartedDesc:
-        'Присоединяйтесь к нашей платформе и откройте новые возможности',
-      goToListings: 'Перейти к объявлениям',
+        'Присоединяйтесь к ведущей платформе горнодобывающей промышленности Казахстана',
+      goToListings: 'К объявлениям',
       ourServices: 'Наши услуги',
       whyChooseUs: 'Почему выбирают нас',
       activeListings: 'Активных объявлений',
       kazakhstanRegions: 'Регионов Казахстана',
       verifiedCompanies: 'Проверенных компаний',
       customerSupport: 'Поддержка клиентов',
+    },
+    listings: {
+      title: 'Месторождения полезных ископаемых',
+      loading: 'Загрузка...',
+      foundDeposits: 'Найдено {count} месторождений',
+      depositsCount: '{count} месторождений',
+      showingResults: 'Показано {count} результатов',
+      pageInfo: 'страница {current} из {total}',
+      filters: 'Фильтры',
+      clearFilters: 'Очистить',
+      smartSearch: 'Умный поиск',
+      listingType: 'Тип объявления',
+      allTypes: 'Все типы',
+      miningLicenses: 'Лицензии на добычу',
+      explorationLicenses: 'Лицензии на разведку',
+      mineralOccurrences: 'Рудопроявления',
+      priceRange: 'Цена (млрд ₸)',
+      apply: 'Применить',
+      region: 'Регион',
+      mineral: 'Полезное ископаемое',
+      verified: 'Проверено',
+      onlineNow: '{count} человек смотрят сейчас',
+      area: 'Площадь',
+      license: 'Лицензия',
+      active: 'Активно',
+      openDate: 'Дата открытия',
+      viewMode: {
+        list: 'Список',
+        map: 'Карта',
+      },
     },
     footer: {
       company: {
@@ -104,25 +134,42 @@ const translations = {
     services: {
       hero: {
         title: 'Экосистема горнодобывающих услуг',
-        subtitle: 'Полный спектр профессиональных услуг для горнодобывающей отрасли Казахстана. От геологической разведки до инвестиционного сопровождения.',
+        subtitle:
+          'Полный спектр профессиональных услуг для горнодобывающей отрасли Казахстана. От геологической разведки до инвестиционного сопровождения.',
         searchPlaceholder: 'Найдите нужную услугу или поставщика...',
       },
       sections: {
         categories: 'Категории услуг',
-        categoriesSubtitle: 'Выберите категорию услуг и найдите проверенных поставщиков в вашем регионе',
+        categoriesSubtitle:
+          'Выберите категорию услуг и найдите проверенных поставщиков в вашем регионе',
         informationCenter: 'Информационный центр',
-        informationCenterSubtitle: 'Актуальная информация, новости отрасли и база знаний для профессионалов',
+        informationCenterSubtitle:
+          'Актуальная информация, новости отрасли и база знаний для профессионалов',
+      },
+      labels: {
+        providers: 'поставщиков',
+        projects: 'проектов',
+        materials: 'материалов',
+        viewAll: 'Смотреть все',
+      },
+      cta: {
+        title: 'Хотите разместить свои услуги?',
+        description: 'Присоединяйтесь к нашей экосистеме и найдите новых клиентов в горнодобывающей отрасли Казахстана',
+        postService: 'Разместить услуги',
+        contactUs: 'Связаться с нами',
       },
       knowledge: {
         knowledgeBase: 'База знаний',
         knowledgeBaseDesc: 'Техническая документация, стандарты, регламенты',
         industryNews: 'Новости отрасли',
-        industryNewsDesc: 'Актуальные новости горнодобывающей промышленности Казахстана',
+        industryNewsDesc:
+          'Актуальные новости горнодобывающей промышленности Казахстана',
         materials: 'материалов',
       },
       cta: {
         title: 'Хотите разместить свои услуги?',
-        subtitle: 'Присоединяйтесь к нашей экосистеме и найдите новых клиентов в горнодобывающей отрасли Казахстана',
+        subtitle:
+          'Присоединяйтесь к нашей экосистеме и найдите новых клиентов в горнодобывающей отрасли Казахстана',
         listServices: 'Разместить услуги',
         contactUs: 'Связаться с нами',
       },
@@ -269,25 +316,55 @@ const translations = {
       officialPlatform: 'Ресми цифрлық платформа',
       title: 'Қазақстанның бірыңғай цифрлық недропайдалану экожүйесі',
       subtitle:
-        'Инвесторлар, геологтар, тау-кен компанияларының және мемлекеттік органдардың ашық өзара әрекеттесуіне арналған инновациялық платформа. Лицензиялау, барлау және кен орындары арқылы саланы цифрландыруды қамтамасыз етеміз.',
-      viewListings: 'Хабарландыруларды қарау',
-      postListing: 'Хабарландыру орналастыру',
+        'Инвесторлар, геологтар, тау-кен компаниялары мен мемлекеттік органдар арасында ашық ынтымақтастықты қамтамасыз ететін инновациялық платформа. Лицензиялау, барлау және минералдық қорларды басқарудың кешенді жүйесі арқылы салаға цифрландыруды дамытамыз.',
+      viewListings: 'Хабарландыруларды көру',
+      postListing: 'Хабарландыру беру',
       miningLicenses: 'Өндіру лицензиялары',
-      miningLicensesDesc: 'Пайдалы қазбаларды өндіру құқықтары',
+      miningLicensesDesc: 'Өндіруге дайын лицензиялар',
       explorationLicenses: 'Барлау лицензиялары',
-      explorationLicensesDesc: 'Геологиялық барлау рұқсаттары',
+      explorationLicensesDesc: 'Геологиялық барлау лицензиялары',
       mineralOccurrences: 'Кен орындары',
-      mineralOccurrencesDesc: 'Пайдалы қазбалардың көрінуі',
+      mineralOccurrencesDesc: 'Табылған пайдалы қазба кен орындары',
       getStarted: 'Жұмысты бастау',
       getStartedDesc:
-        'Біздің платформаға қосылыңыз және жаңа мүмкіндіктерді ашыңыз',
-      goToListings: 'Хабарландыруларға өту',
+        'Қазақстанның жетекші тау-кен өнеркәсібі платформасына қосылыңыз',
+      goToListings: 'Хабарландыруларға',
       ourServices: 'Біздің қызметтер',
       whyChooseUs: 'Неліктен бізді таңдайды',
       activeListings: 'Белсенді хабарландырулар',
       kazakhstanRegions: 'Қазақстан аймақтары',
       verifiedCompanies: 'Тексерілген компаниялар',
-      customerSupport: 'Клиенттерді қолдау',
+      customerSupport: 'Тұтынушыларды қолдау',
+    },
+    listings: {
+      title: 'Пайдалы қазбалар кен орындары',
+      loading: 'Жүктелуде...',
+      foundDeposits: '{count} кен орны табылды',
+      depositsCount: '{count} кен орны',
+      showingResults: '{count} нәтиже көрсетілуде',
+      pageInfo: '{current} бет {total} беттен',
+      filters: 'Сүзгілер',
+      clearFilters: 'Тазалау',
+      smartSearch: 'Ақылды іздеу',
+      listingType: 'Хабарландыру түрі',
+      allTypes: 'Барлық түрлер',
+      miningLicenses: 'Өндіру лицензиялары',
+      explorationLicenses: 'Барлау лицензиялары',
+      mineralOccurrences: 'Рудопроявления',
+      priceRange: 'Баға (млрд ₸)',
+      apply: 'Қолдану',
+      region: 'Аймақ',
+      mineral: 'Пайдалы қазба',
+      verified: 'Тексерілген',
+      onlineNow: '{count} адам қазір қарап отыр',
+      area: 'Аудан',
+      license: 'Лицензия',
+      active: 'Белсенді',
+      openDate: 'Ашылу күні',
+      viewMode: {
+        list: 'Тізім',
+        map: 'Карта',
+      },
     },
     footer: {
       company: {
@@ -339,7 +416,8 @@ const translations = {
     },
     map: {
       title: 'Қазақстанның кен орындарының картасы',
-      subtitle: 'Аймақтар бойынша кен орындарын іздеу үшін картаны пайдаланыңыз',
+      subtitle:
+        'Аймақтар бойынша кен орындарын іздеу үшін картаны пайдаланыңыз',
     },
     common: {
       dashboard: 'Жеке кабинет',
@@ -376,6 +454,18 @@ const translations = {
         equipment: 'Бұрғылау қондырғылары, экскаваторлар, көлік',
         legal: 'Тау-кен құқығы, лицензиялау, мәмілелерді сүйемелдеу',
         investors: 'Инвестиция іздеу, жобаларды бағалау, қаржыландыру',
+      },
+      labels: {
+        providers: 'жеткізушілер',
+        projects: 'жобалар',
+        materials: 'материалдар',
+        viewAll: 'Барлығын көру',
+      },
+      cta: {
+        title: 'Қызметтеріңізді орналастырғыңыз келе ме?',
+        description: 'Біздің экожүйеге қосылыңыз және Қазақстанның тау-кен өнеркәсібінде жаңа клиенттерді табыңыз',
+        postService: 'Қызметтерді орналастыру',
+        contactUs: 'Бізбен байланысыңыз',
       },
     },
     companies: {
@@ -414,7 +504,7 @@ const translations = {
       officialPlatform: 'Official Digital Platform',
       title: "Kazakhstan's Unified Digital Subsoil Use Ecosystem",
       subtitle:
-        'An innovative platform facilitating transparent collaboration between investors, geologists, mining companies, and government agencies. Driving industry digitalization through comprehensive licensing, exploration, and mineral occurrence management.',
+        'Innovative platform ensuring transparent cooperation between investors, geologists, mining companies and government agencies. We promote industry digitalization through comprehensive management of licensing, exploration and mineral resources.',
       viewListings: 'View Listings',
       postListing: 'Post Listing',
       miningLicenses: 'Mining Licenses',
@@ -432,6 +522,36 @@ const translations = {
       kazakhstanRegions: 'Kazakhstan Regions',
       verifiedCompanies: 'Verified Companies',
       customerSupport: 'Customer Support',
+    },
+    listings: {
+      title: 'Mineral Deposits',
+      loading: 'Loading...',
+      foundDeposits: 'Found {count} deposits',
+      depositsCount: '{count} deposits',
+      showingResults: 'Showing {count} results',
+      pageInfo: 'page {current} of {total}',
+      filters: 'Filters',
+      clearFilters: 'Clear',
+      smartSearch: 'Smart Search',
+      listingType: 'Listing Type',
+      allTypes: 'All Types',
+      miningLicenses: 'Mining Licenses',
+      explorationLicenses: 'Exploration Licenses',
+      mineralOccurrences: 'Mineral Occurrences',
+      priceRange: 'Price (billion ₸)',
+      apply: 'Apply',
+      region: 'Region',
+      mineral: 'Mineral',
+      verified: 'Verified',
+      onlineNow: '{count} people viewing now',
+      area: 'Area',
+      license: 'License',
+      active: 'Active',
+      openDate: 'Open Date',
+      viewMode: {
+        list: 'List',
+        map: 'Map',
+      },
     },
     footer: {
       company: {
@@ -520,6 +640,18 @@ const translations = {
         legal: 'Mining law, licensing, transaction support',
         investors: 'Investment search, project evaluation, financing',
       },
+      labels: {
+        providers: 'providers',
+        projects: 'projects',
+        materials: 'materials',
+        viewAll: 'View All',
+      },
+      cta: {
+        title: 'Want to list your services?',
+        description: 'Join our ecosystem and find new clients in Kazakhstan\'s mining industry',
+        postService: 'Post Services',
+        contactUs: 'Contact Us',
+      },
     },
     companies: {
       title: 'Company Directory',
@@ -575,6 +707,36 @@ const translations = {
       kazakhstanRegions: '哈萨克斯坦地区',
       verifiedCompanies: '认证公司',
       customerSupport: '客户支持',
+    },
+    listings: {
+      title: '矿物资源',
+      loading: '加载中...',
+      foundDeposits: '找到 {count} 个矿藏',
+      depositsCount: '{count} 个矿藏',
+      showingResults: '显示 {count} 个结果',
+      pageInfo: '第 {current} 页，共 {total} 页',
+      filters: '筛选器',
+      clearFilters: '清除',
+      smartSearch: '智能搜索',
+      listingType: '发布类型',
+      allTypes: '所有类型',
+      miningLicenses: '开采许可证',
+      explorationLicenses: '勘探许可证',
+      mineralOccurrences: '矿点',
+      priceRange: '价格（十亿坚戈）',
+      apply: '应用',
+      region: '地区',
+      mineral: '矿物',
+      verified: '已验证',
+      onlineNow: '{count} 人正在查看',
+      area: '面积',
+      license: '许可证',
+      active: '活跃',
+      openDate: '开放日期',
+      viewMode: {
+        list: '列表',
+        map: '地图',
+      },
     },
     footer: {
       company: {
@@ -661,6 +823,18 @@ const translations = {
         legal: '矿业法、许可证、交易支持',
         investors: '投资寻找、项目评估、融资',
       },
+      labels: {
+        providers: '供应商',
+        projects: '项目',
+        materials: '资料',
+        viewAll: '查看全部',
+      },
+      cta: {
+        title: '想要发布您的服务吗？',
+        description: '加入我们的生态系统，在哈萨克斯坦采矿业中寻找新客户',
+        postService: '发布服务',
+        contactUs: '联系我们',
+      },
     },
     companies: {
       title: '公司目录',
@@ -703,7 +877,7 @@ export function useTranslation() {
     const currentTranslations =
       (translations as any)[locale] || translations.ru;
 
-    return function translate(key: string): string {
+    return function translate(key: string, params?: Record<string, any>): string {
       const keys = key.split('.');
       let current: any = currentTranslations;
 
@@ -724,11 +898,21 @@ export function useTranslation() {
               return key; // Return key itself if not found
             }
           }
-          return fallback;
+          current = fallback;
+          break;
         }
       }
 
-      return typeof current === 'string' ? current : key;
+      let result = typeof current === 'string' ? current : key;
+      
+      // Handle parameter interpolation
+      if (params && typeof result === 'string') {
+        Object.entries(params).forEach(([paramKey, value]) => {
+          result = result.replace(new RegExp(`\\{${paramKey}\\}`, 'g'), String(value));
+        });
+      }
+
+      return result;
     };
   }, [locale]);
 

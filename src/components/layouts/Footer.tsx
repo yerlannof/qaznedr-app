@@ -1,11 +1,24 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
 
 export default function Footer() {
   const { t, locale } = useTranslation();
+  const pathname = usePathname();
+  
+  // Helper function to switch locale in current path
+  const switchLocalePath = (newLocale: string) => {
+    const segments = pathname.split('/');
+    if (segments[1] && ['ru', 'kz', 'en', 'zh'].includes(segments[1])) {
+      segments[1] = newLocale;
+    } else {
+      segments.splice(1, 0, newLocale);
+    }
+    return segments.join('/') || `/${newLocale}`;
+  };
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -180,25 +193,25 @@ export default function Footer() {
               </h5>
               <div className="flex space-x-4">
                 <Link
-                  href="/ru"
+                  href={switchLocalePath('ru')}
                   className={`text-sm transition-colors ${locale === 'ru' ? 'text-blue-400' : 'text-gray-300 hover:text-white'}`}
                 >
                   Русский
                 </Link>
                 <Link
-                  href="/kz"
+                  href={switchLocalePath('kz')}
                   className={`text-sm transition-colors ${locale === 'kz' ? 'text-blue-400' : 'text-gray-300 hover:text-white'}`}
                 >
                   Қазақша
                 </Link>
                 <Link
-                  href="/en"
+                  href={switchLocalePath('en')}
                   className={`text-sm transition-colors ${locale === 'en' ? 'text-blue-400' : 'text-gray-300 hover:text-white'}`}
                 >
                   English
                 </Link>
                 <Link
-                  href="/zh"
+                  href={switchLocalePath('zh')}
                   className={`text-sm transition-colors ${locale === 'zh' ? 'text-blue-400' : 'text-gray-300 hover:text-white'}`}
                 >
                   中文

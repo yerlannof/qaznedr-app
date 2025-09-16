@@ -145,12 +145,12 @@ function ListingsContent() {
           <div className="flex justify-between items-start">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                Месторождения полезных ископаемых
+                {t('listings.title')}
               </h1>
               <p className="text-gray-600 dark:text-gray-400">
                 {loading
-                  ? 'Загрузка...'
-                  : `Найдено ${totalCount} месторождений`}
+                  ? t('listings.loading')
+                  : t('listings.foundDeposits', { count: totalCount })}
               </p>
             </div>
             <Link
@@ -178,12 +178,12 @@ function ListingsContent() {
               <div className="flex justify-between items-center mb-6">
                 <div>
                   <p className="text-gray-900 dark:text-gray-100 font-medium">
-                    {totalCount} месторождений
+                    {t('listings.depositsCount', { count: totalCount })}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Показано {deposits.length} результатов
+                    {t('listings.showingResults', { count: deposits.length })}
                     {currentPage > 1 &&
-                      ` (страница ${currentPage} из ${totalPages})`}
+                      ` (${t('listings.pageInfo', { current: currentPage, total: totalPages })})`}
                   </p>
                 </div>
 
@@ -200,7 +200,7 @@ function ListingsContent() {
                     whileTap={{ scale: 0.98 }}
                   >
                     <List className="w-4 h-4" />
-                    Список
+                    {t('listings.viewMode.list')}
                   </motion.button>
                   <motion.button
                     onClick={() => setViewMode('map')}
@@ -213,7 +213,7 @@ function ListingsContent() {
                     whileTap={{ scale: 0.98 }}
                   >
                     <Map className="w-4 h-4" />
-                    Карта
+                    {t('listings.viewMode.map')}
                   </motion.button>
 
                   {/* Animated background slider */}

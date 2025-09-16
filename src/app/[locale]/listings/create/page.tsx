@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import CreateListingWizard from '@/components/features/CreateListingWizard';
 import Link from 'next/link';
 
@@ -14,7 +14,7 @@ export default function CreateListingPage() {
   if (status === 'loading') {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Navigation />
+        <NavigationSimple />
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
         </div>
@@ -26,7 +26,7 @@ export default function CreateListingPage() {
   if (!session) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Navigation />
+        <NavigationSimple />
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="text-6xl mb-4">🔒</div>
@@ -50,7 +50,7 @@ export default function CreateListingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
+      <NavigationSimple />
 
       {/* Main content with wizard */}
       <div className="pt-16 px-4 sm:px-6 lg:px-8 py-8">

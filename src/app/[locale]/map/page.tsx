@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import { Map as MapIcon, Loader2 } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 
@@ -27,7 +27,7 @@ export default function MapPage() {
 
   return (
     <div className="h-screen flex flex-col">
-      <Navigation />
+      <NavigationSimple />
 
       {/* Map Header */}
       <div className="bg-white border-b border-gray-200 px-4 py-3 mt-16">
@@ -39,9 +39,7 @@ export default function MapPage() {
             </h1>
           </div>
 
-          <div className="text-sm text-gray-600">
-            {t('map.subtitle')}
-          </div>
+          <div className="text-sm text-gray-600">{t('map.subtitle')}</div>
         </div>
       </div>
 

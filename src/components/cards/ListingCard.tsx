@@ -2,7 +2,7 @@
 
 import { KazakhstanDeposit } from '@/lib/types/listing';
 import { formatPrice } from '@/lib/utils/format';
-import MiningLicenseCard from './MiningLicenseCard';
+import MiningLicenseCardNew from './MiningLicenseCardNew';
 import ExplorationLicenseCard from './ExplorationLicenseCard';
 import MineralOccurrenceCard from './MineralOccurrenceCard';
 
@@ -39,19 +39,20 @@ export default function ListingCard({ deposit }: ListingCardProps) {
 
   const cardProps = {
     deposit,
+    formatPrice,
     getStatusColor,
     getStatusText,
   };
 
   switch (deposit.type) {
     case 'MINING_LICENSE':
-      return <MiningLicenseCard {...cardProps} />;
+      return <MiningLicenseCardNew {...cardProps} />;
     case 'EXPLORATION_LICENSE':
       return <ExplorationLicenseCard {...cardProps} />;
     case 'MINERAL_OCCURRENCE':
       return <MineralOccurrenceCard {...cardProps} />;
     default:
       // Fallback to mining license card for unknown types
-      return <MiningLicenseCard {...cardProps} />;
+      return <MiningLicenseCardNew {...cardProps} />;
   }
 }

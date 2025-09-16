@@ -5,6 +5,7 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 import { REGIONS, MINERALS } from '@/lib/types/listing';
 import AdvancedSearch from './AdvancedSearch';
+import { useTranslation } from '@/hooks/useTranslation';
 import {
   Filter,
   X,
@@ -53,6 +54,7 @@ const getResultCounts = () => ({
 });
 
 function FiltersContent() {
+  const { t } = useTranslation();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -161,7 +163,7 @@ function FiltersContent() {
         <div className="flex items-center gap-2">
           <Filter className="w-5 h-5 text-gray-600" />
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-            Фильтры
+            {t('listings.filters')}
           </h2>
           {activeFiltersCount > 0 && (
             <Badge variant="secondary" className="ml-2">
@@ -177,7 +179,7 @@ function FiltersContent() {
             className="text-gray-500 hover:text-gray-700"
           >
             <X className="w-4 h-4 mr-1" />
-            Очистить
+            {t('listings.clearFilters')}
           </Button>
         )}
       </div>
@@ -185,7 +187,7 @@ function FiltersContent() {
       {/* Smart Search */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 mb-3">
-          Умный поиск
+          {t('listings.smartSearch')}
         </label>
         <AdvancedSearch />
       </div>
@@ -199,7 +201,7 @@ function FiltersContent() {
             className="flex items-center justify-between w-full text-left"
           >
             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-              Тип объявления
+              {t('listings.listingType')}
             </span>
             {expandedSections.type ? (
               <ChevronUp className="w-4 h-4 text-gray-400" />
@@ -219,7 +221,7 @@ function FiltersContent() {
                     onChange={() => handleFilterChange('type', '')}
                     className="mr-3 text-blue-600 focus:ring-blue-500"
                   />
-                  <span className="text-sm text-gray-700">Все типы</span>
+                  <span className="text-sm text-gray-700">{t('listings.allTypes')}</span>
                 </div>
                 <span className="text-xs text-gray-500">
                   {Object.values(resultCounts.types).reduce((a, b) => a + b, 0)}
@@ -238,7 +240,7 @@ function FiltersContent() {
                     className="mr-3 text-blue-600 focus:ring-blue-500"
                   />
                   <span className="text-sm text-gray-700">
-                    Лицензии на добычу
+                    {t('listings.miningLicenses')}
                   </span>
                 </div>
                 <span className="text-xs text-gray-500">
@@ -258,7 +260,7 @@ function FiltersContent() {
                     className="mr-3 text-blue-600 focus:ring-blue-500"
                   />
                   <span className="text-sm text-gray-700">
-                    Лицензии на разведку
+                    {t('listings.explorationLicenses')}
                   </span>
                 </div>
                 <span className="text-xs text-gray-500">
@@ -277,7 +279,7 @@ function FiltersContent() {
                     }
                     className="mr-3 text-blue-600 focus:ring-blue-500"
                   />
-                  <span className="text-sm text-gray-700">Рудопроявления</span>
+                  <span className="text-sm text-gray-700">{t('listings.mineralOccurrences')}</span>
                 </div>
                 <span className="text-xs text-gray-500">
                   {resultCounts.types.MINERAL_OCCURRENCE}
@@ -295,7 +297,7 @@ function FiltersContent() {
           >
             <span className="text-sm font-medium text-gray-900 dark:text-gray-100 flex items-center gap-2">
               <DollarSign className="w-4 h-4" />
-              Цена (млрд ₸)
+              {t('listings.priceRange')}
             </span>
             {expandedSections.price ? (
               <ChevronUp className="w-4 h-4 text-gray-400" />

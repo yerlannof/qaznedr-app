@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import Image from 'next/image';
 import {
   Mountain,
@@ -433,7 +433,7 @@ export default function GeologicalServicesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
+      <NavigationSimple />
 
       {/* Header */}
       <div className="bg-white border-b border-gray-200 mt-16">

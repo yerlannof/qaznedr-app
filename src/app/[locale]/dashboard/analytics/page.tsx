@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
-import Navigation from '@/components/layouts/Navigation';
+import NavigationSimple from '@/components/layouts/NavigationSimple';
 import { Card } from '@/components/ui/card-new';
 import { Button } from '@/components/ui/button';
 import {
@@ -213,7 +213,7 @@ export default function AnalyticsDashboard() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Navigation />
+        <NavigationSimple />
         <div className="max-w-7xl mx-auto px-4 py-8 mt-16">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-1/4 mb-4"></div>
@@ -233,7 +233,7 @@ export default function AnalyticsDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation />
+      <NavigationSimple />
 
       <div className="max-w-7xl mx-auto px-4 py-8 mt-16">
         {/* Header */}

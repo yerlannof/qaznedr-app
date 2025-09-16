@@ -32,7 +32,7 @@ export async function POST() {
     obj.someMethod(); // This will throw TypeError
   } else if (errorType < 0.66) {
     // Reference Error
-    // @ts-expect-error
+    // @ts-expect-error - intentionally calling undefined function to test Sentry error capture
     nonExistentFunction(); // This will throw ReferenceError
   } else {
     // Custom Error

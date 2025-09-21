@@ -180,7 +180,6 @@ export function ChatWindow({
       .single();
 
     if (convError) {
-      console.error('Error loading conversation:', convError);
       setLoading(false);
       return;
     }
@@ -272,7 +271,6 @@ export function ChatWindow({
       .single();
 
     if (error) {
-      console.error('Error sending message:', error);
       setNewMessage(messageContent); // Restore message on error
     } else {
       setReplyTo(null);

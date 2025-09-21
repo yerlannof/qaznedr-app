@@ -54,7 +54,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error tracking custom metric:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to track custom metric' },
       { status: 500 }
@@ -88,8 +87,6 @@ async function sendToMonitoringService(metric: any) {
           ],
         }),
       });
-    } catch (error) {
-      console.error('Failed to send to DataDog:', error);
-    }
+    } catch (error) {}
   }
 }

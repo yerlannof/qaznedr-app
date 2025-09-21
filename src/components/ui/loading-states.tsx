@@ -3,11 +3,17 @@
 import { motion } from 'framer-motion';
 import { Loader2, Sparkles } from 'lucide-react';
 
-export function LoadingSpinner({ size = 'default', className = '' }: { size?: 'sm' | 'default' | 'lg'; className?: string }) {
+export function LoadingSpinner({
+  size = 'default',
+  className = '',
+}: {
+  size?: 'sm' | 'default' | 'lg';
+  className?: string;
+}) {
   const sizes = {
     sm: 'w-4 h-4',
     default: 'w-6 h-6',
-    lg: 'w-8 h-8'
+    lg: 'w-8 h-8',
   };
 
   return (
@@ -30,12 +36,12 @@ export function LoadingDots({ className = '' }: { className?: string }) {
           className="w-2 h-2 bg-blue-600 rounded-full"
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.5, 1, 0.5]
+            opacity: [0.5, 1, 0.5],
           }}
           transition={{
             duration: 1.4,
             repeat: Infinity,
-            delay: i * 0.2
+            delay: i * 0.2,
           }}
         />
       ))}
@@ -48,12 +54,12 @@ export function LoadingPulse({ className = '' }: { className?: string }) {
     <motion.div
       className={`relative ${className}`}
       animate={{
-        scale: [1, 1.05, 1]
+        scale: [1, 1.05, 1],
       }}
       transition={{
         duration: 2,
         repeat: Infinity,
-        ease: 'easeInOut'
+        ease: 'easeInOut',
       }}
     >
       <div className="absolute inset-0 bg-blue-600 rounded-full blur-xl opacity-30 animate-pulse" />
@@ -65,7 +71,11 @@ export function LoadingPulse({ className = '' }: { className?: string }) {
   );
 }
 
-export function LoadingOverlay({ message = 'Загрузка...' }: { message?: string }) {
+export function LoadingOverlay({
+  message = 'Загрузка...',
+}: {
+  message?: string;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0 }}

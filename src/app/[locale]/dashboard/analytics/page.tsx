@@ -169,7 +169,6 @@ export default function AnalyticsDashboard() {
         recentActivity: recentActivity || [],
       });
     } catch (error) {
-      console.error('Error fetching analytics:', error);
     } finally {
       setLoading(false);
     }

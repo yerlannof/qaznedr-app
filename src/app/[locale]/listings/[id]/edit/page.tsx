@@ -141,7 +141,6 @@ export default function EditListingPage() {
             ? err.message
             : 'Произошла ошибка при загрузке данных'
         );
-        console.error('Error loading listing:', err);
       } finally {
         setLoadingData(false);
       }
@@ -357,7 +356,6 @@ export default function EditListingPage() {
       // Перенаправление на страницу объявления
       router.push(`/listings/${listingId}`);
     } catch (error) {
-      console.error('Error updating listing:', error);
       alert('Произошла ошибка при обновлении объявления. Попробуйте еще раз.');
     } finally {
       setLoading(false);

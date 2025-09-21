@@ -16,8 +16,8 @@ import {
   Plus,
 } from 'lucide-react';
 // import { GlobalSearch } from '@/components/features/GlobalSearch'; // Temporarily disabled
-import ThemeToggleNew from '@/components/ui/ThemeToggleNew';
-import LanguageSwitcher from '@/components/ui/LanguageSwitcherNew';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import {
   Sheet,
   SheetContent,
@@ -51,11 +51,27 @@ export default function Navigation() {
   }, []);
 
   const navigation = [
-    { name: t('navigation.listings'), href: `/${locale}/listings`, icon: MapPin },
+    {
+      name: t('navigation.listings'),
+      href: `/${locale}/listings`,
+      icon: MapPin,
+    },
     { name: t('navigation.map'), href: `/${locale}/map`, icon: MapPin },
-    { name: t('navigation.services'), href: `/${locale}/services`, icon: Briefcase },
-    { name: t('navigation.companies'), href: `/${locale}/companies`, icon: Building2 },
-    { name: t('navigation.messages'), href: `/${locale}/messages`, icon: MessageSquare },
+    {
+      name: t('navigation.services'),
+      href: `/${locale}/services`,
+      icon: Briefcase,
+    },
+    {
+      name: t('navigation.companies'),
+      href: `/${locale}/companies`,
+      icon: Building2,
+    },
+    {
+      name: t('navigation.messages'),
+      href: `/${locale}/messages`,
+      icon: MessageSquare,
+    },
   ];
 
   const isActive = (href: string) => pathname === href;
@@ -123,8 +139,8 @@ export default function Navigation() {
 
             {/* User Menu */}
             <div className="hidden md:flex items-center space-x-4">
-              <LanguageSwitcher currentLocale={locale as any} />
-              <ThemeToggleNew />
+              <LanguageSwitcher />
+              <ThemeToggle />
               <Link
                 href={`/${locale}/listings/create`}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
@@ -255,8 +271,8 @@ export default function Navigation() {
                     {/* Bottom Actions */}
                     <div className="border-t p-4 space-y-3">
                       <div className="flex items-center justify-between mb-3">
-                        <LanguageSwitcher currentLocale={locale as any} />
-                        <ThemeToggleNew />
+                        <LanguageSwitcher />
+                        <ThemeToggle />
                       </div>
                       <Link
                         href={`/${locale}/listings/create`}

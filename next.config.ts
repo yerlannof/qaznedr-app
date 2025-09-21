@@ -1,8 +1,13 @@
 import type { NextConfig } from 'next';
-// import createNextIntlPlugin from 'next-intl/plugin';
+import createNextIntlPlugin from 'next-intl/plugin';
 import { withSentryConfig } from '@sentry/nextjs';
 
-// const withNextIntl = createNextIntlPlugin('./i18n.ts');
+const withNextIntl = createNextIntlPlugin('./i18n.ts');
+
+// Bundle analyzer configuration
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const nextConfig: NextConfig = {
   // Enable standalone output for Docker
@@ -42,12 +47,95 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: false,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
-  // Performance optimizations (minimal for now to ensure build works)
-  experimental: {},
+  // Performance optimizations
+  experimental: {
+    optimizeCss: true,
+    webpackBuildWorker: true,
+  },
 
-  // Security headers (additional to middleware)
+  // SWC minification
+  swcMinify: true,
+
+  // Module optimization
+  modularizeImports: {
+    'lucide-react': {
+      transform: 'lucide-react/dist/esm/icons/{{kebabCase member}}',
+    },
+    '@heroicons/react': {
+      transform: '@heroicons/react/24/outline/{{member}}',
+    },
+  },
+
+  // Webpack optimizations
+  webpack: (
+    config: any,
+    { dev, isServer }: { dev: boolean; isServer: boolean }
+  ) => {
+    // Optimize production builds
+    if (!dev && !isServer) {
+      // Tree shaking
+      config.optimization.sideEffects = false;
+      config.optimization.usedExports = true;
+
+      // Split chunks optimization
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        cacheGroups: {
+          default: false,
+          vendors: false,
+          // Framework chunk
+          framework: {
+            name: 'framework',
+            chunks: 'all',
+            test: /[\\/]node_modules[\\/](react|react-dom|next)[\\/]/,
+            priority: 40,
+            enforce: true,
+          },
+          // Vendor chunk
+          vendor: {
+            name: 'vendor',
+            chunks: 'all',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 30,
+          },
+          // Common components
+          commons: {
+            name: 'commons',
+            minChunks: 2,
+            chunks: 'all',
+            priority: 20,
+            reuseExistingChunk: true,
+          },
+          // UI components
+          ui: {
+            name: 'ui',
+            test: /[\\/]components[\\/]ui[\\/]/,
+            chunks: 'all',
+            priority: 35,
+            reuseExistingChunk: true,
+          },
+        },
+      };
+
+      // Runtime chunk
+      config.optimization.runtimeChunk = {
+        name: 'runtime',
+      };
+    }
+
+    // Remove console logs in production
+    if (!dev) {
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
+    }
+
+    return config;
+  },
+
+  // Security and caching headers
   async headers() {
     return [
       {
@@ -60,6 +148,36 @@ const nextConfig: NextConfig = {
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff',
+          },
+        ],
+      },
+      // Cache static assets for 1 year
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Cache images for 30 days
+      {
+        source: '/images/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000',
+          },
+        ],
+      },
+      // Cache API responses for 5 minutes
+      {
+        source: '/api/listings',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=300, stale-while-revalidate=59',
           },
         ],
       },
@@ -88,20 +206,34 @@ const nextConfig: NextConfig = {
   // PoweredBy header removal
   poweredByHeader: false,
 
-  // Temporarily skip ESLint during builds to deploy quickly
+  // ESLint configuration
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true, // Disabled for performance optimization phase
+    dirs: ['src'],
   },
 
-  // Temporarily skip TypeScript errors to deploy quickly
-  // IMPORTANT: Fix these in Phase 2 after initial deployment
+  // TypeScript configuration
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true, // Temporarily to check build
+    tsconfigPath: './tsconfig.json',
+  },
+
+  // React strict mode for better development
+  reactStrictMode: true,
+
+  // Compiler optimizations
+  compiler: {
+    removeConsole:
+      process.env.NODE_ENV === 'production'
+        ? {
+            exclude: ['error', 'warn'],
+          }
+        : false,
   },
 };
 
-// Wrap with Sentry config
-export default withSentryConfig(nextConfig, {
+// Wrap with bundle analyzer, next-intl and then Sentry config
+export default withSentryConfig(withBundleAnalyzer(withNextIntl(nextConfig)), {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
 

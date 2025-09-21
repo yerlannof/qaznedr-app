@@ -347,7 +347,7 @@ export default function PriceTrendAnalytics() {
           <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
-                data={mineralDistribution}
+                data={mineralDistribution as any}
                 cx="50%"
                 cy="50%"
                 labelLine={false}

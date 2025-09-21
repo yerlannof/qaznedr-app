@@ -56,7 +56,6 @@ export class StorageService {
         path: data.path,
       };
     } catch (error) {
-      console.error('Upload error:', error);
       return {
         url: '',
         path: '',
@@ -86,7 +85,6 @@ export class StorageService {
       if (error) throw error;
       return true;
     } catch (error) {
-      console.error('Delete error:', error);
       return false;
     }
   }
@@ -104,7 +102,6 @@ export class StorageService {
       if (error) throw error;
       return true;
     } catch (error) {
-      console.error('Delete error:', error);
       return false;
     }
   }
@@ -125,7 +122,6 @@ export class StorageService {
       if (error) throw error;
       return data.signedUrl;
     } catch (error) {
-      console.error('Signed URL error:', error);
       return null;
     }
   }
@@ -146,7 +142,6 @@ export class StorageService {
       if (error) throw error;
       return data;
     } catch (error) {
-      console.error('List error:', error);
       return [];
     }
   }

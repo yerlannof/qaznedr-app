@@ -1,8 +1,16 @@
-# QAZNEDR.KZ - Kazakhstan Mining Rights Portal
+# QAZNEDR.KZ - Kazakhstan Mining Rights Portal 🇰🇿
+
+![Next.js](https://img.shields.io/badge/Next.js-15.3.4-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+![Supabase](https://img.shields.io/badge/Supabase-Database-green)
+![Tests](https://img.shields.io/badge/Tests-Jest-red)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ## Overview
 
 QAZNEDR.KZ is a specialized marketplace platform for buying and selling mineral deposits and mining licenses in Kazakhstan. The platform connects license holders with potential investors and mining companies, facilitating transparent transactions in the mining sector.
+
+> 🎯 **Mission**: Digitalize Kazakhstan's mining rights marketplace, making it transparent, efficient, and accessible to global investors.
 
 ## Features
 

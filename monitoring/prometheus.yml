@@ -1,0 +1,80 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'qaznedr-monitor'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+# Load rules once and periodically evaluate them
+rule_files:
+  - 'alerts/*.yml'
+
+# Scrape configurations
+scrape_configs:
+  # Node.js application metrics
+  - job_name: 'qaznedr-app'
+    static_configs:
+      - targets: ['app:3000']
+    metrics_path: /api/metrics
+    params:
+      token: ['${METRICS_AUTH_TOKEN}']
+
+  # PostgreSQL exporter
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+
+  # Redis exporter
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+
+  # Node exporter for system metrics
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # Nginx exporter
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx:9113']
+
+  # Cloudflare Analytics
+  - job_name: 'cloudflare'
+    static_configs:
+      - targets: ['cloudflare-exporter:9199']
+    params:
+      zone_id: ['${CLOUDFLARE_ZONE_ID}']
+
+  # Sentry metrics
+  - job_name: 'sentry'
+    static_configs:
+      - targets: ['sentry-exporter:9200']
+    params:
+      organization: ['${SENTRY_ORG}']
+      project: ['${SENTRY_PROJECT}']
+
+  # Uptime monitoring
+  - job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+          - https://qaznedr.kz
+          - https://api.qaznedr.kz
+          - https://staging.qaznedr.kz
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115

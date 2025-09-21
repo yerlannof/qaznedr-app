@@ -114,7 +114,6 @@ export default function CompaniesPage() {
       .order('rating', { ascending: false, nullsFirst: false });
 
     if (error) {
-      console.error('Error loading companies:', error);
     } else {
       const companiesWithCounts =
         data?.map((company: any) => ({
@@ -150,7 +149,9 @@ export default function CompaniesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-4">
             <Building2 className="w-8 h-8 text-gray-700 dark:text-gray-300" />
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">{t('companies.title')}</h1>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
+              {t('companies.title')}
+            </h1>
           </div>
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
             {t('companies.description')}
@@ -173,7 +174,9 @@ export default function CompaniesPage() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-6 max-w-2xl mt-8">
             <div>
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">{companies.length}</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                {companies.length}
+              </div>
               <div className="text-gray-600 dark:text-gray-400">
                 {t('companies.stats.companies')}
               </div>

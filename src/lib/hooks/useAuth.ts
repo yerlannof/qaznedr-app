@@ -8,14 +8,14 @@ export function useAuth() {
   const { data: session, status, update } = useSession();
   const router = useRouter();
   const pathname = usePathname();
-  
+
   // Extract current locale from pathname
   const getCurrentLocale = () => {
     const segments = pathname.split('/');
     const locale = segments[1];
     return ['ru', 'kz', 'en', 'zh'].includes(locale) ? locale : 'ru';
   };
-  
+
   const locale = getCurrentLocale();
 
   const login = useCallback(

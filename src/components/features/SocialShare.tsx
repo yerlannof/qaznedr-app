@@ -56,9 +56,7 @@ export default function SocialShare({
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
+    } catch (err) {}
   };
 
   const handleNativeShare = async () => {
@@ -71,7 +69,6 @@ export default function SocialShare({
         });
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
-          console.error('Error sharing:', err);
         }
       }
     } else {

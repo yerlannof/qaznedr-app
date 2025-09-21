@@ -940,7 +940,6 @@ export default function CreateListingWizard({
       const newListing = await depositApi.create(listingData);
       router.push(`/listings/${newListing.id}`);
     } catch (error) {
-      console.error('Error creating listing:', error);
       alert('Произошла ошибка при создании объявления. Попробуйте еще раз.');
     } finally {
       setIsLoading(false);

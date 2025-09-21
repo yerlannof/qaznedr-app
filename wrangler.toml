@@ -1,0 +1,82 @@
+name = "qaznedr-app"
+main = ".cloudflare/worker.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[site]
+bucket = ".vercel/output/static"
+
+[build]
+command = "npm run build:cf"
+
+[[kv_namespaces]]
+binding = "KV_CACHE"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-id"
+
+[[r2_buckets]]
+binding = "R2_ASSETS"
+bucket_name = "qaznedr-assets"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "qaznedr-db"
+database_id = "your-d1-database-id"
+
+[ai]
+binding = "AI"
+
+[analytics_engine_datasets]
+binding = "AE"
+
+[[queues.producers]]
+binding = "QUEUE"
+queue = "qaznedr-queue"
+
+[[queues.consumers]]
+queue = "qaznedr-queue"
+
+[vars]
+NEXTAUTH_URL = "https://qaznedr.kz"
+NODE_ENV = "production"
+
+[secrets]
+# wrangler secret put NEXTAUTH_SECRET
+# wrangler secret put SUPABASE_SERVICE_KEY
+# wrangler secret put SENTRY_DSN
+
+[env.production]
+name = "qaznedr-production"
+route = "qaznedr.kz/*"
+vars = { ENVIRONMENT = "production" }
+
+[env.staging]
+name = "qaznedr-staging"
+route = "staging.qaznedr.kz/*"
+vars = { ENVIRONMENT = "staging" }
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["QaznedrDO"]
+
+[durable_objects]
+bindings = [
+  { name = "DO_CACHE", class_name = "QaznedrDO" }
+]
+
+[observability]
+enabled = true
+
+[[routes]]
+pattern = "qaznedr.kz/*"
+zone_name = "qaznedr.kz"
+
+[[routes]]
+pattern = "www.qaznedr.kz/*"
+zone_name = "qaznedr.kz"
+
+[triggers]
+crons = [
+  "0 2 * * *",  # Daily cleanup at 2 AM
+  "*/30 * * * *" # Cache refresh every 30 minutes
+]

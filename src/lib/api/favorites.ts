@@ -22,7 +22,6 @@ export const favoritesApi = {
 
       return response.data.map((fav) => fav.deposit);
     } catch (error) {
-      console.error('Error fetching favorites:', error);
       return [];
     }
   },

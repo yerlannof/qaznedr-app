@@ -457,7 +457,8 @@ const translations = {
       },
       cta: {
         title: 'Қызметтеріңізді орналастырғыңыз келе ме?',
-        description: 'Біздің экожүйеге қосылыңыз және Қазақстанның тау-кен өнеркәсібінде жаңа клиенттерді табыңыз',
+        description:
+          'Біздің экожүйеге қосылыңыз және Қазақстанның тау-кен өнеркәсібінде жаңа клиенттерді табыңыз',
         postService: 'Қызметтерді орналастыру',
         contactUs: 'Бізбен байланысыңыз',
       },
@@ -642,7 +643,8 @@ const translations = {
       },
       cta: {
         title: 'Want to list your services?',
-        description: 'Join our ecosystem and find new clients in Kazakhstan\'s mining industry',
+        description:
+          "Join our ecosystem and find new clients in Kazakhstan's mining industry",
         postService: 'Post Services',
         contactUs: 'Contact Us',
       },
@@ -871,7 +873,10 @@ export function useTranslation() {
     const currentTranslations =
       (translations as any)[locale] || translations.ru;
 
-    return function translate(key: string, params?: Record<string, any>): string {
+    return function translate(
+      key: string,
+      params?: Record<string, any>
+    ): string {
       const keys = key.split('.');
       let current: any = currentTranslations;
 
@@ -898,11 +903,14 @@ export function useTranslation() {
       }
 
       let result = typeof current === 'string' ? current : key;
-      
+
       // Handle parameter interpolation
       if (params && typeof result === 'string') {
         Object.entries(params).forEach(([paramKey, value]) => {
-          result = result.replace(new RegExp(`\\{${paramKey}\\}`, 'g'), String(value));
+          result = result.replace(
+            new RegExp(`\\{${paramKey}\\}`, 'g'),
+            String(value)
+          );
         });
       }
 

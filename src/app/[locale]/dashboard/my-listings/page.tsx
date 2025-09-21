@@ -42,7 +42,6 @@ export default function MyListingsPage() {
           ? err.message
           : 'Произошла ошибка при загрузке данных'
       );
-      console.error('Error loading my listings:', err);
     } finally {
       setLoading(false);
     }
@@ -102,7 +101,6 @@ export default function MyListingsPage() {
       await loadMyListings(); // Перезагрузка списка
       alert('Объявление успешно удалено');
     } catch (err) {
-      console.error('Error deleting listing:', err);
       alert('Произошла ошибка при удалении объявления');
     }
   };

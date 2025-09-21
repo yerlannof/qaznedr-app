@@ -4,9 +4,17 @@ import NavigationSimple from '@/components/layouts/NavigationSimple';
 import Footer from '@/components/layouts/Footer';
 import PageTransition from '@/components/layouts/PageTransition';
 import { GlassCard, GlassButton } from '@/components/ui/glass-card';
-import { FadeInWhenVisible, StaggerChildren, ParallaxSection, FloatingElement, RevealText } from '@/components/ui/scroll-animations';
-import { InteractiveLink, InteractiveButton } from '@/components/ui/interactive-link';
-import { LazyBackground } from '@/components/ui/lazy-image';
+import {
+  FadeInWhenVisible,
+  StaggerChildren,
+  ParallaxSection,
+  FloatingElement,
+  RevealText,
+} from '@/components/ui/scroll-animations';
+import {
+  InteractiveLink,
+  InteractiveButton,
+} from '@/components/ui/interactive-link';
 import Link from 'next/link';
 import {
   ArrowRight,
@@ -29,7 +37,7 @@ export default function Home() {
         {/* Hero Section with Parallax */}
         <ParallaxSection speed={0.3} className="relative">
           <div className="absolute inset-0 bg-gradient-to-b from-blue-600/5 to-transparent dark:from-blue-600/10 pointer-events-none" />
-          <motion.div 
+          <motion.div
             className="relative bg-gradient-to-b from-white/80 to-gray-50/80 dark:from-gray-900/80 dark:to-gray-950/80 backdrop-blur-sm pt-8 pb-16"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -40,7 +48,7 @@ export default function Home() {
                 {/* Premium Title with Better Typography */}
                 <FadeInWhenVisible delay={0.1}>
                   <div className="mb-6">
-                    <motion.div 
+                    <motion.div
                       className="inline-flex items-center px-4 py-2 bg-blue-50/80 dark:bg-blue-900/30 backdrop-blur-sm rounded-full text-sm font-medium text-blue-600 dark:text-blue-400 mb-4 border border-blue-200/50 dark:border-blue-800/50"
                       whileHover={{ scale: 1.05 }}
                       transition={{ type: 'spring', stiffness: 400 }}
@@ -60,19 +68,21 @@ export default function Home() {
                     </h1>
                   </div>
                 </FadeInWhenVisible>
-                
+
                 <FadeInWhenVisible delay={0.3}>
                   <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-4xl mx-auto leading-relaxed">
                     {t('home.subtitle')}
                   </p>
                 </FadeInWhenVisible>
-                
+
                 <FadeInWhenVisible delay={0.5}>
                   <div className="flex gap-4 justify-center relative z-10">
                     <InteractiveButton
                       variant="primary"
                       size="lg"
-                      onClick={() => window.location.href = `/${locale}/listings`}
+                      onClick={() =>
+                        (window.location.href = `/${locale}/listings`)
+                      }
                       className="flex items-center"
                     >
                       {t('home.viewListings')}
@@ -81,7 +91,9 @@ export default function Home() {
                     <GlassButton
                       variant="ghost"
                       size="lg"
-                      onClick={() => window.location.href = `/${locale}/listings/create`}
+                      onClick={() =>
+                        (window.location.href = `/${locale}/listings/create`)
+                      }
                     >
                       {t('home.postListing')}
                     </GlassButton>
@@ -97,19 +109,35 @@ export default function Home() {
           <FadeInWhenVisible>
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { icon: MapPin, title: t('home.miningLicenses'), desc: t('home.miningLicensesDesc') },
-                { icon: Building2, title: t('home.explorationLicenses'), desc: t('home.explorationLicensesDesc') },
-                { icon: TrendingUp, title: t('home.mineralOccurrences'), desc: t('home.mineralOccurrencesDesc') }
+                {
+                  icon: MapPin,
+                  title: t('home.miningLicenses'),
+                  desc: t('home.miningLicensesDesc'),
+                },
+                {
+                  icon: Building2,
+                  title: t('home.explorationLicenses'),
+                  desc: t('home.explorationLicensesDesc'),
+                },
+                {
+                  icon: TrendingUp,
+                  title: t('home.mineralOccurrences'),
+                  desc: t('home.mineralOccurrencesDesc'),
+                },
               ].map((feature, index) => (
-                <FadeInWhenVisible key={index} delay={index * 0.2} direction="up">
-                  <GlassCard 
-                    variant="default" 
-                    blur="md" 
-                    hover 
+                <FadeInWhenVisible
+                  key={index}
+                  delay={index * 0.2}
+                  direction="up"
+                >
+                  <GlassCard
+                    variant="default"
+                    blur="md"
+                    hover
                     glow={index === 1}
                     className="p-6"
                   >
-                    <motion.div 
+                    <motion.div
                       className="w-12 h-12 bg-blue-100/80 dark:bg-blue-900/40 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4"
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.5 }}
@@ -163,25 +191,34 @@ export default function Home() {
               </RevealText>
             </div>
           </FadeInWhenVisible>
-          
+
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
               { value: '500+', label: t('home.activeListings') },
               { value: '14', label: t('home.kazakhstanRegions') },
               { value: '100+', label: t('home.verifiedCompanies') },
-              { value: '24/7', label: t('home.customerSupport') }
+              { value: '24/7', label: t('home.customerSupport') },
             ].map((stat, index) => (
-              <FadeInWhenVisible key={index} delay={index * 0.15} direction="up">
-                <GlassCard variant="secondary" blur="sm" hover={false} className="p-6">
-                  <motion.div 
+              <FadeInWhenVisible
+                key={index}
+                delay={index * 0.15}
+                direction="up"
+              >
+                <GlassCard
+                  variant="secondary"
+                  blur="sm"
+                  hover={false}
+                  className="p-6"
+                >
+                  <motion.div
                     className="text-3xl font-bold text-blue-600 mb-2"
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ 
-                      type: 'spring', 
+                    transition={{
+                      type: 'spring',
                       stiffness: 100,
-                      delay: 0.5 + index * 0.1 
+                      delay: 0.5 + index * 0.1,
                     }}
                   >
                     {stat.value}

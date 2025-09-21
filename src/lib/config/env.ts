@@ -69,7 +69,6 @@ function validateEnv() {
   try {
     return envSchema.parse(process.env);
   } catch (error) {
-    console.error('❌ Invalid environment variables:', error);
     throw new Error(`Environment validation failed: ${error}`);
   }
 }

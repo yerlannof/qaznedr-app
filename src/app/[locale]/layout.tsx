@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { WebVitalsTracker } from '@/components/monitoring/WebVitalsTracker';
 import '../../styles/globals.css';
 
 const geistSans = Geist({
@@ -39,7 +40,10 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <WebVitalsTracker pageName={`/${locale}`} />
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

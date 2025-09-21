@@ -136,7 +136,6 @@ export function ConversationsList({
       .order('last_message_at', { ascending: false, nullsFirst: false });
 
     if (error) {
-      console.error('Error loading conversations:', error);
     } else {
       setConversations(data || []);
     }

@@ -3,14 +3,24 @@
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import NavigationSimple from '@/components/layouts/NavigationSimple';
 import Footer from '@/components/layouts/Footer';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import ListingsFilters from '@/components/features/ListingsFilters';
 import ListingCard from '@/components/cards/ListingCard';
-import DepositMap from '@/components/features/DepositMap';
 import SkeletonCard from '@/components/ui/SkeletonCard';
+
+// Dynamic import for heavy map component
+const DepositMap = dynamic(() => import('@/components/features/DepositMap'), {
+  loading: () => (
+    <div className="h-[600px] bg-gray-100 rounded-lg animate-pulse flex items-center justify-center">
+      <span className="text-gray-500">Loading map...</span>
+    </div>
+  ),
+  ssr: false,
+});
 import { LiveActivityIndicator } from '@/components/features/SocialProof';
 import { depositApi } from '@/lib/api/deposits';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -114,7 +124,6 @@ function ListingsContent() {
           ? err.message
           : 'Произошла ошибка при загрузке данных'
       );
-      console.error('Error loading deposits:', err);
     } finally {
       setLoading(false);
     }

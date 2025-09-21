@@ -64,25 +64,26 @@ export default function NavigationSimple() {
 
   useEffect(() => {
     setMounted(true);
-    
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <motion.nav 
+    <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-200/50 dark:border-gray-800/50' 
+        scrolled
+          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-200/50 dark:border-gray-800/50'
           : 'bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800'
-      }`}>
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -145,9 +146,9 @@ export default function NavigationSimple() {
               <span>{t('navigation.companies')}</span>
             </Link>
             <Link
-              href={`/${currentLocale}/messages`}
+              href={`/${currentLocale}/dashboard/messages`}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
-                pathname === `/${currentLocale}/messages`
+                pathname === `/${currentLocale}/dashboard/messages`
                   ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
                   : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800'
               }`}
@@ -158,36 +159,16 @@ export default function NavigationSimple() {
           </div>
 
           {/* Mobile menu button */}
-          <motion.button
+          <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="md:hidden touch-target text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
           >
-            <AnimatePresence mode="wait">
-              {isMobileMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="w-6 h-6" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="w-6 h-6" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
 
           {/* Right side */}
           <div className="hidden md:flex items-center space-x-3">
@@ -255,25 +236,45 @@ export default function NavigationSimple() {
           </div>
         </div>
       </div>
-      
+
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden fixed top-16 left-0 right-0 bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 z-50 overflow-y-auto mobile-scroll"
           >
-            <div className="px-4 py-4 space-y-2">
+            <div className="px-4 py-4 space-y-2 safe-bottom max-w-lg mx-auto">
               {/* Mobile Navigation Links */}
               {[
-                { href: `/${currentLocale}/listings`, icon: MapPin, label: t('navigation.listings') },
-                { href: `/${currentLocale}/map`, icon: MapPin, label: t('navigation.map') },
-                { href: `/${currentLocale}/services`, icon: Briefcase, label: t('navigation.services') },
-                { href: `/${currentLocale}/companies`, icon: Building2, label: t('navigation.companies') },
-                { href: `/${currentLocale}/messages`, icon: MessageSquare, label: t('navigation.messages') },
+                {
+                  href: `/${currentLocale}/listings`,
+                  icon: MapPin,
+                  label: t('navigation.listings'),
+                },
+                {
+                  href: `/${currentLocale}/map`,
+                  icon: MapPin,
+                  label: t('navigation.map'),
+                },
+                {
+                  href: `/${currentLocale}/services`,
+                  icon: Briefcase,
+                  label: t('navigation.services'),
+                },
+                {
+                  href: `/${currentLocale}/companies`,
+                  icon: Building2,
+                  label: t('navigation.companies'),
+                },
+                {
+                  href: `/${currentLocale}/messages`,
+                  icon: MessageSquare,
+                  label: t('navigation.messages'),
+                },
               ].map((item) => (
                 <motion.div key={item.href} whileTap={{ scale: 0.98 }}>
                   <Link
@@ -286,7 +287,7 @@ export default function NavigationSimple() {
                   </Link>
                 </motion.div>
               ))}
-              
+
               {/* Mobile Language Selector */}
               <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
                 <div className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">
@@ -312,7 +313,7 @@ export default function NavigationSimple() {
                   ))}
                 </div>
               </div>
-              
+
               {/* Mobile Create Button */}
               <motion.div className="pt-2" whileTap={{ scale: 0.98 }}>
                 <Link

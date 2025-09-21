@@ -1,0 +1,880 @@
+// 🚀 QAZNEDR.KZ - Advanced Supabase PostgreSQL Schema
+// World-class Kazakhstan Mining Platform Database
+// Enterprise-grade with multi-tenancy, audit logging, GDPR compliance
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ================================
+// 🏢 MULTI-TENANCY & ORGANIZATIONS
+// ================================
+
+model Organization {
+  id          String   @id @default(cuid())
+  name        String
+  type        OrgType  @default(COMPANY)
+  binNumber   String?  @unique // Business identification number Kazakhstan
+  license     String?  // Government license number
+  description String?
+  website     String?
+  phone       String?
+  email       String?
+  address     Json?    // Structured address
+  verified    Boolean  @default(false)
+  active      Boolean  @default(true)
+  
+  // Kazakhstan-specific
+  region      KazakhstanRegion?
+  city        String?
+  govRegistry Json?    // Government registry data
+  
+  // Audit fields
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   String?
+  
+  // Relations
+  users       User[]
+  deposits    KazakhstanDeposit[]
+  
+  @@index([type])
+  @@index([region])
+  @@index([verified])
+  @@index([createdAt])
+}
+
+enum OrgType {
+  COMPANY
+  GOVERNMENT
+  INDIVIDUAL
+  FOREIGN_INVESTOR
+  STATE_ENTERPRISE
+}
+
+// ================================
+// 👤 ADVANCED USER MANAGEMENT
+// ================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  phone         String?
+  
+  // Authentication
+  password      String?
+  twoFactorEnabled Boolean @default(false)
+  twoFactorSecret  String?
+  
+  // Profile
+  role          UserRole  @default(BUYER)
+  status        UserStatus @default(ACTIVE)
+  preferences   Json?     // User preferences and settings
+  metadata      Json?     // Additional user data
+  
+  // Kazakhstan-specific
+  iin           String?   @unique // Individual identification number
+  binNumber     String?   // Business identification number
+  
+  // Organization
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  
+  // Audit fields
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastLoginAt   DateTime?
+  
+  // Auth relations
+  accounts      Account[]
+  sessions      Session[]
+  
+  // Business relations
+  deposits         KazakhstanDeposit[]
+  favorites        Favorite[]
+  views            View[]
+  uploadedDocuments Document[]
+  sentRequests     ContactRequest[] @relation("SentRequests")
+  receivedRequests ContactRequest[] @relation("ReceivedRequests")
+  notifications    Notification[]
+  auditLogs        AuditLog[]
+  
+  @@index([role])
+  @@index([status])
+  @@index([organizationId])
+  @@index([createdAt])
+}
+
+enum UserRole {
+  BUYER
+  SELLER
+  ADMIN
+  SUPER_ADMIN
+  GOVERNMENT_OFFICIAL
+  AUDITOR
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  DEACTIVATED
+  PENDING_VERIFICATION
+}
+
+// ================================
+// 🏛️ KAZAKHSTAN MINING DEPOSITS (Enhanced)
+// ================================
+
+model KazakhstanDeposit {
+  id          String      @id @default(cuid())
+  title       String
+  description String
+  
+  // Core classification
+  type        DepositType
+  mineral     MineralType
+  region      KazakhstanRegion
+  city        String
+  
+  // Geographic & Physical
+  area        Float       // km²
+  coordinates Json        // GeoJSON with detailed boundaries
+  elevation   Float?      // meters above sea level
+  
+  // Financial
+  price       Decimal?    @db.Decimal(15,2) // in tenge
+  currency    String      @default("KZT")
+  
+  // Status & Verification
+  status      DepositStatus @default(DRAFT)
+  verified    Boolean     @default(false)
+  featured    Boolean     @default(false)
+  views       Int         @default(0)
+  
+  // Media & Documents
+  images      Json        // Array of image URLs
+  documents   Json        // Array of document metadata
+  
+  // Ownership
+  userId      String
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  
+  // Mining License specific fields
+  licenseSubtype         LicenseSubtype?
+  licenseNumber          String?
+  licenseExpiry          DateTime?
+  annualProductionLimit  Decimal?        @db.Decimal(15,2)
+  licensingAuthority     String?
+  
+  // Exploration License specific fields
+  explorationStage       ExplorationStage?
+  explorationStart       DateTime?
+  explorationEnd         DateTime?
+  explorationBudget      Decimal?        @db.Decimal(15,2)
+  
+  // Mineral Occurrence specific fields
+  discoveryDate          DateTime?
+  geologicalConfidence   GeologicalConfidence?
+  estimatedReserves      Decimal?        @db.Decimal(15,2)
+  accessibilityRating    AccessibilityRating?
+  
+  // Advanced fields
+  geologicalData     GeologicalData[]
+  infrastructure     Infrastructure?
+  economics          Economics?
+  environmentalData  EnvironmentalData?
+  
+  // Audit fields
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  // Relations
+  favorites       Favorite[]
+  views_          View[]
+  documents_      Document[]
+  contactRequests ContactRequest[]
+  auctions        Auction[]
+  
+  @@index([type])
+  @@index([mineral])
+  @@index([region])
+  @@index([status])
+  @@index([verified])
+  @@index([featured])
+  @@index([organizationId])
+  @@index([createdAt])
+  @@fulltext([title, description])
+}
+
+// Enhanced enums for Kazakhstan specificity
+enum DepositType {
+  MINING_LICENSE
+  EXPLORATION_LICENSE
+  MINERAL_OCCURRENCE
+  DEVELOPMENT_LICENSE
+  PROCESSING_LICENSE
+}
+
+enum MineralType {
+  OIL              // Нефть
+  GAS              // Газ
+  GOLD             // Золото
+  COPPER           // Медь
+  COAL             // Уголь
+  URANIUM          // Уран
+  IRON             // Железо
+  LEAD             // Свинец
+  ZINC             // Цинк
+  CHROMIUM         // Хром
+  MANGANESE        // Марганец
+  ALUMINUM         // Алюминий
+  SILVER           // Серебро
+  PLATINUM         // Платина
+  TITANIUM         // Титан
+  RARE_EARTH       // Редкоземельные металлы
+}
+
+enum KazakhstanRegion {
+  MANGISTAU        // Мангистауская
+  ATYRAU           // Атырауская
+  KARAGANDA        // Карагандинская
+  EAST_KAZAKHSTAN  // Восточно-Казахстанская
+  WEST_KAZAKHSTAN  // Западно-Казахстанская
+  PAVLODAR         // Павлодарская
+  KOSTANAY         // Костанайская
+  AKMOLA           // Акмолинская
+  ZHAMBYL          // Жамбылская
+  KYZYLORDA        // Кызылординская
+  AKTOBE           // Актюбинская
+  ALMATY           // Алматинская
+  TURKESTAN        // Туркестанская
+  ULYTAU           // Улытауская
+}
+
+enum DepositStatus {
+  DRAFT
+  ACTIVE
+  SOLD
+  PENDING_APPROVAL
+  SUSPENDED
+  EXPIRED
+  ARCHIVED
+}
+
+enum LicenseSubtype {
+  EXTRACTION_RIGHT
+  PROCESSING_RIGHT
+  TRANSPORTATION_RIGHT
+  COMBINED_RIGHT
+  EXPLORATION_RIGHT
+  DEVELOPMENT_RIGHT
+}
+
+enum ExplorationStage {
+  PRELIMINARY      // Предварительная разведка
+  DETAILED         // Детальная разведка
+  FEASIBILITY      // ТЭО
+  ENVIRONMENTAL    // Экологическая оценка
+  PILOT_PROJECT    // Пилотный проект
+}
+
+enum GeologicalConfidence {
+  INFERRED         // Предполагаемые запасы
+  INDICATED        // Вероятные запасы
+  MEASURED         // Доказанные запасы
+  PROVEN           // Подтвержденные запасы
+  PROBABLE         // Вероятные запасы
+}
+
+enum AccessibilityRating {
+  EASY             // Легкий доступ
+  MODERATE         // Средний доступ
+  DIFFICULT        // Трудный доступ
+  VERY_DIFFICULT   // Очень трудный доступ
+  REMOTE           // Удаленная местность
+}
+
+// ================================
+// 🔬 GEOLOGICAL & TECHNICAL DATA
+// ================================
+
+model GeologicalData {
+  id          String    @id @default(cuid())
+  depositId   String
+  deposit     KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  
+  // Reserve data
+  reserves    Decimal   @db.Decimal(15,2) // tonnes or barrels
+  grade       Float?    // mineral content percentage
+  depth       Float     // meters
+  thickness   Float     // seam thickness in meters
+  
+  // Geological description
+  geology     String
+  stratigraphy Json?    // Geological layers
+  
+  // Extraction
+  extractionMethod ExtractionMethod
+  recoveryRate     Float?           // percentage
+  
+  // Quality metrics
+  quality     Json?     // Quality parameters
+  
+  // Audit
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  verifiedBy  String?
+  
+  @@index([depositId])
+}
+
+enum ExtractionMethod {
+  OPEN_PIT
+  UNDERGROUND
+  IN_SITU
+  OFFSHORE
+  HYDRAULIC
+  SOLUTION_MINING
+}
+
+model Infrastructure {
+  id          String    @id @default(cuid())
+  depositId   String    @unique
+  deposit     KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  
+  // Transportation
+  roads       Boolean   @default(false)
+  railway     Boolean   @default(false)
+  airport     Boolean   @default(false)
+  port        Boolean   @default(false)
+  
+  // Utilities
+  powerLine   Boolean   @default(false)
+  pipeline    Boolean   @default(false)
+  waterSupply Boolean   @default(false)
+  internet    Boolean   @default(false)
+  
+  // Facilities
+  housing     Boolean   @default(false)
+  hospital    Boolean   @default(false)
+  school      Boolean   @default(false)
+  
+  // Distance to infrastructure (km)
+  distanceToRoad     Float?
+  distanceToRailway  Float?
+  distanceToPort     Float?
+  distanceToPowerLine Float?
+  
+  description String?
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Economics {
+  id          String    @id @default(cuid())
+  depositId   String    @unique
+  deposit     KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  
+  // Financial metrics (in KZT)
+  capex       Decimal   @db.Decimal(15,2) // Capital expenditure
+  opex        Decimal   @db.Decimal(15,2) // Operating expenditure per tonne
+  
+  // Investment metrics
+  paybackPeriod Float   // years
+  irr         Float     // Internal Rate of Return %
+  npv         Decimal   @db.Decimal(15,2) // Net Present Value
+  
+  // Production
+  productionStart  DateTime?
+  productionEnd    DateTime?
+  annualProduction Decimal  @db.Decimal(15,2)
+  
+  // Market data
+  marketPrice     Decimal? @db.Decimal(15,2)
+  priceForcast    Json?    // Price forecast data
+  
+  calculatedAt    DateTime
+  calculatedBy    String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model EnvironmentalData {
+  id          String    @id @default(cuid())
+  depositId   String    @unique
+  deposit     KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  
+  // Environmental assessments
+  environmentalImpact Json? // Environmental impact assessment
+  protectedAreas      Boolean @default(false)
+  waterSources        Json?   // Nearby water sources
+  wildlifeImpact      String?
+  
+  // Permits and compliance
+  environmentalPermits Json? // Environmental permits
+  complianceStatus    String @default("PENDING")
+  
+  // Remediation
+  remediationPlan     String?
+  remediationCost     Decimal? @db.Decimal(15,2)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ================================
+// 🔐 AUDIT LOGGING & COMPLIANCE
+// ================================
+
+model AuditLog {
+  id          String      @id @default(cuid())
+  action      AuditAction
+  entityType  String      // Table name
+  entityId    String      // Record ID
+  oldValues   Json?       // Previous values
+  newValues   Json?       // New values
+  
+  // User context
+  userId      String?
+  user        User?       @relation(fields: [userId], references: [id])
+  ipAddress   String?
+  userAgent   String?
+  
+  // Request context
+  endpoint    String?
+  method      String?
+  
+  // Metadata
+  metadata    Json?
+  
+  createdAt   DateTime    @default(now())
+  
+  @@index([action])
+  @@index([entityType])
+  @@index([entityId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  VIEW
+  DOWNLOAD
+  SHARE
+  APPROVE
+  REJECT
+  SUSPEND
+  RESTORE
+}
+
+// ================================
+// 🛒 MARKETPLACE & TRANSACTIONS
+// ================================
+
+model Auction {
+  id          String      @id @default(cuid())
+  depositId   String
+  deposit     KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  
+  // Auction details
+  title       String
+  description String?
+  startPrice  Decimal     @db.Decimal(15,2)
+  reservePrice Decimal?   @db.Decimal(15,2)
+  currentPrice Decimal    @db.Decimal(15,2)
+  minStep     Decimal     @db.Decimal(15,2)
+  
+  // Timing
+  startDate   DateTime
+  endDate     DateTime
+  extendedDate DateTime?
+  
+  // Status
+  status      AuctionStatus @default(SCHEDULED)
+  
+  // Results
+  winnerId    String?
+  finalPrice  Decimal?      @db.Decimal(15,2)
+  
+  // Participants
+  participants String[]     // Array of user IDs
+  
+  // Audit
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  // Relations
+  bids        Bid[]
+  
+  @@index([status])
+  @@index([startDate])
+  @@index([endDate])
+}
+
+enum AuctionStatus {
+  SCHEDULED
+  ACTIVE
+  EXTENDED
+  COMPLETED
+  CANCELLED
+  SUSPENDED
+}
+
+model Bid {
+  id        String   @id @default(cuid())
+  auctionId String
+  auction   Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  userId    String
+  amount    Decimal  @db.Decimal(15,2)
+  automatic Boolean  @default(false) // Auto-bid
+  timestamp DateTime @default(now())
+  
+  @@index([auctionId])
+  @@index([userId])
+  @@index([timestamp])
+}
+
+// ================================
+// 📊 ANALYTICS & MONITORING
+// ================================
+
+model AnalyticsEvent {
+  id         String   @id @default(cuid())
+  name       String
+  properties Json?
+  userId     String?
+  sessionId  String?
+  timestamp  DateTime
+  clientIP   String?
+  userAgent  String?
+  country    String?
+  region     String?
+  city       String?
+  
+  createdAt  DateTime @default(now())
+  
+  @@index([name])
+  @@index([userId])
+  @@index([sessionId])
+  @@index([timestamp])
+}
+
+model ErrorLog {
+  id          String      @id @default(cuid())
+  message     String
+  stack       String?
+  severity    ErrorLevel  @default(MEDIUM)
+  fingerprint String
+  count       Int         @default(1)
+  context     Json?
+  
+  // Request context
+  url         String?
+  method      String?
+  
+  // User context
+  userId      String?
+  sessionId   String?
+  clientIP    String?
+  userAgent   String?
+  
+  // Component context
+  component   String?
+  action      String?
+  
+  // Timing
+  timestamp   DateTime
+  resolvedAt  DateTime?
+  
+  createdAt   DateTime    @default(now())
+  
+  @@index([severity])
+  @@index([fingerprint])
+  @@index([component])
+  @@index([timestamp])
+  @@index([resolvedAt])
+}
+
+enum ErrorLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+// ================================
+// 🔔 NOTIFICATIONS & MESSAGING
+// ================================
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  type      NotificationType
+  title     String
+  message   String
+  data      Json?            // Additional notification data
+  
+  // Delivery
+  channels  String[]         // email, sms, push, in_app
+  delivered Boolean          @default(false)
+  read      Boolean          @default(false)
+  
+  // Scheduling
+  scheduledFor DateTime?
+  expiresAt    DateTime?
+  
+  createdAt DateTime         @default(now())
+  readAt    DateTime?
+  
+  @@index([userId])
+  @@index([type])
+  @@index([read])
+  @@index([delivered])
+  @@index([createdAt])
+}
+
+enum NotificationType {
+  // Deposit related
+  NEW_DEPOSIT
+  DEPOSIT_UPDATED
+  DEPOSIT_SOLD
+  PRICE_CHANGE
+  
+  // Auction related
+  AUCTION_START
+  AUCTION_END
+  AUCTION_WON
+  AUCTION_OUTBID
+  
+  // Communication
+  NEW_MESSAGE
+  CONTACT_REQUEST
+  
+  // System
+  SYSTEM_MAINTENANCE
+  SECURITY_ALERT
+  ACCOUNT_VERIFICATION
+  
+  // Kazakhstan specific
+  LICENSE_EXPIRY
+  REGULATION_CHANGE
+  GOVERNMENT_UPDATE
+}
+
+// Keep existing models (Account, Session, Favorite, View, Document, ContactRequest)
+// with minor enhancements...
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  depositId String
+  createdAt DateTime @default(now())
+
+  user    User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deposit KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, depositId])
+}
+
+model View {
+  id        String   @id @default(cuid())
+  depositId String
+  userId    String?
+  ipAddress String
+  userAgent String
+  sessionId String?
+  duration  Int?     // seconds spent viewing
+  createdAt DateTime @default(now())
+
+  user    User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  deposit KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+
+  @@index([depositId])
+  @@index([createdAt])
+  @@index([sessionId])
+}
+
+model Document {
+  id         String      @id @default(cuid())
+  depositId  String
+  name       String
+  type       DocumentType
+  url        String
+  size       Int
+  mimeType   String
+  checksum   String?     // File integrity
+  uploadedBy String
+  
+  // Metadata
+  metadata   Json?
+  tags       String[]
+  
+  // Security
+  encrypted  Boolean     @default(false)
+  accessLevel String     @default("PUBLIC") // PUBLIC, PRIVATE, RESTRICTED
+  
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  deposit  KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  uploader User              @relation(fields: [uploadedBy], references: [id])
+
+  @@index([depositId])
+  @@index([type])
+  @@index([uploadedBy])
+}
+
+enum DocumentType {
+  LICENSE
+  GEOLOGICAL_SURVEY
+  ENVIRONMENTAL
+  FINANCIAL
+  LEGAL
+  TECHNICAL
+  PHOTOS
+  MAPS
+  CERTIFICATES
+  OTHER
+}
+
+model ContactRequest {
+  id         String        @id @default(cuid())
+  depositId  String
+  fromUserId String
+  toUserId   String
+  message    String
+  phone      String?
+  email      String?
+  
+  // Enhanced fields
+  subject    String?
+  priority   Priority      @default(MEDIUM)
+  category   String?       // Type of inquiry
+  
+  status     RequestStatus @default(PENDING)
+  
+  // Response
+  response   String?
+  respondedAt DateTime?
+  
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  deposit  KazakhstanDeposit @relation(fields: [depositId], references: [id], onDelete: Cascade)
+  fromUser User              @relation("SentRequests", fields: [fromUserId], references: [id])
+  toUser   User              @relation("ReceivedRequests", fields: [toUserId], references: [id])
+
+  @@index([depositId])
+  @@index([fromUserId])
+  @@index([toUserId])
+  @@index([status])
+}
+
+enum RequestStatus {
+  PENDING
+  RESPONDED
+  CLOSED
+  ESCALATED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+// ================================
+// 🔍 SEARCH & INDEXING
+// ================================
+
+model SearchIndex {
+  id        String   @id @default(cuid())
+  entityType String  // deposits, users, organizations
+  entityId   String
+  content    String  // Searchable content
+  vector     String? // Vector embeddings for semantic search
+  language   String  @default("ru")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([entityType])
+  @@index([entityId])
+  @@index([language])
+  @@fulltext([content])
+}
+
+// ================================
+// 🌍 LOCALIZATION & CONTENT
+// ================================
+
+model LocalizedContent {
+  id        String @id @default(cuid())
+  key       String // Translation key
+  language  String // Language code
+  content   String // Translated content
+  context   String? // Context for translators
+  approved  Boolean @default(false)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([key, language])
+  @@index([language])
+  @@index([approved])
+}

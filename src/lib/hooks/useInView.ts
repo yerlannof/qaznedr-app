@@ -210,8 +210,6 @@ export function useViewTracking(
       if (typeof window !== 'undefined' && window.va) {
         window.va('track', eventName, metadata);
       }
-
-      console.log(`[View Tracking] ${eventName}`, metadata);
     }
   }, [inView, entry, eventName, metadata]);
 

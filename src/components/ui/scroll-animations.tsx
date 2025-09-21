@@ -3,12 +3,12 @@
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { ReactNode, useRef } from 'react';
 
-export function FadeInWhenVisible({ 
-  children, 
+export function FadeInWhenVisible({
+  children,
   delay = 0,
-  direction = 'up'
-}: { 
-  children: ReactNode; 
+  direction = 'up',
+}: {
+  children: ReactNode;
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right';
 }) {
@@ -19,7 +19,7 @@ export function FadeInWhenVisible({
     up: { y: 50, x: 0 },
     down: { y: -50, x: 0 },
     left: { x: 50, y: 0 },
-    right: { x: -50, y: 0 }
+    right: { x: -50, y: 0 },
   };
 
   const { x, y } = directions[direction];
@@ -29,10 +29,10 @@ export function FadeInWhenVisible({
       ref={ref}
       initial={{ opacity: 0, x, y }}
       animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x, y }}
-      transition={{ 
-        duration: 0.6, 
+      transition={{
+        duration: 0.6,
         delay,
-        ease: [0.22, 1, 0.36, 1]
+        ease: [0.22, 1, 0.36, 1],
       }}
     >
       {children}
@@ -40,19 +40,19 @@ export function FadeInWhenVisible({
   );
 }
 
-export function ParallaxSection({ 
-  children, 
+export function ParallaxSection({
+  children,
   speed = 0.5,
-  className = ''
-}: { 
-  children: ReactNode; 
+  className = '',
+}: {
+  children: ReactNode;
   speed?: number;
   className?: string;
 }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'end start']
+    offset: ['start end', 'end start'],
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ['0%', `${speed * 100}%`]);
@@ -66,11 +66,11 @@ export function ParallaxSection({
   );
 }
 
-export function ScaleOnScroll({ 
+export function ScaleOnScroll({
   children,
   startScale = 0.8,
-  endScale = 1
-}: { 
+  endScale = 1,
+}: {
   children: ReactNode;
   startScale?: number;
   endScale?: number;
@@ -78,7 +78,7 @@ export function ScaleOnScroll({
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'center center']
+    offset: ['start end', 'center center'],
   });
 
   const scale = useTransform(scrollYProgress, [0, 1], [startScale, endScale]);
@@ -95,10 +95,10 @@ export function ScaleOnScroll({
   );
 }
 
-export function StaggerChildren({ 
+export function StaggerChildren({
   children,
-  staggerDelay = 0.1
-}: { 
+  staggerDelay = 0.1,
+}: {
   children: ReactNode[];
   staggerDelay?: number;
 }) {
@@ -115,7 +115,7 @@ export function StaggerChildren({
           transition={{
             duration: 0.5,
             delay: index * staggerDelay,
-            ease: [0.22, 1, 0.36, 1]
+            ease: [0.22, 1, 0.36, 1],
           }}
         >
           {child}
@@ -125,10 +125,10 @@ export function StaggerChildren({
   );
 }
 
-export function RevealText({ 
+export function RevealText({
   children,
-  className = ''
-}: { 
+  className = '',
+}: {
   children: string;
   className?: string;
 }) {
@@ -148,11 +148,11 @@ export function RevealText({
   );
 }
 
-export function FloatingElement({ 
+export function FloatingElement({
   children,
   amplitude = 20,
-  duration = 3
-}: { 
+  duration = 3,
+}: {
   children: ReactNode;
   amplitude?: number;
   duration?: number;
@@ -160,12 +160,12 @@ export function FloatingElement({
   return (
     <motion.div
       animate={{
-        y: [0, -amplitude, 0]
+        y: [0, -amplitude, 0],
       }}
       transition={{
         duration,
         repeat: Infinity,
-        ease: 'easeInOut'
+        ease: 'easeInOut',
       }}
     >
       {children}
@@ -177,7 +177,7 @@ export function RotateOnScroll({ children }: { children: ReactNode }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'end start']
+    offset: ['start end', 'end start'],
   });
 
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);

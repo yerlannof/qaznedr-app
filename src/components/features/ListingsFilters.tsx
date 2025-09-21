@@ -198,20 +198,22 @@ function FiltersContent() {
         <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
           <button
             onClick={() => toggleSection('type')}
-            className="flex items-center justify-between w-full text-left"
+            className="flex items-center justify-between w-full text-left touch-target py-2"
           >
             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
               {t('listings.listingType')}
             </span>
-            {expandedSections.type ? (
-              <ChevronUp className="w-4 h-4 text-gray-400" />
-            ) : (
-              <ChevronDown className="w-4 h-4 text-gray-400" />
-            )}
+            <span className="touch-target-sm flex items-center justify-center">
+              {expandedSections.type ? (
+                <ChevronUp className="w-5 h-5 text-gray-400" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-gray-400" />
+              )}
+            </span>
           </button>
           {expandedSections.type && (
             <div className="mt-3 space-y-2">
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-3 rounded-lg transition-colors touch-target">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -219,15 +221,17 @@ function FiltersContent() {
                     value=""
                     checked={!currentFilters.type}
                     onChange={() => handleFilterChange('type', '')}
-                    className="mr-3 text-blue-600 focus:ring-blue-500"
+                    className="mr-3 text-blue-600 focus:ring-blue-500 w-5 h-5"
                   />
-                  <span className="text-sm text-gray-700">{t('listings.allTypes')}</span>
+                  <span className="text-sm text-gray-700">
+                    {t('listings.allTypes')}
+                  </span>
                 </div>
                 <span className="text-xs text-gray-500">
                   {Object.values(resultCounts.types).reduce((a, b) => a + b, 0)}
                 </span>
               </label>
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-3 rounded-lg transition-colors touch-target">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -237,7 +241,7 @@ function FiltersContent() {
                     onChange={() =>
                       handleFilterChange('type', 'MINING_LICENSE')
                     }
-                    className="mr-3 text-blue-600 focus:ring-blue-500"
+                    className="mr-3 text-blue-600 focus:ring-blue-500 w-5 h-5"
                   />
                   <span className="text-sm text-gray-700">
                     {t('listings.miningLicenses')}
@@ -247,7 +251,7 @@ function FiltersContent() {
                   {resultCounts.types.MINING_LICENSE}
                 </span>
               </label>
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-3 rounded-lg transition-colors touch-target">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -257,7 +261,7 @@ function FiltersContent() {
                     onChange={() =>
                       handleFilterChange('type', 'EXPLORATION_LICENSE')
                     }
-                    className="mr-3 text-blue-600 focus:ring-blue-500"
+                    className="mr-3 text-blue-600 focus:ring-blue-500 w-5 h-5"
                   />
                   <span className="text-sm text-gray-700">
                     {t('listings.explorationLicenses')}
@@ -267,7 +271,7 @@ function FiltersContent() {
                   {resultCounts.types.EXPLORATION_LICENSE}
                 </span>
               </label>
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-3 rounded-lg transition-colors touch-target">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -277,9 +281,11 @@ function FiltersContent() {
                     onChange={() =>
                       handleFilterChange('type', 'MINERAL_OCCURRENCE')
                     }
-                    className="mr-3 text-blue-600 focus:ring-blue-500"
+                    className="mr-3 text-blue-600 focus:ring-blue-500 w-5 h-5"
                   />
-                  <span className="text-sm text-gray-700">{t('listings.mineralOccurrences')}</span>
+                  <span className="text-sm text-gray-700">
+                    {t('listings.mineralOccurrences')}
+                  </span>
                 </div>
                 <span className="text-xs text-gray-500">
                   {resultCounts.types.MINERAL_OCCURRENCE}
@@ -371,7 +377,7 @@ function FiltersContent() {
           </button>
           {expandedSections.region && (
             <div className="mt-3 max-h-60 overflow-y-auto space-y-1">
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-3 rounded-lg transition-colors touch-target">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -379,7 +385,7 @@ function FiltersContent() {
                     value=""
                     checked={!currentFilters.region}
                     onChange={() => handleFilterChange('region', '')}
-                    className="mr-3 text-blue-600 focus:ring-blue-500"
+                    className="mr-3 text-blue-600 focus:ring-blue-500 w-5 h-5"
                   />
                   <span className="text-sm text-gray-700">Все регионы</span>
                 </div>
@@ -396,7 +402,7 @@ function FiltersContent() {
                       value={region}
                       checked={currentFilters.region === region}
                       onChange={() => handleFilterChange('region', region)}
-                      className="mr-3 text-blue-600 focus:ring-blue-500"
+                      className="mr-3 text-blue-600 focus:ring-blue-500 w-5 h-5"
                     />
                     <span className="text-sm text-gray-700">{region}</span>
                   </div>
@@ -427,7 +433,7 @@ function FiltersContent() {
           </button>
           {expandedSections.mineral && (
             <div className="mt-3 space-y-1">
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-3 rounded-lg transition-colors touch-target">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -435,7 +441,7 @@ function FiltersContent() {
                     value=""
                     checked={!currentFilters.mineral}
                     onChange={() => handleFilterChange('mineral', '')}
-                    className="mr-3 text-blue-600 focus:ring-blue-500"
+                    className="mr-3 text-blue-600 focus:ring-blue-500 w-5 h-5"
                   />
                   <span className="text-sm text-gray-700">Все минералы</span>
                 </div>
@@ -452,7 +458,7 @@ function FiltersContent() {
                       value={mineral}
                       checked={currentFilters.mineral === mineral}
                       onChange={() => handleFilterChange('mineral', mineral)}
-                      className="mr-3 text-blue-600 focus:ring-blue-500"
+                      className="mr-3 text-blue-600 focus:ring-blue-500 w-5 h-5"
                     />
                     <span className="text-sm text-gray-700">{mineral}</span>
                   </div>

@@ -68,9 +68,7 @@ export function PerformanceMonitor() {
           setMetrics((prev) => ({ ...prev, ttfb: metric.value }));
           sendToAnalytics('TTFB', metric.value);
         });
-      } catch (error) {
-        console.error('Failed to load web-vitals:', error);
-      }
+      } catch (error) {}
     };
 
     // Navigation timing
@@ -126,9 +124,7 @@ export function PerformanceMonitor() {
           observer.observe({ entryTypes: ['longtask'] });
 
           return () => observer.disconnect();
-        } catch (error) {
-          console.error('Failed to observe long tasks:', error);
-        }
+        } catch (error) {}
       }
     };
 
@@ -156,8 +152,6 @@ export function PerformanceMonitor() {
         const type = resource.initiatorType;
         resourcesByType[type] = (resourcesByType[type] || 0) + 1;
       });
-
-      console.log('Resources by type:', resourcesByType);
     };
 
     // Run measurements
@@ -208,7 +202,9 @@ export function PerformanceMonitor() {
           userAgent: navigator.userAgent,
           ...metadata,
         }),
-      }).catch(console.error);
+      }).catch(() => {
+        // Silently ignore analytics errors
+      });
     }
   };
 

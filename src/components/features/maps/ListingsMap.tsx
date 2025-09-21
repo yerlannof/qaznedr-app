@@ -101,7 +101,6 @@ export default function ListingsMap({
       .not('coordinates', 'is', null);
 
     if (error) {
-      console.error('Error loading listings:', error);
       return;
     }
 

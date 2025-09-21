@@ -449,7 +449,6 @@ export default function Recommendations({
 
   const handleViewRecommendation = (id: string) => {
     // Track recommendation click analytics
-    console.log('Recommendation clicked:', id);
   };
 
   if (isLoading) {

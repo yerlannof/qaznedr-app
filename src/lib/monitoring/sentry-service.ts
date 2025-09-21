@@ -1,0 +1,457 @@
+import * as Sentry from '@sentry/nextjs';
+import { NextRequest } from 'next/server';
+
+// Mining platform specific error types
+export enum MiningErrorType {
+  LISTING_CREATION_FAILED = 'listing_creation_failed',
+  SEARCH_QUERY_FAILED = 'search_query_failed',
+  TRANSACTION_FAILED = 'transaction_failed',
+  PAYMENT_PROCESSING_ERROR = 'payment_processing_error',
+  DATABASE_CONNECTION_ERROR = 'database_connection_error',
+  CACHE_ERROR = 'cache_error',
+  AUTHENTICATION_ERROR = 'authentication_error',
+  AUTHORIZATION_ERROR = 'authorization_error',
+  VALIDATION_ERROR = 'validation_error',
+  EXTERNAL_API_ERROR = 'external_api_error',
+}
+
+// Mining business metrics
+export enum MiningMetric {
+  LISTING_CREATED = 'listing_created',
+  LISTING_VIEWED = 'listing_viewed',
+  SEARCH_PERFORMED = 'search_performed',
+  USER_REGISTERED = 'user_registered',
+  TRANSACTION_COMPLETED = 'transaction_completed',
+  API_REQUEST_PROCESSED = 'api_request_processed',
+  CACHE_HIT = 'cache_hit',
+  CACHE_MISS = 'cache_miss',
+  DATABASE_QUERY_EXECUTED = 'database_query_executed',
+}
+
+// Kazakhstan region codes for better geographical tracking
+export enum KazakhstanRegion {
+  ALMATY = 'almaty',
+  NUR_SULTAN = 'nur-sultan',
+  SHYMKENT = 'shymkent',
+  ATYRAU = 'atyrau',
+  MANGISTAU = 'mangistau',
+  AKTOBE = 'aktobe',
+  KARAGANDY = 'karagandy',
+  PAVLODAR = 'pavlodar',
+  KOSTANAY = 'kostanay',
+  PETROPAVLOVSK = 'petropavlovsk',
+  TARAZ = 'taraz',
+  SEMEY = 'semey',
+  ORAL = 'oral',
+  KYZYLORDA = 'kyzylorda',
+}
+
+// Listing types for context
+export enum ListingType {
+  MINING_LICENSE = 'mining_license',
+  EXPLORATION_LICENSE = 'exploration_license',
+  MINERAL_OCCURRENCE = 'mineral_occurrence',
+}
+
+export interface MiningErrorContext {
+  listingId?: string;
+  listingType?: ListingType;
+  userId?: string;
+  region?: KazakhstanRegion;
+  mineral?: string;
+  searchQuery?: string;
+  transactionId?: string;
+  apiEndpoint?: string;
+  operationId?: string;
+}
+
+export interface PerformanceMetrics {
+  duration: number;
+  memoryUsage?: number;
+  databaseQueries?: number;
+  cacheOperations?: number;
+  elasticsearchQueries?: number;
+}
+
+export class SentryMiningService {
+  private static instance: SentryMiningService;
+
+  static getInstance(): SentryMiningService {
+    if (!this.instance) {
+      this.instance = new SentryMiningService();
+    }
+    return this.instance;
+  }
+
+  /**
+   * Capture mining-specific errors with enhanced context
+   */
+  captureError(
+    error: Error,
+    errorType: MiningErrorType,
+    context: MiningErrorContext = {},
+    level: 'error' | 'warning' | 'info' = 'error'
+  ): string {
+    return Sentry.withScope((scope) => {
+      // Set mining-specific tags
+      scope.setTag('error_type', errorType);
+      scope.setTag('business_domain', 'mining_marketplace');
+
+      if (context.listingType) {
+        scope.setTag('listing_type', context.listingType);
+      }
+
+      if (context.region) {
+        scope.setTag('kazakhstan_region', context.region);
+      }
+
+      if (context.mineral) {
+        scope.setTag('mineral_type', context.mineral);
+      }
+
+      // Set context data
+      scope.setContext('mining_operation', {
+        listing_id: context.listingId,
+        user_id: context.userId,
+        transaction_id: context.transactionId,
+        api_endpoint: context.apiEndpoint,
+        operation_id: context.operationId,
+        search_query: context.searchQuery,
+      });
+
+      // Set user context if available
+      if (context.userId) {
+        scope.setUser({ id: context.userId });
+      }
+
+      // Set fingerprint for better error grouping
+      scope.setFingerprint([
+        errorType,
+        context.listingType || 'unknown',
+        error.name,
+      ]);
+
+      scope.setLevel(level);
+
+      return Sentry.captureException(error);
+    });
+  }
+
+  /**
+   * Track mining business metrics
+   */
+  trackMetric(
+    metric: MiningMetric,
+    value: number = 1,
+    context: MiningErrorContext = {},
+    tags: Record<string, string> = {}
+  ): void {
+    Sentry.withScope((scope) => {
+      // Add mining-specific tags
+      scope.setTag('metric_type', metric);
+      scope.setTag('business_domain', 'mining_marketplace');
+
+      // Add context tags
+      if (context.listingType) {
+        scope.setTag('listing_type', context.listingType);
+      }
+
+      if (context.region) {
+        scope.setTag('kazakhstan_region', context.region);
+      }
+
+      // Add custom tags
+      Object.entries(tags).forEach(([key, val]) => {
+        scope.setTag(key, val);
+      });
+
+      // Use addBreadcrumb for metrics tracking
+      scope.addBreadcrumb({
+        category: 'metric',
+        message: `${metric}: ${value}`,
+        level: 'info',
+        data: {
+          metric,
+          value,
+          context,
+          timestamp: new Date().toISOString(),
+        },
+      });
+    });
+  }
+
+  /**
+   * Monitor API performance with mining context - Updated for Sentry v8
+   */
+  async monitorApiPerformance<T>(
+    operation: () => Promise<T>,
+    operationName: string,
+    context: MiningErrorContext = {}
+  ): Promise<T> {
+    const startTime = Date.now();
+
+    // Use Sentry v8 API - startNewTrace instead of startTransaction
+    return await Sentry.startNewTrace(async () => {
+      return await Sentry.startSpan(
+        {
+          name: operationName,
+          op: 'mining_api_operation',
+        },
+        async (span) => {
+          // Set mining context on span
+          // span.setData('business_domain', 'mining_marketplace');
+          // if (context.listingType) {
+          //   span.setData('listing_type', context.listingType);
+          // }
+          // if (context.region) {
+          //   span.setData('kazakhstan_region', context.region);
+          // }
+
+          try {
+            const result = await operation();
+
+            const duration = Date.now() - startTime;
+            span.setData('duration_ms', duration);
+            span.setStatus('ok');
+
+            // Track successful operation
+            this.trackMetric(MiningMetric.API_REQUEST_PROCESSED, 1, context, {
+              operation: operationName,
+              status: 'success',
+            });
+
+            return result;
+          } catch (error) {
+            const duration = Date.now() - startTime;
+            span.setData('duration_ms', duration);
+            span.setStatus('internal_error');
+
+            // Capture error with context
+            this.captureError(
+              error as Error,
+              MiningErrorType.EXTERNAL_API_ERROR,
+              {
+                ...context,
+                apiEndpoint: operationName,
+              }
+            );
+
+            throw error;
+          }
+        }
+      );
+    });
+  }
+
+  /**
+   * Monitor database performance - Updated for Sentry v8
+   */
+  async monitorDatabaseOperation<T>(
+    operation: () => Promise<T>,
+    operationName: string,
+    tableName?: string,
+    context: MiningErrorContext = {}
+  ): Promise<T> {
+    const startTime = Date.now();
+
+    return await Sentry.startSpan(
+      {
+        op: 'db.query',
+        name: operationName,
+      },
+      async (span) => {
+        // span.setData('db.operation', operationName);
+        // if (tableName) {
+        //   span.setData('db.table', tableName);
+        // }
+
+        try {
+          const result = await operation();
+
+          const duration = Date.now() - startTime;
+          span.setData('duration_ms', duration);
+          span.setStatus('ok');
+
+          // Track database performance
+          this.trackMetric(MiningMetric.DATABASE_QUERY_EXECUTED, 1, context, {
+            operation: operationName,
+            table: tableName || 'unknown',
+            duration_range: this.getDurationRange(duration),
+          });
+
+          return result;
+        } catch (error) {
+          span.setStatus('internal_error');
+
+          this.captureError(
+            error as Error,
+            MiningErrorType.DATABASE_CONNECTION_ERROR,
+            { ...context, apiEndpoint: operationName }
+          );
+
+          throw error;
+        }
+      }
+    );
+  }
+
+  /**
+   * Monitor cache operations
+   */
+  trackCacheOperation(
+    operation: 'hit' | 'miss' | 'set' | 'delete',
+    key: string,
+    context: MiningErrorContext = {}
+  ): void {
+    const metric =
+      operation === 'hit' ? MiningMetric.CACHE_HIT : MiningMetric.CACHE_MISS;
+
+    this.trackMetric(metric, 1, context, {
+      cache_operation: operation,
+      cache_key_prefix: key.split(':')[0] || 'unknown',
+    });
+  }
+
+  /**
+   * Add mining-specific breadcrumb
+   */
+  addMiningBreadcrumb(
+    message: string,
+    category:
+      | 'listing'
+      | 'search'
+      | 'transaction'
+      | 'auth'
+      | 'api'
+      | 'database'
+      | 'cache',
+    data: Record<string, any> = {},
+    level: 'info' | 'warning' | 'error' = 'info'
+  ): void {
+    Sentry.addBreadcrumb({
+      message,
+      category: `mining_${category}`,
+      level,
+      data: {
+        ...data,
+        timestamp: new Date().toISOString(),
+        platform: 'qaznedr_kz',
+      },
+    });
+  }
+
+  /**
+   * Set user context with mining platform specifics - Updated for Sentry v8
+   */
+  setUserContext(
+    userId: string,
+    userData: {
+      email?: string;
+      role?: string;
+      region?: KazakhstanRegion;
+      company?: string;
+      verified?: boolean;
+    } = {}
+  ): void {
+    Sentry.setUser({
+      id: userId,
+      email: userData.email,
+      username: userData.email?.split('@')[0],
+      ...userData,
+    });
+
+    // Use getCurrentScope instead of configureScope
+    const scope = Sentry.getCurrentScope();
+    scope.setTag('user_role', userData.role || 'user');
+    if (userData.region) {
+      scope.setTag('user_region', userData.region);
+    }
+    if (userData.verified !== undefined) {
+      scope.setTag('user_verified', userData.verified.toString());
+    }
+  }
+
+  /**
+   * Clear user context
+   */
+  clearUserContext(): void {
+    Sentry.setUser(null);
+  }
+
+  /**
+   * Helper to categorize performance durations
+   */
+  private getDurationRange(duration: number): string {
+    if (duration < 100) return 'fast';
+    if (duration < 500) return 'medium';
+    if (duration < 1000) return 'slow';
+    if (duration < 5000) return 'very_slow';
+    return 'critical';
+  }
+
+  /**
+   * Configure Sentry for API request monitoring - Updated for Sentry v8
+   */
+  configureRequestMonitoring(request: NextRequest, userId?: string): void {
+    const scope = Sentry.getCurrentScope();
+    scope.setTag('request_method', request.method);
+    scope.setTag('request_url', request.url);
+
+    // Add geographical context if available
+    const country = request.geo?.country || 'unknown';
+    const region = request.geo?.region || 'unknown';
+
+    scope.setTag('request_country', country);
+    scope.setTag('request_region', region);
+
+    // Add user agent context
+    const userAgent = request.headers.get('user-agent') || 'unknown';
+    scope.setContext('user_agent', { value: userAgent });
+
+    if (userId) {
+      scope.setUser({ id: userId });
+    }
+  }
+}
+
+// Export singleton instance
+export const sentryMiningService = SentryMiningService.getInstance();
+
+// Export helper functions for common operations
+export const trackListingView = (
+  listingId: string,
+  listingType: ListingType,
+  userId?: string
+) => {
+  sentryMiningService.trackMetric(MiningMetric.LISTING_VIEWED, 1, {
+    listingId,
+    listingType,
+    userId,
+  });
+};
+
+export const trackSearch = (
+  query: string,
+  userId?: string,
+  region?: KazakhstanRegion
+) => {
+  sentryMiningService.trackMetric(MiningMetric.SEARCH_PERFORMED, 1, {
+    searchQuery: query,
+    userId,
+    region,
+  });
+};
+
+export const trackListingCreation = (
+  listingId: string,
+  listingType: ListingType,
+  userId: string,
+  region?: KazakhstanRegion
+) => {
+  sentryMiningService.trackMetric(MiningMetric.LISTING_CREATED, 1, {
+    listingId,
+    listingType,
+    userId,
+    region,
+  });
+};

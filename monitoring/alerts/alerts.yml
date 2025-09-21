@@ -1,0 +1,166 @@
+groups:
+  - name: qaznedr_alerts
+    interval: 30s
+    rules:
+      # Application Health
+      - alert: ApplicationDown
+        expr: up{job="qaznedr-app"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: application
+        annotations:
+          summary: 'QAZNEDR application is down'
+          description: 'The QAZNEDR application has been down for more than 2 minutes.'
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'High error rate detected'
+          description: 'Error rate is above 5% for the last 5 minutes'
+
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'High response time detected'
+          description: '95th percentile response time is above 2 seconds'
+
+      # Database Alerts
+      - alert: DatabaseDown
+        expr: up{job="postgres"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: 'PostgreSQL database is down'
+          description: 'PostgreSQL database has been down for more than 1 minute'
+
+      - alert: DatabaseConnectionPoolExhausted
+        expr: pg_stat_database_numbackends / pg_settings_max_connections > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'Database connection pool nearly exhausted'
+          description: 'Database is using more than 80% of available connections'
+
+      - alert: SlowQueries
+        expr: rate(pg_stat_statements_mean_exec_time_seconds[5m]) > 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'Slow database queries detected'
+          description: 'Average query execution time is above 1 second'
+
+      # Redis Alerts
+      - alert: RedisDown
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: cache
+        annotations:
+          summary: 'Redis cache is down'
+          description: 'Redis has been down for more than 1 minute'
+
+      - alert: RedisMemoryHigh
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'Redis memory usage is high'
+          description: 'Redis is using more than 90% of available memory'
+
+      # Resource Alerts
+      - alert: HighCPUUsage
+        expr: rate(process_cpu_seconds_total[5m]) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'High CPU usage detected'
+          description: 'CPU usage is above 80% for the last 5 minutes'
+
+      - alert: HighMemoryUsage
+        expr: process_resident_memory_bytes / node_memory_MemTotal_bytes > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'High memory usage detected'
+          description: 'Memory usage is above 80%'
+
+      - alert: DiskSpaceLow
+        expr: node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"} < 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: 'Low disk space'
+          description: 'Less than 10% disk space remaining'
+
+      # Business Metrics
+      - alert: NoNewListings
+        expr: increase(listings_created_total[1h]) == 0
+        for: 6h
+        labels:
+          severity: info
+        annotations:
+          summary: 'No new listings created'
+          description: 'No new listings have been created in the last 6 hours'
+
+      - alert: HighFailedPayments
+        expr: rate(payment_failures_total[1h]) / rate(payment_attempts_total[1h]) > 0.1
+        for: 30m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'High payment failure rate'
+          description: 'Payment failure rate is above 10%'
+
+      # Security Alerts
+      - alert: RateLimitTriggered
+        expr: rate(rate_limit_exceeded_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'Rate limiting triggered frequently'
+          description: 'Rate limits are being hit more than 10 times per 5 minutes'
+
+      - alert: SuspiciousActivity
+        expr: rate(authentication_failures_total[5m]) > 5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'Multiple authentication failures detected'
+          description: 'More than 5 authentication failures in 5 minutes'
+
+      # Cloudflare Alerts
+      - alert: CloudflareHighThreatScore
+        expr: cloudflare_threat_score > 50
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'High threat score from Cloudflare'
+          description: 'Cloudflare is reporting high threat scores'
+
+      - alert: CloudflareDDoSDetected
+        expr: rate(cloudflare_requests_total{threat_type="ddos"}[5m]) > 100
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: 'Potential DDoS attack detected'
+          description: 'Cloudflare is detecting potential DDoS activity'

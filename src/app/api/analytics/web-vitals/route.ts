@@ -15,26 +15,21 @@ export async function POST(request: NextRequest) {
 
       // Логирование критических метрик
       if (metrics.name === 'CLS' && metrics.value > 0.25) {
-        console.warn('High CLS detected:', metrics);
       }
 
       if (metrics.name === 'FCP' && metrics.value > 3000) {
-        console.warn('Slow FCP detected:', metrics);
       }
 
       if (metrics.name === 'LCP' && metrics.value > 4000) {
-        console.warn('Slow LCP detected:', metrics);
       }
     }
 
     // В development логируем все метрики
     if (process.env.NODE_ENV === 'development') {
-      console.log('[Web Vitals]', metrics);
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error tracking web vitals:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to track web vitals' },
       { status: 500 }
@@ -73,16 +68,12 @@ async function sendToGoogleAnalytics(metrics: any) {
     );
 
     if (!response.ok) {
-      console.error('Failed to send metrics to GA:', response.statusText);
     }
-  } catch (error) {
-    console.error('Error sending to GA:', error);
-  }
+  } catch (error) {}
 }
 
 // Функция для отправки в собственную систему аналитики
 async function sendToCustomAnalytics(metrics: any) {
   // Здесь можно реализовать отправку в вашу систему аналитики
   // Например, в базу данных или внешний сервис
-  console.log('Custom analytics:', metrics);
 }

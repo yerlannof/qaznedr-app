@@ -25,7 +25,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error tracking error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to track error' },
       { status: 500 }
@@ -77,9 +76,7 @@ async function sendToSentry(errorData: any) {
         timestamp: errorData.timestamp / 1000,
       }),
     });
-  } catch (error) {
-    console.error('Failed to send to Sentry:', error);
-  }
+  } catch (error) {}
 }
 
 // Функция для парсинга stack trace
@@ -109,5 +106,4 @@ function parseStackTrace(stack: string) {
 async function sendToErrorLogging(errorData: any) {
   // Здесь можно реализовать отправку в вашу систему логирования
   // Например, в базу данных или внешний сервис
-  console.log('Error logging:', errorData);
 }

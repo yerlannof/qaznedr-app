@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { KazakhstanDeposit } from '@/lib/types/listing';
 import { formatPrice } from '@/lib/utils/format';
 import { getMineralIcon } from '@/components/icons';
@@ -56,10 +57,13 @@ export default function MineralOccurrenceCard({
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
       {/* Image */}
       <div className="aspect-[4/3] relative bg-gray-50">
-        <img 
-          src={imageUrl} 
+        <Image
+          src={imageUrl}
           alt={deposit.title}
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={false}
           onError={(e) => {
             // Fallback to icon if image fails to load
             const target = e.target as HTMLImageElement;

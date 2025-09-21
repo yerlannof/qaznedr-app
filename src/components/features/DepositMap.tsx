@@ -1,8 +1,8 @@
 'use client';
 
-import 'leaflet/dist/leaflet.css';
-import { useEffect, useState, useRef } from 'react';
-import dynamic from 'next/dynamic';
+import { useEffect, useRef, useState } from 'react';
+import maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { KazakhstanDeposit } from '@/lib/types/listing';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -19,23 +19,7 @@ import {
   X,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-// Dynamically import Leaflet components to avoid SSR issues
-const MapContainer = dynamic(
-  () => import('react-leaflet').then((mod) => mod.MapContainer),
-  { ssr: false }
-);
-const TileLayer = dynamic(
-  () => import('react-leaflet').then((mod) => mod.TileLayer),
-  { ssr: false }
-);
-const Marker = dynamic(
-  () => import('react-leaflet').then((mod) => mod.Marker),
-  { ssr: false }
-);
-const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), {
-  ssr: false,
-});
+import { formatPrice } from '@/lib/utils/format';
 
 interface DepositMapProps {
   deposits: KazakhstanDeposit[];
@@ -46,328 +30,237 @@ interface DepositMapProps {
 }
 
 // Kazakhstan center coordinates
-const KAZAKHSTAN_CENTER: [number, number] = [48.0196, 66.9237];
+const KAZAKHSTAN_CENTER: [number, number] = [66.9237, 48.0196];
 const KAZAKHSTAN_BOUNDS: [[number, number], [number, number]] = [
-  [40.5686, 46.4662], // Southwest corner
-  [55.4421, 87.3599], // Northeast corner
+  [46.4932, 40.5686],
+  [87.3156, 55.4421],
 ];
 
-// Create custom marker icons for different deposit types
-const createCustomIcon = (type: string, isSelected?: boolean) => {
-  if (typeof window === 'undefined') return null;
-  const L = typeof window !== 'undefined' ? window.L : null;
-  if (!L) return null;
-
-  const colors = {
-    MINING_LICENSE: '#3B82F6', // Blue
-    EXPLORATION_LICENSE: '#10B981', // Green
-    MINERAL_OCCURRENCE: '#F59E0B', // Yellow
-  };
-
-  const color = colors[type as keyof typeof colors] || '#6B7280';
-  const size = isSelected ? 40 : 30;
-  const opacity = isSelected ? 1 : 0.8;
-
-  return L.divIcon({
-    html: `
-      <div style="
-        width: ${size}px; 
-        height: ${size}px; 
-        background-color: ${color}; 
-        border: 3px solid white;
-        border-radius: 50%; 
-        opacity: ${opacity};
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        transform: ${isSelected ? 'scale(1.2)' : 'scale(1)'};
-        transition: all 0.2s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      ">
-        <div style="color: white; font-size: ${size / 3}px; font-weight: bold;">
-          ${type === 'MINING_LICENSE' ? '⛏️' : type === 'EXPLORATION_LICENSE' ? '🔍' : '📍'}
-        </div>
-      </div>
-    `,
-    className: '',
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
-  });
-};
-
-const formatPrice = (price: number | null) => {
-  if (!price) return 'По запросу';
-
-  if (price >= 1000000000000) {
-    return `${(price / 1000000000000).toFixed(1)} трлн ₸`;
-  } else if (price >= 1000000000) {
-    return `${(price / 1000000000).toFixed(1)} млрд ₸`;
-  } else if (price >= 1000000) {
-    return `${(price / 1000000).toFixed(1)} млн ₸`;
-  } else {
-    return `${price.toLocaleString()} ₸`;
-  }
-};
-
-const getTypeLabel = (type: string) => {
-  switch (type) {
-    case 'MINING_LICENSE':
-      return 'Лицензия на добычу';
-    case 'EXPLORATION_LICENSE':
-      return 'Лицензия на разведку';
-    case 'MINERAL_OCCURRENCE':
-      return 'Рудопроявление';
-    default:
-      return type;
-  }
-};
-
-function MapContent({
-  deposits,
+export function DepositMap({
+  deposits = [],
   selectedDeposit,
   onDepositClick,
-  height = '400px',
+  className,
+  height = 'h-[500px]',
 }: DepositMapProps) {
-  const mapRef = useRef(null);
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<maplibregl.Map | null>(null);
+  const markers = useRef<maplibregl.Marker[]>([]);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const MapContainerAny = MapContainer as any;
-  const TileLayerAny = TileLayer as any;
-  const MarkerAny = Marker as any;
-  const PopupAny = Popup as any;
 
-  // Reset map view to Kazakhstan
-  const resetView = () => {
-    if (mapRef.current) {
-      const map = (mapRef.current as any).getMap();
-      map.fitBounds(KAZAKHSTAN_BOUNDS, { padding: [20, 20] });
-    }
+  // Initialize map
+  useEffect(() => {
+    if (!mapContainer.current || map.current) return;
+
+    map.current = new maplibregl.Map({
+      container: mapContainer.current,
+      style: {
+        version: 8,
+        sources: {
+          'osm-tiles': {
+            type: 'raster',
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tileSize: 256,
+            attribution: '© OpenStreetMap contributors',
+          },
+        },
+        layers: [
+          {
+            id: 'osm-tiles',
+            type: 'raster',
+            source: 'osm-tiles',
+            minzoom: 0,
+            maxzoom: 19,
+          },
+        ],
+      },
+      center: KAZAKHSTAN_CENTER,
+      zoom: 5,
+      bounds: KAZAKHSTAN_BOUNDS,
+    });
+
+    // Add navigation controls
+    map.current.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+    return () => {
+      map.current?.remove();
+      map.current = null;
+    };
+  }, []);
+
+  // Add markers for deposits
+  useEffect(() => {
+    if (!map.current) return;
+
+    // Clear existing markers
+    markers.current.forEach((marker) => marker.remove());
+    markers.current = [];
+
+    // Add new markers
+    deposits.forEach((deposit) => {
+      if (!deposit.coordinates) return;
+
+      // Create marker element
+      const el = document.createElement('div');
+      el.className = 'w-8 h-8 relative cursor-pointer';
+
+      // Create inner circle
+      const inner = document.createElement('div');
+      inner.className = cn(
+        'absolute inset-0 bg-blue-500 rounded-full border-2 border-white shadow-lg',
+        'hover:scale-110 transition-transform',
+        selectedDeposit?.id === deposit.id && 'bg-blue-600 scale-110'
+      );
+      el.appendChild(inner);
+
+      // Create popup
+      const popup = new maplibregl.Popup({ offset: 25 }).setHTML(`
+        <div class="p-3 max-w-xs">
+          <h3 class="font-semibold text-sm mb-1">${deposit.title}</h3>
+          <p class="text-xs text-gray-600 mb-2">${deposit.region}, ${deposit.city}</p>
+          ${deposit.price ? `<p class="text-sm font-medium">${formatPrice(deposit.price)}</p>` : ''}
+          <div class="mt-2 flex gap-1">
+            <span class="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+              ${deposit.mineral}
+            </span>
+            <span class="inline-block px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">
+              ${deposit.area} км²
+            </span>
+          </div>
+        </div>
+      `);
+
+      // Create and add marker
+      const marker = new maplibregl.Marker({ element: el })
+        .setLngLat([deposit.coordinates.lng, deposit.coordinates.lat])
+        .setPopup(popup)
+        .addTo(map.current!);
+
+      // Add click handler
+      el.addEventListener('click', () => {
+        onDepositClick?.(deposit);
+        // Fly to marker
+        map.current?.flyTo({
+          center: [deposit.coordinates!.lng, deposit.coordinates!.lat],
+          zoom: 10,
+          duration: 1500,
+        });
+      });
+
+      markers.current.push(marker);
+    });
+  }, [deposits, selectedDeposit, onDepositClick]);
+
+  // Fly to selected deposit
+  useEffect(() => {
+    if (!map.current || !selectedDeposit?.coordinates) return;
+
+    map.current.flyTo({
+      center: [
+        selectedDeposit.coordinates.lng,
+        selectedDeposit.coordinates.lat,
+      ],
+      zoom: 10,
+      duration: 1500,
+    });
+  }, [selectedDeposit]);
+
+  const handleReset = () => {
+    map.current?.flyTo({
+      center: KAZAKHSTAN_CENTER,
+      zoom: 5,
+      duration: 1000,
+    });
   };
 
-  // Zoom controls
-  const zoomIn = () => {
-    if (mapRef.current) {
-      const map = (mapRef.current as any).getMap();
-      map.zoomIn();
-    }
+  const handleZoomIn = () => {
+    map.current?.zoomIn();
   };
 
-  const zoomOut = () => {
-    if (mapRef.current) {
-      const map = (mapRef.current as any).getMap();
-      map.zoomOut();
-    }
+  const handleZoomOut = () => {
+    map.current?.zoomOut();
+  };
+
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
   };
 
   return (
-    <div
+    <Card
       className={cn(
-        'relative',
-        isFullscreen && 'fixed inset-0 z-50 bg-white dark:bg-gray-900'
+        'relative overflow-hidden',
+        isFullscreen && 'fixed inset-4 z-50 m-0',
+        className
       )}
     >
-      {/* Map Controls */}
-      <div className="absolute top-4 right-4 z-[1000] flex flex-col gap-2">
-        <Button
-          variant="secondary"
-          size="icon"
-          onClick={() => setIsFullscreen(!isFullscreen)}
-          className="h-10 w-10 bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700"
-        >
-          {isFullscreen ? (
-            <X className="h-4 w-4" />
-          ) : (
-            <Maximize2 className="h-4 w-4" />
-          )}
-        </Button>
-        <Button
-          variant="secondary"
-          size="icon"
-          onClick={resetView}
-          className="h-10 w-10 bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700"
-        >
-          <RotateCcw className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="secondary"
-          size="icon"
-          onClick={zoomIn}
-          className="h-10 w-10 bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700"
-        >
-          <ZoomIn className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="secondary"
-          size="icon"
-          onClick={zoomOut}
-          className="h-10 w-10 bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700"
-        >
-          <ZoomOut className="h-4 w-4" />
-        </Button>
-      </div>
-
-      {/* Legend */}
-      <div className="absolute bottom-4 left-4 z-[1000]">
-        <Card className="p-3 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm">
-          <div className="space-y-2">
-            <h4 className="text-sm font-medium">Типы месторождений</h4>
-            <div className="flex flex-col gap-1 text-xs">
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-blue-600 flex items-center justify-center">
-                  <span className="text-[8px]">⛏️</span>
-                </div>
-                <span>Лицензии на добычу</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-green-600 flex items-center justify-center">
-                  <span className="text-[8px]">🔍</span>
-                </div>
-                <span>Лицензии на разведку</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-yellow-600 flex items-center justify-center">
-                  <span className="text-[8px]">📍</span>
-                </div>
-                <span>Рудопроявления</span>
-              </div>
-            </div>
+      <CardHeader className="pb-2">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-lg flex items-center gap-2">
+            <MapPin className="h-5 w-5" />
+            Карта месторождений
+          </CardTitle>
+          <div className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleZoomIn}
+              className="h-8 w-8"
+              title="Приблизить"
+            >
+              <ZoomIn className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleZoomOut}
+              className="h-8 w-8"
+              title="Отдалить"
+            >
+              <ZoomOut className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleReset}
+              className="h-8 w-8"
+              title="Сбросить вид"
+            >
+              <RotateCcw className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleFullscreen}
+              className="h-8 w-8"
+              title={
+                isFullscreen
+                  ? 'Выйти из полноэкранного режима'
+                  : 'Полноэкранный режим'
+              }
+            >
+              {isFullscreen ? (
+                <X className="h-4 w-4" />
+              ) : (
+                <Maximize2 className="h-4 w-4" />
+              )}
+            </Button>
           </div>
-        </Card>
-      </div>
-
-      <div
-        className="w-full rounded-lg overflow-hidden"
-        style={{ height: isFullscreen ? '100vh' : height }}
-      >
-        <MapContainerAny
-          ref={mapRef}
-          center={KAZAKHSTAN_CENTER}
-          zoom={6}
-          style={{ height: '100%', width: '100%' }}
-          maxBounds={KAZAKHSTAN_BOUNDS}
-          minZoom={5}
-          maxZoom={15}
-        >
-          <TileLayerAny
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-
-          {deposits.map((deposit) => {
-            // Generate random coordinates within Kazakhstan bounds if not provided
-            const lat = deposit.coordinates
-              ? deposit.coordinates[0]
-              : 40.5686 + Math.random() * (55.4421 - 40.5686);
-            const lng = deposit.coordinates
-              ? deposit.coordinates[1]
-              : 46.4662 + Math.random() * (87.3599 - 46.4662);
-
-            return (
-              <MarkerAny
-                key={deposit.id}
-                position={[lat, lng]}
-                icon={createCustomIcon(
-                  deposit.type,
-                  selectedDeposit?.id === deposit.id
-                )}
-                eventHandlers={{
-                  click: () => onDepositClick?.(deposit),
-                }}
-              >
-                <PopupAny>
-                  <div className="p-2 max-w-xs">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-semibold text-sm text-gray-900">
-                        {deposit.title}
-                      </h3>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Badge variant="secondary" className="text-xs">
-                          {getTypeLabel(deposit.type)}
-                        </Badge>
-                        {deposit.verified && (
-                          <Badge
-                            variant="default"
-                            className="text-xs bg-green-600"
-                          >
-                            ✓ Проверено
-                          </Badge>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <MapPin className="w-4 h-4" />
-                        <span>
-                          {deposit.region}, {deposit.city}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Factory className="w-4 h-4" />
-                        <span>{deposit.mineral}</span>
-                      </div>
-
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <DollarSign className="w-4 h-4" />
-                        <span className="font-semibold text-gray-900">
-                          {formatPrice(deposit.price)}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Eye className="w-4 h-4" />
-                        <span>{deposit.views} просмотров</span>
-                      </div>
-
-                      <p className="text-xs text-gray-600 mt-2 line-clamp-3">
-                        {deposit.description}
-                      </p>
-
-                      <Button
-                        size="sm"
-                        className="w-full mt-2"
-                        onClick={() =>
-                          window.open(`/listings/${deposit.id}`, '_blank')
-                        }
-                      >
-                        Подробнее
-                      </Button>
-                    </div>
-                  </div>
-                </PopupAny>
-              </MarkerAny>
-            );
-          })}
-        </MapContainerAny>
-      </div>
-    </div>
-  );
-}
-
-export default function DepositMap(props: DepositMapProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div
-        className={cn(
-          'w-full bg-gray-100 rounded-lg flex items-center justify-center',
-          props.className
-        )}
-        style={{ height: props.height || '400px' }}
-      >
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
-          <p className="text-sm text-gray-600">Загрузка карты...</p>
         </div>
-      </div>
-    );
-  }
-
-  return <MapContent {...props} />;
+      </CardHeader>
+      <CardContent className="p-0">
+        <div
+          ref={mapContainer}
+          className={cn(
+            'w-full',
+            isFullscreen ? 'h-[calc(100vh-120px)]' : height
+          )}
+        />
+        {deposits.length === 0 && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-50/80">
+            <p className="text-gray-500">Нет месторождений для отображения</p>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
 }

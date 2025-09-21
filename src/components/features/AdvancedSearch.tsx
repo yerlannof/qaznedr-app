@@ -89,7 +89,6 @@ export default function AdvancedSearch() {
         }));
       setFuzzyResults(formattedResults);
     } catch (error) {
-      console.error('Error performing fuzzy search:', error);
     } finally {
       setIsSearching(false);
     }

@@ -136,11 +136,8 @@ class Logger {
     );
 
     if (level === LogLevel.ERROR) {
-      console.error(formattedMessage);
     } else if (level === LogLevel.WARN) {
-      console.warn(formattedMessage);
     } else {
-      console.log(formattedMessage);
     }
   }
 

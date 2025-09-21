@@ -1,19 +1,28 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
+import * as argon2 from 'argon2';
+import { registerSchema, validateRequest } from '@/lib/validations/api';
 
 const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
   try {
-    const { email, password, name } = await request.json();
+    const body = await request.json();
 
-    if (!email || !password) {
+    // Validate request data with zod
+    const validation = validateRequest(body, registerSchema);
+
+    if (!validation.success) {
       return NextResponse.json(
-        { error: 'Email and password are required' },
+        {
+          error: 'Invalid registration data',
+          details: validation.errors.flatten(),
+        },
         { status: 400 }
       );
     }
+
+    const { email, password, name } = validation.data;
 
     // Check if user already exists
     const existingUser = await prisma.user.findUnique({
@@ -27,8 +36,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Hash the password with argon2 (more secure than bcrypt)
+    const hashedPassword = await argon2.hash(password);
 
     // Create the user
     const user = await prisma.user.create({
@@ -50,7 +59,6 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (error) {
-    console.error('Registration error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

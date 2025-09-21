@@ -137,6 +137,82 @@ type ListingType =
 3. **Follow Design System**: Strict adherence to gray+blue color scheme
 4. **Kazakhstan Context**: All content should reflect Kazakhstan mining industry
 5. **Type Safety**: Use provided TypeScript types for all Kazakhstan-specific data
+6. **No Console Statements**: Remove all console.log/error/warn from production code
+7. **Test Coverage**: Maintain minimum 60% test coverage
+8. **Build Before Commit**: Always run `npm run build` to ensure no TypeScript errors
+
+## Known Issues & Solutions
+
+### Common Build Errors
+
+1. **i18n Configuration Error**
+   - Ensure `locale` is provided in i18n.ts: `locale: locale || 'ru'`
+   - Messages path must be: `./src/messages/${locale}.json`
+
+2. **TypeScript Recharts Errors**
+   - Use `as any` for chart data props when needed
+   - Example: `data={mineralDistribution as any}`
+
+3. **Missing Dependencies**
+   - Required: recharts, zod, react-map-gl, maplibre-gl, date-fns
+   - Testing: jest, @testing-library/react, @testing-library/jest-dom
+
+4. **Multiple Dev Servers Running**
+   - Check with: `ps aux | grep "npm run dev"`
+   - Kill all: `pkill -f "npm run dev"`
+
+### File Organization Best Practices
+
+1. **Component Structure**
+
+   ```
+   components/
+   ├── features/       # Complex business features
+   ├── layouts/        # Page layouts (Navigation, Footer)
+   └── ui/            # Simple reusable components
+   ```
+
+2. **Test Files**
+   - Place in `src/__tests__/` mirroring source structure
+   - Name pattern: `ComponentName.test.tsx`
+
+3. **API Routes**
+   - All under `app/api/`
+   - Use consistent error handling with `handleApiError`
+
+### Performance Optimizations Applied
+
+1. **Removed Unused Dependencies** (84 packages removed)
+   - Cleaned production and dev dependencies
+   - Kept only essential packages
+
+2. **Component Consolidation**
+   - Merged duplicate UI components
+   - Removed \*New suffix variants
+
+3. **Code Cleanup**
+   - No console statements in production
+   - Removed test/debug pages from production build
+
+### Testing Setup
+
+```bash
+# Run tests
+npm run test
+
+# With coverage
+npm run test:coverage
+
+# Watch mode
+npm run test:watch
+```
+
+Key test mocks configured:
+
+- Next.js navigation
+- next-intl translations
+- Supabase client
+- fetch polyfill
 
 ## MCP Server Integration
 

@@ -54,7 +54,9 @@ export function trackWebVitals(metric: NextWebVitalsMetric) {
         url: window.location.href,
         userAgent: navigator.userAgent,
       }),
-    }).catch(console.error);
+    }).catch(() => {
+      // Silently ignore analytics errors
+    });
   }
 }
 
@@ -122,9 +124,7 @@ export function initPerformanceObserver() {
       }
     });
     longTaskObserver.observe({ entryTypes: ['longtask'] });
-  } catch (error) {
-    console.error('Performance Observer initialization failed:', error);
-  }
+  } catch (error) {}
 }
 
 // Track custom metrics
@@ -134,7 +134,6 @@ function trackCustomMetric(
   metadata?: Record<string, any>
 ) {
   if (process.env.NODE_ENV === 'development') {
-    console.log('[Custom Metric]', { name, value, metadata });
   }
 
   if (process.env.NODE_ENV === 'production') {
@@ -151,7 +150,9 @@ function trackCustomMetric(
         timestamp: Date.now(),
         url: window.location.href,
       }),
-    }).catch(console.error);
+    }).catch(() => {
+      // Silently ignore analytics errors
+    });
   }
 }
 
@@ -166,8 +167,6 @@ function getResourceType(url: string): string {
 
 // Error tracking
 export function trackError(error: Error, errorInfo?: any) {
-  console.error('[Error Tracked]', error, errorInfo);
-
   if (process.env.NODE_ENV === 'production') {
     // Send to error tracking service
     fetch('/api/analytics/errors', {
@@ -183,7 +182,9 @@ export function trackError(error: Error, errorInfo?: any) {
         url: window.location.href,
         userAgent: navigator.userAgent,
       }),
-    }).catch(console.error);
+    }).catch(() => {
+      // Silently ignore analytics errors
+    });
   }
 }
 
@@ -196,7 +197,6 @@ export function trackUserInteraction(
   if (typeof window === 'undefined') return;
 
   if (process.env.NODE_ENV === 'development') {
-    console.log('[User Interaction]', { action, label, value });
   }
 
   if (process.env.NODE_ENV === 'production') {

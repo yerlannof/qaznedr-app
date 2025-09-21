@@ -115,7 +115,6 @@ export function ImageUpload({
       setImages(updatedImages);
       onChange?.(updatedImages.map((img) => img.url));
     } catch (error) {
-      console.error('Upload error:', error);
       alert('Failed to upload images. Please try again.');
     } finally {
       setUploading(false);

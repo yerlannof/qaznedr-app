@@ -89,7 +89,6 @@ export const depositApi = {
 
       return response.data;
     } catch (error) {
-      console.error('Error fetching deposit by ID:', error);
       return null;
     }
   },

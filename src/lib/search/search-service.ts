@@ -1,5 +1,14 @@
 import { createClient } from '@/lib/supabase/client';
 import { Database } from '@/lib/supabase/database.types';
+import { elasticsearchService } from './elasticsearch-service';
+import { dataSyncService } from '@/lib/sync/data-sync-service';
+import { redisCacheService } from '@/lib/cache/redis-cache-service';
+import {
+  sentryMiningService,
+  MiningErrorType,
+  MiningMetric,
+} from '@/lib/monitoring/sentry-service';
+import { performanceMonitoring } from '@/lib/middleware/performance-monitoring';
 
 type Deposit = Database['public']['Tables']['kazakhstan_deposits']['Row'];
 
@@ -36,8 +45,133 @@ export interface SearchResult {
 
 export class SearchService {
   private supabase = createClient();
+  private useElasticsearch = process.env.ENABLE_ELASTICSEARCH === 'true';
 
   async search(filters: SearchFilters): Promise<SearchResult> {
+    // Add search monitoring breadcrumb
+    sentryMiningService.addMiningBreadcrumb(
+      `Search operation started: ${filters.query || 'no query'}`,
+      'search',
+      {
+        query: filters.query,
+        sortBy: filters.sortBy,
+        page: filters.page,
+        limit: filters.limit,
+      }
+    );
+
+    // Try to get cached results first
+    const cachedResults =
+      await redisCacheService.getCachedSearchResults(filters);
+    if (cachedResults) {
+      sentryMiningService.trackCacheOperation(
+        'hit',
+        `search:${filters.query || 'all'}`
+      );
+
+      // Track search performance
+      sentryMiningService.trackMetric(
+        MiningMetric.SEARCH_PERFORMED,
+        1,
+        {
+          searchQuery: filters.query,
+        },
+        {
+          cache_hit: 'true',
+          search_type: 'cached',
+          results_count: cachedResults.deposits.length.toString(),
+        }
+      );
+
+      return cachedResults;
+    }
+
+    sentryMiningService.trackCacheOperation(
+      'miss',
+      `search:${filters.query || 'all'}`
+    );
+
+    let results: SearchResult;
+
+    // Try Elasticsearch first if enabled
+    if (this.useElasticsearch) {
+      try {
+        const esHealth = await elasticsearchService.healthCheck();
+        if (esHealth.connected && esHealth.indexExists) {
+          console.log('🔍 Using Elasticsearch for search');
+          results = await performanceMonitoring.monitorSearchOperation(
+            () => elasticsearchService.search(filters),
+            filters.query || 'all',
+            'elasticsearch'
+          );
+        } else {
+          console.warn(
+            '⚠️ Elasticsearch not available, falling back to Supabase'
+          );
+          results = await performanceMonitoring.monitorSearchOperation(
+            () => this.searchWithSupabase(filters),
+            filters.query || 'all',
+            'supabase'
+          );
+        }
+      } catch (error) {
+        console.error(
+          '❌ Elasticsearch search failed, falling back to Supabase:',
+          error
+        );
+
+        // Capture Elasticsearch error
+        sentryMiningService.captureError(
+          error as Error,
+          MiningErrorType.SEARCH_QUERY_FAILED,
+          { searchQuery: filters.query },
+          'warning'
+        );
+
+        results = await performanceMonitoring.monitorSearchOperation(
+          () => this.searchWithSupabase(filters),
+          filters.query || 'all',
+          'supabase'
+        );
+      }
+    } else {
+      // Fallback to Supabase search
+      console.log('🔍 Using Supabase for search');
+      results = await performanceMonitoring.monitorSearchOperation(
+        () => this.searchWithSupabase(filters),
+        filters.query || 'all',
+        'supabase'
+      );
+    }
+
+    // Cache the results with monitoring
+    await redisCacheService.cacheSearchResults(filters, results);
+    sentryMiningService.trackCacheOperation(
+      'set',
+      `search:${filters.query || 'all'}`
+    );
+
+    // Track successful search
+    sentryMiningService.trackMetric(
+      MiningMetric.SEARCH_PERFORMED,
+      1,
+      {
+        searchQuery: filters.query,
+      },
+      {
+        cache_hit: 'false',
+        search_type: this.useElasticsearch ? 'elasticsearch' : 'supabase',
+        results_count: results.deposits.length.toString(),
+        total_results: results.total.toString(),
+      }
+    );
+
+    return results;
+  }
+
+  private async searchWithSupabase(
+    filters: SearchFilters
+  ): Promise<SearchResult> {
     const {
       query,
       type,
@@ -128,11 +262,20 @@ export class SearchService {
     const to = from + limit - 1;
     queryBuilder = queryBuilder.range(from, to);
 
-    // Execute query
-    const { data, error, count } = await queryBuilder;
+    // Execute query with monitoring
+    const { data, error, count } =
+      await performanceMonitoring.monitorDatabaseOperation(
+        () => queryBuilder,
+        'search_supabase_query',
+        'kazakhstan_deposits'
+      );
 
     if (error) {
-      console.error('Search error:', error);
+      sentryMiningService.captureError(
+        error,
+        MiningErrorType.SEARCH_QUERY_FAILED,
+        { searchQuery: query }
+      );
       throw error;
     }
 
@@ -210,13 +353,61 @@ export class SearchService {
   async getSuggestions(query: string): Promise<string[]> {
     if (!query || query.length < 2) return [];
 
-    const { data } = await this.supabase
-      .from('kazakhstan_deposits')
-      .select('title')
-      .ilike('title', `%${query}%`)
-      .limit(5);
+    // Try to get cached suggestions first
+    const cachedSuggestions =
+      await redisCacheService.getCachedSuggestions(query);
+    if (cachedSuggestions) {
+      return cachedSuggestions;
+    }
 
-    return data?.map((item: any) => item.title) || [];
+    let suggestions: string[];
+
+    // Try Elasticsearch first if enabled
+    if (this.useElasticsearch) {
+      try {
+        const esHealth = await elasticsearchService.healthCheck();
+        if (esHealth.connected && esHealth.indexExists) {
+          suggestions = await elasticsearchService.getSuggestions(query);
+        } else {
+          // Fallback to Supabase
+          const { data } = await this.supabase
+            .from('kazakhstan_deposits')
+            .select('title')
+            .ilike('title', `%${query}%`)
+            .limit(5);
+
+          suggestions = data?.map((item: any) => item.title) || [];
+        }
+      } catch (error) {
+        console.error(
+          '❌ Elasticsearch suggestions failed, falling back to Supabase:',
+          error
+        );
+
+        // Fallback to Supabase
+        const { data } = await this.supabase
+          .from('kazakhstan_deposits')
+          .select('title')
+          .ilike('title', `%${query}%`)
+          .limit(5);
+
+        suggestions = data?.map((item: any) => item.title) || [];
+      }
+    } else {
+      // Fallback to Supabase
+      const { data } = await this.supabase
+        .from('kazakhstan_deposits')
+        .select('title')
+        .ilike('title', `%${query}%`)
+        .limit(5);
+
+      suggestions = data?.map((item: any) => item.title) || [];
+    }
+
+    // Cache the suggestions
+    await redisCacheService.cacheSuggestions(query, suggestions);
+
+    return suggestions;
   }
 
   async saveSearch(userId: string, filters: SearchFilters, name?: string) {

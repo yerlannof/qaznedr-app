@@ -95,7 +95,6 @@ export async function GET(
       data: formattedDeposit,
     });
   } catch (error) {
-    console.error('Error fetching listing:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to fetch listing' },
       { status: 500 }
@@ -208,7 +207,6 @@ export async function PUT(
       },
     });
   } catch (error) {
-    console.error('Error updating listing:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to update listing' },
       { status: 500 }
@@ -262,7 +260,6 @@ export async function DELETE(
       message: 'Listing deleted successfully',
     });
   } catch (error) {
-    console.error('Error deleting listing:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to delete listing' },
       { status: 500 }

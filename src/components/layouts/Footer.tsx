@@ -8,7 +8,7 @@ import { Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
 export default function Footer() {
   const { t, locale } = useTranslation();
   const pathname = usePathname();
-  
+
   // Helper function to switch locale in current path
   const switchLocalePath = (newLocale: string) => {
     const segments = pathname.split('/');

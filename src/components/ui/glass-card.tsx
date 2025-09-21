@@ -26,14 +26,17 @@ export function GlassCard({
     sm: 'backdrop-blur-sm',
     md: 'backdrop-blur-md',
     lg: 'backdrop-blur-lg',
-    xl: 'backdrop-blur-xl'
+    xl: 'backdrop-blur-xl',
   };
 
   const variants = {
-    default: 'bg-white/80 dark:bg-gray-900/80 border-gray-200/50 dark:border-gray-700/50',
-    primary: 'bg-blue-50/80 dark:bg-blue-950/80 border-blue-200/50 dark:border-blue-800/50',
-    secondary: 'bg-gray-50/80 dark:bg-gray-800/80 border-gray-300/50 dark:border-gray-600/50',
-    dark: 'bg-gray-900/90 border-gray-700/50 text-white'
+    default:
+      'bg-white/80 dark:bg-gray-900/80 border-gray-200/50 dark:border-gray-700/50',
+    primary:
+      'bg-blue-50/80 dark:bg-blue-950/80 border-blue-200/50 dark:border-blue-800/50',
+    secondary:
+      'bg-gray-50/80 dark:bg-gray-800/80 border-gray-300/50 dark:border-gray-600/50',
+    dark: 'bg-gray-900/90 border-gray-700/50 text-white',
   };
 
   return (
@@ -45,7 +48,8 @@ export function GlassCard({
         blurValues[blur],
         variants[variant],
         hover && 'transition-all duration-300 hover:shadow-2xl',
-        glow && 'before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r before:from-blue-600/20 before:to-purple-600/20 before:blur-xl before:-z-10',
+        glow &&
+          'before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r before:from-blue-600/20 before:to-purple-600/20 before:blur-xl before:-z-10',
         className
       )}
       {...motionProps}
@@ -54,12 +58,12 @@ export function GlassCard({
         <motion.div
           className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-600/10 to-purple-600/10 blur-2xl -z-10"
           animate={{
-            opacity: [0.5, 0.8, 0.5]
+            opacity: [0.5, 0.8, 0.5],
           }}
           transition={{
             duration: 3,
             repeat: Infinity,
-            ease: 'easeInOut'
+            ease: 'easeInOut',
           }}
         />
       )}
@@ -72,7 +76,7 @@ export function GlassModal({
   children,
   isOpen,
   onClose,
-  title
+  title,
 }: {
   children: ReactNode;
   isOpen: boolean;
@@ -126,15 +130,16 @@ export function GlassButton({
   onClick?: () => void;
 } & HTMLMotionProps<'button'>) {
   const variants = {
-    default: 'bg-white/80 dark:bg-gray-800/80 text-gray-900 dark:text-white hover:bg-white/90 dark:hover:bg-gray-800/90',
+    default:
+      'bg-white/80 dark:bg-gray-800/80 text-gray-900 dark:text-white hover:bg-white/90 dark:hover:bg-gray-800/90',
     primary: 'bg-blue-600/80 text-white hover:bg-blue-600/90',
-    ghost: 'bg-transparent hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
+    ghost: 'bg-transparent hover:bg-gray-100/50 dark:hover:bg-gray-800/50',
   };
 
   const sizes = {
     sm: 'px-3 py-1.5 text-sm',
     default: 'px-4 py-2',
-    lg: 'px-6 py-3 text-lg'
+    lg: 'px-6 py-3 text-lg',
   };
 
   return (
@@ -155,12 +160,12 @@ export function GlassButton({
       <motion.div
         className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600/10 to-purple-600/10"
         animate={{
-          opacity: [0, 0.5, 0]
+          opacity: [0, 0.5, 0],
         }}
         transition={{
           duration: 2,
           repeat: Infinity,
-          ease: 'easeInOut'
+          ease: 'easeInOut',
         }}
       />
     </motion.button>

@@ -2,6 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile Touch Optimizations */
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    touch-action: manipulation;
+  }
+
+  body {
+    overscroll-behavior: none;
+  }
+}
+
+/* Safe Area Support */
+@layer utilities {
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .safe-inset {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+      env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+
+  /* Touch Target Sizes */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    @apply inline-flex items-center justify-center;
+  }
+
+  .touch-target-sm {
+    min-height: 36px;
+    min-width: 36px;
+    @apply inline-flex items-center justify-center;
+  }
+
+  /* Mobile Scrolling */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    scroll-behavior: smooth;
+  }
+
+  /* Disable animations on mobile for performance */
+  @media (hover: none) and (pointer: coarse) {
+    .reduce-motion-mobile * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Mobile-only utilities */
+  @media (max-width: 640px) {
+    .no-scroll-mobile {
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
+
+    .mobile-full-height {
+      height: calc(
+        100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+      );
+      height: calc(
+        100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+      );
+    }
+  }
+}
+
 :root {
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);

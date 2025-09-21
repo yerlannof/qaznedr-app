@@ -18,14 +18,19 @@ export function InteractiveLink({
   children,
   variant = 'default',
   className = '',
-  external = false
+  external = false,
 }: InteractiveLinkProps) {
   const LinkComponent = external ? 'a' : Link;
-  const linkProps = external ? { href, target: '_blank', rel: 'noopener noreferrer' } : { href };
+  const linkProps = external
+    ? { href, target: '_blank', rel: 'noopener noreferrer' }
+    : { href };
 
   if (variant === 'underline') {
     return (
-      <LinkComponent {...linkProps} className={cn('relative group inline-block', className)}>
+      <LinkComponent
+        {...linkProps}
+        className={cn('relative group inline-block', className)}
+      >
         <span className="relative">
           {children}
           <motion.span
@@ -69,7 +74,7 @@ export function InteractiveLink({
           <motion.span
             className="block"
             variants={{
-              hover: { y: '-100%' }
+              hover: { y: '-100%' },
             }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
@@ -78,7 +83,7 @@ export function InteractiveLink({
           <motion.span
             className="absolute top-full left-0 block text-blue-600"
             variants={{
-              hover: { y: '-100%' }
+              hover: { y: '-100%' },
             }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
@@ -110,7 +115,7 @@ export function InteractiveButton({
   variant = 'default',
   size = 'default',
   disabled = false,
-  className = ''
+  className = '',
 }: {
   children: ReactNode;
   onClick?: () => void;
@@ -120,16 +125,17 @@ export function InteractiveButton({
   className?: string;
 }) {
   const variants = {
-    default: 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700',
+    default:
+      'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700',
     primary: 'bg-blue-600 text-white hover:bg-blue-700',
     ghost: 'bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800',
-    danger: 'bg-red-600 text-white hover:bg-red-700'
+    danger: 'bg-red-600 text-white hover:bg-red-700',
   };
 
   const sizes = {
     sm: 'px-3 py-1.5 text-sm',
     default: 'px-4 py-2',
-    lg: 'px-6 py-3 text-lg'
+    lg: 'px-6 py-3 text-lg',
   };
 
   return (
@@ -160,7 +166,7 @@ export function InteractiveButton({
 
 export function MagneticButton({
   children,
-  className = ''
+  className = '',
 }: {
   children: ReactNode;
   className?: string;
@@ -175,8 +181,8 @@ export function MagneticButton({
           hover: {
             x: [0, -2, 2, -2, 2, 0],
             y: [0, -2, 2, -2, 2, 0],
-            transition: { duration: 0.4 }
-          }
+            transition: { duration: 0.4 },
+          },
         }}
       >
         {children}

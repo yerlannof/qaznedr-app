@@ -27,7 +27,6 @@ export default function FavoritesPage() {
         setFavorites(favoriteDeposits);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Произошла ошибка');
-        console.error('Error loading favorites:', err);
       } finally {
         setLoading(false);
       }

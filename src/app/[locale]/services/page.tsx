@@ -274,9 +274,7 @@ export default function ServicesPage() {
 
         {/* CTA Section */}
         <section className="bg-blue-600 dark:bg-blue-700 rounded-2xl p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">
-            {t('services.cta.title')}
-          </h2>
+          <h2 className="text-2xl font-bold mb-4">{t('services.cta.title')}</h2>
           <p className="text-blue-100 dark:text-blue-200 mb-6 max-w-2xl mx-auto">
             {t('services.cta.description')}
           </p>

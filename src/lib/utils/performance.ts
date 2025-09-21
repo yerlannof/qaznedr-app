@@ -189,7 +189,6 @@ class PerformanceMonitor {
       this.observers.push(observer);
     } catch {
       // Observer not supported, ignore
-      console.warn(`Performance observer for ${type} not supported`);
     }
   }
 

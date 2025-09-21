@@ -74,7 +74,6 @@ async function collectDatabaseMetrics(): Promise<Record<string, number>> {
       qaznedr_favorites_total: favoriteCount,
     };
   } catch (error) {
-    console.error('Failed to collect database metrics:', error);
     return {};
   }
 }
@@ -150,7 +149,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       },
     });
   } catch (error) {
-    console.error('Metrics endpoint error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

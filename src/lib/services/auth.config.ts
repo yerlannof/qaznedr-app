@@ -8,7 +8,7 @@ import { AdapterUser } from 'next-auth/adapters';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { createClient } from '@/lib/supabase/server';
-import * as argon2 from 'argon2';
+import bcrypt from 'bcryptjs';
 import { getSecureAuthConfig } from '@/lib/auth/jwt-security';
 import { ValidationSchemas } from '@/lib/middleware/input-validation';
 
@@ -94,9 +94,9 @@ export const authOptions = {
         // Verify password with timing attack protection
         let isPasswordValid = false;
         try {
-          isPasswordValid = await argon2.verify(
-            user.password,
-            credentials.password
+          isPasswordValid = await bcrypt.compare(
+            credentials.password,
+            user.password
           );
         } catch (error) {
           console.error('Password verification error:', error);

@@ -33,13 +33,13 @@ export default function UserMenu() {
           href={`/${locale}/auth/login`}
           className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
         >
-          {t('nav.login') || 'Log in'}
+          {t('common.login') || 'Log in'}
         </Link>
         <Link
           href={`/${locale}/auth/register`}
           className="text-sm px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
-          {t('nav.register') || 'Register'}
+          {t('common.register') || 'Register'}
         </Link>
       </div>
     );
@@ -72,7 +72,7 @@ export default function UserMenu() {
             onClick={() => setOpen(false)}
             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-            {t('nav.profile') || 'Profile'}
+            {t('common.profile') || 'Profile'}
           </Link>
           <hr className="my-1 border-gray-200 dark:border-gray-700" />
           <button

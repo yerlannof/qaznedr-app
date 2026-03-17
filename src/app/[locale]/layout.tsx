@@ -1,5 +1,8 @@
 import { notFound } from 'next/navigation';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Toaster } from 'sonner';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { WebVitalsTracker } from '@/components/monitoring/WebVitalsTracker';
@@ -43,6 +46,9 @@ export default async function LocaleLayout({
           <AuthProvider>
             <WebVitalsTracker pageName={`/${locale}`} />
             {children}
+            <Toaster position="top-right" richColors />
+            <Analytics />
+            <SpeedInsights />
           </AuthProvider>
         </ThemeProvider>
       </body>

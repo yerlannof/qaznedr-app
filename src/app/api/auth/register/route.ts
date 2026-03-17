@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getPrisma } from '@/lib/prisma';
-import * as argon2 from 'argon2';
+import bcrypt from 'bcryptjs';
 import { registerSchema, validateRequest } from '@/lib/validations/api';
 
 export const dynamic = 'force-dynamic';
@@ -37,8 +37,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Hash the password with argon2 (more secure than bcrypt)
-    const hashedPassword = await argon2.hash(password);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     // Create the user
     const user = await prisma.user.create({

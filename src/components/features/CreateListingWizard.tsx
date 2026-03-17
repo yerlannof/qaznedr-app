@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Wizard, useWizard } from 'react-use-wizard';
+import { createContext, useContext } from 'react';
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -17,6 +17,25 @@ import {
   Settings,
   AlertTriangle,
 } from 'lucide-react';
+
+// Simple wizard context to replace react-use-wizard
+interface WizardContextType {
+  activeStep: number;
+  stepCount: number;
+  nextStep: () => void;
+  previousStep: () => void;
+  isFirstStep: boolean;
+  isLastStep: boolean;
+}
+const WizardContext = createContext<WizardContextType>({
+  activeStep: 0,
+  stepCount: 4,
+  nextStep: () => {},
+  previousStep: () => {},
+  isFirstStep: true,
+  isLastStep: false,
+});
+const useWizard = () => useContext(WizardContext);
 
 import { depositApi } from '@/lib/api/deposits';
 import { ListingType, MineralType, RegionType } from '@/lib/types/listing';
@@ -875,6 +894,17 @@ export default function CreateListingWizard({
 }: CreateListingWizardProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+  const stepCount = 4;
+
+  const wizardValue: WizardContextType = {
+    activeStep,
+    stepCount,
+    nextStep: () => setActiveStep((s) => Math.min(s + 1, stepCount - 1)),
+    previousStep: () => setActiveStep((s) => Math.max(s - 1, 0)),
+    isFirstStep: activeStep === 0,
+    isLastStep: activeStep === stepCount - 1,
+  };
 
   const methods = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -962,19 +992,21 @@ export default function CreateListingWizard({
 
           {/* Content */}
           <div className="px-8 py-8">
-            <StepIndicator />
+            <WizardContext.Provider value={wizardValue}>
+              <StepIndicator />
 
-            <Wizard>
-              <BasicInfoStep />
-              <LocationStep />
-              <TypeSpecificStep />
-              <ImagesStep />
-            </Wizard>
+              <AnimatePresence mode="wait">
+                {activeStep === 0 && <BasicInfoStep key="step0" />}
+                {activeStep === 1 && <LocationStep key="step1" />}
+                {activeStep === 2 && <TypeSpecificStep key="step2" />}
+                {activeStep === 3 && <ImagesStep key="step3" />}
+              </AnimatePresence>
 
-            <StepNavigation
-              onSubmit={methods.handleSubmit(onSubmit)}
-              isLoading={isLoading}
-            />
+              <StepNavigation
+                onSubmit={methods.handleSubmit(onSubmit)}
+                isLoading={isLoading}
+              />
+            </WizardContext.Provider>
           </div>
         </div>
 

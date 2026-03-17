@@ -200,8 +200,10 @@ export async function GET(request: NextRequest) {
     }
 
     // Apply sorting, pagination
+    const dbSortBy =
+      sortBy === 'createdAt' ? 'created_at' : (sortBy ?? 'created_at');
     queryBuilder = queryBuilder
-      .order(sortBy ?? 'created_at', { ascending: sortOrder === 'asc' })
+      .order(dbSortBy, { ascending: sortOrder === 'asc' })
       .range(offset, offset + (limit ?? 10) - 1);
 
     // Execute query

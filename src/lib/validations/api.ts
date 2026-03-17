@@ -11,7 +11,9 @@ export const listingQuerySchema = z.object({
     .optional()
     .refine((val) => !val || parseInt(val) <= 100, 'Limit must not exceed 100')
     .transform((val) => (val ? parseInt(val) : undefined)),
-  sortBy: z.enum(['created_at', 'price', 'area', 'title']).optional(),
+  sortBy: z
+    .enum(['created_at', 'createdAt', 'price', 'area', 'title', 'views'])
+    .optional(),
   sortOrder: z.enum(['asc', 'desc']).optional(),
   query: z.string().optional(),
   region: z.string().optional(),

@@ -14,13 +14,14 @@ const envSchema = z.object({
   NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),
 
   // Authentication
-  NEXTAUTH_URL: z.string().url(),
+  NEXTAUTH_URL: z.string().url().default('http://localhost:3000'),
   NEXTAUTH_SECRET: z
     .string()
-    .min(32, 'NEXTAUTH_SECRET must be at least 32 characters'),
+    .min(1)
+    .default('development-secret-change-in-production'),
 
   // Database
-  DATABASE_URL: z.string().min(1, 'DATABASE_URL is required'),
+  DATABASE_URL: z.string().min(1).default('file:./dev.db'),
 
   // Email (optional)
   SMTP_HOST: z.string().optional(),

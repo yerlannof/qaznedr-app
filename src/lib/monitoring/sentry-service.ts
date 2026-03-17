@@ -211,8 +211,9 @@ export class SentryMiningService {
             const result = await operation();
 
             const duration = Date.now() - startTime;
-            span.setData('duration_ms', duration);
-            span.setStatus('ok');
+            // In Sentry v8, setData is replaced with setAttribute
+            span.setAttribute('duration_ms', duration);
+            span.setStatus({ code: 0 }); // 0 = Ok status in Sentry v8
 
             // Track successful operation
             this.trackMetric(MiningMetric.API_REQUEST_PROCESSED, 1, context, {
@@ -223,8 +224,8 @@ export class SentryMiningService {
             return result;
           } catch (error) {
             const duration = Date.now() - startTime;
-            span.setData('duration_ms', duration);
-            span.setStatus('internal_error');
+            span.setAttribute('duration_ms', duration);
+            span.setStatus({ code: 2 }); // 2 = Internal Error status in Sentry v8
 
             // Capture error with context
             this.captureError(
@@ -269,8 +270,8 @@ export class SentryMiningService {
           const result = await operation();
 
           const duration = Date.now() - startTime;
-          span.setData('duration_ms', duration);
-          span.setStatus('ok');
+          span.setAttribute('duration_ms', duration);
+          span.setStatus({ code: 0 }); // 0 = Ok status in Sentry v8
 
           // Track database performance
           this.trackMetric(MiningMetric.DATABASE_QUERY_EXECUTED, 1, context, {
@@ -281,7 +282,7 @@ export class SentryMiningService {
 
           return result;
         } catch (error) {
-          span.setStatus('internal_error');
+          span.setStatus({ code: 2 }); // 2 = Internal Error status in Sentry v8
 
           this.captureError(
             error as Error,
@@ -398,8 +399,10 @@ export class SentryMiningService {
     scope.setTag('request_url', request.url);
 
     // Add geographical context if available
-    const country = request.geo?.country || 'unknown';
-    const region = request.geo?.region || 'unknown';
+    // NextRequest doesn't have geo property in Next.js 15
+    // This would need to be extracted from headers like CloudFlare-IPCountry or similar
+    const country = request.headers.get('cloudflare-ipcountry') || 'unknown';
+    const region = request.headers.get('cloudflare-ipregion') || 'unknown';
 
     scope.setTag('request_country', country);
     scope.setTag('request_region', region);

@@ -130,7 +130,7 @@ class AuditLogger {
 
     try {
       // Get request context
-      const headersList = headers();
+      const headersList = await headers();
       const ipAddress =
         headersList.get('x-forwarded-for') ||
         headersList.get('x-real-ip') ||
@@ -141,31 +141,31 @@ class AuditLogger {
       const session = await getServerSession(authOptions);
       const userId = event.userId || session?.user?.id;
 
-      // Create audit record
-      await this.prisma.auditLog.create({
-        data: {
-          action: event.action,
-          resourceType: event.resourceType,
-          resourceId: event.resourceId,
-          userId,
-          organizationId: event.organizationId,
-          ipAddress: event.ipAddress || ipAddress,
-          userAgent: event.userAgent || userAgent,
-          sessionId: event.sessionId,
-          metadata: event.metadata || {},
-          sensitiveData: event.sensitiveData || false,
-          riskLevel: event.riskLevel,
-          category: event.category,
-          timestamp: new Date(),
-          fingerprint: this.generateFingerprint(event),
-          context: {
-            url: headersList.get('referer'),
-            method: 'unknown', // Will be set by middleware
-            region: await this.detectRegion(ipAddress),
-            deviceType: this.detectDeviceType(userAgent),
-          },
-        },
-      });
+      // TODO: Create audit record when auditLog table is created
+      // await this.prisma.auditLog.create({
+      //   data: {
+      //     action: event.action,
+      //     resourceType: event.resourceType,
+      //     resourceId: event.resourceId,
+      //     userId,
+      //     organizationId: event.organizationId,
+      //     ipAddress: event.ipAddress || ipAddress,
+      //     userAgent: event.userAgent || userAgent,
+      //     sessionId: event.sessionId,
+      //     metadata: event.metadata || {},
+      //     sensitiveData: event.sensitiveData || false,
+      //     riskLevel: event.riskLevel,
+      //     category: event.category,
+      //     timestamp: new Date(),
+      //     fingerprint: this.generateFingerprint(event),
+      //     context: {
+      //       url: headersList.get('referer'),
+      //       method: 'unknown', // Will be set by middleware
+      //       region: await this.detectRegion(ipAddress),
+      //       deviceType: this.detectDeviceType(userAgent),
+      //     },
+      //   },
+      // });
 
       // Alert on high-risk events
       if (
@@ -286,21 +286,23 @@ class AuditLogger {
     riskLevel?: RiskLevel;
     format: 'JSON' | 'CSV' | 'PDF';
   }): Promise<any[]> {
-    const logs = await this.prisma.auditLog.findMany({
-      where: {
-        timestamp: {
-          gte: params.startDate,
-          lte: params.endDate,
-        },
-        userId: params.userId,
-        organizationId: params.organizationId,
-        category: params.category,
-        riskLevel: params.riskLevel,
-      },
-      orderBy: {
-        timestamp: 'desc',
-      },
-    });
+    // TODO: Export logs when auditLog table is created
+    const logs: any[] = [];
+    // const logs = await this.prisma.auditLog.findMany({
+    //   where: {
+    //     timestamp: {
+    //       gte: params.startDate,
+    //       lte: params.endDate,
+    //     },
+    //     userId: params.userId,
+    //     organizationId: params.organizationId,
+    //     category: params.category,
+    //     riskLevel: params.riskLevel,
+    //   },
+    //   orderBy: {
+    //     timestamp: 'desc',
+    //   },
+    // });
 
     // Log the export action
     await this.log({
@@ -378,17 +380,19 @@ class AuditLogger {
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - retentionDays);
 
-    const deleted = await this.prisma.auditLog.deleteMany({
-      where: {
-        timestamp: {
-          lt: cutoffDate,
-        },
-        // Never delete critical security events
-        riskLevel: {
-          not: RiskLevel.CRITICAL,
-        },
-      },
-    });
+    // TODO: Cleanup old logs when auditLog table is created
+    const deleted = { count: 0 };
+    // const deleted = await this.prisma.auditLog.deleteMany({
+    //   where: {
+    //     timestamp: {
+    //       lt: cutoffDate,
+    //     },
+    //     // Never delete critical security events
+    //     riskLevel: {
+    //       not: RiskLevel.CRITICAL,
+    //     },
+    //   },
+    // });
 
     console.log(`Cleaned up ${deleted.count} old audit logs`);
   }

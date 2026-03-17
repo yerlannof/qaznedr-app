@@ -169,19 +169,9 @@ export default function MiningLicenseCardSimple({
               Площадь
             </div>
             <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-              {deposit.areaHectares?.toLocaleString()} га
+              {deposit.area?.toLocaleString()} км²
             </div>
           </div>
-          {deposit.reservesTons && (
-            <div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">
-                Запасы
-              </div>
-              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                {deposit.reservesTons.toLocaleString()} т
-              </div>
-            </div>
-          )}
         </div>
 
         {/* License Expiry */}
@@ -211,8 +201,7 @@ export default function MiningLicenseCardSimple({
               {deposit.views}
             </span>
             <span className="flex items-center gap-1">
-              <MessageCircle className="w-3 h-3" />
-              {deposit.inquiries || 0}
+              <MessageCircle className="w-3 h-3" />0
             </span>
           </div>
         </div>

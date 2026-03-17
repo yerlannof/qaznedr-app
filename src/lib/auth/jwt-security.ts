@@ -265,19 +265,37 @@ export function getSecureAuthConfig() {
     jwt: {
       maxAge: 15 * 60, // 15 minutes (short-lived for security)
       // Use secure JWT algorithm
-      encode: async ({ secret, token }) => {
+      encode: async ({
+        secret,
+        token,
+      }: {
+        secret: string | Buffer;
+        token?: any;
+      }) => {
         const jwt = await import('jsonwebtoken');
-        return jwt.sign(token!, secret, {
+        const secretStr =
+          secret instanceof Buffer ? secret.toString('utf-8') : secret;
+        if (!token) return '';
+        return jwt.sign(token, secretStr, {
           algorithm: 'HS256',
           expiresIn: '15m',
           issuer: 'qaznedr.kz',
           audience: 'qaznedr-app',
         });
       },
-      decode: async ({ secret, token }) => {
+      decode: async ({
+        secret,
+        token,
+      }: {
+        secret: string | Buffer;
+        token?: string;
+      }) => {
         const jwt = await import('jsonwebtoken');
+        if (!token) return null;
         try {
-          return jwt.verify(token!, secret, {
+          const secretStr =
+            secret instanceof Buffer ? secret.toString('utf-8') : secret;
+          return jwt.verify(token, secretStr, {
             algorithms: ['HS256'],
             issuer: 'qaznedr.kz',
             audience: 'qaznedr-app',

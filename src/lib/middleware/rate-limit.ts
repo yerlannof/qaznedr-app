@@ -79,10 +79,7 @@ export async function rateLimit(
   try {
     // Use IP address or custom identifier for rate limiting
     const id =
-      identifier ||
-      request.ip ||
-      request.headers.get('x-forwarded-for') ||
-      'anonymous';
+      identifier || request.headers.get('x-forwarded-for') || 'anonymous';
 
     // Use stricter limits for write operations
     const isWriteOperation = ['POST', 'PUT', 'DELETE', 'PATCH'].includes(

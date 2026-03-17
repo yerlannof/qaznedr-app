@@ -200,10 +200,24 @@ export default function MessagesPage() {
 
       {/* MessagingSystem Modal */}
       {showMessaging && (
-        <MessagingSystem
-          isOpen={showMessaging}
-          onClose={() => setShowMessaging(false)}
-        />
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          <div
+            className="absolute inset-0 bg-black/50"
+            onClick={() => setShowMessaging(false)}
+          />
+          <div className="absolute right-0 top-0 h-full w-full max-w-4xl bg-white shadow-xl">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-xl font-semibold">Сообщения</h2>
+              <button
+                onClick={() => setShowMessaging(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+            <MessagingSystem />
+          </div>
+        </div>
       )}
 
       <Footer />

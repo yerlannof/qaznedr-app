@@ -142,7 +142,7 @@ export function useMobileKeyboard() {
     // Visual Viewport API for better keyboard detection
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', () => {
-        const viewportHeight = window.visualViewport.height;
+        const viewportHeight = window.visualViewport?.height || 0;
         const windowHeight = window.innerHeight;
         const keyboardVisible = windowHeight - viewportHeight > 100;
 

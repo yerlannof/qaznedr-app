@@ -5,16 +5,14 @@ export const listingQuerySchema = z.object({
   page: z
     .string()
     .optional()
-    .transform((val) => (val ? parseInt(val) : 1)),
+    .transform((val) => (val ? parseInt(val) : undefined)),
   limit: z
     .string()
     .optional()
-    .transform((val) => (val ? Math.min(parseInt(val) || 12, 100) : 12)),
-  sortBy: z
-    .enum(['created_at', 'price', 'area', 'title'])
-    .optional()
-    .default('created_at'),
-  sortOrder: z.enum(['asc', 'desc']).optional().default('desc'),
+    .refine((val) => !val || parseInt(val) <= 100, 'Limit must not exceed 100')
+    .transform((val) => (val ? parseInt(val) : undefined)),
+  sortBy: z.enum(['created_at', 'price', 'area', 'title']).optional(),
+  sortOrder: z.enum(['asc', 'desc']).optional(),
   query: z.string().optional(),
   region: z.string().optional(),
   mineral: z.string().optional(),
@@ -23,10 +21,22 @@ export const listingQuerySchema = z.object({
     .optional(),
   verified: z.enum(['true', 'false']).optional(),
   featured: z.enum(['true', 'false']).optional(),
-  priceMin: z.string().optional(),
-  priceMax: z.string().optional(),
-  areaMin: z.string().optional(),
-  areaMax: z.string().optional(),
+  minPrice: z
+    .string()
+    .optional()
+    .refine((val) => !val || parseInt(val) >= 0, 'Price must be non-negative'),
+  maxPrice: z
+    .string()
+    .optional()
+    .refine((val) => !val || parseInt(val) >= 0, 'Price must be non-negative'),
+  minArea: z
+    .string()
+    .optional()
+    .refine((val) => !val || parseInt(val) >= 0, 'Area must be non-negative'),
+  maxArea: z
+    .string()
+    .optional()
+    .refine((val) => !val || parseInt(val) >= 0, 'Area must be non-negative'),
 });
 
 // Create listing body schema
@@ -39,15 +49,25 @@ export const createListingSchema = z.object({
   type: z.enum(['MINING_LICENSE', 'EXPLORATION_LICENSE', 'MINERAL_OCCURRENCE']),
   mineral: z.string().min(1, 'Mineral type is required'),
   region: z.string().min(1, 'Region is required'),
-  city: z.string().min(1, 'City is required'),
+  city: z.string().min(1, 'City is required').optional(),
   area: z.number().positive('Area must be positive'),
   price: z.number().positive('Price must be positive').optional().nullable(),
-  coordinates: z.object({
-    lat: z.number().min(-90).max(90),
-    lng: z.number().min(-180).max(180),
-  }),
+  coordinates: z
+    .object({
+      lat: z.number().min(-90).max(90),
+      lng: z.number().min(-180).max(180),
+    })
+    .optional(),
   images: z.array(z.string().url()).optional().default([]),
   documents: z.array(z.string()).optional().default([]),
+
+  // Status field
+  status: z.enum(['ACTIVE', 'PENDING', 'SOLD', 'EXPIRED']).optional(),
+
+  // Contact information
+  contactEmail: z.string().email('Invalid email format').optional(),
+  contactPhone: z.string().optional(),
+  contactName: z.string().optional(),
 
   // License-specific fields
   licenseSubtype: z.string().optional(),
@@ -59,12 +79,16 @@ export const createListingSchema = z.object({
   explorationStage: z.string().optional(),
   explorationStart: z.string().optional().nullable(),
   explorationEnd: z.string().optional().nullable(),
+  explorationPeriod: z.string().optional(),
   explorationBudget: z.number().positive().optional().nullable(),
 
   // Occurrence-specific fields
   discoveryDate: z.string().optional().nullable(),
   geologicalConfidence: z.string().optional(),
-  estimatedReserves: z.number().positive().optional().nullable(),
+  estimatedReserves: z
+    .union([z.number().positive(), z.string()])
+    .optional()
+    .nullable(),
   accessibilityRating: z.number().min(1).max(5).optional(),
 });
 
@@ -83,6 +107,48 @@ export const registerSchema = z.object({
     .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
     .regex(/[0-9]/, 'Password must contain at least one number'),
   name: z.string().min(2, 'Name must be at least 2 characters').optional(),
+});
+
+// Alias for compatibility with tests
+export const listingsQuerySchema = listingQuerySchema;
+
+// Update listing schema (partial of create schema)
+export const updateListingSchema = createListingSchema.partial();
+
+// Listing ID validation schema
+export const listingIdSchema = z.object({
+  id: z.string().uuid('Invalid listing ID format'),
+});
+
+// Pagination schema
+export const paginationSchema = z.object({
+  page: z
+    .union([
+      z.string().refine((val) => parseInt(val) >= 1, 'Page must be at least 1'),
+      z.number().min(1, 'Page must be at least 1'),
+    ])
+    .optional()
+    .transform((val) => {
+      if (!val) return 1;
+      if (typeof val === 'string') return parseInt(val);
+      return val;
+    })
+    .default(1),
+  limit: z
+    .union([
+      z.string().refine((val) => {
+        const num = parseInt(val);
+        return num >= 1 && num <= 100;
+      }, 'Limit must be between 1 and 100'),
+      z.number().min(1).max(100, 'Limit must not exceed 100'),
+    ])
+    .optional()
+    .transform((val) => {
+      if (!val) return 20;
+      if (typeof val === 'string') return parseInt(val);
+      return val;
+    })
+    .default(20),
 });
 
 // Validation helper

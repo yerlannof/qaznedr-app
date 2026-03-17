@@ -10,10 +10,7 @@ export async function GET(request: NextRequest) {
   // Apply rate limiting
   const rateLimitResult = await rateLimit(request);
   if (rateLimitResult && !rateLimitResult.success) {
-    return NextResponse.json(
-      { error: 'Too many requests' },
-      { status: 429 }
-    );
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
   try {
@@ -38,7 +35,7 @@ export async function GET(request: NextRequest) {
       userId: user.id,
       email: user.email,
       metadata: user.user_metadata,
-      
+
       // Get user's listings
       listings: [],
       favorites: [],
@@ -51,9 +48,9 @@ export async function GET(request: NextRequest) {
       .from('kazakhstan_deposits')
       .select('*')
       .eq('user_id', user.id);
-    
+
     if (listings) {
-      userData.listings = listings.map(l => ({
+      userData.listings = listings.map((l: any) => ({
         id: l.id,
         title: l.title,
         description: l.description,
@@ -74,9 +71,9 @@ export async function GET(request: NextRequest) {
       .from('favorites')
       .select('*, kazakhstan_deposits!inner(*)')
       .eq('user_id', user.id);
-    
+
     if (favorites) {
-      userData.favorites = favorites.map(f => ({
+      userData.favorites = favorites.map((f: any) => ({
         listingId: f.listing_id,
         listingTitle: f.kazakhstan_deposits?.title,
         addedAt: f.created_at,
@@ -88,9 +85,9 @@ export async function GET(request: NextRequest) {
       .from('messages')
       .select('*')
       .or(`sender_id.eq.${user.id},recipient_id.eq.${user.id}`);
-    
+
     if (messages) {
-      userData.messages = messages.map(m => ({
+      userData.messages = messages.map((m: any) => ({
         id: m.id,
         content: m.sender_id === user.id ? m.content : '[Received message]',
         sentAt: m.created_at,
@@ -99,7 +96,9 @@ export async function GET(request: NextRequest) {
     }
 
     // Log data export for compliance
-    console.log(`GDPR data export requested by user ${user.id} at ${new Date().toISOString()}`);
+    console.log(
+      `GDPR data export requested by user ${user.id} at ${new Date().toISOString()}`
+    );
 
     // Return data as JSON (could also be CSV or other format)
     return NextResponse.json(userData, {

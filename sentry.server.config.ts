@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs';
-import { ProfilingIntegration } from '@sentry/profiling-node';
+// import { ProfilingIntegration } from '@sentry/profiling-node'; // Commented out - not compatible with Sentry v8
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN,
@@ -90,7 +90,7 @@ Sentry.init({
 
   // Enhanced integrations for server monitoring
   integrations: [
-    new ProfilingIntegration(),
+    // ProfilingIntegration removed - not compatible with Sentry v8
     // Add custom integration for database monitoring
     {
       name: 'DatabaseMonitoring',

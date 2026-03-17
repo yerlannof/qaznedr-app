@@ -7,8 +7,6 @@ import { GlassCard, GlassButton } from '@/components/ui/glass-card';
 import {
   FadeInWhenVisible,
   StaggerChildren,
-  ParallaxSection,
-  FloatingElement,
   RevealText,
 } from '@/components/ui/scroll-animations';
 import {
@@ -34,30 +32,19 @@ export default function Home() {
     <PageTransition>
       <NavigationSimple />
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900">
-        {/* Hero Section with Parallax */}
-        <ParallaxSection speed={0.3} className="relative">
+        {/* Hero Section */}
+        <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-b from-blue-600/5 to-transparent dark:from-blue-600/10 pointer-events-none" />
-          <motion.div
-            className="relative bg-gradient-to-b from-white/80 to-gray-50/80 dark:from-gray-900/80 dark:to-gray-950/80 backdrop-blur-sm pt-8 pb-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="relative bg-gradient-to-b from-white/80 to-gray-50/80 dark:from-gray-900/80 dark:to-gray-950/80 backdrop-blur-sm pt-8 pb-16">
             <div className="max-w-6xl mx-auto px-4">
               <div className="text-center">
                 {/* Premium Title with Better Typography */}
                 <FadeInWhenVisible delay={0.1}>
                   <div className="mb-6">
-                    <motion.div
-                      className="inline-flex items-center px-4 py-2 bg-blue-50/80 dark:bg-blue-900/30 backdrop-blur-sm rounded-full text-sm font-medium text-blue-600 dark:text-blue-400 mb-4 border border-blue-200/50 dark:border-blue-800/50"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: 'spring', stiffness: 400 }}
-                    >
-                      <FloatingElement amplitude={10} duration={2}>
-                        <Sparkles className="w-4 h-4 mr-2" />
-                      </FloatingElement>
+                    <div className="inline-flex items-center px-4 py-2 bg-blue-50/80 dark:bg-blue-900/30 backdrop-blur-sm rounded-full text-sm font-medium text-blue-600 dark:text-blue-400 mb-4 border border-blue-200/50 dark:border-blue-800/50 transition-all hover:shadow-md">
+                      <Sparkles className="w-4 h-4 mr-2" />
                       {t('home.officialPlatform')}
-                    </motion.div>
+                    </div>
                     <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
                       <RevealText className="block text-blue-600 dark:text-blue-400 mb-2">
                         {t('home.title').split(' ').slice(0, 2).join(' ')}
@@ -101,8 +88,8 @@ export default function Home() {
                 </FadeInWhenVisible>
               </div>
             </div>
-          </motion.div>
-        </ParallaxSection>
+          </div>
+        </div>
 
         {/* Features Section with Glass Cards */}
         <div className="max-w-6xl mx-auto px-4 py-16">

@@ -338,7 +338,8 @@ export function withUserRateLimit(
         secret: getSecureAuthConfig().secret,
       });
 
-      const userId = token?.sub || req.ip || 'anonymous';
+      const userId =
+        token?.sub || req.headers.get('x-forwarded-for') || 'anonymous';
       const now = Date.now();
 
       // Clean up expired entries

@@ -74,10 +74,10 @@ export async function csrfProtection(
       request.headers.get('x-xsrf-token') ||
       request.headers.get('X-XSRF-TOKEN'); // Support different casing
 
-    if (!validateCSRFToken(cookieToken, headerToken)) {
+    if (!validateCSRFToken(cookieToken, headerToken || undefined)) {
       // Log CSRF attack attempt
       console.warn(
-        `CSRF attack attempt detected: ${request.method} ${pathname} from ${request.ip}`
+        `CSRF attack attempt detected: ${request.method} ${pathname} from ${request.headers.get('x-forwarded-for') || 'unknown'}`
       );
 
       return NextResponse.json(

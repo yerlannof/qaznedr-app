@@ -60,3 +60,13 @@ next-env.d.ts
 
 # MCP Server tokens
 .env.mcp
+
+# Logs
+logs/
+*.log
+
+# Backup/temp files
+*.bak
+build.log
+eslint-output.txt
+test-output.txt

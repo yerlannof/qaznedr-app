@@ -22,11 +22,11 @@ const buttonVariants = cva(
         link: 'text-blue-600 underline-offset-4 hover:underline hover:text-blue-700 focus-visible:ring-blue-600 dark:text-blue-400 dark:hover:text-blue-300',
       },
       size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-8 rounded-md px-3 text-xs',
+        default: 'h-11 px-4 py-2',
+        sm: 'h-11 rounded-md px-3 text-xs',
         lg: 'h-12 rounded-lg px-8',
         xl: 'h-14 rounded-lg px-10 text-base',
-        icon: 'h-10 w-10',
+        icon: 'h-11 w-11',
       },
       loading: {
         true: 'cursor-wait',

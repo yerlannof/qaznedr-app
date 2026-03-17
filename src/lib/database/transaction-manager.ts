@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { Database } from '@/lib/supabase/database.types';
-import { dataSyncService } from '@/lib/sync/data-sync-service';
+
 import { redisCacheService } from '@/lib/cache/redis-cache-service';
 
 type Transaction = any; // Supabase doesn't have built-in transactions, so we simulate them
@@ -60,10 +60,17 @@ interface CompensatingAction {
 export class DatabaseTransactionManager {
   private static instance: DatabaseTransactionManager;
   private activeTransactions = new Map<string, TransactionContext>();
-  private supabase: SupabaseClient<Database>;
+  private supabase: SupabaseClient<Database> | null = null;
 
   private constructor() {
-    this.supabase = createClient();
+    // Will be initialized on first use
+  }
+
+  private async ensureSupabase(): Promise<SupabaseClient<Database>> {
+    if (!this.supabase) {
+      this.supabase = await createClient();
+    }
+    return this.supabase;
   }
 
   static getInstance(): DatabaseTransactionManager {
@@ -125,7 +132,7 @@ export class DatabaseTransactionManager {
       attempt++;
       const transactionId = await this.beginTransaction(isolationLevel, {
         ...metadata,
-        attempt,
+        description: `${metadata.description || 'Transaction'} (attempt ${attempt})`,
       });
 
       try {
@@ -363,9 +370,10 @@ export class DatabaseTransactionManager {
     action: CompensatingAction
   ): Promise<void> {
     try {
+      const supabase = await this.ensureSupabase();
       switch (action.type) {
         case 'delete':
-          await this.supabase
+          await supabase
             .from(action.table as any)
             .delete()
             .eq('id', action.id);
@@ -374,7 +382,9 @@ export class DatabaseTransactionManager {
         case 'restore':
         case 'update':
           if (action.data) {
-            await this.supabase.from(action.table as any).upsert([action.data]);
+            await (supabase.from(action.table as any) as any).upsert([
+              action.data,
+            ]);
           }
           break;
       }
@@ -387,20 +397,8 @@ export class DatabaseTransactionManager {
   /**
    * Trigger data synchronization for affected records
    */
-  private async triggerDataSync(context: TransactionContext): Promise<void> {
-    try {
-      for (const operation of context.operations) {
-        if (operation.table === 'kazakhstan_deposits' && operation.data?.id) {
-          await dataSyncService.handleDepositChange(
-            operation.type === 'delete' ? 'delete' : 'update',
-            operation.data
-          );
-        }
-      }
-    } catch (error) {
-      console.error('❌ Data sync trigger failed:', error);
-      // Don't fail the transaction for sync issues
-    }
+  private async triggerDataSync(_context: TransactionContext): Promise<void> {
+    // Data sync service removed during cleanup — no-op
   }
 
   /**
@@ -458,8 +456,10 @@ export class DatabaseTransactionManager {
           }
 
           // Insert deposit
-          const { data, error } = await this.supabase
-            .from('kazakhstan_deposits')
+          const supabase = await this.ensureSupabase();
+          const { data, error } = await (
+            supabase.from('kazakhstan_deposits') as any
+          )
             .insert([depositData])
             .select()
             .single();
@@ -470,7 +470,8 @@ export class DatabaseTransactionManager {
 
         async () => {
           // Create audit log entry
-          const { error } = await this.supabase.from('audit_logs').insert([
+          const supabase = await this.ensureSupabase();
+          const { error } = await (supabase.from('audit_logs') as any).insert([
             {
               table_name: 'kazakhstan_deposits',
               operation: 'INSERT',
@@ -507,15 +508,18 @@ export class DatabaseTransactionManager {
       [
         async () => {
           // Get existing data for rollback
-          const { data: existing } = await this.supabase
-            .from('kazakhstan_deposits')
+          const supabase = await this.ensureSupabase();
+          const { data: existing } = await (
+            supabase.from('kazakhstan_deposits') as any
+          )
             .select('*')
             .eq('id', depositId)
             .single();
 
           // Update deposit
-          const { data, error } = await this.supabase
-            .from('kazakhstan_deposits')
+          const { data, error } = await (
+            supabase.from('kazakhstan_deposits') as any
+          )
             .update(updateData)
             .eq('id', depositId)
             .select()
@@ -528,7 +532,8 @@ export class DatabaseTransactionManager {
 
         async () => {
           // Create audit log entry
-          const { error } = await this.supabase.from('audit_logs').insert([
+          const supabase = await this.ensureSupabase();
+          const { error } = await (supabase.from('audit_logs') as any).insert([
             {
               table_name: 'kazakhstan_deposits',
               operation: 'UPDATE',

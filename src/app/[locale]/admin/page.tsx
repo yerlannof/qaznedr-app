@@ -66,7 +66,7 @@ export default function AdminDashboard() {
       .eq('id', user.id)
       .single();
 
-    if (profile?.role !== 'admin') {
+    if ((profile as any)?.role !== 'admin') {
       router.push('/');
       return;
     }
@@ -223,9 +223,9 @@ export default function AdminDashboard() {
                   stats.pendingVerifications + stats.reportedListings
                 ).toLocaleString()}
               </p>
-              <p className="text-sm text-orange-600 mt-2">Requires attention</p>
+              <p className="text-sm text-blue-600 mt-2">Requires attention</p>
             </div>
-            <AlertTriangle className="w-10 h-10 text-orange-500" />
+            <AlertTriangle className="w-10 h-10 text-blue-500" />
           </div>
         </Card>
       </div>
@@ -251,7 +251,7 @@ export default function AdminDashboard() {
               onClick={() => router.push('/admin/listings')}
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
             >
-              <FileText className="w-6 h-6 text-green-500 mb-2" />
+              <FileText className="w-6 h-6 text-blue-500 mb-2" />
               <p className="font-medium">Manage Listings</p>
               <p className="text-sm text-gray-600">
                 Review and moderate listings
@@ -262,7 +262,7 @@ export default function AdminDashboard() {
               onClick={() => router.push('/admin/verifications')}
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
             >
-              <Shield className="w-6 h-6 text-purple-500 mb-2" />
+              <Shield className="w-6 h-6 text-blue-500 mb-2" />
               <p className="font-medium">Verifications</p>
               <p className="text-sm text-gray-600">
                 {stats.pendingVerifications} pending
@@ -273,7 +273,7 @@ export default function AdminDashboard() {
               onClick={() => router.push('/admin/reports')}
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
             >
-              <AlertTriangle className="w-6 h-6 text-orange-500 mb-2" />
+              <AlertTriangle className="w-6 h-6 text-blue-500 mb-2" />
               <p className="font-medium">Reports</p>
               <p className="text-sm text-gray-600">
                 {stats.reportedListings} to review

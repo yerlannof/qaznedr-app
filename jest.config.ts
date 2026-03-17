@@ -4,20 +4,21 @@ const createJestConfig = nextJest({
   dir: './',
 });
 
-const config = {
+const config: any = {
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^.+\\.(css|less|scss|sass)$': '<rootDir>/src/__tests__/mocks/styleMock.js',
   },
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/.next/',
     '<rootDir>/src/__tests__/mocks/',
     '<rootDir>/tests/e2e/',
   ],
+  transformIgnorePatterns: ['node_modules/(?!(uuid)/)'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   collectCoverage: true,
   collectCoverageFrom: [

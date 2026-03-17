@@ -193,17 +193,17 @@ export default function DashboardPage() {
                       </div>
                     </div>
 
-                    <div className="bg-purple-50 rounded-lg p-6 border border-purple-200">
+                    <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-purple-600 text-sm font-medium">
+                          <p className="text-blue-600 text-sm font-medium">
                             Типов минералов
                           </p>
-                          <p className="text-3xl font-bold text-purple-900">
+                          <p className="text-3xl font-bold text-blue-900">
                             {stats.minerals}
                           </p>
                         </div>
-                        <div className="text-purple-600 text-3xl">💎</div>
+                        <div className="text-blue-600 text-3xl">💎</div>
                       </div>
                     </div>
                   </div>

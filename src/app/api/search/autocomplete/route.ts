@@ -1,28 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { elasticsearchClient } from '@/lib/search/elasticsearch-client';
+import { createClient } from '@/lib/supabase/server';
 import { verifyRateLimit } from '@/lib/middleware/rate-limit';
 
 // GET /api/search/autocomplete
 export async function GET(request: NextRequest) {
   try {
     // Rate limiting
-    const rateLimitResult = await verifyRateLimit(request, {
-      requests: 200,
-      window: '1m',
-    });
+    const rateLimitResult = await verifyRateLimit(request);
 
-    if (!rateLimitResult.success) {
-      return NextResponse.json(
-        { error: 'Rate limit exceeded' },
-        {
-          status: 429,
-          headers: {
-            'X-RateLimit-Limit': String(rateLimitResult.limit),
-            'X-RateLimit-Remaining': String(rateLimitResult.remaining),
-            'X-RateLimit-Reset': new Date(rateLimitResult.reset).toISOString(),
-          },
-        }
-      );
+    if (rateLimitResult) {
+      return rateLimitResult;
     }
 
     // Get query parameters
@@ -38,23 +25,40 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Check Elasticsearch health
-    const isHealthy = await elasticsearchClient.healthCheck();
+    // Sanitize query
+    const sanitizedQuery = query
+      .replace(/[%_]/g, '\\$&')
+      .replace(/['"]/g, '')
+      .trim()
+      .substring(0, 100);
 
-    if (!isHealthy) {
-      // Return empty suggestions if Elasticsearch is down
-      return NextResponse.json({
-        success: true,
-        suggestions: [],
-        fallback: true,
-      });
+    const supabase = await createClient();
+    let dbQuery = supabase
+      .from('kazakhstan_deposits')
+      .select('id, title, type, region')
+      .ilike('title', `%${sanitizedQuery}%`)
+      .limit(10);
+
+    if (region) {
+      dbQuery = dbQuery.eq('region', region);
     }
 
-    // Get autocomplete suggestions
-    const suggestions = await elasticsearchClient.suggest(query, {
-      region: region || undefined,
-      type: type || undefined,
-    });
+    if (type) {
+      dbQuery = dbQuery.eq('type', type);
+    }
+
+    const { data, error } = await dbQuery;
+
+    if (error) {
+      throw error;
+    }
+
+    const suggestions = (data || []).map((item: any) => ({
+      id: item.id,
+      text: item.title,
+      type: item.type,
+      region: item.region,
+    }));
 
     return NextResponse.json({
       success: true,
@@ -62,8 +66,6 @@ export async function GET(request: NextRequest) {
       query,
     });
   } catch (error) {
-    console.error('Autocomplete error:', error);
-
     return NextResponse.json(
       {
         error: 'Autocomplete failed',

@@ -191,7 +191,7 @@ class BackupManager {
       // Log audit event
       await auditLogger.log({
         action: AuditAction.DATA_EXPORTED,
-        resourceType: 'SYSTEM',
+        resourceType: 'SYSTEM' as any,
         metadata: {
           backupId: job.id,
           backupType: BackupType.FULL,
@@ -199,8 +199,8 @@ class BackupManager {
           tables: tables.length,
           totalRecords: Object.values(recordCounts).reduce((a, b) => a + b, 0),
         },
-        riskLevel: 'HIGH',
-        category: 'SYSTEM_EVENT',
+        riskLevel: 'HIGH' as any,
+        category: 'SYSTEM_EVENT' as any,
         sensitiveData: true,
       });
 
@@ -218,7 +218,7 @@ class BackupManager {
       // Log error
       await auditLogger.logSecurityIncident({
         incidentType: 'BACKUP_FAILURE',
-        severity: 'HIGH',
+        severity: 'HIGH' as any,
         description: `Full backup failed: ${job.error}`,
         metadata: { jobId: job.id },
       });
@@ -468,14 +468,14 @@ class BackupManager {
       // Log restore event
       await auditLogger.log({
         action: AuditAction.DATA_EXPORTED,
-        resourceType: 'SYSTEM',
+        resourceType: 'SYSTEM' as any,
         metadata: {
           operation: 'RESTORE',
           backupId,
           restoredTables: tables.length,
         },
-        riskLevel: 'CRITICAL',
-        category: 'SYSTEM_EVENT',
+        riskLevel: 'CRITICAL' as any,
+        category: 'SYSTEM_EVENT' as any,
         sensitiveData: true,
       });
 

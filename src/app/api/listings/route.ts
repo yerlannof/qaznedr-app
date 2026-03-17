@@ -26,8 +26,8 @@ import {
 
 // Temporary simplified cache while fixing Redis issues
 const cache = {
-  get: async () => null,
-  set: async () => {},
+  get: async (key?: string) => null,
+  set: async (key?: string, value?: any, ttl?: any) => {},
 };
 
 const getCacheKey = (prefix: string, params: any) =>
@@ -86,7 +86,7 @@ export async function GET(request: NextRequest) {
     }
 
     const params = validation.data;
-    const offset = (params.page - 1) * params.limit;
+    const offset = ((params.page ?? 1) - 1) * (params.limit ?? 10);
 
     // Extract validated parameters
     const {
@@ -100,15 +100,15 @@ export async function GET(request: NextRequest) {
       type,
       verified,
       featured,
-      priceMin,
-      priceMax,
-      areaMin,
-      areaMax,
+      minPrice,
+      maxPrice,
+      minArea,
+      maxArea,
     } = params;
 
     // Try to get from cache with monitoring
     const cacheKey = getCacheKey('LISTINGS', params);
-    const cachedData = await cache.get<any>(cacheKey);
+    const cachedData = await cache.get(cacheKey);
 
     if (cachedData) {
       // Track cache hit
@@ -172,43 +172,38 @@ export async function GET(request: NextRequest) {
     if (featured !== null) {
       queryBuilder = queryBuilder.eq('featured', featured === 'true');
     }
-    if (priceMin) {
-      const minPrice = safeParseInt(priceMin, 0, 0);
-      if (minPrice > 0) {
-        queryBuilder = queryBuilder.gte('price', minPrice);
+    if (minPrice) {
+      const parsedMinPrice = safeParseInt(minPrice, 0, 0);
+      if (parsedMinPrice > 0) {
+        queryBuilder = queryBuilder.gte('price', parsedMinPrice);
       }
     }
-    if (priceMax) {
-      const maxPrice = safeParseInt(priceMax, Number.MAX_SAFE_INTEGER, 0);
-      if (maxPrice < Number.MAX_SAFE_INTEGER) {
-        queryBuilder = queryBuilder.lte('price', maxPrice);
+    if (maxPrice) {
+      const parsedMaxPrice = safeParseInt(maxPrice, Number.MAX_SAFE_INTEGER, 0);
+      if (parsedMaxPrice < Number.MAX_SAFE_INTEGER) {
+        queryBuilder = queryBuilder.lte('price', parsedMaxPrice);
       }
     }
-    if (areaMin) {
-      const minArea = safeParseInt(areaMin, 0, 0);
-      if (minArea > 0) {
-        queryBuilder = queryBuilder.gte('area', minArea);
+    if (minArea) {
+      const parsedMinArea = safeParseInt(minArea, 0, 0);
+      if (parsedMinArea > 0) {
+        queryBuilder = queryBuilder.gte('area', parsedMinArea);
       }
     }
-    if (areaMax) {
-      const maxArea = safeParseInt(areaMax, Number.MAX_SAFE_INTEGER, 0);
-      if (maxArea < Number.MAX_SAFE_INTEGER) {
-        queryBuilder = queryBuilder.lte('area', maxArea);
+    if (maxArea) {
+      const parsedMaxArea = safeParseInt(maxArea, Number.MAX_SAFE_INTEGER, 0);
+      if (parsedMaxArea < Number.MAX_SAFE_INTEGER) {
+        queryBuilder = queryBuilder.lte('area', parsedMaxArea);
       }
     }
 
     // Apply sorting, pagination
     queryBuilder = queryBuilder
-      .order(sortBy, { ascending: sortOrder === 'asc' })
-      .range(offset, offset + limit - 1);
+      .order(sortBy ?? 'created_at', { ascending: sortOrder === 'asc' })
+      .range(offset, offset + (limit ?? 10) - 1);
 
-    // Execute query with performance monitoring
-    const { data, error, count } =
-      await performanceMonitoring.monitorDatabaseOperation(
-        () => queryBuilder,
-        'listings_query',
-        'kazakhstan_deposits'
-      );
+    // Execute query
+    const { data, error, count } = await queryBuilder;
 
     // If there's an error or no data, use mock data
     let deposits: any[] = data || [];
@@ -244,32 +239,36 @@ export async function GET(request: NextRequest) {
           (d) => d.featured === (featured === 'true')
         );
       }
-      if (priceMin) {
-        const minPrice = safeParseInt(priceMin, 0, 0);
-        if (minPrice > 0) {
+      if (minPrice) {
+        const parsedMinPrice = safeParseInt(minPrice, 0, 0);
+        if (parsedMinPrice > 0) {
           filteredMocks = filteredMocks.filter(
-            (d) => (d.price || 0) >= minPrice
+            (d) => (d.price || 0) >= parsedMinPrice
           );
         }
       }
-      if (priceMax) {
-        const maxPrice = safeParseInt(priceMax, Number.MAX_SAFE_INTEGER, 0);
-        if (maxPrice < Number.MAX_SAFE_INTEGER) {
+      if (maxPrice) {
+        const parsedMaxPrice = safeParseInt(
+          maxPrice,
+          Number.MAX_SAFE_INTEGER,
+          0
+        );
+        if (parsedMaxPrice < Number.MAX_SAFE_INTEGER) {
           filteredMocks = filteredMocks.filter(
-            (d) => (d.price || 0) <= maxPrice
+            (d) => (d.price || 0) <= parsedMaxPrice
           );
         }
       }
-      if (areaMin) {
-        const minArea = safeParseInt(areaMin, 0, 0);
-        if (minArea > 0) {
-          filteredMocks = filteredMocks.filter((d) => d.area >= minArea);
+      if (minArea) {
+        const parsedMinArea = safeParseInt(minArea, 0, 0);
+        if (parsedMinArea > 0) {
+          filteredMocks = filteredMocks.filter((d) => d.area >= parsedMinArea);
         }
       }
-      if (areaMax) {
-        const maxArea = safeParseInt(areaMax, Number.MAX_SAFE_INTEGER, 0);
-        if (maxArea < Number.MAX_SAFE_INTEGER) {
-          filteredMocks = filteredMocks.filter((d) => d.area <= maxArea);
+      if (maxArea) {
+        const parsedMaxArea = safeParseInt(maxArea, Number.MAX_SAFE_INTEGER, 0);
+        if (parsedMaxArea < Number.MAX_SAFE_INTEGER) {
+          filteredMocks = filteredMocks.filter((d) => d.area <= parsedMaxArea);
         }
       }
 
@@ -290,18 +289,21 @@ export async function GET(request: NextRequest) {
       });
 
       totalCount = filteredMocks.length;
-      deposits = filteredMocks.slice(offset, offset + limit);
+      deposits = filteredMocks.slice(offset, offset + (limit ?? 10));
     }
+
+    const finalLimit = limit ?? 10;
+    const finalPage = page ?? 1;
 
     const result = {
       deposits,
       pagination: {
-        page,
-        limit,
+        page: finalPage,
+        limit: finalLimit,
         total: totalCount,
-        totalPages: Math.ceil(totalCount / limit),
-        hasNext: page < Math.ceil(totalCount / limit),
-        hasPrev: page > 1,
+        totalPages: Math.ceil(totalCount / finalLimit),
+        hasNext: finalPage < Math.ceil(totalCount / finalLimit),
+        hasPrev: finalPage > 1,
       },
     };
 
@@ -375,15 +377,11 @@ export async function POST(request: NextRequest) {
 
     const supabase = await createClient();
 
-    // Get authenticated user with monitoring
+    // Get authenticated user
     const {
       data: { user },
       error: authError,
-    } = await performanceMonitoring.monitorDatabaseOperation(
-      () => supabase.auth.getUser(),
-      'get_authenticated_user',
-      'auth.users'
-    );
+    } = await supabase.auth.getUser();
 
     if (authError || !user) {
       return NextResponse.json(
@@ -444,22 +442,18 @@ export async function POST(request: NextRequest) {
 
         discovery_date: validatedData.discoveryDate,
         geological_confidence: validatedData.geologicalConfidence,
-        estimated_reserves: validatedData.estimatedReserves,
+        estimated_reserves: validatedData.estimatedReserves
+          ? Number(validatedData.estimatedReserves)
+          : null,
         accessibility_rating: validatedData.accessibilityRating?.toString(),
       };
 
-    // Insert new listing with monitoring
-    const { data: newDeposit, error: insertError } =
-      await performanceMonitoring.monitorDatabaseOperation(
-        () =>
-          supabase
-            .from('kazakhstan_deposits')
-            .insert([insertData] as any)
-            .select()
-            .single(),
-        'create_new_listing',
-        'kazakhstan_deposits'
-      );
+    // Insert new listing
+    const { data: newDeposit, error: insertError } = await supabase
+      .from('kazakhstan_deposits')
+      .insert([insertData] as any)
+      .select()
+      .single();
 
     if (insertError) {
       throw insertError;
@@ -470,7 +464,7 @@ export async function POST(request: NextRequest) {
       MiningMetric.LISTING_CREATED,
       1,
       {
-        listingId: newDeposit.id,
+        listingId: (newDeposit as any).id,
         listingType: validatedData.type as ListingType,
         userId: user.id,
       },

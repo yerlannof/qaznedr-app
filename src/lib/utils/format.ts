@@ -16,7 +16,7 @@ export const formatPrice = (price: number | null): string => {
   } else if (price >= 1000000) {
     return `${(price / 1000000).toFixed(1)} млн ₸`;
   } else {
-    return `${price.toLocaleString('ru-RU')} ₸`;
+    return `${price.toLocaleString('ru-RU').replace(/\u00A0/g, ' ')} ₸`;
   }
 };
 
@@ -82,16 +82,18 @@ export const formatArea = (area: number): string => {
   if (area >= 10000) {
     return `${(area / 1000).toFixed(0)} тыс. км²`;
   }
-  return `${area.toLocaleString('ru-RU')} км²`;
+  return `${area.toLocaleString('ru-RU').replace(/\u00A0/g, ' ')} км²`;
 };
 
 /**
  * Format date in Russian locale by default
  */
 export const formatDate = (
-  date: string | Date,
+  date: string | Date | null,
   locale: 'ru' | 'en' | 'kz' | 'zh' = 'ru'
 ): string => {
+  if (!date) return '';
+
   const d = new Date(date);
   const localeMap = {
     ru: 'ru-RU',
@@ -261,7 +263,8 @@ export const formatNumber = (
     zh: 'zh-CN',
   };
 
-  return value.toLocaleString(localeMap[locale]);
+  // Replace non-breaking space with regular space for consistency
+  return value.toLocaleString(localeMap[locale]).replace(/\u00A0/g, ' ');
 };
 
 /**

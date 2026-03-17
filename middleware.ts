@@ -33,19 +33,21 @@ function simpleRateLimit(
   return true;
 }
 
-async function applyGlobalRateLimit(request: NextRequest): Promise<NextResponse | null> {
+async function applyGlobalRateLimit(
+  request: NextRequest
+): Promise<NextResponse | null> {
   // Skip rate limiting in development
   if (process.env.NODE_ENV === 'development') {
     return null;
   }
 
-  const identifier = request.ip || request.headers.get('x-forwarded-for') || 'anonymous';
-  
+  const identifier =
+    request.headers.get('x-forwarded-for') ||
+    request.headers.get('x-real-ip') ||
+    'anonymous';
+
   if (!simpleRateLimit(identifier)) {
-    return NextResponse.json(
-      { error: 'Too many requests' },
-      { status: 429 }
-    );
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
   return null;

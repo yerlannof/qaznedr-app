@@ -591,14 +591,30 @@ export default function DepositDetailPage() {
 
         {/* MessagingSystem Modal */}
         {showMessaging && deposit && (
-          <MessagingSystem
-            isOpen={showMessaging}
-            onClose={() => setShowMessaging(false)}
-            listingId={deposit.id}
-            listingTitle={deposit.title}
-            sellerId={deposit.userId}
-            sellerName="Продавец"
-          />
+          <div className="fixed inset-0 z-50 overflow-hidden">
+            <div
+              className="absolute inset-0 bg-black/50"
+              onClick={() => setShowMessaging(false)}
+            />
+            <div className="absolute right-0 top-0 h-full w-full max-w-4xl bg-white shadow-xl">
+              <div className="flex items-center justify-between p-4 border-b">
+                <h2 className="text-xl font-semibold">Связаться с продавцом</h2>
+                <button
+                  onClick={() => setShowMessaging(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="p-4 space-y-4">
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <p className="text-sm text-gray-600">Объявление:</p>
+                  <p className="font-semibold">{deposit.title}</p>
+                </div>
+                <MessagingSystem />
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </>

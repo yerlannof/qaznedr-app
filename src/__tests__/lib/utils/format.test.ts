@@ -8,15 +8,16 @@ import {
 describe('Format Utils', () => {
   describe('formatPrice', () => {
     it('formats price with currency symbol', () => {
-      expect(formatPrice(1000000)).toBe('1 000 000 ₸');
+      expect(formatPrice(1000000)).toBe('1.0 млн ₸');
       expect(formatPrice(500000)).toBe('500 000 ₸');
-      expect(formatPrice(0)).toBe('Договорная');
-      expect(formatPrice(null)).toBe('Договорная');
+      expect(formatPrice(0)).toBe('По запросу');
+      expect(formatPrice(null)).toBe('По запросу');
     });
 
     it('formats large prices correctly', () => {
-      expect(formatPrice(1000000000)).toBe('1 000 000 000 ₸');
-      expect(formatPrice(99999999)).toBe('99 999 999 ₸');
+      expect(formatPrice(1000000000)).toBe('1.0 млрд ₸');
+      expect(formatPrice(99999999)).toBe('100.0 млн ₸');
+      expect(formatPrice(999999)).toBe('999 999 ₸');
     });
   });
 
@@ -27,9 +28,9 @@ describe('Format Utils', () => {
       expect(formatArea(0)).toBe('0 км²');
     });
 
-    it('formats decimal areas correctly', () => {
-      expect(formatArea(100.5)).toBe('100.5 км²');
-      expect(formatArea(1234.56)).toBe('1 234.56 км²');
+    it('formats large areas with thousand suffix', () => {
+      expect(formatArea(10000)).toBe('10 тыс. км²');
+      expect(formatArea(25000)).toBe('25 тыс. км²');
     });
   });
 

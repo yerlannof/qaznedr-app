@@ -11,10 +11,7 @@ export async function DELETE(request: NextRequest) {
   // Apply strict rate limiting for deletion
   const rateLimitResult = await rateLimit(request);
   if (rateLimitResult && !rateLimitResult.success) {
-    return NextResponse.json(
-      { error: 'Too many requests' },
-      { status: 429 }
-    );
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
   try {
@@ -70,7 +67,7 @@ export async function DELETE(request: NextRequest) {
       .from('kazakhstan_deposits')
       .delete()
       .eq('user_id', user.id);
-    
+
     if (listingsCount) {
       deletionLog.dataDeleted.listings = listingsCount;
     }
@@ -80,7 +77,7 @@ export async function DELETE(request: NextRequest) {
       .from('favorites')
       .delete()
       .eq('user_id', user.id);
-    
+
     if (favoritesCount) {
       deletionLog.dataDeleted.favorites = favoritesCount;
     }
@@ -90,35 +87,33 @@ export async function DELETE(request: NextRequest) {
       .from('messages')
       .delete()
       .or(`sender_id.eq.${user.id},recipient_id.eq.${user.id}`);
-    
+
     if (messagesCount) {
       deletionLog.dataDeleted.messages = messagesCount;
     }
 
     // Delete user's uploaded images from storage
-    const { data: storageList } = await supabase
-      .storage
+    const { data: storageList } = await supabase.storage
       .from('listings')
       .list(user.id);
 
     if (storageList && storageList.length > 0) {
-      const filesToDelete = storageList.map(file => `${user.id}/${file.name}`);
-      await supabase
-        .storage
-        .from('listings')
-        .remove(filesToDelete);
-      
+      const filesToDelete = storageList.map(
+        (file) => `${user.id}/${file.name}`
+      );
+      await supabase.storage.from('listings').remove(filesToDelete);
+
       deletionLog.dataDeleted.images = filesToDelete.length;
     }
 
     // Create anonymized record for legal compliance
-    await supabase
-      .from('gdpr_deletions')
-      .insert([{
+    await supabase.from('gdpr_deletions').insert([
+      {
         anonymized_id: `DELETED_${Date.now()}`,
         deletion_date: new Date().toISOString(),
         data_categories_deleted: Object.keys(deletionLog.dataDeleted).join(','),
-      }]);
+      },
+    ] as any);
 
     // Finally, delete the user account
     const { error: deleteError } = await supabase.auth.admin.deleteUser(
@@ -127,32 +122,36 @@ export async function DELETE(request: NextRequest) {
 
     if (deleteError) {
       // If using client-side auth, mark account for deletion
-      await supabase
-        .from('deletion_requests')
-        .insert([{
+      await supabase.from('deletion_requests').insert([
+        {
           user_id: user.id,
           requested_at: new Date().toISOString(),
           status: 'pending',
-        }]);
-      
+        },
+      ] as any);
+
       // Log for manual processing
       console.log(`GDPR deletion request pending for user ${user.id}`);
-      
+
       return NextResponse.json({
-        message: 'Account deletion request submitted. Your account will be deleted within 30 days.',
+        message:
+          'Account deletion request submitted. Your account will be deleted within 30 days.',
         requestId: `DEL_${user.id}_${Date.now()}`,
       });
     }
 
     // Log successful deletion
-    console.log(`GDPR data deletion completed for user ${user.id} at ${new Date().toISOString()}`);
+    console.log(
+      `GDPR data deletion completed for user ${user.id} at ${new Date().toISOString()}`
+    );
     console.log('Deletion summary:', deletionLog);
 
     // Sign out the user
     await supabase.auth.signOut();
 
     return NextResponse.json({
-      message: 'Your account and all associated data has been permanently deleted.',
+      message:
+        'Your account and all associated data has been permanently deleted.',
       summary: deletionLog,
     });
   } catch (error) {
@@ -191,15 +190,15 @@ export async function GET(request: NextRequest) {
       .single();
 
     if (deletionRequest) {
-      const requestedDate = new Date(deletionRequest.requested_at);
+      const requestedDate = new Date((deletionRequest as any).requested_at);
       const deletionDate = new Date(requestedDate);
       deletionDate.setDate(deletionDate.getDate() + 30); // 30 days grace period
 
       return NextResponse.json({
-        status: deletionRequest.status,
-        requestedAt: deletionRequest.requested_at,
+        status: (deletionRequest as any).status,
+        requestedAt: (deletionRequest as any).requested_at,
         scheduledDeletion: deletionDate.toISOString(),
-        canCancel: deletionRequest.status === 'pending',
+        canCancel: (deletionRequest as any).status === 'pending',
       });
     }
 

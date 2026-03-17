@@ -366,7 +366,7 @@ function QuickActions({ className = '' }: { className?: string }) {
                     ? 'hover:border-red-200'
                     : action.color === 'green'
                       ? 'hover:border-green-200'
-                      : 'hover:border-purple-200'
+                      : 'hover:border-gray-200'
               }`}
             >
               <div
@@ -377,7 +377,7 @@ function QuickActions({ className = '' }: { className?: string }) {
                       ? 'bg-red-50 text-red-600'
                       : action.color === 'green'
                         ? 'bg-green-50 text-green-600'
-                        : 'bg-purple-50 text-purple-600'
+                        : 'bg-gray-50 text-gray-600'
                 }`}
               >
                 <Icon className="w-4 h-4" />

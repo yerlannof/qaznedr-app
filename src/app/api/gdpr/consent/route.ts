@@ -23,10 +23,7 @@ export async function GET(request: NextRequest) {
   // Apply rate limiting
   const rateLimitResult = await rateLimit(request);
   if (rateLimitResult && !rateLimitResult.success) {
-    return NextResponse.json(
-      { error: 'Too many requests' },
-      { status: 429 }
-    );
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
   try {
@@ -70,15 +67,15 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       userId: user.id,
       preferences: {
-        analytics: consent.analytics_consent,
-        marketing: consent.marketing_consent,
-        personalizedContent: consent.personalized_content_consent,
-        thirdPartySharing: consent.third_party_sharing_consent,
-        newsletterSubscription: consent.newsletter_consent,
+        analytics: (consent as any).analytics_consent,
+        marketing: (consent as any).marketing_consent,
+        personalizedContent: (consent as any).personalized_content_consent,
+        thirdPartySharing: (consent as any).third_party_sharing_consent,
+        newsletterSubscription: (consent as any).newsletter_consent,
       },
-      lastUpdated: consent.updated_at,
-      ipAddress: consent.ip_address,
-      consentVersion: consent.consent_version,
+      lastUpdated: (consent as any).updated_at,
+      ipAddress: (consent as any).ip_address,
+      consentVersion: (consent as any).consent_version,
     });
   } catch (error) {
     console.error('GDPR consent retrieval error:', error);
@@ -96,10 +93,7 @@ export async function POST(request: NextRequest) {
   // Apply rate limiting
   const rateLimitResult = await rateLimit(request);
   if (rateLimitResult && !rateLimitResult.success) {
-    return NextResponse.json(
-      { error: 'Too many requests' },
-      { status: 429 }
-    );
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
   try {
@@ -129,9 +123,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Get IP address for audit trail
-    const ipAddress = request.headers.get('x-forwarded-for') || 
-                      request.headers.get('x-real-ip') ||
-                      'unknown';
+    const ipAddress =
+      request.headers.get('x-forwarded-for') ||
+      request.headers.get('x-real-ip') ||
+      'unknown';
 
     // Prepare consent record
     const consentRecord = {
@@ -150,7 +145,7 @@ export async function POST(request: NextRequest) {
     // Upsert consent preferences
     const { data: updatedConsent, error: upsertError } = await supabase
       .from('user_consent')
-      .upsert(consentRecord, {
+      .upsert([consentRecord] as any, {
         onConflict: 'user_id',
       })
       .select()
@@ -161,15 +156,15 @@ export async function POST(request: NextRequest) {
     }
 
     // Create audit log entry
-    await supabase
-      .from('consent_audit_log')
-      .insert([{
+    await supabase.from('consent_audit_log').insert([
+      {
         user_id: user.id,
         action: 'consent_updated',
         preferences: JSON.stringify(preferences),
         ip_address: ipAddress,
         timestamp: new Date().toISOString(),
-      }]);
+      },
+    ] as any);
 
     // Update user's cookie preferences
     const response = NextResponse.json({
@@ -179,17 +174,21 @@ export async function POST(request: NextRequest) {
     });
 
     // Set consent cookie for client-side tracking
-    response.cookies.set('gdpr_consent', JSON.stringify({
-      analytics: preferences.analytics,
-      marketing: preferences.marketing,
-      version: '1.0',
-    }), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 365 * 24 * 60 * 60, // 1 year
-      path: '/',
-    });
+    response.cookies.set(
+      'gdpr_consent',
+      JSON.stringify({
+        analytics: preferences.analytics,
+        marketing: preferences.marketing,
+        version: '1.0',
+      }),
+      {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 365 * 24 * 60 * 60, // 1 year
+        path: '/',
+      }
+    );
 
     return response;
   } catch (error) {
@@ -208,10 +207,7 @@ export async function DELETE(request: NextRequest) {
   // Apply rate limiting
   const rateLimitResult = await rateLimit(request);
   if (rateLimitResult && !rateLimitResult.success) {
-    return NextResponse.json(
-      { error: 'Too many requests' },
-      { status: 429 }
-    );
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
   try {
@@ -244,16 +240,13 @@ export async function DELETE(request: NextRequest) {
     };
 
     // Update consent record
-    await supabase
-      .from('user_consent')
-      .upsert(withdrawnConsent, {
-        onConflict: 'user_id',
-      });
+    await supabase.from('user_consent').upsert([withdrawnConsent] as any, {
+      onConflict: 'user_id',
+    });
 
     // Create audit log entry
-    await supabase
-      .from('consent_audit_log')
-      .insert([{
+    await supabase.from('consent_audit_log').insert([
+      {
         user_id: user.id,
         action: 'consent_withdrawn',
         preferences: JSON.stringify({
@@ -265,7 +258,8 @@ export async function DELETE(request: NextRequest) {
         }),
         ip_address: request.headers.get('x-forwarded-for') || 'unknown',
         timestamp: new Date().toISOString(),
-      }]);
+      },
+    ] as any);
 
     // Clear consent cookie
     const response = NextResponse.json({

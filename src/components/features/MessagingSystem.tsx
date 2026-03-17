@@ -1,18 +1,15 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useUser } from '@supabase/auth-helpers-react';
-import { wsNotificationService } from '@/lib/notifications/websocket-service';
 import {
   Send,
   Paperclip,
-  MoreVertical,
   Search,
   Phone,
   Video,
   Info,
-  Archive,
   Trash2,
   Check,
   CheckCheck,
@@ -54,12 +51,10 @@ export default function MessagingSystem() {
     useState<Conversation | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageText, setMessageText] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const [otherUserTyping, setOtherUserTyping] = useState(false);
+  const [otherUserTyping] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const typingTimeoutRef = useRef<NodeJS.Timeout>();
   const user = useUser();
   const supabase = createClient();
 
@@ -89,37 +84,23 @@ export default function MessagingSystem() {
     try {
       setLoading(true);
 
-      // Fetch conversations
-      const { data: convos } = await supabase
-        .from('conversations')
-        .select(
-          `
-          *,
-          messages (
-            id,
-            content,
-            sender_id,
-            created_at,
-            read_at
-          ),
-          profiles!conversations_participants (
-            id,
-            full_name,
-            avatar_url
-          )
-        `
-        )
-        .or(`participant1.eq.${user.id},participant2.eq.${user.id}`)
-        .order('updated_at', { ascending: false });
+      // TODO: Uncomment when conversations table is created
+      // const { data: convos } = await supabase
+      //   .from('conversations')
+      //   .select('*')
+      //   .or(`participant1.eq.${user.id},participant2.eq.${user.id}`)
+      //   .order('updated_at', { ascending: false });
 
-      if (convos) {
+      const convos: any[] | null = []; // Temporary until table exists - empty array
+
+      if (convos && convos.length > 0) {
         const formattedConversations: Conversation[] = await Promise.all(
-          convos.map(async (convo) => {
+          convos.map(async (convo: any) => {
             const otherUserId =
               convo.participant1 === user.id
                 ? convo.participant2
                 : convo.participant1;
-            const { data: otherUserProfile } = await supabase
+            const { data: otherUserProfile }: { data: any } = await supabase
               .from('profiles')
               .select('*')
               .eq('id', otherUserId)
@@ -145,7 +126,7 @@ export default function MessagingSystem() {
             return {
               id: convo.id,
               participants: [convo.participant1, convo.participant2],
-              lastMessage: lastMsg,
+              lastMessage: lastMsg || undefined,
               unreadCount: unreadCount || 0,
               listingId: convo.listing_id,
               listingTitle: convo.listing_title,
@@ -171,28 +152,32 @@ export default function MessagingSystem() {
 
   const loadMessages = async (conversationId: string) => {
     try {
-      const { data: msgs } = await supabase
-        .from('messages')
-        .select('*')
-        .eq('conversation_id', conversationId)
-        .order('created_at', { ascending: true });
+      // TODO: Uncomment when messages table is created
+      // const { data: msgs } = await supabase
+      //   .from('messages')
+      //   .select('*')
+      //   .eq('conversation_id', conversationId)
+      //   .order('created_at', { ascending: true });
 
-      if (msgs) {
-        setMessages(
-          msgs.map((msg) => ({
-            id: msg.id,
-            conversationId: msg.conversation_id,
-            senderId: msg.sender_id,
-            receiverId: msg.receiver_id,
-            content: msg.content,
-            attachments: msg.attachments,
-            readAt: msg.read_at,
-            createdAt: msg.created_at,
-            updatedAt: msg.updated_at,
-            replyTo: msg.reply_to,
-          }))
-        );
-      }
+      // if (msgs) {
+      //   setMessages(
+      //     msgs.map((msg: any) => ({
+      //       id: msg.id,
+      //       conversationId: msg.conversation_id,
+      //       senderId: msg.sender_id,
+      //       receiverId: msg.receiver_id,
+      //       content: msg.content,
+      //       attachments: msg.attachments,
+      //       readAt: msg.read_at,
+      //       createdAt: msg.created_at,
+      //       updatedAt: msg.updated_at,
+      //       replyTo: msg.reply_to,
+      //     }))
+      //   );
+      // }
+
+      // For now, use empty messages
+      setMessages([]);
     } catch (error) {
       console.error('Error loading messages:', error);
     }
@@ -216,47 +201,27 @@ export default function MessagingSystem() {
     setMessageText('');
 
     try {
-      // Save to database
-      const { data, error } = await supabase
-        .from('messages')
-        .insert({
-          conversation_id: selectedConversation.id,
-          sender_id: user.id,
-          receiver_id: selectedConversation.otherUser.id,
-          content: messageText,
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      // Update with real ID
-      setMessages((prev) =>
-        prev.map((msg) => (msg.id === tempId ? { ...data, id: data.id } : msg))
-      );
-
-      // Update conversation's last message
-      await supabase
-        .from('conversations')
-        .update({
-          last_message_id: data.id,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', selectedConversation.id);
-
-      // Send WebSocket notification
-      wsNotificationService.sendNotification(
-        selectedConversation.otherUser.id,
-        {
-          type: 'NEW_MESSAGE' as any,
-          title: `New message from ${user.user_metadata?.full_name || 'User'}`,
-          message: messageText.substring(0, 100),
-          data: {
-            conversationId: selectedConversation.id,
-            messageId: data.id,
-          },
-        }
-      );
+      // TODO: Uncomment when messages table is created
+      // const { data, error } = await supabase
+      //   .from('messages')
+      //   .insert({
+      //     conversation_id: selectedConversation.id,
+      //     sender_id: user.id,
+      //     receiver_id: selectedConversation.otherUser.id,
+      //     content: messageText,
+      //   })
+      //   .select()
+      //   .single();
+      // if (error) throw error;
+      // For now, just keep the temp message
+      // TODO: Uncomment when conversations table is created
+      // await supabase
+      //   .from('conversations')
+      //   .update({
+      //     last_message_id: data.id,
+      //     updated_at: new Date().toISOString(),
+      //   })
+      //   .eq('id', selectedConversation.id);
     } catch (error) {
       console.error('Error sending message:', error);
       // Remove optimistic message on error
@@ -268,12 +233,13 @@ export default function MessagingSystem() {
     if (!user?.id) return;
 
     try {
-      await supabase
-        .from('messages')
-        .update({ read_at: new Date().toISOString() })
-        .eq('conversation_id', conversationId)
-        .eq('receiver_id', user.id)
-        .is('read_at', null);
+      // TODO: Uncomment when messages table is created
+      // await supabase
+      //   .from('messages')
+      //   .update({ read_at: new Date().toISOString() })
+      //   .eq('conversation_id', conversationId)
+      //   .eq('receiver_id', user.id)
+      //   .is('read_at', null);
 
       // Update local state
       setMessages((prev) =>
@@ -296,26 +262,7 @@ export default function MessagingSystem() {
   };
 
   const handleTyping = () => {
-    if (!selectedConversation || !user?.id) return;
-
-    // Send typing indicator
-    wsNotificationService.sendTypingIndicator(
-      selectedConversation.otherUser.id,
-      true
-    );
-
-    // Clear previous timeout
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current);
-    }
-
-    // Set new timeout to stop typing indicator
-    typingTimeoutRef.current = setTimeout(() => {
-      wsNotificationService.sendTypingIndicator(
-        selectedConversation.otherUser.id,
-        false
-      );
-    }, 2000);
+    // Typing indicators are currently disabled (no websocket service)
   };
 
   const setupRealtimeSubscription = () => {
@@ -345,16 +292,6 @@ export default function MessagingSystem() {
         }
       )
       .subscribe();
-
-    // WebSocket typing indicators
-    wsNotificationService.on('onNotification', (notification) => {
-      if (notification.type === ('USER_TYPING' as any)) {
-        setOtherUserTyping(notification.data?.isTyping || false);
-        if (notification.data?.isTyping) {
-          setTimeout(() => setOtherUserTyping(false), 3000);
-        }
-      }
-    });
 
     return () => {
       messageSubscription.unsubscribe();

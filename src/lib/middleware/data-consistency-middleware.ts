@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 import { Database } from '@/lib/supabase/database.types';
-import { dataSyncService } from '@/lib/sync/data-sync-service';
+
 import { redisCacheService } from '@/lib/cache/redis-cache-service';
 
 type Deposit = Database['public']['Tables']['kazakhstan_deposits']['Row'];
@@ -74,8 +74,8 @@ const CONSISTENCY_RULES: ConsistencyRule[] = [
         };
       } catch (error) {
         if (error instanceof z.ZodError) {
-          const errors = error.errors.map(
-            (e) => `${e.path.join('.')}: ${e.message}`
+          const errors = (error as any).errors.map(
+            (e: any) => `${e.path.join('.')}: ${e.message}`
           );
           return {
             valid: false,
@@ -202,7 +202,7 @@ const CONSISTENCY_RULES: ConsistencyRule[] = [
       const warnings: string[] = [];
 
       try {
-        const supabase = createClient();
+        const supabase = await createClient();
 
         // Check for duplicate titles
         let titleQuery = supabase
@@ -259,7 +259,7 @@ const CONSISTENCY_RULES: ConsistencyRule[] = [
 
           if (duplicateCoordinates && duplicateCoordinates.length > 0) {
             warnings.push(
-              `Exact coordinates are already used by listing: "${duplicateCoordinates[0].title}"`
+              `Exact coordinates are already used by listing: "${(duplicateCoordinates[0] as any).title}"`
             );
           }
         }
@@ -289,7 +289,7 @@ const CONSISTENCY_RULES: ConsistencyRule[] = [
       const warnings: string[] = [];
 
       try {
-        const supabase = createClient();
+        const supabase = await createClient();
 
         // Check if user exists and is valid
         if (data.user_id || data.seller_id) {
@@ -302,7 +302,7 @@ const CONSISTENCY_RULES: ConsistencyRule[] = [
 
           if (!user) {
             errors.push(`User ${userId} does not exist`);
-          } else if (!user.is_verified) {
+          } else if (!(user as any).is_verified) {
             warnings.push('Associated user account is not verified');
           }
         }
@@ -361,16 +361,6 @@ const CONSISTENCY_RULES: ConsistencyRule[] = [
       const warnings: string[] = [];
 
       try {
-        // Check if Elasticsearch sync is up to date
-        if (data.id) {
-          const esHealth = await dataSyncService.healthCheck();
-          if (!esHealth.elasticsearch) {
-            warnings.push(
-              'Elasticsearch is not available - search functionality may be limited'
-            );
-          }
-        }
-
         // Check cache consistency
         const cacheHealth = await redisCacheService.healthCheck();
         if (!cacheHealth.connected) {
@@ -378,8 +368,7 @@ const CONSISTENCY_RULES: ConsistencyRule[] = [
             'Redis cache is not available - performance may be degraded'
           );
         }
-      } catch (error) {
-        console.error('Data synchronization validation error:', error);
+      } catch (_error) {
         warnings.push('Could not verify data synchronization status');
       }
 
@@ -387,13 +376,7 @@ const CONSISTENCY_RULES: ConsistencyRule[] = [
         valid: true, // Non-critical, so always valid
         errors: [],
         warnings,
-        fixable: true,
-        autoFix: async () => {
-          if (data.id) {
-            // Trigger sync for this specific deposit
-            await dataSyncService.handleDepositChange('update', data);
-          }
-        },
+        fixable: false,
       };
     },
   },
@@ -452,7 +435,7 @@ export function withDataConsistency(
       // Get existing data for updates
       if (operation === 'update' && requestBody.id) {
         try {
-          const supabase = createClient();
+          const supabase = await createClient();
           const { data: existing } = await supabase
             .from('kazakhstan_deposits')
             .select('*')

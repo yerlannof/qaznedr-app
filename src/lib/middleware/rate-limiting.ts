@@ -167,7 +167,6 @@ function getRateLimitIdentifier(
 function getClientIP(request: NextRequest): string {
   const forwarded = request.headers.get('x-forwarded-for');
   const realIP = request.headers.get('x-real-ip');
-  const remoteAddr = request.ip;
 
   if (forwarded) {
     // X-Forwarded-For can contain multiple IPs, use the first one
@@ -178,7 +177,7 @@ function getClientIP(request: NextRequest): string {
     return realIP;
   }
 
-  return remoteAddr || 'unknown';
+  return 'unknown';
 }
 
 // Check if IP is whitelisted (for development/testing)
@@ -284,7 +283,7 @@ export function withBurstProtection(
 ) {
   const burstLimiter = new Ratelimit({
     redis,
-    limiter: Ratelimit.slidingWindow(burstLimit, burstWindow),
+    limiter: Ratelimit.slidingWindow(burstLimit, burstWindow as any),
     analytics: true,
     prefix: 'ratelimit:burst',
   });
@@ -326,7 +325,7 @@ export function withUserRateLimit(
 ) {
   const userLimiter = new Ratelimit({
     redis,
-    limiter: Ratelimit.slidingWindow(limit, window),
+    limiter: Ratelimit.slidingWindow(limit, window as any),
     analytics: true,
     prefix: 'ratelimit:user',
   });

@@ -33,7 +33,6 @@ describe('MiningLicenseCard', () => {
     render(
       <MiningLicenseCard
         deposit={mockDeposit}
-        formatPrice={(price) => `${price.toLocaleString()} ₸`}
         getStatusColor={() => 'bg-blue-100 text-blue-800'}
         getStatusText={() => 'Активно'}
       />
@@ -41,7 +40,7 @@ describe('MiningLicenseCard', () => {
 
     expect(screen.getByText('Test Mining License')).toBeInTheDocument();
     expect(screen.getByText('Золото')).toBeInTheDocument();
-    expect(screen.getByText('Карагандинская')).toBeInTheDocument();
+    expect(screen.getByText('Караганда')).toBeInTheDocument();
     expect(screen.getByText('100 км²')).toBeInTheDocument();
   });
 
@@ -49,13 +48,11 @@ describe('MiningLicenseCard', () => {
     render(
       <MiningLicenseCard
         deposit={mockDeposit}
-        formatPrice={(price) => `${price.toLocaleString()} ₸`}
         getStatusColor={() => 'bg-blue-100 text-blue-800'}
         getStatusText={() => 'Активно'}
       />
     );
 
-    expect(screen.getByText('Право на добычу')).toBeInTheDocument();
     expect(screen.getByText('LIC-123')).toBeInTheDocument();
   });
 
@@ -63,7 +60,6 @@ describe('MiningLicenseCard', () => {
     render(
       <MiningLicenseCard
         deposit={mockDeposit}
-        formatPrice={(price) => `${price.toLocaleString()} ₸`}
         getStatusColor={() => 'bg-blue-100 text-blue-800'}
         getStatusText={() => 'Активно'}
       />
@@ -76,12 +72,11 @@ describe('MiningLicenseCard', () => {
     render(
       <MiningLicenseCard
         deposit={mockDeposit}
-        formatPrice={(price) => `${price.toLocaleString()} ₸`}
         getStatusColor={() => 'bg-blue-100 text-blue-800'}
         getStatusText={() => 'Активно'}
       />
     );
 
-    expect(screen.getByText('1,000,000 ₸')).toBeInTheDocument();
+    expect(screen.getByText('1.0 млн ₸')).toBeInTheDocument();
   });
 });

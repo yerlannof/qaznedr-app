@@ -214,7 +214,7 @@ export function RecommendationCard({
                 : reason.color === 'red'
                   ? 'bg-red-50 text-red-700'
                   : reason.color === 'purple'
-                    ? 'bg-purple-50 text-purple-700'
+                    ? 'bg-gray-50 text-gray-700'
                     : reason.color === 'green'
                       ? 'bg-green-50 text-green-700'
                       : 'bg-yellow-50 text-yellow-700'

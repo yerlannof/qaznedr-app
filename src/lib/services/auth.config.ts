@@ -1,4 +1,11 @@
-import { NextAuthOptions } from 'next-auth';
+import {
+  NextAuthOptions,
+  User as NextAuthUser,
+  Account,
+  Profile,
+} from 'next-auth';
+import { AdapterUser } from 'next-auth/adapters';
+import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { createClient } from '@/lib/supabase/server';
 import * as argon2 from 'argon2';
@@ -13,7 +20,7 @@ interface User {
   image: string | null;
 }
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -98,12 +105,12 @@ export const authOptions: NextAuthOptions = {
 
         if (!isPasswordValid) {
           // Update failed login attempts
-          await supabase
-            .from('users')
-            .update({
-              failed_login_attempts: (user.failed_login_attempts || 0) + 1,
-              last_failed_login: new Date().toISOString(),
-            })
+          const updateData = {
+            failed_login_attempts: (user.failed_login_attempts || 0) + 1,
+            last_failed_login: new Date().toISOString(),
+          };
+          await (supabase.from('users') as any)
+            .update(updateData)
             .eq('id', user.id);
 
           console.warn(`Invalid password for email: ${credentials.email}`);
@@ -117,13 +124,13 @@ export const authOptions: NextAuthOptions = {
 
         // Reset failed login attempts on successful login
         if (user.failed_login_attempts && user.failed_login_attempts > 0) {
-          await supabase
-            .from('users')
-            .update({
-              failed_login_attempts: 0,
-              last_failed_login: null,
-              last_login: new Date().toISOString(),
-            })
+          const resetData = {
+            failed_login_attempts: 0,
+            last_failed_login: null,
+            last_login: new Date().toISOString(),
+          };
+          await (supabase.from('users') as any)
+            .update(resetData)
             .eq('id', user.id);
         }
 
@@ -142,7 +149,13 @@ export const authOptions: NextAuthOptions = {
   // Use secure JWT configuration
   ...getSecureAuthConfig(),
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({
+      token,
+      user,
+    }: {
+      token: JWT;
+      user?: NextAuthUser | AdapterUser;
+    }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -162,7 +175,7 @@ export const authOptions: NextAuthOptions = {
 
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: JWT }) {
       if (token && session.user) {
         session.user.id = token.id as string;
         session.user.email = token.email as string;
@@ -174,11 +187,11 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn() {
       // Additional security checks can be added here
       return true;
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
       // Ensure redirect URLs are safe
       if (url.startsWith('/')) return `${baseUrl}${url}`;
       if (new URL(url).origin === baseUrl) return url;
@@ -186,13 +199,13 @@ export const authOptions: NextAuthOptions = {
     },
   },
   events: {
-    async signIn({ user, account, profile, isNewUser }) {
+    async signIn({ user }: { user: NextAuthUser | AdapterUser }) {
       console.log(`User signed in: ${user.id} (${user.email})`);
     },
-    async signOut({ session, token }) {
+    async signOut({ token }: { token?: JWT }) {
       console.log(`User signed out: ${token?.sub}`);
     },
-    async createUser({ user }) {
+    async createUser({ user }: { user: NextAuthUser }) {
       console.log(`New user created: ${user.id} (${user.email})`);
     },
   },

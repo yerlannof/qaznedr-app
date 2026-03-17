@@ -1,11 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {
-  elasticsearchClient,
-  SearchParams,
-} from '@/lib/search/elasticsearch-client';
 import { createClient } from '@/lib/supabase/server';
 import { z } from 'zod';
 import { verifyRateLimit } from '@/lib/middleware/rate-limit';
+
+// Search params type
+interface SearchParams {
+  query?: string;
+  filters?: {
+    type?: string[];
+    region?: string[];
+    minerals?: string[];
+    priceMin?: number;
+    priceMax?: number;
+    areaMin?: number;
+    areaMax?: number;
+    licenseStatus?: string[];
+    explorationStage?: string[];
+  };
+  sort?: {
+    field: string;
+    order: 'asc' | 'desc';
+  };
+  pagination?: {
+    page: number;
+    size: number;
+  };
+  geoFilter?: {
+    lat: number;
+    lng: number;
+    radius: string;
+  };
+  includeAggregations?: boolean;
+}
 
 // Request validation schema
 const searchRequestSchema = z.object({
@@ -49,23 +75,10 @@ const searchRequestSchema = z.object({
 export async function GET(request: NextRequest) {
   try {
     // Rate limiting
-    const rateLimitResult = await verifyRateLimit(request, {
-      requests: 100,
-      window: '1m',
-    });
+    const rateLimitResult = await verifyRateLimit(request);
 
-    if (!rateLimitResult.success) {
-      return NextResponse.json(
-        { error: 'Rate limit exceeded' },
-        {
-          status: 429,
-          headers: {
-            'X-RateLimit-Limit': String(rateLimitResult.limit),
-            'X-RateLimit-Remaining': String(rateLimitResult.remaining),
-            'X-RateLimit-Reset': new Date(rateLimitResult.reset).toISOString(),
-          },
-        }
-      );
+    if (rateLimitResult) {
+      return rateLimitResult;
     }
 
     // Parse query parameters
@@ -93,7 +106,7 @@ export async function GET(request: NextRequest) {
       },
       sort: searchParams.get('sortBy')
         ? {
-            field: searchParams.get('sortBy') as any,
+            field: searchParams.get('sortBy') as string,
             order: (searchParams.get('sortOrder') || 'desc') as 'asc' | 'desc',
           }
         : undefined,
@@ -112,38 +125,8 @@ export async function GET(request: NextRequest) {
       includeAggregations: searchParams.get('facets') === 'true',
     };
 
-    // Check Elasticsearch health
-    const isHealthy = await elasticsearchClient.healthCheck();
-
-    if (!isHealthy) {
-      // Fallback to Supabase search
-      console.log('Elasticsearch unhealthy, falling back to Supabase');
-      return await fallbackToSupabaseSearch(params);
-    }
-
-    // Perform search
-    const results = await elasticsearchClient.search(params);
-
-    // Track search analytics
-    await trackSearchAnalytics(params.query || '', results.total);
-
-    return NextResponse.json({
-      success: true,
-      data: results.results,
-      total: results.total,
-      page: params.pagination?.page || 1,
-      size: params.pagination?.size || 20,
-      aggregations: results.aggregations,
-    });
+    return await supabaseSearch(params);
   } catch (error) {
-    console.error('Search error:', error);
-
-    // Fallback to Supabase on error
-    if (error instanceof Error && error.message.includes('connect')) {
-      const searchParams = Object.fromEntries(request.nextUrl.searchParams);
-      return await fallbackToSupabaseSearch(searchParams as any);
-    }
-
     return NextResponse.json(
       {
         error: 'Search failed',
@@ -158,60 +141,21 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting
-    const rateLimitResult = await verifyRateLimit(request, {
-      requests: 50,
-      window: '1m',
-    });
+    const rateLimitResult = await verifyRateLimit(request);
 
-    if (!rateLimitResult.success) {
-      return NextResponse.json(
-        { error: 'Rate limit exceeded' },
-        {
-          status: 429,
-          headers: {
-            'X-RateLimit-Limit': String(rateLimitResult.limit),
-            'X-RateLimit-Remaining': String(rateLimitResult.remaining),
-            'X-RateLimit-Reset': new Date(rateLimitResult.reset).toISOString(),
-          },
-        }
-      );
+    if (rateLimitResult) {
+      return rateLimitResult;
     }
 
     // Parse and validate request body
     const body = await request.json();
     const validatedParams = searchRequestSchema.parse(body);
 
-    // Check Elasticsearch health
-    const isHealthy = await elasticsearchClient.healthCheck();
-
-    if (!isHealthy) {
-      // Fallback to Supabase search
-      console.log('Elasticsearch unhealthy, falling back to Supabase');
-      return await fallbackToSupabaseSearch(validatedParams as SearchParams);
-    }
-
-    // Perform search
-    const results = await elasticsearchClient.search(
-      validatedParams as SearchParams
-    );
-
-    // Track search analytics
-    await trackSearchAnalytics(validatedParams.query || '', results.total);
-
-    return NextResponse.json({
-      success: true,
-      data: results.results,
-      total: results.total,
-      page: validatedParams.pagination?.page || 1,
-      size: validatedParams.pagination?.size || 20,
-      aggregations: results.aggregations,
-    });
+    return await supabaseSearch(validatedParams as SearchParams);
   } catch (error) {
-    console.error('Search error:', error);
-
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request', details: error.errors },
+        { error: 'Invalid request', details: error.issues },
         { status: 400 }
       );
     }
@@ -226,10 +170,10 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Fallback to Supabase when Elasticsearch is unavailable
-async function fallbackToSupabaseSearch(params: SearchParams) {
+// Primary search via Supabase
+async function supabaseSearch(params: SearchParams) {
   try {
-    const supabase = createClient();
+    const supabase = await createClient();
     let query = supabase
       .from('kazakhstan_deposits')
       .select('*', { count: 'exact' });
@@ -315,10 +259,8 @@ async function fallbackToSupabaseSearch(params: SearchParams) {
       total: count || 0,
       page,
       size,
-      fallback: true, // Indicate this is a fallback response
     });
   } catch (error) {
-    console.error('Supabase search error:', error);
     return NextResponse.json(
       {
         error: 'Search failed',
@@ -326,21 +268,5 @@ async function fallbackToSupabaseSearch(params: SearchParams) {
       },
       { status: 500 }
     );
-  }
-}
-
-// Track search analytics
-async function trackSearchAnalytics(query: string, resultCount: number) {
-  try {
-    const supabase = createClient();
-
-    await supabase.from('search_analytics').insert({
-      query,
-      result_count: resultCount,
-      timestamp: new Date().toISOString(),
-    });
-  } catch (error) {
-    console.error('Error tracking search analytics:', error);
-    // Don't fail the request if analytics tracking fails
   }
 }

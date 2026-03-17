@@ -73,9 +73,9 @@ function StatsCard({
 }) {
   const colorClasses = {
     blue: 'bg-blue-50 text-blue-600',
-    green: 'bg-green-50 text-green-600',
-    purple: 'bg-purple-50 text-purple-600',
-    orange: 'bg-orange-50 text-orange-600',
+    green: 'bg-gray-50 text-gray-600',
+    purple: 'bg-gray-50 text-gray-600',
+    orange: 'bg-gray-50 text-gray-600',
   };
 
   return (

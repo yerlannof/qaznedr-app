@@ -85,7 +85,8 @@ const DEFAULT_CONFIG: SecurityHeadersConfig = {
       'base-uri': ["'self'"],
       'form-action': ["'self'", 'https://*.supabase.co'],
       'frame-ancestors': ["'none'"],
-      'upgrade-insecure-requests': process.env.NODE_ENV === 'production' ? [] : undefined,
+      'upgrade-insecure-requests':
+        process.env.NODE_ENV === 'production' ? [] : [],
     },
     reportOnly: false, // Enforce in production
   },

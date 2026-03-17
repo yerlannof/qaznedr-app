@@ -171,7 +171,7 @@ export default function MineralOccurrenceCard({
 
         {/* Price */}
         <div className="flex justify-between items-center">
-          <span className="text-2xl font-bold text-purple-600">
+          <span className="text-2xl font-bold text-blue-600">
             {formatPrice(deposit.price)}
           </span>
           <span className="text-sm text-gray-500">👁 {deposit.views}</span>
@@ -180,7 +180,7 @@ export default function MineralOccurrenceCard({
         {/* Action Button */}
         <Link
           href={`/listings/${deposit.id}`}
-          className="block w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-purple-700 hover:shadow-md transition-all text-center"
+          className="block w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 hover:shadow-md transition-all text-center"
         >
           Подробнее о рудопроявлении
         </Link>

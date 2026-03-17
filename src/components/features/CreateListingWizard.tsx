@@ -208,7 +208,7 @@ const StepIndicator = () => {
       {/* Progress bar */}
       <div className="mt-6 bg-gray-200 rounded-full h-2 overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-blue-500 to-green-500"
+          className="h-full bg-blue-500"
           initial={{ width: 0 }}
           animate={{ width: `${((activeStep + 1) / stepCount) * 100}%` }}
           transition={{ duration: 0.5, ease: 'easeOut' }}

@@ -9,7 +9,11 @@ import { NextRequest } from 'next/server';
 jest.mock('@/lib/supabase/server');
 jest.mock('@/lib/middleware/rate-limit');
 jest.mock('@/lib/middleware/csrf');
-jest.mock('@/lib/cache/redis');
+jest.mock('@/lib/cache/redis', () => ({
+  RedisCache: {
+    getInstance: jest.fn(),
+  },
+}));
 
 describe('Listings API', () => {
   let mockSupabase: any;

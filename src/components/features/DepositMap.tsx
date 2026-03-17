@@ -132,7 +132,7 @@ export function DepositMap({
 
       // Create and add marker
       const marker = new maplibregl.Marker({ element: el })
-        .setLngLat([deposit.coordinates.lng, deposit.coordinates.lat])
+        .setLngLat([deposit.coordinates[1], deposit.coordinates[0]])
         .setPopup(popup)
         .addTo(map.current!);
 
@@ -141,7 +141,7 @@ export function DepositMap({
         onDepositClick?.(deposit);
         // Fly to marker
         map.current?.flyTo({
-          center: [deposit.coordinates!.lng, deposit.coordinates!.lat],
+          center: [deposit.coordinates![1], deposit.coordinates![0]],
           zoom: 10,
           duration: 1500,
         });
@@ -156,10 +156,7 @@ export function DepositMap({
     if (!map.current || !selectedDeposit?.coordinates) return;
 
     map.current.flyTo({
-      center: [
-        selectedDeposit.coordinates.lng,
-        selectedDeposit.coordinates.lat,
-      ],
+      center: [selectedDeposit.coordinates[1], selectedDeposit.coordinates[0]],
       zoom: 10,
       duration: 1500,
     });

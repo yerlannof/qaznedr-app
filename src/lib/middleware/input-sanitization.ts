@@ -53,18 +53,21 @@ const COMMAND_INJECTION_PATTERNS = [
  */
 export function sanitizeHtml(input: string): string {
   if (typeof input !== 'string') return '';
-  
+
   // Remove any script tags first
-  let cleaned = input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-  
+  let cleaned = input.replace(
+    /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+    ''
+  );
+
   // Remove event handlers
   cleaned = cleaned.replace(/on\w+\s*=\s*"[^"]*"/gi, '');
   cleaned = cleaned.replace(/on\w+\s*=\s*'[^']*'/gi, '');
   cleaned = cleaned.replace(/on\w+\s*=\s*[^\s>]*/gi, '');
-  
+
   // Remove javascript: protocol
   cleaned = cleaned.replace(/javascript:/gi, '');
-  
+
   // Use DOMPurify for comprehensive sanitization
   return DOMPurify.sanitize(cleaned, sanitizeConfig);
 }
@@ -74,10 +77,13 @@ export function sanitizeHtml(input: string): string {
  */
 export function detectSqlInjection(input: string): boolean {
   if (typeof input !== 'string') return false;
-  
+
   for (const pattern of SQL_INJECTION_PATTERNS) {
     if (pattern.test(input)) {
-      console.warn('Potential SQL injection detected:', input.substring(0, 100));
+      console.warn(
+        'Potential SQL injection detected:',
+        input.substring(0, 100)
+      );
       return true;
     }
   }
@@ -89,14 +95,14 @@ export function detectSqlInjection(input: string): boolean {
  */
 export function detectNoSqlInjection(input: any): boolean {
   const str = typeof input === 'string' ? input : JSON.stringify(input);
-  
+
   for (const pattern of NOSQL_INJECTION_PATTERNS) {
     if (pattern.test(str)) {
       console.warn('Potential NoSQL injection detected');
       return true;
     }
   }
-  
+
   // Check for object with $ operators
   if (typeof input === 'object' && input !== null) {
     for (const key in input) {
@@ -110,7 +116,7 @@ export function detectNoSqlInjection(input: any): boolean {
       }
     }
   }
-  
+
   return false;
 }
 
@@ -119,10 +125,13 @@ export function detectNoSqlInjection(input: any): boolean {
  */
 export function detectPathTraversal(input: string): boolean {
   if (typeof input !== 'string') return false;
-  
+
   for (const pattern of PATH_TRAVERSAL_PATTERNS) {
     if (pattern.test(input)) {
-      console.warn('Potential path traversal detected:', input.substring(0, 100));
+      console.warn(
+        'Potential path traversal detected:',
+        input.substring(0, 100)
+      );
       return true;
     }
   }
@@ -134,10 +143,13 @@ export function detectPathTraversal(input: string): boolean {
  */
 export function detectCommandInjection(input: string): boolean {
   if (typeof input !== 'string') return false;
-  
+
   for (const pattern of COMMAND_INJECTION_PATTERNS) {
     if (pattern.test(input)) {
-      console.warn('Potential command injection detected:', input.substring(0, 100));
+      console.warn(
+        'Potential command injection detected:',
+        input.substring(0, 100)
+      );
       return true;
     }
   }
@@ -149,7 +161,7 @@ export function detectCommandInjection(input: string): boolean {
  */
 export function escapeSql(input: string): string {
   if (typeof input !== 'string') return '';
-  
+
   return input
     .replace(/\\/g, '\\\\')
     .replace(/'/g, "\\'")
@@ -165,7 +177,7 @@ export function escapeSql(input: string): string {
  */
 export function sanitizeEmail(email: string): string | null {
   const emailSchema = z.string().email().max(254);
-  
+
   try {
     const validated = emailSchema.parse(email.toLowerCase().trim());
     // Additional check for common injection attempts
@@ -184,17 +196,17 @@ export function sanitizeEmail(email: string): string | null {
 export function sanitizeUrl(url: string): string | null {
   try {
     const parsed = new URL(url);
-    
+
     // Only allow http and https protocols
     if (!['http:', 'https:'].includes(parsed.protocol)) {
       return null;
     }
-    
+
     // Check for injection attempts
     if (detectSqlInjection(url) || detectCommandInjection(url)) {
       return null;
     }
-    
+
     return parsed.toString();
   } catch {
     return null;
@@ -215,15 +227,15 @@ export function sanitizeMiningInput(input: any): any {
     ) {
       throw new Error('Invalid input detected');
     }
-    
+
     // Sanitize HTML content
     return sanitizeHtml(input);
   }
-  
+
   if (Array.isArray(input)) {
-    return input.map(item => sanitizeMiningInput(item));
+    return input.map((item) => sanitizeMiningInput(item));
   }
-  
+
   if (typeof input === 'object' && input !== null) {
     const sanitized: any = {};
     for (const key in input) {
@@ -235,7 +247,7 @@ export function sanitizeMiningInput(input: any): any {
     }
     return sanitized;
   }
-  
+
   return input;
 }
 
@@ -247,32 +259,55 @@ export const ValidationSchemas = {
   createListing: z.object({
     title: z.string().min(3).max(200),
     description: z.string().min(10).max(5000),
-    type: z.enum(['MINING_LICENSE', 'EXPLORATION_LICENSE', 'MINERAL_OCCURRENCE']),
-    mineral: z.enum(['Oil', 'Gas', 'Gold', 'Copper', 'Coal', 'Uranium', 'Iron']),
+    type: z.enum([
+      'MINING_LICENSE',
+      'EXPLORATION_LICENSE',
+      'MINERAL_OCCURRENCE',
+    ]),
+    mineral: z.enum([
+      'Oil',
+      'Gas',
+      'Gold',
+      'Copper',
+      'Coal',
+      'Uranium',
+      'Iron',
+    ]),
     price: z.number().positive().max(1000000000000), // Max 1 trillion tenge
     area: z.number().positive().max(100000), // Max 100,000 km²
     region: z.string().min(2).max(100),
     city: z.string().min(2).max(100),
-    coordinates: z.object({
-      lat: z.number().min(-90).max(90),
-      lng: z.number().min(-180).max(180),
-    }).optional(),
+    coordinates: z
+      .object({
+        lat: z.number().min(-90).max(90),
+        lng: z.number().min(-180).max(180),
+      })
+      .optional(),
     images: z.array(z.string().url()).max(10).optional(),
   }),
-  
+
   // User registration schema
   registerUser: z.object({
     email: z.string().email().max(254),
-    password: z.string().min(8).max(128).regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/),
+    password: z
+      .string()
+      .min(8)
+      .max(128)
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/),
     name: z.string().min(2).max(100),
     company: z.string().min(2).max(200).optional(),
-    phone: z.string().regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/).optional(),
+    phone: z
+      .string()
+      .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)
+      .optional(),
   }),
-  
+
   // Search query schema
   searchQuery: z.object({
     q: z.string().max(200).optional(),
-    type: z.enum(['MINING_LICENSE', 'EXPLORATION_LICENSE', 'MINERAL_OCCURRENCE']).optional(),
+    type: z
+      .enum(['MINING_LICENSE', 'EXPLORATION_LICENSE', 'MINERAL_OCCURRENCE'])
+      .optional(),
     mineral: z.string().max(50).optional(),
     minPrice: z.number().positive().optional(),
     maxPrice: z.number().positive().optional(),
@@ -292,7 +327,7 @@ export async function sanitizeRequestMiddleware(
     // Check URL parameters
     const url = new URL(request.url);
     const params = url.searchParams;
-    
+
     for (const [key, value] of params) {
       if (
         detectSqlInjection(key) ||
@@ -308,23 +343,23 @@ export async function sanitizeRequestMiddleware(
         );
       }
     }
-    
+
     // Check request body for POST/PUT/PATCH requests
     if (['POST', 'PUT', 'PATCH'].includes(request.method)) {
       try {
         const contentType = request.headers.get('content-type');
-        
+
         if (contentType?.includes('application/json')) {
           const body = await request.json();
           const sanitized = sanitizeMiningInput(body);
-          
+
           // Create new request with sanitized body
           const sanitizedRequest = new NextRequest(request.url, {
             method: request.method,
             headers: request.headers,
             body: JSON.stringify(sanitized),
           });
-          
+
           // Store sanitized body for later use
           (sanitizedRequest as any).sanitizedBody = sanitized;
         }
@@ -336,17 +371,25 @@ export async function sanitizeRequestMiddleware(
         );
       }
     }
-    
+
     // Check common headers for injection attempts
-    const suspiciousHeaders = ['x-forwarded-for', 'x-real-ip', 'referer', 'user-agent'];
+    const suspiciousHeaders = [
+      'x-forwarded-for',
+      'x-real-ip',
+      'referer',
+      'user-agent',
+    ];
     for (const header of suspiciousHeaders) {
       const value = request.headers.get(header);
-      if (value && (detectSqlInjection(value) || detectCommandInjection(value))) {
+      if (
+        value &&
+        (detectSqlInjection(value) || detectCommandInjection(value))
+      ) {
         console.warn(`Suspicious ${header} header:`, value.substring(0, 100));
         // Don't block, but log for monitoring
       }
     }
-    
+
     return null; // Continue to next middleware
   } catch (error) {
     console.error('Input sanitization error:', error);
@@ -366,9 +409,9 @@ export function checkAuthRateLimit(identifier: string): boolean {
   const now = Date.now();
   const limit = 5; // 5 attempts
   const windowMs = 15 * 60 * 1000; // 15 minutes
-  
+
   const record = authAttempts.get(identifier);
-  
+
   if (!record || record.resetTime < now) {
     authAttempts.set(identifier, {
       count: 1,
@@ -376,11 +419,11 @@ export function checkAuthRateLimit(identifier: string): boolean {
     });
     return true;
   }
-  
+
   if (record.count >= limit) {
     return false;
   }
-  
+
   record.count++;
   return true;
 }

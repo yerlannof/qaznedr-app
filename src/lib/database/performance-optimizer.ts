@@ -5,7 +5,13 @@
  */
 
 import { PrismaClient } from '@prisma/client';
-import { auditLogger, AuditAction } from '../compliance/audit-logger';
+import {
+  auditLogger,
+  AuditAction,
+  ResourceType,
+  RiskLevel,
+  AuditCategory,
+} from '../compliance/audit-logger';
 
 // Performance monitoring configuration
 interface PerformanceConfig {
@@ -118,15 +124,15 @@ class DatabasePerformanceOptimizer {
       // Log performance analysis
       await auditLogger.log({
         action: AuditAction.SYSTEM_ERROR,
-        resourceType: 'SYSTEM',
+        resourceType: ResourceType.SYSTEM,
         metadata: {
           operation: 'PERFORMANCE_ANALYSIS',
           slowQueries: slowQueries.length,
           recommendations: recommendations.length,
           connectionPoolStatus: connectionPool.status,
         },
-        riskLevel: 'MEDIUM',
-        category: 'SYSTEM_EVENT',
+        riskLevel: RiskLevel.MEDIUM,
+        category: AuditCategory.SYSTEM_EVENT,
         sensitiveData: false,
       });
 
@@ -190,15 +196,15 @@ class DatabasePerformanceOptimizer {
     // Log optimization results
     await auditLogger.log({
       action: AuditAction.SYSTEM_ERROR,
-      resourceType: 'SYSTEM',
+      resourceType: ResourceType.SYSTEM,
       metadata: {
         operation: 'PERFORMANCE_OPTIMIZATION',
         indexesCreated: applied,
         indexesFailed: failed,
         recommendations: recommendations.length,
       },
-      riskLevel: 'MEDIUM',
-      category: 'SYSTEM_EVENT',
+      riskLevel: RiskLevel.MEDIUM,
+      category: AuditCategory.SYSTEM_EVENT,
       sensitiveData: false,
     });
 
@@ -321,15 +327,15 @@ class DatabasePerformanceOptimizer {
 
         await auditLogger.log({
           action: AuditAction.SYSTEM_ERROR,
-          resourceType: 'SYSTEM',
+          resourceType: ResourceType.SYSTEM,
           metadata: {
             operation: 'SLOW_QUERY',
             executionTime,
             query: query.substring(0, 200),
             context,
           },
-          riskLevel: 'MEDIUM',
-          category: 'SYSTEM_EVENT',
+          riskLevel: RiskLevel.MEDIUM,
+          category: AuditCategory.SYSTEM_EVENT,
           sensitiveData: false,
         });
       }
@@ -441,13 +447,14 @@ class DatabasePerformanceOptimizer {
 
   private setupQueryLogging(): void {
     if (this.config.monitoring.queryLogging) {
-      // Setup Prisma query logging
-      this.prisma.$on('query', (e) => {
-        if (e.duration > this.config.monitoring.slowQueryThreshold) {
-          console.log(`Query: ${e.query}`);
-          console.log(`Duration: ${e.duration}ms`);
-        }
-      });
+      // TODO: Setup Prisma query logging - $on is not available in newer versions
+      // Consider using Prisma middleware or logging at database level
+      // this.prisma.$on('query', (e) => {
+      //   if (e.duration > this.config.monitoring.slowQueryThreshold) {
+      //     console.log(`Query: ${e.query}`);
+      //     console.log(`Duration: ${e.duration}ms`);
+      //   }
+      // });
     }
   }
 

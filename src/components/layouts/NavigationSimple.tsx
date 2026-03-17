@@ -302,7 +302,7 @@ export default function NavigationSimple() {
                         setIsMobileMenuOpen(false);
                       }}
                       whileTap={{ scale: 0.95 }}
-                      className={`px-3 py-2 text-sm rounded-lg transition-colors ${
+                      className={`touch-target px-3 py-3 text-sm rounded-lg transition-colors ${
                         currentLocale === locale.code
                           ? 'bg-blue-600 text-white'
                           : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'

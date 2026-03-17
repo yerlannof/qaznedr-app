@@ -114,7 +114,7 @@ export class PerformanceMonitoringService {
             const duration = Date.now() - startTime;
 
             // Set success status
-            span.setStatus('ok');
+            span.setStatus({ code: 0 }); // 0 = Ok status in Sentry v8
             // span.setData('response', {
             //   status: response.status,
             //   duration,
@@ -145,7 +145,7 @@ export class PerformanceMonitoringService {
             const duration = Date.now() - startTime;
 
             // Set error status
-            span.setStatus('internal_error');
+            span.setStatus({ code: 2 }); // 2 = Internal Error status in Sentry v8
             // span.setData('error', {
             //   message: (error as Error).message,
             //   duration,
@@ -216,7 +216,7 @@ export class PerformanceMonitoringService {
           this.trackDatabasePerformance(operationName, duration, tableName);
 
           // span.setData('duration_ms', duration);
-          span.setStatus('ok');
+          span.setStatus({ code: 0 }); // 0 = Ok status in Sentry v8
 
           sentryMiningService.addMiningBreadcrumb(
             `Database operation completed: ${operationName} (${duration}ms)`,
@@ -236,7 +236,7 @@ export class PerformanceMonitoringService {
         } catch (error) {
           const duration = Date.now() - startTime;
 
-          span.setStatus('internal_error');
+          span.setStatus({ code: 2 }); // 2 = Internal Error status in Sentry v8
           // // span.setData('error', (error as Error).message);
           // // span.setData('duration_ms', duration);
 
@@ -286,13 +286,13 @@ export class PerformanceMonitoringService {
           this.trackSearchPerformance(query, duration, searchType);
 
           // span.setData('duration_ms', duration);
-          span.setStatus('ok');
+          span.setStatus({ code: 0 }); // 0 = Ok status in Sentry v8
 
           return result;
         } catch (error) {
           const duration = Date.now() - startTime;
 
-          span.setStatus('internal_error');
+          span.setStatus({ code: 2 }); // 2 = Internal Error status in Sentry v8
           // span.setData('duration_ms', duration);
 
           sentryMiningService.captureError(

@@ -13,14 +13,20 @@ import ListingCard from '@/components/cards/ListingCard';
 import SkeletonCard from '@/components/ui/SkeletonCard';
 
 // Dynamic import for heavy map component
-const DepositMap = dynamic(() => import('@/components/features/DepositMap'), {
-  loading: () => (
-    <div className="h-[600px] bg-gray-100 rounded-lg animate-pulse flex items-center justify-center">
-      <span className="text-gray-500">Loading map...</span>
-    </div>
-  ),
-  ssr: false,
-});
+const DepositMap = dynamic(
+  () =>
+    import('@/components/features/DepositMap').then((mod) => ({
+      default: mod.DepositMap,
+    })),
+  {
+    loading: () => (
+      <div className="h-[600px] bg-gray-100 rounded-lg animate-pulse flex items-center justify-center">
+        <span className="text-gray-500">Loading map...</span>
+      </div>
+    ),
+    ssr: false,
+  }
+);
 import { LiveActivityIndicator } from '@/components/features/SocialProof';
 import { depositApi } from '@/lib/api/deposits';
 import { useTranslation } from '@/hooks/useTranslation';

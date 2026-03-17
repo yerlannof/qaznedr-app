@@ -52,40 +52,50 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
     // Use Web Vitals library if available, fallback to manual tracking
     const trackWebVitals = async () => {
       try {
-        // Try to import web-vitals dynamically
-        const { getCLS, getFID, getFCP, getLCP } = await import('web-vitals');
+        // Try to import web-vitals dynamically - v5 uses different API
+        const webVitals = await import('web-vitals');
 
-        getCLS((metric) => {
-          if (!reportedRef.current.has('CLS')) {
-            reportedRef.current.add('CLS');
-            metricsRef.current.CLS = metric.value;
-            reportMetric('CLS', metric.value);
-          }
-        });
+        // For web-vitals v5, use onMetric functions or direct imports
+        if (webVitals.onCLS) {
+          webVitals.onCLS((metric) => {
+            if (!reportedRef.current.has('CLS')) {
+              reportedRef.current.add('CLS');
+              metricsRef.current.CLS = metric.value;
+              reportMetric('CLS', metric.value);
+            }
+          });
+        }
 
-        getFID((metric) => {
-          if (!reportedRef.current.has('FID')) {
-            reportedRef.current.add('FID');
-            metricsRef.current.FID = metric.value;
-            reportMetric('FID', metric.value);
-          }
-        });
+        // onFID is deprecated in v5, use onINP instead
+        if (webVitals.onINP) {
+          webVitals.onINP((metric) => {
+            if (!reportedRef.current.has('FID')) {
+              reportedRef.current.add('FID');
+              metricsRef.current.FID = metric.value;
+              reportMetric('FID', metric.value);
+            }
+          });
+        }
 
-        getFCP((metric) => {
-          if (!reportedRef.current.has('FCP')) {
-            reportedRef.current.add('FCP');
-            metricsRef.current.FCP = metric.value;
-            reportMetric('FCP', metric.value);
-          }
-        });
+        if (webVitals.onFCP) {
+          webVitals.onFCP((metric) => {
+            if (!reportedRef.current.has('FCP')) {
+              reportedRef.current.add('FCP');
+              metricsRef.current.FCP = metric.value;
+              reportMetric('FCP', metric.value);
+            }
+          });
+        }
 
-        getLCP((metric) => {
-          if (!reportedRef.current.has('LCP')) {
-            reportedRef.current.add('LCP');
-            metricsRef.current.LCP = metric.value;
-            reportMetric('LCP', metric.value);
-          }
-        });
+        if (webVitals.onLCP) {
+          webVitals.onLCP((metric) => {
+            if (!reportedRef.current.has('LCP')) {
+              reportedRef.current.add('LCP');
+              metricsRef.current.LCP = metric.value;
+              reportMetric('LCP', metric.value);
+            }
+          });
+        }
       } catch (error) {
         // Fallback to manual tracking if web-vitals is not available
         console.warn('Web Vitals library not available, using manual tracking');

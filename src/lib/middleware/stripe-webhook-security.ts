@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 
 // Simple timing-safe comparison for edge runtime
 function timingSafeEqual(a: Buffer, b: Buffer): boolean {
@@ -53,7 +54,7 @@ const webhookEventSchema = z.object({
     'invoice.payment_failed',
   ]),
   data: z.object({
-    object: z.record(z.any()),
+    object: z.record(z.string(), z.any()),
   }),
   created: z.number(),
   livemode: z.boolean(),
@@ -209,7 +210,6 @@ export function withStripeWebhookSecurity(
       const clientIP =
         req.headers.get('x-forwarded-for')?.split(',')[0] ||
         req.headers.get('x-real-ip') ||
-        req.ip ||
         'unknown';
 
       // 1. Validate IP address
@@ -395,8 +395,8 @@ export function validateWebhookEvent(event: any): {
   } catch (validationError) {
     if (validationError instanceof z.ZodError) {
       errors.push(
-        ...validationError.errors.map(
-          (e) => `${e.path.join('.')}: ${e.message}`
+        ...(validationError as any).errors.map(
+          (e: any) => `${e.path.join('.')}: ${e.message}`
         )
       );
     } else {

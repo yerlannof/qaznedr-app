@@ -4,7 +4,7 @@ import { motion, HTMLMotionProps } from 'framer-motion';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-interface GlassCardProps extends HTMLMotionProps<'div'> {
+interface GlassCardProps {
   children: ReactNode;
   variant?: 'default' | 'primary' | 'secondary' | 'dark';
   blur?: 'sm' | 'md' | 'lg' | 'xl';
@@ -20,7 +20,6 @@ export function GlassCard({
   hover = true,
   glow = false,
   className,
-  ...motionProps
 }: GlassCardProps) {
   const blurValues = {
     sm: 'backdrop-blur-sm',
@@ -40,35 +39,22 @@ export function GlassCard({
   };
 
   return (
-    <motion.div
-      whileHover={hover ? { scale: 1.02, y: -4 } : undefined}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+    <div
       className={cn(
         'relative rounded-2xl border shadow-lg',
         blurValues[blur],
         variants[variant],
-        hover && 'transition-all duration-300 hover:shadow-2xl',
+        hover && 'transition-all duration-200 ease-out hover:shadow-xl',
         glow &&
-          'before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r before:from-blue-600/20 before:to-purple-600/20 before:blur-xl before:-z-10',
+          'before:absolute before:inset-0 before:rounded-2xl before:bg-blue-600/20 before:blur-xl before:-z-10',
         className
       )}
-      {...motionProps}
     >
       {glow && (
-        <motion.div
-          className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-600/10 to-purple-600/10 blur-2xl -z-10"
-          animate={{
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
+        <div className="absolute inset-0 rounded-2xl bg-blue-600/15 blur-2xl -z-10" />
       )}
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -95,10 +81,10 @@ export function GlassModal({
     >
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
       <motion.div
-        initial={{ scale: 0.9, opacity: 0, y: 20 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
         className="relative w-full max-w-lg"
         onClick={(e) => e.stopPropagation()}
       >
@@ -128,7 +114,8 @@ export function GlassButton({
   size?: 'sm' | 'default' | 'lg';
   className?: string;
   onClick?: () => void;
-} & HTMLMotionProps<'button'>) {
+  [key: string]: any;
+}) {
   const variants = {
     default:
       'bg-white/80 dark:bg-gray-800/80 text-gray-900 dark:text-white hover:bg-white/90 dark:hover:bg-gray-800/90',
@@ -143,31 +130,17 @@ export function GlassButton({
   };
 
   return (
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+    <button
       className={cn(
-        'relative rounded-xl font-medium backdrop-blur-md border border-white/20 dark:border-gray-700/20 shadow-lg transition-all duration-300',
+        'relative rounded-xl font-medium backdrop-blur-md border border-white/20 dark:border-gray-700/20 shadow-lg transition-all duration-200 ease-out hover:shadow-xl active:scale-95',
         variants[variant],
         sizes[size],
         className
       )}
       onClick={onClick}
-      {...props}
+      {...(props as any)}
     >
       <span className="relative z-10">{children}</span>
-      <motion.div
-        className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600/10 to-purple-600/10"
-        animate={{
-          opacity: [0, 0.5, 0],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-    </motion.button>
+    </button>
   );
 }

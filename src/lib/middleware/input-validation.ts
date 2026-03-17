@@ -116,8 +116,8 @@ export function validateRequestBody<T>(
     return { success: true, data: validatedData };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const errorMessages = error.errors
-        .map((err) => `${err.path.join('.')}: ${err.message}`)
+      const errorMessages = (error as any).errors
+        .map((err: any) => `${err.path.join('.')}: ${err.message}`)
         .join(', ');
       return { success: false, error: errorMessages };
     }

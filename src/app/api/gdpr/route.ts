@@ -248,14 +248,19 @@ async function updateConsent(userId: string, body: any, request: NextRequest) {
   const validation = ConsentRequestSchema.safeParse(body);
   if (!validation.success) {
     return NextResponse.json(
-      { error: 'Invalid consent request', details: validation.error.errors },
+      {
+        error: 'Invalid consent request',
+        details: (validation.error as any).errors,
+      },
       { status: 400 }
     );
   }
 
   const { consentType, granted, purpose, dataCategories } = validation.data;
   const ipAddress =
-    request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+    request.headers.get('x-forwarded-for') ||
+    request.headers.get('x-real-ip') ||
+    'unknown';
   const userAgent = request.headers.get('user-agent') || 'unknown';
 
   try {
@@ -264,7 +269,7 @@ async function updateConsent(userId: string, body: any, request: NextRequest) {
         userId,
         consentType,
         granted: true,
-        legalBasis: 'CONSENT',
+        legalBasis: 'CONSENT' as any,
         purpose: purpose || `Consent for ${consentType}`,
         dataCategories: dataCategories || [],
         retentionPeriod: 365 * 7, // 7 years default
@@ -307,7 +312,10 @@ async function exportUserData(userId: string, body: any) {
   const validation = DataExportRequestSchema.safeParse(body);
   if (!validation.success) {
     return NextResponse.json(
-      { error: 'Invalid export request', details: validation.error.errors },
+      {
+        error: 'Invalid export request',
+        details: (validation.error as any).errors,
+      },
       { status: 400 }
     );
   }
@@ -343,7 +351,10 @@ async function requestDataDeletion(userId: string, body: any) {
   const validation = DataDeletionRequestSchema.safeParse(body);
   if (!validation.success) {
     return NextResponse.json(
-      { error: 'Invalid deletion request', details: validation.error.errors },
+      {
+        error: 'Invalid deletion request',
+        details: (validation.error as any).errors,
+      },
       { status: 400 }
     );
   }

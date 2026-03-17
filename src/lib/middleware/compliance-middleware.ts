@@ -61,7 +61,6 @@ async function extractComplianceContext(
 ): Promise<ComplianceContext> {
   const session = await getServerSession(authOptions);
   const ipAddress =
-    request.ip ||
     request.headers.get('x-forwarded-for') ||
     request.headers.get('x-real-ip') ||
     'unknown';
@@ -85,10 +84,10 @@ async function extractComplianceContext(
 
   return {
     userId: session?.user?.id,
-    organizationId: session?.user?.organizationId,
+    organizationId: (session?.user as any)?.organizationId,
     ipAddress,
     userAgent,
-    sessionId: session?.sessionId,
+    sessionId: (session as any)?.sessionId,
     route,
     method,
     isAuthenticated: !!session,
@@ -331,7 +330,8 @@ function extractResourceId(
   return (
     searchParams.get('id') ||
     searchParams.get('depositId') ||
-    searchParams.get('userId')
+    searchParams.get('userId') ||
+    undefined
   );
 }
 

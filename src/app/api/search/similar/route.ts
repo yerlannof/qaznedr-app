@@ -1,28 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { elasticsearchClient } from '@/lib/search/elasticsearch-client';
+import { createClient } from '@/lib/supabase/server';
 import { verifyRateLimit } from '@/lib/middleware/rate-limit';
 
-// GET /api/search/similar/[id]
+// GET /api/search/similar
 export async function GET(request: NextRequest) {
   try {
     // Rate limiting
-    const rateLimitResult = await verifyRateLimit(request, {
-      requests: 100,
-      window: '1m',
-    });
+    const rateLimitResult = await verifyRateLimit(request);
 
-    if (!rateLimitResult.success) {
-      return NextResponse.json(
-        { error: 'Rate limit exceeded' },
-        {
-          status: 429,
-          headers: {
-            'X-RateLimit-Limit': String(rateLimitResult.limit),
-            'X-RateLimit-Remaining': String(rateLimitResult.remaining),
-            'X-RateLimit-Reset': new Date(rateLimitResult.reset).toISOString(),
-          },
-        }
-      );
+    if (rateLimitResult) {
+      return rateLimitResult;
     }
 
     // Get listing ID from query params
@@ -44,33 +31,40 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Check Elasticsearch health
-    const isHealthy = await elasticsearchClient.healthCheck();
+    const supabase = await createClient();
 
-    if (!isHealthy) {
-      // Return empty results if Elasticsearch is down
-      return NextResponse.json({
-        success: true,
-        similar: [],
-        fallback: true,
-      });
+    // First, fetch the source listing to find similar ones
+    const { data: sourceListing, error: sourceError } = await supabase
+      .from('kazakhstan_deposits')
+      .select('id, type, region, minerals')
+      .eq('id', listingId)
+      .single();
+
+    if (sourceError || !sourceListing) {
+      return NextResponse.json({ error: 'Listing not found' }, { status: 404 });
     }
 
-    // Find similar listings
-    const similarListings = await elasticsearchClient.findSimilar(
-      listingId,
-      limit
-    );
+    const source = sourceListing as any;
+
+    // Find similar listings by matching type and region, excluding the source
+    const { data: similarListings, error: similarError } = await supabase
+      .from('kazakhstan_deposits')
+      .select('*')
+      .neq('id', listingId)
+      .or(`type.eq.${source.type},region.eq.${source.region}`)
+      .limit(limit);
+
+    if (similarError) {
+      throw similarError;
+    }
 
     return NextResponse.json({
       success: true,
-      similar: similarListings,
-      total: similarListings.length,
+      similar: similarListings || [],
+      total: (similarListings || []).length,
       listingId,
     });
   } catch (error) {
-    console.error('Similar listings error:', error);
-
     return NextResponse.json(
       {
         error: 'Failed to find similar listings',

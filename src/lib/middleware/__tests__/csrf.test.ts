@@ -1,47 +1,52 @@
 import { generateCSRFToken, validateCSRFToken } from '../csrf';
-import * as crypto from 'crypto';
-
-// Mock crypto.randomBytes
-jest.mock('crypto', () => ({
-  ...jest.requireActual('crypto'),
-  randomBytes: jest.fn(),
-}));
 
 describe('CSRF Protection', () => {
+  // Store original getRandomValues
+  const originalGetRandomValues = global.crypto.getRandomValues;
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
+  afterAll(() => {
+    // Restore original
+    global.crypto.getRandomValues = originalGetRandomValues;
+  });
+
   describe('generateCSRFToken', () => {
-    it('should generate a 32-character hex token', () => {
-      const mockBytes = Buffer.from('1234567890abcdef1234567890abcdef', 'hex');
-      (crypto.randomBytes as jest.Mock).mockReturnValue(mockBytes);
+    it('should generate a 64-character hex token', () => {
+      // Mock crypto.getRandomValues to return predictable values
+      const mockArray = new Uint8Array(32);
+      for (let i = 0; i < 32; i++) {
+        mockArray[i] = i;
+      }
+      global.crypto.getRandomValues = jest.fn((array) => {
+        for (let i = 0; i < array.length; i++) {
+          array[i] = mockArray[i];
+        }
+        return array;
+      });
 
       const token = generateCSRFToken();
 
-      expect(token).toHaveLength(32);
-      expect(token).toMatch(/^[a-f0-9]{32}$/);
-      expect(crypto.randomBytes).toHaveBeenCalledWith(16);
+      expect(token).toHaveLength(64); // 32 bytes * 2 hex chars
+      expect(token).toMatch(/^[a-f0-9]{64}$/);
     });
 
     it('should generate different tokens on each call', () => {
-      (crypto.randomBytes as jest.Mock)
-        .mockReturnValueOnce(
-          Buffer.from('1234567890abcdef1234567890abcdef', 'hex')
-        )
-        .mockReturnValueOnce(
-          Buffer.from('fedcba0987654321fedcba0987654321', 'hex')
-        );
+      // Use real crypto which generates random values
+      global.crypto.getRandomValues = originalGetRandomValues;
 
       const token1 = generateCSRFToken();
       const token2 = generateCSRFToken();
 
       expect(token1).not.toBe(token2);
-      expect(crypto.randomBytes).toHaveBeenCalledTimes(2);
+      expect(token1).toHaveLength(64);
+      expect(token2).toHaveLength(64);
     });
 
     it('should handle crypto errors', () => {
-      (crypto.randomBytes as jest.Mock).mockImplementation(() => {
+      global.crypto.getRandomValues = jest.fn(() => {
         throw new Error('Crypto error');
       });
 

@@ -210,6 +210,7 @@ describe('API Validation Schemas', () => {
         type: 'MINING_LICENSE',
         mineral: 'Gold',
         region: 'Aktobe',
+        area: 500,
         status: 'ACTIVE',
         contactName: 'John Doe',
         contactEmail: 'john@example.com',

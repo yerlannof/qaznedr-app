@@ -135,9 +135,15 @@ class Logger {
       error
     );
 
-    if (level === LogLevel.ERROR) {
-    } else if (level === LogLevel.WARN) {
-    } else {
+    // Only log to console in development
+    if (this.isDevelopment) {
+      if (level === LogLevel.ERROR) {
+        console.error(formattedMessage);
+      } else if (level === LogLevel.WARN) {
+        console.warn(formattedMessage);
+      } else {
+        console.log(formattedMessage);
+      }
     }
   }
 

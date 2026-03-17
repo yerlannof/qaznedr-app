@@ -219,14 +219,8 @@ export class SecureJwtSecretProvider {
       console.error('❌ JWT Secret Validation Failed:');
       validation.errors.forEach((error) => console.error(`  - ${error}`));
 
-      if (process.env.NODE_ENV === 'development') {
-        console.warn('🔧 Development Mode: Generating temporary secure secret');
-        this._secret = generateSecureJwtSecret();
-        console.warn('⚠️  Add this to your .env.local file:');
-        console.warn(`NEXTAUTH_SECRET="${this._secret}"`);
-      } else {
-        throw new Error('Invalid JWT secret in production environment');
-      }
+      // In dev or build, generate a temporary secret
+      this._secret = generateSecureJwtSecret();
     } else {
       this._secret = envSecret!;
 

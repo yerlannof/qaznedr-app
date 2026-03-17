@@ -1,6 +1,7 @@
 # QAZNEDR.KZ API Documentation
 
 ## Base URL
+
 - Production: `https://qaznedr.kz/api`
 - Development: `http://localhost:3000/api`
 
@@ -23,9 +24,11 @@ Authorization: Bearer <your-token>
 ### Listings
 
 #### GET /api/listings
+
 Get all listings with pagination and filtering.
 
 **Query Parameters:**
+
 - `page` (number): Page number (default: 1)
 - `limit` (number): Items per page (default: 12, max: 100)
 - `sortBy` (string): Sort field (created_at, price, area, views)
@@ -42,6 +45,7 @@ Get all listings with pagination and filtering.
 - `areaMax` (number): Maximum area in km²
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -79,9 +83,11 @@ Get all listings with pagination and filtering.
 ```
 
 #### POST /api/listings
+
 Create a new listing (requires authentication).
 
 **Request Body:**
+
 ```json
 {
   "title": "New Mining License",
@@ -95,19 +101,19 @@ Create a new listing (requires authentication).
   "coordinates": { "lat": 49.8, "lng": 73.1 },
   "images": ["https://..."],
   "documents": ["https://..."],
-  
+
   // For MINING_LICENSE type:
   "licenseSubtype": "extraction",
   "licenseNumber": "KZ-2024-001",
   "licenseExpiry": "2034-12-31",
   "annualProductionLimit": 50000,
-  
+
   // For EXPLORATION_LICENSE type:
   "explorationStage": "DETAILED",
   "explorationStart": "2024-01-01",
   "explorationEnd": "2026-12-31",
   "explorationBudget": 10000000,
-  
+
   // For MINERAL_OCCURRENCE type:
   "discoveryDate": "2023-06-15",
   "geologicalConfidence": "INDICATED",
@@ -117,6 +123,7 @@ Create a new listing (requires authentication).
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -130,9 +137,11 @@ Create a new listing (requires authentication).
 ```
 
 #### GET /api/listings/[id]
+
 Get a specific listing by ID.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -161,19 +170,23 @@ Get a specific listing by ID.
 ```
 
 #### PUT /api/listings/[id]
+
 Update a listing (requires authentication and ownership).
 
 **Request Body:** Same as POST /api/listings
 
 #### DELETE /api/listings/[id]
+
 Delete a listing (requires authentication and ownership).
 
 ### Favorites
 
 #### GET /api/favorites
+
 Get user's favorite listings (requires authentication).
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -194,9 +207,11 @@ Get user's favorite listings (requires authentication).
 ```
 
 #### POST /api/favorites
+
 Add a listing to favorites (requires authentication).
 
 **Request Body:**
+
 ```json
 {
   "listingId": "listing_uuid"
@@ -204,14 +219,17 @@ Add a listing to favorites (requires authentication).
 ```
 
 #### DELETE /api/favorites/[id]
+
 Remove a listing from favorites (requires authentication).
 
 ### Authentication
 
 #### POST /api/auth/register
+
 Register a new user.
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com",
@@ -223,9 +241,11 @@ Register a new user.
 ```
 
 #### POST /api/auth/login
+
 Login user.
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com",
@@ -234,12 +254,15 @@ Login user.
 ```
 
 #### POST /api/auth/logout
+
 Logout current user (requires authentication).
 
 #### POST /api/auth/reset-password
+
 Request password reset.
 
 **Request Body:**
+
 ```json
 {
   "email": "user@example.com"
@@ -249,14 +272,17 @@ Request password reset.
 ### GDPR Compliance
 
 #### GET /api/gdpr/export
+
 Export all user data (requires authentication).
 
 **Response:** JSON file with all user data.
 
 #### DELETE /api/gdpr/delete
+
 Request account deletion (requires authentication).
 
 **Request Body:**
+
 ```json
 {
   "password": "current_password",
@@ -265,12 +291,15 @@ Request account deletion (requires authentication).
 ```
 
 #### GET /api/gdpr/consent
+
 Get current consent preferences (requires authentication).
 
 #### POST /api/gdpr/consent
+
 Update consent preferences (requires authentication).
 
 **Request Body:**
+
 ```json
 {
   "preferences": {
@@ -286,9 +315,11 @@ Update consent preferences (requires authentication).
 ### Analytics
 
 #### GET /api/analytics/dashboard
+
 Get dashboard analytics (requires authentication).
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -306,9 +337,11 @@ Get dashboard analytics (requires authentication).
 ```
 
 #### POST /api/analytics/web-vitals
+
 Track web vitals performance metrics.
 
 **Request Body:**
+
 ```json
 {
   "metrics": {
@@ -363,6 +396,7 @@ Content-Security-Policy: default-src 'self'
 ## Input Validation
 
 All inputs are validated and sanitized to prevent:
+
 - SQL Injection
 - XSS (Cross-Site Scripting)
 - Path Traversal
@@ -387,9 +421,9 @@ All inputs are validated and sanitized to prevent:
 // Using fetch
 const response = await fetch('https://qaznedr.kz/api/listings', {
   headers: {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json'
-  }
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  },
 });
 const data = await response.json();
 
@@ -440,6 +474,7 @@ Webhooks can be configured for these events:
 ## Support
 
 For API support:
+
 - Email: api@qaznedr.kz
 - Documentation: https://docs.qaznedr.kz
 - Status Page: https://status.qaznedr.kz

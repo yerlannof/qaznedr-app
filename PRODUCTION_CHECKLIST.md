@@ -312,14 +312,14 @@ vercel --prod
 
 ## Sign-off
 
-- [ ] **Development Team Lead**: ******\_\_\_****** Date: ****\_\_\_****
-- [ ] **QA Lead**: ******\_\_\_****** Date: ****\_\_\_****
-- [ ] **Security Officer**: ******\_\_\_****** Date: ****\_\_\_****
-- [ ] **Product Owner**: ******\_\_\_****** Date: ****\_\_\_****
-- [ ] **DevOps Engineer**: ******\_\_\_****** Date: ****\_\_\_****
+- [ ] **Development Team Lead**: **\*\***\_\_\_**\*\*** Date: \***\*\_\_\_\*\***
+- [ ] **QA Lead**: **\*\***\_\_\_**\*\*** Date: \***\*\_\_\_\*\***
+- [ ] **Security Officer**: **\*\***\_\_\_**\*\*** Date: \***\*\_\_\_\*\***
+- [ ] **Product Owner**: **\*\***\_\_\_**\*\*** Date: \***\*\_\_\_\*\***
+- [ ] **DevOps Engineer**: **\*\***\_\_\_**\*\*** Date: \***\*\_\_\_\*\***
 
 ---
 
-**Deployment Date**: ****\_\_\_****
-**Version**: ****\_\_\_****
+**Deployment Date**: \***\*\_\_\_\*\***
+**Version**: \***\*\_\_\_\*\***
 **Release Notes**: [Link to release notes]

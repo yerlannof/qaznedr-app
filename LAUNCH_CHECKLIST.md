@@ -3,6 +3,7 @@
 ## Pre-Launch (Day -7 to -1)
 
 ### Infrastructure Setup ✅
+
 - [ ] Domain configured (qaznedr.kz)
 - [ ] SSL certificate active
 - [ ] CDN configured (Cloudflare)
@@ -10,6 +11,7 @@
 - [ ] Backup system configured
 
 ### Database Preparation ✅
+
 - [ ] Production database created
 - [ ] Migrations run
 - [ ] Indexes created
@@ -17,6 +19,7 @@
 - [ ] Initial seed data loaded
 
 ### Environment Configuration ✅
+
 - [ ] Production env variables set
 - [ ] API keys configured
 - [ ] Email service ready
@@ -24,6 +27,7 @@
 - [ ] Analytics tracking codes added
 
 ### Security Final Check ✅
+
 - [ ] Security headers verified
 - [ ] Rate limiting tested
 - [ ] CORS configured
@@ -31,6 +35,7 @@
 - [ ] HTTPS enforced
 
 ### Performance Validation ✅
+
 - [ ] Lighthouse score > 90
 - [ ] Bundle size < 500KB
 - [ ] Images optimized
@@ -40,6 +45,7 @@
 ## Launch Day (Day 0)
 
 ### Morning (09:00 - 12:00)
+
 ```bash
 # 1. Final code review
 git pull origin main
@@ -57,6 +63,7 @@ vercel --env=preview
 ```
 
 ### Afternoon (12:00 - 15:00)
+
 ```bash
 # 5. Production deployment
 vercel --prod
@@ -70,6 +77,7 @@ npm run test:smoke
 ```
 
 ### Evening (15:00 - 18:00)
+
 - [ ] Monitor error rates
 - [ ] Check performance metrics
 - [ ] Verify all endpoints
@@ -79,6 +87,7 @@ npm run test:smoke
 ## Post-Launch (Day +1 to +7)
 
 ### Day 1 - Monitoring
+
 - [ ] Review Sentry errors
 - [ ] Check analytics data
 - [ ] Monitor API response times
@@ -86,6 +95,7 @@ npm run test:smoke
 - [ ] Check database performance
 
 ### Day 2-3 - Optimization
+
 - [ ] Address any critical bugs
 - [ ] Optimize slow queries
 - [ ] Fine-tune caching
@@ -93,6 +103,7 @@ npm run test:smoke
 - [ ] Review user feedback
 
 ### Day 4-7 - Stabilization
+
 - [ ] Daily health checks
 - [ ] Performance monitoring
 - [ ] User support response
@@ -102,6 +113,7 @@ npm run test:smoke
 ## Critical User Flows to Test
 
 ### 1. User Registration
+
 - [ ] Sign up with email
 - [ ] Email verification
 - [ ] Profile completion
@@ -109,6 +121,7 @@ npm run test:smoke
 - [ ] Welcome email sent
 
 ### 2. Listing Creation
+
 - [ ] Create mining license
 - [ ] Upload images
 - [ ] Add location
@@ -116,6 +129,7 @@ npm run test:smoke
 - [ ] Publish listing
 
 ### 3. Search & Discovery
+
 - [ ] Search by keyword
 - [ ] Filter by mineral type
 - [ ] Filter by region
@@ -123,6 +137,7 @@ npm run test:smoke
 - [ ] View on map
 
 ### 4. Transaction Flow
+
 - [ ] View listing details
 - [ ] Contact seller
 - [ ] Add to favorites
@@ -130,6 +145,7 @@ npm run test:smoke
 - [ ] Track inquiries
 
 ### 5. Admin Functions
+
 - [ ] Login to admin panel
 - [ ] Review listings
 - [ ] Approve/reject listings
@@ -143,13 +159,13 @@ Production:
   App: https://qaznedr.kz
   API: https://qaznedr.kz/api
   Admin: https://qaznedr.kz/admin
-  
+
 Monitoring:
   Sentry: https://sentry.io/organizations/qaznedr
   Analytics: https://analytics.google.com/qaznedr
   Vercel: https://vercel.com/qaznedr/dashboard
   Supabase: https://app.supabase.com/project/qaznedr
-  
+
 Status:
   Health: https://qaznedr.kz/api/health
   Metrics: https://qaznedr.kz/api/metrics
@@ -163,12 +179,12 @@ Technical Team:
   Lead Developer: +7 (XXX) XXX-XX-XX
   DevOps: +7 (XXX) XXX-XX-XX
   DBA: +7 (XXX) XXX-XX-XX
-  
+
 Support:
   Email: support@qaznedr.kz
   Phone: +7 (XXX) XXX-XX-XX
   Slack: #qaznedr-prod
-  
+
 External:
   Hosting: Vercel Support
   Database: Supabase Support
@@ -206,13 +222,13 @@ Performance:
   ✅ Response Time: < 500ms (p95)
   ✅ Error Rate: < 0.1%
   ✅ Core Web Vitals: Pass
-  
+
 User Metrics:
   ✅ Registrations: > 50
   ✅ Listings Created: > 10
   ✅ Page Views: > 1000
   ✅ Bounce Rate: < 40%
-  
+
 Technical:
   ✅ No Critical Errors
   ✅ No Security Incidents
@@ -223,6 +239,7 @@ Technical:
 ## Marketing Launch
 
 ### Social Media
+
 - [ ] LinkedIn announcement
 - [ ] Twitter/X post
 - [ ] Facebook update
@@ -230,6 +247,7 @@ Technical:
 - [ ] Press release sent
 
 ### Email Campaign
+
 - [ ] Announcement to subscribers
 - [ ] Partner notifications
 - [ ] Industry newsletters
@@ -237,6 +255,7 @@ Technical:
 - [ ] Media contacts
 
 ### SEO
+
 - [ ] Submit sitemap
 - [ ] Google Search Console
 - [ ] Bing Webmaster Tools
@@ -284,6 +303,7 @@ echo "🎉 Ready for launch!"
 ## Post-Launch Celebration 🎉
 
 Once successfully launched:
+
 1. Team announcement
 2. Stakeholder notification
 3. Success metrics review
@@ -292,12 +312,12 @@ Once successfully launched:
 
 ---
 
-**Launch Authority**: _________________
-**Date**: _________________
-**Time**: _________________
+**Launch Authority**: **\*\*\*\***\_**\*\*\*\***
+**Date**: **\*\*\*\***\_**\*\*\*\***
+**Time**: **\*\*\*\***\_**\*\*\*\***
 
 **GO / NO-GO Decision**: [ GO ✅ ]
 
 ---
 
-*This checklist ensures a smooth, professional launch of QAZNEDR.KZ*
+_This checklist ensures a smooth, professional launch of QAZNEDR.KZ_

@@ -120,7 +120,7 @@ CREATE POLICY "Users can delete own listings" ON kazakhstan_deposits
 
 ```sql
 -- Create storage buckets
-INSERT INTO storage.buckets (id, name, public) VALUES 
+INSERT INTO storage.buckets (id, name, public) VALUES
   ('listings', 'listings', true),
   ('documents', 'documents', false),
   ('avatars', 'avatars', true);
@@ -166,16 +166,19 @@ npm test
 ### Option 1: Vercel (Recommended)
 
 1. **Install Vercel CLI**
+
 ```bash
 npm i -g vercel
 ```
 
 2. **Deploy**
+
 ```bash
 vercel --prod
 ```
 
 3. **Configure Domain**
+
 - Add domain in Vercel dashboard
 - Update DNS records:
   ```
@@ -184,28 +187,33 @@ vercel --prod
   ```
 
 4. **Environment Variables**
+
 - Add all env variables in Vercel dashboard
 - Settings → Environment Variables
 
 ### Option 2: Cloudflare Pages
 
 1. **Build Command**
+
 ```bash
 npm run build
 ```
 
 2. **Output Directory**
+
 ```
 .next
 ```
 
 3. **Environment Variables**
+
 - Add in Cloudflare Pages settings
 - Use Cloudflare KV for session storage
 
 ### Option 3: Docker
 
 1. **Build Docker Image**
+
 ```dockerfile
 FROM node:20-alpine AS builder
 WORKDIR /app
@@ -226,6 +234,7 @@ CMD ["node", "server.js"]
 ```
 
 2. **Build and Run**
+
 ```bash
 docker build -t qaznedr-app .
 docker run -p 3000:3000 --env-file .env.production qaznedr-app
@@ -335,6 +344,7 @@ jobs:
 ## Post-Deployment Checklist
 
 ### Security
+
 - [ ] SSL certificate active
 - [ ] Security headers configured
 - [ ] Rate limiting active
@@ -343,6 +353,7 @@ jobs:
 - [ ] Database backups configured
 
 ### Performance
+
 - [ ] CDN configured
 - [ ] Images optimized
 - [ ] Gzip/Brotli compression enabled
@@ -350,6 +361,7 @@ jobs:
 - [ ] Bundle size < 500KB
 
 ### Monitoring
+
 - [ ] Sentry error tracking active
 - [ ] Analytics tracking working
 - [ ] Uptime monitoring configured
@@ -357,6 +369,7 @@ jobs:
 - [ ] Log aggregation setup
 
 ### SEO
+
 - [ ] Meta tags configured
 - [ ] Sitemap generated
 - [ ] Robots.txt configured
@@ -364,6 +377,7 @@ jobs:
 - [ ] Open Graph tags set
 
 ### Testing
+
 - [ ] Smoke tests pass
 - [ ] Critical user flows work
 - [ ] Payment processing works
@@ -373,6 +387,7 @@ jobs:
 ## Rollback Procedure
 
 ### Vercel
+
 ```bash
 # List deployments
 vercel ls
@@ -382,6 +397,7 @@ vercel rollback [deployment-url]
 ```
 
 ### Manual Rollback
+
 ```bash
 # Checkout previous version
 git checkout [previous-commit]
@@ -422,22 +438,24 @@ Create `public/maintenance.html`:
 ```html
 <!DOCTYPE html>
 <html lang="ru">
-<head>
+  <head>
     <title>Техническое обслуживание - QAZNEDR.KZ</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 50px; 
-        }
-        h1 { color: #333; }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+      }
+      h1 {
+        color: #333;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Сайт на техническом обслуживании</h1>
     <p>Мы проводим плановые работы. Пожалуйста, зайдите позже.</p>
     <p>Приносим извинения за неудобства.</p>
-</body>
+  </body>
 </html>
 ```
 

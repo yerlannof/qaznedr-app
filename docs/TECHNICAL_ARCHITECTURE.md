@@ -50,6 +50,7 @@ QAZNEDR.KZ is a modern web platform for Kazakhstan's mining industry, built with
 ## Technology Stack
 
 ### Frontend
+
 - **Framework**: Next.js 15.5.3 with App Router
 - **Language**: TypeScript 5.x
 - **Styling**: Tailwind CSS v4
@@ -60,6 +61,7 @@ QAZNEDR.KZ is a modern web platform for Kazakhstan's mining industry, built with
 - **Maps**: Mapbox GL / MapLibre GL
 
 ### Backend
+
 - **Runtime**: Node.js 20.x
 - **API**: Next.js Route Handlers
 - **Database**: PostgreSQL (via Supabase)
@@ -69,6 +71,7 @@ QAZNEDR.KZ is a modern web platform for Kazakhstan's mining industry, built with
 - **Caching**: In-memory + Edge caching
 
 ### Infrastructure
+
 - **Hosting**: Vercel / Cloudflare Pages
 - **CDN**: Cloudflare
 - **Database**: Supabase (PostgreSQL)
@@ -87,7 +90,7 @@ enum UserRole {
   MODERATOR = 'moderator',
   VERIFIED_SELLER = 'verified_seller',
   SELLER = 'seller',
-  BUYER = 'buyer'
+  BUYER = 'buyer',
 }
 
 // Permission System
@@ -96,7 +99,7 @@ enum Permission {
   EDIT_ANY_LISTING = 'edit_any_listing',
   DELETE_ANY_LISTING = 'delete_any_listing',
   APPROVE_LISTING = 'approve_listing',
-  ACCESS_ADMIN_PANEL = 'access_admin_panel'
+  ACCESS_ADMIN_PANEL = 'access_admin_panel',
 }
 ```
 
@@ -135,6 +138,7 @@ interface KazakhstanDeposit {
 ### 4. Security Architecture
 
 #### Security Layers:
+
 1. **Network Security**
    - Cloudflare DDoS protection
    - Rate limiting (30 req/min)
@@ -219,6 +223,7 @@ CREATE INDEX idx_security_events_timestamp ON security_events(timestamp DESC);
 ## Performance Optimization
 
 ### 1. Frontend Optimization
+
 - **Code Splitting**: Dynamic imports for routes
 - **Image Optimization**: Next.js Image with WebP/AVIF
 - **Bundle Size**: < 500KB initial load
@@ -226,6 +231,7 @@ CREATE INDEX idx_security_events_timestamp ON security_events(timestamp DESC);
 - **Prefetching**: Next.js Link prefetch
 
 ### 2. Backend Optimization
+
 - **Database Queries**: Optimized with indexes
 - **Caching Strategy**:
   - Static pages: 1 year
@@ -235,6 +241,7 @@ CREATE INDEX idx_security_events_timestamp ON security_events(timestamp DESC);
 - **Query Optimization**: Pagination, selective fields
 
 ### 3. Infrastructure Optimization
+
 - **CDN**: Cloudflare global network
 - **Edge Functions**: Computation at edge
 - **Compression**: Brotli/Gzip
@@ -243,25 +250,25 @@ CREATE INDEX idx_security_events_timestamp ON security_events(timestamp DESC);
 ## Monitoring & Observability
 
 ### 1. Error Tracking (Sentry)
+
 ```typescript
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   tracesSampleRate: 0.1,
   profilesSampleRate: 0.1,
-  integrations: [
-    new Sentry.BrowserTracing(),
-    new Sentry.Replay()
-  ]
+  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 });
 ```
 
 ### 2. Performance Monitoring
+
 - Core Web Vitals tracking
 - Custom metrics for business operations
 - Real User Monitoring (RUM)
 - Synthetic monitoring
 
 ### 3. Security Monitoring
+
 - Real-time threat detection
 - Anomaly detection
 - Security event logging
@@ -270,17 +277,20 @@ Sentry.init({
 ## Scalability Strategy
 
 ### Horizontal Scaling
+
 - **Application**: Serverless functions (auto-scaling)
 - **Database**: Read replicas for queries
 - **Storage**: S3-compatible object storage
 - **Cache**: Distributed caching layer
 
 ### Vertical Scaling
+
 - **Database**: Upgrade Supabase tier
 - **Compute**: Increase function memory/timeout
 - **Storage**: Increase storage limits
 
 ### Load Balancing
+
 - Geographic distribution via Cloudflare
 - Automatic failover
 - Health checks
@@ -288,12 +298,14 @@ Sentry.init({
 ## Disaster Recovery
 
 ### Backup Strategy
+
 - **Database**: Daily automated backups (30-day retention)
 - **Files**: Versioned storage with soft delete
 - **Code**: Git version control
 - **Configuration**: Encrypted secrets backup
 
 ### Recovery Procedures
+
 1. **RTO (Recovery Time Objective)**: < 1 hour
 2. **RPO (Recovery Point Objective)**: < 24 hours
 3. **Failover**: Automatic via Cloudflare
@@ -302,6 +314,7 @@ Sentry.init({
 ## Development Workflow
 
 ### Git Flow
+
 ```
 main (production)
 ├── develop (staging)
@@ -311,6 +324,7 @@ main (production)
 ```
 
 ### CI/CD Pipeline
+
 1. **Commit** → GitHub
 2. **Test** → Jest, ESLint, TypeScript
 3. **Build** → Next.js production build
@@ -318,6 +332,7 @@ main (production)
 5. **Monitor** → Sentry, Analytics
 
 ### Code Quality
+
 - **Linting**: ESLint with custom rules
 - **Formatting**: Prettier
 - **Type Checking**: TypeScript strict mode
@@ -327,18 +342,21 @@ main (production)
 ## API Design Principles
 
 ### RESTful Design
+
 - Consistent naming conventions
 - Proper HTTP methods (GET, POST, PUT, DELETE)
 - Status codes follow standards
 - Pagination for list endpoints
 
 ### Security First
+
 - Authentication required by default
 - Input validation on all endpoints
 - Rate limiting per endpoint
 - Audit logging for sensitive operations
 
 ### Performance
+
 - Response time < 200ms (p50)
 - Batch operations where possible
 - Efficient query patterns
@@ -347,18 +365,21 @@ main (production)
 ## Future Enhancements
 
 ### Phase 1 (Q1 2025)
+
 - [ ] ElasticSearch integration
 - [ ] Advanced analytics dashboard
 - [ ] Mobile app (React Native)
 - [ ] WebSocket real-time updates
 
 ### Phase 2 (Q2 2025)
+
 - [ ] AI-powered recommendations
 - [ ] Blockchain integration
 - [ ] Advanced GIS features
 - [ ] Multi-language support (5+ languages)
 
 ### Phase 3 (Q3 2025)
+
 - [ ] Marketplace features
 - [ ] Advanced reporting
 - [ ] API marketplace
@@ -367,18 +388,21 @@ main (production)
 ## Compliance & Standards
 
 ### GDPR Compliance
+
 - Data export functionality
 - Right to deletion
 - Consent management
 - Privacy by design
 
 ### Security Standards
+
 - OWASP Top 10 protection
 - PCI DSS ready (for payments)
 - SOC 2 Type II (in progress)
 - ISO 27001 alignment
 
 ### Accessibility
+
 - WCAG 2.1 Level AA compliance
 - Keyboard navigation
 - Screen reader support
@@ -387,12 +411,14 @@ main (production)
 ## Support & Maintenance
 
 ### SLA Targets
+
 - **Uptime**: 99.9% (43.2 minutes/month downtime)
 - **Response Time**: < 500ms (p95)
 - **Error Rate**: < 0.1%
 - **Support Response**: < 2 hours (critical)
 
 ### Monitoring Dashboard
+
 - Real-time metrics
 - Alert thresholds
 - Incident management
@@ -401,12 +427,14 @@ main (production)
 ## Documentation
 
 ### Technical Documentation
+
 - API documentation (OpenAPI 3.0)
 - Database schema documentation
 - Architecture decision records (ADRs)
 - Runbooks for common issues
 
 ### User Documentation
+
 - User guides
 - Video tutorials
 - FAQ section

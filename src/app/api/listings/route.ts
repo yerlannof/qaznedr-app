@@ -168,10 +168,10 @@ export async function GET(request: NextRequest) {
     if (type) {
       queryBuilder = queryBuilder.eq('type', type);
     }
-    if (verified !== null) {
+    if (verified !== undefined && verified !== null) {
       queryBuilder = queryBuilder.eq('verified', verified === 'true');
     }
-    if (featured !== null) {
+    if (featured !== undefined && featured !== null) {
       queryBuilder = queryBuilder.eq('featured', featured === 'true');
     }
     if (minPrice) {
@@ -231,12 +231,12 @@ export async function GET(request: NextRequest) {
       if (type) {
         filteredMocks = filteredMocks.filter((d) => d.type === type);
       }
-      if (verified !== null) {
+      if (verified !== undefined && verified !== null) {
         filteredMocks = filteredMocks.filter(
           (d) => d.verified === (verified === 'true')
         );
       }
-      if (featured !== null) {
+      if (featured !== undefined && featured !== null) {
         filteredMocks = filteredMocks.filter(
           (d) => d.featured === (featured === 'true')
         );

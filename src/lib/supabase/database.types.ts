@@ -25,7 +25,13 @@ export interface Database {
           documents: string[] | null;
           verified: boolean;
           featured: boolean;
-          status: 'DRAFT' | 'ACTIVE' | 'ARCHIVED' | 'SOLD';
+          status:
+            | 'DRAFT'
+            | 'ACTIVE'
+            | 'ARCHIVED'
+            | 'SOLD'
+            | 'PENDING_MODERATION'
+            | 'REJECTED';
           user_id: string | null;
           license_subtype: string | null;
           license_number: string | null;
@@ -57,7 +63,13 @@ export interface Database {
           documents?: string[] | null;
           verified?: boolean;
           featured?: boolean;
-          status?: 'DRAFT' | 'ACTIVE' | 'ARCHIVED' | 'SOLD';
+          status?:
+            | 'DRAFT'
+            | 'ACTIVE'
+            | 'ARCHIVED'
+            | 'SOLD'
+            | 'PENDING_MODERATION'
+            | 'REJECTED';
           user_id?: string | null;
           license_subtype?: string | null;
           license_number?: string | null;
@@ -92,7 +104,13 @@ export interface Database {
           documents?: string[] | null;
           verified?: boolean;
           featured?: boolean;
-          status?: 'DRAFT' | 'ACTIVE' | 'ARCHIVED' | 'SOLD';
+          status?:
+            | 'DRAFT'
+            | 'ACTIVE'
+            | 'ARCHIVED'
+            | 'SOLD'
+            | 'PENDING_MODERATION'
+            | 'REJECTED';
           user_id?: string | null;
           license_subtype?: string | null;
           license_number?: string | null;

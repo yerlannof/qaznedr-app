@@ -1,16 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPrisma } from '@/lib/prisma';
+import { createClient } from '@/lib/supabase/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/services/auth.config';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
-  const prisma = getPrisma();
   try {
     const session = await getServerSession(authOptions);
 
-    if (!session?.user?.email) {
+    if (!session?.user) {
+      return NextResponse.json(
+        { success: false, error: 'Необходима авторизация' },
+        { status: 401 }
+      );
+    }
+
+    const userId = (session.user as any).id;
+    if (!userId) {
       return NextResponse.json(
         { success: false, error: 'Необходима авторизация' },
         { status: 401 }
@@ -20,86 +27,68 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '10');
-    const status = searchParams.get('status'); // 'ACTIVE', 'PENDING', 'SOLD'
+    const status = searchParams.get('status');
 
-    const skip = (page - 1) * limit;
+    const offset = (page - 1) * limit;
 
-    // Фильтр по статусу
-    const where: { ownerId: string; status?: string } = {
-      ownerId: session.user.id,
-    };
+    const supabase = await createClient();
+
+    // Build query filtered by user_id (owner)
+    let queryBuilder = supabase
+      .from('kazakhstan_deposits')
+      .select('*', { count: 'exact' })
+      .eq('user_id', userId);
+
+    // Apply status filter if provided
     if (status) {
-      where.status = status;
+      queryBuilder = queryBuilder.eq('status', status);
     }
 
-    // Получение объявлений пользователя
-    const [deposits, total] = await Promise.all([
-      prisma.kazakhstanDeposit.findMany({
-        where,
-        orderBy: { createdAt: 'desc' },
-        skip,
-        take: limit,
-        select: {
-          id: true,
-          title: true,
-          description: true,
-          type: true,
-          mineral: true,
-          region: true,
-          city: true,
-          price: true,
-          area: true,
-          coordinates: true,
-          status: true,
-          verified: true,
-          featured: true,
-          views: true,
-          images: true,
-          documents: true,
-          createdAt: true,
-          updatedAt: true,
-          // Type-specific fields
-          licenseSubtype: true,
-          licenseNumber: true,
-          licenseExpiry: true,
-          annualProductionLimit: true,
-          explorationStage: true,
-          explorationStart: true,
-          explorationEnd: true,
-          explorationBudget: true,
-          discoveryDate: true,
-          geologicalConfidence: true,
-          estimatedReserves: true,
-        },
-      }),
-      prisma.kazakhstanDeposit.count({ where }),
-    ]);
+    // Apply sorting and pagination
+    queryBuilder = queryBuilder
+      .order('created_at', { ascending: false })
+      .range(offset, offset + limit - 1);
 
-    const totalPages = Math.ceil(total / limit);
+    const { data, error, count } = await queryBuilder;
 
-    // Преобразование данных для фронтенда
-    const formattedDeposits = deposits.map((deposit) => ({
-      ...deposit,
-      coordinates: JSON.parse(deposit.coordinates as string),
-      images: JSON.parse(deposit.images as string),
-      documents: JSON.parse(deposit.documents as string),
-      price: deposit.price ? parseFloat(deposit.price.toString()) : null,
-      area: parseFloat(deposit.area.toString()),
-      annualProductionLimit: deposit.annualProductionLimit
-        ? parseFloat(deposit.annualProductionLimit.toString())
-        : null,
-      explorationBudget: deposit.explorationBudget
-        ? parseFloat(deposit.explorationBudget.toString())
-        : null,
-      estimatedReserves: deposit.estimatedReserves
-        ? parseFloat(deposit.estimatedReserves.toString())
-        : null,
+    if (error) {
+      throw error;
+    }
+
+    const deposits = (data || []).map((row: any) => ({
+      id: row.id,
+      title: row.title || '',
+      description: row.description || '',
+      type: row.type,
+      mineral: row.mineral,
+      region: row.region,
+      city: row.city || '',
+      price: row.price != null ? Number(row.price) : null,
+      area: Number(row.area) || 0,
+      status: row.status || 'DRAFT',
+      verified: Boolean(row.verified),
+      featured: Boolean(row.featured),
+      views: Number(row.views) || 0,
+      images: Array.isArray(row.images) ? row.images : [],
+      createdAt: row.created_at || '',
+      updatedAt: row.updated_at || '',
+      licenseSubtype: row.license_subtype || null,
+      licenseNumber: row.license_number || null,
+      licenseExpiry: row.license_expiry || null,
+      explorationStage: row.exploration_stage || null,
+      discoveryDate: row.discovery_date || null,
+      geologicalConfidence: row.geological_confidence || null,
+      estimatedReserves:
+        row.estimated_reserves != null ? Number(row.estimated_reserves) : null,
     }));
+
+    const total = count || 0;
+    const totalPages = Math.ceil(total / limit);
 
     return NextResponse.json({
       success: true,
       data: {
-        deposits: formattedDeposits,
+        deposits,
         pagination: {
           page,
           limit,

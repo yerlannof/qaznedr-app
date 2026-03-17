@@ -23,6 +23,7 @@ import {
   detectSqlInjection,
   ValidationSchemas,
 } from '@/lib/middleware/input-sanitization';
+import { getProfile } from '@/lib/supabase/profiles';
 
 export const dynamic = 'force-dynamic';
 
@@ -529,6 +530,13 @@ export async function POST(request: NextRequest) {
 
     const validatedData = validation.data;
 
+    // Determine listing status based on seller trust level
+    let listingStatus: 'ACTIVE' | 'PENDING_MODERATION' = 'PENDING_MODERATION';
+    const profile = await getProfile(user.id);
+    if (profile && (profile as any).is_trusted_seller === true) {
+      listingStatus = 'ACTIVE';
+    }
+
     const insertData: Database['public']['Tables']['kazakhstan_deposits']['Insert'] =
       {
         title: validatedData.title,
@@ -544,7 +552,7 @@ export async function POST(request: NextRequest) {
         documents: validatedData.documents,
         verified: false, // Default requires verification
         featured: false,
-        status: 'DRAFT', // Start as draft
+        status: listingStatus,
         user_id: user.id,
 
         // Conditional fields based on type

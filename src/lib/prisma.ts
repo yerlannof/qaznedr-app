@@ -5,6 +5,15 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient(): PrismaClient {
+  const url = process.env.DATABASE_URL;
+  if (!url) {
+    // Return a dummy client during build — it will never be called at build time
+    return new Proxy({} as PrismaClient, {
+      get() {
+        throw new Error('PrismaClient used without DATABASE_URL');
+      },
+    });
+  }
   return new PrismaClient({
     log:
       process.env.NODE_ENV === 'development'
@@ -12,9 +21,7 @@ function createPrismaClient(): PrismaClient {
         : ['error'],
     errorFormat: 'pretty',
     datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
+      db: { url },
     },
   });
 }

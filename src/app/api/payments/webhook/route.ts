@@ -12,6 +12,7 @@ import Stripe from 'stripe';
 
 // Disable body parsing for raw webhook payload
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 // Main webhook handler with comprehensive security
 async function handleSecureWebhook(

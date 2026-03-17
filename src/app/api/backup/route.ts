@@ -11,6 +11,8 @@ import { backupManager, backupHelpers } from '@/lib/backup/backup-manager';
 import { auditHelpers } from '@/lib/compliance/audit-logger';
 import { z } from 'zod';
 
+export const dynamic = 'force-dynamic';
+
 // Validation schemas
 const BackupRequestSchema = z.object({
   type: z.enum([

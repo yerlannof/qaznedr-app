@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { verifyRateLimit } from '@/lib/middleware/rate-limit';
 
+export const dynamic = 'force-dynamic';
+
 // GET /api/search/autocomplete
 export async function GET(request: NextRequest) {
   try {

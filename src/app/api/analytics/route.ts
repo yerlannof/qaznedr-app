@@ -7,6 +7,8 @@ import { PrismaClient } from '@prisma/client';
 import { logger } from '@/lib/utils/logger';
 import { handleApiError, validateRequired } from '@/lib/utils/error-handler';
 
+export const dynamic = 'force-dynamic';
+
 const prisma = new PrismaClient();
 
 interface AnalyticsEvent {

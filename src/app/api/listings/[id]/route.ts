@@ -3,6 +3,8 @@ import { PrismaClient } from '@prisma/client';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/services/auth.config';
 
+export const dynamic = 'force-dynamic';
+
 const prisma = new PrismaClient();
 
 // GET /api/listings/[id] - получить конкретное объявление

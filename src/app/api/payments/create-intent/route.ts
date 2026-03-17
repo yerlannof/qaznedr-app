@@ -9,6 +9,8 @@ import {
 import { withRateLimit } from '@/lib/middleware/rate-limiting';
 import { z } from 'zod';
 
+export const dynamic = 'force-dynamic';
+
 const createPaymentIntentSchema = z.object({
   listingId: z.string().uuid(),
   amount: z.number().positive().max(999999999),

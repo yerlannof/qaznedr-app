@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server';
 import { z } from 'zod';
 import { verifyRateLimit } from '@/lib/middleware/rate-limit';
 
+export const dynamic = 'force-dynamic';
+
 // Search params type
 interface SearchParams {
   query?: string;

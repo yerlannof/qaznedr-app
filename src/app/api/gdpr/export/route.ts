@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { rateLimit } from '@/lib/middleware/rate-limit';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GDPR Data Export Endpoint
  * Allows users to export all their personal data

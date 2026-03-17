@@ -3,6 +3,8 @@ import { PrismaClient } from '@prisma/client';
 import * as argon2 from 'argon2';
 import { registerSchema, validateRequest } from '@/lib/validations/api';
 
+export const dynamic = 'force-dynamic';
+
 const prisma = new PrismaClient();
 
 export async function POST(request: Request) {

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // POST /api/analytics/custom-metrics - трекинг кастомных метрик производительности
 export async function POST(request: NextRequest) {
   try {

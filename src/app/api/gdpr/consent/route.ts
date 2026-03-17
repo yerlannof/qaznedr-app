@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server';
 import { rateLimit } from '@/lib/middleware/rate-limit';
 import { sanitizeMiningInput } from '@/lib/middleware/input-sanitization';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GDPR Consent Management Endpoint
  * Manages user consent preferences for data processing

@@ -8,6 +8,8 @@ import {
 } from '@/lib/middleware/input-validation';
 import { z } from 'zod';
 
+export const dynamic = 'force-dynamic';
+
 // Test schema for request validation
 const testSchema = z.object({
   title: ValidationSchemas.title,

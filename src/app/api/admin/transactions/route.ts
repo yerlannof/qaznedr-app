@@ -3,6 +3,8 @@ import { withAuth, AuthLevel } from '@/lib/middleware/auth-middleware';
 import { withRateLimit } from '@/lib/middleware/rate-limiting';
 import { transactionManager } from '@/lib/database/transaction-manager';
 
+export const dynamic = 'force-dynamic';
+
 // Get transaction status and statistics
 async function handleTransactionStatus(
   request: NextRequest

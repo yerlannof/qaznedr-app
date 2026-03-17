@@ -9,6 +9,8 @@ import {
 } from '@/lib/monitoring/sentry-service';
 import * as Sentry from '@sentry/nextjs';
 
+export const dynamic = 'force-dynamic';
+
 // Observability metrics interface
 interface ObservabilityMetrics {
   // System Health

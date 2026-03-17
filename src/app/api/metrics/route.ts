@@ -7,6 +7,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { config } from '@/lib/config/env';
 
+export const dynamic = 'force-dynamic';
+
 const prisma = new PrismaClient();
 
 // Simple metrics collector

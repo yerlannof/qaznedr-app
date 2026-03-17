@@ -24,6 +24,8 @@ import {
   ValidationSchemas,
 } from '@/lib/middleware/input-sanitization';
 
+export const dynamic = 'force-dynamic';
+
 // Temporary simplified cache while fixing Redis issues
 const cache = {
   get: async (key?: string) => null,

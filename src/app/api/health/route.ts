@@ -8,6 +8,8 @@ import { PrismaClient } from '@prisma/client';
 import { config } from '@/lib/config/env';
 import { logger } from '@/lib/utils/logger';
 
+export const dynamic = 'force-dynamic';
+
 const prisma = new PrismaClient();
 
 interface HealthCheck {

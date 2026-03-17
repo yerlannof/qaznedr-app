@@ -16,6 +16,8 @@ import {
 import { auditHelpers } from '@/lib/compliance/audit-logger';
 import { z } from 'zod';
 
+export const dynamic = 'force-dynamic';
+
 // Validation schemas
 const ConsentRequestSchema = z.object({
   consentType: z.nativeEnum(ConsentType),

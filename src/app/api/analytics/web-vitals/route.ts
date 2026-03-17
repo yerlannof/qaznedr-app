@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // POST /api/analytics/web-vitals - трекинг web vitals метрик
 export async function POST(request: NextRequest) {
   try {

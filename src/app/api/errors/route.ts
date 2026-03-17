@@ -8,6 +8,8 @@ import { logger } from '@/lib/utils/logger';
 import { handleApiError, validateRequired } from '@/lib/utils/error-handler';
 import type { MonitoredError } from '@/lib/utils/error-monitoring';
 
+export const dynamic = 'force-dynamic';
+
 const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest): Promise<NextResponse> {

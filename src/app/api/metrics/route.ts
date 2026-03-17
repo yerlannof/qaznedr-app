@@ -4,12 +4,10 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { getPrisma } from '@/lib/prisma';
 import { config } from '@/lib/config/env';
 
 export const dynamic = 'force-dynamic';
-
-const prisma = new PrismaClient();
 
 // Simple metrics collector
 class MetricsCollector {
@@ -50,6 +48,7 @@ const metrics = MetricsCollector.getInstance();
 
 // Collect database metrics
 async function collectDatabaseMetrics(): Promise<Record<string, number>> {
+  const prisma = getPrisma();
   try {
     // Count total users
     const userCount = await prisma.user.count();

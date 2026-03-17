@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { getPrisma } from '@/lib/prisma';
 import * as argon2 from 'argon2';
 import { registerSchema, validateRequest } from '@/lib/validations/api';
 
 export const dynamic = 'force-dynamic';
 
-const prisma = new PrismaClient();
-
 export async function POST(request: Request) {
+  const prisma = getPrisma();
   try {
     const body = await request.json();
 

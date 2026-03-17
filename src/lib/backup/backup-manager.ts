@@ -4,7 +4,7 @@
  * Multi-tier backup with encryption, compression, and disaster recovery
  */
 
-import { PrismaClient } from '@prisma/client';
+import { getPrisma } from '@/lib/prisma';
 import { createReadStream, createWriteStream, promises as fs } from 'fs';
 import { createGzip, createGunzip } from 'zlib';
 import { createCipher, createDecipher, randomBytes, pbkdf2Sync } from 'crypto';
@@ -92,12 +92,12 @@ interface BackupJob {
 }
 
 class BackupManager {
-  private prisma: PrismaClient;
+  private prisma: any;
   private config: BackupConfig;
   private encryptionKey: Buffer;
 
   constructor() {
-    this.prisma = new PrismaClient();
+    this.prisma = getPrisma();
     this.config = this.loadConfig();
     this.encryptionKey = this.deriveEncryptionKey();
   }

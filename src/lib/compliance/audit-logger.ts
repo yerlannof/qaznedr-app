@@ -4,7 +4,7 @@
  * Supports GDPR, Kazakhstan data protection laws, and mining regulations
  */
 
-import { PrismaClient } from '@prisma/client';
+import { getPrisma } from '@/lib/prisma';
 import { headers } from 'next/headers';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -109,11 +109,11 @@ export enum AuditCategory {
 }
 
 class AuditLogger {
-  private prisma: PrismaClient;
+  private prisma: any;
   private isEnabled: boolean;
 
   constructor() {
-    this.prisma = new PrismaClient();
+    this.prisma = getPrisma();
     this.isEnabled =
       process.env.NODE_ENV === 'production' ||
       process.env.AUDIT_LOGGING_ENABLED === 'true';

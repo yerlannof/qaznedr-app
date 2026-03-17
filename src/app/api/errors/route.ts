@@ -3,16 +3,15 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { getPrisma } from '@/lib/prisma';
 import { logger } from '@/lib/utils/logger';
 import { handleApiError, validateRequired } from '@/lib/utils/error-handler';
 import type { MonitoredError } from '@/lib/utils/error-monitoring';
 
 export const dynamic = 'force-dynamic';
 
-const prisma = new PrismaClient();
-
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  const prisma = getPrisma();
   try {
     const body: MonitoredError = await request.json();
 
@@ -75,6 +74,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 // Get error statistics and recent errors
 export async function GET(request: NextRequest): Promise<NextResponse> {
+  const prisma = getPrisma();
   try {
     const { searchParams } = new URL(request.url);
     const startDate = searchParams.get('startDate');

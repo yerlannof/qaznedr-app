@@ -4,7 +4,7 @@
  * Handles consent management, data retention, and user rights
  */
 
-import { PrismaClient } from '@prisma/client';
+import { getPrisma } from '@/lib/prisma';
 import { auditLogger, AuditAction } from './audit-logger';
 import { hash, compare } from 'bcryptjs';
 import JSZip from 'jszip';
@@ -98,10 +98,10 @@ interface DataDeletionRequest {
 }
 
 class GDPRComplianceManager {
-  private prisma: PrismaClient;
+  private prisma: any;
 
   constructor() {
-    this.prisma = new PrismaClient();
+    this.prisma = getPrisma();
   }
 
   /**

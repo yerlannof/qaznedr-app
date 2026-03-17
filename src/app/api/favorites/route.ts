@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { getPrisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/services/auth.config';
 
 export const dynamic = 'force-dynamic';
 
-const prisma = new PrismaClient();
-
 // GET /api/favorites - получить избранные объявления пользователя
 export async function GET(_request: NextRequest) {
+  const prisma = getPrisma();
   try {
     const session = await getServerSession(authOptions);
 
@@ -83,6 +82,7 @@ export async function GET(_request: NextRequest) {
 
 // POST /api/favorites - добавить в избранное
 export async function POST(request: NextRequest) {
+  const prisma = getPrisma();
   try {
     const session = await getServerSession(authOptions);
 
@@ -154,6 +154,7 @@ export async function POST(request: NextRequest) {
 
 // DELETE /api/favorites - удалить из избранного
 export async function DELETE(request: NextRequest) {
+  const prisma = getPrisma();
   try {
     const session = await getServerSession(authOptions);
 

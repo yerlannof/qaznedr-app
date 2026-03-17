@@ -4,7 +4,7 @@
  * Query optimization, indexing strategies, and connection pooling
  */
 
-import { PrismaClient } from '@prisma/client';
+import { getPrisma } from '@/lib/prisma';
 import {
   auditLogger,
   AuditAction,
@@ -64,20 +64,13 @@ interface IndexRecommendation {
 }
 
 class DatabasePerformanceOptimizer {
-  private prisma: PrismaClient;
+  private prisma: any;
   private config: PerformanceConfig;
   private queryCache: Map<string, { data: any; timestamp: number }>;
   private performanceMetrics: QueryMetrics[];
 
   constructor() {
-    this.prisma = new PrismaClient({
-      log: ['query', 'info', 'warn', 'error'],
-      datasources: {
-        db: {
-          url: process.env.DATABASE_URL,
-        },
-      },
-    });
+    this.prisma = getPrisma();
 
     this.config = this.loadPerformanceConfig();
     this.queryCache = new Map();

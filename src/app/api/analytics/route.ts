@@ -3,13 +3,11 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { getPrisma } from '@/lib/prisma';
 import { logger } from '@/lib/utils/logger';
 import { handleApiError, validateRequired } from '@/lib/utils/error-handler';
 
 export const dynamic = 'force-dynamic';
-
-const prisma = new PrismaClient();
 
 interface AnalyticsEvent {
   name: string;
@@ -20,6 +18,7 @@ interface AnalyticsEvent {
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  const prisma = getPrisma();
   try {
     const body = await request.json();
 
@@ -79,6 +78,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 // Get analytics data (for internal use/dashboards)
 export async function GET(request: NextRequest): Promise<NextResponse> {
+  const prisma = getPrisma();
   try {
     const { searchParams } = new URL(request.url);
     const startDate = searchParams.get('startDate');

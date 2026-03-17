@@ -4,13 +4,11 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { getPrisma } from '@/lib/prisma';
 import { config } from '@/lib/config/env';
 import { logger } from '@/lib/utils/logger';
 
 export const dynamic = 'force-dynamic';
-
-const prisma = new PrismaClient();
 
 interface HealthCheck {
   status: 'healthy' | 'degraded' | 'unhealthy';
@@ -42,6 +40,7 @@ interface ServiceStatus {
 // Check database connectivity
 async function checkDatabase(): Promise<ServiceStatus> {
   const startTime = Date.now();
+  const prisma = getPrisma();
 
   try {
     await prisma.$queryRaw`SELECT 1`;

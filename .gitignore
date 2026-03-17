@@ -70,3 +70,4 @@ logs/
 build.log
 eslint-output.txt
 test-output.txt
+.env*.local

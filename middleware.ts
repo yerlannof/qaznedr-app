@@ -53,7 +53,7 @@ async function applyGlobalRateLimit(
   return null;
 }
 
-const locales = ['ru', 'kz', 'en'];
+const locales = ['ru', 'kz', 'en', 'zh'];
 const defaultLocale = 'ru';
 
 function getLocale(pathname: string): string {
@@ -159,6 +159,35 @@ export async function middleware(request: NextRequest) {
 
   // If we have a locale in the path, save it to cookie
   const currentLocale = getLocale(pathname);
+
+  // Protect dashboard routes - require authentication
+  const isDashboard = pathname.includes('/dashboard');
+  if (isDashboard) {
+    const sessionToken =
+      request.cookies.get('next-auth.session-token')?.value ||
+      request.cookies.get('__Secure-next-auth.session-token')?.value;
+    if (!sessionToken) {
+      const locale = pathname.split('/')[1] || 'ru';
+      return NextResponse.redirect(
+        new URL(`/${locale}/auth/login`, request.url)
+      );
+    }
+  }
+
+  // Protect profile-setup route - require authentication
+  const isProfileSetup = pathname.includes('/auth/profile-setup');
+  if (isProfileSetup) {
+    const sessionToken =
+      request.cookies.get('next-auth.session-token')?.value ||
+      request.cookies.get('__Secure-next-auth.session-token')?.value;
+    if (!sessionToken) {
+      const locale = pathname.split('/')[1] || 'ru';
+      return NextResponse.redirect(
+        new URL(`/${locale}/auth/login`, request.url)
+      );
+    }
+  }
+
   let response = NextResponse.next();
 
   // Update the locale cookie with current locale

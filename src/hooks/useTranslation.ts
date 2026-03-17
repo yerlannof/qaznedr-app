@@ -131,6 +131,23 @@ const translations = {
       filter: 'Фильтр',
       close: 'Закрыть',
     },
+    profile: {
+      setup: {
+        title: 'Выберите тип профиля',
+        subtitle: 'Это поможет нам настроить платформу под ваши потребности',
+        continue: 'Продолжить',
+      },
+      type: {
+        subsoilUser: 'Недропользователь',
+        subsoilUserDesc:
+          'Владелец лицензий на добычу или разведку полезных ископаемых',
+        serviceProvider: 'Поставщик услуг',
+        serviceProviderDesc:
+          'Компания, оказывающая услуги для горнодобывающей отрасли',
+        investor: 'Инвестор / Покупатель',
+        investorDesc: 'Инвестор или покупатель минеральных ресурсов и лицензий',
+      },
+    },
     services: {
       hero: {
         title: 'Экосистема горнодобывающих услуг',
@@ -424,6 +441,24 @@ const translations = {
       filter: 'Сүзгі',
       close: 'Жабу',
     },
+    profile: {
+      setup: {
+        title: 'Профиль түрін таңдаңыз',
+        subtitle:
+          'Бұл платформаны сіздің қажеттіліктеріңізге бейімдеуге көмектеседі',
+        continue: 'Жалғастыру',
+      },
+      type: {
+        subsoilUser: 'Жер қойнауын пайдаланушы',
+        subsoilUserDesc:
+          'Пайдалы қазбаларды өндіру немесе барлау лицензияларының иесі',
+        serviceProvider: 'Қызмет көрсетуші',
+        serviceProviderDesc: 'Тау-кен өнеркәсібіне қызмет көрсететін компания',
+        investor: 'Инвестор / Сатып алушы',
+        investorDesc:
+          'Минералдық ресурстар мен лицензиялардың инвесторы немесе сатып алушысы',
+      },
+    },
     services: {
       categories: {
         drilling: 'Бұрғылау',
@@ -610,6 +645,23 @@ const translations = {
       filter: 'Filter',
       close: 'Close',
     },
+    profile: {
+      setup: {
+        title: 'Choose your profile type',
+        subtitle: 'This will help us tailor the platform to your needs',
+        continue: 'Continue',
+      },
+      type: {
+        subsoilUser: 'Subsoil User',
+        subsoilUserDesc:
+          'Owner of mining or exploration licenses for mineral resources',
+        serviceProvider: 'Service Provider',
+        serviceProviderDesc:
+          'Company providing services to the mining industry',
+        investor: 'Investor / Buyer',
+        investorDesc: 'Investor or buyer of mineral resources and licenses',
+      },
+    },
     services: {
       categories: {
         drilling: 'Drilling',
@@ -793,6 +845,21 @@ const translations = {
       search: '搜索',
       filter: '筛选',
       close: '关闭',
+    },
+    profile: {
+      setup: {
+        title: '选择您的个人资料类型',
+        subtitle: '这将帮助我们根据您的需求定制平台',
+        continue: '继续',
+      },
+      type: {
+        subsoilUser: '地下资源使用者',
+        subsoilUserDesc: '矿产资源开采或勘探许可证持有人',
+        serviceProvider: '服务提供商',
+        serviceProviderDesc: '为采矿业提供服务的公司',
+        investor: '投资者 / 买家',
+        investorDesc: '矿产资源和许可证的投资者或买家',
+      },
     },
     services: {
       categories: {

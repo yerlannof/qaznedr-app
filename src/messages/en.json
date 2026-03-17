@@ -7,7 +7,8 @@
     "save": "Save",
     "delete": "Delete",
     "edit": "Edit",
-    "search": "Search"
+    "search": "Search",
+    "continue": "Continue"
   },
   "nav": {
     "home": "Home",
@@ -15,10 +16,27 @@
     "dashboard": "Dashboard",
     "favorites": "Favorites",
     "messages": "Messages",
-    "profile": "Profile"
+    "profile": "Profile",
+    "login": "Log in",
+    "register": "Register",
+    "logout": "Log out"
   },
   "home": {
     "title": "Welcome to QAZNEDR",
     "subtitle": "Kazakhstan Mining License Trading Platform"
+  },
+  "profile": {
+    "setup": {
+      "title": "Choose your role",
+      "subtitle": "This helps us personalize your experience"
+    },
+    "type": {
+      "subsoilUser": "Subsoil User",
+      "subsoilUserDesc": "I sell mineral deposits and mining licenses",
+      "serviceProvider": "Service Provider",
+      "serviceProviderDesc": "I offer geology and mining services",
+      "investor": "Investor / Buyer",
+      "investorDesc": "I'm looking for deposits to buy or invest in"
+    }
   }
 }

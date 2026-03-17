@@ -329,6 +329,75 @@ export interface Database {
           created_at?: string;
         };
       };
+      profiles: {
+        Row: {
+          id: string;
+          full_name: string;
+          email: string;
+          profile_type: 'subsoil_user' | 'service_provider' | 'investor';
+          country: string | null;
+          company_name: string | null;
+          phone: string | null;
+          description: string | null;
+          avatar_url: string | null;
+          city: string | null;
+          website: string | null;
+          service_types: string[] | null;
+          contacts_viewed_count: number;
+          contacts_viewed_limit: number | null;
+          is_verified: boolean;
+          verified_at: string | null;
+          verification_document_url: string | null;
+          is_trusted_seller: boolean;
+          listings_moderated_count: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          full_name: string;
+          email: string;
+          profile_type?: 'subsoil_user' | 'service_provider' | 'investor';
+          country?: string | null;
+          company_name?: string | null;
+          phone?: string | null;
+          description?: string | null;
+          avatar_url?: string | null;
+          city?: string | null;
+          website?: string | null;
+          service_types?: string[] | null;
+        };
+        Update: {
+          full_name?: string;
+          email?: string;
+          profile_type?: 'subsoil_user' | 'service_provider' | 'investor';
+          country?: string | null;
+          company_name?: string | null;
+          phone?: string | null;
+          description?: string | null;
+          avatar_url?: string | null;
+          city?: string | null;
+          website?: string | null;
+          service_types?: string[] | null;
+          verification_document_url?: string | null;
+          updated_at?: string;
+        };
+      };
+      contact_views: {
+        Row: {
+          id: string;
+          viewer_id: string;
+          listing_id: string | null;
+          seller_id: string | null;
+          viewed_at: string;
+        };
+        Insert: {
+          viewer_id: string;
+          listing_id?: string | null;
+          seller_id?: string | null;
+        };
+        Update: never;
+      };
       error_logs: {
         Row: {
           id: string;

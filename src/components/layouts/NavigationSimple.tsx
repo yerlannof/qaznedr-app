@@ -10,11 +10,11 @@ import {
   Globe,
   Sun,
   Moon,
-  User,
   ChevronDown,
   Menu,
   X,
 } from 'lucide-react';
+import UserMenu from '@/components/features/UserMenu';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -230,9 +230,7 @@ export default function NavigationSimple() {
             </Link>
 
             {/* User menu */}
-            <button className="p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors">
-              <User className="w-5 h-5" />
-            </button>
+            <UserMenu />
           </div>
         </div>
       </div>

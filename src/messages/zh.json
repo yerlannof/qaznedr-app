@@ -1,0 +1,42 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "retry": "重试",
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "search": "搜索",
+    "continue": "继续"
+  },
+  "nav": {
+    "home": "首页",
+    "listings": "矿权列表",
+    "dashboard": "控制面板",
+    "favorites": "收藏夹",
+    "messages": "消息",
+    "profile": "个人资料",
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出登录"
+  },
+  "home": {
+    "title": "欢迎来到 QAZNEDR",
+    "subtitle": "哈萨克斯坦矿业许可证交易平台"
+  },
+  "profile": {
+    "setup": {
+      "title": "选择您的角色",
+      "subtitle": "这将帮助我们为您提供个性化体验"
+    },
+    "type": {
+      "subsoilUser": "矿产权持有者",
+      "subsoilUserDesc": "我出售矿产资源和采矿许可证",
+      "serviceProvider": "服务提供商",
+      "serviceProviderDesc": "我提供地质和矿业相关服务",
+      "investor": "投资者 / 买家",
+      "investorDesc": "我正在寻找可以购买或投资的矿产资源"
+    }
+  }
+}

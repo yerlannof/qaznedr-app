@@ -2,10 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 
-// Initialize Redis connection
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+// Lazy Redis initialization
+let _redis: Redis | null = null;
+function getRedisInstance(): Redis | null {
+  if (!_redis) {
+    const url = process.env.UPSTASH_REDIS_REST_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+    if (!url || !token) return null;
+    _redis = new Redis({ url, token });
+  }
+  return _redis;
+}
+const redis = new Proxy({} as Redis, {
+  get(_target, prop) {
+    const r = getRedisInstance();
+    if (!r) throw new Error('Redis not configured');
+    return (r as any)[prop];
+  },
 });
 
 // Rate limiting configurations for different endpoint types

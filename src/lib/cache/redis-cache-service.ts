@@ -35,10 +35,27 @@ const CACHE_CONFIG = {
   batchSize: 100,
 };
 
-// Initialize Redis connection (using existing Upstash configuration)
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+// Lazy Redis initialization (avoids crash during build when env vars are missing)
+let _redis: Redis | null = null;
+function getRedis(): Redis {
+  if (!_redis) {
+    const url = process.env.UPSTASH_REDIS_REST_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+    if (!url || !token) {
+      return new Proxy({} as Redis, {
+        get() {
+          throw new Error('Redis not configured');
+        },
+      });
+    }
+    _redis = new Redis({ url, token });
+  }
+  return _redis;
+}
+const redis = new Proxy({} as Redis, {
+  get(_target, prop) {
+    return (getRedis() as any)[prop];
+  },
 });
 
 export class RedisCacheService {

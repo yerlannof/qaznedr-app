@@ -1,11 +1,21 @@
 import Stripe from 'stripe';
 import { z } from 'zod';
 
-// Initialize Stripe with API key
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-08-27.basil',
-  typescript: true,
-});
+// Lazy Stripe initialization (avoids crash during build when key is missing)
+let _stripe: Stripe | null = null;
+function getStripe(): Stripe {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) {
+      throw new Error('STRIPE_SECRET_KEY is not configured');
+    }
+    _stripe = new Stripe(key, {
+      apiVersion: '2025-08-27.basil' as Stripe.LatestApiVersion,
+      typescript: true,
+    });
+  }
+  return _stripe;
+}
 
 // Payment amount validation
 const paymentAmountSchema = z.object({
@@ -55,7 +65,7 @@ export class StripePaymentService {
       // Convert to smallest currency unit (tiyn for KZT, cents for USD/EUR)
       const amountInSmallestUnit = Math.round(validAmount * 100);
 
-      const paymentIntent = await stripe.paymentIntents.create({
+      const paymentIntent = await getStripe().paymentIntents.create({
         amount: amountInSmallestUnit,
         currency: validCurrency.toLowerCase(),
         automatic_payment_methods: {
@@ -85,24 +95,27 @@ export class StripePaymentService {
       const validCustomer = customerSchema.parse(customerData);
 
       // Check if customer exists
-      const existingCustomers = await stripe.customers.list({
+      const existingCustomers = await getStripe().customers.list({
         email: validCustomer.email,
         limit: 1,
       });
 
       if (existingCustomers.data.length > 0) {
         // Update existing customer
-        return await stripe.customers.update(existingCustomers.data[0].id, {
-          name: validCustomer.name,
-          phone: validCustomer.phone,
-          metadata: {
-            userId: validCustomer.userId,
-          },
-        });
+        return await getStripe().customers.update(
+          existingCustomers.data[0].id,
+          {
+            name: validCustomer.name,
+            phone: validCustomer.phone,
+            metadata: {
+              userId: validCustomer.userId,
+            },
+          }
+        );
       }
 
       // Create new customer
-      return await stripe.customers.create({
+      return await getStripe().customers.create({
         email: validCustomer.email,
         name: validCustomer.name,
         phone: validCustomer.phone,
@@ -133,7 +146,7 @@ export class StripePaymentService {
       const platformFee = Math.round(amount * validListing.commission);
       const sellerAmount = amount - platformFee;
 
-      const session = await stripe.checkout.sessions.create({
+      const session = await getStripe().checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
           {
@@ -185,7 +198,7 @@ export class StripePaymentService {
   async capturePayment(paymentIntentId: string): Promise<Stripe.PaymentIntent> {
     try {
       const paymentIntent =
-        await stripe.paymentIntents.capture(paymentIntentId);
+        await getStripe().paymentIntents.capture(paymentIntentId);
       return paymentIntent;
     } catch (error) {
       console.error('Error capturing payment:', error);
@@ -202,7 +215,7 @@ export class StripePaymentService {
     reason?: string
   ): Promise<Stripe.Refund> {
     try {
-      const refund = await stripe.refunds.create({
+      const refund = await getStripe().refunds.create({
         payment_intent: paymentIntentId,
         amount: amount ? Math.round(amount * 100) : undefined,
         reason: reason as Stripe.RefundCreateParams.Reason,
@@ -228,7 +241,7 @@ export class StripePaymentService {
     businessType: 'individual' | 'company' = 'individual'
   ): Promise<Stripe.Account> {
     try {
-      const account = await stripe.accounts.create({
+      const account = await getStripe().accounts.create({
         type: 'express',
         country,
         email,
@@ -259,7 +272,7 @@ export class StripePaymentService {
     returnUrl: string
   ): Promise<Stripe.AccountLink> {
     try {
-      const accountLink = await stripe.accountLinks.create({
+      const accountLink = await getStripe().accountLinks.create({
         account: accountId,
         refresh_url: refreshUrl,
         return_url: returnUrl,
@@ -291,7 +304,7 @@ export class StripePaymentService {
     signature: string
   ): Promise<{ received: boolean; event?: Stripe.Event }> {
     try {
-      const event = stripe.webhooks.constructEvent(
+      const event = getStripe().webhooks.constructEvent(
         rawBody,
         signature,
         process.env.STRIPE_WEBHOOK_SECRET!
@@ -364,7 +377,7 @@ export class StripePaymentService {
     limit: number = 10
   ): Promise<Stripe.PaymentIntent[]> {
     try {
-      const paymentIntents = await stripe.paymentIntents.list({
+      const paymentIntents = await getStripe().paymentIntents.list({
         customer: customerId,
         limit,
       });

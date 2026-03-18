@@ -10,6 +10,7 @@ import ExplorationLicenseDetails from '@/components/detail-sections/ExplorationL
 import MineralOccurrenceDetails from '@/components/detail-sections/MineralOccurrenceDetails';
 import SocialShare from '@/components/features/SocialShare';
 import MessagingSystem from '@/components/features/MessagingSystem';
+import ContactReveal from '@/components/features/ContactReveal';
 import { depositApi } from '@/lib/api/deposits';
 import { favoritesApi } from '@/lib/api/favorites';
 import type { KazakhstanDeposit } from '@/lib/types/listing';
@@ -17,11 +18,8 @@ import {
   Bookmark,
   Heart,
   MapPin,
-  Calendar,
-  Eye,
   FileText,
   AlertTriangle,
-  Phone,
   MessageSquare,
 } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -393,7 +391,16 @@ export default function DepositDetailPage() {
 
             {/* Sidebar */}
             <div className="space-y-6">
-              {/* Contact Card */}
+              {/* Contact Reveal */}
+              <ContactReveal
+                listingId={deposit.id}
+                sellerId={deposit.userId}
+                ownerName={deposit.contactName}
+                ownerPhone={deposit.contactPhone}
+                ownerEmail={deposit.contactEmail}
+              />
+
+              {/* Actions Card */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
                   Связаться с продавцом
@@ -414,10 +421,6 @@ export default function DepositDetailPage() {
                     >
                       <FileText className="w-4 h-4" />
                       Форма обратной связи
-                    </button>
-                    <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-                      <Phone className="w-4 h-4" />
-                      Позвонить
                     </button>
                     <button
                       onClick={handleFavoriteToggle}

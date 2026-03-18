@@ -89,6 +89,11 @@ export interface KazakhstanDeposit {
   geologicalConfidence?: 'INFERRED' | 'INDICATED' | 'MEASURED';
   estimatedReserves?: number;
   accessibilityRating?: 'EASY' | 'MODERATE' | 'DIFFICULT' | 'VERY_DIFFICULT';
+
+  // Контактная информация продавца
+  contactName?: string;
+  contactPhone?: string;
+  contactEmail?: string;
 }
 
 // Фильтры для поиска месторождений

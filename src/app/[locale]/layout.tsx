@@ -6,7 +6,56 @@ import { Toaster } from 'sonner';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { WebVitalsTracker } from '@/components/monitoring/WebVitalsTracker';
+import type { Metadata, Viewport } from 'next';
 import '../../styles/globals.css';
+
+export const metadata: Metadata = {
+  title: {
+    default: 'QAZNEDR.KZ — Площадка недропользования Казахстана',
+    template: '%s | QAZNEDR.KZ',
+  },
+  description:
+    'B2B маркетплейс для покупки и продажи месторождений, горнодобывающих лицензий и геологических услуг в Казахстане. Для инвесторов, недропользователей и сервис-провайдеров.',
+  keywords: [
+    'месторождения Казахстан',
+    'горнодобыча',
+    'mining licenses Kazakhstan',
+    'mineral deposits',
+    '矿产资源哈萨克斯坦',
+    'лицензии на добычу',
+    'геология',
+  ],
+  openGraph: {
+    title: 'QAZNEDR.KZ — Площадка недропользования Казахстана',
+    description:
+      'B2B маркетплейс для покупки и продажи месторождений в Казахстане',
+    url: 'https://qaznedr.vercel.app',
+    siteName: 'QAZNEDR.KZ',
+    locale: 'ru_KZ',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://qaznedr.vercel.app',
+    languages: {
+      ru: 'https://qaznedr.vercel.app/ru',
+      en: 'https://qaznedr.vercel.app/en',
+      kk: 'https://qaznedr.vercel.app/kz',
+      zh: 'https://qaznedr.vercel.app/zh',
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+};
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

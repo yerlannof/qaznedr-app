@@ -135,6 +135,27 @@ export default function ServicesPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Catalog CTA Banner */}
+        <section className="mb-10">
+          <Link href={`/${locale}/services/catalog`}>
+            <div className="flex items-center justify-between bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-800 rounded-xl p-5 hover:shadow-md transition-all group">
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                  Каталог услуг
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Буровые работы, консалтинг, аудит, юридические услуги и многое
+                  другое
+                </p>
+              </div>
+              <span className="text-blue-600 dark:text-blue-400 font-medium flex items-center gap-1 group-hover:gap-2 transition-all text-sm whitespace-nowrap ml-4">
+                Перейти в каталог услуг
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </div>
+          </Link>
+        </section>
+
         {/* Service Categories */}
         <section className="mb-16">
           <div className="text-center mb-12">

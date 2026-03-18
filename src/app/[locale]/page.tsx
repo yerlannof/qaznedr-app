@@ -21,12 +21,30 @@ import {
   TrendingUp,
   Shield,
   Sparkles,
+  UserPlus,
+  FileText,
+  Handshake,
 } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const { t, locale } = useTranslation();
+  const [listingsCount, setListingsCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch('/api/listings?limit=1')
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && json.data?.pagination?.total) {
+          setListingsCount(json.data.pagination.total);
+        }
+      })
+      .catch(() => {
+        // silently fail, will show fallback
+      });
+  }, []);
 
   return (
     <PageTransition>
@@ -88,6 +106,113 @@ export default function Home() {
                 </FadeInWhenVisible>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* How It Works Section */}
+        <div className="max-w-6xl mx-auto px-4 py-16">
+          <FadeInWhenVisible>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                {locale === 'en'
+                  ? 'How It Works'
+                  : locale === 'kz'
+                    ? 'Қалай жұмыс істейді'
+                    : locale === 'zh'
+                      ? '如何运作'
+                      : 'Как это работает'}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                {locale === 'en'
+                  ? 'Start working with the platform in three simple steps'
+                  : locale === 'kz'
+                    ? 'Үш қарапайым қадаммен платформамен жұмыс істеңіз'
+                    : locale === 'zh'
+                      ? '通过三个简单步骤开始使用平台'
+                      : 'Начните работу с платформой за три простых шага'}
+              </p>
+            </div>
+          </FadeInWhenVisible>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: UserPlus,
+                step: '01',
+                title:
+                  locale === 'en'
+                    ? 'Register'
+                    : locale === 'kz'
+                      ? 'Тіркеліңіз'
+                      : locale === 'zh'
+                        ? '注册'
+                        : 'Зарегистрируйтесь',
+                desc:
+                  locale === 'en'
+                    ? 'Create an account and set up your company profile'
+                    : locale === 'kz'
+                      ? 'Аккаунт жасаңыз және компания профилін баптаңыз'
+                      : locale === 'zh'
+                        ? '创建账户并设置公司资料'
+                        : 'Создайте аккаунт и настройте профиль компании',
+              },
+              {
+                icon: FileText,
+                step: '02',
+                title:
+                  locale === 'en'
+                    ? 'Post a Listing'
+                    : locale === 'kz'
+                      ? 'Хабарландыру жариялаңыз'
+                      : locale === 'zh'
+                        ? '发布信息'
+                        : 'Разместите объявление',
+                desc:
+                  locale === 'en'
+                    ? 'Publish your deposit, license, or service listing'
+                    : locale === 'kz'
+                      ? 'Кен орнын, лицензияны немесе қызметті жариялаңыз'
+                      : locale === 'zh'
+                        ? '发布您的矿床、许可证或服务信息'
+                        : 'Опубликуйте месторождение, лицензию или услугу',
+              },
+              {
+                icon: Handshake,
+                step: '03',
+                title:
+                  locale === 'en'
+                    ? 'Find a Partner'
+                    : locale === 'kz'
+                      ? 'Серіктес табыңыз'
+                      : locale === 'zh'
+                        ? '寻找合作伙伴'
+                        : 'Найдите партнёра',
+                desc:
+                  locale === 'en'
+                    ? 'Connect with buyers, sellers, and service providers'
+                    : locale === 'kz'
+                      ? 'Сатып алушылармен, сатушылармен және қызмет көрсетушілермен байланысыңыз'
+                      : locale === 'zh'
+                        ? '与买家、卖家和服务商建立联系'
+                        : 'Свяжитесь с покупателями, продавцами и поставщиками услуг',
+              },
+            ].map((item, index) => (
+              <FadeInWhenVisible key={index} delay={index * 0.2} direction="up">
+                <div className="relative text-center p-6">
+                  <div className="text-5xl font-bold text-blue-100 dark:text-blue-900/40 absolute top-2 right-4 select-none">
+                    {item.step}
+                  </div>
+                  <div className="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mx-auto mb-4 border border-blue-200/50 dark:border-blue-800/50">
+                    <item.icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    {item.desc}
+                  </p>
+                </div>
+              </FadeInWhenVisible>
+            ))}
           </div>
         </div>
 
@@ -181,9 +306,12 @@ export default function Home() {
 
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
-              { value: '500+', label: t('home.activeListings') },
+              {
+                value: listingsCount !== null ? String(listingsCount) : '...',
+                label: t('home.activeListings'),
+              },
               { value: '14', label: t('home.kazakhstanRegions') },
-              { value: '100+', label: t('home.verifiedCompanies') },
+              { value: '10+', label: t('home.verifiedCompanies') },
               { value: '24/7', label: t('home.customerSupport') },
             ].map((stat, index) => (
               <FadeInWhenVisible

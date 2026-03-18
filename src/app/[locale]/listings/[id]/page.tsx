@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'next/navigation';
-import Head from 'next/head';
 import Link from 'next/link';
 import NavigationSimple from '@/components/layouts/NavigationSimple';
 import MiningLicenseDetails from '@/components/detail-sections/MiningLicenseDetails';
@@ -23,6 +22,19 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
+
+function getTypeLabel(type: string) {
+  switch (type) {
+    case 'MINING_LICENSE':
+      return 'Mining License';
+    case 'EXPLORATION_LICENSE':
+      return 'Exploration License';
+    case 'MINERAL_OCCURRENCE':
+      return 'Mineral Occurrence';
+    default:
+      return type;
+  }
+}
 
 export default function DepositDetailPage() {
   const params = useParams();
@@ -72,6 +84,49 @@ export default function DepositDetailPage() {
 
     loadDeposit();
   }, [depositId]);
+
+  // JSON-LD structured data for SEO
+  const jsonLd = useMemo(() => {
+    if (!deposit) return null;
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: deposit.title,
+      description: deposit.description,
+      category: getTypeLabel(deposit.type),
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'KZT',
+        price: deposit.price || 0,
+        availability:
+          deposit.status === 'SOLD'
+            ? 'https://schema.org/SoldOut'
+            : 'https://schema.org/InStock',
+      },
+      additionalProperty: [
+        {
+          '@type': 'PropertyValue',
+          name: 'Mineral',
+          value: deposit.mineral,
+        },
+        {
+          '@type': 'PropertyValue',
+          name: 'Region',
+          value: deposit.region,
+        },
+        {
+          '@type': 'PropertyValue',
+          name: 'Type',
+          value: deposit.type,
+        },
+        {
+          '@type': 'PropertyValue',
+          name: 'Area',
+          value: `${deposit.area} km²`,
+        },
+      ],
+    };
+  }, [deposit]);
 
   // Обработка добавления/удаления из избранного
   const handleFavoriteToggle = async () => {
@@ -182,14 +237,12 @@ export default function DepositDetailPage() {
 
   return (
     <>
-      <Head>
-        <title>{deposit.title} - QAZNEDR.KZ</title>
-        <meta name="description" content={deposit.description} />
-        <meta property="og:title" content={deposit.title} />
-        <meta property="og:description" content={deposit.description} />
-        <meta property="og:type" content="website" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       <div className="min-h-screen bg-gray-50">
         <NavigationSimple />
 

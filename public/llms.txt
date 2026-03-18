@@ -1,0 +1,18 @@
+# QAZNEDR.KZ - Kazakhstan Mining Marketplace
+
+QAZNEDR.KZ is a B2B marketplace for buying and selling mineral deposits, mining licenses, and geological services in Kazakhstan.
+
+## What we offer:
+- Mining licenses (active extraction rights)
+- Exploration licenses (geological exploration permits)
+- Mineral occurrences (documented mineral findings)
+- Geology services (drilling, consulting, audit, legal, lab analysis)
+
+## Regions covered: All 14 regions of Kazakhstan
+## Languages: Russian, Kazakh, English, Chinese
+## Target audience: Mining companies, investors (including Chinese), geologists, service providers
+
+## Key URLs:
+- Listings: /ru/listings
+- Services: /ru/services/catalog
+- API: /api/listings (public, JSON)

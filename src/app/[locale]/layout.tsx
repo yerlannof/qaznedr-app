@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Toaster } from 'sonner';
@@ -57,18 +57,10 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-inter',
   display: 'swap',
-  preload: true,
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  display: 'swap',
-  preload: false,
 });
 
 export default async function LocaleLayout({
@@ -88,9 +80,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${inter.variable} ${inter.className} antialiased`}>
         <ThemeProvider>
           <AuthProvider>
             <WebVitalsTracker pageName={`/${locale}`} />

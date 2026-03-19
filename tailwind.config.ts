@@ -19,6 +19,14 @@ const config: Config = {
         border: '#E5E7EB',
         card: '#FFFFFF',
         'card-foreground': '#111827',
+        'dark-bg': '#0A0A0A',
+        'dark-surface': '#141414',
+        'dark-border': '#262626',
+      },
+      boxShadow: {
+        subtle: '0 1px 2px rgba(0,0,0,0.04)',
+        medium: '0 4px 12px rgba(0,0,0,0.08)',
+        elevated: '0 8px 30px rgba(0,0,0,0.12)',
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in-out',

@@ -6,6 +6,7 @@ import { Toaster } from 'sonner';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { WebVitalsTracker } from '@/components/monitoring/WebVitalsTracker';
+import MobileTabBar from '@/components/layouts/MobileTabBar';
 import type { Metadata, Viewport } from 'next';
 import '../../styles/globals.css';
 
@@ -84,7 +85,8 @@ export default async function LocaleLayout({
         <ThemeProvider>
           <AuthProvider>
             <WebVitalsTracker pageName={`/${locale}`} />
-            {children}
+            <div className="pb-16 md:pb-0">{children}</div>
+            <MobileTabBar />
             <Toaster position="top-right" richColors />
             <Analytics />
             <SpeedInsights />

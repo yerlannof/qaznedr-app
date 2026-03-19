@@ -71,3 +71,6 @@ build.log
 eslint-output.txt
 test-output.txt
 .env*.local
+
+# Superpowers brainstorm files
+.superpowers/

@@ -1,6 +1,6 @@
 'use client';
 
-import NavigationSimple from '@/components/layouts/NavigationSimple';
+import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import PageTransition from '@/components/layouts/PageTransition';
 import { GlassCard, GlassButton } from '@/components/ui/glass-card';
@@ -48,7 +48,7 @@ export default function Home() {
 
   return (
     <PageTransition>
-      <NavigationSimple />
+      <Navigation />
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900">
         {/* Hero Section */}
         <div className="relative">

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Pencil, List, Shield, Eye } from 'lucide-react';
-import NavigationSimple from '@/components/layouts/NavigationSimple';
+import Navigation from '@/components/layouts/Navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 
 interface Profile {
@@ -74,7 +74,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <NavigationSimple />
+      <Navigation />
 
       <div className="pt-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

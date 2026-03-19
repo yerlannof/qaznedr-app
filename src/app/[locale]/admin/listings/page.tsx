@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import NavigationSimple from '@/components/layouts/NavigationSimple';
+import Navigation from '@/components/layouts/Navigation';
 import {
   Shield,
   FileText,
@@ -168,7 +168,7 @@ export default function AdminListingsModeration() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <NavigationSimple />
+      <Navigation />
 
       <div className="pt-20 pb-10 px-4 max-w-7xl mx-auto">
         {/* Header */}

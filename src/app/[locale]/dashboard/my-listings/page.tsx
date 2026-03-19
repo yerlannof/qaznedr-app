@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import NavigationSimple from '@/components/layouts/NavigationSimple';
+import Navigation from '@/components/layouts/Navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Plus, FileText, Eye, MapPin, Calendar } from 'lucide-react';
 
@@ -143,7 +143,7 @@ export default function MyListingsPage() {
   if (authStatus === 'loading') {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        <NavigationSimple />
+        <Navigation />
         <div className="pt-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-48 mb-6 animate-pulse" />
@@ -162,7 +162,7 @@ export default function MyListingsPage() {
   if (!session) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        <NavigationSimple />
+        <Navigation />
         <div className="pt-16 flex items-center justify-center min-h-[60vh]">
           <div className="text-center px-4">
             <FileText className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
@@ -186,7 +186,7 @@ export default function MyListingsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <NavigationSimple />
+      <Navigation />
 
       <div className="pt-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

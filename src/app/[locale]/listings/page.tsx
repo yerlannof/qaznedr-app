@@ -5,7 +5,7 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import NavigationSimple from '@/components/layouts/NavigationSimple';
+import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import ListingsFilters from '@/components/features/ListingsFilters';
@@ -152,7 +152,7 @@ function ListingsContent() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <NavigationSimple />
+      <Navigation />
 
       {/* Header */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 pt-16">

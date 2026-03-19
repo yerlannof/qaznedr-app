@@ -1,15 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
 export default function SkeletonCard() {
   return (
-    <motion.div
-      className="bg-white rounded-xl border border-gray-200 overflow-hidden"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
+    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
       {/* Image skeleton */}
       <div className="aspect-[4/3] relative bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:200%_100%] animate-[shimmer_1.5s_ease-in-out_infinite]">
         <div className="absolute inset-0 flex items-center justify-center">
@@ -61,6 +54,6 @@ export default function SkeletonCard() {
         {/* Button */}
         <div className="w-full h-10 bg-gray-300 rounded-lg animate-pulse" />
       </div>
-    </motion.div>
+    </div>
   );
 }

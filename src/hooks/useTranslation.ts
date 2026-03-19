@@ -16,6 +16,12 @@ const translations = {
     },
     home: {
       officialPlatform: 'Официальная цифровая платформа',
+      platformLabel: 'ПЛАТФОРМА НЕДРОПОЛЬЗОВАНИЯ',
+      heroTitle: 'Месторождения и лицензии Казахстана',
+      heroSubtitle:
+        'Покупка и продажа горнодобывающих лицензий, участков разведки и минеральных объектов.',
+      catalog: 'Каталог',
+      post: 'Разместить',
       title: 'Единая цифровая экосистема недропользования Казахстана',
       subtitle:
         'Инновационная платформа, обеспечивающая прозрачное взаимодействие между инвесторами, геологами, горнодобывающими компаниями и государственными органами. Способствуем цифровизации отрасли через комплексное управление лицензированием, разведкой и минеральными ресурсами.',
@@ -37,6 +43,20 @@ const translations = {
       kazakhstanRegions: 'Регионов Казахстана',
       verifiedCompanies: 'Проверенных компаний',
       customerSupport: 'Поддержка клиентов',
+      statsListings: 'объявлений',
+      statsRegions: 'регионов',
+      statsCompanies: 'компаний',
+      howItWorks: 'Как это работает',
+      howItWorksSubtitle: 'Начните работу с платформой за три простых шага',
+      stepRegisterTitle: 'Зарегистрируйтесь',
+      stepRegisterDesc: 'Создайте аккаунт и настройте профиль компании',
+      stepPostTitle: 'Разместите объявление',
+      stepPostDesc: 'Опубликуйте месторождение, лицензию или услугу',
+      stepPartnerTitle: 'Найдите партнёра',
+      stepPartnerDesc:
+        'Свяжитесь с покупателями, продавцами и поставщиками услуг',
+      featuredListings: 'Объявления',
+      viewAll: 'Смотреть все',
     },
     listings: {
       title: 'Месторождения полезных ископаемых',
@@ -329,6 +349,12 @@ const translations = {
     },
     home: {
       officialPlatform: 'Ресми цифрлық платформа',
+      platformLabel: 'ЖЕРҚОЙНАУЫН ПАЙДАЛАНУ ПЛАТФОРМАСЫ',
+      heroTitle: 'Қазақстанның кен орындары мен лицензиялары',
+      heroSubtitle:
+        'Тау-кен лицензияларын, барлау учаскелерін және минералдық объектілерді сату-сатып алу.',
+      catalog: 'Каталог',
+      post: 'Орналастыру',
       title: 'Қазақстанның бірыңғай цифрлық недропайдалану экожүйесі',
       subtitle:
         'Инвесторлар, геологтар, тау-кен компаниялары мен мемлекеттік органдар арасында ашық ынтымақтастықты қамтамасыз ететін инновациялық платформа. Лицензиялау, барлау және минералдық қорларды басқарудың кешенді жүйесі арқылы салаға цифрландыруды дамытамыз.',
@@ -350,6 +376,20 @@ const translations = {
       kazakhstanRegions: 'Қазақстан аймақтары',
       verifiedCompanies: 'Тексерілген компаниялар',
       customerSupport: 'Тұтынушыларды қолдау',
+      statsListings: 'хабарландыру',
+      statsRegions: 'аймақ',
+      statsCompanies: 'компания',
+      howItWorks: 'Қалай жұмыс істейді',
+      howItWorksSubtitle: 'Үш қарапайым қадаммен платформамен жұмыс істеңіз',
+      stepRegisterTitle: 'Тіркеліңіз',
+      stepRegisterDesc: 'Аккаунт жасаңыз және компания профилін баптаңыз',
+      stepPostTitle: 'Хабарландыру жариялаңыз',
+      stepPostDesc: 'Кен орнын, лицензияны немесе қызметті жариялаңыз',
+      stepPartnerTitle: 'Серіктес табыңыз',
+      stepPartnerDesc:
+        'Сатып алушылармен, сатушылармен және қызмет көрсетушілермен байланысыңыз',
+      featuredListings: 'Хабарландырулар',
+      viewAll: 'Барлығын көру',
     },
     listings: {
       title: 'Пайдалы қазбалар кен орындары',
@@ -540,6 +580,12 @@ const translations = {
     },
     home: {
       officialPlatform: 'Official Digital Platform',
+      platformLabel: 'SUBSOIL USE PLATFORM',
+      heroTitle: 'Deposits and Licenses of Kazakhstan',
+      heroSubtitle:
+        'Buying and selling mining licenses, exploration sites, and mineral objects.',
+      catalog: 'Catalog',
+      post: 'Post Listing',
       title: "Kazakhstan's Unified Digital Subsoil Use Ecosystem",
       subtitle:
         'Innovative platform ensuring transparent cooperation between investors, geologists, mining companies and government agencies. We promote industry digitalization through comprehensive management of licensing, exploration and mineral resources.',
@@ -560,6 +606,20 @@ const translations = {
       kazakhstanRegions: 'Kazakhstan Regions',
       verifiedCompanies: 'Verified Companies',
       customerSupport: 'Customer Support',
+      statsListings: 'listings',
+      statsRegions: 'regions',
+      statsCompanies: 'companies',
+      howItWorks: 'How It Works',
+      howItWorksSubtitle:
+        'Start working with the platform in three simple steps',
+      stepRegisterTitle: 'Register',
+      stepRegisterDesc: 'Create an account and set up your company profile',
+      stepPostTitle: 'Post a Listing',
+      stepPostDesc: 'Publish your deposit, license, or service listing',
+      stepPartnerTitle: 'Find a Partner',
+      stepPartnerDesc: 'Connect with buyers, sellers, and service providers',
+      featuredListings: 'Listings',
+      viewAll: 'View all',
     },
     listings: {
       title: 'Mineral Deposits',
@@ -747,6 +807,11 @@ const translations = {
     },
     home: {
       officialPlatform: '官方数字化平台',
+      platformLabel: '地下资源利用平台',
+      heroTitle: '哈萨克斯坦的矿藏和许可证',
+      heroSubtitle: '买卖采矿许可证、勘探区块和矿物资源。',
+      catalog: '目录',
+      post: '发布',
       title: '哈萨克斯坦统一数字化地下资源生态系统',
       subtitle:
         '促进投资者、地质学家、矿业公司与政府机构透明协作的创新平台。通过全面的许可证管理、勘探和矿物资源分析，推动行业数字化转型。',
@@ -767,6 +832,19 @@ const translations = {
       kazakhstanRegions: '哈萨克斯坦地区',
       verifiedCompanies: '认证公司',
       customerSupport: '客户支持',
+      statsListings: '个列表',
+      statsRegions: '个地区',
+      statsCompanies: '家公司',
+      howItWorks: '如何运作',
+      howItWorksSubtitle: '通过三个简单步骤开始使用平台',
+      stepRegisterTitle: '注册',
+      stepRegisterDesc: '创建账户并设置公司资料',
+      stepPostTitle: '发布信息',
+      stepPostDesc: '发布您的矿床、许可证或服务信息',
+      stepPartnerTitle: '寻找合作伙伴',
+      stepPartnerDesc: '与买家、卖家和服务商建立联系',
+      featuredListings: '列表',
+      viewAll: '查看全部',
     },
     listings: {
       title: '矿物资源',

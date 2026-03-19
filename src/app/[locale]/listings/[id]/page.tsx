@@ -3,13 +3,13 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import NavigationSimple from '@/components/layouts/NavigationSimple';
+import Navigation from '@/components/layouts/Navigation';
 import MiningLicenseDetails from '@/components/detail-sections/MiningLicenseDetails';
 import ExplorationLicenseDetails from '@/components/detail-sections/ExplorationLicenseDetails';
 import MineralOccurrenceDetails from '@/components/detail-sections/MineralOccurrenceDetails';
-import SocialShare from '@/components/features/SocialShare';
-import MessagingSystem from '@/components/features/MessagingSystem';
 import ContactReveal from '@/components/features/ContactReveal';
+import MessagingSystem from '@/components/features/MessagingSystem';
+import { Badge } from '@/components/ui/badge';
 import { depositApi } from '@/lib/api/deposits';
 import { favoritesApi } from '@/lib/api/favorites';
 import type { KazakhstanDeposit } from '@/lib/types/listing';
@@ -20,35 +20,64 @@ import {
   FileText,
   AlertTriangle,
   MessageSquare,
+  Share2,
+  X,
 } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 
 function getTypeLabel(type: string) {
   switch (type) {
     case 'MINING_LICENSE':
-      return 'Mining License';
+      return 'Лицензия на добычу';
     case 'EXPLORATION_LICENSE':
-      return 'Exploration License';
+      return 'Лицензия на разведку';
     case 'MINERAL_OCCURRENCE':
-      return 'Mineral Occurrence';
+      return 'Рудопроявление';
     default:
       return type;
+  }
+}
+
+function getStatusVariant(
+  status: string
+): 'default' | 'blue' | 'success' | 'warning' | 'error' {
+  switch (status) {
+    case 'ACTIVE':
+      return 'blue';
+    case 'PENDING':
+      return 'default';
+    case 'SOLD':
+      return 'default';
+    default:
+      return 'default';
+  }
+}
+
+function getStatusText(status: string) {
+  switch (status) {
+    case 'ACTIVE':
+      return 'Активно';
+    case 'PENDING':
+      return 'В ожидании';
+    case 'SOLD':
+      return 'Продано';
+    default:
+      return status;
   }
 }
 
 export default function DepositDetailPage() {
   const params = useParams();
   const depositId = params.id as string;
-  const { locale, t } = useTranslation();
+  const { locale } = useTranslation();
 
   const [deposit, setDeposit] = useState<KazakhstanDeposit | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteLoading, setFavoriteLoading] = useState(false);
-
-  const [showContactForm, setShowContactForm] = useState(false);
   const [showMessaging, setShowMessaging] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
   const [contactData, setContactData] = useState({
     name: '',
     email: '',
@@ -56,7 +85,6 @@ export default function DepositDetailPage() {
     message: '',
   });
 
-  // Загрузка данных объявления
   useEffect(() => {
     const loadDeposit = async () => {
       try {
@@ -85,7 +113,6 @@ export default function DepositDetailPage() {
     loadDeposit();
   }, [depositId]);
 
-  // JSON-LD structured data for SEO
   const jsonLd = useMemo(() => {
     if (!deposit) return null;
     return {
@@ -104,21 +131,9 @@ export default function DepositDetailPage() {
             : 'https://schema.org/InStock',
       },
       additionalProperty: [
-        {
-          '@type': 'PropertyValue',
-          name: 'Mineral',
-          value: deposit.mineral,
-        },
-        {
-          '@type': 'PropertyValue',
-          name: 'Region',
-          value: deposit.region,
-        },
-        {
-          '@type': 'PropertyValue',
-          name: 'Type',
-          value: deposit.type,
-        },
+        { '@type': 'PropertyValue', name: 'Mineral', value: deposit.mineral },
+        { '@type': 'PropertyValue', name: 'Region', value: deposit.region },
+        { '@type': 'PropertyValue', name: 'Type', value: deposit.type },
         {
           '@type': 'PropertyValue',
           name: 'Area',
@@ -128,7 +143,6 @@ export default function DepositDetailPage() {
     };
   }, [deposit]);
 
-  // Обработка добавления/удаления из избранного
   const handleFavoriteToggle = async () => {
     if (!deposit) return;
 
@@ -142,21 +156,53 @@ export default function DepositDetailPage() {
         await favoritesApi.addToFavorites(deposit.id);
         setIsFavorite(true);
       }
-    } catch (err) {
-      alert('Произошла ошибка. Попробуйте еще раз.');
+    } catch {
+      // silently fail
     } finally {
       setFavoriteLoading(false);
     }
   };
 
+  const handleShare = async () => {
+    if (!deposit) return;
+    const shareUrl =
+      typeof window !== 'undefined'
+        ? `${window.location.origin}/${locale}/listings/${deposit.id}`
+        : `/${locale}/listings/${deposit.id}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: deposit.title,
+          text: deposit.description,
+          url: shareUrl,
+        });
+      } catch {
+        // AbortError is fine
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+      } catch {
+        // silently fail
+      }
+    }
+  };
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowContactForm(false);
+    setContactData({ name: '', email: '', phone: '', message: '' });
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <NavigationSimple />
-        <div className="pt-16 flex items-center justify-center min-h-screen">
+      <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
+        <Navigation />
+        <div className="pt-20 lg:pt-24 flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Загрузка объявления...</p>
+            <div className="animate-spin rounded-full h-10 w-10 border-2 border-gray-200 border-t-[#0A84FF] mx-auto mb-4" />
+            <p className="text-sm text-gray-500">Загрузка...</p>
           </div>
         </div>
       </div>
@@ -165,20 +211,18 @@ export default function DepositDetailPage() {
 
   if (error || !deposit) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <AlertTriangle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+      <div className="min-h-screen bg-white dark:bg-[#0a0a0a] flex items-center justify-center">
+        <div className="text-center px-4">
+          <AlertTriangle className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-2">
             {error || 'Объявление не найдено'}
           </h1>
-          <p className="text-gray-600 mb-6">
-            {error === 'Объявление не найдено'
-              ? 'Возможно, объявление было удалено или перемещено'
-              : 'Произошла ошибка при загрузке данных'}
+          <p className="text-sm text-gray-500 mb-6">
+            Возможно, объявление было удалено или перемещено
           </p>
           <Link
             href={`/${locale}/listings`}
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center px-4 py-2 bg-[#0A84FF] text-white rounded-lg text-sm font-medium hover:bg-[#0070e0] transition-colors"
           >
             Вернуться к каталогу
           </Link>
@@ -189,50 +233,11 @@ export default function DepositDetailPage() {
 
   const formatPrice = (price: number | null) => {
     if (!price) return 'По запросу';
-
-    if (price >= 1000000000000) {
+    if (price >= 1000000000000)
       return `${(price / 1000000000000).toFixed(1)} трлн ₸`;
-    } else if (price >= 1000000000) {
-      return `${(price / 1000000000).toFixed(1)} млрд ₸`;
-    } else if (price >= 1000000) {
-      return `${(price / 1000000).toFixed(1)} млн ₸`;
-    } else {
-      return `${price.toLocaleString()} ₸`;
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'ACTIVE':
-        return 'bg-blue-100 text-blue-800';
-      case 'PENDING':
-        return 'bg-gray-100 text-gray-700';
-      case 'SOLD':
-        return 'bg-gray-200 text-gray-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'ACTIVE':
-        return 'Активно';
-      case 'PENDING':
-        return 'В ожидании';
-      case 'SOLD':
-        return 'Продано';
-      default:
-        return status;
-    }
-  };
-
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Здесь будет логика отправки сообщения
-    alert('Сообщение отправлено! Продавец свяжется с вами в ближайшее время.');
-    setShowContactForm(false);
-    setContactData({ name: '', email: '', phone: '', message: '' });
+    if (price >= 1000000000) return `${(price / 1000000000).toFixed(1)} млрд ₸`;
+    if (price >= 1000000) return `${(price / 1000000).toFixed(1)} млн ₸`;
+    return `${price.toLocaleString()} ₸`;
   };
 
   return (
@@ -243,40 +248,34 @@ export default function DepositDetailPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
-      <div className="min-h-screen bg-gray-50">
-        <NavigationSimple />
+      <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
+        <Navigation />
 
         {/* Breadcrumb */}
-        <div className="bg-white border-b border-gray-200 pt-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="border-b border-gray-100 dark:border-gray-800 pt-20 lg:pt-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <nav className="flex" aria-label="Breadcrumb">
-              <ol className="flex items-center space-x-4">
+              <ol className="flex items-center gap-2 text-sm text-gray-500">
                 <li>
                   <Link
                     href={`/${locale}`}
-                    className="text-gray-500 hover:text-gray-700"
+                    className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
                   >
                     Главная
                   </Link>
                 </li>
-                <li>
-                  <span className="text-gray-500">/</span>
-                </li>
+                <li className="text-gray-300 dark:text-gray-600">/</li>
                 <li>
                   <Link
                     href={`/${locale}/listings`}
-                    className="text-gray-500 hover:text-gray-700"
+                    className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
                   >
                     Объявления
                   </Link>
                 </li>
-                <li>
-                  <span className="text-gray-500">/</span>
-                </li>
-                <li>
-                  <span className="text-gray-900 font-medium truncate max-w-xs">
-                    {deposit.title}
-                  </span>
+                <li className="text-gray-300 dark:text-gray-600">/</li>
+                <li className="text-gray-900 dark:text-gray-100 font-medium truncate max-w-xs">
+                  {deposit.title}
                 </li>
               </ol>
             </nav>
@@ -284,91 +283,80 @@ export default function DepositDetailPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main Content */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Header */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <div>
-                      <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                        {deposit.title}
-                      </h1>
-                      <p className="text-lg text-gray-600">
-                        {deposit.region}, {deposit.city}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end space-y-2">
-                    <span
-                      className={`px-3 py-1 rounded-md text-sm font-medium ${getStatusColor(deposit.status)}`}
-                    >
+          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+            {/* Left: main content */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Title section */}
+              <div>
+                <div className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-2">
+                  {getTypeLabel(deposit.type)}
+                </div>
+                <div className="flex items-start justify-between gap-4">
+                  <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
+                    {deposit.title}
+                  </h1>
+                  <div className="flex flex-col items-end gap-2 shrink-0">
+                    <Badge variant={getStatusVariant(deposit.status)}>
                       {getStatusText(deposit.status)}
-                    </span>
+                    </Badge>
                     {deposit.verified && (
-                      <span className="bg-blue-600 text-white px-3 py-1 rounded-md text-sm font-medium">
-                        Проверено
-                      </span>
+                      <Badge variant="blue">Проверено</Badge>
                     )}
                     {deposit.featured && (
-                      <span className="bg-blue-600 text-white px-3 py-1 rounded-md text-sm font-medium">
-                        Рекомендуем
-                      </span>
+                      <Badge variant="default">Рекомендуем</Badge>
                     )}
                   </div>
                 </div>
-
-                <div className="flex items-center justify-between mb-4">
-                  <div className="text-4xl font-bold text-blue-600">
-                    {formatPrice(deposit.price)}
-                  </div>
-                  <SocialShare
-                    url={`/listings/${deposit.id}`}
-                    title={deposit.title}
-                    description={deposit.description}
-                  />
+                <div className="flex items-center gap-1.5 mt-2 text-sm text-gray-500">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>
+                    {deposit.region}, {deposit.city}
+                  </span>
                 </div>
+              </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                  <div>
-                    <span className="text-gray-500">Просмотры:</span>
-                    <div className="font-medium text-gray-900">
-                      {deposit.views}
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-gray-500">Площадь:</span>
-                    <div className="font-medium text-gray-900">
-                      {deposit.area.toLocaleString()} км²
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-gray-500">Тип объекта:</span>
-                    <div className="font-medium text-gray-900">
-                      {deposit.type === 'MINING_LICENSE' &&
-                        'Лицензия на добычу'}
-                      {deposit.type === 'EXPLORATION_LICENSE' &&
-                        'Лицензия на разведку'}
-                      {deposit.type === 'MINERAL_OCCURRENCE' &&
-                        'Рудопроявление'}
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-gray-500">Полезное ископаемое:</span>
-                    <div className="font-medium text-gray-900">
-                      {deposit.mineral}
-                    </div>
-                  </div>
+              {/* Quick stats */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-b border-gray-100 dark:border-gray-800 py-4">
+                <div>
+                  <dt className="text-xs font-medium uppercase tracking-wider text-gray-400">
+                    Просмотры
+                  </dt>
+                  <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
+                    {deposit.views}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-medium uppercase tracking-wider text-gray-400">
+                    Площадь
+                  </dt>
+                  <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
+                    {deposit.area.toLocaleString()} км²
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-medium uppercase tracking-wider text-gray-400">
+                    Ископаемое
+                  </dt>
+                  <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
+                    {deposit.mineral}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-medium uppercase tracking-wider text-gray-400">
+                    Регион
+                  </dt>
+                  <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
+                    {deposit.region}
+                  </dd>
                 </div>
               </div>
 
               {/* Description */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-3">
                   Описание объекта
                 </h2>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                   {deposit.description}
                 </p>
               </div>
@@ -385,54 +373,50 @@ export default function DepositDetailPage() {
               )}
 
               {/* Location */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-4">
                   Местоположение
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <h3 className="font-medium text-gray-900 mb-2">Адрес</h3>
-                    <p className="text-gray-700">
+                    <dt className="text-xs font-medium uppercase tracking-wider text-gray-400">
+                      Адрес
+                    </dt>
+                    <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
                       {deposit.region}, {deposit.city}
-                    </p>
-
-                    <h3 className="font-medium text-gray-900 mb-2 mt-4">
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-medium uppercase tracking-wider text-gray-400">
                       Координаты
-                    </h3>
-                    <p className="text-gray-700 font-mono text-sm">
+                    </dt>
+                    <dd className="text-sm font-mono text-gray-900 dark:text-gray-50 mt-1">
                       {deposit.coordinates[0].toFixed(6)},{' '}
                       {deposit.coordinates[1].toFixed(6)}
-                    </p>
-                  </div>
-                  <div className="bg-gray-100 rounded-lg h-48 flex items-center justify-center">
-                    <div className="text-center text-gray-500">
-                      <MapPin className="w-8 h-8 mx-auto mb-2" />
-                      <p>Интерактивная карта</p>
-                      <p className="text-sm">(в разработке)</p>
-                    </div>
+                    </dd>
                   </div>
                 </div>
               </div>
 
               {/* Documents */}
               {deposit.documents.length > 0 && (
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                <div>
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-4">
                     Документы
                   </h2>
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {deposit.documents.map((doc, index) => (
                       <div
                         key={index}
-                        className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                        className="flex items-center justify-between px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-[#141414]"
                       >
-                        <div className="flex items-center space-x-3">
-                          <FileText className="w-5 h-5 text-gray-600" />
-                          <span className="font-medium text-gray-900">
+                        <div className="flex items-center gap-3">
+                          <FileText className="w-4 h-4 text-gray-400" />
+                          <span className="text-sm text-gray-900 dark:text-gray-100">
                             {doc}
                           </span>
                         </div>
-                        <button className="text-blue-600 hover:text-blue-700 font-medium">
+                        <button className="text-xs text-[#0A84FF] hover:text-[#0070e0] font-medium transition-colors">
                           Скачать
                         </button>
                       </div>
@@ -440,232 +424,205 @@ export default function DepositDetailPage() {
                   </div>
                 </div>
               )}
+
+              {/* Listing info */}
+              <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
+                <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-400">
+                  <span>ID: #{deposit.id}</span>
+                  <span>
+                    Размещено: {deposit.createdAt.toLocaleDateString('ru-RU')}
+                  </span>
+                  <span>
+                    Обновлено: {deposit.updatedAt.toLocaleDateString('ru-RU')}
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {/* Sidebar */}
-            <div className="space-y-6">
-              {/* Contact Reveal */}
-              <ContactReveal
-                listingId={deposit.id}
-                sellerId={deposit.userId}
-                ownerName={deposit.contactName}
-                ownerPhone={deposit.contactPhone}
-                ownerEmail={deposit.contactEmail}
-              />
+            {/* Right sidebar */}
+            <div className="lg:col-span-1 mt-8 lg:mt-0">
+              <div className="sticky top-20 space-y-4">
+                {/* Price card */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6 bg-white dark:bg-[#141414] shadow-sm">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-1">
+                    {formatPrice(deposit.price)}
+                  </div>
+                  {deposit.price && (
+                    <div className="text-xs text-gray-400 mb-5">
+                      Цена в тенге (₸)
+                    </div>
+                  )}
 
-              {/* Actions Card */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  Связаться с продавцом
-                </h3>
-
-                {!showContactForm ? (
                   <div className="space-y-3">
                     <button
                       onClick={() => setShowMessaging(true)}
-                      className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                      className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#0A84FF] text-white rounded-lg text-sm font-medium hover:bg-[#0070e0] transition-colors"
                     >
                       <MessageSquare className="w-4 h-4" />
                       Написать сообщение
                     </button>
-                    <button
-                      onClick={() => setShowContactForm(true)}
-                      className="w-full bg-gray-100 text-gray-900 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
-                    >
-                      <FileText className="w-4 h-4" />
-                      Форма обратной связи
-                    </button>
-                    <button
-                      onClick={handleFavoriteToggle}
-                      disabled={favoriteLoading}
-                      className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
-                        isFavorite
-                          ? 'bg-red-100 text-red-900 hover:bg-red-200'
-                          : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                      } ${favoriteLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    >
-                      {favoriteLoading ? (
-                        <span>Загрузка...</span>
-                      ) : isFavorite ? (
-                        <span className="flex items-center justify-center gap-2">
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleFavoriteToggle}
+                        disabled={favoriteLoading}
+                        className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium border transition-colors disabled:opacity-50 ${
+                          isFavorite
+                            ? 'border-[#0A84FF] text-[#0A84FF] bg-[rgba(10,132,255,0.05)]'
+                            : 'border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                        }`}
+                      >
+                        {isFavorite ? (
                           <Heart className="w-4 h-4 fill-current" />
-                          Удалить из избранного
-                        </span>
-                      ) : (
-                        <span className="flex items-center justify-center gap-2">
+                        ) : (
                           <Bookmark className="w-4 h-4" />
-                          Добавить в избранное
-                        </span>
-                      )}
-                    </button>
+                        )}
+                        {isFavorite ? 'В избранном' : 'Сохранить'}
+                      </button>
+
+                      <button
+                        onClick={handleShare}
+                        className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
+                        title="Поделиться"
+                      >
+                        <Share2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
+                </div>
+
+                {/* Contact reveal */}
+                <ContactReveal
+                  listingId={deposit.id}
+                  sellerId={deposit.userId}
+                  ownerName={deposit.contactName}
+                  ownerPhone={deposit.contactPhone}
+                  ownerEmail={deposit.contactEmail}
+                />
+
+                {/* Contact form toggle */}
+                {!showContactForm ? (
+                  <button
+                    onClick={() => setShowContactForm(true)}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
+                  >
+                    <FileText className="w-4 h-4" />
+                    Форма обратной связи
+                  </button>
                 ) : (
-                  <form onSubmit={handleContactSubmit} className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Имя *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value={contactData.name}
-                        onChange={(e) =>
-                          setContactData({
-                            ...contactData,
-                            name: e.target.value,
-                          })
-                        }
-                      />
+                  <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-5 bg-white dark:bg-[#141414]">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                        Обратная связь
+                      </h3>
+                      <button
+                        onClick={() => setShowContactForm(false)}
+                        className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
                     </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value={contactData.email}
-                        onChange={(e) =>
-                          setContactData({
-                            ...contactData,
-                            email: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Телефон
-                      </label>
-                      <input
-                        type="tel"
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value={contactData.phone}
-                        onChange={(e) =>
-                          setContactData({
-                            ...contactData,
-                            phone: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Сообщение *
-                      </label>
-                      <textarea
-                        required
-                        rows={4}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value={contactData.message}
-                        onChange={(e) =>
-                          setContactData({
-                            ...contactData,
-                            message: e.target.value,
-                          })
-                        }
-                        placeholder="Опишите ваш интерес к месторождению..."
-                      />
-                    </div>
-
-                    <div className="flex space-x-3">
+                    <form onSubmit={handleContactSubmit} className="space-y-3">
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500 mb-1">
+                          Имя *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#0A84FF] transition-colors"
+                          value={contactData.name}
+                          onChange={(e) =>
+                            setContactData({
+                              ...contactData,
+                              name: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500 mb-1">
+                          Email *
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#0A84FF] transition-colors"
+                          value={contactData.email}
+                          onChange={(e) =>
+                            setContactData({
+                              ...contactData,
+                              email: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500 mb-1">
+                          Сообщение *
+                        </label>
+                        <textarea
+                          required
+                          rows={3}
+                          className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#0A84FF] transition-colors resize-none"
+                          value={contactData.message}
+                          onChange={(e) =>
+                            setContactData({
+                              ...contactData,
+                              message: e.target.value,
+                            })
+                          }
+                          placeholder="Опишите ваш интерес..."
+                        />
+                      </div>
                       <button
                         type="submit"
-                        className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                        className="w-full px-4 py-2 bg-[#0A84FF] text-white rounded-lg text-sm font-medium hover:bg-[#0070e0] transition-colors"
                       >
                         Отправить
                       </button>
-                      <button
-                        type="button"
-                        onClick={() => setShowContactForm(false)}
-                        className="flex-1 bg-gray-100 text-gray-900 py-2 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
-                      >
-                        Отмена
-                      </button>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 )}
-              </div>
 
-              {/* Info Card */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  Информация об объявлении
-                </h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">ID объявления:</span>
-                    <span className="font-medium text-gray-900">
-                      #{deposit.id}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Размещено:</span>
-                    <span className="font-medium text-gray-900">
-                      {deposit.createdAt.toLocaleDateString('ru-RU')}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Обновлено:</span>
-                    <span className="font-medium text-gray-900">
-                      {deposit.updatedAt.toLocaleDateString('ru-RU')}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Просмотры:</span>
-                    <span className="font-medium text-gray-900">
-                      {deposit.views}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Warning */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                <div className="flex items-start space-x-3">
-                  <AlertTriangle className="w-5 h-5 text-gray-600 mt-0.5" />
-                  <div>
-                    <h4 className="font-medium text-gray-800 mb-1">
-                      Важное предупреждение
-                    </h4>
-                    <p className="text-gray-700 text-sm">
-                      Проверяйте все документы и лицензии перед совершением
-                      сделки. QAZNEDR.KZ не несет ответственности за
-                      достоверность информации.
-                    </p>
-                  </div>
+                {/* Warning */}
+                <div className="flex items-start gap-3 p-4 rounded-lg bg-gray-50 dark:bg-[#141414] border border-gray-100 dark:border-gray-800">
+                  <AlertTriangle className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
+                  <p className="text-xs text-gray-500 leading-relaxed">
+                    Проверяйте документы и лицензии перед сделкой. QAZNEDR.KZ не
+                    несёт ответственности за достоверность информации.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* MessagingSystem Modal */}
+        {/* Messaging modal */}
         {showMessaging && deposit && (
           <div className="fixed inset-0 z-50 overflow-hidden">
             <div
               className="absolute inset-0 bg-black/50"
               onClick={() => setShowMessaging(false)}
             />
-            <div className="absolute right-0 top-0 h-full w-full max-w-4xl bg-white shadow-xl">
-              <div className="flex items-center justify-between p-4 border-b">
-                <h2 className="text-xl font-semibold">Связаться с продавцом</h2>
+            <div className="absolute right-0 top-0 h-full w-full max-w-4xl bg-white dark:bg-[#0a0a0a] shadow-xl">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-800">
+                <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">
+                  Связаться с продавцом
+                </h2>
                 <button
                   onClick={() => setShowMessaging(false)}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                 >
-                  ✕
+                  <X className="w-4 h-4 text-gray-500" />
                 </button>
               </div>
-              <div className="p-4 space-y-4">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <p className="text-sm text-gray-600">Объявление:</p>
-                  <p className="font-semibold">{deposit.title}</p>
+              <div className="p-5 space-y-4">
+                <div className="bg-gray-50 dark:bg-[#141414] px-4 py-3 rounded-lg border border-gray-100 dark:border-gray-800">
+                  <p className="text-xs text-gray-400 mb-0.5">Объявление</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                    {deposit.title}
+                  </p>
                 </div>
                 <MessagingSystem />
               </div>

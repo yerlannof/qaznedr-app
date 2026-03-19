@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
-import { Card } from '@/components/ui/card-new';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
   MessageCircle,
@@ -264,7 +264,7 @@ export function ConversationsList({
   }
 
   return (
-    <Card className="h-full flex flex-col" padding="none">
+    <Card className="h-full flex flex-col">
       {/* Header */}
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center justify-between mb-4">

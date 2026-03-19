@@ -14,7 +14,7 @@ import {
   Award,
   ArrowRight,
 } from 'lucide-react';
-import { Card, CardBadge } from '@/components/ui/card-new';
+import { Card, CardBadge } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 interface CompanyCardProps {
@@ -95,10 +95,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
     : 0;
 
   return (
-    <Card
-      variant="elevated"
-      className="group hover:shadow-xl transition-all duration-300"
-    >
+    <Card className="group hover:shadow-xl transition-all duration-300">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-start gap-4">

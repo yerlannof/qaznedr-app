@@ -5,7 +5,7 @@ import NextImage from 'next/image';
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { createClient } from '@/lib/supabase/client';
-import { Card } from '@/components/ui/card-new';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
   Send,
@@ -316,7 +316,7 @@ export function ChatWindow({
   const otherUser = getOtherParticipant();
 
   return (
-    <Card className="flex flex-col h-full" padding="none">
+    <Card className="flex flex-col h-full">
       {/* Chat Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
         <div className="flex items-center gap-3">

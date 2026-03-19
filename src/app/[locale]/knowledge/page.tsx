@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import NavigationSimple from '@/components/layouts/NavigationSimple';
+import Navigation from '@/components/layouts/Navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -25,7 +25,7 @@ import {
   Award,
   Lightbulb,
 } from 'lucide-react';
-import { Card } from '@/components/ui/card-new';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/layouts/Footer';
 
@@ -351,7 +351,7 @@ export default function KnowledgePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <NavigationSimple />
+      <Navigation />
 
       {/* Hero Section */}
       <div className="bg-blue-600 text-white mt-16">
@@ -689,7 +689,7 @@ export default function KnowledgePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              variant="secondary"
+              variant="outline"
               className="bg-white text-blue-600 hover:bg-gray-100"
             >
               <Lightbulb className="w-4 h-4 mr-2" />

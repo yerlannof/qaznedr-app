@@ -1,7 +1,6 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
 
 interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'text' | 'circular' | 'rectangular';
@@ -27,51 +26,17 @@ function SkeletonEnhanced({
     rectangular: 'rounded-lg',
   };
 
-  const animationClasses = {
-    pulse: 'animate-pulse',
-    wave: '',
-    shimmer: '',
-  };
-
   return (
     <div
       className={cn(
         baseClasses,
         variantClasses[variant],
-        animationClasses[animation],
+        'animate-pulse',
         className
       )}
       style={{ width, height }}
       {...props}
-    >
-      {animation === 'shimmer' && (
-        <motion.div
-          className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent"
-          animate={{ translateX: '200%' }}
-          transition={{
-            repeat: Infinity,
-            duration: 1.5,
-            ease: 'linear',
-          }}
-        />
-      )}
-      {animation === 'wave' && (
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-          animate={{
-            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          style={{
-            backgroundSize: '200% 100%',
-          }}
-        />
-      )}
-    </div>
+    />
   );
 }
 

@@ -4,7 +4,7 @@
 export const dynamic = 'force-dynamic';
 
 import { useState, useEffect } from 'react';
-import NavigationSimple from '@/components/layouts/NavigationSimple';
+import Navigation from '@/components/layouts/Navigation';
 import { CompanyCard } from '@/components/features/companies/CompanyCard';
 import { createClient } from '@/lib/supabase/client';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -142,7 +142,7 @@ export default function CompaniesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <NavigationSimple />
+      <Navigation />
 
       {/* Hero Section */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 pt-20 pb-16">

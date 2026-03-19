@@ -10,23 +10,20 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-blue-600 text-white shadow hover:bg-blue-700 hover:shadow-md focus-visible:ring-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-700',
-        destructive:
-          'bg-gray-700 text-white shadow-sm hover:bg-gray-800 hover:shadow-md focus-visible:ring-gray-700 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700',
+          'bg-gray-900 text-white hover:bg-gray-800 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200',
         outline:
-          'border border-gray-300 bg-white text-gray-900 shadow-sm hover:bg-gray-50 hover:border-gray-400 focus-visible:ring-gray-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:border-gray-500',
-        secondary:
-          'bg-gray-100 text-gray-900 shadow-sm hover:bg-gray-200 hover:shadow-md focus-visible:ring-gray-400 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600',
+          'border border-gray-200 bg-transparent text-gray-700 hover:border-gray-300 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800',
+        accent: 'bg-[#0A84FF] text-white hover:bg-[#0070E0]',
         ghost:
-          'text-gray-900 hover:bg-gray-100 hover:text-gray-900 focus-visible:ring-gray-400 dark:text-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-100',
-        link: 'text-blue-600 underline-offset-4 hover:underline hover:text-blue-700 focus-visible:ring-blue-600 dark:text-blue-400 dark:hover:text-blue-300',
+          'text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-50 dark:hover:bg-gray-800',
+        link: 'text-[#0A84FF] underline-offset-4 hover:underline',
+        destructive: 'bg-red-500 text-white hover:bg-red-600',
       },
       size: {
-        default: 'h-11 px-4 py-2',
-        sm: 'h-11 rounded-md px-3 text-xs',
-        lg: 'h-12 rounded-lg px-8',
-        xl: 'h-14 rounded-lg px-10 text-base',
-        icon: 'h-11 w-11',
+        sm: 'h-8 px-3.5 text-sm rounded-lg',
+        default: 'h-10 px-5 text-sm rounded-lg',
+        lg: 'h-12 px-7 text-base rounded-lg',
+        icon: 'h-10 w-10',
       },
       loading: {
         true: 'cursor-wait',

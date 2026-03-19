@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import NavigationSimple from '@/components/layouts/NavigationSimple';
+import Navigation from '@/components/layouts/Navigation';
 import { depositApi } from '@/lib/api/deposits';
 import {
   KazakhstanDeposit,
@@ -155,7 +155,7 @@ export default function EditListingPage() {
   if (status === 'loading' || loadingData) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <NavigationSimple />
+        <Navigation />
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
@@ -169,7 +169,7 @@ export default function EditListingPage() {
   if (!session) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <NavigationSimple />
+        <Navigation />
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="text-6xl mb-4">🔒</div>
@@ -194,7 +194,7 @@ export default function EditListingPage() {
   if (error || !originalListing) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <NavigationSimple />
+        <Navigation />
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="text-6xl mb-4">❌</div>
@@ -587,7 +587,7 @@ export default function EditListingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <NavigationSimple />
+      <Navigation />
 
       {/* Header */}
       <div className="bg-white border-b border-gray-200 pt-16">

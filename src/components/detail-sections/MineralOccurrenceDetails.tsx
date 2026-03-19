@@ -1,7 +1,16 @@
 'use client';
 
 import { KazakhstanDeposit } from '@/lib/types/listing';
-import { useTranslation } from '@/hooks/useTranslation';
+import {
+  Gem,
+  Calendar,
+  BarChart2,
+  Layers,
+  Navigation,
+  Mountain,
+  CheckCircle,
+  TrendingUp,
+} from 'lucide-react';
 
 interface MineralOccurrenceDetailsProps {
   deposit: KazakhstanDeposit;
@@ -19,20 +28,6 @@ export default function MineralOccurrenceDetails({
     return confidences[confidence || ''] || 'Не определена';
   };
 
-  const getConfidenceColor = (confidence?: string) => {
-    const colors: Record<string, string> = {
-      INFERRED: 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200',
-      INDICATED:
-        'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300',
-      MEASURED:
-        'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300',
-    };
-    return (
-      colors[confidence || ''] ||
-      'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
-    );
-  };
-
   const getAccessibilityText = (rating?: string) => {
     const ratings: Record<string, string> = {
       EASY: 'Легкий доступ',
@@ -41,16 +36,6 @@ export default function MineralOccurrenceDetails({
       VERY_DIFFICULT: 'Очень сложный доступ',
     };
     return ratings[rating || ''] || 'Не оценен';
-  };
-
-  const getAccessibilityColor = (rating?: string) => {
-    const colors: Record<string, string> = {
-      EASY: 'text-blue-600 dark:text-blue-400',
-      MODERATE: 'text-gray-600 dark:text-gray-400',
-      DIFFICULT: 'text-gray-700 dark:text-gray-300',
-      VERY_DIFFICULT: 'text-gray-800 dark:text-gray-200',
-    };
-    return colors[rating || ''] || 'text-gray-600 dark:text-gray-400';
   };
 
   const getAccessibilityDescription = (rating?: string) => {
@@ -65,113 +50,111 @@ export default function MineralOccurrenceDetails({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-      <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-        💎 Информация о рудопроявлении
+    <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6 bg-white dark:bg-[#141414]">
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-4 flex items-center gap-2">
+        <Gem className="w-5 h-5 text-gray-400" />
+        Информация о рудопроявлении
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          {deposit.discoveryDate && (
-            <div>
-              <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
-                Дата открытия
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300">
-                {new Date(deposit.discoveryDate).toLocaleDateString('ru-RU', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </p>
-            </div>
-          )}
-
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {deposit.discoveryDate && (
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">
-              Достоверность запасов
-            </h3>
-            <span
-              className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getConfidenceColor(deposit.geologicalConfidence)}`}
-            >
-              {getConfidenceText(deposit.geologicalConfidence)}
-            </span>
+            <dt className="text-xs font-medium uppercase tracking-wider text-gray-400 flex items-center gap-1">
+              <Calendar className="w-3 h-3 text-gray-400" />
+              Дата открытия
+            </dt>
+            <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
+              {new Date(deposit.discoveryDate).toLocaleDateString('ru-RU', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </dd>
           </div>
+        )}
 
-          {deposit.estimatedReserves && (
-            <div>
-              <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-2">
-                Оценочные запасы
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300">
-                <span className="text-2xl font-bold text-blue-600">
-                  {deposit.estimatedReserves.toLocaleString()}
-                </span>{' '}
-                тонн
-              </p>
-            </div>
-          )}
-
-          <div>
-            <h3 className="font-medium text-gray-900 mb-2">
-              Полезное ископаемое
-            </h3>
-            <p className="text-gray-700 text-lg font-medium">
-              {deposit.mineral}
-            </p>
-          </div>
+        <div>
+          <dt className="text-xs font-medium uppercase tracking-wider text-gray-400 flex items-center gap-1">
+            <BarChart2 className="w-3 h-3 text-gray-400" />
+            Достоверность запасов
+          </dt>
+          <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
+            {getConfidenceText(deposit.geologicalConfidence)}
+          </dd>
         </div>
 
-        <div className="space-y-4">
+        {deposit.estimatedReserves && (
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">
-              Транспортная доступность
-            </h3>
-            <div className="space-y-2">
-              <p
-                className={`font-medium ${getAccessibilityColor(deposit.accessibilityRating)}`}
-              >
-                {getAccessibilityText(deposit.accessibilityRating)}
-              </p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                {getAccessibilityDescription(deposit.accessibilityRating)}
-              </p>
+            <dt className="text-xs font-medium uppercase tracking-wider text-gray-400 flex items-center gap-1">
+              <Layers className="w-3 h-3 text-gray-400" />
+              Оценочные запасы
+            </dt>
+            <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
+              {deposit.estimatedReserves.toLocaleString()} т
+            </dd>
+          </div>
+        )}
+
+        <div>
+          <dt className="text-xs font-medium uppercase tracking-wider text-gray-400 flex items-center gap-1">
+            <Mountain className="w-3 h-3 text-gray-400" />
+            Полезное ископаемое
+          </dt>
+          <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
+            {deposit.mineral}
+          </dd>
+        </div>
+
+        <div>
+          <dt className="text-xs font-medium uppercase tracking-wider text-gray-400 flex items-center gap-1">
+            <Navigation className="w-3 h-3 text-gray-400" />
+            Транспортная доступность
+          </dt>
+          <dd className="mt-1">
+            <div className="text-sm font-medium text-gray-900 dark:text-gray-50">
+              {getAccessibilityText(deposit.accessibilityRating)}
             </div>
-          </div>
+            {getAccessibilityDescription(deposit.accessibilityRating) && (
+              <div className="text-xs text-gray-500 mt-0.5">
+                {getAccessibilityDescription(deposit.accessibilityRating)}
+              </div>
+            )}
+          </dd>
+        </div>
 
-          <div>
-            <h3 className="font-medium text-gray-900 mb-2">Площадь участка</h3>
-            <p className="text-gray-700">
-              <span className="text-xl font-bold text-blue-600">
-                {deposit.area.toLocaleString()}
-              </span>{' '}
-              км²
-            </p>
-          </div>
-
-          <div>
-            <h3 className="font-medium text-gray-900 mb-2">Статус участка</h3>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300">
-              💎 Рудопроявление
-            </span>
-          </div>
+        <div>
+          <dt className="text-xs font-medium uppercase tracking-wider text-gray-400 flex items-center gap-1">
+            <Layers className="w-3 h-3 text-gray-400" />
+            Площадь участка
+          </dt>
+          <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
+            {deposit.area.toLocaleString()} км²
+          </dd>
         </div>
       </div>
 
-      {/* Investment Potential */}
-      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-        <h3 className="font-medium text-gray-900 mb-3">
-          📈 Инвестиционный потенциал
+      <div className="mt-6 pt-5 border-t border-gray-100 dark:border-gray-800">
+        <h3 className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-3 flex items-center gap-1.5">
+          <TrendingUp className="w-3.5 h-3.5 text-gray-400" />
+          Инвестиционный потенциал
         </h3>
-        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-          <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-300">
-            <li>💡 Возможность дальнейшей разведки и оценки запасов</li>
-            <li>🔬 Потенциал для научных исследований</li>
-            <li>📊 База для инвестиционных решений</li>
-            <li>🏗️ Планирование инфраструктурных проектов</li>
-            <li>⚖️ Соблюдение требований экологической безопасности</li>
-          </ul>
-        </div>
+        <ul className="space-y-2">
+          {[
+            'Возможность дальнейшей разведки и оценки запасов',
+            'Потенциал для научных исследований',
+            'База для инвестиционных решений',
+            'Планирование инфраструктурных проектов',
+            'Соблюдение требований экологической безопасности',
+          ].map((item) => (
+            <li
+              key={item}
+              className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400"
+            >
+              <CheckCircle className="w-3.5 h-3.5 text-[#0A84FF] mt-0.5 shrink-0" />
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

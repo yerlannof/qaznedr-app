@@ -22,7 +22,7 @@ import {
   ArrowRight,
   Shield,
 } from 'lucide-react';
-import { Card, CardBadge } from '@/components/ui/card-new';
+import { Card, CardBadge } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 interface GeologicalProvider {
@@ -293,7 +293,6 @@ export default function GeologicalServicesPage() {
   const renderProviderCard = (provider: GeologicalProvider) => (
     <Card
       key={provider.id}
-      variant="elevated"
       className="hover:shadow-xl transition-all duration-300"
     >
       <div className="flex items-start gap-4 mb-4">

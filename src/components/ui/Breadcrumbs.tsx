@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 interface BreadcrumbItem {
   label: string;
@@ -87,13 +86,7 @@ export default function Breadcrumbs() {
             const isFirst = index === 0;
 
             return (
-              <motion.li
-                key={index}
-                className="flex items-center"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.05 }}
-              >
+              <li key={index} className="flex items-center">
                 {index > 0 && (
                   <ChevronRight className="w-4 h-4 mx-2 text-gray-400 dark:text-gray-600" />
                 )}
@@ -130,7 +123,7 @@ export default function Breadcrumbs() {
                     {crumb.label}
                   </span>
                 )}
-              </motion.li>
+              </li>
             );
           })}
         </ol>

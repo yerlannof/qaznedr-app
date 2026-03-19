@@ -25,7 +25,7 @@ import {
   Award,
   Lightbulb,
 } from 'lucide-react';
-import { Card } from '@/components/ui/card-new';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/layouts/Footer';
 

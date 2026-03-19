@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import { Card } from '@/components/ui/card-new';
+import { Card } from '@/components/ui/card';
 import {
   BarChart3,
   Users,

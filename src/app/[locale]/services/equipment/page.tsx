@@ -26,7 +26,7 @@ import {
   AlertCircle,
   Zap,
 } from 'lucide-react';
-import { Card, CardBadge } from '@/components/ui/card-new';
+import { Card, CardBadge } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 interface EquipmentItem {
@@ -503,7 +503,6 @@ export default function EquipmentRentalPage() {
     return (
       <Card
         key={item.id}
-        variant="elevated"
         className="hover:shadow-xl transition-all duration-300"
       >
         {/* Equipment Image */}

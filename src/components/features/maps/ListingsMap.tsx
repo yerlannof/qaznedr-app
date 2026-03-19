@@ -19,7 +19,7 @@ import {
   Maximize,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card-new';
+import { Card } from '@/components/ui/card';
 import { getMineralIcon } from '@/components/icons';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -229,7 +229,7 @@ export default function ListingsMap({
             closeOnClick={false}
             className="map-popup"
           >
-            <Card padding="sm" className="min-w-[250px]">
+            <Card className="min-w-[250px]">
               <h3 className="font-semibold text-gray-900 mb-2">
                 {selectedListing.title}
               </h3>
@@ -264,7 +264,7 @@ export default function ListingsMap({
 
       {/* Map Controls Overlay */}
       <div className="absolute top-4 left-4 z-10">
-        <Card padding="sm" className="bg-white/95 backdrop-blur-sm">
+        <Card className="bg-white/95 backdrop-blur-sm">
           <div className="flex items-center gap-2 mb-3">
             <Layers className="w-4 h-4 text-gray-600" />
             <span className="text-sm font-medium text-gray-700">
@@ -291,7 +291,7 @@ export default function ListingsMap({
 
       {/* Legend */}
       <div className="absolute bottom-8 left-4 z-10">
-        <Card padding="sm" className="bg-white/95 backdrop-blur-sm">
+        <Card className="bg-white/95 backdrop-blur-sm">
           <h4 className="text-sm font-medium text-gray-700 mb-2">Легенда</h4>
           <div className="space-y-1">
             {Object.entries(MINERAL_COLORS)
@@ -311,7 +311,7 @@ export default function ListingsMap({
 
       {/* Stats Overlay */}
       <div className="absolute top-4 right-20 z-10">
-        <Card padding="sm" className="bg-white/95 backdrop-blur-sm">
+        <Card className="bg-white/95 backdrop-blur-sm">
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900">
               {listings.length}

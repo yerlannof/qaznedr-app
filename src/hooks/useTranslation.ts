@@ -16,10 +16,10 @@ const translations = {
     },
     home: {
       officialPlatform: 'Официальная цифровая платформа',
-      platformLabel: 'ПЛАТФОРМА НЕДРОПОЛЬЗОВАНИЯ',
-      heroTitle: 'Месторождения и лицензии Казахстана',
+      platformLabel: 'ГЕОЛОГИЧЕСКАЯ ОТРАСЛЬ КАЗАХСТАНА',
+      heroTitle: 'Платформа геологической отрасли Казахстана',
       heroSubtitle:
-        'Покупка и продажа горнодобывающих лицензий, участков разведки и минеральных объектов.',
+        'Объединяем участников рынка недропользования: лицензии, услуги, компании, данные — от разведки до добычи.',
       catalog: 'Каталог',
       post: 'Разместить',
       title: 'Единая цифровая экосистема недропользования Казахстана',
@@ -92,7 +92,7 @@ const translations = {
       company: {
         name: 'QAZNEDR.KZ',
         description:
-          'Первая в Казахстане цифровая B2B платформа для горнодобывающей отрасли',
+          'Платформа геологической отрасли Казахстана. Лицензии, услуги, компании, данные.',
       },
       contact: {
         address: 'Алматы, Казахстан',
@@ -349,10 +349,10 @@ const translations = {
     },
     home: {
       officialPlatform: 'Ресми цифрлық платформа',
-      platformLabel: 'ЖЕРҚОЙНАУЫН ПАЙДАЛАНУ ПЛАТФОРМАСЫ',
-      heroTitle: 'Қазақстанның кен орындары мен лицензиялары',
+      platformLabel: 'ҚАЗАҚСТАННЫҢ ГЕОЛОГИЯ САЛАСЫ',
+      heroTitle: 'Қазақстанның геология саласының платформасы',
       heroSubtitle:
-        'Тау-кен лицензияларын, барлау учаскелерін және минералдық объектілерді сату-сатып алу.',
+        'Жерқойнауын пайдалану нарығының қатысушыларын біріктіреміз: лицензиялар, қызметтер, компаниялар, деректер — барлаудан өндіруге дейін.',
       catalog: 'Каталог',
       post: 'Орналастыру',
       title: 'Қазақстанның бірыңғай цифрлық недропайдалану экожүйесі',
@@ -425,7 +425,7 @@ const translations = {
       company: {
         name: 'QAZNEDR.KZ',
         description:
-          'Қазақстандағы тау-кен өнеркәсібіне арналған алғашқы цифрлық B2B платформа',
+          'Қазақстанның геология саласының платформасы. Лицензиялар, қызметтер, компаниялар, деректер.',
       },
       contact: {
         address: 'Алматы, Қазақстан',
@@ -580,10 +580,10 @@ const translations = {
     },
     home: {
       officialPlatform: 'Official Digital Platform',
-      platformLabel: 'SUBSOIL USE PLATFORM',
-      heroTitle: 'Deposits and Licenses of Kazakhstan',
+      platformLabel: 'KAZAKHSTAN GEOLOGY INDUSTRY',
+      heroTitle: "Kazakhstan's Geology Industry Platform",
       heroSubtitle:
-        'Buying and selling mining licenses, exploration sites, and mineral objects.',
+        'Connecting subsoil use market participants: licenses, services, companies, data — from exploration to extraction.',
       catalog: 'Catalog',
       post: 'Post Listing',
       title: "Kazakhstan's Unified Digital Subsoil Use Ecosystem",
@@ -655,7 +655,7 @@ const translations = {
       company: {
         name: 'QAZNEDR.KZ',
         description:
-          "Kazakhstan's first digital B2B platform for the mining industry",
+          "Kazakhstan's geology industry platform. Licenses, services, companies, data.",
       },
       contact: {
         address: 'Almaty, Kazakhstan',
@@ -807,9 +807,10 @@ const translations = {
     },
     home: {
       officialPlatform: '官方数字化平台',
-      platformLabel: '地下资源利用平台',
-      heroTitle: '哈萨克斯坦的矿藏和许可证',
-      heroSubtitle: '买卖采矿许可证、勘探区块和矿物资源。',
+      platformLabel: '哈萨克斯坦地质行业',
+      heroTitle: '哈萨克斯坦地质行业平台',
+      heroSubtitle:
+        '连接地下资源利用市场参与者：许可证、服务、公司、数据——从勘探到开采。',
       catalog: '目录',
       post: '发布',
       title: '哈萨克斯坦统一数字化地下资源生态系统',
@@ -879,7 +880,7 @@ const translations = {
     footer: {
       company: {
         name: 'QAZNEDR.KZ',
-        description: '哈萨克斯坦首个采矿业数字B2B平台',
+        description: '哈萨克斯坦地质行业平台。许可证、服务、公司、数据。',
       },
       contact: {
         address: '阿拉木图，哈萨克斯坦',

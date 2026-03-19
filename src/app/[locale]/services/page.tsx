@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
-import Image from 'next/image';
 import { useTranslation } from '@/hooks/useTranslation';
 import {
   Mountain,
@@ -12,21 +11,17 @@ import {
   Users,
   BookOpen,
   Newspaper,
-  MapPin,
-  Star,
   ArrowRight,
   Search,
-  Filter,
   Building2,
+  Star,
 } from 'lucide-react';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/layouts/Footer';
 
 export default function ServicesPage() {
   const { t, locale } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
 
   const serviceCategories = [
     {
@@ -34,7 +29,6 @@ export default function ServicesPage() {
       title: t('services.titles.geological'),
       description: t('services.descriptions.geological'),
       icon: Mountain,
-      color: 'blue',
       href: '/services/geological',
       stats: { providers: 47, projects: 156 },
       featured: [
@@ -47,9 +41,8 @@ export default function ServicesPage() {
       title: t('services.titles.equipment'),
       description: t('services.descriptions.equipment'),
       icon: Truck,
-      color: 'green',
       href: '/services/equipment',
-      stats: { providers: 6, items: 78 },
+      stats: { providers: 6, projects: 78 },
       featured: [
         { name: 'ТехРент Казахстан', rating: 4.7, location: 'Караганда' },
         { name: 'Горная Техника Ко', rating: 4.8, location: 'Алматы' },
@@ -60,9 +53,8 @@ export default function ServicesPage() {
       title: t('services.titles.legal'),
       description: t('services.descriptions.legal'),
       icon: Scale,
-      color: 'blue',
       href: '/services/legal',
-      stats: { providers: 6, specialists: 23 },
+      stats: { providers: 6, projects: 23 },
       featured: [
         { name: 'Юр-Центр Недра', rating: 4.9, location: 'Алматы' },
         { name: 'Горное Право КЗ', rating: 4.8, location: 'Нур-Султан' },
@@ -73,9 +65,8 @@ export default function ServicesPage() {
       title: t('services.titles.investors'),
       description: t('services.descriptions.investors'),
       icon: Users,
-      color: 'blue',
       href: '/services/investors',
-      stats: { providers: 6, funded: 89 },
+      stats: { providers: 6, projects: 89 },
       featured: [
         { name: 'КазИнвест Майнинг', rating: 4.8, location: 'Алматы' },
         { name: 'Altyn Invest Fund', rating: 4.9, location: 'Нур-Султан' },
@@ -101,222 +92,162 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen bg-white dark:bg-[#0A0A0A]">
       <Navigation />
-      {/* Hero Section */}
-      <div className="bg-blue-600 dark:bg-blue-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
-          <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-              {t('services.hero.title')}
-            </h1>
-            <p className="text-xl text-blue-100 dark:text-blue-200 mb-8 max-w-3xl mx-auto">
-              {t('services.hero.subtitle')}
-            </p>
 
-            {/* Search */}
-            <div className="max-w-2xl mx-auto relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t('services.hero.searchPlaceholder')}
-                className="w-full px-6 py-4 rounded-full text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-600"
-              />
-              <Button
-                size="icon"
-                className="absolute right-2 top-2 rounded-full"
-              >
-                <Search className="w-5 h-5" />
-              </Button>
-            </div>
-          </div>
+      {/* Hero */}
+      <section className="pt-24 lg:pt-32 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <p className="text-xs font-medium uppercase tracking-wider text-gray-400">
+          {t('services.sections.categories')}
+        </p>
+        <h1 className="mt-3 text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+          {t('services.hero.title')}
+        </h1>
+        <p className="mt-4 text-base lg:text-lg text-gray-500 max-w-xl">
+          {t('services.hero.subtitle')}
+        </p>
+
+        {/* Search */}
+        <div className="mt-8 max-w-md relative">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder={t('services.hero.searchPlaceholder')}
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-white dark:bg-[#141414] text-gray-900 dark:text-gray-50 placeholder:text-gray-400 focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] focus:outline-none transition-colors duration-150"
+          />
         </div>
+      </section>
+
+      {/* Catalog CTA */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        <Link href={`/${locale}/services/catalog`}>
+          <div className="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-xl p-5 bg-white dark:bg-[#141414] hover:border-gray-300 hover:shadow-medium transition-all duration-200 group">
+            <div>
+              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                Каталог услуг
+              </h2>
+              <p className="text-sm text-gray-500 mt-0.5">
+                Буровые работы, консалтинг, аудит, юридические услуги и многое
+                другое
+              </p>
+            </div>
+            <span className="text-sm text-[#0A84FF] font-medium flex items-center gap-1 group-hover:gap-2 transition-all whitespace-nowrap ml-4">
+              Перейти
+              <ArrowRight className="w-4 h-4" />
+            </span>
+          </div>
+        </Link>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Catalog CTA Banner */}
-        <section className="mb-10">
-          <Link href={`/${locale}/services/catalog`}>
-            <div className="flex items-center justify-between bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-800 rounded-xl p-5 hover:shadow-md transition-all group">
-              <div>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                  Каталог услуг
-                </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Буровые работы, консалтинг, аудит, юридические услуги и многое
-                  другое
-                </p>
-              </div>
-              <span className="text-blue-600 dark:text-blue-400 font-medium flex items-center gap-1 group-hover:gap-2 transition-all text-sm whitespace-nowrap ml-4">
-                Перейти в каталог услуг
-                <ArrowRight className="w-4 h-4" />
-              </span>
-            </div>
-          </Link>
-        </section>
-
-        {/* Service Categories */}
-        <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              {t('services.sections.categories')}
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              {t('services.sections.categoriesSubtitle')}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      {/* Service Categories */}
+      <section className="py-12 bg-gray-50 dark:bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {serviceCategories.map((category) => {
               const Icon = category.icon;
               return (
                 <Link key={category.id} href={`/${locale}${category.href}`}>
-                  <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer">
-                    <div className="text-center">
-                      <div
-                        className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
-                          category.color === 'blue'
-                            ? 'bg-blue-100 dark:bg-blue-900'
-                            : 'bg-green-100 dark:bg-green-900'
-                        }`}
-                      >
-                        <Icon
-                          className={`w-8 h-8 ${
-                            category.color === 'blue'
-                              ? 'text-blue-600'
-                              : 'text-green-600'
-                          }`}
-                        />
-                      </div>
+                  <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-5 bg-white dark:bg-[#141414] hover:border-gray-300 hover:shadow-medium hover:-translate-y-0.5 transition-all duration-200 cursor-pointer h-full">
+                    <Icon className="w-5 h-5 text-gray-400 mb-3" />
+                    <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                      {category.title}
+                    </h3>
+                    <p className="text-sm text-gray-500 mt-1 mb-4">
+                      {category.description}
+                    </p>
 
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                        {category.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                        {category.description}
-                      </p>
+                    {/* Stats */}
+                    <div className="flex gap-4 text-xs text-gray-400 mb-4">
+                      <span>
+                        {category.stats.providers}{' '}
+                        {t('services.labels.providers')}
+                      </span>
+                      <span>
+                        {category.stats.projects}{' '}
+                        {t('services.labels.projects')}
+                      </span>
+                    </div>
 
-                      {/* Stats */}
-                      <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
-                        <span>
-                          {category.stats.providers ||
-                            category.stats.specialists}{' '}
-                          {t('services.labels.providers')}
-                        </span>
-                        <span>
-                          {category.stats.projects ||
-                            category.stats.items ||
-                            category.stats.funded}{' '}
-                          {t('services.labels.projects')}
-                        </span>
-                      </div>
-
-                      {/* Featured providers */}
-                      <div className="space-y-2 mb-4">
-                        {category.featured.map((provider, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center justify-between text-xs"
-                          >
-                            <div className="flex items-center gap-2">
-                              <Building2 className="w-3 h-3" />
-                              <span className="font-medium">
-                                {provider.name}
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                              <span>{provider.rating}</span>
-                            </div>
+                    {/* Featured */}
+                    <div className="space-y-2 pt-3 border-t border-gray-100 dark:border-gray-700">
+                      {category.featured.map((provider, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between text-xs"
+                        >
+                          <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+                            <Building2 className="w-3 h-3 text-gray-400" />
+                            <span>{provider.name}</span>
                           </div>
-                        ))}
-                      </div>
-
-                      <Button
-                        variant="outline"
-                        className="w-full group-hover:bg-blue-600 group-hover:text-white transition-colors"
-                        rightIcon={<ArrowRight className="w-4 h-4" />}
-                      >
-                        {t('services.labels.viewAll')}
-                      </Button>
+                          <div className="flex items-center gap-0.5 text-gray-500">
+                            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                            <span>{provider.rating}</span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  </Card>
+                  </div>
                 </Link>
               );
             })}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Knowledge Center & News */}
-        <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              {t('services.sections.informationCenter')}
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              {t('services.sections.informationCenterSubtitle')}
-            </p>
-          </div>
+      {/* Knowledge Center */}
+      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50 mb-8">
+          {t('services.sections.informationCenter')}
+        </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {knowledgeCenter.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <Link key={index} href={`/${locale}${item.href}`}>
-                  <Card className="group hover:shadow-lg transition-all duration-300 h-full">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                          <Icon className="w-6 h-6 text-blue-600" />
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-400 mb-4">
-                          {item.description}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
-                            {item.articles} {t('services.labels.materials')}
-                          </span>
-                          <ArrowRight className="w-5 h-5 text-blue-600 group-hover:translate-x-1 transition-transform" />
-                        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {knowledgeCenter.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <Link key={index} href={`/${locale}${item.href}`}>
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-5 bg-white dark:bg-[#141414] hover:border-gray-300 hover:shadow-medium transition-all duration-200 group">
+                  <div className="flex items-start gap-4">
+                    <Icon className="w-5 h-5 text-gray-400 mt-0.5 flex-shrink-0" />
+                    <div className="flex-1">
+                      <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {item.description}
+                      </p>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-xs text-gray-400">
+                          {item.articles} {t('services.labels.materials')}
+                        </span>
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#0A84FF] transition-colors" />
                       </div>
                     </div>
-                  </Card>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
 
-        {/* CTA Section */}
-        <section className="bg-blue-600 dark:bg-blue-700 rounded-2xl p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">{t('services.cta.title')}</h2>
-          <p className="text-blue-100 dark:text-blue-200 mb-6 max-w-2xl mx-auto">
+      {/* CTA */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 bg-gray-50 dark:bg-[#141414]">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+            {t('services.cta.title')}
+          </h2>
+          <p className="text-sm text-gray-500 mt-2 max-w-lg">
             {t('services.cta.description')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="outline"
-              className="bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700"
-            >
-              {t('services.cta.postService')}
-            </Button>
-            <Button
-              variant="outline"
-              className="border-blue-400 dark:border-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-800"
-            >
-              {t('services.cta.contactUs')}
-            </Button>
+          <div className="flex gap-3 mt-6">
+            <Button>{t('services.cta.postService')}</Button>
+            <Button variant="outline">{t('services.cta.contactUs')}</Button>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

@@ -674,7 +674,7 @@ export default function NewsPage() {
               className="px-4 py-2 rounded-lg text-gray-900 flex-1"
             />
             <Button
-              variant="secondary"
+              variant="outline"
               className="bg-white text-blue-600 hover:bg-gray-100 whitespace-nowrap"
             >
               Подписаться

@@ -930,7 +930,7 @@ export default function InvestorsPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              variant="secondary"
+              variant="outline"
               className="bg-white text-blue-600 hover:bg-gray-100"
             >
               <Plus className="w-4 h-4 mr-2" />

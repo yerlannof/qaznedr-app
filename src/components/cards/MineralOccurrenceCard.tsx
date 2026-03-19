@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { KazakhstanDeposit } from '@/lib/types/listing';
 import { formatPrice } from '@/lib/utils/format';
 import { getMineralIcon } from '@/components/icons';
-import { getPlaceholderImage } from '@/lib/images/placeholders';
+import { Badge } from '@/components/ui/badge';
+import { MapPin, ShieldCheck } from 'lucide-react';
 
 interface MineralOccurrenceCardProps {
   deposit: KazakhstanDeposit;
@@ -15,176 +15,78 @@ interface MineralOccurrenceCardProps {
 
 export default function MineralOccurrenceCard({
   deposit,
-  getStatusColor,
   getStatusText,
 }: MineralOccurrenceCardProps) {
-  const getConfidenceText = (confidence?: string) => {
-    const confidences: Record<string, string> = {
-      INFERRED: 'Предполагаемые',
-      INDICATED: 'Вероятные',
-      MEASURED: 'Достоверные',
-    };
-    return confidences[confidence || ''] || 'Не определена';
-  };
+  const statusVariant = (() => {
+    switch (deposit.status) {
+      case 'ACTIVE':
+        return 'success' as const;
+      case 'PENDING':
+        return 'warning' as const;
+      case 'SOLD':
+        return 'default' as const;
+      default:
+        return 'default' as const;
+    }
+  })();
 
-  const getAccessibilityText = (rating?: string) => {
-    const ratings: Record<string, string> = {
-      EASY: 'Легкий доступ',
-      MODERATE: 'Умеренный доступ',
-      DIFFICULT: 'Сложный доступ',
-      VERY_DIFFICULT: 'Очень сложный доступ',
-    };
-    return ratings[rating || ''] || 'Не оценен';
-  };
+  const formattedDate = deposit.createdAt
+    ? new Date(deposit.createdAt).toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'short',
+      })
+    : '';
 
-  const getAccessibilityColor = (rating?: string) => {
-    const colors: Record<string, string> = {
-      EASY: 'text-green-600',
-      MODERATE: 'text-yellow-600',
-      DIFFICULT: 'text-orange-600',
-      VERY_DIFFICULT: 'text-red-600',
-    };
-    return colors[rating || ''] || 'text-gray-600';
-  };
-
-  // Get image URL - use first image from array or placeholder
-  const imageUrl =
-    deposit.images && Array.isArray(deposit.images) && deposit.images.length > 0
-      ? deposit.images[0]
-      : getPlaceholderImage(deposit.mineral, deposit.type);
+  const MineralIcon = getMineralIcon(deposit.mineral);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-      {/* Image */}
-      <div className="aspect-[4/3] relative bg-gray-50">
-        <Image
-          src={imageUrl}
-          alt={deposit.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority={false}
-          onError={(e) => {
-            // Fallback to icon if image fails to load
-            const target = e.target as HTMLImageElement;
-            target.style.display = 'none';
-            const iconDiv = target.nextElementSibling as HTMLDivElement;
-            if (iconDiv) iconDiv.style.display = 'flex';
-          }}
-        />
-        <div className="absolute inset-0 hidden items-center justify-center">
-          {(() => {
-            const Icon = getMineralIcon(deposit.mineral);
-            return <Icon className="w-20 h-20 text-blue-600 opacity-60" />;
-          })()}
+    <Link href={`/listings/${deposit.id}`}>
+      <article className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] shadow-subtle hover:border-gray-300 hover:shadow-medium hover:-translate-y-0.5 transition-all duration-200 cursor-pointer overflow-hidden">
+        {/* Image */}
+        <div className="h-48 bg-gray-100 dark:bg-gray-800 overflow-hidden relative flex items-center justify-center">
+          <MineralIcon className="w-16 h-16 text-gray-300 dark:text-gray-600" />
+
+          {/* Status badge top-right */}
+          <div className="absolute top-3 right-3 flex gap-1.5">
+            <Badge variant={statusVariant}>
+              {getStatusText(deposit.status)}
+            </Badge>
+            {deposit.verified && (
+              <Badge variant="blue">
+                <ShieldCheck className="w-3 h-3 mr-1" />
+                Проверено
+              </Badge>
+            )}
+          </div>
         </div>
 
-        {/* Type Badge */}
-        <div className="absolute top-2 left-2">
-          <span className="bg-blue-600 text-white px-3 py-1 rounded-md text-xs font-medium">
-            Рудопроявление
-          </span>
-        </div>
-
-        {/* Badges */}
-        <div className="absolute top-2 right-2 flex flex-col gap-1">
-          {deposit.featured && (
-            <span className="bg-gray-700 text-white px-2 py-1 rounded-md text-xs font-medium">
-              Рекомендуем
-            </span>
-          )}
-          {deposit.verified && (
-            <span className="bg-blue-600 text-white px-2 py-1 rounded-md text-xs font-medium">
-              ✓ Проверено
-            </span>
-          )}
-        </div>
-
-        {/* Status */}
-        <div className="absolute bottom-2 right-2">
-          <span
-            className={`px-2 py-1 rounded-md text-xs font-medium ${getStatusColor(deposit.status)}`}
-          >
-            {getStatusText(deposit.status)}
-          </span>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-6">
-        <div className="mb-3">
-          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+        {/* Content */}
+        <div className="p-4">
+          <div className="text-xs font-medium uppercase tracking-wider text-gray-400">
+            Минеральное проявление
+          </div>
+          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50 mt-1 line-clamp-1">
             {deposit.title}
           </h3>
-          <p className="text-sm text-gray-600">
-            {deposit.region}, {deposit.city}
+          <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
+            <MapPin className="w-3.5 h-3.5" />
+            {deposit.region}
           </p>
-        </div>
 
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-          {deposit.description}
-        </p>
+          {/* Key info row */}
+          <div className="flex items-center gap-3 mt-2 text-xs text-gray-400">
+            <span>{deposit.area.toLocaleString()} km²</span>
+            <span>{deposit.mineral}</span>
+          </div>
 
-        {/* Occurrence-specific Details */}
-        <div className="space-y-2 mb-4">
-          {deposit.discoveryDate && (
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-500">Дата открытия:</span>
-              <span className="font-medium text-gray-900">
-                {new Date(deposit.discoveryDate).toLocaleDateString('ru-RU')}
-              </span>
-            </div>
-          )}
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Достоверность:</span>
-            <span className="font-medium text-gray-900">
-              {getConfidenceText(deposit.geologicalConfidence)}
+          <div className="border-t border-gray-100 dark:border-gray-700 mt-3 pt-3 flex justify-between items-center">
+            <span className="text-lg font-bold text-gray-900 dark:text-gray-50">
+              {formatPrice(deposit.price)}
             </span>
-          </div>
-          {deposit.estimatedReserves && (
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-500">Запасы (оценка):</span>
-              <span className="font-medium text-gray-900">
-                {deposit.estimatedReserves.toLocaleString()} т
-              </span>
-            </div>
-          )}
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Доступность:</span>
-            <span
-              className={`font-medium ${getAccessibilityColor(deposit.accessibilityRating)}`}
-            >
-              {getAccessibilityText(deposit.accessibilityRating)}
-            </span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Минерал:</span>
-            <span className="font-medium text-gray-900">{deposit.mineral}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Площадь:</span>
-            <span className="font-medium text-gray-900">
-              {deposit.area.toLocaleString()} км²
-            </span>
+            <span className="text-xs text-gray-400">{formattedDate}</span>
           </div>
         </div>
-
-        {/* Price */}
-        <div className="flex justify-between items-center">
-          <span className="text-2xl font-bold text-blue-600">
-            {formatPrice(deposit.price)}
-          </span>
-          <span className="text-sm text-gray-500">👁 {deposit.views}</span>
-        </div>
-
-        {/* Action Button */}
-        <Link
-          href={`/listings/${deposit.id}`}
-          className="block w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 hover:shadow-md transition-all text-center"
-        >
-          Подробнее о рудопроявлении
-        </Link>
-      </div>
-    </div>
+      </article>
+    </Link>
   );
 }

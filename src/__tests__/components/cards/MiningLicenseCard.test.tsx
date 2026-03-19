@@ -39,12 +39,10 @@ describe('MiningLicenseCard', () => {
     );
 
     expect(screen.getByText('Test Mining License')).toBeInTheDocument();
-    expect(screen.getByText('Золото')).toBeInTheDocument();
-    expect(screen.getByText('Караганда')).toBeInTheDocument();
-    expect(screen.getByText('100 км²')).toBeInTheDocument();
+    expect(screen.getByText('Карагандинская')).toBeInTheDocument();
   });
 
-  it('displays license details correctly', () => {
+  it('shows type label', () => {
     render(
       <MiningLicenseCard
         deposit={mockDeposit}
@@ -53,7 +51,7 @@ describe('MiningLicenseCard', () => {
       />
     );
 
-    expect(screen.getByText('LIC-123')).toBeInTheDocument();
+    expect(screen.getByText('Горнодобывающая лицензия')).toBeInTheDocument();
   });
 
   it('shows verified badge when deposit is verified', () => {
@@ -78,5 +76,17 @@ describe('MiningLicenseCard', () => {
     );
 
     expect(screen.getByText('1.0 млн ₸')).toBeInTheDocument();
+  });
+
+  it('displays status badge', () => {
+    render(
+      <MiningLicenseCard
+        deposit={mockDeposit}
+        getStatusColor={() => 'bg-blue-100 text-blue-800'}
+        getStatusText={() => 'Активно'}
+      />
+    );
+
+    expect(screen.getByText('Активно')).toBeInTheDocument();
   });
 });

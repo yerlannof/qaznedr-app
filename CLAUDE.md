@@ -36,7 +36,7 @@ npm run test:coverage # Run tests with coverage report
 
 - **Framework**: Next.js 15.3.4 with App Router
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS v4
+- **Styling**: Tailwind CSS v3
 - **Database**: Prisma with SQLite
 - **Authentication**: NextAuth.js
 - **Testing**: Jest with Testing Library
@@ -82,10 +82,13 @@ type ListingType =
 
 **CRITICAL**: This project has strict design requirements:
 
-- **Colors**: Only gray + blue accent (`#0A84FF`). No gradients, no bright colors
-- **Components**: Minimal, clean design with subtle shadows and hover effects
-- **Animations**: Limited to `hover:shadow-md` and `transition-all`
-- **Forbidden**: emerald, purple, orange colors; complex animations; gradients
+- **Colors**: Gray base (gray-900 primary text) + blue accent (`#0A84FF`). No gradients, no bright colors. Primary buttons are BLACK (bg-gray-900), not blue.
+- **Typography**: Inter font via next/font/google. Tight letter-spacing on headings (tracking-tight).
+- **Components**: Minimal, clean design with subtle shadows (`shadow-subtle`) and hover effects (`hover:shadow-medium hover:-translate-y-0.5`). Border-based cards (`border border-gray-200 rounded-xl`).
+- **Animations**: CSS transitions only for hover (duration-150/200). Framer Motion only for mount/unmount (AnimatePresence). No pulse, glow, sparkle, gradient-shift.
+- **Icons**: Lucide React only. NO emoji in UI elements.
+- **Copy**: Short, direct, factual. No marketing noise ("инновационная экосистема").
+- **Forbidden**: glassmorphism, sparkle badges, emoji icons, blue primary buttons, centered hero text, gradient backgrounds, complex Framer Motion orchestrations
 
 ### Kazakhstan-Specific Features
 

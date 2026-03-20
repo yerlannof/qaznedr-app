@@ -255,7 +255,7 @@ export default function AdminListingsModeration() {
 
                     {/* Metadata row */}
                     <div className="flex flex-wrap items-center gap-3 mt-2">
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
                         {TYPE_LABELS[listing.type] || listing.type}
                       </span>
                       {listing.mineral && (

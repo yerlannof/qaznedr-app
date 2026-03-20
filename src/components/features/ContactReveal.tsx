@@ -57,7 +57,7 @@ export default function ContactReveal({
         </p>
         <Link
           href={`/${locale}/auth/login`}
-          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+          className="inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200"
         >
           Войти для просмотра контактов
         </Link>

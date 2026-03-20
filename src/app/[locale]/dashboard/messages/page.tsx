@@ -184,7 +184,7 @@ export default function MessagesPage() {
             className="absolute inset-0 bg-black/50"
             onClick={() => setShowMessaging(false)}
           />
-          <div className="absolute right-0 top-0 h-full w-full max-w-4xl bg-white dark:bg-[#141414] shadow-xl">
+          <div className="absolute right-0 top-0 h-full w-full max-w-4xl bg-white dark:bg-[#141414] shadow-elevated">
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
               <h2 className="text-base font-semibold text-gray-900 dark:text-gray-50">
                 Сообщения

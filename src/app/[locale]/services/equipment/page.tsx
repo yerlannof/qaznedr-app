@@ -503,7 +503,7 @@ export default function EquipmentRentalPage() {
     return (
       <Card
         key={item.id}
-        className="hover:shadow-xl transition-all duration-300"
+        className="hover:shadow-medium transition-all duration-300"
       >
         {/* Equipment Image */}
         <div className="relative h-48 bg-gray-100 rounded-lg mb-4 overflow-hidden">
@@ -525,7 +525,7 @@ export default function EquipmentRentalPage() {
           <div
             className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${
               availability.color === 'green'
-                ? 'bg-blue-100 text-blue-800'
+                ? 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
                 : availability.color === 'red'
                   ? 'bg-red-100 text-red-800'
                   : availability.color === 'yellow'

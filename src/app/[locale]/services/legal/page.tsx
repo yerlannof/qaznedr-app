@@ -547,7 +547,7 @@ export default function LegalServicesPage() {
           {filteredExperts.map((expert) => (
             <Card
               key={expert.id}
-              className={`group hover:shadow-xl transition-all duration-300 ${viewMode === 'list' ? 'p-6' : ''}`}
+              className={`group hover:shadow-medium transition-all duration-300 ${viewMode === 'list' ? 'p-6' : ''}`}
             >
               <div
                 className={`${viewMode === 'list' ? 'flex gap-6' : 'text-center'}`}

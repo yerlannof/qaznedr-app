@@ -3,7 +3,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import ListingCard from '@/components/cards/ListingCard';
 import SkeletonCard from '@/components/ui/SkeletonCard';
 import { depositApi } from '@/lib/api/deposits';
@@ -87,11 +87,7 @@ export default function InfiniteListings({
   // Error state
   if (status === 'error') {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col items-center justify-center py-16"
-      >
+      <div className="flex flex-col items-center justify-center py-16">
         <AlertCircle className="w-16 h-16 text-gray-400 mb-4" />
         <h3 className="text-lg font-semibold text-gray-900 mb-2">
           Произошла ошибка при загрузке
@@ -101,11 +97,11 @@ export default function InfiniteListings({
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
         >
           Попробовать снова
         </button>
-      </motion.div>
+      </div>
     );
   }
 
@@ -115,11 +111,7 @@ export default function InfiniteListings({
   // Empty state
   if (allDeposits.length === 0 && !isFetching) {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col items-center justify-center py-16"
-      >
+      <div className="flex flex-col items-center justify-center py-16">
         <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4">
           <AlertCircle className="w-10 h-10 text-gray-400" />
         </div>
@@ -130,7 +122,7 @@ export default function InfiniteListings({
           Попробуйте изменить параметры поиска или фильтры для получения
           результатов
         </p>
-      </motion.div>
+      </div>
     );
   }
 
@@ -147,75 +139,40 @@ export default function InfiniteListings({
           </p>
         </div>
         {isFetching && !isFetchingNextPage && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="flex items-center gap-2 text-sm text-blue-600"
-          >
+          <div className="flex items-center gap-2 text-sm text-gray-400">
             <Loader2 className="w-4 h-4 animate-spin" />
             <span>Обновление...</span>
-          </motion.div>
+          </div>
         )}
       </div>
 
       {/* Listings grid */}
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          visible: {
-            transition: {
-              staggerChildren: 0.05,
-            },
-          },
-        }}
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <AnimatePresence mode="popLayout">
-          {allDeposits.map((deposit, index) => (
-            <motion.div
-              key={deposit.id}
-              layout
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{
-                duration: 0.3,
-                delay: index * 0.05,
-              }}
-            >
+          {allDeposits.map((deposit) => (
+            <div key={deposit.id}>
               <ListingCard deposit={deposit} />
-            </motion.div>
+            </div>
           ))}
         </AnimatePresence>
-      </motion.div>
+      </div>
 
       {/* Load more trigger */}
       <div ref={ref} className="mt-8 flex justify-center">
         {isFetchingNextPage && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col items-center gap-3"
-          >
-            <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+          <div className="flex flex-col items-center gap-3">
+            <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
             <p className="text-sm text-gray-600">Загрузка объявлений...</p>
-          </motion.div>
+          </div>
         )}
 
         {!hasNextPage && allDeposits.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg"
-          >
+          <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg">
             <CheckCircle className="w-5 h-5 text-gray-600" />
             <p className="text-sm text-gray-600">
               Все {totalCount} объявлений загружены
             </p>
-          </motion.div>
+          </div>
         )}
       </div>
 

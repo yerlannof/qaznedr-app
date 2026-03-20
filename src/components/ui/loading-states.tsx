@@ -17,7 +17,7 @@ export function LoadingSpinner({
 
   return (
     <div className={`${sizes[size]} ${className} animate-spin`}>
-      <Loader2 className="w-full h-full text-blue-600" />
+      <Loader2 className="w-full h-full text-gray-400" />
     </div>
   );
 }
@@ -28,7 +28,7 @@ export function LoadingDots({ className = '' }: { className?: string }) {
       {[0, 1, 2].map((i) => (
         <div
           key={i}
-          className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"
+          className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"
           style={{ animationDelay: `${i * 200}ms` }}
         />
       ))}

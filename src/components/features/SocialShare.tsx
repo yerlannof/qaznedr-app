@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Share2, Copy, Check, MessageCircle, Send, Link2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 interface SocialShareProps {
   url: string;
@@ -88,13 +88,7 @@ export default function SocialShare({
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 z-50"
-          >
+          <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 z-50">
             <div className="p-4">
               <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
                 Поделиться объявлением
@@ -121,7 +115,7 @@ export default function SocialShare({
                   className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 >
                   {copied ? (
-                    <Check className="w-4 h-4 text-blue-600" />
+                    <Check className="w-4 h-4 text-[#0A84FF]" />
                   ) : (
                     <Copy className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                   )}
@@ -131,7 +125,7 @@ export default function SocialShare({
                 </button>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
 

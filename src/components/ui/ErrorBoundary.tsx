@@ -76,7 +76,7 @@ export default class ErrorBoundary extends Component<Props, State> {
               <div className="flex gap-3 w-full">
                 <button
                   onClick={this.handleReset}
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
                 >
                   <RefreshCw className="w-4 h-4" />
                   Перезагрузить
@@ -115,7 +115,7 @@ export function AsyncErrorBoundary({ children }: { children: ReactNode }) {
               onClick={() =>
                 typeof window !== 'undefined' && window.location.reload()
               }
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="mt-4 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
             >
               Попробовать снова
             </button>

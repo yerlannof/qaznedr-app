@@ -285,7 +285,7 @@ export function ConversationsList({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Поиск по чатам..."
-            className="w-full px-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
           />
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
         </div>
@@ -341,7 +341,7 @@ export function ConversationsList({
                 key={conversation.id}
                 onClick={() => onSelectConversation(conversation.id)}
                 className={`p-4 hover:bg-gray-50 cursor-pointer transition-colors border-b border-gray-100 ${
-                  isSelected ? 'bg-blue-50' : ''
+                  isSelected ? 'bg-gray-100' : ''
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -391,7 +391,7 @@ export function ConversationsList({
                         {conversation.last_message_text || 'Нет сообщений'}
                       </p>
                       {unreadCount > 0 && (
-                        <span className="ml-2 px-2 py-0.5 bg-blue-600 text-white text-xs rounded-full">
+                        <span className="ml-2 px-2 py-0.5 bg-gray-900 text-white text-xs rounded-md">
                           {unreadCount > 99 ? '99+' : unreadCount}
                         </span>
                       )}

@@ -107,9 +107,9 @@ export function DepositMap({
       // Create inner circle
       const inner = document.createElement('div');
       inner.className = cn(
-        'absolute inset-0 bg-blue-500 rounded-full border-2 border-white shadow-lg',
+        'absolute inset-0 bg-gray-900 rounded-full border-2 border-white shadow-lg',
         'hover:scale-110 transition-transform',
-        selectedDeposit?.id === deposit.id && 'bg-blue-600 scale-110'
+        selectedDeposit?.id === deposit.id && 'bg-gray-900 scale-110'
       );
       el.appendChild(inner);
 
@@ -120,7 +120,7 @@ export function DepositMap({
           <p class="text-xs text-gray-600 mb-2">${deposit.region}, ${deposit.city}</p>
           ${deposit.price ? `<p class="text-sm font-medium">${formatPrice(deposit.price)}</p>` : ''}
           <div class="mt-2 flex gap-1">
-            <span class="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+            <span class="inline-block px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">
               ${deposit.mineral}
             </span>
             <span class="inline-block px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">

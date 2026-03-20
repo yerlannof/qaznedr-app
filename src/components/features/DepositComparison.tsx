@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import {
   X,
   CheckCircle,
@@ -93,13 +93,9 @@ export function ComparisonBadge({
   if (count === 0) return null;
 
   return (
-    <motion.button
+    <button
       onClick={onClick}
-      className={`fixed bottom-6 right-6 bg-blue-600 text-white rounded-full shadow-lg hover:shadow-xl z-50 ${className}`}
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      className={`fixed bottom-6 right-6 bg-gray-900 text-white rounded-full shadow-md hover:shadow-lg z-50 ${className}`}
     >
       <div className="flex items-center space-x-3 px-4 py-3">
         <Scale className="w-5 h-5" />
@@ -110,20 +106,10 @@ export function ComparisonBadge({
       </div>
 
       {/* Notification dot */}
-      <motion.div
-        className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold"
-        animate={{
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      >
+      <div className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold">
         {count}
-      </motion.div>
-    </motion.button>
+      </div>
+    </button>
   );
 }
 
@@ -245,23 +231,14 @@ export function ComparisonModal({
       {isOpen && (
         <>
           {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-50"
-            onClick={onClose}
-          />
+          <div className="fixed inset-0 bg-black/50 z-50" onClick={onClose} />
 
           {/* Modal */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          <div
             className={`fixed inset-4 bg-white rounded-2xl shadow-2xl z-50 overflow-hidden ${className}`}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-gray-50">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gray-50 dark:bg-[#141414]">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">
                   Сравнение месторождений
@@ -310,12 +287,9 @@ export function ComparisonModal({
                   >
                     <div /> {/* Empty cell for labels */}
                     {deposits.map((deposit) => (
-                      <motion.div
+                      <div
                         key={deposit.id}
                         className="bg-white border rounded-xl p-4 relative"
-                        whileHover={{
-                          y: -2,
-                        }}
                       >
                         <button
                           onClick={() => onRemove(deposit.id)}
@@ -327,7 +301,7 @@ export function ComparisonModal({
                         <div className="mb-3">
                           {(() => {
                             const Icon = getMineralIcon(deposit.mineral);
-                            return <Icon className="w-8 h-8 text-blue-600" />;
+                            return <Icon className="w-8 h-8 text-gray-600" />;
                           })()}
                         </div>
 
@@ -338,7 +312,7 @@ export function ComparisonModal({
                           <MapPin className="w-3 h-3 mr-1" />
                           {deposit.city}
                         </p>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
 
@@ -350,15 +324,12 @@ export function ComparisonModal({
                         : null;
 
                       return (
-                        <motion.div
+                        <div
                           key={row.label}
                           className="grid gap-4 py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors"
                           style={{
                             gridTemplateColumns: `200px repeat(${deposits.length}, 1fr)`,
                           }}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.05 }}
                         >
                           <div className="font-medium text-gray-700 text-sm flex items-center">
                             {row.label}
@@ -401,7 +372,7 @@ export function ComparisonModal({
                                         deposit.mineral
                                       );
                                       return (
-                                        <Icon className="w-4 h-4 text-blue-600" />
+                                        <Icon className="w-4 h-4 text-gray-600" />
                                       );
                                     })()}
                                     <span>{value}</span>
@@ -411,18 +382,14 @@ export function ComparisonModal({
                                   <span>{value}</span>
                                 )}
                                 {isBest && (
-                                  <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    className="inline-flex items-center ml-2"
-                                  >
+                                  <div className="inline-flex items-center ml-2">
                                     <TrendingUp className="w-3 h-3 text-green-600" />
-                                  </motion.div>
+                                  </div>
                                 )}
                               </div>
                             );
                           })}
-                        </motion.div>
+                        </div>
                       );
                     })}
                   </div>
@@ -433,7 +400,7 @@ export function ComparisonModal({
                       <Link
                         key={deposit.id}
                         href={`/listings/${deposit.id}`}
-                        className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                        className="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
                       >
                         Подробнее о {deposit.mineral.toLowerCase()}
                       </Link>
@@ -442,7 +409,7 @@ export function ComparisonModal({
                 </div>
               )}
             </div>
-          </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
@@ -472,18 +439,16 @@ export function AddToComparisonButton({
   };
 
   return (
-    <motion.button
+    <button
       onClick={handleClick}
       className={`flex items-center justify-center p-2 rounded-lg border transition-all ${
         isAdded
-          ? 'bg-blue-100 border-blue-300 text-blue-700'
+          ? 'bg-gray-200 border-gray-400 text-gray-700'
           : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
       } ${className}`}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
     >
       {isAdded ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-    </motion.button>
+    </button>
   );
 }
 

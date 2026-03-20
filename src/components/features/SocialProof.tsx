@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import {
   Eye,
   Users,
@@ -58,10 +58,7 @@ export function LiveActivityIndicator({
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
+        <div
           className={`fixed bottom-4 left-4 bg-white border border-gray-200 rounded-lg shadow-lg p-3 max-w-sm z-50 ${className}`}
         >
           <div className="flex items-start space-x-3">
@@ -78,7 +75,7 @@ export function LiveActivityIndicator({
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
@@ -110,14 +107,12 @@ export function ViewingNowIndicator({
   if (viewingCount === 0) return null;
 
   return (
-    <motion.div
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      className={`inline-flex items-center space-x-1 bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-xs font-medium ${className}`}
+    <div
+      className={`inline-flex items-center space-x-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded-full text-xs font-medium ${className}`}
     >
       <Eye className="w-3 h-3" />
       <span>{viewingCount} человек смотрят сейчас</span>
-    </motion.div>
+    </div>
   );
 }
 
@@ -140,8 +135,7 @@ export function InterestLevelIndicator({
   const interest = getInterestLevel(interestedCount);
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
+    <div
       className={`inline-flex items-center space-x-2 px-3 py-2 rounded-lg border ${className}`}
       style={{
         backgroundColor: `${
@@ -173,7 +167,7 @@ export function InterestLevelIndicator({
           {interestedCount} человек заинтересованы
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -230,8 +224,7 @@ export function TrustBadge({
   const Icon = badge.icon;
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
+    <div
       className={`inline-flex items-center space-x-2 px-3 py-2 rounded-lg border bg-white shadow-sm ${className}`}
     >
       <Icon
@@ -267,7 +260,7 @@ export function TrustBadge({
           ))}
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }
 
@@ -327,11 +320,8 @@ export function RecentActivityFeed({
         {activities.map((activity, index) => {
           const Icon = activity.icon;
           return (
-            <motion.div
+            <div
               key={activity.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
               className="flex items-center space-x-3 text-sm"
             >
               <div className="flex-shrink-0">
@@ -344,7 +334,7 @@ export function RecentActivityFeed({
                 <span className="text-gray-600 ml-1">{activity.action}</span>
               </div>
               <div className="text-gray-500 text-xs">{activity.time}</div>
-            </motion.div>
+            </div>
           );
         })}
       </div>

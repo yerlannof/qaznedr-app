@@ -37,7 +37,7 @@ export default function SearchHero() {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-gray-50 py-20">
+    <div className="bg-gray-50 dark:bg-[#141414] py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
@@ -66,7 +66,7 @@ export default function SearchHero() {
                   Регион
                 </label>
                 <select
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] focus:border-transparent"
                   value={searchData.region}
                   onChange={(e) =>
                     setSearchData({ ...searchData, region: e.target.value })
@@ -87,7 +87,7 @@ export default function SearchHero() {
                   Минерал
                 </label>
                 <select
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] focus:border-transparent"
                   value={searchData.mineral}
                   onChange={(e) =>
                     setSearchData({ ...searchData, mineral: e.target.value })
@@ -106,7 +106,7 @@ export default function SearchHero() {
               <div className="flex items-end">
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 hover:shadow-lg transition-all flex items-center justify-center space-x-2"
+                  className="w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 hover:shadow-lg transition-all flex items-center justify-center space-x-2"
                 >
                   <span>🔍</span>
                   <span>Поиск</span>
@@ -130,7 +130,7 @@ export default function SearchHero() {
                   params.set('q', search.query);
                   router.push(`/listings?${params.toString()}`);
                 }}
-                className="flex items-center space-x-2 bg-white text-gray-700 px-4 py-2 rounded-full hover:shadow-md hover:text-blue-600 transition-all border border-gray-200"
+                className="flex items-center space-x-2 bg-white text-gray-700 px-4 py-2 rounded-md hover:shadow-md hover:text-gray-900 transition-all border border-gray-200"
               >
                 <span>{search.icon}</span>
                 <span className="text-sm">{search.query}</span>

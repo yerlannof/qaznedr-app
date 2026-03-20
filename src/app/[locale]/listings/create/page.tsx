@@ -16,7 +16,7 @@ export default function CreateListingPage() {
       <div className="min-h-screen bg-gray-50">
         <Navigation />
         <div className="pt-16 flex items-center justify-center min-h-screen">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-400"></div>
         </div>
       </div>
     );
@@ -38,7 +38,7 @@ export default function CreateListingPage() {
             </p>
             <Link
               href="/auth/login"
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              className="bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
             >
               Войти в систему
             </Link>

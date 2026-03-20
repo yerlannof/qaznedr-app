@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+// framer-motion removed for design cleanup
 import Link from 'next/link';
 import {
   User,
@@ -73,13 +73,12 @@ function UserProfileCard({
   className?: string;
 }) {
   return (
-    <motion.div
-      className={`bg-gradient-to-br from-blue-50 to-gray-50 rounded-xl p-6 border border-gray-100 ${className}`}
-      whileHover={{ scale: 1.02 }}
+    <div
+      className={`bg-gray-50 dark:bg-[#141414] rounded-xl p-6 border border-gray-100 ${className}`}
     >
       <div className="flex items-center space-x-4 mb-4">
-        <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-          <User className="w-6 h-6 text-white" />
+        <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+          <User className="w-6 h-6 text-gray-600 dark:text-gray-300" />
         </div>
         <div>
           <h3 className="font-semibold text-gray-900">{profile.name}</h3>
@@ -106,18 +105,16 @@ function UserProfileCard({
           </span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
-          <motion.div
-            className="bg-blue-600 h-2 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${profile.stats.completeness}%` }}
-            transition={{ duration: 1, ease: 'easeOut' }}
+          <div
+            className="bg-gray-900 dark:bg-gray-50 h-2 rounded-full transition-all duration-1000 ease-out"
+            style={{ width: `${profile.stats.completeness}%` }}
           />
         </div>
       </div>
 
       {/* Quick Stats */}
       <div className="grid grid-cols-3 gap-4">
-        <motion.div className="text-center" whileHover={{ scale: 1.05 }}>
+        <div className="text-center">
           <div className="text-lg font-semibold text-gray-900">
             {profile.stats.viewedCount}
           </div>
@@ -125,8 +122,8 @@ function UserProfileCard({
             <Eye className="w-3 h-3 mr-1" />
             Просмотрено
           </div>
-        </motion.div>
-        <motion.div className="text-center" whileHover={{ scale: 1.05 }}>
+        </div>
+        <div className="text-center">
           <div className="text-lg font-semibold text-gray-900">
             {profile.stats.savedCount}
           </div>
@@ -134,8 +131,8 @@ function UserProfileCard({
             <Heart className="w-3 h-3 mr-1" />
             Сохранено
           </div>
-        </motion.div>
-        <motion.div className="text-center" whileHover={{ scale: 1.05 }}>
+        </div>
+        <div className="text-center">
           <div className="text-lg font-semibold text-gray-900">
             {profile.stats.comparisonsCount}
           </div>
@@ -143,9 +140,9 @@ function UserProfileCard({
             <TrendingUp className="w-3 h-3 mr-1" />
             Сравнений
           </div>
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -188,7 +185,7 @@ function SavedSearches({ className = '' }: { className?: string }) {
         </div>
         <Link
           href="/dashboard/searches"
-          className="text-sm text-blue-600 hover:text-blue-700"
+          className="text-sm text-[#0A84FF] hover:text-[#0070E0]"
         >
           Все поиски
         </Link>
@@ -196,26 +193,19 @@ function SavedSearches({ className = '' }: { className?: string }) {
 
       <div className="space-y-3">
         {savedSearches.map((search, index) => (
-          <motion.div
+          <div
             key={search.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
             className="p-3 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors group"
           >
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center space-x-2 mb-1">
                   <Search className="w-4 h-4 text-gray-500" />
-                  <span className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                  <span className="font-medium text-gray-900 group-hover:text-gray-900 transition-colors">
                     {search.query}
                   </span>
                   {search.hasNewResults && (
-                    <motion.div
-                      className="w-2 h-2 bg-red-500 rounded-full"
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
+                    <div className="w-2 h-2 bg-red-500 rounded-full" />
                   )}
                 </div>
                 <div className="text-sm text-gray-600">
@@ -227,7 +217,7 @@ function SavedSearches({ className = '' }: { className?: string }) {
                 <Bell className="w-4 h-4" />
               </button>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
@@ -272,20 +262,14 @@ function PriceAlerts({ className = '' }: { className?: string }) {
           <Target className="w-5 h-5 text-gray-600" />
           <h3 className="font-semibold text-gray-900">Ценовые уведомления</h3>
         </div>
-        <button className="text-sm text-blue-600 hover:text-blue-700">
+        <button className="text-sm text-[#0A84FF] hover:text-[#0070E0]">
           + Добавить
         </button>
       </div>
 
       <div className="space-y-3">
         {alerts.map((alert, index) => (
-          <motion.div
-            key={alert.id}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="p-3 border border-gray-100 rounded-lg"
-          >
+          <div key={alert.id} className="p-3 border border-gray-100 rounded-lg">
             <div className="flex items-center justify-between mb-2">
               <span className="font-medium text-gray-900 text-sm">
                 {alert.deposit}
@@ -306,7 +290,7 @@ function PriceAlerts({ className = '' }: { className?: string }) {
               Текущая: {formatPrice(alert.currentPrice)} • Цель:{' '}
               {formatPrice(alert.targetPrice)}
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
@@ -351,12 +335,7 @@ function QuickActions({ className = '' }: { className?: string }) {
         const Icon = action.icon;
 
         return (
-          <motion.div
-            key={action.id}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.1 }}
-          >
+          <div key={action.id}>
             <Link
               href={action.href}
               className={`block p-4 bg-white border border-gray-100 rounded-xl hover:shadow-md transition-all group ${
@@ -382,11 +361,11 @@ function QuickActions({ className = '' }: { className?: string }) {
               >
                 <Icon className="w-4 h-4" />
               </div>
-              <span className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+              <span className="text-sm font-medium text-gray-900 group-hover:text-gray-900 transition-colors">
                 {action.label}
               </span>
             </Link>
-          </motion.div>
+          </div>
         );
       })}
     </div>

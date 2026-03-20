@@ -108,7 +108,7 @@ export default function ProfileTypeSelector() {
               onClick={() => setSelected(card.type)}
               className={`relative flex flex-col items-center text-center p-6 rounded-xl border-2 transition-all cursor-pointer ${
                 isSelected
-                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/30 shadow-md'
+                  ? 'border-[#0A84FF] bg-gray-50 dark:bg-gray-800 shadow-md'
                   : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 hover:shadow-md hover:border-gray-300 dark:hover:border-gray-600'
               }`}
             >
@@ -116,7 +116,7 @@ export default function ProfileTypeSelector() {
               <h3
                 className={`text-lg font-semibold mb-2 ${
                   isSelected
-                    ? 'text-blue-700 dark:text-blue-300'
+                    ? 'text-gray-900 dark:text-gray-100'
                     : 'text-gray-900 dark:text-white'
                 }`}
               >
@@ -126,7 +126,7 @@ export default function ProfileTypeSelector() {
                 {getLabel(card.descriptionKey, card.fallbackDescription)}
               </p>
               {isSelected && (
-                <div className="absolute top-3 right-3 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                <div className="absolute top-3 right-3 w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
                   <svg
                     className="w-4 h-4 text-white"
                     fill="none"
@@ -159,7 +159,7 @@ export default function ProfileTypeSelector() {
           disabled={!selected || isSubmitting}
           className={`px-8 py-3 rounded-lg font-medium text-white transition-all ${
             selected && !isSubmitting
-              ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer'
+              ? 'bg-gray-900 hover:bg-gray-800 cursor-pointer'
               : 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed'
           }`}
         >

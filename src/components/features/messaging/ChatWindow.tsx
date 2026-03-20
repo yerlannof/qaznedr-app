@@ -388,7 +388,7 @@ export function ChatWindow({
               <div className={`max-w-[70%] ${isOwn ? 'order-2' : 'order-1'}`}>
                 {/* Reply Preview */}
                 {message.reply_to && (
-                  <div className="mb-1 px-3 py-2 bg-gray-100 rounded-lg border-l-4 border-blue-500">
+                  <div className="mb-1 px-3 py-2 bg-gray-100 rounded-lg border-l-4 border-gray-900">
                     <p className="text-xs text-gray-500">
                       {message.reply_to.sender?.name}
                     </p>
@@ -402,7 +402,7 @@ export function ChatWindow({
                 <div
                   className={`px-4 py-2 rounded-2xl ${
                     isOwn
-                      ? 'bg-blue-600 text-white'
+                      ? 'bg-gray-900 text-white'
                       : 'bg-gray-100 text-gray-900'
                   }`}
                 >
@@ -417,14 +417,14 @@ export function ChatWindow({
                   >
                     <span
                       className={`text-xs ${
-                        isOwn ? 'text-blue-100' : 'text-gray-500'
+                        isOwn ? 'text-gray-300' : 'text-gray-500'
                       }`}
                     >
                       {formatTime(message.created_at)}
                     </span>
 
                     {isOwn && (
-                      <span className="text-blue-100">
+                      <span className="text-gray-300">
                         {message.read_receipts &&
                         message.read_receipts.length > 0 ? (
                           <CheckCheck className="w-4 h-4" />
@@ -484,7 +484,7 @@ export function ChatWindow({
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Введите сообщение..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
               rows={1}
               disabled={sending}
             />

@@ -37,7 +37,7 @@ export default function UserMenu() {
         </Link>
         <Link
           href={`/${locale}/auth/register`}
-          className="text-sm px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="text-sm px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
         >
           {t('common.register') || 'Register'}
         </Link>
@@ -51,7 +51,7 @@ export default function UserMenu() {
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
       >
-        <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-medium">
+        <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-sm font-medium">
           {session.user?.name?.[0]?.toUpperCase() || '?'}
         </div>
         <span className="text-sm text-gray-700 dark:text-gray-300 hidden sm:block">

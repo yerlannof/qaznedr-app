@@ -268,7 +268,7 @@ export default function ProfileForm() {
         <div
           className={`p-4 rounded-lg text-sm font-medium ${
             toast.type === 'success'
-              ? 'bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800'
+              ? 'bg-blue-50 dark:bg-blue-950/30 text-gray-900 dark:text-gray-100 border border-blue-200 dark:border-blue-800'
               : 'bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800'
           }`}
         >
@@ -291,7 +291,7 @@ export default function ProfileForm() {
           required
           value={form.full_name}
           onChange={handleChange}
-          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] transition-colors"
           placeholder={label(
             'Иванов Иван Иванович',
             'John Doe',
@@ -314,7 +314,7 @@ export default function ProfileForm() {
           type="text"
           value={form.company_name}
           onChange={handleChange}
-          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] transition-colors"
           placeholder={label('ТОО "Пример"', 'Example LLC', 'ЖШС "Мысал"')}
         />
       </div>
@@ -334,7 +334,7 @@ export default function ProfileForm() {
             type="text"
             value={form.phone}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+            className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] transition-colors"
             placeholder="+7 (7xx) xxx-xx-xx"
           />
         </div>
@@ -351,7 +351,7 @@ export default function ProfileForm() {
             type="text"
             value={form.city}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+            className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] transition-colors"
             placeholder={label('Алматы', 'Almaty', 'Алматы')}
           />
         </div>
@@ -371,7 +371,7 @@ export default function ProfileForm() {
           type="text"
           value={form.country}
           onChange={handleChange}
-          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] transition-colors"
           placeholder="Kazakhstan"
         />
       </div>
@@ -390,7 +390,7 @@ export default function ProfileForm() {
           type="text"
           value={form.website}
           onChange={handleChange}
-          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] transition-colors"
           placeholder="https://example.kz"
         />
       </div>
@@ -409,7 +409,7 @@ export default function ProfileForm() {
           rows={4}
           value={form.description}
           onChange={handleChange}
-          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-none"
+          className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] transition-colors resize-none"
           placeholder={label(
             'Расскажите о себе или вашей компании...',
             'Tell us about yourself or your company...',
@@ -429,7 +429,7 @@ export default function ProfileForm() {
               key={pt.value}
               className={`flex items-center p-3 rounded-lg border cursor-pointer transition-all ${
                 form.profile_type === pt.value
-                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/20'
+                  ? 'border-[#0A84FF] bg-gray-50 dark:bg-gray-800'
                   : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
               }`}
             >
@@ -439,12 +439,12 @@ export default function ProfileForm() {
                 value={pt.value}
                 checked={form.profile_type === pt.value}
                 onChange={() => handleProfileTypeChange(pt.value)}
-                className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                className="w-4 h-4 text-[#0A84FF] border-gray-300 focus:ring-[#0A84FF]"
               />
               <span
                 className={`ml-3 text-sm font-medium ${
                   form.profile_type === pt.value
-                    ? 'text-blue-700 dark:text-blue-300'
+                    ? 'text-gray-900 dark:text-gray-100'
                     : 'text-gray-700 dark:text-gray-300'
                 }`}
               >
@@ -467,7 +467,7 @@ export default function ProfileForm() {
                 key={st.value}
                 className={`flex items-center p-3 rounded-lg border cursor-pointer transition-all ${
                   form.service_types.includes(st.value)
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/20'
+                    ? 'border-[#0A84FF] bg-gray-50 dark:bg-gray-800'
                     : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
@@ -480,7 +480,7 @@ export default function ProfileForm() {
                 <span
                   className={`ml-3 text-sm font-medium ${
                     form.service_types.includes(st.value)
-                      ? 'text-blue-700 dark:text-blue-300'
+                      ? 'text-gray-900 dark:text-gray-100'
                       : 'text-gray-700 dark:text-gray-300'
                   }`}
                 >
@@ -500,7 +500,7 @@ export default function ProfileForm() {
           className={`px-6 py-2.5 rounded-lg font-medium text-white transition-all ${
             isSaving
               ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700 hover:shadow-md cursor-pointer'
+              : 'bg-gray-900 hover:bg-gray-800 hover:shadow-md cursor-pointer'
           }`}
         >
           {isSaving

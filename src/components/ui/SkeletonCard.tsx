@@ -4,7 +4,7 @@ export default function SkeletonCard() {
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
       {/* Image skeleton */}
-      <div className="aspect-[4/3] relative bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:200%_100%] animate-[shimmer_1.5s_ease-in-out_infinite]">
+      <div className="aspect-[4/3] relative bg-gray-200 dark:bg-gray-700 animate-pulse">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-16 h-16 bg-gray-300 rounded-full animate-pulse" />
         </div>

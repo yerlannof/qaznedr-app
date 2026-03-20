@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import {
   X,
   ChevronRight,
@@ -94,21 +94,10 @@ export default function Onboarding() {
 
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-      >
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          transition={{ type: 'spring', duration: 0.5 }}
-          className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden"
-        >
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
           {/* Header */}
-          <div className="relative bg-gradient-to-br from-blue-500 to-blue-600 p-6 text-white">
+          <div className="relative bg-gray-900 p-6 text-white">
             <button
               onClick={handleSkip}
               className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/20 transition-colors"
@@ -123,7 +112,7 @@ export default function Onboarding() {
               <h2 className="text-2xl font-bold mb-2">
                 {onboardingSteps[currentStep].title}
               </h2>
-              <p className="text-blue-100">
+              <p className="text-gray-300">
                 {onboardingSteps[currentStep].description}
               </p>
             </div>
@@ -137,9 +126,9 @@ export default function Onboarding() {
                 onClick={() => setCurrentStep(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   index === currentStep
-                    ? 'w-8 bg-blue-600'
+                    ? 'w-8 bg-gray-900'
                     : index < currentStep
-                      ? 'w-2 bg-blue-400'
+                      ? 'w-2 bg-gray-400'
                       : 'w-2 bg-gray-300 dark:bg-gray-700'
                 }`}
               />
@@ -160,7 +149,7 @@ export default function Onboarding() {
 
             <button
               onClick={handleNext}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
             >
               {currentStep === onboardingSteps.length - 1 ? (
                 <>
@@ -184,8 +173,8 @@ export default function Onboarding() {
               </button>
             )}
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </AnimatePresence>
   );
 }
@@ -233,13 +222,8 @@ export function TutorialTooltip({
 
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.9 }}
-        className={`absolute ${positionClasses[position]} z-50 w-64`}
-      >
-        <div className="bg-blue-600 text-white rounded-lg shadow-lg p-3">
+      <div className={`absolute ${positionClasses[position]} z-50 w-64`}>
+        <div className="bg-gray-900 text-white rounded-lg shadow-lg p-3">
           <div className="flex items-start justify-between mb-1">
             <h4 className="font-semibold">{title}</h4>
             <button
@@ -249,10 +233,10 @@ export function TutorialTooltip({
               <X className="w-3 h-3" />
             </button>
           </div>
-          <p className="text-sm text-blue-100">{description}</p>
-          <div className="absolute w-3 h-3 bg-blue-600 transform rotate-45 -bottom-1.5 left-6" />
+          <p className="text-sm text-gray-300">{description}</p>
+          <div className="absolute w-3 h-3 bg-gray-900 transform rotate-45 -bottom-1.5 left-6" />
         </div>
-      </motion.div>
+      </div>
     </AnimatePresence>
   );
 }

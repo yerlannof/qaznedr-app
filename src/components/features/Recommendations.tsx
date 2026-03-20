@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import {
   Eye,
@@ -194,23 +194,17 @@ export function RecommendationCard({
   const MineralIcon = getMineralIcon(deposit.mineral);
 
   return (
-    <motion.div
+    <div
       className="group bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden cursor-pointer"
-      whileHover={{
-        y: -4,
-        boxShadow:
-          '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-      }}
-      whileTap={{ scale: 0.98 }}
       onClick={() => onView?.(deposit.id)}
     >
       {/* Header with Recommendation Reason */}
       <div className="relative p-4 pb-2">
         <div className="flex items-center justify-between mb-3">
-          <motion.div
+          <div
             className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-medium ${
               reason.color === 'blue'
-                ? 'bg-blue-50 text-blue-700'
+                ? 'bg-gray-100 text-gray-700'
                 : reason.color === 'red'
                   ? 'bg-red-50 text-red-700'
                   : reason.color === 'purple'
@@ -219,11 +213,10 @@ export function RecommendationCard({
                       ? 'bg-green-50 text-green-700'
                       : 'bg-yellow-50 text-yellow-700'
             }`}
-            whileHover={{ scale: 1.05 }}
           >
             <Icon className="w-3 h-3" />
             <span>{reason.label}</span>
-          </motion.div>
+          </div>
 
           {/* Match Score */}
           <div className="flex items-center space-x-1 text-xs text-gray-500">
@@ -234,13 +227,13 @@ export function RecommendationCard({
 
         {/* Mineral Icon */}
         <div className="flex items-center justify-center w-12 h-12 bg-gray-50 rounded-lg mb-3">
-          <MineralIcon className="w-6 h-6 text-blue-600" />
+          <MineralIcon className="w-6 h-6 text-gray-600" />
         </div>
       </div>
 
       {/* Content */}
       <div className="px-4 pb-4">
-        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-1 group-hover:text-blue-600 transition-colors">
+        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-1 group-hover:text-gray-600 transition-colors">
           {deposit.title}
         </h3>
 
@@ -276,7 +269,7 @@ export function RecommendationCard({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -361,24 +354,19 @@ export function RecentlyViewed({
           const MineralIcon = getMineralIcon(deposit.mineral);
 
           return (
-            <motion.div
-              key={deposit.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
+            <div key={deposit.id}>
               <Link
                 href={`/listings/${deposit.id}`}
                 className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
               >
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <MineralIcon className="w-5 h-5 text-blue-600" />
+                    <MineralIcon className="w-5 h-5 text-gray-600" />
                   </div>
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-medium text-gray-900 text-sm group-hover:text-blue-600 transition-colors line-clamp-1">
+                  <h4 className="font-medium text-gray-900 text-sm group-hover:text-gray-600 transition-colors line-clamp-1">
                     {deposit.title}
                   </h4>
                   <div className="flex items-center text-xs text-gray-500 mt-1">
@@ -404,7 +392,7 @@ export function RecentlyViewed({
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           );
         })}
       </div>
@@ -412,7 +400,7 @@ export function RecentlyViewed({
       <div className="mt-4 pt-3 border-t border-gray-100">
         <Link
           href="/dashboard/history"
-          className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+          className="text-sm text-[#0A84FF] hover:text-[#0070E0] font-medium"
         >
           Посмотреть всю историю →
         </Link>
@@ -477,12 +465,9 @@ export default function Recommendations({
     <div className={`space-y-6 ${className}`}>
       {/* Header */}
       <div className="flex items-center space-x-2">
-        <motion.div
-          animate={{ rotate: [0, 10, -10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <Sparkles className="w-5 h-5 text-blue-600" />
-        </motion.div>
+        <div>
+          <Sparkles className="w-5 h-5 text-gray-600" />
+        </div>
         <h2 className="text-xl font-semibold text-gray-900">
           Рекомендации для вас
         </h2>
@@ -492,51 +477,30 @@ export default function Recommendations({
       </div>
 
       {/* Recommendations Grid */}
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          visible: {
-            transition: {
-              staggerChildren: 0.1,
-            },
-          },
-        }}
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <AnimatePresence>
           {recommendations.map((rec) => {
             const reason = RECOMMENDATION_REASONS[rec.reason];
 
             return (
-              <motion.div
-                key={rec.id}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-              >
+              <div key={rec.id}>
                 <RecommendationCard
                   deposit={rec}
                   reason={reason}
                   score={rec.score}
                   onView={handleViewRecommendation}
                 />
-              </motion.div>
+              </div>
             );
           })}
         </AnimatePresence>
-      </motion.div>
+      </div>
 
       {/* Load More */}
       <div className="text-center">
-        <motion.button
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
+        <button className="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
           Показать больше рекомендаций
-        </motion.button>
+        </button>
       </div>
     </div>
   );

@@ -327,7 +327,7 @@ export default function MessagingSystem() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-400"></div>
       </div>
     );
   }
@@ -345,7 +345,7 @@ export default function MessagingSystem() {
               placeholder="Search conversations..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
             />
           </div>
         </div>
@@ -362,7 +362,7 @@ export default function MessagingSystem() {
                 key={conv.id}
                 onClick={() => setSelectedConversation(conv)}
                 className={`p-4 border-b cursor-pointer hover:bg-gray-50 ${
-                  selectedConversation?.id === conv.id ? 'bg-blue-50' : ''
+                  selectedConversation?.id === conv.id ? 'bg-gray-100' : ''
                 }`}
               >
                 <div className="flex items-start">
@@ -399,7 +399,7 @@ export default function MessagingSystem() {
                       )}
                     </div>
                     {conv.listingTitle && (
-                      <p className="text-xs text-blue-600 mt-1">
+                      <p className="text-xs text-[#0A84FF] mt-1">
                         Re: {conv.listingTitle}
                       </p>
                     )}
@@ -410,7 +410,7 @@ export default function MessagingSystem() {
                       </p>
                     )}
                     {conv.unreadCount > 0 && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-500 text-white mt-1">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-900 text-white mt-1">
                         {conv.unreadCount}
                       </span>
                     )}
@@ -492,7 +492,7 @@ export default function MessagingSystem() {
                   <div
                     className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
                       message.senderId === user?.id
-                        ? 'bg-blue-500 text-white'
+                        ? 'bg-gray-900 text-white'
                         : 'bg-gray-100 text-gray-900'
                     }`}
                   >
@@ -500,7 +500,7 @@ export default function MessagingSystem() {
                     <div
                       className={`flex items-center justify-end mt-1 space-x-1 ${
                         message.senderId === user?.id
-                          ? 'text-blue-100'
+                          ? 'text-gray-300'
                           : 'text-gray-500'
                       }`}
                     >
@@ -541,12 +541,12 @@ export default function MessagingSystem() {
                   }}
                   onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                   placeholder="Type a message..."
-                  className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
                 />
                 <button
                   onClick={sendMessage}
                   disabled={!messageText.trim()}
-                  className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                  className="p-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
                   <Send className="w-5 h-5" />
                 </button>

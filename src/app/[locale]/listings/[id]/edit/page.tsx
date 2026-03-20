@@ -158,7 +158,7 @@ export default function EditListingPage() {
         <Navigation />
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-400 mx-auto mb-4"></div>
             <p className="text-gray-600">Загрузка данных...</p>
           </div>
         </div>
@@ -181,7 +181,7 @@ export default function EditListingPage() {
             </p>
             <Link
               href="/auth/login"
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              className="bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
             >
               Войти в систему
             </Link>
@@ -207,7 +207,7 @@ export default function EditListingPage() {
             </p>
             <Link
               href="/dashboard/my-listings"
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              className="bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
             >
               Вернуться к моим объявлениям
             </Link>
@@ -380,7 +380,7 @@ export default function EditListingPage() {
                   name="licenseSubtype"
                   value={formData.licenseSubtype || ''}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
                 >
                   <option value="">Выберите подтип</option>
                   <option value="Добычная">Добычная</option>
@@ -397,7 +397,7 @@ export default function EditListingPage() {
                   name="licenseNumber"
                   value={formData.licenseNumber || ''}
                   onChange={handleInputChange}
-                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                     errors.licenseNumber ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Например: KZ1234567890"
@@ -418,7 +418,7 @@ export default function EditListingPage() {
                   name="licenseExpiry"
                   value={formData.licenseExpiry || ''}
                   onChange={handleInputChange}
-                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                     errors.licenseExpiry ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
@@ -448,7 +448,7 @@ export default function EditListingPage() {
                   name="explorationStage"
                   value={formData.explorationStage || ''}
                   onChange={handleInputChange}
-                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                     errors.explorationStage
                       ? 'border-red-500'
                       : 'border-gray-300'
@@ -477,7 +477,7 @@ export default function EditListingPage() {
                   name="explorationStart"
                   value={formData.explorationStart || ''}
                   onChange={handleInputChange}
-                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                     errors.explorationStart
                       ? 'border-red-500'
                       : 'border-gray-300'
@@ -500,7 +500,7 @@ export default function EditListingPage() {
                   name="explorationBudget"
                   value={formData.explorationBudget || ''}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
                   placeholder="Сумма в тенге"
                   min="0"
                 />
@@ -526,7 +526,7 @@ export default function EditListingPage() {
                   name="discoveryDate"
                   value={formData.discoveryDate || ''}
                   onChange={handleInputChange}
-                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                     errors.discoveryDate ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
@@ -545,7 +545,7 @@ export default function EditListingPage() {
                   name="geologicalConfidence"
                   value={formData.geologicalConfidence || ''}
                   onChange={handleInputChange}
-                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                     errors.geologicalConfidence
                       ? 'border-red-500'
                       : 'border-gray-300'
@@ -572,7 +572,7 @@ export default function EditListingPage() {
                   value={formData.estimatedReserves || ''}
                   onChange={handleInputChange}
                   rows={3}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
                   placeholder="Описание оценочных запасов полезного ископаемого"
                 />
               </div>
@@ -628,7 +628,7 @@ export default function EditListingPage() {
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
-                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                     errors.title ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Например: Месторождение нефти в Мангистауской области"
@@ -647,7 +647,7 @@ export default function EditListingPage() {
                   value={formData.description}
                   onChange={handleInputChange}
                   rows={4}
-                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                     errors.description ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Подробное описание месторождения, его характеристик и особенностей"
@@ -668,7 +668,7 @@ export default function EditListingPage() {
                     name="type"
                     value={formData.type}
                     onChange={handleInputChange}
-                    className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                       errors.type ? 'border-red-500' : 'border-gray-300'
                     }`}
                   >
@@ -692,7 +692,7 @@ export default function EditListingPage() {
                     name="mineral"
                     value={formData.mineral}
                     onChange={handleInputChange}
-                    className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                       errors.mineral ? 'border-red-500' : 'border-gray-300'
                     }`}
                   >
@@ -719,7 +719,7 @@ export default function EditListingPage() {
                     name="price"
                     value={formData.price || ''}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
                     placeholder="Укажите цену"
                     min="0"
                   />
@@ -747,7 +747,7 @@ export default function EditListingPage() {
                     name="region"
                     value={formData.region}
                     onChange={handleInputChange}
-                    className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                       errors.region ? 'border-red-500' : 'border-gray-300'
                     }`}
                   >
@@ -772,7 +772,7 @@ export default function EditListingPage() {
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                       errors.city ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder="Город или населенный пункт"
@@ -792,7 +792,7 @@ export default function EditListingPage() {
                   name="area"
                   value={formData.area || ''}
                   onChange={handleInputChange}
-                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] ${
                     errors.area ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Площадь в квадратных километрах"
@@ -813,7 +813,7 @@ export default function EditListingPage() {
                     type="number"
                     value={formData.coordinates[0] || ''}
                     onChange={(e) => handleCoordinateChange(0, e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
                     placeholder="Например: 43.238949"
                     step="any"
                   />
@@ -827,7 +827,7 @@ export default function EditListingPage() {
                     type="number"
                     value={formData.coordinates[1] || ''}
                     onChange={(e) => handleCoordinateChange(1, e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
                     placeholder="Например: 76.889709"
                     step="any"
                   />
@@ -854,7 +854,7 @@ export default function EditListingPage() {
             <button
               type="submit"
               disabled={loading}
-              className={`px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors ${
+              className={`px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors ${
                 loading ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >

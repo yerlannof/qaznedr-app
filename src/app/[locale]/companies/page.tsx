@@ -209,7 +209,7 @@ export default function CompaniesPage() {
                   type="checkbox"
                   checked={onlyVerified}
                   onChange={(e) => setOnlyVerified(e.target.checked)}
-                  className="mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  className="mr-2 rounded border-gray-300 text-[#0A84FF] focus:ring-[#0A84FF]"
                 />
                 <span className="text-sm text-gray-700 dark:text-gray-300">
                   {t('companies.filters.verifiedOnly')}

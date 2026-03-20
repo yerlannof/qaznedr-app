@@ -180,7 +180,7 @@ export default function PriceTrendAnalytics() {
                 <span
                   className={
                     priceChange > 0
-                      ? 'text-blue-600'
+                      ? 'text-gray-900 dark:text-gray-50'
                       : priceChange < 0
                         ? 'text-gray-600'
                         : 'text-gray-500'
@@ -237,7 +237,7 @@ export default function PriceTrendAnalytics() {
                   onClick={() => setSelectedPeriod(period)}
                   className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
                     selectedPeriod === period
-                      ? 'bg-blue-600 text-white'
+                      ? 'bg-gray-900 text-white'
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
@@ -258,7 +258,7 @@ export default function PriceTrendAnalytics() {
             <select
               value={selectedMineral}
               onChange={(e) => setSelectedMineral(e.target.value)}
-              className="px-3 py-1 rounded-lg text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-0 focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-1 rounded-lg text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-0 focus:ring-1 focus:ring-[#0A84FF]"
             >
               <option value="all">Все</option>
               <option value="oil">Нефть</option>

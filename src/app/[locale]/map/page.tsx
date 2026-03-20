@@ -14,7 +14,7 @@ const ListingsMap = dynamic(
     loading: () => (
       <div className="w-full h-full flex items-center justify-center bg-gray-100">
         <div className="text-center">
-          <Loader2 className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-2" />
+          <Loader2 className="w-8 h-8 text-gray-400 animate-spin mx-auto mb-2" />
           <p className="text-gray-600">Загрузка карты...</p>
         </div>
       </div>
@@ -49,7 +49,7 @@ export default function MapPage() {
           fallback={
             <div className="w-full h-full flex items-center justify-center bg-gray-100">
               <div className="text-center">
-                <Loader2 className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-2" />
+                <Loader2 className="w-8 h-8 text-gray-400 animate-spin mx-auto mb-2" />
                 <p className="text-gray-600">{t('common.loading')}</p>
               </div>
             </div>

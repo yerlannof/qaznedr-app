@@ -70,7 +70,7 @@ export default function ContactReveal({
     return (
       <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-2 mb-3">
-          <Eye className="w-5 h-5 text-blue-600" />
+          <Eye className="w-5 h-5 text-[#0A84FF]" />
           <h3 className="font-semibold text-gray-900 dark:text-gray-100">
             Контактные данные
           </h3>
@@ -83,7 +83,7 @@ export default function ContactReveal({
         <button
           onClick={handleReveal}
           disabled={loading}
-          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm disabled:opacity-50"
+          className="inline-flex items-center px-4 py-2 bg-[#0A84FF] text-white rounded-lg hover:bg-[#0070E0] transition-colors text-sm disabled:opacity-50"
         >
           {loading ? 'Загрузка...' : 'Показать контакты'}
         </button>
@@ -105,7 +105,7 @@ export default function ContactReveal({
       {ownerPhone && (
         <a
           href={`tel:+${ownerPhone}`}
-          className="flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-2"
+          className="flex items-center gap-2 text-[#0A84FF] hover:text-blue-700 mb-2"
         >
           <Phone className="w-4 h-4" /> +{ownerPhone}
         </a>
@@ -113,7 +113,7 @@ export default function ContactReveal({
       {ownerEmail && (
         <a
           href={`mailto:${ownerEmail}`}
-          className="flex items-center gap-2 text-blue-600 hover:text-blue-700"
+          className="flex items-center gap-2 text-[#0A84FF] hover:text-blue-700"
         >
           <Mail className="w-4 h-4" /> {ownerEmail}
         </a>

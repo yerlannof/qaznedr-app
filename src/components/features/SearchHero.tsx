@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Droplets, Gem, Flame, Hexagon, Search } from 'lucide-react';
 import { REGIONS, MINERALS } from '@/lib/types/listing';
 import AdvancedSearch from './AdvancedSearch';
 
@@ -30,10 +31,10 @@ export default function SearchHero() {
   };
 
   const popularSearches = [
-    { query: 'Нефть Мангистауская', icon: '🛢️' },
-    { query: 'Золото Восточно-Казахстанская', icon: '🥇' },
-    { query: 'Газ Атырауская', icon: '⛽' },
-    { query: 'Медь Карагандинская', icon: '🔶' },
+    { query: 'Нефть Мангистауская', icon: Droplets },
+    { query: 'Золото Восточно-Казахстанская', icon: Gem },
+    { query: 'Газ Атырауская', icon: Flame },
+    { query: 'Медь Карагандинская', icon: Hexagon },
   ];
 
   return (
@@ -108,7 +109,7 @@ export default function SearchHero() {
                   type="submit"
                   className="w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 hover:shadow-lg transition-all flex items-center justify-center space-x-2"
                 >
-                  <span>🔍</span>
+                  <Search className="w-4 h-4" />
                   <span>Поиск</span>
                 </button>
               </div>
@@ -132,7 +133,7 @@ export default function SearchHero() {
                 }}
                 className="flex items-center space-x-2 bg-white text-gray-700 px-4 py-2 rounded-md hover:shadow-md hover:text-gray-900 transition-all border border-gray-200"
               >
-                <span>{search.icon}</span>
+                <search.icon className="w-4 h-4" />
                 <span className="text-sm">{search.query}</span>
               </button>
             ))}

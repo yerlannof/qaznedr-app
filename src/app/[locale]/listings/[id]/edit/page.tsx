@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { Lock, X } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import { depositApi } from '@/lib/api/deposits';
 import {
@@ -172,7 +173,7 @@ export default function EditListingPage() {
         <Navigation />
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <div className="text-6xl mb-4">🔒</div>
+            <Lock className="w-12 h-12 text-gray-300 mb-4 mx-auto" />
             <h1 className="text-2xl font-bold text-gray-900 mb-4">
               Необходима авторизация
             </h1>
@@ -197,7 +198,7 @@ export default function EditListingPage() {
         <Navigation />
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <div className="text-6xl mb-4">❌</div>
+            <X className="w-12 h-12 text-gray-300 mb-4 mx-auto" />
             <h1 className="text-2xl font-bold text-gray-900 mb-4">
               {error || 'Объявление не найдено'}
             </h1>

@@ -1,14 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Pickaxe, Wrench, Briefcase } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 
 type ProfileType = 'subsoil_user' | 'service_provider' | 'investor';
 
 interface ProfileCard {
   type: ProfileType;
-  icon: string;
+  icon: React.ComponentType<{ className?: string }>;
   titleKey: string;
   descriptionKey: string;
   fallbackTitle: string;
@@ -18,7 +19,7 @@ interface ProfileCard {
 const profileCards: ProfileCard[] = [
   {
     type: 'subsoil_user',
-    icon: '⛏️',
+    icon: Pickaxe,
     titleKey: 'profile.type.subsoilUser',
     descriptionKey: 'profile.type.subsoilUserDesc',
     fallbackTitle: 'Недропользователь',
@@ -27,7 +28,7 @@ const profileCards: ProfileCard[] = [
   },
   {
     type: 'service_provider',
-    icon: '🔧',
+    icon: Wrench,
     titleKey: 'profile.type.serviceProvider',
     descriptionKey: 'profile.type.serviceProviderDesc',
     fallbackTitle: 'Поставщик услуг',
@@ -36,7 +37,7 @@ const profileCards: ProfileCard[] = [
   },
   {
     type: 'investor',
-    icon: '💼',
+    icon: Briefcase,
     titleKey: 'profile.type.investor',
     descriptionKey: 'profile.type.investorDesc',
     fallbackTitle: 'Инвестор / Покупатель',
@@ -112,7 +113,7 @@ export default function ProfileTypeSelector() {
                   : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 hover:shadow-md hover:border-gray-300 dark:hover:border-gray-600'
               }`}
             >
-              <span className="text-4xl mb-4">{card.icon}</span>
+              <card.icon className="w-10 h-10 mb-4 text-gray-600 dark:text-gray-300" />
               <h3
                 className={`text-lg font-semibold mb-2 ${
                   isSelected

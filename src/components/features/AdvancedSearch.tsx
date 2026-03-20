@@ -2,13 +2,23 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import {
+  Droplets,
+  Flame,
+  Gem,
+  Hexagon,
+  MapPin,
+  Building2,
+  Search,
+  type LucideIcon,
+} from 'lucide-react';
 // import { REGIONS, MINERALS } from '@/lib/types/listing';
 
 interface SearchResult {
   item: {
     title: string;
     type: string;
-    icon?: string;
+    icon?: LucideIcon;
     score?: number;
   };
   score?: number;
@@ -53,19 +63,19 @@ export default function AdvancedSearch() {
 
       // Данные для поиска (в реальном приложении это будет из API)
       const searchData = [
-        { type: 'region', name: 'Мангистауская область', icon: '🗺️' },
-        { type: 'region', name: 'Атырауская область', icon: '🗺️' },
-        { type: 'region', name: 'Западно-Казахстанская область', icon: '🗺️' },
-        { type: 'mineral', name: 'Нефть', icon: '🛢️' },
-        { type: 'mineral', name: 'Газ', icon: '⛽' },
-        { type: 'mineral', name: 'Золото', icon: '🥇' },
-        { type: 'mineral', name: 'Медь', icon: '🔶' },
-        { type: 'deposit', name: 'Кашаган', icon: '🛢️' },
-        { type: 'deposit', name: 'Тенгиз', icon: '🛢️' },
-        { type: 'deposit', name: 'Карачаганак', icon: '⛽' },
-        { type: 'city', name: 'Атырау', icon: '🏙️' },
-        { type: 'city', name: 'Актау', icon: '🏙️' },
-        { type: 'city', name: 'Уральск', icon: '🏙️' },
+        { type: 'region', name: 'Мангистауская область', icon: MapPin },
+        { type: 'region', name: 'Атырауская область', icon: MapPin },
+        { type: 'region', name: 'Западно-Казахстанская область', icon: MapPin },
+        { type: 'mineral', name: 'Нефть', icon: Droplets },
+        { type: 'mineral', name: 'Газ', icon: Flame },
+        { type: 'mineral', name: 'Золото', icon: Gem },
+        { type: 'mineral', name: 'Медь', icon: Hexagon },
+        { type: 'deposit', name: 'Кашаган', icon: Droplets },
+        { type: 'deposit', name: 'Тенгиз', icon: Droplets },
+        { type: 'deposit', name: 'Карачаганак', icon: Flame },
+        { type: 'city', name: 'Атырау', icon: Building2 },
+        { type: 'city', name: 'Актау', icon: Building2 },
+        { type: 'city', name: 'Уральск', icon: Building2 },
       ];
 
       const fuse = new Fuse(searchData, {
@@ -161,7 +171,7 @@ export default function AdvancedSearch() {
             {isSearching ? (
               <div className="animate-spin h-5 w-5 border-2 border-blue-600 border-t-transparent rounded-full"></div>
             ) : (
-              <span className="text-xl">🔍</span>
+              <Search className="w-5 h-5 text-gray-400" />
             )}
           </button>
         </div>
@@ -178,7 +188,9 @@ export default function AdvancedSearch() {
                 onClick={() => handleSuggestionClick(result)}
                 className="w-full text-left px-3 py-2 hover:bg-blue-50 rounded-lg flex items-center space-x-3 transition-colors"
               >
-                <span className="text-lg">{result.item.icon}</span>
+                {result.item.icon && (
+                  <result.item.icon className="w-4 h-4 text-gray-500 shrink-0" />
+                )}
                 <div>
                   <div className="font-medium text-gray-900">
                     {result.item.title}

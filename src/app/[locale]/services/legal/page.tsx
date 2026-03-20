@@ -349,42 +349,36 @@ export default function LegalServicesPage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white dark:bg-[#0A0A0A]">
       <Navigation />
 
       {/* Hero Section */}
-      <div className="bg-blue-600 text-white mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
-          <div className="text-center">
-            <Scale className="w-16 h-16 mx-auto mb-6 text-blue-200" />
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-              Юридические эксперты по горному праву
-            </h1>
-            <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              Найдите проверенных юристов и консультантов, специализирующихся на
-              горнодобывающей отрасли Казахстана. От лицензирования до
-              международных арбитражей.
-            </p>
+      <section className="pt-24 lg:pt-32 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <p className="text-xs font-medium uppercase tracking-wider text-gray-400">
+          Юридические услуги
+        </p>
+        <h1 className="mt-3 text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+          Юридические эксперты по горному праву
+        </h1>
+        <p className="mt-4 text-base lg:text-lg text-gray-500 max-w-xl">
+          Найдите проверенных юристов и консультантов, специализирующихся на
+          горнодобывающей отрасли Казахстана.
+        </p>
 
-            {/* Search */}
-            <div className="max-w-2xl mx-auto relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Найдите эксперта по имени, компании или специализации..."
-                className="w-full px-6 py-4 rounded-full text-gray-900 text-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
-              />
-              <Button
-                size="icon"
-                className="absolute right-2 top-2 rounded-full"
-              >
-                <Search className="w-5 h-5" />
-              </Button>
-            </div>
-          </div>
+        {/* Search */}
+        <div className="max-w-2xl mt-6 relative">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Найдите эксперта по имени, компании или специализации..."
+            className="w-full px-6 py-4 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 bg-white dark:bg-[#141414] text-lg focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
+          />
+          <Button size="icon" className="absolute right-2 top-2 rounded-lg">
+            <Search className="w-5 h-5" />
+          </Button>
         </div>
-      </div>
+      </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters */}
@@ -399,7 +393,7 @@ export default function LegalServicesPage() {
                 <select
                   value={selectedRegion}
                   onChange={(e) => setSelectedRegion(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] appearance-none bg-white"
                 >
                   {regions.map((region) => (
                     <option key={region} value={region}>
@@ -420,7 +414,7 @@ export default function LegalServicesPage() {
                 <select
                   value={selectedSpecialization}
                   onChange={(e) => setSelectedSpecialization(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] appearance-none bg-white"
                 >
                   {specializations.map((spec) => (
                     <option key={spec} value={spec}>
@@ -462,7 +456,7 @@ export default function LegalServicesPage() {
                 type="number"
                 value={maxRate}
                 onChange={(e) => setMaxRate(Number(e.target.value))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
                 min="0"
                 step="5000"
               />
@@ -504,7 +498,7 @@ export default function LegalServicesPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="px-3 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="px-3 py-1 border border-gray-300 rounded text-sm focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
                 >
                   <option value="rating">По рейтингу</option>
                   <option value="experience">По опыту</option>
@@ -516,13 +510,13 @@ export default function LegalServicesPage() {
               <div className="flex items-center border border-gray-300 rounded-lg">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'text-gray-400'}`}
+                  className={`p-2 ${viewMode === 'grid' ? 'bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
                 >
                   <Grid3X3 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-2 ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'text-gray-400'}`}
+                  className={`p-2 ${viewMode === 'list' ? 'bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
                 >
                   <List className="w-4 h-4" />
                 </button>
@@ -662,7 +656,7 @@ export default function LegalServicesPage() {
                       {expert.specializations.slice(0, 3).map((spec, index) => (
                         <span
                           key={index}
-                          className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full"
+                          className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs rounded-full"
                         >
                           {spec}
                         </span>
@@ -689,7 +683,7 @@ export default function LegalServicesPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="group-hover:bg-blue-600 group-hover:text-white transition-colors"
+                      className="group-hover:bg-gray-900 group-hover:text-white transition-colors"
                       disabled={!expert.available}
                     >
                       <Phone className="w-4 h-4 mr-2" />
@@ -707,30 +701,25 @@ export default function LegalServicesPage() {
         </div>
 
         {/* CTA Section */}
-        <section className="bg-blue-600 rounded-2xl p-8 text-center text-white mt-16">
-          <Scale className="w-12 h-12 mx-auto mb-4 text-blue-200" />
-          <h2 className="text-2xl font-bold mb-4">Юрист по горному праву?</h2>
-          <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+        <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 bg-gray-50 dark:bg-[#141414] mt-16">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+            Юрист по горному праву?
+          </h2>
+          <p className="text-sm text-gray-500 mt-2 max-w-lg">
             Присоединяйтесь к нашей базе экспертов и найдите новых клиентов в
             горнодобывающей отрасли Казахстана
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="outline"
-              className="bg-white text-blue-600 hover:bg-gray-100"
-            >
+          <div className="flex gap-3 mt-6">
+            <Button>
               <User className="w-4 h-4 mr-2" />
               Создать профиль эксперта
             </Button>
-            <Button
-              variant="outline"
-              className="border-blue-400 text-white hover:bg-blue-700"
-            >
+            <Button variant="outline">
               <Building className="w-4 h-4 mr-2" />
               Зарегистрировать компанию
             </Button>
           </div>
-        </section>
+        </div>
       </div>
     </div>
   );

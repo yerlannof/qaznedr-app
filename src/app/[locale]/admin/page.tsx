@@ -136,7 +136,7 @@ export default function AdminDashboard() {
         transactionsToday: transactionsToday.count || 0,
       });
     } catch (error) {
-      console.error('Error loading dashboard stats:', error);
+      // Error loading dashboard stats
     } finally {
       setLoading(false);
     }
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <Activity className="w-8 h-8 animate-spin text-blue-500" />
+        <Activity className="w-8 h-8 animate-spin text-gray-400" />
       </div>
     );
   }
@@ -182,7 +182,7 @@ export default function AdminDashboard() {
                 +{stats.newUsersToday} today
               </p>
             </div>
-            <Users className="w-10 h-10 text-blue-500" />
+            <Users className="w-10 h-10 text-gray-400" />
           </div>
         </Card>
 
@@ -195,7 +195,7 @@ export default function AdminDashboard() {
               </p>
               <p className="text-sm text-gray-500 mt-2">Available now</p>
             </div>
-            <FileText className="w-10 h-10 text-green-500" />
+            <FileText className="w-10 h-10 text-gray-400" />
           </div>
         </Card>
 
@@ -210,7 +210,7 @@ export default function AdminDashboard() {
                 {stats.transactionsToday} sales today
               </p>
             </div>
-            <DollarSign className="w-10 h-10 text-yellow-500" />
+            <DollarSign className="w-10 h-10 text-gray-400" />
           </div>
         </Card>
 
@@ -223,9 +223,9 @@ export default function AdminDashboard() {
                   stats.pendingVerifications + stats.reportedListings
                 ).toLocaleString()}
               </p>
-              <p className="text-sm text-blue-600 mt-2">Requires attention</p>
+              <p className="text-sm text-gray-500 mt-2">Requires attention</p>
             </div>
-            <AlertTriangle className="w-10 h-10 text-blue-500" />
+            <AlertTriangle className="w-10 h-10 text-gray-400" />
           </div>
         </Card>
       </div>
@@ -240,7 +240,7 @@ export default function AdminDashboard() {
               onClick={() => router.push('/admin/users')}
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
             >
-              <Users className="w-6 h-6 text-blue-500 mb-2" />
+              <Users className="w-6 h-6 text-gray-400 mb-2" />
               <p className="font-medium">Manage Users</p>
               <p className="text-sm text-gray-600">
                 View and manage user accounts
@@ -251,7 +251,7 @@ export default function AdminDashboard() {
               onClick={() => router.push('/admin/listings')}
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
             >
-              <FileText className="w-6 h-6 text-blue-500 mb-2" />
+              <FileText className="w-6 h-6 text-gray-400 mb-2" />
               <p className="font-medium">Manage Listings</p>
               <p className="text-sm text-gray-600">
                 Review and moderate listings
@@ -262,7 +262,7 @@ export default function AdminDashboard() {
               onClick={() => router.push('/admin/verifications')}
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
             >
-              <Shield className="w-6 h-6 text-blue-500 mb-2" />
+              <Shield className="w-6 h-6 text-gray-400 mb-2" />
               <p className="font-medium">Verifications</p>
               <p className="text-sm text-gray-600">
                 {stats.pendingVerifications} pending
@@ -273,7 +273,7 @@ export default function AdminDashboard() {
               onClick={() => router.push('/admin/reports')}
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
             >
-              <AlertTriangle className="w-6 h-6 text-blue-500 mb-2" />
+              <AlertTriangle className="w-6 h-6 text-gray-400 mb-2" />
               <p className="font-medium">Reports</p>
               <p className="text-sm text-gray-600">
                 {stats.reportedListings} to review
@@ -284,7 +284,7 @@ export default function AdminDashboard() {
               onClick={() => router.push('/admin/analytics')}
               className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
             >
-              <BarChart3 className="w-6 h-6 text-indigo-500 mb-2" />
+              <BarChart3 className="w-6 h-6 text-gray-400 mb-2" />
               <p className="font-medium">Analytics</p>
               <p className="text-sm text-gray-600">View detailed statistics</p>
             </button>
@@ -352,7 +352,7 @@ export default function AdminDashboard() {
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div
-                className="bg-blue-500 h-2 rounded-full"
+                className="bg-gray-500 h-2 rounded-full"
                 style={{ width: '42%' }}
               ></div>
             </div>

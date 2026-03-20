@@ -54,37 +54,31 @@ export default function CompaniesPage() {
   const supabase = createClient();
 
   const SERVICE_CATEGORIES = [
-    { value: 'drilling', label: t('services.categories.drilling'), icon: '🔧' },
+    { value: 'drilling', label: t('services.categories.drilling') },
     {
       value: 'exploration',
       label: t('services.categories.exploration'),
-      icon: '🔍',
     },
     {
       value: 'consulting',
       label: t('services.categories.consulting'),
-      icon: '📊',
     },
     {
       value: 'logistics',
       label: t('services.categories.logistics'),
-      icon: '🚛',
     },
     {
       value: 'equipment',
       label: t('services.categories.equipment'),
-      icon: '⚙️',
     },
-    { value: 'legal', label: t('services.categories.legal'), icon: '⚖️' },
+    { value: 'legal', label: t('services.categories.legal') },
     {
       value: 'environmental',
       label: t('services.categories.environmental'),
-      icon: '🌿',
     },
     {
       value: 'construction',
       label: t('services.categories.construction'),
-      icon: '🏗️',
     },
   ];
 
@@ -141,7 +135,7 @@ export default function CompaniesPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen bg-white dark:bg-[#0A0A0A]">
       <Navigation />
 
       {/* Hero Section */}
@@ -165,7 +159,7 @@ export default function CompaniesPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('companies.searchPlaceholder')}
-                className="w-full px-4 py-3 pl-12 pr-4 rounded-lg text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 pl-12 pr-4 rounded-lg text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
               />
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             </div>
@@ -174,7 +168,7 @@ export default function CompaniesPage() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-6 max-w-2xl mt-8">
             <div>
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+              <div className="text-3xl font-bold text-gray-900 dark:text-gray-50">
                 {companies.length}
               </div>
               <div className="text-gray-600 dark:text-gray-400">
@@ -182,7 +176,7 @@ export default function CompaniesPage() {
               </div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+              <div className="text-3xl font-bold text-gray-900 dark:text-gray-50">
                 {companies.filter((c) => c.verified).length}
               </div>
               <div className="text-gray-600 dark:text-gray-400">
@@ -190,7 +184,7 @@ export default function CompaniesPage() {
               </div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+              <div className="text-3xl font-bold text-gray-900 dark:text-gray-50">
                 {companies.reduce((sum, c) => sum + (c.services_count || 0), 0)}
               </div>
               <div className="text-gray-600 dark:text-gray-400">
@@ -239,7 +233,7 @@ export default function CompaniesPage() {
               onClick={() => setSelectedCategory(null)}
               className={`px-4 py-2 rounded-full text-sm transition-colors ${
                 !selectedCategory
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900'
                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
               }`}
             >
@@ -251,11 +245,10 @@ export default function CompaniesPage() {
                 onClick={() => setSelectedCategory(category.value)}
                 className={`px-4 py-2 rounded-full text-sm transition-colors ${
                   selectedCategory === category.value
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900'
                     : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
               >
-                <span className="mr-1">{category.icon}</span>
                 {category.label}
               </button>
             ))}

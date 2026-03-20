@@ -9,15 +9,15 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { ChevronLeft, ChevronRight, Plus, Search } from 'lucide-react';
 
 const SERVICE_TYPES = [
-  { key: '', label: 'Все', emoji: '' },
-  { key: 'drilling', label: 'Буровые работы', emoji: '\uD83D\uDD29' },
-  { key: 'consulting', label: 'Консалтинг', emoji: '\uD83D\uDCA1' },
-  { key: 'audit', label: 'Аудит', emoji: '\uD83D\uDCCB' },
-  { key: 'legal', label: 'Юридические услуги', emoji: '\u2696\uFE0F' },
-  { key: 'lab', label: 'Лабораторные анализы', emoji: '\uD83D\uDD2C' },
-  { key: 'reserve_estimation', label: 'Оценка запасов', emoji: '\uD83D\uDCCA' },
-  { key: 'equipment', label: 'Оборудование', emoji: '\u2699\uFE0F' },
-  { key: 'other', label: 'Другое', emoji: '\uD83D\uDCE6' },
+  { key: '', label: 'Все' },
+  { key: 'drilling', label: 'Буровые работы' },
+  { key: 'consulting', label: 'Консалтинг' },
+  { key: 'audit', label: 'Аудит' },
+  { key: 'legal', label: 'Юридические услуги' },
+  { key: 'lab', label: 'Лабораторные анализы' },
+  { key: 'reserve_estimation', label: 'Оценка запасов' },
+  { key: 'equipment', label: 'Оборудование' },
+  { key: 'other', label: 'Другое' },
 ] as const;
 
 const REGIONS = [
@@ -108,7 +108,7 @@ export default function ServicesCatalogPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen bg-white dark:bg-[#0A0A0A]">
       <Navigation />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
@@ -138,7 +138,7 @@ export default function ServicesCatalogPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Поиск по названию или провайдеру..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] text-sm"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           </div>
@@ -154,11 +154,10 @@ export default function ServicesCatalogPage() {
                 onClick={() => handleTypeChange(st.key)}
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                   selectedType === st.key
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900'
                     : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
               >
-                {st.emoji ? `${st.emoji} ` : ''}
                 {st.label}
               </button>
             ))}
@@ -169,7 +168,7 @@ export default function ServicesCatalogPage() {
             <select
               value={selectedRegion || 'Все регионы'}
               onChange={handleRegionChange}
-              className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
             >
               {REGIONS.map((r) => (
                 <option key={r} value={r}>
@@ -192,7 +191,7 @@ export default function ServicesCatalogPage() {
             </p>
             <Link
               href={`/${locale}/dashboard`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
             >
               <Plus className="w-4 h-4" />
               Добавить услугу

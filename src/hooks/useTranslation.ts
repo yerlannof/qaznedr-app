@@ -19,7 +19,7 @@ const translations = {
       platformLabel: 'ГЕОЛОГИЧЕСКАЯ ОТРАСЛЬ КАЗАХСТАНА',
       heroTitle: 'Платформа геологической отрасли Казахстана',
       heroSubtitle:
-        'Объединяем участников рынка недропользования: лицензии, услуги, компании, данные — от разведки до добычи.',
+        'Превращаем природные богатства Казахстана в экономический рост',
       catalog: 'Каталог',
       post: 'Разместить',
       title: 'Единая цифровая экосистема недропользования Казахстана',
@@ -352,7 +352,7 @@ const translations = {
       platformLabel: 'ҚАЗАҚСТАННЫҢ ГЕОЛОГИЯ САЛАСЫ',
       heroTitle: 'Қазақстанның геология саласының платформасы',
       heroSubtitle:
-        'Жерқойнауын пайдалану нарығының қатысушыларын біріктіреміз: лицензиялар, қызметтер, компаниялар, деректер — барлаудан өндіруге дейін.',
+        'Қазақстанның табиғи байлықтарын экономикалық өсімге айналдырамыз',
       catalog: 'Каталог',
       post: 'Орналастыру',
       title: 'Қазақстанның бірыңғай цифрлық недропайдалану экожүйесі',
@@ -582,8 +582,7 @@ const translations = {
       officialPlatform: 'Official Digital Platform',
       platformLabel: 'KAZAKHSTAN GEOLOGY INDUSTRY',
       heroTitle: "Kazakhstan's Geology Industry Platform",
-      heroSubtitle:
-        'Connecting subsoil use market participants: licenses, services, companies, data — from exploration to extraction.',
+      heroSubtitle: "Turning Kazakhstan's natural wealth into economic growth",
       catalog: 'Catalog',
       post: 'Post Listing',
       title: "Kazakhstan's Unified Digital Subsoil Use Ecosystem",
@@ -809,8 +808,7 @@ const translations = {
       officialPlatform: '官方数字化平台',
       platformLabel: '哈萨克斯坦地质行业',
       heroTitle: '哈萨克斯坦地质行业平台',
-      heroSubtitle:
-        '连接地下资源利用市场参与者：许可证、服务、公司、数据——从勘探到开采。',
+      heroSubtitle: '将哈萨克斯坦的自然财富转化为经济增长',
       catalog: '目录',
       post: '发布',
       title: '哈萨克斯坦统一数字化地下资源生态系统',

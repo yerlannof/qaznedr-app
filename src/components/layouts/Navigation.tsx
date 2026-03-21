@@ -57,6 +57,8 @@ export default function Navigation() {
     { label: t('navigation.listings'), href: `/${locale}/listings` },
     { label: t('navigation.services'), href: `/${locale}/services` },
     { label: t('navigation.companies'), href: `/${locale}/companies` },
+    { label: t('navigation.blog'), href: `/${locale}/blog` },
+    { label: t('navigation.education'), href: `/${locale}/education` },
   ];
 
   const isActive = (href: string) => {

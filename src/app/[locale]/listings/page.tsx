@@ -181,9 +181,9 @@ function ListingsContent() {
                   : `${totalCount} ${t('listings.foundDeposits', { count: totalCount })}`}
               </p>
             </div>
-            <Button asChild variant="accent">
+            <Button asChild variant="outline" className="hidden lg:inline-flex">
               <Link href={`/${locale}/listings/create`}>
-                + {t('navigation.createListing')}
+                {t('navigation.createListing')}
               </Link>
             </Button>
           </div>

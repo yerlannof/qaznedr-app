@@ -1,18 +1,93 @@
-# QAZNEDR.KZ - Kazakhstan Mining Marketplace
+# QAZNEDR.KZ — Kazakhstan Geology Industry Platform
 
-QAZNEDR.KZ is a B2B marketplace for buying and selling mineral deposits, mining licenses, and geological services in Kazakhstan.
+> B2B marketplace for buying and selling mineral deposits, mining licenses, and geological services in Kazakhstan.
 
-## What we offer:
-- Mining licenses (active extraction rights)
-- Exploration licenses (geological exploration permits)
-- Mineral occurrences (documented mineral findings)
-- Geology services (drilling, consulting, audit, legal, lab analysis)
+## About
 
-## Regions covered: All 14 regions of Kazakhstan
-## Languages: Russian, Kazakh, English, Chinese
-## Target audience: Mining companies, investors (including Chinese), geologists, service providers
+QAZNEDR.KZ connects mining companies, investors, geologists, and service providers across Kazakhstan's geology and mining industry. The platform facilitates transactions involving mineral deposits, exploration and mining licenses, and professional geological services.
 
-## Key URLs:
-- Listings: /ru/listings
-- Services: /ru/services/catalog
-- API: /api/listings (public, JSON)
+- **Founded:** 2025
+- **Domain:** https://qaznedr.kz
+- **Industry:** Mining, Geology, Natural Resources
+- **Country:** Kazakhstan (all 14 regions)
+
+## Content Types
+
+### 1. Mining Licenses (Лицензии на добычу)
+Active extraction rights for mineral resources.
+Fields: license number, license expiry, subtype, annual production limit.
+
+### 2. Exploration Licenses (Лицензии на разведку)
+Geological exploration permits for prospecting.
+Fields: exploration stage, exploration period (start/end), exploration budget.
+
+### 3. Mineral Occurrences (Рудопроявления)
+Documented mineral findings and geological discoveries.
+Fields: discovery date, geological confidence level, estimated reserves, accessibility rating.
+
+## Minerals Covered
+Oil, Gas, Gold, Copper, Coal, Uranium, Iron, Manganese, Chromium, Zinc, Lead, Rare Earth Elements.
+
+## Services Categories
+- Geological services (drilling, surveying, sampling)
+- Legal services (licensing, compliance, permits)
+- Equipment rental (drilling rigs, lab equipment)
+- Investment services (due diligence, project financing)
+
+## Languages & URLs
+
+| Language | URL                    | Code |
+|----------|------------------------|------|
+| Russian  | https://qaznedr.kz/ru  | ru   |
+| Kazakh   | https://qaznedr.kz/kz  | kk   |
+| English  | https://qaznedr.kz/en  | en   |
+| Chinese  | https://qaznedr.kz/zh  | zh   |
+
+## Key Pages
+
+- Homepage: https://qaznedr.kz/ru
+- Listings catalog: https://qaznedr.kz/ru/listings
+- Services: https://qaznedr.kz/ru/services
+- Services catalog: https://qaznedr.kz/ru/services/catalog
+- Geological services: https://qaznedr.kz/ru/services/geological
+- Legal services: https://qaznedr.kz/ru/services/legal
+- Equipment: https://qaznedr.kz/ru/services/equipment
+- Investors: https://qaznedr.kz/ru/services/investors
+- Companies directory: https://qaznedr.kz/ru/companies
+- News: https://qaznedr.kz/ru/news
+- Knowledge base: https://qaznedr.kz/ru/knowledge
+- Interactive map: https://qaznedr.kz/ru/map
+- Favorites: https://qaznedr.kz/ru/favorites
+
+## API Endpoints (Public, JSON)
+
+### GET /api/listings
+Fetch listings with filtering and pagination.
+Query parameters: page, limit, query, sortBy, sortOrder, region, mineral, type, verified, featured, priceMin, priceMax, areaMin, areaMax.
+Response: `{ success: true, data: { deposits: [...], pagination: { page, limit, total, totalPages, hasNext, hasPrev } } }`
+
+### GET /api/listings/[id]
+Fetch a single listing by ID.
+Response: `{ success: true, data: { id, title, description, type, mineral, region, city, area, price, coordinates, images, documents, ... } }`
+
+## Regions of Kazakhstan
+Мангистауская, Атырауская, Западно-Казахстанская, Актюбинская, Костанайская, Северо-Казахстанская, Павлодарская, Карагандинская, Акмолинская, Восточно-Казахстанская, Абайская, Жетысуская, Алматинская, Кызылординская, Туркестанская, Жамбылская.
+
+## Target Audience
+- Mining companies and nedra users (недропользователи)
+- International investors (including Chinese mining companies)
+- Geologists and geological survey firms
+- Service providers (drilling, legal, equipment)
+- Government regulatory bodies
+
+## Contact
+- Platform: https://qaznedr.kz
+- Email: info@qaznedr.kz
+
+## Technical
+- Built with Next.js 15 (App Router)
+- Database: Supabase (PostgreSQL)
+- Hosting: Vercel / Cloudflare
+- Authentication: NextAuth.js
+- Sitemap: https://qaznedr.kz/sitemap.xml
+- Robots: https://qaznedr.kz/robots.txt

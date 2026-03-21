@@ -46,8 +46,46 @@ export default function Home() {
     },
   ];
 
+  const organizationJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'QAZNEDR',
+    url: 'https://qaznedr.kz',
+    description: 'Платформа геологической отрасли Казахстана',
+    foundingDate: '2025',
+    areaServed: {
+      '@type': 'Country',
+      name: 'Kazakhstan',
+    },
+    sameAs: [],
+  };
+
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'QAZNEDR',
+    url: 'https://qaznedr.kz',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://qaznedr.kz/ru/listings?search={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-[#0A0A0A]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationJsonLd),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteJsonLd),
+        }}
+      />
       <Navigation />
 
       {/* Hero Section */}

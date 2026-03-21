@@ -30,18 +30,25 @@ export const metadata: Metadata = {
     title: 'QAZNEDR.KZ — Площадка недропользования Казахстана',
     description:
       'B2B маркетплейс для покупки и продажи месторождений в Казахстане',
-    url: 'https://qaznedr.vercel.app',
+    url: 'https://qaznedr.kz',
     siteName: 'QAZNEDR.KZ',
     locale: 'ru_KZ',
     type: 'website',
   },
+  twitter: {
+    card: 'summary',
+    title: 'QAZNEDR — Платформа геологической отрасли Казахстана',
+    description:
+      'Превращаем природные богатства Казахстана в экономический рост',
+    site: '@qaznedr',
+  },
   alternates: {
-    canonical: 'https://qaznedr.vercel.app',
+    canonical: 'https://qaznedr.kz',
     languages: {
-      ru: 'https://qaznedr.vercel.app/ru',
-      en: 'https://qaznedr.vercel.app/en',
-      kk: 'https://qaznedr.vercel.app/kz',
-      zh: 'https://qaznedr.vercel.app/zh',
+      ru: 'https://qaznedr.kz/ru',
+      en: 'https://qaznedr.kz/en',
+      kk: 'https://qaznedr.kz/kz',
+      zh: 'https://qaznedr.kz/zh',
     },
   },
   robots: {

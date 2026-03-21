@@ -143,6 +143,33 @@ export default function DepositDetailPage() {
     };
   }, [deposit]);
 
+  const breadcrumbJsonLd = useMemo(() => {
+    if (!deposit) return null;
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Главная',
+          item: `https://qaznedr.kz/${locale}`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Объявления',
+          item: `https://qaznedr.kz/${locale}/listings`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: deposit.title,
+        },
+      ],
+    };
+  }, [deposit, locale]);
+
   const handleFavoriteToggle = async () => {
     if (!deposit) return;
 
@@ -246,6 +273,12 @@ export default function DepositDetailPage() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
+      {breadcrumbJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       )}
       <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">

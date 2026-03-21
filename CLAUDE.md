@@ -144,6 +144,32 @@ type ListingType =
 7. **Test Coverage**: Maintain minimum 60% test coverage
 8. **Build Before Commit**: Always run `npm run build` to ensure no TypeScript errors
 
+## SEO Rules
+
+Every page and feature must follow these SEO requirements:
+
+1. **Every new page** must have a `metadata` export or `generateMetadata` function with unique `title` and `description`
+2. **Every new dynamic page** (e.g., `/listings/[id]`) must have `generateMetadata` that uses the content data for title/description
+3. **Every new page** must be added to `src/app/sitemap.ts`
+4. **No blue backgrounds** in hero sections (design system rule)
+5. **Heading hierarchy**: one `h1` per page, then `h2` → `h3` progression
+6. **Images** must use `next/image` with `alt` text
+7. **No emoji** in UI — use Lucide icons (also important for structured data parsing)
+8. **Internal links** — link related pages to each other
+9. **JSON-LD structured data** — add appropriate schema.org types for new content pages
+10. **Canonical URLs** — use `qaznedr.kz` domain, never `vercel.app`
+11. **After adding new content pages** — call `/api/indexnow` to notify search engines
+12. **llms.txt** — update `public/llms.txt` when adding new major features or content types
+
+### Key SEO Files
+
+- `src/app/sitemap.ts` — sitemap generation
+- `src/app/robots.ts` — crawler rules
+- `public/llms.txt` — AI search engine info
+- `public/.well-known/ai-plugin.json` — AI agent discovery
+- `public/api/openapi.json` — API documentation for AI
+- `src/app/[locale]/opengraph-image.tsx` — dynamic OG images
+
 ## Known Issues & Solutions
 
 ### Common Build Errors

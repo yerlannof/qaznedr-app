@@ -199,10 +199,28 @@ export const SERVICE_TAXONOMY: ServiceCategory[] = [
           {
             id: 'deep-drilling',
             name: {
-              ru: 'Глубокое бурение (600+ м)',
-              kz: 'Терең бұрғылау (600+ м)',
-              en: 'Deep drilling (600m+)',
-              zh: '深层钻探（600米以上）',
+              ru: 'Глубокое бурение (600–2000 м)',
+              kz: 'Терең бұрғылау (600–2000 м)',
+              en: 'Deep drilling (600–2000m)',
+              zh: '深层钻探（600-2000米）',
+            },
+          },
+          {
+            id: 'ultra-deep-drilling',
+            name: {
+              ru: 'Сверхглубокое бурение (2000–6000 м)',
+              kz: 'Аса терең бұрғылау (2000–6000 м)',
+              en: 'Ultra-deep drilling (2000–6000m)',
+              zh: '超深钻探（2000-6000米）',
+            },
+          },
+          {
+            id: 'super-deep-drilling',
+            name: {
+              ru: 'Особо глубокое бурение (6000+ м)',
+              kz: 'Ерекше терең бұрғылау (6000+ м)',
+              en: 'Super-deep drilling (6000m+)',
+              zh: '特深钻探（6000米以上）',
             },
           },
         ],

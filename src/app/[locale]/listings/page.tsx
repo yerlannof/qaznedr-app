@@ -146,8 +146,25 @@ function ListingsContent() {
     router.push(pathname);
   };
 
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Месторождения и лицензии Казахстана',
+    description:
+      'Каталог горнодобывающих лицензий, участков разведки и минеральных проявлений',
+    url: 'https://qaznedr.kz/ru/listings',
+    numberOfItems: totalCount || 0,
+    itemListOrder: 'https://schema.org/ItemListUnordered',
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#0A0A0A]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(itemListJsonLd),
+        }}
+      />
       <Navigation />
 
       {/* Header */}

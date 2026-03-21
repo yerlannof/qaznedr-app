@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "QAZNEDR — Kazakhstan Geology Platform",
+  "name_for_model": "qaznedr",
+  "description_for_human": "Platform for Kazakhstan's geology industry — licenses, services, companies, data.",
+  "description_for_model": "QAZNEDR is Kazakhstan's geology industry platform. It provides: 1) Mining and exploration license marketplace (buy/sell), 2) Geological services catalog (drilling, legal, equipment, investment), 3) Company directory for the mining sector, 4) Knowledge base on Kazakhstan subsoil use regulations. Content is available in Russian, Kazakh, English, and Chinese. All data relates to Kazakhstan's 14 regions and minerals including oil, gas, gold, copper, coal, uranium, and iron.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://qaznedr.kz/api/openapi.json"
+  },
+  "logo_url": "https://qaznedr.kz/icon-512.png",
+  "contact_email": "info@qaznedr.kz",
+  "legal_info_url": "https://qaznedr.kz/ru/terms"
+}

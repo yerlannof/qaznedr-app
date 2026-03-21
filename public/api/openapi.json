@@ -1,0 +1,76 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "QAZNEDR API",
+    "description": "Kazakhstan geology industry platform API. Access mining licenses, exploration sites, mineral occurrences, and geological services.",
+    "version": "1.0.0"
+  },
+  "servers": [{ "url": "https://qaznedr.kz" }],
+  "paths": {
+    "/api/listings": {
+      "get": {
+        "summary": "Get mining listings",
+        "description": "Returns mining licenses, exploration licenses, and mineral occurrences in Kazakhstan",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MINING_LICENSE",
+                "EXPLORATION_LICENSE",
+                "MINERAL_OCCURRENCE"
+              ]
+            }
+          },
+          { "name": "region", "in": "query", "schema": { "type": "string" } },
+          {
+            "name": "mineral",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": { "type": "integer", "default": 20 }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": { "type": "integer", "default": 1 }
+          }
+        ],
+        "responses": {
+          "200": { "description": "List of listings with pagination" }
+        }
+      }
+    },
+    "/api/listings/{id}": {
+      "get": {
+        "summary": "Get listing details",
+        "description": "Returns detailed information about a specific mining listing",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Listing details" }
+        }
+      }
+    },
+    "/api/services": {
+      "get": {
+        "summary": "Get geological services",
+        "description": "Returns available geological, legal, equipment, and investment services",
+        "responses": {
+          "200": { "description": "List of services" }
+        }
+      }
+    }
+  }
+}

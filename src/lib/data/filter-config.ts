@@ -192,7 +192,7 @@ export const LISTING_FILTERS: FilterConfig[] = [
         id: 'MINERAL_OCCURRENCE',
         name: {
           ru: 'Рудопроявление',
-          kz: 'Рудакөріністері',
+          kz: 'Кен көріністері',
           en: 'Mineral Occurrence',
           zh: '矿点',
         },
@@ -339,7 +339,7 @@ export const COMPANY_FILTERS: FilterConfig[] = [
         id: 'subsoil_user',
         name: {
           ru: 'Недропользователь',
-          kz: 'Жерқойнауын пайдаланушы',
+          kz: 'Жер қойнауын пайдаланушы',
           en: 'Subsoil User',
           zh: '地下资源使用者',
         },
@@ -375,7 +375,7 @@ export const COMPANY_FILTERS: FilterConfig[] = [
     id: 'verified',
     label: {
       ru: 'С сертификатами',
-      kz: 'Сертификаты бар',
+      kz: 'Сертификаттары бар',
       en: 'Certified',
       zh: '已认证',
     },

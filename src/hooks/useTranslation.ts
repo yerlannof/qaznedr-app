@@ -124,7 +124,7 @@ const translations = {
         regulatory: 'Соответствует стандартам недропользования РК',
         certified: 'Сертифицированная платформа',
       },
-      copyright: '© 2025 QAZNEDR.KZ. Все права защищены.',
+      copyright: '© 2025-2026 QAZNEDR.KZ. Все права защищены.',
       poweredBy: 'Работает на',
     },
     errors: {
@@ -197,9 +197,9 @@ const translations = {
       },
       cta: {
         title: 'Хотите разместить свои услуги?',
-        subtitle:
+        description:
           'Присоединяйтесь к нашей экосистеме и найдите новых клиентов в горнодобывающей отрасли Казахстана',
-        listServices: 'Разместить услуги',
+        postService: 'Разместить услуги',
         contactUs: 'Связаться с нами',
       },
       knowledge: {
@@ -409,7 +409,7 @@ const translations = {
       allTypes: 'Барлық түрлер',
       miningLicenses: 'Өндіру лицензиялары',
       explorationLicenses: 'Барлау лицензиялары',
-      mineralOccurrences: 'Рудопроявления',
+      mineralOccurrences: 'Кен көріністері',
       priceRange: 'Баға (млрд ₸)',
       apply: 'Қолдану',
       region: 'Аймақ',
@@ -459,8 +459,8 @@ const translations = {
         regulatory: 'ҚР недропайдалану стандарттарына сәйкес',
         certified: 'Сертификатталған платформа',
       },
-      copyright: '© 2025 QAZNEDR.KZ. Барлық құқықтар қорғалған.',
-      poweredBy: 'Жұмысістейді',
+      copyright: '© 2025-2026 QAZNEDR.KZ. Барлық құқықтар қорғалған.',
+      poweredBy: 'Жұмыс істейді',
     },
     errors: {
       somethingWentWrong: 'Бірдеңе дұрыс болмады',
@@ -512,6 +512,33 @@ const translations = {
       },
     },
     services: {
+      hero: {
+        title: 'Тау-кен қызметтерінің экожүйесі',
+        subtitle:
+          'Қазақстанның тау-кен өнеркәсібі үшін кәсіби қызметтердің толық спектрі. Геологиялық барлаудан инвестициялық сүйемелдеуге дейін.',
+        searchPlaceholder: 'Қажетті қызметті немесе жеткізушіні табыңыз...',
+      },
+      sections: {
+        categories: 'Қызмет санаттары',
+        categoriesSubtitle:
+          'Қызмет санатын таңдаңыз және аймағыңыздағы тексерілген жеткізушілерді табыңыз',
+        informationCenter: 'Ақпараттық орталық',
+        informationCenterSubtitle:
+          'Кәсіпқойларға арналған өзекті ақпарат, сала жаңалықтары және білім базасы',
+      },
+      knowledge: {
+        knowledgeBase: 'Білім базасы',
+        knowledgeBaseDesc: 'Техникалық құжаттама, стандарттар, регламенттер',
+        industryNews: 'Сала жаңалықтары',
+        industryNewsDesc:
+          'Қазақстанның тау-кен өнеркәсібінің өзекті жаңалықтары',
+        materials: 'материалдар',
+      },
+      stats: {
+        providers: 'жеткізушілер',
+        projects: 'жобалар',
+        viewAll: 'Барлығын көру',
+      },
       categories: {
         drilling: 'Бұрғылау',
         exploration: 'Геологиялық барлау',
@@ -650,7 +677,7 @@ const translations = {
       area: 'Area',
       license: 'License',
       active: 'Active',
-      openDate: 'Open Date',
+      openDate: 'Discovery Date',
       viewMode: {
         list: 'List',
         map: 'Map',
@@ -687,10 +714,10 @@ const translations = {
         title: 'Language',
       },
       industry: {
-        regulatory: 'Complies with RK subsoil use standards',
+        regulatory: 'Complies with Kazakhstan subsoil use standards',
         certified: 'Certified platform',
       },
-      copyright: '© 2025 QAZNEDR.KZ. All rights reserved.',
+      copyright: '© 2025-2026 QAZNEDR.KZ. All rights reserved.',
       poweredBy: 'Powered by',
     },
     errors: {
@@ -740,6 +767,32 @@ const translations = {
       },
     },
     services: {
+      hero: {
+        title: 'Mining Services Ecosystem',
+        subtitle:
+          "Full range of professional services for Kazakhstan's mining industry. From geological exploration to investment support.",
+        searchPlaceholder: 'Find the service or provider you need...',
+      },
+      sections: {
+        categories: 'Service Categories',
+        categoriesSubtitle:
+          'Choose a service category and find verified providers in your region',
+        informationCenter: 'Information Center',
+        informationCenterSubtitle:
+          'Current information, industry news and knowledge base for professionals',
+      },
+      knowledge: {
+        knowledgeBase: 'Knowledge Base',
+        knowledgeBaseDesc: 'Technical documentation, standards, regulations',
+        industryNews: 'Industry News',
+        industryNewsDesc: "Current news from Kazakhstan's mining industry",
+        materials: 'materials',
+      },
+      stats: {
+        providers: 'providers',
+        projects: 'projects',
+        viewAll: 'View All',
+      },
       categories: {
         drilling: 'Drilling',
         exploration: 'Geological Exploration',
@@ -803,14 +856,14 @@ const translations = {
   },
   zh: {
     navigation: {
-      listings: '发布信息',
+      listings: '信息列表',
       map: '地图',
       services: '服务',
       companies: '公司',
       blog: '博客',
       education: '培训',
       messages: '消息',
-      createListing: '创建发布',
+      createListing: '发布信息',
     },
     home: {
       officialPlatform: '官方数字化平台',
@@ -828,7 +881,7 @@ const translations = {
       miningLicensesDesc: '矿物开采权',
       explorationLicenses: '勘探许可证',
       explorationLicensesDesc: '地质勘探许可',
-      mineralOccurrences: '矿物产出',
+      mineralOccurrences: '矿点',
       mineralOccurrencesDesc: '记录的矿物发现',
       getStarted: '开始使用',
       getStartedDesc: '加入我们的平台，发现新机遇',
@@ -850,7 +903,7 @@ const translations = {
       stepPostDesc: '发布您的矿床、许可证或服务信息',
       stepPartnerTitle: '寻找合作伙伴',
       stepPartnerDesc: '与买家、卖家和服务商建立联系',
-      featuredListings: '列表',
+      featuredListings: '推荐信息',
       viewAll: '查看全部',
     },
     listings: {
@@ -877,7 +930,7 @@ const translations = {
       area: '面积',
       license: '许可证',
       active: '活跃',
-      openDate: '开放日期',
+      openDate: '发现日期',
       viewMode: {
         list: '列表',
         map: '地图',
@@ -916,8 +969,8 @@ const translations = {
         regulatory: '符合哈萨克斯坦地下资源利用标准',
         certified: '认证平台',
       },
-      copyright: '© 2025 QAZNEDR.KZ。保留所有权利。',
-      poweredBy: '技术支持',
+      copyright: '© 2025-2026 QAZNEDR.KZ。保留所有权利。',
+      poweredBy: '技术提供',
     },
     errors: {
       somethingWentWrong: '出现了问题',
@@ -933,7 +986,7 @@ const translations = {
       subtitle: '使用地图按地区搜索矿物资源',
     },
     common: {
-      dashboard: '仪表板',
+      dashboard: '个人中心',
       favorites: '收藏夹',
       login: '登录',
       register: '注册',
@@ -963,6 +1016,29 @@ const translations = {
       },
     },
     services: {
+      hero: {
+        title: '矿业服务生态系统',
+        subtitle: '哈萨克斯坦矿业的全方位专业服务。从地质勘探到投资支持。',
+        searchPlaceholder: '搜索所需的服务或供应商...',
+      },
+      sections: {
+        categories: '服务类别',
+        categoriesSubtitle: '选择服务类别，找到您所在地区的认证供应商',
+        informationCenter: '信息中心',
+        informationCenterSubtitle: '为专业人士提供的最新信息、行业新闻和知识库',
+      },
+      knowledge: {
+        knowledgeBase: '知识库',
+        knowledgeBaseDesc: '技术文档、标准、法规',
+        industryNews: '行业新闻',
+        industryNewsDesc: '哈萨克斯坦矿业最新新闻',
+        materials: '资料',
+      },
+      stats: {
+        providers: '供应商',
+        projects: '项目',
+        viewAll: '查看全部',
+      },
       categories: {
         drilling: '钻探',
         exploration: '地质勘探',

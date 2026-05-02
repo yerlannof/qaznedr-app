@@ -1,13 +1,9 @@
-import {
-  NextAuthOptions,
-  User as NextAuthUser,
-  Account,
-  Profile,
-} from 'next-auth';
+import { User as NextAuthUser } from 'next-auth';
 import { AdapterUser } from 'next-auth/adapters';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { createClient } from '@/lib/supabase/server';
+import GoogleProvider from 'next-auth/providers/google';
+import { createClient, createServiceClient } from '@/lib/supabase/server';
 import bcrypt from 'bcryptjs';
 import { getSecureAuthConfig } from '@/lib/auth/jwt-security';
 import { ValidationSchemas } from '@/lib/middleware/input-validation';
@@ -20,8 +16,20 @@ interface User {
   image: string | null;
 }
 
+const googleEnabled = Boolean(
+  process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+);
+
 export const authOptions = {
   providers: [
+    ...(googleEnabled
+      ? [
+          GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+          }),
+        ]
+      : []),
     CredentialsProvider({
       name: 'credentials',
       credentials: {
@@ -187,8 +195,63 @@ export const authOptions = {
       }
       return session;
     },
-    async signIn() {
-      // Additional security checks can be added here
+    async signIn({
+      user,
+      account,
+    }: {
+      user: NextAuthUser | AdapterUser;
+      account: { provider: string } | null;
+    }) {
+      if (account?.provider === 'google' && user.email) {
+        try {
+          const supabase = await createServiceClient();
+          const email = user.email.toLowerCase().trim();
+
+          const { data: existing } = (await (supabase as any)
+            .from('users')
+            .select('id')
+            .eq('email', email)
+            .maybeSingle()) as { data: { id: string } | null };
+
+          let userId = existing?.id;
+
+          if (!userId) {
+            const placeholder = await bcrypt.hash(
+              `oauth-${Date.now()}-${Math.random()}`,
+              10
+            );
+            const { data: created } = (await (supabase as any)
+              .from('users')
+              .insert({
+                email,
+                name: user.name ?? null,
+                image: user.image ?? null,
+                password: placeholder,
+                verified: true,
+                email_verified: new Date().toISOString(),
+              })
+              .select('id')
+              .single()) as { data: { id: string } | null };
+            userId = created?.id;
+          }
+
+          if (userId) {
+            user.id = userId;
+            await (supabase as any).from('profiles').upsert(
+              {
+                id: userId,
+                full_name: user.name || email.split('@')[0],
+                email,
+                avatar_url: user.image ?? null,
+              },
+              { onConflict: 'id' }
+            );
+          }
+        } catch (err) {
+          console.error('Google signIn provisioning failed:', err);
+          return false;
+        }
+      }
       return true;
     },
     async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {

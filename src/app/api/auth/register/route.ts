@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getPrisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import { registerSchema, validateRequest } from '@/lib/validations/api';
+import { createServiceClient } from '@/lib/supabase/server';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,7 +11,6 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    // Validate request data with zod
     const validation = validateRequest(body, registerSchema);
 
     if (!validation.success) {
@@ -23,9 +23,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const { email, password, name } = validation.data;
+    const { email, password, name, profileType } = validation.data;
 
-    // Check if user already exists
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -39,7 +38,6 @@ export async function POST(request: Request) {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Create the user
     const user = await prisma.user.create({
       data: {
         email,
@@ -54,8 +52,29 @@ export async function POST(request: Request) {
       },
     });
 
+    if (profileType) {
+      try {
+        const supabase = await createServiceClient();
+        await (supabase as any).from('profiles').upsert(
+          {
+            id: user.id,
+            full_name: name || email.split('@')[0],
+            email,
+            profile_type: profileType,
+          },
+          { onConflict: 'id' }
+        );
+      } catch {
+        // Profile creation is best-effort; user can complete setup later
+      }
+    }
+
     return NextResponse.json(
-      { message: 'User created successfully', user },
+      {
+        message: 'User created successfully',
+        user,
+        profileSetupComplete: Boolean(profileType),
+      },
       { status: 201 }
     );
   } catch (error) {

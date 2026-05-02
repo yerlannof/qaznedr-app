@@ -1,495 +1,85 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import Navigation from '@/components/layouts/Navigation';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  Users,
-  MapPin,
-  Star,
-  Shield,
-  Award,
-  Phone,
-  Mail,
-  Clock,
-  DollarSign,
-  TrendingUp,
-  Building2,
-  Search,
-  Filter,
-  Grid3X3,
-  List,
-  ChevronDown,
-  User,
-  Plus,
-  BarChart3,
-  Target,
-  Globe,
-} from 'lucide-react';
-import { Card } from '@/components/ui/card';
+import Navigation from '@/components/layouts/Navigation';
+import Footer from '@/components/layouts/Footer';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from '@/hooks/useTranslation';
+import {
+  Search,
+  ShieldCheck,
+  Briefcase,
+  MapPin,
+  Globe,
+  Plus,
+} from 'lucide-react';
 
-const investors = [
-  {
-    id: '1',
-    name: 'Нурлан Смагулов',
-    position: 'Управляющий партнер',
-    company: 'КазИнвест Майнинг',
-    type: 'individual', // 'individual' | 'fund' | 'bank'
-    location: 'Алматы',
-    rating: 4.8,
-    reviews: 67,
-    verified: true,
-    totalInvested: 15700000000, // в тенге
-    activeProjects: 12,
-    successRate: 89,
-    avatar: '/images/investors/investor-1.jpg',
-    investmentRange: { min: 500000000, max: 5000000000 }, // в тенге
-    responseTime: '< 24 часов',
-    description:
-      'Опытный инвестор в горнодобывающий сектор с портфолио из 12 активных проектов. Специализируется на золотодобыче и медных месторождениях.',
-    focusAreas: ['Золото', 'Медь', 'Цинк', 'Полиметаллы'],
-    investmentStages: [
-      'Разведка',
-      'Подготовка к добыче',
-      'Действующие рудники',
-    ],
-    regions: [
-      'Восточно-Казахстанская обл.',
-      'Карагандинская обл.',
-      'Павлодарская обл.',
-    ],
-    recentInvestments: [
-      {
-        project: 'Золоторудное месторождение "Жолымбет"',
-        amount: 2500000000,
-        year: 2023,
-      },
-      {
-        project: 'Медный рудник "Актогай-Восток"',
-        amount: 3200000000,
-        year: 2022,
-      },
-      {
-        project: 'Полиметаллическое месторождение "Шалкия"',
-        amount: 1800000000,
-        year: 2022,
-      },
-    ],
-    contactPhone: '+7 727 123 4567',
-    contactEmail: 'n.smagulov@kazinvest-mining.kz',
-    available: true,
-    lookingFor:
-      'Ищу перспективные золотые и медные месторождения на стадии завершения разведки',
-  },
-  {
-    id: '2',
-    name: 'Алтын Инвест Фонд',
-    position: 'Инвестиционный фонд',
-    company: 'Altyn Invest Fund',
-    type: 'fund',
-    location: 'Нур-Султан',
-    rating: 4.9,
-    reviews: 134,
-    verified: true,
-    totalInvested: 45200000000,
-    activeProjects: 28,
-    successRate: 92,
-    avatar: '/images/investors/investor-2.jpg',
-    investmentRange: { min: 1000000000, max: 15000000000 },
-    responseTime: '< 48 часов',
-    description:
-      'Ведущий казахстанский фонд прямых инвестиций, специализирующийся на горнодобывающих проектах. Управляет активами на сумму более 50 млрд тенге.',
-    focusAreas: ['Золото', 'Серебро', 'Медь', 'Железная руда', 'Уголь'],
-    investmentStages: [
-      'Геологическая разведка',
-      'Технико-экономическое обоснование',
-      'Строительство',
-      'Действующее производство',
-    ],
-    regions: ['Вся территория Казахстана'],
-    recentInvestments: [
-      {
-        project: 'ГОК "Бозшаколь" - расширение',
-        amount: 12000000000,
-        year: 2023,
-      },
-      {
-        project: 'Угольное месторождение "Майкубен-Запад"',
-        amount: 7500000000,
-        year: 2023,
-      },
-      {
-        project: 'Железорудное месторождение "Соколовское-2"',
-        amount: 9200000000,
-        year: 2022,
-      },
-    ],
-    contactPhone: '+7 7172 234 5678',
-    contactEmail: 'info@altyn-fund.kz',
-    available: true,
-    lookingFor:
-      'Рассматриваем крупные проекты с потенциалом IRR свыше 18% и сроком окупаемости до 7 лет',
-  },
-  {
-    id: '3',
-    name: 'Казахстанский Банк Развития',
-    position: 'Банк развития',
-    company: 'БРК',
-    type: 'bank',
-    location: 'Алматы',
-    rating: 4.7,
-    reviews: 89,
-    verified: true,
-    totalInvested: 127500000000,
-    activeProjects: 45,
-    successRate: 87,
-    avatar: '/images/investors/investor-3.jpg',
-    investmentRange: { min: 2000000000, max: 25000000000 },
-    responseTime: '< 72 часов',
-    description:
-      'Национальный институт развития, обеспечивающий долгосрочное финансирование производственной инфраструктуры и промышленных проектов.',
-    focusAreas: [
-      'Все минералы',
-      'Инфраструктурные проекты',
-      'Обогатительные комплексы',
-    ],
-    investmentStages: [
-      'ТЭО',
-      'Строительство',
-      'Модернизация действующих предприятий',
-    ],
-    regions: ['Вся территория Казахстана', 'Приоритет - индустриальные зоны'],
-    recentInvestments: [
-      {
-        project: 'Модернизация Жезказганского медеплавильного завода',
-        amount: 18000000000,
-        year: 2023,
-      },
-      {
-        project: 'Строительство обогатительной фабрики "Костанай Минералс"',
-        amount: 15600000000,
-        year: 2023,
-      },
-      {
-        project:
-          'Развитие железнодорожной инфраструктуры месторождения "Кокжайлау"',
-        amount: 11200000000,
-        year: 2022,
-      },
-    ],
-    contactPhone: '+7 727 345 6789',
-    contactEmail: 'mining@kdb.kz',
-    available: true,
-    lookingFor:
-      'Финансируем проекты по диверсификации экономики с высоким экспортным потенциалом',
-  },
-  {
-    id: '4',
-    name: 'Дарья Волкова',
-    position: 'Частный инвестор',
-    company: 'Nedra Capital',
-    type: 'individual',
-    location: 'Нур-Султан',
-    rating: 4.6,
-    reviews: 43,
-    verified: true,
-    totalInvested: 8900000000,
-    activeProjects: 7,
-    successRate: 86,
-    avatar: '/images/investors/investor-4.jpg',
-    investmentRange: { min: 300000000, max: 2500000000 },
-    responseTime: '< 12 часов',
-    description:
-      'Частный инвестор с 8-летним опытом в горнодобывающей отрасли. Фокусируется на средних и малых месторождениях с быстрой окупаемостью.',
-    focusAreas: [
-      'Россыпное золото',
-      'Строительные материалы',
-      'Техногенные месторождения',
-    ],
-    investmentStages: [
-      'Начальная разведка',
-      'Опытная добыча',
-      'Малая горная техника',
-    ],
-    regions: [
-      'Акмолинская обл.',
-      'Северо-Казахстанская обл.',
-      'Костанайская обл.',
-    ],
-    recentInvestments: [
-      { project: 'Россыпное золото "Жана-Жол"', amount: 850000000, year: 2023 },
-      {
-        project: 'Песчано-гравийное месторождение "Сарыарка"',
-        amount: 650000000,
-        year: 2023,
-      },
-      {
-        project: 'Техногенное месторождение "Балхаш-Золото"',
-        amount: 1200000000,
-        year: 2022,
-      },
-    ],
-    contactPhone: '+7 7172 456 7890',
-    contactEmail: 'd.volkova@nedra-capital.kz',
-    available: false,
-    lookingFor:
-      'Интересуют проекты сроком окупаемости до 3 лет с минимальными экологическими рисками',
-  },
-  {
-    id: '5',
-    name: 'Мирас Алтынбеков',
-    position: 'Директор по инвестициям',
-    company: 'Qazaq Mining Invest',
-    type: 'fund',
-    location: 'Шымкент',
-    rating: 4.5,
-    reviews: 56,
-    verified: true,
-    totalInvested: 11300000000,
-    activeProjects: 9,
-    successRate: 83,
-    avatar: '/images/investors/investor-5.jpg',
-    investmentRange: { min: 400000000, max: 3000000000 },
-    responseTime: '< 36 часов',
-    description:
-      'Региональный инвестиционный фонд, специализирующийся на развитии горнодобывающих проектов южного Казахстана. Поддерживаем местных предпринимателей.',
-    focusAreas: [
-      'Свинцово-цинковые руды',
-      'Барит',
-      'Плавиковый шпат',
-      'Каолин',
-    ],
-    investmentStages: [
-      'Детальная разведка',
-      'Подготовка к эксплуатации',
-      'Первые годы эксплуатации',
-    ],
-    regions: [
-      'Южно-Казахстанская обл.',
-      'Жамбылская обл.',
-      'Кызылординская обл.',
-    ],
-    recentInvestments: [
-      {
-        project: 'Свинцово-цинковое месторождение "Жайрем-Южное"',
-        amount: 2100000000,
-        year: 2023,
-      },
-      {
-        project: 'Баритовое месторождение "Жезды"',
-        amount: 980000000,
-        year: 2022,
-      },
-      {
-        project: 'Каолиновое месторождение "Криворожское"',
-        amount: 1450000000,
-        year: 2022,
-      },
-    ],
-    contactPhone: '+7 7252 567 8901',
-    contactEmail: 'm.altynbekov@qazaq-mining.kz',
-    available: true,
-    lookingFor:
-      'Ищем проекты по редким и редкоземельным металлам в южных регионах',
-  },
-  {
-    id: '6',
-    name: 'Евразийский Инвест',
-    position: 'Международный фонд',
-    company: 'Eurasian Mining Fund',
-    type: 'fund',
-    location: 'Алматы',
-    rating: 4.8,
-    reviews: 112,
-    verified: true,
-    totalInvested: 89600000000,
-    activeProjects: 31,
-    successRate: 91,
-    avatar: '/images/investors/investor-6.jpg',
-    investmentRange: { min: 3000000000, max: 20000000000 },
-    responseTime: '< 5 дней',
-    description:
-      'Международный фонд с капиталом более 100 млрд тенге. Инвестируем в крупные горнодобывающие проекты с международным потенциалом экспорта.',
-    focusAreas: [
-      'Медь',
-      'Золото',
-      'Уран',
-      'Редкоземельные металлы',
-      'Калийные соли',
-    ],
-    investmentStages: [
-      'Подтвержденные запасы',
-      'Строительство ГОКов',
-      'Модернизация действующих предприятий',
-    ],
-    regions: [
-      'Вся территория Казахстана',
-      'Фокус на экспортно-ориентированных проектах',
-    ],
-    recentInvestments: [
-      {
-        project: 'Урановое месторождение "Инкай" - расширение',
-        amount: 19500000000,
-        year: 2023,
-      },
-      {
-        project: 'Медно-порфировое месторождение "Актогай-Север"',
-        amount: 16800000000,
-        year: 2023,
-      },
-      {
-        project: 'Золоторудное месторождение "Васильковское" - модернизация',
-        amount: 12300000000,
-        year: 2022,
-      },
-    ],
-    contactPhone: '+7 727 678 9012',
-    contactEmail: 'investment@eurasian-mining.kz',
-    available: true,
-    lookingFor:
-      'Крупные проекты мирового класса с запасами категории С1+С2 и экспортным потенциалом',
-  },
-];
-
-const regions = [
-  'Все регионы',
-  'Алматы',
-  'Нур-Султан',
-  'Шымкент',
-  'Караганда',
-  'Восточно-Казахстанская обл.',
-  'Карагандинская обл.',
-  'Павлодарская обл.',
-  'Акмолинская обл.',
-  'Костанайская обл.',
-  'Атырауская обл.',
-  'Мангистауская обл.',
-  'Актюбинская обл.',
-  'Жамбылская обл.',
-  'Кызылординская обл.',
-];
-
-const investorTypes = ['Все типы', 'individual', 'fund', 'bank'];
-
-const investorTypeNames = {
-  individual: 'Частный инвестор',
-  fund: 'Инвестиционный фонд',
-  bank: 'Банк/Финансовая организация',
+type Investor = {
+  id: string;
+  full_name: string;
+  company_name: string | null;
+  country: string | null;
+  city: string | null;
+  description: string | null;
+  avatar_url: string | null;
+  is_verified: boolean | null;
+  website: string | null;
+  service_types: string[] | null;
+  created_at: string | null;
 };
 
-const focusAreas = [
-  'Все области',
-  'Золото',
-  'Медь',
-  'Серебро',
-  'Цинк',
-  'Уран',
-  'Железная руда',
-  'Уголь',
-  'Редкоземельные металлы',
-  'Строительные материалы',
-  'Полиметаллы',
-];
-
 export default function InvestorsPage() {
+  const { locale } = useTranslation();
+  const [investors, setInvestors] = useState<Investor[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedRegion, setSelectedRegion] = useState('Все регионы');
-  const [selectedType, setSelectedType] = useState('Все типы');
-  const [selectedFocus, setSelectedFocus] = useState('Все области');
   const [verifiedOnly, setVerifiedOnly] = useState(false);
-  const [availableOnly, setAvailableOnly] = useState(false);
-  const [ratingFilter, setRatingFilter] = useState(0);
-  const [minInvestment, setMinInvestment] = useState(0);
-  const [maxInvestment, setMaxInvestment] = useState(50000000000);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [sortBy, setSortBy] = useState<
-    'rating' | 'totalInvested' | 'activeProjects' | 'successRate'
-  >('rating');
 
-  const filteredInvestors = useMemo(() => {
-    const filtered = investors.filter((investor) => {
-      const matchesSearch =
-        !searchQuery ||
-        investor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        investor.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        investor.focusAreas.some((area) =>
-          area.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+  useEffect(() => {
+    let cancelled = false;
+    setIsLoading(true);
+    fetch('/api/investors?limit=100')
+      .then((res) => res.json())
+      .then((json) => {
+        if (cancelled) return;
+        if (json.success && Array.isArray(json.data)) {
+          setInvestors(json.data);
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setIsLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
-      const matchesRegion =
-        selectedRegion === 'Все регионы' ||
-        investor.location === selectedRegion ||
-        investor.regions.includes(selectedRegion);
-      const matchesType =
-        selectedType === 'Все типы' || investor.type === selectedType;
-      const matchesFocus =
-        selectedFocus === 'Все области' ||
-        investor.focusAreas.includes(selectedFocus);
-      const matchesVerified = !verifiedOnly || investor.verified;
-      const matchesAvailable = !availableOnly || investor.available;
-      const matchesRating = investor.rating >= ratingFilter;
-      const matchesInvestmentRange =
-        investor.investmentRange.min <= maxInvestment &&
-        investor.investmentRange.max >= minInvestment;
-
-      return (
-        matchesSearch &&
-        matchesRegion &&
-        matchesType &&
-        matchesFocus &&
-        matchesVerified &&
-        matchesAvailable &&
-        matchesRating &&
-        matchesInvestmentRange
-      );
+  const filtered = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
+    return investors.filter((inv) => {
+      if (verifiedOnly && !inv.is_verified) return false;
+      if (!q) return true;
+      const text = [
+        inv.full_name,
+        inv.company_name,
+        inv.description,
+        inv.city,
+        inv.country,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      return text.includes(q);
     });
-
-    // Сортировка - создаем отсортированную копию
-    const sorted = [...filtered].sort((a, b) => {
-      switch (sortBy) {
-        case 'rating':
-          return b.rating - a.rating;
-        case 'totalInvested':
-          return b.totalInvested - a.totalInvested;
-        case 'activeProjects':
-          return b.activeProjects - a.activeProjects;
-        case 'successRate':
-          return b.successRate - a.successRate;
-        default:
-          return 0;
-      }
-    });
-
-    return sorted;
-  }, [
-    searchQuery,
-    selectedRegion,
-    selectedType,
-    selectedFocus,
-    verifiedOnly,
-    availableOnly,
-    ratingFilter,
-    minInvestment,
-    maxInvestment,
-    sortBy,
-  ]);
-
-  const formatAmount = (amount: number) => {
-    if (amount >= 1000000000) {
-      return (amount / 1000000000).toFixed(1) + ' млрд ₸';
-    } else if (amount >= 1000000) {
-      return (amount / 1000000).toFixed(0) + ' млн ₸';
-    }
-    return amount.toLocaleString() + ' ₸';
-  };
+  }, [investors, searchQuery, verifiedOnly]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0A0A0A]">
       <Navigation />
 
-      {/* Hero Section */}
       <section className="pt-24 lg:pt-32 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <p className="text-xs font-medium uppercase tracking-wider text-gray-400">
           Инвестиции
@@ -498,441 +88,239 @@ export default function InvestorsPage() {
           Инвесторы и фонды
         </h1>
         <p className="mt-4 text-base lg:text-lg text-gray-500 max-w-xl">
-          Найдите инвесторов для финансирования вашего горнодобывающего проекта.
-          От частных инвесторов до крупных фондов и банков развития.
+          Каталог инвесторов и финансовых организаций, готовых вкладываться в
+          горнодобывающие проекты Казахстана.
         </p>
 
-        {/* Search */}
-        <div className="max-w-2xl mt-6 relative">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Найдите инвестора по имени, компании или сфере интересов..."
-            className="w-full px-6 py-4 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 bg-white dark:bg-[#141414] text-lg focus:outline-none focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
-          />
-          <Button size="icon" className="absolute right-2 top-2 rounded-lg">
-            <Search className="w-5 h-5" />
-          </Button>
+        <div className="mt-6 flex flex-col sm:flex-row gap-3 max-w-2xl">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Поиск по имени, компании или сфере"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-[#141414] focus:outline-none focus:ring-2 focus:ring-[#0A84FF] focus:border-transparent"
+            />
+          </div>
+          <label className="inline-flex items-center gap-2 px-3 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] cursor-pointer text-sm text-gray-700 dark:text-gray-300">
+            <input
+              type="checkbox"
+              checked={verifiedOnly}
+              onChange={(e) => setVerifiedOnly(e.target.checked)}
+              className="rounded border-gray-300"
+            />
+            <ShieldCheck className="w-4 h-4 text-[#0A84FF]" />
+            Только верифицированные
+          </label>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Filters */}
-        <Card className="mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Region Filter */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Регион
-              </label>
-              <div className="relative">
-                <select
-                  value={selectedRegion}
-                  onChange={(e) => setSelectedRegion(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] appearance-none bg-white"
-                >
-                  {regions.map((region) => (
-                    <option key={region} value={region}>
-                      {region}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="absolute right-3 top-3 w-4 h-4 text-gray-400 pointer-events-none" />
-              </div>
-            </div>
-
-            {/* Type Filter */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Тип инвестора
-              </label>
-              <div className="relative">
-                <select
-                  value={selectedType}
-                  onChange={(e) => setSelectedType(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] appearance-none bg-white"
-                >
-                  {investorTypes.map((type) => (
-                    <option key={type} value={type}>
-                      {type === 'Все типы'
-                        ? type
-                        : investorTypeNames[
-                            type as keyof typeof investorTypeNames
-                          ]}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="absolute right-3 top-3 w-4 h-4 text-gray-400 pointer-events-none" />
-              </div>
-            </div>
-
-            {/* Focus Area Filter */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Сфера интересов
-              </label>
-              <div className="relative">
-                <select
-                  value={selectedFocus}
-                  onChange={(e) => setSelectedFocus(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF] appearance-none bg-white"
-                >
-                  {focusAreas.map((area) => (
-                    <option key={area} value={area}>
-                      {area}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="absolute right-3 top-3 w-4 h-4 text-gray-400 pointer-events-none" />
-              </div>
-            </div>
-
-            {/* Rating Filter */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Мин. рейтинг
-              </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="range"
-                  min="0"
-                  max="5"
-                  step="0.5"
-                  value={ratingFilter}
-                  onChange={(e) => setRatingFilter(Number(e.target.value))}
-                  className="flex-1"
-                />
-                <span className="text-sm text-gray-600 min-w-[3rem]">
-                  {ratingFilter}+
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Investment Range */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Мин. инвестиция, млн ₸
-              </label>
-              <input
-                type="number"
-                value={minInvestment / 1000000}
-                onChange={(e) =>
-                  setMinInvestment(Number(e.target.value) * 1000000)
-                }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
-                min="0"
-                step="100"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Макс. инвестиция, млн ₸
-              </label>
-              <input
-                type="number"
-                value={maxInvestment / 1000000}
-                onChange={(e) =>
-                  setMaxInvestment(Number(e.target.value) * 1000000)
-                }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
-                min="0"
-                step="500"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 pt-6 border-t border-gray-200">
-            {/* Checkboxes */}
-            <div className="flex flex-wrap gap-4">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={verifiedOnly}
-                  onChange={(e) => setVerifiedOnly(e.target.checked)}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <Shield className="w-4 h-4 text-green-600" />
-                <span className="text-sm text-gray-700">
-                  Только верифицированные
-                </span>
-              </label>
-
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={availableOnly}
-                  onChange={(e) => setAvailableOnly(e.target.checked)}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <Clock className="w-4 h-4 text-green-600" />
-                <span className="text-sm text-gray-700">Только доступные</span>
-              </label>
-            </div>
-
-            {/* Sort and View Controls */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-700">Сортировка:</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
-                  className="px-3 py-1 border border-gray-300 rounded text-sm focus:border-[#0A84FF] focus:ring-1 focus:ring-[#0A84FF]"
-                >
-                  <option value="rating">По рейтингу</option>
-                  <option value="totalInvested">По объему инвестиций</option>
-                  <option value="activeProjects">По кол-ву проектов</option>
-                  <option value="successRate">По успешности</option>
-                </select>
-              </div>
-
-              <div className="flex items-center border border-gray-300 rounded-lg">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`p-2 ${viewMode === 'grid' ? 'bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
-                >
-                  <Grid3X3 className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`p-2 ${viewMode === 'list' ? 'bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
-                >
-                  <List className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </Card>
-
-        {/* Results */}
-        <div className="mb-6">
-          <p className="text-gray-600">
-            Найдено{' '}
-            <span className="font-semibold text-gray-900">
-              {filteredInvestors.length}
-            </span>{' '}
-            инвесторов
-          </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="text-sm text-gray-500 mb-6">
+          {isLoading
+            ? 'Загрузка…'
+            : `Найдено ${filtered.length} ${pluralize(filtered.length, [
+                'инвестор',
+                'инвестора',
+                'инвесторов',
+              ])}`}
         </div>
 
-        {/* Investors Grid/List */}
-        <div
-          className={
-            viewMode === 'grid'
-              ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'
-              : 'space-y-6'
-          }
-        >
-          {filteredInvestors.map((investor) => (
-            <Card
-              key={investor.id}
-              className={`group hover:shadow-medium transition-all duration-300 ${viewMode === 'list' ? 'p-6' : ''}`}
-            >
-              <div
-                className={`${viewMode === 'list' ? 'flex gap-6' : 'text-center'}`}
-              >
-                {/* Avatar and Basic Info */}
-                <div
-                  className={`${viewMode === 'list' ? 'flex-shrink-0' : 'mb-4'}`}
-                >
-                  <div
-                    className={`relative ${viewMode === 'list' ? 'w-24 h-24' : 'w-20 h-20 mx-auto'} mb-3`}
-                  >
-                    <Image
-                      src="/images/placeholder-avatar.jpg"
-                      alt={investor.name}
-                      fill
-                      className="rounded-full object-cover"
-                    />
-                    {investor.verified && (
-                      <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
-                        <Shield className="w-3 h-3 text-white" />
-                      </div>
-                    )}
-                    {!investor.available && (
-                      <div className="absolute inset-0 bg-gray-900 bg-opacity-50 rounded-full flex items-center justify-center">
-                        <Clock className="w-8 h-8 text-white opacity-75" />
-                      </div>
-                    )}
-                  </div>
+        {isLoading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <InvestorSkeleton key={i} />
+            ))}
+          </div>
+        )}
 
-                  <div
-                    className={`${viewMode === 'list' ? 'text-center' : ''}`}
-                  >
-                    <div
-                      className={`inline-flex px-2 py-1 rounded-full text-xs ${
-                        investor.type === 'fund'
-                          ? 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
-                          : investor.type === 'bank'
-                            ? 'bg-green-100 text-green-700'
-                            : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
-                      }`}
-                    >
-                      {
-                        investorTypeNames[
-                          investor.type as keyof typeof investorTypeNames
-                        ]
-                      }
-                    </div>
-                  </div>
-                </div>
+        {!isLoading && filtered.length === 0 && (
+          <EmptyState
+            locale={locale}
+            hasFilters={Boolean(searchQuery || verifiedOnly)}
+          />
+        )}
 
-                <div className={`${viewMode === 'list' ? 'flex-1' : ''}`}>
-                  {/* Header */}
-                  <div
-                    className={`${viewMode === 'list' ? 'flex justify-between items-start mb-3' : 'mb-3'}`}
-                  >
-                    <div className={viewMode === 'list' ? '' : 'text-center'}>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-1">
-                        {investor.name}
-                      </h3>
-                      <p className="text-gray-600 text-sm mb-1">
-                        {investor.position}
-                      </p>
-                      <p className="font-medium text-blue-600 text-sm">
-                        {investor.company}
-                      </p>
-                    </div>
+        {!isLoading && filtered.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {filtered.map((investor) => (
+              <InvestorCard key={investor.id} investor={investor} />
+            ))}
+          </div>
+        )}
 
-                    <div
-                      className={`${viewMode === 'list' ? 'text-right' : 'flex justify-center items-center gap-4 mt-3'}`}
-                    >
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        <span className="font-medium">{investor.rating}</span>
-                        <span className="text-gray-500 text-sm">
-                          ({investor.reviews})
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Location and Availability */}
-                  <div
-                    className={`flex ${viewMode === 'list' ? 'justify-between' : 'justify-center'} items-center gap-4 mb-4 text-sm text-gray-600`}
-                  >
-                    <div className="flex items-center gap-1">
-                      <MapPin className="w-4 h-4" />
-                      <span>{investor.location}</span>
-                    </div>
-                    <div
-                      className={`flex items-center gap-1 ${investor.available ? 'text-green-600' : 'text-red-600'}`}
-                    >
-                      <Clock className="w-4 h-4" />
-                      <span>
-                        {investor.available
-                          ? investor.responseTime
-                          : 'Недоступен'}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Stats */}
-                  <div
-                    className={`${viewMode === 'list' ? 'grid grid-cols-4 gap-4' : 'grid grid-cols-2 gap-2'} mb-4 text-center text-sm`}
-                  >
-                    <div>
-                      <div className="font-semibold text-gray-900">
-                        {formatAmount(investor.totalInvested)}
-                      </div>
-                      <div className="text-gray-600">инвестировано</div>
-                    </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">
-                        {investor.activeProjects}
-                      </div>
-                      <div className="text-gray-600">проектов</div>
-                    </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">
-                        {investor.successRate}%
-                      </div>
-                      <div className="text-gray-600">успех</div>
-                    </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">
-                        {formatAmount(investor.investmentRange.min)} -{' '}
-                        {formatAmount(investor.investmentRange.max)}
-                      </div>
-                      <div className="text-gray-600">диапазон</div>
-                    </div>
-                  </div>
-
-                  {/* Focus Areas */}
-                  <div className="mb-4">
-                    <div className="flex flex-wrap gap-1 justify-center">
-                      {investor.focusAreas.slice(0, 3).map((area, index) => (
-                        <span
-                          key={index}
-                          className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs rounded-full"
-                        >
-                          {area}
-                        </span>
-                      ))}
-                      {investor.focusAreas.length > 3 && (
-                        <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
-                          +{investor.focusAreas.length - 3}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Looking For */}
-                  {viewMode === 'list' && (
-                    <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <p className="text-sm text-gray-700 dark:text-gray-300 italic">
-                        {investor.lookingFor}
-                      </p>
-                    </div>
-                  )}
-
-                  {/* Contact Buttons */}
-                  <div
-                    className={`${viewMode === 'list' ? 'flex' : 'grid grid-cols-2'} gap-2`}
-                  >
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="group-hover:bg-gray-900 group-hover:text-white transition-colors"
-                      disabled={!investor.available}
-                    >
-                      <Phone className="w-4 h-4 mr-2" />
-                      Позвонить
-                    </Button>
-                    <Button size="sm" disabled={!investor.available}>
-                      <Mail className="w-4 h-4 mr-2" />
-                      Написать
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-
-        {/* CTA Section */}
         <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 bg-gray-50 dark:bg-[#141414] mt-16">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
-            Ищете финансирование для проекта?
+            Хотите попасть в этот список?
           </h2>
           <p className="text-sm text-gray-500 mt-2 max-w-lg">
-            Создайте профиль проекта и привлеките внимание инвесторов к вашему
-            горнодобывающему предприятию
+            Зарегистрируйтесь как инвестор — продавцы лицензий и геологи смогут
+            находить вас по сфере интересов и регионам.
           </p>
-          <div className="flex gap-3 mt-6">
-            <Button>
-              <Plus className="w-4 h-4 mr-2" />
-              Создать профиль проекта
-            </Button>
-            <Button variant="outline">
-              <BarChart3 className="w-4 h-4 mr-2" />
-              Посмотреть статистику
-            </Button>
+          <div className="flex flex-wrap gap-3 mt-6">
+            <Link href={`/${locale}/auth/register`}>
+              <Button>
+                <Plus className="w-4 h-4 mr-2" />
+                Стать инвестором
+              </Button>
+            </Link>
+            <Link href={`/${locale}/listings`}>
+              <Button variant="outline">
+                <Briefcase className="w-4 h-4 mr-2" />
+                Смотреть проекты
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
+}
+
+function InvestorSkeleton() {
+  return (
+    <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] p-5 animate-pulse">
+      <div className="flex items-start gap-4">
+        <div className="w-14 h-14 rounded-full bg-gray-200 dark:bg-gray-700" />
+        <div className="flex-1 space-y-2">
+          <div className="h-4 w-2/3 bg-gray-200 dark:bg-gray-700 rounded" />
+          <div className="h-3 w-1/2 bg-gray-200 dark:bg-gray-700 rounded" />
+        </div>
+      </div>
+      <div className="mt-4 space-y-2">
+        <div className="h-3 w-full bg-gray-200 dark:bg-gray-700 rounded" />
+        <div className="h-3 w-5/6 bg-gray-200 dark:bg-gray-700 rounded" />
+        <div className="h-3 w-4/6 bg-gray-200 dark:bg-gray-700 rounded" />
+      </div>
+      <div className="mt-4 flex gap-2">
+        <div className="h-5 w-16 bg-gray-200 dark:bg-gray-700 rounded-full" />
+        <div className="h-5 w-20 bg-gray-200 dark:bg-gray-700 rounded-full" />
+      </div>
+    </div>
+  );
+}
+
+function InvestorCard({ investor }: { investor: Investor }) {
+  const location = [investor.city, investor.country].filter(Boolean).join(', ');
+
+  return (
+    <article className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] shadow-subtle hover:border-gray-300 hover:shadow-medium hover:-translate-y-0.5 transition-all duration-200 p-5">
+      <div className="flex items-start gap-4">
+        <div className="relative w-14 h-14 rounded-full bg-gray-100 dark:bg-gray-800 flex-shrink-0 overflow-hidden">
+          {investor.avatar_url ? (
+            <Image
+              src={investor.avatar_url}
+              alt={investor.full_name}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-400 font-semibold text-lg">
+              {investor.full_name.charAt(0).toUpperCase()}
+            </div>
+          )}
+          {investor.is_verified && (
+            <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-[#0A84FF] rounded-full flex items-center justify-center border-2 border-white dark:border-[#141414]">
+              <ShieldCheck className="w-3 h-3 text-white" />
+            </div>
+          )}
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50 truncate">
+            {investor.full_name}
+          </h3>
+          {investor.company_name && (
+            <p className="text-sm text-gray-500 truncate">
+              {investor.company_name}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {investor.description && (
+        <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+          {investor.description}
+        </p>
+      )}
+
+      <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-gray-400">
+        {location && (
+          <span className="flex items-center gap-1">
+            <MapPin className="w-3.5 h-3.5" />
+            {location}
+          </span>
+        )}
+        {investor.website && (
+          <a
+            href={investor.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-50"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Globe className="w-3.5 h-3.5" />
+            {new URL(investor.website).hostname.replace('www.', '')}
+          </a>
+        )}
+      </div>
+
+      {investor.service_types && investor.service_types.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {investor.service_types.slice(0, 4).map((tag) => (
+            <span
+              key={tag}
+              className="px-2 py-0.5 rounded-full text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </article>
+  );
+}
+
+function EmptyState({
+  locale,
+  hasFilters,
+}: {
+  locale: string;
+  hasFilters: boolean;
+}) {
+  return (
+    <div className="border border-dashed border-gray-200 dark:border-gray-700 rounded-xl p-10 text-center">
+      <Briefcase className="w-10 h-10 text-gray-300 dark:text-gray-600 mx-auto" />
+      <h3 className="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-50">
+        {hasFilters
+          ? 'По вашему запросу никого не найдено'
+          : 'Пока нет зарегистрированных инвесторов'}
+      </h3>
+      <p className="mt-2 text-sm text-gray-500 max-w-md mx-auto">
+        {hasFilters
+          ? 'Попробуйте смягчить фильтры или поиск.'
+          : 'Будьте первым в каталоге инвесторов QAZNEDR — продавцы лицензий смогут находить вас напрямую.'}
+      </p>
+      {!hasFilters && (
+        <div className="mt-6">
+          <Link href={`/${locale}/auth/register`}>
+            <Button>
+              <Plus className="w-4 h-4 mr-2" />
+              Стать инвестором
+            </Button>
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function pluralize(n: number, [one, few, many]: [string, string, string]) {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return one;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+  return many;
 }

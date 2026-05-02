@@ -49,12 +49,17 @@ export function useAuth() {
   }, [router, locale]);
 
   const register = useCallback(
-    async (email: string, password: string, name?: string) => {
+    async (
+      email: string,
+      password: string,
+      name?: string,
+      profileType?: 'subsoil_user' | 'service_provider' | 'investor'
+    ) => {
       try {
         const response = await fetch('/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, name }),
+          body: JSON.stringify({ email, password, name, profileType }),
         });
 
         const data = await response.json();
@@ -63,7 +68,6 @@ export function useAuth() {
           throw new Error(data.error || 'Registration failed');
         }
 
-        // Auto-login after registration
         await login(email, password);
         return { success: true };
       } catch (error) {

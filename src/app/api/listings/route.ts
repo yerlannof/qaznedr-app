@@ -9,6 +9,7 @@ import {
 import {
   listingQuerySchema,
   createListingSchema,
+  draftListingSchema,
   validateRequest,
 } from '@/lib/validations/api';
 import {
@@ -510,12 +511,16 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+    const isDraft = body?.draft === true;
 
     // Sanitize input to prevent XSS and injection attacks
     const sanitizedBody = sanitizeMiningInput(body);
 
-    // Validate request body with zod
-    const validation = validateRequest(sanitizedBody, createListingSchema);
+    // Validate request body with zod (relaxed schema for drafts)
+    const validation = validateRequest(
+      sanitizedBody,
+      isDraft ? draftListingSchema : createListingSchema
+    );
 
     if (!validation.success) {
       return NextResponse.json(
@@ -530,24 +535,32 @@ export async function POST(request: NextRequest) {
 
     const validatedData = validation.data;
 
-    // Determine listing status based on seller trust level
-    let listingStatus: 'ACTIVE' | 'PENDING_MODERATION' = 'PENDING_MODERATION';
-    const profile = await getProfile(user.id);
-    if (profile && (profile as any).is_trusted_seller === true) {
-      listingStatus = 'ACTIVE';
+    // Determine listing status based on seller trust level (drafts stay private)
+    let listingStatus: 'ACTIVE' | 'PENDING_MODERATION' | 'DRAFT' =
+      'PENDING_MODERATION';
+    if (isDraft) {
+      listingStatus = 'DRAFT';
+    } else {
+      const profile = await getProfile(user.id);
+      if (profile && (profile as any).is_trusted_seller === true) {
+        listingStatus = 'ACTIVE';
+      }
     }
 
     const insertData: Database['public']['Tables']['kazakhstan_deposits']['Insert'] =
       {
         title: validatedData.title,
-        description: validatedData.description,
-        type: validatedData.type,
-        mineral: validatedData.mineral,
-        region: validatedData.region,
-        city: validatedData.city,
-        area: validatedData.area,
+        description: validatedData.description ?? '',
+        type: (validatedData.type ?? 'MINING_LICENSE') as
+          | 'MINING_LICENSE'
+          | 'EXPLORATION_LICENSE'
+          | 'MINERAL_OCCURRENCE',
+        mineral: validatedData.mineral ?? '',
+        region: validatedData.region ?? '',
+        city: validatedData.city ?? '',
+        area: validatedData.area ?? 0,
         price: validatedData.price,
-        coordinates: validatedData.coordinates,
+        coordinates: validatedData.coordinates ?? { lat: 0, lng: 0 },
         images: validatedData.images,
         documents: validatedData.documents,
         verified: false, // Default requires verification
@@ -595,9 +608,9 @@ export async function POST(request: NextRequest) {
         userId: user.id,
       },
       {
-        listing_type: validatedData.type,
-        mineral: validatedData.mineral,
-        region: validatedData.region,
+        listing_type: validatedData.type ?? 'unknown',
+        mineral: validatedData.mineral ?? 'unknown',
+        region: validatedData.region ?? 'unknown',
         status: 'success',
       }
     );

@@ -7,6 +7,7 @@ import { Pencil, List, Shield, Eye, CheckCircle, XCircle } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import { Badge } from '@/components/ui/badge';
 import { useTranslation } from '@/hooks/useTranslation';
+import OnboardingTour from '@/components/features/OnboardingTour';
 
 interface Profile {
   profile_type?: string;
@@ -76,6 +77,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#0A0A0A]">
       <Navigation />
+      <OnboardingTour />
 
       <div className="pt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -95,6 +97,30 @@ export default function DashboardPage() {
               </div>
             )}
           </div>
+
+          {/* Investor quick link */}
+          {!loading && profile?.profile_type === 'investor' && (
+            <Link
+              href={`/${locale}/dashboard/investor`}
+              className="group flex items-center justify-between gap-4 mb-6 p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] hover:border-gray-900 dark:hover:border-gray-50 hover:shadow-medium transition-all"
+            >
+              <div>
+                <div className="text-xs font-medium uppercase tracking-wider text-[#0A84FF]">
+                  Кабинет инвестора
+                </div>
+                <div className="mt-1 text-base font-semibold text-gray-900 dark:text-gray-50">
+                  Watchlist, запросы и рекомендации
+                </div>
+                <p className="mt-1 text-sm text-gray-500">
+                  Сохранённые проекты и история отправленных запросов в одном
+                  месте.
+                </p>
+              </div>
+              <span className="text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-50 transition-colors text-2xl">
+                →
+              </span>
+            </Link>
+          )}
 
           {/* Profile completion */}
           <div className="border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#141414] p-6 mb-6">

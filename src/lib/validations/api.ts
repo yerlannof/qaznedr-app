@@ -94,6 +94,11 @@ export const createListingSchema = z.object({
   accessibilityRating: z.number().min(1).max(5).optional(),
 });
 
+// Draft listing schema — only title is required, everything else optional
+export const draftListingSchema = createListingSchema.partial().extend({
+  title: z.string().min(1, 'Title is required').max(200),
+});
+
 // Auth schemas
 export const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -109,6 +114,9 @@ export const registerSchema = z.object({
     .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
     .regex(/[0-9]/, 'Password must contain at least one number'),
   name: z.string().min(2, 'Name must be at least 2 characters').optional(),
+  profileType: z
+    .enum(['subsoil_user', 'service_provider', 'investor'])
+    .optional(),
 });
 
 // Alias for compatibility with tests

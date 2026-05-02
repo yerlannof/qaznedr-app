@@ -228,16 +228,20 @@ const StepIndicator = () => {
 
 const StepNavigation = ({
   onSubmit,
+  onSaveDraft,
   isLoading,
+  isSavingDraft,
 }: {
   onSubmit: () => void;
+  onSaveDraft: () => void;
   isLoading: boolean;
+  isSavingDraft: boolean;
 }) => {
   const { previousStep, nextStep, activeStep, isFirstStep, isLastStep } =
     useWizard();
 
   return (
-    <div className="flex justify-between items-center pt-8 border-t border-gray-200">
+    <div className="flex flex-wrap justify-between items-center gap-3 pt-8 border-t border-gray-200">
       <button
         type="button"
         onClick={previousStep}
@@ -252,27 +256,38 @@ const StepNavigation = ({
         <span>Назад</span>
       </button>
 
-      <div className="flex items-center space-x-2 text-sm text-gray-500">
-        <span>Шаг {activeStep + 1} из 4</span>
-      </div>
-
-      <button
-        type={isLastStep ? 'submit' : 'button'}
-        onClick={isLastStep ? onSubmit : nextStep}
-        disabled={isLoading}
-        className={`flex items-center space-x-2 px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-all ${
-          isLoading ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-      >
-        <span>
-          {isLastStep
-            ? isLoading
-              ? 'Создание...'
-              : 'Создать объявление'
-            : 'Далее'}
+      <div className="flex items-center gap-3">
+        <span className="hidden sm:inline text-sm text-gray-500">
+          Шаг {activeStep + 1} из 4
         </span>
-        {!isLastStep && <ArrowRight className="w-4 h-4" />}
-      </button>
+
+        <button
+          type="button"
+          onClick={onSaveDraft}
+          disabled={isSavingDraft || isLoading}
+          className="px-5 py-3 rounded-lg font-medium text-sm text-gray-700 border border-gray-300 hover:bg-gray-50 transition-colors disabled:opacity-50"
+        >
+          {isSavingDraft ? 'Сохранение...' : 'Сохранить черновик'}
+        </button>
+
+        <button
+          type={isLastStep ? 'submit' : 'button'}
+          onClick={isLastStep ? onSubmit : nextStep}
+          disabled={isLoading || isSavingDraft}
+          className={`flex items-center space-x-2 px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-all ${
+            isLoading ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
+        >
+          <span>
+            {isLastStep
+              ? isLoading
+                ? 'Создание...'
+                : 'Создать объявление'
+              : 'Далее'}
+          </span>
+          {!isLastStep && <ArrowRight className="w-4 h-4" />}
+        </button>
+      </div>
     </div>
   );
 };
@@ -819,6 +834,7 @@ export default function CreateListingWizard({
 }: CreateListingWizardProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [isSavingDraft, setIsSavingDraft] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const stepCount = 4;
 
@@ -929,7 +945,45 @@ export default function CreateListingWizard({
 
               <StepNavigation
                 onSubmit={methods.handleSubmit(onSubmit)}
+                onSaveDraft={async () => {
+                  const data = methods.getValues();
+                  if (!data.title || data.title.trim().length === 0) {
+                    alert('Укажите название, чтобы сохранить черновик');
+                    return;
+                  }
+                  setIsSavingDraft(true);
+                  try {
+                    const draftPayload: any = {
+                      draft: true,
+                      title: data.title,
+                      description: data.description || undefined,
+                      type: data.type || undefined,
+                      mineral: data.mineral || undefined,
+                      region: data.region || undefined,
+                      city: data.city || undefined,
+                      area: data.area || undefined,
+                      price: data.price || undefined,
+                      coordinates: data.coordinates,
+                      images: data.images || [],
+                    };
+                    const res = await fetch('/api/listings', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(draftPayload),
+                    });
+                    if (!res.ok) {
+                      const err = await res.json().catch(() => ({}));
+                      throw new Error(err?.error || 'Save failed');
+                    }
+                    router.push('/dashboard/my-listings?tab=drafts');
+                  } catch (err) {
+                    alert('Не удалось сохранить черновик. Попробуйте ещё раз.');
+                  } finally {
+                    setIsSavingDraft(false);
+                  }
+                }}
                 isLoading={isLoading}
+                isSavingDraft={isSavingDraft}
               />
             </WizardContext.Provider>
           </div>

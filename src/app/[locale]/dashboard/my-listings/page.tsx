@@ -1,12 +1,22 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { Suspense, useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
 import { Badge } from '@/components/ui/badge';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Plus, FileText, Eye, MapPin, Calendar } from 'lucide-react';
+
+type TabKey = 'all' | 'active' | 'pending' | 'drafts';
+
+const TABS: Array<{ key: TabKey; label: string; status?: string }> = [
+  { key: 'all', label: 'Все' },
+  { key: 'active', label: 'Активные', status: 'ACTIVE' },
+  { key: 'pending', label: 'На модерации', status: 'PENDING_MODERATION' },
+  { key: 'drafts', label: 'Черновики', status: 'DRAFT' },
+];
 
 interface Listing {
   id: string;
@@ -89,19 +99,53 @@ function SkeletonCard() {
 }
 
 export default function MyListingsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 dark:bg-[#0A0A0A]">
+          <Navigation />
+        </div>
+      }
+    >
+      <MyListingsContent />
+    </Suspense>
+  );
+}
+
+function MyListingsContent() {
   const { data: session, status: authStatus } = useSession();
   const { locale } = useTranslation();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [listings, setListings] = useState<Listing[]>([]);
   const [pagination, setPagination] = useState<PaginationInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
 
+  const tabParam = searchParams.get('tab') as TabKey | null;
+  const activeTab: TabKey =
+    tabParam && TABS.some((t) => t.key === tabParam) ? tabParam : 'all';
+
+  const setTab = (tab: TabKey) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (tab === 'all') params.delete('tab');
+    else params.set('tab', tab);
+    router.replace(`?${params.toString()}`);
+    setPage(1);
+  };
+
   const fetchListings = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`/api/my-listings?page=${page}&limit=10`);
+      const tabConfig = TABS.find((t) => t.key === activeTab);
+      const statusParam = tabConfig?.status
+        ? `&status=${tabConfig.status}`
+        : '';
+      const res = await fetch(
+        `/api/my-listings?page=${page}&limit=10${statusParam}`
+      );
       if (!res.ok) {
         if (res.status === 401) {
           setError('Необходима авторизация');
@@ -123,7 +167,7 @@ export default function MyListingsPage() {
     } finally {
       setLoading(false);
     }
-  }, [page]);
+  }, [page, activeTab]);
 
   useEffect(() => {
     if (session) {
@@ -181,7 +225,7 @@ export default function MyListingsPage() {
       <div className="pt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
               Мои объявления
             </h1>
@@ -192,6 +236,30 @@ export default function MyListingsPage() {
               <Plus className="w-4 h-4" />
               Создать объявление
             </Link>
+          </div>
+
+          {/* Tabs */}
+          <div className="flex items-center gap-1 mb-8 border-b border-gray-200 dark:border-gray-700 -mx-4 px-4 overflow-x-auto">
+            {TABS.map((tab) => {
+              const isActive = activeTab === tab.key;
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => setTab(tab.key)}
+                  className={`relative px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors ${
+                    isActive
+                      ? 'text-gray-900 dark:text-gray-50'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50'
+                  }`}
+                >
+                  {tab.label}
+                  {isActive && (
+                    <span className="absolute -bottom-px left-0 right-0 h-0.5 bg-gray-900 dark:bg-gray-50" />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
           {/* Error state */}

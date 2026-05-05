@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient, createServiceClient } from '@/lib/supabase/server';
+import { createServiceClient } from '@/lib/supabase/server';
+import { requireAdmin, forbidden } from '@/lib/auth/admin';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,19 +13,8 @@ export async function POST(
   try {
     const { id } = await params;
 
-    // Check that a session exists (basic admin check)
-    const supabase = await createClient();
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser();
-
-    if (authError || !user) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    const admin = await requireAdmin();
+    if (!admin) return forbidden();
 
     const body = await request.json();
     const { action } = body;

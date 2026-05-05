@@ -55,12 +55,20 @@ export async function POST(request: Request) {
     if (profileType) {
       try {
         const supabase = await createServiceClient();
+
+        // First registered user becomes super_admin (platform owner bootstrap)
+        const { count } = await (supabase as any)
+          .from('profiles')
+          .select('id', { count: 'exact', head: true });
+        const isFirstUser = count === 0;
+
         await (supabase as any).from('profiles').upsert(
           {
             id: user.id,
             full_name: name || email.split('@')[0],
             email,
             profile_type: profileType,
+            role: isFirstUser ? 'super_admin' : 'user',
           },
           { onConflict: 'id' }
         );

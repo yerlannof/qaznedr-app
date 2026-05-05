@@ -1,420 +1,240 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
-import { Card } from '@/components/ui/card';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Navigation from '@/components/layouts/Navigation';
+import { useTranslation } from '@/hooks/useTranslation';
 import {
-  BarChart3,
-  Users,
+  ShieldCheck,
   FileText,
-  DollarSign,
-  AlertTriangle,
+  Users,
+  Crown,
+  Plus,
   TrendingUp,
-  Activity,
-  Shield,
-  Settings,
-  Database,
+  Clock,
 } from 'lucide-react';
 
-interface DashboardStats {
-  totalUsers: number;
+type Role = 'user' | 'admin' | 'super_admin';
+
+interface Stats {
+  pendingListings: number;
   activeListings: number;
-  totalTransactions: number;
-  revenue: number;
-  pendingVerifications: number;
-  reportedListings: number;
-  newUsersToday: number;
-  transactionsToday: number;
+  totalListings: number;
+  totalUsers: number;
+  adminCount: number;
 }
 
-export default function AdminDashboard() {
-  const [stats, setStats] = useState<DashboardStats>({
-    totalUsers: 0,
-    activeListings: 0,
-    totalTransactions: 0,
-    revenue: 0,
-    pendingVerifications: 0,
-    reportedListings: 0,
-    newUsersToday: 0,
-    transactionsToday: 0,
-  });
-  const [loading, setLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const router = useRouter();
-  const supabase = createClient();
+export default function AdminHome() {
+  const { locale } = useTranslation();
+  const [stats, setStats] = useState<Stats | null>(null);
+  const [role, setRole] = useState<Role | null>(null);
+  const [forbidden, setForbidden] = useState(false);
 
   useEffect(() => {
-    checkAdminAccess();
-    loadDashboardStats();
+    fetch('/api/admin/stats')
+      .then(async (res) => {
+        if (res.status === 403 || res.status === 401) {
+          setForbidden(true);
+          return null;
+        }
+        return res.json();
+      })
+      .then((json) => {
+        if (!json) return;
+        if (json.success) {
+          setStats(json.data);
+          setRole(json.role);
+        }
+      })
+      .catch(() => {});
   }, []);
 
-  const checkAdminAccess = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-
-    // Check if user is admin
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', user.id)
-      .single();
-
-    if ((profile as any)?.role !== 'admin') {
-      router.push('/');
-      return;
-    }
-
-    setIsAdmin(true);
-  };
-
-  const loadDashboardStats = async () => {
-    try {
-      setLoading(true);
-
-      // Fetch all stats in parallel
-      const [
-        users,
-        listings,
-        transactions,
-        pendingVerifications,
-        reportedListings,
-        newUsersToday,
-        transactionsToday,
-      ] = await Promise.all([
-        supabase.from('profiles').select('id', { count: 'exact' }),
-        supabase
-          .from('kazakhstan_deposits')
-          .select('id', { count: 'exact' })
-          .eq('status', 'ACTIVE'),
-        supabase.from('transactions').select('id, amount', { count: 'exact' }),
-        supabase
-          .from('verification_requests')
-          .select('id', { count: 'exact' })
-          .eq('status', 'pending'),
-        supabase
-          .from('reported_listings')
-          .select('id', { count: 'exact' })
-          .eq('status', 'pending'),
-        supabase
-          .from('profiles')
-          .select('id', { count: 'exact' })
-          .gte(
-            'created_at',
-            new Date(new Date().setHours(0, 0, 0, 0)).toISOString()
-          ),
-        supabase
-          .from('transactions')
-          .select('id', { count: 'exact' })
-          .gte(
-            'created_at',
-            new Date(new Date().setHours(0, 0, 0, 0)).toISOString()
-          ),
-      ]);
-
-      // Calculate total revenue
-      const totalRevenue =
-        transactions.data?.reduce(
-          (sum: number, t: any) => sum + (t.platform_fee || 0),
-          0
-        ) || 0;
-
-      setStats({
-        totalUsers: users.count || 0,
-        activeListings: listings.count || 0,
-        totalTransactions: transactions.count || 0,
-        revenue: totalRevenue,
-        pendingVerifications: pendingVerifications.count || 0,
-        reportedListings: reportedListings.count || 0,
-        newUsersToday: newUsersToday.count || 0,
-        transactionsToday: transactionsToday.count || 0,
-      });
-    } catch (error) {
-      // Error loading dashboard stats
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (!isAdmin) {
+  if (forbidden) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <Shield className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-          <p className="text-gray-600">Checking admin access...</p>
+      <div className="min-h-screen bg-gray-50 dark:bg-[#0A0A0A]">
+        <Navigation />
+        <div className="pt-32 text-center px-4">
+          <ShieldCheck className="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-4" />
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+            Доступ запрещён
+          </h1>
+          <p className="text-sm text-gray-500 mt-2">
+            У вас нет прав администратора.
+          </p>
+          <Link
+            href={`/${locale}`}
+            className="inline-block mt-6 px-5 py-2 bg-gray-900 dark:bg-gray-50 text-white dark:text-gray-900 rounded-lg text-sm font-medium"
+          >
+            На главную
+          </Link>
         </div>
       </div>
     );
   }
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Activity className="w-8 h-8 animate-spin text-gray-400" />
-      </div>
-    );
-  }
+  const isSuperAdmin = role === 'super_admin';
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-        <p className="text-gray-600 mt-2">Platform overview and management</p>
-      </div>
-
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card className="p-6">
-          <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#0A0A0A]">
+      <Navigation />
+      <div className="pt-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex items-center justify-between mb-8">
             <div>
-              <p className="text-sm text-gray-600">Total Users</p>
-              <p className="text-2xl font-bold mt-1">
-                {stats.totalUsers.toLocaleString()}
-              </p>
-              <p className="text-sm text-green-600 mt-2">
-                +{stats.newUsersToday} today
-              </p>
-            </div>
-            <Users className="w-10 h-10 text-gray-400" />
-          </div>
-        </Card>
-
-        <Card className="p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600">Active Listings</p>
-              <p className="text-2xl font-bold mt-1">
-                {stats.activeListings.toLocaleString()}
-              </p>
-              <p className="text-sm text-gray-500 mt-2">Available now</p>
-            </div>
-            <FileText className="w-10 h-10 text-gray-400" />
-          </div>
-        </Card>
-
-        <Card className="p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600">Revenue</p>
-              <p className="text-2xl font-bold mt-1">
-                ₸{stats.revenue.toLocaleString()}
-              </p>
-              <p className="text-sm text-green-600 mt-2">
-                {stats.transactionsToday} sales today
-              </p>
-            </div>
-            <DollarSign className="w-10 h-10 text-gray-400" />
-          </div>
-        </Card>
-
-        <Card className="p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600">Pending Actions</p>
-              <p className="text-2xl font-bold mt-1">
-                {(
-                  stats.pendingVerifications + stats.reportedListings
-                ).toLocaleString()}
-              </p>
-              <p className="text-sm text-gray-500 mt-2">Requires attention</p>
-            </div>
-            <AlertTriangle className="w-10 h-10 text-gray-400" />
-          </div>
-        </Card>
-      </div>
-
-      {/* Management Sections */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Quick Actions */}
-        <Card className="p-6 lg:col-span-2">
-          <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <button
-              onClick={() => router.push('/admin/users')}
-              className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
-            >
-              <Users className="w-6 h-6 text-gray-400 mb-2" />
-              <p className="font-medium">Manage Users</p>
-              <p className="text-sm text-gray-600">
-                View and manage user accounts
-              </p>
-            </button>
-
-            <button
-              onClick={() => router.push('/admin/listings')}
-              className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
-            >
-              <FileText className="w-6 h-6 text-gray-400 mb-2" />
-              <p className="font-medium">Manage Listings</p>
-              <p className="text-sm text-gray-600">
-                Review and moderate listings
-              </p>
-            </button>
-
-            <button
-              onClick={() => router.push('/admin/verifications')}
-              className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
-            >
-              <Shield className="w-6 h-6 text-gray-400 mb-2" />
-              <p className="font-medium">Verifications</p>
-              <p className="text-sm text-gray-600">
-                {stats.pendingVerifications} pending
-              </p>
-            </button>
-
-            <button
-              onClick={() => router.push('/admin/reports')}
-              className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
-            >
-              <AlertTriangle className="w-6 h-6 text-gray-400 mb-2" />
-              <p className="font-medium">Reports</p>
-              <p className="text-sm text-gray-600">
-                {stats.reportedListings} to review
-              </p>
-            </button>
-
-            <button
-              onClick={() => router.push('/admin/analytics')}
-              className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
-            >
-              <BarChart3 className="w-6 h-6 text-gray-400 mb-2" />
-              <p className="font-medium">Analytics</p>
-              <p className="text-sm text-gray-600">View detailed statistics</p>
-            </button>
-
-            <button
-              onClick={() => router.push('/admin/settings')}
-              className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors text-left"
-            >
-              <Settings className="w-6 h-6 text-gray-500 mb-2" />
-              <p className="font-medium">Settings</p>
-              <p className="text-sm text-gray-600">Platform configuration</p>
-            </button>
-          </div>
-        </Card>
-
-        {/* Recent Activity */}
-        <Card className="p-6">
-          <h2 className="text-lg font-semibold mb-4">System Health</h2>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                <span className="text-sm">Database</span>
-              </div>
-              <span className="text-sm text-green-600">Operational</span>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                <span className="text-sm">API</span>
-              </div>
-              <span className="text-sm text-green-600">Operational</span>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                <span className="text-sm">Payments</span>
-              </div>
-              <span className="text-sm text-green-600">Operational</span>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
-                <span className="text-sm">CDN</span>
-              </div>
-              <span className="text-sm text-yellow-600">High traffic</span>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                <span className="text-sm">WebSocket</span>
-              </div>
-              <span className="text-sm text-green-600">Connected</span>
-            </div>
-          </div>
-
-          <div className="mt-6 pt-6 border-t">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-gray-600">Database Usage</span>
-              <span className="text-sm font-medium">42%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div
-                className="bg-gray-500 h-2 rounded-full"
-                style={{ width: '42%' }}
-              ></div>
-            </div>
-          </div>
-
-          <div className="mt-4">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-gray-600">Storage Usage</span>
-              <span className="text-sm font-medium">68%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div
-                className="bg-yellow-500 h-2 rounded-full"
-                style={{ width: '68%' }}
-              ></div>
-            </div>
-          </div>
-        </Card>
-      </div>
-
-      {/* Recent Transactions Table */}
-      <Card className="p-6 mt-6">
-        <h2 className="text-lg font-semibold mb-4">Recent Transactions</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b">
-                <th className="text-left pb-3 text-sm font-medium text-gray-600">
-                  Transaction ID
-                </th>
-                <th className="text-left pb-3 text-sm font-medium text-gray-600">
-                  Listing
-                </th>
-                <th className="text-left pb-3 text-sm font-medium text-gray-600">
-                  Amount
-                </th>
-                <th className="text-left pb-3 text-sm font-medium text-gray-600">
-                  Status
-                </th>
-                <th className="text-left pb-3 text-sm font-medium text-gray-600">
-                  Date
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* Sample data - would be fetched from database */}
-              <tr className="border-b">
-                <td className="py-3 text-sm">#TXN-001</td>
-                <td className="py-3 text-sm">Gold Mining License - Aktobe</td>
-                <td className="py-3 text-sm">₸15,000,000</td>
-                <td className="py-3">
-                  <span className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded-full">
-                    Completed
+              <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
+                Админ-панель
+              </h1>
+              <div className="mt-2">
+                {role && (
+                  <span
+                    className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${
+                      isSuperAdmin
+                        ? 'bg-purple-100 dark:bg-purple-900/20 text-purple-700 dark:text-purple-400'
+                        : 'bg-[#0A84FF]/10 text-[#0A84FF]'
+                    }`}
+                  >
+                    {isSuperAdmin ? (
+                      <Crown className="w-3 h-3" />
+                    ) : (
+                      <ShieldCheck className="w-3 h-3" />
+                    )}
+                    {isSuperAdmin ? 'Super Admin' : 'Admin'}
                   </span>
-                </td>
-                <td className="py-3 text-sm text-gray-600">2 hours ago</td>
-              </tr>
-              {/* Add more rows as needed */}
-            </tbody>
-          </table>
+                )}
+              </div>
+            </div>
+            <Link
+              href={`/${locale}/admin/listings/new`}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-gray-50 text-white dark:text-gray-900 rounded-lg font-medium text-sm hover:bg-gray-800 dark:hover:bg-gray-200"
+            >
+              <Plus className="w-4 h-4" />
+              Создать объявление
+            </Link>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+            <StatCard
+              label="На модерации"
+              value={stats?.pendingListings}
+              icon={Clock}
+              accent
+            />
+            <StatCard
+              label="Опубликовано"
+              value={stats?.activeListings}
+              icon={TrendingUp}
+            />
+            <StatCard
+              label="Всего объявлений"
+              value={stats?.totalListings}
+              icon={FileText}
+            />
+            <StatCard
+              label="Пользователей"
+              value={stats?.totalUsers}
+              icon={Users}
+            />
+          </div>
+
+          {/* Sections */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <SectionTile
+              href={`/${locale}/admin/listings`}
+              title="Объявления"
+              description="Модерация, редактирование, удаление, featured / verified"
+              icon={FileText}
+              badge={
+                stats?.pendingListings
+                  ? `${stats.pendingListings} на проверке`
+                  : undefined
+              }
+            />
+
+            <SectionTile
+              href={`/${locale}/admin/users`}
+              title="Пользователи"
+              description={
+                isSuperAdmin
+                  ? 'Управление ролями (admin / super_admin) и верификацией'
+                  : 'Просмотр и верификация'
+              }
+              icon={Users}
+              badge={isSuperAdmin ? 'Super Admin only' : undefined}
+            />
+          </div>
         </div>
-      </Card>
+      </div>
     </div>
+  );
+}
+
+function StatCard({
+  label,
+  value,
+  icon: Icon,
+  accent,
+}: {
+  label: string;
+  value: number | undefined;
+  icon: any;
+  accent?: boolean;
+}) {
+  return (
+    <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] p-4">
+      <div className="flex items-center gap-2">
+        <div
+          className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+            accent
+              ? 'bg-amber-100 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400'
+              : 'bg-[#0A84FF]/10 text-[#0A84FF]'
+          }`}
+        >
+          <Icon className="w-4 h-4" />
+        </div>
+      </div>
+      <div className="mt-3 text-2xl font-semibold text-gray-900 dark:text-gray-50">
+        {value ?? '—'}
+      </div>
+      <div className="text-xs text-gray-500 mt-0.5">{label}</div>
+    </div>
+  );
+}
+
+function SectionTile({
+  href,
+  title,
+  description,
+  icon: Icon,
+  badge,
+}: {
+  href: string;
+  title: string;
+  description: string;
+  icon: any;
+  badge?: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group flex items-start gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] hover:border-gray-900 dark:hover:border-gray-50 hover:shadow-medium transition-all"
+    >
+      <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 group-hover:bg-gray-900 dark:group-hover:bg-gray-50 group-hover:text-white dark:group-hover:text-gray-900 transition-colors shrink-0">
+        <Icon className="w-5 h-5" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50">
+            {title}
+          </h3>
+          {badge && (
+            <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400">
+              {badge}
+            </span>
+          )}
+        </div>
+        <p className="text-sm text-gray-500 mt-1">{description}</p>
+      </div>
+    </Link>
   );
 }

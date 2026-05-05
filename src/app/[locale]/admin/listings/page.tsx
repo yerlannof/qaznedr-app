@@ -1,20 +1,34 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
+import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
+import { useTranslation } from '@/hooks/useTranslation';
 import {
   Shield,
   FileText,
   Clock,
   CheckCircle,
   XCircle,
-  ArrowLeft,
   Loader2,
+  Pencil,
+  Trash2,
+  Star,
+  EyeOff,
+  RotateCcw,
+  Plus,
+  Tag,
 } from 'lucide-react';
 
-type TabStatus = 'PENDING_MODERATION' | 'ACTIVE' | 'REJECTED';
+type StatusTab =
+  | 'ALL'
+  | 'PENDING_MODERATION'
+  | 'ACTIVE'
+  | 'REJECTED'
+  | 'SOLD'
+  | 'DRAFT'
+  | 'DELETED';
 
 interface Listing {
   id: string;
@@ -23,95 +37,81 @@ interface Listing {
   type: string;
   mineral: string;
   region: string;
+  price: number | null;
+  area: number | null;
   status: string;
+  verified: boolean;
+  featured: boolean;
+  views: number;
   created_at: string;
   user_id: string;
   owner_name: string;
 }
 
-const TABS: { label: string; status: TabStatus }[] = [
-  { label: 'На проверке', status: 'PENDING_MODERATION' },
-  { label: 'Опубликованные', status: 'ACTIVE' },
-  { label: 'Отклонённые', status: 'REJECTED' },
+const TABS: Array<{ key: StatusTab; label: string }> = [
+  { key: 'ALL', label: 'Все' },
+  { key: 'PENDING_MODERATION', label: 'На проверке' },
+  { key: 'ACTIVE', label: 'Опубликованные' },
+  { key: 'REJECTED', label: 'Отклонённые' },
+  { key: 'SOLD', label: 'Проданные' },
+  { key: 'DRAFT', label: 'Черновики' },
+  { key: 'DELETED', label: 'Удалённые' },
 ];
 
 const TYPE_LABELS: Record<string, string> = {
-  MINING_LICENSE: 'Горнодобывающая лицензия',
-  EXPLORATION_LICENSE: 'Разведочная лицензия',
-  MINERAL_OCCURRENCE: 'Месторождение',
+  MINING_LICENSE: 'Добыча',
+  EXPLORATION_LICENSE: 'Разведка',
+  MINERAL_OCCURRENCE: 'Проявление',
 };
 
-function truncate(text: string, maxLength: number): string {
-  if (!text) return '';
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength) + '...';
-}
+const STATUS_LABELS: Record<string, string> = {
+  PENDING_MODERATION: 'На проверке',
+  ACTIVE: 'Опубликовано',
+  REJECTED: 'Отклонено',
+  SOLD: 'Продано',
+  DRAFT: 'Черновик',
+  DELETED: 'Удалено',
+  EXPIRED: 'Истёк срок',
+  PENDING: 'Ожидает',
+};
 
-function formatDate(dateString: string): string {
-  if (!dateString) return '';
+function formatDate(s: string) {
+  if (!s) return '';
   try {
-    return new Date(dateString).toLocaleDateString('ru-RU', {
+    return new Date(s).toLocaleDateString('ru-RU', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
     });
   } catch {
-    return dateString;
+    return s;
   }
 }
 
-export default function AdminListingsModeration() {
-  const [activeTab, setActiveTab] = useState<TabStatus>('PENDING_MODERATION');
+function truncate(t: string, n: number) {
+  if (!t) return '';
+  return t.length <= n ? t : t.slice(0, n) + '…';
+}
+
+export default function AdminListingsPage() {
+  const router = useRouter();
+  const { locale } = useTranslation();
+  const [activeTab, setActiveTab] = useState<StatusTab>('PENDING_MODERATION');
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [moderatingId, setModeratingId] = useState<string | null>(null);
-  const router = useRouter();
-  const supabase = createClient();
+  const [forbidden, setForbidden] = useState(false);
+  const [busyId, setBusyId] = useState<string | null>(null);
 
-  useEffect(() => {
-    checkAdminAccess();
-  }, []);
-
-  const checkAdminAccess = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', user.id)
-      .single();
-
-    if ((profile as any)?.role !== 'admin') {
-      router.push('/');
-      return;
-    }
-
-    setIsAdmin(true);
-  };
-
-  const fetchListings = useCallback(async (status: TabStatus) => {
+  const fetchListings = useCallback(async (status: StatusTab) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `/api/admin/listings?status=${encodeURIComponent(status)}`
-      );
-      const result = await response.json();
-
-      if (result.success) {
-        setListings(result.data || []);
-      } else {
-        setListings([]);
+      const res = await fetch(`/api/admin/listings?status=${status}`);
+      if (res.status === 403 || res.status === 401) {
+        setForbidden(true);
+        return;
       }
+      const json = await res.json();
+      setListings(json.success ? json.data || [] : []);
     } catch {
       setListings([]);
     } finally {
@@ -120,229 +120,378 @@ export default function AdminListingsModeration() {
   }, []);
 
   useEffect(() => {
-    if (isAdmin) {
-      fetchListings(activeTab);
-    }
-  }, [isAdmin, activeTab, fetchListings]);
+    fetchListings(activeTab);
+  }, [activeTab, fetchListings]);
 
-  const handleModerate = async (
-    listingId: string,
-    action: 'approve' | 'reject'
-  ) => {
-    setModeratingId(listingId);
+  const moderate = async (id: string, action: 'approve' | 'reject') => {
+    setBusyId(id);
     try {
-      const response = await fetch(
-        `/api/admin/listings/${listingId}/moderate`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action }),
-        }
-      );
-
-      const result = await response.json();
-
-      if (result.success) {
-        // Remove the listing from the current view
-        setListings((prev) => prev.filter((l) => l.id !== listingId));
+      const res = await fetch(`/api/admin/listings/${id}/moderate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action }),
+      });
+      if (res.ok) {
+        setListings((prev) => prev.filter((l) => l.id !== id));
       }
-    } catch {
-      // Silently handle error - listing stays in the list
     } finally {
-      setModeratingId(null);
+      setBusyId(null);
     }
   };
 
-  if (!isAdmin) {
+  const patchListing = async (id: string, patch: Record<string, any>) => {
+    setBusyId(id);
+    try {
+      const res = await fetch(`/api/admin/listings/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(patch),
+      });
+      if (res.ok) {
+        const json = await res.json();
+        if (patch.status && patch.status !== activeTab && activeTab !== 'ALL') {
+          setListings((prev) => prev.filter((l) => l.id !== id));
+        } else {
+          setListings((prev) =>
+            prev.map((l) => (l.id === id ? { ...l, ...json.data } : l))
+          );
+        }
+      }
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  const deleteListing = async (id: string) => {
+    if (
+      !confirm('Удалить объявление? Будет soft-delete (можно восстановить).')
+    ) {
+      return;
+    }
+    setBusyId(id);
+    try {
+      const res = await fetch(`/api/admin/listings/${id}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        setListings((prev) => prev.filter((l) => l.id !== id));
+      }
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  if (forbidden) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
-          <Shield className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-          <p className="text-gray-600 dark:text-gray-400">
-            Проверка доступа администратора...
-          </p>
+      <div className="min-h-screen bg-gray-50 dark:bg-[#0A0A0A]">
+        <Navigation />
+        <div className="pt-32 flex items-center justify-center">
+          <div className="text-center">
+            <Shield className="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-4" />
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+              Доступ запрещён
+            </h1>
+            <p className="text-sm text-gray-500 mt-2">
+              У вашей учётной записи нет роли администратора.
+            </p>
+            <button
+              onClick={() => router.push(`/${locale}`)}
+              className="mt-6 px-5 py-2 bg-gray-900 dark:bg-gray-50 text-white dark:text-gray-900 rounded-lg text-sm font-medium"
+            >
+              На главную
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#0A0A0A]">
       <Navigation />
 
-      <div className="pt-20 pb-10 px-4 max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <button
-            onClick={() => router.back()}
-            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 mb-4 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-sm">Назад</span>
-          </button>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Модерация объявлений
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Просмотр и управление объявлениями платформы
-          </p>
-        </div>
-
-        {/* Tab Bar */}
-        <div className="flex border-b border-gray-200 dark:border-gray-700 mb-6">
-          {TABS.map((tab) => (
-            <button
-              key={tab.status}
-              onClick={() => setActiveTab(tab.status)}
-              className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === tab.status
-                  ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
-                  : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
-              }`}
+      <div className="pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
+                Модерация объявлений
+              </h1>
+              <p className="mt-1 text-sm text-gray-500">
+                Полный доступ: одобрение, редактирование, статусы, удаление.
+              </p>
+            </div>
+            <Link
+              href={`/${locale}/admin/listings/new`}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-gray-50 text-white dark:text-gray-900 rounded-lg font-medium text-sm hover:bg-gray-800 dark:hover:bg-gray-200"
             >
-              {tab.label}
-            </button>
-          ))}
+              <Plus className="w-4 h-4" />
+              Создать объявление
+            </Link>
+          </div>
+
+          {/* Tabs */}
+          <div className="flex items-center gap-1 mb-6 border-b border-gray-200 dark:border-gray-700 -mx-4 px-4 overflow-x-auto">
+            {TABS.map((tab) => {
+              const isActive = activeTab === tab.key;
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`relative px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors ${
+                    isActive
+                      ? 'text-gray-900 dark:text-gray-50'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50'
+                  }`}
+                >
+                  {tab.label}
+                  {isActive && (
+                    <span className="absolute -bottom-px left-0 right-0 h-0.5 bg-gray-900 dark:bg-gray-50" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Content */}
+          {loading ? (
+            <div className="space-y-3">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="h-28 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] animate-pulse"
+                />
+              ))}
+            </div>
+          ) : listings.length === 0 ? (
+            <div className="border border-dashed border-gray-200 dark:border-gray-700 rounded-xl p-12 text-center">
+              <FileText className="w-10 h-10 mx-auto text-gray-300 dark:text-gray-600 mb-3" />
+              <p className="text-sm text-gray-500">
+                Нет объявлений в этой категории
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {listings.map((listing) => {
+                const isBusy = busyId === listing.id;
+                return (
+                  <div
+                    key={listing.id}
+                    className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] p-5"
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center flex-wrap gap-2">
+                          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50">
+                            {listing.title}
+                          </h3>
+                          <StatusPill status={listing.status} />
+                          {listing.featured && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#0A84FF]/10 text-[#0A84FF]">
+                              <Star className="w-3 h-3" />
+                              Featured
+                            </span>
+                          )}
+                          {listing.verified && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400">
+                              <Shield className="w-3 h-3" />
+                              Verified
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-gray-500">
+                          <span className="inline-flex items-center gap-1">
+                            <Tag className="w-3 h-3" />
+                            {TYPE_LABELS[listing.type] || listing.type}
+                          </span>
+                          <span>{listing.mineral}</span>
+                          <span>{listing.region}</span>
+                          {listing.area != null && (
+                            <span>
+                              {Number(listing.area).toLocaleString()} км²
+                            </span>
+                          )}
+                          <span>{listing.views ?? 0} просмотров</span>
+                        </div>
+
+                        {listing.description && (
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                            {truncate(listing.description, 200)}
+                          </p>
+                        )}
+
+                        <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-gray-400">
+                          <span className="inline-flex items-center gap-1">
+                            <Shield className="w-3 h-3" />
+                            {listing.owner_name}
+                          </span>
+                          <span className="inline-flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {formatDate(listing.created_at)}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex flex-wrap items-center gap-2 shrink-0">
+                        {listing.status === 'PENDING_MODERATION' && (
+                          <>
+                            <ActionButton
+                              onClick={() => moderate(listing.id, 'approve')}
+                              busy={isBusy}
+                              variant="primary"
+                              icon={<CheckCircle className="w-4 h-4" />}
+                              label="Одобрить"
+                            />
+                            <ActionButton
+                              onClick={() => moderate(listing.id, 'reject')}
+                              busy={isBusy}
+                              variant="danger"
+                              icon={<XCircle className="w-4 h-4" />}
+                              label="Отклонить"
+                            />
+                          </>
+                        )}
+
+                        {listing.status === 'ACTIVE' && (
+                          <>
+                            <ActionButton
+                              onClick={() =>
+                                patchListing(listing.id, { status: 'SOLD' })
+                              }
+                              busy={isBusy}
+                              variant="ghost"
+                              icon={<CheckCircle className="w-4 h-4" />}
+                              label="Sold"
+                            />
+                            <ActionButton
+                              onClick={() =>
+                                patchListing(listing.id, {
+                                  status: 'PENDING_MODERATION',
+                                })
+                              }
+                              busy={isBusy}
+                              variant="ghost"
+                              icon={<EyeOff className="w-4 h-4" />}
+                              label="Снять"
+                            />
+                          </>
+                        )}
+
+                        {(listing.status === 'REJECTED' ||
+                          listing.status === 'DELETED') && (
+                          <ActionButton
+                            onClick={() =>
+                              patchListing(listing.id, { status: 'ACTIVE' })
+                            }
+                            busy={isBusy}
+                            variant="ghost"
+                            icon={<RotateCcw className="w-4 h-4" />}
+                            label="Восстановить"
+                          />
+                        )}
+
+                        {listing.status !== 'DELETED' && (
+                          <>
+                            <ActionButton
+                              onClick={() =>
+                                patchListing(listing.id, {
+                                  featured: !listing.featured,
+                                })
+                              }
+                              busy={isBusy}
+                              variant="ghost"
+                              icon={<Star className="w-4 h-4" />}
+                              label={listing.featured ? 'Unfeature' : 'Feature'}
+                            />
+                            <Link
+                              href={`/${locale}/admin/listings/${listing.id}/edit`}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
+                            >
+                              <Pencil className="w-4 h-4" />
+                              Редактировать
+                            </Link>
+                            <ActionButton
+                              onClick={() => deleteListing(listing.id)}
+                              busy={isBusy}
+                              variant="danger-ghost"
+                              icon={<Trash2 className="w-4 h-4" />}
+                              label="Удалить"
+                            />
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
-
-        {/* Content */}
-        {loading ? (
-          <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 animate-pulse"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-3" />
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2" />
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
-                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/5 mt-3" />
-                  </div>
-                  <div className="flex gap-2 ml-4">
-                    <div className="h-9 w-24 bg-gray-200 dark:bg-gray-700 rounded" />
-                    <div className="h-9 w-24 bg-gray-200 dark:bg-gray-700 rounded" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : listings.length === 0 ? (
-          <div className="text-center py-16">
-            <FileText className="w-16 h-16 mx-auto text-gray-300 dark:text-gray-600 mb-4" />
-            <p className="text-gray-500 dark:text-gray-400 text-lg">
-              {activeTab === 'PENDING_MODERATION'
-                ? 'Нет объявлений на проверке'
-                : activeTab === 'ACTIVE'
-                  ? 'Нет опубликованных объявлений'
-                  : 'Нет отклонённых объявлений'}
-            </p>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {listings.map((listing) => (
-              <div
-                key={listing.id}
-                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 transition-all hover:shadow-md"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    {/* Title */}
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
-                      {listing.title}
-                    </h3>
-
-                    {/* Metadata row */}
-                    <div className="flex flex-wrap items-center gap-3 mt-2">
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-                        {TYPE_LABELS[listing.type] || listing.type}
-                      </span>
-                      {listing.mineral && (
-                        <span className="text-sm text-gray-600 dark:text-gray-400">
-                          {listing.mineral}
-                        </span>
-                      )}
-                      {listing.region && (
-                        <span className="text-sm text-gray-500 dark:text-gray-500">
-                          {listing.region}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Description */}
-                    {listing.description && (
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                        {truncate(listing.description, 200)}
-                      </p>
-                    )}
-
-                    {/* Footer info */}
-                    <div className="flex flex-wrap items-center gap-4 mt-3 text-xs text-gray-500 dark:text-gray-500">
-                      <span className="flex items-center gap-1">
-                        <Shield className="w-3.5 h-3.5" />
-                        {listing.owner_name}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5" />
-                        {formatDate(listing.created_at)}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Action buttons for pending listings */}
-                  {activeTab === 'PENDING_MODERATION' && (
-                    <div className="flex flex-shrink-0 gap-2">
-                      <button
-                        onClick={() => handleModerate(listing.id, 'approve')}
-                        disabled={moderatingId === listing.id}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                      >
-                        {moderatingId === listing.id ? (
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                        ) : (
-                          <CheckCircle className="w-4 h-4" />
-                        )}
-                        Одобрить
-                      </button>
-                      <button
-                        onClick={() => handleModerate(listing.id, 'reject')}
-                        disabled={moderatingId === listing.id}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                      >
-                        {moderatingId === listing.id ? (
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                        ) : (
-                          <XCircle className="w-4 h-4" />
-                        )}
-                        Отклонить
-                      </button>
-                    </div>
-                  )}
-
-                  {/* Status badge for non-pending tabs */}
-                  {activeTab !== 'PENDING_MODERATION' && (
-                    <div className="flex-shrink-0">
-                      {listing.status === 'ACTIVE' && (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
-                          <CheckCircle className="w-3.5 h-3.5" />
-                          Опубликовано
-                        </span>
-                      )}
-                      {listing.status === 'REJECTED' && (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400">
-                          <XCircle className="w-3.5 h-3.5" />
-                          Отклонено
-                        </span>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </div>
+  );
+}
+
+function StatusPill({ status }: { status: string }) {
+  const label = STATUS_LABELS[status] || status;
+  const palette: Record<string, string> = {
+    ACTIVE:
+      'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400',
+    PENDING_MODERATION:
+      'bg-amber-100 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400',
+    REJECTED: 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-400',
+    DRAFT: 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400',
+    SOLD: 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400',
+    DELETED: 'bg-gray-100 dark:bg-gray-800 text-gray-500',
+  };
+  const cls =
+    palette[status] ||
+    'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300';
+  return (
+    <span
+      className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${cls}`}
+    >
+      {label}
+    </span>
+  );
+}
+
+function ActionButton({
+  onClick,
+  busy,
+  variant,
+  icon,
+  label,
+}: {
+  onClick: () => void;
+  busy: boolean;
+  variant: 'primary' | 'danger' | 'ghost' | 'danger-ghost';
+  icon: React.ReactNode;
+  label: string;
+}) {
+  const palette: Record<typeof variant, string> = {
+    primary:
+      'bg-gray-900 dark:bg-gray-50 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200',
+    danger: 'bg-red-600 text-white hover:bg-red-700',
+    ghost:
+      'border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600',
+    'danger-ghost':
+      'border border-red-200 dark:border-red-900/40 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/10',
+  } as const;
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={busy}
+      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${palette[variant]}`}
+    >
+      {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : icon}
+      {label}
+    </button>
   );
 }

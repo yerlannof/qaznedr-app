@@ -79,14 +79,19 @@ const DEFAULT_PERMISSION: RoutePermission = {
 };
 
 /**
- * Get user role from database
+ * Get user role from Supabase profiles.role.
+ * Returns 'user' | 'admin' | 'super_admin', or null on error.
  */
 async function getUserRole(userId: string): Promise<string | null> {
   try {
-    // This would typically query your database
-    // For now, return null to indicate regular user
-    // In production, implement proper role checking
-    return null;
+    const { createServiceClient } = await import('@/lib/supabase/server');
+    const supabase = await createServiceClient();
+    const { data } = (await (supabase as any)
+      .from('profiles')
+      .select('role')
+      .eq('id', userId)
+      .single()) as { data: { role: string } | null };
+    return data?.role ?? 'user';
   } catch (error) {
     console.error('Error getting user role:', error);
     return null;

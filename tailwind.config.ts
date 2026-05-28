@@ -12,6 +12,9 @@ const config: Config = {
       colors: {
         primary: '#0A84FF',
         secondary: '#6B7280',
+        gold: '#C8A24B',
+        'gold-dark': '#A8842F',
+        'gold-light': '#E0C674',
         background: '#FFFFFF',
         foreground: '#111827',
         muted: '#F3F4F6',

@@ -54,6 +54,7 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
+    { label: t('navigation.leads'), href: `/${locale}/leads` },
     { label: t('navigation.listings'), href: `/${locale}/listings` },
     { label: t('navigation.services'), href: `/${locale}/services` },
     { label: t('navigation.companies'), href: `/${locale}/companies` },

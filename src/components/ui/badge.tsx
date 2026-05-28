@@ -16,6 +16,7 @@ const badgeVariants = cva(
           'bg-[rgba(234,179,8,0.08)] text-yellow-700 border border-[rgba(234,179,8,0.15)] dark:text-yellow-400',
         error:
           'bg-[rgba(255,59,48,0.08)] text-red-600 border border-[rgba(255,59,48,0.15)] dark:text-red-400',
+        gold: 'bg-[rgba(200,162,75,0.12)] text-[#8a6d1f] border border-[rgba(200,162,75,0.30)] dark:text-[#e0c674] dark:border-[rgba(200,162,75,0.25)]',
         // Aliases for backward compatibility
         secondary:
           'bg-gray-100 text-gray-600 border border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700',

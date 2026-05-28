@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 const translations = {
   ru: {
     navigation: {
+      leads: 'Лиды',
       listings: 'Объявления',
       map: 'Карта',
       services: 'Услуги',
@@ -342,6 +343,7 @@ const translations = {
   },
   kz: {
     navigation: {
+      leads: 'Лидтер',
       listings: 'Хабарландырулар',
       map: 'Карта',
       services: 'Қызметтер',
@@ -602,6 +604,7 @@ const translations = {
   },
   en: {
     navigation: {
+      leads: 'Leads',
       listings: 'Listings',
       map: 'Map',
       services: 'Services',
@@ -856,6 +859,7 @@ const translations = {
   },
   zh: {
     navigation: {
+      leads: '线索',
       listings: '信息列表',
       map: '地图',
       services: '服务',

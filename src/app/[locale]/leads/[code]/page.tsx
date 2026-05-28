@@ -32,6 +32,9 @@ export default async function LeadTeaserPage({
   if (!lead) notFound();
 
   const free = isFreeStatus(lead.license_status);
+  const coordVerified =
+    free &&
+    (lead.license_status || '').toUpperCase().includes('COORD_VERIFIED');
   const isSold = lead.status === 'SOLD';
   const fairValue =
     lead.fair_value_min_usd_m || lead.fair_value_max_usd_m
@@ -179,7 +182,9 @@ export default async function LeadTeaserPage({
                     )}
                     <span className="text-gray-700 dark:text-gray-300">
                       {free
-                        ? 'Свободен от лицензий (по госкарте недропользования)'
+                        ? coordVerified
+                          ? 'Свободен — проверено по координатам на госкарте недропользования'
+                          : 'Свободен по госреестру (рекомендуется координатная проверка перед заявкой)'
                         : 'Статус уточняется'}
                     </span>
                   </div>

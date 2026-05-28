@@ -7,6 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
   const staticPages = [
     '',
+    '/leads',
     '/listings',
     '/services',
     '/services/catalog',
@@ -70,5 +71,39 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // If API is unavailable, return only static entries
   }
 
-  return [...staticEntries, ...listingEntries];
+  // Dynamic PUBLISHED lead teasers (NOT /full — that is noindex)
+  let leadEntries: MetadataRoute.Sitemap = [];
+  try {
+    let codes: { code: string }[] = [];
+    let lpage = 1;
+    let lhasMore = true;
+    while (lhasMore) {
+      const res = await fetch(`${baseUrl}/api/leads?limit=50&page=${lpage}`, {
+        next: { revalidate: 3600 },
+      });
+      const data = await res.json();
+      if (data.success && data.data?.leads?.length) {
+        codes = [
+          ...codes,
+          ...data.data.leads.map((l: { code: string }) => ({ code: l.code })),
+        ];
+        lhasMore = lpage < (data.data.totalPages ?? 1);
+        lpage++;
+      } else {
+        lhasMore = false;
+      }
+    }
+    leadEntries = codes.flatMap((l) =>
+      locales.map((locale) => ({
+        url: `${baseUrl}/${locale}/leads/${l.code}`,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: 0.9,
+      }))
+    );
+  } catch {
+    // If API is unavailable, skip lead entries
+  }
+
+  return [...staticEntries, ...listingEntries, ...leadEntries];
 }

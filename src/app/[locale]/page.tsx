@@ -5,6 +5,7 @@ import Footer from '@/components/layouts/Footer';
 import Link from 'next/link';
 import { Search, FileText, Handshake } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import LeadsHomeHero from '@/components/features/LeadsHomeHero';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useEffect, useState } from 'react';
 
@@ -109,6 +110,8 @@ export default function Home() {
         }}
       />
       <Navigation />
+
+      <LeadsHomeHero locale={locale} />
 
       {/* Hero Section */}
       <section className="pt-24 lg:pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">

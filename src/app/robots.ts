@@ -6,12 +6,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/dashboard/', '/admin/'],
+        disallow: ['/api/', '/dashboard/', '/admin/', '/*/leads/*/full'],
       },
       {
         userAgent: 'Yandex',
         allow: '/',
-        disallow: ['/api/', '/dashboard/', '/admin/'],
+        disallow: ['/api/', '/dashboard/', '/admin/', '/*/leads/*/full'],
         crawlDelay: 2,
       },
     ],

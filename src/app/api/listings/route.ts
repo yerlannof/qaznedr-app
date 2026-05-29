@@ -256,6 +256,9 @@ export async function GET(request: NextRequest) {
       .from('kazakhstan_deposits')
       .select('*', { count: 'exact' });
 
+    // Public listings: only ACTIVE are visible (hide DRAFT/PENDING/REJECTED/SOLD/EXPIRED/DELETED)
+    queryBuilder = queryBuilder.eq('status', 'ACTIVE');
+
     // Apply filters with proper sanitization
     if (query) {
       // Check for SQL injection attempts

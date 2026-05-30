@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { Inter } from 'next/font/google';
+import { Inter, Cormorant_Garamond } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Toaster } from 'sonner';
@@ -75,6 +75,15 @@ const inter = Inter({
   display: 'swap',
 });
 
+// Editorial display serif for the portal welcome hero (gravitas + character).
+const fraunces = Cormorant_Garamond({
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  variable: '--font-fraunces',
+  display: 'swap',
+  weight: ['300', '400', '500', '600'],
+  style: ['normal', 'italic'],
+});
+
 export default async function LocaleLayout({
   children,
   params,
@@ -92,7 +101,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${inter.variable} ${inter.className} antialiased`}>
+      <body
+        className={`${inter.variable} ${fraunces.variable} ${inter.className} antialiased`}
+      >
         <ThemeProvider>
           <AuthProvider>
             <WebVitalsTracker pageName={`/${locale}`} />

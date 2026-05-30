@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Search, FileText, Handshake } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LeadsHomeHero from '@/components/features/LeadsHomeHero';
+import PortalWelcomeHero from '@/components/features/PortalWelcomeHero';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useEffect, useState } from 'react';
 
@@ -110,6 +111,8 @@ export default function Home() {
         }}
       />
       <Navigation />
+
+      <PortalWelcomeHero locale={locale} />
 
       <LeadsHomeHero locale={locale} />
 

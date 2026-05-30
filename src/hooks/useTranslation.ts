@@ -17,6 +17,36 @@ const translations = {
       messages: 'Сообщения',
       createListing: 'Создать объявление',
     },
+    portal: {
+      eyebrow: 'Платформа недропользования Казахстана',
+      headlineLine1: 'Открыть',
+      headlineEmphasis: 'недра Казахстана',
+      headlineLine2: 'для тех, кто умеет работать',
+      subtitle:
+        'Проверенные участки, честные данные, прямой путь от архива до заявки. Закрытые геологические наводки и публичные объявления — на одной площадке.',
+      ctaLeads: 'Каталог наводок',
+      ctaListings: 'Объявления',
+      statsLive: 'Сейчас в системе',
+      statsLeadsLabel: 'Закрытых наводок',
+      statsListingsLabel: 'Активных объявлений',
+      statsRegionsLabel: 'Регионов охвачено',
+      statsCaption:
+        'Данные обновляются автоматически. Каждый объект — из государственного первоисточника, с указанием типа значения.',
+      trust: {
+        verifiedTitle: 'Координатная проверка',
+        verifiedDesc:
+          'Лицензионный статус — point-in-polygon по госкарте недропользования.',
+        archiveTitle: 'Государственный архив',
+        archiveDesc:
+          'Все цифры из первичных отчётов ТФГИ и опубликованных справочников.',
+        gatesTitle: 'Закрытый доступ',
+        gatesDesc:
+          'Точные координаты, название и первоисточник — после заявки и соглашения.',
+        disciplineTitle: 'Без приукрашивания',
+        disciplineDesc:
+          'Каждый грейд подан с типом: среднее / макс. проба / прогноз — не overstated.',
+      },
+    },
     home: {
       officialPlatform: 'Официальная цифровая платформа',
       platformLabel: 'ГЕОЛОГИЧЕСКАЯ ОТРАСЛЬ КАЗАХСТАНА',
@@ -353,6 +383,36 @@ const translations = {
       messages: 'Хабарлар',
       createListing: 'Хабарландыру құру',
     },
+    portal: {
+      eyebrow: 'Қазақстан жер қойнауы алаңы',
+      headlineLine1: 'Қазақстан',
+      headlineEmphasis: 'жер қойнауын',
+      headlineLine2: 'өз ісін білетіндер үшін ашамыз',
+      subtitle:
+        'Тексерілген учаскелер, адал деректер, мұрағаттан өтінімге дейін тікелей жол. Жабық геологиялық бағыттар мен ашық хабарландырулар — бір алаңда.',
+      ctaLeads: 'Бағыттар каталогы',
+      ctaListings: 'Хабарландырулар',
+      statsLive: 'Қазір жүйеде',
+      statsLeadsLabel: 'Жабық бағыттар',
+      statsListingsLabel: 'Белсенді хабарландырулар',
+      statsRegionsLabel: 'Қамтылған өңірлер',
+      statsCaption:
+        'Деректер автоматты түрде жаңарады. Әр объект — мемлекеттік бастапқы дереккөзден, мәннің түрі көрсетілген.',
+      trust: {
+        verifiedTitle: 'Координаталық тексеру',
+        verifiedDesc:
+          'Лицензия мәртебесі — жер қойнауы мемлекеттік картасы бойынша point-in-polygon.',
+        archiveTitle: 'Мемлекеттік мұрағат',
+        archiveDesc:
+          'Барлық сандар бастапқы ТФГИ есептерінен және жарияланған анықтамалықтардан.',
+        gatesTitle: 'Жабық қол жетімділік',
+        gatesDesc:
+          'Дәл координаттар, атау және бастапқы дереккөз — өтінімнен және келісімнен кейін.',
+        disciplineTitle: 'Әсірелеусіз',
+        disciplineDesc:
+          'Әр құрам түрімен берілген: орташа / макс. сынама / болжам — асыра айтылмайды.',
+      },
+    },
     home: {
       officialPlatform: 'Ресми цифрлық платформа',
       platformLabel: 'ҚАЗАҚСТАННЫҢ ГЕОЛОГИЯ САЛАСЫ',
@@ -614,6 +674,36 @@ const translations = {
       messages: 'Messages',
       createListing: 'Create Listing',
     },
+    portal: {
+      eyebrow: "Kazakhstan's subsoil platform",
+      headlineLine1: 'Open',
+      headlineEmphasis: "Kazakhstan's subsoil",
+      headlineLine2: 'to those who know how to work it',
+      subtitle:
+        'Verified sites, honest data, a direct path from archive to application. Closed geological leads and public listings — on one platform.',
+      ctaLeads: 'Browse leads',
+      ctaListings: 'Listings',
+      statsLive: 'Live in the system',
+      statsLeadsLabel: 'Closed leads',
+      statsListingsLabel: 'Active listings',
+      statsRegionsLabel: 'Regions covered',
+      statsCaption:
+        'Updated automatically. Every entry is from a state primary source, with the value type stated.',
+      trust: {
+        verifiedTitle: 'Coordinate check',
+        verifiedDesc:
+          'License status — point-in-polygon against the state subsoil map.',
+        archiveTitle: 'State archive',
+        archiveDesc:
+          'Every figure from primary TFGI reports and published handbooks.',
+        gatesTitle: 'Gated access',
+        gatesDesc:
+          'Exact coordinates, name and primary source — released after request and agreement.',
+        disciplineTitle: 'No overclaiming',
+        disciplineDesc:
+          'Every grade carries its type: average / max sample / forecast — not overstated.',
+      },
+    },
     home: {
       officialPlatform: 'Official Digital Platform',
       platformLabel: 'KAZAKHSTAN GEOLOGY INDUSTRY',
@@ -868,6 +958,33 @@ const translations = {
       education: '培训',
       messages: '消息',
       createListing: '发布信息',
+    },
+    portal: {
+      eyebrow: '哈萨克斯坦地下资源平台',
+      headlineLine1: '开启',
+      headlineEmphasis: '哈萨克斯坦的地下宝藏',
+      headlineLine2: '献给懂得开采的人',
+      subtitle:
+        '经过核验的矿区、真实的数据，从档案到申请的直接通路。封闭式地质线索与公开发布信息 — 同在一个平台。',
+      ctaLeads: '查看线索目录',
+      ctaListings: '发布信息',
+      statsLive: '系统当前数据',
+      statsLeadsLabel: '封闭线索',
+      statsListingsLabel: '活跃发布',
+      statsRegionsLabel: '覆盖地区',
+      statsCaption:
+        '数据自动更新。每条信息均来自国家原始资料，并标注数值类型。',
+      trust: {
+        verifiedTitle: '坐标核验',
+        verifiedDesc: '基于地下资源国家地图进行点-多边形重叠核验许可证状态。',
+        archiveTitle: '国家档案',
+        archiveDesc: '所有数据来自原始 ТФГИ 报告和已出版的参考资料。',
+        gatesTitle: '受限访问',
+        gatesDesc: '精确坐标、名称与原始资料 — 在提交申请并达成协议后开放。',
+        disciplineTitle: '不夸大',
+        disciplineDesc:
+          '每个品位均标注类型：平均值 / 最大样品 / 预测 — 不会过度宣传。',
+      },
     },
     home: {
       officialPlatform: '官方数字化平台',

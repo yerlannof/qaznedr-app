@@ -26,6 +26,10 @@ const config: Config = {
         'dark-surface': '#141414',
         'dark-border': '#262626',
       },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-fraunces)', 'Georgia', 'serif'],
+      },
       boxShadow: {
         subtle: '0 1px 2px rgba(0,0,0,0.04)',
         medium: '0 4px 12px rgba(0,0,0,0.08)',

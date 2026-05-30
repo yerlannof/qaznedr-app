@@ -1,9 +1,13 @@
+'use client';
+
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Gem, Lock, ShieldCheck, ArrowRight } from 'lucide-react';
-import { type LeadTeaser, TYPE_LABELS, isFreeStatus } from '@/lib/leads/types';
+import { type LeadTeaser, isFreeStatus } from '@/lib/leads/types';
+import { useTranslation } from '@/hooks/useTranslation';
 
-// Presentational server component — teaser only. No private fields exist on LeadTeaser.
+// Presentational client component — teaser only. No private fields on LeadTeaser.
+// Client so we can localize UI strings via useTranslation hook.
 export default function LeadCard({
   lead,
   locale,
@@ -11,9 +15,13 @@ export default function LeadCard({
   lead: LeadTeaser;
   locale: string;
 }) {
+  const { t } = useTranslation();
   const free = isFreeStatus(lead.license_status);
   const isSold = lead.status === 'SOLD';
-  const typeLabel = TYPE_LABELS[lead.type] ?? 'Объект';
+  const typeLabel =
+    t(`leadCard.types.${lead.type}`) === `leadCard.types.${lead.type}`
+      ? t('leadCard.types.other')
+      : t(`leadCard.types.${lead.type}`);
 
   return (
     <Link href={`/${locale}/leads/${lead.code}`} className="group block">
@@ -25,11 +33,11 @@ export default function LeadCard({
           </div>
           <div className="absolute top-3 right-3 flex flex-col items-end gap-1.5">
             {isSold ? (
-              <Badge variant="default">ПРОДАНО</Badge>
+              <Badge variant="default">{t('leadCard.badge.sold')}</Badge>
             ) : free ? (
               <Badge variant="gold">
                 <ShieldCheck className="w-3 h-3 mr-1" />
-                СВОБОДЕН
+                {t('leadCard.badge.free')}
               </Badge>
             ) : null}
             <Badge variant="blue">{lead.mineral}</Badge>
@@ -50,7 +58,10 @@ export default function LeadCard({
             </span>
           </div>
           <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50 mt-1.5 line-clamp-2">
-            {lead.teaser_title || `Золото · ${lead.region || 'Казахстан'}`}
+            {lead.teaser_title ||
+              t('leadCard.titleFallback', {
+                region: lead.region || t('leadCard.regionFallback'),
+              })}
           </h3>
 
           {lead.grade_display && (
@@ -73,7 +84,7 @@ export default function LeadCard({
                   key={c}
                   className="inline-flex items-center px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-[11px] text-gray-600 dark:text-gray-300"
                 >
-                  кат. {c}
+                  {t('leadCard.categoryPrefix')} {c}
                 </span>
               ))}
             </div>
@@ -81,11 +92,11 @@ export default function LeadCard({
 
           <div className="border-t border-gray-100 dark:border-gray-700 mt-3 pt-3 flex items-center justify-between mt-auto">
             <span className="text-sm font-bold text-gold-dark dark:text-gold-light">
-              {lead.price_display || 'Цена по запросу'}
+              {lead.price_display || t('leadCard.priceOnRequest')}
             </span>
             <span className="inline-flex items-center gap-1 text-xs font-medium text-[#0A84FF] group-hover:gap-1.5 transition-all">
               <Lock className="w-3 h-3" />
-              Открыть
+              {t('leadCard.open')}
               <ArrowRight className="w-3 h-3" />
             </span>
           </div>

@@ -43,15 +43,23 @@ export default function Footer() {
           {/* Column 2: Платформа */}
           <div>
             <h4 className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-3">
-              Платформа
+              {t('footerNav.platform.title')}
             </h4>
             <ul className="space-y-2">
+              <li>
+                <Link
+                  href={`/${locale}/leads`}
+                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  {t('footerNav.platform.leads')}
+                </Link>
+              </li>
               <li>
                 <Link
                   href={`/${locale}/listings`}
                   className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
-                  Объявления
+                  {t('footerNav.platform.listings')}
                 </Link>
               </li>
               <li>
@@ -59,7 +67,7 @@ export default function Footer() {
                   href={`/${locale}/services`}
                   className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
-                  Услуги
+                  {t('footerNav.platform.services')}
                 </Link>
               </li>
               <li>
@@ -67,7 +75,7 @@ export default function Footer() {
                   href={`/${locale}/companies`}
                   className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
-                  Компании
+                  {t('footerNav.platform.companies')}
                 </Link>
               </li>
               <li>
@@ -75,7 +83,7 @@ export default function Footer() {
                   href={`/${locale}/map`}
                   className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
-                  Карта
+                  {t('footerNav.platform.map')}
                 </Link>
               </li>
             </ul>
@@ -84,7 +92,7 @@ export default function Footer() {
           {/* Column 3: Информация */}
           <div>
             <h4 className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-3">
-              Информация
+              {t('footerNav.info.title')}
             </h4>
             <ul className="space-y-2">
               <li>
@@ -92,7 +100,7 @@ export default function Footer() {
                   href={`/${locale}/about`}
                   className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
-                  О платформе
+                  {t('footerNav.info.about')}
                 </Link>
               </li>
               <li>
@@ -100,7 +108,7 @@ export default function Footer() {
                   href={`/${locale}/support`}
                   className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
-                  Контакты
+                  {t('footerNav.info.contacts')}
                 </Link>
               </li>
               <li>
@@ -108,7 +116,7 @@ export default function Footer() {
                   href={`/${locale}/legal/terms`}
                   className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
-                  Правила
+                  {t('footerNav.info.terms')}
                 </Link>
               </li>
             </ul>
@@ -143,8 +151,8 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-gray-200 dark:border-[#262626] mt-8 pt-4 flex justify-between text-xs text-gray-400">
-          <span>© 2025 QAZNEDR. Все права защищены.</span>
-          <span>Астана, Казахстан</span>
+          <span>{t('footerNav.bottom.rights', { year: '2026' })}</span>
+          <span>{t('footerNav.bottom.city')}</span>
         </div>
       </div>
     </footer>

@@ -81,6 +81,35 @@ const translations = {
       freshHeading: 'Свежие наводки',
       freshAll: 'Все наводки',
     },
+    footerNav: {
+      platform: {
+        title: 'Платформа',
+        leads: 'Лиды',
+        listings: 'Объявления',
+        services: 'Услуги',
+        companies: 'Компании',
+        map: 'Карта',
+      },
+      info: {
+        title: 'Информация',
+        about: 'О платформе',
+        contacts: 'Контакты',
+        terms: 'Правила',
+      },
+      bottom: {
+        rights: '© {year} QAZNEDR. Все права защищены.',
+        city: 'Астана, Казахстан',
+      },
+    },
+    leadCard: {
+      badge: { sold: 'ПРОДАНО', free: 'СВОБОДЕН' },
+      types: { placer: 'Россыпь', bedrock: 'Коренное', other: 'Объект' },
+      titleFallback: 'Золото · {region}',
+      regionFallback: 'Казахстан',
+      categoryPrefix: 'кат.',
+      priceOnRequest: 'Цена по запросу',
+      open: 'Открыть',
+    },
     home: {
       officialPlatform: 'Официальная цифровая платформа',
       platformLabel: 'ГЕОЛОГИЧЕСКАЯ ОТРАСЛЬ КАЗАХСТАНА',
@@ -481,6 +510,35 @@ const translations = {
       freshHeading: 'Жаңа бағыттар',
       freshAll: 'Барлық бағыттар',
     },
+    footerNav: {
+      platform: {
+        title: 'Платформа',
+        leads: 'Лидтер',
+        listings: 'Хабарландырулар',
+        services: 'Қызметтер',
+        companies: 'Компаниялар',
+        map: 'Карта',
+      },
+      info: {
+        title: 'Ақпарат',
+        about: 'Платформа туралы',
+        contacts: 'Байланыстар',
+        terms: 'Ережелер',
+      },
+      bottom: {
+        rights: '© {year} QAZNEDR. Барлық құқықтар қорғалған.',
+        city: 'Астана, Қазақстан',
+      },
+    },
+    leadCard: {
+      badge: { sold: 'САТЫЛДЫ', free: 'БОС' },
+      types: { placer: 'Шашыранды', bedrock: 'Қазба орны', other: 'Объект' },
+      titleFallback: 'Алтын · {region}',
+      regionFallback: 'Қазақстан',
+      categoryPrefix: 'санат',
+      priceOnRequest: 'Баға сұрау бойынша',
+      open: 'Ашу',
+    },
     home: {
       officialPlatform: 'Ресми цифрлық платформа',
       platformLabel: 'ҚАЗАҚСТАННЫҢ ГЕОЛОГИЯ САЛАСЫ',
@@ -806,6 +864,35 @@ const translations = {
       freshHeading: 'Fresh leads',
       freshAll: 'All leads',
     },
+    footerNav: {
+      platform: {
+        title: 'Platform',
+        leads: 'Leads',
+        listings: 'Listings',
+        services: 'Services',
+        companies: 'Companies',
+        map: 'Map',
+      },
+      info: {
+        title: 'Information',
+        about: 'About',
+        contacts: 'Contacts',
+        terms: 'Terms',
+      },
+      bottom: {
+        rights: '© {year} QAZNEDR. All rights reserved.',
+        city: 'Astana, Kazakhstan',
+      },
+    },
+    leadCard: {
+      badge: { sold: 'SOLD', free: 'FREE' },
+      types: { placer: 'Placer', bedrock: 'Bedrock', other: 'Object' },
+      titleFallback: 'Gold · {region}',
+      regionFallback: 'Kazakhstan',
+      categoryPrefix: 'cat.',
+      priceOnRequest: 'Price on request',
+      open: 'Open',
+    },
     home: {
       officialPlatform: 'Official Digital Platform',
       platformLabel: 'KAZAKHSTAN GEOLOGY INDUSTRY',
@@ -1120,6 +1207,35 @@ const translations = {
       ctaFree: '仅显示空闲',
       freshHeading: '最新线索',
       freshAll: '全部线索',
+    },
+    footerNav: {
+      platform: {
+        title: '平台',
+        leads: '线索',
+        listings: '信息列表',
+        services: '服务',
+        companies: '公司',
+        map: '地图',
+      },
+      info: {
+        title: '信息',
+        about: '关于平台',
+        contacts: '联系方式',
+        terms: '使用条款',
+      },
+      bottom: {
+        rights: '© {year} QAZNEDR. 版权所有。',
+        city: '哈萨克斯坦阿斯塔纳',
+      },
+    },
+    leadCard: {
+      badge: { sold: '已售出', free: '空闲' },
+      types: { placer: '砂矿', bedrock: '原生矿', other: '项目' },
+      titleFallback: '黄金 · {region}',
+      regionFallback: '哈萨克斯坦',
+      categoryPrefix: '类',
+      priceOnRequest: '价格面议',
+      open: '查看',
     },
     home: {
       officialPlatform: '官方数字化平台',

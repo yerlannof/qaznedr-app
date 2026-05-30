@@ -19,9 +19,9 @@ const translations = {
     },
     portal: {
       eyebrow: 'Платформа недропользования Казахстана',
-      headlineLine1: 'Открыть',
-      headlineEmphasis: 'недра Казахстана',
-      headlineLine2: 'для тех, кто умеет работать',
+      headlineLine1: 'Открытый маркетплейс',
+      headlineEmphasis: 'недр Казахстана',
+      headlineLine2: '— от архива до заявки',
       subtitle:
         'Проверенные участки, честные данные, прямой путь от архива до заявки. Закрытые геологические наводки и публичные объявления — на одной площадке.',
       ctaLeads: 'Каталог наводок',
@@ -448,9 +448,9 @@ const translations = {
     },
     portal: {
       eyebrow: 'Қазақстан жер қойнауы алаңы',
-      headlineLine1: 'Қазақстан',
-      headlineEmphasis: 'жер қойнауын',
-      headlineLine2: 'өз ісін білетіндер үшін ашамыз',
+      headlineLine1: 'Ашық алаң',
+      headlineEmphasis: 'Қазақстан жер қойнауы',
+      headlineLine2: '— мұрағаттан өтінімге дейін',
       subtitle:
         'Тексерілген учаскелер, адал деректер, мұрағаттан өтінімге дейін тікелей жол. Жабық геологиялық бағыттар мен ашық хабарландырулар — бір алаңда.',
       ctaLeads: 'Бағыттар каталогы',
@@ -802,9 +802,9 @@ const translations = {
     },
     portal: {
       eyebrow: "Kazakhstan's subsoil platform",
-      headlineLine1: 'Open',
+      headlineLine1: 'Open marketplace for',
       headlineEmphasis: "Kazakhstan's subsoil",
-      headlineLine2: 'to those who know how to work it',
+      headlineLine2: '— from archive to application',
       subtitle:
         'Verified sites, honest data, a direct path from archive to application. Closed geological leads and public listings — on one platform.',
       ctaLeads: 'Browse leads',
@@ -1150,9 +1150,9 @@ const translations = {
     },
     portal: {
       eyebrow: '哈萨克斯坦地下资源平台',
-      headlineLine1: '开启',
-      headlineEmphasis: '哈萨克斯坦的地下宝藏',
-      headlineLine2: '献给懂得开采的人',
+      headlineLine1: '公开市场',
+      headlineEmphasis: '哈萨克斯坦地下资源',
+      headlineLine2: '— 从档案到申请的直通车',
       subtitle:
         '经过核验的矿区、真实的数据，从档案到申请的直接通路。封闭式地质线索与公开发布信息 — 同在一个平台。',
       ctaLeads: '查看线索目录',

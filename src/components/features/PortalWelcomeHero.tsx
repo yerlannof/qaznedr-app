@@ -116,11 +116,11 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
           {/* Editorial column — left, ~60% */}
           <div className="lg:col-span-7">
             <div
-              className="inline-flex items-center gap-2.5 mb-7 opacity-0"
+              className="inline-flex items-center gap-3 mb-7 px-4 py-2 rounded-full border border-gold/40 bg-[rgba(200,162,75,0.08)] opacity-0"
               style={{ animation: 'qzFadeUp 0.6s ease-out forwards' }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-              <span className="text-[11px] uppercase tracking-[0.22em] text-gold-light">
+              <span className="w-2 h-2 rounded-full bg-gold shadow-[0_0_8px_rgba(200,162,75,0.6)]" />
+              <span className="text-[13px] font-semibold uppercase tracking-[0.16em] text-gold-light">
                 {t('portal.eyebrow')}
               </span>
             </div>

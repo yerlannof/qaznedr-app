@@ -47,6 +47,40 @@ const translations = {
           'Каждый грейд подан с типом: среднее / макс. проба / прогноз — не overstated.',
       },
     },
+    audience: {
+      eyebrow: 'Для кого площадка',
+      title: 'Три пути к недрам Казахстана',
+      subtitle:
+        'Каждый объект на платформе — для конкретного игрока. Выберите свой.',
+      prospector: {
+        tag: 'Старателю',
+        title: 'Купите проверенную наводку',
+        desc: 'Готовая точка из госархива: координатно-свободная, грейд с честным типом. От 1 млн ₸. Идёте промывать.',
+        cta: 'Каталог наводок',
+      },
+      investor: {
+        tag: 'Инвестору',
+        title: 'Свободные участки для лицензии',
+        desc: 'Объявления на участки — для заявки, earn-in или приобретения. Прямой выход на держателей.',
+        cta: 'К объявлениям',
+      },
+      geologist: {
+        tag: 'Геологу / Партнёру',
+        title: 'Разместите свой объект',
+        desc: 'Свой участок, лицензия, проявление — на площадке с прозрачными условиями и реальным трафиком.',
+        cta: 'Создать объявление',
+      },
+    },
+    leadsHero: {
+      eyebrow: 'Закрытые геологические наводки · проверенные данные',
+      title: 'Свободные участки с золотом — готовые к заявке',
+      subtitle:
+        'Откалиброванные наводки из государственных архивов: свободные по лицензии, с честными грейдами. Тизер открыт всем — точные координаты, название и первоисточник передаются после заявки.',
+      ctaBrowse: 'Смотреть каталог наводок',
+      ctaFree: 'Только свободные',
+      freshHeading: 'Свежие наводки',
+      freshAll: 'Все наводки',
+    },
     home: {
       officialPlatform: 'Официальная цифровая платформа',
       platformLabel: 'ГЕОЛОГИЧЕСКАЯ ОТРАСЛЬ КАЗАХСТАНА',
@@ -413,6 +447,40 @@ const translations = {
           'Әр құрам түрімен берілген: орташа / макс. сынама / болжам — асыра айтылмайды.',
       },
     },
+    audience: {
+      eyebrow: 'Алаң кімге арналған',
+      title: 'Қазақстан жер қойнауына үш жол',
+      subtitle:
+        'Платформадағы әр объект — белгілі бір ойыншыға арналған. Өзіңіздікін таңдаңыз.',
+      prospector: {
+        tag: 'Старательге',
+        title: 'Тексерілген бағытты сатып алыңыз',
+        desc: 'Мемлекеттік мұрағаттан дайын нүкте: координаталық-бос, әділ түрі көрсетілген құрам. 1 млн ₸-дан бастап. Жуып іздеуге барасыз.',
+        cta: 'Бағыттар каталогы',
+      },
+      investor: {
+        tag: 'Инвесторға',
+        title: 'Лицензияға арналған бос учаскелер',
+        desc: 'Учаскелер бойынша хабарландырулар — өтінімге, earn-in немесе сатып алуға. Иесімен тікелей байланыс.',
+        cta: 'Хабарландыруларға',
+      },
+      geologist: {
+        tag: 'Геологқа / Серіктеске',
+        title: 'Өз объектіңізді жариялаңыз',
+        desc: 'Өз учаскеңіз, лицензияңыз, көрінісіңіз — ашық шарттар мен нақты трафигі бар алаңда.',
+        cta: 'Хабарландыру жасау',
+      },
+    },
+    leadsHero: {
+      eyebrow: 'Жабық геологиялық бағыттар · тексерілген деректер',
+      title: 'Алтыны бар бос учаскелер — өтінімге дайын',
+      subtitle:
+        'Мемлекеттік мұрағаттардан калибрленген бағыттар: лицензия бойынша бос, адал құраммен. Тизер бәріне ашық — дәл координаттар, атау және бастапқы дереккөз өтінімнен кейін беріледі.',
+      ctaBrowse: 'Бағыттар каталогын қарау',
+      ctaFree: 'Тек бос',
+      freshHeading: 'Жаңа бағыттар',
+      freshAll: 'Барлық бағыттар',
+    },
     home: {
       officialPlatform: 'Ресми цифрлық платформа',
       platformLabel: 'ҚАЗАҚСТАННЫҢ ГЕОЛОГИЯ САЛАСЫ',
@@ -704,6 +772,40 @@ const translations = {
           'Every grade carries its type: average / max sample / forecast — not overstated.',
       },
     },
+    audience: {
+      eyebrow: "Who it's for",
+      title: "Three paths to Kazakhstan's subsoil",
+      subtitle:
+        'Every entry on the platform is built for a specific player. Pick yours.',
+      prospector: {
+        tag: 'For prospectors',
+        title: 'Buy a verified lead',
+        desc: 'A ready point from the state archive: coordinate-free, grade with honest type. From 1M ₸. Go pan.',
+        cta: 'Browse leads',
+      },
+      investor: {
+        tag: 'For investors',
+        title: 'Free plots ready for licensing',
+        desc: 'Listings of plots — for application, earn-in or acquisition. Direct line to license holders.',
+        cta: 'Open listings',
+      },
+      geologist: {
+        tag: 'For geologists / partners',
+        title: 'Post your object',
+        desc: 'Your plot, license or occurrence — on a platform with transparent terms and real traffic.',
+        cta: 'Create listing',
+      },
+    },
+    leadsHero: {
+      eyebrow: 'Closed geological leads · verified data',
+      title: 'Free gold-bearing sites — ready to apply',
+      subtitle:
+        'Calibrated leads from state archives: license-free, with honest grades. The teaser is open to all — exact coordinates, name and primary source are handed over after request.',
+      ctaBrowse: 'Browse leads catalog',
+      ctaFree: 'Free only',
+      freshHeading: 'Fresh leads',
+      freshAll: 'All leads',
+    },
     home: {
       officialPlatform: 'Official Digital Platform',
       platformLabel: 'KAZAKHSTAN GEOLOGY INDUSTRY',
@@ -985,6 +1087,39 @@ const translations = {
         disciplineDesc:
           '每个品位均标注类型：平均值 / 最大样品 / 预测 — 不会过度宣传。',
       },
+    },
+    audience: {
+      eyebrow: '面向哪些人',
+      title: '通往哈萨克斯坦地下宝藏的三条路',
+      subtitle: '平台上的每条信息都为特定参与者而设。请选择您的角色。',
+      prospector: {
+        tag: '面向淘金者',
+        title: '购买经过核验的线索',
+        desc: '来自国家档案的成熟坐标点：坐标已确认空闲，含金量标注真实类型。100 万坚戈起。直接前往现场。',
+        cta: '查看线索目录',
+      },
+      investor: {
+        tag: '面向投资者',
+        title: '可申请许可的空闲矿区',
+        desc: '矿区发布信息 — 用于申请、earn-in 或收购。直接对接持牌人。',
+        cta: '查看发布列表',
+      },
+      geologist: {
+        tag: '面向地质学家 / 合作伙伴',
+        title: '发布您的项目',
+        desc: '您的矿区、许可证或矿点 — 在条款透明、流量真实的平台上发布。',
+        cta: '创建发布',
+      },
+    },
+    leadsHero: {
+      eyebrow: '封闭式地质线索 · 经过核验的数据',
+      title: '含金的空闲矿区 — 可立即申请',
+      subtitle:
+        '来自国家档案的经过校准的线索：许可证空闲，含金量标注真实。摘要向所有人开放 — 精确坐标、名称与原始资料在提交申请后交付。',
+      ctaBrowse: '查看线索目录',
+      ctaFree: '仅显示空闲',
+      freshHeading: '最新线索',
+      freshAll: '全部线索',
     },
     home: {
       officialPlatform: '官方数字化平台',

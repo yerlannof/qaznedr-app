@@ -30,7 +30,8 @@ export const inquirySchema = z.object({
   leadCode: z
     .string()
     .trim()
-    .regex(/^[A-Z]{1,6}-[A-Z0-9]{3,12}$/)
+    .max(40)
+    .regex(/^[A-Z0-9]{1,8}(-[A-Z0-9]{1,16}){1,3}$/)
     .optional(),
   locale: z.enum(['ru', 'kz', 'en', 'zh']),
   sourcePath: text(300).default(''),

@@ -29,6 +29,17 @@ describe('inquirySchema', () => {
     expect(inquirySchema.safeParse(input).success).toBe(false);
   });
 
+  // Real published codes are as short as AU-4; the leads schema also allows
+  // multi-part codes like AU-CLUSTER-308.
+  it.each(['AU-4', 'AU-31', 'AU-508A4C', 'AU-CLUSTER-308'])(
+    'accepts real lead code %s',
+    (leadCode) => {
+      expect(inquirySchema.safeParse({ ...valid, leadCode }).success).toBe(
+        true
+      );
+    }
+  );
+
   it('keeps only known utm fields', () => {
     const r = inquirySchema.parse({
       ...valid,

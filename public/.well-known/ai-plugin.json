@@ -1,9 +1,9 @@
 {
   "schema_version": "v1",
-  "name_for_human": "QAZNEDR — Kazakhstan Geology Platform",
+  "name_for_human": "QAZNEDR HOLDING — ore areas in Kazakhstan",
   "name_for_model": "qaznedr",
-  "description_for_human": "Platform for Kazakhstan's geology industry — licenses, services, companies, data.",
-  "description_for_model": "QAZNEDR is Kazakhstan's geology industry platform. It provides: 1) Mining and exploration license marketplace (buy/sell), 2) Geological services catalog (drilling, legal, equipment, investment), 3) Company directory for the mining sector, 4) Knowledge base on Kazakhstan subsoil use regulations. Content is available in Russian, Kazakh, English, and Chinese. All data relates to Kazakhstan's 14 regions and minerals including oil, gas, gold, copper, coal, uranium, and iron.",
+  "description_for_human": "Kazakhstan exploration holding: prepared free ore areas and licensing and deal support for investors.",
+  "description_for_model": "QAZNEDR HOLDING is a Kazakhstan exploration holding. Its geologists study Soviet-era archival exploration reports (registry of 7,152 ore objects) and find areas with no active subsoil licence per the company's own check on a stated date. The site shows teasers of these areas (metal, region, geology, check date); names, coordinates and materials are shared after an NDA. The company does not own these areas and does not sell archival reports; it prepares deals: licence in the investor's name, licence via the holding then transfer, JV or earn-in, or analytics. Reserves are stated with their standard (Soviet GKZ categories or historical estimate). Contact via WeChat or WhatsApp at https://qaznedr.kz/en/contact. Languages: Russian, Kazakh, English, Chinese.",
   "auth": {
     "type": "none"
   },
@@ -13,5 +13,5 @@
   },
   "logo_url": "https://qaznedr.kz/icon-512.png",
   "contact_email": "info@qaznedr.kz",
-  "legal_info_url": "https://qaznedr.kz/ru/terms"
+  "legal_info_url": "https://qaznedr.kz/ru/legal/terms"
 }

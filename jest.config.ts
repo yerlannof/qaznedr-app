@@ -18,7 +18,7 @@ const config: any = {
     '<rootDir>/src/__tests__/mocks/',
     '<rootDir>/tests/e2e/',
   ],
-  transformIgnorePatterns: ['node_modules/(?!(uuid)/)'],
+  transformIgnorePatterns: ['node_modules/(?!(uuid|marked)/)'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   collectCoverage: true,
   collectCoverageFrom: [

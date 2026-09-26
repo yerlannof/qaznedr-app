@@ -5,6 +5,16 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
+  // marked ships ESM only; next/jest reads this list to transform it in tests.
+  transpilePackages: ['marked'],
+
+  // Guides are read from content/ at build time; keep them in the trace in
+  // case a page is ever rendered on demand.
+  outputFileTracingIncludes: {
+    '/[locale]/insights': ['./content/insights/**/*'],
+    '/[locale]/insights/[slug]': ['./content/insights/**/*'],
+  },
+
   // Image optimization
   images: {
     domains: [

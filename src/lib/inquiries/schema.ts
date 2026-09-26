@@ -47,7 +47,7 @@ export const inquirySchema = z.object({
   // Honeypot: real users never see or fill this field.
   website: z.string().max(200).default(''),
   // Time between form render and submit, measured client-side.
-  elapsedMs: z.number().int().nonnegative().optional(),
+  elapsedMs: z.number().int().nonnegative(),
 });
 
 export type InquiryInput = z.infer<typeof inquirySchema>;
@@ -55,8 +55,29 @@ export type InquiryInput = z.infer<typeof inquirySchema>;
 const MIN_FILL_MS = 2000;
 
 export function isLikelySpam(input: InquiryInput): boolean {
-  return (
-    input.website.trim() !== '' ||
-    (input.elapsedMs !== undefined && input.elapsedMs < MIN_FILL_MS)
-  );
+  return input.website.trim() !== '' || input.elapsedMs < MIN_FILL_MS;
+}
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/** PATCH body of the admin inbox: a uuid and a known status, else null. */
+export function parseStatusUpdate(
+  body: unknown
+): { id: string; status: InquiryStatus } | null {
+  if (!body || typeof body !== 'object') return null;
+  const { id, status } = body as { id?: unknown; status?: unknown };
+  if (typeof id !== 'string' || !UUID.test(id)) return null;
+  if (!(INQUIRY_STATUSES as readonly unknown[]).includes(status)) return null;
+  return { id, status: status as InquiryStatus };
+}
+
+/** `?status=` of the admin inbox: missing → NEW, ALL, a known status, else null. */
+export function parseStatusFilter(
+  param: string | null
+): InquiryStatus | 'ALL' | null {
+  const value = param || 'NEW';
+  if (value === 'ALL') return 'ALL';
+  return (INQUIRY_STATUSES as readonly string[]).includes(value)
+    ? (value as InquiryStatus)
+    : null;
 }

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { requireAdmin, forbidden } from '@/lib/auth/admin';
-import { INQUIRY_STATUSES } from '@/lib/inquiries/schema';
+import { parseStatusFilter, parseStatusUpdate } from '@/lib/inquiries/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,7 +10,15 @@ export async function GET(request: NextRequest) {
   const admin = await requireAdmin();
   if (!admin) return forbidden();
 
-  const status = new URL(request.url).searchParams.get('status') || 'NEW';
+  const status = parseStatusFilter(
+    new URL(request.url).searchParams.get('status')
+  );
+  if (!status) {
+    return NextResponse.json(
+      { success: false, error: 'Invalid status' },
+      { status: 400 }
+    );
+  }
   const svc = await createServiceClient();
   let q = (svc as any)
     .from('inquiries')
@@ -34,16 +42,14 @@ export async function PATCH(request: NextRequest) {
   const admin = await requireAdmin();
   if (!admin) return forbidden();
 
-  let body: { id?: unknown; status?: unknown } = {};
+  let body: unknown = null;
   try {
     body = await request.json();
   } catch {
     // falls through to validation
   }
-  const valid =
-    typeof body.id === 'string' &&
-    (INQUIRY_STATUSES as readonly string[]).includes(String(body.status));
-  if (!valid) {
+  const input = parseStatusUpdate(body);
+  if (!input) {
     return NextResponse.json(
       { success: false, error: 'Invalid input' },
       { status: 400 }
@@ -53,8 +59,8 @@ export async function PATCH(request: NextRequest) {
   const svc = await createServiceClient();
   const { error } = await (svc as any)
     .from('inquiries')
-    .update({ status: body.status })
-    .eq('id', body.id);
+    .update({ status: input.status })
+    .eq('id', input.id);
   if (error) {
     return NextResponse.json(
       { success: false, error: 'Failed to update' },

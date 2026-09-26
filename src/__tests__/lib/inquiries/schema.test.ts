@@ -1,4 +1,9 @@
-import { inquirySchema, isLikelySpam } from '@/lib/inquiries/schema';
+import {
+  inquirySchema,
+  isLikelySpam,
+  parseStatusFilter,
+  parseStatusUpdate,
+} from '@/lib/inquiries/schema';
 
 const valid = {
   name: 'Li Wei',
@@ -6,6 +11,7 @@ const valid = {
   contact: 'liwei_88',
   locale: 'zh',
   leadCode: 'AU-508A4C',
+  elapsedMs: 8000,
 };
 
 describe('inquirySchema', () => {
@@ -61,5 +67,37 @@ describe('isLikelySpam', () => {
       isLikelySpam(inquirySchema.parse({ ...valid, elapsedMs: 8000 }))
     ).toBe(false);
     expect(isLikelySpam(inquirySchema.parse(valid))).toBe(false);
+  });
+});
+
+describe('fill timer', () => {
+  it('requires elapsedMs', () => {
+    const { elapsedMs, ...noTimer } = valid;
+    expect(elapsedMs).toBe(8000);
+    expect(inquirySchema.safeParse(noTimer).success).toBe(false);
+  });
+});
+
+describe('admin status input', () => {
+  const id = '3f2b8c1e-9a4d-4e2b-8f1a-2c3d4e5f6a7b';
+
+  it('accepts a uuid and a known status', () => {
+    expect(parseStatusUpdate({ id, status: 'REJECTED' })).toEqual({
+      id,
+      status: 'REJECTED',
+    });
+  });
+
+  it('rejects a non-uuid id or an unknown status', () => {
+    expect(parseStatusUpdate({ id: '42', status: 'REJECTED' })).toBeNull();
+    expect(parseStatusUpdate({ id, status: 'LOST' })).toBeNull();
+    expect(parseStatusUpdate(null)).toBeNull();
+  });
+
+  it('parses the list filter', () => {
+    expect(parseStatusFilter(null)).toBe('NEW');
+    expect(parseStatusFilter('ALL')).toBe('ALL');
+    expect(parseStatusFilter('DEAL')).toBe('DEAL');
+    expect(parseStatusFilter('drop table')).toBeNull();
   });
 });

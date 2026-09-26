@@ -64,10 +64,34 @@ describe('/api/admin/inquiries', () => {
     const ok = await PATCH(
       new NextRequest('https://qaznedr.kz/api/admin/inquiries', {
         method: 'PATCH',
-        body: JSON.stringify({ id: 'i1', status: 'MEETING' }),
+        body: JSON.stringify({
+          id: '3f2b8c1e-9a4d-4e2b-8f1a-2c3d4e5f6a7b',
+          status: 'MEETING',
+        }),
       })
     );
     expect(ok.status).toBe(200);
     expect(q.update).toHaveBeenCalledWith({ status: 'MEETING' });
+  });
+
+  it('400 for a non-uuid id without touching the database', async () => {
+    (requireAdmin as jest.Mock).mockResolvedValue({ role: 'super_admin' });
+    const res = await PATCH(
+      new NextRequest('https://qaznedr.kz/api/admin/inquiries', {
+        method: 'PATCH',
+        body: JSON.stringify({ id: 'not-a-uuid', status: 'REJECTED' }),
+      })
+    );
+    expect(res.status).toBe(400);
+    expect(q.update).not.toHaveBeenCalled();
+  });
+
+  it('400 for an unknown status filter', async () => {
+    (requireAdmin as jest.Mock).mockResolvedValue({ role: 'super_admin' });
+    const res = await GET(
+      new NextRequest('https://qaznedr.kz/api/admin/inquiries?status=WON')
+    );
+    expect(res.status).toBe(400);
+    expect(q.eq).not.toHaveBeenCalled();
   });
 });

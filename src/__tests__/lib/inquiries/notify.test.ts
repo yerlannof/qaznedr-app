@@ -9,6 +9,7 @@ const input = inquirySchema.parse({
   locale: 'zh',
   leadCode: 'AU-508A4C',
   sourcePath: '/zh/leads/AU-508A4C',
+  elapsedMs: 9000,
 });
 
 describe('formatInquiryMessage', () => {

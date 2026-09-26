@@ -10,10 +10,16 @@ import {
   type Locale,
 } from './site';
 
-export function buildLanguageAlternates(path: string): Record<string, string> {
+export function buildLanguageAlternates(
+  path: string,
+  locales: readonly Locale[] = LOCALES
+): Record<string, string> {
   const languages: Record<string, string> = {};
-  for (const l of LOCALES) languages[HREFLANG[l]] = localeUrl(l, path);
-  languages['x-default'] = localeUrl('ru', path);
+  for (const l of locales) languages[HREFLANG[l]] = localeUrl(l, path);
+  languages['x-default'] = localeUrl(
+    locales.includes('ru') ? 'ru' : locales[0],
+    path
+  );
   return languages;
 }
 
@@ -26,6 +32,10 @@ export interface PageMetadataInput {
   /** Skip the "%s | QAZNEDR HOLDING" template (home page). */
   absoluteTitle?: boolean;
   noindex?: boolean;
+  /** Languages the page exists in (hreflang). Defaults to every locale. */
+  locales?: readonly Locale[];
+  /** ISO dates of an article; switches og:type to "article". */
+  article?: { published: string; modified: string };
 }
 
 export function buildPageMetadata(input: PageMetadataInput): Metadata {
@@ -34,6 +44,13 @@ export function buildPageMetadata(input: PageMetadataInput): Metadata {
     input.absoluteTitle || input.title.includes(SITE_NAME)
       ? input.title
       : `${input.title} | ${SITE_NAME}`;
+  const openGraph = {
+    title: fullTitle,
+    description: input.description,
+    url,
+    siteName: SITE_NAME,
+    locale: OG_LOCALE[input.locale],
+  };
   return {
     // Absolute on purpose: nested layouts that set their own title drop the
     // root "%s | QAZNEDR HOLDING" template, so the suffix is added here.
@@ -41,16 +58,16 @@ export function buildPageMetadata(input: PageMetadataInput): Metadata {
     description: input.description,
     alternates: {
       canonical: url,
-      languages: buildLanguageAlternates(input.path),
+      languages: buildLanguageAlternates(input.path, input.locales),
     },
-    openGraph: {
-      title: fullTitle,
-      description: input.description,
-      url,
-      siteName: SITE_NAME,
-      locale: OG_LOCALE[input.locale],
-      type: 'website',
-    },
+    openGraph: input.article
+      ? {
+          ...openGraph,
+          type: 'article',
+          publishedTime: input.article.published,
+          modifiedTime: input.article.modified,
+        }
+      : { ...openGraph, type: 'website' },
     twitter: {
       card: 'summary_large_image',
       title: fullTitle,

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { INSIGHTS } from '@/lib/insights/registry';
 import { buildLanguageAlternates } from '@/lib/seo/metadata';
 import { PUBLIC_PAGES } from '@/lib/seo/pages';
 import { LOCALES, SITE_URL, localeUrl } from '@/lib/seo/site';
@@ -37,6 +38,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
+  const insightEntries: MetadataRoute.Sitemap = INSIGHTS.flatMap((entry) => {
+    const path = `/insights/${entry.slug}`;
+    return entry.locales.map((locale) => ({
+      url: localeUrl(locale, path),
+      lastModified: new Date(entry.updated),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+      alternates: { languages: buildLanguageAlternates(path, entry.locales) },
+    }));
+  });
+
   let leadEntries: MetadataRoute.Sitemap = [];
   try {
     const codes = await fetchLeadCodes();
@@ -53,5 +65,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Leads API unavailable at build time: ship static entries only.
   }
 
-  return [...staticEntries, ...leadEntries];
+  return [...staticEntries, ...insightEntries, ...leadEntries];
 }

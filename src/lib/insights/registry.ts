@@ -70,3 +70,11 @@ export const INSIGHT_FALLBACK_LOCALE: Locale = 'ru';
 export function findInsight(slug: string): InsightEntry | undefined {
   return INSIGHTS.find((entry) => entry.slug === slug);
 }
+
+/** Link to a guide in the reader's language, or straight to its fallback
+ * version, so pages never link through the middleware's 308. */
+export function insightHref(locale: string, slug: string): string {
+  const entry = findInsight(slug);
+  const written = entry?.locales.some((l) => l === locale) ?? false;
+  return `/${written ? locale : INSIGHT_FALLBACK_LOCALE}/insights/${slug}`;
+}

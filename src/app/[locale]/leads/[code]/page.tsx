@@ -29,7 +29,7 @@ import {
 import { getPublishedLeadByCode } from '@/lib/leads/public-queries';
 import { TYPE_LABELS, isFreeStatus } from '@/lib/leads/types';
 import { getServerTranslation } from '@/lib/i18n/translations';
-import { GUIDE } from '@/lib/insights/registry';
+import { GUIDE, insightHref } from '@/lib/insights/registry';
 
 export const dynamic = 'force-dynamic';
 
@@ -213,7 +213,7 @@ export default async function LeadTeaserPage({
                   {t('leadDetail.transferNote')}
                 </p>
                 <Link
-                  href={`/${locale}/insights/${GUIDE.rightsTransfer}`}
+                  href={insightHref(locale, GUIDE.rightsTransfer)}
                   className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-gold-dark dark:text-gold-light hover:underline underline-offset-4"
                 >
                   {t('insights.links.rightsTransfer')}

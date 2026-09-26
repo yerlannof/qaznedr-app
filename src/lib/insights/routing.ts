@@ -1,4 +1,4 @@
-import { INSIGHT_FALLBACK_LOCALE, findInsight } from './registry';
+import { findInsight, insightHref } from './registry';
 
 const ARTICLE_PATH = /^\/(ru|kz|en|zh)\/insights\/([\w-]+)\/?$/;
 
@@ -14,5 +14,5 @@ export function insightLocaleRedirect(pathname: string): string | null {
   if (!entry || (entry.locales as readonly string[]).includes(locale)) {
     return null;
   }
-  return `/${INSIGHT_FALLBACK_LOCALE}/insights/${slug}`;
+  return insightHref(locale, slug);
 }

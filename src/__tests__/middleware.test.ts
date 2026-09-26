@@ -20,12 +20,12 @@ describe('middleware location', () => {
 });
 
 describe('hidden marketplace routes', () => {
-  it('redirects with 308 to the replacement, keeping the locale', () => {
+  it('redirects with 308 to the replacement, keeping the locale and query', () => {
     const res = middleware(
       new NextRequest('https://qaznedr.kz/zh/listings/abc?x=1')
     );
     expect(res.status).toBe(308);
-    expect(res.headers.get('location')).toBe('https://qaznedr.kz/zh/leads');
+    expect(res.headers.get('location')).toBe('https://qaznedr.kz/zh/leads?x=1');
   });
 
   it('lets look-alike and regular pages through', () => {
@@ -72,6 +72,18 @@ describe('guides without a translation', () => {
     expect(res.status).toBe(308);
     expect(res.headers.get('location')).toBe(
       `https://qaznedr.kz/ru/insights/${slug}`
+    );
+  });
+
+  it('keeps UTM and other query parameters byte for byte', () => {
+    const res = middleware(
+      new NextRequest(
+        `https://qaznedr.kz/kz/insights/${slug}?utm_source=wechat&utm_campaign=a%20b`
+      )
+    );
+    expect(res.status).toBe(308);
+    expect(res.headers.get('location')).toBe(
+      `https://qaznedr.kz/ru/insights/${slug}?utm_source=wechat&utm_campaign=a%20b`
     );
   });
 

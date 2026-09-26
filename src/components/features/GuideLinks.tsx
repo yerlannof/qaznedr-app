@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
-import { GUIDE, GUIDE_KEYS, type GuideKey } from '@/lib/insights/registry';
+import {
+  GUIDE,
+  GUIDE_KEYS,
+  insightHref,
+  type GuideKey,
+} from '@/lib/insights/registry';
 
 /** Cards linking to guides. Hook-free, so it renders in RSC and client pages. */
 export default function GuideLinks({
@@ -22,7 +27,7 @@ export default function GuideLinks({
         {keys.map((key) => (
           <li key={key}>
             <Link
-              href={`/${locale}/insights/${GUIDE[key]}`}
+              href={insightHref(locale, GUIDE[key])}
               className="group block h-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#141414] p-5 shadow-subtle hover:shadow-medium hover:-translate-y-0.5 transition-all duration-200"
             >
               <span className="block text-base font-semibold text-gray-900 dark:text-gray-50">

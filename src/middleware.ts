@@ -12,7 +12,10 @@ export function middleware(request: NextRequest) {
   const target =
     hiddenRouteRedirect(pathname) ?? insightLocaleRedirect(pathname);
   if (target) {
-    return NextResponse.redirect(new URL(target, request.url), 308);
+    // Clone keeps the query string (UTM tags survive the redirect).
+    const url = request.nextUrl.clone();
+    url.pathname = target;
+    return NextResponse.redirect(url, 308);
   }
   return NextResponse.next();
 }

@@ -35,8 +35,24 @@ const NAV_KEYS = [
   'navigation.admin',
 ];
 
+const CONTACT_KEYS = [
+  'contact.title',
+  'contact.subtitle',
+  'contact.wechatHint',
+  'contact.wechatQrAlt',
+  'contact.copy',
+  'contact.copied',
+  'contact.whatsappCta',
+  'contact.formTitle',
+  'contact.whatsappTextLead',
+  'contact.whatsappTextGeneral',
+  'contact.discussHeading',
+  'contact.discussNote',
+  'contact.orForm',
+];
+
 // Later tasks append their namespaces here.
-const KEYS: string[] = [...SEO_KEYS, ...NAV_KEYS];
+const KEYS: string[] = [...SEO_KEYS, ...NAV_KEYS, ...CONTACT_KEYS];
 
 describe.each(['ru', 'kz', 'en', 'zh'])('%s holding translations', (locale) => {
   it.each(KEYS)('%s exists', (key) => {

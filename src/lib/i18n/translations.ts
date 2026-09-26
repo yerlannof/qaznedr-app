@@ -95,6 +95,27 @@ export const translations = {
         notFound: 'Участок не найден',
       },
     },
+    contact: {
+      title: 'Связаться с QAZNEDR HOLDING',
+      subtitle:
+        'Напишите в удобный мессенджер или оставьте заявку — ответим в течение рабочего дня.',
+      wechatTitle: 'WeChat',
+      wechatHint: 'Отсканируйте QR-код или добавьте ID. Укажите код участка.',
+      wechatQrAlt: 'QR-код WeChat QAZNEDR HOLDING',
+      copy: 'Копировать',
+      copied: 'Скопировано',
+      whatsappTitle: 'WhatsApp',
+      whatsappCta: 'Написать в WhatsApp',
+      emailTitle: 'Email',
+      formTitle: 'Оставить заявку',
+      whatsappTextLead:
+        'Здравствуйте! Интересует участок {code} на qaznedr.kz.',
+      whatsappTextGeneral: 'Здравствуйте! Пишу с сайта qaznedr.kz.',
+      discussHeading: 'Обсудить участок',
+      discussNote:
+        'Детали, формат сделки и документы — на встрече после подписания NDA.',
+      orForm: 'Или оставьте заявку — мы напишем сами',
+    },
     navigation: {
       leads: 'Находки',
       listings: 'Объявления',
@@ -750,6 +771,28 @@ export const translations = {
         notFound: 'Учаске табылмады',
       },
     },
+    contact: {
+      title: 'QAZNEDR HOLDING-пен байланысу',
+      subtitle:
+        'Ыңғайлы мессенджерге жазыңыз немесе өтінім қалдырыңыз — бір жұмыс күні ішінде жауап береміз.',
+      wechatTitle: 'WeChat',
+      wechatHint:
+        'QR-кодты сканерлеңіз немесе ID қосыңыз. Учаске кодын көрсетіңіз.',
+      wechatQrAlt: 'QAZNEDR HOLDING WeChat QR-коды',
+      copy: 'Көшіру',
+      copied: 'Көшірілді',
+      whatsappTitle: 'WhatsApp',
+      whatsappCta: 'WhatsApp-қа жазу',
+      emailTitle: 'Email',
+      formTitle: 'Өтінім қалдыру',
+      whatsappTextLead:
+        'Сәлеметсіз бе! qaznedr.kz сайтындағы {code} учаскесі қызықтырады.',
+      whatsappTextGeneral: 'Сәлеметсіз бе! qaznedr.kz сайтынан жазып отырмын.',
+      discussHeading: 'Учаскені талқылау',
+      discussNote:
+        'Мәліметтер, мәміле форматы және құжаттар — NDA-ға қол қойылғаннан кейінгі кездесуде.',
+      orForm: 'Немесе өтінім қалдырыңыз — өзіміз хабарласамыз',
+    },
     navigation: {
       leads: 'Олжалар',
       listings: 'Хабарландырулар',
@@ -1330,6 +1373,27 @@ export const translations = {
         notFound: 'Area not found',
       },
     },
+    contact: {
+      title: 'Contact QAZNEDR HOLDING',
+      subtitle:
+        'Message us in your preferred messenger or send an inquiry — we reply within one business day.',
+      wechatTitle: 'WeChat',
+      wechatHint:
+        'Scan the QR code or add our ID. Please mention the area code.',
+      wechatQrAlt: 'QAZNEDR HOLDING WeChat QR code',
+      copy: 'Copy',
+      copied: 'Copied',
+      whatsappTitle: 'WhatsApp',
+      whatsappCta: 'Message on WhatsApp',
+      emailTitle: 'Email',
+      formTitle: 'Send an inquiry',
+      whatsappTextLead: 'Hello! I am interested in area {code} on qaznedr.kz.',
+      whatsappTextGeneral: 'Hello! I am writing from qaznedr.kz.',
+      discussHeading: 'Discuss this area',
+      discussNote:
+        'Details, deal format and documents are shared at a meeting after an NDA is signed.',
+      orForm: 'Or leave an inquiry — we will reach out',
+    },
     navigation: {
       leads: 'Finds',
       listings: 'Listings',
@@ -1895,6 +1959,25 @@ export const translations = {
         whereNone: '',
         notFound: '未找到该项目',
       },
+    },
+    contact: {
+      title: '联系 QAZNEDR HOLDING',
+      subtitle:
+        '通过微信或 WhatsApp 联系我们，或提交在线咨询，我们将在一个工作日内回复。',
+      wechatTitle: '微信',
+      wechatHint: '扫描二维码或添加微信号，请注明项目编号。',
+      wechatQrAlt: 'QAZNEDR HOLDING 微信二维码',
+      copy: '复制',
+      copied: '已复制',
+      whatsappTitle: 'WhatsApp',
+      whatsappCta: '通过 WhatsApp 联系',
+      emailTitle: '邮箱',
+      formTitle: '在线咨询',
+      whatsappTextLead: '您好！我对 qaznedr.kz 上的项目 {code} 感兴趣。',
+      whatsappTextGeneral: '您好！我从 qaznedr.kz 联系您。',
+      discussHeading: '洽谈该项目',
+      discussNote: '项目详情、合作方式及文件将在签署保密协议后的会面中提供。',
+      orForm: '或留下咨询信息，我们将主动联系您',
     },
     navigation: {
       leads: '发现',

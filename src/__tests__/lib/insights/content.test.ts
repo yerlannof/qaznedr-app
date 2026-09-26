@@ -87,7 +87,26 @@ describe('parseArticle', () => {
       updated: '2026-09-27',
       readingMinutes: 1,
     });
-    expect(a.html).toContain('<h2>Раздел</h2>');
+    expect(a.html).toContain(
+      '<h2 id="section-1" tabindex="-1" class="scroll-mt-24">Раздел</h2>'
+    );
+    expect(a.toc).toEqual([{ id: 'section-1', title: 'Раздел', level: 2 }]);
+  });
+
+  it('creates unique heading anchors and plain-text TOC labels from inline markup and entities', () => {
+    const a = parseArticle(
+      '---\ntitle: T\ndescription: D\n---\n\n## *Gold* &amp; **Copper**\n\n### A &lt; B\n\n## *Gold* &amp; **Copper**',
+      entry,
+      'en'
+    );
+    expect(a.toc).toEqual([
+      { id: 'section-1', title: 'Gold & Copper', level: 2 },
+      { id: 'section-2', title: 'A < B', level: 3 },
+      { id: 'section-3', title: 'Gold & Copper', level: 2 },
+    ]);
+    expect(a.html).toContain(
+      '<h3 id="section-2" tabindex="-1" class="scroll-mt-24">'
+    );
   });
 
   it('names the file when title or description is missing', () => {

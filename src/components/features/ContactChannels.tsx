@@ -13,8 +13,7 @@ interface ContactChannelsProps {
   leadCode?: string;
 }
 
-const card =
-  'rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] p-5';
+const card = 'border border-brand-line bg-brand-surface p-5';
 
 export default function ContactChannels({
   config,
@@ -24,6 +23,7 @@ export default function ContactChannels({
   const t = (key: string, params?: Record<string, unknown>) =>
     translate(locale, key, params);
   const [copied, setCopied] = useState(false);
+  const [codeCopied, setCodeCopied] = useState(false);
 
   const copyWeChat = async () => {
     if (!config.wechatId) return;
@@ -36,35 +36,44 @@ export default function ContactChannels({
     }
   };
 
+  const copyLeadCode = async () => {
+    if (!leadCode) return;
+    try {
+      await navigator.clipboard?.writeText(leadCode);
+      if (navigator.clipboard) setCodeCopied(true);
+    } catch {
+      // The code remains visible and selectable when clipboard access fails.
+    }
+  };
+
   const wechat =
     config.wechatId || config.wechatQrSrc ? (
       <section key="wechat" data-channel="wechat" className={card}>
-        <h3 className="flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-gray-100">
-          <MessageCircle
-            aria-hidden
-            className="w-4 h-4 text-gold-dark dark:text-gold-light"
-          />
+        <h3 className="flex items-center gap-2 text-sm font-semibold text-brand-ink">
+          <MessageCircle aria-hidden className="w-4 h-4 text-brand-muted" />
           {t('contact.wechatTitle')}
         </h3>
-        <p className="mt-1 text-xs text-gray-500">{t('contact.wechatHint')}</p>
+        <p className="mt-1 text-xs text-brand-muted">
+          {t('contact.wechatHint')}
+        </p>
         {config.wechatQrSrc && (
           <Image
             src={config.wechatQrSrc}
             alt={t('contact.wechatQrAlt')}
             width={176}
             height={176}
-            className="mt-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white"
+            className="mt-3 border border-brand-line bg-white"
           />
         )}
         {config.wechatId && (
           <div className="mt-3 flex items-center gap-2">
-            <span className="select-all font-mono text-sm text-gray-900 dark:text-gray-100">
+            <span className="select-all font-mono text-sm text-brand-ink">
               {config.wechatId}
             </span>
             <button
               type="button"
               onClick={copyWeChat}
-              className="inline-flex items-center gap-1 min-h-[44px] px-3 text-xs rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+              className="brand-focus inline-flex min-h-11 items-center gap-1 border border-brand-line px-3 text-xs text-brand-ink hover:bg-brand-bg transition-colors"
             >
               {copied ? (
                 <Check aria-hidden className="w-3.5 h-3.5" />
@@ -75,12 +84,32 @@ export default function ContactChannels({
             </button>
           </div>
         )}
+        {leadCode && (
+          <div className="mt-4 border-t border-brand-line pt-4">
+            <span className="select-all font-mono text-sm text-brand-ink">
+              {leadCode}
+            </span>
+            <button
+              type="button"
+              onClick={copyLeadCode}
+              aria-label={`${codeCopied ? t('contact.copied') : t('contact.copy')} ${leadCode}`}
+              className="brand-focus ml-3 inline-flex min-h-11 items-center gap-1 border border-brand-line px-3 text-xs text-brand-ink hover:bg-brand-bg transition-colors"
+            >
+              {codeCopied ? (
+                <Check aria-hidden className="size-4" />
+              ) : (
+                <Copy aria-hidden className="size-4" />
+              )}
+              {codeCopied ? t('contact.copied') : t('contact.copy')}
+            </button>
+          </div>
+        )}
       </section>
     ) : null;
 
   const whatsapp = config.whatsappNumber ? (
     <section key="whatsapp" data-channel="whatsapp" className={card}>
-      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+      <h3 className="text-sm font-semibold text-brand-ink">
         {t('contact.whatsappTitle')}
       </h3>
       <a
@@ -93,7 +122,7 @@ export default function ContactChannels({
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => track('click_whatsapp', { lead: leadCode ?? '' })}
-        className="mt-3 flex items-center justify-center gap-2 w-full min-h-[44px] px-4 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-sm font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+        className="brand-button brand-focus mt-3 w-full"
       >
         <MessageCircle aria-hidden className="w-4 h-4" />
         {t('contact.whatsappCta')}
@@ -103,12 +132,12 @@ export default function ContactChannels({
 
   const email = config.email ? (
     <section key="email" data-channel="email" className={card}>
-      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+      <h3 className="text-sm font-semibold text-brand-ink">
         {t('contact.emailTitle')}
       </h3>
       <a
-        href={`mailto:${config.email}`}
-        className="mt-2 inline-flex items-center gap-2 text-sm text-[#0060DF] hover:underline"
+        href={`mailto:${config.email}${leadCode ? `?body=${encodeURIComponent(t('contact.whatsappTextLead', { code: leadCode }))}` : ''}`}
+        className="brand-focus mt-2 inline-flex min-h-11 items-center gap-2 text-sm text-brand-ink underline underline-offset-4 decoration-brand-line hover:text-brand-muted"
       >
         <Mail aria-hidden className="w-4 h-4" />
         {config.email}

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import type { LeadType } from '@/lib/leads/types';
 import { withRateLimit } from '@/lib/middleware/rate-limiting';
 import {
   listPublishedLeads,
@@ -39,6 +40,9 @@ async function handler(req: NextRequest): Promise<NextResponse> {
     result = await listPublishedLeads({
       region: p.get('region') || undefined,
       tier: p.get('tier') || undefined,
+      type: ['placer', 'bedrock', 'other'].includes(p.get('type') ?? '')
+        ? (p.get('type') as LeadType)
+        : undefined,
       mineral: p.get('mineral') || undefined,
       exclusivity: p.get('exclusivity') || undefined,
       freeOnly: p.get('free') === '1',

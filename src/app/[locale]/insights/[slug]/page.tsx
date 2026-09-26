@@ -5,6 +5,7 @@ import { Scale } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import ClosingCta from '@/components/features/ClosingCta';
+import ArticleToc from '@/components/insights/ArticleToc';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { getArticle, listArticles } from '@/lib/insights/content';
 import { INSIGHTS, findInsight } from '@/lib/insights/registry';
@@ -83,15 +84,15 @@ export default async function InsightArticlePage({
         />
       ))}
       <Navigation />
-      <div className="min-h-screen bg-white dark:bg-[#0A0A0A] pt-20 lg:pt-24">
-        <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 lg:pt-14 lg:pb-20">
+      <div className="min-h-screen bg-brand-bg text-brand-ink pt-20 lg:pt-24">
+        <article className="brand-container max-w-[760px] pt-10 pb-16 lg:pt-14 lg:pb-20">
           <nav
             aria-label="Breadcrumb"
-            className="flex flex-wrap items-center gap-1.5 text-xs text-gray-500"
+            className="flex flex-wrap items-center gap-1.5 text-xs text-brand-muted"
           >
             <Link
               href={`/${locale}`}
-              className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-150"
+              className="brand-focus underline underline-offset-4 decoration-brand-line hover:text-brand-ink"
             >
               {t('navigation.home')}
             </Link>
@@ -99,7 +100,7 @@ export default async function InsightArticlePage({
               <span aria-hidden="true">/</span>
               <Link
                 href={`/${locale}/insights`}
-                className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-150"
+                className="brand-focus underline underline-offset-4 decoration-brand-line hover:text-brand-ink"
               >
                 {t('insights.breadcrumb')}
               </Link>
@@ -110,7 +111,7 @@ export default async function InsightArticlePage({
               </span>
               <span
                 aria-current="page"
-                className="max-w-full truncate text-gray-700 dark:text-gray-300"
+                className="max-w-full truncate text-brand-ink"
               >
                 {article.title}
               </span>
@@ -118,49 +119,51 @@ export default async function InsightArticlePage({
           </nav>
 
           <div className="mt-8 inline-flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-gold-dark dark:text-gold-light">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
+            <span className="text-xs font-semibold uppercase text-brand-muted">
               {t(`insights.categories.${entry.category}`)}
             </span>
           </div>
-          <h1 className="mt-4 font-serif font-light text-4xl lg:text-5xl tracking-tight text-gray-900 dark:text-gray-50 leading-[1.1]">
+          <h1 className="mt-4 font-serif font-light text-4xl lg:text-5xl tracking-tight text-brand-ink leading-[1.1]">
             {article.title}
           </h1>
-          <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="mt-6 text-lg text-brand-muted leading-relaxed">
             {article.description}
           </p>
-          <p className="mt-4 text-sm text-gray-500">
+          <p className="mt-4 text-sm text-brand-muted">
             {t('insights.updated')} {updated} ·{' '}
             {t('insights.readingTime', { n: article.readingMinutes })}
           </p>
 
           {entry.legal && (
-            <aside className="mt-8 flex gap-3 rounded-xl border border-gold/40 bg-[rgba(200,162,75,0.05)] p-5 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+            <aside className="mt-8 flex gap-3 border-l-2 border-brand-accent bg-brand-surface p-5 text-sm text-brand-muted leading-relaxed">
               <Scale
-                className="w-4 h-4 mt-0.5 flex-shrink-0 text-gold-dark dark:text-gold-light"
+                className="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-accent"
                 aria-hidden="true"
               />
               <p>{t('insights.legalNote', { date: lawAsOf })}</p>
             </aside>
           )}
 
+          <ArticleToc label={t('insights.contents')} toc={article.toc} />
+
           <div
-            className="insight-prose mt-10"
+            className="insight-prose mt-10 text-base leading-[1.7] md:text-[17px] lg:text-lg"
             dangerouslySetInnerHTML={{ __html: article.html }}
           />
         </article>
 
         {others.length > 0 && (
-          <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-20">
-            <h2 className="font-serif text-2xl lg:text-3xl font-light tracking-tight text-gray-900 dark:text-gray-50">
+          <section className="brand-container max-w-[760px] pb-16 lg:pb-20">
+            <h2 className="font-serif text-2xl lg:text-3xl font-light tracking-tight text-brand-ink">
               {t('insights.otherGuides')}
             </h2>
-            <ul className="mt-6 divide-y divide-gray-100 dark:divide-gray-800 border-y border-gray-100 dark:border-gray-800">
+            <ul className="mt-6 divide-y divide-brand-line border-y border-brand-line">
               {others.map((card) => (
                 <li key={card.slug}>
                   <Link
                     href={`/${card.locale}/insights/${card.slug}`}
-                    className="block py-4 text-base text-gray-900 dark:text-gray-100 hover:text-gold-dark dark:hover:text-gold-light transition-colors duration-150"
+                    className="brand-focus block py-4 text-base text-brand-ink underline underline-offset-4 decoration-brand-line hover:text-brand-muted"
                   >
                     {card.title}
                   </Link>
@@ -170,7 +173,7 @@ export default async function InsightArticlePage({
           </section>
         )}
 
-        <ClosingCta locale={locale} />
+        <ClosingCta locale={locale} variant="brand" />
       </div>
       <Footer />
     </>

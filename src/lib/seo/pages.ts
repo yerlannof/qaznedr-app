@@ -12,6 +12,12 @@ export const PUBLIC_PAGES = [
   '/faq',
   '/legal/terms',
   '/insights',
+  '/minerals/gold',
+  '/minerals/copper',
+  '/minerals/lead-zinc',
+  '/minerals/molybdenum',
+  '/minerals/tungsten',
+  '/minerals/iron',
 ] as const;
 
 /**

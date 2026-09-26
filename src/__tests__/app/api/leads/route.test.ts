@@ -47,3 +47,15 @@ it('caches successful empty results but reads again after 60 seconds', async () 
   await GET(request('ttl'));
   expect(read).toHaveBeenCalledTimes(2);
 });
+
+it('passes only recognized geological types through the public API', async () => {
+  read.mockResolvedValue(empty);
+  await GET(new NextRequest('https://qaznedr.kz/api/leads?type=bedrock'));
+  expect(read).toHaveBeenLastCalledWith(
+    expect.objectContaining({ type: 'bedrock' })
+  );
+  await GET(new NextRequest('https://qaznedr.kz/api/leads?type=unrecognized'));
+  expect(read).toHaveBeenLastCalledWith(
+    expect.objectContaining({ type: undefined })
+  );
+});

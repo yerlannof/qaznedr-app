@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArrowUpRight, LockKeyhole, MapPin } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
-import { Badge } from '@/components/ui/badge';
 import LeadLockedSection from '@/components/features/LeadLockedSection';
 import ContactChannels from '@/components/features/ContactChannels';
 import InquiryForm from '@/components/features/InquiryForm';
@@ -11,263 +11,180 @@ import { formatCheckDate } from '@/lib/leads/check-date';
 import { toLocale } from '@/lib/seo/site';
 import { leadJsonLd } from '@/lib/seo/lead-jsonld';
 import {
-  MapPin,
-  ShieldCheck,
-  Calendar,
-  TrendingUp,
-  Lock,
-  ChevronRight,
-  CheckCircle2,
-  BarChart3,
-  Scale,
-  Archive,
-  Compass,
-  FileSignature,
-  FolderCheck,
-  ArrowRight,
-} from 'lucide-react';
+  leadSeoText,
+  leadMineralName,
+  leadRegionName,
+} from '@/lib/seo/lead-metadata';
 import { getPublishedLeadByCode } from '@/lib/leads/public-queries';
-import { TYPE_LABELS, isFreeStatus } from '@/lib/leads/types';
+import { isFreeStatus } from '@/lib/leads/types';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { GUIDE, insightHref } from '@/lib/insights/registry';
 
 export const dynamic = 'force-dynamic';
+const section = 'border-t border-brand-line py-8 lg:py-10';
+const heading = 'font-serif text-2xl lg:text-3xl leading-tight';
+const sourceLanguage = (s: string) => (/[А-Яа-яЁё]/.test(s) ? 'ru' : undefined);
 
 export default async function LeadTeaserPage({
   params,
 }: {
   params: Promise<{ locale: string; code: string }>;
 }) {
-  const { locale, code } = await params;
+  const { locale: raw, code } = await params;
+  const locale = toLocale(raw);
   const { t } = getServerTranslation(locale);
   const lead = await getPublishedLeadByCode(code);
   if (!lead) notFound();
-
   const free = isFreeStatus(lead.license_status);
-  const checkedOn = formatCheckDate(lead.last_verified, toLocale(locale));
-  const contacts = getContactConfig();
   const coordVerified =
     free &&
-    (lead.license_status || '').toUpperCase().includes('COORD_VERIFIED');
-  const isSold = lead.status === 'SOLD';
+    (lead.license_status ?? '').toUpperCase().includes('COORD_VERIFIED');
+  const checkedOn = formatCheckDate(lead.last_verified, locale);
+  const region =
+    leadRegionName(lead.region, locale) ||
+    lead.region ||
+    t('leadDetail.locationFallback');
+  const contacts = getContactConfig();
+  const { place, breadcrumb } = leadJsonLd(lead, locale);
+  const type = ['placer', 'bedrock', 'other'].includes(lead.type)
+    ? lead.type
+    : 'other';
+  const number = (n: number | null) =>
+    n === null
+      ? '?'
+      : new Intl.NumberFormat(locale === 'kz' ? 'kk' : locale, {
+          maximumFractionDigits: 2,
+        }).format(n * 1000000);
   const fairValue =
-    lead.fair_value_min_usd_m || lead.fair_value_max_usd_m
-      ? `$${lead.fair_value_min_usd_m ?? '?'}–${lead.fair_value_max_usd_m ?? '?'} млн`
+    lead.fair_value_min_usd_m != null || lead.fair_value_max_usd_m != null
+      ? `${number(lead.fair_value_min_usd_m)}–${number(lead.fair_value_max_usd_m)} USD`
       : null;
-
-  const teaserTitle =
-    lead.teaser_title || `Золото · ${lead.region || 'Казахстан'}`;
-
-  const { place: jsonLd, breadcrumb: breadcrumbJsonLd } = leadJsonLd(
-    lead,
-    toLocale(locale)
-  );
-
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-white dark:bg-[#0A0A0A] pt-16 lg:pt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* Breadcrumb */}
+      <div className="bg-brand-bg text-brand-ink pt-20 lg:pt-24">
+        <div className="brand-container pb-12 lg:pb-20">
           <nav
-            aria-label="Breadcrumb"
-            className="text-sm text-gray-400 mb-6 flex items-center gap-1.5"
+            aria-label={t('navigation.home')}
+            className="flex flex-wrap items-center gap-3 py-6 text-sm text-brand-muted"
           >
-            <Link href={`/${locale}/leads`} className="hover:text-gray-600">
+            <Link
+              className="brand-focus min-h-11 inline-flex items-center underline underline-offset-4"
+              href={`/${locale}/leads`}
+            >
               {t('leadDetail.breadcrumbLeads')}
             </Link>
-            <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-gray-600 dark:text-gray-300">
-              {lead.code}
-            </span>
+            <span aria-hidden>/</span>
+            <span>{lead.code}</span>
           </nav>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main */}
-            <div className="lg:col-span-2 space-y-6">
-              <div>
-                <div className="flex flex-wrap items-center gap-2 mb-3">
-                  {isSold ? (
-                    <Badge variant="default">{t('leadDetail.badgeSold')}</Badge>
-                  ) : free ? (
-                    <Badge variant="gold">
-                      <ShieldCheck className="w-3 h-3 mr-1" />
-                      {t('leadDetail.badgeFree')}
-                    </Badge>
-                  ) : null}
-                  <Badge variant="blue">{lead.mineral}</Badge>
-                  <Badge variant="default">
-                    {TYPE_LABELS[lead.type] ?? t('leadDetail.typeFallback')}
-                  </Badge>
-                </div>
-                <h1 className="font-serif font-light text-3xl lg:text-4xl tracking-tight text-gray-900 dark:text-gray-50">
-                  {teaserTitle}
-                </h1>
-                {lead.region && (
-                  <p className="mt-2 inline-flex items-center gap-1 text-sm text-gray-500">
-                    <MapPin className="w-4 h-4" /> {lead.region}
-                    {lead.distance_band ? ` · ${lead.distance_band}` : ''}
-                  </p>
-                )}
-              </div>
-
-              {/* Value evidence */}
-              <section className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                  <BarChart3
-                    className="w-4 h-4 text-gold-dark dark:text-gold-light"
-                    aria-hidden="true"
-                  />
+          <header className="border-b border-brand-line pb-10">
+            <p className="text-sm text-brand-muted">
+              {lead.code} · {leadMineralName(lead.mineral, locale)} ·{' '}
+              {t(`leadCard.types.${type}`)}
+            </p>
+            <h1 className="holding-title mt-5 max-w-4xl">
+              {leadSeoText(lead, locale).title}
+            </h1>
+            <p className="mt-5 flex items-center gap-2 text-brand-muted">
+              <MapPin aria-hidden className="size-4" />
+              {region}
+            </p>
+            <p className="mt-4 text-sm">
+              {free
+                ? coordVerified
+                  ? t('leadDetail.freeVerified')
+                  : t('leadDetail.freeRegistry')
+                : t('leadDetail.statusPending')}
+              <span className="block mt-1 text-brand-muted">
+                {t('leadDetail.verifyDate')} {checkedOn}
+              </span>
+            </p>
+          </header>
+          <div className="grid gap-x-12 lg:grid-cols-[minmax(0,1fr)_340px]">
+            <div className="min-w-0">
+              <section className={section}>
+                <h2 className={heading}>
                   {t('leadDetail.valueEvidenceHeading')}
                 </h2>
-                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <dl className="mt-7 grid gap-6 sm:grid-cols-2 text-sm">
+                  <div>
+                    <dt className="text-brand-muted">
+                      {t('listingsFilters.mineral')}
+                    </dt>
+                    <dd className="mt-1">
+                      {leadMineralName(lead.mineral, locale)}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-brand-muted">
+                      {t('leadsCatalog.type')}
+                    </dt>
+                    <dd className="mt-1">{t(`leadCard.types.${type}`)}</dd>
+                  </div>
                   {lead.grade_display && (
                     <div className="sm:col-span-2">
-                      <dt className="text-xs uppercase tracking-wider text-gray-400">
+                      <dt className="text-brand-muted">
                         {t('leadDetail.gradeAu')}
                       </dt>
-                      <dd className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                      <dd
+                        className="mt-2 text-xl"
+                        lang={sourceLanguage(lead.grade_display)}
+                      >
                         {lead.grade_display}
                       </dd>
                       {lead.grade_label && (
-                        <p className="text-[12px] text-gray-500 mt-0.5">
+                        <dd
+                          className="mt-2 text-brand-muted"
+                          lang={sourceLanguage(lead.grade_label)}
+                        >
                           {lead.grade_label}
-                        </p>
+                        </dd>
                       )}
                     </div>
                   )}
-                  {lead.reserve_categories &&
-                    lead.reserve_categories.length > 0 && (
-                      <div>
-                        <dt className="text-xs uppercase tracking-wider text-gray-400">
-                          {t('leadDetail.reserveCategories')}
-                        </dt>
-                        <dd className="text-sm font-medium">
-                          {lead.reserve_categories.join(', ')}
-                        </dd>
-                      </div>
-                    )}
+                  {!!lead.reserve_categories?.length && (
+                    <div className="sm:col-span-2">
+                      <dt className="text-brand-muted">
+                        {t('leadDetail.reserveCategories')}
+                      </dt>
+                      <dd className="mt-1">
+                        {lead.reserve_categories.join(', ')}
+                      </dd>
+                      <dd className="mt-2 text-brand-muted leading-relaxed">
+                        {t('leadDetail.assessmentNote')}
+                      </dd>
+                    </div>
+                  )}
                   {lead.byproducts_display && (
                     <div>
-                      <dt className="text-xs uppercase tracking-wider text-gray-400">
+                      <dt className="text-brand-muted">
                         {t('leadDetail.byproducts')}
                       </dt>
-                      <dd className="text-sm font-medium">
+                      <dd
+                        className="mt-1"
+                        lang={sourceLanguage(lead.byproducts_display)}
+                      >
                         {lead.byproducts_display}
                       </dd>
                     </div>
                   )}
                   {fairValue && (
                     <div>
-                      <dt className="text-xs uppercase tracking-wider text-gray-400">
+                      <dt className="text-brand-muted">
                         {t('leadDetail.fairValue')}
                       </dt>
-                      <dd className="text-sm font-medium inline-flex items-center gap-1">
-                        <TrendingUp className="w-3.5 h-3.5 text-gold-dark" />{' '}
-                        {fairValue}
-                      </dd>
+                      <dd className="mt-1">{fairValue}</dd>
                     </div>
                   )}
                 </dl>
-                <p className="text-[12px] text-gray-400 mt-4 flex items-start gap-1.5">
-                  <Scale
-                    className="w-4 h-4 shrink-0 text-gold-dark dark:text-gold-light"
-                    aria-hidden="true"
-                  />
-                  <span>{t('leadDetail.valueNote')}</span>
+                <p className="mt-6 text-sm leading-relaxed text-brand-muted">
+                  {t('leadDetail.valueNote')}
                 </p>
               </section>
-
-              {/* Legal status */}
-              <section className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                  <Scale
-                    className="w-4 h-4 text-gold-dark dark:text-gold-light"
-                    aria-hidden="true"
-                  />
-                  {t('leadDetail.legalStatusHeading')}
-                </h2>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2">
-                    {free ? (
-                      <CheckCircle2 className="w-4 h-4 text-green-600" />
-                    ) : (
-                      <Lock className="w-4 h-4 text-gray-400" />
-                    )}
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {free
-                        ? coordVerified
-                          ? t('leadDetail.freeVerified')
-                          : t('leadDetail.freeRegistry')
-                        : t('leadDetail.statusPending')}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-500">
-                    <Calendar className="w-4 h-4" />{' '}
-                    {t('leadDetail.verifyDate')} {checkedOn}
-                  </div>
-                </div>
-                <p className="mt-3 text-xs text-gray-500 leading-relaxed">
-                  {t('leadDetail.transferNote')}
-                </p>
-                <Link
-                  href={insightHref(locale, GUIDE.rightsTransfer)}
-                  className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-gold-dark dark:text-gold-light hover:underline underline-offset-4"
-                >
-                  {t('insights.links.rightsTransfer')}
-                  <ArrowRight className="w-3 h-3" aria-hidden="true" />
-                </Link>
-              </section>
-
-              {/* How it works legally */}
-              <section className="rounded-xl border border-gold/40 bg-[rgba(200,162,75,0.05)] p-5">
-                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                  <ShieldCheck
-                    className="w-4 h-4 text-gold-dark dark:text-gold-light"
-                    aria-hidden="true"
-                  />
-                  {t('leadDetail.howItWorksHeading')}
-                </h2>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-sm">
-                  <li className="flex items-start gap-2.5">
-                    <Archive className="w-4 h-4 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {t('leadDetail.howItWorksPoint1')}
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Compass className="w-4 h-4 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {t('leadDetail.howItWorksPoint2')}
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <FolderCheck className="w-4 h-4 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {t('leadDetail.howItWorksPoint3')}
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <FileSignature className="w-4 h-4 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {t('leadDetail.howItWorksPoint4')}
-                    </span>
-                  </li>
-                </ul>
-              </section>
-
-              {/* Locked */}
               <LeadLockedSection locale={locale} />
-
-              {/* Contact — messengers first, form as fallback; no login */}
-              <section
-                id="inquiry"
-                className="scroll-mt-24 rounded-xl border border-gold/40 p-5"
-              >
-                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-1">
-                  {t('contact.discussHeading')}
-                </h2>
-                <p className="text-sm text-gray-500 mb-4">
+              <section id="inquiry" className={`${section} scroll-mt-24`}>
+                <h2 className={heading}>{t('contact.discussHeading')}</h2>
+                <p className="mt-4 mb-6 text-brand-muted leading-relaxed">
                   {t('contact.discussNote')}
                 </p>
                 <div id="contact-channels" className="scroll-mt-24">
@@ -277,97 +194,106 @@ export default async function LeadTeaserPage({
                     leadCode={lead.code}
                   />
                 </div>
-                <h3 className="mt-6 mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">
+                <h3 className="mt-8 mb-5 font-semibold">
                   {hasAnyChannel(contacts)
                     ? t('contact.orForm')
                     : t('contact.formTitle')}
                 </h3>
                 <InquiryForm locale={locale} leadCode={lead.code} />
               </section>
-
-              {/* Region indicator (exact GPS hidden) */}
-              <section className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-2">
-                  {t('leadDetail.locationHeading')}
+              <section className={section}>
+                <h2 className={heading}>{t('dealSteps.step3Title')}</h2>
+                <p className="mt-5 leading-relaxed text-brand-muted">
+                  {t('dealSteps.step3Desc')}
+                </p>
+                <h3 className="mt-8 font-serif text-2xl">
+                  {t('leadDetail.howItWorksHeading')}
+                </h3>
+                <ol className="mt-6 grid gap-6 sm:grid-cols-2">
+                  {[1, 2, 3, 4].map((n) => (
+                    <li
+                      key={n}
+                      className="border-t border-brand-line pt-4 text-sm leading-relaxed"
+                    >
+                      <span className="mb-2 block text-brand-muted">0{n}</span>
+                      {t(`leadDetail.howItWorksPoint${n}`)}
+                    </li>
+                  ))}
+                </ol>
+              </section>
+              <section className={section}>
+                <h2 className={heading}>
+                  {t('leadDetail.legalStatusHeading')}
                 </h2>
-                <div className="h-40 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 flex flex-col items-center justify-center text-center">
-                  <MapPin className="w-7 h-7 text-gray-300" />
-                  <p className="mt-2 text-sm font-medium text-gray-600 dark:text-gray-300">
-                    {lead.region || t('leadDetail.locationFallback')}
-                  </p>
-                  <p className="text-[12px] text-gray-400">
-                    {t('leadDetail.locationHidden')}
-                  </p>
-                </div>
+                <p className="mt-5 text-sm leading-relaxed">
+                  {free
+                    ? coordVerified
+                      ? t('leadDetail.freeVerified')
+                      : t('leadDetail.freeRegistry')
+                    : t('leadDetail.statusPending')}
+                </p>
+                <p className="mt-2 text-sm text-brand-muted">
+                  {t('leadDetail.verifyDate')} {checkedOn}
+                </p>
+                <p className="mt-6 leading-relaxed text-brand-muted">
+                  {t('leadDetail.transferNote')}
+                </p>
+                <Link
+                  className="brand-focus mt-5 inline-flex min-h-11 items-center gap-2 underline underline-offset-4"
+                  href={insightHref(locale, GUIDE.rightsTransfer)}
+                >
+                  {t('insights.links.rightsTransfer')}
+                  <ArrowUpRight aria-hidden className="size-4 shrink-0" />
+                </Link>
+              </section>
+              <section className={section}>
+                <h2 className={heading}>{t('leadDetail.locationHeading')}</h2>
+                <p className="mt-5">{region}</p>
+                <p className="mt-2 text-sm text-brand-muted">
+                  {t('leadDetail.locationHidden')}
+                </p>
               </section>
             </div>
-
-            {/* Sidebar */}
-            <aside className="lg:col-span-1">
-              <div className="lg:sticky lg:top-24 space-y-4">
-                <div className="rounded-xl border border-gold/40 bg-[rgba(200,162,75,0.06)] p-5">
-                  <div className="text-xs text-gray-500 mb-1">
-                    {t('leadDetail.priceCardLabel')}
-                  </div>
-                  <div className="font-serif text-xl text-gold-dark dark:text-gold-light">
-                    {t('leadDetail.priceFallback')}
-                  </div>
-                  <p className="mt-4 text-xs text-gray-500">
-                    {t('leadDetail.includedHeading')}
-                  </p>
-                  <ul className="mt-2 space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
-                      {t('leadDetail.includedCoords')}
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
-                      {t('leadDetail.includedAssay')}
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
-                      {t('leadDetail.includedLegal')}
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
-                      {t('leadDetail.includedContacts')}
-                    </li>
-                  </ul>
-
-                  {isSold ? (
-                    <div className="mt-5 w-full text-center px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 text-sm font-medium">
-                      {t('leadDetail.sold')}
-                    </div>
-                  ) : (
-                    <a
-                      href="#inquiry"
-                      className="mt-5 block w-full text-center px-4 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 dark:text-gray-900 text-white text-sm font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
-                    >
-                      {t('contact.discussHeading')}
-                    </a>
-                  )}
-                  <p className="text-[12px] text-gray-400 mt-3 text-center">
-                    {t('contact.discussNote')}
-                  </p>
-                </div>
+            <aside className="py-8 lg:py-10">
+              <div className="lg:sticky lg:top-24 border border-brand-line bg-brand-surface p-6">
+                <LockKeyhole aria-hidden className="size-6" />
+                <p className="mt-6 text-sm text-brand-muted">
+                  {t('leadDetail.priceCardLabel')}
+                </p>
+                <p className="mt-2 font-serif text-3xl">
+                  {t('leadDetail.priceFallback')}
+                </p>
+                <p className="mt-6 text-sm">
+                  {t('leadDetail.includedHeading')}
+                </p>
+                <ul className="mt-4 space-y-3 text-sm text-brand-muted">
+                  {[
+                    'includedCoords',
+                    'includedAssay',
+                    'includedLegal',
+                    'includedContacts',
+                  ].map((key) => (
+                    <li key={key}>{t(`leadDetail.${key}`)}</li>
+                  ))}
+                </ul>
+                <a className="brand-button mt-7 w-full" href="#inquiry">
+                  {t('contact.discussHeading')}
+                </a>
               </div>
             </aside>
           </div>
         </div>
-      </main>
+      </div>
       <Footer />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c'),
-        }}
-      />
+      {[place, breadcrumb].map((data, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+          }}
+        />
+      ))}
     </>
   );
 }

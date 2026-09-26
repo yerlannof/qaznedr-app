@@ -42,3 +42,12 @@ WeChat, WhatsApp and an inquiry form: https://qaznedr.kz/en/contact
 
 ## Sitemap
 https://qaznedr.kz/sitemap.xml
+
+## Mineral areas
+
+- Gold: https://qaznedr.kz/en/minerals/gold, https://qaznedr.kz/zh/minerals/gold, https://qaznedr.kz/ru/minerals/gold, https://qaznedr.kz/kz/minerals/gold
+- Copper: https://qaznedr.kz/en/minerals/copper, https://qaznedr.kz/zh/minerals/copper, https://qaznedr.kz/ru/minerals/copper, https://qaznedr.kz/kz/minerals/copper
+- Lead-zinc: https://qaznedr.kz/en/minerals/lead-zinc, https://qaznedr.kz/zh/minerals/lead-zinc, https://qaznedr.kz/ru/minerals/lead-zinc, https://qaznedr.kz/kz/minerals/lead-zinc
+- Molybdenum: https://qaznedr.kz/en/minerals/molybdenum, https://qaznedr.kz/zh/minerals/molybdenum, https://qaznedr.kz/ru/minerals/molybdenum, https://qaznedr.kz/kz/minerals/molybdenum
+- Tungsten: https://qaznedr.kz/en/minerals/tungsten, https://qaznedr.kz/zh/minerals/tungsten, https://qaznedr.kz/ru/minerals/tungsten, https://qaznedr.kz/kz/minerals/tungsten
+- Iron: https://qaznedr.kz/en/minerals/iron, https://qaznedr.kz/zh/minerals/iron, https://qaznedr.kz/ru/minerals/iron, https://qaznedr.kz/kz/minerals/iron

@@ -1,13 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { MapPin, Gem, Lock, ShieldCheck, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, Gem } from 'lucide-react';
 import { type LeadTeaser, isFreeStatus } from '@/lib/leads/types';
-import { useTranslation } from '@/hooks/useTranslation';
+import {
+  leadMineralName,
+  leadRegionName,
+  leadSeoText,
+} from '@/lib/seo/lead-metadata';
+import { formatCheckDate } from '@/lib/leads/check-date';
+import { toLocale } from '@/lib/seo/site';
+import { translate } from '@/lib/i18n/translations';
 
-// Presentational client component — teaser only. No private fields on LeadTeaser.
-// Client so we can localize UI strings via useTranslation hook.
+/** Public teaser fields only; no private lead data reaches the browser. */
 export default function LeadCard({
   lead,
   locale,
@@ -15,93 +20,79 @@ export default function LeadCard({
   lead: LeadTeaser;
   locale: string;
 }) {
-  const { t } = useTranslation();
+  const loc = toLocale(locale);
+  const t = (key: string) => translate(loc, key);
   const free = isFreeStatus(lead.license_status);
-  const isSold = lead.status === 'SOLD';
-  const typeLabel =
-    t(`leadCard.types.${lead.type}`) === `leadCard.types.${lead.type}`
-      ? t('leadCard.types.other')
-      : t(`leadCard.types.${lead.type}`);
+  const region = leadRegionName(lead.region, loc) || lead.region;
+  const mineral = leadMineralName(lead.mineral, loc);
+  const typeKey = ['placer', 'bedrock', 'other'].includes(lead.type)
+    ? lead.type
+    : 'other';
 
   return (
-    <Link href={`/${locale}/leads/${lead.code}`} className="group block">
-      <article className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] shadow-subtle hover:border-gold/60 hover:shadow-medium hover:-translate-y-0.5 transition-all duration-200 overflow-hidden h-full flex flex-col">
-        {/* Header / icon area */}
-        <div className="h-36 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 overflow-hidden relative flex items-center justify-center">
-          <div className="w-16 h-16 rounded-2xl bg-white dark:bg-[#141414] shadow-subtle flex items-center justify-center">
-            <Gem className="w-8 h-8 text-gold" aria-hidden="true" />
-          </div>
-          <div className="absolute top-3 right-3 flex flex-col items-end gap-1.5">
-            {isSold ? (
-              <Badge variant="default">{t('leadCard.badge.sold')}</Badge>
-            ) : free ? (
-              <Badge variant="gold">
-                <ShieldCheck className="w-3 h-3 mr-1" aria-hidden="true" />
-                {t('leadCard.badge.free')}
-              </Badge>
-            ) : null}
-            <Badge variant="blue">{lead.mineral}</Badge>
-          </div>
-          {lead.region && (
-            <div className="absolute bottom-3 left-3 inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white/95 dark:bg-[#141414]/95 backdrop-blur text-xs font-medium text-gray-700 dark:text-gray-200 border border-gray-200/60 dark:border-gray-700/60">
-              <MapPin className="w-3 h-3" aria-hidden="true" />
-              {lead.region}
-            </div>
+    <article className="flex h-full flex-col border-t border-brand-line bg-brand-surface p-5 text-brand-ink">
+      <div className="flex items-start justify-between gap-4">
+        <p className="text-xs font-semibold uppercase tracking-wider text-brand-muted">
+          {lead.code}
+        </p>
+        <Gem aria-hidden="true" className="size-6 shrink-0 text-brand-ink" />
+      </div>
+      <h2 className="mt-5 font-serif text-2xl leading-snug">
+        <Link
+          href={`/${locale}/leads/${lead.code}`}
+          className="brand-focus hover:underline"
+        >
+          {leadSeoText(lead, loc).title}
+        </Link>
+      </h2>
+      <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+        <div>
+          <dt className="text-brand-muted">{t('listingsFilters.mineral')}</dt>
+          <dd>{mineral}</dd>
+        </div>
+        <div>
+          <dt className="text-brand-muted">{t('leadsCatalog.region')}</dt>
+          <dd>{region || t('leadCard.regionFallback')}</dd>
+        </div>
+        <div>
+          <dt className="text-brand-muted">{t('leadsCatalog.type')}</dt>
+          <dd>{t(`leadCard.types.${typeKey}`)}</dd>
+        </div>
+      </dl>
+      {lead.grade_display && (
+        <div className="mt-5 border-t border-brand-line pt-4 text-sm">
+          <span lang={/[А-Яа-яЁё]/.test(lead.grade_display) ? 'ru' : undefined}>
+            {lead.grade_display}
+          </span>
+          {lead.grade_label && (
+            <p
+              lang={/[А-Яа-яЁё]/.test(lead.grade_label) ? 'ru' : undefined}
+              className="mt-1 text-brand-muted"
+            >
+              {lead.grade_label}
+            </p>
           )}
         </div>
-
-        {/* Content */}
-        <div className="p-4 flex flex-col flex-1">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-              {typeLabel} · {lead.code}
-            </span>
-          </div>
-          <h3 className="font-serif text-lg text-gray-900 dark:text-gray-50 mt-1.5 line-clamp-2">
-            {lead.teaser_title ||
-              t('leadCard.titleFallback', {
-                region: lead.region || t('leadCard.regionFallback'),
-              })}
-          </h3>
-
-          {lead.grade_display && (
-            <div className="mt-2">
-              <span className="text-sm font-bold text-gray-900 dark:text-gray-100">
-                {lead.grade_display}
-              </span>
-              {lead.grade_label && (
-                <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-tight mt-0.5 line-clamp-1">
-                  {lead.grade_label}
-                </p>
-              )}
-            </div>
-          )}
-
-          {lead.reserve_categories && lead.reserve_categories.length > 0 && (
-            <div className="flex flex-wrap gap-1 mt-2">
-              {lead.reserve_categories.map((c) => (
-                <span
-                  key={c}
-                  className="inline-flex items-center px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-[11px] text-gray-600 dark:text-gray-300"
-                >
-                  {t('leadCard.categoryPrefix')} {c}
-                </span>
-              ))}
-            </div>
-          )}
-
-          <div className="border-t border-gray-100 dark:border-gray-700 mt-3 pt-3 flex items-center justify-between mt-auto">
-            <span className="font-serif text-lg text-gold-dark dark:text-gold-light">
-              {t('leadCard.priceOnRequest')}
-            </span>
-            <span className="inline-flex items-center gap-1 text-xs font-medium text-[#0060DF] group-hover:gap-1.5 transition-all">
-              <Lock className="w-3 h-3" aria-hidden="true" />
-              {t('leadCard.open')}
-              <ArrowRight className="w-3 h-3" aria-hidden="true" />
-            </span>
-          </div>
-        </div>
-      </article>
-    </Link>
+      )}
+      <div className="mt-auto flex flex-wrap items-end justify-between gap-3 border-t border-brand-line pt-5 text-sm">
+        <p className="text-brand-muted">
+          {lead.status === 'SOLD'
+            ? t('leadCard.badge.sold')
+            : free
+              ? t('leadCard.badge.free')
+              : t('leadDetail.statusPending')}
+          <span className="block">
+            {formatCheckDate(lead.last_verified, loc)}
+          </span>
+        </p>
+        <Link
+          href={`/${locale}/leads/${lead.code}`}
+          className="brand-focus inline-flex min-h-11 items-center gap-2 font-semibold hover:underline"
+        >
+          {t('leadCard.open')}{' '}
+          <ArrowUpRight aria-hidden="true" className="size-4" />
+        </Link>
+      </div>
+    </article>
   );
 }

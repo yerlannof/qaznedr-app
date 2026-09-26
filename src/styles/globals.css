@@ -337,22 +337,22 @@ body {
 /* Guide body rendered from markdown (/insights/[slug]). */
 @layer components {
   .insight-prose {
-    @apply text-base leading-relaxed text-gray-700 dark:text-gray-300;
+    @apply text-base leading-relaxed text-brand-ink;
   }
   .insight-prose > * + * {
     @apply mt-5;
   }
   .insight-prose h2 {
-    @apply mt-12 font-serif text-3xl font-light tracking-tight text-gray-900 dark:text-gray-50;
+    @apply mt-12 font-serif text-3xl font-light tracking-tight text-brand-ink;
   }
   .insight-prose h3 {
-    @apply mt-8 font-serif text-2xl text-gray-900 dark:text-gray-50;
+    @apply mt-8 font-serif text-2xl text-brand-ink;
   }
   .insight-prose a {
-    @apply text-gray-900 underline decoration-gold underline-offset-4 transition-colors duration-150 hover:decoration-gold-dark dark:text-gray-100;
+    @apply text-brand-ink underline decoration-brand-line underline-offset-4 hover:decoration-brand-ink;
   }
   .insight-prose strong {
-    @apply font-semibold text-gray-900 dark:text-gray-100;
+    @apply font-semibold text-brand-ink;
   }
   .insight-prose ul {
     @apply list-disc space-y-2 pl-6;
@@ -361,22 +361,22 @@ body {
     @apply list-decimal space-y-2 pl-6;
   }
   .insight-prose blockquote {
-    @apply border-l-2 border-gold pl-5 text-gray-600 dark:text-gray-400;
+    @apply border-l-2 border-brand-line pl-5 text-brand-muted;
   }
   .insight-table {
     @apply -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0;
   }
   .insight-table:focus-visible {
-    @apply outline-none ring-2 ring-gold/60 ring-offset-2 ring-offset-white dark:ring-offset-[#0A0A0A];
+    @apply outline-none ring-2 ring-brand-ink ring-offset-2 ring-offset-brand-bg;
   }
   .insight-prose table {
     @apply w-full min-w-[560px] border-collapse text-sm;
   }
   .insight-prose th {
-    @apply border-b border-gray-300 py-2 pr-4 text-left align-bottom font-semibold text-gray-900 dark:border-gray-700 dark:text-gray-100;
+    @apply border-b border-brand-line py-2 pr-4 text-left align-bottom font-semibold text-gray-900 dark:text-gray-100;
   }
   .insight-prose td {
-    @apply border-b border-gray-100 py-2 pr-4 align-top dark:border-gray-800;
+    @apply border-b border-brand-line py-2 pr-4 align-top;
   }
 }
 

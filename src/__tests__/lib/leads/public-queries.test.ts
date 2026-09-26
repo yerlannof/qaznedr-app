@@ -59,3 +59,43 @@ describe('listPublishedLeads failures', () => {
     });
   });
 });
+
+describe('mineral and geological type filters', () => {
+  it('selects exact source values for a hub, including multiple metals without substring false positives', async () => {
+    const originalThen = builder.then;
+    const originalSelect = builder.select;
+    const originalEq = builder.eq;
+    let columns = '';
+    const selected = jest.fn(() => builder);
+    const equal = jest.fn(() => builder);
+    builder.in = selected;
+    builder.eq = equal;
+    builder.select = (value: string) => {
+      columns = value;
+      return builder;
+    };
+    builder.then = (resolve: (value: unknown) => void) =>
+      resolve(
+        columns === 'mineral'
+          ? {
+              data: [
+                { mineral: 'Au' },
+                { mineral: 'Au+Cu' },
+                { mineral: 'bauxite' },
+              ],
+              error: null,
+            }
+          : { data: [], count: 0, error: null }
+      );
+    try {
+      await listPublishedLeads({ mineral: 'gold', type: 'bedrock' });
+      expect(selected).toHaveBeenCalledWith('mineral', ['Au', 'Au+Cu']);
+      expect(equal).toHaveBeenCalledWith('type', 'bedrock');
+      expect(equal).not.toHaveBeenCalledWith('mineral', 'gold');
+    } finally {
+      builder.then = originalThen;
+      builder.select = originalSelect;
+      builder.eq = originalEq;
+    }
+  });
+});

@@ -15,6 +15,7 @@ const KEYS = [
     'legalNote',
     'otherGuides',
     'table',
+    'contents',
     'onlyRu',
     'ctaTitle',
     'ctaText',

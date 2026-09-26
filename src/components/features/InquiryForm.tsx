@@ -22,8 +22,8 @@ const CHANNEL_KEYS: Record<InquiryChannel, string> = {
 };
 
 const input =
-  'w-full min-h-[44px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#141414] px-3 py-2 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A84FF]';
-const label = 'block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1';
+  'brand-focus w-full min-h-11 border border-brand-line bg-brand-surface px-3 py-2 text-sm text-brand-ink';
+const label = 'mb-1 block text-xs font-medium text-brand-muted';
 
 function readUtm(): Record<string, string> | undefined {
   const params = new URLSearchParams(window.location.search);
@@ -79,18 +79,16 @@ export default function InquiryForm({ locale, leadCode }: InquiryFormProps) {
 
   if (state === 'done') {
     return (
-      <div className="flex items-start gap-3 rounded-lg border border-gold/40 bg-[rgba(200,162,75,0.06)] p-4">
+      <div className="flex items-start gap-3 border border-brand-line bg-brand-surface p-4">
         <CheckCircle2
           aria-hidden
-          className="w-5 h-5 mt-0.5 text-gold-dark dark:text-gold-light"
+          className="w-5 h-5 mt-0.5 text-brand-accent"
         />
         <div>
-          <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+          <p className="text-sm font-semibold text-brand-ink">
             {t('inquiry.successTitle')}
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            {t('inquiry.successText')}
-          </p>
+          <p className="text-sm text-brand-muted">{t('inquiry.successText')}</p>
         </div>
       </div>
     );
@@ -209,7 +207,7 @@ export default function InquiryForm({ locale, leadCode }: InquiryFormProps) {
       <button
         type="submit"
         disabled={state === 'sending'}
-        className="w-full min-h-[44px] rounded-lg bg-gray-900 dark:bg-gray-100 px-4 text-sm font-semibold text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-60 transition-colors"
+        className="brand-button brand-focus w-full disabled:opacity-60"
       >
         {state === 'sending' ? t('inquiry.sending') : t('inquiry.submit')}
       </button>

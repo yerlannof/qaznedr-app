@@ -29,29 +29,96 @@ export interface ArticleCard {
 
 export interface Article extends ArticleCard {
   html: string;
+  toc: ArticleTocItem[];
+}
+
+export interface ArticleTocItem {
+  id: string;
+  title: string;
+  level: 2 | 3;
 }
 
 export function articlePath(slug: string, locale: Locale): string {
   return path.join(INSIGHTS_DIR, slug, `${locale}.md`);
 }
 
-export function renderMarkdown(markdown: string, tableLabel = 'Table'): string {
-  const html = marked.parse(markdown, { async: false, gfm: true }) as string;
+function plainHeading(html: string): string {
+  const entities: Record<string, string> = {
+    amp: '&',
+    lt: '<',
+    gt: '>',
+    quot: '"',
+    apos: "'",
+    nbsp: ' ',
+    ndash: '–',
+    mdash: '—',
+    hellip: '…',
+    lsquo: '‘',
+    rsquo: '’',
+    ldquo: '“',
+    rdquo: '”',
+  };
+  return html
+    .replace(/<[^>]*>/g, '')
+    .replace(/&(#x[\da-f]+|#\d+|[a-z]+);/gi, (entity, key: string) => {
+      if (key.startsWith('#')) {
+        const value =
+          key[1].toLowerCase() === 'x'
+            ? parseInt(key.slice(2), 16)
+            : parseInt(key.slice(1), 10);
+        return value > 0 &&
+          value <= 0x10ffff &&
+          !(value >= 0xd800 && value <= 0xdfff)
+          ? String.fromCodePoint(value)
+          : entity;
+      }
+      return entities[key.toLowerCase()] ?? entity;
+    })
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function renderWithToc(
+  markdown: string,
+  tableLabel: string
+): { html: string; toc: ArticleTocItem[] } {
+  const toc: ArticleTocItem[] = [];
+  const renderer = new marked.Renderer();
+  renderer.heading = function ({ tokens, depth }) {
+    const content = this.parser.parseInline(tokens);
+    if (depth !== 2 && depth !== 3)
+      return `<h${depth}>${content}</h${depth}>\n`;
+    const id = `section-${toc.length + 1}`;
+    toc.push({ id, title: plainHeading(content), level: depth });
+    return `<h${depth} id="${id}" tabindex="-1" class="scroll-mt-24">${content}</h${depth}>\n`;
+  };
+  const html = marked.parse(markdown, {
+    async: false,
+    gfm: true,
+    renderer,
+  }) as string;
   let tableNumber = 0;
   // Focusable region: wide tables scroll inside, keyboard users reach them.
-  return html
-    .replace(/<table>/g, () => {
-      tableNumber += 1;
-      const label = `${tableLabel} ${tableNumber}`
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;');
-      return `<div class="insight-table" tabindex="0" role="region" aria-label="${label}"><table>`;
-    })
-    .replace(/<\/table>/g, '</table></div>')
-    .replace(
-      /<a href="(https?:\/\/[^"]+)"/g,
-      '<a href="$1" target="_blank" rel="noopener noreferrer"'
-    );
+  return {
+    toc,
+    html: html
+      .replace(/<table>/g, () => {
+        tableNumber += 1;
+        const label = `${tableLabel} ${tableNumber}`
+          .replace(/&/g, '&amp;')
+          .replace(/"/g, '&quot;');
+        return `<div class="insight-table" tabindex="0" role="region" aria-label="${label}"><table>`;
+      })
+      .replace(/<\/table>/g, '</table></div>')
+      .replace(
+        /<a href="(https?:\/\/[^"]+)"/g,
+        '<a href="$1" target="_blank" rel="noopener noreferrer"'
+      ),
+  };
+}
+
+export function renderMarkdown(markdown: string, tableLabel = 'Table'): string {
+  return renderWithToc(markdown, tableLabel).html;
 }
 
 export function readingMinutes(markdown: string, locale: Locale): number {
@@ -72,7 +139,10 @@ export function parseArticle(
   const file = `${entry.slug}/${locale}.md`;
   if (!data.title) throw new Error(`${file}: missing title`);
   if (!data.description) throw new Error(`${file}: missing description`);
-  const html = renderMarkdown(body, translate(locale, 'insights.table'));
+  const { html, toc } = renderWithToc(
+    body,
+    translate(locale, 'insights.table')
+  );
   // The page prints the title as its only H1.
   if (/<h1[\s>]/i.test(html)) throw new Error(`${file}: H1 in the body`);
   return {
@@ -84,6 +154,7 @@ export function parseArticle(
     updated: entry.updated,
     readingMinutes: readingMinutes(body, locale),
     html,
+    toc,
   };
 }
 

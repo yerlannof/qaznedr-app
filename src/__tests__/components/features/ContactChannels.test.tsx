@@ -79,4 +79,43 @@ describe('ContactChannels', () => {
     fireEvent.click(screen.getByRole('button', { name: '复制' }));
     expect(await screen.findByText('已复制')).toBeInTheDocument();
   });
+
+  it('keeps the area code visible by WeChat and copies it separately from the WeChat ID', async () => {
+    const writeText = jest.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText },
+      configurable: true,
+    });
+    const { container } = render(
+      <ContactChannels config={full} locale="zh" leadCode="AU-1" />
+    );
+    const wechat = container.querySelector(
+      '[data-channel="wechat"]'
+    ) as HTMLElement;
+    expect(wechat).toHaveTextContent('AU-1');
+    fireEvent.click(screen.getByRole('button', { name: '复制 AU-1' }));
+    expect(writeText).toHaveBeenCalledWith('AU-1');
+    expect(screen.getByRole('button', { name: '复制' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: '复制' }));
+    expect(writeText).toHaveBeenCalledWith('qaznedr_holding');
+  });
+
+  it('includes the area code in email but keeps general email unchanged', () => {
+    const { rerender } = render(
+      <ContactChannels config={full} locale="en" leadCode="CU-42" />
+    );
+    const href = screen
+      .getByRole('link', { name: 'info@qaznedr.kz' })
+      .getAttribute('href')!;
+    expect(href).toMatch(/^mailto:info@qaznedr\.kz\?body=/);
+    expect(href).toContain('%20');
+    expect(href).not.toContain('+');
+    expect(new URL(href).searchParams.get('body')).toBe(
+      'Hello! I am interested in area CU-42 on qaznedr.kz.'
+    );
+    rerender(<ContactChannels config={full} locale="en" />);
+    expect(
+      screen.getByRole('link', { name: 'info@qaznedr.kz' })
+    ).toHaveAttribute('href', 'mailto:info@qaznedr.kz');
+  });
 });

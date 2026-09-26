@@ -17,6 +17,7 @@ export const translations = {
         'Как устроена сделка, откуда данные и что мы гарантируем — коротко и без общих фраз.',
     },
     insights: {
+      contents: 'Содержание',
       eyebrow: 'Гайды',
       title: 'Гайды для инвестора',
       subtitle:
@@ -479,8 +480,10 @@ export const translations = {
       badgeFree: 'СВОБОДЕН',
       typeFallback: 'Объект',
       valueEvidenceHeading: 'Чем подтверждена ценность',
-      gradeAu: 'Содержание Au',
-      reserveCategories: 'Категории запасов',
+      gradeAu: 'Содержание',
+      reserveCategories: 'Категории оценки',
+      assessmentNote:
+        'Обозначения приведены по исходным материалам. P1–P3 — прогнозные ресурсы, не запасы; стандарт и актуальность уточняются при проверке.',
       byproducts: 'Попутные',
       fairValue: 'Оценочная стоимость',
       valueNote:
@@ -775,6 +778,7 @@ export const translations = {
         'Мәміле қалай құрылады, деректер қайдан алынады және біз нені кепілдендіреміз — қысқа әрі нақты.',
     },
     insights: {
+      contents: 'Мазмұны',
       eyebrow: 'Нұсқаулықтар',
       title: 'Инвесторға арналған нұсқаулықтар',
       subtitle:
@@ -1243,8 +1247,10 @@ export const translations = {
       badgeFree: 'БОС',
       typeFallback: 'Объект',
       valueEvidenceHeading: 'Құндылық немен расталған',
-      gradeAu: 'Au мөлшері',
-      reserveCategories: 'Қор санаттары',
+      gradeAu: 'Мөлшері',
+      reserveCategories: 'Бағалау санаттары',
+      assessmentNote:
+        'Белгілеулер бастапқы материалдар бойынша берілген. P1–P3 — болжамды ресурстар, қорлар емес; стандарт пен өзектілік тексеру кезінде нақтыланады.',
       byproducts: 'Қосалқы',
       fairValue: 'Бағаланған құны',
       valueNote:
@@ -1465,6 +1471,7 @@ export const translations = {
         'How a deal works, where the data comes from and what we guarantee — briefly and to the point.',
     },
     insights: {
+      contents: 'Contents',
       eyebrow: 'Guides',
       title: 'Guides for investors',
       subtitle:
@@ -1925,8 +1932,10 @@ export const translations = {
       badgeFree: 'FREE',
       typeFallback: 'Object',
       valueEvidenceHeading: 'What backs the value',
-      gradeAu: 'Au content',
-      reserveCategories: 'Reserve categories',
+      gradeAu: 'Grade',
+      reserveCategories: 'Assessment categories',
+      assessmentNote:
+        'Designations follow the source materials. P1–P3 are forecast resources, not reserves; the standard and currency are clarified during verification.',
       byproducts: 'By-products',
       fairValue: 'Estimated value',
       valueNote:
@@ -2143,6 +2152,7 @@ export const translations = {
       subtitle: '交易如何进行、数据从何而来、我们保证什么——简明扼要。',
     },
     insights: {
+      contents: '目录',
       eyebrow: '投资指南',
       title: '投资者指南',
       subtitle:
@@ -2587,8 +2597,10 @@ export const translations = {
       badgeFree: '空闲',
       typeFallback: '项目',
       valueEvidenceHeading: '价值依据',
-      gradeAu: '金含量',
-      reserveCategories: '储量类别',
+      gradeAu: '品位',
+      reserveCategories: '评估类别',
+      assessmentNote:
+        '标识按原始资料列示。P1–P3 为预测资源量，并非储量；标准及资料时效性在核查时确认。',
       byproducts: '伴生矿',
       fairValue: '估值',
       valueNote:

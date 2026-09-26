@@ -8,7 +8,8 @@ export function createThrottle({
 }: {
   limit: number;
   windowMs: number;
-  /** Memory bound. Expired keys go first, then the least recently used. */
+  /** Memory bound. Expired keys go first, then unblocked, then the least
+   * recently used. */
   maxKeys?: number;
   now?: () => number;
 }): (key: string) => boolean {
@@ -16,11 +17,19 @@ export function createThrottle({
   const hits = new Map<string, number[]>();
 
   function prune(t: number): void {
+    const inWindow = (stamps: number[]) =>
+      stamps.filter((ts) => t - ts < windowMs).length;
     for (const [key, stamps] of hits) {
-      if (stamps.every((ts) => t - ts >= windowMs)) hits.delete(key);
+      if (inWindow(stamps) === 0) hits.delete(key);
+    }
+    // Unblocked keys go first, so spraying fresh keys (e.g. random emails
+    // next to the owner's) cannot push a locked-out key out of memory.
+    for (const [key, stamps] of hits) {
+      if (hits.size <= maxKeys) return;
+      if (inWindow(stamps) < limit) hits.delete(key);
     }
     for (const key of hits.keys()) {
-      if (hits.size <= maxKeys) break;
+      if (hits.size <= maxKeys) return;
       hits.delete(key);
     }
   }

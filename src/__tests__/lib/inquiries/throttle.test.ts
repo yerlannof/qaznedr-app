@@ -37,3 +37,17 @@ it('evicts the least recently used keys when nothing has expired', () => {
   expect(allow('k3')).toBe(false); // newest stays tracked
   expect(allow('k0')).toBe(true); // k0 was forgotten, starts over
 });
+
+it('evicts unblocked keys before a blocked one when fresh keys are sprayed', () => {
+  const allow = createThrottle({
+    limit: 2,
+    windowMs: 1000,
+    maxKeys: 3,
+    now: () => 0,
+  });
+  allow('owner');
+  allow('owner');
+  expect(allow('owner')).toBe(false);
+  for (let i = 0; i < 10; i++) allow(`spray${i}`);
+  expect(allow('owner')).toBe(false);
+});

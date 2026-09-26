@@ -51,8 +51,31 @@ const CONTACT_KEYS = [
   'contact.orForm',
 ];
 
+const INQUIRY_KEYS = [
+  'inquiry.nameLabel',
+  'inquiry.companyLabel',
+  'inquiry.countryLabel',
+  'inquiry.channelLabel',
+  'inquiry.contactLabel',
+  'inquiry.messageLabel',
+  'inquiry.messagePlaceholder',
+  'inquiry.submit',
+  'inquiry.sending',
+  'inquiry.successTitle',
+  'inquiry.successText',
+  'inquiry.error',
+  'inquiry.rateLimited',
+  'inquiry.invalid',
+  'inquiry.optional',
+];
+
 // Later tasks append their namespaces here.
-const KEYS: string[] = [...SEO_KEYS, ...NAV_KEYS, ...CONTACT_KEYS];
+const KEYS: string[] = [
+  ...SEO_KEYS,
+  ...NAV_KEYS,
+  ...CONTACT_KEYS,
+  ...INQUIRY_KEYS,
+];
 
 describe.each(['ru', 'kz', 'en', 'zh'])('%s holding translations', (locale) => {
   it.each(KEYS)('%s exists', (key) => {

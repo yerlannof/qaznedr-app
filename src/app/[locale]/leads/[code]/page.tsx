@@ -4,6 +4,9 @@ import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import { Badge } from '@/components/ui/badge';
 import LeadLockedSection from '@/components/features/LeadLockedSection';
+import ContactChannels from '@/components/features/ContactChannels';
+import InquiryForm from '@/components/features/InquiryForm';
+import { getContactConfig } from '@/lib/config/contacts';
 import {
   MapPin,
   ShieldCheck,
@@ -283,6 +286,28 @@ export default async function LeadTeaserPage({
               {/* Locked */}
               <LeadLockedSection />
 
+              {/* Contact — messengers first, form as fallback; no login */}
+              <section
+                id="inquiry"
+                className="scroll-mt-24 rounded-xl border border-gold/40 p-5"
+              >
+                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-1">
+                  {t('contact.discussHeading')}
+                </h2>
+                <p className="text-sm text-gray-500 mb-4">
+                  {t('contact.discussNote')}
+                </p>
+                <ContactChannels
+                  config={getContactConfig()}
+                  locale={locale}
+                  leadCode={lead.code}
+                />
+                <h3 className="mt-6 mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  {t('contact.orForm')}
+                </h3>
+                <InquiryForm locale={locale} leadCode={lead.code} />
+              </section>
+
               {/* Region indicator (exact GPS hidden) */}
               <section className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
                 <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-2">
@@ -338,15 +363,15 @@ export default async function LeadTeaserPage({
                       {t('leadDetail.sold')}
                     </div>
                   ) : (
-                    <Link
-                      href={`/${locale}/leads/${lead.code}/full`}
+                    <a
+                      href="#inquiry"
                       className="mt-5 block w-full text-center px-4 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 dark:text-gray-900 text-white text-sm font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
                     >
-                      {t('leadDetail.getFullPackage')}
-                    </Link>
+                      {t('contact.discussHeading')}
+                    </a>
                   )}
                   <p className="text-[12px] text-gray-400 mt-3 text-center">
-                    {t('leadDetail.ctaNote')}
+                    {t('contact.discussNote')}
                   </p>
                 </div>
               </div>

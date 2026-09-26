@@ -61,3 +61,24 @@ describe('session 2 hidden routes', () => {
     expect(PUBLIC_PAGES).not.toContain('/services/investors');
   });
 });
+
+describe('session 3: content sections merged into /insights', () => {
+  it.each([
+    ['/ru/blog', '/ru/insights'],
+    ['/en/blog/2', '/en/insights'],
+    ['/zh/education', '/zh/insights'],
+    ['/kz/knowledge', '/kz/insights'],
+    ['/ru/news/kazakhstan-gold', '/ru/insights'],
+  ])('%s → %s', (from, to) => {
+    expect(hiddenRouteRedirect(from)).toBe(to);
+  });
+
+  it('lists /insights, not the old sections', () => {
+    expect(PUBLIC_PAGES).toContain('/insights');
+    for (const old of ['/blog', '/education', '/knowledge', '/news']) {
+      expect(PUBLIC_PAGES).not.toContain(old);
+    }
+    expect(hiddenRouteRedirect('/ru/insights')).toBeNull();
+    expect(hiddenRouteRedirect('/ru/insights/x')).toBeNull();
+  });
+});

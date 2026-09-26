@@ -64,26 +64,6 @@ export const translations = {
         description:
           'Условия использования сайта qaznedr.kz компании QAZNEDR HOLDING.',
       },
-      blog: {
-        title: 'Статьи о недропользовании Казахстана',
-        description:
-          'Статьи и гайды о геологии, лицензировании и инвестициях в недра Казахстана.',
-      },
-      education: {
-        title: 'Обучение: геология и недропользование',
-        description:
-          'Материалы по геологии и недропользованию Казахстана для инвесторов и специалистов.',
-      },
-      knowledge: {
-        title: 'База знаний по недропользованию',
-        description:
-          'Термины, процедуры и законодательство о недрах Казахстана простым языком.',
-      },
-      news: {
-        title: 'Новости недропользования Казахстана',
-        description:
-          'Новости геологической отрасли и законодательства о недрах Казахстана.',
-      },
       lead: {
         title: '{mineral} — участок {code}, {where}',
         descriptionFree:
@@ -794,26 +774,6 @@ export const translations = {
         description:
           'QAZNEDR HOLDING компаниясының qaznedr.kz сайтын пайдалану шарттары.',
       },
-      blog: {
-        title: 'Қазақстандағы жер қойнауын пайдалану туралы мақалалар',
-        description:
-          'Қазақстандағы геология, лицензиялау және тау-кен инвестициялары туралы мақалалар мен нұсқаулықтар.',
-      },
-      education: {
-        title: 'Оқу: геология және жер қойнауын пайдалану',
-        description:
-          'Инвесторлар мен мамандарға арналған Қазақстандағы геология және жер қойнауын пайдалану материалдары.',
-      },
-      knowledge: {
-        title: 'Жер қойнауын пайдалану бойынша білім базасы',
-        description:
-          'Қазақстандағы жер қойнауы туралы терминдер, рәсімдер және заңнама қарапайым тілмен.',
-      },
-      news: {
-        title: 'Қазақстандағы жер қойнауын пайдалану жаңалықтары',
-        description:
-          'Қазақстанның геология саласы мен жер қойнауы заңнамасының жаңалықтары.',
-      },
       lead: {
         title: '{mineral} — {code} учаскесі, {where}',
         descriptionFree:
@@ -1452,26 +1412,6 @@ export const translations = {
         description:
           'Terms of use of qaznedr.kz, the website of QAZNEDR HOLDING.',
       },
-      blog: {
-        title: 'Articles on Subsoil Use in Kazakhstan',
-        description:
-          'Articles and guides on geology, licensing and mining investment in Kazakhstan.',
-      },
-      education: {
-        title: 'Learning: Geology and Subsoil Use',
-        description:
-          'Materials on geology and subsoil use in Kazakhstan for investors and professionals.',
-      },
-      knowledge: {
-        title: 'Subsoil Use Knowledge Base',
-        description:
-          'Terms, procedures and subsoil legislation of Kazakhstan in plain language.',
-      },
-      news: {
-        title: 'Kazakhstan Subsoil Use News',
-        description:
-          "News of Kazakhstan's geology sector and subsoil legislation.",
-      },
       lead: {
         title: '{mineral} Exploration Area {code}, {where}',
         descriptionFree:
@@ -2099,22 +2039,6 @@ export const translations = {
       terms: {
         title: '使用条款',
         description: 'QAZNEDR HOLDING 官网 qaznedr.kz 使用条款。',
-      },
-      blog: {
-        title: '哈萨克斯坦矿业资讯文章',
-        description: '关于哈萨克斯坦地质、矿权许可与矿业投资的文章与指南。',
-      },
-      education: {
-        title: '地质与矿产资源知识',
-        description: '面向投资者与专业人士的哈萨克斯坦地质与矿产资源利用资料。',
-      },
-      knowledge: {
-        title: '哈萨克斯坦矿业知识库',
-        description: '以通俗语言介绍哈萨克斯坦矿产资源相关术语、流程与法规。',
-      },
-      news: {
-        title: '哈萨克斯坦矿业新闻',
-        description: '哈萨克斯坦地质行业与矿产资源法规动态。',
       },
       lead: {
         title: '哈萨克斯坦{where}{mineral}矿项目 {code}',

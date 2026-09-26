@@ -13,10 +13,7 @@ const SEO_PAGES = [
   'faq',
   'support',
   'terms',
-  'blog',
-  'education',
-  'knowledge',
-  'news',
+  'insights',
 ];
 
 const SEO_KEYS = [

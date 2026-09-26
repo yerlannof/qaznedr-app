@@ -11,10 +11,7 @@ export const PUBLIC_PAGES = [
   '/contact',
   '/faq',
   '/legal/terms',
-  '/blog',
-  '/education',
-  '/knowledge',
-  '/news',
+  '/insights',
 ] as const;
 
 /**
@@ -35,6 +32,11 @@ export const HIDDEN_ROUTE_REDIRECTS: ReadonlyArray<readonly [string, string]> =
     ['/auth/register', '/contact'],
     ['/support', '/contact'],
     ['/services/investors', '/contact'],
+    // Session 3: invented blog/news/courses replaced by the guides section.
+    ['/blog', '/insights'],
+    ['/education', '/insights'],
+    ['/knowledge', '/insights'],
+    ['/news', '/insights'],
   ];
 
 const LOCALE_PATH = new RegExp(`^/(${LOCALES.join('|')})(/.*)?$`);

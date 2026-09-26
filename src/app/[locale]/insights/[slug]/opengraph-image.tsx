@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { OG_FONTS } from '@/lib/seo/og-fonts';
+import { getOgFonts } from '@/lib/seo/og-fonts';
 import { translate } from '@/lib/i18n/translations';
 import { getArticle } from '@/lib/insights/content';
 import { INSIGHTS, findInsight } from '@/lib/insights/registry';
@@ -35,6 +35,6 @@ export default async function Image({
       title: article.title,
       footer: 'QAZNEDR HOLDING · qaznedr.kz',
     }),
-    { ...OG_SIZE, fonts: OG_FONTS }
+    { ...OG_SIZE, fonts: getOgFonts() }
   );
 }

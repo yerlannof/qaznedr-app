@@ -9,29 +9,39 @@ const font = (file: string) =>
 
 // Supply Latin/Cyrillic/Kazakh and Chinese locally. ImageResponse otherwise
 // attempts Google Fonts for missing glyphs during builds and live requests.
-export const OG_FONTS = [
-  {
-    name: 'Plex',
-    data: font('IBMPlexSans-Regular.ttf'),
-    weight: 400 as const,
-    style: 'normal' as const,
-  },
-  {
-    name: 'Plex',
-    data: font('IBMPlexSans-SemiBold.ttf'),
-    weight: 600 as const,
-    style: 'normal' as const,
-  },
-  {
-    name: 'NotoSC',
-    data: font('NotoSansSC-OG-Regular.ttf'),
-    weight: 400 as const,
-    style: 'normal' as const,
-  },
-  {
-    name: 'NotoSC',
-    data: font('NotoSansSC-OG-Bold.ttf'),
-    weight: 700 as const,
-    style: 'normal' as const,
-  },
-];
+function readOgFonts() {
+  return [
+    {
+      name: 'Plex',
+      data: font('IBMPlexSans-Regular.ttf'),
+      weight: 400 as const,
+      style: 'normal' as const,
+    },
+    {
+      name: 'Plex',
+      data: font('IBMPlexSans-SemiBold.ttf'),
+      weight: 600 as const,
+      style: 'normal' as const,
+    },
+    {
+      name: 'NotoSC',
+      data: font('NotoSansSC-OG-Regular.ttf'),
+      weight: 400 as const,
+      style: 'normal' as const,
+    },
+    {
+      name: 'NotoSC',
+      data: font('NotoSansSC-OG-Bold.ttf'),
+      weight: 700 as const,
+      style: 'normal' as const,
+    },
+  ];
+}
+
+let cached: ReturnType<typeof readOgFonts> | undefined;
+
+/** Next imports image metadata during ordinary page rendering too. Read files
+ * only when generating the image, whose server trace contains these assets. */
+export function getOgFonts() {
+  return (cached ??= readOgFonts());
+}

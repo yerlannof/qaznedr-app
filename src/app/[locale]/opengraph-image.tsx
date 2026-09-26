@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { OG_FONTS } from '@/lib/seo/og-fonts';
+import { getOgFonts } from '@/lib/seo/og-fonts';
 import { OG_ALT, OG_SIZE, ogHomeTitle } from '@/lib/seo/og';
 import { ogCard } from '@/lib/seo/og-card';
 import { toLocale } from '@/lib/seo/site';
@@ -21,6 +21,6 @@ export default async function Image({
       title: ogHomeTitle(toLocale(locale)),
       footer: 'qaznedr.kz',
     }),
-    { ...OG_SIZE, fonts: OG_FONTS }
+    { ...OG_SIZE, fonts: getOgFonts() }
   );
 }

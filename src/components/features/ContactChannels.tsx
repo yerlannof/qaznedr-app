@@ -69,7 +69,11 @@ export default function ContactChannels({
           {t('contact.wechatTitle')}
         </h3>
         <p className="mt-1 text-xs text-brand-muted">
-          {t('contact.wechatHint')}
+          {t(
+            serviceTopic && !leadCode
+              ? 'contact.wechatServiceHint'
+              : 'contact.wechatHint'
+          )}
         </p>
         {config.wechatQrSrc && (
           <Image

@@ -30,3 +30,6 @@ next-env.d.ts
 prisma/migrations/
 # Implementation plans embed partial code snippets that must stay verbatim
 docs/superpowers/plans/
+
+# Exact observed AI answers are evidence; preserve their rendered text verbatim
+docs/visibility/answers/

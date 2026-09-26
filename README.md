@@ -1,133 +1,55 @@
-# QAZNEDR.KZ - Kazakhstan Mining Rights Portal 🇰🇿
+# QAZNEDR HOLDING
 
-![Next.js](https://img.shields.io/badge/Next.js-15.3.4-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
-![Supabase](https://img.shields.io/badge/Supabase-Database-green)
-![Tests](https://img.shields.io/badge/Tests-Jest-red)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+Source code for the company website: **[qaznedr.kz](https://qaznedr.kz)**.
 
-## Overview
+QAZNEDR HOLDING LLP prepares transactions involving ore areas in Kazakhstan for international and Kazakh investors. Our geologists study areas using archival reports; we check their status and support licensing in connection with a transaction.
 
-QAZNEDR.KZ is a specialized marketplace platform for buying and selling mineral deposits and mining licenses in Kazakhstan. The platform connects license holders with potential investors and mining companies, facilitating transparent transactions in the mining sector.
+## Public website
 
-> 🎯 **Mission**: Digitalize Kazakhstan's mining rights marketplace, making it transparent, efficient, and accessible to global investors.
+- [Areas](https://qaznedr.kz/en/leads): public teasers with mineral, region, geological information and the status check date. The holding does not claim ownership of the displayed areas; detailed materials are shared after a meeting and an NDA.
+- [Services](https://qaznedr.kz/en/services): licensing, geology and fieldwork, area due diligence, and analytics.
+- [Investor guides](https://qaznedr.kz/en/insights), [company information](https://qaznedr.kz/en/about), and [contact](https://qaznedr.kz/en/contact) through WeChat, WhatsApp or the inquiry form.
+- Russian, Kazakh, English and Chinese interfaces. Guides currently have RU/EN/ZH versions; KZ guides use the Russian source. Terms remain in Russian pending approved legal translations.
 
-## Features
+The former open marketplace has been replaced by the holding website. Legacy listing, supplier and investor-directory routes redirect to current pages. Some legacy implementation remains in the repository; it does not describe the current public product.
 
-### Core Functionality
+## Development
 
-- **Three types of listings:**
-  - Mining Licenses - Active extraction rights with operational permits
-  - Exploration Licenses - Geological exploration and survey permits
-  - Mineral Occurrences - Documented mineral findings and prospects
-
-- **Advanced Search & Filtering:**
-  - By mineral type (Oil, Gas, Gold, Copper, Coal, Uranium, Iron)
-  - By region (14 Kazakhstan regions)
-  - By price range and listing status
-  - Full-text search with fuzzy matching
-
-- **User Features:**
-  - Secure authentication system
-  - Personal dashboard for managing listings
-  - Favorites system for tracking interesting opportunities
-  - Multi-language support (Kazakh, Russian, English)
-
-## Quick Start
-
-### Prerequisites
-
-- Node.js 20+
-- npm or yarn
-- SQLite
-
-### Installation
+Use Node.js 20+ and npm. Configure a dedicated development Supabase project and authentication settings using `.env.example`; keep credentials in the local environment, never in Git. Production area records are managed by the geodata team and must not be edited or seeded by website development tasks.
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-org/qaznedr-app.git
-cd qaznedr-app
-
-# Install dependencies
-npm install
-
-# Setup database
-npm run db:reset
-
-# Start development server
+npm ci
+cp .env.example .env.local
+# Fill the required development settings in .env.local before starting.
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
-
-## Development Commands
+The local app runs at [localhost:3000](http://localhost:3000). Optional contact channels stay hidden when they are not configured.
 
 ```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
-npm run format       # Format code with Prettier
-npm run test:e2e     # Run Playwright tests
-npm run db:seed      # Seed database with sample data
+npx jest                                      # Full unit/integration suite
+npx jest --coverage=false <test-path>          # Focused tests
+ESLINT_USE_FLAT_CONFIG=false npx eslint <file> # Changed-file lint
+npm run build                                 # Production build and type check
+PORT=3107 npm run start                        # Local production browser check
 ```
 
-## Tech Stack
+Known legacy test failures and the required test-first/review process are documented in [AGENTS.md](AGENTS.md). Browser verification covers 375/1440 px, both themes and changed locales. Use the current roadmap for the latest validation results rather than the old marketplace test baseline alone.
 
-- **Framework:** Next.js 15.3 with App Router
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS v4
-- **Database:** Prisma ORM with SQLite
-- **Authentication:** NextAuth.js
-- **Testing:** Playwright for E2E tests
-- **Deployment:** Vercel / Docker
+## Stack and deployment
 
-## Project Structure
+Next.js 15.5 App Router, React 19, TypeScript 5, Tailwind CSS 3, Supabase/Postgres and NextAuth. Jest covers application behavior; Playwright is available for browser checks. Legacy Prisma usage remains in some supporting modules and is not the source of the area catalog.
 
-```
-src/
-├── app/           # Next.js App Router pages and API routes
-├── components/    # React components (features, layouts, ui)
-├── contexts/      # React Context providers
-├── lib/           # Business logic, utilities, and data
-└── styles/        # Global styles
-```
+Vercel deploys production from GitHub `master`. The release workflow is tests, lint, build, browser verification, independent review, then `git push origin master`; do not additionally run a manual production deployment. Verify the GitHub Production deployment SHA/status and the live site after each release. The canonical public domain is **qaznedr.kz**.
 
-## Documentation
+## Project documentation
 
-- [Technical Guide](./CLAUDE_TECHNICAL_GUIDE.md) - Detailed implementation guide
-- [Deployment Instructions](./DEPLOY_INSTRUCTIONS.md) - Production deployment steps
-- [Production Checklist](./PRODUCTION_READINESS.md) - Pre-launch checklist
-- [Quick Commands](./START_COMMANDS.md) - Common development commands
-
-## Environment Variables
-
-Create a `.env.local` file with:
-
-```env
-# Database
-DATABASE_URL="file:./dev.db"
-
-# Authentication
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-secret-key"
-
-# Optional: Analytics
-NEXT_PUBLIC_VERCEL_ANALYTICS_ID=""
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- [Roadmap and current status](docs/HOLDING_ROADMAP.md)
+- [Agent workflow and safeguards](AGENTS.md)
+- [Technical rules](CLAUDE.md)
+- [Approved design and copy](docs/design/APPROVED.md)
+- [Holding product specification](docs/superpowers/specs/2026-09-26-qaznedr-holding-pivot-design.md)
 
 ## License
 
-Proprietary - All rights reserved
-
-## Support
-
-For questions or support, please contact the development team.
+Proprietary — all rights reserved.

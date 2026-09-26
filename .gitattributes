@@ -1,0 +1,2 @@
+# Preserve whitespace in verbatim browser observations, including citation labels.
+docs/visibility/answers/*.md -whitespace

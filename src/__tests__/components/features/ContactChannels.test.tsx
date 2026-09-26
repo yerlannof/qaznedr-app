@@ -153,3 +153,18 @@ it('preserves the approved service topic in WhatsApp, WeChat copy and email', as
     await screen.findByRole('button', { name: 'Copied Licensing' })
   ).toBeInTheDocument();
 });
+
+it.each([
+  ['ru', 'Отсканируйте QR-код в WeChat и укажите тему обращения.'],
+  ['kz', 'WeChat-та QR-кодты сканерлеп, өтініш тақырыбын көрсетіңіз.'],
+  ['en', 'Scan the QR code in WeChat and mention the inquiry topic.'],
+  ['zh', '请用微信扫描二维码添加，并注明咨询主题。'],
+])(
+  'uses the service instruction in %s instead of requesting an absent area code',
+  (locale, hint) => {
+    render(
+      <ContactChannels config={full} locale={locale} serviceTopic="analytics" />
+    );
+    expect(screen.getByText(hint)).toBeInTheDocument();
+  }
+);

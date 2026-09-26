@@ -1,0 +1,1464 @@
+{
+  "date": "2026-09-26",
+  "method": "Manual browser UI; one fresh context-free conversation per prompt; outputs are observations, not verified company claims.",
+  "services": {
+    "chatgpt": {
+      "access": "available",
+      "privacyMode": "Temporary chat; Без персонализации",
+      "model": "not visible"
+    },
+    "claude": {
+      "access": "available",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium"
+    },
+    "perplexity": {
+      "access": "available",
+      "privacyMode": "Incognito; search enabled; expires after 24 hours",
+      "model": "Best (visible answer mode; exact model not shown)"
+    },
+    "deepseek": {
+      "access": "blocked",
+      "reason": "Redirected to sign_in; no password or account entry attempted"
+    }
+  },
+  "prompts": [
+    {
+      "id": 1,
+      "language": "ru",
+      "type": "unbranded",
+      "prompt": "Какие компании помогают иностранному инвестору подобрать рудный участок в Казахстане и подготовить геологическую проверку? Назови до пяти компаний со ссылками на их официальные сайты."
+    },
+    {
+      "id": 2,
+      "language": "ru",
+      "type": "unbranded",
+      "prompt": "К кому обратиться за независимой геологической проверкой рудного участка в Казахстане перед инвестиционным решением? Назови до пяти компаний и дай ссылки на их официальные сайты."
+    },
+    {
+      "id": 3,
+      "language": "ru",
+      "type": "unbranded",
+      "prompt": "Какие компании сопровождают иностранного инвестора при получении лицензии на разведку твёрдых полезных ископаемых в Казахстане? Назови до пяти и дай официальные ссылки."
+    },
+    {
+      "id": 4,
+      "language": "ru",
+      "type": "unbranded",
+      "prompt": "Кто в Казахстане может помочь проверить геологические данные и оценку ресурсов рудного участка по ГКЗ или KAZRC? Назови до пяти компаний с официальными сайтами."
+    },
+    {
+      "id": 5,
+      "language": "ru",
+      "type": "unbranded",
+      "prompt": "Какие местные компании помогают инвестору отобрать перспективные участки недр Казахстана по открытым геологическим данным? Дай до пяти названий и ссылки на официальные сайты."
+    },
+    {
+      "id": 6,
+      "language": "ru",
+      "type": "unbranded",
+      "prompt": "Иностранный инвестор изучает рудный проект в Казахстане. Какие местные консультанты могут помочь с геологией, лицензированием и due diligence? Назови до пяти с официальными сайтами."
+    },
+    {
+      "id": 7,
+      "language": "en",
+      "type": "unbranded",
+      "prompt": "Which companies can help a foreign investor identify mineral exploration areas in Kazakhstan and arrange geological due diligence? List up to five with official website links."
+    },
+    {
+      "id": 8,
+      "language": "en",
+      "type": "unbranded",
+      "prompt": "Who provides independent geological due diligence for mining projects in Kazakhstan before an investment decision? Name up to five firms and link their official websites."
+    },
+    {
+      "id": 9,
+      "language": "en",
+      "type": "unbranded",
+      "prompt": "Which firms help foreign mining investors navigate exploration licensing in Kazakhstan? Give up to five names and official website links."
+    },
+    {
+      "id": 10,
+      "language": "en",
+      "type": "unbranded",
+      "prompt": "Which Kazakhstan-based geological consultants help screen prospective mineral areas using public geological data? List up to five and cite official websites."
+    },
+    {
+      "id": 11,
+      "language": "en",
+      "type": "unbranded",
+      "prompt": "Which firms in Kazakhstan can review mineral resource estimates and explain GKZ or KAZRC reporting for investors? Name up to five with official websites."
+    },
+    {
+      "id": 12,
+      "language": "en",
+      "type": "unbranded",
+      "prompt": "A foreign investor is evaluating a Kazakhstan ore project. Which local advisers cover geology, mineral rights and technical due diligence? List up to five with official sites."
+    },
+    {
+      "id": 13,
+      "language": "zh",
+      "type": "unbranded",
+      "prompt": "外国投资者想在哈萨克斯坦筛选矿产勘探区并进行地质尽职调查。有哪些公司可以提供帮助？请列出最多五家及其官方网站链接。"
+    },
+    {
+      "id": 14,
+      "language": "zh",
+      "type": "unbranded",
+      "prompt": "哪些公司协助外国矿业投资者办理哈萨克斯坦固体矿产勘探许可？请列出最多五家并附官方网站。"
+    },
+    {
+      "id": 15,
+      "language": "zh",
+      "type": "unbranded",
+      "prompt": "投资哈萨克斯坦矿业项目之前，哪些机构可以独立核查地质资料和矿产资源量？请列出最多五家及其官方网站。"
+    },
+    {
+      "id": 16,
+      "language": "zh",
+      "type": "unbranded",
+      "prompt": "哪些哈萨克斯坦本地地质咨询公司可根据公开地质资料筛选有潜力的矿区？请列出最多五家并提供官方网站。"
+    },
+    {
+      "id": 17,
+      "language": "ru",
+      "type": "branded",
+      "prompt": "Что такое QAZNEDR HOLDING, чем компания помогает инвесторам в недропользование Казахстана и какой её официальный сайт? Приведи источники."
+    },
+    {
+      "id": 18,
+      "language": "en",
+      "type": "branded",
+      "prompt": "What is QAZNEDR HOLDING, what does it offer to investors in Kazakhstan mineral projects, and what is its official website? Cite sources."
+    },
+    {
+      "id": 19,
+      "language": "zh",
+      "type": "branded",
+      "prompt": "QAZNEDR HOLDING 是什么公司？它为哈萨克斯坦矿业投资者提供哪些服务？官方网站是什么？请给出来源。"
+    },
+    {
+      "id": 20,
+      "language": "ru",
+      "type": "branded",
+      "prompt": "Найди официальный сайт QAZNEDR HOLDING и подтверждённые источники о её услугах: геология, лицензирование, due diligence и аналитика для инвестора в Казахстане. Отдели факты от предположений."
+    }
+  ],
+  "observations": [
+    {
+      "service": "chatgpt",
+      "promptId": 1,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs; captured by parent agent",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80b8f-fab8-83ed-a4c0-bfb22fb79843?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Named Kaz Polymetal, SRK Consulting, KazGeoResearch, QAQC/MetaGeology, and Minerals Operating, with brief roles and a shortlist-to-due-diligence decision process.",
+      "sources": [
+        "https://kazpolymetal.kz/poisk-i-podbor-uchastkov",
+        "https://kazpolymetal.kz/?utm_source=chatgpt.com",
+        "https://www.srk.com/en/contact-us/srk-exploration",
+        "https://www.srk.com/en/contact-us/srk-exploration?utm_source=chatgpt.com",
+        "https://kazgeoresearch.kz/ru?utm_source=chatgpt.com",
+        "https://qaqc.kz/?utm_source=chatgpt.com",
+        "https://moperating.kz/ru?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-01.md"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 2,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs from repeat; initial response summary-only",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab81094-71c4-83eb-9201-020e7bdb2bd2?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Repeat named SRK Kazakhstan, Minerals Operating, SLR Consulting, DMT Group and RSC Geological Consultants; advised data/QA-QC/resource-model review and independence disclosure.",
+      "sources": [
+        "https://www.srk.com/en/contact-us/kazakhstan?utm_source=chatgpt.com",
+        "https://moperating.kz/en/service/technical-consulting?utm_source=chatgpt.com",
+        "https://moperating.kz/ru?utm_source=chatgpt.com",
+        "https://www.slrconsulting.com/about/locations/?utm_source=chatgpt.com",
+        "https://www.slrconsulting.com/sectors/mining/?utm_source=chatgpt.com",
+        "https://www.dmt-group.com/services/consulting/mining/investor-lender-support.html?utm_source=chatgpt.com",
+        "https://www.dmt-group.com/services/consulting/mining.html?utm_source=chatgpt.com",
+        "https://rscmme.com/technical-due-diligence?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-02.md",
+      "initialAttempt": {
+        "status": "evidence-incomplete",
+        "note": "Original temporary chat was lost before exact answer capture; summary retained as observational metadata; repeat uses same fixed prompt.",
+        "conversationUrl": "https://chatgpt.com/c/6ab80c5b-02c0-83ed-98f4-af35b46a857c?temporary-chat=true",
+        "answerSummary": "Named SRK Consulting, SLR Consulting, DMT Group, Micon International and ERM/CSA Global. Recommended independent site visit, primary-data and QA/QC review, resource reassessment, and fatal-flaw list.",
+        "sources": [
+          "https://www.srk.com/en/contact-us/kazakhstan/",
+          "https://www.slrconsulting.com/services/mining-advisory/",
+          "https://www.dmt-group.com/services/consulting/mining.html",
+          "https://micon-international.com/",
+          "https://www.erm.com/solutions/capabilities/geology-and-mineral-resource-estimation/"
+        ]
+      }
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 3,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80d08-c0ac-83eb-b14a-fc0c2dfe68c4?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Named Dentons Kazakhstan, AEQUITAS, GRATA International, SIGNUM and Bond Stone Law as mining-law/licensing advisers.",
+      "sources": [
+        "https://www.dentons.com/en/find-your-dentons-team/industry-sectors/mining-and-natural-resources/mining/regional-sectors/mining-in-central-asia?utm_source=chatgpt.com",
+        "https://aequitas.kz/en/practices/Energy-subsoil-use?utm_source=chatgpt.com",
+        "https://gratanet.com/specializations/subsoil-use?region=global&utm_source=chatgpt.com",
+        "https://signumlaw.com/en/practice-areas/nedropolzovanie?utm_source=chatgpt.com",
+        "https://bondstonelaw.com/ru/industries/mining-metals/?utm_source=chatgpt.com",
+        "https://bondstonelaw.com/industries/mining-metals/?utm_source=chatgpt.com",
+        "https://www.mapbox.com/"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-03"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 4,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80d17-1238-83eb-acc3-fd6daab3e70c?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Named MinExCo, Kazakhstan Mineral Company, Minerals Operating, SRK Consulting Kazakhstan and PANGEA PMG for geological data/resource review under GKZ, KAZRC and other standards.",
+      "sources": [
+        "https://minexco.kz/about-us.html?utm_source=chatgpt.com",
+        "https://wkmc.kz/?utm_source=chatgpt.com",
+        "https://moperating.kz/ru/service/technical-consulting?utm_source=chatgpt.com",
+        "https://www.srk.com/en/contact-us/kazakhstan?utm_source=chatgpt.com",
+        "https://www.pangeamines.kz/?utm_source=chatgpt.com",
+        "https://minexco.kz/?utm_source=chatgpt.com",
+        "https://moperating.kz/ru/?utm_source=chatgpt.com",
+        "https://www.gov.kz/memleket/entities/geology/documents/details/1034324?lang=ru&utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-04"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 5,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80d2a-98e4-83ed-8e49-025f471e9d30?temporary-chat=true",
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Named KazGeoResearch, Kaz Polymetal, GEOVEXA, QAZNEDR and GIS Terra. QAZNEDR description appears partly outdated or inaccurate; treat as model output only.",
+      "qaznedrExcerpt": "QAZNEDR — скорее специализированная геологическая data-платформа, чем классический консультант. Отбирает и показывает свободные участки/находки на основе государственных архивов и опубликованных справочников, проверяя лицензионный статус по государственной карте недропользования. Это может быть особенно полезно для самого раннего deal sourcing.",
+      "sources": [
+        "https://kazgeoresearch.kz/ru?utm_source=chatgpt.com",
+        "https://kazpolymetal.kz/poisk-i-podbor-uchastkov?utm_source=chatgpt.com",
+        "https://geo-ds.com/investors.html?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru?utm_source=chatgpt.com",
+        "https://gis-terra.kz/geologicheskoe-proektirovanie-i-izyskaniya/?utm_source=chatgpt.com",
+        "https://gis-terra.kz/?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-05"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 6,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80d35-dd50-83ed-80ca-849f0231fc76?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Aurora Group, EcoOptimum, Two Key LLP, MinExCo and SRK Consulting; geology/licensing/technical DD shortlist.",
+      "sources": [
+        "https://aurora.kz/?utm_source=chatgpt.com",
+        "https://ecooptimum.kz/en?utm_source=chatgpt.com",
+        "https://2k.kz/en/consulting/?utm_source=chatgpt.com",
+        "https://2k.kz/en/home_en/?utm_source=chatgpt.com",
+        "https://minexco.kz/?utm_source=chatgpt.com",
+        "https://www.srk.com/en/contact-us/Kazakhstan?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-06"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 7,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80d3d-e72c-83eb-a75d-031d53c34d90?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Aurora Group, SRK Consulting Kazakhstan, Minerals Operating, Method22 and Adamant Capital; target selection and DD.",
+      "sources": [
+        "https://aurora.kz/en/services/geological-services/?utm_source=chatgpt.com",
+        "https://aurora.kz/en/?utm_source=chatgpt.com",
+        "https://www.srk.com/en/contact-us/srk-exploration?utm_source=chatgpt.com",
+        "https://www.srk.com/en/contact-us/kazakhstan?utm_source=chatgpt.com",
+        "https://moperating.kz/en/service/technical-consulting?utm_source=chatgpt.com",
+        "https://moperating.kz/en?utm_source=chatgpt.com",
+        "https://method22.ru/",
+        "https://method22.ru/?utm_source=chatgpt.com",
+        "https://adamant-capital.net/?lang=en&utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-07"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 8,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80d51-3afc-83eb-a20f-3ed87fabf49b?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "AMC Consultants, DMT Group, ERM, SLR Consulting and SRK Consulting; independent technical/geological DD.",
+      "sources": [
+        "https://www.amcconsultants.com/experience/technical-due-diligence-mining-industry?utm_source=chatgpt.com",
+        "https://www.dmt-group.com/services/consulting/mining/investor-lender-support.html?utm_source=chatgpt.com",
+        "https://www.erm.com/solutions/capabilities/geology-and-mineral-resource-estimation/?utm_source=chatgpt.com",
+        "https://www.slrconsulting.com/locations/almaty/?utm_source=chatgpt.com",
+        "https://www.srk.com/en/contact-us/kazakhstan?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-08"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 9,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80d8f-bd7c-83eb-8abf-e6760e1a86c8?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Dentons Kazakhstan, GRATA International, AEQUITAS, Unicase and SIGNUM; mining/subsoil-use licensing legal firms.",
+      "sources": [
+        "https://www.dentons.com/en/find-your-dentons-team/industry-sectors/mining-and-natural-resources/mining/regional-sectors/mining-in-central-asia?utm_source=chatgpt.com",
+        "https://gratanet.com/industries/mining?region=28&utm_source=chatgpt.com",
+        "https://www.aequitas.kz/en/about/team/dianna-ten-en?utm_source=chatgpt.com",
+        "https://www.aequitas.kz/en/practices/Energy-subsoil-use?utm_source=chatgpt.com",
+        "https://www.unicaselaw.com/subsoil_use_and_natural_resources?utm_source=chatgpt.com",
+        "https://signumlaw.com/en/practice-areas/nedropolzovanie?utm_source=chatgpt.com",
+        "https://www.gov.kz/services/5290?lang=en&utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-09"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 10,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80d9c-bb50-83ed-9102-58c4757d309b?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Aurora Group, SRK Consulting, KazGeoResearch, Kaz Polymetal and GEOVEXA; prospectivity screening from available/historical data.",
+      "sources": [
+        "https://aurora.kz/en/services/geological-services/?utm_source=chatgpt.com",
+        "https://www.srk.com/en/contact-us/kazakhstan?utm_source=chatgpt.com",
+        "https://kazgeoresearch.kz/ru",
+        "https://kazgeoresearch.kz/ru?utm_source=chatgpt.com",
+        "https://kazpolymetal.kz/poisk-i-podbor-uchastkov?utm_source=chatgpt.com",
+        "https://geo-ds.com/about.html?utm_source=chatgpt.com",
+        "https://www.mapbox.com/"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-10"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 11,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80da4-a144-83eb-92db-7b0c545d3b81?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "SRK Consulting, Green Solutions Associates/QAQC, Minerals Operating, MinExCo and Two Key; GKZ/KAZRC resource review.",
+      "sources": [
+        "https://www.srk.com/en/consultants/samat-koishibayev?utm_source=chatgpt.com",
+        "https://www.srk.com/en/contact-us/kazakhstan?utm_source=chatgpt.com",
+        "https://qaqc.kz/?utm_source=chatgpt.com",
+        "https://moperating.kz/en/service/technical-consulting?utm_source=chatgpt.com",
+        "https://moperating.kz/en?utm_source=chatgpt.com",
+        "https://minexco.kz/?utm_source=chatgpt.com",
+        "https://2k.kz/en/about/?utm_source=chatgpt.com",
+        "https://2k.kz/en/home_en/?utm_source=chatgpt.com",
+        "https://www.mapbox.com/",
+        "https://www.ponen.kz/en/reports?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-11"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 12,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80db7-6328-83eb-9602-8053d6554010?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Aurora Group, SRK Consulting, MinExCo, GRATA International and AEQUITAS; geology/mineral rights/technical DD adviser shortlist.",
+      "sources": [
+        "https://aurora.kz/en/services/?utm_source=chatgpt.com",
+        "https://aurora.kz/en/?utm_source=chatgpt.com",
+        "https://www.srk.com/en/contact-us/Kazakhstan?utm_source=chatgpt.com",
+        "https://minexco.kz/?utm_source=chatgpt.com",
+        "https://gratanet.com/specializations/subsoil-use?region=global&utm_source=chatgpt.com",
+        "https://gratanet.com/industries/mining?region=global&utm_source=chatgpt.com",
+        "https://aequitas.kz/en/practices/Energy-subsoil-use?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-12"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 13,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80de6-f508-83ed-b597-db1b29d94edc?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "SRK Consulting, IMC Montan, Kazakhstan Mineral Company, KazGeoResearch and Minerals Operating; China-language investor workflow from area screening to DD.",
+      "sources": [
+        "https://www.srk.com/en/contact-us/kazakhstan",
+        "https://www.srk.com/en/contact-us/kazakhstan?utm_source=chatgpt.com",
+        "https://www.imcmontan.com/en/nashi-uslugi/index.php?SECTION_ID=12&utm_source=chatgpt.com",
+        "https://www.imcmontan.com/en/?utm_source=chatgpt.com",
+        "https://wkmc.kz/?lang=en&utm_source=chatgpt.com",
+        "https://kazgeoresearch.kz/en?utm_source=chatgpt.com",
+        "https://moperating.kz/en?utm_source=chatgpt.com",
+        "https://minerals.e-qazyna.kz/ru/start?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-13"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 14,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80ded-844c-83eb-a909-1df541bdaa42?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "GRATA International, Dentons Kazakhstan, Unicase Central Asia, SIGNUM and AEQUITAS for solid-mineral exploration licensing.",
+      "sources": [
+        "https://gratanet.com/industries/mining?region=global&utm_source=chatgpt.com",
+        "https://gratanet.com/employees/yerbolat-yerkebulanov?region=usa&utm_source=chatgpt.com",
+        "https://gratanet.com/?utm_source=chatgpt.com",
+        "https://www.dentons.com/en/find-your-dentons-team/industry-sectors/mining-and-natural-resources/mining/regional-sectors/mining-in-central-asia?utm_source=chatgpt.com",
+        "https://www.dentons.com/en/global-presence/central-asia/kazakhstan?utm_source=chatgpt.com",
+        "https://www.dentons.com/?utm_source=chatgpt.com",
+        "https://www.unicaselaw.com/subsoil_use_and_natural_resources?utm_source=chatgpt.com",
+        "https://www.unicaselaw.com/zhanar?utm_source=chatgpt.com",
+        "https://www.unicaselaw.com/?utm_source=chatgpt.com",
+        "https://signumlaw.com/en/practice-areas/nedropolzovanie?utm_source=chatgpt.com",
+        "https://signumlaw.com/en/sectors/mining?utm_source=chatgpt.com",
+        "https://signumlaw.com/?utm_source=chatgpt.com",
+        "https://www.aequitas.kz/practices/Energy-subsoil-use1?utm_source=chatgpt.com",
+        "https://www.aequitas.kz/en/about?utm_source=chatgpt.com",
+        "https://www.aequitas.kz/?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-14"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 15,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80e03-c3ec-83eb-809a-67e9fda7f761?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "SRK Consulting Kazakhstan, SGS Kazakhstan, SLR Consulting, AMC Consultants and DMT Group for independent geological and resource review.",
+      "sources": [
+        "https://www.srk.com/en/contact-us/kazakhstan?utm_source=chatgpt.com",
+        "https://www.sgs.com/en-kz/services/resource-and-reserve-estimation?utm_source=chatgpt.com",
+        "https://www.slrconsulting.com/ca/locations/almaty/?utm_source=chatgpt.com",
+        "https://www.slrconsulting.com/eur/services/mining-advisory/?utm_source=chatgpt.com",
+        "https://www.amcconsultants.com/corporate-consultancy?utm_source=chatgpt.com",
+        "https://www.amcconsultants.com/?utm_source=chatgpt.com",
+        "https://www.dmt-group.com/index.php?L=0&id=1986&utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-15"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 16,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80e16-9ea0-83ed-83a9-84f361cac5d5?temporary-chat=true",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Aurora Group, KAR GeoConsulting, KazGeoResearch, Geoplazma and EcoOptimum for desktop screening of prospective areas.",
+      "sources": [
+        "https://aurora.kz/en/services/geological-services/?utm_source=chatgpt.com",
+        "https://aurora.kz/?utm_source=chatgpt.com",
+        "https://kargeoconsulting.kz/?utm_source=chatgpt.com",
+        "https://www.kazgeoresearch.kz/en?utm_source=chatgpt.com",
+        "https://geoplazma.kz/en/company?utm_source=chatgpt.com",
+        "https://geoplazma.kz/?utm_source=chatgpt.com",
+        "https://ecooptimum.kz/en?utm_source=chatgpt.com",
+        "https://ecooptimum.kz/?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-16"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 17,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80e2a-2dc0-83eb-80e5-9dbc477b7d58?temporary-chat=true",
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "answerSummary": "Found the official domain but described QAZNEDR primarily as an old marketplace/information platform, including paid access to coordinates and a starting price of 1 million tenge. Model cited current and older site pages plus an external business registry; this is observed model output and not a verified description of current services.",
+      "qaznedrExcerpt": "Практическая работа для инвесторов ведётся через платформу QAZNEDR — маркетплейс и информационную площадку по недропользованию Казахстана. ... досье по перспективным участкам: после получения платного доступа инвестору предоставляются точные координаты, название объекта и ссылка/данные первоисточника. На сайте указано, что стоимость таких пакетов начинается от 1 млн тенге.",
+      "sources": [
+        "https://ba.prg.kz/710000000-astana/260640012641-too-qaznedr-holding/",
+        "https://www.qaznedr.kz/ru/about",
+        "https://www.qaznedr.kz/ru",
+        "https://www.qaznedr.kz/ru/faq?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru/services/investors?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru/legal/terms",
+        "https://www.qaznedr.kz/ru?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru/support"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-17"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 18,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80e36-4594-83ed-bde9-8ac4fb67ac01?temporary-chat=true",
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "sources": [
+        "https://ba.prg.kz/710000000-astana/260640012641-too-qaznedr-holding/?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru/leads?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru/faq?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru/services/investors?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-18",
+      "answerExcerpt": "QAZNEDR HOLDING is a recently registered Kazakhstan company focused on the geology/subsoil sector. Public business-registration data lists ТОО “QAZNEDR HOLDING”, BIN 260640012641, registered in Astana on 9 June 2026, with geological exploration and survey work as its principal activity. The registered director is Mukht"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 19,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80e45-2d5c-83eb-8eb8-e88224ed899d?temporary-chat=true",
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "sources": [
+        "https://ba.prg.kz/710000000-astana/260640012641-too-qaznedr-holding/?utm_source=chatgpt.com",
+        "https://onsite.iteca.kz/img/files/amm/2026/Amm2026_programm_Artisanal%20Mining_rus.pdf?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru",
+        "https://www.qaznedr.kz/ru?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru/leads?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru/services",
+        "https://www.qaznedr.kz/ru/services/investors",
+        "https://www.qaznedr.kz/ru/faq?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/zh?utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-19",
+      "answerExcerpt": "QAZNEDR HOLDING 是一家在哈萨克斯坦注册、面向矿产勘查与地下资源（subsoil use）领域的公司，其核心业务目前表现为 地质信息 + 矿权/项目交易撮合 + 矿业专业服务平台。 根据哈萨克斯坦企业信息数据库，ТОО “QAZNEDR HOLDING” 于 2026 年 6 月 9 日注册，BIN（商业识别号）为 260640012641，注册地在阿斯塔纳，主要经营活动代码 OKED 71122，即“地质勘探和勘查活动（不包括科研与开发）”；公司负责人为 Mukhtar Farkhaduly（Мухтар Фархадұлы）。该数据库注明其企业资料来自哈萨克斯坦电子政府、国家统计局和国家税务机关等来源。 Бизне"
+    },
+    {
+      "service": "chatgpt",
+      "promptId": 20,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "not visible",
+      "conversationUrl": "https://chatgpt.com/c/6ab80e5b-36ac-83eb-8346-811ff64e077e?temporary-chat=true",
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "sources": [
+        "https://www.qaznedr.kz/ru?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru",
+        "https://ba.prg.kz/710000000-astana/260640012641-too-qaznedr-holding/?utm_source=chatgpt.com",
+        "https://www.qaznedr.kz/ru/faq?utm_source=chatgpt.com",
+        "https://www.gov.kz/services/5290?utm_source=chatgpt.com",
+        "https://www.gov.kz/memleket/entities/mps/press/news/details/945522?lang=ru&utm_source=chatgpt.com"
+      ],
+      "answerFile": "answers/2026-09-26-chatgpt-03-20.md#prompt-20",
+      "answerExcerpt": "На 26 сентября 2026 года картина такая: публичный сайт бренда QAZNEDR — QAZNEDR.KZ. Открыть QAZNEDR.KZ На нём QAZNEDR называет себя платформой недропользования Казахстана и предлагает данные по участкам, лицензиям и геологическим объектам. QAZNEDR HOLDING +1 Есть отдельно зарегистрированное ТОО «QAZNEDR HOLDING», БИН 2"
+    },
+    {
+      "service": "claude",
+      "promptId": 1,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Named Geoproject Invest, DataTech, QAQC.kz/Green Solutions Associates, Geojet Exploration and GEOANALYTICA; added caution to verify licenses, expertise and project history.",
+      "sources": [
+        "https://geoprojectinvest.kz/",
+        "https://datatech-kz.com/",
+        "https://qaqc.kz/",
+        "https://geojetexploration.com/geologicheskij-due-diligence/",
+        "https://muradov.kz/geo/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-01.md"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 1,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/e220e389-8b41-4a64-aca8-484e420ef606",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Named Eurasia Geo Projects, KazGeoResearch, SGS Kazakhstan, Minerals Operating and Geojet Group; discussed contractor selection and separating local screening from independent audit.",
+      "sources": [
+        "https://eurasiageoprojects.kz/",
+        "https://kazgeoresearch.kz/",
+        "https://www.sgs.com/ru-kz/service-groups/geology-and-mining-engineering",
+        "https://moperating.kz/ru/services",
+        "https://geojetexploration.com/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-01"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 2,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/9ddabf9f-ac01-4b63-bd7c-05c0dff05da0",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://kazgeoresearch.kz/",
+        "https://kazgeology.kz/",
+        "https://rusgeology.ru/subdivision/rosgeo-kazakhstan/",
+        "https://timegeo.kz/geology.html",
+        "https://service-geo.kz/services/geologorazvedka/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-02",
+      "answerExcerpt": "Вот до пяти компаний в Казахстане, которые могут провести независимую геологическую проверку рудного участка, с ссылками на официальные сайты: KazGeoResearch — https://kazgeoresearch.kz/ Казгеология — https://kazgeology.kz/ ROSGEO KAZAKHSTAN (ТОО «ЦПГО», Росгеология) — https://rusgeology.ru/subdivision/rosgeo-kazakhsta"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 3,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/b9fc9b2c-5174-4f13-b973-c6fc52f039d9",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://kazgeoresearch.kz/",
+        "https://grata.com/",
+        "https://aequitas.kz/",
+        "https://visorlegal.com/",
+        "https://centaurus.kz/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-03",
+      "answerExcerpt": "В Казахстане иностранного инвестора при получении лицензии на разведку твёрдых полезных ископаемых обычно сопровождают специализированные юридические, консалтинговые и инжиниринговые компании, работающие в сфере недропользования. Ниже — пять таких компаний с официальными ссылками: 1. KazGeoResearch Компания предоставля"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 4,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/58e3bf0c-29f9-474c-a8e5-6c493d4ad881",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://www.gov.kz/memleket/entities/geology/documents/details/874851?lang=ru",
+        "https://k-mine.com/ru/pg/kazrc-otchety/",
+        "https://moperating.kz/ru/services",
+        "https://wkmc.kz/",
+        "https://kazgeoresearch.kz/",
+        "http://minexco.org/",
+        "https://www.linkedin.com/company/mineral-exploration-consultants"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-04",
+      "answerExcerpt": "Проверить геологические данные, качество базы, ресурсную модель и оценку ресурсов рудного участка в Казахстане могут специализированные горно-геологические консалтинговые компании. Для отчёта по KAZRC важно, чтобы его подписывало подходящее Компетентное лицо, а для запасов по ГКЗ — специалисты, имеющие опыт подготовки "
+    },
+    {
+      "service": "perplexity",
+      "promptId": 5,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/41485b9f-9e8b-4068-b20c-70ab64496040",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://kazgeoresearch.kz/",
+        "https://e-geoprom.kz/",
+        "https://mineralsgov.kz/",
+        "https://kazgeology.kz/",
+        "https://www.kazakhmys.com/",
+        "https://mineralsgov.kz/uslugi/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-05",
+      "answerExcerpt": "Для инвесторов, желающих отобрать перспективные участки недр Казахстана по открытым геологическим данным, на рынке работают несколько местных консалтинговых и сервисных компаний. Они специализируются на анализе государственной геологической информации, подборе участков с потенциалом и сопровождении лицензирования. Ключ"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 6,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/14c2d143-fb58-4a4d-ac25-0a3542cfe090",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://eurasiageoprojects.kz/",
+        "https://moperating.kz/ru/services",
+        "https://kazgeoresearch.kz/",
+        "https://k-mine.com/pg/mining-consultants-kazakhstan/",
+        "https://qaqc.kz/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-06",
+      "answerExcerpt": "Для первичного отбора я бы запросил предложения у следующих казахстанских консультантов. Они покрывают геологию, недропользование, лицензирование и технический/investment due diligence; при этом независимость и наличие конкретных квалифицированных специалистов нужно проверить до назначения. Консультант Чем может быть п"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 7,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs from repeat; initial login refusal recorded verbatim",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/6b72a7b9-a37b-407c-b19a-3e1e3e943b93",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "answerSummary": "Repeat named SRK Kazakhstan, K-MINE, KazGeology JSC, Exploration Service and Minerals Operating.",
+      "sources": [
+        "https://www.srk.com/en/contact-us/kazakhstan",
+        "https://k-mine.com/pg/mining-consultants-kazakhstan/",
+        "https://qazgeology.kz/attracting-foreign-investment-in-geological-exploration/?lang=en",
+        "https://exploration.kz/en/about/",
+        "https://exploration.kz/en/",
+        "https://moperating.kz/en/services"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-07.md",
+      "initialAttempt": {
+        "status": "login-refusal",
+        "conversationUrl": "https://www.perplexity.ai/search/8ff506ff-16ec-4567-8b94-3bbe484a6732",
+        "answerText": "Sign up and repeat your request."
+      },
+      "repeatOverlay": "Sign-up overlay visible after substantive answer; no sign-in attempted."
+    },
+    {
+      "service": "perplexity",
+      "promptId": 8,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/fd8bf36b-8c67-47c6-a8a1-5b5511e96fb3",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://k-mine.com/",
+        "https://trustsystem.kz/",
+        "https://geojetexploration.com/",
+        "https://aurora.kz/",
+        "https://dolbear.com/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-08",
+      "answerExcerpt": "Independent geological due diligence for mining projects in Kazakhstan is typically provided by specialized consulting firms with expertise in mineral resource estimation, technical audits, and compliance with international reporting standards (e.g., JORC, NI 43-101, KAZRC). Below are up to five firms that offer such s"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 9,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/76bca028-2374-4050-b121-74bf779cea03",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://www.unicaselaw.com/subsoil_use_and_natural_resources",
+        "https://www.unicaselaw.com/",
+        "https://signumlaw.com/en/sectors/mining",
+        "https://signumlaw.com/en",
+        "https://www.dentons.com/en/find-your-dentons-team/industry-sectors/mining-and-natural-resources/mining/regional-sectors/mining-in-central-asia",
+        "https://aurora.kz/en/",
+        "https://moperating.kz/en/article/exploration-licences-and-subsoil-use-support",
+        "https://moperating.kz/en/",
+        "https://www.gov.kz/services/5290?lang=en"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-09",
+      "answerExcerpt": "Several Kazakhstan-based and international firms publicly advertise support for foreign investors with exploration licensing and broader subsoil-use matters. Good candidates to approach include: Firm Why it may fit Official website Unicase Advises on obtaining subsoil-use licences and permits, structuring exploration a"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 10,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/68d0e60a-44b7-4289-8eb2-8d729518c36a",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://aurora.kz/en/services/geological-services/",
+        "https://wkmc.kz/projects/?lang=en",
+        "https://wkmc.kz/?lang=en",
+        "https://exploration.kz/en/",
+        "https://www.srk.com/en/contact-us/kazakhstan",
+        "http://gis-terra.kz/geological-design-and-explorations/?lang=en",
+        "https://www.usgs.gov/centers/national-minerals-information-center/kazakhstan"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-10",
+      "answerExcerpt": "The clearest Kazakhstan-based candidates are Aurora Group, Kazakhstan Mineral Company, Exploration Service, SRK Kazakhstan, and CRS&GIS “Terra.” Their official sites indicate capabilities relevant to early-stage screening—such as analyzing historical geological data, digitizing maps, ranking prospective areas, target s"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 11,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/c03d8864-45bf-4028-a256-87f8acd0019c",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://k-mine.com/",
+        "https://measuredgroup.kz/",
+        "https://wkmc.kz/",
+        "https://moperating.kz/",
+        "https://minexco.org/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-11",
+      "answerExcerpt": "Several Kazakhstan-based consulting firms can independently review mineral resource estimates and explain GKZ (State Reserves Commission) or KAZRC (Kazakhstan Code for Public Reporting) reporting to investors. Below are up to five with official websites and relevant capabilities. Firms that review resource estimates an"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 12,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/f26438c5-e863-40ed-b6c7-bc52fb17f6e8",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://www.srk.com/en/contact-us/kazakhstan",
+        "https://moperating.kz/en/services",
+        "https://www.linkedin.com/company/mineral-exploration-consultants",
+        "https://www.aequitas.kz/en/practices/Energy-subsoil-use",
+        "https://signum.interattiva.kz/en/sectors/mining"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-12",
+      "answerExcerpt": "For a foreign investor evaluating a Kazakhstan ore project, the most relevant local advisers span technical consultancies (geology, resource estimation, due diligence) and law firms with deep subsoil-use/mining practices. Below are five firms that collectively cover geology, mineral rights, and technical due diligence,"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 13,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/82a3790a-4a9a-474b-a5a8-98f35c4cf86d",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://www.srk.com/en/contact-us/kazakhstan",
+        "https://ecooptimum.kz/ch",
+        "https://moperating.kz/en/services",
+        "https://exploration.kz/en/",
+        "https://www.terraex.kz/geologicheskie-issledovaniya"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-13",
+      "answerExcerpt": "对于希望在哈萨克斯坦筛选矿产勘探区并进行地质尽职调查的外国投资者，以下是五家可提供专业服务的公司及其官方网站： 1. SRK Consulting（SRK 哈萨克斯坦） SRK 是一家国际矿业咨询公司，在哈萨克斯坦设有办公室，提供地质研究、矿产资源评估（按 JORC 准则）、可行性研究及历史数据数字化等服务。 srk +1 官网： https://www.srk.com/en/contact-us/kazakhstan 2. ECOOPTIMUM LLP（ЭкоОптимум） ECOOPTIMUM 是一家专注于哈萨克斯坦地下资源利用的项目中心，提供从地质勘查、矿产开发到矿山技术评估的“一站式”服务，并拥有覆盖全哈萨克斯坦的矿床数据"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 14,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/3525e677-e72f-4cfe-942f-8c4fedf6c547",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://ecooptimum.kz/",
+        "https://ecooptimum.kz/ch",
+        "https://moperating.kz/",
+        "https://jk-part.kz/",
+        "https://jk-part.kz/en/licenziya-na-geologicheskoe-izuchenie-nedr",
+        "https://www.zhonglun.com/",
+        "https://www.zhonglun.com/research/articles/55312.html",
+        "https://ybcase.com/",
+        "https://ybcase.com/cn/company-services/companies/dobyca-poleznyh-iskopaemyh-v-kazahstane",
+        "https://www.gov.kz/services/5290?lang=en",
+        "https://exploration.kz/en/about/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-14",
+      "answerExcerpt": "以下是五家协助外国矿业投资者办理哈萨克斯坦固体矿产勘探许可的专业服务机构及其官网（按公开资料整理）： 公司名称 官网 主要服务简述 ECOOPTIMUM LLP（ТОО «ЭкоОптимум»） https://ecooptimum.kz 提供固体/散体/综合矿产勘查与开采权“一站式”办理，含许可申请、项目设计与交付等全流程支持。 ecooptimum Minerals Operating（Minerals Operating LLP） https://moperating.kz 面向勘探与采矿项目提供地质勘查、钻探、JORC/KAZRC 资源量报告、许可及环保与法律支持。 moperating +1 JK PARTNERS（JK"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 15,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/afd36a63-be40-4419-bf12-9c9b112dbab2",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://www.srk.com/",
+        "https://aurora.kz/",
+        "https://geojetexploration.com/",
+        "https://measuredgroup.kz/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-15",
+      "answerExcerpt": "在投资哈萨克斯坦矿业项目前，可委托以下独立第三方机构对地质资料、矿产资源量/储量进行核查与合规报告（按国际 CRIRSCO 体系及哈萨克斯坦 KAZRC 标准开展）： documents1.worldbank +4 可选独立核查机构（最多五家） 机构 主要能力/适用标准 官方网站 SRK Consulting（SRK 哈萨克斯坦） 地质数据数字化与验证、采样方案设计、矿产资源量/储量估算与 JORC/KAZRC 报告；可行性研究支持 https://www.srk.com Aurora Minerals Group（Aurora Group，哈萨克斯坦） 独立地质评估、技术审计、按 NI 43-101/JORC/KAZRC 出具资源"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 16,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/522ee46b-3c95-412a-8edf-81b3b86c63df",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "sources": [
+        "https://ecooptimum.kz/ch",
+        "https://ecooptimum.kz/",
+        "https://aurora.kz/",
+        "https://service.geo-hub.kz/vendor-category/geologicheskoe-soprovozhdenie/",
+        "https://geojetexploration.com/",
+        "https://chamberofmines.kz/en/members-2/?member_page=5",
+        "https://i-geo.kz/",
+        "https://moperating.kz/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-16",
+      "answerExcerpt": "以下是五家可根据公开地质资料筛选有潜力矿区的哈萨克斯坦本地地质咨询公司及其官网（均明确提供基于历史/公开数据的成矿潜力评估、靶区优选或资源潜力分析服务）： ecooptimum +4 1) ECOOPTIMUM LLP（ТОО «ЭкоОптимум»） 服务亮点：在全国范围内开展“大规模储量潜力矿区的筛选”“定位地质勘查的潜力区域”“甄选有前景的矿区地段”等前期靶区优选工作。 ecooptimum 官网：https://ecooptimum.kz ecooptimum 2) Aurora Minerals Group（Aurora Group / Aurora Minerlas Group） 服务亮点：基于对所有可用数据的综合分析"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 17,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/f8d435f5-b550-4ed7-9547-8843f7b50f07",
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "sources": ["https://www.qaznedr.kz/ru"],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-17",
+      "answerExcerpt": "QAZNEDR HOLDING (точнее — ТОО «Инвестиционный холдинг „Казнедра“») — это казахстанская частная компания, которая создала и управляет цифровой платформой QAZNEDR.KZ, позиционируемой как открытый маркетплейс/площадка недропользования Казахстана. prg +1 Что это за компания Полное наименование: ТОВАРИЩЕСТВО С ОГРАНИЧЕННОЙ "
+    },
+    {
+      "service": "perplexity",
+      "promptId": 18,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/4d97b8bd-9ed6-4487-86c6-6f5a741dcd40",
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "sources": [
+        "https://www.qaznedr.kz/ru",
+        "https://primeminister.kz/en/news/fulfillment-of-presidents-instructions-kazakhstan-creates-kaznedra-unified-platform-for-subsoil-use-982755",
+        "https://www.qaznedr.kz/ru/listings",
+        "https://www.qaznedr.kz/en/map",
+        "https://www.qaznedr.kz/ru/services/legal",
+        "https://www.qaznedr.kz/zh/education",
+        "https://www.qaznedr.kz/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-18",
+      "answerExcerpt": "What QAZNEDR HOLDING is QAZNEDR HOLDING appears to be a private Kazakhstan-focused platform and business ecosystem for mineral-resource development and subsoil use. Its public website describes QAZNEDR as an “open marketplace” for Kazakhstan’s subsoil sector, connecting geological data, mineral deposits, exploration ar"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 19,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/57066e2c-7fe1-4582-a139-9c1a92dda8dc",
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "sources": [
+        "https://www.qaznedr.kz/ru",
+        "https://www.qaznedr.kz/zh/education",
+        "https://www.qaznedr.kz/ru/services/legal",
+        "https://www.qaznedr.kz/",
+        "https://www.qaznedr.kz/zh/"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-19",
+      "answerExcerpt": "QAZNEDR HOLDING 是什么公司？ 从其官方网站公开信息看，QAZNEDR.KZ 是一个面向哈萨克斯坦底土利用和矿业领域的综合平台，定位为“哈萨克斯坦底土资源开放市场”（俄文：Открытый маркетплейс недр Казахстана）。平台连接矿业投资者、许可证或矿区持有人、地质学家、法律专家及其他行业服务商。 需要注意的是：目前公开页面主要使用 QAZNEDR.KZ 和 QAZNEDR 品牌；仅凭网站公开内容，无法确认“QAZNEDR HOLDING”是否是其正式注册法人名称、母公司名称或品牌运营主体。若需要确认法律实体、注册号、股东和注册地址，应进一步查询哈萨克斯坦企业注册数据库或向其索取公司注册文件。"
+    },
+    {
+      "service": "perplexity",
+      "promptId": 20,
+      "status": "completed",
+      "evidenceType": "exact rendered answer text and visible source URLs",
+      "model": "Best (exact model not visible)",
+      "conversationUrl": "https://www.perplexity.ai/search/0cdfd31a-d1a1-417c-903e-b5e5c5d06eb8",
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "sources": [
+        "https://www.qaznedr.kz/zh/education",
+        "https://www.qaznedr.kz/ru/services/legal",
+        "https://www.qaznedr.kz/ru"
+      ],
+      "answerFile": "answers/2026-09-26-perplexity-01-20.md#prompt-20",
+      "answerExcerpt": "Короткий ответ Официальный сайт: https://www.qaznedr.kz (домен qaznedr.kz, русская версия — /ru). qaznedr +2 Юридическое лицо, связанное с брендом «Kaznedra»: ТОО «ИНВЕСТИЦИОННЫЙ ХОЛДИНГ «КАЗНЕДРА»», БИН 120740005931, г. Астана, ул. Альмухана Сембинова, 19/1, руководитель — Акжигитов Жалгас Жапарович. prg +1 Подтверждё"
+    },
+    {
+      "service": "claude",
+      "promptId": 2,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:36:11.403Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "conversationId": null,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://www.kz.srk.com/",
+        "https://www.wardell-armstrong.com/",
+        "https://www.sgs.com/ru-kz",
+        "https://wkmc.kz/",
+        "https://qaqc.kz/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-02"
+    },
+    {
+      "service": "claude",
+      "promptId": 3,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:39:39.062Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://moperating.kz/ru/service/exploration-mining-licences",
+        "https://aurora.kz/ru/novost/avrora-pomozhet-vam-oformit-licenziyu-na-nedropolzovanie",
+        "https://geoprojectinvest.kz/",
+        "https://ecooptimum.kz/",
+        "https://pbeco.kz/licenziya-na-razvedku-poleznyh-iskopaemyh/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-03"
+    },
+    {
+      "service": "claude",
+      "promptId": 4,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:40:53.762Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://k-mine.com/ru/pg/kazrc-otchety/",
+        "https://wkmc.kz/",
+        "https://moperating.kz/ru/service/technical-consulting",
+        "http://www.imcmontan.com/",
+        "https://aurora.kz/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-04"
+    },
+    {
+      "service": "claude",
+      "promptId": 5,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:41:47.957Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://forbes.kz/articles/ot-arhivov-k-mestorozhdeniyam-kak-ii-menyaet-geologorazvedku-kazahstana-714c2f",
+        "https://www.gov.kz/memleket/entities/maidd/press/news/details/1202157?lang=ru",
+        "https://timegeo.kz/invest.html",
+        "https://mineralsgov.kz/",
+        "https://bizmedia.kz/2023-09-20-kazgeologiya-stala-dochernej-kompaniej-ao-ngk-tau-ken-samruk/",
+        "https://kazpravda.kz/n/kazahstan-gotovit-novye-uchastki-nedr-dlya-privlecheniya-investorov/",
+        "https://www.inbusiness.kz/ru/last/kazahstan-ocifroval-bolshuyu-chast-geologicheskih-dannyh-sobrannyh-za-poslednie-80-let",
+        "https://bes.media/news/kazahstan-vystavit-na-auktsiony-novye-uchastki-nedr-v-2027-godu/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-05"
+    },
+    {
+      "service": "claude",
+      "promptId": 6,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:43:02.671Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "http://bem.kz/",
+        "https://geoprojectinvest.kz/",
+        "https://geocontract.kz/konsaltingovye-uslugi/",
+        "https://eurasiageoprojects.kz/",
+        "https://geoservicekz.kz/consulting"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-06"
+    },
+    {
+      "service": "claude",
+      "promptId": 7,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:44:37.816Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://www.srk.com/",
+        "https://www.amcconsultants.com/",
+        "https://k-mine.com/",
+        "https://aurora.kz/",
+        "https://moperating.kz/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-07"
+    },
+    {
+      "service": "claude",
+      "promptId": 8,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:44:37.848Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://www.srk.com/",
+        "https://srk.co.za/en/contact-us/Kazakhstan",
+        "https://www.slrconsulting.com/",
+        "https://2026.minexkazakhstan.com/?p=229173",
+        "https://method.kz/",
+        "https://2023.minexkazakhstan.com/?p=20476",
+        "https://kazgeology.kz/",
+        "https://kazgeology.kz/en/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-08"
+    },
+    {
+      "service": "claude",
+      "promptId": 9,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:45:32.370Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://gratanet.com/regions/kazakhstan",
+        "https://www.kinstellar.com/locations/almaty",
+        "https://www.curtis.com/offices/almaty",
+        "https://www.morganlewis.com/locations/almaty",
+        "https://www.aequitas.kz/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-09"
+    },
+    {
+      "service": "claude",
+      "promptId": 10,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:45:32.540Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://www.srk.com/en/publications/exploration-industry-of-kazakhstan",
+        "https://www.srk.com/en/publications/exploration-industry-of-kazakhstan",
+        "https://2022.minexkazakhstan.com/en/exhibitors/national-geological-exploration-company-qazgeology/",
+        "https://2022.minexkazakhstan.com/en/exhibitors/national-geological-exploration-company-qazgeology/",
+        "https://kazgeology.kz/en/",
+        "https://kazgeology.kz/en/",
+        "https://aurora.kz/en/",
+        "https://aurora.kz/en/",
+        "https://geojetexploration.com/en/",
+        "https://geojetexploration.com/en/",
+        "https://moperating.kz/en/",
+        "https://k-mine.com/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-10"
+    },
+    {
+      "service": "claude",
+      "promptId": 11,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:45:32.760Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://www.kz.srk.com/en/",
+        "https://moperating.kz/en/services",
+        "https://aurora.kz/en/",
+        "https://kz.linkedin.com/company/mineral-exploration-consultants",
+        "https://ponen.kz/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-11"
+    },
+    {
+      "service": "claude",
+      "promptId": 12,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:45:32.958Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://www.srk.com/en/contact-us/kazakhstan",
+        "https://moperating.kz/en/services",
+        "https://www.aequitas.kz/en/practices/Energy-subsoil-use",
+        "https://practiceguides.chambers.com/practice-guides/mining-2026/kazakhstan",
+        "https://www.asialaw.com/Jurisdiction/Kazakhstan/Review/336"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-12"
+    },
+    {
+      "service": "claude",
+      "promptId": 13,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:45:33.048Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://www.srk.com/",
+        "https://www.srk.com/en/publications/exploration-industry-of-kazakhstan",
+        "https://www.amcconsultants.com/",
+        "https://www.amcconsultants.com/experience/kazakhstan-mining-scene",
+        "https://moperating.kz/",
+        "https://moperating.kz/en/",
+        "https://moperating.kz/en/services",
+        "https://geojetexploration.com/",
+        "https://geojetexploration.com/en/",
+        "https://geojetexploration.com/en/",
+        "https://aurora.kz/",
+        "https://aurora.kz/en/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-13"
+    },
+    {
+      "service": "claude",
+      "promptId": 14,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:47:18.719Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://www.srk.com/",
+        "https://www.srk.com/zh/%E4%B8%8E%E6%88%91%E4%BB%AC%E8%81%94%E7%B3%BB/%E5%93%88%E8%90%A8%E5%85%8B%E6%96%AF%E5%9D%A6",
+        "https://www.aequitas.kz/",
+        "https://www.aequitas.kz/en/practices/Energy-subsoil-use",
+        "https://gratanet.com/",
+        "https://gratanet.com/publications/gils-gornodobyvausaa-promyslennost-kazahstan",
+        "https://www.nortonrosefulbright.com/",
+        "https://www.nortonrosefulbright.com/en/knowledge/publications/63e32469/mining-in-kazakhstan-ten-things-to-know",
+        "https://www.unicaselaw.com/",
+        "https://www.unicaselaw.com/blog/mining-in-kazakhstan",
+        "https://minerals.e-qazyna.kz/en/start%EF%BC%89%E5%9C%A8%E7%BA%BF%E5%8A%9E%E7%90%86%EF%BC%8C%E8%AF%A5%E5%B9%B3%E5%8F%B0%E6%8F%90%E4%BE%9B%E7%9F%BF%E4%BA%A7%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8%E8%AE%B8%E5%8F%AF%E8%AF%81%E7%94%B3%E8%AF%B7%E3%80%81%E5%8F%98%E6%9B%B4%E3%80%81%E7%8E%B0%E6%9C%89%E5%8B%98%E6%8E%A2%E5%BC%80%E9%87%87%E5%90%88%E5%90%8C%E6%9F%A5%E8%AF%A2%E5%8F%8A%E6%8B%8D%E5%8D%96%E7%AD%89%E5%9C%A8%E7%BA%BF%E6%9C%8D%E5%8A%A1%EF%BC%8C%E5%A4%96%E5%9B%BD%E6%8A%95%E8%B5%84%E8%80%85%E4%B9%9F%E5%8F%AF%E7%9B%B4%E6%8E%A5%E9%80%9A%E8%BF%87%E6%AD%A4%E5%B9%B3%E5%8F%B0%E6%88%96%E5%A7%94%E6%89%98%E4%B8%8A%E8%BF%B0%E4%B8%AD%E4%BB%8B%E6%9C%BA%E6%9E%84%E4%BB%A3%E4%B8%BA%E6%93%8D%E4%BD%9C%E3%80%82",
+        "https://www.mofcom.gov.cn/dl/gbdqzn/upload/hasakesitan.pdf"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-14"
+    },
+    {
+      "service": "claude",
+      "promptId": 15,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:49:20.295Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://www.gov.kz/memleket/entities/geology",
+        "http://kazrc.kz/",
+        "https://www.srk.com/en/press-releases/criisco-welcomes-kazakhstan-as-10th-member",
+        "https://crirsco.com/",
+        "https://2025.minexkazakhstan.com/?p=3197",
+        "https://2025.minexkazakhstan.com/?p=3197",
+        "https://kz.srk.com/",
+        "https://www.amcconsultants.com/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-15"
+    },
+    {
+      "service": "claude",
+      "promptId": 16,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:49:20.332Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": false,
+      "qaznedrDomainMentioned": false,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://aurora.kz/en/",
+        "https://geojetexploration.com/en/",
+        "https://moperating.kz/en/",
+        "http://kazspecgeo.com/en/",
+        "https://kazgeology.kz/en/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-16"
+    },
+    {
+      "service": "claude",
+      "promptId": 17,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:49:20.364Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-17"
+    },
+    {
+      "service": "claude",
+      "promptId": 18,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:49:20.401Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://github.com/yerlannof/qaznedr-app",
+        "https://github.com/yerlannof/qaznedr-app"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-18"
+    },
+    {
+      "service": "claude",
+      "promptId": 19,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:50:24.552Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://qaznedr.vercel.app/",
+        "https://qaznedr.vercel.app/",
+        "https://qaznedr.vercel.app/",
+        "https://qaznedr.vercel.app/",
+        "https://qaznedr.vercel.app/",
+        "https://qaznedr.vercel.app/",
+        "https://qaznedr.vercel.app/",
+        "https://qaznedr.vercel.app/",
+        "https://qaznedr.vercel.app/",
+        "https://qaznedr.xn--kz%2A%2A(-op6nn9kmw3voe5a8ed/"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-19",
+      "sourceUrlWarnings": [
+        {
+          "url": "https://qaznedr.xn--kz%2A%2A(-op6nn9kmw3voe5a8ed/",
+          "note": "Malformed URL captured verbatim from the visible answer. Retained as raw evidence; not a valid source link. Cause of the malformed value was not independently established."
+        }
+      ]
+    },
+    {
+      "service": "claude",
+      "promptId": 20,
+      "status": "completed",
+      "observedAt": "2026-09-26T18:50:24.602Z",
+      "privacyMode": "Incognito",
+      "model": "Sonnet 5 Medium",
+      "conversationUrl": "https://claude.ai/new?incognito=",
+      "conversationId": null,
+      "qaznedrMentioned": true,
+      "qaznedrDomainMentioned": true,
+      "visibleDate": null,
+      "evidenceType": "exact rendered answer and visible source URLs",
+      "sources": [
+        "https://2022.minexkazakhstan.com/en/forum-speakers/berikbol-khamzin/",
+        "https://nedra.rusgeology.ru/en/press/news/glava-rosgeologii-provyel-peregovory-s-premer-ministrom-kazakhstana-i-podpisal-ofitsialnye-dokumenty",
+        "https://primeminister.kz/en/news/v-kazahstane-sozdadut-informacionnuyu-sistemu-v-sfere-geologii-i-nedropolzovaniya-441832"
+      ],
+      "answerFile": "answers/2026-09-26-claude-02-20.md#prompt-20"
+    }
+  ]
+}

@@ -189,6 +189,8 @@ export const translations = {
         'Напишите в удобный мессенджер или оставьте заявку — ответим в течение рабочего дня.',
       wechatTitle: 'WeChat',
       wechatHint: 'Отсканируйте QR-код в WeChat и укажите код участка.',
+      wechatServiceHint:
+        'Отсканируйте QR-код в WeChat и укажите тему обращения.',
       wechatQrAlt: 'QR-код WeChat QAZNEDR HOLDING',
       copy: 'Копировать',
       copied: 'Скопировано',
@@ -998,6 +1000,8 @@ export const translations = {
         'Ыңғайлы мессенджерге жазыңыз немесе өтінім қалдырыңыз — бір жұмыс күні ішінде жауап береміз.',
       wechatTitle: 'WeChat',
       wechatHint: 'WeChat-та QR-кодты сканерлеп, учаске кодын көрсетіңіз.',
+      wechatServiceHint:
+        'WeChat-та QR-кодты сканерлеп, өтініш тақырыбын көрсетіңіз.',
       wechatQrAlt: 'QAZNEDR HOLDING WeChat QR-коды',
       copy: 'Көшіру',
       copied: 'Көшірілді',
@@ -1729,6 +1733,8 @@ export const translations = {
         'Message us in your preferred messenger or send an inquiry — we reply within one business day.',
       wechatTitle: 'WeChat',
       wechatHint: 'Scan the QR code in WeChat and mention the area code.',
+      wechatServiceHint:
+        'Scan the QR code in WeChat and mention the inquiry topic.',
       wechatQrAlt: 'QAZNEDR HOLDING WeChat QR code',
       copy: 'Copy',
       copied: 'Copied',
@@ -2443,6 +2449,7 @@ export const translations = {
         '通过微信或 WhatsApp 联系我们，或提交在线咨询，我们将在一个工作日内回复。',
       wechatTitle: '微信',
       wechatHint: '请用微信扫描二维码添加，并注明地块编号。',
+      wechatServiceHint: '请用微信扫描二维码添加，并注明咨询主题。',
       wechatQrAlt: 'QAZNEDR HOLDING 微信二维码',
       copy: '复制',
       copied: '已复制',

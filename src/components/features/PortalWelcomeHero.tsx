@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { ArrowRight, Gem, MapPin } from 'lucide-react';
+import { ArrowRight, Gem } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 
 // Portal-level welcome hero — editorial gold-on-ink aesthetic with mission statement.
@@ -10,27 +10,14 @@ import { useTranslation } from '@/hooks/useTranslation';
 // Always dark for editorial gravitas (subsoil/geology subject); rest of page respects theme.
 export default function PortalWelcomeHero({ locale }: { locale: string }) {
   const { t } = useTranslation();
-  const [counts, setCounts] = useState<{ leads: number; listings: number }>({
-    leads: 31,
-    listings: 2,
-  });
+  const [leadsCount, setLeadsCount] = useState(31);
 
   useEffect(() => {
-    Promise.all([
-      fetch('/api/leads?limit=1')
-        .then((r) => r.json())
-        .then((j) => Number(j?.data?.pagination?.total ?? 0))
-        .catch(() => 0),
-      fetch('/api/listings?limit=1')
-        .then((r) => r.json())
-        .then((j) => Number(j?.data?.pagination?.total ?? 0))
-        .catch(() => 0),
-    ]).then(([leads, listings]) => {
-      setCounts({
-        leads: leads || 31,
-        listings: listings || 2,
-      });
-    });
+    fetch('/api/leads?limit=1')
+      .then((r) => r.json())
+      .then((j) => Number(j?.data?.pagination?.total ?? 0))
+      .catch(() => 0)
+      .then((leads) => setLeadsCount(leads || 31));
   }, []);
 
   return (
@@ -158,13 +145,6 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
                   className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
                 />
               </Link>
-              <Link
-                href={`/${locale}/listings`}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/20 text-white text-sm font-semibold hover:bg-white/5 hover:border-white/40 transition-colors"
-              >
-                <MapPin aria-hidden className="w-4 h-4" />
-                {t('portal.ctaListings')}
-              </Link>
             </div>
           </div>
 
@@ -185,12 +165,7 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
                 <div className="space-y-5">
                   <StatRow
                     label={t('portal.statsLeadsLabel')}
-                    value={counts.leads}
-                  />
-                  <div className="h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-                  <StatRow
-                    label={t('portal.statsListingsLabel')}
-                    value={counts.listings}
+                    value={leadsCount}
                   />
                   <div className="h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
                   <StatRow label={t('portal.statsRegionsLabel')} value={9} />

@@ -159,13 +159,13 @@ export default function InvestorsPage() {
             находить вас по сфере интересов и регионам.
           </p>
           <div className="flex flex-wrap gap-3 mt-6">
-            <Link href={`/${locale}/auth/register`}>
+            <Link href={`/${locale}/contact`}>
               <Button>
                 <Plus className="w-4 h-4 mr-2" />
                 Стать инвестором
               </Button>
             </Link>
-            <Link href={`/${locale}/listings`}>
+            <Link href={`/${locale}/leads`}>
               <Button variant="outline">
                 <Briefcase className="w-4 h-4 mr-2" />
                 Смотреть проекты
@@ -305,7 +305,7 @@ function EmptyState({
       </p>
       {!hasFilters && (
         <div className="mt-6">
-          <Link href={`/${locale}/auth/register`}>
+          <Link href={`/${locale}/contact`}>
             <Button>
               <Plus className="w-4 h-4 mr-2" />
               Стать инвестором

@@ -6,7 +6,6 @@ import Navigation from '@/components/layouts/Navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import {
   Mountain,
-  Truck,
   Scale,
   Users,
   BookOpen,
@@ -28,13 +27,6 @@ export default function ServicesPage() {
       description: t('services.descriptions.geological'),
       icon: Mountain,
       href: '/services/geological',
-    },
-    {
-      id: 'equipment',
-      title: t('services.titles.equipment'),
-      description: t('services.descriptions.equipment'),
-      icon: Truck,
-      href: '/services/equipment',
     },
     {
       id: 'legal',
@@ -132,27 +124,6 @@ export default function ServicesPage() {
           />
         </div>
       </section>
-
-      {/* Catalog CTA */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-        <Link href={`/${locale}/services/catalog`}>
-          <div className="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-xl p-5 bg-white dark:bg-[#141414] hover:border-gray-300 hover:shadow-medium transition-all duration-200 group">
-            <div>
-              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                Каталог услуг
-              </h2>
-              <p className="text-sm text-gray-500 mt-0.5">
-                Буровые работы, консалтинг, аудит, юридические услуги и многое
-                другое
-              </p>
-            </div>
-            <span className="text-sm text-[#0A84FF] font-medium flex items-center gap-1 group-hover:gap-2 transition-all whitespace-nowrap ml-4">
-              Перейти
-              <ArrowRight className="w-4 h-4" />
-            </span>
-          </div>
-        </Link>
-      </div>
 
       {/* Service Categories */}
       <section className="py-12 bg-gray-50 dark:bg-[#0A0A0A]">

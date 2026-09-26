@@ -157,17 +157,17 @@ export default async function AboutPage({
               </p>
             </Link>
             <Link
-              href={`/${locale}/listings`}
+              href={`/${locale}/contact`}
               className="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#141414] p-6 transition-all hover:border-gold/50 hover:shadow-medium hover:-translate-y-0.5"
             >
               <div className="flex items-center justify-between">
                 <span className="font-semibold text-gray-900 dark:text-gray-50">
-                  Объявления
+                  Контакты
                 </span>
                 <ArrowRight className="w-4 h-4 text-gray-400 transition-transform group-hover:translate-x-0.5" />
               </div>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Лицензии и рудопроявления на продажу.
+                WeChat, WhatsApp или заявка на сайте.
               </p>
             </Link>
             <Link

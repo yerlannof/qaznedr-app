@@ -192,7 +192,7 @@ export default async function LeadsCatalogPage({
                   {t('leadsCatalog.emptyDesc')}
                 </p>
                 <Link
-                  href={`/${locale}/support`}
+                  href={`/${locale}/contact`}
                   className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 dark:bg-gray-100 dark:text-gray-900 text-white text-sm font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
                 >
                   <Mail className="w-4 h-4" aria-hidden="true" />

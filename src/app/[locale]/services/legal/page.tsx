@@ -73,7 +73,7 @@ export default function LegalServicesPage() {
             практикуете в сфере недропользования — создайте профиль эксперта.
           </p>
           <div className="mt-8">
-            <Link href={`/${locale}/support`}>
+            <Link href={`/${locale}/contact`}>
               <Button>
                 Стать экспертом
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -109,13 +109,13 @@ export default function LegalServicesPage() {
             области недропользования Казахстана
           </p>
           <div className="flex flex-wrap gap-3 mt-6">
-            <Link href={`/${locale}/support`}>
+            <Link href={`/${locale}/contact`}>
               <Button>
                 <User className="w-4 h-4 mr-2" />
                 Создать профиль эксперта
               </Button>
             </Link>
-            <Link href={`/${locale}/support`}>
+            <Link href={`/${locale}/contact`}>
               <Button variant="outline">
                 <Building className="w-4 h-4 mr-2" />
                 Зарегистрировать компанию

@@ -46,3 +46,18 @@ describe('hiddenRouteRedirect', () => {
     }
   });
 });
+
+describe('session 2 hidden routes', () => {
+  it('redirects support and the investors directory to contact', () => {
+    expect(hiddenRouteRedirect('/ru/support')).toBe('/ru/contact');
+    expect(hiddenRouteRedirect('/en/services/investors')).toBe('/en/contact');
+    expect(hiddenRouteRedirect('/en/services/investors/x')).toBe('/en/contact');
+    expect(hiddenRouteRedirect('/ru/services')).toBeNull();
+    expect(hiddenRouteRedirect('/ru/services/legal')).toBeNull();
+  });
+
+  it('keeps them out of the sitemap', () => {
+    expect(PUBLIC_PAGES).not.toContain('/support');
+    expect(PUBLIC_PAGES).not.toContain('/services/investors');
+  });
+});

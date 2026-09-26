@@ -7,7 +7,6 @@ import { useTranslation } from '@/hooks/useTranslation';
 import {
   Mountain,
   Scale,
-  Users,
   BookOpen,
   Newspaper,
   ArrowRight,
@@ -35,13 +34,6 @@ export default function ServicesPage() {
       icon: Scale,
       href: '/services/legal',
     },
-    {
-      id: 'investors',
-      title: t('services.titles.investors'),
-      description: t('services.descriptions.investors'),
-      icon: Users,
-      href: '/services/investors',
-    },
   ];
 
   const knowledgeCenter = [
@@ -59,45 +51,8 @@ export default function ServicesPage() {
     },
   ];
 
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Какие геологические услуги доступны в Казахстане?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'На платформе QAZNEDR доступны геологоразведка, юридическое сопровождение лицензий, аренда бурового оборудования и инвестиционные услуги для недропользователей.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Как найти поставщика геологических услуг?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Используйте каталог услуг QAZNEDR для поиска проверенных поставщиков по категориям: геология, оборудование, юридические услуги, инвестиции.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Как разместить объявление о продаже лицензии?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Зарегистрируйтесь на платформе, выберите тип объявления (лицензия на добычу, разведку или рудопроявление) и заполните данные о месторождении.',
-        },
-      },
-    ],
-  };
-
   return (
     <div className="min-h-screen bg-white dark:bg-[#0A0A0A]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c'),
-        }}
-      />
       <Navigation />
 
       {/* Hero */}

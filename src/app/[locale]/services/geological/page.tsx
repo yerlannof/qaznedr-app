@@ -57,7 +57,7 @@ export default function GeologicalServicesPage() {
             оказываете геологические услуги — станьте одним из первых.
           </p>
           <div className="mt-8">
-            <Link href={`/${locale}/support`}>
+            <Link href={`/${locale}/contact`}>
               <Button>
                 Стать поставщиком
                 <ArrowRight className="w-4 h-4 ml-2" />

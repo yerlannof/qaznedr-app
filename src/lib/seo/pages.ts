@@ -7,11 +7,9 @@ export const PUBLIC_PAGES = [
   '/services',
   '/services/geological',
   '/services/legal',
-  '/services/investors',
   '/about',
   '/contact',
   '/faq',
-  '/support',
   '/legal/terms',
   '/blog',
   '/education',
@@ -35,6 +33,8 @@ export const HIDDEN_ROUTE_REDIRECTS: ReadonlyArray<readonly [string, string]> =
     ['/messages', '/contact'],
     ['/dashboard', '/leads'],
     ['/auth/register', '/contact'],
+    ['/support', '/contact'],
+    ['/services/investors', '/contact'],
   ];
 
 const LOCALE_PATH = new RegExp(`^/(${LOCALES.join('|')})(/.*)?$`);

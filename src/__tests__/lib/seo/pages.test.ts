@@ -2,6 +2,7 @@ import {
   HIDDEN_ROUTE_REDIRECTS,
   PUBLIC_PAGES,
   hiddenRouteRedirect,
+  trackingQuery,
 } from '@/lib/seo/pages';
 
 describe('hiddenRouteRedirect', () => {
@@ -80,5 +81,22 @@ describe('session 3: content sections merged into /insights', () => {
     }
     expect(hiddenRouteRedirect('/ru/insights')).toBeNull();
     expect(hiddenRouteRedirect('/ru/insights/x')).toBeNull();
+  });
+});
+
+describe('trackingQuery', () => {
+  it('keeps utm_*, gclid, yclid, fbclid and msclkid only', () => {
+    expect(
+      trackingQuery(
+        new URLSearchParams(
+          'region=x&utm_source=a&utm_campaign=b&gclid=1&yclid=2&fbclid=3&msclkid=4&page=2'
+        )
+      )
+    ).toBe('?utm_source=a&utm_campaign=b&gclid=1&yclid=2&fbclid=3&msclkid=4');
+  });
+
+  it('is empty when nothing is worth keeping', () => {
+    expect(trackingQuery(new URLSearchParams('region=x&page=2'))).toBe('');
+    expect(trackingQuery(new URLSearchParams(''))).toBe('');
   });
 });

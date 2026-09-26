@@ -20,12 +20,23 @@ describe('middleware location', () => {
 });
 
 describe('hidden marketplace routes', () => {
-  it('redirects with 308 to the replacement, keeping the locale and query', () => {
+  it('redirects with 308 to the replacement, keeping the locale', () => {
     const res = middleware(
       new NextRequest('https://qaznedr.kz/zh/listings/abc?x=1')
     );
     expect(res.status).toBe(308);
-    expect(res.headers.get('location')).toBe('https://qaznedr.kz/zh/leads?x=1');
+    expect(res.headers.get('location')).toBe('https://qaznedr.kz/zh/leads');
+  });
+
+  it('carries campaign tags but drops old marketplace filters', () => {
+    const res = middleware(
+      new NextRequest(
+        'https://qaznedr.kz/ru/listings?region=Мангистауская&page=3&utm_source=wechat&gclid=abc'
+      )
+    );
+    expect(res.headers.get('location')).toBe(
+      'https://qaznedr.kz/ru/leads?utm_source=wechat&gclid=abc'
+    );
   });
 
   it('lets look-alike and regular pages through', () => {

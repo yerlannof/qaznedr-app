@@ -52,3 +52,17 @@ export function hiddenRouteRedirect(pathname: string): string | null {
   }
   return null;
 }
+
+const TRACKING_PARAM = /^(utm_[a-z_]+|gclid|yclid|fbclid|msclkid)$/i;
+
+/** Campaign tags of a query string (`?utm_source=…`), or '' if none. Old
+ * marketplace filters are dropped: an unknown ?region= on the new pages
+ * would show an empty list instead of all areas. */
+export function trackingQuery(params: URLSearchParams): string {
+  const kept = new URLSearchParams();
+  params.forEach((value, key) => {
+    if (TRACKING_PARAM.test(key)) kept.append(key, value);
+  });
+  const query = kept.toString();
+  return query ? `?${query}` : '';
+}

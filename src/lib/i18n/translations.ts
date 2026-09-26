@@ -3,6 +3,13 @@
 
 export const translations = {
   ru: {
+    notFound: {
+      title: 'Страница не найдена',
+      text: 'Возможно, она была перемещена или больше не существует.',
+      home: 'На главную',
+      contact: 'Связаться с нами',
+      leads: 'Участки',
+    },
     faqPage: {
       eyebrow: 'Вопросы и ответы',
       title: 'Коротко о главном',
@@ -620,13 +627,6 @@ export const translations = {
         materials: 'материалов',
         viewAll: 'Смотреть все',
       },
-      cta: {
-        title: 'Хотите разместить свои услуги?',
-        description:
-          'Присоединяйтесь к нашей экосистеме и найдите новых клиентов в области недропользования Казахстана',
-        postService: 'Разместить услуги',
-        contactUs: 'Связаться с нами',
-      },
       knowledge: {
         knowledgeBase: 'База знаний',
         knowledgeBaseDesc: 'Техническая документация, стандарты, регламенты',
@@ -765,6 +765,13 @@ export const translations = {
     },
   },
   kz: {
+    notFound: {
+      title: 'Бет табылмады',
+      text: 'Мүмкін, ол басқа мекенжайға көшірілген немесе енді жоқ.',
+      home: 'Басты бетке',
+      contact: 'Бізбен байланысу',
+      leads: 'Учаскелер',
+    },
     faqPage: {
       eyebrow: 'Сұрақ-жауап',
       title: 'Негізгісі қысқаша',
@@ -1428,13 +1435,6 @@ export const translations = {
         materials: 'материалдар',
         viewAll: 'Барлығын көру',
       },
-      cta: {
-        title: 'Қызметтеріңізді орналастырғыңыз келе ме?',
-        description:
-          'Біздің экожүйеге қосылыңыз және Қазақстанның тау-кен өнеркәсібінде жаңа клиенттерді табыңыз',
-        postService: 'Қызметтерді орналастыру',
-        contactUs: 'Бізбен байланысыңыз',
-      },
     },
     companies: {
       title: 'Компаниялар каталогы',
@@ -1460,6 +1460,13 @@ export const translations = {
     },
   },
   en: {
+    notFound: {
+      title: 'Page not found',
+      text: 'It may have been moved or no longer exists.',
+      home: 'Home',
+      contact: 'Contact us',
+      leads: 'Areas',
+    },
     faqPage: {
       eyebrow: 'Questions and answers',
       title: 'The essentials',
@@ -1920,7 +1927,7 @@ export const translations = {
     },
     leadDetail: {
       transferNote:
-        "Transferring a subsoil-use right requires the competent authority's permission (Arts. 44–45 of the Subsoil Code); a solid-minerals exploration licence cannot be transferred in its first year.",
+        "As a rule, transferring a subsoil-use right requires the competent authority's permission (Arts. 44–45 of the Subsoil Code); a solid-minerals exploration licence cannot be transferred in its first year.",
       includedHeading: 'At a meeting after an NDA we discuss:',
       breadcrumbLeads: 'Areas',
       badgeSold: 'SOLD',
@@ -2111,13 +2118,6 @@ export const translations = {
         materials: 'materials',
         viewAll: 'View All',
       },
-      cta: {
-        title: 'Want to list your services?',
-        description:
-          "Join our ecosystem and find new clients in Kazakhstan's subsoil-use sector",
-        postService: 'Post Services',
-        contactUs: 'Contact Us',
-      },
     },
     companies: {
       title: 'Company Directory',
@@ -2143,6 +2143,13 @@ export const translations = {
     },
   },
   zh: {
+    notFound: {
+      title: '页面未找到',
+      text: '该页面可能已被移动或已不存在。',
+      home: '返回首页',
+      contact: '联系我们',
+      leads: '地块',
+    },
     faqPage: {
       eyebrow: '常见问题',
       title: '要点速览',
@@ -2586,7 +2593,7 @@ export const translations = {
     },
     leadDetail: {
       transferNote:
-        '矿业权转让须经主管机关许可（《底土法》第44–45条）；固体矿产勘探许可证在有效期第一年内不得转让。',
+        '矿业权转让通常须经主管机关许可（《底土法》第44–45条）；固体矿产勘查许可证在有效期第一年内不得转让。',
       includedHeading: '签署保密协议后会面洽谈：',
       breadcrumbLeads: '地块',
       badgeSold: '已售出',
@@ -2765,12 +2772,6 @@ export const translations = {
         projects: '项目',
         materials: '资料',
         viewAll: '查看全部',
-      },
-      cta: {
-        title: '想要发布您的服务吗？',
-        description: '加入我们的生态系统，在哈萨克斯坦采矿业中寻找新客户',
-        postService: '发布服务',
-        contactUs: '联系我们',
       },
     },
     companies: {

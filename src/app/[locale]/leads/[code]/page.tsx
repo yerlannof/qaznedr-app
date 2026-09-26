@@ -202,12 +202,10 @@ export default async function LeadTeaserPage({
                         : t('leadDetail.statusPending')}
                     </span>
                   </div>
-                  {free && (
-                    <div className="flex items-center gap-2 text-gray-500">
-                      <Calendar className="w-4 h-4" />{' '}
-                      {t('leadDetail.verifyDate')} {checkedOn}
-                    </div>
-                  )}
+                  <div className="flex items-center gap-2 text-gray-500">
+                    <Calendar className="w-4 h-4" />{' '}
+                    {t('leadDetail.verifyDate')} {checkedOn}
+                  </div>
                 </div>
                 <p className="mt-3 text-xs text-gray-500 leading-relaxed">
                   {t('leadDetail.transferNote')}

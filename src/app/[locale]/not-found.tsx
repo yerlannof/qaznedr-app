@@ -1,9 +1,13 @@
+'use client';
+
 import Link from 'next/link';
 import { Home, ArrowRight, Compass } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function NotFound() {
+  const { t, locale } = useTranslation();
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0a0a] flex flex-col">
       <Navigation />
@@ -30,42 +34,42 @@ export default function NotFound() {
 
           {/* Headline */}
           <h1 className="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-gray-900 dark:text-gray-50 -mt-6">
-            Страница не найдена
+            {t('notFound.title')}
           </h1>
 
           {/* Subtitle */}
           <p className="mt-4 text-base text-gray-500 dark:text-gray-400 font-sans">
-            Возможно, она была перемещена или больше не существует.
+            {t('notFound.text')}
           </p>
 
           {/* Primary action */}
           <div className="mt-10">
             <Link
-              href="/"
+              href={`/${locale}`}
               className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-6 py-3 text-sm font-medium text-white shadow-subtle transition-all duration-200 hover:shadow-medium hover:-translate-y-0.5 dark:bg-gray-50 dark:text-gray-900"
             >
               <Home className="h-4 w-4" strokeWidth={1.75} />
-              На главную
+              {t('notFound.home')}
             </Link>
           </div>
 
           {/* Secondary gold links */}
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-8">
             <Link
-              href="/ru/contact"
+              href={`/${locale}/contact`}
               className="group inline-flex items-center gap-1.5 text-sm font-medium text-gold transition-colors hover:text-gold-dark"
             >
-              Связаться с нами
+              {t('notFound.contact')}
               <ArrowRight
                 className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
                 strokeWidth={1.75}
               />
             </Link>
             <Link
-              href="/ru/leads"
+              href={`/${locale}/leads`}
               className="group inline-flex items-center gap-1.5 text-sm font-medium text-gold transition-colors hover:text-gold-dark"
             >
-              Геологические находки
+              {t('notFound.leads')}
               <ArrowRight
                 className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
                 strokeWidth={1.75}

@@ -4,9 +4,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
 import GuideLinks from '@/components/features/GuideLinks';
+import ClosingCta from '@/components/features/ClosingCta';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Mountain, Scale, ArrowRight, Search } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import Footer from '@/components/layouts/Footer';
 
 export default function ServicesPage() {
@@ -93,21 +93,7 @@ export default function ServicesPage() {
         <GuideLinks locale={locale} heading={t('insights.servicesHeading')} />
       </section>
 
-      {/* CTA */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 bg-gray-50 dark:bg-[#141414]">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
-            {t('services.cta.title')}
-          </h2>
-          <p className="text-sm text-gray-500 mt-2 max-w-lg">
-            {t('services.cta.description')}
-          </p>
-          <div className="flex gap-3 mt-6">
-            <Button>{t('services.cta.postService')}</Button>
-            <Button variant="outline">{t('services.cta.contactUs')}</Button>
-          </div>
-        </div>
-      </section>
+      <ClosingCta locale={locale} />
 
       <Footer />
     </div>

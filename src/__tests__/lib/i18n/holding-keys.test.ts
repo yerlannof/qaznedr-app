@@ -122,6 +122,10 @@ const TEASER_KEYS = [
   'leadLocked.note',
 ];
 
+const NOT_FOUND_KEYS = ['title', 'text', 'home', 'contact', 'leads'].map(
+  (k) => `notFound.${k}`
+);
+
 // Later tasks append their namespaces here.
 const KEYS: string[] = [
   ...SEO_KEYS,
@@ -130,6 +134,7 @@ const KEYS: string[] = [
   ...INQUIRY_KEYS,
   ...HOME_KEYS,
   ...TEASER_KEYS,
+  ...NOT_FOUND_KEYS,
 ];
 
 describe.each(['ru', 'kz', 'en', 'zh'])('%s holding translations', (locale) => {
@@ -142,4 +147,18 @@ describe.each(['ru', 'kz', 'en', 'zh'])('%s holding translations', (locale) => {
       expect(translate(locale, key)).not.toBe(translate('ru', key));
     });
   }
+});
+
+describe('transfer note', () => {
+  it('says "as a rule" in every language, like the ru text', () => {
+    expect(translate('ru', 'leadDetail.transferNote')).toMatch(/как правило/);
+    expect(translate('kz', 'leadDetail.transferNote')).toMatch(/әдетте/);
+    expect(translate('en', 'leadDetail.transferNote')).toMatch(/as a rule/i);
+    expect(translate('zh', 'leadDetail.transferNote')).toMatch(/通常/);
+  });
+
+  it('uses the guides term 勘查 for exploration in zh', () => {
+    expect(translate('zh', 'leadDetail.transferNote')).toContain('勘查');
+    expect(translate('zh', 'leadDetail.transferNote')).not.toContain('勘探');
+  });
 });

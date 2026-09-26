@@ -1,7 +1,11 @@
 /** @jest-environment node */
 import { existsSync, readFileSync, readdirSync } from 'fs';
 import path from 'path';
-import { INSIGHTS_DIR, articlePath } from '@/lib/insights/content';
+import {
+  INSIGHTS_DIR,
+  articlePath,
+  renderMarkdown,
+} from '@/lib/insights/content';
 import { parseFrontMatter } from '@/lib/insights/front-matter';
 import { INSIGHTS } from '@/lib/insights/registry';
 import { hiddenRouteRedirect } from '@/lib/seo/pages';
@@ -80,6 +84,14 @@ describe('guide files', () => {
         expect(body).not.toMatch(/^# /m);
         expect(body).toMatch(SOURCES_HEADING[locale]);
         expect(body).toMatch(/\]\(https?:\/\//);
+      });
+
+      it('renders emphasis without stray markers', () => {
+        // CJK text: a closing ** right after ）or 。 and before a character
+        // does not close the bold, and the reader sees raw asterisks.
+        const { body } = parseFrontMatter(source);
+        const visible = renderMarkdown(body).replace(/<[^>]+>/g, '');
+        expect(visible).not.toMatch(/\*\*|__/);
       });
 
       it('keeps the copy red lines', () => {

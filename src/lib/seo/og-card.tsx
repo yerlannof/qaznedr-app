@@ -1,6 +1,6 @@
 import { ogTitleSize } from './og';
 
-/** 1200×630 card in the current neutral style (until the approved design). */
+/** 1200×630 card in the approved D2 palette, using local Latin/CJK fonts. */
 export function ogCard({
   eyebrow,
   title,
@@ -19,16 +19,16 @@ export function ogCard({
         flexDirection: 'column',
         justifyContent: 'center',
         padding: '80px',
-        backgroundColor: '#ffffff',
-        fontFamily: 'system-ui, sans-serif',
+        backgroundColor: '#253740',
+        fontFamily: 'Plex, NotoSC',
         position: 'relative',
       }}
     >
       <div
         style={{
           fontSize: 20,
-          fontWeight: 500,
-          color: '#9CA3AF',
+          fontWeight: 400,
+          color: '#CAD2CA',
           textTransform: 'uppercase',
           letterSpacing: '3px',
           marginBottom: '24px',
@@ -39,8 +39,8 @@ export function ogCard({
       <div
         style={{
           fontSize: ogTitleSize(title),
-          fontWeight: 700,
-          color: '#111827',
+          fontWeight: 600,
+          color: '#E9ECE6',
           lineHeight: 1.15,
           letterSpacing: '-1px',
           maxWidth: '1040px',
@@ -54,7 +54,7 @@ export function ogCard({
           bottom: '40px',
           right: '80px',
           fontSize: 16,
-          color: '#9CA3AF',
+          color: '#CAD2CA',
         }}
       >
         {footer}

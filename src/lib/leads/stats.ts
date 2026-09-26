@@ -30,7 +30,10 @@ export async function collectLeadStats(
   fetchPage: (page: number) => Promise<LeadsPage>
 ): Promise<{ total: number; regions: number }> {
   const first = await fetchPage(1);
-  const pages = Math.min(Math.ceil(first.total / LEADS_PAGE_SIZE), MAX_PAGES);
+  const pages = Math.ceil(first.total / LEADS_PAGE_SIZE);
+  if (!Number.isInteger(first.total) || first.total < 0 || pages > MAX_PAGES) {
+    throw new Error('/api/leads total exceeds statistics budget');
+  }
   const rest = await Promise.all(
     Array.from({ length: Math.max(0, pages - 1) }, (_, i) => fetchPage(i + 2))
   );
@@ -39,6 +42,14 @@ export async function collectLeadStats(
       throw new Error('/api/leads pages disagree');
     }
   }
+  [first, ...rest].forEach((page, index) => {
+    const expected = Math.min(
+      LEADS_PAGE_SIZE,
+      first.total - index * LEADS_PAGE_SIZE
+    );
+    if (page.leads.length !== expected)
+      throw new Error('/api/leads incomplete page');
+  });
   const regions = new Set<string>();
   for (const { leads } of [first, ...rest]) {
     for (const l of leads) {

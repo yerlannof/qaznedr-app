@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { Inter, Cormorant_Garamond } from 'next/font/google';
+import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Toaster } from 'sonner';
@@ -39,6 +39,7 @@ export async function generateMetadata({
   // must NOT, otherwise every page inherits the home canonical.
   return {
     metadataBase: new URL(SITE_URL),
+    icons: { icon: '/brand/favicon.svg', apple: '/brand/apple-touch-icon.png' },
     title: { default: t('seo.site.title'), template: `%s | ${SITE_NAME}` },
     description: t('seo.site.description'),
     openGraph: {
@@ -68,19 +69,25 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 
-const inter = Inter({
-  subsets: ['latin', 'cyrillic'],
+const inter = localFont({
+  src: [
+    {
+      path: '../../../public/brand/fonts/IBMPlexSans-Regular.woff2',
+      weight: '400',
+    },
+    {
+      path: '../../../public/brand/fonts/IBMPlexSans-SemiBold.woff2',
+      weight: '600',
+    },
+  ],
   variable: '--font-inter',
   display: 'swap',
 });
-
-// Editorial display serif for the portal welcome hero (gravitas + character).
-const fraunces = Cormorant_Garamond({
-  subsets: ['latin', 'latin-ext', 'cyrillic'],
+const fraunces = localFont({
+  src: '../../../public/brand/fonts/SourceSerif4Display-Regular.ttf.woff2',
   variable: '--font-fraunces',
+  weight: '400',
   display: 'swap',
-  weight: ['300', '400', '600'],
-  style: ['normal'],
 });
 
 export default async function LocaleLayout({
@@ -106,7 +113,7 @@ export default async function LocaleLayout({
         <meta httpEquiv="content-language" content={lang} />
       </head>
       <body
-        className={`${inter.variable} ${fraunces.variable} ${inter.className} antialiased`}
+        className={`${inter.variable} ${fraunces.variable} ${inter.className} antialiased bg-brand-bg text-brand-ink`}
       >
         <a
           href="#main"
@@ -117,7 +124,7 @@ export default async function LocaleLayout({
         <ThemeProvider>
           <AuthProvider>
             <WebVitalsTracker pageName={`/${locale}`} />
-            <main id="main" tabIndex={-1} className="pb-16 md:pb-0">
+            <main id="main" tabIndex={-1} className="pb-24 md:pb-0">
               {children}
             </main>
             <MobileTabBar />

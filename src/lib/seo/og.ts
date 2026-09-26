@@ -4,6 +4,7 @@ import { SITE_NAME, localeUrl, type Locale } from './site';
 // Shared by the og-image routes (edge and node) and page metadata.
 export const OG_SIZE = { width: 1200, height: 630 } as const;
 export const OG_ALT = SITE_NAME;
+export const OG_VERSION = '20260926-d2';
 
 const BRAND_PREFIX = /^QAZNEDR HOLDING\s*[—–-]\s*/;
 
@@ -29,5 +30,5 @@ export function ogTitleSize(title: string): number {
 
 /** The card drawn by `<path>/opengraph-image` ('' = the locale card). */
 export function ogImageUrl(locale: Locale, path = ''): string {
-  return localeUrl(locale, `${path}/opengraph-image`);
+  return `${localeUrl(locale, `${path}/opengraph-image`)}?v=${OG_VERSION}`;
 }

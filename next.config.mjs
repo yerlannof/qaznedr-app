@@ -8,15 +8,23 @@ const nextConfig = {
   // No "X-Powered-By: Next.js" header.
   poweredByHeader: false,
 
+  // Metadata here only reads local translations. Keep it in the initial head
+  // for every crawler/link preview, even on the dynamic holding home page.
+  htmlLimitedBots: /.*/,
+
   // marked ships ESM only; next/jest reads this list to transform it in tests.
   transpilePackages: ['marked'],
 
   // Guides are read from content/ at build time; keep them in the trace in
   // case a page is ever rendered on demand.
   outputFileTracingIncludes: {
+    '/[locale]/opengraph-image': ['./public/brand/fonts/*.ttf'],
     '/[locale]/insights': ['./content/insights/**/*'],
     '/[locale]/insights/[slug]': ['./content/insights/**/*'],
-    '/[locale]/insights/[slug]/opengraph-image': ['./content/insights/**/*'],
+    '/[locale]/insights/[slug]/opengraph-image': [
+      './content/insights/**/*',
+      './public/brand/fonts/*.ttf',
+    ],
   },
 
   // Image optimization

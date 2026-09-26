@@ -12,6 +12,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          bg: 'var(--brand-bg)',
+          surface: 'var(--brand-surface)',
+          ink: 'var(--brand-ink)',
+          muted: 'var(--brand-muted)',
+          line: 'var(--brand-line)',
+          accent: '#DDE55E',
+          slate: '#253740',
+          chalk: '#E9ECE6',
+        },
         primary: '#0A84FF',
         secondary: '#6B7280',
         gold: '#C8A24B',

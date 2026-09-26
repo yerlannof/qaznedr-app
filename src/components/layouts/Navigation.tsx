@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
+import { LogOut, Menu, Shield } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
-import { Menu, LogOut, Shield } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import BrandLogo from '@/components/brand/BrandLogo';
 import {
   Sheet,
   SheetContent,
@@ -16,25 +17,29 @@ import {
   SheetClose,
 } from '@/components/ui/sheet';
 
-/**
- * Navigation — fixed top nav bar, h-16 (desktop) / h-14 (mobile).
- *
- * IMPORTANT: Every page that renders this component must add `pt-16`
- * (or `pt-14` on mobile if using the shorter bar) to its root content
- * wrapper so the fixed nav does not overlap page content.
- */
+const languages = [
+  { code: 'ru', label: 'RU' },
+  { code: 'kz', label: 'KZ' },
+  { code: 'en', label: 'English' },
+  { code: 'zh', label: '中文' },
+];
+
+/** Fixed 56/64 px header. Page content starts below it. */
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
+  const pathname = usePathname() || '/';
   const { t, locale } = useTranslation();
   const { data: session } = useSession();
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const switchLocalePath = (newLocale: string) => {
+    const segments = pathname.split('/');
+    if (['ru', 'kz', 'en', 'zh'].includes(segments[1])) {
+      segments[1] = newLocale;
+    } else {
+      segments.splice(1, 0, newLocale);
+    }
+    return segments.join('/') || `/${newLocale}`;
+  };
 
   const navLinks = [
     { label: t('navigation.leads'), href: `/${locale}/leads` },
@@ -42,158 +47,181 @@ export default function Navigation() {
     { label: t('navigation.insights'), href: `/${locale}/insights` },
     { label: t('navigation.about'), href: `/${locale}/about` },
   ];
-  const contactHref = `/${locale}/contact`;
-  const adminHref = `/${locale}/admin`;
-
   const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(href + '/');
+    pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <nav
       aria-label={t('common.menu')}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
-        isScrolled
-          ? 'bg-white/95 border-b border-gray-100 dark:bg-[#0A0A0A]/95 dark:border-gray-800'
-          : 'bg-white border-b border-transparent dark:bg-[#0A0A0A] dark:border-transparent'
-      }`}
+      className="fixed inset-x-0 top-0 z-50 border-b border-brand-line bg-brand-bg text-brand-ink"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 lg:h-16">
-          <Link
-            href={`/${locale}`}
-            className="font-bold tracking-tight text-gray-900 dark:text-gray-50 text-lg"
-          >
-            QAZNEDR
-          </Link>
+      <div className="brand-container flex h-14 items-center justify-between gap-4 lg:h-16">
+        <Link
+          href={`/${locale}`}
+          className="brand-focus inline-flex min-h-11 items-center shrink-0"
+          aria-label="QAZNEDR HOLDING"
+        >
+          <BrandLogo className="w-40" />
+        </Link>
 
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
+        <div className="hidden items-center gap-1 lg:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+              className={`brand-focus inline-flex min-h-11 items-center px-2 text-sm hover:text-brand-ink ${
+                isActive(link.href)
+                  ? 'font-semibold text-brand-ink'
+                  : 'text-brand-muted'
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="hidden items-center gap-1 lg:flex">
+          <div
+            className="flex items-center"
+            aria-label={t('footer.language.title')}
+          >
+            {languages.map(({ code, label }) => (
               <Link
-                key={link.href}
-                href={link.href}
-                aria-current={isActive(link.href) ? 'page' : undefined}
-                className={`px-3 py-2 text-sm transition-colors rounded-md ${
-                  isActive(link.href)
-                    ? 'text-gray-900 dark:text-gray-50 font-medium'
-                    : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50'
+                key={code}
+                href={switchLocalePath(code)}
+                hrefLang={code === 'kz' ? 'kk' : code === 'zh' ? 'zh' : code}
+                lang={code === 'kz' ? 'kk' : code}
+                aria-current={locale === code ? 'page' : undefined}
+                className={`brand-focus inline-flex min-h-11 min-w-11 items-center justify-center px-1.5 text-xs ${
+                  locale === code
+                    ? 'font-semibold text-brand-ink'
+                    : 'text-brand-muted hover:text-brand-ink'
                 }`}
               >
-                {link.label}
+                {label}
               </Link>
             ))}
           </div>
-
-          <div className="hidden lg:flex items-center gap-3">
-            <ThemeToggle />
-            {session && (
-              <>
-                <Link
-                  href={adminHref}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50 transition-colors"
-                >
-                  <Shield aria-hidden className="w-4 h-4" />
-                  {t('navigation.admin')}
-                </Link>
-                <button
-                  onClick={() => signOut({ callbackUrl: `/${locale}` })}
-                  aria-label={t('common.logout')}
-                  className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                >
-                  <LogOut aria-hidden className="w-4 h-4" />
-                </button>
-              </>
-            )}
-            <Link
-              href={contactHref}
-              className="px-4 py-1.5 text-sm font-medium text-white bg-gray-900 dark:bg-gray-100 dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
-            >
-              {t('navigation.contact')}
-            </Link>
-          </div>
-
-          <div className="flex lg:hidden items-center gap-2">
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <button
-                  aria-label={t('common.menu')}
-                  aria-expanded={isOpen}
-                  aria-controls="mobile-nav-menu"
-                  className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A84FF]"
-                >
-                  <Menu aria-hidden className="w-5 h-5" />
-                </button>
-              </SheetTrigger>
-              <SheetContent
-                id="mobile-nav-menu"
-                side="right"
-                className="w-[300px] sm:w-[360px] p-0"
+          <ThemeToggle />
+          {session && (
+            <>
+              <Link
+                href={`/${locale}/admin`}
+                className="brand-focus inline-flex min-h-11 items-center gap-1 px-2 text-sm text-brand-muted hover:text-brand-ink"
               >
-                <SheetHeader className="px-6 pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
-                  <SheetTitle className="text-left text-base font-semibold text-gray-900 dark:text-gray-50">
-                    {t('common.menu')}
-                  </SheetTitle>
-                </SheetHeader>
+                <Shield aria-hidden="true" className="size-4" />
+                {t('navigation.admin')}
+              </Link>
+              <button
+                type="button"
+                onClick={() => signOut({ callbackUrl: `/${locale}` })}
+                aria-label={t('common.logout')}
+                className="brand-focus inline-flex min-h-11 min-w-11 items-center justify-center text-brand-muted hover:text-brand-ink"
+              >
+                <LogOut aria-hidden="true" className="size-4" />
+              </button>
+            </>
+          )}
+          <Link
+            href={`/${locale}/contact`}
+            className="brand-button brand-focus ml-2 inline-flex min-h-11 items-center px-4 text-sm"
+          >
+            {t('navigation.contact')}
+          </Link>
+        </div>
 
-                <div className="flex flex-col h-[calc(100%-73px)]">
-                  <div className="flex-1 overflow-y-auto py-4 px-4 space-y-1">
-                    {navLinks.map((link) => (
-                      <SheetClose asChild key={link.href}>
-                        <Link
-                          href={link.href}
-                          className={`block px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                            isActive(link.href)
-                              ? 'text-gray-900 dark:text-gray-50 font-medium bg-gray-50 dark:bg-gray-800'
-                              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-800'
-                          }`}
-                        >
-                          {link.label}
-                        </Link>
-                      </SheetClose>
-                    ))}
-                    {session && (
-                      <SheetClose asChild>
-                        <Link
-                          href={adminHref}
-                          className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                        >
-                          <Shield aria-hidden className="w-4 h-4" />
-                          {t('navigation.admin')}
-                        </Link>
-                      </SheetClose>
-                    )}
-                  </div>
-
-                  <div className="border-t border-gray-100 dark:border-gray-800 p-4 space-y-3">
-                    <div className="flex items-center justify-between px-3">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
-                        {t('common.theme') !== 'common.theme'
-                          ? t('common.theme')
-                          : 'Тема'}
-                      </span>
-                      <ThemeToggle />
-                    </div>
-                    <SheetClose asChild>
+        <div className="lg:hidden">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <button
+                type="button"
+                aria-label={t('common.menu')}
+                aria-expanded={isOpen}
+                aria-controls="mobile-nav-menu"
+                className="brand-focus inline-flex min-h-11 min-w-11 items-center justify-center text-brand-ink"
+              >
+                <Menu aria-hidden="true" className="size-5" />
+              </button>
+            </SheetTrigger>
+            <SheetContent
+              closeLabel={t('common.close')}
+              id="mobile-nav-menu"
+              side="right"
+              className="w-[min(22rem,90vw)] gap-0 border-brand-line bg-brand-bg p-0 text-brand-ink"
+            >
+              <SheetHeader className="border-b border-brand-line px-5 py-5">
+                <SheetTitle className="text-left text-brand-ink">
+                  {t('common.menu')}
+                </SheetTitle>
+              </SheetHeader>
+              <div className="flex flex-1 flex-col overflow-y-auto px-5 py-4">
+                {navLinks.map((link) => (
+                  <SheetClose asChild key={link.href}>
+                    <Link
+                      href={link.href}
+                      aria-current={isActive(link.href) ? 'page' : undefined}
+                      className="brand-focus flex min-h-12 items-center border-b border-brand-line text-brand-ink"
+                    >
+                      {link.label}
+                    </Link>
+                  </SheetClose>
+                ))}
+                {session && (
+                  <SheetClose asChild>
+                    <Link
+                      href={`/${locale}/admin`}
+                      className="brand-focus flex min-h-12 items-center gap-2 border-b border-brand-line text-brand-ink"
+                    >
+                      <Shield aria-hidden="true" className="size-4" />
+                      {t('navigation.admin')}
+                    </Link>
+                  </SheetClose>
+                )}
+                <div className="mt-7 text-xs text-brand-muted">
+                  {t('footer.language.title')}
+                </div>
+                <div className="mt-2 grid grid-cols-4 gap-1">
+                  {languages.map(({ code, label }) => (
+                    <SheetClose asChild key={code}>
                       <Link
-                        href={contactHref}
-                        className="block w-full px-4 py-2.5 text-sm text-center font-medium text-white bg-gray-900 dark:bg-gray-100 dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+                        href={switchLocalePath(code)}
+                        hrefLang={
+                          code === 'kz' ? 'kk' : code === 'zh' ? 'zh' : code
+                        }
+                        lang={code === 'kz' ? 'kk' : code}
+                        aria-current={locale === code ? 'page' : undefined}
+                        className={`brand-focus flex min-h-11 items-center justify-center border border-brand-line text-xs ${locale === code ? 'bg-brand-surface font-semibold text-brand-ink' : 'text-brand-muted'}`}
                       >
-                        {t('navigation.contact')}
+                        {label}
                       </Link>
                     </SheetClose>
-                    {session && (
-                      <button
-                        onClick={() => signOut({ callbackUrl: `/${locale}` })}
-                        className="flex items-center gap-2 w-full px-3 py-2.5 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                      >
-                        <LogOut aria-hidden className="w-4 h-4" />
-                        <span>{t('common.logout')}</span>
-                      </button>
-                    )}
-                  </div>
+                  ))}
                 </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+                <div className="mt-6">
+                  <ThemeToggle />
+                </div>
+                <SheetClose asChild>
+                  <Link
+                    href={`/${locale}/contact`}
+                    className="brand-button brand-focus mt-6 flex min-h-12 items-center justify-center"
+                  >
+                    {t('navigation.contact')}
+                  </Link>
+                </SheetClose>
+                {session && (
+                  <button
+                    type="button"
+                    onClick={() => signOut({ callbackUrl: `/${locale}` })}
+                    className="brand-focus mt-4 flex min-h-11 items-center gap-2 text-brand-muted"
+                  >
+                    <LogOut aria-hidden="true" className="size-4" />
+                    {t('common.logout')}
+                  </button>
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </nav>

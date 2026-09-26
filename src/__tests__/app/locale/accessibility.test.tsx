@@ -4,10 +4,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { translate } from '@/lib/i18n/translations';
 import LocaleLayout from '@/app/[locale]/layout';
 import NotFound from '@/app/[locale]/not-found';
-jest.mock('next/font/google', () => ({
-  Inter: () => ({}),
-  Cormorant_Garamond: () => ({}),
-}));
+jest.mock('next/font/local', () => ({ __esModule: true, default: () => ({}) }));
 jest.mock('@/providers/ThemeProvider', () => ({
   ThemeProvider: ({ children }: { children: React.ReactNode }) => children,
 }));

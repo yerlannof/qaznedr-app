@@ -4,14 +4,22 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import BrandLogo from '@/components/brand/BrandLogo';
+
+const languages = [
+  { code: 'ru', label: 'Русский' },
+  { code: 'kz', label: 'Қазақша' },
+  { code: 'en', label: 'English' },
+  { code: 'zh', label: '中文' },
+];
 
 export default function Footer() {
   const { t, locale } = useTranslation();
-  const pathname = usePathname();
+  const pathname = usePathname() || '/';
 
   const switchLocalePath = (newLocale: string) => {
     const segments = pathname.split('/');
-    if (segments[1] && ['ru', 'kz', 'en', 'zh'].includes(segments[1])) {
+    if (['ru', 'kz', 'en', 'zh'].includes(segments[1])) {
       segments[1] = newLocale;
     } else {
       segments.splice(1, 0, newLocale);
@@ -19,116 +27,84 @@ export default function Footer() {
     return segments.join('/') || `/${newLocale}`;
   };
 
-  const languages = [
-    { code: 'ru', label: 'Русский' },
-    { code: 'kz', label: 'Қазақша' },
-    { code: 'en', label: 'English' },
-    { code: 'zh', label: '中文' },
+  const platformLinks = [
+    { href: `/${locale}/leads`, label: t('footerNav.platform.leads') },
+    { href: `/${locale}/services`, label: t('footerNav.platform.services') },
+    { href: `/${locale}/insights`, label: t('navigation.insights') },
+  ];
+  const infoLinks = [
+    { href: `/${locale}/about`, label: t('footerNav.info.about') },
+    { href: `/${locale}/contact`, label: t('footerNav.info.contacts') },
+    { href: `/${locale}/faq`, label: t('footerNav.info.faq') },
+    { href: `/${locale}/legal/terms`, label: t('footerNav.info.terms') },
   ];
 
   return (
-    <footer className="md:mb-0 mb-14 bg-white border-t border-gray-200 dark:bg-[#0A0A0A] dark:border-[#262626]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Column 1: Brand */}
+    <footer className="border-t border-brand-line bg-brand-surface pb-20 text-brand-ink md:pb-0">
+      <div className="brand-container py-12 lg:py-16">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
-            <div className="font-bold tracking-tight text-gray-900 dark:text-white text-lg mb-3">
-              QAZNEDR
-            </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+            <Link
+              href={`/${locale}`}
+              className="brand-focus inline-block"
+              aria-label="QAZNEDR HOLDING"
+            >
+              <BrandLogo className="w-40" />
+            </Link>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-brand-muted">
               {t('footer.company.description')}
             </p>
           </div>
 
-          {/* Column 2: Платформа */}
           <div>
-            <h4 className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-3">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-brand-muted">
               {t('footerNav.platform.title')}
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href={`/${locale}/leads`}
-                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  {t('footerNav.platform.leads')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/services`}
-                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  {t('footerNav.platform.services')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/insights`}
-                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  {t('navigation.insights')}
-                </Link>
-              </li>
+            </h2>
+            <ul>
+              {platformLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="brand-focus flex min-h-11 items-center text-sm text-brand-ink hover:underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Column 3: Информация */}
           <div>
-            <h4 className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-3">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-brand-muted">
               {t('footerNav.info.title')}
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href={`/${locale}/about`}
-                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  {t('footerNav.info.about')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/contact`}
-                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  {t('footerNav.info.contacts')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/faq`}
-                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  {t('footerNav.info.faq')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/legal/terms`}
-                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  {t('footerNav.info.terms')}
-                </Link>
-              </li>
+            </h2>
+            <ul>
+              {infoLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="brand-focus flex min-h-11 items-center text-sm text-brand-ink hover:underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Column 4: Язык + ThemeToggle */}
           <div>
-            <h4 className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-3">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-brand-muted">
               {t('footer.language.title')}
-            </h4>
-            <ul className="space-y-2">
+            </h2>
+            <ul>
               {languages.map(({ code, label }) => (
                 <li key={code}>
                   <Link
                     href={switchLocalePath(code)}
-                    className={`text-sm transition-colors ${
-                      locale === code
-                        ? 'text-gray-900 dark:text-white font-medium'
-                        : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'
-                    }`}
+                    hrefLang={code === 'kz' ? 'kk' : code}
+                    lang={code === 'kz' ? 'kk' : code}
+                    aria-current={locale === code ? 'page' : undefined}
+                    className={`brand-focus flex min-h-11 items-center text-sm hover:underline ${locale === code ? 'font-semibold text-brand-ink' : 'text-brand-muted'}`}
                   >
                     {label}
                   </Link>
@@ -141,8 +117,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-gray-200 dark:border-[#262626] mt-8 pt-4 flex justify-between text-xs text-gray-400">
+        <div className="mt-10 flex flex-wrap justify-between gap-2 border-t border-brand-line pt-5 text-xs text-brand-muted">
           <span>{t('footerNav.bottom.rights', { year: '2026' })}</span>
           <span>{t('footerNav.bottom.city')}</span>
         </div>

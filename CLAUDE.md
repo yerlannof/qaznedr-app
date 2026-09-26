@@ -91,15 +91,16 @@ type ListingType =
 
 ### Design System Constraints
 
-**CRITICAL**: This project has strict design requirements:
+**Approved holding system (2026-09-26): A3 «Контур» + D2 «Сланец / мел / сера».** Owner approved pages 03–06 and the exact vector master plus local type pair; source: `docs/design/APPROVED.md`.
 
-- **Colors**: Gray base + **gold accent** (`gold #C8A24B` / `gold-dark #A8842F` / `gold-light #E0C674`) on an **editorial gold-on-ink** system (ink `#0A0A0A`, surface `#141414`). Blue `#0A84FF` is a secondary/link accent only. No gradients, no bright colors, no emoji. Primary buttons are BLACK (`bg-gray-900`), not blue. Verified/price accents are gold.
-- **Typography**: Inter (`--font-inter`, sans body) + **Cormorant Garamond** (`font-serif`, var `--font-fraunces` — legacy name) for editorial headings and prices. Serif headings use `font-serif font-light tracking-tight`; prices `font-serif tabular-nums text-gold-dark dark:text-gold-light`. Tokens in `tailwind.config.ts`.
-- **Components**: Minimal, clean design with subtle shadows (`shadow-subtle`) and hover effects (`hover:shadow-medium hover:-translate-y-0.5`). Border-based cards (`border border-gray-200 rounded-xl`).
-- **Animations**: CSS transitions only for hover (duration-150/200). Framer Motion only for mount/unmount (AnimatePresence). No pulse, glow, sparkle, gradient-shift.
-- **Icons**: Lucide React only. NO emoji in UI elements.
-- **Copy**: Short, direct, factual. No marketing noise ("инновационная экосистема").
-- **Forbidden**: glassmorphism, sparkle badges, emoji icons, blue primary buttons, centered hero text, gradient backgrounds, complex Framer Motion orchestrations
+- **Colors:** light background `#E9ECE6`, surface `#F4F5F0`, ink `#253740`, muted `#51616A`, line `#64747A`; dark background `#253740`, surface `#30434C`, ink `#E9ECE6`, muted `#CAD2CA`, line `#8FA19E`. Accent `#DDE55E` with slate text. Use semantic `brand-*` Tailwind tokens. Sulphur is not body text on a light background.
+- **Typography:** local IBM Plex Sans 400/600 for body/UI; Source Serif 4 Display 400 for headings. Existing CSS variable names `--font-inter` / `--font-fraunces` remain compatibility aliases. Chinese uses system CJK and normal tracking. OG uses local Plex + Noto SC subsets; update the subset when adding Chinese copy.
+- **Logo:** approved exact SVGs in `public/brand/`, component `BrandLogo`; do not typeset substitute letters. Light/dark logo variants and favicon derive from the same A3 master.
+- **Layout:** content 1200 px plus 20/32 px gutters; headings 36/46/64 px; thin dividers, 0–4 px radii, no heavy card shadows. Controls 44 px minimum, primary buttons 48 px. Mobile menu and ONE contact action, no bottom tab navigation.
+- **Images:** local geological engraving WebP, decorative illustrations rather than real project evidence. Never turn demonstration codes or template quantities into live data. Static scene until movement is separately approved.
+- **Icons:** Lucide only. No emoji, glassmorphism, gradients, flashing/pulse/glow animations. Hover transitions short, reduced motion supported.
+- **Copy:** approved existing texts, factual and concise, no claims of ownership or guaranteed returns. Locale strings only in translations.ts.
+- **Migration:** home/header/footer use D2 in session 4; legacy gold/ink tokens remain for pages scheduled for sessions 5–6. Do not use old palette for new holding components.
 
 ### Kazakhstan-Specific Features
 
@@ -120,7 +121,7 @@ type ListingType =
 ### UI Component Development
 
 1. Follow existing patterns in `/components/ui/`
-2. Use only gray/blue color scheme
+2. Use the approved D2 semantic brand tokens
 3. Test hover states and transitions
 4. Ensure responsive design (mobile-first)
 
@@ -148,7 +149,7 @@ type ListingType =
 
 1. **Incremental Changes**: Never rewrite entire architecture; make file-by-file updates
 2. **Preserve Functionality**: Only add/enhance; never remove working features
-3. **Follow Design System**: Strict adherence to gray+blue color scheme
+3. **Follow Design System**: Use approved A3/D2 tokens and assets
 4. **Kazakhstan Context**: All content should reflect Kazakhstan mining industry
 5. **Type Safety**: Use provided TypeScript types for all Kazakhstan-specific data
 6. **No Console Statements**: Remove all console.log/error/warn from production code

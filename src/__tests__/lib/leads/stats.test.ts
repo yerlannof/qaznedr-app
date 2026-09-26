@@ -41,7 +41,7 @@ describe('collectLeadStats', () => {
     const calls: number[] = [];
     await collectLeadStats(async (page) => {
       calls.push(page);
-      return { total: 31, leads: [lead('Абайская область')] };
+      return { total: 31, leads: Array(31).fill(lead('Абайская область')) };
     });
     expect(calls).toEqual([1]);
   });
@@ -113,4 +113,28 @@ describe('fetchLeadsPage', () => {
       fetchLeadsPage(1, respond(200, { success: false }))
     ).rejects.toThrow();
   });
+});
+
+describe('complete statistics only', () => {
+  it('rejects totals beyond the bounded page budget instead of counting a subset', async () => {
+    await expect(
+      collectLeadStats(async () => ({
+        total: 1001,
+        leads: Array(50).fill(lead('ВКО')),
+      }))
+    ).rejects.toThrow();
+  });
+  it.each([1, 2])(
+    'rejects a truncated page %s even when its total agrees',
+    async (truncated) => {
+      await expect(
+        collectLeadStats(async (page) => ({
+          total: 60,
+          leads: Array(page === truncated ? 1 : page === 1 ? 50 : 10).fill(
+            lead('ВКО')
+          ),
+        }))
+      ).rejects.toThrow();
+    }
+  );
 });

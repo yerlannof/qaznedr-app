@@ -26,9 +26,11 @@ describe('ogTitleSize', () => {
 
 describe('ogImageUrl', () => {
   it('points at the locale card', () => {
-    expect(ogImageUrl('zh')).toBe('https://qaznedr.kz/zh/opengraph-image');
+    expect(ogImageUrl('zh')).toBe(
+      'https://qaznedr.kz/zh/opengraph-image?v=20260926-d2'
+    );
     expect(ogImageUrl('en', '/insights/x')).toBe(
-      'https://qaznedr.kz/en/insights/x/opengraph-image'
+      'https://qaznedr.kz/en/insights/x/opengraph-image?v=20260926-d2'
     );
     expect(OG_ALT).toBe('QAZNEDR HOLDING');
   });

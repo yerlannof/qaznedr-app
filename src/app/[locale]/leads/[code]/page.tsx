@@ -270,11 +270,13 @@ export default async function LeadTeaserPage({
                 <p className="text-sm text-gray-500 mb-4">
                   {t('contact.discussNote')}
                 </p>
-                <ContactChannels
-                  config={contacts}
-                  locale={locale}
-                  leadCode={lead.code}
-                />
+                <div id="contact-channels" className="scroll-mt-24">
+                  <ContactChannels
+                    config={contacts}
+                    locale={locale}
+                    leadCode={lead.code}
+                  />
+                </div>
                 <h3 className="mt-6 mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">
                   {hasAnyChannel(contacts)
                     ? t('contact.orForm')

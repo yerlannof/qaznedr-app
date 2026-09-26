@@ -1,0 +1,60 @@
+from pathlib import Path
+from html import escape
+
+ROOT = Path(__file__).resolve().parent
+STYLE = '''
+:root{--bg:#E9ECE6;--ink:#253740;--muted:#51616A;--accent:#DDE55E}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,sans-serif}a{color:inherit;text-underline-offset:4px}a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid var(--ink);outline-offset:4px}header{border-bottom:1px solid #64747A;padding:24px max(20px,calc((100vw - 1240px)/2));display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}header b{font:24px Georgia,serif}nav{display:flex;gap:18px;flex-wrap:wrap}nav a{min-height:44px;display:inline-flex;align-items:center}main{max-width:1240px;margin:auto;padding:48px 20px 72px}h1,h2,h3{font-family:Georgia,serif;font-weight:400;line-height:1.12}h1{font-size:clamp(36px,5vw,64px);max-width:940px;margin:8px 0 24px}h2{font-size:36px;margin:0 0 22px}h3{font-size:26px;margin:0 0 12px}.lead{font-size:20px;max-width:850px}.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase}.note{border-left:3px solid #64747A;padding:10px 20px;max-width:900px;color:var(--muted)}section{padding:42px 0;border-bottom:1px solid #64747A}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.card{border:1px solid #64747A;background:#F4F5F0;padding:22px;min-width:0}.card p{color:var(--muted)}.button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 18px;text-decoration:none;border:1px solid var(--ink);background:var(--accent);font-weight:600}.links{display:flex;gap:10px 20px;flex-wrap:wrap;align-items:center}.links a{min-height:44px;display:inline-flex;align-items:center}.visual{margin:0;background:#F4F5F0;border:1px solid #64747A;padding:12px;min-width:0}.visual img{display:block;width:100%;height:auto}.visual figcaption{padding:14px 4px 4px;font-size:14px;color:var(--muted)}.preview-crop{width:100%;aspect-ratio:1.4;object-fit:cover;object-position:top;border:1px solid #64747A}.badge{display:inline-block;padding:5px 10px;border:1px solid #64747A;font-size:12px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:640px}th,td{text-align:left;border-bottom:1px solid #64747A;padding:14px;vertical-align:top}th{font-size:13px}.tools{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.tools label{display:grid;gap:4px;font-size:13px}.tools select,.tools button{font:inherit;min-height:44px;border:1px solid #64747A;background:#F4F5F0;color:#253740;padding:8px 12px}.frame-scroll{overflow:auto;border:1px solid #64747A;background:#cbd2cd;padding:16px}.frame-scroll iframe{display:block;border:0;margin:auto;width:375px;height:850px;background:#E9ECE6}footer{max-width:1240px;margin:0 auto;padding:24px 20px 64px;color:var(--muted);font-size:14px}.small{font-size:14px;color:var(--muted)}@media(max-width:760px){.grid{grid-template-columns:1fr}main{padding-top:32px}.lead{font-size:18px}h2{font-size:30px}section{padding:32px 0}header{padding:16px 20px}.frame-scroll{padding:8px}.card{padding:18px}}
+'''
+
+PAGES = [
+    dict(n='03', file='03-home.html', title='Главная', desc='Крупная геологическая сцена, понятный вход в портфель и связь с командой.', screens=['home'], boards=[('desktop/light-v2.png','EN · светлая, весь desktop'),('desktop/dark-v2.png','EN · тёмная, весь desktop'),('mobile/light-v2.png','中文 · светлая, три фрагмента прокрутки'),('mobile/dark-v2.png','中文 · тёмная, три фрагмента прокрутки')]),
+    dict(n='04', file='04-portfolio.html', title='Портфель и тизер', desc='От выбора направления к открытому тизеру и предметному разговору.', screens=['portfolio','teaser'], boards=[('imagegen/portfolio-v2.png','Портфель · EN desktop и 中文 mobile'),('imagegen/teaser.png','Тизер · параметры, NDA и связь')]),
+    dict(n='05', file='05-pages.html', title='Услуги, компания, контакты', desc='Состав работы команды, проверяемые сведения и удобные каналы связи.', screens=['services','about','contact'], boards=[('imagegen/services-about.png','Услуги и компания · общая подача'),('imagegen/contact-v2.png','Контакты · китайская версия')]),
+    dict(n='06', file='06-insights.html', title='Гайды и металлы', desc='Читаемые материалы, таблицы и тематические входы в портфель.', screens=['insights','article','metal'], boards=[('imagegen/insights.png','Гайды и статья · редакционная подача'),('imagegen/metal.png','Страница металла · контекст и проекты')]),
+]
+LABELS = {'home':'Главная','portfolio':'Портфель','teaser':'Тизер','services':'Услуги','about':'О компании','contact':'Контакты','insights':'Гайды','article':'Статья','metal':'Металл'}
+
+def chrome(title, body, script=''):
+    nav=''.join(f'<a href="{p["file"]}">{p["n"]} · {p["title"]}</a>' for p in PAGES)
+    nav += '<a href="07-brand-system.html">Брендбук и носители</a>'
+    return f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)} · QAZNEDR</title><style>{STYLE}</style></head><body><header><b><a href="00-design-review.html">QAZNEDR HOLDING</a></b><nav aria-label="Разделы обзора">{nav}</nav></header><main>{body}</main><footer>Дизайн-пакет на рассмотрении · 26 сентября 2026 · Все примеры проектов и недостающие сведения обозначены как демонстрационные. Рисунки не являются данными участков. Сайт проекта не изменён.</footer>{script}</body></html>'
+
+def board(n, name, caption):
+    rel=f'../mockups/{n}/{name}'
+    return f'<figure class="visual"><a href="{rel}"><img loading="lazy" src="{rel}" alt="{escape(caption)}"></a><figcaption>{escape(caption)} · ImageGen · <a href="{rel}">Открыть полный размер</a></figcaption></figure>'
+
+def snapshot_links(screen):
+    links=[]
+    for theme, label in [('light','светлая'),('dark','тёмная')]:
+        for width in [375,1440]:
+            rel=f'../mockups/site-preview/{screen}-en-{theme}-{width}.png'
+            links.append(f'<a href="{rel}">EN {width} · {label}</a>')
+    for theme,label in [('light','светлая'),('dark','тёмная')]:
+        links.append(f'<a href="../mockups/site-preview/{screen}-zh-{theme}-375.png">中文 375 · {label}</a>')
+    return '<div class="links">'+''.join(links)+'</div>'
+
+for p in PAGES:
+    body=f'<span class="eyebrow">Задание {p["n"]} · предложение</span><h1>{p["title"]}</h1><p class="lead">{p["desc"]}</p><p class="note">Сначала — художественные макеты через ImageGen. Ниже — точный браузерный макет с отдельными текстами и иллюстрациями, проверенный на реальных ширинах. Растровые подписи и мелкие детали генерации не являются источником текстов или мастер-файлом логотипа.</p>'
+    body+='<section><h2>Визуальная подача</h2><div class="grid">'+''.join(board(p['n'],n,c) for n,c in p['boards'])+'</div></section>'
+    body+='<section><h2>Страницы и размеры</h2>'
+    for screen in p['screens']:
+        body+=f'<article class="card" style="margin-bottom:22px"><h3>{LABELS[screen]}</h3><div class="links">'+''.join(f'<a class="button" href="site-preview.html?screen={screen}&amp;lang={lang}&amp;theme=light">Открыть {lab}</a>' for lang,lab in [('ru','RU'),('en','EN'),('zh','中文')])+'</div>'+snapshot_links(screen)+'</article>'
+    body+='</section>'
+    body+=f'<section><h2>Спецификация и проверка</h2><div class="links"><a href="../mockups/{p["n"]}/spec.md">Спецификация блоков</a><a href="../brand/brand.md">Цвета, размеры, состояния</a><a href="../mockups/site-preview/README.md">Что проверено в браузере</a><a href="../DELIVERY.md">Реестр результатов и ограничения</a></div></section>'
+    if p['n']=='03':
+        body+='<p class="small">В светлом мобильном рисунке генератор сохранил бронзовый оттенок малого HOLDING. Для дальнейшей реализации используется сланец из D2; ранний бронзовый цвет не возвращается. Слоганы, случайные микронадписи и приблизительные иконки на генеративных изображениях не переносятся автоматически.</p>'
+    (ROOT/p['file']).write_text(chrome(p['title'],body),encoding='utf8')
+
+body='''<span class="eyebrow">Итог автономной дизайн-сессии · на рассмотрении</span><h1>Один визуальный язык для всего сайта.</h1><p class="lead">A3 «Контур», сланец, мел и серный акцент. Геологическая гравюра объединяет главную, портфель, экспертизу и материалы для инвестора.</p><p class="note">Учтены твои решения: сцена перед портфелем; утверждённый состав тизера; на телефоне меню и одна кнопка связи. Новые цветные страницы пока являются предложением.</p>'''
+body+='<section><h2>Продолжение: брендбук и носители</h2><p>Точный векторный кандидат A3, брендбук, фирменные носители через ImageGen, демонстрация геологического движения и материалы разработчику.</p><a class="button" href="07-brand-system.html">Открыть новый пакет</a></section>'
+body+='<section><h2>Начать с главной</h2><div class="grid">'+board('03','desktop/light-v2.png','Светлая главная · EN')+board('03','mobile/dark-v2.png','Тёмная мобильная · 中文')+'</div><p><a class="button" href="03-home.html">Сравнить все варианты главной</a></p></section>'
+body+='<section><h2>Весь комплект</h2><div class="grid">'
+for p in PAGES:
+    image=f'../mockups/{p["n"]}/{p["boards"][0][0]}'
+    body+=f'<article class="card"><a href="{p["file"]}"><img class="preview-crop" loading="lazy" src="{image}" alt="{p["title"]}"></a><p class="eyebrow">{p["n"]}</p><h3>{p["title"]}</h3><p>{p["desc"]}</p><a class="button" href="{p["file"]}">Открыть раздел</a></article>'
+body+='</div></section>'
+body+='''<section><h2>Проверить страницу в действии</h2><p>Выбери страницу, язык, тему и ширину. Все формы здесь демонстрационные. Для удобного просмотра всего экрана открой макет отдельной вкладкой.</p><div class="tools"><label>Страница<select id="page">'''+''.join(f'<option value="{s}">{l}</option>' for s,l in LABELS.items())+'''</select></label><label>Язык<select id="lang"><option value="zh">中文</option><option value="en">EN</option><option value="ru">RU</option></select></label><label>Тема<select id="theme"><option value="light">Светлая</option><option value="dark">Тёмная</option></select></label><label>Ширина<select id="width"><option>375</option><option>768</option><option>1440</option></select></label><a id="open" class="button" href="site-preview.html?screen=home&amp;lang=zh&amp;theme=light">Открыть отдельно</a></div><div class="frame-scroll"><iframe title="Интерактивный дизайн-макет сайта" id="live" src="site-preview.html?screen=home&amp;lang=zh&amp;theme=light" loading="lazy"></iframe></div></section>'''
+body+='''<section><h2>Что уже проверено</h2><p>Размеры 375, 768 и 1440 px; две темы; китайский и английский основной маршрут; сохранение кода участка; меню и фильтры; отсутствие горизонтального переполнения. Подробный объём проверки и известные ограничения — в отчёте.</p><div class="links"><a href="../mockups/site-preview/README.md">Отчёт браузерной проверки</a><a href="../mockups/site-preview/states.html">Состояния компонентов</a><a href="../brand/brand.md">Рабочая система дизайна</a><a href="../DELIVERY.md">Все результаты и передача в разработку</a></div></section><section><h2>Решения на итоговое рассмотрение</h2><ol><li>Общий визуальный язык и плотность цветных страниц.</li><li>Светлая или тёмная тема по умолчанию; обе версии сохраняются.</li><li>Каким страницам нужна следующая доработка.</li></ol><p>Утверждения из предыдущих этапов не пересматриваем. Реальные сведения о компании, контактах, проектах и команде заполняются отдельно.</p></section>'''
+script='''<script>const ids=['page','lang','theme','width'];function sync(){const q=new URLSearchParams({screen:document.getElementById('page').value,lang:document.getElementById('lang').value,theme:document.getElementById('theme').value});const u='site-preview.html?'+q;document.getElementById('live').src=u;document.getElementById('live').style.width=document.getElementById('width').value+'px';document.getElementById('open').href=u;}ids.forEach(id=>document.getElementById(id).addEventListener('change',sync));</script>'''
+(ROOT/'00-design-review.html').write_text(chrome('Пакет дизайна',body,script),encoding='utf8')
+print('Built 00 + 03–06 review pages.')

@@ -1,0 +1,95 @@
+{
+  "pages": 12,
+  "sheets": [
+    {
+      "page": 1,
+      "height": 793.6875,
+      "contentBottom": 657.34375,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 2,
+      "height": 793.6875,
+      "contentBottom": 664.4375,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 3,
+      "height": 793.6875,
+      "contentBottom": 705.578125,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 4,
+      "height": 793.6875,
+      "contentBottom": 666.546875,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 5,
+      "height": 793.6875,
+      "contentBottom": 664.25,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 6,
+      "height": 793.6875,
+      "contentBottom": 649.09375,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 7,
+      "height": 793.6875,
+      "contentBottom": 723.421875,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 8,
+      "height": 793.6875,
+      "contentBottom": 718.5625,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 9,
+      "height": 793.6875,
+      "contentBottom": 675.28125,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 10,
+      "height": 793.6875,
+      "contentBottom": 730.09375,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 11,
+      "height": 793.6875,
+      "contentBottom": 706.015625,
+      "footerTop": 741.5625,
+      "overlap": false
+    },
+    {
+      "page": 12,
+      "height": 793.6875,
+      "contentBottom": 710.1875,
+      "footerTop": 741.5625,
+      "overlap": false
+    }
+  ],
+  "badImages": [],
+  "errors": [],
+  "mobile": {
+    "scroll": 375,
+    "client": 375
+  }
+}

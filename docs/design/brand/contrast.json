@@ -1,0 +1,103 @@
+{
+  "scope": "Exact token pairs only; not full interface WCAG audit or raster pixel check.",
+  "checks": [
+    {
+      "theme": "light",
+      "pair": "text/background",
+      "ratio": 10.36,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "pair": "text/surface",
+      "ratio": 11.28,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "pair": "muted/background",
+      "ratio": 5.39,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "pair": "muted/surface",
+      "ratio": 5.86,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "pair": "onAccent/accent",
+      "ratio": 9.09,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "pair": "border/surface",
+      "ratio": 4.44,
+      "minimum": 3,
+      "pass": true
+    },
+    {
+      "theme": "light",
+      "pair": "focus/background",
+      "ratio": 10.36,
+      "minimum": 3,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "pair": "text/background",
+      "ratio": 10.36,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "pair": "text/surface",
+      "ratio": 8.66,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "pair": "muted/background",
+      "ratio": 7.99,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "pair": "muted/surface",
+      "ratio": 6.68,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "pair": "onAccent/accent",
+      "ratio": 9.09,
+      "minimum": 4.5,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "pair": "border/surface",
+      "ratio": 3.82,
+      "minimum": 3,
+      "pass": true
+    },
+    {
+      "theme": "dark",
+      "pair": "focus/background",
+      "ratio": 10.36,
+      "minimum": 3,
+      "pass": true
+    }
+  ]
+}

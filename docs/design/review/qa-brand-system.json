@@ -1,0 +1,513 @@
+{
+  "generatedAt": "2026-09-26T14:41:18.026Z",
+  "browser": "installed Google Chrome via Playwright",
+  "browserLaunchError": null,
+  "viewports": [1440, 375],
+  "summary": {
+    "pageCount": 4,
+    "viewportCount": 8,
+    "issues": []
+  },
+  "screenshots": {
+    "review/07-brand-system.html @ 375px": "review/review07-375.png",
+    "review/07-brand-system.html @ 1440px": "review/screenshotreview07-1440.png"
+  },
+  "pages": [
+    {
+      "file": "review/07-brand-system.html",
+      "localTargetIssues": [],
+      "viewports": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "document": {
+            "width": 1440,
+            "height": 5541
+          },
+          "horizontalOverflow": false,
+          "overflowNodes": [],
+          "fonts": {
+            "status": "loaded",
+            "failed": []
+          },
+          "images": [
+            {
+              "src": "../mockups/07/collateral/investor-teaser-board.png",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "../mockups/07/collateral/stationery-wechat-board-v2.png",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "../brand/candidate-v1/comparison-sheet.png",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 1020
+            },
+            {
+              "src": "../mockups/07/motion/storyboard.png",
+              "complete": true,
+              "naturalWidth": 1920,
+              "naturalHeight": 400
+            }
+          ],
+          "jsErrors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "viewport": {
+            "width": 375,
+            "height": 812
+          },
+          "document": {
+            "width": 375,
+            "height": 5244
+          },
+          "horizontalOverflow": false,
+          "overflowNodes": [],
+          "fonts": {
+            "status": "loaded",
+            "failed": []
+          },
+          "images": [
+            {
+              "src": "../mockups/07/collateral/investor-teaser-board.png",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "../mockups/07/collateral/stationery-wechat-board-v2.png",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "../brand/candidate-v1/comparison-sheet.png",
+              "complete": true,
+              "naturalWidth": 1200,
+              "naturalHeight": 1020
+            },
+            {
+              "src": "../mockups/07/motion/storyboard.png",
+              "complete": true,
+              "naturalWidth": 1920,
+              "naturalHeight": 400
+            }
+          ],
+          "jsErrors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        }
+      ]
+    },
+    {
+      "file": "review/01-master-candidate.html",
+      "localTargetIssues": [],
+      "viewports": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "document": {
+            "width": 1440,
+            "height": 3015
+          },
+          "horizontalOverflow": false,
+          "overflowNodes": [],
+          "fonts": {
+            "status": "loaded",
+            "failed": []
+          },
+          "images": [
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 16,
+              "naturalHeight": 16
+            },
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 32,
+              "naturalHeight": 32
+            },
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 16,
+              "naturalHeight": 16
+            },
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 32,
+              "naturalHeight": 32
+            }
+          ],
+          "jsErrors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "viewport": {
+            "width": 375,
+            "height": 812
+          },
+          "document": {
+            "width": 375,
+            "height": 3838
+          },
+          "horizontalOverflow": false,
+          "overflowNodes": [],
+          "fonts": {
+            "status": "loaded",
+            "failed": []
+          },
+          "images": [
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 16,
+              "naturalHeight": 16
+            },
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 32,
+              "naturalHeight": 32
+            },
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 16,
+              "naturalHeight": 16
+            },
+            {
+              "src": "[embedded data image]",
+              "complete": true,
+              "naturalWidth": 32,
+              "naturalHeight": 32
+            }
+          ],
+          "jsErrors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        }
+      ]
+    },
+    {
+      "file": "review/07-geology-motion.html",
+      "localTargetIssues": [],
+      "viewports": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "document": {
+            "width": 1440,
+            "height": 4781
+          },
+          "horizontalOverflow": false,
+          "overflowNodes": [],
+          "fonts": {
+            "status": "loaded",
+            "failed": []
+          },
+          "images": [
+            {
+              "src": "../mockups/01/elements/geology-cutaway.png",
+              "complete": true,
+              "naturalWidth": 1774,
+              "naturalHeight": 887
+            },
+            {
+              "src": "../mockups/01/elements/geology-cutaway.png",
+              "complete": true,
+              "naturalWidth": 1774,
+              "naturalHeight": 887
+            }
+          ],
+          "jsErrors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "viewport": {
+            "width": 375,
+            "height": 812
+          },
+          "document": {
+            "width": 375,
+            "height": 2205
+          },
+          "horizontalOverflow": false,
+          "overflowNodes": [],
+          "fonts": {
+            "status": "loaded",
+            "failed": []
+          },
+          "images": [
+            {
+              "src": "../mockups/01/elements/geology-cutaway.png",
+              "complete": true,
+              "naturalWidth": 1774,
+              "naturalHeight": 887
+            },
+            {
+              "src": "../mockups/01/elements/geology-cutaway.png",
+              "complete": true,
+              "naturalWidth": 1774,
+              "naturalHeight": 887
+            }
+          ],
+          "jsErrors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        }
+      ]
+    },
+    {
+      "file": "brand/book/brand-book.html",
+      "localTargetIssues": [],
+      "viewports": [
+        {
+          "width": 1440,
+          "height": 1000,
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "document": {
+            "width": 1440,
+            "height": 9991
+          },
+          "horizontalOverflow": false,
+          "overflowNodes": [],
+          "fonts": {
+            "status": "loaded",
+            "failed": []
+          },
+          "images": [
+            {
+              "src": "../../mockups/01/elements/geology-cutaway.png",
+              "complete": true,
+              "naturalWidth": 1774,
+              "naturalHeight": 887
+            },
+            {
+              "src": "../candidate-v1/logo-horizontal.svg",
+              "complete": true,
+              "naturalWidth": 640,
+              "naturalHeight": 150
+            },
+            {
+              "src": "../candidate-v1/logo-stacked.svg",
+              "complete": true,
+              "naturalWidth": 540,
+              "naturalHeight": 330
+            },
+            {
+              "src": "../candidate-v1/mark-inverse.svg",
+              "complete": true,
+              "naturalWidth": 120,
+              "naturalHeight": 120
+            },
+            {
+              "src": "../candidate-v1/favicon-16.svg",
+              "complete": true,
+              "naturalWidth": 16,
+              "naturalHeight": 16
+            },
+            {
+              "src": "../candidate-v1/favicon-32.png",
+              "complete": true,
+              "naturalWidth": 32,
+              "naturalHeight": 32
+            },
+            {
+              "src": "../candidate-v1/wechat-avatar.png",
+              "complete": true,
+              "naturalWidth": 640,
+              "naturalHeight": 640
+            },
+            {
+              "src": "../candidate-v1/mark.svg",
+              "complete": true,
+              "naturalWidth": 120,
+              "naturalHeight": 120
+            },
+            {
+              "src": "../../mockups/01/elements/portfolio-specimens.png",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "../../mockups/01/elements/archive-to-field.png",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "../../mockups/01/elements/geology-cutaway.png",
+              "complete": true,
+              "naturalWidth": 1774,
+              "naturalHeight": 887
+            },
+            {
+              "src": "../../mockups/07/collateral/investor-teaser-board.png",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            }
+          ],
+          "jsErrors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        },
+        {
+          "width": 375,
+          "height": 812,
+          "viewport": {
+            "width": 375,
+            "height": 812
+          },
+          "document": {
+            "width": 375,
+            "height": 16062
+          },
+          "horizontalOverflow": false,
+          "overflowNodes": [],
+          "fonts": {
+            "status": "loaded",
+            "failed": []
+          },
+          "images": [
+            {
+              "src": "../../mockups/01/elements/geology-cutaway.png",
+              "complete": true,
+              "naturalWidth": 1774,
+              "naturalHeight": 887
+            },
+            {
+              "src": "../candidate-v1/logo-horizontal.svg",
+              "complete": true,
+              "naturalWidth": 640,
+              "naturalHeight": 150
+            },
+            {
+              "src": "../candidate-v1/logo-stacked.svg",
+              "complete": true,
+              "naturalWidth": 540,
+              "naturalHeight": 330
+            },
+            {
+              "src": "../candidate-v1/mark-inverse.svg",
+              "complete": true,
+              "naturalWidth": 120,
+              "naturalHeight": 120
+            },
+            {
+              "src": "../candidate-v1/favicon-16.svg",
+              "complete": true,
+              "naturalWidth": 16,
+              "naturalHeight": 16
+            },
+            {
+              "src": "../candidate-v1/favicon-32.png",
+              "complete": true,
+              "naturalWidth": 32,
+              "naturalHeight": 32
+            },
+            {
+              "src": "../candidate-v1/wechat-avatar.png",
+              "complete": true,
+              "naturalWidth": 640,
+              "naturalHeight": 640
+            },
+            {
+              "src": "../candidate-v1/mark.svg",
+              "complete": true,
+              "naturalWidth": 120,
+              "naturalHeight": 120
+            },
+            {
+              "src": "../../mockups/01/elements/portfolio-specimens.png",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "../../mockups/01/elements/archive-to-field.png",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            },
+            {
+              "src": "../../mockups/01/elements/geology-cutaway.png",
+              "complete": true,
+              "naturalWidth": 1774,
+              "naturalHeight": 887
+            },
+            {
+              "src": "../../mockups/07/collateral/investor-teaser-board.png",
+              "complete": true,
+              "naturalWidth": 1536,
+              "naturalHeight": 1024
+            }
+          ],
+          "jsErrors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        }
+      ]
+    }
+  ]
+}

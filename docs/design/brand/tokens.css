@@ -1,0 +1,32 @@
+/* QAZNEDR design proposal v0.2. docs/design only; owner review pending. */
+:root,
+[data-theme='light'] {
+  --q-background: #e9ece6;
+  --q-surface: #f4f5f0;
+  --q-text: #253740;
+  --q-muted: #51616a;
+  --q-border: #64747a;
+  --q-accent: #dde55e;
+  --q-on-accent: #253740;
+  --q-focus: #253740;
+}
+[data-theme='dark'] {
+  --q-background: #253740;
+  --q-surface: #30434c;
+  --q-text: #e9ece6;
+  --q-muted: #cad2ca;
+  --q-border: #8fa19e;
+  --q-accent: #dde55e;
+  --q-on-accent: #253740;
+  --q-focus: #e9ece6;
+}
+/* On an inverted/slate section, use dark focus even within a light page. */
+[data-tone='slate'] {
+  --q-focus: #e9ece6;
+}
+:root {
+  --q-content-max: 1200px;
+  --q-button-min: 48px;
+  --q-tap-min: 44px;
+  --q-radius: 4px;
+}

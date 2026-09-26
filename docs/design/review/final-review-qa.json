@@ -1,0 +1,255 @@
+{
+  "checkedAt": "2026-09-26T14:07:23.060Z",
+  "pages": [
+    "00-design-review.html",
+    "03-home.html",
+    "04-portfolio.html",
+    "05-pages.html",
+    "06-insights.html"
+  ],
+  "referenceCount": 177,
+  "missingReferences": [],
+  "results": [
+    {
+      "page": "00-design-review.html",
+      "desktop": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "bodyHeight": 5345,
+        "images": [
+          {
+            "src": "../mockups/03/desktop/light-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/03/mobile/dark-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/03/desktop/light-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/04/imagegen/portfolio-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/05/imagegen/services-about.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/06/imagegen/insights.png",
+            "ok": true
+          }
+        ]
+      },
+      "mobile": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "bodyHeight": 6784,
+        "images": [
+          {
+            "src": "../mockups/03/desktop/light-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/03/mobile/dark-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/03/desktop/light-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/04/imagegen/portfolio-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/05/imagegen/services-about.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/06/imagegen/insights.png",
+            "ok": true
+          }
+        ]
+      },
+      "selectorState": {
+        "attrs": {
+          "src": "site-preview.html?screen=portfolio&lang=en&theme=dark",
+          "width": "768px"
+        },
+        "href": "site-preview.html?screen=portfolio&lang=en&theme=dark"
+      },
+      "anchorUrl": "file:///Users/yerlankulumgariyev/Documents/qaznedr-app/docs/design/review/03-home.html",
+      "iframeMobile": {
+        "w": "375px",
+        "src": "site-preview.html?screen=portfolio&lang=en&theme=dark"
+      },
+      "iframeErrors": [],
+      "iframeWidth": {
+        "scrollWidth": 768,
+        "clientWidth": 768
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "page": "03-home.html",
+      "desktop": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "bodyHeight": 3097,
+        "images": [
+          {
+            "src": "../mockups/03/desktop/light-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/03/desktop/dark-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/03/mobile/light-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/03/mobile/dark-v2.png",
+            "ok": true
+          }
+        ]
+      },
+      "mobile": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "bodyHeight": 4327,
+        "images": [
+          {
+            "src": "../mockups/03/desktop/light-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/03/desktop/dark-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/03/mobile/light-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/03/mobile/dark-v2.png",
+            "ok": true
+          }
+        ]
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "page": "04-portfolio.html",
+      "desktop": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "bodyHeight": 1967,
+        "images": [
+          {
+            "src": "../mockups/04/imagegen/portfolio-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/04/imagegen/teaser.png",
+            "ok": true
+          }
+        ]
+      },
+      "mobile": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "bodyHeight": 2931,
+        "images": [
+          {
+            "src": "../mockups/04/imagegen/portfolio-v2.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/04/imagegen/teaser.png",
+            "ok": true
+          }
+        ]
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "page": "05-pages.html",
+      "desktop": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "bodyHeight": 2379,
+        "images": [
+          {
+            "src": "../mockups/05/imagegen/services-about.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/05/imagegen/contact-v2.png",
+            "ok": true
+          }
+        ]
+      },
+      "mobile": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "bodyHeight": 3447,
+        "images": [
+          {
+            "src": "../mockups/05/imagegen/services-about.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/05/imagegen/contact-v2.png",
+            "ok": true
+          }
+        ]
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "page": "06-insights.html",
+      "desktop": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "bodyHeight": 2168,
+        "images": [
+          {
+            "src": "../mockups/06/imagegen/insights.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/06/imagegen/metal.png",
+            "ok": true
+          }
+        ]
+      },
+      "mobile": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "bodyHeight": 3290,
+        "images": [
+          {
+            "src": "../mockups/06/imagegen/insights.png",
+            "ok": true
+          },
+          {
+            "src": "../mockups/06/imagegen/metal.png",
+            "ok": true
+          }
+        ]
+      },
+      "errors": [],
+      "failed": []
+    }
+  ],
+  "issues": []
+}

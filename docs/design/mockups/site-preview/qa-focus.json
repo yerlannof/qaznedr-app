@@ -1,0 +1,141 @@
+{
+  "results": [
+    {
+      "width": 375,
+      "theme": "light",
+      "nav": {
+        "outline": "rgb(37, 55, 64)",
+        "height": 44.796875
+      },
+      "primary": "rgb(37, 55, 64)",
+      "contact": "rgb(233, 236, 230)",
+      "footer": [
+        {
+          "text": "View portfolio",
+          "height": 44
+        },
+        {
+          "text": "Copper in Kazakhstan",
+          "height": 44
+        },
+        {
+          "text": "Contact",
+          "height": 44
+        }
+      ],
+      "pass": true
+    },
+    {
+      "width": 375,
+      "theme": "light",
+      "input": {
+        "outline": "rgb(37, 55, 64)",
+        "height": 48
+      },
+      "pass": true
+    },
+    {
+      "width": 375,
+      "theme": "dark",
+      "nav": {
+        "outline": "rgb(233, 236, 230)",
+        "height": 44.796875
+      },
+      "primary": "rgb(233, 236, 230)",
+      "contact": "rgb(233, 236, 230)",
+      "footer": [
+        {
+          "text": "View portfolio",
+          "height": 44
+        },
+        {
+          "text": "Copper in Kazakhstan",
+          "height": 44
+        },
+        {
+          "text": "Contact",
+          "height": 44
+        }
+      ],
+      "pass": true
+    },
+    {
+      "width": 375,
+      "theme": "dark",
+      "input": {
+        "outline": "rgb(233, 236, 230)",
+        "height": 48
+      },
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "nav": {
+        "outline": "rgb(37, 55, 64)",
+        "height": 44
+      },
+      "primary": "rgb(37, 55, 64)",
+      "contact": "rgb(233, 236, 230)",
+      "footer": [
+        {
+          "text": "View portfolio",
+          "height": 44
+        },
+        {
+          "text": "Copper in Kazakhstan",
+          "height": 44
+        },
+        {
+          "text": "Contact",
+          "height": 44
+        }
+      ],
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "input": {
+        "outline": "rgb(37, 55, 64)",
+        "height": 48
+      },
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "nav": {
+        "outline": "rgb(233, 236, 230)",
+        "height": 44
+      },
+      "primary": "rgb(233, 236, 230)",
+      "contact": "rgb(233, 236, 230)",
+      "footer": [
+        {
+          "text": "View portfolio",
+          "height": 44
+        },
+        {
+          "text": "Copper in Kazakhstan",
+          "height": 44
+        },
+        {
+          "text": "Contact",
+          "height": 44
+        }
+      ],
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "input": {
+        "outline": "rgb(233, 236, 230)",
+        "height": 48
+      },
+      "pass": true
+    }
+  ],
+  "failures": []
+}

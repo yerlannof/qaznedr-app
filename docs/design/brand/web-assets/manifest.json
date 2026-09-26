@@ -1,0 +1,107 @@
+{
+  "format": "WebP",
+  "encoder": "sharp/libvips",
+  "quality": 88,
+  "resize": "aspect-ratio preserved; no upscaling",
+  "assets": [
+    {
+      "source": "../../mockups/01/elements/geology-cutaway.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "sourceBytes": 2605323,
+      "sourceSha256": "8388d1e8fc71b071c0fbf8fd1e4199543f60775ffce85dba0c7c4715aceb7a11",
+      "variants": [
+        {
+          "file": "geology-cutaway-640.webp",
+          "width": 640,
+          "height": 320,
+          "bytes": 47738,
+          "quality": 88,
+          "sha256": "45282200fd08a30798680abfb394207892f1bdc206291227094c3d99f17b28d7"
+        },
+        {
+          "file": "geology-cutaway-960.webp",
+          "width": 960,
+          "height": 480,
+          "bytes": 110762,
+          "quality": 88,
+          "sha256": "9812a426b7f7cf241af2ebca32c2ab33d91ec61a28c1e146758b0ef100b97d32"
+        },
+        {
+          "file": "geology-cutaway-1440.webp",
+          "width": 1440,
+          "height": 720,
+          "bytes": 248546,
+          "quality": 88,
+          "sha256": "f8a0be2d3b6b2316bb33e06ce538c6af51145e738d9aeab5485aad9cd94c1ab7"
+        }
+      ]
+    },
+    {
+      "source": "../../mockups/01/elements/portfolio-specimens.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceBytes": 2701979,
+      "sourceSha256": "93b9e756bdf12ee2fd0e454d07878dfd15f20843f3824163300fe071636dfab8",
+      "variants": [
+        {
+          "file": "portfolio-specimens-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 51978,
+          "quality": 88,
+          "sha256": "dee31a10fc27bc6dea5bfe90aa3102897d744bd22243a7f40471e36953d49f97"
+        },
+        {
+          "file": "portfolio-specimens-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 119460,
+          "quality": 88,
+          "sha256": "ba723463ed1dc47d087287ba327b897b58312907c245f69a00838d28c2e6f4ae"
+        },
+        {
+          "file": "portfolio-specimens-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 261636,
+          "quality": 88,
+          "sha256": "902bbad2a41832a93fa7e597429018b5c71c9a0d526563a8c74d2e3cff97ca93"
+        }
+      ]
+    },
+    {
+      "source": "../../mockups/01/elements/archive-to-field.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "sourceBytes": 2416107,
+      "sourceSha256": "24929de185b9f91dfe906e9a092d6fd284b0a6f7bcd5f10d28db15075c0764f2",
+      "variants": [
+        {
+          "file": "archive-to-field-640.webp",
+          "width": 640,
+          "height": 427,
+          "bytes": 38602,
+          "quality": 88,
+          "sha256": "a34967fbda4f0e93f76b7e139ecdc9d3a135386e43547e595b84975813a35d54"
+        },
+        {
+          "file": "archive-to-field-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 91556,
+          "quality": 88,
+          "sha256": "416b52b9ee604873f25a6a292895bac36877e36658195c3d96963134ad28cefa"
+        },
+        {
+          "file": "archive-to-field-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 201988,
+          "quality": 88,
+          "sha256": "fc960968a6578f17c5cc4b69f0212630d12f0816cfbb25ebe5d857d3b8eedc06"
+        }
+      ]
+    }
+  ]
+}

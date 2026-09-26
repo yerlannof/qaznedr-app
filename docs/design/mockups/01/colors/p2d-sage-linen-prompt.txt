@@ -1,0 +1,5 @@
+Change ONLY the palette and the small top-left label from P2 to P2D. Preserve EXACTLY every shape, logo, lettering, layout, hero text, position, typography, and contour line. Do not redesign, redraw, move, resize, or alter content.
+
+P2D “Sage and Linen” is a noticeably lighter and more muted sage/linen variation of P2. Light background #F1F4EE. Light-theme text, logo, and primary CTA: muted sage-green #375344. Dark panels: medium-dark desaturated sage #465F50, noticeably lighter than the original forest green; dark-panel text and logo #F1F4EE. Light accents for HOLDING and contour lines: #6F6250 linen/stone brown. Dark accents: #E2D5B6 pale linen, not gold. Dark-theme CTA: pale linen background with #465F50 sage text. Bottom four swatches: pale linen background, deep sage, medium sage, linen accent.
+
+No bright mint, low-contrast pastel text, or yellow gold. Flat opaque colors only; no gradients, vignette, texture, or photography. Preserve every existing label and all copy except the small P2 label becomes P2D. Add no new design.

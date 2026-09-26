@@ -1,0 +1,5 @@
+Use case: precise-object-edit
+Asset type: targeted correction of existing QAZNEDR Chinese Contact page design board.
+Input image: contact.png is the edit target. Preserve its entire desktop and mobile composition, A3 brand, light desktop and dark mobile themes, Chinese heading, blank dashed QR placeholders, pending contact values, slate geology sidebar, form field positions, buttons and footer. Change ONLY one form field in each preview.
+In BOTH the desktop form and mobile form, replace the dropdown field currently labeled '回复方式' with a normal single-line text input labeled exactly '微信号、电话或邮箱', containing the placeholder exactly '请输入联系方式'. Remove the dropdown chevron. The desktop field stays in the same location in the form's top row; the mobile field stays in the same second-field location. Match existing outline, text sizes and spacing. Leave other fields as 姓名, 公司（选填）, 需求或项目编号. Preserve the demo notice '设计演示，不发送数据' and pending availability notice.
+Absolutely no other edits, new contact values, scannable QR pattern, date, fake success state, gradients or glow. All type must remain legible.

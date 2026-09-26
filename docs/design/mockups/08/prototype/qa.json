@@ -1,0 +1,165 @@
+{
+  "url": "file:///Users/yerlankulumgariyev/Documents/qaznedr-app/docs/design/review/08-geology-layers.html",
+  "timestamp": "2026-09-26T15:09:29.147Z",
+  "passed": true,
+  "failures": [],
+  "checks": [
+    {
+      "name": "1440: no horizontal overflow",
+      "pass": true,
+      "detail": "1440/1440"
+    },
+    {
+      "name": "1440: sprite loads",
+      "pass": true
+    },
+    {
+      "name": "1440: logo loads",
+      "pass": true
+    },
+    {
+      "name": "1440: three independent scene planes",
+      "pass": true
+    },
+    {
+      "name": "1440: stage 1 selected",
+      "pass": true
+    },
+    {
+      "name": "1440: stage 2 selected",
+      "pass": true
+    },
+    {
+      "name": "1440: stage 3 selected",
+      "pass": true
+    },
+    {
+      "name": "1440: EN translation",
+      "pass": true
+    },
+    {
+      "name": "1440: dark theme",
+      "pass": true
+    },
+    {
+      "name": "1440: language/theme preserve stage",
+      "pass": true
+    },
+    {
+      "name": "1440: ru contact label",
+      "pass": true
+    },
+    {
+      "name": "1440: ru contact label backing",
+      "pass": true
+    },
+    {
+      "name": "1440: en contact label",
+      "pass": true
+    },
+    {
+      "name": "1440: en contact label backing",
+      "pass": true
+    },
+    {
+      "name": "1440: zh contact label",
+      "pass": true
+    },
+    {
+      "name": "1440: zh contact label backing",
+      "pass": true
+    },
+    {
+      "name": "768: no horizontal overflow",
+      "pass": true,
+      "detail": "768/768"
+    },
+    {
+      "name": "768: sprite loads",
+      "pass": true
+    },
+    {
+      "name": "768: logo loads",
+      "pass": true
+    },
+    {
+      "name": "768: three independent scene planes",
+      "pass": true
+    },
+    {
+      "name": "768: button switches scene",
+      "pass": true
+    },
+    {
+      "name": "768: page remains near scene",
+      "pass": true
+    },
+    {
+      "name": "375: no horizontal overflow",
+      "pass": true,
+      "detail": "375/375"
+    },
+    {
+      "name": "375: sprite loads",
+      "pass": true
+    },
+    {
+      "name": "375: logo loads",
+      "pass": true
+    },
+    {
+      "name": "375: three independent scene planes",
+      "pass": true
+    },
+    {
+      "name": "375: ZH stage title",
+      "pass": true
+    },
+    {
+      "name": "375: ZH dark preserves stage",
+      "pass": true
+    },
+    {
+      "name": "375: control height >=44",
+      "pass": true
+    },
+    {
+      "name": "375: no horizontal overflow after ZH",
+      "pass": true
+    },
+    {
+      "name": "reduced: static explanation visible",
+      "pass": true
+    },
+    {
+      "name": "reduced: scene is not sticky",
+      "pass": true
+    },
+    {
+      "name": "reduced: three steps in static text",
+      "pass": true
+    },
+    {
+      "name": "no-JS: static explanation visible",
+      "pass": true
+    },
+    {
+      "name": "no-JS: scene art visible",
+      "pass": true
+    },
+    {
+      "name": "no-JS: stage controls hidden",
+      "pass": true
+    },
+    {
+      "name": "no-JS: no overflow",
+      "pass": true
+    },
+    {
+      "name": "no page errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "errors": []
+}

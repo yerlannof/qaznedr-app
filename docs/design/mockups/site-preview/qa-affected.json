@@ -1,0 +1,111 @@
+[
+  {
+    "lang": "en",
+    "code": "DEMO-A01",
+    "correct": true,
+    "alternatives": true,
+    "contact": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "lang": "en",
+    "code": "DEMO-B02",
+    "correct": true,
+    "alternatives": true,
+    "contact": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "lang": "en",
+    "code": "DEMO-C03",
+    "correct": true,
+    "alternatives": true,
+    "contact": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "lang": "ru",
+    "code": "DEMO-A01",
+    "correct": true,
+    "alternatives": true,
+    "contact": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "lang": "ru",
+    "code": "DEMO-B02",
+    "correct": true,
+    "alternatives": true,
+    "contact": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "lang": "ru",
+    "code": "DEMO-C03",
+    "correct": true,
+    "alternatives": true,
+    "contact": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "lang": "zh",
+    "code": "DEMO-A01",
+    "correct": true,
+    "alternatives": true,
+    "contact": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "lang": "zh",
+    "code": "DEMO-B02",
+    "correct": true,
+    "alternatives": true,
+    "contact": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "lang": "zh",
+    "code": "DEMO-C03",
+    "correct": true,
+    "alternatives": true,
+    "contact": true,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "lang": "en",
+    "screen": "article",
+    "rows": 4,
+    "overflow": false,
+    "noEquivalenceTable": true,
+    "errors": []
+  },
+  {
+    "lang": "ru",
+    "screen": "article",
+    "rows": 4,
+    "overflow": false,
+    "noEquivalenceTable": true,
+    "errors": []
+  },
+  {
+    "lang": "zh",
+    "screen": "article",
+    "rows": 4,
+    "overflow": false,
+    "noEquivalenceTable": true,
+    "errors": []
+  },
+  {
+    "screen": "unknown-code",
+    "safe": true
+  }
+]

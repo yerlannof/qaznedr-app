@@ -1,0 +1,174 @@
+{
+  "cases": [
+    {
+      "width": 1440,
+      "uiLang": "ru",
+      "theme": "light",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 1440,
+      "uiLang": "ru",
+      "theme": "dark",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 1440,
+      "uiLang": "en",
+      "theme": "light",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 1440,
+      "uiLang": "en",
+      "theme": "dark",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 1440,
+      "uiLang": "zh",
+      "theme": "light",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 1440,
+      "uiLang": "zh",
+      "theme": "dark",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 375,
+      "uiLang": "ru",
+      "theme": "light",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 375,
+      "uiLang": "ru",
+      "theme": "dark",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 375,
+      "uiLang": "en",
+      "theme": "light",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 375,
+      "uiLang": "en",
+      "theme": "dark",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 375,
+      "uiLang": "zh",
+      "theme": "light",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    },
+    {
+      "width": 375,
+      "uiLang": "zh",
+      "theme": "dark",
+      "initial": 2,
+      "filteredRU": 2,
+      "filteredEN": 2,
+      "filteredZH": 1,
+      "emptyReset": true,
+      "images": {
+        "count": 0,
+        "broken": 0
+      }
+    }
+  ],
+  "errors": [],
+  "headerLocaleSwitch": "passed"
+}

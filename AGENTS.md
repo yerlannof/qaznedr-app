@@ -1,20 +1,80 @@
-# AGENTS.md
+# AGENTS.md — инструкция для Astra (Codex)
 
-Instructions for AI agents other than Claude Code (e.g. Codex) working in this repository.
+С 2026-09-26 **Astra (Codex, `gpt-6-astra`) ведёт проект QAZNEDR HOLDING целиком: дизайн и код** — до конца дорожной карты. Claude Code передал эстафету: его сессии 1–3б закрыты, всё на проде. Владелец — Ерлан, общаемся по-русски, коротко и по делу; технические решения принимай сам, бизнес-решения (тексты, цены, что показывать инвестору, утверждение дизайна) — только с «да» владельца.
 
-## Role split
+## С чего начать каждую сессию
 
-- **Codex = design.** Brand identity, logos, mockups, HTML prototypes.
-- **Claude Code = code.** Everything in `src/`, database, SEO, i18n, deploys.
-- **The owner approves every design result** before it is implemented.
+1. Прочитай по порядку:
+   - `docs/HOLDING_ROADMAP.md` — «Текущий статус», «Не хватает от владельца», следующая незавершённая сессия. Это единая точка продолжения.
+   - `CLAUDE.md` — технические правила проекта (стек, дизайн-система, SEO-правила, известные ловушки). Они обязательны и для тебя.
+   - `docs/superpowers/specs/2026-09-26-qaznedr-holding-pivot-design.md` — продукт, информационная архитектура, красные линии текста.
+   - Для дизайна: `docs/design/BRIEF.md`, `docs/design/ROADMAP.md`, `docs/design/APPROVED.md`, `docs/design/DELIVERY.md`.
+2. **Сверь синхронизацию.** Локальный HEAD, `origin/master` и коммит продакшен-деплоя Vercel должны совпадать:
+   ```bash
+   git fetch origin && git rev-parse --short HEAD origin/master
+   TOKEN=$(python3 -c "import json,os;print(json.load(open(os.path.expanduser('~/Library/Application Support/com.vercel.cli/auth.json')))['token'])")
+   curl -s -H "Authorization: Bearer $TOKEN" "https://api.vercel.com/v6/deployments?app=qaznedr&target=production&limit=1&teamId=yerlans-projects-7b5aa914" \
+     | python3 -c "import json,sys;d=json.load(sys.stdin)['deployments'][0];print(d['meta'].get('githubCommitSha','')[:7], d['readyState'])"
+   ```
+   Не совпадает — скажи владельцу, ничего не пушь до выяснения.
 
-## Rules for Codex
+## Как вести сессию (процесс)
 
-1. Read `docs/design/BRIEF.md` first, then the task file you were given in `docs/design/tasks/`.
-2. **Write only inside `docs/design/`.** Do not modify `src/`, config files, `package.json`, migrations, or anything else outside `docs/design/`.
-3. Do not run `git commit` / `git push`, do not install npm packages, do not deploy.
-4. Present options for approval as a self-contained page `docs/design/review/NN-*.html` plus images in `docs/design/mockups/NN/`. Stop and wait for the owner's choice before producing finals.
-5. Record what the owner approved in `docs/design/APPROVED.md`.
-6. Design constraints: Lucide icons only, no emoji in UI, no glassmorphism, no gradient backgrounds, no flashy animations, mobile-first (375px), light and dark theme, WCAG AA contrast, Chinese text uses system CJK fonts or a self-hosted subset.
+1. **Понять и записать.** Коротко изложи владельцу, что делаем и как поймём, что готово; задай только необходимые вопросы (по одному). Для заметной работы — спецификация `docs/superpowers/specs/ГГГГ-ММ-ДД-<тема>-design.md`, затем план `docs/superpowers/plans/ГГГГ-ММ-ДД-<тема>.md` (задачи, файлы, тесты, коммиты). Мелкую правку достаточно описать в чате.
+2. **Дизайн до кода.** Верстай только то, что записано в `docs/design/APPROVED.md`. Новое визуальное решение: страница `docs/design/review/NN-*.html` + картинки в `docs/design/mockups/NN/` → вопросы владельцу → после «да» запись в `APPROVED.md` → код.
+3. **TDD.** Для каждой правки поведения: сначала тест, убедись, что он падает по правильной причине, потом код, потом тест зелёный. Тесты в `src/__tests__/` зеркально исходникам.
+4. **Проверка перед пушем:**
+   - `npx jest --coverage=false <пути>` — точечно (без флага частичный прогон падает на глобальном пороге покрытия, хотя тесты зелёные);
+   - `npx jest` — весь набор; сравни падения с базовой линией (ниже), новых быть не должно;
+   - `ESLINT_USE_FLAT_CONFIG=false npx eslint <изменённые файлы>`;
+   - `npm run build` — обязательно;
+   - браузер: `PORT=3107 npm run start`, проверь 375 и 1440 px, светлую и тёмную тему, ru/kz/en/zh там, где менял. Остановить сервер: `pkill -f next-server` (процесс называется так, не «next start»).
+5. **Независимое ревью** в конце сессии: отдельный агент (сильная модель) читает весь диф сессии против спецификации; важные находки чинишь через тест, мелочи записываешь в роудмап.
+6. **Деплой = `git push origin master`.** Vercel сам собирает прод из GitHub. `vercel --prod` не запускать (двойная сборка). После пуша дождись `READY` для своего коммита (команда выше) и проверь прод curl’ом/в браузере.
+7. **Закрыть сессию:** обнови «Текущий статус» и блок сессии в `docs/HOLDING_ROADMAP.md`, закоммить, запушь, сверь синхронизацию, дай владельцу промпт для следующей сессии.
 
-Product context: `docs/superpowers/specs/2026-09-26-qaznedr-holding-pivot-design.md`.
+Субагентов используй по правилам `docs/design/AGENTS.md` (маршруты моделей по стоимости, узкие задачи, без дублирования).
+
+## Базовая линия тестов (на 2026-09-26, коммит `eaae5d0`)
+
+- Падают 5 старых наборов маркетплейса — не чиним: `MiningLicenseCard`, `CreateListingWizard`, `ListingsFilters`, `ThemeToggle`, `src/app/api/listings/__tests__/route.test.ts`.
+- Иногда падает `src/lib/middleware/__tests__/csrf.test.ts` («constant-time comparison»): замер времени, на неизменном коде то проходит, то нет. Не регрессия.
+- Остальное зелёное (≈1420 тестов).
+
+## Git
+
+- Коммить явные пути (`git add <файлы>`), не `git add -A`: в рабочей папке могут лежать чужие черновики.
+- При коммите lint-staged прогоняет prettier — после коммита перечитай файл, прежде чем править его текстовой заменой.
+- Сообщения коммитов — как в истории: `fix(scope): …`, `feat(scope): …`, `docs: …`, по-английски.
+
+## Технические ловушки (проверено)
+
+- Middleware — только `src/middleware.ts` (корневой игнорируется). Конфиг — `next.config.mjs`.
+- Переводы — только `src/lib/i18n/translations.ts`, все 4 языка; тесты `holding-keys` / `insights-keys` проверяют паритет. `messages/*.json` не используются.
+- Метаданные страниц — `buildPageMetadata` / `buildTranslatedPageMetadata` (`src/lib/seo/metadata.ts`). Собственный `openGraph` страницы перекрывает файловый `opengraph-image` сегмента, поэтому своя карточка передаётся через `ogImagePath`.
+- Новая публичная страница: metadata, `PUBLIC_PAGES` в `src/lib/seo/pages.ts` (sitemap), JSON-LD, внутренние ссылки, `public/llms.txt`, IndexNow (секрета `INDEXNOW_TRIGGER_SECRET` нет — пингуй `api.indexnow.org` напрямую).
+- Скрытые маркетплейсные маршруты — `HIDDEN_ROUTE_REDIRECTS` (308; переносятся только UTM-метки).
+- Гайды: `content/insights/<slug>/{ru,en,zh}.md` + запись в `src/lib/insights/registry.ts` (у юридических — `lawAsOf`).
+- Неизвестные адреса под языком ловит `src/app/[locale]/[...rest]/page.tsx` → локализованная 404.
+- В тестах `jest.setup` мокает `next/navigation` без `notFound` — нужен `jest.requireActual`.
+- БД — Supabase (Postgres). Legacy Prisma не расширять. RLS-политики на `auth.uid()` не работают с NextAuth → чтения владельца/админа через service-role клиент.
+
+## Границы и безопасность
+
+- **Данные участков** (`leads`, `lead_private`) публикует только геобаза («50 точек») после «да» Ерлана. Строки не редактировать.
+- **Пароли** на сайтах вводит только владелец. Пароль админки — в Связке ключей macOS (`qaznedr.kz admin`).
+- **Секреты** (токены Vercel, Supabase, Cloudflare) не класть в репозиторий и не печатать в чат. Vercel-токен — в `~/Library/Application Support/com.vercel.cli/auth.json`, переменные окружения — в Vercel.
+- **Файлы подтверждения поисковиков** в `public/` (`google…html`, `yandex_…html`, `BingSiteAuth.xml`) не удалять.
+
+## Красные линии текста
+
+- не писать и не намекать, что участок принадлежит холдингу (слово «портфель» для витрины не использовать, адрес `/leads`, в текстах «участки / areas / 矿区»);
+- не писать, что продаём архивные госотчёты — продаём экспертизу и аналитику;
+- «свободен» = «по нашей проверке на дату»; стандарт запасов указывать всегда (ГКЗ / KAZRC / историческая оценка); спайк ≠ среднее; P1–P3 — прогноз, не запасы;
+- без «гарантированной доходности»;
+- без упоминания OCR, ИИ и моделей — это труд наших геологов;
+- без маркетингового шума («экосистема», «инновационная платформа»).
+
+## Дизайн-ограничения
+
+Lucide-иконки, без эмодзи в UI, без glassmorphism и градиентных фонов, без мигающих анимаций; mobile-first (375 px), светлая и тёмная тема, контраст WCAG AA; китайский — системные CJK-шрифты или свой подмножественный шрифт. Бренд: форма A3 «Контур», палитра D2 «Сланец / мел / сера» (`docs/design/APPROVED.md`). После утверждения новой системы обнови раздел Design System в `CLAUDE.md`.

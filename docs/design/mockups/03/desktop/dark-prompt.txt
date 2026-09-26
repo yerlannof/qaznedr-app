@@ -1,0 +1,15 @@
+Use case: ui-mockup
+Asset type: complete QAZNEDR HOLDING desktop homepage visual design, dark theme, English copy. One uninterrupted full-page website canvas, portrait around 1440 x 3000 pixels, no browser frame, no device.
+Input images: 1 LIGHT HOMEPAGE IS THE EXACT LAYOUT REFERENCE: preserve its section order, structure, grid, illustration placement, typography hierarchy, button placement, and exact English copy; 2 approved A3 faceted Q and wedge-serif wordmark reference; 3 engraved terrain geology reference; 4 gold and copper specimen reference; 5 archive and drill core illustration reference. Do not copy Chinese text from reference art.
+Primary request: produce the dark-theme companion to the supplied light homepage. Keep the layout exactly recognizable as the same design. Main background deep slate #253740; chalk #E9ECE6 text, fine pale rules and engraving lines; selective sulphur #DDE55E for buttons, focus marks, and one terrain stratum. Use slight flat tonal variations of slate to pace sections, never gradients or glows. Crisp editorial typography: wedge-serif display headlines, legible sans UI. Bespoke, technically precise geological publishing feel. No generic SaaS cards or luxury template styling.
+Preserve exact top-to-bottom sequence and copy:
+1. Compact header approved QAZNEDR HOLDING lockup, Projects / Expertise / About / Insights, RU EN 中文 KZ, theme icon and Dark label. Compact hero 'Kazakhstan prospects. Geological insight.' with subline 'Geological research and transaction support.' WhatsApp primary and WeChat secondary immediately beside it. Slender strip '7,000+' / 'archival ore occurrences'; 'Gold & copper'; 'Field geologists'.
+2. Large signature terrain cutaway engraving BEFORE portfolio. Heading 'From surface to evidence.' and 'Schematic illustration'. Terrain should feel monumental, layered, fine hatchwork, one selected sulphur seam.
+3. 'Selected prospects', two ruled editorial rows with specimen engravings: 'DEMO-A01' / 'Gold'; 'DEMO-B02' / 'Copper'. Note 'Illustrative listings • project data pending'.
+4. 'Ways to work together' rows 'Licensing support', 'Joint venture & earn-in', 'Geological analysis'.
+5. 'From introduction to fieldwork': Inquiry → NDA → Meeting → Site visit.
+6. 'Geologists behind the work' with archive/core motif and a neutral empty placeholder marked 'Team photography to follow', no people.
+7. 'Verify the company' and 'Company details and registry links pending verification'.
+8. 'Investor guides' links 'Understanding a project teaser' and 'Preparing for geological review'.
+9. Closing strip 'Discuss your next project.' WhatsApp / WeChat and small QAZNEDR HOLDING footer.
+All key text readable. Full content to bottom, no clipping. No additional numerical claims or ownership claims. No mobile bottom bar, gradients, glow, glass, emoji, stock photo, people, gold bars, pickaxes, or floating 3D blobs.

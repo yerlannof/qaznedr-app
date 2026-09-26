@@ -1,0 +1,3 @@
+Targeted edit of the supplied P2D image. Change ONLY the accent color in BOTH right-hand dark panels: all HOLDING lettering and all geological contour strokes must be fully opaque pale linen #E2D5B6, as bright as the existing light CTA background. Do not reduce opacity or mute the accents.
+
+Preserve every other element exactly: logo geometry, all other text and text colors, dark backgrounds, layout, left light panels, buttons, swatches, positions, typography, and all copy. No other color changes. Do not add or remove anything.

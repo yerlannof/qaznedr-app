@@ -1,0 +1,139 @@
+{
+  "status": "Review candidate of A3. Owner approval of precise geometry pending.",
+  "svgCount": 15,
+  "pngCount": 6,
+  "files": [
+    {
+      "file": "apple-touch-icon.png",
+      "bytes": 2451,
+      "sha256": "f80d95f236dbccd9e1bb383c7592ea0be8888934f5d1c3823b36999900413c23",
+      "width": 180,
+      "height": 180
+    },
+    {
+      "file": "apple-touch-icon.svg",
+      "bytes": 552,
+      "sha256": "d71fabad4f2b980183ca548e70a811ccd7cc2a3ab670b6bbd6c52c95348cffe6",
+      "viewBox": "0 0 180 180"
+    },
+    {
+      "file": "comparison-sheet.png",
+      "bytes": 391909,
+      "sha256": "c3fedc926398ca27cdb6b32250e99856d1afa1143911cbea0f97437ef886addf",
+      "width": 1200,
+      "height": 1020
+    },
+    {
+      "file": "favicon-16.png",
+      "bytes": 433,
+      "sha256": "6ca28b4520a41e6e4f48e87161d9c269eed582874947dfac3b8a8d52c34e3097",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "file": "favicon-16.svg",
+      "bytes": 546,
+      "sha256": "66611ec4b64b355117cf2d70719fd63a156c70b679d646ea3ee4daf594bcc30d",
+      "viewBox": "0 0 16 16"
+    },
+    {
+      "file": "favicon-32.png",
+      "bytes": 735,
+      "sha256": "4fdaf686ca73f627317c69154541763b776757da792c73d899581044c9bc8923",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "file": "favicon-32.svg",
+      "bytes": 546,
+      "sha256": "31b5b383f58c4fc00d78aef88b3c070c4cc28b40f23c8297b4a6b97944a2faab",
+      "viewBox": "0 0 32 32"
+    },
+    {
+      "file": "favicon.svg",
+      "bytes": 546,
+      "sha256": "31b5b383f58c4fc00d78aef88b3c070c4cc28b40f23c8297b4a6b97944a2faab",
+      "viewBox": "0 0 32 32"
+    },
+    {
+      "file": "logo-horizontal-inverse.svg",
+      "bytes": 3042,
+      "sha256": "70c85dd4e00df8f49aebdddb5b96f7b42ee22a6a39848505364d59eb7f55fc62",
+      "viewBox": "0 0 640 150"
+    },
+    {
+      "file": "logo-horizontal-mono.svg",
+      "bytes": 3042,
+      "sha256": "7c6b2efc84ae0298e4e8bd033868a3a59e09b94b2fd9bebc5b17e937b9ac49cb",
+      "viewBox": "0 0 640 150"
+    },
+    {
+      "file": "logo-horizontal.svg",
+      "bytes": 3042,
+      "sha256": "f4d9e41d079db526f06dbfd1b6eb0898cea21c2254fa27f1207449606a8af4af",
+      "viewBox": "0 0 640 150"
+    },
+    {
+      "file": "logo-stacked-inverse.svg",
+      "bytes": 3040,
+      "sha256": "bb6cd617bb7ffc789b018a01107636210b9b56daf7236ac5bf2fb695d81c34aa",
+      "viewBox": "0 0 540 330"
+    },
+    {
+      "file": "logo-stacked-mono.svg",
+      "bytes": 3040,
+      "sha256": "9327f02eb09d99d63816b6745e1008e2c6753f3e7ce76cc94f7fc4f6efe0f5e7",
+      "viewBox": "0 0 540 330"
+    },
+    {
+      "file": "logo-stacked.svg",
+      "bytes": 3040,
+      "sha256": "d58a92aa6ff77fdd2ebc7c54d868528b71ec4a7d1b5f10f9533f00b42ea61bbb",
+      "viewBox": "0 0 540 330"
+    },
+    {
+      "file": "mark-inverse.svg",
+      "bytes": 516,
+      "sha256": "498409c1e966f72eb3e70604d644da6cc2c5919f1df2b550b06302e1dc6b1f38",
+      "viewBox": "0 0 120 120"
+    },
+    {
+      "file": "mark-mono.svg",
+      "bytes": 516,
+      "sha256": "f3076e9c204e54830c76c59cabce882d3731f8d182688d1e83e4059174f7e472",
+      "viewBox": "0 0 120 120"
+    },
+    {
+      "file": "mark.svg",
+      "bytes": 516,
+      "sha256": "9328ceac0e6df5ba7bdc854fd130707aed3ed6945813541311edacb50925b28f",
+      "viewBox": "0 0 120 120"
+    },
+    {
+      "file": "og-default.png",
+      "bytes": 28266,
+      "sha256": "3e03484755426cf74b52bc5bced438024729cd74bf567502da3a09d23cc85ae0",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "file": "og-default.svg",
+      "bytes": 3084,
+      "sha256": "13d8b7e4da3dab2cbab92fa7ef0f95a786ab62b3f48b7e6506c4500558bb3523",
+      "viewBox": "0 0 1200 630"
+    },
+    {
+      "file": "wechat-avatar.png",
+      "bytes": 8890,
+      "sha256": "ab3751b435f6be4287beef1cb2dfc2b0b10ed6269285d279e47d7a4e03aa28ef",
+      "width": 640,
+      "height": 640
+    },
+    {
+      "file": "wechat-avatar.svg",
+      "bytes": 559,
+      "sha256": "76cea46a334eba5b39a120aca504a332c5a1a1e9fc3431c2c9a75a5ff669c8a1",
+      "viewBox": "0 0 640 640"
+    }
+  ]
+}

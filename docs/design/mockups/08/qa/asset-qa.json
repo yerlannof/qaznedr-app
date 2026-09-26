@@ -1,0 +1,119 @@
+{
+  "asset": "../layers/sprite-v1.png",
+  "sha256": "0c663267e23762b53dbfcd33d3c89053903e73653604ddcfd701947e002da3a8",
+  "fileBytes": 2360026,
+  "dimensions": {
+    "width": 1254,
+    "height": 1254,
+    "format": "png",
+    "channels": 4,
+    "alpha": true
+  },
+  "alphaPixelCounts": {
+    "alpha0": 792609,
+    "alpha1to254": 779033,
+    "alpha255": 874
+  },
+  "foregroundBoundsInclusive": {
+    "thresholdGt8": {
+      "left": 41,
+      "top": 116,
+      "right": 1212,
+      "bottom": 1229
+    },
+    "thresholdGt1": {
+      "left": 38,
+      "top": 114,
+      "right": 1219,
+      "bottom": 1231
+    }
+  },
+  "connectedForegroundBands": {
+    "thresholdGt8": [
+      {
+        "top": 116,
+        "bottom": 483,
+        "height": 368
+      },
+      {
+        "top": 513,
+        "bottom": 880,
+        "height": 368
+      },
+      {
+        "top": 885,
+        "bottom": 1229,
+        "height": 345
+      }
+    ],
+    "thresholdGt1": [
+      {
+        "top": 114,
+        "bottom": 485,
+        "height": 372
+      },
+      {
+        "top": 511,
+        "bottom": 1231,
+        "height": 721
+      }
+    ]
+  },
+  "readmeSuggestedCropAudit": [
+    {
+      "crop": [0, 100, 1253, 495],
+      "alphaGt8ContentWithinCrop": {
+        "left": 41,
+        "top": 116,
+        "right": 1212,
+        "bottom": 483
+      },
+      "ownBandPixelsMissed": 0,
+      "otherBandPixelsInsideCrop": 0
+    },
+    {
+      "crop": [0, 500, 1253, 882],
+      "alphaGt8ContentWithinCrop": {
+        "left": 41,
+        "top": 513,
+        "right": 1210,
+        "bottom": 880
+      },
+      "ownBandPixelsMissed": 0,
+      "otherBandPixelsInsideCrop": 0
+    },
+    {
+      "crop": [0, 883, 1253, 1253],
+      "alphaGt8ContentWithinCrop": {
+        "left": 41,
+        "top": 885,
+        "right": 1210,
+        "bottom": 1229
+      },
+      "ownBandPixelsMissed": 0,
+      "otherBandPixelsInsideCrop": 0
+    }
+  ],
+  "interpretation": "One RGBA PNG image containing three visually independent horizontal parts; the HTML uses crop/clipping of this single raster. This is a 2.5D raster composition, not three separate source files and not a 3D model.",
+  "prototypeReference": {
+    "path": "../../../../review/08-geology-layers.html",
+    "selectedAsset": "../mockups/08/layers/sprite-v1.png",
+    "referencesRejectedV2": false,
+    "layerStrategy": "The CSS clip-path percentages create three bands from one vertical plate; the initial equal-column background slicing is overridden."
+  },
+  "edgeObservation": "At alpha >1, foreground bounds extend to x=38..1219, y=114..1231, a few pixels beyond alpha >8 bounds; inspect bright fringe pixels if edge quality is refined. No edge cleanup performed.",
+  "alphaDistributionAmongForegroundGt8": {
+    "pixelCount": 737335,
+    "quantiles": {
+      "p10": 252,
+      "median": 252,
+      "p90": 253
+    },
+    "counts": {
+      "greaterThan128": 729717,
+      "greaterThan230": 723964,
+      "greaterThan250": 700909
+    },
+    "note": "The very low alpha255 count reflects extensive semitransparent foreground; this metric describes encoded alpha only and does not diagnose visual edge quality."
+  }
+}

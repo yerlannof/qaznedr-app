@@ -1,0 +1,5 @@
+Change ONLY COLORS and the tiny top-left label from P1 to P4. Preserve logo form, exact lettering, every panel, positions, typography, website copy and layout, contour pattern geometry, and swatches layout identical to the reference. Do not alter or redraw any content.
+
+P4 wine/sand palette: light background #F7F0EA warm ivory; primary text, logo, light-theme CTA, and dark-theme backgrounds deep muted oxblood/wine #48202B, distinctly burgundy rather than purple, pink, or black. Light accents for HOLDING and contour lines #876249 muted clay bronze; dark accents #D4B496 pale sand. On dark panels, text, logo, and navigation #F7F0EA. Dark CTA: pale sand background and wine text. Bottom four swatches: warm ivory, wine, clay, sand. Outer background ivory.
+
+Flat graphics only: no gradients, glow, photography, or texture. Add no new logos. This is a recolor for fair comparison. Keep every word exactly unchanged apart from changing the tiny P1 label to P4.

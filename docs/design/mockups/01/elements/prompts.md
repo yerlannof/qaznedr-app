@@ -1,0 +1,15 @@
+# QAZNEDR D2 illustration prompts
+
+Both assets were generated independently with the built-in ImageGen tool on 2026-09-26. They are conceptual illustrations, not depictions of actual sites or verified geological data.
+
+## portfolio-specimens.png
+
+```text
+Use case: website illustration asset. Generate a single wide landscape raster artwork, approximately 3:2, for the established QAZNEDR HOLDING A3/D2 brand. An editorial geological museum specimen engraving on one perfectly flat, uniform chalk #E9ECE6 background. Two distinct natural mineralized rock specimens separated by breathing room, loose asymmetrical composition. LEFT: large dark angular host-rock hand specimen cut by one modest pale quartz vein with only sparse tiny muted ochre flecks suggesting a gold exploration theme. RIGHT: a gray rough cylindrical rocky core segment with a fine irregular veinlet network and subtle oxidized muted green/copper mineral traces. Scientific plate quality, disciplined precise engraved slate #253740 ink linework, organic hatching and stipple, tangible geological structure, strong silhouette and generous negative space around subjects for later localized HTML text outside the bitmap. Only one or two tiny sulphur #DDE55E analytical tickmarks directly on dark mineral surfaces. Visually coherent with the provided QAZNEDR D2 slate/chalk/sulphur references but make an entirely new illustration. No typography, letters, numerals, labels, legends, logo, frame, border, grid, all-over pattern, UI, gemstones, gleaming gold nuggets, shiny 3D forms, fantasy crystals, gradients, photographic lighting, or fake deposit claim.
+```
+
+## archive-to-field.png
+
+```text
+Use case: website illustration asset. Generate a single wide landscape raster artwork, approximately 3:2, for the established QAZNEDR HOLDING A3/D2 brand. Restrained editorial engraving still-life on a perfectly flat uniform slate #253740 background. Chalk #E9ECE6 engraved ink. Place the objects mostly across center and right, leaving the LEFT QUARTER entirely quiet and empty for later localized HTML headline. One slim open field notebook with abstract hatched geological cross-section sketch, no legible data or writing; one narrow paper archive sheet aligned beside it with only abstract section hatching, no legible writing; three short real-looking rough drilled rock-core pieces lying diagonally in the foreground with chipped exterior and naturally polished cut ends. Organic imperfect paper and stone texture, precise and confident editorial engraving with controlled stipple and hatching, mineral work-material specificity rather than generic office objects. A few tiny sulphur #DDE55E index tabs only. Clearly an illustration, not an archival photograph. Cohere with QAZNEDR D2 slate/chalk/sulphur references while making a new artwork. No words, letters, numerals, maps, coordinates, grades, company credentials, logo, frame, UI, laptop, magnifying glass, clipart pickaxes, people, gradients, decorative all-over pattern, or fabricated scientific claims.
+```

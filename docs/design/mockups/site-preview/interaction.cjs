@@ -1,0 +1,22 @@
+const { chromium }=require('playwright');
+const path=require('path');
+const url='file://'+path.resolve(__dirname,'../../review/site-preview.html');
+(async()=>{
+ const browser=await chromium.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
+ const page=await browser.newPage({viewport:{width:375,height:812}});
+ const checks={};
+ await page.goto(url+'?screen=portfolio&lang=en&theme=light');
+ await page.locator('.menu-btn').click(); checks.menuOpens=await page.locator('.mobile-menu').evaluate(x=>x.classList.contains('open'));
+ await page.keyboard.press('Escape'); checks.menuEscape=await page.locator('.menu-btn').evaluate(x=>x===document.activeElement&&x.getAttribute('aria-expanded')==='false');
+ await page.locator('.filter-toggle').click(); checks.filterOpens=await page.locator('#filters').evaluate(x=>x.classList.contains('open'));
+ await page.locator('#metalFilter').selectOption('0'); await page.locator('#typeFilter').selectOption('1');
+ checks.filterEmpty=await page.locator('#empty').isVisible();
+ await page.locator('.reset').click(); checks.filterReset=await page.locator('.project:visible').count()===3;
+ await page.keyboard.press('Escape'); checks.filterEscape=await page.locator('.filter-toggle').evaluate(x=>x===document.activeElement&&x.getAttribute('aria-expanded')==='false');
+ await page.locator('.project').nth(1).locator('a').click(); checks.teaserCode=page.url().includes('code=DEMO-B02')&&await page.locator('h1').textContent().then(x=>x.includes('Copper'));
+ await page.locator('.float-contact').click(); checks.contactCode=page.url().includes('code=DEMO-B02')&&await page.locator('textarea').inputValue().then(x=>x.includes('DEMO-B02'));
+ await page.locator('[name=name]').fill('Test'); await page.locator('[name=reply]').fill('test@example.test'); await page.locator('[name=message]').fill('Review'); await page.locator('.form button[type=submit]').click(); checks.formPreview=await page.locator('.form-status').textContent().then(x=>x.includes('no data was sent'));
+ await page.locator('.menu-btn').click(); await page.locator('.mobile-tools [data-lang=zh]').click(); checks.language=page.url().includes('lang=zh')&&await page.locator('h1').textContent().then(x=>x.includes('联系'));
+ await page.locator('.menu-btn').click(); await page.locator('.mobile-tools .theme').click(); checks.theme=page.url().includes('theme=dark')&&await page.locator('body').evaluate(x=>x.classList.contains('dark'));
+ console.log(JSON.stringify(checks,null,2)); await browser.close();if(Object.values(checks).some(x=>!x))process.exit(2);
+})().catch(e=>{console.error(e);process.exit(1)});

@@ -9,7 +9,8 @@ The open marketplace is being pivoted into **QAZNEDR HOLDING**'s own company sit
 - **Resume point / multi-session roadmap:** `docs/HOLDING_ROADMAP.md` — read its «Текущий статус» first and update it at the end of every session.
 - **Design is done by Codex** in `docs/design/` (brief: `docs/design/BRIEF.md`, rules: `AGENTS.md`). Implement only what is recorded in `docs/design/APPROVED.md`.
 - **Copy red lines:** never imply the holding owns an area it has no license for; don't sell state archive reports (sell expertise/analytics); always state the reserve standard (ГКЗ / KAZRC / historical); no "guaranteed returns".
-- **Deploy/sync:** production deploys go via `vercel --prod` from the CLI — always push to GitHub after deploying, and at session start check that local, `origin/master` and the live deployment's commit agree.
+- **Deploy/sync:** the Vercel GitHub integration builds production on every push to `master` (other branches get SSO-protected previews) — so deploy = `git push origin master` after build and tests; don't also run `vercel --prod` (double build). At session start check that local, `origin/master` and the live deployment's `meta.githubCommitSha` agree.
+- **Next.js gotchas here:** middleware must live in `src/middleware.ts` (the app is in `src/app`; a root `middleware.ts` is silently ignored), and `next.config.mjs` wins over `next.config.ts` (the `.ts` file is dead).
 
 ## Project Overview (legacy marketplace — being replaced)
 

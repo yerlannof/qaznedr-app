@@ -9,6 +9,13 @@ export function middleware(request: NextRequest) {
   // Legacy marketplace routes hidden after the holding pivot, and guides
   // opened in a language they are not written in → permanent redirect.
   const { pathname, searchParams } = request.nextUrl;
+  // One crawlable entry point, independent of JavaScript and hosting provider.
+  // Keep the same Russian default and all incoming query parameters.
+  if (pathname === '/') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/ru';
+    return NextResponse.redirect(url, 308);
+  }
   const hidden = hiddenRouteRedirect(pathname);
   const target = hidden ?? insightLocaleRedirect(pathname);
   if (target) {
@@ -23,5 +30,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/(ru|kz|en|zh)/:path*'],
+  matcher: ['/', '/(ru|kz|en|zh)/:path*'],
 };

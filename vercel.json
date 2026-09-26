@@ -70,11 +70,6 @@
   ],
   "redirects": [
     {
-      "source": "/",
-      "destination": "/ru",
-      "permanent": false
-    },
-    {
       "source": "/listings",
       "destination": "/ru/listings",
       "permanent": false

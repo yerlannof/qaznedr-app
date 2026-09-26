@@ -10,7 +10,7 @@ import {
   type LeadListFilters,
 } from '@/lib/leads/public-queries';
 import { MINERAL_HUBS, hubMineralName } from '@/lib/leads/minerals';
-import { toLocale } from '@/lib/seo/site';
+import { HREFLANG, localeUrl, toLocale } from '@/lib/seo/site';
 import type { LeadType } from '@/lib/leads/types';
 import { getServerTranslation } from '@/lib/i18n/translations';
 
@@ -27,7 +27,7 @@ export default async function LeadsCatalogPage({
   params: Promise<{ locale: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const { locale } = await params;
+  const locale = toLocale((await params).locale);
   const sp = await searchParams;
   const { t } = getServerTranslation(locale);
   const rawType = str(sp.type);
@@ -52,6 +52,22 @@ export default async function LeadsCatalogPage({
     listPublishedLeads(filters),
     listLeadRegions(),
   ]);
+  const collectionJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: t('navigation.leads'),
+    description: t('leadsCatalog.valueProp2'),
+    url: localeUrl(locale, '/leads'),
+    inLanguage: HREFLANG[locale],
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: leads.map((lead, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: localeUrl(locale, `/leads/${lead.code}`),
+      })),
+    },
+  };
 
   const buildQuery = (nextPage: number) => {
     const q = new URLSearchParams();
@@ -171,6 +187,12 @@ export default async function LeadsCatalogPage({
         </div>
       </div>
       <Footer />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(collectionJsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
     </>
   );
 }

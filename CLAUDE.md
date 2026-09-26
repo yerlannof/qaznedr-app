@@ -172,6 +172,8 @@ Every page and feature must follow these SEO requirements:
 10. **Canonical URLs** — use `qaznedr.kz` domain, never `vercel.app`
 11. **After adding new content pages** — call `/api/indexnow` to notify search engines
 12. **llms.txt** — update `public/llms.txt` when adding new major features or content types
+13. **Sitemap reliability:** `src/lib/seo/sitemap-leads.ts` caches only a complete validated public code snapshot (Next cache, 1h); do not swallow API errors into partial XML. Initial generation needs a healthy public API. Use genuine article dates only; never use deploy/check dates as invented lastmod.
+14. **Search submission:** the old `scripts/ping-search-engines.sh` is retired (Google sitemap ping no longer works). Use robots.txt/Search Console for Google and the existing IndexNow flow for changed public URLs. Accepted submission does not mean indexed.
 
 ### Key SEO Files
 

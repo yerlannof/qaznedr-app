@@ -19,6 +19,21 @@ describe('middleware location', () => {
   });
 });
 
+describe('default locale entry', () => {
+  it('permanently redirects the bare domain without JavaScript and keeps campaign parameters', () => {
+    expect(
+      unstable_doesMiddlewareMatch({ config, url: '/', nextConfig: {} })
+    ).toBe(true);
+    const res = middleware(
+      new NextRequest('https://qaznedr.kz/?utm_source=baidu&utm_campaign=a%20b')
+    );
+    expect(res.status).toBe(308);
+    expect(res.headers.get('location')).toBe(
+      'https://qaznedr.kz/ru?utm_source=baidu&utm_campaign=a%20b'
+    );
+  });
+});
+
 describe('hidden marketplace routes', () => {
   it('redirects with 308 to the replacement, keeping the locale', () => {
     const res = middleware(

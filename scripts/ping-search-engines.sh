@@ -1,6 +1,3 @@
 #!/bin/bash
-# Notify search engines about sitemap updates
-echo "Pinging search engines..."
-curl -s "https://www.google.com/ping?sitemap=https://qaznedr.kz/sitemap.xml" > /dev/null
-curl -s "https://webmaster.yandex.ru/ping?sitemap=https://qaznedr.kz/sitemap.xml" > /dev/null
-echo "Done! Pinged Google and Yandex."
+echo "Legacy sitemap ping is no longer supported. For Google, use robots.txt or Search Console. For changed URLs on IndexNow-supported search engines (not Google), use the existing IndexNow procedure." >&2
+exit 1

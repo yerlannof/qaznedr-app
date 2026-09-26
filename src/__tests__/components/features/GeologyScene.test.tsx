@@ -152,13 +152,18 @@ it('does not require browser storage to select a stage', () => {
   );
 });
 
-it('positions desktop button navigation at the matching stage', () => {
+it('selects the desktop stage only when the scroll reaches it', () => {
   render(<GeologyScene locale="ru" />);
   fireEvent.click(screen.getAllByRole('button')[2]);
   expect(window.scrollTo).toHaveBeenCalledWith({
     top: 1672,
     behavior: 'smooth',
   });
+  expect(screen.getAllByRole('button')[0]).toHaveAttribute(
+    'aria-pressed',
+    'true'
+  );
+  scroll(-1608);
   expect(screen.getAllByRole('button')[2]).toHaveAttribute(
     'aria-pressed',
     'true'
@@ -191,3 +196,35 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     ).toBeVisible();
   }
 );
+
+it('updates the layer pose inside a stage and retraces it immediately on reverse scroll', () => {
+  render(<GeologyScene locale="ru" />);
+  const section = screen.getByRole('region');
+  scroll(64 - 1672 * 0.2);
+  expect(Number(section.style.getPropertyValue('--reveal'))).toBeCloseTo(0.4);
+  scroll(64 - 1672 * 0.25);
+  expect(Number(section.style.getPropertyValue('--reveal'))).toBeCloseTo(0.5);
+  scroll(64 - 1672 * 0.2);
+  expect(Number(section.style.getPropertyValue('--reveal'))).toBeCloseTo(0.4);
+  expect(Number(section.style.getPropertyValue('--focus'))).toBe(0);
+  expect(window.scrollTo).not.toHaveBeenCalled();
+});
+
+it('clamps fast jumps to both endpoints even outside the viewport', () => {
+  render(<GeologyScene locale="ru" />);
+  const section = screen.getByRole('region');
+  scroll(-4000);
+  expect(section.style.getPropertyValue('--reveal')).toBe('1');
+  expect(section.style.getPropertyValue('--focus')).toBe('1');
+  expect(screen.getAllByRole('button')[2]).toHaveAttribute(
+    'aria-pressed',
+    'true'
+  );
+  scroll(1500);
+  expect(section.style.getPropertyValue('--reveal')).toBe('0');
+  expect(section.style.getPropertyValue('--focus')).toBe('0');
+  expect(screen.getAllByRole('button')[0]).toHaveAttribute(
+    'aria-pressed',
+    'true'
+  );
+});

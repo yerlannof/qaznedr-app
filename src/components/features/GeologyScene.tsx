@@ -54,15 +54,24 @@ export default function GeologyScene({ locale }: { locale: string }) {
   useEffect(() => {
     if (mode !== 'scroll') return;
     let frame = 0;
+    let lastProgress = -1;
+    const section = root.current;
     const update = () => {
       frame = 0;
-      const rect = root.current?.getBoundingClientRect();
-      if (!rect || rect.top > window.innerHeight || rect.bottom < HEADER)
-        return;
+      const rect = section?.getBoundingClientRect();
+      if (!rect || !section) return;
       const travel = rect.height - (window.innerHeight - HEADER);
       if (travel <= 0) return;
       const progress = Math.max(0, Math.min(1, (HEADER - rect.top) / travel));
-      setStage(Math.min(2, Math.floor(progress * 3)));
+      if (progress === lastProgress) return;
+      lastProgress = progress;
+      // Write only compositor inputs per frame, not React state for every pixel.
+      section.style.setProperty('--reveal', String(Math.min(1, progress * 2)));
+      section.style.setProperty(
+        '--focus',
+        String(Math.max(0, progress * 2 - 1))
+      );
+      setStage(Math.round(progress * 2));
     };
     const schedule = () => {
       if (!frame) frame = window.requestAnimationFrame(update);
@@ -74,16 +83,19 @@ export default function GeologyScene({ locale }: { locale: string }) {
       window.cancelAnimationFrame(frame);
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
+      section?.style.removeProperty('--reveal');
+      section?.style.removeProperty('--focus');
     };
   }, [mode]);
 
   function select(index: number) {
-    setStage(index);
-    if (mode !== 'scroll' || !root.current) return;
+    if (mode !== 'scroll' || !root.current) {
+      setStage(index);
+      return;
+    }
     const rect = root.current.getBoundingClientRect();
     const travel = rect.height - (window.innerHeight - HEADER);
-    // Midpoints for interior steps avoid selecting the adjacent boundary due
-    // to pixel rounding. The first/last steps use the section endpoints.
+    // Selection and pose follow actual scroll, including smooth button travel.
     window.scrollTo({
       top: window.scrollY + rect.top - HEADER + (index / 2) * travel,
       behavior: 'smooth',

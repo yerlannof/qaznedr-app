@@ -16,13 +16,7 @@ export default function PortalWelcomeHero({
 }) {
   const t = (key: string) => translate(locale, key);
   const cta = primaryContactCta(locale, getContactConfig());
-  const label = t(
-    cta.kind === 'whatsapp'
-      ? 'portal.ctaWhatsapp'
-      : cta.kind === 'wechat'
-        ? 'portal.ctaWechat'
-        : 'portal.ctaContact'
-  );
+  const label = t('portal.ctaContact');
   // Chrome may fall back from kk to en while Node supports kk. Deterministic
   // grouping prevents a server/client text mismatch without hiding the error.
   const number = (value: number) =>
@@ -39,19 +33,26 @@ export default function PortalWelcomeHero({
               {t('portal.eyebrow')}
             </p>
             <h1 className="font-serif font-normal text-[36px] md:text-[46px] lg:text-[64px] leading-[1.08] tracking-tight">
-              {t('portal.headlineLine1')} {t('portal.headlineEmphasis')}{' '}
-              {t('portal.headlineLine2')}
+              {[
+                t('portal.headlineLine1'),
+                t('portal.headlineEmphasis'),
+                t('portal.headlineLine2'),
+              ].join(locale === 'zh' ? '' : ' ')}
             </h1>
             <p className="holding-lead mt-6 max-w-2xl">
               {t('portal.subtitle')}
             </p>
             <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
+              <Link href={`/${locale}/leads`} className="brand-button">
+                {t('portal.ctaLeads')}
+                <ArrowUpRight aria-hidden className="w-5 h-5 shrink-0" />
+              </Link>
               {cta.kind === 'whatsapp' ? (
                 <a
                   href={cta.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="brand-button"
+                  className="brand-button-secondary"
                   onClick={() =>
                     track('click_whatsapp', { lead: '', place: 'hero' })
                   }
@@ -60,18 +61,11 @@ export default function PortalWelcomeHero({
                   {label}
                 </a>
               ) : (
-                <Link href={cta.href} className="brand-button">
+                <Link href={cta.href} className="brand-button-secondary">
                   <MessageCircle aria-hidden className="w-5 h-5 shrink-0" />
                   {label}
                 </Link>
               )}
-              <Link
-                href={`/${locale}/leads`}
-                className="brand-button-secondary"
-              >
-                {t('portal.ctaLeads')}
-                <ArrowUpRight aria-hidden className="w-5 h-5 shrink-0" />
-              </Link>
             </div>
           </div>
           <div className="lg:col-span-5">

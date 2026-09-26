@@ -8,7 +8,13 @@ import DealSteps from '@/components/features/DealSteps';
 import ClosingCta from '@/components/features/ClosingCta';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { getServerTranslation } from '@/lib/i18n/translations';
-import { SITE_NAME, SITE_URL, localeUrl, toLocale } from '@/lib/seo/site';
+import {
+  SITE_NAME,
+  SITE_URL,
+  INSTAGRAM_URL,
+  localeUrl,
+  toLocale,
+} from '@/lib/seo/site';
 import { breadcrumbJsonLd } from '@/lib/seo/article-jsonld';
 
 export async function generateMetadata({
@@ -30,6 +36,7 @@ export default async function AboutPage({
     '@type': 'Organization',
     name: SITE_NAME,
     url: SITE_URL,
+    sameAs: [INSTAGRAM_URL],
   };
   const schemas = [
     {

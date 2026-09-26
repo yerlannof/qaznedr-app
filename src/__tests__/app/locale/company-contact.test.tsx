@@ -53,3 +53,30 @@ it('ignores unapproved query text', async () => {
   );
   expect(html).not.toContain('untrusted-business-offer');
 });
+
+it.each(['ru', 'kz', 'en', 'zh'])(
+  'identifies the confirmed Instagram profile on %s company/contact pages',
+  async (locale) => {
+    for (const Page of [About, Contact]) {
+      const html = renderToStaticMarkup(
+        await Page({ params: Promise.resolve({ locale }) })
+      );
+      const scripts = [
+        ...html.matchAll(
+          /<script type="application\/ld\+json">(.*?)<\/script>/g
+        ),
+      ];
+      const organization = scripts
+        .map((match) => JSON.parse(match[1]))
+        .find((schema) => schema.mainEntity)?.mainEntity;
+      expect(organization?.sameAs).toEqual([
+        'https://www.instagram.com/qaznedr.kz/',
+      ]);
+      if (Page === Contact) {
+        // Footer is mocked: this is a visible link in the contact page itself.
+        expect(html).toContain('href="https://www.instagram.com/qaznedr.kz/"');
+        expect(html).toContain('Instagram @qaznedr.kz</a>');
+      }
+    }
+  }
+);

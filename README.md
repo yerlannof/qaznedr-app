@@ -2,13 +2,14 @@
 
 Source code for the company website: **[qaznedr.kz](https://qaznedr.kz)**.
 
-QAZNEDR HOLDING LLP prepares transactions involving ore areas in Kazakhstan for international and Kazakh investors. Our geologists study areas using archival reports; we check their status and support licensing in connection with a transaction.
+We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience. We discuss a specific area and the form of cooperation, and support licensing, due diligence, and fieldwork.
 
 ## Public website
 
 - [Areas](https://qaznedr.kz/en/leads): public teasers with mineral, region, geological information and the status check date. The holding does not claim ownership of the displayed areas; detailed materials are shared after a meeting and an NDA.
 - [Services](https://qaznedr.kz/en/services): licensing, geology and fieldwork, area due diligence, and analytics.
 - [Investor guides](https://qaznedr.kz/en/insights), [company information](https://qaznedr.kz/en/about), and [contact](https://qaznedr.kz/en/contact) through WeChat, WhatsApp or the inquiry form.
+- Instagram: [@qaznedr.kz](https://www.instagram.com/qaznedr.kz/).
 - Russian, Kazakh, English and Chinese interfaces. Guides currently have RU/EN/ZH versions; KZ guides use the Russian source. Terms remain in Russian pending approved legal translations.
 
 The former open marketplace has been replaced by the holding website. Legacy listing, supplier and investor-directory routes redirect to current pages. Some legacy implementation remains in the repository; it does not describe the current public product.

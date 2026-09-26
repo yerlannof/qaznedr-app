@@ -8,7 +8,13 @@ import { getContactConfig, hasAnyChannel } from '@/lib/config/contacts';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { getServiceTopic } from '@/lib/services/topics';
-import { SITE_NAME, SITE_URL, localeUrl, toLocale } from '@/lib/seo/site';
+import {
+  SITE_NAME,
+  SITE_URL,
+  INSTAGRAM_URL,
+  localeUrl,
+  toLocale,
+} from '@/lib/seo/site';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -29,7 +35,12 @@ export default async function ContactPage({ params, searchParams }: Props) {
     '@type': 'ContactPage',
     name: t('contact.title'),
     url: localeUrl(locale, '/contact'),
-    mainEntity: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    mainEntity: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      sameAs: [INSTAGRAM_URL],
+    },
   };
   return (
     <>
@@ -39,6 +50,12 @@ export default async function ContactPage({ params, searchParams }: Props) {
           <header className="max-w-3xl">
             <h1 className="holding-title">{t('contact.title')}</h1>
             <p className="holding-lead mt-6">{t('contact.subtitle')}</p>
+            <a
+              href={INSTAGRAM_URL}
+              className="brand-focus mt-4 inline-flex min-h-11 items-center underline underline-offset-4"
+            >
+              Instagram @qaznedr.kz
+            </a>
           </header>
           {topic && (
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-brand-line py-4">

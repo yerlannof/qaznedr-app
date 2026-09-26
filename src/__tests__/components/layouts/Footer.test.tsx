@@ -56,3 +56,11 @@ describe('Footer', () => {
     );
   });
 });
+
+it('links to the Instagram profile confirmed by the owner', () => {
+  (usePathname as jest.Mock).mockReturnValue('/ru');
+  render(<Footer />);
+  expect(
+    screen.getByRole('link', { name: 'Instagram @qaznedr.kz' })
+  ).toHaveAttribute('href', 'https://www.instagram.com/qaznedr.kz/');
+});

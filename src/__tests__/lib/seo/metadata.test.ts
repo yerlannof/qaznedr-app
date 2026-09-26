@@ -34,14 +34,14 @@ describe('seo/metadata', () => {
     });
     expect(m.openGraph?.images).toEqual([
       {
-        url: 'https://qaznedr.kz/zh/opengraph-image?v=20260926-d2',
+        url: 'https://qaznedr.kz/zh/opengraph-image?v=20260927-areas',
         width: 1200,
         height: 630,
         alt: 'QAZNEDR HOLDING',
       },
     ]);
     expect(m.twitter?.images).toEqual([
-      'https://qaznedr.kz/zh/opengraph-image?v=20260926-d2',
+      'https://qaznedr.kz/zh/opengraph-image?v=20260927-areas',
     ]);
   });
 
@@ -55,12 +55,12 @@ describe('seo/metadata', () => {
     });
     expect(m.openGraph?.images).toEqual([
       expect.objectContaining({
-        url: 'https://qaznedr.kz/en/insights/x/opengraph-image?v=20260926-d2',
+        url: 'https://qaznedr.kz/en/insights/x/opengraph-image?v=20260927-areas',
         alt: 't',
       }),
     ]);
     expect(m.twitter?.images).toEqual([
-      'https://qaznedr.kz/en/insights/x/opengraph-image?v=20260926-d2',
+      'https://qaznedr.kz/en/insights/x/opengraph-image?v=20260927-areas',
     ]);
   });
 

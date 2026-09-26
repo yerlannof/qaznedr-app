@@ -21,6 +21,15 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     const html = renderToStaticMarkup(
       await Home({ params: Promise.resolve({ locale }) })
     );
+    const scripts = [
+      ...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g),
+    ];
+    const organization = scripts
+      .map((match) => JSON.parse(match[1]))
+      .find((schema) => schema['@type'] === 'Organization');
+    expect(organization.sameAs).toEqual([
+      'https://www.instagram.com/qaznedr.kz/',
+    ]);
     expect(html.match(/<h1\b/g)).toHaveLength(1);
     expect(html).toContain(translate(locale, 'portal.headlineLine1'));
     const guideLocale = locale === 'kz' ? 'ru' : locale;

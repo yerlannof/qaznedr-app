@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { INSTAGRAM_URL } from '@/lib/seo/site';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
@@ -47,6 +48,7 @@ export default function Footer({
     { href: `/${locale}/contact`, label: t('footerNav.info.contacts') },
     { href: `/${locale}/faq`, label: t('footerNav.info.faq') },
     { href: `/${locale}/legal/terms`, label: t('footerNav.info.terms') },
+    { href: INSTAGRAM_URL, label: 'Instagram @qaznedr.kz' },
   ];
 
   return (

@@ -24,9 +24,10 @@ export const translations = {
       stage3Question: 'Что сверить с архивом и полевыми материалами?',
     },
     holdingCompany: {
-      title: 'QAZNEDR HOLDING — геология и недропользование Казахстана',
+      title: 'QAZNEDR HOLDING — Участки недр Казахстана для инвесторов',
       intro:
-        'ТОО «QAZNEDR HOLDING» готовит сделки по рудным участкам Казахстана для иностранных и казахстанских инвесторов. Наши геологи изучают участки по фондовым отчётам, мы проверяем их статус и сопровождаем оформление лицензии под сделку.',
+        'Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов. В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом. Обсуждаем конкретный участок и формат сотрудничества, сопровождаем лицензирование, проверку и полевые работы.',
+      team: 'В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом.',
       what: 'Что мы делаем',
       areas:
         'Подготовленные участки. Свободны по нашей проверке на дату в карточке; геология изучена. Тизер открыт, детали — после NDA.',
@@ -132,14 +133,14 @@ export const translations = {
           'Как иностранному инвестору получить право недропользования в Казахстане, лицензия на разведку, классификации запасов и сделки с правом — со ссылками на закон.',
       },
       site: {
-        title: 'QAZNEDR HOLDING — участки недр Казахстана для инвесторов',
+        title: 'QAZNEDR HOLDING — Участки недр Казахстана для инвесторов',
         description:
-          'Геологоразведочный холдинг из Казахстана. Подготовленные участки по золоту, меди и другим металлам, свободные по нашей проверке, из реестра 7 000+ рудных объектов. Сопровождение лицензирования и сделок.',
+          'Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов. В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом.',
       },
       home: {
-        title: 'QAZNEDR HOLDING — участки недр Казахстана для инвесторов',
+        title: 'QAZNEDR HOLDING — Участки недр Казахстана для инвесторов',
         description:
-          'Геологоразведочный холдинг из Казахстана. Подготовленные участки по золоту, меди и другим металлам, свободные по нашей проверке, из реестра 7 000+ рудных объектов. Сопровождение лицензирования и сделок.',
+          'Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов. В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом.',
       },
       leads: {
         title: 'Участки недр Казахстана: золото, медь и другие металлы',
@@ -169,7 +170,7 @@ export const translations = {
       about: {
         title: 'О компании QAZNEDR HOLDING',
         description:
-          'Казахстанский геологоразведочный холдинг: команда геологов, анализ архивных геологических отчётов, подготовка участков и сделок для иностранных инвесторов.',
+          'Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов. В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом.',
       },
       contact: {
         title: 'Контакты: WeChat и WhatsApp',
@@ -265,15 +266,15 @@ export const translations = {
     },
     portal: {
       statsRegistryLabel: 'Рудных объектов в нашем реестре',
-      ctaContact: 'Связаться',
+      ctaContact: 'Обсудить участок',
       ctaWechat: 'Написать в WeChat',
       ctaWhatsapp: 'Написать в WhatsApp',
       eyebrow: 'QAZNEDR HOLDING · геология и недропользование Казахстана',
-      headlineLine1: 'Подготовленные рудные участки',
-      headlineEmphasis: 'в Казахстане',
-      headlineLine2: '— для инвесторов',
+      headlineLine1: 'Участки недр',
+      headlineEmphasis: 'Казахстана',
+      headlineLine2: 'для инвесторов',
       subtitle:
-        'Наши геологи изучают советские геологоразведочные отчёты и находят участки без действующей лицензии — по нашей проверке, дата указана в карточке. Лицензию оформляем под сделку.',
+        'Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов. В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом. Обсуждаем конкретный участок и формат сотрудничества, сопровождаем лицензирование, проверку и полевые работы.',
       ctaLeads: 'Смотреть участки',
       ctaListings: 'Объявления',
       statsLive: 'В цифрах',
@@ -594,7 +595,7 @@ export const translations = {
       company: {
         name: 'QAZNEDR HOLDING',
         description:
-          'Геологоразведочный холдинг из Казахстана: подготовленные рудные участки и сопровождение сделок для инвесторов.',
+          'Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов.',
       },
       contact: {
         address: 'Алматы, Казахстан',
@@ -853,9 +854,10 @@ export const translations = {
     },
     holdingCompany: {
       title:
-        'QAZNEDR HOLDING — Қазақстан геологиясы және жер қойнауын пайдалану',
+        'QAZNEDR HOLDING — Инвесторларға арналған Қазақстанның жер қойнауы учаскелері',
       intro:
-        '«QAZNEDR HOLDING» ЖШС Қазақстандағы кенді учаскелер бойынша шетелдік және қазақстандық инвесторларға арналған мәмілелерді дайындайды. Геологтарымыз учаскелерді қор есептері бойынша зерттейді, мәртебесін тексереміз және мәміле аясында лицензиялау рәсімін сүйемелдейміз.',
+        'Геологиялық материалдарды зерделеу негізінде геологтарымыз іріктеген учаскелерді ұсынамыз. Біздің командада қазақстандық мамандар, соның ішінде 50 жылдық тәжірибесі бар геологтар бар. Нақты учаскені және ынтымақтастық форматын талқылаймыз, лицензиялау, тексеру және далалық жұмыстарға қолдау көрсетеміз.',
+      team: 'Біздің командада қазақстандық мамандар, соның ішінде 50 жылдық тәжірибесі бар геологтар бар.',
       what: 'Біздің жұмысымыз',
       areas:
         'Дайындалған учаскелер. Карточкада көрсетілген күнгі тексеруіміз бойынша бос; геологиясы зерттелген. Тизер ашық, толық ақпарат NDA-дан кейін беріледі.',
@@ -963,15 +965,15 @@ export const translations = {
       },
       site: {
         title:
-          'QAZNEDR HOLDING — инвесторларға арналған Қазақстан жер қойнауы учаскелері',
+          'QAZNEDR HOLDING — Инвесторларға арналған Қазақстанның жер қойнауы учаскелері',
         description:
-          'Қазақстандағы геологиялық барлау холдингі. 7 000+ кен объектісі тізілімінен іріктелген, біздің тексеруімізше бос алтын, мыс және басқа металдар учаскелері. Лицензиялау мен мәмілені сүйемелдеу.',
+          'Геологиялық материалдарды зерделеу негізінде геологтарымыз іріктеген учаскелерді ұсынамыз. Біздің командада қазақстандық мамандар, соның ішінде 50 жылдық тәжірибесі бар геологтар бар.',
       },
       home: {
         title:
-          'QAZNEDR HOLDING — инвесторларға арналған Қазақстан жер қойнауы учаскелері',
+          'QAZNEDR HOLDING — Инвесторларға арналған Қазақстанның жер қойнауы учаскелері',
         description:
-          'Қазақстандағы геологиялық барлау холдингі. 7 000+ кен объектісі тізілімінен іріктелген, біздің тексеруімізше бос алтын, мыс және басқа металдар учаскелері. Лицензиялау мен мәмілені сүйемелдеу.',
+          'Геологиялық материалдарды зерделеу негізінде геологтарымыз іріктеген учаскелерді ұсынамыз. Біздің командада қазақстандық мамандар, соның ішінде 50 жылдық тәжірибесі бар геологтар бар.',
       },
       leads: {
         title:
@@ -1002,7 +1004,7 @@ export const translations = {
       about: {
         title: 'QAZNEDR HOLDING туралы',
         description:
-          'Қазақстандық геологиялық барлау холдингі: геологтар командасы, архивтік геологиялық есептерді талдау, шетелдік инвесторларға учаскелер мен мәмілелерді дайындау.',
+          'Геологиялық материалдарды зерделеу негізінде геологтарымыз іріктеген учаскелерді ұсынамыз. Біздің командада қазақстандық мамандар, соның ішінде 50 жылдық тәжірибесі бар геологтар бар.',
       },
       contact: {
         title: 'Байланыс: WeChat және WhatsApp',
@@ -1099,17 +1101,17 @@ export const translations = {
     },
     portal: {
       statsRegistryLabel: 'Біздің тізілімдегі кен объектілері',
-      ctaContact: 'Байланысу',
+      ctaContact: 'Учаскені талқылау',
       ctaWechat: 'WeChat-қа жазу',
       ctaWhatsapp: 'WhatsApp-қа жазу',
       eyebrow:
         'QAZNEDR HOLDING · Қазақстан геологиясы және жер қойнауын пайдалану',
-      headlineLine1: 'Қазақстандағы',
-      headlineEmphasis: 'дайындалған кен учаскелері',
-      headlineLine2: '— инвесторларға',
+      headlineLine1: 'Инвесторларға арналған',
+      headlineEmphasis: 'Қазақстанның',
+      headlineLine2: 'жер қойнауы учаскелері',
       subtitle:
-        'Геологтарымыз кеңестік геологиялық барлау есептерін зерттеп, қолданыстағы лицензиясы жоқ учаскелерді табады — біздің тексеруіміз бойынша, күні карточкада көрсетілген. Лицензияны мәмілеге қарай рәсімдейміз.',
-      ctaLeads: 'Учаскелерді көру',
+        'Геологиялық материалдарды зерделеу негізінде геологтарымыз іріктеген учаскелерді ұсынамыз. Біздің командада қазақстандық мамандар, соның ішінде 50 жылдық тәжірибесі бар геологтар бар. Нақты учаскені және ынтымақтастық форматын талқылаймыз, лицензиялау, тексеру және далалық жұмыстарға қолдау көрсетеміз.',
+      ctaLeads: 'Учаскелерді қарау',
       ctaListings: 'Хабарландырулар',
       statsLive: 'Сандармен',
       statsLeadsLabel: 'Витринадағы учаскелер',
@@ -1430,7 +1432,7 @@ export const translations = {
       company: {
         name: 'QAZNEDR HOLDING',
         description:
-          'Қазақстандық геологиялық барлау холдингі: инвесторларға дайындалған кен учаскелері және мәмілені сүйемелдеу.',
+          'Геологиялық материалдарды зерделеу негізінде геологтарымыз іріктеген учаскелерді ұсынамыз.',
       },
       contact: {
         address: 'Алматы, Қазақстан',
@@ -1613,9 +1615,10 @@ export const translations = {
         'What should be compared with archive and field materials?',
     },
     holdingCompany: {
-      title: 'QAZNEDR HOLDING — Geology and Subsoil Use in Kazakhstan',
+      title: 'QAZNEDR HOLDING — Mineral areas in Kazakhstan for investors',
       intro:
-        'QAZNEDR HOLDING LLP prepares transactions involving ore areas in Kazakhstan for international and Kazakh investors. Our geologists study areas using archival reports; we check their status and support licensing in connection with a transaction.',
+        'We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience. We discuss a specific area and the form of cooperation, and support licensing, due diligence, and fieldwork.',
+      team: 'Our team includes Kazakhstani specialists, including geologists with 50 years of experience.',
       what: 'What we do',
       areas:
         'Prepared areas. Free per our check on the date shown on the card, with geology studied. The teaser is public; details are shared after an NDA.',
@@ -1718,16 +1721,14 @@ export const translations = {
           'How a foreign investor acquires subsoil use rights in Kazakhstan, the exploration licence, reserve classifications and rights transfers — with links to the law.',
       },
       site: {
-        title:
-          'QAZNEDR HOLDING — Mineral Exploration Areas in Kazakhstan for Investors',
+        title: 'QAZNEDR HOLDING — Mineral areas in Kazakhstan for investors',
         description:
-          'Kazakhstan exploration holding. Prepared areas for gold, copper and other metals, free per our check, drawn from a registry of 7,000+ ore objects. Licensing and deal support for investors.',
+          'We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience.',
       },
       home: {
-        title:
-          'QAZNEDR HOLDING — Mineral Exploration Areas in Kazakhstan for Investors',
+        title: 'QAZNEDR HOLDING — Mineral areas in Kazakhstan for investors',
         description:
-          'Kazakhstan exploration holding. Prepared areas for gold, copper and other metals, free per our check, drawn from a registry of 7,000+ ore objects. Licensing and deal support for investors.',
+          'We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience.',
       },
       leads: {
         title: 'Exploration Areas in Kazakhstan: Gold, Copper and More',
@@ -1757,7 +1758,7 @@ export const translations = {
       about: {
         title: 'About QAZNEDR HOLDING',
         description:
-          'Kazakhstan exploration holding: a team of geologists, analysis of archival geological reports, preparation of areas and deals for foreign investors.',
+          'We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience.',
       },
       contact: {
         title: 'Contact: WeChat and WhatsApp',
@@ -1853,15 +1854,15 @@ export const translations = {
     },
     portal: {
       statsRegistryLabel: 'Ore objects in our registry',
-      ctaContact: 'Contact us',
+      ctaContact: 'Discuss an area',
       ctaWechat: 'Message us on WeChat',
       ctaWhatsapp: 'Message us on WhatsApp',
       eyebrow: 'QAZNEDR HOLDING · Kazakhstan geology and subsoil use',
-      headlineLine1: 'Prepared ore areas',
+      headlineLine1: 'Mineral areas',
       headlineEmphasis: 'in Kazakhstan',
-      headlineLine2: '— for investors',
+      headlineLine2: 'for investors',
       subtitle:
-        'Our geologists study Soviet-era exploration reports and find areas with no active licence — per our check, dated on each card. We arrange the licence application for the deal.',
+        'We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience. We discuss a specific area and the form of cooperation, and support licensing, due diligence, and fieldwork.',
       ctaLeads: 'View areas',
       ctaListings: 'Listings',
       statsLive: 'In numbers',
@@ -2181,7 +2182,7 @@ export const translations = {
       company: {
         name: 'QAZNEDR HOLDING',
         description:
-          'Kazakhstan exploration holding: prepared ore areas and deal support for investors.',
+          'We present areas selected by our geologists based on their review of geological materials.',
       },
       contact: {
         address: 'Almaty, Kazakhstan',
@@ -2357,9 +2358,10 @@ export const translations = {
       stage3Question: '应与哪些档案和野外资料核对？',
     },
     holdingCompany: {
-      title: 'QAZNEDR HOLDING — 哈萨克斯坦地质与矿产资源利用',
+      title: 'QAZNEDR HOLDING — 面向投资者的哈萨克斯坦矿区',
       intro:
-        'QAZNEDR HOLDING 有限责任合伙企业为外国及哈萨克斯坦投资者筹备哈萨克斯坦矿产矿区相关交易。我们的地质师依据地质档案报告研究矿区；我们核查其状态，并为交易提供许可证办理协助。',
+        '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。我们就具体矿区及合作方式进行沟通，并为许可证办理、尽职调查和野外工作提供支持。',
+      team: '我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。',
       what: '我们的工作',
       areas:
         '已整理的矿区。根据卡片所示日期的核查，未设矿权，地质情况已研究。项目简介公开，详细资料在签署保密协议（NDA）后提供。',
@@ -2454,16 +2456,14 @@ export const translations = {
           '外国投资者如何在哈萨克斯坦取得矿业权、固体矿产勘查许可证流程、储量分类对照及矿业权转让许可——附法律原文链接。',
       },
       site: {
-        title:
-          'QAZNEDR HOLDING — 哈萨克斯坦矿权投资项目：金矿、铜矿等空白探矿区',
+        title: 'QAZNEDR HOLDING — 面向投资者的哈萨克斯坦矿区',
         description:
-          '哈萨克斯坦地质勘探控股公司。依托基于苏联时期地质档案整理的7000余处矿点数据库，筛选经我方核查未设矿权的金、铜等矿种地块，为投资者提供探矿权办理及交易全程服务。',
+          '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。',
       },
       home: {
-        title:
-          'QAZNEDR HOLDING — 哈萨克斯坦矿权投资项目：金矿、铜矿等空白探矿区',
+        title: 'QAZNEDR HOLDING — 面向投资者的哈萨克斯坦矿区',
         description:
-          '哈萨克斯坦地质勘探控股公司。依托基于苏联时期地质档案整理的7000余处矿点数据库，筛选经我方核查未设矿权的金、铜等矿种地块，为投资者提供探矿权办理及交易全程服务。',
+          '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。',
       },
       leads: {
         title: '哈萨克斯坦矿区项目库：金矿、铜矿等空白探矿区',
@@ -2493,7 +2493,7 @@ export const translations = {
       about: {
         title: '关于 QAZNEDR HOLDING',
         description:
-          '哈萨克斯坦地质勘探控股公司：自有地质团队，系统分析地质档案报告，为外国投资者筛选矿区并推进交易。',
+          '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。',
       },
       contact: {
         title: '联系我们：微信和 WhatsApp',
@@ -2583,16 +2583,16 @@ export const translations = {
     },
     portal: {
       statsRegistryLabel: '我方数据库中的矿点',
-      ctaContact: '联系我们',
+      ctaContact: '洽谈矿区',
       ctaWechat: '添加微信咨询',
       ctaWhatsapp: '通过 WhatsApp 咨询',
       eyebrow: 'QAZNEDR HOLDING · 哈萨克斯坦地质与矿业权',
-      headlineLine1: '哈萨克斯坦',
-      headlineEmphasis: '矿权投资',
-      headlineLine2: '— 已完成前期地质研究的金属矿地块',
+      headlineLine1: '面向投资者的',
+      headlineEmphasis: '哈萨克斯坦',
+      headlineLine2: '矿区',
       subtitle:
-        '我方地质师依据前苏联地质勘查报告筛选地块，经我方核查未设矿业权（核查日期见地块卡片）。许可证按交易需要办理。',
-      ctaLeads: '查看地块',
+        '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。我们就具体矿区及合作方式进行沟通，并为许可证办理、尽职调查和野外工作提供支持。',
+      ctaLeads: '查看矿区',
       ctaListings: '发布信息',
       statsLive: '数据一览',
       statsLeadsLabel: '在展地块',
@@ -2898,8 +2898,7 @@ export const translations = {
     footer: {
       company: {
         name: 'QAZNEDR HOLDING',
-        description:
-          '哈萨克斯坦地质勘查控股公司：为投资者提供已完成前期研究的金属矿地块及交易支持。',
+        description: '我们介绍由我们的地质专家研究地质资料后筛选的矿区。',
       },
       contact: {
         address: '阿拉木图，哈萨克斯坦',

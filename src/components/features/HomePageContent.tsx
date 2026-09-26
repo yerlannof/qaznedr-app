@@ -12,7 +12,7 @@ import {
   leadRegionName,
   leadSeoText,
 } from '@/lib/seo/lead-metadata';
-import type { Locale } from '@/lib/seo/site';
+import { INSTAGRAM_URL, type Locale } from '@/lib/seo/site';
 import type { HomeSnapshot } from '@/lib/leads/home';
 import { formatCheckDate } from '@/lib/leads/check-date';
 
@@ -30,8 +30,8 @@ export default function HomePageContent({
     '@type': 'Organization',
     name: 'QAZNEDR HOLDING',
     url: 'https://qaznedr.kz',
-    description:
-      'Kazakhstan mineral exploration holding: prepared subsoil areas and licensing/deal support for investors.',
+    description: t('portal.subtitle'),
+    sameAs: [INSTAGRAM_URL],
     areaServed: { '@type': 'Country', name: 'Kazakhstan' },
     contactPoint: {
       '@type': 'ContactPoint',
@@ -150,12 +150,8 @@ export default function HomePageContent({
       <section className="holding-section">
         <div className="brand-container grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
           <div>
-            <h2 className="holding-title">
-              {t('seo.servicesGeological.title')}
-            </h2>
-            <p className="holding-lead mt-6">
-              {t('seo.servicesGeological.description')}
-            </p>
+            <h2 className="holding-title">{t('portal.trust.archiveTitle')}</h2>
+            <p className="holding-lead mt-6">{t('holdingCompany.team')}</p>
             <Link
               href={`/${locale}/about`}
               className="brand-button-secondary mt-7"

@@ -3,6 +3,8 @@
 
 export const SITE_URL = 'https://qaznedr.kz';
 export const SITE_NAME = 'QAZNEDR HOLDING';
+// Confirmed by the owner on 2026-09-27.
+export const INSTAGRAM_URL = 'https://www.instagram.com/qaznedr.kz/';
 
 export const LOCALES = ['ru', 'kz', 'en', 'zh'] as const;
 export type Locale = (typeof LOCALES)[number];

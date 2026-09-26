@@ -15,6 +15,14 @@ describe('formatCheckDate', () => {
     expect(formatCheckDate('2026-07-15', 'zh')).toBe('2026年7月15日');
   });
 
+  it('drops an impossible day but keeps the month of the value', () => {
+    expect(formatCheckDate('2026-06-00', 'ru')).toBe('06.2026');
+    expect(formatCheckDate('2026-02-31', 'ru')).toBe('02.2026');
+    expect(formatCheckDate('2026-02-29', 'en')).toBe('February 2026');
+    expect(formatCheckDate('2028-02-29', 'ru')).toBe('29.02.2028');
+    expect(formatCheckDate('2026-04-31', 'zh')).toBe('2026年4月');
+  });
+
   it('ignores garbage', () => {
     expect(formatCheckDate('май 2026', 'ru')).toBe('05.2026');
     expect(formatCheckDate('2026-13-40', 'ru')).toBe('05.2026');

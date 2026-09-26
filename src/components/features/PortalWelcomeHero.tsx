@@ -6,7 +6,7 @@ import { ArrowRight, MessageCircle } from 'lucide-react';
 import { track } from '@vercel/analytics';
 import { useTranslation } from '@/hooks/useTranslation';
 import { getContactConfig, primaryContactCta } from '@/lib/config/contacts';
-import { leadRegionName } from '@/lib/seo/lead-metadata';
+import { collectLeadStats, LEADS_PAGE_SIZE } from '@/lib/leads/stats';
 
 // Ore objects in the holding's registry (owner-confirmed figure, 2026-09-26).
 const REGISTRY_OBJECTS = 7152;
@@ -26,20 +26,17 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
   const [regionsCount, setRegionsCount] = useState(9);
 
   useEffect(() => {
-    fetch('/api/leads?limit=100')
-      .then((r) => r.json())
-      .then((j) => {
-        const total = Number(j?.data?.total ?? 0);
-        const leads: { region?: string | null }[] = j?.data?.leads ?? [];
-        const regions = new Set(
-          leads
-            .map(
-              (l) => leadRegionName(l.region, 'ru') || (l.region ?? '').trim()
-            )
-            .filter(Boolean)
-        );
+    collectLeadStats(async (page) => {
+      const r = await fetch(`/api/leads?limit=${LEADS_PAGE_SIZE}&page=${page}`);
+      const j = await r.json();
+      return {
+        total: Number(j?.data?.total ?? 0),
+        leads: j?.data?.leads ?? [],
+      };
+    })
+      .then(({ total, regions }) => {
         if (total > 0) setLeadsCount(total);
-        if (regions.size > 0) setRegionsCount(regions.size);
+        if (regions > 0) setRegionsCount(regions);
       })
       .catch(() => {});
   }, []);

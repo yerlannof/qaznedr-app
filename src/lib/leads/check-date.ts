@@ -5,6 +5,10 @@ export const LEADS_BULK_CHECK = '2026-05';
 
 const DATE = /^(\d{4})-(\d{2})(?:-(\d{2}))?/;
 
+function daysInMonth(year: number, month: number): number {
+  return new Date(Date.UTC(year, month, 0)).getUTCDate();
+}
+
 function parts(value: string | null | undefined): {
   y: string;
   m: string;
@@ -12,9 +16,11 @@ function parts(value: string | null | undefined): {
 } {
   const match = DATE.exec(value ?? '');
   const month = match ? Number(match[2]) : 0;
-  const day = match?.[3] ? Number(match[3]) : 0;
-  if (match && month >= 1 && month <= 12 && day <= 31) {
-    return { y: match[1], m: match[2], d: match[3] };
+  if (match && month >= 1 && month <= 12) {
+    const day = match[3] ? Number(match[3]) : 0;
+    // A day that does not exist (00, 31.02) keeps the month, drops the day.
+    const valid = day >= 1 && day <= daysInMonth(Number(match[1]), month);
+    return { y: match[1], m: match[2], d: valid ? match[3] : undefined };
   }
   const [y, m] = LEADS_BULK_CHECK.split('-');
   return { y, m };

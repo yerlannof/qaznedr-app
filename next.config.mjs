@@ -5,6 +5,9 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
+  // No "X-Powered-By: Next.js" header.
+  poweredByHeader: false,
+
   // marked ships ESM only; next/jest reads this list to transform it in tests.
   transpilePackages: ['marked'],
 

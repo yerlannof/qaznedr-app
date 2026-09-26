@@ -3,7 +3,7 @@ import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import ContactChannels from '@/components/features/ContactChannels';
 import InquiryForm from '@/components/features/InquiryForm';
-import { getContactConfig } from '@/lib/config/contacts';
+import { getContactConfig, hasAnyChannel } from '@/lib/config/contacts';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 
@@ -36,15 +36,32 @@ export default async function ContactPage({
           <p className="mt-3 max-w-2xl text-gray-600 dark:text-gray-400">
             {t('contact.subtitle')}
           </p>
-          <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <ContactChannels config={config} locale={locale} />
-            <section className="rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+          {hasAnyChannel(config) ? (
+            <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <section aria-labelledby="channels-heading">
+                <h2
+                  id="channels-heading"
+                  className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-4"
+                >
+                  {t('contact.channelsHeading')}
+                </h2>
+                <ContactChannels config={config} locale={locale} />
+              </section>
+              <section className="rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-4">
+                  {t('contact.formTitle')}
+                </h2>
+                <InquiryForm locale={locale} />
+              </section>
+            </div>
+          ) : (
+            <section className="mt-10 max-w-2xl rounded-xl border border-gray-200 dark:border-gray-700 p-6">
               <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-4">
                 {t('contact.formTitle')}
               </h2>
               <InquiryForm locale={locale} />
             </section>
-          </div>
+          )}
         </div>
       </main>
       <Footer />

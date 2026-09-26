@@ -45,7 +45,7 @@ export const translations = {
           'Казахстанский геологоразведочный холдинг: команда геологов, анализ архивных геологических отчётов, подготовка участков и сделок для иностранных инвесторов.',
       },
       contact: {
-        title: 'Контакты: WeChat, WhatsApp, email',
+        title: 'Контакты: WeChat и WhatsApp',
         description:
           'Свяжитесь с QAZNEDR HOLDING через WeChat, WhatsApp или форму заявки. Обсудим участок, формат сделки и встречу.',
       },
@@ -96,11 +96,12 @@ export const translations = {
       },
     },
     contact: {
+      channelsHeading: 'Написать нам',
       title: 'Связаться с QAZNEDR HOLDING',
       subtitle:
         'Напишите в удобный мессенджер или оставьте заявку — ответим в течение рабочего дня.',
       wechatTitle: 'WeChat',
-      wechatHint: 'Отсканируйте QR-код или добавьте ID. Укажите код участка.',
+      wechatHint: 'Отсканируйте QR-код в WeChat и укажите код участка.',
       wechatQrAlt: 'QR-код WeChat QAZNEDR HOLDING',
       copy: 'Копировать',
       copied: 'Скопировано',
@@ -772,7 +773,7 @@ export const translations = {
           'Қазақстандық геологиялық барлау холдингі: геологтар командасы, архивтік геологиялық есептерді талдау, шетелдік инвесторларға учаскелер мен мәмілелерді дайындау.',
       },
       contact: {
-        title: 'Байланыс: WeChat, WhatsApp, email',
+        title: 'Байланыс: WeChat және WhatsApp',
         description:
           'QAZNEDR HOLDING-пен WeChat, WhatsApp немесе өтінім формасы арқылы байланысыңыз. Учаскені, мәміле форматын және кездесуді талқылаймыз.',
       },
@@ -823,12 +824,12 @@ export const translations = {
       },
     },
     contact: {
+      channelsHeading: 'Бізге жазыңыз',
       title: 'QAZNEDR HOLDING-пен байланысу',
       subtitle:
         'Ыңғайлы мессенджерге жазыңыз немесе өтінім қалдырыңыз — бір жұмыс күні ішінде жауап береміз.',
       wechatTitle: 'WeChat',
-      wechatHint:
-        'QR-кодты сканерлеңіз немесе ID қосыңыз. Учаске кодын көрсетіңіз.',
+      wechatHint: 'WeChat-та QR-кодты сканерлеп, учаске кодын көрсетіңіз.',
       wechatQrAlt: 'QAZNEDR HOLDING WeChat QR-коды',
       copy: 'Көшіру',
       copied: 'Көшірілді',
@@ -1428,7 +1429,7 @@ export const translations = {
           'Kazakhstan exploration holding: a team of geologists, analysis of archival geological reports, preparation of areas and deals for foreign investors.',
       },
       contact: {
-        title: 'Contact: WeChat, WhatsApp, Email',
+        title: 'Contact: WeChat and WhatsApp',
         description:
           'Contact QAZNEDR HOLDING via WeChat, WhatsApp or the inquiry form to discuss an area, a deal format and a meeting.',
       },
@@ -1479,12 +1480,12 @@ export const translations = {
       },
     },
     contact: {
+      channelsHeading: 'Message us',
       title: 'Contact QAZNEDR HOLDING',
       subtitle:
         'Message us in your preferred messenger or send an inquiry — we reply within one business day.',
       wechatTitle: 'WeChat',
-      wechatHint:
-        'Scan the QR code or add our ID. Please mention the area code.',
+      wechatHint: 'Scan the QR code in WeChat and mention the area code.',
       wechatQrAlt: 'QAZNEDR HOLDING WeChat QR code',
       copy: 'Copy',
       copied: 'Copied',
@@ -2076,7 +2077,7 @@ export const translations = {
           '哈萨克斯坦地质勘探控股公司：自有地质团队，系统分析地质档案报告，为外国投资者筛选矿区并推进交易。',
       },
       contact: {
-        title: '联系我们：微信、WhatsApp、邮箱',
+        title: '联系我们：微信和 WhatsApp',
         description:
           '通过微信、WhatsApp 或在线表单联系 QAZNEDR HOLDING，洽谈矿区项目、合作方式及会面安排。',
       },
@@ -2121,11 +2122,12 @@ export const translations = {
       },
     },
     contact: {
+      channelsHeading: '联系方式',
       title: '联系 QAZNEDR HOLDING',
       subtitle:
         '通过微信或 WhatsApp 联系我们，或提交在线咨询，我们将在一个工作日内回复。',
       wechatTitle: '微信',
-      wechatHint: '扫描二维码或添加微信号，请注明项目编号。',
+      wechatHint: '请用微信扫描二维码添加，并注明地块编号。',
       wechatQrAlt: 'QAZNEDR HOLDING 微信二维码',
       copy: '复制',
       copied: '已复制',

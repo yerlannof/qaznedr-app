@@ -49,6 +49,7 @@ const CONTACT_KEYS = [
   'contact.discussHeading',
   'contact.discussNote',
   'contact.orForm',
+  'contact.channelsHeading',
 ];
 
 const INQUIRY_KEYS = [

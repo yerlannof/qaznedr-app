@@ -47,6 +47,18 @@ describe('notifyTelegram', () => {
     });
   });
 
+  it('gives up when Telegram hangs, so the inquiry response is not blocked', async () => {
+    const hang = (_url: string, init: RequestInit) =>
+      new Promise<{ ok: boolean }>((_resolve, reject) => {
+        init.signal?.addEventListener('abort', () =>
+          reject(new Error('aborted'))
+        );
+      });
+    await expect(
+      notifyTelegram('hi', { token: 'T', chatId: '42' }, hang, 20)
+    ).resolves.toBe(false);
+  }, 1000);
+
   it('never throws on network errors', async () => {
     const f = jest.fn().mockRejectedValue(new Error('down'));
     await expect(

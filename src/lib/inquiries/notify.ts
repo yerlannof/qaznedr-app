@@ -25,9 +25,13 @@ export async function notifyTelegram(
   fetchImpl: (
     url: string,
     init: RequestInit
-  ) => Promise<{ ok: boolean }> = fetch
+  ) => Promise<{ ok: boolean }> = fetch,
+  // The inquiry is already saved; don't keep the visitor waiting on Telegram.
+  timeoutMs = 4000
 ): Promise<boolean> {
   if (!env.token || !env.chatId) return false;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const res = await fetchImpl(
       `https://api.telegram.org/bot${env.token}/sendMessage`,
@@ -39,10 +43,13 @@ export async function notifyTelegram(
           text,
           disable_web_page_preview: true,
         }),
+        signal: controller.signal,
       }
     );
     return res.ok;
   } catch {
     return false;
+  } finally {
+    clearTimeout(timer);
   }
 }

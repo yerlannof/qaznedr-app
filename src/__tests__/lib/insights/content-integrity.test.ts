@@ -8,7 +8,7 @@ import {
 } from '@/lib/insights/content';
 import { parseFrontMatter } from '@/lib/insights/front-matter';
 import { INSIGHTS } from '@/lib/insights/registry';
-import { hiddenRouteRedirect } from '@/lib/seo/pages';
+import { PUBLIC_PAGES } from '@/lib/seo/pages';
 import type { Locale } from '@/lib/seo/site';
 
 const SOURCES_HEADING: Record<string, RegExp> = {
@@ -37,6 +37,69 @@ const FORBIDDEN = [
   /маркетплейс|marketplace/i,
   /obtain the licen[cs]e/i,
 ];
+
+/**
+ * Internal links, read from the rendered HTML so that every markdown form
+ * (titles, references, <…>, raw <a>) is seen. A link must stay in the
+ * article's language and lead to a public page or a guide written in it.
+ */
+function linkProblems(markdown: string, locale: string): string[] {
+  const problems: string[] = [];
+  for (const [, href] of renderMarkdown(markdown).matchAll(/href="([^"]*)"/g)) {
+    if (href.startsWith('#')) continue;
+    if (/^https?:\/\//i.test(href)) {
+      if (/^https?:\/\/(www\.)?qaznedr\.kz(\/|$)/i.test(href)) {
+        problems.push(`own site as an absolute link: ${href}`);
+      }
+      continue;
+    }
+    if (!href.startsWith(`/${locale}/`)) {
+      problems.push(`not a /${locale}/ path: ${href}`);
+      continue;
+    }
+    const rest = href
+      .slice(locale.length + 1)
+      .replace(/[#?].*$/, '')
+      .replace(/\/$/, '');
+    const guide = /^\/insights\/([\w-]+)$/.exec(rest);
+    if (guide) {
+      const entry = INSIGHTS.find((e) => e.slug === guide[1]);
+      if (!entry || !(entry.locales as readonly string[]).includes(locale)) {
+        problems.push(`no such guide in ${locale}: ${href}`);
+      }
+      continue;
+    }
+    if (!(PUBLIC_PAGES as readonly string[]).includes(rest)) {
+      problems.push(`not a public page: ${href}`);
+    }
+  }
+  return problems;
+}
+
+describe('linkProblems', () => {
+  it.each([
+    ['titled link', '[x](/ru/blog "t")'],
+    ['reference link', '[x][b]\n\n[b]: /ru/listings'],
+    ['angle brackets', '[x](</ru/listings>)'],
+    ['raw anchor', '<a href="/ru/blog">x</a>'],
+    ['relative link', '[x](leads)'],
+    ['absolute own link', '[x](https://qaznedr.kz/ru/leads)'],
+    ['mistyped guide', '[x](/ru/insights/foreign-investor-subsoil-rights)'],
+    ['other language', '[x](/en/leads)'],
+  ])('flags a %s', (_kind, markdown) => {
+    expect(linkProblems(markdown, 'ru')).not.toEqual([]);
+  });
+
+  it('accepts public pages, written guides and external sources', () => {
+    expect(
+      linkProblems(
+        '[a](/ru/leads) [b](/ru/insights/foreign-investor-subsoil-rights-kazakhstan) ' +
+          '[c](https://adilet.zan.kz/rus/docs/K1700000125) [d](/ru/services/legal) [e](#top)',
+        'ru'
+      )
+    ).toEqual([]);
+  });
+});
 
 const files = INSIGHTS.flatMap((entry) =>
   entry.locales.map((locale) => ({ entry, locale: locale as Locale }))
@@ -100,13 +163,8 @@ describe('guide files', () => {
       });
 
       it('links only to live pages in its own language', () => {
-        const internal = [...source.matchAll(/\]\((\/[^)\s]*)\)/g)].map(
-          (m) => m[1]
-        );
-        for (const href of internal) {
-          expect(href.startsWith(`/${locale}/`)).toBe(true);
-          expect(hiddenRouteRedirect(href.replace(/[#?].*$/, ''))).toBeNull();
-        }
+        const { body } = parseFrontMatter(source);
+        expect(linkProblems(body, locale)).toEqual([]);
       });
     }
   );

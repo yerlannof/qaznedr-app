@@ -74,6 +74,24 @@ describe('parseArticle', () => {
   });
 });
 
+describe('parseArticle rejects a second H1', () => {
+  // The page renders the title as the only H1; build must fail otherwise.
+  it.each([
+    ['atx', '# Title'],
+    ['indented atx', '   # Title'],
+    ['setext', 'Title\n====='],
+    ['raw html', '<h1>Title</h1>'],
+  ])('%s heading', (_kind, heading) => {
+    expect(() =>
+      parseArticle(
+        `---\ntitle: T\ndescription: D\n---\n\n${heading}\n\nText`,
+        entry,
+        'ru'
+      )
+    ).toThrow('test-guide/ru.md: H1 in the body');
+  });
+});
+
 describe('listArticles', () => {
   // Runs against the real content/ folder; guides land in Task 7–8.
   it('falls back to the ru version for locales without a translation', () => {

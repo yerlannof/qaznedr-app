@@ -63,6 +63,9 @@ export function parseArticle(
   const file = `${entry.slug}/${locale}.md`;
   if (!data.title) throw new Error(`${file}: missing title`);
   if (!data.description) throw new Error(`${file}: missing description`);
+  const html = renderMarkdown(body);
+  // The page prints the title as its only H1.
+  if (/<h1[\s>]/i.test(html)) throw new Error(`${file}: H1 in the body`);
   return {
     slug: entry.slug,
     locale,
@@ -71,7 +74,7 @@ export function parseArticle(
     category: entry.category,
     updated: entry.updated,
     readingMinutes: readingMinutes(body, locale),
-    html: renderMarkdown(body),
+    html,
   };
 }
 

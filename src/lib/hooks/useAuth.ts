@@ -31,7 +31,7 @@ export function useAuth() {
           throw new Error(result.error);
         }
 
-        router.push(`/${locale}/dashboard`);
+        router.push(`/${locale}/admin`);
         return { success: true };
       } catch (error) {
         return {

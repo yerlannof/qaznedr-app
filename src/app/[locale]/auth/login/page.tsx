@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { signIn } from 'next-auth/react';
-import Link from 'next/link';
 import { useTranslation } from '@/hooks/useTranslation';
 import { AlertCircle } from 'lucide-react';
 
@@ -35,15 +34,6 @@ export default function LoginPage() {
         <h1 className="text-2xl font-semibold tracking-tight text-center text-gray-900 dark:text-gray-50">
           Войти
         </h1>
-        <p className="mt-2 text-center text-sm text-gray-400">
-          Нет аккаунта?{' '}
-          <Link
-            href={`/${locale}/auth/register`}
-            className="text-[#0A84FF] hover:underline font-medium"
-          >
-            Зарегистрироваться
-          </Link>
-        </p>
 
         <form className="mt-8 flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1.5">
@@ -115,9 +105,7 @@ export default function LoginPage() {
 
         <button
           type="button"
-          onClick={() =>
-            signIn('google', { callbackUrl: `/${locale}/dashboard` })
-          }
+          onClick={() => signIn('google', { callbackUrl: `/${locale}/admin` })}
           className="w-full py-2.5 px-4 border border-gray-200 dark:border-gray-700 rounded-lg font-medium text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">

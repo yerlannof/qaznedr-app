@@ -18,9 +18,10 @@ function resolveImport(spec: string): string | null {
 // Page files for every indexable route plus the components they import,
 // followed recursively within src/components.
 function publicSourceFiles(): string[] {
-  const queue = PUBLIC_PAGES.map((p) =>
-    path.join(SRC, 'app/[locale]', p, 'page.tsx')
-  ).filter(existsSync);
+  // The login page is not indexed, but the owner uses it.
+  const queue = [...PUBLIC_PAGES, '/auth/login']
+    .map((p) => path.join(SRC, 'app/[locale]', p, 'page.tsx'))
+    .filter(existsSync);
   const seen = new Set<string>();
   while (queue.length) {
     const file = queue.pop()!;

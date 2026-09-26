@@ -33,6 +33,7 @@ export default function Navigation({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname() || '/';
+  const preserveHomeScroll = /^\/(ru|kz|en|zh)\/?$/.test(pathname);
   const { t, locale } = useTranslation();
   const { data: session } = useSession();
   const topic = getServiceTopic(serviceTopic);
@@ -100,6 +101,7 @@ export default function Navigation({
               <Link
                 key={code}
                 href={switchLocalePath(code)}
+                scroll={!preserveHomeScroll}
                 hrefLang={code === 'kz' ? 'kk' : code === 'zh' ? 'zh' : code}
                 lang={code === 'kz' ? 'kk' : code}
                 aria-current={locale === code ? 'page' : undefined}
@@ -196,6 +198,7 @@ export default function Navigation({
                     <SheetClose asChild key={code}>
                       <Link
                         href={switchLocalePath(code)}
+                        scroll={!preserveHomeScroll}
                         hrefLang={
                           code === 'kz' ? 'kk' : code === 'zh' ? 'zh' : code
                         }

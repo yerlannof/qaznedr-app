@@ -4,6 +4,7 @@ import { ArrowUpRight, FileText } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import PortalWelcomeHero from '@/components/features/PortalWelcomeHero';
+import GeologyScene from '@/components/features/GeologyScene';
 import { translate } from '@/lib/i18n/translations';
 import { GUIDE } from '@/lib/insights/registry';
 import {
@@ -66,27 +67,7 @@ export default function HomePageContent({
       />
       <Navigation />
       <PortalWelcomeHero locale={locale} stats={snapshot.stats} />
-      <section
-        className="holding-section holding-dark"
-        aria-labelledby="home-geology"
-      >
-        <div className="brand-container">
-          <div className="grid md:grid-cols-2 gap-6 items-end mb-10">
-            <h2 id="home-geology" className="holding-title">
-              {t('portal.trust.archiveTitle')}
-            </h2>
-            <p className="holding-lead">{t('portal.trust.archiveDesc')}</p>
-          </div>
-          <Image
-            src="/brand/geology-cutaway-1440.webp"
-            alt=""
-            width={1440}
-            height={720}
-            sizes="(max-width:768px) 100vw, 1200px"
-            className="w-full h-auto"
-          />
-        </div>
-      </section>
+      <GeologyScene locale={locale} />
       <section className="holding-section" aria-labelledby="home-areas">
         <div className="brand-container">
           <div className="grid md:grid-cols-2 gap-6 mb-10">

@@ -3,6 +3,26 @@
 
 export const translations = {
   ru: {
+    geologyScene: {
+      disclaimer: 'СХЕМАТИЧЕСКИЙ РАЗРЕЗ / НЕ ДАННЫЕ УЧАСТКА',
+      surface: 'Поверхность',
+      contacts: 'Контакты пород',
+      base: 'Нижний слой',
+      stage1Label: 'Контекст',
+      stage1Title: 'Увидеть целое',
+      stage1Body: 'Геолог начинает с формы участка и общего положения пород.',
+      stage1Question: 'Что известно из карты, архива и наблюдений?',
+      stage2Label: 'Слои',
+      stage2Title: 'Развести слои',
+      stage2Body:
+        'Пласты расходятся, чтобы были видны порядок и отношения между ними.',
+      stage2Question: 'Какие контакты пород требуют внимательного чтения?',
+      stage3Label: 'Проверка',
+      stage3Title: 'Выбрать проверку',
+      stage3Body:
+        'Внимание переходит к одному контакту — это вопрос для дальнейшей работы.',
+      stage3Question: 'Что сверить с архивом и полевыми материалами?',
+    },
     holdingCompany: {
       title: 'QAZNEDR HOLDING — геология и недропользование Казахстана',
       intro:
@@ -809,6 +829,28 @@ export const translations = {
     },
   },
   kz: {
+    geologyScene: {
+      disclaimer: 'Сызбалық қима / учаске деректері емес',
+      surface: 'Жер беті',
+      contacts: 'Тау жыныстарының түйісуі',
+      base: 'Төменгі қабат',
+      stage1Label: 'Жалпы көрініс',
+      stage1Title: 'Тұтас көріністі көру',
+      stage1Body:
+        'Геолог учаскенің пішіні мен тау жыныстарының жалпы орналасуынан бастайды.',
+      stage1Question: 'Картадан, мұрағаттан және бақылаулардан не белгілі?',
+      stage2Label: 'Қабаттар',
+      stage2Title: 'Қабаттарды ажырату',
+      stage2Body:
+        'Қабаттар олардың реті мен өзара байланысы көрінуі үшін ажыратылады.',
+      stage2Question: 'Тау жыныстарының қай түйісуін мұқият зерттеу керек?',
+      stage3Label: 'Тексеру',
+      stage3Title: 'Тексеру нүктесін таңдау',
+      stage3Body:
+        'Назар бір түйісуге аударылады — бұл кейінгі жұмысқа арналған сұрақ.',
+      stage3Question:
+        'Мұрағаттық және далалық материалдармен нені салыстыру керек?',
+    },
     holdingCompany: {
       title:
         'QAZNEDR HOLDING — Қазақстан геологиясы және жер қойнауын пайдалану',
@@ -1548,6 +1590,28 @@ export const translations = {
     },
   },
   en: {
+    geologyScene: {
+      disclaimer: 'SCHEMATIC SECTION / NOT SITE DATA',
+      surface: 'Surface',
+      contacts: 'Rock contacts',
+      base: 'Lower layer',
+      stage1Label: 'Context',
+      stage1Title: 'See the whole',
+      stage1Body:
+        'The geologist begins with the site form and the broad position of rock units.',
+      stage1Question: 'What is known from maps, archives and observation?',
+      stage2Label: 'Layers',
+      stage2Title: 'Separate the layers',
+      stage2Body:
+        'The strata part to make their order and relationships visible.',
+      stage2Question: 'Which contacts call for a closer reading?',
+      stage3Label: 'Verification',
+      stage3Title: 'Choose a check',
+      stage3Body:
+        'Attention moves to one contact as a question for further work.',
+      stage3Question:
+        'What should be compared with archive and field materials?',
+    },
     holdingCompany: {
       title: 'QAZNEDR HOLDING — Geology and Subsoil Use in Kazakhstan',
       intro:
@@ -2274,6 +2338,24 @@ export const translations = {
     },
   },
   zh: {
+    geologyScene: {
+      disclaimer: '示意剖面 / 非地块数据',
+      surface: '地表',
+      contacts: '岩层接触',
+      base: '下部地层',
+      stage1Label: '整体',
+      stage1Title: '观察整体',
+      stage1Body: '地质师先看地形和岩层的大致位置。',
+      stage1Question: '地图、档案和观察资料已告诉我们什么？',
+      stage2Label: '分层',
+      stage2Title: '分开地层',
+      stage2Body: '地层展开后，更容易读懂顺序与相互关系。',
+      stage2Question: '哪些岩层接触关系值得细看？',
+      stage3Label: '核查',
+      stage3Title: '选择核查点',
+      stage3Body: '关注一个接触关系，并将它作为下一步工作的问题。',
+      stage3Question: '应与哪些档案和野外资料核对？',
+    },
     holdingCompany: {
       title: 'QAZNEDR HOLDING — 哈萨克斯坦地质与矿产资源利用',
       intro:

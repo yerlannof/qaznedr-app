@@ -21,6 +21,7 @@ export default function Footer({
 }) {
   const { t, locale } = useTranslation();
   const pathname = usePathname() || '/';
+  const preserveHomeScroll = /^\/(ru|kz|en|zh)\/?$/.test(pathname);
   const topic = getServiceTopic(serviceTopic);
 
   const switchLocalePath = (newLocale: string) => {
@@ -110,6 +111,7 @@ export default function Footer({
                 <li key={code}>
                   <Link
                     href={switchLocalePath(code)}
+                    scroll={!preserveHomeScroll}
                     hrefLang={code === 'kz' ? 'kk' : code}
                     lang={code === 'kz' ? 'kk' : code}
                     aria-current={locale === code ? 'page' : undefined}

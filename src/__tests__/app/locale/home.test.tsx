@@ -30,5 +30,12 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     expect(html).toContain(`/${locale}/contact`);
     expect(html).toContain('7');
     expect(html).not.toMatch(/>31<|>9</);
+    expect(html).toContain('data-mode="static"');
+    expect(html).toContain(translate(locale, 'geologyScene.disclaimer'));
+    for (const stage of [1, 2, 3]) {
+      expect(html).toContain(
+        translate(locale, `geologyScene.stage${stage}Title`)
+      );
+    }
   }
 );

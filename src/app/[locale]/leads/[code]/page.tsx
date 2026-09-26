@@ -9,6 +9,7 @@ import InquiryForm from '@/components/features/InquiryForm';
 import { getContactConfig, hasAnyChannel } from '@/lib/config/contacts';
 import { formatCheckDate } from '@/lib/leads/check-date';
 import { toLocale } from '@/lib/seo/site';
+import { leadJsonLd } from '@/lib/seo/lead-jsonld';
 import {
   MapPin,
   ShieldCheck,
@@ -55,48 +56,10 @@ export default async function LeadTeaserPage({
   const teaserTitle =
     lead.teaser_title || `Золото · ${lead.region || 'Казахстан'}`;
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: lead.teaser_title || `Золотоносный участок ${lead.code}`,
-    category: 'Geological lead',
-    description:
-      lead.teaser_summary ||
-      'Свободный золотоносный участок (закрытая находка).',
-    areaServed: lead.region || 'Kazakhstan',
-    offers: {
-      '@type': 'Offer',
-      priceCurrency: 'KZT',
-      availability: isSold
-        ? 'https://schema.org/SoldOut'
-        : 'https://schema.org/InStock',
-    },
-  };
-
-  const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Главная',
-        item: `https://qaznedr.kz/${locale}`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Находки',
-        item: `https://qaznedr.kz/${locale}/leads`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: teaserTitle,
-        item: `https://qaznedr.kz/${locale}/leads/${lead.code}`,
-      },
-    ],
-  };
+  const { place: jsonLd, breadcrumb: breadcrumbJsonLd } = leadJsonLd(
+    lead,
+    toLocale(locale)
+  );
 
   return (
     <>
@@ -244,6 +207,9 @@ export default async function LeadTeaserPage({
                     </div>
                   )}
                 </div>
+                <p className="mt-3 text-xs text-gray-500 leading-relaxed">
+                  {t('leadDetail.transferNote')}
+                </p>
               </section>
 
               {/* How it works legally */}

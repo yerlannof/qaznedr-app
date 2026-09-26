@@ -7,17 +7,17 @@ export const translations = {
       site: {
         title: 'QAZNEDR HOLDING — участки недр Казахстана для инвесторов',
         description:
-          'Геологоразведочный холдинг из Казахстана. Подготовленные свободные участки по золоту, меди и другим металлам из реестра 7 000+ рудных объектов по советским фондовым отчётам. Сопровождение лицензирования и сделок для инвесторов.',
+          'Геологоразведочный холдинг из Казахстана. Подготовленные участки по золоту, меди и другим металлам, свободные по нашей проверке, из реестра 7 000+ рудных объектов. Сопровождение лицензирования и сделок.',
       },
       home: {
         title: 'QAZNEDR HOLDING — участки недр Казахстана для инвесторов',
         description:
-          'Геологоразведочный холдинг из Казахстана. Подготовленные свободные участки по золоту, меди и другим металлам из реестра 7 000+ рудных объектов по советским фондовым отчётам. Сопровождение лицензирования и сделок для инвесторов.',
+          'Геологоразведочный холдинг из Казахстана. Подготовленные участки по золоту, меди и другим металлам, свободные по нашей проверке, из реестра 7 000+ рудных объектов. Сопровождение лицензирования и сделок.',
       },
       leads: {
         title: 'Участки недр Казахстана: золото, медь и другие металлы',
         description:
-          'Подготовленные свободные рудные участки Казахстана. В тизере: металл, регион, тип месторождения, содержание. Детали — после встречи и NDA.',
+          'Подготовленные рудные участки Казахстана, свободные по нашей проверке на дату в карточке. В тизере: металл, регион, тип месторождения, содержание. Детали — после встречи и NDA.',
       },
       services: {
         title: 'Услуги: лицензирование, геологоразведка, due diligence',
@@ -429,6 +429,8 @@ export const translations = {
       forward: 'Вперёд →',
     },
     leadDetail: {
+      transferNote:
+        'Передача права недропользования требует разрешения уполномоченного органа (ст. 44–45 Кодекса о недрах); лицензию на разведку твёрдых полезных ископаемых нельзя передать в первый год её действия.',
       includedHeading: 'На встрече после NDA обсуждаем:',
       breadcrumbLeads: 'Участки',
       badgeSold: 'ПРОДАНО',
@@ -733,19 +735,19 @@ export const translations = {
         title:
           'QAZNEDR HOLDING — инвесторларға арналған Қазақстан жер қойнауы учаскелері',
         description:
-          'Қазақстандағы геологиялық барлау холдингі. Кеңестік қор есептері бойынша 7 000+ кен объектісі тізілімінен іріктелген алтын, мыс және басқа металдар бойынша дайын бос учаскелер. Инвесторларға лицензиялау мен мәмілені сүйемелдеу.',
+          'Қазақстандағы геологиялық барлау холдингі. 7 000+ кен объектісі тізілімінен іріктелген, біздің тексеруімізше бос алтын, мыс және басқа металдар учаскелері. Лицензиялау мен мәмілені сүйемелдеу.',
       },
       home: {
         title:
           'QAZNEDR HOLDING — инвесторларға арналған Қазақстан жер қойнауы учаскелері',
         description:
-          'Қазақстандағы геологиялық барлау холдингі. Кеңестік қор есептері бойынша 7 000+ кен объектісі тізілімінен іріктелген алтын, мыс және басқа металдар бойынша дайын бос учаскелер. Инвесторларға лицензиялау мен мәмілені сүйемелдеу.',
+          'Қазақстандағы геологиялық барлау холдингі. 7 000+ кен объектісі тізілімінен іріктелген, біздің тексеруімізше бос алтын, мыс және басқа металдар учаскелері. Лицензиялау мен мәмілені сүйемелдеу.',
       },
       leads: {
         title:
           'Қазақстан жер қойнауы учаскелері: алтын, мыс және басқа металдар',
         description:
-          'Қазақстанның дайындалған бос кен учаскелері. Тизерде: металл, өңір, кен орнының түрі, құрамы. Толық деректер кездесу мен NDA-дан кейін.',
+          'Қазақстанның дайындалған кен учаскелері, карточкадағы күнге біздің тексеруімізше бос. Тизерде: металл, өңір, кен орнының түрі, құрамы. Толығы — кездесу мен NDA-дан кейін.',
       },
       services: {
         title: 'Қызметтер: лицензиялау, геологиялық барлау, due diligence',
@@ -916,7 +918,7 @@ export const translations = {
           'Атауын, координаттарын және материалдарын NDA-ға қол қойылғаннан кейін кездесуде көрсетеміз.',
         disciplineTitle: 'Стандарт әрқашан көрсетіледі',
         disciplineDesc:
-          'Қорлар КСРО МҚК санаттары (A, B, C1, C2) бойынша немесе тарихи бағалау ретінде көрсетіледі. P1–P3 — болжам, қор емес.',
+          'Қорлар КСРО ГКЗ санаттары (A, B, C1, C2) бойынша немесе тарихи бағалау ретінде көрсетіледі. P1–P3 — болжам, қор емес.',
       },
     },
     dealSteps: {
@@ -1159,6 +1161,8 @@ export const translations = {
       forward: 'Алға →',
     },
     leadDetail: {
+      transferNote:
+        'Жер қойнауын пайдалану құқығын беру уәкілетті органның рұқсатын талап етеді (Жер қойнауы туралы кодекстің 44–45-баптары); қатты пайдалы қазбаларды барлау лицензиясын оның алғашқы жылында беруге болмайды.',
       includedHeading: 'NDA-дан кейінгі кездесуде талқылаймыз:',
       breadcrumbLeads: 'Учаскелер',
       badgeSold: 'САТЫЛДЫ',
@@ -1390,18 +1394,18 @@ export const translations = {
         title:
           'QAZNEDR HOLDING — Mineral Exploration Areas in Kazakhstan for Investors',
         description:
-          'Kazakhstan exploration holding. Prepared free subsoil areas for gold, copper and other metals, drawn from a registry of 7,000+ mineral occurrences compiled from Soviet-era geological reports. Licensing and deal support for investors.',
+          'Kazakhstan exploration holding. Prepared areas for gold, copper and other metals, free per our check, drawn from a registry of 7,000+ ore objects. Licensing and deal support for investors.',
       },
       home: {
         title:
           'QAZNEDR HOLDING — Mineral Exploration Areas in Kazakhstan for Investors',
         description:
-          'Kazakhstan exploration holding. Prepared free subsoil areas for gold, copper and other metals, drawn from a registry of 7,000+ mineral occurrences compiled from Soviet-era geological reports. Licensing and deal support for investors.',
+          'Kazakhstan exploration holding. Prepared areas for gold, copper and other metals, free per our check, drawn from a registry of 7,000+ ore objects. Licensing and deal support for investors.',
       },
       leads: {
         title: 'Exploration Areas in Kazakhstan: Gold, Copper and More',
         description:
-          'Prepared free ore areas in Kazakhstan. The teaser shows metal, region, deposit type and grade; full details after a meeting and an NDA.',
+          'Prepared ore areas in Kazakhstan, free per our check as of the date on each card. The teaser shows metal, region, deposit type and grade; details after a meeting and an NDA.',
       },
       services: {
         title: 'Services: Licensing, Exploration, Due Diligence',
@@ -1549,7 +1553,7 @@ export const translations = {
       headlineEmphasis: 'in Kazakhstan',
       headlineLine2: '— for investors',
       subtitle:
-        'Our geologists study Soviet-era exploration reports and find areas with no active licence — per our check, dated on each card. We obtain the licence for the deal.',
+        'Our geologists study Soviet-era exploration reports and find areas with no active licence — per our check, dated on each card. We arrange the licence application for the deal.',
       ctaLeads: 'View areas',
       ctaListings: 'Listings',
       statsLive: 'In numbers',
@@ -1584,7 +1588,7 @@ export const translations = {
       step3Title: 'Choose the format',
       step3Desc:
         'A licence in your name with our support; a licence obtained by the holding and then transferred; a JV or earn-in; or analytics only.',
-      step4Title: 'We obtain the licence',
+      step4Title: 'We handle the licence',
       step4Desc:
         'We re-check the status, file the application and support you until the licence is issued. The decision rests with the competent authority.',
     },
@@ -1811,6 +1815,8 @@ export const translations = {
       forward: 'Forward →',
     },
     leadDetail: {
+      transferNote:
+        "Transferring a subsoil-use right requires the competent authority's permission (Arts. 44–45 of the Subsoil Code); a solid-minerals exploration licence cannot be transferred in its first year.",
       includedHeading: 'At a meeting after an NDA we discuss:',
       breadcrumbLeads: 'Areas',
       badgeSold: 'SOLD',
@@ -1838,7 +1844,7 @@ export const translations = {
       howItWorksPoint3:
         'At a meeting after an NDA we share the materials and choose the deal format.',
       howItWorksPoint4:
-        'We obtain the licence for the deal and support you until it is issued.',
+        'We apply for the licence for the deal and support you until it is issued.',
       locationHeading: 'Location',
       locationFallback: 'Kazakhstan',
       locationHidden: 'Exact coordinates — after an NDA',
@@ -2038,18 +2044,18 @@ export const translations = {
         title:
           'QAZNEDR HOLDING — 哈萨克斯坦矿权投资项目：金矿、铜矿等空白探矿区',
         description:
-          '哈萨克斯坦地质勘探控股公司。依托基于苏联时期地质档案整理的7000余处矿点数据库，筛选金、铜等矿种空白矿区，为投资者提供探矿权办理及交易全程服务。',
+          '哈萨克斯坦地质勘探控股公司。依托基于苏联时期地质档案整理的7000余处矿点数据库，筛选经我方核查未设矿权的金、铜等矿种地块，为投资者提供探矿权办理及交易全程服务。',
       },
       home: {
         title:
           'QAZNEDR HOLDING — 哈萨克斯坦矿权投资项目：金矿、铜矿等空白探矿区',
         description:
-          '哈萨克斯坦地质勘探控股公司。依托基于苏联时期地质档案整理的7000余处矿点数据库，筛选金、铜等矿种空白矿区，为投资者提供探矿权办理及交易全程服务。',
+          '哈萨克斯坦地质勘探控股公司。依托基于苏联时期地质档案整理的7000余处矿点数据库，筛选经我方核查未设矿权的金、铜等矿种地块，为投资者提供探矿权办理及交易全程服务。',
       },
       leads: {
         title: '哈萨克斯坦矿区项目库：金矿、铜矿等空白探矿区',
         description:
-          'QAZNEDR HOLDING 精选空白矿区项目。公开简介包含矿种、位置、矿床类型与品位；详细资料在会面并签署保密协议（NDA）后提供。',
+          '经我方核查（日期见地块卡片）未设矿权的空白矿区项目。公开简介包含矿种、位置、矿床类型与品位；详细资料在会面并签署保密协议（NDA）后提供。',
       },
       services: {
         title: '服务：探矿权办理、地质勘探、尽职调查',
@@ -2443,6 +2449,8 @@ export const translations = {
       forward: '下一页 →',
     },
     leadDetail: {
+      transferNote:
+        '矿业权转让须经主管机关许可（《底土法》第44–45条）；固体矿产勘探许可证在有效期第一年内不得转让。',
       includedHeading: '签署保密协议后会面洽谈：',
       breadcrumbLeads: '地块',
       badgeSold: '已售出',

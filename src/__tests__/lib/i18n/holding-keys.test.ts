@@ -115,6 +115,7 @@ const TEASER_KEYS = [
   'leadDetail.includedLegal',
   'leadDetail.includedContacts',
   'leadDetail.locationHidden',
+  'leadDetail.transferNote',
   'leadLocked.heading',
   'leadLocked.itemName',
   'leadLocked.itemArea',

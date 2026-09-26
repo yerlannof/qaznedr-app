@@ -109,6 +109,10 @@ const FORBIDDEN_COPY = [
   /付款后/,
   /Ашық алаң/,
   /толық пакет/i,
+  // Promises an outcome the state decides (session 2 review).
+  /obtain the licen[cs]e/i,
+  // Non-standard abbreviation for the Soviet reserves commission (ГКЗ).
+  /МҚК/,
 ];
 const COPY_NAMESPACES = [
   'portal',

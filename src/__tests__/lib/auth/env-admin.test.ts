@@ -44,4 +44,19 @@ describe('env admin', () => {
       verifyEnvAdmin('second@x.kz', 'correct horse', env)
     ).resolves.toBeNull();
   });
+
+  it('does not let one IP lock the owner out of another', async () => {
+    for (let i = 0; i < 10; i++)
+      await verifyEnvAdmin('owner@qaznedr.kz', 'bad', env, '10.0.0.1');
+    await expect(
+      verifyEnvAdmin('owner@qaznedr.kz', 'correct horse', env, '10.0.0.2')
+    ).resolves.not.toBeNull();
+  });
+
+  it('spends a bcrypt compare on unknown emails too', async () => {
+    const spy = jest.spyOn(bcrypt, 'compare');
+    await verifyEnvAdmin('stranger@x.kz', 'whatever', env, '10.0.0.3');
+    expect(spy).toHaveBeenCalledTimes(1);
+    spy.mockRestore();
+  });
 });

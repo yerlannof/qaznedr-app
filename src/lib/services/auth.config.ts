@@ -37,7 +37,7 @@ export const authOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Invalid credentials');
         }
@@ -58,9 +58,17 @@ export const authOptions = {
         }
 
         // Owner/admin login from env — the legacy `users` table does not exist.
+        const forwarded = req?.headers?.['x-forwarded-for'];
+        const clientIp =
+          (typeof forwarded === 'string'
+            ? forwarded.split(',')[0]
+            : ''
+          ).trim() || 'unknown';
         const envAdmin = await verifyEnvAdmin(
           credentials.email,
-          credentials.password
+          credentials.password,
+          undefined,
+          clientIp
         );
         if (envAdmin) return envAdmin;
 

@@ -28,7 +28,7 @@ const RU: readonly FaqItem[] = [
   },
   {
     q: 'Какие ограничения есть у сделки?',
-    a: 'Передача права недропользования и долей требует разрешения уполномоченного органа (ст. 44–45 Кодекса о недрах). Лицензию на разведку твёрдых полезных ископаемых нельзя передать в первый год её действия. Мы учитываем это при выборе формата.',
+    a: 'Передача права недропользования и долей требует разрешения компетентного органа (ст. 44–45 Кодекса о недрах), кроме случаев из ст. 44 п. 2 — например, покупки, после которой у покупателя менее 25% в компании-недропользователе. Лицензию на разведку твёрдых полезных ископаемых нельзя передать в первый год её действия. Мы учитываем это при выборе формата.',
   },
   {
     q: 'Что вы гарантируете?',
@@ -63,7 +63,7 @@ const EN: readonly FaqItem[] = [
   },
   {
     q: 'What restrictions apply to a deal?',
-    a: 'A transfer of a subsoil use right or of shares requires permission from the competent authority (Articles 44–45 of the Subsoil Code). A solid-minerals exploration licence cannot be transferred in its first year. We take this into account when choosing the format.',
+    a: 'A transfer of a subsoil use right or of shares requires permission from the competent authority (Articles 44–45 of the Subsoil Code), except in the cases listed in Article 44(2) — for example, a purchase after which the buyer holds less than 25% of the subsoil user company. A solid-minerals exploration licence cannot be transferred in its first year. We take this into account when choosing the format.',
   },
   {
     q: 'What do you guarantee?',
@@ -98,7 +98,7 @@ const ZH: readonly FaqItem[] = [
   },
   {
     q: '交易有哪些限制？',
-    a: '矿业权及股权的转让须经主管机关许可（《底土法》第44–45条）。固体矿产勘查许可证在有效期第一年内不得转让。我们在选择交易形式时会考虑这些规定。',
+    a: '矿业权及股权的转让须经主管机关许可（《底土法》第44–45条），第44条第2款规定的情形除外，例如收购后买方在底土利用人公司中的持股不足25%。固体矿产勘查许可证在有效期第一年内不得转让。我们在选择交易形式时会考虑这些规定。',
   },
   {
     q: '你们保证什么？',

@@ -149,7 +149,12 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
             </div>
 
             <h1
-              className="font-serif text-4xl sm:text-5xl lg:text-[5rem] leading-[1.04] tracking-tight font-light text-white opacity-0 motion-reduce:opacity-100 motion-reduce:animate-none"
+              className={`font-serif ${
+                // CJK glyphs are much wider: at 5rem the zh headline breaks mid-word.
+                locale === 'zh'
+                  ? 'text-3xl sm:text-4xl lg:text-6xl leading-[1.2]'
+                  : 'text-4xl sm:text-5xl lg:text-[5rem] leading-[1.04]'
+              } tracking-tight font-light text-white opacity-0 motion-reduce:opacity-100 motion-reduce:animate-none`}
               style={{ animation: 'qzFadeUp 0.7s 0.1s ease-out forwards' }}
             >
               {t('portal.headlineLine1')}{' '}

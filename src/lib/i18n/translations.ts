@@ -3,6 +3,98 @@
 
 export const translations = {
   ru: {
+    seo: {
+      site: {
+        title: 'QAZNEDR HOLDING — участки недр Казахстана для инвесторов',
+        description:
+          'Геологоразведочный холдинг из Казахстана. Подготовленные свободные участки по золоту, меди и другим металлам из реестра 7 000+ рудных объектов по советским фондовым отчётам. Сопровождение лицензирования и сделок для инвесторов.',
+      },
+      home: {
+        title: 'QAZNEDR HOLDING — участки недр Казахстана для инвесторов',
+        description:
+          'Геологоразведочный холдинг из Казахстана. Подготовленные свободные участки по золоту, меди и другим металлам из реестра 7 000+ рудных объектов по советским фондовым отчётам. Сопровождение лицензирования и сделок для инвесторов.',
+      },
+      leads: {
+        title: 'Участки недр Казахстана: золото, медь и другие металлы',
+        description:
+          'Портфель подготовленных свободных участков QAZNEDR HOLDING. В тизере: металл, регион, тип месторождения, содержание. Детали — после встречи и NDA.',
+      },
+      services: {
+        title: 'Услуги: лицензирование, геологоразведка, due diligence',
+        description:
+          'Сопровождение получения лицензии на недропользование в Казахстане, полевые геологические работы, due diligence участков и аналитика для инвесторов.',
+      },
+      servicesGeological: {
+        title: 'Геологоразведка и полевые работы в Казахстане',
+        description:
+          'Штатные геологи QAZNEDR HOLDING: выезд на участок, опробование, оценка перспектив по архивным и полевым данным.',
+      },
+      servicesLegal: {
+        title: 'Лицензирование недропользования в Казахстане',
+        description:
+          'Сопровождение получения лицензии на разведку твёрдых полезных ископаемых: подбор участка, подготовка заявки, работа с Единой платформой недропользования.',
+      },
+      servicesInvestors: {
+        title: 'Инвесторам: вход в геологоразведочные проекты Казахстана',
+        description:
+          'Форматы сделок: лицензия на инвестора, совместное предприятие, earn-in, аналитика по участку. Сопровождение от подбора до разрешения на переход права.',
+      },
+      about: {
+        title: 'О компании QAZNEDR HOLDING',
+        description:
+          'Казахстанский геологоразведочный холдинг: команда геологов, анализ архивных геологических отчётов, подготовка участков и сделок для иностранных инвесторов.',
+      },
+      contact: {
+        title: 'Контакты: WeChat, WhatsApp, email',
+        description:
+          'Свяжитесь с QAZNEDR HOLDING через WeChat, WhatsApp или форму заявки. Обсудим участок, формат сделки и встречу.',
+      },
+      faq: {
+        title: 'Вопросы и ответы',
+        description:
+          'Как устроена работа с QAZNEDR HOLDING: участки, форматы сделок, лицензирование в Казахстане, NDA и встречи.',
+      },
+      support: {
+        title: 'Поддержка',
+        description:
+          'Вопросы по сайту и заявкам QAZNEDR HOLDING. Отвечаем в течение одного рабочего дня.',
+      },
+      terms: {
+        title: 'Условия использования',
+        description:
+          'Условия использования сайта qaznedr.kz компании QAZNEDR HOLDING.',
+      },
+      blog: {
+        title: 'Статьи о недропользовании Казахстана',
+        description:
+          'Статьи и гайды о геологии, лицензировании и инвестициях в недра Казахстана.',
+      },
+      education: {
+        title: 'Обучение: геология и недропользование',
+        description:
+          'Материалы по геологии и недропользованию Казахстана для инвесторов и специалистов.',
+      },
+      knowledge: {
+        title: 'База знаний по недропользованию',
+        description:
+          'Термины, процедуры и законодательство о недрах Казахстана простым языком.',
+      },
+      news: {
+        title: 'Новости недропользования Казахстана',
+        description:
+          'Новости геологической отрасли и законодательства о недрах Казахстана.',
+      },
+      lead: {
+        title: '{mineral} — участок {code}, {where}',
+        descriptionFree:
+          'Участок: {mineral}, {where}. По нашей проверке свободен от лицензий; геология изучена по архивным отчётам, лицензию оформим под сделку. Код {code}.',
+        descriptionOther:
+          '{mineral}, {where}. Участок из портфеля QAZNEDR HOLDING. Код {code}.',
+        where: '{region} область, Казахстан',
+        whereNone: 'Казахстан',
+        notFound: 'Участок не найден',
+      },
+    },
     navigation: {
       leads: 'Находки',
       listings: 'Объявления',
@@ -559,6 +651,101 @@ export const translations = {
     },
   },
   kz: {
+    seo: {
+      site: {
+        title:
+          'QAZNEDR HOLDING — инвесторларға арналған Қазақстан жер қойнауы учаскелері',
+        description:
+          'Қазақстандағы геологиялық барлау холдингі. Кеңестік қор есептері бойынша 7 000+ кен объектісі тізілімінен іріктелген алтын, мыс және басқа металдар бойынша дайын бос учаскелер. Инвесторларға лицензиялау мен мәмілені сүйемелдеу.',
+      },
+      home: {
+        title:
+          'QAZNEDR HOLDING — инвесторларға арналған Қазақстан жер қойнауы учаскелері',
+        description:
+          'Қазақстандағы геологиялық барлау холдингі. Кеңестік қор есептері бойынша 7 000+ кен объектісі тізілімінен іріктелген алтын, мыс және басқа металдар бойынша дайын бос учаскелер. Инвесторларға лицензиялау мен мәмілені сүйемелдеу.',
+      },
+      leads: {
+        title:
+          'Қазақстан жер қойнауы учаскелері: алтын, мыс және басқа металдар',
+        description:
+          'QAZNEDR HOLDING дайын бос учаскелер портфелі. Тизерде: металл, өңір, кен орнының түрі, құрамы. Толық деректер кездесу мен NDA-дан кейін.',
+      },
+      services: {
+        title: 'Қызметтер: лицензиялау, геологиялық барлау, due diligence',
+        description:
+          'Қазақстанда жер қойнауын пайдалану лицензиясын алуды сүйемелдеу, далалық геологиялық жұмыстар, учаскелердің due diligence және инвесторларға арналған талдау.',
+      },
+      servicesGeological: {
+        title: 'Қазақстандағы геологиялық барлау және далалық жұмыстар',
+        description:
+          'QAZNEDR HOLDING штаттағы геологтары: учаскеге шығу, сынама алу, архивтік және далалық деректер бойынша болашағын бағалау.',
+      },
+      servicesLegal: {
+        title: 'Қазақстанда жер қойнауын пайдалану лицензиясы',
+        description:
+          'Қатты пайдалы қазбаларды барлау лицензиясын алуды сүйемелдеу: учаскені іріктеу, өтінімді дайындау, Жер қойнауын пайдаланудың бірыңғай платформасымен жұмыс.',
+      },
+      servicesInvestors: {
+        title: 'Инвесторларға: Қазақстанның геологиялық барлау жобаларына кіру',
+        description:
+          'Мәміле форматтары: инвесторға лицензия, бірлескен кәсіпорын, earn-in, учаске бойынша талдау. Іріктеуден құқықты беруге рұқсат алғанға дейін сүйемелдеу.',
+      },
+      about: {
+        title: 'QAZNEDR HOLDING туралы',
+        description:
+          'Қазақстандық геологиялық барлау холдингі: геологтар командасы, архивтік геологиялық есептерді талдау, шетелдік инвесторларға учаскелер мен мәмілелерді дайындау.',
+      },
+      contact: {
+        title: 'Байланыс: WeChat, WhatsApp, email',
+        description:
+          'QAZNEDR HOLDING-пен WeChat, WhatsApp немесе өтінім формасы арқылы байланысыңыз. Учаскені, мәміле форматын және кездесуді талқылаймыз.',
+      },
+      faq: {
+        title: 'Сұрақтар мен жауаптар',
+        description:
+          'QAZNEDR HOLDING-пен жұмыс: учаскелер, мәміле форматтары, Қазақстандағы лицензиялау, NDA және кездесулер.',
+      },
+      support: {
+        title: 'Қолдау',
+        description:
+          'Сайт пен өтінімдер бойынша сұрақтар. Бір жұмыс күні ішінде жауап береміз.',
+      },
+      terms: {
+        title: 'Пайдалану шарттары',
+        description:
+          'QAZNEDR HOLDING компаниясының qaznedr.kz сайтын пайдалану шарттары.',
+      },
+      blog: {
+        title: 'Қазақстандағы жер қойнауын пайдалану туралы мақалалар',
+        description:
+          'Қазақстандағы геология, лицензиялау және тау-кен инвестициялары туралы мақалалар мен нұсқаулықтар.',
+      },
+      education: {
+        title: 'Оқу: геология және жер қойнауын пайдалану',
+        description:
+          'Инвесторлар мен мамандарға арналған Қазақстандағы геология және жер қойнауын пайдалану материалдары.',
+      },
+      knowledge: {
+        title: 'Жер қойнауын пайдалану бойынша білім базасы',
+        description:
+          'Қазақстандағы жер қойнауы туралы терминдер, рәсімдер және заңнама қарапайым тілмен.',
+      },
+      news: {
+        title: 'Қазақстандағы жер қойнауын пайдалану жаңалықтары',
+        description:
+          'Қазақстанның геология саласы мен жер қойнауы заңнамасының жаңалықтары.',
+      },
+      lead: {
+        title: '{mineral} — {code} учаскесі, {where}',
+        descriptionFree:
+          'Учаске: {mineral}, {where}. Біздің тексеруімізше лицензиядан бос; геологиясы архивтік есептер бойынша зерттелген, лицензияны мәміле үшін рәсімдейміз. Код {code}.',
+        descriptionOther:
+          '{mineral}, {where}. QAZNEDR HOLDING портфеліндегі учаске. Код {code}.',
+        where: '{region}, Қазақстан',
+        whereNone: 'Қазақстан',
+        notFound: 'Учаске табылмады',
+      },
+    },
     navigation: {
       leads: 'Олжалар',
       listings: 'Хабарландырулар',
@@ -1041,6 +1228,100 @@ export const translations = {
     },
   },
   en: {
+    seo: {
+      site: {
+        title:
+          'QAZNEDR HOLDING — Mineral Exploration Areas in Kazakhstan for Investors',
+        description:
+          'Kazakhstan exploration holding. Prepared free subsoil areas for gold, copper and other metals, drawn from a registry of 7,000+ mineral occurrences compiled from Soviet-era geological reports. Licensing and deal support for investors.',
+      },
+      home: {
+        title:
+          'QAZNEDR HOLDING — Mineral Exploration Areas in Kazakhstan for Investors',
+        description:
+          'Kazakhstan exploration holding. Prepared free subsoil areas for gold, copper and other metals, drawn from a registry of 7,000+ mineral occurrences compiled from Soviet-era geological reports. Licensing and deal support for investors.',
+      },
+      leads: {
+        title: 'Exploration Areas in Kazakhstan: Gold, Copper and More',
+        description:
+          'QAZNEDR HOLDING portfolio of prepared free subsoil areas. The teaser shows metal, region, deposit type and grade; full details after a meeting and an NDA.',
+      },
+      services: {
+        title: 'Services: Licensing, Exploration, Due Diligence',
+        description:
+          'Support in obtaining a subsoil use licence in Kazakhstan, field geology, due diligence of areas and analytics for investors.',
+      },
+      servicesGeological: {
+        title: 'Exploration and Field Geology in Kazakhstan',
+        description:
+          'QAZNEDR HOLDING staff geologists: site visits, sampling and prospect evaluation based on archival and field data.',
+      },
+      servicesLegal: {
+        title: 'Subsoil Licensing in Kazakhstan',
+        description:
+          'Support in obtaining an exploration licence for solid minerals: area selection, application preparation and work with the Unified Subsoil Use Platform.',
+      },
+      servicesInvestors: {
+        title: 'For Investors: Entering Exploration Projects in Kazakhstan',
+        description:
+          'Deal formats: licence for the investor, joint venture, earn-in, area analytics. Support from area selection to the transfer-of-rights permission.',
+      },
+      about: {
+        title: 'About QAZNEDR HOLDING',
+        description:
+          'Kazakhstan exploration holding: a team of geologists, analysis of archival geological reports, preparation of areas and deals for foreign investors.',
+      },
+      contact: {
+        title: 'Contact: WeChat, WhatsApp, Email',
+        description:
+          'Contact QAZNEDR HOLDING via WeChat, WhatsApp or the inquiry form to discuss an area, a deal format and a meeting.',
+      },
+      faq: {
+        title: 'FAQ',
+        description:
+          'How working with QAZNEDR HOLDING works: areas, deal formats, licensing in Kazakhstan, NDA and meetings.',
+      },
+      support: {
+        title: 'Support',
+        description:
+          'Questions about the website and inquiries. We reply within one business day.',
+      },
+      terms: {
+        title: 'Terms of Use',
+        description:
+          'Terms of use of qaznedr.kz, the website of QAZNEDR HOLDING.',
+      },
+      blog: {
+        title: 'Articles on Subsoil Use in Kazakhstan',
+        description:
+          'Articles and guides on geology, licensing and mining investment in Kazakhstan.',
+      },
+      education: {
+        title: 'Learning: Geology and Subsoil Use',
+        description:
+          'Materials on geology and subsoil use in Kazakhstan for investors and professionals.',
+      },
+      knowledge: {
+        title: 'Subsoil Use Knowledge Base',
+        description:
+          'Terms, procedures and subsoil legislation of Kazakhstan in plain language.',
+      },
+      news: {
+        title: 'Kazakhstan Subsoil Use News',
+        description:
+          "News of Kazakhstan's geology sector and subsoil legislation.",
+      },
+      lead: {
+        title: '{mineral} Exploration Area {code}, {where}',
+        descriptionFree:
+          'Area: {mineral}, {where}. Free of licences per our check; geology studied from archival reports, the licence can be arranged for the deal. Code {code}.',
+        descriptionOther:
+          '{mineral}, {where}. Area from the QAZNEDR HOLDING portfolio. Code {code}.',
+        where: '{region}, Kazakhstan',
+        whereNone: 'Kazakhstan',
+        notFound: 'Area not found',
+      },
+    },
     navigation: {
       leads: 'Finds',
       listings: 'Listings',
@@ -1515,6 +1796,94 @@ export const translations = {
     },
   },
   zh: {
+    seo: {
+      site: {
+        title:
+          'QAZNEDR HOLDING — 哈萨克斯坦矿权投资项目：金矿、铜矿等空白探矿区',
+        description:
+          '哈萨克斯坦地质勘探控股公司。依托基于苏联时期地质档案整理的7000余处矿点数据库，筛选金、铜等矿种空白矿区，为投资者提供探矿权办理及交易全程服务。',
+      },
+      home: {
+        title:
+          'QAZNEDR HOLDING — 哈萨克斯坦矿权投资项目：金矿、铜矿等空白探矿区',
+        description:
+          '哈萨克斯坦地质勘探控股公司。依托基于苏联时期地质档案整理的7000余处矿点数据库，筛选金、铜等矿种空白矿区，为投资者提供探矿权办理及交易全程服务。',
+      },
+      leads: {
+        title: '哈萨克斯坦矿区项目库：金矿、铜矿等空白探矿区',
+        description:
+          'QAZNEDR HOLDING 精选空白矿区项目。公开简介包含矿种、位置、矿床类型与品位；详细资料在会面并签署保密协议（NDA）后提供。',
+      },
+      services: {
+        title: '服务：探矿权办理、地质勘探、尽职调查',
+        description:
+          '协助在哈萨克斯坦办理矿产资源勘查许可证、野外地质工作、矿区尽职调查及投资分析。',
+      },
+      servicesGeological: {
+        title: '哈萨克斯坦地质勘探与野外工作',
+        description:
+          'QAZNEDR HOLDING 自有地质团队：实地踏勘、采样，基于档案资料与野外数据评价找矿前景。',
+      },
+      servicesLegal: {
+        title: '哈萨克斯坦矿权许可证办理',
+        description:
+          '协助办理固体矿产勘查许可证：矿区筛选、申请材料准备，通过哈萨克斯坦统一矿产资源利用平台提交。',
+      },
+      servicesInvestors: {
+        title: '投资者服务：进入哈萨克斯坦矿产勘查项目',
+        description:
+          '合作方式：许可证直接办理在投资者名下、合资企业、分阶段投资入股（earn-in）、矿区分析报告。从选区到矿权转让审批全程陪同。',
+      },
+      about: {
+        title: '关于 QAZNEDR HOLDING',
+        description:
+          '哈萨克斯坦地质勘探控股公司：自有地质团队，系统分析地质档案报告，为外国投资者筛选矿区并推进交易。',
+      },
+      contact: {
+        title: '联系我们：微信、WhatsApp、邮箱',
+        description:
+          '通过微信、WhatsApp 或在线表单联系 QAZNEDR HOLDING，洽谈矿区项目、合作方式及会面安排。',
+      },
+      faq: {
+        title: '常见问题',
+        description:
+          '与 QAZNEDR HOLDING 合作流程：矿区项目、合作方式、哈萨克斯坦许可证办理、保密协议与会面。',
+      },
+      support: {
+        title: '客户支持',
+        description: '关于网站与咨询的问题，我们将在一个工作日内回复。',
+      },
+      terms: {
+        title: '使用条款',
+        description: 'QAZNEDR HOLDING 官网 qaznedr.kz 使用条款。',
+      },
+      blog: {
+        title: '哈萨克斯坦矿业资讯文章',
+        description: '关于哈萨克斯坦地质、矿权许可与矿业投资的文章与指南。',
+      },
+      education: {
+        title: '地质与矿产资源知识',
+        description: '面向投资者与专业人士的哈萨克斯坦地质与矿产资源利用资料。',
+      },
+      knowledge: {
+        title: '哈萨克斯坦矿业知识库',
+        description: '以通俗语言介绍哈萨克斯坦矿产资源相关术语、流程与法规。',
+      },
+      news: {
+        title: '哈萨克斯坦矿业新闻',
+        description: '哈萨克斯坦地质行业与矿产资源法规动态。',
+      },
+      lead: {
+        title: '哈萨克斯坦{where}{mineral}矿项目 {code}',
+        descriptionFree:
+          '哈萨克斯坦{where}{mineral}矿区，经我方核查目前无矿权（空白区），已基于地质档案完成研究，可为交易协助办理探矿权。项目编号 {code}。',
+        descriptionOther:
+          '哈萨克斯坦{where}{mineral}矿项目，来自 QAZNEDR HOLDING 项目库。项目编号 {code}。',
+        where: '{region}',
+        whereNone: '',
+        notFound: '未找到该项目',
+      },
+    },
     navigation: {
       leads: '发现',
       listings: '信息列表',

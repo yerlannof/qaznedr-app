@@ -2,7 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## Current Direction (2026-09) — read first
+
+The open marketplace is being pivoted into **QAZNEDR HOLDING**'s own company site: a closed-teaser portfolio of prepared free subsoil areas (`leads` table) sold to foreign — mainly Chinese — investors, plus consulting/geology services. Source of truth: `docs/superpowers/specs/2026-09-26-qaznedr-holding-pivot-design.md` (IA, inquiries flow, SEO/GEO, legal copy red lines).
+
+- **Design is done by Codex** in `docs/design/` (brief: `docs/design/BRIEF.md`, rules: `AGENTS.md`). Implement only what is recorded in `docs/design/APPROVED.md`.
+- **Copy red lines:** never imply the holding owns an area it has no license for; don't sell state archive reports (sell expertise/analytics); always state the reserve standard (ГКЗ / KAZRC / historical); no "guaranteed returns".
+- **Deploy/sync:** production deploys go via `vercel --prod` from the CLI — always push to GitHub after deploying, and at session start check that local, `origin/master` and the live deployment's commit agree.
+
+## Project Overview (legacy marketplace — being replaced)
 
 QAZNEDR.KZ is a Kazakhstan mining platform for buying and selling mineral deposits and licenses. The platform supports three types of listings:
 

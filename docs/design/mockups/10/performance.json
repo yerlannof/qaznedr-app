@@ -1,0 +1,18 @@
+[
+  {
+    "cpuSlowdown": 1,
+    "frames": 240,
+    "medianMs": 16.699999999999818,
+    "p95Ms": 16.799999999999727,
+    "framesOver34Ms": 0,
+    "longTasks": 0
+  },
+  {
+    "cpuSlowdown": 4,
+    "frames": 240,
+    "medianMs": 16.699999999999818,
+    "p95Ms": 16.700000000000728,
+    "framesOver34Ms": 0,
+    "longTasks": 0
+  }
+]

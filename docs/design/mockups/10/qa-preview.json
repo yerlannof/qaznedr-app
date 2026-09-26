@@ -1,0 +1,155 @@
+{
+  "cases": [
+    {
+      "width": 1440,
+      "height": 900,
+      "lang": "ru",
+      "theme": "light"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "lang": "ru",
+      "theme": "dark"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "lang": "kz",
+      "theme": "light"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "lang": "kz",
+      "theme": "dark"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "lang": "en",
+      "theme": "light"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "lang": "en",
+      "theme": "dark"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "lang": "zh",
+      "theme": "light"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "lang": "zh",
+      "theme": "dark"
+    },
+    {
+      "width": 1024,
+      "height": 740,
+      "lang": "ru",
+      "theme": "light"
+    },
+    {
+      "width": 1024,
+      "height": 740,
+      "lang": "ru",
+      "theme": "dark"
+    },
+    {
+      "width": 1024,
+      "height": 740,
+      "lang": "kz",
+      "theme": "light"
+    },
+    {
+      "width": 1024,
+      "height": 740,
+      "lang": "kz",
+      "theme": "dark"
+    },
+    {
+      "width": 1024,
+      "height": 740,
+      "lang": "en",
+      "theme": "light"
+    },
+    {
+      "width": 1024,
+      "height": 740,
+      "lang": "en",
+      "theme": "dark"
+    },
+    {
+      "width": 1024,
+      "height": 740,
+      "lang": "zh",
+      "theme": "light"
+    },
+    {
+      "width": 1024,
+      "height": 740,
+      "lang": "zh",
+      "theme": "dark"
+    },
+    {
+      "width": 375,
+      "height": 900,
+      "lang": "ru",
+      "theme": "light"
+    },
+    {
+      "width": 375,
+      "height": 900,
+      "lang": "ru",
+      "theme": "dark"
+    },
+    {
+      "width": 375,
+      "height": 900,
+      "lang": "kz",
+      "theme": "light"
+    },
+    {
+      "width": 375,
+      "height": 900,
+      "lang": "kz",
+      "theme": "dark"
+    },
+    {
+      "width": 375,
+      "height": 900,
+      "lang": "en",
+      "theme": "light"
+    },
+    {
+      "width": 375,
+      "height": 900,
+      "lang": "en",
+      "theme": "dark"
+    },
+    {
+      "width": 375,
+      "height": 900,
+      "lang": "zh",
+      "theme": "light"
+    },
+    {
+      "width": 375,
+      "height": 900,
+      "lang": "zh",
+      "theme": "dark"
+    },
+    {
+      "javaScriptEnabled": false
+    },
+    {
+      "reducedMotion": "reduce"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,1469 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>10 · Последовательность геологической сцены — предложение</title>
+    <style>
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-Regular.woff2')
+          format('woff2');
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-SemiBold.woff2')
+          format('woff2');
+        font-weight: 600;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Serif;
+        src: url('../../../public/brand/fonts/SourceSerif4Display-Regular.ttf.woff2')
+          format('woff2');
+        font-display: swap;
+      }
+      :root {
+        --slate: #253740;
+        --chalk: #e9ece6;
+        --sulfur: #dde55e;
+        --muted: #afbfbd;
+        --line: #698087;
+        --art-url: url('../mockups/10/geology-realistic-v1.png');
+        font-family: Plex, Arial, sans-serif;
+        background: var(--chalk);
+        color: var(--slate);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+      body {
+        margin: 0;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      a {
+        color: inherit;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid var(--sulfur);
+        outline-offset: 4px;
+      }
+      .skip {
+        position: absolute;
+        left: -9999px;
+        top: 8px;
+        z-index: 20;
+        padding: 12px;
+        background: var(--sulfur);
+        color: var(--slate);
+      }
+      .skip:focus {
+        left: 8px;
+      }
+      .reviewbar {
+        position: relative;
+        z-index: 5;
+        min-height: 72px;
+        padding: 12px clamp(20px, 4vw, 64px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        border-bottom: 1px solid #aab9b7;
+        background: #e9ece6;
+        color: #253740;
+      }
+      .reviewbrand {
+        width: 178px;
+        max-width: 34vw;
+        height: auto;
+      }
+      .reviewtools {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .reviewtools button {
+        border: 1px solid #8da09f;
+        background: transparent;
+        color: inherit;
+        padding: 7px 10px;
+        min-height: 36px;
+        font-size: 12px;
+      }
+      .reviewtools button[aria-pressed='true'] {
+        background: var(--slate);
+        color: var(--chalk);
+        border-color: var(--slate);
+      }
+      .reviewid {
+        font-size: 10px;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        margin-right: 12px;
+      }
+      .asset-warning {
+        display: none;
+        color: #713e24;
+        font-size: 11px;
+        border: 1px solid currentColor;
+        padding: 6px 8px;
+      }
+      .asset-warning.visible {
+        display: inline-block;
+      }
+      .opening {
+        max-width: 1536px;
+        margin: auto;
+        padding: clamp(40px, 6vw, 96px) clamp(20px, 5vw, 76px)
+          clamp(46px, 6vw, 100px);
+        display: grid;
+        grid-template-columns: minmax(0, 1.7fr) minmax(210px, 0.55fr);
+        gap: 8vw;
+        align-items: end;
+      }
+      .eyebrow {
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 0.17em;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .opening h1 {
+        font:
+          400 clamp(43px, 5.8vw, 88px) / 1.01 Serif,
+          Georgia,
+          serif;
+        max-width: 1000px;
+        letter-spacing: -0.035em;
+        margin: 24px 0 0;
+      }
+      .opening p {
+        font-size: 15px;
+        line-height: 1.65;
+        max-width: 330px;
+        margin: 0;
+        padding-top: 14px;
+        border-top: 1px solid #9baaaa;
+      }
+      .story {
+        background: var(--slate);
+        color: var(--chalk);
+        --top-y: -7.5%;
+        --base-y: 7.5%;
+        --reveal: 1;
+        --focus: 0;
+      }
+      .scene {
+        min-height: 730px;
+        max-width: 1600px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: minmax(330px, 34%) minmax(0, 66%);
+        align-items: center;
+        padding: clamp(30px, 4vw, 70px) clamp(20px, 5vw, 76px);
+        gap: 0;
+      }
+      .copy {
+        position: relative;
+        z-index: 2;
+        align-self: center;
+        max-width: 430px;
+        padding-right: 20px;
+      }
+      .section-kicker {
+        color: var(--sulfur);
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .scene-heading {
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        margin: 16px 0 0;
+      }
+      .scene-intro {
+        font-size: 15px;
+        line-height: 1.58;
+        color: #c9d2cf;
+        max-width: 355px;
+        margin: 12px 0 0;
+      }
+      .explanations {
+        margin-top: clamp(42px, 8vh, 92px);
+      }
+      .explanation + .explanation {
+        margin-top: 48px;
+      }
+      .stage-index {
+        color: var(--sulfur);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+      }
+      .explanation h3 {
+        font:
+          400 clamp(40px, 4vw, 64px) / 1.04 Serif,
+          Georgia,
+          serif;
+        letter-spacing: -0.025em;
+        margin: 12px 0 18px;
+      }
+      .explanation p {
+        font-size: 16px;
+        line-height: 1.55;
+        color: #d3dbd6;
+        max-width: 360px;
+        margin: 0;
+      }
+      .explanation .question {
+        margin-top: 22px;
+        color: var(--chalk);
+        font-size: 14px;
+        border-left: 1px solid var(--sulfur);
+        padding-left: 17px;
+      }
+      .story:not(.static) .explanations {
+        display: grid;
+      }
+      .story:not(.static) .explanation {
+        grid-area: 1/1;
+        margin: 0;
+      }
+      .story:not(.static) .explanation:not(.active) {
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .story:not(.static) .explanation[hidden] {
+        display: block;
+      }
+      .stage-track {
+        margin-top: clamp(38px, 8vh, 80px);
+        max-width: 300px;
+      }
+      .stage-track .numbers {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .stage-track .numbers button {
+        border: 0;
+        background: transparent;
+        padding: 8px 0;
+        color: #c6d0cb;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-align: left;
+        white-space: nowrap;
+      }
+      .stage-track .numbers button[aria-pressed='true'] {
+        color: var(--sulfur);
+      }
+      .stage-track .rule {
+        height: 1px;
+        background: #71868c;
+        margin-top: 11px;
+      }
+      .stage-track .rule span {
+        height: 2px;
+        background: var(--sulfur);
+        display: block;
+        transform: scaleX(var(--progress, 0));
+        transform-origin: left;
+      }
+      .mobile-nav {
+        display: none;
+      }
+      .static .stage-track {
+        display: none;
+      }
+      .artboard {
+        position: relative;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 680px;
+      }
+      .stack {
+        position: relative;
+        width: min(100%, 700px, calc(100vh - 220px));
+        aspect-ratio: 1;
+        flex: none;
+      }
+      .piece {
+        position: absolute;
+        inset: 0;
+        transform: translateY(var(--shift));
+        will-change: transform;
+      }
+      .surface {
+        --shift: var(--top-y);
+        z-index: 3;
+      }
+      .middle {
+        --shift: 0px;
+        z-index: 2;
+      }
+      .base {
+        --shift: var(--base-y);
+        z-index: 1;
+      }
+      .slice {
+        position: absolute;
+        inset: 0;
+        background-image: var(--art-url);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        pointer-events: none;
+      }
+      .surface .slice {
+        clip-path: inset(5.5% 0 64% 0);
+      }
+      .middle .slice {
+        clip-path: inset(36.5% 0 32.5% 0);
+      }
+      .base .slice {
+        clip-path: inset(67.5% 0 2.5% 0);
+      }
+      .annotation {
+        position: absolute;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 3px 0;
+        color: #cfd9d4;
+        white-space: nowrap;
+        font-size: 11px;
+        line-height: 1.25;
+        letter-spacing: 0.02em;
+        opacity: var(--reveal);
+      }
+      .annotation:before {
+        content: '';
+        width: clamp(18px, 3vw, 45px);
+        height: 1px;
+        background: #91a7a6;
+        flex: none;
+      }
+      .annotation.surface-note {
+        right: 2%;
+        top: 9.5%;
+      }
+      .annotation.contact-note {
+        left: 0;
+        top: 38.5%;
+        color: var(--sulfur);
+      }
+      .annotation.contact-note:before {
+        background: var(--sulfur);
+      }
+      .annotation.base-note {
+        right: 4%;
+        top: 68.5%;
+      }
+      .focus-mark {
+        position: absolute;
+        left: 52%;
+        top: 49.2%;
+        width: 23px;
+        height: 23px;
+        border: 1px solid var(--sulfur);
+        border-radius: 50%;
+        opacity: var(--focus);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+      }
+      .focus-mark:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: var(--sulfur);
+        transform: translate(-50%, -50%);
+      }
+      .focus-mark:after {
+        content: '';
+        position: absolute;
+        left: 22px;
+        top: 10px;
+        width: clamp(22px, 5vw, 55px);
+        height: 1px;
+        background: var(--sulfur);
+      }
+      .art-caption {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        color: #b7c6c4;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      .story.static .focus-mark {
+        opacity: 0.7;
+      }
+      .story.static .annotation {
+        opacity: 1;
+      }
+      .story:not(.motion):not(.static) .piece {
+        transition: transform 0.65s cubic-bezier(0.22, 0.75, 0.2, 1);
+      }
+      .scene-footnote {
+        background: var(--slate);
+      }
+      .footnote {
+        max-width: 1536px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 28px;
+        padding: 23px clamp(20px, 5vw, 76px) 40px;
+        border-top: 1px solid #667c82;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #c9d4d0;
+      }
+      .footnote p {
+        max-width: 600px;
+        margin: 0;
+      }
+      .footnote .art-caption {
+        white-space: normal;
+        max-width: 220px;
+        flex: none;
+      }
+      .footnote .mono {
+        white-space: nowrap;
+        color: var(--sulfur);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .after {
+        max-width: 1536px;
+        margin: auto;
+        padding: 72px clamp(20px, 5vw, 76px) 100px;
+        display: flex;
+        justify-content: space-between;
+        gap: 28px;
+        border-top: 1px solid #b1bdba;
+      }
+      .after h2 {
+        font:
+          400 clamp(32px, 3vw, 46px) / 1.1 Serif,
+          Georgia,
+          serif;
+        margin: 0 0 15px;
+      }
+      .after p {
+        max-width: 600px;
+        font-size: 14px;
+        line-height: 1.65;
+        margin: 0;
+      }
+      .after-links {
+        display: flex;
+        gap: 22px;
+        flex-wrap: wrap;
+        align-content: start;
+        font-size: 13px;
+      }
+      .after-links a {
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+      }
+      body[data-theme='dark'] {
+        background: #1d2e35;
+        color: #e9ece6;
+      }
+      body[data-theme='dark'] .reviewbar {
+        background: #1d2e35;
+        color: #e9ece6;
+        border-color: #536c73;
+      }
+      body[data-theme='dark'] .reviewtools button[aria-pressed='true'] {
+        background: var(--sulfur);
+        color: var(--slate);
+        border-color: var(--sulfur);
+      }
+      body[data-theme='dark'] .opening p,
+      body[data-theme='dark'] .after {
+        border-color: #536c73;
+      }
+      html[lang='zh'] .opening h1,
+      html[lang='zh'] .explanation h3,
+      html[lang='zh'] .after h2 {
+        font-family:
+          PingFang SC,
+          Hiragino Sans GB,
+          Microsoft YaHei,
+          Arial,
+          sans-serif;
+        letter-spacing: 0;
+      }
+      html[lang='zh'] .explanation h3 {
+        font-size: clamp(34px, 3.5vw, 55px);
+      }
+      @media (min-width: 1024px) and (min-height: 740px) {
+        .story.motion {
+          height: calc(300vh - 128px);
+          position: relative;
+        }
+        .story.motion .scene {
+          position: sticky;
+          top: 64px;
+          height: calc(100vh - 64px);
+          min-height: 0;
+        }
+        .story.motion .artboard {
+          height: 100%;
+          min-height: 0;
+        }
+      }
+      @media (max-width: 1023px), (max-height: 739px) {
+        .scene {
+          min-height: 0;
+          display: flex;
+          flex-direction: column-reverse;
+          padding: 42px 20px 54px;
+          gap: 28px;
+        }
+        .artboard {
+          width: 100%;
+          min-height: 0;
+        }
+        .stack {
+          width: min(100%, 600px);
+        }
+        .copy {
+          max-width: 700px;
+          width: 100%;
+          padding: 0;
+        }
+        .scene-intro {
+          max-width: 560px;
+        }
+        .explanations {
+          margin-top: 38px;
+        }
+        .stage-track {
+          display: none;
+        }
+        .story:not(.static) .mobile-nav {
+          display: flex;
+          gap: 0;
+          margin-top: 28px;
+          border-top: 1px solid #71868c;
+          overflow: auto;
+        }
+        .mobile-nav button {
+          background: transparent;
+          color: #dce3dc;
+          border: 0;
+          border-bottom: 2px solid transparent;
+          padding: 15px 14px;
+          white-space: nowrap;
+          font-size: 12px;
+          min-height: 48px;
+        }
+        .mobile-nav button:first-child {
+          padding-left: 0;
+        }
+        .mobile-nav button[aria-pressed='true'] {
+          color: var(--sulfur);
+          border-color: var(--sulfur);
+        }
+        .footnote {
+          padding: 20px 20px 32px;
+        }
+        .after {
+          padding: 58px 20px;
+          flex-direction: column;
+        }
+        .story.motion {
+          height: auto;
+        }
+      }
+      @media (max-width: 600px) {
+        .reviewbar {
+          align-items: flex-start;
+        }
+        .reviewbrand {
+          width: 128px;
+        }
+        .reviewid {
+          width: 100%;
+          margin: 0;
+        }
+        .reviewtools {
+          max-width: 58%;
+        }
+        .opening {
+          grid-template-columns: 1fr;
+          gap: 34px;
+          padding-top: 54px;
+        }
+        .opening h1 {
+          font-size: clamp(43px, 12vw, 66px);
+        }
+        .opening p {
+          max-width: 450px;
+        }
+        .stack {
+          width: min(100%, 440px);
+        }
+        .annotation {
+          font-size: 9px;
+          gap: 4px;
+        }
+        .annotation:before {
+          width: 15px;
+        }
+        .annotation.surface-note {
+          right: -1%;
+          top: 19%;
+        }
+        .annotation.contact-note {
+          left: -1%;
+        }
+        .annotation.base-note {
+          right: 0;
+        }
+        .art-caption {
+          font-size: 9px;
+        }
+        .explanation h3 {
+          font-size: 42px;
+        }
+        .footnote {
+          flex-direction: column;
+          gap: 12px;
+        }
+        .footnote .mono {
+          white-space: normal;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .story {
+          --top-y: -7.5% !important;
+          --base-y: 7.5% !important;
+          --reveal: 1 !important;
+          --focus: 0.7 !important;
+        }
+        .piece {
+          transition: none !important;
+        }
+      }
+
+      /* 10: one authored sequence. The camera only scales the common axis. */
+      .stack {
+        transform: scale(var(--camera, 1));
+        transform-origin: 50% 54.5%;
+      }
+      .surface .slice,
+      .base .slice {
+        opacity: var(--peripheral, 1);
+      }
+      .surface-note {
+        opacity: var(--surface-label, 0);
+      }
+      .base-note {
+        opacity: var(--base-label, 0);
+      }
+      .annotation.contact-note {
+        left: auto;
+        right: 3%;
+        top: 35%;
+        opacity: var(--focus, 0);
+        color: var(--sulfur);
+      }
+      .annotation.contact-note:before {
+        width: clamp(16px, 2vw, 28px);
+      }
+      .contact-leader {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        fill: none;
+        stroke: var(--sulfur);
+        stroke-width: 1.25;
+        vector-effect: non-scaling-stroke;
+        opacity: var(--focus, 0);
+        pointer-events: none;
+        z-index: 4;
+      }
+      .contact-leader .pin {
+        fill: var(--sulfur);
+        stroke: none;
+      }
+      .story.static .contact-leader {
+        opacity: 0.8;
+      }
+      .story.static .surface .slice,
+      .story.static .base .slice {
+        opacity: 0.76;
+      }
+      .story:not(.motion):not(.static) .stack,
+      .story:not(.motion):not(.static) .slice {
+        transition:
+          transform 0.65s cubic-bezier(0.22, 0.75, 0.2, 1),
+          opacity 0.5s ease;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .stack,
+        .slice {
+          transition: none !important;
+        }
+      }
+
+      /* 10: specimen-first composition; caption remains in a quiet right rail. */
+      .story {
+        overflow-x: clip;
+      }
+      .scene {
+        max-width: 1720px;
+        grid-template-columns: minmax(0, 68%) minmax(280px, 32%);
+        grid-template-rows: auto minmax(0, 1fr);
+        padding: 25px clamp(28px, 4vw, 72px);
+        align-items: stretch;
+      }
+      .scene-head {
+        grid-column: 1/-1;
+        grid-row: 1;
+        display: grid;
+        grid-template-columns: 68% 32%;
+        grid-template-rows: auto auto;
+        align-items: end;
+        padding: 0 0 19px;
+        border-bottom: 1px solid #60767b;
+      }
+      .scene-head .section-kicker {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .scene-head .scene-heading {
+        grid-column: 1;
+        grid-row: 2;
+        font:
+          400 clamp(39px, 3.6vw, 54px) / 1.05 Serif,
+          Georgia,
+          serif;
+        letter-spacing: -0.018em;
+        margin: 10px 0 0;
+      }
+      .scene-head .scene-intro {
+        grid-column: 2;
+        grid-row: 1/3;
+        max-width: 380px;
+        margin: 0;
+        padding-left: 30px;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+      .artboard {
+        grid-column: 1;
+        grid-row: 2;
+        min-height: 0;
+        height: 100%;
+        justify-content: center;
+      }
+      .stack {
+        width: min(100%, 740px, calc(100vh - 220px));
+      }
+      .copy {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: center;
+        padding: 0 0 0 30px;
+        max-width: none;
+      }
+      .explanations {
+        margin-top: 0;
+      }
+      .explanation h3 {
+        font-size: clamp(37px, 3vw, 48px);
+      }
+      .explanation p {
+        font-size: 15px;
+      }
+      .stage-track {
+        margin-top: 42px;
+      }
+      .annotation.contact-note:before {
+        display: none;
+      }
+      .annotation.contact-note {
+        left: 74%;
+        right: auto;
+        top: 35%;
+        padding-left: 7px;
+      }
+      .surface-note,
+      .base-note {
+        color: #dbe4de;
+      }
+      @media (max-width: 1023px), (max-height: 739px) {
+        .scene {
+          display: flex;
+          flex-direction: column;
+          padding: 28px 20px 48px;
+          gap: 0;
+        }
+        .scene-head {
+          display: block;
+          width: 100%;
+          padding-bottom: 22px;
+        }
+        .scene-head .scene-heading {
+          font-size: clamp(34px, 7vw, 46px);
+          margin-top: 12px;
+        }
+        .scene-head .scene-intro {
+          padding: 0;
+          margin-top: 14px;
+          max-width: 620px;
+        }
+        .artboard {
+          order: 1;
+          min-height: 0;
+          width: 100%;
+          height: auto;
+          margin: 18px 0 8px;
+        }
+        .stack {
+          width: min(100%, 600px);
+        }
+        .copy {
+          order: 2;
+          width: 100%;
+          padding: 0;
+          max-width: 650px;
+          align-self: center;
+        }
+        .explanations {
+          margin-top: 0;
+        }
+      }
+      @media (max-width: 600px) {
+        .scene {
+          padding: 30px 20px 43px;
+        }
+        .scene-head .scene-heading {
+          font-size: 39px;
+        }
+        .scene-head .scene-intro {
+          font-size: 14px;
+        }
+        .artboard {
+          margin: 20px 0 18px;
+        }
+        .explanation h3 {
+          font-size: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#scene-heading">К сцене</a>
+    <div class="reviewbar">
+      <img
+        class="reviewbrand"
+        src="../../../public/brand/logo-horizontal.svg"
+        alt="QAZNEDR HOLDING"
+      />
+      <div class="reviewtools">
+        <span class="reviewid">10 / предложение · на утверждении</span
+        ><span class="asset-warning" id="asset-warning"
+          >Показан запасной рисунок: новый PNG ожидается</span
+        ><button type="button" data-lang="ru" aria-pressed="true">RU</button
+        ><button type="button" data-lang="kz" aria-pressed="false">KZ</button
+        ><button type="button" data-lang="en" aria-pressed="false">EN</button
+        ><button type="button" data-lang="zh" aria-pressed="false">中文</button
+        ><button type="button" id="theme" aria-pressed="false">Тема</button
+        ><button type="button" id="replay">Начало сцены</button>
+      </div>
+    </div>
+    <main>
+      <section class="story static" id="story" aria-label="Геологическая сцена">
+        <div class="scene">
+          <div class="scene-head">
+            <span class="section-kicker">01 — 03 / чтение разреза</span>
+            <h2 class="scene-heading" id="scene-heading">
+              Работа наших геологов
+            </h2>
+            <p class="scene-intro">
+              Геологию каждого участка изучают наши геологи по фондовым отчётам.
+            </p>
+          </div>
+          <div class="copy">
+            <div class="explanations" id="explanations">
+              <article class="explanation active">
+                <span class="stage-index">01 / 03 · Контекст</span>
+                <h3>Увидеть целое</h3>
+                <p class="body">
+                  Геолог начинает с формы участка и общего положения пород.
+                </p>
+                <p class="question">
+                  Что известно из карты, архива и наблюдений?
+                </p>
+              </article>
+              <article class="explanation">
+                <span class="stage-index">02 / 03 · Слои</span>
+                <h3>Развести слои</h3>
+                <p class="body">
+                  Пласты расходятся, чтобы были видны порядок и отношения между
+                  ними.
+                </p>
+                <p class="question">
+                  Какие контакты пород требуют внимательного чтения?
+                </p>
+              </article>
+              <article class="explanation">
+                <span class="stage-index">03 / 03 · Проверка</span>
+                <h3>Выбрать проверку</h3>
+                <p class="body">
+                  Внимание переходит к одному контакту — это вопрос для
+                  дальнейшей работы.
+                </p>
+                <p class="question">
+                  Что сверить с архивом и полевыми материалами?
+                </p>
+              </article>
+            </div>
+            <div class="stage-track" aria-label="Этапы сцены">
+              <div class="numbers">
+                <button type="button" data-stage="0" aria-pressed="true">
+                  01 / КОНТЕКСТ</button
+                ><button type="button" data-stage="1" aria-pressed="false">
+                  02 / СЛОИ</button
+                ><button type="button" data-stage="2" aria-pressed="false">
+                  03 / ПРОВЕРКА
+                </button>
+              </div>
+              <div class="rule"><span></span></div>
+            </div>
+            <div class="mobile-nav" aria-label="Этапы сцены">
+              <button type="button" data-stage="0" aria-pressed="true">
+                01 · Контекст</button
+              ><button type="button" data-stage="1" aria-pressed="false">
+                02 · Слои</button
+              ><button type="button" data-stage="2" aria-pressed="false">
+                03 · Проверка
+              </button>
+            </div>
+          </div>
+          <div
+            class="artboard"
+            role="img"
+            aria-label="Условные слои на одной оси раскрываются при прокрутке"
+          >
+            <div class="stack" id="stack" aria-hidden="true">
+              <div class="piece surface">
+                <div class="slice"></div>
+                <span class="annotation surface-note">Поверхность</span>
+              </div>
+              <div class="piece middle">
+                <div class="slice"></div>
+                <span class="annotation contact-note">Контакты пород</span
+                ><svg
+                  class="contact-leader"
+                  viewBox="0 0 1000 1000"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M 740 365 H 710 L 500 545" />
+                  <circle cx="500" cy="545" r="15" />
+                  <circle class="pin" cx="500" cy="545" r="3" />
+                </svg>
+              </div>
+              <div class="piece base">
+                <div class="slice"></div>
+                <span class="annotation base-note">Нижний слой</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="scene-footnote">
+        <div class="footnote">
+          <span class="art-caption"
+            >СХЕМАТИЧЕСКИЙ РАЗРЕЗ / НЕ ДАННЫЕ УЧАСТКА</span
+          >
+          <p>
+            Иллюстрация условная: показывает способ чтения геологического
+            материала, не глубину, масштаб или данные какого-либо участка.
+          </p>
+          <span class="mono">Прокрутка или кнопки этапов</span>
+        </div>
+      </div>
+      <section class="after">
+        <div>
+          <h2>Движение как способ чтения.</h2>
+          <p>
+            Поверхность поднимается первой, затем опускается основание. После
+            раскрытия камера приближается к среднему контакту, а внешние части
+            остаются видны.
+          </p>
+        </div>
+        <div class="after-links">
+          <a href="09-geology-motion.html">Предложение 09 ↗</a
+          ><a href="../mockups/10/NOTES.md">Источники и ограничения ↗</a>
+        </div>
+      </section>
+    </main>
+    <script>
+      (() => {
+        'use strict';
+        const data = {
+          ru: {
+            opening: [
+              '10 / последовательность движения',
+              'Открыть, затем рассмотреть.',
+              'Поверхность поднимается первой. Затем открывается основание. Последний шаг приближает контакт для изучения.',
+            ],
+            heading: 'Работа наших геологов',
+            intro:
+              'Геологию каждого участка изучают наши геологи по фондовым отчётам.',
+            stages: [
+              [
+                'Контекст',
+                'Увидеть целое',
+                'Геолог начинает с формы участка и общего положения пород.',
+                'Что известно из карты, архива и наблюдений?',
+              ],
+              [
+                'Слои',
+                'Развести слои',
+                'Пласты расходятся, чтобы были видны порядок и отношения между ними.',
+                'Какие контакты пород требуют внимательного чтения?',
+              ],
+              [
+                'Проверка',
+                'Выбрать проверку',
+                'Внимание переходит к одному контакту — это вопрос для дальнейшей работы.',
+                'Что сверить с архивом и полевыми материалами?',
+              ],
+            ],
+            labels: ['Поверхность', 'Контакты пород', 'Нижний слой'],
+            disclaimer: 'СХЕМАТИЧЕСКИЙ РАЗРЕЗ / НЕ ДАННЫЕ УЧАСТКА',
+            note: 'Иллюстрация условная: показывает способ чтения геологического материала, не глубину, масштаб или данные какого-либо участка.',
+            bottom: [
+              'Движение как способ чтения.',
+              'Поверхность поднимается первой, затем опускается основание. После раскрытия камера приближается к среднему контакту, а внешние части остаются видны.',
+            ],
+            nav: ['Предложение 09 ↗', 'Источники и ограничения ↗'],
+            theme: 'Тема',
+            replay: 'Начало сцены',
+            skip: 'К сцене',
+            sceneAria: 'Геологическая сцена',
+            section: '01 — 03 / чтение разреза',
+            stageAria: 'Этапы сцены',
+            hint: 'Прокрутка или кнопки этапов',
+          },
+          kz: {
+            opening: [
+              '10 / қозғалыс тізбегі',
+              'Ашу, содан кейін қарастыру.',
+              'Алдымен үстіңгі қабат көтеріледі, кейін негізі ашылады. Соңында түйісу нүктесі жақынырақ көрінеді.',
+            ],
+            heading: 'Геологтарымыздың жұмысы',
+            intro:
+              'Әр учаскенің геологиясын геологтарымыз қордағы есептер бойынша зерттейді.',
+            stages: [
+              [
+                'Жалпы көрініс',
+                'Тұтас көріністі көру',
+                'Геолог учаскенің пішіні мен тау жыныстарының жалпы орналасуынан бастайды.',
+                'Картадан, мұрағаттан және бақылаулардан не белгілі?',
+              ],
+              [
+                'Қабаттар',
+                'Қабаттарды ажырату',
+                'Қабаттар олардың реті мен өзара байланысы көрінуі үшін ажыратылады.',
+                'Тау жыныстарының қай түйісуін мұқият зерттеу керек?',
+              ],
+              [
+                'Тексеру',
+                'Тексеру нүктесін таңдау',
+                'Назар бір түйісуге аударылады — бұл кейінгі жұмысқа арналған сұрақ.',
+                'Мұрағаттық және далалық материалдармен нені салыстыру керек?',
+              ],
+            ],
+            labels: ['Жер беті', 'Тау жыныстарының түйісуі', 'Төменгі қабат'],
+            disclaimer: 'СЫЗБАЛЫҚ ҚИМА / УЧАСКЕ ДЕРЕКТЕРІ ЕМЕС',
+            note: 'Бұл сызба геологиялық материалды оқу тәсілін ғана көрсетеді; нақты учаскенің тереңдігін, масштабын немесе деректерін білдірмейді.',
+            bottom: [
+              'Қозғалыс — түсіну тәсілі.',
+              'Алдымен үстіңгі қабат көтеріледі, содан кейін негізі төмен түседі. Ашылған соң көрініс ортаңғы түйісуге жақындайды, шеткі бөліктер көрініп тұрады.',
+            ],
+            nav: ['09 ұсынысы ↗', 'Дереккөздер мен шектеулер ↗'],
+            theme: 'Тақырып',
+            replay: 'Сахнаның басы',
+            skip: 'Сахнаға өту',
+            sceneAria: 'Геологиялық көрініс',
+            section: '01 — 03 / қиманы оқу',
+            stageAria: 'Көрініс кезеңдері',
+            hint: 'Айналдыру немесе кезең батырмалары',
+          },
+          en: {
+            opening: [
+              '10 / motion sequence',
+              'Open, then examine.',
+              'The surface rises first; then the base opens. The final move brings one contact closer for examination.',
+            ],
+            heading: 'Our geologists’ work',
+            intro:
+              'Our geologists study each area using archival geological reports.',
+            stages: [
+              [
+                'Context',
+                'See the whole',
+                'The geologist begins with the site form and the broad position of rock units.',
+                'What is known from maps, archives and observation?',
+              ],
+              [
+                'Layers',
+                'Separate the layers',
+                'The strata part to make their order and relationships visible.',
+                'Which contacts call for a closer reading?',
+              ],
+              [
+                'Verification',
+                'Choose a check',
+                'Attention moves to one contact as a question for further work.',
+                'What should be compared with archive and field materials?',
+              ],
+            ],
+            labels: ['Surface', 'Rock contacts', 'Lower layer'],
+            disclaimer: 'SCHEMATIC SECTION / NOT SITE DATA',
+            note: 'This illustration shows a way to read geological material. It does not represent the depth, scale or data of any area.',
+            bottom: [
+              'Motion helps us read.',
+              'The surface rises first, then the base descends. Once open, the camera moves closer to the middle contact while the outer pieces remain visible.',
+            ],
+            nav: ['Proposal 09 ↗', 'Sources and limitations ↗'],
+            theme: 'Theme',
+            replay: 'Scene start',
+            skip: 'Skip to scene',
+            sceneAria: 'Geological scene',
+            section: '01 — 03 / reading the section',
+            stageAria: 'Scene stages',
+            hint: 'Scroll or use stage buttons',
+          },
+          zh: {
+            opening: [
+              '10 / 动效序列',
+              '先展开，再细看。',
+              '地表先升起，随后底层打开。最后镜头靠近一个接触点，便于细看。',
+            ],
+            heading: '我方地质师的研究',
+            intro: '每个地块的地质情况均由我方地质师依据档案报告研究。',
+            stages: [
+              [
+                '整体',
+                '观察整体',
+                '地质师先看地形和岩层的大致位置。',
+                '地图、档案和观察资料已告诉我们什么？',
+              ],
+              [
+                '分层',
+                '分开地层',
+                '地层展开后，更容易读懂顺序与相互关系。',
+                '哪些岩层接触关系值得细看？',
+              ],
+              [
+                '核查',
+                '选择核查点',
+                '关注一个接触关系，并将它作为下一步工作的问题。',
+                '应与哪些档案和野外资料核对？',
+              ],
+            ],
+            labels: ['地表', '岩层接触', '下部地层'],
+            disclaimer: '示意剖面 / 非地块数据',
+            note: '此示意图仅展示地质材料的阅读方式，不表示任何矿区的深度、比例或数据。',
+            bottom: [
+              '通过动效理解结构。',
+              '地表先升起，随后底层下降。展开后镜头靠近中部接触点，外侧部分仍保持可见。',
+            ],
+            nav: ['09 版提案 ↗', '来源与限制 ↗'],
+            theme: '主题',
+            replay: '回到场景开头',
+            skip: '跳转到场景',
+            sceneAria: '地质场景',
+            section: '01 — 03 / 阅读剖面',
+            stageAria: '场景阶段',
+            hint: '滚动或使用阶段按钮',
+          },
+        };
+        const story = document.getElementById('story'),
+          stack = document.getElementById('stack'),
+          reduced = matchMedia('(prefers-reduced-motion: reduce)'),
+          desktop = matchMedia('(min-width:1024px) and (min-height:740px)');
+        let language = 'ru',
+          stage = 0,
+          appliedStage = -1,
+          mode = 'static',
+          frame = 0;
+        function clamp(v) {
+          return Math.max(0, Math.min(1, v));
+        }
+        function setPose(topLift, baseDrop, focus) {
+          const w = stack.offsetWidth;
+          story.style.setProperty(
+            '--top-y',
+            `${(0.175 - 0.21 * topLift) * w}px`
+          );
+          story.style.setProperty(
+            '--base-y',
+            `${(-0.174 + 0.204 * baseDrop) * w}px`
+          );
+          story.style.setProperty(
+            '--camera',
+            String(1.14 - 0.25 * topLift + 0.12 * focus)
+          );
+          story.style.setProperty('--peripheral', String(1 - 0.42 * focus));
+          story.style.setProperty(
+            '--surface-label',
+            String(clamp((topLift - 0.55) / 0.35))
+          );
+          story.style.setProperty(
+            '--base-label',
+            String(clamp((baseDrop - 0.55) / 0.35))
+          );
+          story.style.setProperty('--focus', String(focus));
+          story.style.setProperty(
+            '--progress',
+            String(clamp((topLift + baseDrop + focus) / 3))
+          );
+        }
+        function setStage(n) {
+          if (n === appliedStage) return;
+          stage = n;
+          appliedStage = n;
+          document.querySelectorAll('.explanation').forEach((el, i) => {
+            el.classList.toggle('active', i === n);
+            el.hidden = mode !== 'static' && i !== n;
+          });
+          document
+            .querySelectorAll('.mobile-nav button, .stage-track button')
+            .forEach((el) =>
+              el.setAttribute(
+                'aria-pressed',
+                String(Number(el.dataset.stage) === n)
+              )
+            );
+          document
+            .querySelector('.artboard')
+            .setAttribute(
+              'aria-label',
+              data[language].disclaimer + ' — ' + data[language].stages[n][2]
+            );
+        }
+        function update() {
+          frame = 0;
+          if (mode !== 'scroll') return;
+          const r = story.getBoundingClientRect(),
+            travel = r.height - (innerHeight - 64),
+            p = clamp((64 - r.top) / travel),
+            topLift = clamp((p - 0.15) / 0.3),
+            baseDrop = clamp((p - 0.45) / 0.2),
+            focus = clamp((p - 0.65) / 0.35);
+          setPose(topLift, baseDrop, focus);
+          setStage(p < 0.29 ? 0 : p < 0.72 ? 1 : 2);
+        }
+        function schedule() {
+          if (!frame) frame = requestAnimationFrame(update);
+        }
+        function changeMode() {
+          const next = reduced.matches
+            ? 'static'
+            : desktop.matches
+              ? 'scroll'
+              : 'manual';
+          if (next === mode) {
+            schedule();
+            return;
+          }
+          mode = next;
+          appliedStage = -1;
+          story.classList.toggle('static', mode === 'static');
+          story.classList.toggle('motion', mode === 'scroll');
+          if (mode === 'static') {
+            document
+              .querySelectorAll('.explanation')
+              .forEach((el) => (el.hidden = false));
+            story.style.removeProperty('--top-y');
+            story.style.removeProperty('--base-y');
+            story.style.removeProperty('--reveal');
+            story.style.removeProperty('--focus');
+            story.style.removeProperty('--camera');
+            story.style.removeProperty('--peripheral');
+            story.style.removeProperty('--surface-label');
+            story.style.removeProperty('--base-label');
+          } else if (mode === 'manual') {
+            setStage(0);
+            setPose(0, 0, 0);
+          } else {
+            schedule();
+          }
+        }
+        function render() {
+          const t = data[language];
+          document.documentElement.lang = language === 'zh' ? 'zh' : language;
+          document.querySelector('.skip').textContent = t.skip;
+          story.setAttribute('aria-label', t.sceneAria);
+          document.querySelector('.section-kicker').textContent = t.section;
+          document
+            .querySelector('.stage-track')
+            .setAttribute('aria-label', t.stageAria);
+          document
+            .querySelector('.mobile-nav')
+            .setAttribute('aria-label', t.stageAria);
+          document.querySelector('.footnote .mono').textContent = t.hint;
+          document.querySelector('.scene-heading').textContent = t.heading;
+          document.querySelector('.scene-intro').textContent = t.intro;
+          document.querySelectorAll('.explanation').forEach((el, i) => {
+            el.querySelector('.stage-index').textContent =
+              `0${i + 1} / 03 · ${t.stages[i][0]}`;
+            el.querySelector('h3').textContent = t.stages[i][1];
+            el.querySelector('.body').textContent = t.stages[i][2];
+            el.querySelector('.question').textContent = t.stages[i][3];
+          });
+          document
+            .querySelectorAll('.mobile-nav button')
+            .forEach(
+              (el, i) => (el.textContent = `0${i + 1} · ${t.stages[i][0]}`)
+            );
+          document
+            .querySelectorAll('.stage-track button')
+            .forEach(
+              (el, i) =>
+                (el.textContent = `0${i + 1} / ${t.stages[i][0].toUpperCase()}`)
+            );
+          document
+            .querySelectorAll('.annotation')
+            .forEach((el, i) => (el.textContent = t.labels[i]));
+          document.querySelector('.art-caption').textContent = t.disclaimer;
+          document.querySelector('.footnote p').textContent = t.note;
+          document.querySelector('.after h2').textContent = t.bottom[0];
+          document.querySelector('.after p').textContent = t.bottom[1];
+          document
+            .querySelectorAll('.after-links a')
+            .forEach((el, i) => (el.textContent = t.nav[i]));
+          document.getElementById('theme').textContent = t.theme;
+          document.getElementById('replay').textContent = t.replay;
+          document
+            .querySelectorAll('[data-lang]')
+            .forEach((el) =>
+              el.setAttribute(
+                'aria-pressed',
+                String(el.dataset.lang === language)
+              )
+            );
+          document
+            .querySelector('.artboard')
+            .setAttribute(
+              'aria-label',
+              t.disclaimer + ' — ' + t.stages[stage][2]
+            );
+        }
+        document.querySelectorAll('[data-lang]').forEach((el) =>
+          el.addEventListener('click', () => {
+            language = el.dataset.lang;
+            render();
+          })
+        );
+        document.querySelectorAll('.mobile-nav button').forEach((el) =>
+          el.addEventListener('click', () => {
+            if (mode !== 'manual') return;
+            setStage(Number(el.dataset.stage));
+            setPose(
+              stage === 0 ? 0 : 1,
+              stage === 2 ? 1 : 0,
+              stage === 2 ? 1 : 0
+            );
+          })
+        );
+        document.querySelectorAll('.stage-track button').forEach((el) =>
+          el.addEventListener('click', () => {
+            if (mode !== 'scroll') return;
+            const travel = story.offsetHeight - (innerHeight - 64);
+            window.scrollTo({
+              top:
+                story.offsetTop -
+                64 +
+                [0, 0.53, 0.83][Number(el.dataset.stage)] * travel,
+              behavior: 'smooth',
+            });
+          })
+        );
+        document.getElementById('theme').addEventListener('click', (e) => {
+          const dark = document.body.dataset.theme !== 'dark';
+          document.body.dataset.theme = dark ? 'dark' : 'light';
+          e.currentTarget.setAttribute('aria-pressed', String(dark));
+        });
+        document.getElementById('replay').addEventListener('click', () => {
+          if (mode === 'scroll') {
+            window.scrollTo({ top: story.offsetTop - 64, behavior: 'smooth' });
+          } else {
+            setStage(0);
+            if (mode === 'manual') setPose(0, 0, 0);
+            story.scrollIntoView({
+              behavior: reduced.matches ? 'instant' : 'smooth',
+              block: 'start',
+            });
+          }
+        });
+        const probe = new Image();
+        probe.onload = () => {
+          story.style.setProperty(
+            '--art-url',
+            "url('../mockups/10/geology-realistic-v1.png')"
+          );
+        };
+        probe.onerror = () => {
+          story.style.setProperty(
+            '--art-url',
+            "url('../../../public/brand/geology-layers.png')"
+          );
+          document.getElementById('asset-warning').classList.add('visible');
+        };
+        probe.src = '../mockups/10/geology-realistic-v1.png';
+        addEventListener('scroll', schedule, { passive: true });
+        addEventListener('resize', () => {
+          if (mode === 'manual')
+            setPose(
+              stage === 0 ? 0 : 1,
+              stage === 2 ? 1 : 0,
+              stage === 2 ? 1 : 0
+            );
+          else schedule();
+        });
+        desktop.addEventListener('change', changeMode);
+        reduced.addEventListener('change', changeMode);
+        changeMode();
+        render();
+      })();
+    </script>
+  </body>
+</html>

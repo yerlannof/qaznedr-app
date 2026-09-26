@@ -12,10 +12,12 @@
 2. **Сверь синхронизацию.** Локальный HEAD, `origin/master` и коммит продакшен-деплоя Vercel должны совпадать:
    ```bash
    git fetch origin && git rev-parse --short HEAD origin/master
-   TOKEN=$(python3 -c "import json,os;print(json.load(open(os.path.expanduser('~/Library/Application Support/com.vercel.cli/auth.json')))['token'])")
-   curl -s -H "Authorization: Bearer $TOKEN" "https://api.vercel.com/v6/deployments?app=qaznedr&target=production&limit=1&teamId=yerlans-projects-7b5aa914" \
-     | python3 -c "import json,sys;d=json.load(sys.stdin)['deployments'][0];print(d['meta'].get('githubCommitSha','')[:7], d['readyState'])"
+   # Прод: последний Production-деплой из GitHub (Vercel пишет туда статусы; токен Vercel не нужен)
+   ID=$(gh api "repos/yerlannof/qaznedr-app/deployments?environment=Production&per_page=1" --jq '.[0].id')
+   gh api "repos/yerlannof/qaznedr-app/deployments?environment=Production&per_page=1" --jq '.[0].sha[0:7]'
+   gh api "repos/yerlannof/qaznedr-app/deployments/$ID/statuses" --jq '.[0].state'   # success = готов
    ```
+   Запасной путь — Vercel API (`/v6/deployments?app=qaznedr&target=production`, `meta.githubCommitSha`) с токеном из `~/Library/Application Support/com.vercel.cli/auth.json`; на 2026-09-26 этот токен недействителен, обновить — `vercel login` (вход делает владелец).
    Не совпадает — скажи владельцу, ничего не пушь до выяснения.
 
 ## Как вести сессию (процесс)
@@ -30,7 +32,7 @@
    - `npm run build` — обязательно;
    - браузер: `PORT=3107 npm run start`, проверь 375 и 1440 px, светлую и тёмную тему, ru/kz/en/zh там, где менял. Остановить сервер: `pkill -f next-server` (процесс называется так, не «next start»).
 5. **Независимое ревью** в конце сессии: отдельный агент (сильная модель) читает весь диф сессии против спецификации; важные находки чинишь через тест, мелочи записываешь в роудмап.
-6. **Деплой = `git push origin master`.** Vercel сам собирает прод из GitHub. `vercel --prod` не запускать (двойная сборка). После пуша дождись `READY` для своего коммита (команда выше) и проверь прод curl’ом/в браузере.
+6. **Деплой = `git push origin master`.** Vercel сам собирает прод из GitHub. `vercel --prod` не запускать (двойная сборка). После пуша дождись статуса `success` деплоя своего коммита (команда выше) и проверь прод curl’ом/в браузере.
 7. **Закрыть сессию:** обнови «Текущий статус» и блок сессии в `docs/HOLDING_ROADMAP.md`, закоммить, запушь, сверь синхронизацию, дай владельцу промпт для следующей сессии.
 
 Субагентов используй по правилам `docs/design/AGENTS.md` (маршруты моделей по стоимости, узкие задачи, без дублирования).

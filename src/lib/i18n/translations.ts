@@ -627,13 +627,6 @@ export const translations = {
         materials: 'материалов',
         viewAll: 'Смотреть все',
       },
-      knowledge: {
-        knowledgeBase: 'База знаний',
-        knowledgeBaseDesc: 'Техническая документация, стандарты, регламенты',
-        industryNews: 'Новости отрасли',
-        industryNewsDesc: 'Актуальные новости недропользования Казахстана',
-        materials: 'материалов',
-      },
       stats: {
         providers: 'поставщиков',
         projects: 'проектов',
@@ -1392,14 +1385,6 @@ export const translations = {
         informationCenterSubtitle:
           'Кәсіпқойларға арналған өзекті ақпарат, сала жаңалықтары және білім базасы',
       },
-      knowledge: {
-        knowledgeBase: 'Білім базасы',
-        knowledgeBaseDesc: 'Техникалық құжаттама, стандарттар, регламенттер',
-        industryNews: 'Сала жаңалықтары',
-        industryNewsDesc:
-          'Қазақстанның тау-кен өнеркәсібінің өзекті жаңалықтары',
-        materials: 'материалдар',
-      },
       stats: {
         providers: 'жеткізушілер',
         projects: 'жобалар',
@@ -2076,13 +2061,6 @@ export const translations = {
         informationCenterSubtitle:
           'Current information, industry news and knowledge base for professionals',
       },
-      knowledge: {
-        knowledgeBase: 'Knowledge Base',
-        knowledgeBaseDesc: 'Technical documentation, standards, regulations',
-        industryNews: 'Industry News',
-        industryNewsDesc: "Current news from Kazakhstan's subsoil-use sector",
-        materials: 'materials',
-      },
       stats: {
         providers: 'providers',
         projects: 'projects',
@@ -2730,13 +2708,6 @@ export const translations = {
         categoriesSubtitle: '选择服务类别，找到您所在地区的认证供应商',
         informationCenter: '信息中心',
         informationCenterSubtitle: '为专业人士提供的最新信息、行业新闻和知识库',
-      },
-      knowledge: {
-        knowledgeBase: '知识库',
-        knowledgeBaseDesc: '技术文档、标准、法规',
-        industryNews: '行业新闻',
-        industryNewsDesc: '哈萨克斯坦矿业最新新闻',
-        materials: '资料',
       },
       stats: {
         providers: '供应商',

@@ -43,12 +43,22 @@ describe('seo/metadata', () => {
       description: 'd',
     });
     expect(m.alternates?.canonical).toBe('https://qaznedr.kz/en/about');
-    expect(m.title).toBe('About');
+    expect(m.title).toEqual({ absolute: 'About | QAZNEDR HOLDING' });
     expect((m.openGraph as { title: string }).title).toBe(
       'About | QAZNEDR HOLDING'
     );
     expect((m.openGraph as { locale: string }).locale).toBe('en_US');
     expect(m.robots).toEqual({ index: true, follow: true });
+  });
+
+  it('does not repeat the brand', () => {
+    const m = buildPageMetadata({
+      locale: 'ru',
+      path: '/about',
+      title: 'О компании QAZNEDR HOLDING',
+      description: 'd',
+    });
+    expect(m.title).toEqual({ absolute: 'О компании QAZNEDR HOLDING' });
   });
 
   it('supports absolute titles and noindex', () => {
@@ -68,7 +78,7 @@ describe('seo/metadata', () => {
   it('reads localized strings from translations', () => {
     const zh = buildTranslatedPageMetadata('zh', '/leads', 'leads');
     const ru = buildTranslatedPageMetadata('ru', '/leads', 'leads');
-    expect(String(zh.title)).toMatch(/[一-鿿]/);
+    expect((zh.title as { absolute: string }).absolute).toMatch(/[一-鿿]/);
     expect(zh.title).not.toEqual(ru.title);
     expect(zh.alternates?.canonical).toBe('https://qaznedr.kz/zh/leads');
   });

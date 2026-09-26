@@ -1,5 +1,6 @@
 import { REGIONS } from '@/lib/data/filter-config';
 import { translate } from '@/lib/i18n/translations';
+import { formatCheckDate } from '@/lib/leads/check-date';
 import type { Locale } from './site';
 
 export interface LeadSeoInput {
@@ -7,6 +8,7 @@ export interface LeadSeoInput {
   mineral: string | null;
   region: string | null;
   license_status: string | null;
+  last_verified?: string | null;
 }
 
 // Chemical symbols used by the leads export → localized names.
@@ -78,7 +80,12 @@ export function leadSeoText(
   const where = region
     ? translate(locale, 'seo.lead.where', { region })
     : translate(locale, 'seo.lead.whereNone');
-  const params = { mineral, where, code: lead.code };
+  const params = {
+    mineral,
+    where,
+    code: lead.code,
+    checked: formatCheckDate(lead.last_verified, locale),
+  };
   const free = (lead.license_status ?? '').startsWith('FREE');
   const clean = (s: string) => s.replace(/\s+/g, ' ').trim();
   return {

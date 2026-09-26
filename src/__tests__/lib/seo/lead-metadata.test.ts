@@ -43,10 +43,12 @@ describe('lead SEO text', () => {
   });
 
   it('uses the free-area description only for FREE statuses', () => {
-    expect(leadSeoText(lead, 'ru').description).toMatch(/свободен от лицензий/);
+    expect(leadSeoText(lead, 'ru').description).toMatch(
+      /свободен от лицензий/i
+    );
     expect(
       leadSeoText({ ...lead, license_status: 'PENDING' }, 'ru').description
-    ).toMatch(/портфеля QAZNEDR HOLDING/);
+    ).toMatch(/Геология изучена нашими геологами/);
   });
 
   it('handles compound and annotated commodity values from the registry', () => {
@@ -64,5 +66,30 @@ describe('lead SEO text', () => {
         'zh'
       )
     ).not.toThrow();
+  });
+});
+
+describe('lead description check date', () => {
+  it('states the check date for a free lead', () => {
+    const { description } = leadSeoText(
+      {
+        code: 'AU-4',
+        mineral: 'Au',
+        region: 'Жамбылская',
+        license_status: 'FREE_CONFIRMED',
+        last_verified: null,
+      },
+      'ru'
+    );
+    expect(description).toContain('по нашей проверке на 05.2026');
+    expect(description).not.toMatch(/портфел/i);
+  });
+
+  it('never claims ownership for a non-free lead', () => {
+    const { description } = leadSeoText(
+      { code: 'AU-9', mineral: 'Au', region: null, license_status: 'PENDING' },
+      'en'
+    );
+    expect(description).not.toMatch(/portfolio/i);
   });
 });

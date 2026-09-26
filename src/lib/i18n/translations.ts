@@ -17,7 +17,7 @@ export const translations = {
       leads: {
         title: 'Участки недр Казахстана: золото, медь и другие металлы',
         description:
-          'Портфель подготовленных свободных участков QAZNEDR HOLDING. В тизере: металл, регион, тип месторождения, содержание. Детали — после встречи и NDA.',
+          'Подготовленные свободные рудные участки Казахстана. В тизере: металл, регион, тип месторождения, содержание. Детали — после встречи и NDA.',
       },
       services: {
         title: 'Услуги: лицензирование, геологоразведка, due diligence',
@@ -87,9 +87,9 @@ export const translations = {
       lead: {
         title: '{mineral} — участок {code}, {where}',
         descriptionFree:
-          'Участок: {mineral}, {where}. По нашей проверке свободен от лицензий; геология изучена по архивным отчётам, лицензию оформим под сделку. Код {code}.',
+          'Участок: {mineral}, {where}. Свободен от лицензий по нашей проверке на {checked}; геология изучена по архивным отчётам, лицензию оформим под сделку. Код {code}.',
         descriptionOther:
-          '{mineral}, {where}. Участок из портфеля QAZNEDR HOLDING. Код {code}.',
+          '{mineral}, {where}. Геология изучена нашими геологами по архивным отчётам. Код {code}.',
         where: '{region} область, Казахстан',
         whereNone: 'Казахстан',
         notFound: 'Участок не найден',
@@ -716,7 +716,7 @@ export const translations = {
         title:
           'Қазақстан жер қойнауы учаскелері: алтын, мыс және басқа металдар',
         description:
-          'QAZNEDR HOLDING дайын бос учаскелер портфелі. Тизерде: металл, өңір, кен орнының түрі, құрамы. Толық деректер кездесу мен NDA-дан кейін.',
+          'Қазақстанның дайындалған бос кен учаскелері. Тизерде: металл, өңір, кен орнының түрі, құрамы. Толық деректер кездесу мен NDA-дан кейін.',
       },
       services: {
         title: 'Қызметтер: лицензиялау, геологиялық барлау, due diligence',
@@ -786,9 +786,9 @@ export const translations = {
       lead: {
         title: '{mineral} — {code} учаскесі, {where}',
         descriptionFree:
-          'Учаске: {mineral}, {where}. Біздің тексеруімізше лицензиядан бос; геологиясы архивтік есептер бойынша зерттелген, лицензияны мәміле үшін рәсімдейміз. Код {code}.',
+          'Учаске: {mineral}, {where}. Біздің тексеруімізше ({checked}) лицензиядан бос; геологиясы архивтік есептер бойынша зерттелген, лицензияны мәміле үшін рәсімдейміз. Код {code}.',
         descriptionOther:
-          '{mineral}, {where}. QAZNEDR HOLDING портфеліндегі учаске. Код {code}.',
+          '{mineral}, {where}. Геологиясын геологтарымыз архивтік есептер бойынша зерттеді. Код {code}.',
         where: '{region}, Қазақстан',
         whereNone: 'Қазақстан',
         notFound: 'Учаске табылмады',
@@ -1342,7 +1342,7 @@ export const translations = {
       leads: {
         title: 'Exploration Areas in Kazakhstan: Gold, Copper and More',
         description:
-          'QAZNEDR HOLDING portfolio of prepared free subsoil areas. The teaser shows metal, region, deposit type and grade; full details after a meeting and an NDA.',
+          'Prepared free ore areas in Kazakhstan. The teaser shows metal, region, deposit type and grade; full details after a meeting and an NDA.',
       },
       services: {
         title: 'Services: Licensing, Exploration, Due Diligence',
@@ -1412,9 +1412,9 @@ export const translations = {
       lead: {
         title: '{mineral} Exploration Area {code}, {where}',
         descriptionFree:
-          'Area: {mineral}, {where}. Free of licences per our check; geology studied from archival reports, the licence can be arranged for the deal. Code {code}.',
+          'Area: {mineral}, {where}. Free of licences per our check as of {checked}; geology studied from archival reports, the licence can be arranged for the deal. Code {code}.',
         descriptionOther:
-          '{mineral}, {where}. Area from the QAZNEDR HOLDING portfolio. Code {code}.',
+          '{mineral}, {where}. Geology studied by our geologists from archival reports. Code {code}.',
         where: '{region}, Kazakhstan',
         whereNone: 'Kazakhstan',
         notFound: 'Area not found',
@@ -2023,9 +2023,9 @@ export const translations = {
       lead: {
         title: '哈萨克斯坦{where}{mineral}矿项目 {code}',
         descriptionFree:
-          '哈萨克斯坦{where}{mineral}矿区，经我方核查目前无矿权（空白区），已基于地质档案完成研究，可为交易协助办理探矿权。项目编号 {code}。',
+          '哈萨克斯坦{where}{mineral}矿区，经我方核查（{checked}）目前无矿权（空白区），已基于地质档案完成研究，可为交易协助办理探矿权。项目编号 {code}。',
         descriptionOther:
-          '哈萨克斯坦{where}{mineral}矿项目，来自 QAZNEDR HOLDING 项目库。项目编号 {code}。',
+          '哈萨克斯坦{where}{mineral}矿项目，地质情况由我方地质师依据档案报告研究。项目编号 {code}。',
         where: '{region}',
         whereNone: '',
         notFound: '未找到该项目',

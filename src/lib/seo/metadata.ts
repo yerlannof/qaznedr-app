@@ -30,11 +30,14 @@ export interface PageMetadataInput {
 
 export function buildPageMetadata(input: PageMetadataInput): Metadata {
   const url = localeUrl(input.locale, input.path);
-  const fullTitle = input.absoluteTitle
-    ? input.title
-    : `${input.title} | ${SITE_NAME}`;
+  const fullTitle =
+    input.absoluteTitle || input.title.includes(SITE_NAME)
+      ? input.title
+      : `${input.title} | ${SITE_NAME}`;
   return {
-    title: input.absoluteTitle ? { absolute: input.title } : input.title,
+    // Absolute on purpose: nested layouts that set their own title drop the
+    // root "%s | QAZNEDR HOLDING" template, so the suffix is added here.
+    title: { absolute: fullTitle },
     description: input.description,
     alternates: {
       canonical: url,

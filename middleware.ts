@@ -5,6 +5,7 @@ import {
   applySecurityHeaders,
   defaultSecurityConfig,
 } from '@/lib/middleware/security-headers';
+import { hiddenRouteRedirect } from '@/lib/seo/pages';
 // Simple rate limiting without Redis for development
 const requestCounts = new Map<string, { count: number; resetTime: number }>();
 
@@ -159,6 +160,15 @@ export async function middleware(request: NextRequest) {
 
   // If we have a locale in the path, save it to cookie
   const currentLocale = getLocale(pathname);
+
+  // Legacy marketplace routes hidden after the holding pivot → permanent redirect.
+  const hiddenTarget = hiddenRouteRedirect(pathname);
+  if (hiddenTarget) {
+    return applySecurityHeaders(
+      NextResponse.redirect(new URL(hiddenTarget, request.url), 308),
+      defaultSecurityConfig
+    );
+  }
 
   // Protect dashboard routes - require authentication
   const isDashboard = pathname.includes('/dashboard');

@@ -56,34 +56,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href={`/${locale}/listings`}
-                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  {t('footerNav.platform.listings')}
-                </Link>
-              </li>
-              <li>
-                <Link
                   href={`/${locale}/services`}
                   className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
                   {t('footerNav.platform.services')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/companies`}
-                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  {t('footerNav.platform.companies')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/map`}
-                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  {t('footerNav.platform.map')}
                 </Link>
               </li>
             </ul>
@@ -105,7 +81,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href={`/${locale}/support`}
+                  href={`/${locale}/contact`}
                   className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >
                   {t('footerNav.info.contacts')}

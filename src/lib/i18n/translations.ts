@@ -105,6 +105,10 @@ export const translations = {
       education: 'Обучение',
       messages: 'Сообщения',
       createListing: 'Создать объявление',
+      home: 'Главная',
+      about: 'О компании',
+      contact: 'Связаться',
+      admin: 'Админка',
     },
     portal: {
       eyebrow: 'Платформа недропользования Казахстана',
@@ -756,6 +760,10 @@ export const translations = {
       education: 'Оқыту',
       messages: 'Хабарлар',
       createListing: 'Хабарландыру құру',
+      home: 'Басты бет',
+      about: 'Компания туралы',
+      contact: 'Байланыс',
+      admin: 'Әкімші',
     },
     portal: {
       eyebrow: 'Қазақстан жер қойнауы алаңы',
@@ -1332,6 +1340,10 @@ export const translations = {
       education: 'Education',
       messages: 'Messages',
       createListing: 'Create Listing',
+      home: 'Home',
+      about: 'About',
+      contact: 'Contact',
+      admin: 'Admin',
     },
     portal: {
       eyebrow: "Kazakhstan's subsoil platform",
@@ -1894,6 +1906,10 @@ export const translations = {
       education: '培训',
       messages: '消息',
       createListing: '发布信息',
+      home: '首页',
+      about: '关于我们',
+      contact: '联系我们',
+      admin: '管理后台',
     },
     portal: {
       eyebrow: '哈萨克斯坦地下资源平台',

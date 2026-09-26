@@ -28,8 +28,15 @@ const SEO_KEYS = [
   'seo.lead.notFound',
 ];
 
+const NAV_KEYS = [
+  'navigation.home',
+  'navigation.about',
+  'navigation.contact',
+  'navigation.admin',
+];
+
 // Later tasks append their namespaces here.
-const KEYS: string[] = [...SEO_KEYS];
+const KEYS: string[] = [...SEO_KEYS, ...NAV_KEYS];
 
 describe.each(['ru', 'kz', 'en', 'zh'])('%s holding translations', (locale) => {
   it.each(KEYS)('%s exists', (key) => {

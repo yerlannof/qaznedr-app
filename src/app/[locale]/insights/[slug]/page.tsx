@@ -13,10 +13,9 @@ import { articleJsonLd } from '@/lib/seo/article-jsonld';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { toLocale } from '@/lib/seo/site';
 
-// Only the languages each guide is written in; others are redirected to ru
-// by the middleware before they reach this page.
-export const dynamicParams = false;
-
+// Prerendered for the languages each guide is written in; other languages
+// are redirected to ru by the middleware. Unknown slugs render notFound()
+// (dynamicParams = false would log a NoFallbackError on every such 404).
 export function generateStaticParams() {
   return INSIGHTS.flatMap((entry) =>
     entry.locales.map((locale) => ({ locale, slug: entry.slug }))

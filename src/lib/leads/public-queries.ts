@@ -53,6 +53,9 @@ export async function listPublishedLeads(
   else if (f.sort === 'confidence_desc')
     q = q.order('confidence', { ascending: false, nullsFirst: false });
   else q = q.order('published_at', { ascending: false, nullsFirst: false });
+  // Unique tiebreaker: rows with equal sort values keep one order, so OFFSET
+  // pages never overlap or skip (e.g. a batch published at the same time).
+  q = q.order('code', { ascending: true });
 
   q = q.range(offset, offset + limit - 1);
 

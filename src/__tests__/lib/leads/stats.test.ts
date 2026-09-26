@@ -1,4 +1,8 @@
-import { collectLeadStats, LEADS_PAGE_SIZE } from '@/lib/leads/stats';
+import {
+  collectLeadStats,
+  fetchLeadsPage,
+  LEADS_PAGE_SIZE,
+} from '@/lib/leads/stats';
 
 const lead = (region: string | null) => ({ region });
 
@@ -49,5 +53,64 @@ describe('collectLeadStats', () => {
         return { total: 60, leads: [lead('Абайская область')] };
       })
     ).rejects.toThrow('503');
+  });
+});
+
+describe('collectLeadStats with a later page that fails quietly', () => {
+  it('rejects when a later page comes back empty (rate limit, DB error)', async () => {
+    await expect(
+      collectLeadStats(async (page) =>
+        page === 1
+          ? { total: 60, leads: [lead('Абайская область')] }
+          : { total: 0, leads: [] }
+      )
+    ).rejects.toThrow();
+  });
+
+  it('rejects when a later page reports a different total', async () => {
+    await expect(
+      collectLeadStats(async (page) => ({
+        total: page === 1 ? 60 : 59,
+        leads: [lead('Абайская область')],
+      }))
+    ).rejects.toThrow();
+  });
+});
+
+describe('fetchLeadsPage', () => {
+  const respond = (status: number, body: unknown) =>
+    (async () => ({
+      ok: status >= 200 && status < 300,
+      status,
+      json: async () => body,
+    })) as unknown as typeof fetch;
+
+  it('asks the API for a full page', async () => {
+    const urls: string[] = [];
+    const fetcher = (async (url: string) => {
+      urls.push(url);
+      return {
+        ok: true,
+        status: 200,
+        json: async () => ({ success: true, data: { total: 3, leads: [] } }),
+      };
+    }) as unknown as typeof fetch;
+    await expect(fetchLeadsPage(2, fetcher)).resolves.toEqual({
+      total: 3,
+      leads: [],
+    });
+    expect(urls).toEqual([`/api/leads?limit=${LEADS_PAGE_SIZE}&page=2`]);
+  });
+
+  it('throws on a JSON error response such as the 429 of the rate limiter', async () => {
+    await expect(
+      fetchLeadsPage(2, respond(429, { success: false, error: 'Too many' }))
+    ).rejects.toThrow();
+  });
+
+  it('throws when the API says success: false', async () => {
+    await expect(
+      fetchLeadsPage(1, respond(200, { success: false }))
+    ).rejects.toThrow();
   });
 });

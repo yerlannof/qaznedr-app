@@ -3,12 +3,16 @@ import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import { Mail, Clock, HelpCircle, ArrowRight } from 'lucide-react';
+import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Поддержка',
-  description:
-    'Связь со службой поддержки QAZNEDR.KZ. Вопросы по доступу к находкам, объявлениям и оплате. Пишите на info@qaznedr.kz — отвечаем в течение одного рабочего дня.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildTranslatedPageMetadata(locale, '/support', 'support');
+}
 
 export default async function SupportPage({
   params,

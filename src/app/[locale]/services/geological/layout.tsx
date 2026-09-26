@@ -1,10 +1,18 @@
 import type { Metadata } from 'next';
+import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Геологические услуги и разведка',
-  description:
-    'Геологоразведочные услуги в Казахстане: бурение скважин, геофизические исследования, опробование, подсчёт запасов и геологическое моделирование месторождений.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildTranslatedPageMetadata(
+    locale,
+    '/services/geological',
+    'servicesGeological'
+  );
+}
 
 export default function ServicesGeologicalLayout({
   children,

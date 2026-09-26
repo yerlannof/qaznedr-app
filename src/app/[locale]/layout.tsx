@@ -9,77 +9,54 @@ import { WebVitalsTracker } from '@/components/monitoring/WebVitalsTracker';
 import MobileTabBar from '@/components/layouts/MobileTabBar';
 import type { Metadata, Viewport } from 'next';
 import '../../styles/globals.css';
-
-const BASE_URL = 'https://qaznedr.kz';
+import { getServerTranslation } from '@/lib/i18n/translations';
+import {
+  HREFLANG,
+  OG_LOCALE,
+  SITE_NAME,
+  SITE_URL,
+  toLocale,
+} from '@/lib/seo/site';
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale } = await params;
+  const locale = toLocale((await params).locale);
+  const { t } = getServerTranslation(locale);
 
+  const otherVerification: Record<string, string> = {};
+  if (process.env.BING_SITE_VERIFICATION) {
+    otherVerification['msvalidate.01'] = process.env.BING_SITE_VERIFICATION;
+  }
+  if (process.env.BAIDU_SITE_VERIFICATION) {
+    otherVerification['baidu-site-verification'] =
+      process.env.BAIDU_SITE_VERIFICATION;
+  }
+
+  // Pages set their own canonical/hreflang via buildPageMetadata — the layout
+  // must NOT, otherwise every page inherits the home canonical.
   return {
-    title: {
-      default: 'QAZNEDR.KZ — Площадка недропользования Казахстана',
-      template: '%s | QAZNEDR.KZ',
-    },
-    description:
-      'B2B маркетплейс для покупки и продажи месторождений, лицензий на недропользование и геологических услуг в Казахстане. Для инвесторов, недропользователей и сервис-провайдеров.',
-    keywords: [
-      'месторождения Казахстан',
-      'недропользование',
-      'mining licenses Kazakhstan',
-      'mineral deposits',
-      '矿产资源哈萨克斯坦',
-      'лицензии на добычу',
-      'геология',
-    ],
+    metadataBase: new URL(SITE_URL),
+    title: { default: t('seo.site.title'), template: `%s | ${SITE_NAME}` },
+    description: t('seo.site.description'),
     openGraph: {
-      title: 'QAZNEDR.KZ — Площадка недропользования Казахстана',
-      description:
-        'B2B маркетплейс для покупки и продажи месторождений в Казахстане',
-      url: `${BASE_URL}/${locale}`,
-      siteName: 'QAZNEDR.KZ',
-      locale:
-        locale === 'kz'
-          ? 'kk_KZ'
-          : locale === 'zh'
-            ? 'zh_CN'
-            : locale === 'en'
-              ? 'en_US'
-              : 'ru_KZ',
+      siteName: SITE_NAME,
+      locale: OG_LOCALE[locale],
       type: 'website',
     },
-    twitter: {
-      card: 'summary',
-      title: 'QAZNEDR — Платформа геологической отрасли Казахстана',
-      description:
-        'Превращаем природные богатства Казахстана в экономический рост',
-      site: '@qaznedr',
-    },
-    alternates: {
-      canonical: `${BASE_URL}/${locale}`,
-      languages: {
-        ru: `${BASE_URL}/ru`,
-        en: `${BASE_URL}/en`,
-        kk: `${BASE_URL}/kz`,
-        zh: `${BASE_URL}/zh`,
-        'x-default': `${BASE_URL}/ru`,
-      },
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-    // Set GOOGLE_SITE_VERIFICATION / YANDEX_VERIFICATION in Vercel env to emit the
-    // verification meta tags. Omitted entirely when unset (no broken placeholder tags).
+    robots: { index: true, follow: true },
+    // Set *_VERIFICATION env vars in Vercel to emit the verification meta tags.
     verification: {
       ...(process.env.GOOGLE_SITE_VERIFICATION
         ? { google: process.env.GOOGLE_SITE_VERIFICATION }
         : {}),
       ...(process.env.YANDEX_VERIFICATION
         ? { yandex: process.env.YANDEX_VERIFICATION }
+        : {}),
+      ...(Object.keys(otherVerification).length
+        ? { other: otherVerification }
         : {}),
     },
   };
@@ -120,9 +97,13 @@ export default async function LocaleLayout({
   if (!validLocales.includes(locale)) {
     notFound();
   }
+  const lang = HREFLANG[toLocale(locale)];
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
+      <head>
+        <meta httpEquiv="content-language" content={lang} />
+      </head>
       <body
         className={`${inter.variable} ${fraunces.variable} ${inter.className} antialiased`}
       >

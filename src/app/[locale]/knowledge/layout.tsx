@@ -1,23 +1,14 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'База знаний',
-  description:
-    'Техническая документация, стандарты и регламенты недропользования Республики Казахстан.',
-  openGraph: {
-    title: 'База знаний | QAZNEDR.KZ',
-    description:
-      'Техническая документация, стандарты и регламенты недропользования Республики Казахстан.',
-    type: 'website',
-    siteName: 'QAZNEDR.KZ',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'База знаний | QAZNEDR.KZ',
-    description:
-      'Техническая документация, стандарты и регламенты недропользования Республики Казахстан.',
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildTranslatedPageMetadata(locale, '/knowledge', 'knowledge');
+}
 
 export default function KnowledgeLayout({
   children,

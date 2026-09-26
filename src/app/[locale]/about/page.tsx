@@ -3,12 +3,16 @@ import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import { MapPin, FileText, ShieldCheck, ArrowRight } from 'lucide-react';
+import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'О платформе',
-  description:
-    'QAZNEDR.KZ — площадка геологических данных Казахстана. Проверенные находки на свободные участки и объявления о продаже лицензий. Координаты сверены с государственным реестром недр.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildTranslatedPageMetadata(locale, '/about', 'about');
+}
 
 export default async function AboutPage({
   params,

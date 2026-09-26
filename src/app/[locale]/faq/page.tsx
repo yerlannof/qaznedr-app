@@ -3,12 +3,16 @@ import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import { ArrowRight } from 'lucide-react';
+import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Вопросы и ответы',
-  description:
-    'Ответы на главные вопросы о QAZNEDR.KZ: законность, состав полного пакета за 1 000 000 ₸, источники данных, гарантии, оплата и чем находки отличаются от объявлений.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildTranslatedPageMetadata(locale, '/faq', 'faq');
+}
 
 const FAQ: { q: string; a: string }[] = [
   {

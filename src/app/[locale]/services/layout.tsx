@@ -1,23 +1,14 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Услуги для геологической отрасли',
-  description:
-    'Геологические, юридические, инвестиционные услуги и аренда оборудования для недропользователей Казахстана.',
-  openGraph: {
-    title: 'Услуги для геологической отрасли | QAZNEDR.KZ',
-    description:
-      'Геологические, юридические, инвестиционные услуги и аренда оборудования для недропользователей Казахстана.',
-    type: 'website',
-    siteName: 'QAZNEDR.KZ',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Услуги для геологической отрасли | QAZNEDR.KZ',
-    description:
-      'Геологические, юридические, инвестиционные услуги и аренда оборудования для недропользователей Казахстана.',
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildTranslatedPageMetadata(locale, '/services', 'services');
+}
 
 export default function ServicesLayout({
   children,

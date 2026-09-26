@@ -1,23 +1,14 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Новости геологической отрасли',
-  description:
-    'Актуальные новости недропользования, горнодобычи и геологоразведки в Казахстане.',
-  openGraph: {
-    title: 'Новости геологической отрасли | QAZNEDR.KZ',
-    description:
-      'Актуальные новости недропользования, горнодобычи и геологоразведки в Казахстане.',
-    type: 'website',
-    siteName: 'QAZNEDR.KZ',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Новости геологической отрасли | QAZNEDR.KZ',
-    description:
-      'Актуальные новости недропользования, горнодобычи и геологоразведки в Казахстане.',
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildTranslatedPageMetadata(locale, '/news', 'news');
+}
 
 export default function NewsLayout({
   children,

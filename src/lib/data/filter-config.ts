@@ -116,6 +116,18 @@ export const REGIONS = [
       zh: '北哈萨克斯坦',
     },
   },
+  {
+    id: 'abai',
+    name: { ru: 'Абайская', kz: 'Абай', en: 'Abai', zh: '阿拜' },
+  },
+  {
+    id: 'zhetysu',
+    name: { ru: 'Жетысуская', kz: 'Жетісу', en: 'Zhetysu', zh: '杰特苏' },
+  },
+  {
+    id: 'ulytau',
+    name: { ru: 'Улытауская', kz: 'Ұлытау', en: 'Ulytau', zh: '乌勒套' },
+  },
 ] as const;
 
 export const MINERALS = [

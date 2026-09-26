@@ -1,10 +1,18 @@
 import type { Metadata } from 'next';
+import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Юридические услуги в недропользовании',
-  description:
-    'Юридическое сопровождение в сфере недропользования Казахстана: оформление и продление лицензий, соблюдение требований законодательства, разрешения и сопровождение сделок.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildTranslatedPageMetadata(
+    locale,
+    '/services/legal',
+    'servicesLegal'
+  );
+}
 
 export default function ServicesLegalLayout({
   children,

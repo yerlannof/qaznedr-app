@@ -1,12 +1,16 @@
 import type { Metadata } from 'next';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
+import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Условия использования',
-  description:
-    'Условия использования платформы QAZNEDR.KZ: услуги, ответственность, конфиденциальность, оплата и доступ. Площадка продаёт информацию и доступ к данным о недрах, а не права недропользования.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildTranslatedPageMetadata(locale, '/legal/terms', 'terms');
+}
 
 export default async function TermsPage() {
   const sections = [

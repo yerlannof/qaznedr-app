@@ -27,6 +27,8 @@
 - **Красные линии текста.** Не писать, что участок принадлежит холдингу. Не писать, что продаём архивные отчёты. Никакой «гарантированной доходности». Формула: «геология изучена по архивным отчётам, лицензию оформим под сделку».
 - **Дизайн-система.** Иконки только Lucide, эмодзи нет. Главные кнопки чёрные (`bg-gray-900`). Акценты gold. Без градиентов. Анимации только лёгкие hover.
 - **В коде нет `console.*`** (правило CLAUDE.md).
+- **Данные участков публикует только геобаза** (сессия «50 точек», гейт выдачи + «да» Ерлана). Сайт сам точки не пушит и в `leads` не пишет.
+- **Правила текста Ерлана:** спайк не равен среднему; P1–P3 — прогноз, а не запасы; слабое не хвалить; не упоминать OCR, агентов и модели — это труд наших геологов.
 - **Секреты только в env.** Номера, ID, токены в код не зашивать. Пустое значение означает, что функция тихо выключена.
 - **Для Supabase-таблиц без сгенерированных типов** использовать приведение `(svc as any)`, как принято в проекте.
 - **Базовая линия тестов на 2026-09-26.** Уже падают 6 legacy-наборов: `MiningLicenseCard`, `CreateListingWizard`, `ListingsFilters`, `ThemeToggle`, `app/api/listings/__tests__/route`, `lib/middleware/__tests__/csrf`. Их не чиним. Новых падений быть не должно.
@@ -371,12 +373,12 @@ export function buildTranslatedPageMetadata(
       site: {
         title: 'QAZNEDR HOLDING — участки недр Казахстана для инвесторов',
         description:
-          'Геологоразведочный холдинг из Казахстана. Подготовленные свободные участки по золоту, меди, цинку, олову и никелю, отобранные по ~7000 геологических отчётов. Сопровождение лицензирования и сделок для инвесторов.',
+          'Геологоразведочный холдинг из Казахстана. Подготовленные свободные участки по золоту, меди и другим металлам из реестра 7 000+ рудных объектов по советским фондовым отчётам. Сопровождение лицензирования и сделок для инвесторов.',
       },
       home: {
         title: 'QAZNEDR HOLDING — участки недр Казахстана для инвесторов',
         description:
-          'Геологоразведочный холдинг из Казахстана. Подготовленные свободные участки по золоту, меди, цинку, олову и никелю, отобранные по ~7000 геологических отчётов. Сопровождение лицензирования и сделок для инвесторов.',
+          'Геологоразведочный холдинг из Казахстана. Подготовленные свободные участки по золоту, меди и другим металлам из реестра 7 000+ рудных объектов по советским фондовым отчётам. Сопровождение лицензирования и сделок для инвесторов.',
       },
       leads: {
         title: 'Участки недр Казахстана: золото, медь и другие металлы',
@@ -451,7 +453,7 @@ export function buildTranslatedPageMetadata(
       lead: {
         title: '{mineral} — участок {code}, {where}',
         descriptionFree:
-          'Свободный участок — {mineral}, {where}. Геология изучена по архивным отчётам, лицензию оформим под сделку. Код {code}.',
+          'Участок: {mineral}, {where}. По нашей проверке свободен от лицензий; геология изучена по архивным отчётам, лицензию оформим под сделку. Код {code}.',
         descriptionOther:
           '{mineral}, {where}. Участок из портфеля QAZNEDR HOLDING. Код {code}.',
         where: '{region} область, Казахстан',
@@ -468,12 +470,12 @@ export function buildTranslatedPageMetadata(
       site: {
         title: 'QAZNEDR HOLDING — инвесторларға арналған Қазақстан жер қойнауы учаскелері',
         description:
-          'Қазақстандағы геологиялық барлау холдингі. ~7000 геологиялық есеп негізінде іріктелген алтын, мыс, мырыш, қалайы және никель бойынша дайын бос учаскелер. Инвесторларға лицензиялау мен мәмілені сүйемелдеу.',
+          'Қазақстандағы геологиялық барлау холдингі. Кеңестік қор есептері бойынша 7 000+ кен объектісі тізілімінен іріктелген алтын, мыс және басқа металдар бойынша дайын бос учаскелер. Инвесторларға лицензиялау мен мәмілені сүйемелдеу.',
       },
       home: {
         title: 'QAZNEDR HOLDING — инвесторларға арналған Қазақстан жер қойнауы учаскелері',
         description:
-          'Қазақстандағы геологиялық барлау холдингі. ~7000 геологиялық есеп негізінде іріктелген алтын, мыс, мырыш, қалайы және никель бойынша дайын бос учаскелер. Инвесторларға лицензиялау мен мәмілені сүйемелдеу.',
+          'Қазақстандағы геологиялық барлау холдингі. Кеңестік қор есептері бойынша 7 000+ кен объектісі тізілімінен іріктелген алтын, мыс және басқа металдар бойынша дайын бос учаскелер. Инвесторларға лицензиялау мен мәмілені сүйемелдеу.',
       },
       leads: {
         title: 'Қазақстан жер қойнауы учаскелері: алтын, мыс және басқа металдар',
@@ -548,7 +550,7 @@ export function buildTranslatedPageMetadata(
       lead: {
         title: '{mineral} — {code} учаскесі, {where}',
         descriptionFree:
-          'Бос учаске — {mineral}, {where}. Геологиясы архивтік есептер бойынша зерттелген, лицензияны мәміле үшін рәсімдейміз. Код {code}.',
+          'Учаске: {mineral}, {where}. Біздің тексеруімізше лицензиядан бос; геологиясы архивтік есептер бойынша зерттелген, лицензияны мәміле үшін рәсімдейміз. Код {code}.',
         descriptionOther:
           '{mineral}, {where}. QAZNEDR HOLDING портфеліндегі учаске. Код {code}.',
         where: '{region}, Қазақстан',
@@ -565,12 +567,12 @@ export function buildTranslatedPageMetadata(
       site: {
         title: 'QAZNEDR HOLDING — Mineral Exploration Areas in Kazakhstan for Investors',
         description:
-          'Kazakhstan exploration holding. Prepared free subsoil areas for gold, copper, zinc, tin and nickel, selected from ~7,000 geological reports. Licensing and deal support for investors.',
+          'Kazakhstan exploration holding. Prepared free subsoil areas for gold, copper and other metals, drawn from a registry of 7,000+ mineral occurrences compiled from Soviet-era geological reports. Licensing and deal support for investors.',
       },
       home: {
         title: 'QAZNEDR HOLDING — Mineral Exploration Areas in Kazakhstan for Investors',
         description:
-          'Kazakhstan exploration holding. Prepared free subsoil areas for gold, copper, zinc, tin and nickel, selected from ~7,000 geological reports. Licensing and deal support for investors.',
+          'Kazakhstan exploration holding. Prepared free subsoil areas for gold, copper and other metals, drawn from a registry of 7,000+ mineral occurrences compiled from Soviet-era geological reports. Licensing and deal support for investors.',
       },
       leads: {
         title: 'Exploration Areas in Kazakhstan: Gold, Copper and More',
@@ -645,7 +647,7 @@ export function buildTranslatedPageMetadata(
       lead: {
         title: '{mineral} Exploration Area {code}, {where}',
         descriptionFree:
-          'Free subsoil area — {mineral}, {where}. Geology studied from archival reports; the licence can be arranged for the deal. Code {code}.',
+          'Area: {mineral}, {where}. Free of licences per our check; geology studied from archival reports, the licence can be arranged for the deal. Code {code}.',
         descriptionOther:
           '{mineral}, {where}. Area from the QAZNEDR HOLDING portfolio. Code {code}.',
         where: '{region}, Kazakhstan',
@@ -662,12 +664,12 @@ export function buildTranslatedPageMetadata(
       site: {
         title: 'QAZNEDR HOLDING — 哈萨克斯坦矿权投资项目：金矿、铜矿等空白探矿区',
         description:
-          '哈萨克斯坦地质勘探控股公司。基于约7000份地质档案报告筛选的金、铜、锌、锡、镍空白矿区，为投资者提供探矿权办理及交易全程服务。',
+          '哈萨克斯坦地质勘探控股公司。依托基于苏联时期地质档案整理的7000余处矿点数据库，筛选金、铜等矿种空白矿区，为投资者提供探矿权办理及交易全程服务。',
       },
       home: {
         title: 'QAZNEDR HOLDING — 哈萨克斯坦矿权投资项目：金矿、铜矿等空白探矿区',
         description:
-          '哈萨克斯坦地质勘探控股公司。基于约7000份地质档案报告筛选的金、铜、锌、锡、镍空白矿区，为投资者提供探矿权办理及交易全程服务。',
+          '哈萨克斯坦地质勘探控股公司。依托基于苏联时期地质档案整理的7000余处矿点数据库，筛选金、铜等矿种空白矿区，为投资者提供探矿权办理及交易全程服务。',
       },
       leads: {
         title: '哈萨克斯坦矿区项目库：金矿、铜矿等空白探矿区',
@@ -738,7 +740,7 @@ export function buildTranslatedPageMetadata(
       lead: {
         title: '哈萨克斯坦{where}{mineral}矿项目 {code}',
         descriptionFree:
-          '哈萨克斯坦{where}{mineral}矿空白矿区，已基于地质档案完成研究，可为交易协助办理探矿权。项目编号 {code}。',
+          '哈萨克斯坦{where}{mineral}矿区，经我方核查目前无矿权（空白区），已基于地质档案完成研究，可为交易协助办理探矿权。项目编号 {code}。',
         descriptionOther:
           '哈萨克斯坦{where}{mineral}矿项目，来自 QAZNEDR HOLDING 项目库。项目编号 {code}。',
         where: '{region}',
@@ -826,10 +828,17 @@ describe('lead SEO text', () => {
   });
 
   it('uses the free-area description only for FREE statuses', () => {
-    expect(leadSeoText(lead, 'ru').description).toMatch(/^Свободный участок/);
+    expect(leadSeoText(lead, 'ru').description).toMatch(/свободен от лицензий/);
     expect(
       leadSeoText({ ...lead, license_status: 'PENDING' }, 'ru').description
     ).toMatch(/портфеля QAZNEDR HOLDING/);
+  });
+
+  it('handles compound and annotated commodity values from the registry', () => {
+    expect(leadMineralName('Pb-Zn', 'zh')).toBe('铅锌');
+    expect(leadMineralName('Pb-Zn', 'ru')).toBe('Свинец-цинк');
+    expect(leadMineralName('Au+Cu', 'en')).toBe('Gold-Copper');
+    expect(leadMineralName('Au россыпь', 'ru')).toBe('Золото');
   });
 
   it('falls back to the raw mineral code and tolerates nulls', () => {
@@ -888,6 +897,10 @@ const MINERALS: Record<string, Record<Locale, string>> = {
   PB: { ru: 'Свинец', kz: 'Қорғасын', en: 'Lead', zh: '铅' },
   AG: { ru: 'Серебро', kz: 'Күміс', en: 'Silver', zh: '银' },
   MO: { ru: 'Молибден', kz: 'Молибден', en: 'Molybdenum', zh: '钼' },
+  FE: { ru: 'Железо', kz: 'Темір', en: 'Iron', zh: '铁' },
+  MN: { ru: 'Марганец', kz: 'Марганец', en: 'Manganese', zh: '锰' },
+  CR: { ru: 'Хром', kz: 'Хром', en: 'Chromium', zh: '铬' },
+  U: { ru: 'Уран', kz: 'Уран', en: 'Uranium', zh: '铀' },
 };
 
 // Region spellings used by the leads export that differ from filter-config.
@@ -897,12 +910,25 @@ const REGION_ALIASES: Record<string, string> = {
   'семипалатинская/абайская': 'абайская',
 };
 
+/**
+ * Registry commodity → localized name. Handles 'Au', 'Pb-Zn', 'Au+Cu' and
+ * annotated values like 'Au россыпь'; unknown values are returned as-is.
+ */
 export function leadMineralName(
   mineral: string | null | undefined,
   locale: Locale
 ): string {
   const raw = (mineral ?? '').trim();
-  return MINERALS[raw.toUpperCase()]?.[locale] ?? raw;
+  const head = raw.split(/\s+/)[0] ?? '';
+  const names = head
+    .split(/[+\-–\/]/)
+    .filter(Boolean)
+    .map((part) => MINERALS[part.toUpperCase()]?.[locale]);
+  if (!names.length || names.some((n) => !n)) return raw;
+  const parts = names as string[];
+  if (locale === 'zh') return parts.join('');
+  if (locale === 'en') return parts.join('-');
+  return [parts[0], ...parts.slice(1).map((n) => n.toLowerCase())].join('-');
 }
 
 /** Localized region name, or '' when the export value is not a known region. */
@@ -2515,7 +2541,7 @@ export const inquirySchema = z.object({
   leadCode: z
     .string()
     .trim()
-    .regex(/^[A-Z]{1,3}-[A-Z0-9]{3,12}$/)
+    .regex(/^[A-Z]{1,6}-[A-Z0-9]{3,12}$/)
     .optional(),
   locale: z.enum(['ru', 'kz', 'en', 'zh']),
   sourcePath: text(300).default(''),
@@ -3899,7 +3925,7 @@ const websiteJsonLd = {
 ```
 # QAZNEDR HOLDING
 
-> Kazakhstan mineral exploration holding. Prepared, currently unlicensed (free) subsoil areas for gold, copper, zinc, tin and nickel, selected by analysing ~7,000 archival geological reports. We support foreign investors — primarily from China and India — from area selection to licensing and the transfer-of-rights permission.
+> Kazakhstan mineral exploration holding. Prepared, currently unlicensed (free) subsoil areas for gold, copper and other metals, drawn from our registry of 7,000+ mineral occurrences compiled from Soviet-era geological fund reports. We support foreign investors — primarily from China and India — from area selection to licensing and the transfer-of-rights permission.
 
 ## What we offer
 - Portfolio of prepared exploration areas as closed teasers: metal, region, deposit type, grade range. Exact coordinates and full data are shared after a meeting and an NDA.
@@ -3909,8 +3935,10 @@ const websiteJsonLd = {
 
 ## Important facts
 - Areas in the portfolio are free (not licensed) unless stated otherwise; the holding does not claim ownership of them.
+- "Free" means free per our check against the public subsoil cadastre map on the stated date; an official extract is obtained before any deal.
+- Reserves are Soviet-era categories (A/B/C1/C2); P1–P3 are forecast resources, not reserves. No object has a JORC report yet.
 - Any transfer of subsoil use rights in Kazakhstan requires permission of the competent authority (Subsoil Code, articles 44–45).
-- Grade and resource figures state their standard (GKZ, KAZRC or historical estimate).
+- Grade figures are labelled as average, spike or schlich values.
 
 ## Key pages
 | Language | Home | Portfolio | Contact |

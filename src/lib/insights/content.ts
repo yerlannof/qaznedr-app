@@ -37,13 +37,16 @@ export function articlePath(slug: string, locale: Locale): string {
 
 export function renderMarkdown(markdown: string, tableLabel = 'Table'): string {
   const html = marked.parse(markdown, { async: false, gfm: true }) as string;
-  const label = tableLabel.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  let tableNumber = 0;
   // Focusable region: wide tables scroll inside, keyboard users reach them.
   return html
-    .replace(
-      /<table>/g,
-      `<div class="insight-table" tabindex="0" role="region" aria-label="${label}"><table>`
-    )
+    .replace(/<table>/g, () => {
+      tableNumber += 1;
+      const label = `${tableLabel} ${tableNumber}`
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;');
+      return `<div class="insight-table" tabindex="0" role="region" aria-label="${label}"><table>`;
+    })
     .replace(/<\/table>/g, '</table></div>')
     .replace(
       /<a href="(https?:\/\/[^"]+)"/g,

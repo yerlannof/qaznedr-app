@@ -56,6 +56,7 @@ describe('seo/metadata', () => {
     expect(m.openGraph?.images).toEqual([
       expect.objectContaining({
         url: 'https://qaznedr.kz/en/insights/x/opengraph-image',
+        alt: 't',
       }),
     ]);
     expect(m.twitter?.images).toEqual([

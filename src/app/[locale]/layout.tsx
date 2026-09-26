@@ -98,6 +98,7 @@ export default async function LocaleLayout({
     notFound();
   }
   const lang = HREFLANG[toLocale(locale)];
+  const { t } = getServerTranslation(locale);
 
   return (
     <html lang={lang} suppressHydrationWarning>
@@ -111,12 +112,12 @@ export default async function LocaleLayout({
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:bg-gray-900 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
         >
-          Перейти к содержимому
+          {t('common.skipToContent')}
         </a>
         <ThemeProvider>
           <AuthProvider>
             <WebVitalsTracker pageName={`/${locale}`} />
-            <main id="main" className="pb-16 md:pb-0">
+            <main id="main" tabIndex={-1} className="pb-16 md:pb-0">
               {children}
             </main>
             <MobileTabBar />

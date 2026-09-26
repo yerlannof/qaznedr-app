@@ -95,19 +95,25 @@ export default async function InsightArticlePage({
             >
               {t('navigation.home')}
             </Link>
-            <span aria-hidden="true">/</span>
-            <Link
-              href={`/${locale}/insights`}
-              className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-150"
-            >
-              {t('insights.breadcrumb')}
-            </Link>
-            <span aria-hidden="true">/</span>
-            <span
-              aria-current="page"
-              className="max-w-full truncate text-gray-700 dark:text-gray-300"
-            >
-              {article.title}
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden="true">/</span>
+              <Link
+                href={`/${locale}/insights`}
+                className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-150"
+              >
+                {t('insights.breadcrumb')}
+              </Link>
+            </span>
+            <span className="inline-flex min-w-0 max-w-full items-center gap-1.5">
+              <span aria-hidden="true" className="shrink-0">
+                /
+              </span>
+              <span
+                aria-current="page"
+                className="max-w-full truncate text-gray-700 dark:text-gray-300"
+              >
+                {article.title}
+              </span>
             </span>
           </nav>
 

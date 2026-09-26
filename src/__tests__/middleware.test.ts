@@ -86,7 +86,7 @@ describe('guides without a translation', () => {
     );
   });
 
-  it('keeps UTM and other query parameters byte for byte', () => {
+  it('preserves UTM and other query parameter values', () => {
     const res = middleware(
       new NextRequest(
         `https://qaznedr.kz/kz/insights/${slug}?utm_source=wechat&utm_campaign=a%20b`

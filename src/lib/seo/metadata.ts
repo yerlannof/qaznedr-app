@@ -49,7 +49,7 @@ export function buildPageMetadata(input: PageMetadataInput): Metadata {
   const image = {
     url: ogImageUrl(input.locale, input.ogImagePath),
     ...OG_SIZE,
-    alt: OG_ALT,
+    alt: input.ogImagePath ? input.title : OG_ALT,
   };
   const fullTitle =
     input.absoluteTitle || input.title.includes(SITE_NAME)

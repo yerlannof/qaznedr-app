@@ -34,3 +34,28 @@ describe('listPublishedLeads paging', () => {
     }
   );
 });
+
+describe('listPublishedLeads failures', () => {
+  it('rejects database failures instead of returning a valid empty catalogue', async () => {
+    const original = builder.then;
+    builder.then = (resolve: (v: unknown) => void) =>
+      resolve({
+        data: null,
+        count: null,
+        error: { message: 'private database detail' },
+      });
+    try {
+      await expect(listPublishedLeads()).rejects.toThrow(
+        'Unable to load areas'
+      );
+    } finally {
+      builder.then = original;
+    }
+  });
+  it('keeps a successful empty catalogue valid', async () => {
+    await expect(listPublishedLeads()).resolves.toMatchObject({
+      leads: [],
+      total: 0,
+    });
+  });
+});

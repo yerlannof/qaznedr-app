@@ -12,7 +12,7 @@ export default function NotFound() {
     <div className="min-h-screen bg-white dark:bg-[#0a0a0a] flex flex-col">
       <Navigation />
 
-      <main className="flex-1 flex items-center justify-center px-6 pt-20 lg:pt-24 pb-24">
+      <div className="flex-1 flex items-center justify-center px-6 pt-20 lg:pt-24 pb-24">
         <div className="w-full max-w-xl mx-auto text-center">
           {/* Decorative accent */}
           <div
@@ -77,7 +77,7 @@ export default function NotFound() {
             </Link>
           </div>
         </div>
-      </main>
+      </div>
 
       <Footer />
     </div>

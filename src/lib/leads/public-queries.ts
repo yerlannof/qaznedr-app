@@ -61,8 +61,7 @@ export async function listPublishedLeads(
 
   const { data, count, error } = await q;
   if (error) {
-    console.error('listPublishedLeads error:', error.message);
-    return { leads: [], total: 0, page, limit, totalPages: 0 };
+    throw new Error('Unable to load areas');
   }
   return {
     leads: (data ?? []) as LeadTeaser[],

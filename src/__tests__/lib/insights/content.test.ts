@@ -21,14 +21,26 @@ describe('renderMarkdown', () => {
   it('wraps tables in a labelled, focusable region that scrolls', () => {
     const html = renderMarkdown('| A | B |\n|---|---|\n| 1 | 2 |\n', 'Таблица');
     expect(html).toContain(
-      '<div class="insight-table" tabindex="0" role="region" aria-label="Таблица"><table>'
+      '<div class="insight-table" tabindex="0" role="region" aria-label="Таблица 1"><table>'
     );
     expect(html).toContain('</table></div>');
   });
 
   it('escapes quotes in the table label', () => {
     const html = renderMarkdown('| A |\n|---|\n| 1 |\n', 'a"b');
-    expect(html).toContain('aria-label="a&quot;b"');
+    expect(html).toContain('aria-label="a&quot;b 1"');
+  });
+
+  it('numbers table regions in order and restarts for each render', () => {
+    const markdown = '| A |\n|---|\n| 1 |\n\n| B |\n|---|\n| 2 |';
+    const html = renderMarkdown(markdown, 'Table');
+    expect(html.match(/aria-label="Table [12]"/g)).toEqual([
+      'aria-label="Table 1"',
+      'aria-label="Table 2"',
+    ]);
+    expect(renderMarkdown('| C |\n|---|\n| 3 |', 'Table')).toContain(
+      'aria-label="Table 1"'
+    );
   });
 
   it('opens external links in a new tab, internal ones in place', () => {
@@ -57,7 +69,7 @@ describe('parseArticle', () => {
   it('labels tables in the article language', () => {
     const md =
       '---\ntitle: 标题\ndescription: 描述\n---\n\n| A |\n|---|\n| 1 |\n';
-    expect(parseArticle(md, entry, 'zh').html).toContain('aria-label="表格"');
+    expect(parseArticle(md, entry, 'zh').html).toContain('aria-label="表格 1"');
   });
 
   it('combines the file header with registry facts', () => {

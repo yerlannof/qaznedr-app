@@ -575,6 +575,7 @@ export const translations = {
       subtitle: 'Используйте карту для поиска месторождений по регионам',
     },
     common: {
+      skipToContent: 'Перейти к содержимому',
       dashboard: 'Личный кабинет',
       favorites: 'Избранное',
       login: 'Войти',
@@ -1338,6 +1339,7 @@ export const translations = {
         'Аймақтар бойынша кен орындарын іздеу үшін картаны пайдаланыңыз',
     },
     common: {
+      skipToContent: 'Мазмұнға өту',
       dashboard: 'Жеке кабинет',
       favorites: 'Таңдаулылар',
       login: 'Кіру',
@@ -2015,6 +2017,7 @@ export const translations = {
       subtitle: 'Use the map to search for deposits by regions',
     },
     common: {
+      skipToContent: 'Skip to content',
       dashboard: 'Dashboard',
       favorites: 'Favorites',
       login: 'Log in',
@@ -2668,6 +2671,7 @@ export const translations = {
       subtitle: '使用地图按地区搜索矿物资源',
     },
     common: {
+      skipToContent: '跳转到主要内容',
       dashboard: '个人中心',
       favorites: '收藏夹',
       login: '登录',

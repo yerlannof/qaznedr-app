@@ -4,6 +4,10 @@
 export const translations = {
   ru: {
     geologyScene: {
+      section: '01 — 03 / чтение разреза',
+      note: 'Иллюстрация условная: показывает способ чтения геологического материала, не глубину, масштаб или данные какого-либо участка.',
+      controlsLabel: 'Этапы сцены',
+      hint: 'Прокрутка или кнопки этапов',
       disclaimer: 'СХЕМАТИЧЕСКИЙ РАЗРЕЗ / НЕ ДАННЫЕ УЧАСТКА',
       surface: 'Поверхность',
       contacts: 'Контакты пород',
@@ -831,6 +835,10 @@ export const translations = {
   },
   kz: {
     geologyScene: {
+      section: '01 — 03 / қиманы оқу',
+      note: 'Бұл сызба геологиялық материалды оқу тәсілін ғана көрсетеді; нақты учаскенің тереңдігін, масштабын немесе деректерін білдірмейді.',
+      controlsLabel: 'Көрініс кезеңдері',
+      hint: 'Айналдыру немесе кезең батырмалары',
       disclaimer: 'Сызбалық қима / учаске деректері емес',
       surface: 'Жер беті',
       contacts: 'Тау жыныстарының түйісуі',
@@ -1593,6 +1601,10 @@ export const translations = {
   },
   en: {
     geologyScene: {
+      section: '01 — 03 / reading the section',
+      note: 'This illustration shows a way to read geological material. It does not represent the depth, scale or data of any area.',
+      controlsLabel: 'Scene stages',
+      hint: 'Scroll or use stage buttons',
       disclaimer: 'SCHEMATIC SECTION / NOT SITE DATA',
       surface: 'Surface',
       contacts: 'Rock contacts',
@@ -2340,6 +2352,10 @@ export const translations = {
   },
   zh: {
     geologyScene: {
+      section: '01 — 03 / 阅读剖面',
+      note: '此示意图仅展示地质材料的阅读方式，不表示任何矿区的深度、比例或数据。',
+      controlsLabel: '场景阶段',
+      hint: '滚动或使用阶段按钮',
       disclaimer: '示意剖面 / 非地块数据',
       surface: '地表',
       contacts: '岩层接触',

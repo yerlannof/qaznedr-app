@@ -156,7 +156,7 @@ it('selects the desktop stage only when the scroll reaches it', () => {
   render(<GeologyScene locale="ru" />);
   fireEvent.click(screen.getAllByRole('button')[2]);
   expect(window.scrollTo).toHaveBeenCalledWith({
-    top: 1672,
+    top: 1672 * 0.83,
     behavior: 'smooth',
   });
   expect(screen.getAllByRole('button')[0]).toHaveAttribute(
@@ -201,11 +201,11 @@ it('updates the layer pose inside a stage and retraces it immediately on reverse
   render(<GeologyScene locale="ru" />);
   const section = screen.getByRole('region');
   scroll(64 - 1672 * 0.2);
-  expect(Number(section.style.getPropertyValue('--reveal'))).toBeCloseTo(0.4);
+  expect(Number(section.style.getPropertyValue('--lift'))).toBeCloseTo(1 / 6);
   scroll(64 - 1672 * 0.25);
-  expect(Number(section.style.getPropertyValue('--reveal'))).toBeCloseTo(0.5);
+  expect(Number(section.style.getPropertyValue('--lift'))).toBeCloseTo(1 / 3);
   scroll(64 - 1672 * 0.2);
-  expect(Number(section.style.getPropertyValue('--reveal'))).toBeCloseTo(0.4);
+  expect(Number(section.style.getPropertyValue('--lift'))).toBeCloseTo(1 / 6);
   expect(Number(section.style.getPropertyValue('--focus'))).toBe(0);
   expect(window.scrollTo).not.toHaveBeenCalled();
 });
@@ -214,17 +214,57 @@ it('clamps fast jumps to both endpoints even outside the viewport', () => {
   render(<GeologyScene locale="ru" />);
   const section = screen.getByRole('region');
   scroll(-4000);
-  expect(section.style.getPropertyValue('--reveal')).toBe('1');
+  expect(section.style.getPropertyValue('--lift')).toBe('1');
   expect(section.style.getPropertyValue('--focus')).toBe('1');
   expect(screen.getAllByRole('button')[2]).toHaveAttribute(
     'aria-pressed',
     'true'
   );
   scroll(1500);
-  expect(section.style.getPropertyValue('--reveal')).toBe('0');
+  expect(section.style.getPropertyValue('--lift')).toBe('0');
   expect(section.style.getPropertyValue('--focus')).toBe('0');
   expect(screen.getAllByRole('button')[0]).toHaveAttribute(
     'aria-pressed',
     'true'
+  );
+});
+
+it('opens the surface before the base, then focuses the revealed contact', () => {
+  render(<GeologyScene locale="en" />);
+  const section = screen.getByRole('region');
+  scroll(64 - 1672 * 0.1);
+  expect(section.style.getPropertyValue('--lift')).toBe('0');
+  scroll(64 - 1672 * 0.3);
+  expect(Number(section.style.getPropertyValue('--lift'))).toBeCloseTo(0.5);
+  expect(section.style.getPropertyValue('--drop')).toBe('0');
+  expect(section.style.getPropertyValue('--focus')).toBe('0');
+  scroll(64 - 1672 * 0.55);
+  expect(section.style.getPropertyValue('--lift')).toBe('1');
+  expect(Number(section.style.getPropertyValue('--drop'))).toBeCloseTo(0.5);
+  expect(section.style.getPropertyValue('--focus')).toBe('0');
+  scroll(64 - 1672 * 0.825);
+  expect(section.style.getPropertyValue('--drop')).toBe('1');
+  expect(Number(section.style.getPropertyValue('--focus'))).toBeCloseTo(0.5);
+});
+
+it('takes the middle-stage button to the approved timeline landmark', () => {
+  render(<GeologyScene locale="en" />);
+  fireEvent.click(screen.getAllByRole('button')[1]);
+  expect(window.scrollTo).toHaveBeenCalledWith({
+    top: 1672 * 0.53,
+    behavior: 'smooth',
+  });
+});
+
+it('uses the approved realistic artwork with a connected contact marker', () => {
+  const { container } = render(<GeologyScene locale="en" />);
+  const images = [...container.querySelectorAll('img')];
+  expect(images).toHaveLength(3);
+  images.forEach((image) =>
+    expect(image.getAttribute('src')).toContain('geology-realistic.png')
+  );
+  expect(container.querySelector('svg path')).toHaveAttribute(
+    'd',
+    'M 740 365 H 710 L 500 545'
   );
 });

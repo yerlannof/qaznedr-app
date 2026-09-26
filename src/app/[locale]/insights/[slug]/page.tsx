@@ -58,6 +58,8 @@ export default async function InsightArticlePage({
   const { t } = getServerTranslation(locale);
   // formatCheckDate renders an ISO date per locale (26.09.2026 / 2026年9月26日).
   const updated = formatCheckDate(entry.updated, locale);
+  // The legal note dates the rules, not the last text edit.
+  const lawAsOf = formatCheckDate(entry.lawAsOf ?? entry.updated, locale);
   const others = listArticles(locale).filter((card) => card.slug !== slug);
   const jsonLd = articleJsonLd({
     slug,
@@ -99,6 +101,13 @@ export default async function InsightArticlePage({
             >
               {t('insights.breadcrumb')}
             </Link>
+            <span aria-hidden="true">/</span>
+            <span
+              aria-current="page"
+              className="max-w-full truncate text-gray-700 dark:text-gray-300"
+            >
+              {article.title}
+            </span>
           </nav>
 
           <div className="mt-8 inline-flex items-center gap-2">
@@ -124,7 +133,7 @@ export default async function InsightArticlePage({
                 className="w-4 h-4 mt-0.5 flex-shrink-0 text-gold-dark dark:text-gold-light"
                 aria-hidden="true"
               />
-              <p>{t('insights.legalNote', { date: updated })}</p>
+              <p>{t('insights.legalNote', { date: lawAsOf })}</p>
             </aside>
           )}
 

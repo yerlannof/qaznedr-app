@@ -18,10 +18,17 @@ const entry: InsightEntry = {
 };
 
 describe('renderMarkdown', () => {
-  it('wraps tables so they scroll on narrow screens', () => {
-    const html = renderMarkdown('| A | B |\n|---|---|\n| 1 | 2 |\n');
-    expect(html).toContain('<div class="insight-table"><table>');
+  it('wraps tables in a labelled, focusable region that scrolls', () => {
+    const html = renderMarkdown('| A | B |\n|---|---|\n| 1 | 2 |\n', 'Таблица');
+    expect(html).toContain(
+      '<div class="insight-table" tabindex="0" role="region" aria-label="Таблица"><table>'
+    );
     expect(html).toContain('</table></div>');
+  });
+
+  it('escapes quotes in the table label', () => {
+    const html = renderMarkdown('| A |\n|---|\n| 1 |\n', 'a"b');
+    expect(html).toContain('aria-label="a&quot;b"');
   });
 
   it('opens external links in a new tab, internal ones in place', () => {
@@ -47,6 +54,12 @@ describe('readingMinutes', () => {
 });
 
 describe('parseArticle', () => {
+  it('labels tables in the article language', () => {
+    const md =
+      '---\ntitle: 标题\ndescription: 描述\n---\n\n| A |\n|---|\n| 1 |\n';
+    expect(parseArticle(md, entry, 'zh').html).toContain('aria-label="表格"');
+  });
+
   it('combines the file header with registry facts', () => {
     const a = parseArticle(
       '---\ntitle: Заголовок\ndescription: Описание\n---\n\n## Раздел\n\nТекст',

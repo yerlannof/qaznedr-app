@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
 import path from 'path';
 import { marked } from 'marked';
+import { translate } from '@/lib/i18n/translations';
 import type { Locale } from '@/lib/seo/site';
 import { parseFrontMatter } from './front-matter';
 import {
@@ -34,10 +35,15 @@ export function articlePath(slug: string, locale: Locale): string {
   return path.join(INSIGHTS_DIR, slug, `${locale}.md`);
 }
 
-export function renderMarkdown(markdown: string): string {
+export function renderMarkdown(markdown: string, tableLabel = 'Table'): string {
   const html = marked.parse(markdown, { async: false, gfm: true }) as string;
+  const label = tableLabel.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  // Focusable region: wide tables scroll inside, keyboard users reach them.
   return html
-    .replace(/<table>/g, '<div class="insight-table"><table>')
+    .replace(
+      /<table>/g,
+      `<div class="insight-table" tabindex="0" role="region" aria-label="${label}"><table>`
+    )
     .replace(/<\/table>/g, '</table></div>')
     .replace(
       /<a href="(https?:\/\/[^"]+)"/g,
@@ -63,7 +69,7 @@ export function parseArticle(
   const file = `${entry.slug}/${locale}.md`;
   if (!data.title) throw new Error(`${file}: missing title`);
   if (!data.description) throw new Error(`${file}: missing description`);
-  const html = renderMarkdown(body);
+  const html = renderMarkdown(body, translate(locale, 'insights.table'));
   // The page prints the title as its only H1.
   if (/<h1[\s>]/i.test(html)) throw new Error(`${file}: H1 in the body`);
   return {

@@ -20,6 +20,7 @@ export const translations = {
       legalNote:
         'Материал не является юридической консультацией. Нормы приведены по состоянию на {date}; перед сделкой проверьте актуальную редакцию на adilet.zan.kz и проконсультируйтесь с юристом.',
       otherGuides: 'Другие гайды',
+      table: 'Таблица',
       onlyRu: 'Гайды пока доступны на русском, английском и китайском.',
       ctaTitle: 'Готовы обсудить участок?',
       ctaText:
@@ -781,6 +782,7 @@ export const translations = {
       legalNote:
         'Бұл материал заң кеңесі емес. Нормалар {date} жағдайы бойынша келтірілген; мәміле алдында adilet.zan.kz сайтындағы өзекті редакцияны тексеріп, заңгермен кеңесіңіз.',
       otherGuides: 'Басқа нұсқаулықтар',
+      table: 'Кесте',
       onlyRu:
         'Нұсқаулықтар әзірге орыс, ағылшын және қытай тілдерінде қолжетімді.',
       ctaTitle: 'Учаскені талқылауға дайынсыз ба?',
@@ -1475,6 +1477,7 @@ export const translations = {
       legalNote:
         'This is not legal advice. Rules are stated as of {date}; before a transaction, check the current wording on adilet.zan.kz and consult a lawyer.',
       otherGuides: 'More guides',
+      table: 'Table',
       onlyRu: 'Guides are available in Russian, English and Chinese.',
       ctaTitle: 'Ready to discuss an area?',
       ctaText:
@@ -2156,6 +2159,7 @@ export const translations = {
       legalNote:
         '本文不构成法律意见。相关规定以{date}为准；交易前请在 adilet.zan.kz 核对现行版本并咨询律师。',
       otherGuides: '更多指南',
+      table: '表格',
       onlyRu: '指南目前提供俄文、英文和中文版本。',
       ctaTitle: '想进一步了解矿区？',
       ctaText: '查看我们准备好的矿区，或直接联系我们——一个工作日内回复。',

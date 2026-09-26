@@ -13,6 +13,9 @@ export interface InsightEntry {
   updated: string;
   /** Shows the "not legal advice, as of <updated>" note. */
   legal: boolean;
+  /** ISO date the cited rules were last checked against the current law
+   * (the legal note's "as of"). Required when `legal` is true. */
+  lawAsOf?: string;
   /** Languages with a content/insights/<slug>/<locale>.md file. */
   locales: readonly Locale[];
 }
@@ -36,6 +39,7 @@ export const INSIGHTS: readonly InsightEntry[] = [
     published: '2026-09-26',
     updated: '2026-09-26',
     legal: true,
+    lawAsOf: '2026-09-26',
     locales: WRITTEN,
   },
   {
@@ -44,6 +48,7 @@ export const INSIGHTS: readonly InsightEntry[] = [
     published: '2026-09-26',
     updated: '2026-09-26',
     legal: true,
+    lawAsOf: '2026-09-26',
     locales: WRITTEN,
   },
   {
@@ -60,6 +65,7 @@ export const INSIGHTS: readonly InsightEntry[] = [
     published: '2026-09-26',
     updated: '2026-09-26',
     legal: true,
+    lawAsOf: '2026-09-26',
     locales: WRITTEN,
   },
 ];

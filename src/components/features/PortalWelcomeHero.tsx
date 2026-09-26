@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { ArrowRight, Sparkles, MapPin } from 'lucide-react';
+import { ArrowRight, Gem, MapPin } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 
 // Portal-level welcome hero — editorial gold-on-ink aesthetic with mission statement.
@@ -116,17 +116,17 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
           {/* Editorial column — left, ~60% */}
           <div className="lg:col-span-7">
             <div
-              className="inline-flex items-center gap-3 mb-7 px-4 py-2 rounded-full border border-gold/40 bg-[rgba(200,162,75,0.08)] opacity-0"
+              className="inline-flex items-center gap-3 mb-7 px-4 py-2 rounded-full border border-gold/40 bg-[rgba(200,162,75,0.08)] opacity-0 motion-reduce:opacity-100 motion-reduce:animate-none"
               style={{ animation: 'qzFadeUp 0.6s ease-out forwards' }}
             >
-              <span className="w-2 h-2 rounded-full bg-gold shadow-[0_0_8px_rgba(200,162,75,0.6)]" />
+              <span className="w-2 h-2 rounded-full bg-gold border border-gold-light/40" />
               <span className="text-[13px] font-semibold uppercase tracking-[0.16em] text-gold-light">
                 {t('portal.eyebrow')}
               </span>
             </div>
 
             <h1
-              className="font-serif text-4xl sm:text-5xl lg:text-[5rem] leading-[1.04] tracking-tight font-light text-white opacity-0"
+              className="font-serif text-4xl sm:text-5xl lg:text-[5rem] leading-[1.04] tracking-tight font-light text-white opacity-0 motion-reduce:opacity-100 motion-reduce:animate-none"
               style={{ animation: 'qzFadeUp 0.7s 0.1s ease-out forwards' }}
             >
               {t('portal.headlineLine1')}{' '}
@@ -137,29 +137,32 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
             </h1>
 
             <p
-              className="mt-6 text-base lg:text-lg text-gray-300 max-w-2xl leading-relaxed opacity-0"
+              className="mt-6 text-base lg:text-lg text-gray-300 max-w-2xl leading-relaxed opacity-0 motion-reduce:opacity-100 motion-reduce:animate-none"
               style={{ animation: 'qzFadeUp 0.7s 0.2s ease-out forwards' }}
             >
               {t('portal.subtitle')}
             </p>
 
             <div
-              className="mt-10 flex flex-wrap items-center gap-3 opacity-0"
+              className="mt-10 flex flex-wrap items-center gap-3 opacity-0 motion-reduce:opacity-100 motion-reduce:animate-none"
               style={{ animation: 'qzFadeUp 0.7s 0.3s ease-out forwards' }}
             >
               <Link
                 href={`/${locale}/leads`}
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold text-[#0A0A0A] text-sm font-semibold hover:bg-gold-light transition-all hover:shadow-[0_0_30px_rgba(200,162,75,0.35)]"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold text-[#0A0A0A] text-sm font-semibold hover:bg-gold-light transition-colors"
               >
-                <Sparkles className="w-4 h-4" />
+                <Gem aria-hidden className="w-4 h-4" />
                 {t('portal.ctaLeads')}
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight
+                  aria-hidden
+                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                />
               </Link>
               <Link
                 href={`/${locale}/listings`}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/20 text-white text-sm font-semibold hover:bg-white/5 hover:border-white/40 transition-all"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/20 text-white text-sm font-semibold hover:bg-white/5 hover:border-white/40 transition-colors"
               >
-                <MapPin className="w-4 h-4" />
+                <MapPin aria-hidden className="w-4 h-4" />
                 {t('portal.ctaListings')}
               </Link>
             </div>
@@ -167,18 +170,13 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
 
           {/* Stats card — right, ~40% */}
           <div
-            className="lg:col-span-5 opacity-0"
+            className="lg:col-span-5 opacity-0 motion-reduce:opacity-100 motion-reduce:animate-none"
             style={{ animation: 'qzFadeUp 0.7s 0.4s ease-out forwards' }}
           >
             <div className="relative">
-              {/* Soft glow */}
-              <div className="absolute -inset-2 bg-gradient-to-br from-gold/25 via-gold/5 to-transparent rounded-3xl blur-2xl" />
               <div className="relative rounded-2xl border border-gold/30 bg-black/50 backdrop-blur-sm p-7 lg:p-8">
                 <div className="flex items-center gap-2 mb-7">
-                  <span className="relative flex w-2 h-2">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-gold opacity-60 animate-ping" />
-                    <span className="relative inline-flex w-2 h-2 rounded-full bg-gold" />
-                  </span>
+                  <span className="inline-flex w-2 h-2 rounded-full bg-gold border border-gold-light/40" />
                   <span className="text-[11px] uppercase tracking-[0.22em] text-gold-light">
                     {t('portal.statsLive')}
                   </span>
@@ -208,7 +206,7 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
 
         {/* Trust strip — subtle, below the main grid */}
         <div
-          className="mt-16 pt-8 border-t border-white/[0.08] grid grid-cols-2 sm:grid-cols-4 gap-6 opacity-0"
+          className="mt-16 pt-8 border-t border-white/[0.08] grid grid-cols-2 sm:grid-cols-4 gap-6 opacity-0 motion-reduce:opacity-100 motion-reduce:animate-none"
           style={{ animation: 'qzFadeUp 0.7s 0.5s ease-out forwards' }}
         >
           {(['verified', 'archive', 'gates', 'discipline'] as const).map(

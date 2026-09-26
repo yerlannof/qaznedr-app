@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getPrisma } from '@/lib/prisma';
+import { createClient } from '@/lib/supabase/server';
 
 const BASE_URL = 'https://qaznedr.kz';
 
@@ -11,26 +11,25 @@ export async function generateMetadata({
   const { locale, id } = await params;
 
   try {
-    const prisma = getPrisma();
-    const deposit = await prisma.kazakhstanDeposit.findUnique({
-      where: { id },
-      select: {
-        title: true,
-        description: true,
-        mineral: true,
-        region: true,
-        type: true,
-      },
-    });
+    const supabase = await createClient();
+    const { data: deposit } = await supabase
+      .from('kazakhstan_deposits')
+      .select('title, description, mineral, region, type, status')
+      .eq('id', id)
+      .single();
 
-    if (!deposit) {
+    if (!deposit || (deposit as any).status !== 'ACTIVE') {
       return {
-        title: 'Объявление не найдено',
+        title: 'Объявление не найдено | QAZNEDR.KZ',
+        robots: { index: false, follow: false },
       };
     }
 
-    const title = deposit.title;
-    const description = deposit.description.slice(0, 160);
+    const title = (deposit as any).title as string;
+    const description = (((deposit as any).description as string) || '').slice(
+      0,
+      160
+    );
     const url = `${BASE_URL}/${locale}/listings/${id}`;
 
     return {

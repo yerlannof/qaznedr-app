@@ -38,7 +38,7 @@ export const TEASER_COLUMNS =
   'code,mineral,type,region,tier,exclusivity,teaser_title,teaser_summary,' +
   'grade_display,grade_label,byproducts_display,reserve_categories,license_status,' +
   'last_verified,distance_band,map_centroid,fair_value_min_usd_m,fair_value_max_usd_m,' +
-  'jorc_potential_usd_m,price_display,confidence,status,sold_count';
+  'jorc_potential_usd_m,confidence,status,sold_count';
 
 /** Gated — server-only. Never imported into a client component. */
 export interface LeadPrivate {

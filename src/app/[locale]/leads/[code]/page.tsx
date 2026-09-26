@@ -12,6 +12,12 @@ import {
   Lock,
   ChevronRight,
   CheckCircle2,
+  BarChart3,
+  Scale,
+  Archive,
+  Compass,
+  FileSignature,
+  FolderCheck,
 } from 'lucide-react';
 import { getPublishedLeadByCode } from '@/lib/leads/public-queries';
 import {
@@ -19,6 +25,7 @@ import {
   EXCLUSIVITY_LABELS,
   isFreeStatus,
 } from '@/lib/leads/types';
+import { getServerTranslation } from '@/lib/i18n/translations';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,6 +35,7 @@ export default async function LeadTeaserPage({
   params: Promise<{ locale: string; code: string }>;
 }) {
   const { locale, code } = await params;
+  const { t } = getServerTranslation(locale);
   const lead = await getPublishedLeadByCode(code);
   if (!lead) notFound();
 
@@ -41,6 +49,9 @@ export default async function LeadTeaserPage({
       ? `$${lead.fair_value_min_usd_m ?? '?'}–${lead.fair_value_max_usd_m ?? '?'} млн`
       : null;
 
+  const teaserTitle =
+    lead.teaser_title || `Золото · ${lead.region || 'Казахстан'}`;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -48,7 +59,7 @@ export default async function LeadTeaserPage({
     category: 'Geological lead',
     description:
       lead.teaser_summary ||
-      'Свободный золотоносный участок (закрытая наводка).',
+      'Свободный золотоносный участок (закрытая находка).',
     areaServed: lead.region || 'Kazakhstan',
     offers: {
       '@type': 'Offer',
@@ -57,6 +68,31 @@ export default async function LeadTeaserPage({
         ? 'https://schema.org/SoldOut'
         : 'https://schema.org/InStock',
     },
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Главная',
+        item: `https://qaznedr.kz/${locale}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Находки',
+        item: `https://qaznedr.kz/${locale}/leads`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: teaserTitle,
+        item: `https://qaznedr.kz/${locale}/leads/${lead.code}`,
+      },
+    ],
   };
 
   return (
@@ -70,7 +106,7 @@ export default async function LeadTeaserPage({
             className="text-sm text-gray-400 mb-6 flex items-center gap-1.5"
           >
             <Link href={`/${locale}/leads`} className="hover:text-gray-600">
-              Наводки
+              {t('leadDetail.breadcrumbLeads')}
             </Link>
             <ChevronRight className="w-3.5 h-3.5" />
             <span className="text-gray-600 dark:text-gray-300">
@@ -84,21 +120,20 @@ export default async function LeadTeaserPage({
               <div>
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   {isSold ? (
-                    <Badge variant="default">ПРОДАНО</Badge>
+                    <Badge variant="default">{t('leadDetail.badgeSold')}</Badge>
                   ) : free ? (
                     <Badge variant="gold">
                       <ShieldCheck className="w-3 h-3 mr-1" />
-                      СВОБОДЕН
+                      {t('leadDetail.badgeFree')}
                     </Badge>
                   ) : null}
                   <Badge variant="blue">{lead.mineral}</Badge>
                   <Badge variant="default">
-                    {TYPE_LABELS[lead.type] ?? 'Объект'}
+                    {TYPE_LABELS[lead.type] ?? t('leadDetail.typeFallback')}
                   </Badge>
                 </div>
-                <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
-                  {lead.teaser_title ||
-                    `Золото · ${lead.region || 'Казахстан'}`}
+                <h1 className="font-serif font-light text-3xl lg:text-4xl tracking-tight text-gray-900 dark:text-gray-50">
+                  {teaserTitle}
                 </h1>
                 {lead.region && (
                   <p className="mt-2 inline-flex items-center gap-1 text-sm text-gray-500">
@@ -110,14 +145,18 @@ export default async function LeadTeaserPage({
 
               {/* Value evidence */}
               <section className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-                <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                  📊 Чем подтверждена ценность
+                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                  <BarChart3
+                    className="w-4 h-4 text-gold-dark dark:text-gold-light"
+                    aria-hidden="true"
+                  />
+                  {t('leadDetail.valueEvidenceHeading')}
                 </h2>
                 <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {lead.grade_display && (
                     <div className="sm:col-span-2">
                       <dt className="text-xs uppercase tracking-wider text-gray-400">
-                        Содержание Au
+                        {t('leadDetail.gradeAu')}
                       </dt>
                       <dd className="text-lg font-bold text-gray-900 dark:text-gray-100">
                         {lead.grade_display}
@@ -133,7 +172,7 @@ export default async function LeadTeaserPage({
                     lead.reserve_categories.length > 0 && (
                       <div>
                         <dt className="text-xs uppercase tracking-wider text-gray-400">
-                          Категории запасов
+                          {t('leadDetail.reserveCategories')}
                         </dt>
                         <dd className="text-sm font-medium">
                           {lead.reserve_categories.join(', ')}
@@ -143,7 +182,7 @@ export default async function LeadTeaserPage({
                   {lead.byproducts_display && (
                     <div>
                       <dt className="text-xs uppercase tracking-wider text-gray-400">
-                        Попутные
+                        {t('leadDetail.byproducts')}
                       </dt>
                       <dd className="text-sm font-medium">
                         {lead.byproducts_display}
@@ -153,7 +192,7 @@ export default async function LeadTeaserPage({
                   {fairValue && (
                     <div>
                       <dt className="text-xs uppercase tracking-wider text-gray-400">
-                        Оценочная стоимость
+                        {t('leadDetail.fairValue')}
                       </dt>
                       <dd className="text-sm font-medium inline-flex items-center gap-1">
                         <TrendingUp className="w-3.5 h-3.5 text-gold-dark" />{' '}
@@ -162,16 +201,23 @@ export default async function LeadTeaserPage({
                     </div>
                   )}
                 </dl>
-                <p className="text-[12px] text-gray-400 mt-4">
-                  ⚖️ Все цифры — из государственного первоисточника, с указанием
-                  типа значения. Без приукрашивания.
+                <p className="text-[12px] text-gray-400 mt-4 flex items-start gap-1.5">
+                  <Scale
+                    className="w-4 h-4 shrink-0 text-gold-dark dark:text-gold-light"
+                    aria-hidden="true"
+                  />
+                  <span>{t('leadDetail.valueNote')}</span>
                 </p>
               </section>
 
               {/* Legal status */}
               <section className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-                <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                  ✅ Юридический статус
+                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                  <Scale
+                    className="w-4 h-4 text-gold-dark dark:text-gold-light"
+                    aria-hidden="true"
+                  />
+                  {t('leadDetail.legalStatusHeading')}
                 </h2>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center gap-2">
@@ -183,18 +229,55 @@ export default async function LeadTeaserPage({
                     <span className="text-gray-700 dark:text-gray-300">
                       {free
                         ? coordVerified
-                          ? 'Свободен — проверено по координатам на госкарте недропользования'
-                          : 'Свободен по госреестру (рекомендуется координатная проверка перед заявкой)'
-                        : 'Статус уточняется'}
+                          ? t('leadDetail.freeVerified')
+                          : t('leadDetail.freeRegistry')
+                        : t('leadDetail.statusPending')}
                     </span>
                   </div>
                   {lead.last_verified && (
                     <div className="flex items-center gap-2 text-gray-500">
-                      <Calendar className="w-4 h-4" /> Дата проверки:{' '}
-                      {lead.last_verified}
+                      <Calendar className="w-4 h-4" />{' '}
+                      {t('leadDetail.verifyDate')} {lead.last_verified}
                     </div>
                   )}
                 </div>
+              </section>
+
+              {/* How it works legally */}
+              <section className="rounded-xl border border-gold/40 bg-[rgba(200,162,75,0.05)] p-5">
+                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                  <ShieldCheck
+                    className="w-4 h-4 text-gold-dark dark:text-gold-light"
+                    aria-hidden="true"
+                  />
+                  {t('leadDetail.howItWorksHeading')}
+                </h2>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-sm">
+                  <li className="flex items-start gap-2.5">
+                    <Archive className="w-4 h-4 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      {t('leadDetail.howItWorksPoint1')}
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Compass className="w-4 h-4 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      {t('leadDetail.howItWorksPoint2')}
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <FolderCheck className="w-4 h-4 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      {t('leadDetail.howItWorksPoint3')}
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <FileSignature className="w-4 h-4 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
+                    <span className="text-gray-700 dark:text-gray-300">
+                      {t('leadDetail.howItWorksPoint4')}
+                    </span>
+                  </li>
+                </ul>
               </section>
 
               {/* Locked */}
@@ -202,16 +285,16 @@ export default async function LeadTeaserPage({
 
               {/* Region indicator (exact GPS hidden) */}
               <section className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-                <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                  Расположение
+                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-2">
+                  {t('leadDetail.locationHeading')}
                 </h2>
                 <div className="h-40 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 flex flex-col items-center justify-center text-center">
                   <MapPin className="w-7 h-7 text-gray-300" />
                   <p className="mt-2 text-sm font-medium text-gray-600 dark:text-gray-300">
-                    {lead.region || 'Казахстан'}
+                    {lead.region || t('leadDetail.locationFallback')}
                   </p>
                   <p className="text-[12px] text-gray-400">
-                    Точные координаты скрыты до доступа
+                    {t('leadDetail.locationHidden')}
                   </p>
                 </div>
               </section>
@@ -220,44 +303,51 @@ export default async function LeadTeaserPage({
             {/* Sidebar */}
             <aside className="lg:col-span-1">
               <div className="lg:sticky lg:top-24 space-y-4">
-                <div className="rounded-xl border border-gold/40 bg-gradient-to-br from-[rgba(200,162,75,0.06)] to-transparent p-5">
+                <div className="rounded-xl border border-gold/40 bg-[rgba(200,162,75,0.06)] p-5">
                   <div className="text-xs text-gray-500 mb-1">
-                    Стоимость наводки
+                    {t('leadDetail.priceCardLabel')}
                   </div>
-                  <div className="text-2xl font-bold text-gold-dark dark:text-gold-light">
-                    {lead.price_display || 'По запросу'}
+                  <div className="font-serif text-xl text-gold-dark dark:text-gold-light">
+                    {t('leadDetail.priceFallback')}
                   </div>
                   <div className="text-xs text-gray-500 mt-1">
                     {EXCLUSIVITY_LABELS[lead.exclusivity]}
                   </div>
 
+                  <ul className="mt-4 space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
+                      {t('leadDetail.includedCoords')}
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
+                      {t('leadDetail.includedAssay')}
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
+                      {t('leadDetail.includedLegal')}
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
+                      {t('leadDetail.includedContacts')}
+                    </li>
+                  </ul>
+
                   {isSold ? (
-                    <div className="mt-4 w-full text-center px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 text-sm font-medium">
-                      Продано
+                    <div className="mt-5 w-full text-center px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 text-sm font-medium">
+                      {t('leadDetail.sold')}
                     </div>
                   ) : (
                     <Link
                       href={`/${locale}/leads/${lead.code}/full`}
-                      className="mt-4 block w-full text-center px-4 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 dark:text-gray-900 text-white text-sm font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+                      className="mt-5 block w-full text-center px-4 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 dark:text-gray-900 text-white text-sm font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
                     >
-                      Получить полные данные
+                      {t('leadDetail.getFullPackage')}
                     </Link>
                   )}
                   <p className="text-[12px] text-gray-400 mt-3 text-center">
-                    Логин → заявка → передача после соглашения
+                    {t('leadDetail.ctaNote')}
                   </p>
-                </div>
-
-                <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-                  <h3 className="text-sm font-semibold mb-2">
-                    Что входит в полный пакет
-                  </h3>
-                  <ul className="space-y-1.5 text-sm text-gray-600 dark:text-gray-300">
-                    <li>• Название и точная привязка</li>
-                    <li>• Координаты (GPS)</li>
-                    <li>• Цитаты госотчёта + первоисточник</li>
-                    <li>• Методика выхода на точку</li>
-                  </ul>
                 </div>
               </div>
             </aside>
@@ -267,7 +357,15 @@ export default async function LeadTeaserPage({
       <Footer />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c'),
+        }}
       />
     </>
   );

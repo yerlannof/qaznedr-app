@@ -34,13 +34,13 @@ npm run test:coverage # Run tests with coverage report
 
 ### Tech Stack
 
-- **Framework**: Next.js 15.3.4 with App Router
+- **Framework**: Next.js 15.5 with App Router (React 19)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v3
-- **Database**: Prisma with SQLite
-- **Authentication**: NextAuth.js
-- **Testing**: Jest with Testing Library
-- **State Management**: React Context (Favorites, i18n, Theme)
+- **Database**: Supabase (Postgres) + Supabase Auth — system of record. NOTE: a legacy Prisma/SQLite client still exists in ~13 files (health, favorites, GDPR, audit-logger) and is being migrated out; do NOT add new Prisma usage. Listings/leads read paths are Supabase-only.
+- **Authentication**: NextAuth.js (sessions) — note Supabase RLS owner policies key on `auth.uid()` which is NOT populated by NextAuth, so owner/admin reads use the service-role client.
+- **Testing**: Jest with Testing Library (minimal coverage currently)
+- **State Management**: React Context (Favorites, Theme). i18n lives in `src/lib/i18n/translations.ts` (inline, 4 locales) via the `useTranslation` client hook / `getServerTranslation` for RSC — NOT `messages/*.json` (those are loaded by next-intl but unconsumed; do not delete without unwiring the plugin).
 
 ### Project Structure
 
@@ -82,8 +82,8 @@ type ListingType =
 
 **CRITICAL**: This project has strict design requirements:
 
-- **Colors**: Gray base (gray-900 primary text) + blue accent (`#0A84FF`). No gradients, no bright colors. Primary buttons are BLACK (bg-gray-900), not blue.
-- **Typography**: Inter font via next/font/google. Tight letter-spacing on headings (tracking-tight).
+- **Colors**: Gray base + **gold accent** (`gold #C8A24B` / `gold-dark #A8842F` / `gold-light #E0C674`) on an **editorial gold-on-ink** system (ink `#0A0A0A`, surface `#141414`). Blue `#0A84FF` is a secondary/link accent only. No gradients, no bright colors, no emoji. Primary buttons are BLACK (`bg-gray-900`), not blue. Verified/price accents are gold.
+- **Typography**: Inter (`--font-inter`, sans body) + **Cormorant Garamond** (`font-serif`, var `--font-fraunces` — legacy name) for editorial headings and prices. Serif headings use `font-serif font-light tracking-tight`; prices `font-serif tabular-nums text-gold-dark dark:text-gold-light`. Tokens in `tailwind.config.ts`.
 - **Components**: Minimal, clean design with subtle shadows (`shadow-subtle`) and hover effects (`hover:shadow-medium hover:-translate-y-0.5`). Border-based cards (`border border-gray-200 rounded-xl`).
 - **Animations**: CSS transitions only for hover (duration-150/200). Framer Motion only for mount/unmount (AnimatePresence). No pulse, glow, sparkle, gradient-shift.
 - **Icons**: Lucide React only. NO emoji in UI elements.
@@ -94,7 +94,7 @@ type ListingType =
 
 - **Regions**: 14 Kazakhstan regions (Мангистауская, Атырауская, etc.)
 - **Minerals**: Oil, Gas, Gold, Copper, Coal, Uranium, Iron
-- **Multilingual**: Supports Kazakh, Russian, English via i18next
+- **Multilingual**: Supports Russian (default), Kazakh, English, Chinese via inline translations in `src/lib/i18n/translations.ts`
 - **Currency**: Prices in Tenge (₸)
 - **Real Data**: Based on actual Kazakhstan mining sites (Kashagan, Tengiz, etc.)
 

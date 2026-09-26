@@ -113,6 +113,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href={`/${locale}/faq`}
+                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  {t('footerNav.info.faq')}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href={`/${locale}/legal/terms`}
                   className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                 >

@@ -124,14 +124,13 @@ function formatPrometheusMetrics(metrics: Record<string, number>): string {
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
-    // Only allow access in production or with proper auth
-    if (config.isProduction) {
-      const authHeader = request.headers.get('authorization');
-      const expectedAuth = process.env.METRICS_AUTH_TOKEN;
+    // Deny-by-default: metrics must never be public.
+    // Require a configured token AND a matching bearer header.
+    const authHeader = request.headers.get('authorization');
+    const expectedAuth = process.env.METRICS_AUTH_TOKEN;
 
-      if (expectedAuth && authHeader !== `Bearer ${expectedAuth}`) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-      }
+    if (!expectedAuth || authHeader !== `Bearer ${expectedAuth}`) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     // Collect metrics

@@ -57,7 +57,7 @@ export default async function LeadFullPage({
               Доступ ещё не открыт
             </h1>
             <p className="mt-2 text-gray-500">
-              Полные данные по наводке{' '}
+              Полные данные по находке{' '}
               <span className="font-mono">{teaser.code}</span> (название, точные
               координаты, первоисточник) передаются после заявки и соглашения.
             </p>
@@ -105,7 +105,7 @@ export default async function LeadFullPage({
               className="text-sm text-gray-400 mb-6 flex items-center gap-1.5"
             >
               <Link href={`/${locale}/leads`} className="hover:text-gray-600">
-                Наводки
+                Находки
               </Link>
               <ChevronRight className="w-3.5 h-3.5" />
               <Link

@@ -1,24 +1,81 @@
-'use client';
-
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Home, ArrowRight, Compass } from 'lucide-react';
+import Navigation from '@/components/layouts/Navigation';
+import Footer from '@/components/layouts/Footer';
 
 export default function NotFound() {
-  const pathname = usePathname();
-  const locale = pathname.split('/')[1] || 'ru';
-
   return (
-    <div
-      style={{ padding: '40px', textAlign: 'center', fontFamily: 'system-ui' }}
-    >
-      <h1>404 - Page Not Found</h1>
-      <p>The page you are looking for does not exist.</p>
-      <Link
-        href={`/${locale}`}
-        style={{ color: '#0A84FF', textDecoration: 'underline' }}
-      >
-        Go to Home
-      </Link>
+    <div className="min-h-screen bg-white dark:bg-[#0a0a0a] flex flex-col">
+      <Navigation />
+
+      <main className="flex-1 flex items-center justify-center px-6 pt-20 lg:pt-24 pb-24">
+        <div className="w-full max-w-xl mx-auto text-center">
+          {/* Decorative accent */}
+          <div
+            className="flex items-center justify-center mb-8"
+            aria-hidden="true"
+          >
+            <span className="h-px w-10 bg-gold/40" />
+            <Compass className="mx-3 h-5 w-5 text-gold" strokeWidth={1.5} />
+            <span className="h-px w-10 bg-gold/40" />
+          </div>
+
+          {/* Faint oversized 404 */}
+          <p
+            className="font-serif text-[7rem] sm:text-[9rem] leading-none font-light tracking-tight text-gray-900/[0.06] dark:text-white/[0.07] select-none"
+            aria-hidden="true"
+          >
+            404
+          </p>
+
+          {/* Headline */}
+          <h1 className="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-gray-900 dark:text-gray-50 -mt-6">
+            Страница не найдена
+          </h1>
+
+          {/* Subtitle */}
+          <p className="mt-4 text-base text-gray-500 dark:text-gray-400 font-sans">
+            Возможно, она была перемещена или больше не существует.
+          </p>
+
+          {/* Primary action */}
+          <div className="mt-10">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-6 py-3 text-sm font-medium text-white shadow-subtle transition-all duration-200 hover:shadow-medium hover:-translate-y-0.5 dark:bg-gray-50 dark:text-gray-900"
+            >
+              <Home className="h-4 w-4" strokeWidth={1.75} />
+              На главную
+            </Link>
+          </div>
+
+          {/* Secondary gold links */}
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-8">
+            <Link
+              href="/ru/listings"
+              className="group inline-flex items-center gap-1.5 text-sm font-medium text-gold transition-colors hover:text-gold-dark"
+            >
+              Смотреть объявления
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                strokeWidth={1.75}
+              />
+            </Link>
+            <Link
+              href="/ru/leads"
+              className="group inline-flex items-center gap-1.5 text-sm font-medium text-gold transition-colors hover:text-gold-dark"
+            >
+              Геологические находки
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                strokeWidth={1.75}
+              />
+            </Link>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }

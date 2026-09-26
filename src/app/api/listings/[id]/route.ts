@@ -2,100 +2,54 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getPrisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/services/auth.config';
+import { createClient } from '@/lib/supabase/server';
+import { transformDepositFromDB } from '@/lib/listings/transform';
 
 export const dynamic = 'force-dynamic';
 
 // GET /api/listings/[id] - получить конкретное объявление
+// Reads from Supabase (system of record) using the same transform as the catalog
+// route, so the detail page never drifts from the listing grid.
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const prisma = getPrisma();
   try {
     const { id } = await params;
 
-    const deposit = await prisma.kazakhstanDeposit.findUnique({
-      where: { id },
-      include: {
-        user: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            company: true,
-            phone: true,
-            verified: true,
-          },
-        },
-        documents_: {
-          select: {
-            id: true,
-            name: true,
-            type: true,
-            url: true,
-            size: true,
-            createdAt: true,
-          },
-        },
-        _count: {
-          select: {
-            favorites: true,
-            views_: true,
-          },
-        },
-      },
-    });
+    const supabase = await createClient();
+    const { data: row, error } = await supabase
+      .from('kazakhstan_deposits')
+      .select('*')
+      .eq('id', id)
+      .single();
 
-    if (!deposit) {
+    if (error || !row) {
       return NextResponse.json(
         { success: false, error: 'Listing not found' },
         { status: 404 }
       );
     }
 
-    // Увеличиваем счетчик просмотров
-    await prisma.kazakhstanDeposit.update({
-      where: { id },
-      data: { views: { increment: 1 } },
-    });
-
-    // Записываем просмотр в историю
-    const session = await getServerSession(authOptions);
-    const userAgent = request.headers.get('user-agent') || 'unknown';
-    const forwarded = request.headers.get('x-forwarded-for');
-    const ipAddress = forwarded ? forwarded.split(',')[0] : '127.0.0.1';
-
-    let userId = null;
-    if (session?.user?.email) {
-      const user = await prisma.user.findUnique({
-        where: { email: session.user.email },
-      });
-      userId = user?.id || null;
+    // Only publicly-visible (ACTIVE) listings are exposed via this endpoint.
+    if ((row as any).status !== 'ACTIVE') {
+      return NextResponse.json(
+        { success: false, error: 'Listing not found' },
+        { status: 404 }
+      );
     }
 
-    await prisma.view.create({
-      data: {
-        depositId: id,
-        userId,
-        ipAddress,
-        userAgent,
-      },
-    });
-
-    const formattedDeposit = {
-      ...deposit,
-      coordinates: JSON.parse(deposit.coordinates),
-      images: JSON.parse(deposit.images),
-      documents: JSON.parse(deposit.documents),
-      favoritesCount: deposit._count.favorites,
-      viewsCount: deposit._count.views_,
-    };
+    // Best-effort view counter — never block the response on it.
+    void (supabase.from('kazakhstan_deposits') as any)
+      .update({ views: (Number((row as any).views) || 0) + 1 })
+      .eq('id', id)
+      .then(() => {});
 
     return NextResponse.json({
       success: true,
-      data: formattedDeposit,
+      data: transformDepositFromDB(row),
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, error: 'Failed to fetch listing' },
       { status: 500 }

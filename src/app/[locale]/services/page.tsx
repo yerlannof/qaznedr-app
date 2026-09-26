@@ -13,8 +13,6 @@ import {
   Newspaper,
   ArrowRight,
   Search,
-  Building2,
-  Star,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/layouts/Footer';
@@ -30,11 +28,6 @@ export default function ServicesPage() {
       description: t('services.descriptions.geological'),
       icon: Mountain,
       href: '/services/geological',
-      stats: { providers: 47, projects: 156 },
-      featured: [
-        { name: 'КазГеоСервис', rating: 4.8, location: 'Алматы' },
-        { name: 'Геопроспект КЗ', rating: 4.9, location: 'Нур-Султан' },
-      ],
     },
     {
       id: 'equipment',
@@ -42,11 +35,6 @@ export default function ServicesPage() {
       description: t('services.descriptions.equipment'),
       icon: Truck,
       href: '/services/equipment',
-      stats: { providers: 6, projects: 78 },
-      featured: [
-        { name: 'ТехРент Казахстан', rating: 4.7, location: 'Караганда' },
-        { name: 'Горная Техника Ко', rating: 4.8, location: 'Алматы' },
-      ],
     },
     {
       id: 'legal',
@@ -54,11 +42,6 @@ export default function ServicesPage() {
       description: t('services.descriptions.legal'),
       icon: Scale,
       href: '/services/legal',
-      stats: { providers: 6, projects: 23 },
-      featured: [
-        { name: 'Юр-Центр Недра', rating: 4.9, location: 'Алматы' },
-        { name: 'Горное Право КЗ', rating: 4.8, location: 'Нур-Султан' },
-      ],
     },
     {
       id: 'investors',
@@ -66,11 +49,6 @@ export default function ServicesPage() {
       description: t('services.descriptions.investors'),
       icon: Users,
       href: '/services/investors',
-      stats: { providers: 6, projects: 89 },
-      featured: [
-        { name: 'КазИнвест Майнинг', rating: 4.8, location: 'Алматы' },
-        { name: 'Altyn Invest Fund', rating: 4.9, location: 'Нур-Султан' },
-      ],
     },
   ];
 
@@ -80,14 +58,12 @@ export default function ServicesPage() {
       description: t('services.knowledge.knowledgeBaseDesc'),
       icon: BookOpen,
       href: '/knowledge',
-      articles: 234,
     },
     {
       title: t('services.knowledge.industryNews'),
       description: t('services.knowledge.industryNewsDesc'),
       icon: Newspaper,
       href: '/news',
-      articles: 156,
     },
   ];
 
@@ -127,7 +103,7 @@ export default function ServicesPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqJsonLd),
+          __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c'),
         }}
       />
       <Navigation />
@@ -191,40 +167,14 @@ export default function ServicesPage() {
                     <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50">
                       {category.title}
                     </h3>
-                    <p className="text-sm text-gray-500 mt-1 mb-4">
+                    <p className="text-sm text-gray-500 mt-1">
                       {category.description}
                     </p>
 
-                    {/* Stats */}
-                    <div className="flex gap-4 text-xs text-gray-400 mb-4">
-                      <span>
-                        {category.stats.providers}{' '}
-                        {t('services.labels.providers')}
-                      </span>
-                      <span>
-                        {category.stats.projects}{' '}
-                        {t('services.labels.projects')}
-                      </span>
-                    </div>
-
-                    {/* Featured */}
-                    <div className="space-y-2 pt-3 border-t border-gray-100 dark:border-gray-700">
-                      {category.featured.map((provider, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center justify-between text-xs"
-                        >
-                          <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
-                            <Building2 className="w-3 h-3 text-gray-400" />
-                            <span>{provider.name}</span>
-                          </div>
-                          <div className="flex items-center gap-0.5 text-gray-500">
-                            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                            <span>{provider.rating}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                    <span className="inline-flex items-center gap-1.5 mt-4 text-xs text-[#0A84FF] font-medium">
+                      {t('services.labels.viewAll')}
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
                   </div>
                 </Link>
               );
@@ -254,10 +204,7 @@ export default function ServicesPage() {
                       <p className="text-sm text-gray-500 mt-1">
                         {item.description}
                       </p>
-                      <div className="flex items-center justify-between mt-3">
-                        <span className="text-xs text-gray-400">
-                          {item.articles} {t('services.labels.materials')}
-                        </span>
+                      <div className="flex items-center justify-end mt-3">
                         <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#0A84FF] transition-colors" />
                       </div>
                     </div>

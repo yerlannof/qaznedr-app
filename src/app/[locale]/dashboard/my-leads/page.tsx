@@ -69,7 +69,7 @@ export default function MyLeadsPage() {
       <main className="min-h-screen bg-white dark:bg-[#0A0A0A] pt-16 lg:pt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-6">
-            Мои наводки
+            Мои находки
           </h1>
 
           <div className="flex gap-2 mb-6">
@@ -77,7 +77,7 @@ export default function MyLeadsPage() {
               onClick={() => setTab('leads')}
               className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-lg ${tab === 'leads' ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900' : 'border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400'}`}
             >
-              <KeyRound className="w-4 h-4" /> Открытые лиды
+              <KeyRound className="w-4 h-4" /> Открытые находки
             </button>
             <button
               onClick={() => setTab('requests')}
@@ -93,7 +93,7 @@ export default function MyLeadsPage() {
             </div>
           ) : tab === 'leads' ? (
             ents.length === 0 ? (
-              <Empty text="У вас пока нет открытых лидов" locale={locale} />
+              <Empty text="У вас пока нет открытых находок" locale={locale} />
             ) : (
               <div className="space-y-3">
                 {ents.map((e) => (
@@ -157,7 +157,7 @@ function Empty({ text, locale }: { text: string; locale: string }) {
         href={`/${locale}/leads`}
         className="inline-block mt-3 text-sm text-[#0A84FF] hover:underline"
       >
-        Смотреть каталог наводок →
+        Смотреть каталог находок →
       </Link>
     </div>
   );

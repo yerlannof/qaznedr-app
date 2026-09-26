@@ -15,8 +15,6 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:e2e": "playwright test",
-    "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma db push --force-reset && npm run db:seed",
     "docker:build": "docker build -t qaznedr-app .",
     "docker:run": "docker run -p 3000:3000 qaznedr-app",
     "deploy:staging": "./scripts/deploy.sh -e staging deploy",

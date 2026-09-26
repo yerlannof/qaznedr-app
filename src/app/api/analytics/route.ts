@@ -6,6 +6,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getPrisma } from '@/lib/prisma';
 import { logger } from '@/lib/utils/logger';
 import { handleApiError, validateRequired } from '@/lib/utils/error-handler';
+import { requireAdmin, forbidden } from '@/lib/auth/admin';
+import {
+  rateLimit,
+  createRateLimitResponse,
+} from '@/lib/middleware/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,6 +23,19 @@ interface AnalyticsEvent {
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  // Rate limit public analytics ingestion to prevent abuse (fails open w/o config)
+  const rateLimitResult = await rateLimit(
+    request,
+    `analytics:${request.headers.get('x-forwarded-for') || 'anonymous'}`
+  );
+  if (rateLimitResult && !rateLimitResult.success) {
+    return createRateLimitResponse(
+      rateLimitResult.limit,
+      rateLimitResult.reset,
+      rateLimitResult.remaining
+    );
+  }
+
   const prisma = getPrisma();
   try {
     const body = await request.json();
@@ -78,6 +96,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 // Get analytics data (for internal use/dashboards)
 export async function GET(request: NextRequest): Promise<NextResponse> {
+  const admin = await requireAdmin();
+  if (!admin) return forbidden();
+
   const prisma = getPrisma();
   try {
     const { searchParams } = new URL(request.url);

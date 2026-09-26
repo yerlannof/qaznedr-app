@@ -10,7 +10,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, code } = await params;
   const lead = await getPublishedLeadByCode(code);
-  if (!lead) return { title: 'Наводка не найдена' };
+  if (!lead) return { title: 'Находка не найдена' };
 
   const title =
     lead.teaser_title ||
@@ -19,7 +19,7 @@ export async function generateMetadata({
     lead.teaser_summary ||
     `Свободный золотоносный участок${lead.region ? `, ${lead.region}` : ''}. ${
       lead.grade_display ? `Содержание: ${lead.grade_display}. ` : ''
-    }Проверенная наводка из госархива.`
+    }Проверенная находка из госархива.`
   ).slice(0, 160);
   const url = `${BASE_URL}/${locale}/leads/${code}`;
 

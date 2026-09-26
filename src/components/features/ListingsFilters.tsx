@@ -33,29 +33,6 @@ import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
 
-// Mock data for result counts (in real app, this would come from API)
-const getResultCounts = () => ({
-  types: {
-    MINING_LICENSE: 45,
-    EXPLORATION_LICENSE: 23,
-    MINERAL_OCCURRENCE: 12,
-  },
-  regions: REGIONS.reduce(
-    (acc, region) => {
-      acc[region] = Math.floor(Math.random() * 20) + 1;
-      return acc;
-    },
-    {} as Record<string, number>
-  ),
-  minerals: MINERALS.reduce(
-    (acc, mineral) => {
-      acc[mineral] = Math.floor(Math.random() * 15) + 1;
-      return acc;
-    },
-    {} as Record<string, number>
-  ),
-});
-
 function FiltersContent() {
   const { t } = useTranslation();
   const searchParams = useSearchParams();
@@ -70,7 +47,6 @@ function FiltersContent() {
     other: false,
   });
   const [priceRange, setPriceRange] = useState([0, 10000]);
-  const [resultCounts] = useState(getResultCounts());
   const [activeFiltersCount, setActiveFiltersCount] = useState(0);
 
   // Check for active filters
@@ -209,82 +185,60 @@ function FiltersContent() {
           </button>
           {expandedSections.type && (
             <div className="mt-3 space-y-1">
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
-                <div className="flex items-center">
-                  <input
-                    type="radio"
-                    name="type"
-                    value=""
-                    checked={!currentFilters.type}
-                    onChange={() => handleFilterChange('type', '')}
-                    className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    {t('listings.allTypes')}
-                  </span>
-                </div>
-                <span className="text-xs text-gray-400">
-                  {Object.values(resultCounts.types).reduce((a, b) => a + b, 0)}
+              <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
+                <input
+                  type="radio"
+                  name="type"
+                  value=""
+                  checked={!currentFilters.type}
+                  onChange={() => handleFilterChange('type', '')}
+                  className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  {t('listings.allTypes')}
                 </span>
               </label>
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
-                <div className="flex items-center">
-                  <input
-                    type="radio"
-                    name="type"
-                    value="MINING_LICENSE"
-                    checked={currentFilters.type === 'MINING_LICENSE'}
-                    onChange={() =>
-                      handleFilterChange('type', 'MINING_LICENSE')
-                    }
-                    className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    {t('listings.miningLicenses')}
-                  </span>
-                </div>
-                <span className="text-xs text-gray-400">
-                  {resultCounts.types.MINING_LICENSE}
+              <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
+                <input
+                  type="radio"
+                  name="type"
+                  value="MINING_LICENSE"
+                  checked={currentFilters.type === 'MINING_LICENSE'}
+                  onChange={() => handleFilterChange('type', 'MINING_LICENSE')}
+                  className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  {t('listings.miningLicenses')}
                 </span>
               </label>
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
-                <div className="flex items-center">
-                  <input
-                    type="radio"
-                    name="type"
-                    value="EXPLORATION_LICENSE"
-                    checked={currentFilters.type === 'EXPLORATION_LICENSE'}
-                    onChange={() =>
-                      handleFilterChange('type', 'EXPLORATION_LICENSE')
-                    }
-                    className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    {t('listings.explorationLicenses')}
-                  </span>
-                </div>
-                <span className="text-xs text-gray-400">
-                  {resultCounts.types.EXPLORATION_LICENSE}
+              <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
+                <input
+                  type="radio"
+                  name="type"
+                  value="EXPLORATION_LICENSE"
+                  checked={currentFilters.type === 'EXPLORATION_LICENSE'}
+                  onChange={() =>
+                    handleFilterChange('type', 'EXPLORATION_LICENSE')
+                  }
+                  className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  {t('listings.explorationLicenses')}
                 </span>
               </label>
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
-                <div className="flex items-center">
-                  <input
-                    type="radio"
-                    name="type"
-                    value="MINERAL_OCCURRENCE"
-                    checked={currentFilters.type === 'MINERAL_OCCURRENCE'}
-                    onChange={() =>
-                      handleFilterChange('type', 'MINERAL_OCCURRENCE')
-                    }
-                    className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    {t('listings.mineralOccurrences')}
-                  </span>
-                </div>
-                <span className="text-xs text-gray-400">
-                  {resultCounts.types.MINERAL_OCCURRENCE}
+              <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
+                <input
+                  type="radio"
+                  name="type"
+                  value="MINERAL_OCCURRENCE"
+                  checked={currentFilters.type === 'MINERAL_OCCURRENCE'}
+                  onChange={() =>
+                    handleFilterChange('type', 'MINERAL_OCCURRENCE')
+                  }
+                  className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  {t('listings.mineralOccurrences')}
                 </span>
               </label>
             </div>
@@ -330,7 +284,7 @@ function FiltersContent() {
                     setPriceRange([Number(e.target.value), priceRange[1]])
                   }
                   className="flex-1 px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-[#141414] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#0A84FF] focus:border-transparent"
-                  placeholder="Мин"
+                  placeholder={t('listingsFilters.minPlaceholder')}
                 />
                 <span className="self-center text-gray-400">—</span>
                 <input
@@ -340,7 +294,7 @@ function FiltersContent() {
                     setPriceRange([priceRange[0], Number(e.target.value)])
                   }
                   className="flex-1 px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-[#141414] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#0A84FF] focus:border-transparent"
-                  placeholder="Макс"
+                  placeholder={t('listingsFilters.maxPlaceholder')}
                 />
               </div>
               <Button
@@ -349,7 +303,7 @@ function FiltersContent() {
                 className="w-full mt-3"
                 variant="outline"
               >
-                Применить
+                {t('listingsFilters.apply')}
               </Button>
             </div>
           )}
@@ -363,7 +317,7 @@ function FiltersContent() {
           >
             <span className="text-xs font-medium uppercase tracking-wider text-gray-400 flex items-center gap-2">
               <MapPin className="w-3.5 h-3.5" />
-              Регион
+              {t('listingsFilters.region')}
             </span>
             {expandedSections.region ? (
               <ChevronUp className="w-4 h-4 text-gray-400" />
@@ -373,41 +327,34 @@ function FiltersContent() {
           </button>
           {expandedSections.region && (
             <div className="mt-3 max-h-60 overflow-y-auto space-y-1">
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
-                <div className="flex items-center">
-                  <input
-                    type="radio"
-                    name="region"
-                    value=""
-                    checked={!currentFilters.region}
-                    onChange={() => handleFilterChange('region', '')}
-                    className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    Все регионы
-                  </span>
-                </div>
+              <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
+                <input
+                  type="radio"
+                  name="region"
+                  value=""
+                  checked={!currentFilters.region}
+                  onChange={() => handleFilterChange('region', '')}
+                  className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  {t('listingsFilters.allRegions')}
+                </span>
               </label>
               {REGIONS.map((region) => (
                 <label
                   key={region}
-                  className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors"
+                  className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors"
                 >
-                  <div className="flex items-center">
-                    <input
-                      type="radio"
-                      name="region"
-                      value={region}
-                      checked={currentFilters.region === region}
-                      onChange={() => handleFilterChange('region', region)}
-                      className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
-                    />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">
-                      {region}
-                    </span>
-                  </div>
-                  <span className="text-xs text-gray-400">
-                    {resultCounts.regions[region]}
+                  <input
+                    type="radio"
+                    name="region"
+                    value={region}
+                    checked={currentFilters.region === region}
+                    onChange={() => handleFilterChange('region', region)}
+                    className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className="text-sm text-gray-700 dark:text-gray-300">
+                    {region}
                   </span>
                 </label>
               ))}
@@ -423,7 +370,7 @@ function FiltersContent() {
           >
             <span className="text-xs font-medium uppercase tracking-wider text-gray-400 flex items-center gap-2">
               <Gem className="w-3.5 h-3.5" />
-              Полезное ископаемое
+              {t('listingsFilters.mineral')}
             </span>
             {expandedSections.mineral ? (
               <ChevronUp className="w-4 h-4 text-gray-400" />
@@ -433,41 +380,34 @@ function FiltersContent() {
           </button>
           {expandedSections.mineral && (
             <div className="mt-3 space-y-1">
-              <label className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
-                <div className="flex items-center">
-                  <input
-                    type="radio"
-                    name="mineral"
-                    value=""
-                    checked={!currentFilters.mineral}
-                    onChange={() => handleFilterChange('mineral', '')}
-                    className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
-                  />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    Все минералы
-                  </span>
-                </div>
+              <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
+                <input
+                  type="radio"
+                  name="mineral"
+                  value=""
+                  checked={!currentFilters.mineral}
+                  onChange={() => handleFilterChange('mineral', '')}
+                  className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                  {t('listingsFilters.allMinerals')}
+                </span>
               </label>
               {MINERALS.map((mineral) => (
                 <label
                   key={mineral}
-                  className="flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors"
+                  className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors"
                 >
-                  <div className="flex items-center">
-                    <input
-                      type="radio"
-                      name="mineral"
-                      value={mineral}
-                      checked={currentFilters.mineral === mineral}
-                      onChange={() => handleFilterChange('mineral', mineral)}
-                      className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
-                    />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">
-                      {mineral}
-                    </span>
-                  </div>
-                  <span className="text-xs text-gray-400">
-                    {resultCounts.minerals[mineral]}
+                  <input
+                    type="radio"
+                    name="mineral"
+                    value={mineral}
+                    checked={currentFilters.mineral === mineral}
+                    onChange={() => handleFilterChange('mineral', mineral)}
+                    className="mr-3 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className="text-sm text-gray-700 dark:text-gray-300">
+                    {mineral}
                   </span>
                 </label>
               ))}
@@ -482,7 +422,7 @@ function FiltersContent() {
             className="flex items-center justify-between w-full text-left py-1"
           >
             <span className="text-xs font-medium uppercase tracking-wider text-gray-400">
-              Дополнительные фильтры
+              {t('listingsFilters.additionalFilters')}
             </span>
             {expandedSections.other ? (
               <ChevronUp className="w-4 h-4 text-gray-400" />
@@ -503,7 +443,7 @@ function FiltersContent() {
                 />
                 <span className="text-sm text-gray-700 dark:text-gray-300 flex items-center gap-2">
                   <Shield className="w-4 h-4" />
-                  Только проверенные
+                  {t('listingsFilters.verifiedOnly')}
                 </span>
               </label>
             </div>
@@ -515,27 +455,31 @@ function FiltersContent() {
       <div className="border-t border-gray-100 dark:border-gray-700 pt-4">
         <label className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-2 flex items-center gap-2">
           <TrendingUp className="w-3.5 h-3.5" />
-          Сортировка
+          {t('listingsFilters.sorting')}
         </label>
         <select
           className="w-full mt-2 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#141414] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#0A84FF] focus:border-transparent"
           value={currentFilters.sort}
           onChange={(e) => handleFilterChange('sort', e.target.value)}
         >
-          <option value="newest">Сначала новые</option>
-          <option value="oldest">Сначала старые</option>
-          <option value="price_desc">Сначала дорогие</option>
-          <option value="price_asc">Сначала дешевые</option>
-          <option value="area_desc">Большая площадь</option>
-          <option value="area_asc">Малая площадь</option>
-          <option value="views_desc">По популярности</option>
+          <option value="newest">{t('listingsFilters.sortNewest')}</option>
+          <option value="oldest">{t('listingsFilters.sortOldest')}</option>
+          <option value="price_desc">
+            {t('listingsFilters.sortPriceDesc')}
+          </option>
+          <option value="price_asc">{t('listingsFilters.sortPriceAsc')}</option>
+          <option value="area_desc">{t('listingsFilters.sortAreaDesc')}</option>
+          <option value="area_asc">{t('listingsFilters.sortAreaAsc')}</option>
+          <option value="views_desc">
+            {t('listingsFilters.sortViewsDesc')}
+          </option>
         </select>
       </div>
 
       {/* Quick Filter Tags */}
       <div className="border-t border-gray-100 dark:border-gray-700 pt-4 mt-4">
         <label className="block text-xs font-medium uppercase tracking-wider text-gray-400 mb-2">
-          Быстрые фильтры
+          {t('listingsFilters.quickFilters')}
         </label>
         <div className="flex flex-wrap gap-2">
           {[
@@ -599,7 +543,7 @@ function FiltersContent() {
           <SheetTrigger asChild>
             <Button className="w-full mb-4" variant="outline">
               <SlidersHorizontal className="w-4 h-4 mr-2" />
-              Фильтры
+              {t('listingsFilters.filters')}
               {activeFiltersCount > 0 && (
                 <Badge variant="blue" className="ml-2">
                   {activeFiltersCount}
@@ -609,7 +553,7 @@ function FiltersContent() {
           </SheetTrigger>
           <SheetContent side="bottom" className="h-[80vh] overflow-y-auto">
             <SheetHeader>
-              <SheetTitle>Фильтры</SheetTitle>
+              <SheetTitle>{t('listingsFilters.filters')}</SheetTitle>
             </SheetHeader>
             <div className="mt-6">
               <FilterContent />

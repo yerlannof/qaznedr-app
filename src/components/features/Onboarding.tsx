@@ -24,7 +24,7 @@ const onboardingSteps: OnboardingStep[] = [
   {
     title: 'Добро пожаловать в QAZNEDR',
     description:
-      'Первая в Казахстане цифровая B2B платформа для горнодобывающей отрасли',
+      'Первая в Казахстане цифровая B2B платформа в области недропользования',
     icon: TrendingUp,
   },
   {

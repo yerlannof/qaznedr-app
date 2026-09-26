@@ -95,7 +95,7 @@ export default function AdminLeadsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold flex items-center gap-2 text-gray-900 dark:text-gray-50">
-              <Shield className="w-6 h-6" /> Управление лидами
+              <Shield className="w-6 h-6" /> Управление находками
             </h1>
             <Link
               href={`/${locale}/admin/lead-requests`}
@@ -127,7 +127,7 @@ export default function AdminLeadsPage() {
             </div>
           ) : rows.length === 0 ? (
             <div className="py-24 text-center text-gray-500 border border-dashed border-gray-200 dark:border-gray-700 rounded-xl">
-              Нет лидов в этой категории
+              Нет находок в этой категории
             </div>
           ) : (
             <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">

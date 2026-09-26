@@ -60,7 +60,7 @@ const mockSearchData: SearchResult[] = [
   {
     id: '3',
     title: 'КазМинералс',
-    description: 'Ведущая горнодобывающая компания',
+    description: 'Ведущий недропользователь',
     type: 'company',
     href: '/companies/kazminerals',
     icon: <Building2 className="w-4 h-4" />,

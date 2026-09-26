@@ -46,7 +46,10 @@ Oil, Gas, Gold, Copper, Coal, Uranium, Iron, Manganese, Chromium, Zinc, Lead, Ra
 ## Key Pages
 
 - Homepage: https://qaznedr.kz/ru
+- About: https://qaznedr.kz/ru/about
 - Listings catalog: https://qaznedr.kz/ru/listings
+- Leads catalog (verified deal teasers): https://qaznedr.kz/ru/leads
+- FAQ: https://qaznedr.kz/ru/faq
 - Services: https://qaznedr.kz/ru/services
 - Services catalog: https://qaznedr.kz/ru/services/catalog
 - Geological services: https://qaznedr.kz/ru/services/geological

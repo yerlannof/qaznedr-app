@@ -89,7 +89,7 @@ export default function InvestorsPage() {
         </h1>
         <p className="mt-4 text-base lg:text-lg text-gray-500 max-w-xl">
           Каталог инвесторов и финансовых организаций, готовых вкладываться в
-          горнодобывающие проекты Казахстана.
+          проекты недропользования Казахстана.
         </p>
 
         <div className="mt-6 flex flex-col sm:flex-row gap-3 max-w-2xl">

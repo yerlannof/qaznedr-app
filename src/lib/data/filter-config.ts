@@ -145,6 +145,63 @@ export const MINERALS = [
 ] as const;
 
 // ─────────────────────────────────────────────
+// Хелперы локализации справочников
+// ─────────────────────────────────────────────
+
+export type LabelLocale = 'ru' | 'kz' | 'en' | 'zh';
+
+function normLocale(locale: string | undefined): LabelLocale {
+  const l = (locale || 'ru').slice(0, 2).toLowerCase();
+  if (l === 'kz' || l === 'kk') return 'kz';
+  if (l === 'en') return 'en';
+  if (l === 'zh') return 'zh';
+  return 'ru';
+}
+
+/**
+ * Возвращает локализованное название региона по его id или по любому из
+ * локализованных названий (например, значение из БД на русском). Если совпадений
+ * нет — возвращает исходное значение без изменений.
+ */
+export function regionLabel(value: string, locale: string): string {
+  if (!value) return value;
+  const loc = normLocale(locale);
+  const v = value.trim().toLowerCase();
+  const match = REGIONS.find(
+    (r) =>
+      r.id === v || Object.values(r.name).some((n) => n.toLowerCase() === v)
+  );
+  return match ? match.name[loc] : value;
+}
+
+/**
+ * Возвращает локализованное название минерала по его id или по любому из
+ * локализованных названий. Если совпадений нет — возвращает исходное значение.
+ */
+export function mineralLabel(value: string, locale: string): string {
+  if (!value) return value;
+  const loc = normLocale(locale);
+  const v = value.trim().toLowerCase();
+  const match = MINERALS.find(
+    (m) =>
+      m.id === v || Object.values(m.name).some((n) => n.toLowerCase() === v)
+  );
+  return match ? match.name[loc] : value;
+}
+
+/** Record id → локализованное название региона для выбранной локали. */
+export function regionLabels(locale: string): Record<string, string> {
+  const loc = normLocale(locale);
+  return Object.fromEntries(REGIONS.map((r) => [r.id, r.name[loc]]));
+}
+
+/** Record id → локализованное название минерала для выбранной локали. */
+export function mineralLabels(locale: string): Record<string, string> {
+  const loc = normLocale(locale);
+  return Object.fromEntries(MINERALS.map((m) => [m.id, m.name[loc]]));
+}
+
+// ─────────────────────────────────────────────
 // Фильтры по разделам
 // ─────────────────────────────────────────────
 

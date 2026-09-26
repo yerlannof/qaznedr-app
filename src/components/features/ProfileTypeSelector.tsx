@@ -33,7 +33,7 @@ const profileCards: ProfileCard[] = [
     descriptionKey: 'profile.type.serviceProviderDesc',
     fallbackTitle: 'Поставщик услуг',
     fallbackDescription:
-      'Компания, оказывающая услуги для горнодобывающей отрасли',
+      'Компания, оказывающая услуги в области недропользования',
   },
   {
     type: 'investor',

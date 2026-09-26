@@ -793,7 +793,7 @@ export const SERVICE_TAXONOMY: ServiceCategory[] = [
       zh: '设备',
     },
     description: {
-      ru: 'Продажа и аренда горнодобывающего и бурового оборудования',
+      ru: 'Продажа и аренда оборудования для недропользования и бурения',
       kz: 'Тау-кен және бұрғылау жабдығын сату және жалға беру',
       en: 'Sale and rental of mining and drilling equipment',
       zh: '矿山和钻探设备的销售和租赁',

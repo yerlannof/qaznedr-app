@@ -4,10 +4,34 @@ import { listPublishedLeads } from '@/lib/leads/public-queries';
 
 export const dynamic = 'force-dynamic';
 
+// Simple in-process TTL cache. Leads data is near-static; this avoids hitting
+// Supabase on every request within a serverless instance's lifetime.
+const TTL_MS = 60_000;
+const responseCache = new Map<string, { ts: number; value: any }>();
+
+function getCachedResponse(key: string): any | null {
+  const entry = responseCache.get(key);
+  if (!entry) return null;
+  if (Date.now() - entry.ts > TTL_MS) {
+    responseCache.delete(key);
+    return null;
+  }
+  return entry.value;
+}
+
 // Public teaser list. Anon + RLS → only PUBLISHED rows, only teaser columns.
 // limit hard-capped at 50 (no bulk dump). No private fields possible here.
 async function handler(req: NextRequest): Promise<NextResponse> {
   const p = req.nextUrl.searchParams;
+
+  const cacheKey = p.toString();
+  const cached = getCachedResponse(cacheKey);
+  if (cached) {
+    return NextResponse.json({ success: true, data: cached });
+  }
+
+  // If listPublishedLeads throws, the error propagates (same as before) and
+  // nothing is cached — only successful reads populate the cache below.
   const result = await listPublishedLeads({
     region: p.get('region') || undefined,
     tier: p.get('tier') || undefined,
@@ -18,6 +42,7 @@ async function handler(req: NextRequest): Promise<NextResponse> {
     page: Number(p.get('page') || '1') || 1,
     limit: Math.min(Number(p.get('limit') || '24') || 24, 50),
   });
+  responseCache.set(cacheKey, { ts: Date.now(), value: result });
   return NextResponse.json({ success: true, data: result });
 }
 

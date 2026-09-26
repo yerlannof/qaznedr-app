@@ -31,7 +31,7 @@ const SAMPLE_ARTICLES = [
     category: 'investors',
     icon: TrendingUp,
     title: {
-      ru: 'Памятка инвестору: как оценить горнодобывающий проект в Казахстане',
+      ru: 'Памятка инвестору: как оценить проект в области недропользования в Казахстане',
       en: 'Investor memo: how to evaluate a mining project in Kazakhstan',
     },
     excerpt: {

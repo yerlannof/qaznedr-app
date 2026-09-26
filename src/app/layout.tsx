@@ -1,14 +1,17 @@
 import { ReactNode } from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
+};
 
 export const metadata: Metadata = {
   title: 'QAZNEDR.KZ - Kazakhstan Mining Platform',
   description:
     'Platform for buying and selling mineral deposits and licenses in Kazakhstan',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
-  ],
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',

@@ -6,11 +6,29 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getPrisma } from '@/lib/prisma';
 import { logger } from '@/lib/utils/logger';
 import { handleApiError, validateRequired } from '@/lib/utils/error-handler';
+import { requireAdmin, forbidden } from '@/lib/auth/admin';
+import {
+  rateLimit,
+  createRateLimitResponse,
+} from '@/lib/middleware/rate-limit';
 import type { MonitoredError } from '@/lib/utils/error-monitoring';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  // Rate limit public error reporting to prevent abuse (fails open w/o config)
+  const rateLimitResult = await rateLimit(
+    request,
+    `errors:${request.headers.get('x-forwarded-for') || 'anonymous'}`
+  );
+  if (rateLimitResult && !rateLimitResult.success) {
+    return createRateLimitResponse(
+      rateLimitResult.limit,
+      rateLimitResult.reset,
+      rateLimitResult.remaining
+    );
+  }
+
   const prisma = getPrisma();
   try {
     const body: MonitoredError = await request.json();
@@ -74,6 +92,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 // Get error statistics and recent errors
 export async function GET(request: NextRequest): Promise<NextResponse> {
+  const admin = await requireAdmin();
+  if (!admin) return forbidden();
+
   const prisma = getPrisma();
   try {
     const { searchParams } = new URL(request.url);

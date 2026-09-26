@@ -9,7 +9,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const url = `${BASE_URL}/${locale}/leads`;
-  const title = 'Свободные участки с золотом — закрытые геологические наводки';
+  const title = 'Свободные участки с золотом — закрытые геологические находки';
   const description =
     'Каталог проверенных золотоносных участков Казахстана из госархивов: свободные по лицензии, с честными грейдами. Тизер открыт, полные данные — после заявки.';
   return {

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import type { Database } from '@/lib/supabase/database.types';
-import { mockDeposits } from '@/lib/data/mock-deposits';
 import {
   rateLimit,
   createRateLimitResponse,
@@ -25,121 +24,9 @@ import {
   ValidationSchemas,
 } from '@/lib/middleware/input-sanitization';
 import { getProfile } from '@/lib/supabase/profiles';
+import { transformDepositFromDB } from '@/lib/listings/transform';
 
 export const dynamic = 'force-dynamic';
-
-/**
- * Transform a database row (snake_case) into the KazakhstanDeposit format (camelCase)
- * expected by frontend components. Handles null values with safe defaults.
- */
-function transformDepositFromDB(row: any): any {
-  // Parse coordinates - handle various formats from the database
-  let coordinates: [number, number] = [0, 0];
-  if (row.coordinates_lat != null && row.coordinates_lng != null) {
-    // Separate lat/lng fields
-    coordinates = [
-      Number(row.coordinates_lat) || 0,
-      Number(row.coordinates_lng) || 0,
-    ];
-  } else if (row.coordinates) {
-    if (Array.isArray(row.coordinates) && row.coordinates.length >= 2) {
-      // Already a [lat, lng] array
-      coordinates = [
-        Number(row.coordinates[0]) || 0,
-        Number(row.coordinates[1]) || 0,
-      ];
-    } else if (
-      typeof row.coordinates === 'object' &&
-      row.coordinates !== null
-    ) {
-      // Object with lat/lng keys
-      coordinates = [
-        Number(row.coordinates.lat ?? row.coordinates.latitude ?? 0) || 0,
-        Number(
-          row.coordinates.lng ??
-            row.coordinates.longitude ??
-            row.coordinates.lon ??
-            0
-        ) || 0,
-      ];
-    } else if (typeof row.coordinates === 'string') {
-      try {
-        const parsed = JSON.parse(row.coordinates);
-        if (Array.isArray(parsed) && parsed.length >= 2) {
-          coordinates = [Number(parsed[0]) || 0, Number(parsed[1]) || 0];
-        } else if (typeof parsed === 'object' && parsed !== null) {
-          coordinates = [
-            Number(parsed.lat ?? parsed.latitude ?? 0) || 0,
-            Number(parsed.lng ?? parsed.longitude ?? parsed.lon ?? 0) || 0,
-          ];
-        }
-      } catch {
-        // leave as [0, 0]
-      }
-    }
-  }
-
-  // Build exploration period if start/end are present
-  let explorationPeriod: { start: Date; end: Date } | undefined;
-  if (row.exploration_start && row.exploration_end) {
-    explorationPeriod = {
-      start: new Date(row.exploration_start),
-      end: new Date(row.exploration_end),
-    };
-  }
-
-  return {
-    id: row.id,
-    title: row.title || '',
-    description: row.description || '',
-    type: row.type,
-    mineral: row.mineral,
-    region: row.region,
-    city: row.city || '',
-    area: Number(row.area) || 0,
-    price: row.price != null ? Number(row.price) : null,
-    coordinates,
-    verified: Boolean(row.verified),
-    featured: Boolean(row.featured),
-    views: Number(row.views) || 0,
-    status: row.status || 'ACTIVE',
-    images: Array.isArray(row.images) ? row.images : [],
-    documents: Array.isArray(row.documents) ? row.documents : [],
-    userId: row.user_id || row.owner_id || '',
-    createdAt: row.created_at ? new Date(row.created_at) : new Date(),
-    updatedAt: row.updated_at ? new Date(row.updated_at) : new Date(),
-
-    // Mining license fields
-    licenseSubtype: row.license_subtype || undefined,
-    licenseNumber: row.license_number || undefined,
-    licenseExpiry: row.license_expiry
-      ? new Date(row.license_expiry)
-      : undefined,
-    annualProductionLimit:
-      row.annual_production_limit != null
-        ? Number(row.annual_production_limit)
-        : undefined,
-
-    // Exploration license fields
-    explorationStage: row.exploration_stage || undefined,
-    explorationPeriod,
-    explorationBudget:
-      row.exploration_budget != null
-        ? Number(row.exploration_budget)
-        : undefined,
-
-    // Mineral occurrence fields
-    discoveryDate: row.discovery_date
-      ? new Date(row.discovery_date)
-      : undefined,
-    geologicalConfidence: row.geological_confidence || undefined,
-    estimatedReserves:
-      row.estimated_reserves != null
-        ? Number(row.estimated_reserves)
-        : undefined,
-    accessibilityRating: row.accessibility_rating || undefined,
-  };
-}
 
 // Temporary simplified cache while fixing Redis issues
 const cache = {
@@ -150,6 +37,26 @@ const cache = {
 const getCacheKey = (prefix: string, params: any) =>
   `${prefix}_${JSON.stringify(params)}`;
 const CACHE_TTL = { MEDIUM: 300 };
+
+// Simple in-process TTL cache for the GET catalog response.
+// Data is near-static; this avoids hitting Supabase on every request within
+// a serverless instance's lifetime. Only successful responses are cached.
+const TTL_MS = 60_000;
+const responseCache = new Map<string, { ts: number; value: any }>();
+
+function getCachedResponse(key: string): any | null {
+  const entry = responseCache.get(key);
+  if (!entry) return null;
+  if (Date.now() - entry.ts > TTL_MS) {
+    responseCache.delete(key);
+    return null;
+  }
+  return entry.value;
+}
+
+function setCachedResponse(key: string, value: any): void {
+  responseCache.set(key, { ts: Date.now(), value });
+}
 
 // Helper function to safely parse integers with validation
 function safeParseInt(
@@ -204,6 +111,16 @@ export async function GET(request: NextRequest) {
 
     const params = validation.data;
     const offset = ((params.page ?? 1) - 1) * (params.limit ?? 10);
+
+    // In-process TTL cache: serve a fresh successful response without hitting Supabase
+    const ttlCacheKey = searchParams.toString();
+    const ttlCached = getCachedResponse(ttlCacheKey);
+    if (ttlCached) {
+      return NextResponse.json({
+        success: true,
+        data: ttlCached,
+      });
+    }
 
     // Extract validated parameters
     const {
@@ -327,93 +244,20 @@ export async function GET(request: NextRequest) {
     // Execute query
     const { data, error, count } = await queryBuilder;
 
-    // If there's an error or no data, use mock data
-    // Transform Supabase rows to frontend-expected KazakhstanDeposit format
-    let deposits: any[] = (data || []).map(transformDepositFromDB);
-    let totalCount = count || 0;
-
-    if (error || deposits.length === 0) {
-      // Filter mock data based on query parameters
-      let filteredMocks = [...mockDeposits];
-
-      if (query) {
-        filteredMocks = filteredMocks.filter(
-          (d) =>
-            d.title.toLowerCase().includes(query.toLowerCase()) ||
-            d.description.toLowerCase().includes(query.toLowerCase())
-        );
-      }
-      if (region) {
-        filteredMocks = filteredMocks.filter((d) => d.region === region);
-      }
-      if (mineral) {
-        filteredMocks = filteredMocks.filter((d) => d.mineral === mineral);
-      }
-      if (type) {
-        filteredMocks = filteredMocks.filter((d) => d.type === type);
-      }
-      if (verified !== undefined && verified !== null) {
-        filteredMocks = filteredMocks.filter(
-          (d) => d.verified === (verified === 'true')
-        );
-      }
-      if (featured !== undefined && featured !== null) {
-        filteredMocks = filteredMocks.filter(
-          (d) => d.featured === (featured === 'true')
-        );
-      }
-      if (minPrice) {
-        const parsedMinPrice = safeParseInt(minPrice, 0, 0);
-        if (parsedMinPrice > 0) {
-          filteredMocks = filteredMocks.filter(
-            (d) => (d.price || 0) >= parsedMinPrice
-          );
-        }
-      }
-      if (maxPrice) {
-        const parsedMaxPrice = safeParseInt(
-          maxPrice,
-          Number.MAX_SAFE_INTEGER,
-          0
-        );
-        if (parsedMaxPrice < Number.MAX_SAFE_INTEGER) {
-          filteredMocks = filteredMocks.filter(
-            (d) => (d.price || 0) <= parsedMaxPrice
-          );
-        }
-      }
-      if (minArea) {
-        const parsedMinArea = safeParseInt(minArea, 0, 0);
-        if (parsedMinArea > 0) {
-          filteredMocks = filteredMocks.filter((d) => d.area >= parsedMinArea);
-        }
-      }
-      if (maxArea) {
-        const parsedMaxArea = safeParseInt(maxArea, Number.MAX_SAFE_INTEGER, 0);
-        if (parsedMaxArea < Number.MAX_SAFE_INTEGER) {
-          filteredMocks = filteredMocks.filter((d) => d.area <= parsedMaxArea);
-        }
-      }
-
-      // Sort mock data
-      filteredMocks.sort((a, b) => {
-        const aVal = a[sortBy as keyof typeof a];
-        const bVal = b[sortBy as keyof typeof b];
-
-        // Handle null/undefined values
-        if (aVal == null && bVal == null) return 0;
-        if (aVal == null) return sortOrder === 'asc' ? 1 : -1;
-        if (bVal == null) return sortOrder === 'asc' ? -1 : 1;
-
-        if (sortOrder === 'asc') {
-          return aVal > bVal ? 1 : -1;
-        }
-        return aVal < bVal ? 1 : -1;
-      });
-
-      totalCount = filteredMocks.length;
-      deposits = filteredMocks.slice(offset, offset + (limit ?? 10));
+    // On DB error, return an empty result set — never serve mock data.
+    // Transform Supabase rows to frontend-expected KazakhstanDeposit format.
+    if (error) {
+      sentryMiningService.captureError(
+        error as unknown as Error,
+        MiningErrorType.LISTING_CREATION_FAILED,
+        { apiEndpoint: '/api/listings' },
+        'error'
+      );
     }
+    const deposits: any[] = error
+      ? []
+      : (data || []).map(transformDepositFromDB);
+    const totalCount = error ? 0 : count || 0;
 
     const finalLimit = limit ?? 10;
     const finalPage = page ?? 1;
@@ -433,6 +277,11 @@ export async function GET(request: NextRequest) {
     // Cache the result with monitoring
     await cache.set(cacheKey, result, CACHE_TTL.MEDIUM);
     sentryMiningService.trackCacheOperation('set', cacheKey);
+
+    // Populate the in-process TTL cache only for successful DB reads
+    if (!error) {
+      setCachedResponse(ttlCacheKey, result);
+    }
 
     // Track successful API response
     sentryMiningService.trackMetric(

@@ -119,7 +119,7 @@ export default function ServicesCatalogPage() {
               Каталог услуг
             </h1>
             <p className="mt-1 text-gray-600 dark:text-gray-400">
-              Профессиональные услуги для горнодобывающей отрасли Казахстана
+              Профессиональные услуги в области недропользования Казахстана
             </p>
           </div>
           <Link

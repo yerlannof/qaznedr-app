@@ -10,62 +10,84 @@ import MobileTabBar from '@/components/layouts/MobileTabBar';
 import type { Metadata, Viewport } from 'next';
 import '../../styles/globals.css';
 
-export const metadata: Metadata = {
-  title: {
-    default: 'QAZNEDR.KZ — Площадка недропользования Казахстана',
-    template: '%s | QAZNEDR.KZ',
-  },
-  description:
-    'B2B маркетплейс для покупки и продажи месторождений, горнодобывающих лицензий и геологических услуг в Казахстане. Для инвесторов, недропользователей и сервис-провайдеров.',
-  keywords: [
-    'месторождения Казахстан',
-    'горнодобыча',
-    'mining licenses Kazakhstan',
-    'mineral deposits',
-    '矿产资源哈萨克斯坦',
-    'лицензии на добычу',
-    'геология',
-  ],
-  openGraph: {
-    title: 'QAZNEDR.KZ — Площадка недропользования Казахстана',
-    description:
-      'B2B маркетплейс для покупки и продажи месторождений в Казахстане',
-    url: 'https://qaznedr.kz',
-    siteName: 'QAZNEDR.KZ',
-    locale: 'ru_KZ',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'QAZNEDR — Платформа геологической отрасли Казахстана',
-    description:
-      'Превращаем природные богатства Казахстана в экономический рост',
-    site: '@qaznedr',
-  },
-  alternates: {
-    canonical: 'https://qaznedr.kz',
-    languages: {
-      ru: 'https://qaznedr.kz/ru',
-      en: 'https://qaznedr.kz/en',
-      kk: 'https://qaznedr.kz/kz',
-      zh: 'https://qaznedr.kz/zh',
+const BASE_URL = 'https://qaznedr.kz';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    title: {
+      default: 'QAZNEDR.KZ — Площадка недропользования Казахстана',
+      template: '%s | QAZNEDR.KZ',
     },
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  verification: {
-    google: 'GOOGLE_VERIFICATION_CODE_HERE',
-    yandex: 'YANDEX_VERIFICATION_CODE_HERE',
-  },
-};
+    description:
+      'B2B маркетплейс для покупки и продажи месторождений, лицензий на недропользование и геологических услуг в Казахстане. Для инвесторов, недропользователей и сервис-провайдеров.',
+    keywords: [
+      'месторождения Казахстан',
+      'недропользование',
+      'mining licenses Kazakhstan',
+      'mineral deposits',
+      '矿产资源哈萨克斯坦',
+      'лицензии на добычу',
+      'геология',
+    ],
+    openGraph: {
+      title: 'QAZNEDR.KZ — Площадка недропользования Казахстана',
+      description:
+        'B2B маркетплейс для покупки и продажи месторождений в Казахстане',
+      url: `${BASE_URL}/${locale}`,
+      siteName: 'QAZNEDR.KZ',
+      locale:
+        locale === 'kz'
+          ? 'kk_KZ'
+          : locale === 'zh'
+            ? 'zh_CN'
+            : locale === 'en'
+              ? 'en_US'
+              : 'ru_KZ',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: 'QAZNEDR — Платформа геологической отрасли Казахстана',
+      description:
+        'Превращаем природные богатства Казахстана в экономический рост',
+      site: '@qaznedr',
+    },
+    alternates: {
+      canonical: `${BASE_URL}/${locale}`,
+      languages: {
+        ru: `${BASE_URL}/ru`,
+        en: `${BASE_URL}/en`,
+        kk: `${BASE_URL}/kz`,
+        zh: `${BASE_URL}/zh`,
+        'x-default': `${BASE_URL}/ru`,
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    // Set GOOGLE_SITE_VERIFICATION / YANDEX_VERIFICATION in Vercel env to emit the
+    // verification meta tags. Omitted entirely when unset (no broken placeholder tags).
+    verification: {
+      ...(process.env.GOOGLE_SITE_VERIFICATION
+        ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+        : {}),
+      ...(process.env.YANDEX_VERIFICATION
+        ? { yandex: process.env.YANDEX_VERIFICATION }
+        : {}),
+    },
+  };
+}
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
   viewportFit: 'cover',
 };
 
@@ -80,8 +102,8 @@ const fraunces = Cormorant_Garamond({
   subsets: ['latin', 'latin-ext', 'cyrillic'],
   variable: '--font-fraunces',
   display: 'swap',
-  weight: ['300', '400', '500', '600'],
-  style: ['normal', 'italic'],
+  weight: ['300', '400', '600'],
+  style: ['normal'],
 });
 
 export default async function LocaleLayout({
@@ -104,10 +126,18 @@ export default async function LocaleLayout({
       <body
         className={`${inter.variable} ${fraunces.variable} ${inter.className} antialiased`}
       >
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:bg-gray-900 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
+        >
+          Перейти к содержимому
+        </a>
         <ThemeProvider>
           <AuthProvider>
             <WebVitalsTracker pageName={`/${locale}`} />
-            <div className="pb-16 md:pb-0">{children}</div>
+            <main id="main" className="pb-16 md:pb-0">
+              {children}
+            </main>
             <MobileTabBar />
             <Toaster position="top-right" richColors />
             <Analytics />

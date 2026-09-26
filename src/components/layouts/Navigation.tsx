@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Menu, Search, User, LogOut, ChevronDown } from 'lucide-react';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import {
   Sheet,
   SheetContent,
@@ -24,6 +25,7 @@ import {
  */
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -69,6 +71,7 @@ export default function Navigation() {
 
   return (
     <nav
+      aria-label="Основная навигация"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
           ? 'bg-white/85 backdrop-blur-xl border-b border-gray-100 dark:bg-[#0A0A0A]/85 dark:border-gray-800'
@@ -105,6 +108,7 @@ export default function Navigation() {
 
           {/* Desktop right side */}
           <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle />
             {status === 'loading' ? (
               <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 animate-pulse" />
             ) : session ? (
@@ -112,16 +116,25 @@ export default function Navigation() {
               <div className="relative" ref={userMenuRef}>
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  aria-label="Меню пользователя"
+                  aria-haspopup="menu"
+                  aria-expanded={userMenuOpen}
+                  className="flex items-center gap-2 px-2 py-1.5 min-h-[44px] rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A84FF]"
                 >
                   <div className="w-7 h-7 rounded-full bg-gray-900 dark:bg-gray-100 flex items-center justify-center text-white dark:text-gray-900 text-xs font-medium">
                     {session.user?.name?.[0]?.toUpperCase() || '?'}
                   </div>
-                  <ChevronDown className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
+                  <ChevronDown
+                    aria-hidden
+                    className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
+                  />
                 </button>
 
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-[#141414] rounded-lg shadow-lg border border-gray-100 dark:border-gray-800 py-1 z-50">
+                  <div
+                    role="menu"
+                    className="absolute right-0 mt-2 w-48 bg-white dark:bg-[#141414] rounded-lg shadow-lg border border-gray-100 dark:border-gray-800 py-1 z-50"
+                  >
                     <Link
                       href={`/${locale}/dashboard`}
                       onClick={() => setUserMenuOpen(false)}
@@ -148,7 +161,7 @@ export default function Navigation() {
                       onClick={() => signOut({ callbackUrl: `/${locale}` })}
                       className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                     >
-                      <LogOut className="w-3.5 h-3.5" />
+                      <LogOut aria-hidden className="w-3.5 h-3.5" />
                       <span>{t('common.logout')}</span>
                     </button>
                   </div>
@@ -175,13 +188,22 @@ export default function Navigation() {
 
           {/* Mobile right side: hamburger */}
           <div className="flex lg:hidden items-center gap-2">
-            <Sheet>
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <button className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                  <Menu className="w-5 h-5" />
+                <button
+                  aria-label={t('common.menu')}
+                  aria-expanded={isOpen}
+                  aria-controls="mobile-nav-menu"
+                  className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A84FF]"
+                >
+                  <Menu aria-hidden className="w-5 h-5" />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[360px] p-0">
+              <SheetContent
+                id="mobile-nav-menu"
+                side="right"
+                className="w-[300px] sm:w-[360px] p-0"
+              >
                 <SheetHeader className="px-6 pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
                   <SheetTitle className="text-left text-base font-semibold text-gray-900 dark:text-gray-50">
                     {t('common.menu')}
@@ -241,12 +263,20 @@ export default function Navigation() {
 
                   {/* Bottom actions */}
                   <div className="border-t border-gray-100 dark:border-gray-800 p-4">
+                    <div className="flex items-center justify-between px-3 pb-3 mb-3 border-b border-gray-100 dark:border-gray-800">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        {t('common.theme') !== 'common.theme'
+                          ? t('common.theme')
+                          : 'Тема'}
+                      </span>
+                      <ThemeToggle />
+                    </div>
                     {session ? (
                       <button
                         onClick={() => signOut({ callbackUrl: `/${locale}` })}
                         className="flex items-center gap-2 w-full px-3 py-2.5 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                       >
-                        <LogOut className="w-4 h-4" />
+                        <LogOut aria-hidden className="w-4 h-4" />
                         <span>{t('common.logout')}</span>
                       </button>
                     ) : (

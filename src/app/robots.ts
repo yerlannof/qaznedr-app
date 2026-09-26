@@ -1,17 +1,30 @@
 import { MetadataRoute } from 'next';
 
+const disallow = [
+  '/api/',
+  '/dashboard/',
+  '/admin/',
+  '/auth/',
+  '/favorites',
+  '/*/dashboard/',
+  '/*/admin/',
+  '/*/auth/',
+  '/*/favorites',
+  '/*/leads/*/full',
+];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/dashboard/', '/admin/', '/*/leads/*/full'],
+        disallow,
       },
       {
         userAgent: 'Yandex',
         allow: '/',
-        disallow: ['/api/', '/dashboard/', '/admin/', '/*/leads/*/full'],
+        disallow,
         crawlDelay: 2,
       },
     ],

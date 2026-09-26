@@ -1,10 +1,26 @@
 import { MetadataRoute } from 'next';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://qaznedr.kz';
-  const locales = ['ru', 'kz', 'en', 'zh'];
+// Stable build-time date to avoid lastModified churn on every deploy.
+const BUILD_DATE = new Date('2026-05-31');
 
-  // Static pages
+const baseUrl = 'https://qaznedr.kz';
+const locales = ['ru', 'kz', 'en', 'zh'] as const;
+
+// hreflang codes: kz uses ISO 'kk'
+const hreflangFor = (locale: string) => (locale === 'kz' ? 'kk' : locale);
+
+// Build alternates.languages map for a given page path (without locale prefix).
+function languagesFor(page: string): Record<string, string> {
+  const languages: Record<string, string> = {};
+  for (const l of locales) {
+    languages[hreflangFor(l)] = `${baseUrl}/${l}${page}`;
+  }
+  languages['x-default'] = `${baseUrl}/ru${page}`;
+  return languages;
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Static pages (no /favorites — user-private)
   const staticPages = [
     '',
     '/leads',
@@ -20,15 +36,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/education',
     '/news',
     '/knowledge',
-    '/favorites',
     '/map',
+    '/about',
+    '/support',
+    '/legal/terms',
+    '/faq',
   ];
-  const staticEntries = locales.flatMap((locale) =>
+  const staticEntries: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     staticPages.map((page) => ({
       url: `${baseUrl}/${locale}${page}`,
-      lastModified: new Date(),
+      lastModified: BUILD_DATE,
       changeFrequency: 'weekly' as const,
       priority: page === '' ? 1.0 : 0.8,
+      alternates: { languages: languagesFor(page) },
     }))
   );
 
@@ -57,16 +77,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     }
 
-    listingEntries = allDeposits.flatMap((deposit) =>
-      locales.map((locale) => ({
+    listingEntries = allDeposits.flatMap((deposit) => {
+      const lastModified = new Date(
+        deposit.updatedAt || deposit.createdAt || BUILD_DATE
+      );
+      return locales.map((locale) => ({
         url: `${baseUrl}/${locale}/listings/${deposit.id}`,
-        lastModified: new Date(
-          deposit.updatedAt || deposit.createdAt || new Date()
-        ),
+        lastModified,
         changeFrequency: 'daily' as const,
         priority: 0.9,
-      }))
-    );
+        alternates: { languages: languagesFor(`/listings/${deposit.id}`) },
+      }));
+    });
   } catch {
     // If API is unavailable, return only static entries
   }
@@ -96,9 +118,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     leadEntries = codes.flatMap((l) =>
       locales.map((locale) => ({
         url: `${baseUrl}/${locale}/leads/${l.code}`,
-        lastModified: new Date(),
+        lastModified: BUILD_DATE,
         changeFrequency: 'daily' as const,
         priority: 0.9,
+        alternates: { languages: languagesFor(`/leads/${l.code}`) },
       }))
     );
   } catch {

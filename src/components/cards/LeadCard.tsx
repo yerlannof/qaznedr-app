@@ -29,14 +29,14 @@ export default function LeadCard({
         {/* Header / icon area */}
         <div className="h-36 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 overflow-hidden relative flex items-center justify-center">
           <div className="w-16 h-16 rounded-2xl bg-white dark:bg-[#141414] shadow-subtle flex items-center justify-center">
-            <Gem className="w-8 h-8 text-gold" />
+            <Gem className="w-8 h-8 text-gold" aria-hidden="true" />
           </div>
           <div className="absolute top-3 right-3 flex flex-col items-end gap-1.5">
             {isSold ? (
               <Badge variant="default">{t('leadCard.badge.sold')}</Badge>
             ) : free ? (
               <Badge variant="gold">
-                <ShieldCheck className="w-3 h-3 mr-1" />
+                <ShieldCheck className="w-3 h-3 mr-1" aria-hidden="true" />
                 {t('leadCard.badge.free')}
               </Badge>
             ) : null}
@@ -44,7 +44,7 @@ export default function LeadCard({
           </div>
           {lead.region && (
             <div className="absolute bottom-3 left-3 inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white/95 dark:bg-[#141414]/95 backdrop-blur text-xs font-medium text-gray-700 dark:text-gray-200 border border-gray-200/60 dark:border-gray-700/60">
-              <MapPin className="w-3 h-3" />
+              <MapPin className="w-3 h-3" aria-hidden="true" />
               {lead.region}
             </div>
           )}
@@ -53,11 +53,11 @@ export default function LeadCard({
         {/* Content */}
         <div className="p-4 flex flex-col flex-1">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium uppercase tracking-wider text-gray-400">
+            <span className="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
               {typeLabel} · {lead.code}
             </span>
           </div>
-          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50 mt-1.5 line-clamp-2">
+          <h3 className="font-serif text-lg text-gray-900 dark:text-gray-50 mt-1.5 line-clamp-2">
             {lead.teaser_title ||
               t('leadCard.titleFallback', {
                 region: lead.region || t('leadCard.regionFallback'),
@@ -70,7 +70,7 @@ export default function LeadCard({
                 {lead.grade_display}
               </span>
               {lead.grade_label && (
-                <p className="text-[11px] text-gray-400 leading-tight mt-0.5 line-clamp-1">
+                <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-tight mt-0.5 line-clamp-1">
                   {lead.grade_label}
                 </p>
               )}
@@ -91,13 +91,13 @@ export default function LeadCard({
           )}
 
           <div className="border-t border-gray-100 dark:border-gray-700 mt-3 pt-3 flex items-center justify-between mt-auto">
-            <span className="text-sm font-bold text-gold-dark dark:text-gold-light">
-              {lead.price_display || t('leadCard.priceOnRequest')}
+            <span className="font-serif text-lg text-gold-dark dark:text-gold-light">
+              {t('leadCard.priceOnRequest')}
             </span>
-            <span className="inline-flex items-center gap-1 text-xs font-medium text-[#0A84FF] group-hover:gap-1.5 transition-all">
-              <Lock className="w-3 h-3" />
+            <span className="inline-flex items-center gap-1 text-xs font-medium text-[#0060DF] group-hover:gap-1.5 transition-all">
+              <Lock className="w-3 h-3" aria-hidden="true" />
               {t('leadCard.open')}
-              <ArrowRight className="w-3 h-3" />
+              <ArrowRight className="w-3 h-3" aria-hidden="true" />
             </span>
           </div>
         </div>

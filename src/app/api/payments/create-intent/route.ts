@@ -8,6 +8,7 @@ import {
 } from '@/lib/middleware/input-validation';
 import { withRateLimit } from '@/lib/middleware/rate-limiting';
 import { z } from 'zod';
+import crypto from 'crypto';
 
 export const dynamic = 'force-dynamic';
 
@@ -101,10 +102,12 @@ async function handlePaymentIntent(
         sellerId: listing.seller_id,
         buyerId: userId,
         timestamp: new Date().toISOString(),
-        // Add security hash to prevent tampering
-        securityHash: Buffer.from(
-          `${listing.id}-${userId}-${amount}-${process.env.STRIPE_WEBHOOK_SECRET}`
-        ).toString('base64'),
+        // Add security hash to prevent tampering.
+        // Use a non-reversible HMAC so the secret can't be recovered from metadata.
+        securityHash: crypto
+          .createHmac('sha256', process.env.STRIPE_WEBHOOK_SECRET || '')
+          .update(`${listing.id}-${userId}-${amount}`)
+          .digest('hex'),
       }
     );
 

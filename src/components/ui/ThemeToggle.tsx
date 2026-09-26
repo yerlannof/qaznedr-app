@@ -18,12 +18,13 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-      aria-label="Toggle theme"
+      className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A84FF]"
+      aria-label="Переключить тему"
     >
       {theme === 'dark' ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
@@ -39,6 +40,7 @@ export function ThemeToggle() {
       ) : (
         <svg
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}

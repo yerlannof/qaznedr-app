@@ -1,149 +1,51 @@
-'use client';
-
-import { useState, useEffect, useCallback, Suspense } from 'react';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import ListingsFilters from '@/components/features/ListingsFilters';
-import ListingCard from '@/components/cards/ListingCard';
-import SkeletonCard from '@/components/ui/SkeletonCard';
-import { Button } from '@/components/ui/button';
+import ListingsResults from '@/components/features/ListingsResults';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Search, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getListings } from '@/lib/listings/queries';
+import { getServerTranslation } from '@/lib/i18n/translations';
+import { cn } from '@/lib/utils';
 
-// Dynamic import for heavy map component
-const DepositMap = dynamic(
-  () =>
-    import('@/components/features/DepositMap').then((mod) => ({
-      default: mod.DepositMap,
-    })),
-  {
-    loading: () => (
-      <div className="h-[600px] bg-gray-100 dark:bg-gray-800 rounded-xl animate-pulse flex items-center justify-center">
-        <span className="text-sm text-gray-400">Loading map...</span>
-      </div>
-    ),
-    ssr: false,
-  }
-);
-import { depositApi } from '@/lib/api/deposits';
-import { useTranslation } from '@/hooks/useTranslation';
-import {
-  List,
-  Map,
-  Search,
-  AlertTriangle,
-  ChevronLeft,
-  ChevronRight,
-  X,
-} from 'lucide-react';
-import type {
-  KazakhstanDeposit,
-  SearchParams,
-  ListingFilters,
-  RegionType,
-  MineralType,
-  ListingType,
-} from '@/lib/types/listing';
+export const dynamic = 'force-dynamic';
 
-function ListingsContent() {
-  const { t, locale } = useTranslation();
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
+const ITEMS_PER_PAGE = 12;
 
-  const [deposits, setDeposits] = useState<KazakhstanDeposit[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [totalCount, setTotalCount] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
-  const [selectedDeposit, setSelectedDeposit] =
-    useState<KazakhstanDeposit | null>(null);
+function firstString(v: string | string[] | undefined): string | undefined {
+  return Array.isArray(v) ? v[0] : v;
+}
 
-  const [_filters, _setFilters] = useState<ListingFilters>({
-    region: [],
-    mineral: [],
-    type: [],
-    verified: undefined,
-    featured: undefined,
-  });
+export default async function ListingsPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const { locale } = await params;
+  const sp = await searchParams;
+  const { t } = getServerTranslation(locale);
 
-  const itemsPerPage = 12;
-  const currentPage = parseInt(searchParams.get('page') || '1');
+  const currentPage = Math.max(1, parseInt(firstString(sp.page) || '1') || 1);
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      if (value) {
-        params.set(name, value);
-      } else {
-        params.delete(name);
-      }
-      return params.toString();
-    },
-    [searchParams]
+  const { deposits, total, totalPages } = await getListings(
+    sp,
+    currentPage,
+    ITEMS_PER_PAGE
   );
 
-  const loadDeposits = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const searchQuery: SearchParams = {
-        page: currentPage,
-        limit: itemsPerPage,
-        query: searchParams.get('q') || undefined,
-        sortBy:
-          (searchParams.get('sortBy') as
-            | 'price'
-            | 'area'
-            | 'views'
-            | 'createdAt') || 'createdAt',
-        sortOrder: (searchParams.get('sortOrder') as 'asc' | 'desc') || 'desc',
-        filters: {
-          region: searchParams.get('region')
-            ? [searchParams.get('region')! as RegionType]
-            : undefined,
-          mineral: searchParams.get('mineral')
-            ? [searchParams.get('mineral')! as MineralType]
-            : undefined,
-          type: searchParams.get('type')
-            ? [searchParams.get('type')! as ListingType]
-            : undefined,
-          verified: searchParams.get('verified') === 'true' ? true : undefined,
-          featured: searchParams.get('featured') === 'true' ? true : undefined,
-          priceMin: searchParams.get('priceMin')
-            ? Number(searchParams.get('priceMin')) * 1000000000
-            : undefined,
-          priceMax: searchParams.get('priceMax')
-            ? Number(searchParams.get('priceMax')) * 1000000000
-            : undefined,
-        },
-      };
-
-      const result = await depositApi.search(searchQuery);
-
-      setDeposits(result.deposits);
-      setTotalCount(result.total);
-      setTotalPages(result.totalPages);
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Произошла ошибка при загрузке данных'
-      );
-    } finally {
-      setLoading(false);
+  // Build a pagination href that preserves the active filters.
+  const buildPageHref = (pageNum: number) => {
+    const q = new URLSearchParams();
+    for (const [key, value] of Object.entries(sp)) {
+      if (key === 'page') continue;
+      const v = firstString(value);
+      if (v) q.set(key, v);
     }
-  }, [searchParams, currentPage]);
-
-  useEffect(() => {
-    loadDeposits();
-  }, [loadDeposits]);
-
-  const clearAllFilters = () => {
-    router.push(pathname);
+    q.set('page', String(pageNum));
+    return `/${locale}/listings?${q.toString()}`;
   };
 
   const itemListJsonLd = {
@@ -151,18 +53,29 @@ function ListingsContent() {
     '@type': 'ItemList',
     name: 'Месторождения и лицензии Казахстана',
     description:
-      'Каталог горнодобывающих лицензий, участков разведки и минеральных проявлений',
+      'Каталог лицензий на добычу, участков разведки и минеральных проявлений',
     url: 'https://qaznedr.kz/ru/listings',
-    numberOfItems: totalCount || 0,
+    numberOfItems: total || 0,
     itemListOrder: 'https://schema.org/ItemListUnordered',
   };
+
+  // Window of page numbers, matching the previous client pagination logic.
+  const pageWindow: number[] = Array.from(
+    { length: Math.min(5, Math.max(totalPages, 0)) },
+    (_, i) => {
+      if (totalPages <= 5) return i + 1;
+      if (currentPage <= 3) return i + 1;
+      if (currentPage >= totalPages - 2) return totalPages - 4 + i;
+      return currentPage - 2 + i;
+    }
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#0A0A0A]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(itemListJsonLd),
+          __html: JSON.stringify(itemListJsonLd).replace(/</g, '\\u003c'),
         }}
       />
       <Navigation />
@@ -172,13 +85,15 @@ function ListingsContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
+              <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-[rgba(200,162,75,0.12)] text-gold-dark dark:text-gold-light text-xs font-semibold uppercase tracking-wider">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                {t('navigation.listings')}
+              </div>
+              <h1 className="font-serif font-light text-4xl lg:text-5xl tracking-tight text-gray-900 dark:text-gray-50">
                 {t('listings.title')}
               </h1>
-              <p className="text-sm text-gray-500 mt-1">
-                {loading
-                  ? t('listings.loading')
-                  : `${totalCount} ${t('listings.foundDeposits', { count: totalCount })}`}
+              <p className="text-sm text-gray-500 mt-2">
+                {`${total} ${t('listings.foundDeposits', { count: total })}`}
               </p>
             </div>
             <Button asChild variant="outline" className="hidden lg:inline-flex">
@@ -200,125 +115,27 @@ function ListingsContent() {
 
           {/* Results */}
           <div className="lg:col-span-3">
-            {/* Results Count and View Options */}
-            {!loading && !error && (
-              <div className="flex justify-between items-center mb-4">
-                <p className="text-sm text-gray-500">
-                  {t('listings.showingResults', { count: deposits.length })}
-                  {currentPage > 1 &&
-                    ` (${t('listings.pageInfo', { current: currentPage, total: totalPages })})`}
-                </p>
-
-                {/* View Toggle */}
-                <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
-                  <button
-                    onClick={() => setViewMode('list')}
-                    className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors flex items-center gap-1.5 ${
-                      viewMode === 'list'
-                        ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 shadow-sm'
-                        : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
-                    }`}
-                  >
-                    <List className="w-4 h-4" />
-                    {t('listings.viewMode.list')}
-                  </button>
-                  <button
-                    onClick={() => setViewMode('map')}
-                    className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors flex items-center gap-1.5 ${
-                      viewMode === 'map'
-                        ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 shadow-sm'
-                        : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
-                    }`}
-                  >
-                    <Map className="w-4 h-4" />
-                    {t('listings.viewMode.map')}
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Loading State */}
-            {loading && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <SkeletonCard key={i} />
-                ))}
-              </div>
-            )}
-
-            {/* Error State */}
-            {error && (
-              <div className="text-center py-16">
-                <AlertTriangle className="w-10 h-10 text-gray-300 mx-auto" />
-                <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50 mt-4">
-                  Ошибка загрузки
-                </h3>
-                <p className="text-sm text-gray-500 mt-1">{error}</p>
-                <Button
-                  className="mt-4"
-                  variant="accent"
-                  onClick={loadDeposits}
-                >
-                  Попробовать снова
-                </Button>
-              </div>
-            )}
-
-            {/* Content based on view mode */}
-            {!loading && !error && deposits.length > 0 && (
-              <>
-                {viewMode === 'list' ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {deposits.map((deposit) => (
-                      <ListingCard key={deposit.id} deposit={deposit} />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="mb-8">
-                    <DepositMap
-                      deposits={deposits}
-                      selectedDeposit={selectedDeposit}
-                      onDepositClick={setSelectedDeposit}
-                      height="600px"
-                      className="rounded-xl border border-gray-200 dark:border-gray-700"
-                    />
-
-                    {/* Selected Deposit Card */}
-                    {selectedDeposit && (
-                      <div className="mt-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                            Выбранное месторождение
-                          </h3>
-                          <button
-                            onClick={() => setSelectedDeposit(null)}
-                            className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
-                        </div>
-                        <div className="max-w-sm">
-                          <ListingCard deposit={selectedDeposit} />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </>
-            )}
-
-            {/* No Results */}
-            {!loading && !error && deposits.length === 0 && (
+            {deposits.length > 0 ? (
+              <ListingsResults
+                deposits={deposits}
+                locale={locale}
+                currentPage={currentPage}
+                totalPages={totalPages}
+              />
+            ) : (
+              /* No Results */
               <div className="text-center py-16">
                 <Search className="w-10 h-10 text-gray-300 mx-auto" />
                 <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50 mt-4">
-                  Ничего не найдено
+                  {t('listings.noResultsTitle')}
                 </h3>
                 <p className="text-sm text-gray-500 mt-1">
-                  Попробуйте изменить фильтры
+                  {t('listings.noResultsDesc')}
                 </p>
-                <Button className="mt-4" onClick={clearAllFilters}>
-                  Сбросить фильтры
+                <Button asChild className="mt-4">
+                  <Link href={`/${locale}/listings`}>
+                    {t('listings.resetFilters')}
+                  </Link>
                 </Button>
               </div>
             )}
@@ -326,87 +143,82 @@ function ListingsContent() {
         </div>
 
         {/* Pagination */}
-        {!loading && !error && totalPages > 1 && (
+        {totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-10">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() =>
-                currentPage > 1 &&
-                router.push(
-                  `${pathname}?${createQueryString('page', (currentPage - 1).toString())}`
-                )
-              }
-              disabled={currentPage <= 1}
-            >
-              <ChevronLeft className="w-4 h-4" />
-              Назад
-            </Button>
+            {currentPage > 1 ? (
+              <Link
+                href={buildPageHref(currentPage - 1)}
+                className={buttonVariants({ variant: 'outline', size: 'sm' })}
+              >
+                <ChevronLeft className="w-4 h-4" />
+                {t('listings.back')}
+              </Link>
+            ) : (
+              <span
+                aria-disabled="true"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'sm' }),
+                  'pointer-events-none opacity-50'
+                )}
+              >
+                <ChevronLeft className="w-4 h-4" />
+                {t('listings.back')}
+              </span>
+            )}
 
             <div className="flex gap-1">
-              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                let pageNum;
-                if (totalPages <= 5) {
-                  pageNum = i + 1;
-                } else if (currentPage <= 3) {
-                  pageNum = i + 1;
-                } else if (currentPage >= totalPages - 2) {
-                  pageNum = totalPages - 4 + i;
-                } else {
-                  pageNum = currentPage - 2 + i;
-                }
-
-                return (
-                  <Button
+              {pageWindow.map((pageNum) =>
+                currentPage === pageNum ? (
+                  <span
                     key={pageNum}
-                    variant={currentPage === pageNum ? 'default' : 'ghost'}
-                    size="sm"
-                    onClick={() =>
-                      router.push(
-                        `${pathname}?${createQueryString('page', pageNum.toString())}`
-                      )
-                    }
-                    className="w-9"
+                    aria-current="page"
+                    className={cn(
+                      buttonVariants({ variant: 'default', size: 'sm' }),
+                      'w-9'
+                    )}
                   >
                     {pageNum}
-                  </Button>
-                );
-              })}
+                  </span>
+                ) : (
+                  <Link
+                    key={pageNum}
+                    href={buildPageHref(pageNum)}
+                    className={cn(
+                      buttonVariants({ variant: 'ghost', size: 'sm' }),
+                      'w-9'
+                    )}
+                  >
+                    {pageNum}
+                  </Link>
+                )
+              )}
             </div>
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() =>
-                currentPage < totalPages &&
-                router.push(
-                  `${pathname}?${createQueryString('page', (currentPage + 1).toString())}`
-                )
-              }
-              disabled={currentPage >= totalPages}
-            >
-              Далее
-              <ChevronRight className="w-4 h-4" />
-            </Button>
+            {currentPage < totalPages ? (
+              <Link
+                href={buildPageHref(currentPage + 1)}
+                className={buttonVariants({ variant: 'outline', size: 'sm' })}
+              >
+                {t('listings.next')}
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            ) : (
+              <span
+                aria-disabled="true"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'sm' }),
+                  'pointer-events-none opacity-50'
+                )}
+              >
+                {t('listings.next')}
+                <ChevronRight className="w-4 h-4" />
+              </span>
+            )}
           </div>
         )}
       </div>
 
       <Footer />
     </div>
-  );
-}
-
-export default function ListingsPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-sm text-gray-400">Загрузка...</div>
-        </div>
-      }
-    >
-      <ListingsContent />
-    </Suspense>
   );
 }

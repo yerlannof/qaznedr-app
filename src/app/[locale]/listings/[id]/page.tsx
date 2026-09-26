@@ -24,47 +24,8 @@ import {
   X,
 } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
-
-function getTypeLabel(type: string) {
-  switch (type) {
-    case 'MINING_LICENSE':
-      return 'Лицензия на добычу';
-    case 'EXPLORATION_LICENSE':
-      return 'Лицензия на разведку';
-    case 'MINERAL_OCCURRENCE':
-      return 'Рудопроявление';
-    default:
-      return type;
-  }
-}
-
-function getStatusVariant(
-  status: string
-): 'default' | 'blue' | 'success' | 'warning' | 'error' {
-  switch (status) {
-    case 'ACTIVE':
-      return 'blue';
-    case 'PENDING':
-      return 'default';
-    case 'SOLD':
-      return 'default';
-    default:
-      return 'default';
-  }
-}
-
-function getStatusText(status: string) {
-  switch (status) {
-    case 'ACTIVE':
-      return 'Активно';
-    case 'PENDING':
-      return 'В ожидании';
-    case 'SOLD':
-      return 'Продано';
-    default:
-      return status;
-  }
-}
+import { formatPrice, formatArea, formatShortDate } from '@/lib/utils/format';
+import { getStatusMeta, getTypeLabel } from '@/lib/listings/listing-status';
 
 export default function DepositDetailPage() {
   const params = useParams();
@@ -121,15 +82,20 @@ export default function DepositDetailPage() {
       name: deposit.title,
       description: deposit.description,
       category: getTypeLabel(deposit.type),
-      offers: {
-        '@type': 'Offer',
-        priceCurrency: 'KZT',
-        price: deposit.price || 0,
-        availability:
-          deposit.status === 'SOLD'
-            ? 'https://schema.org/SoldOut'
-            : 'https://schema.org/InStock',
-      },
+      // Omit offers entirely when price is null — price:0 is invalid for an Offer.
+      ...(deposit.price
+        ? {
+            offers: {
+              '@type': 'Offer',
+              priceCurrency: 'KZT',
+              price: deposit.price,
+              availability:
+                deposit.status === 'SOLD'
+                  ? 'https://schema.org/SoldOut'
+                  : 'https://schema.org/InStock',
+            },
+          }
+        : {}),
       additionalProperty: [
         { '@type': 'PropertyValue', name: 'Mineral', value: deposit.mineral },
         { '@type': 'PropertyValue', name: 'Region', value: deposit.region },
@@ -228,7 +194,7 @@ export default function DepositDetailPage() {
         <Navigation />
         <div className="pt-20 lg:pt-24 flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-10 w-10 border-2 border-gray-200 border-t-[#0A84FF] mx-auto mb-4" />
+            <div className="animate-spin rounded-full h-10 w-10 border-2 border-gray-200 border-t-gold mx-auto mb-4" />
             <p className="text-sm text-gray-500">Загрузка...</p>
           </div>
         </div>
@@ -240,7 +206,10 @@ export default function DepositDetailPage() {
     return (
       <div className="min-h-screen bg-white dark:bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center px-4">
-          <AlertTriangle className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+          <AlertTriangle
+            aria-hidden
+            className="w-12 h-12 text-gray-300 mx-auto mb-4"
+          />
           <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-2">
             {error || 'Объявление не найдено'}
           </h1>
@@ -249,7 +218,7 @@ export default function DepositDetailPage() {
           </p>
           <Link
             href={`/${locale}/listings`}
-            className="inline-flex items-center px-4 py-2 bg-[#0A84FF] text-white rounded-lg text-sm font-medium hover:bg-[#0070e0] transition-colors"
+            className="inline-flex items-center px-4 py-2 bg-gray-900 text-white hover:bg-gray-800 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors"
           >
             Вернуться к каталогу
           </Link>
@@ -258,27 +227,22 @@ export default function DepositDetailPage() {
     );
   }
 
-  const formatPrice = (price: number | null) => {
-    if (!price) return 'По запросу';
-    if (price >= 1000000000000)
-      return `${(price / 1000000000000).toFixed(1)} трлн ₸`;
-    if (price >= 1000000000) return `${(price / 1000000000).toFixed(1)} млрд ₸`;
-    if (price >= 1000000) return `${(price / 1000000).toFixed(1)} млн ₸`;
-    return `${price.toLocaleString()} ₸`;
-  };
-
   return (
     <>
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+          }}
         />
       )}
       {breadcrumbJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c'),
+          }}
         />
       )}
       <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
@@ -325,15 +289,15 @@ export default function DepositDetailPage() {
                   {getTypeLabel(deposit.type)}
                 </div>
                 <div className="flex items-start justify-between gap-4">
-                  <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
+                  <h1 className="font-serif font-light text-3xl lg:text-4xl tracking-tight text-gray-900 dark:text-gray-50">
                     {deposit.title}
                   </h1>
                   <div className="flex flex-col items-end gap-2 shrink-0">
-                    <Badge variant={getStatusVariant(deposit.status)}>
-                      {getStatusText(deposit.status)}
+                    <Badge variant={getStatusMeta(deposit.status).variant}>
+                      {getStatusMeta(deposit.status).label}
                     </Badge>
                     {deposit.verified && (
-                      <Badge variant="blue">Проверено</Badge>
+                      <Badge variant="gold">Проверено</Badge>
                     )}
                     {deposit.featured && (
                       <Badge variant="default">Рекомендуем</Badge>
@@ -363,7 +327,7 @@ export default function DepositDetailPage() {
                     Площадь
                   </dt>
                   <dd className="text-sm font-medium text-gray-900 dark:text-gray-50 mt-1">
-                    {deposit.area.toLocaleString()} км²
+                    {formatArea(deposit.area)}
                   </dd>
                 </div>
                 <div>
@@ -462,12 +426,8 @@ export default function DepositDetailPage() {
               <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
                 <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-400">
                   <span>ID: #{deposit.id}</span>
-                  <span>
-                    Размещено: {deposit.createdAt.toLocaleDateString('ru-RU')}
-                  </span>
-                  <span>
-                    Обновлено: {deposit.updatedAt.toLocaleDateString('ru-RU')}
-                  </span>
+                  <span>Размещено: {formatShortDate(deposit.createdAt)}</span>
+                  <span>Обновлено: {formatShortDate(deposit.updatedAt)}</span>
                 </div>
               </div>
             </div>
@@ -477,7 +437,7 @@ export default function DepositDetailPage() {
               <div className="sticky top-20 space-y-4">
                 {/* Price card */}
                 <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6 bg-white dark:bg-[#141414] shadow-sm">
-                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-1">
+                  <div className="font-serif text-3xl text-gold-dark dark:text-gold-light tabular-nums mb-1">
                     {formatPrice(deposit.price)}
                   </div>
                   {deposit.price && (
@@ -489,9 +449,10 @@ export default function DepositDetailPage() {
                   <div className="space-y-3">
                     <button
                       onClick={() => setShowMessaging(true)}
+                      aria-label="Написать сообщение продавцу"
                       className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#0A84FF] text-white rounded-lg text-sm font-medium hover:bg-[#0070e0] transition-colors"
                     >
-                      <MessageSquare className="w-4 h-4" />
+                      <MessageSquare aria-hidden className="w-4 h-4" />
                       Написать сообщение
                     </button>
 
@@ -499,6 +460,8 @@ export default function DepositDetailPage() {
                       <button
                         onClick={handleFavoriteToggle}
                         disabled={favoriteLoading}
+                        aria-pressed={isFavorite}
+                        aria-label={isFavorite ? 'В избранном' : 'Сохранить'}
                         className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium border transition-colors disabled:opacity-50 ${
                           isFavorite
                             ? 'border-[#0A84FF] text-[#0A84FF] bg-[rgba(10,132,255,0.05)]'
@@ -506,19 +469,20 @@ export default function DepositDetailPage() {
                         }`}
                       >
                         {isFavorite ? (
-                          <Heart className="w-4 h-4 fill-current" />
+                          <Heart aria-hidden className="w-4 h-4 fill-current" />
                         ) : (
-                          <Bookmark className="w-4 h-4" />
+                          <Bookmark aria-hidden className="w-4 h-4" />
                         )}
                         {isFavorite ? 'В избранном' : 'Сохранить'}
                       </button>
 
                       <button
                         onClick={handleShare}
+                        aria-label="Поделиться"
                         className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
                         title="Поделиться"
                       >
-                        <Share2 className="w-4 h-4" />
+                        <Share2 aria-hidden className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
@@ -557,10 +521,14 @@ export default function DepositDetailPage() {
                     </div>
                     <form onSubmit={handleContactSubmit} className="space-y-3">
                       <div>
-                        <label className="block text-xs font-medium text-gray-500 mb-1">
+                        <label
+                          htmlFor="contact-name"
+                          className="block text-xs font-medium text-gray-500 mb-1"
+                        >
                           Имя *
                         </label>
                         <input
+                          id="contact-name"
                           type="text"
                           required
                           className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#0A84FF] transition-colors"
@@ -574,10 +542,14 @@ export default function DepositDetailPage() {
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-gray-500 mb-1">
+                        <label
+                          htmlFor="contact-email"
+                          className="block text-xs font-medium text-gray-500 mb-1"
+                        >
                           Email *
                         </label>
                         <input
+                          id="contact-email"
                           type="email"
                           required
                           className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#0A84FF] transition-colors"
@@ -591,10 +563,14 @@ export default function DepositDetailPage() {
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-gray-500 mb-1">
+                        <label
+                          htmlFor="contact-message"
+                          className="block text-xs font-medium text-gray-500 mb-1"
+                        >
                           Сообщение *
                         </label>
                         <textarea
+                          id="contact-message"
                           required
                           rows={3}
                           className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#0A84FF] transition-colors resize-none"

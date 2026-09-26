@@ -18,10 +18,14 @@ function resolveImport(spec: string): string | null {
 // Page files for every indexable route plus the components they import,
 // followed recursively within src/components.
 function publicSourceFiles(): string[] {
-  // The login page is not indexed, but the owner uses it.
-  const queue = [...PUBLIC_PAGES, '/auth/login']
-    .map((p) => path.join(SRC, 'app/[locale]', p, 'page.tsx'))
-    .filter(existsSync);
+  // The login page is not indexed, but the owner uses it; the 404 page is
+  // embedded in every page's payload.
+  const queue = [
+    ...[...PUBLIC_PAGES, '/auth/login'].map((p) =>
+      path.join(SRC, 'app/[locale]', p, 'page.tsx')
+    ),
+    path.join(SRC, 'app/[locale]/not-found.tsx'),
+  ].filter(existsSync);
   const seen = new Set<string>();
   while (queue.length) {
     const file = queue.pop()!;
@@ -58,7 +62,8 @@ describe('public pages', () => {
   it('do not link to hidden marketplace routes', () => {
     const offenders = files.flatMap((f) =>
       linkedPaths(readFileSync(f, 'utf8'))
-        .filter((p) => hiddenRouteRedirect(`/ru${p}`) !== null)
+        .map((p) => (/^\/(ru|kz|en|zh)(\/|$)/.test(p) ? p : `/ru${p}`))
+        .filter((p) => hiddenRouteRedirect(p) !== null)
         .map((p) => `${path.relative(SRC, f)} → ${p}`)
     );
     expect(offenders).toEqual([]);

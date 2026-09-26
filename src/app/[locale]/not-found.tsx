@@ -52,10 +52,10 @@ export default function NotFound() {
           {/* Secondary gold links */}
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-8">
             <Link
-              href="/ru/listings"
+              href="/ru/contact"
               className="group inline-flex items-center gap-1.5 text-sm font-medium text-gold transition-colors hover:text-gold-dark"
             >
-              Смотреть объявления
+              Связаться с нами
               <ArrowRight
                 className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
                 strokeWidth={1.75}

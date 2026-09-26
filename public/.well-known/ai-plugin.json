@@ -2,7 +2,7 @@
   "schema_version": "v1",
   "name_for_human": "QAZNEDR HOLDING — ore areas in Kazakhstan",
   "name_for_model": "qaznedr",
-  "description_for_human": "Kazakhstan exploration holding: prepared free ore areas and licensing and deal support for investors.",
+  "description_for_human": "We present areas selected by our geologists based on their review of geological materials.",
   "description_for_model": "QAZNEDR HOLDING is a Kazakhstan exploration holding. Its geologists study Soviet-era archival exploration reports (registry of 7,152 ore objects) and find areas with no active subsoil licence per the company's own check on a stated date. The site shows teasers of these areas (metal, region, geology, check date); names, coordinates and materials are shared after an NDA. The company does not own these areas and does not sell archival reports; it prepares deals: licence in the investor's name, licence via the holding then transfer, JV or earn-in, or analytics. Reserves are stated with their standard (Soviet GKZ categories or historical estimate). Contact via WeChat or WhatsApp at https://qaznedr.kz/en/contact. Languages: Russian, Kazakh, English, Chinese.",
   "auth": {
     "type": "none"

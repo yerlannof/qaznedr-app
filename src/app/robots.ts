@@ -16,8 +16,13 @@ const disallow = [
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: '*', allow: '/', disallow },
-      { userAgent: 'Yandex', allow: '/', disallow, crawlDelay: 2 },
+      { userAgent: '*', allow: ['/', '/api/openapi.json$'], disallow },
+      {
+        userAgent: 'Yandex',
+        allow: ['/', '/api/openapi.json$'],
+        disallow,
+        crawlDelay: 2,
+      },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,

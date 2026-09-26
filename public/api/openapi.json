@@ -1,74 +1,272 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "QAZNEDR API",
-    "description": "Kazakhstan geology industry platform API. Access mining licenses, exploration sites, mineral occurrences, and geological services.",
-    "version": "1.0.0"
+    "title": "QAZNEDR HOLDING public areas API",
+    "version": "2.0.0",
+    "description": "Read-only access to published area teasers. We present areas selected by our geologists based on their review of geological materials. Availability is per the company check on the stated date; the holding does not claim ownership. Names, exact coordinates and detailed materials are not provided by these operations. Discuss an area through https://qaznedr.kz/en/contact."
   },
-  "servers": [{ "url": "https://qaznedr.kz" }],
+  "servers": [
+    {
+      "url": "https://qaznedr.kz"
+    }
+  ],
   "paths": {
-    "/api/listings": {
+    "/api/leads": {
       "get": {
-        "summary": "Get mining listings",
-        "description": "Returns mining licenses, exploration licenses, and mineral occurrences in Kazakhstan",
+        "operationId": "listPublicAreas",
+        "summary": "List published area teasers",
         "parameters": [
+          {
+            "name": "region",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Exact original region value."
+          },
+          {
+            "name": "tier",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Exact source tier value; optional legacy classification."
+          },
           {
             "name": "type",
             "in": "query",
             "schema": {
               "type": "string",
-              "enum": [
-                "MINING_LICENSE",
-                "EXPLORATION_LICENSE",
-                "MINERAL_OCCURRENCE"
-              ]
+              "enum": ["placer", "bedrock", "other"]
             }
           },
-          { "name": "region", "in": "query", "schema": { "type": "string" } },
           {
             "name": "mineral",
             "in": "query",
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            },
+            "description": "Exact original commodity value, or a supported mineral group: gold, copper, lead-zinc, molybdenum, tungsten, iron."
           },
           {
-            "name": "limit",
+            "name": "exclusivity",
             "in": "query",
-            "schema": { "type": "integer", "default": 20 }
+            "schema": {
+              "type": "string"
+            },
+            "description": "Exact source exclusivity value."
+          },
+          {
+            "name": "free",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["1"]
+            },
+            "description": "When 1, filters source license_status values containing FREE (case-insensitive). Always interpret the returned status with its check date."
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["newest", "value_desc", "confidence_desc"],
+              "default": "newest"
+            },
+            "description": "Source ordering only; value estimates are not an offer price or guaranteed return."
           },
           {
             "name": "page",
             "in": "query",
-            "schema": { "type": "integer", "default": 1 }
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 24
+            }
           }
         ],
         "responses": {
-          "200": { "description": "List of listings with pagination" }
+          "200": {
+            "description": "Public area teasers and pagination.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["success", "data"],
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [true]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AreaPage"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Request rate limit exceeded."
+          },
+          "503": {
+            "description": "Area data temporarily unavailable; this is not an empty catalogue."
+          }
         }
       }
     },
-    "/api/listings/{id}": {
+    "/api/leads/{code}": {
       "get": {
-        "summary": "Get listing details",
-        "description": "Returns detailed information about a specific mining listing",
+        "operationId": "getPublicArea",
+        "summary": "Read one published area teaser",
         "parameters": [
           {
-            "name": "id",
+            "name": "code",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
-          "200": { "description": "Listing details" }
+          "200": {
+            "description": "Public area teaser.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["success", "data"],
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [true]
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AreaTeaser"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No published area was returned for this code."
+          },
+          "429": {
+            "description": "Request rate limit exceeded."
+          }
         }
       }
-    },
-    "/api/services": {
-      "get": {
-        "summary": "Get geological services",
-        "description": "Returns available geological, legal, equipment, and investment services",
-        "responses": {
-          "200": { "description": "List of services" }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AreaTeaser": {
+        "type": "object",
+        "description": "Documented subset of the existing public teaser response. Additional public source fields may be present. Display strings retain their original language; this API has no locale parameter. Use localized /{locale}/leads/{code} pages for investor-facing presentation.",
+        "required": ["code", "mineral", "type", "status"],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Public area code; not the area name."
+          },
+          "mineral": {
+            "type": "string",
+            "description": "Original public commodity label."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["placer", "bedrock", "other"]
+          },
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "teaser_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "teaser_summary": {
+            "type": "string",
+            "nullable": true
+          },
+          "grade_display": {
+            "type": "string",
+            "nullable": true,
+            "description": "Original source wording; a spike is not an average."
+          },
+          "grade_label": {
+            "type": "string",
+            "nullable": true
+          },
+          "byproducts_display": {
+            "type": "string",
+            "nullable": true
+          },
+          "reserve_categories": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            },
+            "description": "Original category labels, not a cross-standard conversion. P1–P3 are forecast resources, not reserves. Confirm the assessment standard and currency of the source materials."
+          },
+          "license_status": {
+            "type": "string",
+            "nullable": true,
+            "description": "Status per the company check on last_verified, not a current guarantee or ownership claim."
+          },
+          "last_verified": {
+            "type": "string",
+            "nullable": true,
+            "description": "Source check date in ISO YYYY-MM-DD format, or null when unavailable. Do not infer a current check when absent.",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["PUBLISHED"]
+          }
+        },
+        "additionalProperties": true
+      },
+      "AreaPage": {
+        "type": "object",
+        "required": ["leads", "total", "page", "limit", "totalPages"],
+        "properties": {
+          "leads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AreaTeaser"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50
+          },
+          "totalPages": {
+            "type": "integer",
+            "minimum": 0
+          }
         }
       }
     }

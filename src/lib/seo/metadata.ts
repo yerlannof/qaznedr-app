@@ -9,6 +9,7 @@ import {
   toLocale,
   type Locale,
 } from './site';
+import { OG_ALT, OG_SIZE, ogImageUrl } from './og';
 
 export function buildLanguageAlternates(
   path: string,
@@ -34,12 +35,22 @@ export interface PageMetadataInput {
   noindex?: boolean;
   /** Languages the page exists in (hreflang). Defaults to every locale. */
   locales?: readonly Locale[];
+  /** Sub-path with its own opengraph-image route (guides); by default the
+   * locale card. */
+  ogImagePath?: string;
   /** ISO dates of an article; switches og:type to "article". */
   article?: { published: string; modified: string };
 }
 
 export function buildPageMetadata(input: PageMetadataInput): Metadata {
   const url = localeUrl(input.locale, input.path);
+  // A page's own openGraph replaces the file-based card of its segment, so
+  // every page names its card explicitly.
+  const image = {
+    url: ogImageUrl(input.locale, input.ogImagePath),
+    ...OG_SIZE,
+    alt: OG_ALT,
+  };
   const fullTitle =
     input.absoluteTitle || input.title.includes(SITE_NAME)
       ? input.title
@@ -50,6 +61,7 @@ export function buildPageMetadata(input: PageMetadataInput): Metadata {
     url,
     siteName: SITE_NAME,
     locale: OG_LOCALE[input.locale],
+    images: [image],
   };
   return {
     // Absolute on purpose: nested layouts that set their own title drop the
@@ -72,6 +84,7 @@ export function buildPageMetadata(input: PageMetadataInput): Metadata {
       card: 'summary_large_image',
       title: fullTitle,
       description: input.description,
+      images: [image.url],
     },
     robots: input.noindex
       ? { index: false, follow: false }

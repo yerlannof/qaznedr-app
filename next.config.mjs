@@ -13,6 +13,7 @@ const nextConfig = {
   outputFileTracingIncludes: {
     '/[locale]/insights': ['./content/insights/**/*'],
     '/[locale]/insights/[slug]': ['./content/insights/**/*'],
+    '/[locale]/insights/[slug]/opengraph-image': ['./content/insights/**/*'],
   },
 
   // Image optimization

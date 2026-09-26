@@ -25,6 +25,44 @@ describe('seo/site', () => {
 });
 
 describe('seo/metadata', () => {
+  it('gives every page an og:image and twitter:image (the locale card)', () => {
+    const m = buildPageMetadata({
+      locale: 'zh',
+      path: '/faq',
+      title: 't',
+      description: 'd',
+    });
+    expect(m.openGraph?.images).toEqual([
+      {
+        url: 'https://qaznedr.kz/zh/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'QAZNEDR HOLDING',
+      },
+    ]);
+    expect(m.twitter?.images).toEqual([
+      'https://qaznedr.kz/zh/opengraph-image',
+    ]);
+  });
+
+  it('uses a page-specific card when given one (guides)', () => {
+    const m = buildPageMetadata({
+      locale: 'en',
+      path: '/insights/x',
+      title: 't',
+      description: 'd',
+      ogImagePath: '/insights/x',
+    });
+    expect(m.openGraph?.images).toEqual([
+      expect.objectContaining({
+        url: 'https://qaznedr.kz/en/insights/x/opengraph-image',
+      }),
+    ]);
+    expect(m.twitter?.images).toEqual([
+      'https://qaznedr.kz/en/insights/x/opengraph-image',
+    ]);
+  });
+
   it('lists every locale plus x-default in alternates', () => {
     expect(buildLanguageAlternates('/leads')).toEqual({
       ru: 'https://qaznedr.kz/ru/leads',

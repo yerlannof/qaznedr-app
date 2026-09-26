@@ -40,6 +40,7 @@ export async function generateMetadata({
     title: article.title,
     description: article.description,
     locales: entry.locales,
+    ogImagePath: `/insights/${slug}`,
     article: { published: entry.published, modified: entry.updated },
   });
 }

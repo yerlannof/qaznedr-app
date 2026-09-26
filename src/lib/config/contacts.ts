@@ -1,3 +1,5 @@
+import { translate } from '@/lib/i18n/translations';
+
 export interface ContactConfig {
   whatsappNumber: string | null;
   wechatId: string | null;
@@ -35,4 +37,29 @@ export function getContactConfig(): ContactConfig {
 
 export function whatsappLink(number: string, text: string): string {
   return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+}
+
+export function hasAnyChannel(c: ContactConfig): boolean {
+  return Boolean(c.whatsappNumber || c.wechatId || c.wechatQrSrc || c.email);
+}
+
+/** The hero's main button: WeChat QR for zh, WhatsApp elsewhere, else the contact page. */
+export function primaryContactCta(
+  locale: string,
+  c: ContactConfig
+): { kind: 'whatsapp' | 'wechat' | 'contact'; href: string } {
+  const contact = `/${locale}/contact`;
+  if (locale === 'zh' && (c.wechatQrSrc || c.wechatId)) {
+    return { kind: 'wechat', href: contact };
+  }
+  if (c.whatsappNumber) {
+    return {
+      kind: 'whatsapp',
+      href: whatsappLink(
+        c.whatsappNumber,
+        translate(locale, 'contact.whatsappTextGeneral')
+      ),
+    };
+  }
+  return { kind: 'contact', href: contact };
 }

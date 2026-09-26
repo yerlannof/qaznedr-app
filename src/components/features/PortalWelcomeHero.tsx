@@ -2,8 +2,20 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { ArrowRight, Gem } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
+import { track } from '@vercel/analytics';
 import { useTranslation } from '@/hooks/useTranslation';
+import { getContactConfig, primaryContactCta } from '@/lib/config/contacts';
+import { leadRegionName } from '@/lib/seo/lead-metadata';
+
+// Ore objects in the holding's registry (owner-confirmed figure, 2026-09-26).
+const REGISTRY_OBJECTS = 7152;
+const NUMBER_LOCALE: Record<string, string> = {
+  ru: 'ru-RU',
+  kz: 'ru-RU',
+  en: 'en-US',
+  zh: 'zh-CN',
+};
 
 // Portal-level welcome hero — editorial gold-on-ink aesthetic with mission statement.
 // Sits above LeadsHomeHero on the homepage to set tone for the whole platform.
@@ -11,14 +23,38 @@ import { useTranslation } from '@/hooks/useTranslation';
 export default function PortalWelcomeHero({ locale }: { locale: string }) {
   const { t } = useTranslation();
   const [leadsCount, setLeadsCount] = useState(31);
+  const [regionsCount, setRegionsCount] = useState(9);
 
   useEffect(() => {
-    fetch('/api/leads?limit=1')
+    fetch('/api/leads?limit=100')
       .then((r) => r.json())
-      .then((j) => Number(j?.data?.pagination?.total ?? 0))
-      .catch(() => 0)
-      .then((leads) => setLeadsCount(leads || 31));
+      .then((j) => {
+        const total = Number(j?.data?.total ?? 0);
+        const leads: { region?: string | null }[] = j?.data?.leads ?? [];
+        const regions = new Set(
+          leads
+            .map(
+              (l) => leadRegionName(l.region, 'ru') || (l.region ?? '').trim()
+            )
+            .filter(Boolean)
+        );
+        if (total > 0) setLeadsCount(total);
+        if (regions.size > 0) setRegionsCount(regions.size);
+      })
+      .catch(() => {});
   }, []);
+
+  const cta = primaryContactCta(locale, getContactConfig());
+  const ctaLabel = t(
+    cta.kind === 'whatsapp'
+      ? 'portal.ctaWhatsapp'
+      : cta.kind === 'wechat'
+        ? 'portal.ctaWechat'
+        : 'portal.ctaContact'
+  );
+  const registry = new Intl.NumberFormat(
+    NUMBER_LOCALE[locale] ?? 'ru-RU'
+  ).format(REGISTRY_OBJECTS);
 
   return (
     <section className="relative overflow-hidden bg-[#0A0A0A] text-white">
@@ -134,11 +170,32 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
               className="mt-10 flex flex-wrap items-center gap-3 opacity-0 motion-reduce:opacity-100 motion-reduce:animate-none"
               style={{ animation: 'qzFadeUp 0.7s 0.3s ease-out forwards' }}
             >
+              {cta.kind === 'whatsapp' ? (
+                <a
+                  href={cta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    track('click_whatsapp', { lead: '', place: 'hero' })
+                  }
+                  className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold text-[#0A0A0A] text-sm font-semibold hover:bg-gold-light transition-colors"
+                >
+                  <MessageCircle aria-hidden className="w-4 h-4" />
+                  {ctaLabel}
+                </a>
+              ) : (
+                <Link
+                  href={cta.href}
+                  className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold text-[#0A0A0A] text-sm font-semibold hover:bg-gold-light transition-colors"
+                >
+                  <MessageCircle aria-hidden className="w-4 h-4" />
+                  {ctaLabel}
+                </Link>
+              )}
               <Link
                 href={`/${locale}/leads`}
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gold text-[#0A0A0A] text-sm font-semibold hover:bg-gold-light transition-colors"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-gold/40 text-gold-light text-sm font-semibold hover:bg-[rgba(200,162,75,0.08)] transition-colors"
               >
-                <Gem aria-hidden className="w-4 h-4" />
                 {t('portal.ctaLeads')}
                 <ArrowRight
                   aria-hidden
@@ -168,7 +225,15 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
                     value={leadsCount}
                   />
                   <div className="h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-                  <StatRow label={t('portal.statsRegionsLabel')} value={9} />
+                  <StatRow
+                    label={t('portal.statsRegistryLabel')}
+                    value={registry}
+                  />
+                  <div className="h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+                  <StatRow
+                    label={t('portal.statsRegionsLabel')}
+                    value={regionsCount}
+                  />
                 </div>
 
                 <p className="mt-7 pt-5 border-t border-white/10 text-[12px] text-gray-500 leading-relaxed">
@@ -215,7 +280,7 @@ export default function PortalWelcomeHero({ locale }: { locale: string }) {
   );
 }
 
-function StatRow({ label, value }: { label: string; value: number }) {
+function StatRow({ label, value }: { label: string; value: number | string }) {
   return (
     <div className="flex items-baseline justify-between gap-4">
       <span className="text-sm text-gray-400 leading-tight">{label}</span>

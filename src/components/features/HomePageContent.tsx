@@ -4,6 +4,7 @@ import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import LeadsHomeHero from '@/components/features/LeadsHomeHero';
 import PortalWelcomeHero from '@/components/features/PortalWelcomeHero';
+import DealSteps from '@/components/features/DealSteps';
 import { useTranslation } from '@/hooks/useTranslation';
 
 export default function HomePageContent() {
@@ -59,6 +60,8 @@ export default function HomePageContent() {
       <Navigation />
 
       <PortalWelcomeHero locale={locale} />
+
+      <DealSteps locale={locale} />
 
       <LeadsHomeHero locale={locale} />
 

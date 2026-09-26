@@ -140,7 +140,7 @@ export const translations = {
       channelTelegram: 'Telegram',
     },
     navigation: {
-      leads: 'Находки',
+      leads: 'Участки',
       listings: 'Объявления',
       map: 'Карта',
       services: 'Услуги',
@@ -155,34 +155,53 @@ export const translations = {
       admin: 'Админка',
     },
     portal: {
-      eyebrow: 'Платформа недропользования Казахстана',
-      headlineLine1: 'Открытый маркетплейс',
-      headlineEmphasis: 'недр Казахстана',
-      headlineLine2: '— от архива до заявки',
+      statsRegistryLabel: 'Рудных объектов в нашем реестре',
+      ctaContact: 'Связаться',
+      ctaWechat: 'Написать в WeChat',
+      ctaWhatsapp: 'Написать в WhatsApp',
+      eyebrow: 'QAZNEDR HOLDING · геология и недропользование Казахстана',
+      headlineLine1: 'Подготовленные рудные участки',
+      headlineEmphasis: 'в Казахстане',
+      headlineLine2: '— для инвесторов',
       subtitle:
-        'Проверенные участки, честные данные, прямой путь от архива до заявки. Закрытые геологические находки и публичные объявления — на одной площадке.',
-      ctaLeads: 'Каталог находок',
+        'Наши геологи изучают советские геологоразведочные отчёты и находят участки без действующей лицензии — по нашей проверке, дата указана в карточке. Лицензию оформляем под сделку.',
+      ctaLeads: 'Смотреть участки',
       ctaListings: 'Объявления',
-      statsLive: 'Сейчас в системе',
-      statsLeadsLabel: 'Закрытых находок',
+      statsLive: 'В цифрах',
+      statsLeadsLabel: 'Участков на витрине',
       statsListingsLabel: 'Активных объявлений',
-      statsRegionsLabel: 'Регионов охвачено',
+      statsRegionsLabel: 'Областей Казахстана',
       statsCaption:
-        'Данные обновляются автоматически. Каждый объект — из государственного первоисточника, с указанием типа значения.',
+        'Участки на витрине — отобранная часть реестра. Реестр ведут наши геологи по фондовым геологическим отчётам.',
       trust: {
-        verifiedTitle: 'Координатная проверка',
+        verifiedTitle: 'Статус с датой',
         verifiedDesc:
-          'Лицензионный статус — point-in-polygon по госкарте недропользования.',
-        archiveTitle: 'Государственный архив',
+          'Свободность проверяем по публичной карте недропользования, дата проверки — в карточке участка.',
+        archiveTitle: 'Работа наших геологов',
         archiveDesc:
-          'Все цифры из первичных отчётов ТФГИ и опубликованных справочников.',
-        gatesTitle: 'Закрытый доступ',
+          'Геологию каждого участка изучают наши геологи по фондовым отчётам.',
+        gatesTitle: 'Детали под NDA',
         gatesDesc:
-          'Точные координаты, название и первоисточник — после заявки и соглашения.',
-        disciplineTitle: 'Без приукрашивания',
+          'Название, координаты и материалы показываем на встрече после подписания NDA.',
+        disciplineTitle: 'Стандарт указан всегда',
         disciplineDesc:
-          'Каждый грейд подан с типом: среднее / макс. проба / прогноз — не overstated.',
+          'Запасы — по категориям ГКЗ СССР (A, B, C1, C2) или как историческая оценка. P1–P3 — прогноз, а не запасы.',
       },
+    },
+    dealSteps: {
+      title: 'Как проходит сделка',
+      step1Title: 'Выберите участок',
+      step1Desc:
+        'В карточке — металл, регион, геология и статус на дату проверки. Пришлите код участка в WeChat или WhatsApp.',
+      step2Title: 'Встреча и NDA',
+      step2Desc:
+        'После подписания соглашения о конфиденциальности показываем название, координаты и оценку наших геологов.',
+      step3Title: 'Выберите формат',
+      step3Desc:
+        'Лицензия на вас с нашим сопровождением; лицензия на холдинг с последующей передачей; СП или earn-in; только аналитика.',
+      step4Title: 'Оформляем лицензию',
+      step4Desc:
+        'Перепроверяем статус, подаём заявку и сопровождаем до выдачи. Решение принимает уполномоченный орган.',
     },
     audience: {
       eyebrow: 'Для кого площадка',
@@ -209,19 +228,19 @@ export const translations = {
       },
     },
     leadsHero: {
-      eyebrow: 'Закрытые геологические находки · проверенные данные',
-      title: 'Свободные участки с золотом — готовые к заявке',
+      eyebrow: 'Витрина участков · статус по нашей проверке',
+      title: 'Свободные участки с изученной геологией',
       subtitle:
-        'Откалиброванные находки из государственных архивов: свободные по лицензии, с честными грейдами. Тизер открыт всем — точные координаты, название и первоисточник передаются после заявки.',
-      ctaBrowse: 'Смотреть каталог находок',
+        'В карточке — металл, регион, геология и статус на дату проверки. Название, координаты и материалы — после NDA.',
+      ctaBrowse: 'Все участки',
       ctaFree: 'Только свободные',
-      freshHeading: 'Свежие находки',
-      freshAll: 'Все находки',
+      freshHeading: 'Новые участки',
+      freshAll: 'Все участки',
     },
     footerNav: {
       platform: {
-        title: 'Платформа',
-        leads: 'Находки',
+        title: 'Компания',
+        leads: 'Участки',
         listings: 'Объявления',
         services: 'Услуги',
         companies: 'Компании',
@@ -229,7 +248,7 @@ export const translations = {
       },
       info: {
         title: 'Информация',
-        about: 'О платформе',
+        about: 'О компании',
         contacts: 'Контакты',
         faq: 'Вопросы и ответы',
         terms: 'Правила',
@@ -379,19 +398,19 @@ export const translations = {
       filters: 'Фильтры',
     },
     leadsCatalog: {
-      eyebrow: 'Закрытые геологические находки · проверенные данные',
-      title: 'Свободные участки с золотом',
+      eyebrow: 'Витрина участков · статус по нашей проверке',
+      title: 'Свободные рудные участки',
       valueProp1:
-        'Свободные и доступные участки. Координаты сверены с государственной картой недропользования.',
+        'Свободны по нашей проверке по карте недропользования; дата проверки — в карточке.',
       valueProp2:
-        'Откалиброванные находки из государственных архивов. Тизер открыт всем; точные координаты, название и первоисточник — после заявки и соглашения.',
+        'Геологию изучили наши геологи по фондовым отчётам. Название, координаты и материалы — после NDA.',
       foundCount: 'Найдено: {count}',
       filters: 'Фильтры',
       region: 'Регион',
       allRegions: 'Все регионы',
       type: 'Тип',
       allTypes: 'Все',
-      typePlacer: 'Россыпь (старателю)',
+      typePlacer: 'Россыпь',
       typeInvest: 'Инвест-объект',
       sort: 'Сортировка',
       sortNewest: 'Сначала новые',
@@ -402,14 +421,14 @@ export const translations = {
       reset: 'Сброс',
       emptyTitle: 'Не нашли подходящий участок?',
       emptyDesc:
-        'Оставьте запрос — сообщим, когда появятся новые находки по вашему региону или минералу.',
+        'Оставьте запрос — сообщим, когда появятся новые участки по вашему региону или металлу.',
       emptyCta: 'Оставить запрос',
       resetFilters: 'Сбросить фильтры',
       back: '← Назад',
       forward: 'Вперёд →',
     },
     leadDetail: {
-      breadcrumbLeads: 'Находки',
+      breadcrumbLeads: 'Участки',
       badgeSold: 'ПРОДАНО',
       badgeFree: 'СВОБОДЕН',
       typeFallback: 'Объект',
@@ -451,9 +470,9 @@ export const translations = {
     },
     footer: {
       company: {
-        name: 'QAZNEDR.KZ',
+        name: 'QAZNEDR HOLDING',
         description:
-          'Платформа геологической отрасли Казахстана. Лицензии, услуги, компании, данные.',
+          'Геологоразведочный холдинг из Казахстана: подготовленные рудные участки и сопровождение сделок для инвесторов.',
       },
       contact: {
         address: 'Алматы, Казахстан',
@@ -841,7 +860,7 @@ export const translations = {
       channelTelegram: 'Telegram',
     },
     navigation: {
-      leads: 'Олжалар',
+      leads: 'Учаскелер',
       listings: 'Хабарландырулар',
       map: 'Карта',
       services: 'Қызметтер',
@@ -856,34 +875,54 @@ export const translations = {
       admin: 'Әкімші',
     },
     portal: {
-      eyebrow: 'Қазақстан жер қойнауы алаңы',
-      headlineLine1: 'Ашық алаң',
-      headlineEmphasis: 'Қазақстан жер қойнауы',
-      headlineLine2: '— мұрағаттан өтінімге дейін',
+      statsRegistryLabel: 'Біздің тізілімдегі кен объектілері',
+      ctaContact: 'Байланысу',
+      ctaWechat: 'WeChat-қа жазу',
+      ctaWhatsapp: 'WhatsApp-қа жазу',
+      eyebrow:
+        'QAZNEDR HOLDING · Қазақстан геологиясы және жер қойнауын пайдалану',
+      headlineLine1: 'Қазақстандағы',
+      headlineEmphasis: 'дайындалған кен учаскелері',
+      headlineLine2: '— инвесторларға',
       subtitle:
-        'Тексерілген учаскелер, адал деректер, мұрағаттан өтінімге дейін тікелей жол. Жабық геологиялық бағыттар мен ашық хабарландырулар — бір алаңда.',
-      ctaLeads: 'Бағыттар каталогы',
+        'Геологтарымыз кеңестік геологиялық барлау есептерін зерттеп, қолданыстағы лицензиясы жоқ учаскелерді табады — біздің тексеруіміз бойынша, күні карточкада көрсетілген. Лицензияны мәмілеге қарай рәсімдейміз.',
+      ctaLeads: 'Учаскелерді көру',
       ctaListings: 'Хабарландырулар',
-      statsLive: 'Қазір жүйеде',
-      statsLeadsLabel: 'Жабық бағыттар',
+      statsLive: 'Сандармен',
+      statsLeadsLabel: 'Витринадағы учаскелер',
       statsListingsLabel: 'Белсенді хабарландырулар',
-      statsRegionsLabel: 'Қамтылған өңірлер',
+      statsRegionsLabel: 'Қазақстан облыстары',
       statsCaption:
-        'Деректер автоматты түрде жаңарады. Әр объект — мемлекеттік бастапқы дереккөзден, мәннің түрі көрсетілген.',
+        'Витринадағы учаскелер — тізілімнің іріктелген бөлігі. Тізілімді геологтарымыз қордағы геологиялық есептер бойынша жүргізеді.',
       trust: {
-        verifiedTitle: 'Координаталық тексеру',
+        verifiedTitle: 'Мәртебе күнімен',
         verifiedDesc:
-          'Лицензия мәртебесі — жер қойнауы мемлекеттік картасы бойынша point-in-polygon.',
-        archiveTitle: 'Мемлекеттік мұрағат',
+          'Бос екенін жер қойнауын пайдаланудың ашық картасы бойынша тексереміз, тексеру күні учаске карточкасында.',
+        archiveTitle: 'Геологтарымыздың жұмысы',
         archiveDesc:
-          'Барлық сандар бастапқы ТФГИ есептерінен және жарияланған анықтамалықтардан.',
-        gatesTitle: 'Жабық қол жетімділік',
+          'Әр учаскенің геологиясын геологтарымыз қордағы есептер бойынша зерттейді.',
+        gatesTitle: 'Толығы NDA-дан кейін',
         gatesDesc:
-          'Дәл координаттар, атау және бастапқы дереккөз — өтінімнен және келісімнен кейін.',
-        disciplineTitle: 'Әсірелеусіз',
+          'Атауын, координаттарын және материалдарын NDA-ға қол қойылғаннан кейін кездесуде көрсетеміз.',
+        disciplineTitle: 'Стандарт әрқашан көрсетіледі',
         disciplineDesc:
-          'Әр құрам түрімен берілген: орташа / макс. сынама / болжам — асыра айтылмайды.',
+          'Қорлар КСРО МҚК санаттары (A, B, C1, C2) бойынша немесе тарихи бағалау ретінде көрсетіледі. P1–P3 — болжам, қор емес.',
       },
+    },
+    dealSteps: {
+      title: 'Мәміле қалай өтеді',
+      step1Title: 'Учаскені таңдаңыз',
+      step1Desc:
+        'Карточкада — металл, өңір, геология және тексеру күніндегі мәртебе. Учаске кодын WeChat немесе WhatsApp арқылы жіберіңіз.',
+      step2Title: 'Кездесу және NDA',
+      step2Desc:
+        'Құпиялылық келісіміне қол қойылған соң атауын, координаттарын және геологтарымыздың бағасын көрсетеміз.',
+      step3Title: 'Форматты таңдаңыз',
+      step3Desc:
+        'Сіздің атыңызға лицензия, біздің сүйемелдеуімізбен; холдингке лицензия, кейін беру; БК немесе earn-in; тек талдау.',
+      step4Title: 'Лицензияны рәсімдейміз',
+      step4Desc:
+        'Мәртебені қайта тексеріп, өтінім береміз және берілгенге дейін сүйемелдейміз. Шешімді уәкілетті орган қабылдайды.',
     },
     audience: {
       eyebrow: 'Алаң кімге арналған',
@@ -910,19 +949,19 @@ export const translations = {
       },
     },
     leadsHero: {
-      eyebrow: 'Жабық геологиялық бағыттар · тексерілген деректер',
-      title: 'Алтыны бар бос учаскелер — өтінімге дайын',
+      eyebrow: 'Учаскелер витринасы · мәртебе біздің тексеруімізбен',
+      title: 'Геологиясы зерттелген бос учаскелер',
       subtitle:
-        'Мемлекеттік мұрағаттардан калибрленген бағыттар: лицензия бойынша бос, адал құраммен. Тизер бәріне ашық — дәл координаттар, атау және бастапқы дереккөз өтінімнен кейін беріледі.',
-      ctaBrowse: 'Бағыттар каталогын қарау',
-      ctaFree: 'Тек бос',
-      freshHeading: 'Жаңа бағыттар',
-      freshAll: 'Барлық бағыттар',
+        'Карточкада — металл, өңір, геология және тексеру күніндегі мәртебе. Атауы, координаттары және материалдары — NDA-дан кейін.',
+      ctaBrowse: 'Барлық учаскелер',
+      ctaFree: 'Тек бостары',
+      freshHeading: 'Жаңа учаскелер',
+      freshAll: 'Барлық учаскелер',
     },
     footerNav: {
       platform: {
-        title: 'Платформа',
-        leads: 'Олжалар',
+        title: 'Компания',
+        leads: 'Учаскелер',
         listings: 'Хабарландырулар',
         services: 'Қызметтер',
         companies: 'Компаниялар',
@@ -930,7 +969,7 @@ export const translations = {
       },
       info: {
         title: 'Ақпарат',
-        about: 'Платформа туралы',
+        about: 'Компания туралы',
         contacts: 'Байланыстар',
         faq: 'Сұрақ-жауап',
         terms: 'Ережелер',
@@ -1080,19 +1119,19 @@ export const translations = {
       filters: 'Сүзгілер',
     },
     leadsCatalog: {
-      eyebrow: 'Жабық геологиялық бағыттар · тексерілген деректер',
-      title: 'Алтыны бар бос учаскелер',
+      eyebrow: 'Учаскелер витринасы · мәртебе біздің тексеруімізбен',
+      title: 'Бос кен учаскелері',
       valueProp1:
-        'Бос және қолжетімді учаскелер. Координаттар жер қойнауының мемлекеттік картасымен салыстырылған.',
+        'Жер қойнауын пайдалану картасы бойынша біздің тексеруімізше бос; тексеру күні карточкада.',
       valueProp2:
-        'Мемлекеттік мұрағаттардан калибрленген бағыттар. Тизер бәріне ашық; дәл координаттар, атау және бастапқы дереккөз — өтінімнен және келісімнен кейін.',
+        'Геологиясын геологтарымыз қордағы есептер бойынша зерттеді. Атауы, координаттары және материалдары — NDA-дан кейін.',
       foundCount: 'Табылды: {count}',
       filters: 'Сүзгілер',
       region: 'Аймақ',
       allRegions: 'Барлық аймақтар',
       type: 'Түрі',
       allTypes: 'Барлығы',
-      typePlacer: 'Шашыранды (старательге)',
+      typePlacer: 'Шашыранды',
       typeInvest: 'Инвест-объект',
       sort: 'Сұрыптау',
       sortNewest: 'Алдымен жаңалары',
@@ -1103,14 +1142,14 @@ export const translations = {
       reset: 'Тазалау',
       emptyTitle: 'Қолайлы учаске таппадыңыз ба?',
       emptyDesc:
-        'Сұраныс қалдырыңыз — аймағыңыз немесе минералыңыз бойынша жаңа бағыттар пайда болғанда хабарлаймыз.',
+        'Сұраныс қалдырыңыз — өңіріңіз немесе металыңыз бойынша жаңа учаскелер пайда болғанда хабарлаймыз.',
       emptyCta: 'Сұраныс қалдыру',
       resetFilters: 'Сүзгілерді тазалау',
       back: '← Артқа',
       forward: 'Алға →',
     },
     leadDetail: {
-      breadcrumbLeads: 'Бағыттар',
+      breadcrumbLeads: 'Учаскелер',
       badgeSold: 'САТЫЛДЫ',
       badgeFree: 'БОС',
       typeFallback: 'Объект',
@@ -1152,9 +1191,9 @@ export const translations = {
     },
     footer: {
       company: {
-        name: 'QAZNEDR.KZ',
+        name: 'QAZNEDR HOLDING',
         description:
-          'Қазақстанның геология саласының платформасы. Лицензиялар, қызметтер, компаниялар, деректер.',
+          'Қазақстандық геологиялық барлау холдингі: инвесторларға дайындалған кен учаскелері және мәмілені сүйемелдеу.',
       },
       contact: {
         address: 'Алматы, Қазақстан',
@@ -1466,7 +1505,7 @@ export const translations = {
       channelTelegram: 'Telegram',
     },
     navigation: {
-      leads: 'Finds',
+      leads: 'Areas',
       listings: 'Listings',
       map: 'Map',
       services: 'Services',
@@ -1481,34 +1520,53 @@ export const translations = {
       admin: 'Admin',
     },
     portal: {
-      eyebrow: "Kazakhstan's subsoil platform",
-      headlineLine1: 'Open marketplace for',
-      headlineEmphasis: "Kazakhstan's subsoil",
-      headlineLine2: '— from archive to application',
+      statsRegistryLabel: 'Ore objects in our registry',
+      ctaContact: 'Contact us',
+      ctaWechat: 'Message us on WeChat',
+      ctaWhatsapp: 'Message us on WhatsApp',
+      eyebrow: 'QAZNEDR HOLDING · Kazakhstan geology and subsoil use',
+      headlineLine1: 'Prepared ore areas',
+      headlineEmphasis: 'in Kazakhstan',
+      headlineLine2: '— for investors',
       subtitle:
-        'Verified sites, honest data, a direct path from archive to application. Closed geological leads and public listings — on one platform.',
-      ctaLeads: 'Browse leads',
+        'Our geologists study Soviet-era exploration reports and find areas with no active licence — per our check, dated on each card. We obtain the licence for the deal.',
+      ctaLeads: 'View areas',
       ctaListings: 'Listings',
-      statsLive: 'Live in the system',
-      statsLeadsLabel: 'Closed leads',
+      statsLive: 'In numbers',
+      statsLeadsLabel: 'Areas on display',
       statsListingsLabel: 'Active listings',
-      statsRegionsLabel: 'Regions covered',
+      statsRegionsLabel: 'Regions of Kazakhstan',
       statsCaption:
-        'Updated automatically. Every entry is from a state primary source, with the value type stated.',
+        'Areas on display are a selected part of the registry. Our geologists maintain the registry from archival geological reports.',
       trust: {
-        verifiedTitle: 'Coordinate check',
+        verifiedTitle: 'Status with a date',
         verifiedDesc:
-          'License status — point-in-polygon against the state subsoil map.',
-        archiveTitle: 'State archive',
+          'We check availability against the public subsoil-use map; the check date is on each area card.',
+        archiveTitle: "Our geologists' work",
         archiveDesc:
-          'Every figure from primary TFGI reports and published handbooks.',
-        gatesTitle: 'Gated access',
+          'Our geologists study each area using archival geological reports.',
+        gatesTitle: 'Details under NDA',
         gatesDesc:
-          'Exact coordinates, name and primary source — released after request and agreement.',
-        disciplineTitle: 'No overclaiming',
+          'Name, coordinates and materials are shared at a meeting after an NDA is signed.',
+        disciplineTitle: 'Standard always stated',
         disciplineDesc:
-          'Every grade carries its type: average / max sample / forecast — not overstated.',
+          'Reserves follow Soviet GKZ categories (A, B, C1, C2) or are marked as a historical estimate. P1–P3 are forecasts, not reserves.',
       },
+    },
+    dealSteps: {
+      title: 'How the deal works',
+      step1Title: 'Choose an area',
+      step1Desc:
+        'Each card shows the metal, region, geology and status as of the check date. Send us the area code on WeChat or WhatsApp.',
+      step2Title: 'Meet and sign an NDA',
+      step2Desc:
+        "Once the confidentiality agreement is signed, we share the name, coordinates and our geologists' assessment.",
+      step3Title: 'Choose the format',
+      step3Desc:
+        'A licence in your name with our support; a licence obtained by the holding and then transferred; a JV or earn-in; or analytics only.',
+      step4Title: 'We obtain the licence',
+      step4Desc:
+        'We re-check the status, file the application and support you until the licence is issued. The decision rests with the competent authority.',
     },
     audience: {
       eyebrow: "Who it's for",
@@ -1535,19 +1593,19 @@ export const translations = {
       },
     },
     leadsHero: {
-      eyebrow: 'Closed geological leads · verified data',
-      title: 'Free gold-bearing sites — ready to apply',
+      eyebrow: 'Areas on display · status per our check',
+      title: 'Free areas with studied geology',
       subtitle:
-        'Calibrated leads from state archives: license-free, with honest grades. The teaser is open to all — exact coordinates, name and primary source are handed over after request.',
-      ctaBrowse: 'Browse leads catalog',
+        'Each card shows the metal, region, geology and status as of the check date. Name, coordinates and materials — after an NDA.',
+      ctaBrowse: 'All areas',
       ctaFree: 'Free only',
-      freshHeading: 'Fresh leads',
-      freshAll: 'All leads',
+      freshHeading: 'New areas',
+      freshAll: 'All areas',
     },
     footerNav: {
       platform: {
-        title: 'Platform',
-        leads: 'Finds',
+        title: 'Company',
+        leads: 'Areas',
         listings: 'Listings',
         services: 'Services',
         companies: 'Companies',
@@ -1703,19 +1761,19 @@ export const translations = {
       filters: 'Filters',
     },
     leadsCatalog: {
-      eyebrow: 'Closed geological leads · verified data',
-      title: 'Free gold-bearing sites',
+      eyebrow: 'Areas on display · status per our check',
+      title: 'Free ore areas',
       valueProp1:
-        'Free and available plots. Coordinates verified against the state subsoil map.',
+        'Free per our check against the subsoil-use map; the check date is on each card.',
       valueProp2:
-        'Calibrated leads from state archives. The teaser is open to all; exact coordinates, name and primary source — after request and agreement.',
+        'Our geologists studied the geology from archival reports. Name, coordinates and materials — after an NDA.',
       foundCount: 'Found: {count}',
       filters: 'Filters',
       region: 'Region',
       allRegions: 'All regions',
       type: 'Type',
       allTypes: 'All',
-      typePlacer: 'Placer (for prospectors)',
+      typePlacer: 'Placer',
       typeInvest: 'Investment object',
       sort: 'Sorting',
       sortNewest: 'Newest first',
@@ -1726,14 +1784,14 @@ export const translations = {
       reset: 'Reset',
       emptyTitle: "Didn't find a suitable plot?",
       emptyDesc:
-        'Leave a request — we will notify you when new leads appear for your region or mineral.',
+        'Leave a request — we will let you know when new areas appear for your region or metal.',
       emptyCta: 'Leave a request',
       resetFilters: 'Reset filters',
       back: '← Back',
       forward: 'Forward →',
     },
     leadDetail: {
-      breadcrumbLeads: 'Finds',
+      breadcrumbLeads: 'Areas',
       badgeSold: 'SOLD',
       badgeFree: 'FREE',
       typeFallback: 'Object',
@@ -1773,9 +1831,9 @@ export const translations = {
     },
     footer: {
       company: {
-        name: 'QAZNEDR.KZ',
+        name: 'QAZNEDR HOLDING',
         description:
-          "Kazakhstan's geology industry platform. Licenses, services, companies, data.",
+          'Kazakhstan exploration holding: prepared ore areas and deal support for investors.',
       },
       contact: {
         address: 'Almaty, Kazakhstan',
@@ -2073,7 +2131,7 @@ export const translations = {
       channelTelegram: 'Telegram',
     },
     navigation: {
-      leads: '发现',
+      leads: '地块',
       listings: '信息列表',
       map: '地图',
       services: '服务',
@@ -2088,31 +2146,50 @@ export const translations = {
       admin: '管理后台',
     },
     portal: {
-      eyebrow: '哈萨克斯坦地下资源平台',
-      headlineLine1: '公开市场',
-      headlineEmphasis: '哈萨克斯坦地下资源',
-      headlineLine2: '— 从档案到申请的直通车',
+      statsRegistryLabel: '我方数据库中的矿点',
+      ctaContact: '联系我们',
+      ctaWechat: '添加微信咨询',
+      ctaWhatsapp: '通过 WhatsApp 咨询',
+      eyebrow: 'QAZNEDR HOLDING · 哈萨克斯坦地质与矿业权',
+      headlineLine1: '哈萨克斯坦',
+      headlineEmphasis: '矿权投资',
+      headlineLine2: '— 已完成前期地质研究的金属矿地块',
       subtitle:
-        '经过核验的矿区、真实的数据，从档案到申请的直接通路。封闭式地质线索与公开发布信息 — 同在一个平台。',
-      ctaLeads: '查看线索目录',
+        '我方地质师依据前苏联地质勘查报告筛选地块，经我方核查未设矿业权（核查日期见地块卡片）。许可证按交易需要办理。',
+      ctaLeads: '查看地块',
       ctaListings: '发布信息',
-      statsLive: '系统当前数据',
-      statsLeadsLabel: '封闭线索',
+      statsLive: '数据一览',
+      statsLeadsLabel: '在展地块',
       statsListingsLabel: '活跃发布',
-      statsRegionsLabel: '覆盖地区',
+      statsRegionsLabel: '覆盖州数',
       statsCaption:
-        '数据自动更新。每条信息均来自国家原始资料，并标注数值类型。',
+        '在展地块是数据库中的精选部分。数据库由我方地质师依据档案地质报告建立。',
       trust: {
-        verifiedTitle: '坐标核验',
-        verifiedDesc: '基于地下资源国家地图进行点-多边形重叠核验许可证状态。',
-        archiveTitle: '国家档案',
-        archiveDesc: '所有数据来自原始 ТФГИ 报告和已出版的参考资料。',
-        gatesTitle: '受限访问',
-        gatesDesc: '精确坐标、名称与原始资料 — 在提交申请并达成协议后开放。',
-        disciplineTitle: '不夸大',
+        verifiedTitle: '状态注明日期',
+        verifiedDesc:
+          '我方依据公开的矿业权分布图核查地块是否空白，核查日期见地块卡片。',
+        archiveTitle: '我方地质师的研究',
+        archiveDesc: '每个地块的地质情况均由我方地质师依据档案报告研究。',
+        gatesTitle: '详情签署保密协议后提供',
+        gatesDesc: '地块名称、坐标及资料在签署保密协议后的会面中提供。',
+        disciplineTitle: '始终注明标准',
         disciplineDesc:
-          '每个品位均标注类型：平均值 / 最大样品 / 预测 — 不会过度宣传。',
+          '储量按前苏联国家储量委员会（ГКЗ）A、B、C1、C2 级别或历史估算标注。P1–P3 为预测资源量，并非储量。',
       },
+    },
+    dealSteps: {
+      title: '合作流程',
+      step1Title: '选择地块',
+      step1Desc:
+        '卡片列明矿种、地区、地质情况及核查日期的状态。请通过微信或 WhatsApp 发送地块编号。',
+      step2Title: '会面并签署保密协议',
+      step2Desc: '签署保密协议后，我们提供地块名称、坐标及我方地质师的评估。',
+      step3Title: '选择合作方式',
+      step3Desc:
+        '以贵方名义办理许可证并由我方协助；先办在控股公司名下再转让；合资或 earn-in；或仅提供分析服务。',
+      step4Title: '办理许可证',
+      step4Desc:
+        '我们复核状态、提交申请并协助至许可证颁发。最终由主管机关决定。',
     },
     audience: {
       eyebrow: '面向哪些人',
@@ -2138,19 +2215,19 @@ export const translations = {
       },
     },
     leadsHero: {
-      eyebrow: '封闭式地质线索 · 经过核验的数据',
-      title: '含金的空闲矿区 — 可立即申请',
+      eyebrow: '在展地块 · 状态以我方核查为准',
+      title: '地质已研究的空白地块',
       subtitle:
-        '来自国家档案的经过校准的线索：许可证空闲，含金量标注真实。摘要向所有人开放 — 精确坐标、名称与原始资料在提交申请后交付。',
-      ctaBrowse: '查看线索目录',
-      ctaFree: '仅显示空闲',
-      freshHeading: '最新线索',
-      freshAll: '全部线索',
+        '卡片列明矿种、地区、地质情况及核查日期的状态。名称、坐标及资料在签署保密协议后提供。',
+      ctaBrowse: '全部地块',
+      ctaFree: '仅看空白地块',
+      freshHeading: '最新地块',
+      freshAll: '全部地块',
     },
     footerNav: {
       platform: {
-        title: '平台',
-        leads: '发现',
+        title: '公司',
+        leads: '地块',
         listings: '信息列表',
         services: '服务',
         companies: '公司',
@@ -2158,7 +2235,7 @@ export const translations = {
       },
       info: {
         title: '信息',
-        about: '关于平台',
+        about: '关于我们',
         contacts: '联系方式',
         faq: '常见问题',
         terms: '使用条款',
@@ -2305,18 +2382,18 @@ export const translations = {
       filters: '筛选器',
     },
     leadsCatalog: {
-      eyebrow: '封闭式地质线索 · 经过核验的数据',
-      title: '含金的空闲矿区',
-      valueProp1: '空闲且可申请的矿区。坐标已与国家地下资源地图核对。',
+      eyebrow: '在展地块 · 状态以我方核查为准',
+      title: '空白金属矿地块',
+      valueProp1: '经我方依据矿业权分布图核查为空白地块，核查日期见卡片。',
       valueProp2:
-        '来自国家档案的经过校准的线索。摘要向所有人开放；精确坐标、名称与原始资料 — 在提交申请并达成协议后提供。',
+        '地质情况由我方地质师依据档案报告研究。名称、坐标及资料在签署保密协议后提供。',
       foundCount: '找到：{count}',
       filters: '筛选器',
       region: '地区',
       allRegions: '所有地区',
       type: '类型',
       allTypes: '全部',
-      typePlacer: '砂矿（面向淘金者）',
+      typePlacer: '砂矿',
       typeInvest: '投资项目',
       sort: '排序',
       sortNewest: '最新优先',
@@ -2326,14 +2403,14 @@ export const translations = {
       apply: '应用',
       reset: '重置',
       emptyTitle: '没有找到合适的矿区？',
-      emptyDesc: '留下需求 — 当您所在地区或矿种出现新线索时，我们会通知您。',
+      emptyDesc: '留下需求 — 当您关注的地区或矿种出现新地块时，我们会通知您。',
       emptyCta: '提交需求',
       resetFilters: '重置筛选',
       back: '← 上一页',
       forward: '下一页 →',
     },
     leadDetail: {
-      breadcrumbLeads: '线索',
+      breadcrumbLeads: '地块',
       badgeSold: '已售出',
       badgeFree: '空闲',
       typeFallback: '项目',
@@ -2368,8 +2445,9 @@ export const translations = {
     },
     footer: {
       company: {
-        name: 'QAZNEDR.KZ',
-        description: '哈萨克斯坦地质行业平台。许可证、服务、公司、数据。',
+        name: 'QAZNEDR HOLDING',
+        description:
+          '哈萨克斯坦地质勘查控股公司：为投资者提供已完成前期研究的金属矿地块及交易支持。',
       },
       contact: {
         address: '阿拉木图，哈萨克斯坦',

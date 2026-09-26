@@ -69,12 +69,43 @@ const INQUIRY_KEYS = [
   'inquiry.optional',
 ];
 
+const HOME_KEYS = [
+  'portal.eyebrow',
+  'portal.headlineLine1',
+  'portal.headlineEmphasis',
+  'portal.headlineLine2',
+  'portal.subtitle',
+  'portal.ctaWhatsapp',
+  'portal.ctaWechat',
+  'portal.ctaContact',
+  'portal.ctaLeads',
+  'portal.statsLive',
+  'portal.statsLeadsLabel',
+  'portal.statsRegistryLabel',
+  'portal.statsRegionsLabel',
+  'portal.statsCaption',
+  ...['verified', 'archive', 'gates', 'discipline'].flatMap((k) => [
+    `portal.trust.${k}Title`,
+    `portal.trust.${k}Desc`,
+  ]),
+  'dealSteps.title',
+  ...[1, 2, 3, 4].flatMap((n) => [
+    `dealSteps.step${n}Title`,
+    `dealSteps.step${n}Desc`,
+  ]),
+  'leadsHero.eyebrow',
+  'leadsHero.title',
+  'leadsHero.subtitle',
+  'navigation.leads',
+];
+
 // Later tasks append their namespaces here.
 const KEYS: string[] = [
   ...SEO_KEYS,
   ...NAV_KEYS,
   ...CONTACT_KEYS,
   ...INQUIRY_KEYS,
+  ...HOME_KEYS,
 ];
 
 describe.each(['ru', 'kz', 'en', 'zh'])('%s holding translations', (locale) => {

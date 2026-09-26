@@ -100,6 +100,17 @@ jest.mock('framer-motion', () => {
   };
 });
 
+// Node test environment (API route tests) ships real fetch classes; keep them
+// so NextRequest/NextResponse work. jsdom lacks them and gets the mocks below.
+const nativeFetchApi =
+  typeof globalThis.Request === 'function'
+    ? {
+        Request: globalThis.Request,
+        Response: globalThis.Response,
+        Headers: globalThis.Headers,
+      }
+    : null;
+
 // Mock Next.js server globals (Request, Response, Headers, etc.)
 // Use simple mocks instead of importing from undici to avoid ReadableStream issues
 global.Request = class Request {
@@ -192,26 +203,30 @@ global.Headers = class Headers {
   }
 };
 
+if (nativeFetchApi) Object.assign(global, nativeFetchApi);
+
 // Mock environment variables
 process.env.NEXT_PUBLIC_SUPABASE_URL = 'http://localhost:54321';
 process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = 'test-key';
 process.env.UPSTASH_REDIS_REST_URL = 'http://localhost:8079';
 process.env.UPSTASH_REDIS_REST_TOKEN = 'test-token';
 
-// Mock window.matchMedia
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: jest.fn().mockImplementation((query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-});
+// Mock window.matchMedia (jsdom only)
+if (typeof window !== 'undefined') {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation((query) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  });
+}
 
 // Mock IntersectionObserver
 global.IntersectionObserver = jest.fn().mockImplementation(() => ({

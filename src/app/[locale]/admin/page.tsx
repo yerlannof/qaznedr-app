@@ -12,6 +12,7 @@ import {
   Plus,
   TrendingUp,
   Clock,
+  Inbox,
 } from 'lucide-react';
 
 type Role = 'user' | 'admin' | 'super_admin';
@@ -139,6 +140,13 @@ export default function AdminHome() {
 
           {/* Sections */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <SectionTile
+              href={`/${locale}/admin/inquiries`}
+              title="Входящие заявки"
+              description="Заявки с сайта: WeChat, WhatsApp, формы по участкам"
+              icon={Inbox}
+            />
+
             <SectionTile
               href={`/${locale}/admin/listings`}
               title="Объявления"

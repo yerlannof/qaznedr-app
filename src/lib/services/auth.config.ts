@@ -7,6 +7,7 @@ import { createClient, createServiceClient } from '@/lib/supabase/server';
 import bcrypt from 'bcryptjs';
 import { getSecureAuthConfig } from '@/lib/auth/jwt-security';
 import { ValidationSchemas } from '@/lib/middleware/input-validation';
+import { verifyEnvAdmin } from '@/lib/auth/env-admin';
 
 interface User {
   id: string;
@@ -55,6 +56,13 @@ export const authOptions = {
           console.error('Credential validation failed:', validationError);
           throw new Error('Invalid credentials format');
         }
+
+        // Owner/admin login from env — the legacy `users` table does not exist.
+        const envAdmin = await verifyEnvAdmin(
+          credentials.email,
+          credentials.password
+        );
+        if (envAdmin) return envAdmin;
 
         const supabase = await createClient();
 

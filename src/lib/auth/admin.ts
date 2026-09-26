@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/services/auth.config';
 import { createServiceClient } from '@/lib/supabase/server';
+import { isEnvAdminEmail } from '@/lib/auth/env-admin';
 
 export type AdminRole = 'user' | 'admin' | 'super_admin';
 
@@ -21,6 +22,10 @@ export async function getCurrentAdmin(): Promise<AdminContext | null> {
 
   const userId = (session.user as any).id as string | undefined;
   if (!userId) return null;
+
+  if (isEnvAdminEmail(session.user.email)) {
+    return { userId, email: session.user.email ?? null, role: 'super_admin' };
+  }
 
   try {
     const supabase = await createServiceClient();

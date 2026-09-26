@@ -3,6 +3,12 @@
 
 export const translations = {
   ru: {
+    faqPage: {
+      eyebrow: 'Вопросы и ответы',
+      title: 'Коротко о главном',
+      subtitle:
+        'Как устроена сделка, откуда данные и что мы гарантируем — коротко и без общих фраз.',
+    },
     insights: {
       eyebrow: 'Гайды',
       title: 'Гайды для инвестора',
@@ -760,6 +766,12 @@ export const translations = {
     },
   },
   kz: {
+    faqPage: {
+      eyebrow: 'Сұрақ-жауап',
+      title: 'Негізгісі қысқаша',
+      subtitle:
+        'Мәміле қалай құрылады, деректер қайдан алынады және біз нені кепілдендіреміз — қысқа әрі нақты.',
+    },
     insights: {
       eyebrow: 'Нұсқаулықтар',
       title: 'Инвесторға арналған нұсқаулықтар',
@@ -1450,6 +1462,12 @@ export const translations = {
     },
   },
   en: {
+    faqPage: {
+      eyebrow: 'Questions and answers',
+      title: 'The essentials',
+      subtitle:
+        'How a deal works, where the data comes from and what we guarantee — briefly and to the point.',
+    },
     insights: {
       eyebrow: 'Guides',
       title: 'Guides for investors',
@@ -2128,6 +2146,11 @@ export const translations = {
     },
   },
   zh: {
+    faqPage: {
+      eyebrow: '常见问题',
+      title: '要点速览',
+      subtitle: '交易如何进行、数据从何而来、我们保证什么——简明扼要。',
+    },
     insights: {
       eyebrow: '投资指南',
       title: '投资者指南',

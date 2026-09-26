@@ -28,3 +28,5 @@ next-env.d.ts
 
 # Prisma
 prisma/migrations/
+# Implementation plans embed partial code snippets that must stay verbatim
+docs/superpowers/plans/

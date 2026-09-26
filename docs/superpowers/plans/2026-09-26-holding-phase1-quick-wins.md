@@ -1818,7 +1818,7 @@ git commit -m "feat(nav): hide marketplace — 308 redirects, holding menu, cont
   - `getContactConfig(): ContactConfig` (читает `NEXT_PUBLIC_WHATSAPP_NUMBER`, `NEXT_PUBLIC_WECHAT_ID`, `NEXT_PUBLIC_WECHAT_QR`, `NEXT_PUBLIC_CONTACT_EMAIL` буквальными обращениями, чтобы Next их инлайнил);
   - `whatsappLink(number: string, text: string): string`;
   - `<ContactChannels config={ContactConfig} locale={string} leadCode?={string} />` с каналами в `[data-channel="wechat|whatsapp|email"]`.
-- Ключи `contact.*`: `title, subtitle, wechatTitle, wechatHint, wechatQrAlt, copy, copied, whatsappTitle, whatsappCta, emailTitle, formTitle, whatsappTextLead, whatsappTextGeneral, discussHeading, discussNote`.
+- Ключи `contact.*`: `title, subtitle, wechatTitle, wechatHint, wechatQrAlt, copy, copied, whatsappTitle, whatsappCta, emailTitle, formTitle, whatsappTextLead, whatsappTextGeneral, discussHeading, discussNote, orForm`.
 
 - [ ] **Step 1: Падающие тесты.**
 
@@ -1959,6 +1959,7 @@ const CONTACT_KEYS = [
   'contact.whatsappTextGeneral',
   'contact.discussHeading',
   'contact.discussNote',
+  'contact.orForm',
 ];
 ```
 
@@ -2164,6 +2165,7 @@ ru:
       discussHeading: 'Обсудить участок',
       discussNote:
         'Детали, формат сделки и документы — на встрече после подписания NDA.',
+      orForm: 'Или оставьте заявку — мы напишем сами',
     },
 ```
 
@@ -2189,6 +2191,7 @@ kz:
       discussHeading: 'Учаскені талқылау',
       discussNote:
         'Мәліметтер, мәміле форматы және құжаттар — NDA-ға қол қойылғаннан кейінгі кездесуде.',
+      orForm: 'Немесе өтінім қалдырыңыз — өзіміз хабарласамыз',
     },
 ```
 
@@ -2213,6 +2216,7 @@ en:
       discussHeading: 'Discuss this area',
       discussNote:
         'Details, deal format and documents are shared at a meeting after an NDA is signed.',
+      orForm: 'Or leave an inquiry — we will reach out',
     },
 ```
 
@@ -2235,6 +2239,7 @@ zh:
       whatsappTextGeneral: '您好！我从 qaznedr.kz 联系您。',
       discussHeading: '洽谈该项目',
       discussNote: '项目详情、合作方式及文件将在签署保密协议后的会面中提供。',
+      orForm: '或留下咨询信息，我们将主动联系您',
     },
 ```
 
@@ -3305,45 +3310,44 @@ import InquiryForm from '@/components/features/InquiryForm';
 import { getContactConfig } from '@/lib/config/contacts';
 ```
 
-2. Сразу после `<LeadLockedSection />` вставить:
+2. Сразу после `<LeadLockedSection />` вставить блок связи. Продажа идёт в мессенджерах, поэтому сначала каналы, а форма — запасной путь:
 
 ```tsx
-{
-  /* Inquiry — no login required */
-}
-<section
-  id="inquiry"
-  className="scroll-mt-24 rounded-xl border border-gray-200 dark:border-gray-700 p-5"
->
-  <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-1">
-    {t('contact.discussHeading')}
-  </h2>
-  <p className="text-sm text-gray-500 mb-4">{t('contact.discussNote')}</p>
-  <InquiryForm locale={locale} leadCode={lead.code} />
-</section>;
+              {/* Contact — messengers first, form as fallback; no login */}
+              <section
+                id="inquiry"
+                className="scroll-mt-24 rounded-xl border border-gold/40 p-5"
+              >
+                <h2 className="font-serif text-xl text-gray-900 dark:text-gray-100 mb-1">
+                  {t('contact.discussHeading')}
+                </h2>
+                <p className="text-sm text-gray-500 mb-4">
+                  {t('contact.discussNote')}
+                </p>
+                <ContactChannels
+                  config={getContactConfig()}
+                  locale={locale}
+                  leadCode={lead.code}
+                />
+                <h3 className="mt-6 mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  {t('contact.orForm')}
+                </h3>
+                <InquiryForm locale={locale} leadCode={lead.code} />
+              </section>
 ```
 
-3. В сайдбаре заменить `<Link href={`/${locale}/leads/${lead.code}/full`} className="mt-5 block w-full …">{t('leadDetail.getFullPackage')}</Link>` на якорь с теми же классами:
+3. В сайдбаре заменить `<Link href={`/${locale}/leads/${lead.code}/full`} className="mt-5 block w-full …">{t('leadDetail.getFullPackage')}</Link>` на якорь с теми же классами. На мобильном сайдбар стоит ниже основной колонки, а блок связи уже есть в основной колонке, поэтому `ContactChannels` в сайдбар не дублируем:
 
 ```tsx
-<a
-  href="#inquiry"
-  className="mt-5 block w-full text-center px-4 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 dark:text-gray-900 text-white text-sm font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
->
-  {t('contact.discussHeading')}
-</a>
+                    <a
+                      href="#inquiry"
+                      className="mt-5 block w-full text-center px-4 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 dark:text-gray-900 text-white text-sm font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+                    >
+                      {t('contact.discussHeading')}
+                    </a>
 ```
 
 4. Заменить `{t('leadDetail.ctaNote')}` на `{t('contact.discussNote')}`.
-5. Сразу после закрывающего `</div>` gold-карточки сайдбара (внутри `<div className="lg:sticky lg:top-24 space-y-4">`) вставить:
-
-```tsx
-<ContactChannels
-  config={getContactConfig()}
-  locale={locale}
-  leadCode={lead.code}
-/>
-```
 
 - [ ] **Step 7: Тесты, типы, lint.** Run: `npx jest src/__tests__/components/features src/__tests__/lib/i18n --coverage=false && npm run type-check && npm run lint`. Expected: PASS, 0 ошибок TS; в lint нет новых ошибок в изменённых файлах.
 

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
+import GuideLinks from '@/components/features/GuideLinks';
 import { Scale, Search, User, Building, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -23,7 +24,7 @@ const specializations = [
 ];
 
 export default function LegalServicesPage() {
-  const { locale } = useTranslation();
+  const { t, locale } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
@@ -80,6 +81,15 @@ export default function LegalServicesPage() {
               </Button>
             </Link>
           </div>
+        </div>
+
+        {/* Guides */}
+        <div className="mt-12">
+          <GuideLinks
+            locale={locale}
+            heading={t('insights.servicesHeading')}
+            keys={['foreignInvestor', 'explorationLicence', 'rightsTransfer']}
+          />
         </div>
 
         {/* Specializations */}

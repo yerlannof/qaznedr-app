@@ -3,15 +3,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
+import GuideLinks from '@/components/features/GuideLinks';
 import { useTranslation } from '@/hooks/useTranslation';
-import {
-  Mountain,
-  Scale,
-  BookOpen,
-  Newspaper,
-  ArrowRight,
-  Search,
-} from 'lucide-react';
+import { Mountain, Scale, ArrowRight, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/layouts/Footer';
 
@@ -33,21 +27,6 @@ export default function ServicesPage() {
       description: t('services.descriptions.legal'),
       icon: Scale,
       href: '/services/legal',
-    },
-  ];
-
-  const knowledgeCenter = [
-    {
-      title: t('services.knowledge.knowledgeBase'),
-      description: t('services.knowledge.knowledgeBaseDesc'),
-      icon: BookOpen,
-      href: '/knowledge',
-    },
-    {
-      title: t('services.knowledge.industryNews'),
-      description: t('services.knowledge.industryNewsDesc'),
-      icon: Newspaper,
-      href: '/news',
     },
   ];
 
@@ -109,37 +88,9 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Knowledge Center */}
+      {/* Guides */}
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50 mb-8">
-          {t('services.sections.informationCenter')}
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {knowledgeCenter.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <Link key={index} href={`/${locale}${item.href}`}>
-                <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-5 bg-white dark:bg-[#141414] hover:border-gray-300 hover:shadow-medium transition-all duration-200 group">
-                  <div className="flex items-start gap-4">
-                    <Icon className="w-5 h-5 text-gray-400 mt-0.5 flex-shrink-0" />
-                    <div className="flex-1">
-                      <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm text-gray-500 mt-1">
-                        {item.description}
-                      </p>
-                      <div className="flex items-center justify-end mt-3">
-                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#0A84FF] transition-colors" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+        <GuideLinks locale={locale} heading={t('insights.servicesHeading')} />
       </section>
 
       {/* CTA */}

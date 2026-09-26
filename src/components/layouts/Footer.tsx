@@ -62,6 +62,14 @@ export default function Footer() {
                   {t('footerNav.platform.services')}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={`/${locale}/insights`}
+                  className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  {t('navigation.insights')}
+                </Link>
+              </li>
             </ul>
           </div>
 

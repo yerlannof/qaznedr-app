@@ -39,7 +39,7 @@ export default function Navigation() {
   const navLinks = [
     { label: t('navigation.leads'), href: `/${locale}/leads` },
     { label: t('navigation.services'), href: `/${locale}/services` },
-    { label: t('navigation.blog'), href: `/${locale}/blog` },
+    { label: t('navigation.insights'), href: `/${locale}/insights` },
     { label: t('navigation.about'), href: `/${locale}/about` },
   ];
   const contactHref = `/${locale}/contact`;

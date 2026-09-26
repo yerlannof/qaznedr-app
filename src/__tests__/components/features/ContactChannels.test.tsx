@@ -95,9 +95,15 @@ describe('ContactChannels', () => {
     expect(wechat).toHaveTextContent('AU-1');
     fireEvent.click(screen.getByRole('button', { name: '复制 AU-1' }));
     expect(writeText).toHaveBeenCalledWith('AU-1');
+    expect(
+      await screen.findByRole('button', { name: '已复制 AU-1' })
+    ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '复制' })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: '复制' }));
     expect(writeText).toHaveBeenCalledWith('qaznedr_holding');
+    expect(
+      await screen.findByRole('button', { name: '已复制' })
+    ).toBeInTheDocument();
   });
 
   it('includes the area code in email but keeps general email unchanged', () => {
@@ -118,4 +124,32 @@ describe('ContactChannels', () => {
       screen.getByRole('link', { name: 'info@qaznedr.kz' })
     ).toHaveAttribute('href', 'mailto:info@qaznedr.kz');
   });
+});
+
+it('preserves the approved service topic in WhatsApp, WeChat copy and email', async () => {
+  const writeText = jest.fn().mockResolvedValue(undefined);
+  Object.defineProperty(navigator, 'clipboard', {
+    value: { writeText },
+    configurable: true,
+  });
+  render(
+    <ContactChannels config={full} locale="en" serviceTopic="licensing" />
+  );
+  expect(
+    decodeURIComponent(
+      screen.getByRole('link', { name: /WhatsApp/ }).getAttribute('href')!
+    )
+  ).toContain('Licensing');
+  expect(
+    decodeURIComponent(
+      screen
+        .getByRole('link', { name: 'info@qaznedr.kz' })
+        .getAttribute('href')!
+    )
+  ).toContain('Licensing');
+  fireEvent.click(screen.getByRole('button', { name: 'Copy Licensing' }));
+  expect(writeText).toHaveBeenCalledWith('Licensing');
+  expect(
+    await screen.findByRole('button', { name: 'Copied Licensing' })
+  ).toBeInTheDocument();
 });

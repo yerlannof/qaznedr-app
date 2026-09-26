@@ -56,32 +56,35 @@ export default async function TermsPage({
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-white dark:bg-[#0A0A0A] pt-20 lg:pt-24">
-        <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 lg:pt-16 lg:pb-24">
+      <div className="min-h-screen bg-brand-bg text-brand-ink pt-20 lg:pt-24">
+        <section
+          lang="ru"
+          className="brand-container max-w-[760px] pt-12 pb-16 lg:pt-16 lg:pb-24"
+        >
           <div className="inline-flex items-center gap-2 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-gold-dark dark:text-gold-light">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
+            <span className="text-xs font-semibold uppercase text-brand-muted">
               Правовая информация
             </span>
           </div>
-          <h1 className="font-serif font-light text-4xl lg:text-5xl tracking-tight text-gray-900 dark:text-gray-50 leading-[1.05]">
+          <h1 className="font-serif font-light text-4xl lg:text-5xl tracking-tight text-brand-ink leading-[1.05]">
             Условия использования
           </h1>
-          <p className="mt-4 text-sm text-gray-500 dark:text-gray-500">
+          <p className="mt-4 text-sm text-brand-muted">
             Последнее обновление: сентябрь 2026
           </p>
 
           <div className="mt-12 space-y-12">
             {sections.map(({ h, body }) => (
               <section key={h}>
-                <h2 className="font-serif text-2xl lg:text-3xl text-gray-900 dark:text-gray-50 tracking-tight mb-4">
+                <h2 className="font-serif text-2xl lg:text-3xl text-brand-ink tracking-tight mb-4">
                   {h}
                 </h2>
                 <div className="space-y-4">
                   {body.map((p, i) => (
                     <p
                       key={i}
-                      className="text-base text-gray-600 dark:text-gray-400 leading-relaxed"
+                      className="text-base text-brand-muted leading-relaxed"
                     >
                       {p}
                     </p>
@@ -90,14 +93,14 @@ export default async function TermsPage({
               </section>
             ))}
             <section>
-              <h2 className="font-serif text-2xl lg:text-3xl text-gray-900 dark:text-gray-50 tracking-tight mb-4">
+              <h2 className="font-serif text-2xl lg:text-3xl text-brand-ink tracking-tight mb-4">
                 Контакты
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-base text-brand-muted leading-relaxed">
                 Вопросы по этим условиям задавайте через{' '}
                 <Link
                   href={`/${locale}/contact`}
-                  className="text-gray-900 dark:text-gray-50 underline underline-offset-4 hover:text-gold-dark"
+                  className="brand-focus text-brand-ink underline underline-offset-4 decoration-brand-line hover:text-brand-muted"
                 >
                   страницу контактов
                 </Link>
@@ -106,7 +109,7 @@ export default async function TermsPage({
             </section>
           </div>
         </section>
-      </main>
+      </div>
       <Footer />
     </>
   );

@@ -20,24 +20,26 @@ export default function GuideLinks({
 }) {
   return (
     <section>
-      <h2 className="font-serif text-2xl lg:text-3xl font-light tracking-tight text-gray-900 dark:text-gray-50">
+      <h2 className="font-serif text-2xl lg:text-3xl font-light tracking-tight text-brand-ink">
         {heading}
       </h2>
-      <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+      <ul className="mt-6 grid gap-x-8 sm:grid-cols-2 border-y border-brand-line">
         {keys.map((key) => (
-          <li key={key}>
+          <li key={key} className="border-b border-brand-line last:border-b-0">
             <Link
               href={insightHref(locale, GUIDE[key])}
-              className="group block h-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#141414] p-5 shadow-subtle hover:shadow-medium hover:-translate-y-0.5 transition-all duration-200"
+              className="brand-focus group flex h-full min-h-11 items-start justify-between gap-4 py-5"
             >
-              <span className="block text-base font-semibold text-gray-900 dark:text-gray-50">
-                {translate(locale, `insights.links.${key}`)}
-              </span>
-              <span className="mt-2 block text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                {translate(locale, `insights.summaries.${key}`)}
-              </span>
+              <div>
+                <span className="block text-base font-semibold text-brand-ink">
+                  {translate(locale, `insights.links.${key}`)}
+                </span>
+                <span className="mt-2 block text-sm text-brand-muted leading-relaxed">
+                  {translate(locale, `insights.summaries.${key}`)}
+                </span>
+              </div>
               <ArrowRight
-                className="mt-3 w-4 h-4 text-gray-400 group-hover:text-gold-dark transition-colors duration-150"
+                className="mt-1 w-4 h-4 shrink-0 text-brand-muted transition-colors duration-150"
                 aria-hidden="true"
               />
             </Link>

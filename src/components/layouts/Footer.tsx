@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import BrandLogo from '@/components/brand/BrandLogo';
+import { getServiceTopic, type ServiceTopic } from '@/lib/services/topics';
 
 const languages = [
   { code: 'ru', label: 'Русский' },
@@ -13,9 +14,14 @@ const languages = [
   { code: 'zh', label: '中文' },
 ];
 
-export default function Footer() {
+export default function Footer({
+  serviceTopic,
+}: {
+  serviceTopic?: ServiceTopic;
+}) {
   const { t, locale } = useTranslation();
   const pathname = usePathname() || '/';
+  const topic = getServiceTopic(serviceTopic);
 
   const switchLocalePath = (newLocale: string) => {
     const segments = pathname.split('/');
@@ -24,7 +30,10 @@ export default function Footer() {
     } else {
       segments.splice(1, 0, newLocale);
     }
-    return segments.join('/') || `/${newLocale}`;
+    const path = segments.join('/') || `/${newLocale}`;
+    return topic && pathname.split('/').filter(Boolean)[1] === 'contact'
+      ? `${path}?service=${topic}`
+      : path;
   };
 
   const platformLinks = [

@@ -22,9 +22,17 @@ export default function MobileTabBar() {
   }
 
   const isTeaser = section === 'leads' && segments.length === 3;
+  const serviceTopic =
+    section === 'services' && segments.length === 3
+      ? segments[2] === 'legal'
+        ? 'licensing'
+        : segments[2] === 'geological'
+          ? 'geology'
+          : undefined
+      : undefined;
   const href = isTeaser
     ? `${pathname.replace(/\/$/, '')}#contact-channels`
-    : `/${locale}/contact`;
+    : `/${locale}/contact${serviceTopic ? `?service=${serviceTopic}` : ''}`;
 
   return (
     <div

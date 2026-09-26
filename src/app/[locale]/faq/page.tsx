@@ -35,32 +35,36 @@ export default async function FaqPage({
         }}
       />
       <Navigation />
-      <div className="min-h-screen bg-white dark:bg-[#0A0A0A] pt-20 lg:pt-24">
+      <div className="min-h-screen bg-brand-bg text-brand-ink pt-20 lg:pt-24">
         {/* Hero */}
-        <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-12 lg:pt-16 lg:pb-16 border-b border-gray-100 dark:border-gray-800">
+        <section className="brand-container max-w-[760px] pt-12 pb-12 lg:pt-16 lg:pb-16 border-b border-brand-line">
           <div className="inline-flex items-center gap-2 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-gold-dark dark:text-gold-light">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
+            <span className="text-xs font-semibold uppercase text-brand-muted">
               {t('faqPage.eyebrow')}
             </span>
           </div>
-          <h1 className="font-serif font-light text-4xl lg:text-5xl tracking-tight text-gray-900 dark:text-gray-50 leading-[1.05]">
+          <h1 className="font-serif font-light text-4xl lg:text-5xl tracking-tight text-brand-ink leading-[1.05]">
             {t('faqPage.title')}
           </h1>
-          <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="mt-6 text-lg text-brand-muted leading-relaxed">
             {t('faqPage.subtitle')}
           </p>
         </section>
 
         {/* Q&A */}
-        <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-          <div className="divide-y divide-gray-100 dark:divide-gray-800">
+        <section className="brand-container max-w-[760px] py-14 lg:py-20">
+          <div className="divide-y divide-brand-line">
             {items.map(({ q, a }) => (
-              <div key={q} className="py-8 first:pt-0 last:pb-0">
-                <h2 className="font-serif text-2xl text-gray-900 dark:text-gray-50 tracking-tight mb-3">
+              <div
+                key={q}
+                lang={locale === 'kz' ? 'ru' : locale}
+                className="py-8 first:pt-0 last:pb-0"
+              >
+                <h2 className="font-serif text-2xl text-brand-ink tracking-tight mb-3">
                   {q}
                 </h2>
-                <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p className="text-base text-brand-muted leading-relaxed">
                   {a}
                 </p>
               </div>
@@ -69,11 +73,11 @@ export default async function FaqPage({
         </section>
 
         {/* Guides */}
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-20">
+        <div className="brand-container max-w-[760px] pb-16 lg:pb-20">
           <GuideLinks locale={locale} heading={t('insights.faqHeading')} />
         </div>
 
-        <ClosingCta locale={locale} />
+        <ClosingCta locale={locale} variant="brand" />
       </div>
       <Footer />
     </>

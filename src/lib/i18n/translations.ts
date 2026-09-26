@@ -3,6 +3,49 @@
 
 export const translations = {
   ru: {
+    holdingCompany: {
+      title: 'QAZNEDR HOLDING — геология и недропользование Казахстана',
+      intro:
+        'ТОО «QAZNEDR HOLDING» готовит сделки по рудным участкам Казахстана для иностранных и казахстанских инвесторов. Наши геологи изучают участки по фондовым отчётам, мы проверяем их статус и сопровождаем оформление лицензии под сделку.',
+      what: 'Что мы делаем',
+      areas:
+        'Подготовленные участки. Свободны по нашей проверке на дату в карточке; геология изучена. Тизер открыт, детали — после NDA.',
+      deal: 'Сопровождение сделки. Лицензия на инвестора, на холдинг с последующей передачей, СП или earn-in. Формат выбираем на встрече.',
+      geology:
+        'Геология и консалтинг. Экспертиза наших геологов, сопровождение лицензирования и полевые работы.',
+      start: 'С чего начать',
+      links: 'Участки · Контакты · Вопросы и ответы',
+    },
+    holdingServices: {
+      licensing: {
+        title: 'Лицензирование',
+        description:
+          'Для инвестора, который выбирает путь оформления. Обсуждаем участок и исходные сведения, проверяем применимость процедуры, готовим материалы и сопровождаем процесс.',
+        deliverable:
+          'Оценка применимой процедуры, исходные материалы и план сопровождения.',
+      },
+      geology: {
+        title: 'Геология и полевые работы',
+        description:
+          'Для команды, которой нужна проверка на местности. Согласуем программу, выезд, наблюдения или опробование и документацию.',
+        deliverable:
+          'Согласованная программа работ и документация по наблюдениям или отбору проб.',
+      },
+      'due-diligence': {
+        title: 'Due diligence участка',
+        description:
+          'Для инвестора перед предметным решением. Определяем вопросы, изучаем материалы, фиксируем ограничения и дальнейшие проверки.',
+        deliverable:
+          'Перечень изученных материалов, ограничений и вопросов для следующей проверки.',
+      },
+      analytics: {
+        title: 'Аналитика',
+        description:
+          'Для команды, выбирающей направление. Согласуем критерии, сопоставляем архивные сведения и готовим аналитические материалы.',
+        deliverable:
+          'Согласованные критерии и аналитические материалы для обсуждения.',
+      },
+    },
     notFound: {
       title: 'Страница не найдена',
       text: 'Возможно, она была перемещена или больше не существует.',
@@ -764,6 +807,50 @@ export const translations = {
     },
   },
   kz: {
+    holdingCompany: {
+      title:
+        'QAZNEDR HOLDING — Қазақстан геологиясы және жер қойнауын пайдалану',
+      intro:
+        '«QAZNEDR HOLDING» ЖШС Қазақстандағы кенді учаскелер бойынша шетелдік және қазақстандық инвесторларға арналған мәмілелерді дайындайды. Геологтарымыз учаскелерді қор есептері бойынша зерттейді, мәртебесін тексереміз және мәміле аясында лицензиялау рәсімін сүйемелдейміз.',
+      what: 'Біздің жұмысымыз',
+      areas:
+        'Дайындалған учаскелер. Карточкада көрсетілген күнгі тексеруіміз бойынша бос; геологиясы зерттелген. Тизер ашық, толық ақпарат NDA-дан кейін беріледі.',
+      deal: 'Мәмілені сүйемелдеу. Лицензия инвестордың атына немесе кейін беру үшін холдингтің атына; бірлескен кәсіпорын не earn-in. Нысаны кездесуде талқыланады.',
+      geology:
+        'Геология және консалтинг. Геологтарымыздың сараптамасы, лицензиялау рәсімін сүйемелдеу және далалық жұмыстар.',
+      start: 'Неден бастау керек',
+      links: 'Учаскелер · Байланыс · Сұрақ-жауап',
+    },
+    holdingServices: {
+      licensing: {
+        title: 'Лицензиялау',
+        description:
+          'Рәсімдеу жолын таңдаған инвесторға арналған. Учаске мен бастапқы мәліметтерді талқылаймыз, рәсімнің қолданылуын бағалаймыз, материалдарды дайындап, процесті сүйемелдейміз.',
+        deliverable:
+          'Қолданылуы мүмкін рәсімді бағалау, бастапқы материалдар және сүйемелдеу жоспары.',
+      },
+      geology: {
+        title: 'Геология және далалық жұмыстар',
+        description:
+          'Жергілікті жерде тексеру қажет командаға арналған. Бағдарламаны, учаскеге баруды, бақылау не сынама алуды және құжаттаманы келісеміз.',
+        deliverable:
+          'Келісілген жұмыс бағдарламасы және бақылау не сынама алу құжаттамасы.',
+      },
+      'due-diligence': {
+        title: 'Учаскеге қатысты due diligence',
+        description:
+          'Нақты шешім қабылдар алдында инвесторға арналған. Сұрақтарды анықтаймыз, материалдарды зерттейміз, шектеулер мен қосымша тексерулерді белгілейміз.',
+        deliverable:
+          'Қаралған материалдар, шектеулер және келесі тексеруге арналған сұрақтар тізімі.',
+      },
+      analytics: {
+        title: 'Талдау',
+        description:
+          'Бағыт таңдап жатқан командаға арналған. Өлшемшарттарды келісеміз, архивтік мәліметтерді салыстырамыз және талдамалық материалдар дайындаймыз.',
+        deliverable:
+          'Келісілген өлшемшарттар және талқылауға арналған талдамалық материалдар.',
+      },
+    },
     notFound: {
       title: 'Бет табылмады',
       text: 'Мүмкін, ол басқа мекенжайға көшірілген немесе енді жоқ.',
@@ -1457,6 +1544,48 @@ export const translations = {
     },
   },
   en: {
+    holdingCompany: {
+      title: 'QAZNEDR HOLDING — Geology and Subsoil Use in Kazakhstan',
+      intro:
+        'QAZNEDR HOLDING LLP prepares transactions involving ore areas in Kazakhstan for international and Kazakh investors. Our geologists study areas using archival reports; we check their status and support licensing in connection with a transaction.',
+      what: 'What we do',
+      areas:
+        'Prepared areas. Free per our check on the date shown on the card, with geology studied. The teaser is public; details are shared after an NDA.',
+      deal: 'Deal support. A licence in the investor’s name, in the holding’s name for a possible later transfer, a joint venture, or earn-in. The format is discussed at a meeting.',
+      geology:
+        'Geology and consulting. Our geologists’ expertise, licensing support, and fieldwork.',
+      start: 'How to start',
+      links: 'Areas · Contact · FAQ',
+    },
+    holdingServices: {
+      licensing: {
+        title: 'Licensing',
+        description:
+          'For investors choosing an application route. We discuss the area and available information, assess which procedure may apply, prepare materials, and support the process.',
+        deliverable:
+          'Assessment of the applicable procedure, source materials, and a support plan.',
+      },
+      geology: {
+        title: 'Geology and fieldwork',
+        description:
+          'For teams that need on-site checks. We agree on a work programme, site visit, observations or sampling, and documentation.',
+        deliverable:
+          'An agreed work programme and records of observations or sampling.',
+      },
+      'due-diligence': {
+        title: 'Area due diligence',
+        description:
+          'For investors before a substantive decision. We define the questions, review materials, and record limitations and further checks.',
+        deliverable:
+          'A record of reviewed materials, limitations, and questions for further checks.',
+      },
+      analytics: {
+        title: 'Analytics',
+        description:
+          'For teams choosing a direction. We agree on criteria, compare archival information, and prepare analytical materials.',
+        deliverable: 'Agreed criteria and analytical materials for discussion.',
+      },
+    },
     notFound: {
       title: 'Page not found',
       text: 'It may have been moved or no longer exists.',
@@ -2139,6 +2268,45 @@ export const translations = {
     },
   },
   zh: {
+    holdingCompany: {
+      title: 'QAZNEDR HOLDING — 哈萨克斯坦地质与矿产资源利用',
+      intro:
+        'QAZNEDR HOLDING 有限责任合伙企业为外国及哈萨克斯坦投资者筹备哈萨克斯坦矿产矿区相关交易。我们的地质师依据地质档案报告研究矿区；我们核查其状态，并为交易提供许可证办理协助。',
+      what: '我们的工作',
+      areas:
+        '已整理的矿区。根据卡片所示日期的核查，未设矿权，地质情况已研究。项目简介公开，详细资料在签署保密协议（NDA）后提供。',
+      deal: '交易协助。可讨论以投资者名义申请许可证、由控股公司申请后再转让、合资企业或 earn-in 等方式；具体形式在会面时讨论。',
+      geology:
+        '地质与咨询。由我们的地质师提供专业分析、许可证办理协助及野外工作。',
+      start: '如何开始',
+      links: '矿区 · 联系方式 · 常见问题',
+    },
+    holdingServices: {
+      licensing: {
+        title: '许可证办理',
+        description:
+          '面向正在选择办理路径的投资者。讨论矿区及现有资料，评估可能适用的程序，准备材料并提供流程协助。',
+        deliverable: '适用程序评估、现有资料清单及协助计划。',
+      },
+      geology: {
+        title: '地质与野外工作',
+        description:
+          '面向需要现场核查的团队。协商工作方案、现场踏勘、观察或取样及相关记录。',
+        deliverable: '经协商确定的工作方案，以及观察或取样记录。',
+      },
+      'due-diligence': {
+        title: '矿区尽职调查',
+        description:
+          '面向作出实质性决定前的投资者。明确调查问题、审阅资料，并记录限制因素及后续核查事项。',
+        deliverable: '已审阅资料、限制因素及后续核查事项清单。',
+      },
+      analytics: {
+        title: '分析',
+        description:
+          '面向正在选择方向的团队。协商筛选标准、对照档案资料并准备分析材料。',
+        deliverable: '经协商确定的筛选标准及供讨论的分析材料。',
+      },
+    },
     notFound: {
       title: '页面未找到',
       text: '该页面可能已被移动或已不存在。',

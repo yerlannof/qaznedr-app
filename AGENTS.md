@@ -11,7 +11,7 @@
    - Для дизайна: `docs/design/BRIEF.md`, `docs/design/ROADMAP.md`, `docs/design/APPROVED.md`, `docs/design/DELIVERY.md`.
 2. **Сверь синхронизацию.** Локальный HEAD, `origin/master` и коммит продакшен-деплоя Vercel должны совпадать:
    ```bash
-   git fetch origin && git rev-parse --short HEAD origin/master
+   git fetch origin && git rev-parse --short HEAD && git rev-parse --short origin/master
    # Прод: последний Production-деплой из GitHub (Vercel пишет туда статусы; токен Vercel не нужен)
    ID=$(gh api "repos/yerlannof/qaznedr-app/deployments?environment=Production&per_page=1" --jq '.[0].id')
    gh api "repos/yerlannof/qaznedr-app/deployments?environment=Production&per_page=1" --jq '.[0].sha[0:7]'

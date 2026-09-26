@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { track } from '@vercel/analytics';
 import { Check, Copy, Mail, MessageCircle } from 'lucide-react';
+import type { ServiceTopic } from '@/lib/services/topics';
 import { translate } from '@/lib/i18n/translations';
 import { whatsappLink, type ContactConfig } from '@/lib/config/contacts';
 
@@ -11,6 +12,7 @@ interface ContactChannelsProps {
   config: ContactConfig;
   locale: string;
   leadCode?: string;
+  serviceTopic?: ServiceTopic;
 }
 
 const card = 'border border-brand-line bg-brand-surface p-5';
@@ -19,9 +21,22 @@ export default function ContactChannels({
   config,
   locale,
   leadCode,
+  serviceTopic,
 }: ContactChannelsProps) {
   const t = (key: string, params?: Record<string, unknown>) =>
     translate(locale, key, params);
+  const subject = serviceTopic
+    ? t(`holdingServices.${serviceTopic}.title`)
+    : '';
+  const context = [leadCode, subject].filter(Boolean).join(' · ');
+  const message = [
+    leadCode
+      ? t('contact.whatsappTextLead', { code: leadCode })
+      : t('contact.whatsappTextGeneral'),
+    subject,
+  ]
+    .filter(Boolean)
+    .join('\n');
   const [copied, setCopied] = useState(false);
   const [codeCopied, setCodeCopied] = useState(false);
 
@@ -37,9 +52,9 @@ export default function ContactChannels({
   };
 
   const copyLeadCode = async () => {
-    if (!leadCode) return;
+    if (!context) return;
     try {
-      await navigator.clipboard?.writeText(leadCode);
+      await navigator.clipboard?.writeText(context);
       if (navigator.clipboard) setCodeCopied(true);
     } catch {
       // The code remains visible and selectable when clipboard access fails.
@@ -84,15 +99,15 @@ export default function ContactChannels({
             </button>
           </div>
         )}
-        {leadCode && (
+        {context && (
           <div className="mt-4 border-t border-brand-line pt-4">
             <span className="select-all font-mono text-sm text-brand-ink">
-              {leadCode}
+              {context}
             </span>
             <button
               type="button"
               onClick={copyLeadCode}
-              aria-label={`${codeCopied ? t('contact.copied') : t('contact.copy')} ${leadCode}`}
+              aria-label={`${codeCopied ? t('contact.copied') : t('contact.copy')} ${context}`}
               className="brand-focus ml-3 inline-flex min-h-11 items-center gap-1 border border-brand-line px-3 text-xs text-brand-ink hover:bg-brand-bg transition-colors"
             >
               {codeCopied ? (
@@ -113,12 +128,7 @@ export default function ContactChannels({
         {t('contact.whatsappTitle')}
       </h3>
       <a
-        href={whatsappLink(
-          config.whatsappNumber,
-          leadCode
-            ? t('contact.whatsappTextLead', { code: leadCode })
-            : t('contact.whatsappTextGeneral')
-        )}
+        href={whatsappLink(config.whatsappNumber, message)}
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => track('click_whatsapp', { lead: leadCode ?? '' })}
@@ -136,7 +146,7 @@ export default function ContactChannels({
         {t('contact.emailTitle')}
       </h3>
       <a
-        href={`mailto:${config.email}${leadCode ? `?body=${encodeURIComponent(t('contact.whatsappTextLead', { code: leadCode }))}` : ''}`}
+        href={`mailto:${config.email}${context ? `?body=${encodeURIComponent(message)}` : ''}`}
         className="brand-focus mt-2 inline-flex min-h-11 items-center gap-2 text-sm text-brand-ink underline underline-offset-4 decoration-brand-line hover:text-brand-muted"
       >
         <Mail aria-hidden className="w-4 h-4" />

@@ -72,3 +72,21 @@ describe('InquiryForm', () => {
     );
   });
 });
+
+it('prefills the approved service topic but allows the visitor to edit their message', async () => {
+  global.fetch = jest
+    .fn()
+    .mockResolvedValue({ status: 200, json: async () => ({ success: true }) });
+  render(<InquiryForm locale="en" initialMessage="Licensing" />);
+  const message = screen.getByLabelText(/^Message/);
+  expect(message).toHaveValue('Licensing');
+  fireEvent.change(message, {
+    target: { value: 'Licensing: please discuss the documents' },
+  });
+  fill();
+  fireEvent.click(screen.getByRole('button', { name: 'Send inquiry' }));
+  await screen.findByText('Inquiry sent');
+  expect(
+    JSON.parse((global.fetch as jest.Mock).mock.calls[0][1].body).message
+  ).toBe('Licensing: please discuss the documents');
+});

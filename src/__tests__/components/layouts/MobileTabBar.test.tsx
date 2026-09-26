@@ -27,6 +27,15 @@ describe('MobileTabBar', () => {
     );
   });
 
+  it.each([
+    ['/ru/services/legal', '/ru/contact?service=licensing'],
+    ['/zh/services/geological', '/zh/contact?service=geology'],
+  ])('preserves service context from %s', (path, href) => {
+    setPath(path);
+    render(<MobileTabBar />);
+    expect(screen.getByRole('link')).toHaveAttribute('href', href);
+  });
+
   it.each(['/en/contact', '/ru/admin', '/ru/auth/signin', '/en/dashboard'])(
     'is hidden on %s',
     (path) => {

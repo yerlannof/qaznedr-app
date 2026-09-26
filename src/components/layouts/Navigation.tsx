@@ -8,6 +8,7 @@ import { LogOut, Menu, Shield } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import BrandLogo from '@/components/brand/BrandLogo';
+import { getServiceTopic, type ServiceTopic } from '@/lib/services/topics';
 import {
   Sheet,
   SheetContent,
@@ -25,11 +26,17 @@ const languages = [
 ];
 
 /** Fixed 56/64 px header. Page content starts below it. */
-export default function Navigation() {
+export default function Navigation({
+  serviceTopic,
+}: {
+  serviceTopic?: ServiceTopic;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname() || '/';
   const { t, locale } = useTranslation();
   const { data: session } = useSession();
+  const topic = getServiceTopic(serviceTopic);
+  const contactHref = `/${locale}/contact${topic ? `?service=${topic}` : ''}`;
 
   const switchLocalePath = (newLocale: string) => {
     const segments = pathname.split('/');
@@ -38,7 +45,10 @@ export default function Navigation() {
     } else {
       segments.splice(1, 0, newLocale);
     }
-    return segments.join('/') || `/${newLocale}`;
+    const path = segments.join('/') || `/${newLocale}`;
+    return topic && pathname.split('/').filter(Boolean)[1] === 'contact'
+      ? `${path}?service=${topic}`
+      : path;
   };
 
   const navLinks = [
@@ -124,7 +134,7 @@ export default function Navigation() {
             </>
           )}
           <Link
-            href={`/${locale}/contact`}
+            href={contactHref}
             className="brand-button brand-focus ml-2 inline-flex min-h-11 items-center px-4 text-sm"
           >
             {t('navigation.contact')}
@@ -203,7 +213,7 @@ export default function Navigation() {
                 </div>
                 <SheetClose asChild>
                   <Link
-                    href={`/${locale}/contact`}
+                    href={contactHref}
                     className="brand-button brand-focus mt-6 flex min-h-12 items-center justify-center"
                   >
                     {t('navigation.contact')}

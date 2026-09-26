@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Current Direction (2026-09) — read first
 
-The open marketplace is being pivoted into **QAZNEDR HOLDING**'s own company site: a closed-teaser portfolio of prepared free subsoil areas (`leads` table) sold to foreign — mainly Chinese — investors, plus consulting/geology services. Source of truth: `docs/superpowers/specs/2026-09-26-qaznedr-holding-pivot-design.md` (IA, inquiries flow, SEO/GEO, legal copy red lines).
+The former open marketplace is now **QAZNEDR HOLDING**'s company site: public teasers of prepared subsoil areas (`leads` table), free per the check date on each card, plus licensing, geology, due diligence and analytics services for investors. The holding does not claim ownership of the displayed areas. Source of truth: `docs/superpowers/specs/2026-09-26-qaznedr-holding-pivot-design.md` (IA, inquiries flow, SEO/GEO, legal copy red lines).
 
 - **Handoff (2026-09-26):** Astra (Codex, `gpt-6-astra`) now leads both design and code to the end of the roadmap — its rules and process are in `AGENTS.md`. If Claude Code is brought back, follow the same roadmap and `AGENTS.md` process notes.
 - **Resume point / multi-session roadmap:** `docs/HOLDING_ROADMAP.md` — read its «Текущий статус» first and update it at the end of every session.
@@ -100,7 +100,7 @@ type ListingType =
 - **Images:** local geological engraving WebP, decorative illustrations rather than real project evidence. Never turn demonstration codes or template quantities into live data. Static scene until movement is separately approved.
 - **Icons:** Lucide only. No emoji, glassmorphism, gradients, flashing/pulse/glow animations. Hover transitions short, reduced motion supported.
 - **Copy:** approved existing texts, factual and concise, no claims of ownership or guaranteed returns. Locale strings only in translations.ts.
-- **Migration:** home/header/footer use D2 in session 4; legacy gold/ink tokens remain for pages scheduled for sessions 5–6. Do not use old palette for new holding components.
+- **Migration:** public holding pages use D2 after sessions 4–6, including areas/mineral hubs/guides, services/about/contact, FAQ/terms. Legacy gold/ink tokens remain for hidden marketplace/admin code. Do not use the old palette for new holding components.
 
 ### Kazakhstan-Specific Features
 

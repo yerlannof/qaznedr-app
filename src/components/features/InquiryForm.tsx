@@ -9,6 +9,7 @@ import { INQUIRY_CHANNELS, type InquiryChannel } from '@/lib/inquiries/schema';
 interface InquiryFormProps {
   locale: string;
   leadCode?: string;
+  initialMessage?: string;
 }
 
 type State = 'idle' | 'sending' | 'done' | 'error' | 'rate' | 'invalid';
@@ -35,7 +36,11 @@ function readUtm(): Record<string, string> | undefined {
   return Object.keys(utm).length ? utm : undefined;
 }
 
-export default function InquiryForm({ locale, leadCode }: InquiryFormProps) {
+export default function InquiryForm({
+  locale,
+  leadCode,
+  initialMessage = '',
+}: InquiryFormProps) {
   const t = (key: string) => translate(locale, key);
   const startedAt = useRef(Date.now());
   const [state, setState] = useState<State>('idle');
@@ -80,10 +85,7 @@ export default function InquiryForm({ locale, leadCode }: InquiryFormProps) {
   if (state === 'done') {
     return (
       <div className="flex items-start gap-3 border border-brand-line bg-brand-surface p-4">
-        <CheckCircle2
-          aria-hidden
-          className="w-5 h-5 mt-0.5 text-brand-accent"
-        />
+        <CheckCircle2 aria-hidden className="w-5 h-5 mt-0.5 text-brand-ink" />
         <div>
           <p className="text-sm font-semibold text-brand-ink">
             {t('inquiry.successTitle')}
@@ -180,6 +182,7 @@ export default function InquiryForm({ locale, leadCode }: InquiryFormProps) {
         <textarea
           id="inq-message"
           name="message"
+          defaultValue={initialMessage}
           rows={3}
           maxLength={2000}
           placeholder={t('inquiry.messagePlaceholder')}

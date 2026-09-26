@@ -1,10 +1,15 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import DealSteps from '@/components/features/DealSteps';
-import { MapPin, FileText, ShieldCheck, ArrowRight } from 'lucide-react';
+import ClosingCta from '@/components/features/ClosingCta';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
+import { getServerTranslation } from '@/lib/i18n/translations';
+import { SITE_NAME, SITE_URL, localeUrl, toLocale } from '@/lib/seo/site';
+import { breadcrumbJsonLd } from '@/lib/seo/article-jsonld';
 
 export async function generateMetadata({
   params,
@@ -14,136 +19,109 @@ export async function generateMetadata({
   const { locale } = await params;
   return buildTranslatedPageMetadata(locale, '/about', 'about');
 }
-
 export default async function AboutPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-
-  const points = [
+  const locale = toLocale((await params).locale);
+  const { t } = getServerTranslation(locale);
+  const organization = {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+  };
+  const schemas = [
     {
-      icon: MapPin,
-      title: 'Подготовленные участки',
-      desc: 'Свободные по нашей проверке участки с изученной геологией. Тизер открыт, детали — после NDA.',
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: t('holdingCompany.title'),
+      url: localeUrl(locale, '/about'),
+      mainEntity: organization,
     },
-    {
-      icon: FileText,
-      title: 'Сопровождение сделки',
-      desc: 'Лицензия на инвестора, на холдинг с последующей передачей, СП или earn-in. Формат выбираем на встрече.',
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Геология и консалтинг',
-      desc: 'Экспертиза наших геологов, сопровождение лицензирования и полевые работы.',
-    },
+    breadcrumbJsonLd([
+      { name: t('navigation.home'), url: localeUrl(locale) },
+      { name: t('navigation.about'), url: localeUrl(locale, '/about') },
+    ]),
   ];
-
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-white dark:bg-[#0A0A0A] pt-20 lg:pt-24">
-        {/* Hero */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-14 lg:pt-16 lg:pb-20 border-b border-gray-100 dark:border-gray-800">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-gold-dark dark:text-gold-light">
-                О компании
-              </span>
-            </div>
-            <h1 className="font-serif font-light text-4xl lg:text-5xl tracking-tight text-gray-900 dark:text-gray-50 leading-[1.05]">
-              QAZNEDR HOLDING — геология и недропользование Казахстана
-            </h1>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              ТОО «QAZNEDR HOLDING» готовит сделки по свободным рудным участкам
-              Казахстана для иностранных и казахстанских инвесторов. Наши
-              геологи изучают участки по фондовым отчётам, мы проверяем их
-              статус и оформляем лицензию под сделку.
-            </p>
+      <div className="bg-brand-bg text-brand-ink pt-20 lg:pt-24">
+        <header className="brand-container grid items-center gap-10 py-12 lg:grid-cols-[1.25fr_1fr] lg:py-20">
+          <div>
+            <p className="text-sm text-brand-muted">{t('navigation.about')}</p>
+            <h1 className="holding-title mt-5">{t('holdingCompany.title')}</h1>
+            <p className="holding-lead mt-7">{t('holdingCompany.intro')}</p>
           </div>
-        </section>
-
-        {/* Что мы делаем */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-          <h2 className="font-serif text-3xl lg:text-4xl font-light tracking-tight text-gray-900 dark:text-gray-50">
-            Что мы делаем
+          <Image
+            src="/brand/archive-to-field-960.webp"
+            alt=""
+            width={960}
+            height={640}
+            className="w-full border border-brand-line"
+            sizes="(max-width: 1023px) 100vw, 45vw"
+            priority
+          />
+        </header>
+        <section className="brand-container border-t border-brand-line py-12 lg:py-20">
+          <h2 className="font-serif text-3xl lg:text-4xl">
+            {t('holdingCompany.what')}
           </h2>
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
-            {points.map(({ icon: Icon, title, desc }) => (
-              <div
-                key={title}
-                className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#141414] p-7"
-              >
-                <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[rgba(200,162,75,0.10)] text-gold-dark dark:text-gold-light mb-5">
-                  <Icon className="w-5 h-5" />
-                </div>
-                <h3 className="font-serif text-2xl text-gray-900 dark:text-gray-50 leading-tight mb-3">
-                  {title}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {desc}
+          <div className="mt-8 grid gap-8 md:grid-cols-3">
+            {['areas', 'deal', 'geology'].map((key, i) => (
+              <div key={key} className="border-t border-brand-line pt-5">
+                <p className="text-sm text-brand-muted">0{i + 1}</p>
+                <p className="mt-4 leading-relaxed">
+                  {t(`holdingCompany.${key}`)}
                 </p>
               </div>
             ))}
           </div>
-        </section>
-
-        <DealSteps locale={locale} />
-
-        {/* Internal links */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-          <h2 className="font-serif text-3xl lg:text-4xl font-light tracking-tight text-gray-900 dark:text-gray-50 mb-8">
-            С чего начать
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <Link
-              href={`/${locale}/leads`}
-              className="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#141414] p-6 transition-all hover:border-gold/50 hover:shadow-medium hover:-translate-y-0.5"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-gray-900 dark:text-gray-50">
-                  Участки
-                </span>
-                <ArrowRight className="w-4 h-4 text-gray-400 transition-transform group-hover:translate-x-0.5" />
-              </div>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Свободные участки с изученной геологией.
+          <div className="mt-12 border-y border-brand-line py-8 md:flex md:items-start md:gap-12">
+            <div>
+              <p className="font-serif text-5xl">7 152</p>
+              <p className="mt-3 text-sm text-brand-muted">
+                {t('portal.statsRegistryLabel')}
               </p>
-            </Link>
-            <Link
-              href={`/${locale}/contact`}
-              className="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#141414] p-6 transition-all hover:border-gold/50 hover:shadow-medium hover:-translate-y-0.5"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-gray-900 dark:text-gray-50">
-                  Контакты
-                </span>
-                <ArrowRight className="w-4 h-4 text-gray-400 transition-transform group-hover:translate-x-0.5" />
-              </div>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                WeChat, WhatsApp или заявка на сайте.
-              </p>
-            </Link>
-            <Link
-              href={`/${locale}/faq`}
-              className="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#141414] p-6 transition-all hover:border-gold/50 hover:shadow-medium hover:-translate-y-0.5"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-gray-900 dark:text-gray-50">
-                  Вопросы и ответы
-                </span>
-                <ArrowRight className="w-4 h-4 text-gray-400 transition-transform group-hover:translate-x-0.5" />
-              </div>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Форматы сделки, данные и гарантии.
-              </p>
-            </Link>
+            </div>
+            <p className="mt-6 max-w-2xl leading-relaxed text-brand-muted md:mt-0">
+              {t('portal.statsCaption')}
+            </p>
           </div>
         </section>
-      </main>
+        <DealSteps locale={locale} />
+        <section className="brand-container py-12 lg:py-20">
+          <h2 className="font-serif text-3xl">{t('holdingCompany.start')}</h2>
+          <nav className="mt-8 grid divide-y divide-brand-line border-y border-brand-line">
+            {[
+              ['/leads', 'navigation.leads'],
+              ['/contact', 'footerNav.info.contacts'],
+              ['/faq', 'footerNav.info.faq'],
+            ].map(([path, key]) => (
+              <Link
+                key={path}
+                href={`/${locale}${path}`}
+                className="brand-focus flex min-h-16 items-center justify-between gap-5 py-5 text-lg"
+              >
+                {t(key)}
+                <ArrowUpRight className="size-5 shrink-0" aria-hidden />
+              </Link>
+            ))}
+          </nav>
+        </section>
+        <ClosingCta locale={locale} variant="brand" />
+      </div>
       <Footer />
+      {schemas.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schema).replace(/</g, '\\u003c'),
+          }}
+        />
+      ))}
     </>
   );
 }

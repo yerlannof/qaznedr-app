@@ -1,0 +1,55 @@
+/** @jest-environment node */
+import { renderToStaticMarkup } from 'react-dom/server';
+import About from '@/app/[locale]/about/page';
+import Contact from '@/app/[locale]/contact/page';
+import { translate } from '@/lib/i18n/translations';
+jest.mock('@/components/layouts/Navigation', () => () => null);
+jest.mock('@/components/layouts/Footer', () => () => null);
+jest.mock('@/lib/config/contacts', () => ({
+  getContactConfig: () => ({
+    whatsappNumber: '77001234567',
+    wechatQrSrc: '/contacts/wechat-qr.png',
+    wechatId: null,
+    email: null,
+  }),
+  hasAnyChannel: () => true,
+  whatsappLink: (n: string, text: string) =>
+    'https://wa.me/' + n + '?text=' + encodeURIComponent(text),
+}));
+it.each(['ru', 'kz', 'en', 'zh'])(
+  'renders approved %s company copy and one localized page heading',
+  async (locale) => {
+    const html = renderToStaticMarkup(
+      await About({ params: Promise.resolve({ locale }) })
+    );
+    expect(html).toContain(translate(locale, 'holdingCompany.intro'));
+    expect(html).toContain('Organization');
+    expect(html.match(/<h1\b/g)).toHaveLength(1);
+    expect(html).not.toContain('<main');
+  }
+);
+it.each(['ru', 'kz', 'en', 'zh'])(
+  'keeps %s service context in contact UI and editable form',
+  async (locale) => {
+    const html = renderToStaticMarkup(
+      await Contact({
+        params: Promise.resolve({ locale }),
+        searchParams: Promise.resolve({ service: 'analytics' }),
+      })
+    );
+    const title = translate(locale, 'holdingServices.analytics.title');
+    expect(html).toContain(title);
+    expect(decodeURIComponent(html)).toContain(title);
+    expect(html).toContain('>' + title + '</textarea>');
+    expect(html).not.toContain('<main');
+  }
+);
+it('ignores unapproved query text', async () => {
+  const html = renderToStaticMarkup(
+    await Contact({
+      params: Promise.resolve({ locale: 'en' }),
+      searchParams: Promise.resolve({ service: 'untrusted-business-offer' }),
+    })
+  );
+  expect(html).not.toContain('untrusted-business-offer');
+});

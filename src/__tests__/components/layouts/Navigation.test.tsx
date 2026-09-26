@@ -50,4 +50,36 @@ describe('Navigation', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Выйти' }));
     expect(signOut).toHaveBeenCalledWith({ callbackUrl: '/ru' });
   });
+
+  it('keeps an approved service topic when changing language on contact', () => {
+    (usePathname as jest.Mock).mockReturnValue('/ru/contact');
+    render(<Navigation serviceTopic="geology" />);
+    expect(screen.getByRole('link', { name: 'English' })).toHaveAttribute(
+      'href',
+      '/en/contact?service=geology'
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Меню' }));
+    expect(
+      within(screen.getByRole('dialog')).getByRole('link', { name: '中文' })
+    ).toHaveAttribute('href', '/zh/contact?service=geology');
+  });
+
+  it('keeps known service context on desktop and mobile contact actions', () => {
+    (usePathname as jest.Mock).mockReturnValue('/ru/services/legal');
+    render(<Navigation serviceTopic="licensing" />);
+    expect(screen.getByRole('link', { name: 'Связаться' })).toHaveAttribute(
+      'href',
+      '/ru/contact?service=licensing'
+    );
+    expect(screen.getByRole('link', { name: 'English' })).toHaveAttribute(
+      'href',
+      '/en/services/legal'
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Меню' }));
+    expect(
+      within(screen.getByRole('dialog')).getByRole('link', {
+        name: 'Связаться',
+      })
+    ).toHaveAttribute('href', '/ru/contact?service=licensing');
+  });
 });

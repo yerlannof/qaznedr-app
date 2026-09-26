@@ -33,4 +33,26 @@ describe('Footer', () => {
       '/ru/contact'
     );
   });
+
+  it('keeps the approved service topic when changing language on contact', () => {
+    (usePathname as jest.Mock).mockReturnValue('/ru/contact');
+    render(<Footer serviceTopic="licensing" />);
+    expect(screen.getByRole('link', { name: 'English' })).toHaveAttribute(
+      'href',
+      '/en/contact?service=licensing'
+    );
+    expect(screen.getByRole('link', { name: '中文' })).toHaveAttribute(
+      'href',
+      '/zh/contact?service=licensing'
+    );
+  });
+
+  it('does not append a service topic to an unrelated page', () => {
+    (usePathname as jest.Mock).mockReturnValue('/ru/insights');
+    render(<Footer serviceTopic="licensing" />);
+    expect(screen.getByRole('link', { name: 'English' })).toHaveAttribute(
+      'href',
+      '/en/insights'
+    );
+  });
 });

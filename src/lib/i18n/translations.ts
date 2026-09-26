@@ -3,7 +3,56 @@
 
 export const translations = {
   ru: {
+    insights: {
+      eyebrow: 'Гайды',
+      title: 'Гайды для инвестора',
+      subtitle:
+        'Право недропользования, лицензирование и классификации запасов в Казахстане — коротко и со ссылками на источники.',
+      breadcrumb: 'Гайды',
+      updated: 'Обновлено',
+      readingTime: '{n} мин чтения',
+      legalNote:
+        'Материал не является юридической консультацией. Нормы приведены по состоянию на {date}; перед сделкой проверьте актуальную редакцию на adilet.zan.kz и проконсультируйтесь с юристом.',
+      otherGuides: 'Другие гайды',
+      onlyRu: 'Гайды пока доступны на русском, английском и китайском.',
+      ctaTitle: 'Готовы обсудить участок?',
+      ctaText:
+        'Посмотрите участки на витрине или напишите нам — ответим в течение рабочего дня.',
+      ctaLeads: 'Смотреть участки',
+      ctaContact: 'Связаться',
+      servicesHeading: 'Гайды по лицензированию и сделкам',
+      faqHeading: 'Подробные гайды',
+      categories: {
+        law: 'Право',
+        licensing: 'Лицензирование',
+        geology: 'Геология',
+      },
+      links: {
+        foreignInvestor:
+          'Как иностранному инвестору получить право недропользования',
+        explorationLicence: 'Лицензия на разведку ТПИ: процесс по шагам',
+        reserveClassification:
+          'Классификации запасов: ГКЗ, KAZRC/JORC, GB/T 17766',
+        rightsTransfer:
+          'Сделки с правом недропользования: разрешение на переход',
+      },
+      summaries: {
+        foreignInvestor:
+          'Кто может стать недропользователем и три пути входа: новая лицензия, покупка права или доли, совместное предприятие.',
+        explorationLicence:
+          'Заявление, блоки, сроки, обязательства и переход к добыче.',
+        reserveClassification:
+          'Как соотносятся категории ГКЗ, KAZRC/JORC и китайского GB/T 17766 — и где прямого соответствия нет.',
+        rightsTransfer:
+          'Какие сделки требуют разрешения на переход права и что изменилось с 7 сентября 2026 года.',
+      },
+    },
     seo: {
+      insights: {
+        title: 'Гайды для инвестора: недропользование в Казахстане',
+        description:
+          'Как иностранному инвестору получить право недропользования в Казахстане, лицензия на разведку, классификации запасов и сделки с правом — со ссылками на закон.',
+      },
       site: {
         title: 'QAZNEDR HOLDING — участки недр Казахстана для инвесторов',
         description:
@@ -121,6 +170,7 @@ export const translations = {
       channelTelegram: 'Telegram',
     },
     navigation: {
+      insights: 'Гайды',
       leads: 'Участки',
       listings: 'Объявления',
       map: 'Карта',
@@ -710,7 +760,57 @@ export const translations = {
     },
   },
   kz: {
+    insights: {
+      eyebrow: 'Нұсқаулықтар',
+      title: 'Инвесторға арналған нұсқаулықтар',
+      subtitle:
+        'Қазақстандағы жер қойнауын пайдалану құқығы, лицензиялау және қор жіктемелері — қысқа әрі дереккөздерге сілтемелермен.',
+      breadcrumb: 'Нұсқаулықтар',
+      updated: 'Жаңартылды',
+      readingTime: '{n} мин оқу',
+      legalNote:
+        'Бұл материал заң кеңесі емес. Нормалар {date} жағдайы бойынша келтірілген; мәміле алдында adilet.zan.kz сайтындағы өзекті редакцияны тексеріп, заңгермен кеңесіңіз.',
+      otherGuides: 'Басқа нұсқаулықтар',
+      onlyRu:
+        'Нұсқаулықтар әзірге орыс, ағылшын және қытай тілдерінде қолжетімді.',
+      ctaTitle: 'Учаскені талқылауға дайынсыз ба?',
+      ctaText:
+        'Витринадағы учаскелерді қараңыз немесе бізге жазыңыз — жұмыс күні ішінде жауап береміз.',
+      ctaLeads: 'Учаскелерді қарау',
+      ctaContact: 'Байланысу',
+      servicesHeading: 'Лицензиялау және мәмілелер бойынша нұсқаулықтар',
+      faqHeading: 'Толық нұсқаулықтар',
+      categories: {
+        law: 'Құқық',
+        licensing: 'Лицензиялау',
+        geology: 'Геология',
+      },
+      links: {
+        foreignInvestor: 'Шетелдік инвесторға жер қойнауын пайдалану құқығы',
+        explorationLicence:
+          'Қатты пайдалы қазбаларды барлау лицензиясы: қадамдар',
+        reserveClassification: 'Қор жіктемелері: ГКЗ, KAZRC/JORC, GB/T 17766',
+        rightsTransfer:
+          'Жер қойнауын пайдалану құқығымен мәмілелер: өтуге рұқсат',
+      },
+      summaries: {
+        foreignInvestor:
+          'Кім жер қойнауын пайдаланушы бола алады және кірудің үш жолы: жаңа лицензия, құқықты не үлесті сатып алу, бірлескен кәсіпорын.',
+        explorationLicence:
+          'Өтініш, блоктар, мерзімдер, міндеттемелер және өндіруге көшу.',
+        reserveClassification:
+          'ГКЗ, KAZRC/JORC және қытайлық GB/T 17766 санаттары қалай сәйкеседі — және қай жерде тікелей сәйкестік жоқ.',
+        rightsTransfer:
+          'Қандай мәмілелерге құқықтың өтуіне рұқсат керек және 2026 жылғы 7 қыркүйектен бастап не өзгерді.',
+      },
+    },
     seo: {
+      insights: {
+        title:
+          'Инвесторға арналған нұсқаулықтар: Қазақстандағы жер қойнауын пайдалану',
+        description:
+          'Шетелдік инвестор Қазақстанда жер қойнауын пайдалану құқығын қалай алады, барлау лицензиясы, қор жіктемелері және құқықпен мәмілелер — заңға сілтемелермен.',
+      },
       site: {
         title:
           'QAZNEDR HOLDING — инвесторларға арналған Қазақстан жер қойнауы учаскелері',
@@ -832,6 +932,7 @@ export const translations = {
       channelTelegram: 'Telegram',
     },
     navigation: {
+      insights: 'Нұсқаулықтар',
       leads: 'Учаскелер',
       listings: 'Хабарландырулар',
       map: 'Карта',
@@ -1349,7 +1450,54 @@ export const translations = {
     },
   },
   en: {
+    insights: {
+      eyebrow: 'Guides',
+      title: 'Guides for investors',
+      subtitle:
+        'Subsoil use rights, licensing and reserve classifications in Kazakhstan — briefly, with links to the sources.',
+      breadcrumb: 'Guides',
+      updated: 'Updated',
+      readingTime: '{n} min read',
+      legalNote:
+        'This is not legal advice. Rules are stated as of {date}; before a transaction, check the current wording on adilet.zan.kz and consult a lawyer.',
+      otherGuides: 'More guides',
+      onlyRu: 'Guides are available in Russian, English and Chinese.',
+      ctaTitle: 'Ready to discuss an area?',
+      ctaText:
+        'Browse the areas we have prepared or message us — we reply within one business day.',
+      ctaLeads: 'View areas',
+      ctaContact: 'Contact us',
+      servicesHeading: 'Guides on licensing and transactions',
+      faqHeading: 'In-depth guides',
+      categories: {
+        law: 'Law',
+        licensing: 'Licensing',
+        geology: 'Geology',
+      },
+      links: {
+        foreignInvestor: 'Subsoil use rights for foreign investors',
+        explorationLicence: 'Solid-minerals exploration licence, step by step',
+        reserveClassification:
+          'Reserve classifications: GKZ, KAZRC/JORC, GB/T 17766',
+        rightsTransfer: 'Subsoil rights transactions: transfer permission',
+      },
+      summaries: {
+        foreignInvestor:
+          'Who can hold subsoil use rights and three ways in: a new licence, buying a right or a stake, a joint venture.',
+        explorationLicence:
+          'Application, blocks, terms, obligations and the move to mining.',
+        reserveClassification:
+          "How GKZ, KAZRC/JORC and China's GB/T 17766 categories compare — and where there is no direct match.",
+        rightsTransfer:
+          'Which transactions need a transfer permission and what changed on 7 September 2026.',
+      },
+    },
     seo: {
+      insights: {
+        title: 'Guides for investors: subsoil use in Kazakhstan',
+        description:
+          'How a foreign investor acquires subsoil use rights in Kazakhstan, the exploration licence, reserve classifications and rights transfers — with links to the law.',
+      },
       site: {
         title:
           'QAZNEDR HOLDING — Mineral Exploration Areas in Kazakhstan for Investors',
@@ -1469,6 +1617,7 @@ export const translations = {
       channelTelegram: 'Telegram',
     },
     navigation: {
+      insights: 'Guides',
       leads: 'Areas',
       listings: 'Listings',
       map: 'Map',
@@ -1979,7 +2128,50 @@ export const translations = {
     },
   },
   zh: {
+    insights: {
+      eyebrow: '投资指南',
+      title: '投资者指南',
+      subtitle:
+        '哈萨克斯坦矿业权、许可证办理与储量分类——简明扼要，并附资料来源。',
+      breadcrumb: '指南',
+      updated: '更新于',
+      readingTime: '阅读约{n}分钟',
+      legalNote:
+        '本文不构成法律意见。相关规定以{date}为准；交易前请在 adilet.zan.kz 核对现行版本并咨询律师。',
+      otherGuides: '更多指南',
+      onlyRu: '指南目前提供俄文、英文和中文版本。',
+      ctaTitle: '想进一步了解矿区？',
+      ctaText: '查看我们准备好的矿区，或直接联系我们——一个工作日内回复。',
+      ctaLeads: '查看矿区',
+      ctaContact: '联系我们',
+      servicesHeading: '许可证与交易指南',
+      faqHeading: '详细指南',
+      categories: {
+        law: '法律',
+        licensing: '许可证',
+        geology: '地质',
+      },
+      links: {
+        foreignInvestor: '外国投资者如何在哈萨克斯坦取得矿业权',
+        explorationLicence: '固体矿产勘查许可证：办理流程',
+        reserveClassification: '储量分类对照：GKZ、KAZRC/JORC、GB/T 17766',
+        rightsTransfer: '矿业权交易：转让许可',
+      },
+      summaries: {
+        foreignInvestor:
+          '谁可以成为矿业权人，以及三种进入方式：申请新许可证、收购矿业权或股权、成立合资企业。',
+        explorationLicence: '申请、区块、期限、义务及转入开采。',
+        reserveClassification:
+          'GKZ、KAZRC/JORC 与中国 GB/T 17766 分类如何对应，以及哪些无法直接对应。',
+        rightsTransfer: '哪些交易需要转让许可，以及2026年9月7日起的变化。',
+      },
+    },
     seo: {
+      insights: {
+        title: '哈萨克斯坦矿业投资指南：矿业权、勘查许可证与储量分类',
+        description:
+          '外国投资者如何在哈萨克斯坦取得矿业权、固体矿产勘查许可证流程、储量分类对照及矿业权转让许可——附法律原文链接。',
+      },
       site: {
         title:
           'QAZNEDR HOLDING — 哈萨克斯坦矿权投资项目：金矿、铜矿等空白探矿区',
@@ -2094,6 +2286,7 @@ export const translations = {
       channelTelegram: 'Telegram',
     },
     navigation: {
+      insights: '指南',
       leads: '地块',
       listings: '信息列表',
       map: '地图',

@@ -8,9 +8,15 @@ import { listArticles } from '@/lib/insights/content';
 import { formatCheckDate } from '@/lib/leads/check-date';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd, insightsBreadcrumb } from '@/lib/seo/article-jsonld';
-import { HREFLANG, toLocale } from '@/lib/seo/site';
+import { HREFLANG, LOCALES, toLocale } from '@/lib/seo/site';
 
 export const dynamic = 'force-static';
+
+// Prerendered at build time, so a missing guide file fails the build
+// instead of caching a partial index on the first request.
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({
   params,

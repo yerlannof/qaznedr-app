@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import path from 'path';
 import { marked } from 'marked';
 import type { Locale } from '@/lib/seo/site';
@@ -78,12 +78,17 @@ export function parseArticle(
   };
 }
 
+/** null only for languages the guide is not written in; a file the registry
+ * promises but that is missing throws, so the build fails instead of
+ * shipping an index without the guide. */
 export function getArticle(slug: string, locale: Locale): Article | null {
   const entry = findInsight(slug);
   if (!entry || !entry.locales.includes(locale)) return null;
-  const file = articlePath(slug, locale);
-  if (!existsSync(file)) return null;
-  return parseArticle(readFileSync(file, 'utf8'), entry, locale);
+  return parseArticle(
+    readFileSync(articlePath(slug, locale), 'utf8'),
+    entry,
+    locale
+  );
 }
 
 /** Cards for the index; articles without this language fall back to ru. */

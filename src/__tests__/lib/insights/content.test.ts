@@ -1,11 +1,12 @@
 /** @jest-environment node */
 import {
+  getArticle,
   listArticles,
   parseArticle,
   readingMinutes,
   renderMarkdown,
 } from '@/lib/insights/content';
-import { INSIGHTS, type InsightEntry } from '@/lib/insights/registry';
+import { GUIDE, INSIGHTS, type InsightEntry } from '@/lib/insights/registry';
 
 const entry: InsightEntry = {
   slug: 'test-guide',
@@ -98,5 +99,26 @@ describe('listArticles', () => {
     const cards = listArticles('kz');
     for (const card of cards) expect(card.locale).toBe('ru');
     expect(cards.length).toBeLessThanOrEqual(INSIGHTS.length);
+  });
+});
+
+describe('getArticle', () => {
+  // The module object itself, so spies reach the loader's fs calls.
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const fs = require('fs') as typeof import('fs');
+  afterEach(() => jest.restoreAllMocks());
+
+  it('fails loudly when a language the registry lists has no file', () => {
+    jest.spyOn(fs, 'existsSync').mockReturnValue(false);
+    jest.spyOn(fs, 'readFileSync').mockImplementation(() => {
+      throw Object.assign(new Error('ENOENT: no such file'), {
+        code: 'ENOENT',
+      });
+    });
+    expect(() => getArticle(GUIDE.foreignInvestor, 'ru')).toThrow(/ENOENT/);
+  });
+
+  it('returns null for a language the guide is not written in', () => {
+    expect(getArticle(GUIDE.foreignInvestor, 'kz')).toBeNull();
   });
 });

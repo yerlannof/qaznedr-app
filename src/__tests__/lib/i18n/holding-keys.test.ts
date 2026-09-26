@@ -99,6 +99,30 @@ const HOME_KEYS = [
   'navigation.leads',
 ];
 
+const TEASER_KEYS = [
+  'leadDetail.valueNote',
+  'leadDetail.freeVerified',
+  'leadDetail.freeRegistry',
+  'leadDetail.verifyDate',
+  'leadDetail.howItWorksHeading',
+  ...[1, 2, 3, 4].map((n) => `leadDetail.howItWorksPoint${n}`),
+  'leadDetail.priceCardLabel',
+  'leadDetail.priceFallback',
+  'leadDetail.includedHeading',
+  'leadDetail.includedCoords',
+  'leadDetail.includedAssay',
+  'leadDetail.includedLegal',
+  'leadDetail.includedContacts',
+  'leadDetail.locationHidden',
+  'leadLocked.heading',
+  'leadLocked.itemName',
+  'leadLocked.itemArea',
+  'leadLocked.itemCoords',
+  'leadLocked.itemAssessment',
+  'leadLocked.badge',
+  'leadLocked.note',
+];
+
 // Later tasks append their namespaces here.
 const KEYS: string[] = [
   ...SEO_KEYS,
@@ -106,6 +130,7 @@ const KEYS: string[] = [
   ...CONTACT_KEYS,
   ...INQUIRY_KEYS,
   ...HOME_KEYS,
+  ...TEASER_KEYS,
 ];
 
 describe.each(['ru', 'kz', 'en', 'zh'])('%s holding translations', (locale) => {

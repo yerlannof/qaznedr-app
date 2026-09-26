@@ -6,7 +6,9 @@ import { Badge } from '@/components/ui/badge';
 import LeadLockedSection from '@/components/features/LeadLockedSection';
 import ContactChannels from '@/components/features/ContactChannels';
 import InquiryForm from '@/components/features/InquiryForm';
-import { getContactConfig } from '@/lib/config/contacts';
+import { getContactConfig, hasAnyChannel } from '@/lib/config/contacts';
+import { formatCheckDate } from '@/lib/leads/check-date';
+import { toLocale } from '@/lib/seo/site';
 import {
   MapPin,
   ShieldCheck,
@@ -23,11 +25,7 @@ import {
   FolderCheck,
 } from 'lucide-react';
 import { getPublishedLeadByCode } from '@/lib/leads/public-queries';
-import {
-  TYPE_LABELS,
-  EXCLUSIVITY_LABELS,
-  isFreeStatus,
-} from '@/lib/leads/types';
+import { TYPE_LABELS, isFreeStatus } from '@/lib/leads/types';
 import { getServerTranslation } from '@/lib/i18n/translations';
 
 export const dynamic = 'force-dynamic';
@@ -43,6 +41,8 @@ export default async function LeadTeaserPage({
   if (!lead) notFound();
 
   const free = isFreeStatus(lead.license_status);
+  const checkedOn = formatCheckDate(lead.last_verified, toLocale(locale));
+  const contacts = getContactConfig();
   const coordVerified =
     free &&
     (lead.license_status || '').toUpperCase().includes('COORD_VERIFIED');
@@ -237,10 +237,10 @@ export default async function LeadTeaserPage({
                         : t('leadDetail.statusPending')}
                     </span>
                   </div>
-                  {lead.last_verified && (
+                  {free && (
                     <div className="flex items-center gap-2 text-gray-500">
                       <Calendar className="w-4 h-4" />{' '}
-                      {t('leadDetail.verifyDate')} {lead.last_verified}
+                      {t('leadDetail.verifyDate')} {checkedOn}
                     </div>
                   )}
                 </div>
@@ -284,7 +284,7 @@ export default async function LeadTeaserPage({
               </section>
 
               {/* Locked */}
-              <LeadLockedSection />
+              <LeadLockedSection locale={locale} />
 
               {/* Contact — messengers first, form as fallback; no login */}
               <section
@@ -298,12 +298,14 @@ export default async function LeadTeaserPage({
                   {t('contact.discussNote')}
                 </p>
                 <ContactChannels
-                  config={getContactConfig()}
+                  config={contacts}
                   locale={locale}
                   leadCode={lead.code}
                 />
                 <h3 className="mt-6 mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">
-                  {t('contact.orForm')}
+                  {hasAnyChannel(contacts)
+                    ? t('contact.orForm')
+                    : t('contact.formTitle')}
                 </h3>
                 <InquiryForm locale={locale} leadCode={lead.code} />
               </section>
@@ -335,11 +337,10 @@ export default async function LeadTeaserPage({
                   <div className="font-serif text-xl text-gold-dark dark:text-gold-light">
                     {t('leadDetail.priceFallback')}
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    {EXCLUSIVITY_LABELS[lead.exclusivity]}
-                  </div>
-
-                  <ul className="mt-4 space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
+                  <p className="mt-4 text-xs text-gray-500">
+                    {t('leadDetail.includedHeading')}
+                  </p>
+                  <ul className="mt-2 space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gold-dark dark:text-gold-light" />
                       {t('leadDetail.includedCoords')}

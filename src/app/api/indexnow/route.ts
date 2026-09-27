@@ -30,16 +30,22 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  let body: { urls?: unknown };
   try {
-    const { urls } = await request.json();
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+  const urls = body?.urls;
+  if (
+    !Array.isArray(urls) ||
+    urls.length === 0 ||
+    urls.some((url) => typeof url !== 'string' || !url.trim())
+  ) {
+    return NextResponse.json({ error: 'urls array required' }, { status: 400 });
+  }
 
-    if (!urls || !Array.isArray(urls) || urls.length === 0) {
-      return NextResponse.json(
-        { error: 'urls array required' },
-        { status: 400 }
-      );
-    }
-
+  try {
     const payload = {
       host: 'qaznedr.kz',
       key: INDEXNOW_KEY,
@@ -56,19 +62,34 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify(payload),
     });
 
+    if (!response.ok) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'IndexNow rejected submission',
+          status: response.status,
+          submitted: 0,
+        },
+        { status: 502 }
+      );
+    }
+
     return NextResponse.json({
       success: true,
       status: response.status,
       submitted: urls.length,
     });
   } catch {
-    return NextResponse.json({ error: 'Failed to submit' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: 'Failed to submit', submitted: 0 },
+      { status: 502 }
+    );
   }
 }
 
 export async function GET() {
   return NextResponse.json({
     key: 'qaznedr2026indexnow',
-    info: 'POST { urls: ["/ru/listings/123"] } to notify search engines of new/updated pages',
+    info: 'POST { urls: ["/zh/leads"] } to notify search engines of new/updated pages. Accepted URLs are not guaranteed to be indexed.',
   });
 }

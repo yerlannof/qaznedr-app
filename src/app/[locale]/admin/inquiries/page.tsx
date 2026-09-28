@@ -6,6 +6,7 @@ import Navigation from '@/components/layouts/Navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ArrowLeft, Inbox, Loader2, Shield } from 'lucide-react';
 import { INQUIRY_STATUSES, type InquiryStatus } from '@/lib/inquiries/schema';
+import { isPublicPath } from '@/lib/analytics/attribution';
 
 type Tab = InquiryStatus | 'ALL';
 
@@ -20,6 +21,7 @@ interface InquiryRow {
   message: string | null;
   locale: string;
   source_path: string | null;
+  utm?: unknown;
   status: InquiryStatus;
   created_at: string;
 }
@@ -34,6 +36,40 @@ const STATUS_LABELS: Record<Tab, string> = {
 };
 
 const TABS: Tab[] = [...INQUIRY_STATUSES, 'ALL'];
+const UTM_LABELS = {
+  source: 'Источник UTM',
+  medium: 'Канал UTM',
+  campaign: 'Кампания UTM',
+  term: 'Термин UTM',
+  content: 'Вариант UTM',
+} as const;
+
+function attributionFields(value: unknown): Array<[string, string]> {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return [];
+  const utm = value as Record<string, unknown>;
+  const fields: Array<[string, string]> = [];
+  for (const [key, label] of Object.entries(UTM_LABELS)) {
+    const raw = utm[key];
+    if (typeof raw === 'string' && raw.trim() && raw.length <= 200)
+      fields.push([label, raw]);
+  }
+  const landing = utm.landing_path;
+  if (
+    typeof landing === 'string' &&
+    landing.length <= 300 &&
+    /^\/(?:ru|kz|en|zh)(?:\/[A-Za-z0-9/-]*)?$/.test(landing) &&
+    isPublicPath(landing)
+  )
+    fields.push(['Первый вход', landing]);
+  const host = utm.referrer_host;
+  if (
+    typeof host === 'string' &&
+    host.length <= 253 &&
+    /^[a-z0-9-]+(?:\.[a-z0-9-]+)+$/i.test(host)
+  )
+    fields.push(['Реферер', host]);
+  return fields;
+}
 
 export default function AdminInquiriesPage() {
   const { locale } = useTranslation();
@@ -108,6 +144,9 @@ export default function AdminInquiriesPage() {
           <h1 className="text-2xl font-bold flex items-center gap-2 text-gray-900 dark:text-gray-50 mb-6">
             <Inbox className="w-6 h-6" /> Входящие заявки
           </h1>
+          <p className="mb-4 text-xs text-gray-500 dark:text-gray-400">
+            Последние 200 заявок выбранного статуса; не отчёт за всё время.
+          </p>
 
           <div className="flex flex-wrap gap-2 mb-6">
             {TABS.map((key) => (
@@ -173,8 +212,20 @@ export default function AdminInquiriesPage() {
                     )}
                     <p className="mt-1 text-[11px] text-gray-400">
                       {new Date(r.created_at).toLocaleString('ru-RU')}
-                      {r.source_path ? ` · ${r.source_path}` : ''}
                     </p>
+                    {r.source_path && (
+                      <p className="mt-1 text-[11px] text-gray-500 dark:text-gray-400">
+                        Страница формы: {r.source_path}
+                      </p>
+                    )}
+                    {attributionFields(r.utm).map(([label, value]) => (
+                      <p
+                        key={label}
+                        className="mt-1 break-all text-[11px] text-gray-500 dark:text-gray-400"
+                      >
+                        {label}: {value}
+                      </p>
+                    ))}
                   </div>
                   <div className="shrink-0">
                     {busy === r.id ? (

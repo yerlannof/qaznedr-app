@@ -25,6 +25,7 @@ export const GUIDE = {
   explorationLicence: 'solid-minerals-exploration-licence-kazakhstan',
   reserveClassification: 'reserve-classification-gkz-kazrc-jorc-gbt17766',
   rightsTransfer: 'subsoil-rights-transfer-permission-kazakhstan',
+  geologicalMap: 'geological-map-kazakhstan',
 } as const;
 
 export type GuideKey = keyof typeof GUIDE;
@@ -66,6 +67,14 @@ export const INSIGHTS: readonly InsightEntry[] = [
     updated: '2026-09-26',
     legal: true,
     lawAsOf: '2026-09-26',
+    locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.geologicalMap,
+    category: 'geology',
+    published: '2026-09-28',
+    updated: '2026-09-28',
+    legal: false,
     locales: WRITTEN,
   },
 ];

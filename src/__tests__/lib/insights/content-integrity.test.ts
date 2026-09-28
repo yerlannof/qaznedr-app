@@ -7,7 +7,7 @@ import {
   renderMarkdown,
 } from '@/lib/insights/content';
 import { parseFrontMatter } from '@/lib/insights/front-matter';
-import { INSIGHTS } from '@/lib/insights/registry';
+import { GUIDE, INSIGHTS } from '@/lib/insights/registry';
 import { PUBLIC_PAGES } from '@/lib/seo/pages';
 import type { Locale } from '@/lib/seo/site';
 
@@ -169,4 +169,44 @@ describe('guide files', () => {
       });
     }
   );
+});
+
+describe('geological map guide', () => {
+  const slug = GUIDE.geologicalMap;
+
+  it.each(['ru', 'kz', 'en', 'zh'] as Locale[])(
+    '%s publishes the same practical structure without editorial notes',
+    (locale) => {
+      const source = readFileSync(articlePath(slug, locale), 'utf8');
+      const { data, body } = parseFrontMatter(source);
+      expect(data.title).toBeTruthy();
+      expect(data.description).toBeTruthy();
+      expect(body.match(/^## /gm) ?? []).toHaveLength(5);
+      expect(body.match(/^\d\. /gm) ?? []).toHaveLength(5);
+      expect(body).toContain('1:200 000');
+      expect(body).toContain('1:50 000');
+      expect(body).toMatch(/2 (?:километр|kilomet|公里)/);
+      expect(body).toMatch(/500 (?:метр|metr|米)/);
+      expect(body).toContain(
+        `/${locale}/insights/${GUIDE.reserveClassification}`
+      );
+      expect(body).toContain(`/${locale}/services/geological`);
+      expect(body).toContain(`/${locale}/minerals/gold`);
+      expect(body).not.toMatch(
+        /редакционн|не для публикации|до публикации|editorial|not for publication/i
+      );
+    }
+  );
+
+  it('registers all four translations as an educational geology article', () => {
+    const entry = INSIGHTS.find((guide) => guide.slug === slug);
+    expect(entry).toMatchObject({
+      category: 'geology',
+      published: '2026-09-28',
+      updated: '2026-09-28',
+      legal: false,
+      locales: ['ru', 'en', 'zh', 'kz'],
+    });
+    expect(entry?.lawAsOf).toBeUndefined();
+  });
 });

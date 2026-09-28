@@ -137,6 +137,7 @@ export const translations = {
           'Классификации запасов: ГКЗ, KAZRC/JORC, GB/T 17766',
         rightsTransfer:
           'Сделки с правом недропользования: разрешение на переход',
+        geologicalMap: 'Геологическая карта Казахстана: выбор масштаба',
       },
       summaries: {
         foreignInvestor:
@@ -147,6 +148,8 @@ export const translations = {
           'Как соотносятся категории ГКЗ, KAZRC/JORC и китайского GB/T 17766 — и где прямого соответствия нет.',
         rightsTransfer:
           'Какие сделки требуют разрешения на переход права и что изменилось с 7 сентября 2026 года.',
+        geologicalMap:
+          'Чем отличаются геологическая карта, карта рудопроявлений и карта недропользования; как проверить масштаб и источник.',
       },
     },
     seo: {
@@ -990,6 +993,7 @@ export const translations = {
         reserveClassification: 'Қор жіктемелері: ГКЗ, KAZRC/JORC, GB/T 17766',
         rightsTransfer:
           'Жер қойнауын пайдалану құқығымен мәмілелер: өтуге рұқсат',
+        geologicalMap: 'Қазақстанның геологиялық картасы: масштабты таңдау',
       },
       summaries: {
         foreignInvestor:
@@ -1000,6 +1004,8 @@ export const translations = {
           'ГКЗ, KAZRC/JORC және қытайлық GB/T 17766 санаттары қалай сәйкеседі — және қай жерде тікелей сәйкестік жоқ.',
         rightsTransfer:
           'Қандай мәмілелерге құқықтың өтуіне рұқсат керек және 2026 жылғы 7 қыркүйектен бастап не өзгерді.',
+        geologicalMap:
+          'Геологиялық карта, кен көріністері және жер қойнауын пайдалану карталарының айырмасы; масштаб пен дереккөзді тексеру.',
       },
     },
     seo: {
@@ -1771,6 +1777,7 @@ export const translations = {
         reserveClassification:
           'Reserve classifications: GKZ, KAZRC/JORC, GB/T 17766',
         rightsTransfer: 'Subsoil rights transactions: transfer permission',
+        geologicalMap: 'Geological maps of Kazakhstan: choosing a scale',
       },
       summaries: {
         foreignInvestor:
@@ -1781,6 +1788,8 @@ export const translations = {
           "How GKZ, KAZRC/JORC and China's GB/T 17766 categories compare — and where there is no direct match.",
         rightsTransfer:
           'Which transactions need a transfer permission and what changed on 7 September 2026.',
+        geologicalMap:
+          'How geological, occurrence and subsoil use maps differ, and how to check scale and provenance.',
       },
     },
     seo: {
@@ -2530,6 +2539,7 @@ export const translations = {
         explorationLicence: '固体矿产勘查许可证：办理流程',
         reserveClassification: '储量分类对照：GKZ、KAZRC/JORC、GB/T 17766',
         rightsTransfer: '矿业权交易：转让许可',
+        geologicalMap: '哈萨克斯坦地质图：选择比例尺',
       },
       summaries: {
         foreignInvestor:
@@ -2538,6 +2548,8 @@ export const translations = {
         reserveClassification:
           'GKZ、KAZRC/JORC 与中国 GB/T 17766 分类如何对应，以及哪些无法直接对应。',
         rightsTransfer: '哪些交易需要转让许可，以及2026年9月7日起的变化。',
+        geologicalMap:
+          '区分地质图、矿化点图与矿业权地图，并核查比例尺和资料来源。',
       },
     },
     seo: {

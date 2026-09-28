@@ -30,6 +30,7 @@ let gaScript: HTMLScriptElement | null = null;
 let gaScriptLoaded = false;
 let ymScript: HTMLScriptElement | null = null;
 let ymScriptLoaded = false;
+let currentPageReferrer = '';
 
 const DENIED = {
   analytics_storage: 'denied',
@@ -62,9 +63,9 @@ function safeLocation(path: string): string {
   return `https://qaznedr.kz${path}`;
 }
 
-function safeYandexReferrer(): string {
+function safeYandexReferrer(referrer: string): string {
   // The tag falls back to document.referrer when its referrer option is falsy.
-  return sanitizedReferrer() || 'https://qaznedr.kz/';
+  return referrer || 'https://qaznedr.kz/';
 }
 
 function gtag(..._args: unknown[]) {
@@ -75,7 +76,7 @@ function gtag(..._args: unknown[]) {
   browser.dataLayer.push(arguments);
 }
 
-function loadGA(path: string) {
+function loadGA(path: string, referrer: string) {
   if (!GA4_MEASUREMENT_ID || !/^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID)) return;
   const browser = measurementWindow();
   if (!browser.gtag) browser.gtag = gtag;
@@ -119,13 +120,13 @@ function loadGA(path: string) {
       allow_google_signals: false,
       allow_ad_personalization_signals: false,
       page_location: safeLocation(path),
-      page_referrer: sanitizedReferrer(),
+      page_referrer: referrer,
     });
     gaConfigured = true;
   }
 }
 
-function loadYandex(path: string) {
+function loadYandex(path: string, referrer: string) {
   const id = YANDEX_METRIKA_ID;
   if (!id || !Number.isSafeInteger(id) || id <= 0) return;
   const browser = measurementWindow();
@@ -168,7 +169,7 @@ function loadYandex(path: string) {
       webvisor: false,
       sendTitle: false,
       url: safeLocation(path),
-      referrer: safeYandexReferrer(),
+      referrer: safeYandexReferrer(referrer),
     });
     ymInitialized = true;
   }
@@ -199,6 +200,7 @@ function disableProviders() {
   const wasActive = active;
   active = false;
   lastPagePath = null;
+  currentPageReferrer = '';
   if (gaLoaded && wasActive) browser.gtag?.('consent', 'update', DENIED);
   if (ymInitialized && YANDEX_METRIKA_ID && wasActive) {
     if (ymScriptLoaded) browser.ym?.(YANDEX_METRIKA_ID, 'destruct');
@@ -223,22 +225,27 @@ export function syncProviders(
   }
   try {
     const wasActive = active;
+    const referrer = lastPagePath
+      ? lastPagePath === path
+        ? currentPageReferrer
+        : safeLocation(lastPagePath)
+      : sanitizedReferrer();
     active = true;
-    loadGA(path);
-    loadYandex(path);
+    loadGA(path, referrer);
+    loadYandex(path, referrer);
     if (lastPagePath !== path || !wasActive) {
       const location = safeLocation(path);
-      const referer = sanitizedReferrer();
       if (gaLoaded)
         measurementWindow().gtag?.('event', 'page_view', {
           page_location: location,
-          page_referrer: referer,
+          page_referrer: referrer,
         });
       if (ymInitialized && YANDEX_METRIKA_ID)
         measurementWindow().ym?.(YANDEX_METRIKA_ID, 'hit', location, {
-          referer: safeYandexReferrer(),
+          referer: safeYandexReferrer(referrer),
         });
       lastPagePath = path;
+      currentPageReferrer = referrer;
     }
   } catch {
     disableProviders();
@@ -289,7 +296,7 @@ export function trackConsentEvent(
       params.channel = properties.channel;
     if (properties.place === 'hero') params.place = 'hero';
     params.page_location = safeLocation(window.location.pathname);
-    params.page_referrer = sanitizedReferrer();
+    params.page_referrer = currentPageReferrer;
     if (gaLoaded) measurementWindow().gtag?.('event', event, params);
     if (ymInitialized && YANDEX_METRIKA_ID)
       measurementWindow().ym?.(YANDEX_METRIKA_ID, 'reachGoal', event, params);

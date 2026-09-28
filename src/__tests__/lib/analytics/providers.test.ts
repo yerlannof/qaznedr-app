@@ -72,6 +72,15 @@ it('gates requests by consent, host and public path; sanitizes events and stops 
   expect(hits[0][2]).toBe('https://qaznedr.kz/zh/leads');
   expect(hits[0][3]).toMatchObject({ referer: 'https://baidu.com/' });
   expect(hits[1][2]).toBe('https://qaznedr.kz/zh/contact');
+  expect(hits[1][3]).toMatchObject({
+    referer: 'https://qaznedr.kz/zh/leads',
+  });
+  const pageViews = calls.filter(
+    (call) => call[0] === 'event' && call[1] === 'page_view'
+  );
+  expect(pageViews[1][2]).toMatchObject({
+    page_referrer: 'https://qaznedr.kz/zh/leads',
+  });
   trackConsentEvent('click_whatsapp', {
     locale: 'zh',
     lead: 'AU-4',
@@ -82,7 +91,7 @@ it('gates requests by consent, host and public path; sanitizes events and stops 
     .at(-1) as unknown[];
   expect(custom[2]).toMatchObject({
     page_location: 'https://qaznedr.kz/zh/contact',
-    page_referrer: 'https://baidu.com/',
+    page_referrer: 'https://qaznedr.kz/zh/leads',
   });
   expect(JSON.stringify(calls)).toContain('AU-4');
   expect(JSON.stringify(calls)).not.toContain('private@email.test');
@@ -94,7 +103,7 @@ it('gates requests by consent, host and public path; sanitizes events and stops 
     locale: 'zh',
     lead: 'AU-4',
     page_location: 'https://qaznedr.kz/zh/contact',
-    page_referrer: 'https://baidu.com/',
+    page_referrer: 'https://qaznedr.kz/zh/leads',
   });
   expect(JSON.stringify(ymQueue)).not.toContain('private@email.test');
   expect(JSON.stringify(ymQueue)).not.toContain('secret-path');
@@ -281,7 +290,64 @@ it('records a sanitized SPA hit before a goal even when navigation effect has no
     expect(goalIndex).toBeGreaterThan(0);
     expect(queue[goalIndex - 1][1]).toBe('hit');
     expect(queue[goalIndex - 1][2]).toBe('https://qaznedr.kz/ru/contact');
+    expect(queue[goalIndex - 1][3].referer).toBe('https://qaznedr.kz/ru/leads');
+    expect(queue[goalIndex][3].page_referrer).toBe(
+      'https://qaznedr.kz/ru/leads'
+    );
+    const calls = (window as unknown as { dataLayer: unknown[][] }).dataLayer;
+    const pageViews = calls.filter(
+      (call) => call[0] === 'event' && call[1] === 'page_view'
+    );
+    const goal = calls.find(
+      (call) => call[0] === 'event' && call[1] === 'click_email'
+    );
+    expect(pageViews.at(-1)?.[2]).toMatchObject({
+      page_referrer: 'https://qaznedr.kz/ru/leads',
+    });
+    expect(goal?.[2]).toMatchObject({
+      page_referrer: 'https://qaznedr.kz/ru/leads',
+    });
     expect(JSON.stringify(queue)).not.toContain('email=secret');
     isolated.revokeProviders();
   });
+});
+
+it('resets SPA referrer after revoke and never uses a private page', () => {
+  const originalReferrer = Object.getOwnPropertyDescriptor(
+    document,
+    'referrer'
+  );
+  Object.defineProperty(document, 'referrer', {
+    configurable: true,
+    value: 'https://qaznedr.kz/admin?token=secret',
+  });
+  try {
+    jest.isolateModules(() => {
+      delete (window as unknown as { ym?: unknown }).ym;
+      const isolated =
+        require('@/lib/analytics/providers') as typeof import('@/lib/analytics/providers');
+      writeConsent(true);
+      window.history.replaceState({}, '', '/ru/leads');
+      isolated.syncProviders('/ru/leads', true, 'qaznedr.kz');
+      window.history.replaceState({}, '', '/ru/contact');
+      isolated.syncProviders('/ru/contact', true, 'qaznedr.kz');
+      isolated.revokeProviders();
+
+      writeConsent(true);
+      window.history.replaceState({}, '', '/ru/admin?token=secret');
+      isolated.syncProviders('/ru/admin', true, 'qaznedr.kz');
+      window.history.replaceState({}, '', '/ru/faq');
+      isolated.syncProviders('/ru/faq', true, 'qaznedr.kz');
+      const queue = (window as unknown as { ym: { a: IArguments[] } }).ym.a;
+      const hit = queue.find((call) => call[1] === 'hit');
+      expect(hit?.[2]).toBe('https://qaznedr.kz/ru/faq');
+      expect(hit?.[3].referer).toBe('https://qaznedr.kz/');
+      expect(JSON.stringify(queue)).not.toContain('admin');
+      expect(JSON.stringify(queue)).not.toContain('token=secret');
+      isolated.revokeProviders();
+    });
+  } finally {
+    if (originalReferrer)
+      Object.defineProperty(document, 'referrer', originalReferrer);
+  }
 });

@@ -1,0 +1,1558 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>13 · Техника и услуги — рабочий прототип</title>
+    <style>
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-Regular.woff2');
+      }
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-SemiBold.woff2');
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: Source;
+        src: url('../../../public/brand/fonts/SourceSerif4Display-Regular.ttf.woff2');
+      }
+      :root {
+        --bg: #e9ece6;
+        --surface: #f8f9f5;
+        --ink: #253740;
+        --muted: #43585f;
+        --line: #9aa8a5;
+        --accent: #dde55e;
+        --soft: #dbe2dc;
+        --error: #9c3027;
+        font-family: Plex, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      body[data-theme='dark'] {
+        --bg: #17272e;
+        --surface: #253740;
+        --ink: #f0f2ec;
+        --muted: #cbd7d1;
+        --line: #82999c;
+        --soft: #354a52;
+        --error: #ffb2a7;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        color: var(--ink);
+        background: var(--bg);
+        margin: 0;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        min-height: 48px;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid #a1ac15;
+        outline-offset: 2px;
+      }
+      a {
+        color: inherit;
+      }
+      p {
+        line-height: 1.55;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.16;
+      }
+      h1 {
+        font:
+          normal clamp(2rem, 4vw, 3.5rem) / 1.07 Source,
+          Georgia,
+          serif;
+        margin: 0 0 16px;
+      }
+      h2 {
+        font-size: 1.55rem;
+        margin: 0 0 16px;
+      }
+      h3 {
+        font-size: 1.12rem;
+        margin: 0 0 9px;
+      }
+      .shell {
+        max-width: 1260px;
+        margin: auto;
+        padding: 0 24px;
+      }
+      .top {
+        border-bottom: 1px solid var(--line);
+        background: var(--surface);
+      }
+      .topinner {
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .logo {
+        width: 176px;
+        max-width: 43vw;
+      }
+      .tools {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .tools select,
+      .tools button {
+        padding: 0 12px;
+        background: var(--surface);
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+      .tools button {
+        min-width: 80px;
+      }
+      .demo {
+        background: var(--accent);
+        color: #253740;
+        padding: 12px 24px;
+        font-weight: 600;
+        font-size: 0.89rem;
+        text-align: center;
+      }
+      .nav {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 25px 0;
+      }
+      .nav button,
+      .pill {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        padding: 0 20px;
+        font-weight: 600;
+      }
+      .nav button[aria-selected='true'],
+      .pill.active {
+        background: var(--ink);
+        color: var(--bg);
+      }
+      main {
+        padding-bottom: 70px;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        gap: 24px;
+        align-items: end;
+        padding: 26px 0 32px;
+        border-bottom: 1px solid var(--line);
+      }
+      .eyebrow {
+        font-size: 0.77rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      .intro {
+        font-size: 1.1rem;
+        max-width: 680px;
+        margin: 0;
+      }
+      .heroaside {
+        border-left: 3px solid var(--accent);
+        padding: 15px 20px;
+        background: var(--surface);
+      }
+      .heroaside p {
+        margin: 5px 0 0;
+      }
+      .filters {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+        align-items: end;
+        padding: 25px 0;
+      }
+      .field {
+        display: grid;
+        gap: 7px;
+      }
+      .field label,
+      .field legend {
+        font-weight: 600;
+        font-size: 0.96rem;
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 0;
+        color: var(--ink);
+        padding: 10px 13px;
+      }
+      .field textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+      .hint {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin: 0;
+      }
+      .cataloghead {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        align-items: center;
+        margin: 10px 0 15px;
+      }
+      .cataloghead h2 {
+        margin: 0;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 15px;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+      }
+      .cardtop {
+        min-height: 115px;
+        background: var(--soft);
+        padding: 18px;
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .type,
+      .demotag {
+        font-size: 0.73rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .type {
+        border: 1px solid var(--ink);
+        padding: 7px 9px;
+      }
+      .demotag {
+        background: var(--accent);
+        color: #253740;
+        padding: 7px 9px;
+      }
+      .cardbody {
+        padding: 19px;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+      }
+      .cardbody p {
+        margin: 0 0 9px;
+      }
+      .specs {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .price {
+        font-weight: 600;
+        font-size: 1.18rem;
+        margin-top: auto !important;
+        padding-top: 16px;
+      }
+      .card button {
+        margin: 0 19px 19px;
+      }
+      .primary,
+      .secondary {
+        border: 1px solid var(--ink);
+        padding: 0 20px;
+        font-weight: 600;
+        min-height: 50px;
+      }
+      .primary {
+        background: var(--ink);
+        color: var(--bg);
+      }
+      .secondary {
+        background: transparent;
+        color: var(--ink);
+      }
+      .sulfur {
+        background: var(--accent);
+        color: #253740;
+        border-color: var(--accent);
+      }
+      .empty {
+        padding: 30px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+      }
+      .flow {
+        max-width: 830px;
+        margin: 28px auto;
+      }
+      .progress {
+        display: flex;
+        gap: 8px;
+        margin: 18px 0 26px;
+      }
+      .progress span {
+        height: 7px;
+        background: var(--line);
+        flex: 1;
+      }
+      .progress span.on {
+        background: var(--accent);
+      }
+      .stepcount {
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        padding: clamp(20px, 4vw, 38px);
+      }
+      .panel h2 {
+        font:
+          normal clamp(1.65rem, 3vw, 2.35rem) / 1.12 Source,
+          Georgia,
+          serif;
+      }
+      .stack {
+        display: grid;
+        gap: 18px;
+      }
+      .choicegrid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .choice {
+        position: relative;
+      }
+      .choice input {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        inset: 0;
+        cursor: pointer;
+      }
+      .choice span {
+        display: flex;
+        align-items: center;
+        min-height: 82px;
+        padding: 15px;
+        background: var(--bg);
+        border: 2px solid var(--line);
+        font-weight: 600;
+      }
+      .choice input:checked + span {
+        border-color: var(--ink);
+        box-shadow: inset 0 0 0 3px var(--accent);
+      }
+      .choice input:focus-visible + span {
+        outline: 3px solid #a1ac15;
+        outline-offset: 2px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 26px;
+      }
+      .actions button {
+        min-width: 145px;
+      }
+      .error {
+        color: var(--error);
+        font-size: 0.86rem;
+        margin: 4px 0 0;
+        font-weight: 600;
+      }
+      .note {
+        border-left: 4px solid var(--accent);
+        background: var(--bg);
+        padding: 14px 18px;
+      }
+      .help {
+        margin-top: 22px;
+        padding: 20px;
+        border: 1px solid var(--line);
+        background: var(--soft);
+      }
+      .help p {
+        margin: 5px 0 15px;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 10px 15px;
+        margin: 0;
+      }
+      .summary dt {
+        color: var(--muted);
+      }
+      .summary dd {
+        margin: 0;
+        font-weight: 600;
+        overflow-wrap: anywhere;
+      }
+      .result {
+        padding: 25px;
+        background: var(--soft);
+        border-left: 5px solid var(--accent);
+      }
+      .result p {
+        margin-bottom: 0;
+      }
+      .fine {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .hidden {
+        display: none !important;
+      }
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 26px 0;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      @media (max-width: 800px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .filters {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 570px) {
+        .shell {
+          padding: 0 16px;
+        }
+        .topinner {
+          min-height: 74px;
+        }
+        .logo {
+          width: 137px;
+        }
+        .tools {
+          gap: 5px;
+        }
+        .tools select,
+        .tools button {
+          padding: 0 5px;
+          min-width: 55px;
+          font-size: 0.86rem;
+        }
+        .hero {
+          gap: 18px;
+        }
+        .filters,
+        .cards,
+        .row {
+          grid-template-columns: 1fr;
+        }
+        .choicegrid {
+          grid-template-columns: 1fr;
+        }
+        .choice span {
+          min-height: 60px;
+        }
+        .actions button {
+          min-width: 0;
+          flex: 1;
+        }
+        .summary {
+          grid-template-columns: 1fr;
+          gap: 2px;
+        }
+        .summary dd {
+          margin-bottom: 10px;
+        }
+        .cataloghead {
+          align-items: start;
+        }
+        .panel {
+          padding: 19px;
+        }
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <div class="demo" id="demoNotice"></div>
+    <header class="top">
+      <div class="shell topinner">
+        <img
+          class="logo"
+          id="brand"
+          src="../../../public/brand/logo-horizontal.svg"
+          alt="QAZNEDR HOLDING"
+        />
+        <div class="tools">
+          <label class="hidden" for="lang">Language</label
+          ><select id="lang" aria-label="Language">
+            <option value="ru">RU</option>
+            <option value="kz">KZ</option>
+            <option value="en">EN</option>
+            <option value="zh">中文</option></select
+          ><button id="theme" type="button"></button>
+        </div>
+      </div>
+    </header>
+    <main class="shell">
+      <nav class="nav" aria-label="Prototype views">
+        <button type="button" id="catalogTab" aria-selected="true"></button
+        ><button type="button" id="submitTab" aria-selected="false"></button>
+      </nav>
+      <section id="catalog"></section>
+      <section id="submit" class="hidden"></section>
+    </main>
+    <footer><div class="shell" id="footer"></div></footer>
+    <script>
+      const L = {
+        ru: {
+          demo: 'ДЕМО ДЛЯ ОБСУЖДЕНИЯ · объявления вымышленные, отправка и публикация не работают',
+          catalog: 'Каталог',
+          submit: 'Подать объявление',
+          themeLight: 'Светлая',
+          themeDark: 'Тёмная',
+          eyebrow: 'ТЕХНИКА И УСЛУГИ · ПРОТОТИП',
+          title: 'Найти технику для работ',
+          intro:
+            'Аренда, продажа и услуги показаны отдельно. Уточняйте комплектацию и условия до заказа.',
+          asideTitle: 'Есть своя техника?',
+          aside: 'Заполните короткую форму. Это демонстрация будущей подачи.',
+          start: 'Начать подачу',
+          what: 'Что нужно',
+          all: 'Всё',
+          equipment: 'Техника',
+          service: 'Услуги',
+          offerType: 'Тип предложения',
+          rent: 'Аренда',
+          sale: 'Продажа',
+          works: 'Услуга',
+          region: 'Регион',
+          allRegions: 'Все регионы',
+          priceUnit: 'Единица цены',
+          anyUnit: 'Любая',
+          shift: 'Смена',
+          hour: 'Час',
+          day: 'Сутки',
+          meter: 'Метр',
+          object: 'Объект',
+          availability: 'Наличие',
+          anyAvail: 'Любое',
+          available: 'Доступно',
+          ask: 'Уточнить',
+          found: 'Примеры предложений',
+          details: 'Посмотреть пример',
+          noResults: 'По этим условиям примеров нет. Сбросьте фильтры.',
+          reset: 'Сбросить',
+          sample: 'ДЕМО',
+          from: 'от',
+          onRequest: 'Цена по запросу',
+          step: 'Шаг',
+          of: 'из',
+          step1: 'Что хотите разместить?',
+          step2: 'Расскажите о предложении',
+          step3: 'Как с вами связаться?',
+          step4: 'Проверьте перед отправкой',
+          choose: 'Выберите один вариант',
+          rentEquipment: 'Сдаю технику',
+          sellEquipment: 'Продаю технику',
+          provideService: 'Выполняю работы',
+          helpTitle: 'Нужна помощь с подачей?',
+          helpText:
+            'В настоящем сервисе здесь будет согласованный способ обратиться в редакцию. В демо вернитесь к выбору или оставьте отзыв при просмотре.',
+          helpButton: 'Показать, что потребуется',
+          helpResult:
+            'Для помощи достаточно сообщить: тип предложения, технику или работу, регион и удобный способ связи. Канал связи будет согласован до запуска.',
+          category: 'Категория',
+          chooseCategory: 'Выберите категорию',
+          drill: 'Буровая установка',
+          excavator: 'Экскаватор',
+          compressor: 'Компрессор / насос',
+          transport: 'Транспорт / полевой быт',
+          drillService: 'Буровые работы',
+          geoService: 'Геологические работы',
+          name: 'Название или модель',
+          namePlaceholder: 'Например, буровая установка XY-1',
+          city: 'Город / область',
+          cityPlaceholder: 'Например, Караганда',
+          price: 'Цена',
+          priceHint: 'Оставьте пустым, если цена по запросу',
+          currency: 'Валюта',
+          unit: 'За что цена',
+          condition: 'Условия / комплектация',
+          conditionPlaceholder:
+            'Оператор, доставка, топливо, минимальный заказ',
+          method: 'Метод бурения',
+          methodHint: 'Не знаете — выберите «Уточню»',
+          unknown: 'Уточню',
+          core: 'Колонковое',
+          rc: 'RC',
+          auger: 'Шнековое',
+          depth: 'Глубина, м',
+          depthHint: 'Укажите только для выбранного метода и диаметра',
+          diameter: 'Диаметр, мм',
+          bucket: 'Объём ковша, м³',
+          mass: 'Масса, т',
+          item: 'Единица техники',
+          optional: 'необязательно',
+          draft:
+            'Черновик характеристик автоматически сохраняется только в этой вкладке. Имя и телефон не сохраняются. Не вводите реальные личные данные.',
+          contactName: 'Имя для связи',
+          phone: 'Телефон с кодом страны',
+          phonePlaceholder: '+7 000 000 00 00',
+          company: 'Компания или фамилия',
+          publishContact: 'Показывать телефон в объявлении после модерации',
+          privateContact: 'Телефон только для связи редакции; не публиковать',
+          phoneWarning:
+            'Это демонстрация: проверка телефона, вход и отправка не подключены.',
+          preview: 'Предпросмотр',
+          previewNote:
+            'Это пример будущего объявления. Контакт не проверен, право на технику не подтверждено.',
+          back: 'Назад',
+          next: 'Продолжить',
+          send: 'Показать результат отправки',
+          edit: 'Исправить',
+          resultTitle: 'Демо: ожидает модерации',
+          resultText:
+            'В настоящем сервисе после подтверждения телефона объявление попадёт редактору. Публикация произойдёт только после проверки. Сейчас ничего не отправлено и объявление не появилось в каталоге.',
+          again: 'Новое демо-объявление',
+          required: 'Заполните поле',
+          invalidPhone: 'Укажите телефон с кодом страны (например, +7 …)',
+          invalidPrice: 'Укажите число больше нуля',
+          invalidTechnical:
+            'Укажите число больше нуля или оставьте поле пустым',
+          confirm: 'Выберите, можно ли показывать телефон',
+          footer:
+            'Прототип для обсуждения. Нет реальных объявлений, загрузки фото, входа или связи с редакцией.',
+          contactPolicy: 'Показ телефона',
+          yes: 'Да',
+          no: 'Нет',
+          noName: 'Не указано',
+          cardTitle: [
+            'Буровая установка XY-1',
+            'Экскаватор 20 т',
+            'Буровые работы',
+            'Полевой компрессор',
+          ],
+          cardSpec: [
+            'Колонковое · Карагандинская область',
+            'Ковш 1 м³ · Акмолинская область',
+            'Подрядная бригада · ВКО',
+            'Передвижной · Павлодарская область',
+          ],
+        },
+        kz: {
+          demo: 'ТАЛҚЫЛАУҒА АРНАЛҒАН ДЕМО · хабарландырулар ойдан шығарылған, жіберу және жариялау жұмыс істемейді',
+          catalog: 'Каталог',
+          submit: 'Хабарландыру беру',
+          themeLight: 'Ашық',
+          themeDark: 'Қараңғы',
+          eyebrow: 'ТЕХНИКА ЖӘНЕ ҚЫЗМЕТТЕР · ПРОТОТИП',
+          title: 'Жұмысқа техника табу',
+          intro:
+            'Жалға беру, сату және қызметтер бөлек көрсетілген. Тапсырыс алдында жинақ пен шарттарды анықтаңыз.',
+          asideTitle: 'Өз техникаңыз бар ма?',
+          aside: 'Қысқа нысанды толтырыңыз. Бұл болашақ рәсімнің үлгісі.',
+          start: 'Бастау',
+          what: 'Не қажет',
+          all: 'Барлығы',
+          equipment: 'Техника',
+          service: 'Қызметтер',
+          offerType: 'Ұсыныс түрі',
+          rent: 'Жалдау',
+          sale: 'Сату',
+          works: 'Қызмет',
+          region: 'Өңір',
+          allRegions: 'Барлық өңір',
+          priceUnit: 'Баға бірлігі',
+          anyUnit: 'Кез келген',
+          shift: 'Ауысым',
+          hour: 'Сағат',
+          day: 'Тәулік',
+          meter: 'Метр',
+          object: 'Нысан',
+          availability: 'Қолжетімділік',
+          anyAvail: 'Кез келген',
+          available: 'Қолжетімді',
+          ask: 'Нақтылау',
+          found: 'Ұсыныс үлгілері',
+          details: 'Үлгіні қарау',
+          noResults: 'Бұл шарттарға сәйкес үлгі жоқ. Сүзгілерді тазалаңыз.',
+          reset: 'Тазалау',
+          sample: 'ДЕМО',
+          from: 'бастап',
+          onRequest: 'Бағасы сұрау бойынша',
+          step: 'Қадам',
+          of: '/',
+          step1: 'Не орналастырасыз?',
+          step2: 'Ұсынысты сипаттаңыз',
+          step3: 'Сізбен қалай байланысамыз?',
+          step4: 'Жіберер алдында тексеріңіз',
+          choose: 'Бір нұсқаны таңдаңыз',
+          rentEquipment: 'Техниканы жалға беремін',
+          sellEquipment: 'Техниканы сатамын',
+          provideService: 'Жұмыс орындаймын',
+          helpTitle: 'Жариялауға көмек керек пе?',
+          helpText:
+            'Нақты сервисте мұнда редакциямен келісілген байланыс жолы болады. Демода таңдауға оралыңыз.',
+          helpButton: 'Не қажет екенін көрсету',
+          helpResult:
+            'Көмек үшін ұсыныс түрі, техника не жұмыс, өңір және байланыс тәсілі қажет. Байланыс арнасы іске қосу алдында келісілетін болады.',
+          category: 'Санат',
+          chooseCategory: 'Санатты таңдаңыз',
+          drill: 'Бұрғылау қондырғысы',
+          excavator: 'Экскаватор',
+          compressor: 'Компрессор / сорғы',
+          transport: 'Көлік / дала жабдығы',
+          drillService: 'Бұрғылау жұмыстары',
+          geoService: 'Геологиялық жұмыстар',
+          name: 'Атауы немесе моделі',
+          namePlaceholder: 'Мысалы, XY-1 бұрғылау қондырғысы',
+          city: 'Қала / облыс',
+          cityPlaceholder: 'Мысалы, Қарағанды',
+          price: 'Баға',
+          priceHint: 'Баға сұрау бойынша болса, бос қалдырыңыз',
+          currency: 'Валюта',
+          unit: 'Баға өлшемі',
+          condition: 'Шарттар / жинақ',
+          conditionPlaceholder: 'Оператор, жеткізу, отын, ең аз тапсырыс',
+          method: 'Бұрғылау әдісі',
+          methodHint: 'Білмесеңіз, «Нақтылаймын» таңдаңыз',
+          unknown: 'Нақтылаймын',
+          core: 'Кернді',
+          rc: 'RC',
+          auger: 'Шнекті',
+          depth: 'Тереңдік, м',
+          depthHint: 'Тек таңдалған әдіс пен диаметр үшін',
+          diameter: 'Диаметр, мм',
+          bucket: 'Шөміш көлемі, м³',
+          mass: 'Массасы, т',
+          item: 'Бір техника',
+          optional: 'міндетті емес',
+          draft:
+            'Сипаттамалар осы қойындыда ғана сақталады. Аты мен телефоны сақталмайды. Нақты жеке деректерді енгізбеңіз.',
+          contactName: 'Байланыс аты',
+          phone: 'Ел кодымен телефон',
+          phonePlaceholder: '+7 000 000 00 00',
+          company: 'Компания немесе тегі',
+          publishContact: 'Модерациядан кейін телефонды хабарландыруда көрсету',
+          privateContact: 'Телефон тек редакцияға; жарияламау',
+          phoneWarning:
+            'Бұл демо: телефонды тексеру, кіру және жіберу қосылмаған.',
+          preview: 'Алдын ала қарау',
+          previewNote:
+            'Бұл болашақ хабарландыру үлгісі. Байланыс пен меншік құқығы расталмаған.',
+          back: 'Артқа',
+          next: 'Жалғастыру',
+          send: 'Жіберу нәтижесін көрсету',
+          edit: 'Түзету',
+          resultTitle: 'Демо: модерация күтілуде',
+          resultText:
+            'Нақты сервисте телефон расталған соң хабарландыру редакторға түседі. Қазір ештеңе жіберілмеді және каталогта жарияланбады.',
+          again: 'Жаңа демо',
+          required: 'Өрісті толтырыңыз',
+          invalidPhone: 'Ел кодымен телефон енгізіңіз (мысалы, +7 …)',
+          invalidPrice: 'Нөлден үлкен сан енгізіңіз',
+          invalidTechnical: 'Нөлден үлкен сан енгізіңіз немесе бос қалдырыңыз',
+          confirm: 'Телефонды көрсету таңдауын жасаңыз',
+          footer:
+            'Талқылауға арналған прототип. Нақты хабарландыру, фото жүктеу, кіру немесе редакциямен байланыс жоқ.',
+          contactPolicy: 'Телефонды көрсету',
+          yes: 'Иә',
+          no: 'Жоқ',
+          noName: 'Көрсетілмеген',
+          cardTitle: [
+            'XY-1 бұрғылау қондырғысы',
+            '20 т экскаватор',
+            'Бұрғылау жұмыстары',
+            'Дала компрессоры',
+          ],
+          cardSpec: [
+            'Кернді · Қарағанды облысы',
+            'Шөміш 1 м³ · Ақмола облысы',
+            'Мердігер бригада · ШҚО',
+            'Жылжымалы · Павлодар облысы',
+          ],
+        },
+        en: {
+          demo: 'REVIEW DEMO · sample listings are fictional; submission and publication are inactive',
+          catalog: 'Catalogue',
+          submit: 'Post a listing',
+          themeLight: 'Light',
+          themeDark: 'Dark',
+          eyebrow: 'EQUIPMENT & SERVICES · PROTOTYPE',
+          title: 'Find equipment for field work',
+          intro:
+            'Rental, sales and services are separate. Confirm equipment and terms before ordering.',
+          asideTitle: 'Have equipment to offer?',
+          aside:
+            'Fill in a short form. This previews a future submission flow.',
+          start: 'Start listing',
+          what: 'Looking for',
+          all: 'All',
+          equipment: 'Equipment',
+          service: 'Services',
+          offerType: 'Offer type',
+          rent: 'Rental',
+          sale: 'Sale',
+          works: 'Service',
+          region: 'Region',
+          allRegions: 'All regions',
+          priceUnit: 'Price unit',
+          anyUnit: 'Any',
+          shift: 'Shift',
+          hour: 'Hour',
+          day: 'Day',
+          meter: 'Metre',
+          object: 'Project',
+          availability: 'Availability',
+          anyAvail: 'Any',
+          available: 'Available',
+          ask: 'Ask seller',
+          found: 'Sample offers',
+          details: 'View example',
+          noResults: 'No samples match. Clear the filters.',
+          reset: 'Clear',
+          sample: 'DEMO',
+          from: 'from',
+          onRequest: 'Price on request',
+          step: 'Step',
+          of: 'of',
+          step1: 'What would you like to list?',
+          step2: 'Describe your offer',
+          step3: 'How can we reach you?',
+          step4: 'Review before sending',
+          choose: 'Choose one option',
+          rentEquipment: 'Rent out equipment',
+          sellEquipment: 'Sell equipment',
+          provideService: 'Provide a service',
+          helpTitle: 'Need help listing?',
+          helpText:
+            'A real service will show an agreed contact route here. In this demo you can review the information needed.',
+          helpButton: 'Show what is needed',
+          helpResult:
+            'For help, describe the offer type, equipment or work, region and preferred contact method. The contact channel will be agreed before launch.',
+          category: 'Category',
+          chooseCategory: 'Choose a category',
+          drill: 'Drilling rig',
+          excavator: 'Excavator',
+          compressor: 'Compressor / pump',
+          transport: 'Transport / field camp',
+          drillService: 'Drilling service',
+          geoService: 'Geological service',
+          name: 'Title or model',
+          namePlaceholder: 'For example, XY-1 drilling rig',
+          city: 'City / region',
+          cityPlaceholder: 'For example, Karaganda',
+          price: 'Price',
+          priceHint: 'Leave blank for price on request',
+          currency: 'Currency',
+          unit: 'Price per',
+          condition: 'Terms / equipment',
+          conditionPlaceholder: 'Operator, delivery, fuel, minimum order',
+          method: 'Drilling method',
+          methodHint: 'If unsure, choose “To confirm”',
+          unknown: 'To confirm',
+          core: 'Core',
+          rc: 'RC',
+          auger: 'Auger',
+          depth: 'Depth, m',
+          depthHint: 'Only for the stated method and diameter',
+          diameter: 'Diameter, mm',
+          bucket: 'Bucket capacity, m³',
+          mass: 'Weight, t',
+          item: 'One item',
+          optional: 'optional',
+          draft:
+            'Offer details save only in this tab. Name and phone are never saved. Do not enter real personal information.',
+          contactName: 'Contact name',
+          phone: 'Phone with country code',
+          phonePlaceholder: '+7 000 000 00 00',
+          company: 'Company or surname',
+          publishContact: 'Show phone on listing after moderation',
+          privateContact: 'Phone for editors only; keep private',
+          phoneWarning:
+            'Demo only: phone verification, sign-in and submission are inactive.',
+          preview: 'Preview',
+          previewNote:
+            'Example future listing. Contact and ownership are unverified.',
+          back: 'Back',
+          next: 'Continue',
+          send: 'Show submission result',
+          edit: 'Edit',
+          resultTitle: 'Demo: awaiting moderation',
+          resultText:
+            'In the real service, an editor would review this after phone verification. Nothing was sent or published here.',
+          again: 'New demo listing',
+          required: 'Please fill in this field',
+          invalidPhone: 'Enter a phone with country code (for example, +7 …)',
+          invalidPrice: 'Enter a number greater than zero',
+          invalidTechnical:
+            'Enter a number greater than zero or leave this blank',
+          confirm: 'Choose whether the phone may be shown',
+          footer:
+            'Review prototype. No real listings, photo uploads, sign-in or editor contact.',
+          contactPolicy: 'Show phone',
+          yes: 'Yes',
+          no: 'No',
+          noName: 'Not provided',
+          cardTitle: [
+            'XY-1 drilling rig',
+            '20 t excavator',
+            'Drilling service',
+            'Field compressor',
+          ],
+          cardSpec: [
+            'Core · Karaganda region',
+            '1 m³ bucket · Akmola region',
+            'Contract crew · East Kazakhstan',
+            'Mobile · Pavlodar region',
+          ],
+        },
+        zh: {
+          demo: '讨论演示版 · 所有信息均为虚构，提交及发布功能尚未启用',
+          catalog: '目录',
+          submit: '发布信息',
+          themeLight: '浅色',
+          themeDark: '深色',
+          eyebrow: '设备与服务 · 原型',
+          title: '寻找野外作业设备',
+          intro: '租赁、销售和服务分开显示。下单前请确认配置和条件。',
+          asideTitle: '您有设备吗？',
+          aside: '填写简短表单，体验未来的发布流程。',
+          start: '开始填写',
+          what: '寻找内容',
+          all: '全部',
+          equipment: '设备',
+          service: '服务',
+          offerType: '信息类型',
+          rent: '租赁',
+          sale: '销售',
+          works: '服务',
+          region: '地区',
+          allRegions: '全部地区',
+          priceUnit: '计价单位',
+          anyUnit: '不限',
+          shift: '班次',
+          hour: '小时',
+          day: '天',
+          meter: '米',
+          object: '项目',
+          availability: '可用情况',
+          anyAvail: '不限',
+          available: '可用',
+          ask: '需确认',
+          found: '示例信息',
+          details: '查看示例',
+          noResults: '没有符合条件的示例。请清除筛选。',
+          reset: '清除',
+          sample: '演示',
+          from: '起',
+          onRequest: '价格面议',
+          step: '步骤',
+          of: '共',
+          step1: '您要发布什么？',
+          step2: '介绍您的信息',
+          step3: '如何联系您？',
+          step4: '提交前请核对',
+          choose: '请选择一项',
+          rentEquipment: '出租设备',
+          sellEquipment: '出售设备',
+          provideService: '提供服务',
+          helpTitle: '需要帮助发布？',
+          helpText:
+            '正式服务将在此显示商定的编辑部联系方式。演示版可先查看所需信息。',
+          helpButton: '查看所需信息',
+          helpResult:
+            '需要说明信息类型、设备或工作、地区及首选联系方式。联系渠道将在上线前确定。',
+          category: '类别',
+          chooseCategory: '选择类别',
+          drill: '钻机',
+          excavator: '挖掘机',
+          compressor: '压缩机 / 泵',
+          transport: '运输 / 野外设施',
+          drillService: '钻探服务',
+          geoService: '地质服务',
+          name: '名称或型号',
+          namePlaceholder: '例如 XY-1 钻机',
+          city: '城市 / 地区',
+          cityPlaceholder: '例如 卡拉干达',
+          price: '价格',
+          priceHint: '面议可留空',
+          currency: '币种',
+          unit: '计价方式',
+          condition: '条件 / 配置',
+          conditionPlaceholder: '操作员、运输、燃油、最低订单',
+          method: '钻探方法',
+          methodHint: '不确定请选择“待确认”',
+          unknown: '待确认',
+          core: '岩芯钻探',
+          rc: '反循环（RC）',
+          auger: '螺旋钻探',
+          depth: '深度，米',
+          depthHint: '仅适用于所选方法和直径',
+          diameter: '直径，毫米',
+          bucket: '铲斗容量，立方米',
+          mass: '重量，吨',
+          item: '单台设备',
+          optional: '可选',
+          draft:
+            '设备信息仅保存在当前标签页。姓名和电话不会保存。请勿输入真实个人资料。',
+          contactName: '联系人姓名',
+          phone: '含国家代码的电话',
+          phonePlaceholder: '+7 000 000 00 00',
+          company: '公司或姓氏',
+          publishContact: '审核后在信息中显示电话',
+          privateContact: '电话仅供编辑联系，不公开',
+          phoneWarning: '演示版：电话验证、登录和提交均未启用。',
+          preview: '预览',
+          previewNote: '此为未来信息示例。联系方式与所有权未经核实。',
+          back: '返回',
+          next: '继续',
+          send: '查看提交结果',
+          edit: '修改',
+          resultTitle: '演示：等待审核',
+          resultText:
+            '正式服务将在电话验证后交由编辑审核。此处没有发送或发布任何信息。',
+          again: '创建新演示',
+          required: '请填写此项',
+          invalidPhone: '请填写含国家代码的电话（例如 +7 …）',
+          invalidPrice: '请输入大于零的数字',
+          invalidTechnical: '请输入大于零的数字，或留空',
+          confirm: '请选择是否公开电话',
+          footer: '讨论用原型。没有真实信息、照片上传、登录或编辑部联系功能。',
+          contactPolicy: '公开电话',
+          yes: '是',
+          no: '否',
+          noName: '未填写',
+          cardTitle: ['XY-1 钻机', '20 吨挖掘机', '钻探服务', '野外压缩机'],
+          cardSpec: [
+            '岩芯钻探 · 卡拉干达州',
+            '1 立方米铲斗 · 阿克莫拉州',
+            '承包团队 · 东哈州',
+            '移动式 · 巴甫洛达尔州',
+          ],
+        },
+      };
+      const items = [
+        {
+          title: 0,
+          spec: 0,
+          kind: 'equipment',
+          offer: 'rent',
+          region: 'karaganda',
+          unit: 'shift',
+          avail: 'available',
+          price: '180 000 KZT',
+        },
+        {
+          title: 1,
+          spec: 1,
+          kind: 'equipment',
+          offer: 'sale',
+          region: 'akmola',
+          unit: 'object',
+          avail: 'ask',
+          price: '',
+        },
+        {
+          title: 2,
+          spec: 2,
+          kind: 'service',
+          offer: 'works',
+          region: 'east',
+          unit: 'meter',
+          avail: 'ask',
+          price: '',
+        },
+        {
+          title: 3,
+          spec: 3,
+          kind: 'equipment',
+          offer: 'rent',
+          region: 'pavlodar',
+          unit: 'day',
+          avail: 'available',
+          price: '75 000 KZT',
+        },
+      ];
+      const regions = {
+        karaganda: {
+          ru: 'Карагандинская',
+          kz: 'Қарағанды',
+          en: 'Karaganda',
+          zh: '卡拉干达',
+        },
+        akmola: {
+          ru: 'Акмолинская',
+          kz: 'Ақмола',
+          en: 'Akmola',
+          zh: '阿克莫拉',
+        },
+        east: {
+          ru: 'ВКО',
+          kz: 'ШҚО',
+          en: 'East Kazakhstan',
+          zh: '东哈萨克斯坦',
+        },
+        pavlodar: {
+          ru: 'Павлодарская',
+          kz: 'Павлодар',
+          en: 'Pavlodar',
+          zh: '巴甫洛达尔',
+        },
+      };
+      let lang = 'ru',
+        theme = 'light',
+        view = 'catalog',
+        step = 1,
+        result = false,
+        helpOpen = false;
+      const blank = () => ({
+        offer: 'rent',
+        category: '',
+        title: '',
+        city: '',
+        price: '',
+        currency: 'KZT',
+        unit: 'shift',
+        conditions: '',
+        method: '',
+        depth: '',
+        diameter: '',
+        bucket: '',
+        mass: '',
+        contactName: '',
+        company: '',
+        phone: '',
+        publish: '',
+      });
+      let data = blank();
+      try {
+        const saved = JSON.parse(
+          sessionStorage.getItem('marketplace-demo-draft') || 'null'
+        );
+        if (saved && typeof saved === 'object') {
+          for (const k of [
+            'offer',
+            'category',
+            'title',
+            'city',
+            'price',
+            'currency',
+            'unit',
+            'conditions',
+            'method',
+            'depth',
+            'diameter',
+            'bucket',
+            'mass',
+          ])
+            if (typeof saved[k] === 'string') data[k] = saved[k];
+        }
+      } catch {}
+      if (data.offer === 'sale') data.unit = 'item';
+      if (data.offer !== 'sale' && data.unit === 'item') data.unit = 'shift';
+      const t = (k) => L[lang][k],
+        esc = (s) =>
+          String(s ?? '').replace(
+            /[&<>"']/g,
+            (c) =>
+              ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;',
+              })[c]
+          );
+      const opt = (value, label, selected) =>
+        `<option value="${value}" ${selected === value ? 'selected' : ''}>${esc(label)}</option>`;
+      const field = (key, label, placeholder = '', type = 'text', extra = '') =>
+        `<div class="field"><label for="${key}">${esc(label)}</label><input id="${key}" name="${key}" type="${type}" value="${esc(data[key])}" placeholder="${esc(placeholder)}" ${extra}><p class="error" id="err-${key}" hidden></p></div>`;
+      function save() {
+        let d = {};
+        for (const k of [
+          'offer',
+          'category',
+          'title',
+          'city',
+          'price',
+          'currency',
+          'unit',
+          'conditions',
+          'method',
+          'depth',
+          'diameter',
+          'bucket',
+          'mass',
+        ])
+          d[k] = data[k];
+        sessionStorage.setItem('marketplace-demo-draft', JSON.stringify(d));
+      }
+      function selectView(next) {
+        view = next;
+        document
+          .getElementById('catalog')
+          .classList.toggle('hidden', next !== 'catalog');
+        document
+          .getElementById('submit')
+          .classList.toggle('hidden', next !== 'submit');
+        document
+          .getElementById('catalogTab')
+          .setAttribute('aria-selected', next === 'catalog');
+        document
+          .getElementById('submitTab')
+          .setAttribute('aria-selected', next === 'submit');
+        render();
+        window.scrollTo(0, 0);
+      }
+      function chrome() {
+        document.documentElement.lang =
+          lang === 'kz' ? 'kk' : lang === 'zh' ? 'zh-CN' : lang;
+        document.getElementById('demoNotice').textContent = t('demo');
+        document.getElementById('catalogTab').textContent = t('catalog');
+        document.getElementById('submitTab').textContent = t('submit');
+        document.getElementById('theme').textContent =
+          theme === 'light' ? t('themeDark') : t('themeLight');
+        document.getElementById('brand').src =
+          `../../../public/brand/logo-horizontal${theme === 'dark' ? '-inverse' : ''}.svg`;
+        document.getElementById('footer').textContent = t('footer');
+      }
+      function catalog() {
+        const cat = document.getElementById('catalog');
+        cat.innerHTML = `<div class="hero"><div><p class="eyebrow">${t('eyebrow')}</p><h1>${t('title')}</h1><p class="intro">${t('intro')}</p></div><div class="heroaside"><strong>${t('asideTitle')}</strong><p>${t('aside')}</p><button class="primary sulfur" id="heroStart" type="button">${t('start')}</button></div></div><div class="filters"><div class="field"><label for="f-kind">${t('what')}</label><select id="f-kind">${opt('', t('all'))}${opt('equipment', t('equipment'))}${opt('service', t('service'))}</select></div><div class="field"><label for="f-offer">${t('offerType')}</label><select id="f-offer">${opt('', t('all'))}${opt('rent', t('rent'))}${opt('sale', t('sale'))}${opt('works', t('works'))}</select></div><div class="field"><label for="f-region">${t('region')}</label><select id="f-region">${opt('', t('allRegions'))}${Object.keys(
+          regions
+        )
+          .map((k) => opt(k, regions[k][lang]))
+          .join(
+            ''
+          )}</select></div><div class="field"><label for="f-unit">${t('priceUnit')}</label><select id="f-unit">${opt('', t('anyUnit'))}${['shift', 'hour', 'day', 'meter', 'object'].map((k) => opt(k, t(k))).join('')}</select></div><div class="field"><label for="f-avail">${t('availability')}</label><select id="f-avail">${opt('', t('anyAvail'))}${opt('available', t('available'))}${opt('ask', t('ask'))}</select></div></div><div class="cataloghead"><h2>${t('found')} <span id="count"></span></h2><button class="secondary" id="reset" type="button">${t('reset')}</button></div><div id="cards" class="cards"></div>`;
+        ['kind', 'offer', 'region', 'unit', 'avail'].forEach((k) =>
+          document.getElementById('f-' + k).addEventListener('change', filter)
+        );
+        document.getElementById('reset').onclick = () => {
+          ['kind', 'offer', 'region', 'unit', 'avail'].forEach(
+            (k) => (document.getElementById('f-' + k).value = '')
+          );
+          filter();
+        };
+        document.getElementById('heroStart').onclick = () =>
+          selectView('submit');
+        filter();
+      }
+      function filter() {
+        const f = {};
+        ['kind', 'offer', 'region', 'unit', 'avail'].forEach(
+          (k) => (f[k] = document.getElementById('f-' + k).value)
+        );
+        const list = items.filter((i) =>
+          Object.keys(f).every((k) => !f[k] || i[k] === f[k])
+        );
+        document.getElementById('count').textContent = `(${list.length})`;
+        document.getElementById('cards').innerHTML = list.length
+          ? list
+              .map(
+                (i) =>
+                  `<article class="card"><div class="cardtop"><span class="type">${t(i.kind)} · ${t(i.offer)}</span><span class="demotag">${t('sample')}</span></div><div class="cardbody"><h3>${esc(t('cardTitle')[i.title])}</h3><p class="specs">${esc(t('cardSpec')[i.spec])}</p><p class="specs">${t(i.avail)} · ${regions[i.region][lang]}</p><p class="price">${i.price ? `${t('from')} ${i.price} / ${t(i.unit)}` : t('onRequest')}</p></div><button class="secondary" type="button" data-sample="${i.title}">${t('details')}</button></article>`
+              )
+              .join('')
+          : `<div class="empty">${t('noResults')}</div>`;
+        document.querySelectorAll('[data-sample]').forEach(
+          (b) =>
+            (b.onclick = () => {
+              const i = items[+b.dataset.sample];
+              alert(
+                `${t('sample')}: ${t('cardTitle')[i.title]}\n${t('cardSpec')[i.spec]}\n${t('previewNote')}`
+              );
+            })
+        );
+      }
+      function categories() {
+        const service = data.offer === 'works';
+        return service
+          ? ['drillService', 'geoService']
+          : ['drill', 'excavator', 'compressor', 'transport'];
+      }
+      function stepBody() {
+        if (result)
+          return `<div class="result" role="status"><h2>${t('resultTitle')}</h2><p>${t('resultText')}</p></div><div class="actions"><button class="secondary" id="again" type="button">${t('again')}</button><button class="primary" id="toCatalog" type="button">${t('catalog')}</button></div>`;
+        if (step === 1)
+          return `<h2>${t('step1')}</h2><p>${t('choose')}</p><div class="choicegrid">${[
+            ['rent', 'rentEquipment'],
+            ['sale', 'sellEquipment'],
+            ['works', 'provideService'],
+          ]
+            .map(
+              ([v, k]) =>
+                `<label class="choice"><input type="radio" name="offer" value="${v}" ${data.offer === v ? 'checked' : ''}><span>${t(k)}</span></label>`
+            )
+            .join(
+              ''
+            )}</div><div class="help"><h3>${t('helpTitle')}</h3><p>${t('helpText')}</p><button class="secondary" id="helpButton" type="button">${t('helpButton')}</button>${helpOpen ? `<p class="note">${t('helpResult')}</p>` : ''}</div>`;
+        if (step === 2)
+          return `<h2>${t('step2')}</h2><div class="stack"><div class="field"><label for="category">${t('category')}</label><select id="category" name="category">${opt('', t('chooseCategory'), data.category)}${categories()
+            .map((k) => opt(k, t(k), data.category))
+            .join(
+              ''
+            )}</select><p class="error" id="err-category" hidden></p></div>${field('title', t('name'), t('namePlaceholder'))}${field('city', t('city'), t('cityPlaceholder'))}<div class="row">${field('price', t('price'), '', 'number', 'min="0" step="any"')}<div class="field"><label for="currency">${t('currency')}</label><select id="currency" name="currency">${['KZT', 'USD', 'CNY'].map((k) => opt(k, k, data.currency)).join('')}</select></div></div><p class="hint">${t('priceHint')}</p><div class="field"><label for="unit">${t('unit')}</label><select id="unit" name="unit">${(data.offer === 'sale' ? ['item'] : ['shift', 'hour', 'day', 'meter', 'object']).map((k) => opt(k, t(k), data.unit)).join('')}</select></div><div class="field"><label for="conditions">${t('condition')} (${t('optional')})</label><textarea id="conditions" name="conditions" placeholder="${esc(t('conditionPlaceholder'))}">${esc(data.conditions)}</textarea></div><div id="conditional"></div><p class="note">${t('draft')}</p></div>`;
+        if (step === 3)
+          return `<h2>${t('step3')}</h2><div class="stack">${field('contactName', t('contactName'))}${field('company', `${t('company')} (${t('optional')})`)}${field('phone', t('phone'), t('phonePlaceholder'), 'tel', 'autocomplete="off"')}<fieldset class="field" style="border:0;padding:0;margin:0"><legend>${t('contactPolicy')}</legend><div class="choicegrid" style="grid-template-columns:1fr 1fr"><label class="choice"><input type="radio" name="publish" value="yes" ${data.publish === 'yes' ? 'checked' : ''}><span>${t('publishContact')}</span></label><label class="choice"><input type="radio" name="publish" value="no" ${data.publish === 'no' ? 'checked' : ''}><span>${t('privateContact')}</span></label></div><p class="error" id="err-publish" hidden></p></fieldset><p class="note">${t('phoneWarning')}</p></div>`;
+        return `<h2>${t('step4')}</h2><p class="note">${t('previewNote')}</p><dl class="summary">${previewRows()}</dl><p class="fine">${t('phoneWarning')}</p>`;
+      }
+      function previewRows() {
+        const rows = [
+          ['offerType', t(data.offer)],
+          ['category', data.category ? t(data.category) : '—'],
+          ['name', data.title],
+          ['city', data.city],
+          [
+            'price',
+            data.price
+              ? `${data.price} ${data.currency} / ${t(data.unit)}`
+              : t('onRequest'),
+          ],
+          ['condition', data.conditions || '—'],
+        ];
+        if (data.category === 'drill' || data.category === 'drillService') {
+          rows.push(['method', data.method ? t(data.method) : t('unknown')]);
+          if (data.diameter) rows.push(['diameter', data.diameter]);
+          if (data.depth) rows.push(['depth', data.depth]);
+        }
+        if (data.category === 'excavator') {
+          if (data.bucket) rows.push(['bucket', data.bucket]);
+          if (data.mass) rows.push(['mass', data.mass]);
+        }
+        rows.push(
+          ['contactName', data.contactName],
+          ['company', data.company || '—'],
+          ['phone', data.phone],
+          [
+            'contactPolicy',
+            data.publish === 'yes' ? t('publishContact') : t('privateContact'),
+          ]
+        );
+        return rows
+          .map(
+            ([label, value]) =>
+              `<dt>${t(label)}</dt><dd style="white-space:pre-wrap">${esc(value)}</dd>`
+          )
+          .join('');
+      }
+      function conditional() {
+        const box = document.getElementById('conditional');
+        if (!box) return;
+        let html = '';
+        if (data.category === 'drill' || data.category === 'drillService')
+          html = `<div class="stack"><div class="field"><label for="method">${t('method')} (${t('optional')})</label><select id="method" name="method">${opt('', t('unknown'), data.method)}${['core', 'rc', 'auger'].map((k) => opt(k, t(k), data.method)).join('')}</select><p class="hint">${t('methodHint')}</p></div><div class="row">${field('diameter', `${t('diameter')} (${t('optional')})`, '', 'number', 'min="0"')}${field('depth', `${t('depth')} (${t('optional')})`, '', 'number', 'min="0"')}</div><p class="hint">${t('depthHint')}</p></div>`;
+        if (data.category === 'excavator')
+          html = `<div class="row">${field('bucket', `${t('bucket')} (${t('optional')})`, '', 'number', 'min="0" step="any"')}${field('mass', `${t('mass')} (${t('optional')})`, '', 'number', 'min="0" step="any"')}</div>`;
+        box.innerHTML = html;
+        box
+          .querySelectorAll('input,select')
+          .forEach((el) => el.addEventListener('input', update));
+      }
+      function update(e) {
+        const el = e.target;
+        data[el.name] = el.value;
+        if (el.name === 'offer') {
+          data.category = '';
+          clearTechnical();
+          data.unit = data.offer === 'sale' ? 'item' : 'shift';
+          step = 1;
+          save();
+          renderSubmit();
+          return;
+        }
+        if (el.name === 'category') {
+          document.getElementById('err-category').hidden = true;
+          clearTechnical();
+          save();
+          conditional();
+          return;
+        }
+        if (!['contactName', 'company', 'phone', 'publish'].includes(el.name))
+          save();
+        const err = document.getElementById('err-' + el.name);
+        if (err) err.hidden = true;
+      }
+      function clearTechnical() {
+        for (const key of ['method', 'diameter', 'depth', 'bucket', 'mass'])
+          data[key] = '';
+      }
+      function validate() {
+        const keys =
+          step === 2
+            ? ['category', 'title', 'city']
+            : step === 3
+              ? ['contactName', 'phone', 'publish']
+              : [];
+        let first = null;
+        for (const k of keys) {
+          let msg = '';
+          if (!String(data[k]).trim())
+            msg = k === 'publish' ? t('confirm') : t('required');
+          if (
+            k === 'phone' &&
+            data.phone &&
+            !/^\+\d[\d\s()\-]{6,}$/.test(data.phone.trim())
+          )
+            msg = t('invalidPhone');
+          const err = document.getElementById('err-' + k);
+          if (err) {
+            err.textContent = msg;
+            err.hidden = !msg;
+          }
+          if (msg && !first)
+            first =
+              document.getElementById(k) ||
+              document.querySelector(`[name="${k}"]`);
+        }
+        if (
+          step === 2 &&
+          data.price &&
+          (isNaN(+data.price) || +data.price <= 0)
+        ) {
+          const err = document.getElementById('err-price');
+          err.textContent = t('invalidPrice');
+          err.hidden = false;
+          first ||= document.getElementById('price');
+        }
+        if (step === 2) {
+          const technical =
+            data.category === 'excavator'
+              ? ['bucket', 'mass']
+              : data.category === 'drill' || data.category === 'drillService'
+                ? ['diameter', 'depth']
+                : [];
+          for (const key of technical) {
+            if (
+              data[key] &&
+              (!Number.isFinite(+data[key]) || +data[key] <= 0)
+            ) {
+              const err = document.getElementById('err-' + key);
+              err.textContent = t('invalidTechnical');
+              err.hidden = false;
+              first ||= document.getElementById(key);
+            }
+          }
+        }
+        if (first) {
+          first.focus();
+          return false;
+        }
+        return true;
+      }
+      function renderSubmit() {
+        const root = document.getElementById('submit');
+        root.innerHTML = `<div class="flow">${result ? '' : `<div class="stepcount">${t('step')} ${step} ${t('of')} 4</div><div class="progress" aria-label="${t('step')} ${step} ${t('of')} 4">${[1, 2, 3, 4].map((n) => `<span class="${n <= step ? 'on' : ''}"></span>`).join('')}</div>`}<div class="panel">${stepBody()}${result ? '' : `<div class="actions">${step > 1 ? `<button class="secondary" id="back" type="button">${t('back')}</button>` : '<span></span>'}<button class="primary sulfur" id="next" type="button">${step === 4 ? t('send') : t('next')}</button></div>`}</div></div>`;
+        root
+          .querySelectorAll('input,select,textarea')
+          .forEach((el) => el.addEventListener('input', update));
+        conditional();
+        const hb = document.getElementById('helpButton');
+        if (hb)
+          hb.onclick = () => {
+            helpOpen = !helpOpen;
+            renderSubmit();
+          };
+        const back = document.getElementById('back');
+        if (back)
+          back.onclick = () => {
+            step--;
+            renderSubmit();
+            window.scrollTo(0, 0);
+          };
+        const next = document.getElementById('next');
+        if (next)
+          next.onclick = () => {
+            if (!validate()) return;
+            if (step < 4) {
+              step++;
+              renderSubmit();
+              window.scrollTo(0, 0);
+            } else {
+              result = true;
+              renderSubmit();
+              window.scrollTo(0, 0);
+            }
+          };
+        const again = document.getElementById('again');
+        if (again)
+          again.onclick = () => {
+            data = blank();
+            sessionStorage.removeItem('marketplace-demo-draft');
+            step = 1;
+            result = false;
+            renderSubmit();
+          };
+        const to = document.getElementById('toCatalog');
+        if (to) to.onclick = () => selectView('catalog');
+      }
+      function render() {
+        chrome();
+        if (view === 'catalog') catalog();
+        else renderSubmit();
+      }
+      document.getElementById('catalogTab').onclick = () =>
+        selectView('catalog');
+      document.getElementById('submitTab').onclick = () => selectView('submit');
+      document.getElementById('lang').onchange = (e) => {
+        lang = e.target.value;
+        render();
+      };
+      document.getElementById('theme').onclick = () => {
+        theme = theme === 'light' ? 'dark' : 'light';
+        document.body.dataset.theme = theme;
+        render();
+      };
+      render();
+    </script>
+  </body>
+</html>

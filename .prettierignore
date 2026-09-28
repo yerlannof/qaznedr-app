@@ -33,3 +33,7 @@ docs/superpowers/plans/
 
 # Exact observed AI answers are evidence; preserve their rendered text verbatim
 docs/visibility/answers/
+
+# Search-engine verification responses must remain byte-for-byte unchanged
+public/google7ca6a576b317c57a.html
+public/yandex_2b5c93c79c8e4f21.html

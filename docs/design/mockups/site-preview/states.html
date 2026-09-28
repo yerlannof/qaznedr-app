@@ -1,1 +1,182 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QAZNEDR · Component states</title><style>body{margin:0;background:#e9ece6;color:#253740;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}.wrap{max-width:1200px;margin:auto;padding:28px 20px}h1,h2{font-family:Georgia,serif;font-weight:400;letter-spacing:-.035em}h1{font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.05}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.tile{border-top:1px solid #64747a;padding-top:14px}.tile img{display:block;width:100%;height:390px;object-fit:contain;object-position:top;background:#d5dad4;border:1px solid #64747a}.tile p{font-size:.88rem}a{color:#253740}a:focus-visible{outline:3px solid #253740;outline-offset:3px}@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.grid{grid-template-columns:1fr}.tile img{height:480px}}</style></head><body><div class="wrap"><p>QAZNEDR HOLDING / DESIGN REVIEW</p><h1>Interface states</h1><p>Captures of the live local preview at 375 px. They document behavior for implementation; final interaction details remain subject to owner review.</p><div class="grid"><div class="tile"><h2>Hover</h2><img src="state-hover.png" alt="Primary contact button hovered"><p>Primary action hover. <a href="../../review/site-preview.html?screen=home&lang=en&theme=light">Open page</a></p></div><div class="tile"><h2>Keyboard focus</h2><img src="state-focus.png" alt="Primary contact button focused"><p>Visible focus ring on the actual button.</p></div><div class="tile"><h2>Active</h2><img src="state-active.png" alt="Primary contact button pressed"><p>Pressed visual state while pointer is down.</p></div><div class="tile"><h2>Menu and disabled KZ</h2><img src="state-menu-disabled.png" alt="Open mobile menu with disabled Kazakh language option"><p>Menu opens from the header; Escape returns focus to its trigger.</p></div><div class="tile"><h2>Filter overlay</h2><img src="state-filter-overlay.png" alt="Mobile portfolio filters open"><p>Mobile overlay traps focus, supports Escape, and returns focus on close. <a href="../../review/site-preview.html?screen=portfolio&lang=en&theme=light">Open portfolio</a></p></div><div class="tile"><h2>Empty result</h2><img src="state-filter-empty.png" alt="Portfolio empty filter result"><p>Metal and type mismatch yields an explicit empty state; Reset restores cards.</p></div><div class="tile"><h2>Status cards</h2><img src="state-status-cards.png" alt="Portfolio cards showing availability pending, in discussion, and unavailable"><p>Three demo states: pending, in discussion, unavailable.</p></div><div class="tile"><h2>Invalid form</h2><img src="state-invalid-form.png" alt="Form required field validation"><p>Required name, reply contact, and message use browser validation and visible invalid borders. <a href="../../review/site-preview.html?screen=contact&lang=en&theme=light">Open contact</a></p></div><div class="tile"><h2>Preview form status</h2><img src="state-form-status.png" alt="Non-sending design preview form status"><p>After valid input, the preview states clearly that no data was sent.</p></div></div></div></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>QAZNEDR · Component states</title>
+    <style>
+      body {
+        margin: 0;
+        background: #e9ece6;
+        color: #253740;
+        font:
+          16px/1.5 -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: auto;
+        padding: 28px 20px;
+      }
+      h1,
+      h2 {
+        font-family: Georgia, serif;
+        font-weight: 400;
+        letter-spacing: -0.035em;
+      }
+      h1 {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        line-height: 1.05;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .tile {
+        border-top: 1px solid #64747a;
+        padding-top: 14px;
+      }
+      .tile img {
+        display: block;
+        width: 100%;
+        height: 390px;
+        object-fit: contain;
+        object-position: top;
+        background: #d5dad4;
+        border: 1px solid #64747a;
+      }
+      .tile p {
+        font-size: 0.88rem;
+      }
+      a {
+        color: #253740;
+      }
+      a:focus-visible {
+        outline: 3px solid #253740;
+        outline-offset: 3px;
+      }
+      @media (max-width: 760px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 520px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .tile img {
+          height: 480px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p>QAZNEDR HOLDING / DESIGN REVIEW</p>
+      <h1>Interface states</h1>
+      <p>
+        Captures of the live local preview at 375 px. They document behavior for
+        implementation; final interaction details remain subject to owner
+        review.
+      </p>
+      <div class="grid">
+        <div class="tile">
+          <h2>Hover</h2>
+          <img src="state-hover.png" alt="Primary contact button hovered" />
+          <p>
+            Primary action hover.
+            <a
+              href="../../review/site-preview.html?screen=home&lang=en&theme=light"
+              >Open page</a
+            >
+          </p>
+        </div>
+        <div class="tile">
+          <h2>Keyboard focus</h2>
+          <img src="state-focus.png" alt="Primary contact button focused" />
+          <p>Visible focus ring on the actual button.</p>
+        </div>
+        <div class="tile">
+          <h2>Active</h2>
+          <img src="state-active.png" alt="Primary contact button pressed" />
+          <p>Pressed visual state while pointer is down.</p>
+        </div>
+        <div class="tile">
+          <h2>Menu and disabled KZ</h2>
+          <img
+            src="state-menu-disabled.png"
+            alt="Open mobile menu with disabled Kazakh language option"
+          />
+          <p>
+            Menu opens from the header; Escape returns focus to its trigger.
+          </p>
+        </div>
+        <div class="tile">
+          <h2>Filter overlay</h2>
+          <img
+            src="state-filter-overlay.png"
+            alt="Mobile portfolio filters open"
+          />
+          <p>
+            Mobile overlay traps focus, supports Escape, and returns focus on
+            close.
+            <a
+              href="../../review/site-preview.html?screen=portfolio&lang=en&theme=light"
+              >Open portfolio</a
+            >
+          </p>
+        </div>
+        <div class="tile">
+          <h2>Empty result</h2>
+          <img
+            src="state-filter-empty.png"
+            alt="Portfolio empty filter result"
+          />
+          <p>
+            Metal and type mismatch yields an explicit empty state; Reset
+            restores cards.
+          </p>
+        </div>
+        <div class="tile">
+          <h2>Status cards</h2>
+          <img
+            src="state-status-cards.png"
+            alt="Portfolio cards showing availability pending, in discussion, and unavailable"
+          />
+          <p>Three demo states: pending, in discussion, unavailable.</p>
+        </div>
+        <div class="tile">
+          <h2>Invalid form</h2>
+          <img
+            src="state-invalid-form.png"
+            alt="Form required field validation"
+          />
+          <p>
+            Required name, reply contact, and message use browser validation and
+            visible invalid borders.
+            <a
+              href="../../review/site-preview.html?screen=contact&lang=en&theme=light"
+              >Open contact</a
+            >
+          </p>
+        </div>
+        <div class="tile">
+          <h2>Preview form status</h2>
+          <img
+            src="state-form-status.png"
+            alt="Non-sending design preview form status"
+          />
+          <p>
+            After valid input, the preview states clearly that no data was sent.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

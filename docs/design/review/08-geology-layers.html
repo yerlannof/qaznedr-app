@@ -1,71 +1,1541 @@
 <!doctype html>
 <html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>QAZNEDR HOLDING — Геологические слои / предложение 08</title>
-<style>
-:root{color-scheme:light;--page:#e9ece6;--paper:#f4f5f0;--ink:#253740;--muted:#51616a;--rule:#64747a;--accent:#253740;--art:#253740;--art-ink:#e9ece6;--art-muted:#cad2ca;--lime:#dde55e}
-body[data-theme=dark]{color-scheme:dark;--page:#253740;--paper:#30434c;--ink:#e9ece6;--muted:#cad2ca;--rule:#8fa19e;--accent:#dde55e}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--page);color:var(--ink);font:16px/1.5 "IBM Plex Sans",Arial,sans-serif}button{font:inherit}a{color:inherit}button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.skip{position:absolute;left:-9999px;top:8px;z-index:30;padding:10px;background:var(--lime);color:#253740}.skip:focus{left:8px}
-.bar{min-height:78px;padding:16px clamp(20px,4vw,70px);display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--rule);background:var(--paper)}.logo{display:block;width:216px;max-width:100%;height:auto}.logo-dark{display:none}body[data-theme=dark] .logo-dark{display:block}body[data-theme=dark] .logo-light{display:none}.bar-right{display:flex;align-items:center;gap:20px}.bar-note{font-size:11px;line-height:1.25;max-width:120px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}.switches{display:flex;gap:6px}.switches button{min-width:44px;min-height:44px;padding:7px 10px;border:1px solid var(--rule);background:transparent;color:var(--ink);cursor:pointer}.switches button[aria-pressed=true]{background:var(--ink);color:var(--page);border-color:var(--ink)}.theme-toggle{min-width:72px!important}
-.intro{padding:clamp(50px,7vw,105px) clamp(20px,7vw,112px) clamp(48px,6vw,86px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.55fr);gap:clamp(30px,6vw,100px);align-items:end;max-width:1600px;margin:auto}.kicker,.index,.eyebrow{font-size:11px;font-weight:700;letter-spacing:.19em;text-transform:uppercase}.kicker{color:var(--accent)}h1,h2,h3,p{margin-top:0}.intro h1{font:normal clamp(48px,6.7vw,106px)/.98 Georgia,"Times New Roman",serif;letter-spacing:-.045em;margin:20px 0 0;max-width:850px}.intro-aside{border-top:2px solid var(--ink);padding-top:22px;color:var(--muted);font-size:18px}.intro-aside strong{display:block;color:var(--ink);font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:13px}.intro-aside p{margin-bottom:0}
-.story{position:relative}.scene{position:sticky;top:0;min-height:690px;height:100vh;display:grid;grid-template-columns:42% 58%;overflow:hidden;background:var(--art);color:var(--art-ink)}.scene-copy{z-index:2;background:#253740;border-right:1px solid #8fa19e;display:flex;flex-direction:column;justify-content:center;padding:clamp(38px,5.4vw,92px)}.scene-copy .eyebrow{color:var(--lime)}.scene-copy h2{font:normal clamp(47px,4.5vw,74px)/1.05 Georgia,"Times New Roman",serif;letter-spacing:-.035em;margin:23px 0 25px}.scene-copy .description{max-width:430px;font-size:19px;line-height:1.5;color:#cad2ca;margin-bottom:22px}.question{border-left:3px solid var(--lime);padding:2px 0 2px 17px;max-width:415px;color:#e9ece6;font-size:16px;min-height:48px}.stage-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:37px}.stage-nav button{cursor:pointer;min-height:48px;border:1px solid #8fa19e;background:transparent;color:#e9ece6;font-size:12px;letter-spacing:.03em;padding:8px 12px}.stage-nav button[aria-pressed=true]{background:var(--lime);color:#253740;border-color:var(--lime);font-weight:700}.scene-foot{border-top:1px solid #8fa19e;display:flex;gap:18px;align-items:center;justify-content:space-between;margin-top:38px;padding-top:18px;color:#cad2ca;font-size:11px;text-transform:uppercase;letter-spacing:.1em}.scene-foot .rule{height:2px;background:#8fa19e;flex:1}.scene-foot .rule span{display:block;background:var(--lime);height:100%;width:33.333%;transition:width .7s ease}
-.artboard{position:relative;min-width:0;overflow:hidden;background:#253740}.artboard:before{content:"";position:absolute;inset:4%;border:1px solid rgba(233,236,230,.18);pointer-events:none}.art-heading{position:absolute;top:37px;left:40px;z-index:2;color:#cad2ca;font-size:10px;letter-spacing:.18em;text-transform:uppercase}.art-label{position:absolute;z-index:5;color:#e9ece6;font-size:11px;letter-spacing:.13em;text-transform:uppercase;display:flex;align-items:center;gap:10px;pointer-events:none;opacity:0;background:#253740;padding:5px 7px;transition:opacity .45s ease}.art-label:before{content:"";height:1px;width:32px;background:var(--lime)}.art-label.top{left:8%;top:28%}.art-label.middle{right:7%;top:51%;flex-direction:row-reverse}.art-label.low{left:8%;top:72%}.artboard[data-stage="1"] .art-label,.artboard[data-stage="2"] .art-label{opacity:1}.artboard[data-stage="2"] .art-label.top,.artboard[data-stage="2"] .art-label.low{opacity:.4}.artboard[data-stage="2"] .art-label.middle{color:var(--lime)}.asset-frame{position:absolute;inset:5% 3% 8%;display:grid;place-items:center}.layer{position:absolute;width:min(88%,700px);aspect-ratio:1/1;left:50%;top:50%;background-image:url('../mockups/08/layers/sprite-v1.png');background-size:100% 100%;background-repeat:no-repeat;background-position:center;transform:translate(-50%,-50%) translate(var(--x0),var(--y0));transition:transform 1s cubic-bezier(.22,.75,.2,1),filter .65s ease;will-change:transform;filter:drop-shadow(0 18px 10px rgba(7,19,24,.25))}.layer.top{z-index:3}.layer.middle{z-index:2}.layer.low{z-index:1}.artboard[data-stage="1"] .layer{transform:translate(-50%,-50%) translate(var(--x1),var(--y1))}.artboard[data-stage="2"] .layer{transform:translate(-50%,-50%) translate(var(--x2),var(--y2))}.artboard[data-stage="2"] .layer.top,.artboard[data-stage="2"] .layer.low{filter:drop-shadow(0 18px 10px rgba(7,19,24,.25)) brightness(.72)}.focus-ring{position:absolute;z-index:4;left:54%;top:52%;width:36%;height:20%;border:1px solid var(--lime);opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .6s ease;pointer-events:none}.focus-ring:before,.focus-ring:after{content:"";position:absolute;width:17px;height:17px;border-color:var(--lime);border-style:solid}.focus-ring:before{left:-2px;top:-2px;border-width:2px 0 0 2px}.focus-ring:after{right:-2px;bottom:-2px;border-width:0 2px 2px 0}.artboard[data-stage="2"] .focus-ring{opacity:1;transform:none}.art-disclaimer{position:absolute;bottom:25px;right:32px;z-index:5;padding:7px 10px;background:#253740;color:#cad2ca;font-size:10px;letter-spacing:.11em;text-transform:uppercase}
-.marker{height:90vh;min-height:620px}.marker:last-of-type{height:50vh}.static-explanation{display:none}.review{padding:clamp(62px,8vw,115px) clamp(20px,7vw,112px);max-width:1600px;margin:auto}.review-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,.48fr);gap:40px;align-items:end;border-bottom:1px solid var(--rule);padding-bottom:25px}.review h2{font:normal clamp(38px,4.4vw,66px)/1.05 Georgia,serif;letter-spacing:-.035em;margin:14px 0 0}.review-head p{color:var(--muted);font-size:17px;margin:0}.parts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:31px}.part{background:var(--paper);padding:24px;min-width:0}.part-art{aspect-ratio:1.18;background:#253740;display:grid;place-items:center;position:relative;overflow:hidden}.part-art .layer{width:95%;filter:none;transition:none}.part-art .layer.top,.part-art .layer.middle,.part-art .layer.low{transform:translate(-50%,-50%)}.part .index{display:block;color:var(--accent);margin:20px 0 9px}.part h3{font:normal 28px/1.13 Georgia,serif;margin-bottom:8px}.part p{color:var(--muted);font-size:14px;margin:0}.review-note{display:grid;grid-template-columns:1fr 1fr;gap:35px;border-top:1px solid var(--rule);margin-top:42px;padding-top:25px;color:var(--muted)}.review-note strong{color:var(--ink)}.review-note p{max-width:550px}.review-note a{font-weight:700}.zh h1,.zh h2,.zh h3{font-family:PingFang SC,"Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;letter-spacing:0}
-@media(max-width:850px){.bar{align-items:flex-start}.bar-right{flex-direction:column;align-items:flex-end;gap:7px}.bar-note{max-width:none}.intro{grid-template-columns:1fr;padding-top:65px}.intro-aside{max-width:580px}.scene{position:relative;top:auto;height:auto;min-height:0;display:flex;flex-direction:column-reverse}.scene-copy{padding:36px 20px 45px}.scene-copy h2{font-size:43px;margin:14px 0 16px}.scene-copy .description{font-size:17px;min-height:52px}.stage-nav{margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr)}.stage-nav button{font-size:11px;padding:6px 4px}.scene-foot{margin-top:26px}.artboard{height:min(82vw,530px)}.art-heading{top:17px;left:20px}.art-disclaimer{right:16px;bottom:15px}.asset-frame{inset:3% 0}.layer{width:min(86%,500px)}.art-label{font-size:9px}.art-label.top{top:20%;left:5%}.art-label.middle{top:53%;right:4%}.art-label.low{top:76%;left:5%}.focus-ring{left:47%;top:47%;width:38%;height:25%}.marker{display:none}.review-head{grid-template-columns:1fr}.parts{grid-template-columns:1fr}.part-art{max-height:380px}.part-art .layer{width:min(90%,470px)}.review-note{grid-template-columns:1fr}}
-@media(max-width:490px){.bar{min-height:0;padding:12px 18px}.logo{width:134px}.bar-note{display:none}.switches{gap:3px}.switches button{font-size:11px;padding:5px;min-width:40px;min-height:44px}.theme-toggle{min-width:51px!important}.intro{padding:52px 20px 49px;gap:34px}.intro h1{font-size:46px}.intro-aside{font-size:16px}.artboard{height:370px}.layer{width:100%}.layer.top{--x1:-12px;--y1:-72px;--x2:-16px;--y2:-84px}.layer.middle{--x1:15px;--y1:4px;--x2:17px;--y2:0px}.layer.low{--x1:-10px;--y1:76px;--x2:-12px;--y2:86px}.art-label:before{width:14px}.art-label.top{top:15%}.art-label.low{top:81%}.scene-copy h2{font-size:39px}.review{padding:66px 20px}.review h2{font-size:42px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.layer,.focus-ring,.art-label,.scene-foot .rule span{transition:none!important}.scene{position:relative;min-height:0;height:auto}.marker{display:none}.stage-nav,.scene-foot{display:none}.scene-copy .description,.scene-copy .question{display:none}.scene-copy h2{margin-bottom:0}.artboard .layer.top{transform:translate(-50%,-50%) translate(var(--x1),var(--y1))}.artboard .layer.middle{transform:translate(-50%,-50%) translate(var(--x1),var(--y1))}.artboard .layer.low{transform:translate(-50%,-50%) translate(var(--x1),var(--y1))}.artboard .art-label{opacity:1}.static-explanation{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}.static-explanation article{background:var(--paper);padding:24px}.static-explanation h3{font:normal 26px/1.1 Georgia,serif;margin:10px 0}.static-explanation p{color:var(--muted);margin:0}}
-@media(max-width:850px) and (prefers-reduced-motion:reduce){.static-explanation{grid-template-columns:1fr}}
-.no-js .scene{position:relative;min-height:0;height:auto}.no-js .marker,.no-js .stage-nav,.no-js .scene-foot{display:none}.no-js .scene-copy .description,.no-js .scene-copy .question{display:none}.no-js .artboard .layer.top{transform:translate(-50%,-50%) translate(var(--x1),var(--y1))}.no-js .artboard .layer.middle{transform:translate(-50%,-50%) translate(var(--x1),var(--y1))}.no-js .artboard .layer.low{transform:translate(-50%,-50%) translate(var(--x1),var(--y1))}.no-js .artboard .art-label{opacity:1}.no-js .static-explanation{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}.no-js .static-explanation article{background:var(--paper);padding:24px}.no-js .static-explanation h3{font:normal 26px/1.1 Georgia,serif;margin:10px 0}.no-js .static-explanation p{color:var(--muted);margin:0}@media(max-width:850px){.no-js .static-explanation{grid-template-columns:1fr}}
-/* The source is one vertical RGBA plate. Each DOM layer keeps its original canvas
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QAZNEDR HOLDING — Геологические слои / предложение 08</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --page: #e9ece6;
+        --paper: #f4f5f0;
+        --ink: #253740;
+        --muted: #51616a;
+        --rule: #64747a;
+        --accent: #253740;
+        --art: #253740;
+        --art-ink: #e9ece6;
+        --art-muted: #cad2ca;
+        --lime: #dde55e;
+      }
+      body[data-theme='dark'] {
+        color-scheme: dark;
+        --page: #253740;
+        --paper: #30434c;
+        --ink: #e9ece6;
+        --muted: #cad2ca;
+        --rule: #8fa19e;
+        --accent: #dde55e;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--ink);
+        font:
+          16px/1.5 'IBM Plex Sans',
+          Arial,
+          sans-serif;
+      }
+      button {
+        font: inherit;
+      }
+      a {
+        color: inherit;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .skip {
+        position: absolute;
+        left: -9999px;
+        top: 8px;
+        z-index: 30;
+        padding: 10px;
+        background: var(--lime);
+        color: #253740;
+      }
+      .skip:focus {
+        left: 8px;
+      }
+      .bar {
+        min-height: 78px;
+        padding: 16px clamp(20px, 4vw, 70px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        border-bottom: 1px solid var(--rule);
+        background: var(--paper);
+      }
+      .logo {
+        display: block;
+        width: 216px;
+        max-width: 100%;
+        height: auto;
+      }
+      .logo-dark {
+        display: none;
+      }
+      body[data-theme='dark'] .logo-dark {
+        display: block;
+      }
+      body[data-theme='dark'] .logo-light {
+        display: none;
+      }
+      .bar-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .bar-note {
+        font-size: 11px;
+        line-height: 1.25;
+        max-width: 120px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+      }
+      .switches {
+        display: flex;
+        gap: 6px;
+      }
+      .switches button {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 7px 10px;
+        border: 1px solid var(--rule);
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+      }
+      .switches button[aria-pressed='true'] {
+        background: var(--ink);
+        color: var(--page);
+        border-color: var(--ink);
+      }
+      .theme-toggle {
+        min-width: 72px !important;
+      }
+      .intro {
+        padding: clamp(50px, 7vw, 105px) clamp(20px, 7vw, 112px)
+          clamp(48px, 6vw, 86px);
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.55fr);
+        gap: clamp(30px, 6vw, 100px);
+        align-items: end;
+        max-width: 1600px;
+        margin: auto;
+      }
+      .kicker,
+      .index,
+      .eyebrow {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.19em;
+        text-transform: uppercase;
+      }
+      .kicker {
+        color: var(--accent);
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+      .intro h1 {
+        font:
+          normal clamp(48px, 6.7vw, 106px) / 0.98 Georgia,
+          'Times New Roman',
+          serif;
+        letter-spacing: -0.045em;
+        margin: 20px 0 0;
+        max-width: 850px;
+      }
+      .intro-aside {
+        border-top: 2px solid var(--ink);
+        padding-top: 22px;
+        color: var(--muted);
+        font-size: 18px;
+      }
+      .intro-aside strong {
+        display: block;
+        color: var(--ink);
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 13px;
+      }
+      .intro-aside p {
+        margin-bottom: 0;
+      }
+      .story {
+        position: relative;
+      }
+      .scene {
+        position: sticky;
+        top: 0;
+        min-height: 690px;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 42% 58%;
+        overflow: hidden;
+        background: var(--art);
+        color: var(--art-ink);
+      }
+      .scene-copy {
+        z-index: 2;
+        background: #253740;
+        border-right: 1px solid #8fa19e;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(38px, 5.4vw, 92px);
+      }
+      .scene-copy .eyebrow {
+        color: var(--lime);
+      }
+      .scene-copy h2 {
+        font:
+          normal clamp(47px, 4.5vw, 74px) / 1.05 Georgia,
+          'Times New Roman',
+          serif;
+        letter-spacing: -0.035em;
+        margin: 23px 0 25px;
+      }
+      .scene-copy .description {
+        max-width: 430px;
+        font-size: 19px;
+        line-height: 1.5;
+        color: #cad2ca;
+        margin-bottom: 22px;
+      }
+      .question {
+        border-left: 3px solid var(--lime);
+        padding: 2px 0 2px 17px;
+        max-width: 415px;
+        color: #e9ece6;
+        font-size: 16px;
+        min-height: 48px;
+      }
+      .stage-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 37px;
+      }
+      .stage-nav button {
+        cursor: pointer;
+        min-height: 48px;
+        border: 1px solid #8fa19e;
+        background: transparent;
+        color: #e9ece6;
+        font-size: 12px;
+        letter-spacing: 0.03em;
+        padding: 8px 12px;
+      }
+      .stage-nav button[aria-pressed='true'] {
+        background: var(--lime);
+        color: #253740;
+        border-color: var(--lime);
+        font-weight: 700;
+      }
+      .scene-foot {
+        border-top: 1px solid #8fa19e;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 38px;
+        padding-top: 18px;
+        color: #cad2ca;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .scene-foot .rule {
+        height: 2px;
+        background: #8fa19e;
+        flex: 1;
+      }
+      .scene-foot .rule span {
+        display: block;
+        background: var(--lime);
+        height: 100%;
+        width: 33.333%;
+        transition: width 0.7s ease;
+      }
+      .artboard {
+        position: relative;
+        min-width: 0;
+        overflow: hidden;
+        background: #253740;
+      }
+      .artboard:before {
+        content: '';
+        position: absolute;
+        inset: 4%;
+        border: 1px solid rgba(233, 236, 230, 0.18);
+        pointer-events: none;
+      }
+      .art-heading {
+        position: absolute;
+        top: 37px;
+        left: 40px;
+        z-index: 2;
+        color: #cad2ca;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .art-label {
+        position: absolute;
+        z-index: 5;
+        color: #e9ece6;
+        font-size: 11px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        pointer-events: none;
+        opacity: 0;
+        background: #253740;
+        padding: 5px 7px;
+        transition: opacity 0.45s ease;
+      }
+      .art-label:before {
+        content: '';
+        height: 1px;
+        width: 32px;
+        background: var(--lime);
+      }
+      .art-label.top {
+        left: 8%;
+        top: 28%;
+      }
+      .art-label.middle {
+        right: 7%;
+        top: 51%;
+        flex-direction: row-reverse;
+      }
+      .art-label.low {
+        left: 8%;
+        top: 72%;
+      }
+      .artboard[data-stage='1'] .art-label,
+      .artboard[data-stage='2'] .art-label {
+        opacity: 1;
+      }
+      .artboard[data-stage='2'] .art-label.top,
+      .artboard[data-stage='2'] .art-label.low {
+        opacity: 0.4;
+      }
+      .artboard[data-stage='2'] .art-label.middle {
+        color: var(--lime);
+      }
+      .asset-frame {
+        position: absolute;
+        inset: 5% 3% 8%;
+        display: grid;
+        place-items: center;
+      }
+      .layer {
+        position: absolute;
+        width: min(88%, 700px);
+        aspect-ratio: 1/1;
+        left: 50%;
+        top: 50%;
+        background-image: url('../mockups/08/layers/sprite-v1.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        transform: translate(-50%, -50%) translate(var(--x0), var(--y0));
+        transition:
+          transform 1s cubic-bezier(0.22, 0.75, 0.2, 1),
+          filter 0.65s ease;
+        will-change: transform;
+        filter: drop-shadow(0 18px 10px rgba(7, 19, 24, 0.25));
+      }
+      .layer.top {
+        z-index: 3;
+      }
+      .layer.middle {
+        z-index: 2;
+      }
+      .layer.low {
+        z-index: 1;
+      }
+      .artboard[data-stage='1'] .layer {
+        transform: translate(-50%, -50%) translate(var(--x1), var(--y1));
+      }
+      .artboard[data-stage='2'] .layer {
+        transform: translate(-50%, -50%) translate(var(--x2), var(--y2));
+      }
+      .artboard[data-stage='2'] .layer.top,
+      .artboard[data-stage='2'] .layer.low {
+        filter: drop-shadow(0 18px 10px rgba(7, 19, 24, 0.25)) brightness(0.72);
+      }
+      .focus-ring {
+        position: absolute;
+        z-index: 4;
+        left: 54%;
+        top: 52%;
+        width: 36%;
+        height: 20%;
+        border: 1px solid var(--lime);
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 0.5s ease,
+          transform 0.6s ease;
+        pointer-events: none;
+      }
+      .focus-ring:before,
+      .focus-ring:after {
+        content: '';
+        position: absolute;
+        width: 17px;
+        height: 17px;
+        border-color: var(--lime);
+        border-style: solid;
+      }
+      .focus-ring:before {
+        left: -2px;
+        top: -2px;
+        border-width: 2px 0 0 2px;
+      }
+      .focus-ring:after {
+        right: -2px;
+        bottom: -2px;
+        border-width: 0 2px 2px 0;
+      }
+      .artboard[data-stage='2'] .focus-ring {
+        opacity: 1;
+        transform: none;
+      }
+      .art-disclaimer {
+        position: absolute;
+        bottom: 25px;
+        right: 32px;
+        z-index: 5;
+        padding: 7px 10px;
+        background: #253740;
+        color: #cad2ca;
+        font-size: 10px;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+      .marker {
+        height: 90vh;
+        min-height: 620px;
+      }
+      .marker:last-of-type {
+        height: 50vh;
+      }
+      .static-explanation {
+        display: none;
+      }
+      .review {
+        padding: clamp(62px, 8vw, 115px) clamp(20px, 7vw, 112px);
+        max-width: 1600px;
+        margin: auto;
+      }
+      .review-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(230px, 0.48fr);
+        gap: 40px;
+        align-items: end;
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 25px;
+      }
+      .review h2 {
+        font:
+          normal clamp(38px, 4.4vw, 66px) / 1.05 Georgia,
+          serif;
+        letter-spacing: -0.035em;
+        margin: 14px 0 0;
+      }
+      .review-head p {
+        color: var(--muted);
+        font-size: 17px;
+        margin: 0;
+      }
+      .parts {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--rule);
+        border: 1px solid var(--rule);
+        margin-top: 31px;
+      }
+      .part {
+        background: var(--paper);
+        padding: 24px;
+        min-width: 0;
+      }
+      .part-art {
+        aspect-ratio: 1.18;
+        background: #253740;
+        display: grid;
+        place-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .part-art .layer {
+        width: 95%;
+        filter: none;
+        transition: none;
+      }
+      .part-art .layer.top,
+      .part-art .layer.middle,
+      .part-art .layer.low {
+        transform: translate(-50%, -50%);
+      }
+      .part .index {
+        display: block;
+        color: var(--accent);
+        margin: 20px 0 9px;
+      }
+      .part h3 {
+        font:
+          normal 28px/1.13 Georgia,
+          serif;
+        margin-bottom: 8px;
+      }
+      .part p {
+        color: var(--muted);
+        font-size: 14px;
+        margin: 0;
+      }
+      .review-note {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+        border-top: 1px solid var(--rule);
+        margin-top: 42px;
+        padding-top: 25px;
+        color: var(--muted);
+      }
+      .review-note strong {
+        color: var(--ink);
+      }
+      .review-note p {
+        max-width: 550px;
+      }
+      .review-note a {
+        font-weight: 700;
+      }
+      .zh h1,
+      .zh h2,
+      .zh h3 {
+        font-family:
+          PingFang SC,
+          'Hiragino Sans GB',
+          'Microsoft YaHei',
+          'Noto Sans CJK SC',
+          sans-serif;
+        letter-spacing: 0;
+      }
+      @media (max-width: 850px) {
+        .bar {
+          align-items: flex-start;
+        }
+        .bar-right {
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 7px;
+        }
+        .bar-note {
+          max-width: none;
+        }
+        .intro {
+          grid-template-columns: 1fr;
+          padding-top: 65px;
+        }
+        .intro-aside {
+          max-width: 580px;
+        }
+        .scene {
+          position: relative;
+          top: auto;
+          height: auto;
+          min-height: 0;
+          display: flex;
+          flex-direction: column-reverse;
+        }
+        .scene-copy {
+          padding: 36px 20px 45px;
+        }
+        .scene-copy h2 {
+          font-size: 43px;
+          margin: 14px 0 16px;
+        }
+        .scene-copy .description {
+          font-size: 17px;
+          min-height: 52px;
+        }
+        .stage-nav {
+          margin-top: 24px;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .stage-nav button {
+          font-size: 11px;
+          padding: 6px 4px;
+        }
+        .scene-foot {
+          margin-top: 26px;
+        }
+        .artboard {
+          height: min(82vw, 530px);
+        }
+        .art-heading {
+          top: 17px;
+          left: 20px;
+        }
+        .art-disclaimer {
+          right: 16px;
+          bottom: 15px;
+        }
+        .asset-frame {
+          inset: 3% 0;
+        }
+        .layer {
+          width: min(86%, 500px);
+        }
+        .art-label {
+          font-size: 9px;
+        }
+        .art-label.top {
+          top: 20%;
+          left: 5%;
+        }
+        .art-label.middle {
+          top: 53%;
+          right: 4%;
+        }
+        .art-label.low {
+          top: 76%;
+          left: 5%;
+        }
+        .focus-ring {
+          left: 47%;
+          top: 47%;
+          width: 38%;
+          height: 25%;
+        }
+        .marker {
+          display: none;
+        }
+        .review-head {
+          grid-template-columns: 1fr;
+        }
+        .parts {
+          grid-template-columns: 1fr;
+        }
+        .part-art {
+          max-height: 380px;
+        }
+        .part-art .layer {
+          width: min(90%, 470px);
+        }
+        .review-note {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 490px) {
+        .bar {
+          min-height: 0;
+          padding: 12px 18px;
+        }
+        .logo {
+          width: 134px;
+        }
+        .bar-note {
+          display: none;
+        }
+        .switches {
+          gap: 3px;
+        }
+        .switches button {
+          font-size: 11px;
+          padding: 5px;
+          min-width: 40px;
+          min-height: 44px;
+        }
+        .theme-toggle {
+          min-width: 51px !important;
+        }
+        .intro {
+          padding: 52px 20px 49px;
+          gap: 34px;
+        }
+        .intro h1 {
+          font-size: 46px;
+        }
+        .intro-aside {
+          font-size: 16px;
+        }
+        .artboard {
+          height: 370px;
+        }
+        .layer {
+          width: 100%;
+        }
+        .layer.top {
+          --x1: -12px;
+          --y1: -72px;
+          --x2: -16px;
+          --y2: -84px;
+        }
+        .layer.middle {
+          --x1: 15px;
+          --y1: 4px;
+          --x2: 17px;
+          --y2: 0px;
+        }
+        .layer.low {
+          --x1: -10px;
+          --y1: 76px;
+          --x2: -12px;
+          --y2: 86px;
+        }
+        .art-label:before {
+          width: 14px;
+        }
+        .art-label.top {
+          top: 15%;
+        }
+        .art-label.low {
+          top: 81%;
+        }
+        .scene-copy h2 {
+          font-size: 39px;
+        }
+        .review {
+          padding: 66px 20px;
+        }
+        .review h2 {
+          font-size: 42px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .layer,
+        .focus-ring,
+        .art-label,
+        .scene-foot .rule span {
+          transition: none !important;
+        }
+        .scene {
+          position: relative;
+          min-height: 0;
+          height: auto;
+        }
+        .marker {
+          display: none;
+        }
+        .stage-nav,
+        .scene-foot {
+          display: none;
+        }
+        .scene-copy .description,
+        .scene-copy .question {
+          display: none;
+        }
+        .scene-copy h2 {
+          margin-bottom: 0;
+        }
+        .artboard .layer.top {
+          transform: translate(-50%, -50%) translate(var(--x1), var(--y1));
+        }
+        .artboard .layer.middle {
+          transform: translate(-50%, -50%) translate(var(--x1), var(--y1));
+        }
+        .artboard .layer.low {
+          transform: translate(-50%, -50%) translate(var(--x1), var(--y1));
+        }
+        .artboard .art-label {
+          opacity: 1;
+        }
+        .static-explanation {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1px;
+          background: var(--rule);
+          border: 1px solid var(--rule);
+        }
+        .static-explanation article {
+          background: var(--paper);
+          padding: 24px;
+        }
+        .static-explanation h3 {
+          font:
+            normal 26px/1.1 Georgia,
+            serif;
+          margin: 10px 0;
+        }
+        .static-explanation p {
+          color: var(--muted);
+          margin: 0;
+        }
+      }
+      @media (max-width: 850px) and (prefers-reduced-motion: reduce) {
+        .static-explanation {
+          grid-template-columns: 1fr;
+        }
+      }
+      .no-js .scene {
+        position: relative;
+        min-height: 0;
+        height: auto;
+      }
+      .no-js .marker,
+      .no-js .stage-nav,
+      .no-js .scene-foot {
+        display: none;
+      }
+      .no-js .scene-copy .description,
+      .no-js .scene-copy .question {
+        display: none;
+      }
+      .no-js .artboard .layer.top {
+        transform: translate(-50%, -50%) translate(var(--x1), var(--y1));
+      }
+      .no-js .artboard .layer.middle {
+        transform: translate(-50%, -50%) translate(var(--x1), var(--y1));
+      }
+      .no-js .artboard .layer.low {
+        transform: translate(-50%, -50%) translate(var(--x1), var(--y1));
+      }
+      .no-js .artboard .art-label {
+        opacity: 1;
+      }
+      .no-js .static-explanation {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--rule);
+        border: 1px solid var(--rule);
+      }
+      .no-js .static-explanation article {
+        background: var(--paper);
+        padding: 24px;
+      }
+      .no-js .static-explanation h3 {
+        font:
+          normal 26px/1.1 Georgia,
+          serif;
+        margin: 10px 0;
+      }
+      .no-js .static-explanation p {
+        color: var(--muted);
+        margin: 0;
+      }
+      @media (max-width: 850px) {
+        .no-js .static-explanation {
+          grid-template-columns: 1fr;
+        }
+      }
+      /* The source is one vertical RGBA plate. Each DOM layer keeps its original canvas
    coordinates and reveals only its own band, so the three pieces move independently. */
-.layer{width:min(88%,700px);background-size:100% 100%;background-position:center;aspect-ratio:1/1}
-.layer.top{clip-path:inset(8.5% 0 60.7% 0);--x0:26px;--y0:0px;--x1:7px;--y1:-66px;--x2:3px;--y2:-85px}
-.layer.middle{clip-path:inset(40.8% 0 29.4% 0);--x0:0px;--y0:-125px;--x1:16px;--y1:0px;--x2:17px;--y2:0px}
-.layer.low{clip-path:inset(70.5% 0 1% 0);--x0:0px;--y0:-240px;--x1:-7px;--y1:62px;--x2:-12px;--y2:81px}
-.focus-ring{left:32%;top:42%;width:39%;height:21%}
-.part-art .layer{width:min(94%,430px)}
-@media(max-width:850px){.layer{width:min(92%,480px)}.layer.top{--x0:17px;--y0:0px;--x1:7px;--y1:-40px;--x2:5px;--y2:-52px}.layer.middle{--x0:0px;--y0:-80px;--x1:9px;--y1:0px;--x2:10px;--y2:0px}.layer.low{--x0:0px;--y0:-156px;--x1:-5px;--y1:37px;--x2:-7px;--y2:50px}.focus-ring{left:28%;top:40%;width:45%;height:23%}}
-@media(max-width:490px){.artboard{height:420px}.layer{width:min(100%,370px)}.layer.top{--x0:13px;--y0:0px;--x1:5px;--y1:-28px;--x2:4px;--y2:-38px}.layer.middle{--x0:0px;--y0:-66px;--x1:7px;--y1:0px;--x2:8px;--y2:0px}.layer.low{--x0:0px;--y0:-125px;--x1:-3px;--y1:29px;--x2:-4px;--y2:39px}.focus-ring{left:25%;top:38%;width:48%;height:23%}}
-@media(min-width:851px) and (prefers-reduced-motion:reduce){.artboard{min-height:900px}}
-@media(min-width:851px){.no-js .artboard{min-height:900px}}
-@font-face{font-family:"IBM Plex Sans";src:url('../brand/fonts/IBMPlexSans-Regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
-@font-face{font-family:"IBM Plex Sans";src:url('../brand/fonts/IBMPlexSans-SemiBold.woff2') format('woff2');font-style:normal;font-weight:600 700;font-display:swap}
-@font-face{font-family:"Source Serif 4 Display";src:url('../brand/fonts/SourceSerif4Display-Regular.ttf.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
-.intro h1,.scene-copy h2,.review h2,.part h3,.static-explanation h3,.no-js .static-explanation h3{font-family:"Source Serif 4 Display",Georgia,serif}
-.zh h1,.zh h2,.zh h3,.zh .static-explanation h3{font-family:PingFang SC,"Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
-.artboard[data-stage="0"] .layer{transform:translate(-50%,-50%) translate(var(--x0),var(--y0)) translateY(70px)}
-@media(max-width:850px){.artboard[data-stage="0"] .layer{transform:translate(-50%,-50%) translate(var(--x0),var(--y0)) translateY(46px)}}
-@media(max-width:490px){.artboard[data-stage="0"] .layer{transform:translate(-50%,-50%) translate(var(--x0),var(--y0)) translateY(42px)}}
-@media(prefers-reduced-motion:reduce){.artboard[data-stage="0"] .layer{transform:translate(-50%,-50%) translate(var(--x1),var(--y1))}.artboard[data-stage="0"] .art-label{opacity:1}}
-.no-js .artboard[data-stage="0"] .layer{transform:translate(-50%,-50%) translate(var(--x1),var(--y1))}.no-js .scene-copy{display:none}
-</style>
-</head>
-<body class="no-js" data-theme="light">
-<a class="skip" href="#main">Skip to content</a>
-<header class="bar"><div class="brand"><img class="logo logo-light" src="../brand/candidate-v1/logo-horizontal.svg" alt="QAZNEDR HOLDING"><img class="logo logo-dark" src="../brand/candidate-v1/logo-horizontal-inverse.svg" alt="QAZNEDR HOLDING"></div><div class="bar-right"><span class="bar-note" data-key="prototype">Design proposal<br>08 / Geology layers</span><div class="switches" aria-label="Language and theme"><button class="lang" type="button" data-lang="ru" aria-pressed="true">RU</button><button class="lang" type="button" data-lang="en" aria-pressed="false">EN</button><button class="lang" type="button" data-lang="zh" aria-pressed="false">中文</button><button class="theme-toggle" type="button" aria-pressed="false">Dark</button></div></div></header>
-<main id="main">
-<section class="intro"><div><span class="kicker" data-key="kicker">08 / Эскиз геологической сцены</span><h1 data-key="hero">От цельного объекта<br>к читаемой структуре.</h1></div><div class="intro-aside"><strong data-key="thesis">Зачем это движение</strong><p data-key="intro">Три самостоятельных пласта раскрываются по мере просмотра. Каждый шаг меняет ракурс чтения: контекст, связь слоёв, следующий вопрос геолога.</p></div></section>
-<section class="story" aria-label="Geological layer reveal">
- <div class="scene"><div class="scene-copy" aria-live="polite"><span class="eyebrow" id="stage-count">01 / 03 · Контекст</span><h2 id="stage-title">Увидеть целое</h2><p class="description" id="stage-description">Геолог начинает с формы участка и общего положения пород.</p><p class="question" id="stage-question">Что известно из карты, архива и наблюдений?</p><div class="stage-nav" aria-label="Choose a stage"><button type="button" data-stage="0" aria-pressed="true">01 · Контекст</button><button type="button" data-stage="1" aria-pressed="false">02 · Слои</button><button type="button" data-stage="2" aria-pressed="false">03 · Проверка</button></div><div class="scene-foot"><span data-key="scrollhint">Прокрутка · 3 шага</span><div class="rule" aria-hidden="true"><span id="progress"></span></div><span id="progress-label">01 / 03</span></div></div><div class="artboard" data-stage="0" role="img" aria-label="Three illustrated geological strata shown together, then independently separated"><div class="art-heading" data-key="artheading">СХЕМАТИЧЕСКИЙ РАЗРЕЗ / НЕ ДАННЫЕ УЧАСТКА</div><div class="asset-frame" aria-hidden="true"><div class="layer top"></div><div class="layer middle"></div><div class="layer low"></div></div><span class="art-label top" data-key="toplabel">Поверхность</span><span class="art-label middle" data-key="midlabel">Контакты пород</span><span class="art-label low" data-key="lowlabel">Нижний слой</span><div class="focus-ring" aria-hidden="true"></div><span class="art-disclaimer" data-key="artnote">Иллюстрация · без масштаба</span></div></div>
- <div class="marker" data-step="0" aria-hidden="true"></div><div class="marker" data-step="1" aria-hidden="true"></div><div class="marker" data-step="2" aria-hidden="true"></div>
- <div class="static-explanation"><article><span class="index">01 / 03</span><h3 data-stage-title="0">Увидеть целое</h3><p data-stage-body="0">Геолог начинает с формы участка и общего положения пород.</p></article><article><span class="index">02 / 03</span><h3 data-stage-title="1">Развести слои</h3><p data-stage-body="1">Расстояние между пластами помогает читать их порядок и контакты.</p></article><article><span class="index">03 / 03</span><h3 data-stage-title="2">Выбрать проверку</h3><p data-stage-body="2">Внимание переходит к контакту, который нужно сверить с материалами.</p></article></div>
-</section>
-<section class="review"><div class="review-head"><div><span class="kicker" data-key="reviewlabel">Отдельные фрагменты</span><h2 data-key="reviewtitle">Три части одного рисунка.</h2></div><p data-key="reviewintro">Ниже — исходные независимые части сцены. Они работают вместе в одном следе изображения, а при раскрытии читаются порознь.</p></div><div class="parts"><article class="part"><div class="part-art"><div class="layer top" role="img" aria-label="Upper geological stratum"></div></div><span class="index">01 / 03</span><h3 data-key="part1">Поверхность</h3><p data-key="part1body">Рельеф и верхняя граница дают общий контекст.</p></article><article class="part"><div class="part-art"><div class="layer middle" role="img" aria-label="Middle geological stratum"></div></div><span class="index">02 / 03</span><h3 data-key="part2">Средний пласт</h3><p data-key="part2body">Главная область для чтения связи пород.</p></article><article class="part"><div class="part-art"><div class="layer low" role="img" aria-label="Lower geological stratum"></div></div><span class="index">03 / 03</span><h3 data-key="part3">Основание</h3><p data-key="part3body">Нижний срез завершает схему, не задавая глубину или масштаб.</p></article></div><div class="review-note"><p><strong data-key="decisionlabel">На согласование.</strong> <span data-key="decision">Раздельное движение растровых частей, пауза между шагами и акцент на среднем контакте. Утверждение сцены не подтверждает геологическую точность рисунка.</span></p><p><strong data-key="source">Материалы.</strong> <span data-key="sourcebody">Использован новый составной растр. Логотип — технический кандидат A3; точная векторная форма ещё ожидает решения владельца.</span> <a href="../mockups/08/prototype/README.md" data-key="spec">Спецификация и ограничения</a> · <a href="07-geology-motion.html" data-key="previous">Предыдущее исследование</a></p></div></section>
-</main>
-<script>
-document.body.classList.remove('no-js');
-const i18n={
- ru:{prototype:'Предложение<br>08 / Геологические слои',kicker:'08 / Эскиз геологической сцены',hero:'От цельного объекта<br>к читаемой структуре.',thesis:'Зачем это движение',intro:'Три самостоятельных пласта раскрываются по мере просмотра. Каждый шаг меняет ракурс чтения: контекст, связь слоёв, следующий вопрос геолога.',scrollhint:'Прокрутка · 3 шага',artheading:'СХЕМАТИЧЕСКИЙ РАЗРЕЗ / НЕ ДАННЫЕ УЧАСТКА',toplabel:'Поверхность',midlabel:'Контакты пород',lowlabel:'Нижний слой',artnote:'Иллюстрация · без масштаба',reviewlabel:'Отдельные фрагменты',reviewtitle:'Три части одного рисунка.',reviewintro:'Ниже — исходные независимые части сцены. Они работают вместе в одном следе изображения, а при раскрытии читаются порознь.',part1:'Поверхность',part1body:'Рельеф и верхняя граница дают общий контекст.',part2:'Средний пласт',part2body:'Главная область для чтения связи пород.',part3:'Основание',part3body:'Нижний срез завершает схему, не задавая глубину или масштаб.',decisionlabel:'На согласование.',decision:'Раздельное движение растровых частей, пауза между шагами и акцент на среднем контакте. Утверждение сцены не подтверждает геологическую точность рисунка.',source:'Материалы.',sourcebody:'Использован новый составной растр. Логотип — технический кандидат A3; точная векторная форма ещё ожидает решения владельца.',spec:'Спецификация и ограничения',previous:'Предыдущее исследование',nav:['Контекст','Слои','Проверка'],stages:[['Увидеть целое','Геолог начинает с формы участка и общего положения пород.','Что известно из карты, архива и наблюдений?'],['Развести слои','Пласты расходятся, чтобы были видны порядок и отношения между ними.','Какие контакты пород требуют внимательного чтения?'],['Выбрать проверку','Внимание переходит к одному контакту — это вопрос для дальнейшей работы.','Что сверить с архивом и полевыми материалами?']]},
- en:{prototype:'Design proposal<br>08 / Geology layers',kicker:'08 / Geological scene study',hero:'From one formation<br>to a readable structure.',thesis:'Why it moves',intro:'Three independent strata separate as the visitor moves through the page. Each step changes the reading: context, the relation between layers, the geologist’s next question.',scrollhint:'Scroll · 3 stages',artheading:'SCHEMATIC SECTION / NOT SITE DATA',toplabel:'Surface',midlabel:'Rock contacts',lowlabel:'Lower layer',artnote:'Illustration · not to scale',reviewlabel:'Individual pieces',reviewtitle:'Three parts of one drawing.',reviewintro:'These are the three independent pieces in the scene. They share one footprint when assembled and read separately after the reveal.',part1:'Surface',part1body:'The relief and upper boundary establish context.',part2:'Middle stratum',part2body:'The main area for reading relationships between rocks.',part3:'Base',part3body:'The lower section completes the diagram without implying depth or scale.',decisionlabel:'For review.',decision:'Independent motion of raster parts, pacing between stages, and focus on the middle contact. Approval of the scene does not establish geological accuracy.',source:'Materials.',sourcebody:'A new composite raster is used. The logo is the technical A3 candidate; its exact vector form still awaits owner review.',spec:'Specification and limits',previous:'Earlier study',nav:['Context','Layers','Verification'],stages:[['See the whole','The geologist begins with the site form and the broad position of rock units.','What is known from maps, archives and observation?'],['Separate the layers','The strata part to make their order and relationships visible.','Which contacts call for a closer reading?'],['Choose a check','Attention moves to one contact as a question for further work.','What should be compared with archive and field materials?']]},
- zh:{prototype:'设计提案<br>08 / 地质分层',kicker:'08 / 地质场景草案',hero:'从完整地层<br>到清晰结构。',thesis:'为何展开',intro:'三个独立地层随浏览逐步分开。每一步转换观察重点：整体背景、地层关系、地质师接下来要核查的问题。',scrollhint:'滚动浏览 · 三个阶段',artheading:'示意剖面 / 非地块数据',toplabel:'地表',midlabel:'岩层接触',lowlabel:'下部地层',artnote:'示意图 · 不按比例',reviewlabel:'独立图层',reviewtitle:'一幅图的三个部分。',reviewintro:'以下展示场景中的三个独立部分。合在一起形成整体，展开后可分别观察。',part1:'地表',part1body:'地形与上部边界提供整体背景。',part2:'中部地层',part2body:'观察岩层关系的主要区域。',part3:'基底',part3body:'下部剖面补全示意，不表示深度或比例。',decisionlabel:'供审阅。',decision:'请评估图层分离、步骤节奏与中部接触带的视觉重点。认可场景不等于确认图中的地质准确性。',source:'素材。',sourcebody:'场景使用新制作的复合位图。标志为 A3 技术候选稿，其精确矢量形态仍待业主审定。',spec:'规格与限制',previous:'上一版研究',nav:['整体','分层','核查'],stages:[['观察整体','地质师先看地形和岩层的大致位置。','地图、档案和观察资料已告诉我们什么？'],['分开地层','地层展开后，更容易读懂顺序与相互关系。','哪些岩层接触关系值得细看？'],['选择核查点','关注一个接触关系，并将它作为下一步工作的问题。','应与哪些档案和野外资料核对？']]}
-};
-let language='ru',stage=0;const reduced=matchMedia('(prefers-reduced-motion: reduce)'),mobile=matchMedia('(max-width: 850px)');if(reduced.matches)stage=1;const art=document.querySelector('.artboard');
-function render(){const t=i18n[language];document.documentElement.lang=language==='zh'?'zh-CN':language;document.body.classList.toggle('zh',language==='zh');document.querySelectorAll('[data-key]').forEach(el=>{const v=t[el.dataset.key];if(v!==undefined){if(el.dataset.key==='hero'||el.dataset.key==='prototype')el.innerHTML=v;else el.textContent=v}});document.querySelectorAll('[data-stage-title]').forEach(el=>el.textContent=t.stages[+el.dataset.stageTitle][0]);document.querySelectorAll('[data-stage-body]').forEach(el=>el.textContent=t.stages[+el.dataset.stageBody][1]);document.getElementById('stage-count').textContent=`0${stage+1} / 03 · ${t.nav[stage]}`;document.getElementById('stage-title').textContent=t.stages[stage][0];document.getElementById('stage-description').textContent=t.stages[stage][1];document.getElementById('stage-question').textContent=t.stages[stage][2];document.getElementById('progress-label').textContent=`0${stage+1} / 03`;document.getElementById('progress').style.width=`${(stage+1)*100/3}%`;art.dataset.stage=stage;art.setAttribute('aria-label',t.artheading+': '+t.stages[stage][1]);document.querySelectorAll('.stage-nav button').forEach((b,n)=>{b.textContent=`0${n+1} · ${t.nav[n]}`;b.setAttribute('aria-pressed',String(n===stage))});document.querySelectorAll('.lang').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===language)));document.querySelectorAll('.part-art .layer').forEach((el,n)=>el.setAttribute('aria-label',t['part'+(n+1)]))}
-function select(n,clicked=false){stage=n;render();if(clicked&&!mobile.matches&&!reduced.matches)document.querySelector(`.marker[data-step="${n}"]`).scrollIntoView({behavior:'smooth',block:'center'})}
-document.querySelectorAll('.lang').forEach(b=>b.addEventListener('click',()=>{language=b.dataset.lang;render()}));document.querySelectorAll('.stage-nav button').forEach(b=>b.addEventListener('click',()=>select(+b.dataset.stage,true)));document.querySelector('.theme-toggle').addEventListener('click',e=>{const dark=document.body.dataset.theme!=='dark';document.body.dataset.theme=dark?'dark':'light';e.currentTarget.setAttribute('aria-pressed',String(dark));e.currentTarget.textContent=dark?'Light':'Dark'});
-let ticking=false;addEventListener('scroll',()=>{if(ticking||mobile.matches||reduced.matches)return;ticking=true;requestAnimationFrame(()=>{const r=document.querySelector('.story').getBoundingClientRect();if(r.top<innerHeight*.55&&r.bottom>innerHeight*.45){let best=0,dist=Infinity;document.querySelectorAll('.marker').forEach((m,n)=>{const mr=m.getBoundingClientRect(),d=Math.abs((mr.top+mr.bottom)/2-innerHeight*.5);if(d<dist){dist=d;best=n}});if(best!==stage)select(best)}ticking=false})},{passive:true});render();
-</script>
-</body>
+      .layer {
+        width: min(88%, 700px);
+        background-size: 100% 100%;
+        background-position: center;
+        aspect-ratio: 1/1;
+      }
+      .layer.top {
+        clip-path: inset(8.5% 0 60.7% 0);
+        --x0: 26px;
+        --y0: 0px;
+        --x1: 7px;
+        --y1: -66px;
+        --x2: 3px;
+        --y2: -85px;
+      }
+      .layer.middle {
+        clip-path: inset(40.8% 0 29.4% 0);
+        --x0: 0px;
+        --y0: -125px;
+        --x1: 16px;
+        --y1: 0px;
+        --x2: 17px;
+        --y2: 0px;
+      }
+      .layer.low {
+        clip-path: inset(70.5% 0 1% 0);
+        --x0: 0px;
+        --y0: -240px;
+        --x1: -7px;
+        --y1: 62px;
+        --x2: -12px;
+        --y2: 81px;
+      }
+      .focus-ring {
+        left: 32%;
+        top: 42%;
+        width: 39%;
+        height: 21%;
+      }
+      .part-art .layer {
+        width: min(94%, 430px);
+      }
+      @media (max-width: 850px) {
+        .layer {
+          width: min(92%, 480px);
+        }
+        .layer.top {
+          --x0: 17px;
+          --y0: 0px;
+          --x1: 7px;
+          --y1: -40px;
+          --x2: 5px;
+          --y2: -52px;
+        }
+        .layer.middle {
+          --x0: 0px;
+          --y0: -80px;
+          --x1: 9px;
+          --y1: 0px;
+          --x2: 10px;
+          --y2: 0px;
+        }
+        .layer.low {
+          --x0: 0px;
+          --y0: -156px;
+          --x1: -5px;
+          --y1: 37px;
+          --x2: -7px;
+          --y2: 50px;
+        }
+        .focus-ring {
+          left: 28%;
+          top: 40%;
+          width: 45%;
+          height: 23%;
+        }
+      }
+      @media (max-width: 490px) {
+        .artboard {
+          height: 420px;
+        }
+        .layer {
+          width: min(100%, 370px);
+        }
+        .layer.top {
+          --x0: 13px;
+          --y0: 0px;
+          --x1: 5px;
+          --y1: -28px;
+          --x2: 4px;
+          --y2: -38px;
+        }
+        .layer.middle {
+          --x0: 0px;
+          --y0: -66px;
+          --x1: 7px;
+          --y1: 0px;
+          --x2: 8px;
+          --y2: 0px;
+        }
+        .layer.low {
+          --x0: 0px;
+          --y0: -125px;
+          --x1: -3px;
+          --y1: 29px;
+          --x2: -4px;
+          --y2: 39px;
+        }
+        .focus-ring {
+          left: 25%;
+          top: 38%;
+          width: 48%;
+          height: 23%;
+        }
+      }
+      @media (min-width: 851px) and (prefers-reduced-motion: reduce) {
+        .artboard {
+          min-height: 900px;
+        }
+      }
+      @media (min-width: 851px) {
+        .no-js .artboard {
+          min-height: 900px;
+        }
+      }
+      @font-face {
+        font-family: 'IBM Plex Sans';
+        src: url('../brand/fonts/IBMPlexSans-Regular.woff2') format('woff2');
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'IBM Plex Sans';
+        src: url('../brand/fonts/IBMPlexSans-SemiBold.woff2') format('woff2');
+        font-style: normal;
+        font-weight: 600 700;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Source Serif 4 Display';
+        src: url('../brand/fonts/SourceSerif4Display-Regular.ttf.woff2')
+          format('woff2');
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+      }
+      .intro h1,
+      .scene-copy h2,
+      .review h2,
+      .part h3,
+      .static-explanation h3,
+      .no-js .static-explanation h3 {
+        font-family: 'Source Serif 4 Display', Georgia, serif;
+      }
+      .zh h1,
+      .zh h2,
+      .zh h3,
+      .zh .static-explanation h3 {
+        font-family:
+          PingFang SC,
+          'Hiragino Sans GB',
+          'Microsoft YaHei',
+          'Noto Sans CJK SC',
+          sans-serif;
+      }
+      .artboard[data-stage='0'] .layer {
+        transform: translate(-50%, -50%) translate(var(--x0), var(--y0))
+          translateY(70px);
+      }
+      @media (max-width: 850px) {
+        .artboard[data-stage='0'] .layer {
+          transform: translate(-50%, -50%) translate(var(--x0), var(--y0))
+            translateY(46px);
+        }
+      }
+      @media (max-width: 490px) {
+        .artboard[data-stage='0'] .layer {
+          transform: translate(-50%, -50%) translate(var(--x0), var(--y0))
+            translateY(42px);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .artboard[data-stage='0'] .layer {
+          transform: translate(-50%, -50%) translate(var(--x1), var(--y1));
+        }
+        .artboard[data-stage='0'] .art-label {
+          opacity: 1;
+        }
+      }
+      .no-js .artboard[data-stage='0'] .layer {
+        transform: translate(-50%, -50%) translate(var(--x1), var(--y1));
+      }
+      .no-js .scene-copy {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="no-js" data-theme="light">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="bar">
+      <div class="brand">
+        <img
+          class="logo logo-light"
+          src="../brand/candidate-v1/logo-horizontal.svg"
+          alt="QAZNEDR HOLDING"
+        /><img
+          class="logo logo-dark"
+          src="../brand/candidate-v1/logo-horizontal-inverse.svg"
+          alt="QAZNEDR HOLDING"
+        />
+      </div>
+      <div class="bar-right">
+        <span class="bar-note" data-key="prototype"
+          >Design proposal<br />08 / Geology layers</span
+        >
+        <div class="switches" aria-label="Language and theme">
+          <button class="lang" type="button" data-lang="ru" aria-pressed="true">
+            RU</button
+          ><button
+            class="lang"
+            type="button"
+            data-lang="en"
+            aria-pressed="false"
+          >
+            EN</button
+          ><button
+            class="lang"
+            type="button"
+            data-lang="zh"
+            aria-pressed="false"
+          >
+            中文</button
+          ><button class="theme-toggle" type="button" aria-pressed="false">
+            Dark
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main">
+      <section class="intro">
+        <div>
+          <span class="kicker" data-key="kicker"
+            >08 / Эскиз геологической сцены</span
+          >
+          <h1 data-key="hero">
+            От цельного объекта<br />к читаемой структуре.
+          </h1>
+        </div>
+        <div class="intro-aside">
+          <strong data-key="thesis">Зачем это движение</strong>
+          <p data-key="intro">
+            Три самостоятельных пласта раскрываются по мере просмотра. Каждый
+            шаг меняет ракурс чтения: контекст, связь слоёв, следующий вопрос
+            геолога.
+          </p>
+        </div>
+      </section>
+      <section class="story" aria-label="Geological layer reveal">
+        <div class="scene">
+          <div class="scene-copy" aria-live="polite">
+            <span class="eyebrow" id="stage-count">01 / 03 · Контекст</span>
+            <h2 id="stage-title">Увидеть целое</h2>
+            <p class="description" id="stage-description">
+              Геолог начинает с формы участка и общего положения пород.
+            </p>
+            <p class="question" id="stage-question">
+              Что известно из карты, архива и наблюдений?
+            </p>
+            <div class="stage-nav" aria-label="Choose a stage">
+              <button type="button" data-stage="0" aria-pressed="true">
+                01 · Контекст</button
+              ><button type="button" data-stage="1" aria-pressed="false">
+                02 · Слои</button
+              ><button type="button" data-stage="2" aria-pressed="false">
+                03 · Проверка
+              </button>
+            </div>
+            <div class="scene-foot">
+              <span data-key="scrollhint">Прокрутка · 3 шага</span>
+              <div class="rule" aria-hidden="true">
+                <span id="progress"></span>
+              </div>
+              <span id="progress-label">01 / 03</span>
+            </div>
+          </div>
+          <div
+            class="artboard"
+            data-stage="0"
+            role="img"
+            aria-label="Three illustrated geological strata shown together, then independently separated"
+          >
+            <div class="art-heading" data-key="artheading">
+              СХЕМАТИЧЕСКИЙ РАЗРЕЗ / НЕ ДАННЫЕ УЧАСТКА
+            </div>
+            <div class="asset-frame" aria-hidden="true">
+              <div class="layer top"></div>
+              <div class="layer middle"></div>
+              <div class="layer low"></div>
+            </div>
+            <span class="art-label top" data-key="toplabel">Поверхность</span
+            ><span class="art-label middle" data-key="midlabel"
+              >Контакты пород</span
+            ><span class="art-label low" data-key="lowlabel">Нижний слой</span>
+            <div class="focus-ring" aria-hidden="true"></div>
+            <span class="art-disclaimer" data-key="artnote"
+              >Иллюстрация · без масштаба</span
+            >
+          </div>
+        </div>
+        <div class="marker" data-step="0" aria-hidden="true"></div>
+        <div class="marker" data-step="1" aria-hidden="true"></div>
+        <div class="marker" data-step="2" aria-hidden="true"></div>
+        <div class="static-explanation">
+          <article>
+            <span class="index">01 / 03</span>
+            <h3 data-stage-title="0">Увидеть целое</h3>
+            <p data-stage-body="0">
+              Геолог начинает с формы участка и общего положения пород.
+            </p>
+          </article>
+          <article>
+            <span class="index">02 / 03</span>
+            <h3 data-stage-title="1">Развести слои</h3>
+            <p data-stage-body="1">
+              Расстояние между пластами помогает читать их порядок и контакты.
+            </p>
+          </article>
+          <article>
+            <span class="index">03 / 03</span>
+            <h3 data-stage-title="2">Выбрать проверку</h3>
+            <p data-stage-body="2">
+              Внимание переходит к контакту, который нужно сверить с
+              материалами.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section class="review">
+        <div class="review-head">
+          <div>
+            <span class="kicker" data-key="reviewlabel"
+              >Отдельные фрагменты</span
+            >
+            <h2 data-key="reviewtitle">Три части одного рисунка.</h2>
+          </div>
+          <p data-key="reviewintro">
+            Ниже — исходные независимые части сцены. Они работают вместе в одном
+            следе изображения, а при раскрытии читаются порознь.
+          </p>
+        </div>
+        <div class="parts">
+          <article class="part">
+            <div class="part-art">
+              <div
+                class="layer top"
+                role="img"
+                aria-label="Upper geological stratum"
+              ></div>
+            </div>
+            <span class="index">01 / 03</span>
+            <h3 data-key="part1">Поверхность</h3>
+            <p data-key="part1body">
+              Рельеф и верхняя граница дают общий контекст.
+            </p>
+          </article>
+          <article class="part">
+            <div class="part-art">
+              <div
+                class="layer middle"
+                role="img"
+                aria-label="Middle geological stratum"
+              ></div>
+            </div>
+            <span class="index">02 / 03</span>
+            <h3 data-key="part2">Средний пласт</h3>
+            <p data-key="part2body">Главная область для чтения связи пород.</p>
+          </article>
+          <article class="part">
+            <div class="part-art">
+              <div
+                class="layer low"
+                role="img"
+                aria-label="Lower geological stratum"
+              ></div>
+            </div>
+            <span class="index">03 / 03</span>
+            <h3 data-key="part3">Основание</h3>
+            <p data-key="part3body">
+              Нижний срез завершает схему, не задавая глубину или масштаб.
+            </p>
+          </article>
+        </div>
+        <div class="review-note">
+          <p>
+            <strong data-key="decisionlabel">На согласование.</strong>
+            <span data-key="decision"
+              >Раздельное движение растровых частей, пауза между шагами и акцент
+              на среднем контакте. Утверждение сцены не подтверждает
+              геологическую точность рисунка.</span
+            >
+          </p>
+          <p>
+            <strong data-key="source">Материалы.</strong>
+            <span data-key="sourcebody"
+              >Использован новый составной растр. Логотип — технический кандидат
+              A3; точная векторная форма ещё ожидает решения владельца.</span
+            >
+            <a href="../mockups/08/prototype/README.md" data-key="spec"
+              >Спецификация и ограничения</a
+            >
+            ·
+            <a href="07-geology-motion.html" data-key="previous"
+              >Предыдущее исследование</a
+            >
+          </p>
+        </div>
+      </section>
+    </main>
+    <script>
+      document.body.classList.remove('no-js');
+      const i18n = {
+        ru: {
+          prototype: 'Предложение<br>08 / Геологические слои',
+          kicker: '08 / Эскиз геологической сцены',
+          hero: 'От цельного объекта<br>к читаемой структуре.',
+          thesis: 'Зачем это движение',
+          intro:
+            'Три самостоятельных пласта раскрываются по мере просмотра. Каждый шаг меняет ракурс чтения: контекст, связь слоёв, следующий вопрос геолога.',
+          scrollhint: 'Прокрутка · 3 шага',
+          artheading: 'СХЕМАТИЧЕСКИЙ РАЗРЕЗ / НЕ ДАННЫЕ УЧАСТКА',
+          toplabel: 'Поверхность',
+          midlabel: 'Контакты пород',
+          lowlabel: 'Нижний слой',
+          artnote: 'Иллюстрация · без масштаба',
+          reviewlabel: 'Отдельные фрагменты',
+          reviewtitle: 'Три части одного рисунка.',
+          reviewintro:
+            'Ниже — исходные независимые части сцены. Они работают вместе в одном следе изображения, а при раскрытии читаются порознь.',
+          part1: 'Поверхность',
+          part1body: 'Рельеф и верхняя граница дают общий контекст.',
+          part2: 'Средний пласт',
+          part2body: 'Главная область для чтения связи пород.',
+          part3: 'Основание',
+          part3body:
+            'Нижний срез завершает схему, не задавая глубину или масштаб.',
+          decisionlabel: 'На согласование.',
+          decision:
+            'Раздельное движение растровых частей, пауза между шагами и акцент на среднем контакте. Утверждение сцены не подтверждает геологическую точность рисунка.',
+          source: 'Материалы.',
+          sourcebody:
+            'Использован новый составной растр. Логотип — технический кандидат A3; точная векторная форма ещё ожидает решения владельца.',
+          spec: 'Спецификация и ограничения',
+          previous: 'Предыдущее исследование',
+          nav: ['Контекст', 'Слои', 'Проверка'],
+          stages: [
+            [
+              'Увидеть целое',
+              'Геолог начинает с формы участка и общего положения пород.',
+              'Что известно из карты, архива и наблюдений?',
+            ],
+            [
+              'Развести слои',
+              'Пласты расходятся, чтобы были видны порядок и отношения между ними.',
+              'Какие контакты пород требуют внимательного чтения?',
+            ],
+            [
+              'Выбрать проверку',
+              'Внимание переходит к одному контакту — это вопрос для дальнейшей работы.',
+              'Что сверить с архивом и полевыми материалами?',
+            ],
+          ],
+        },
+        en: {
+          prototype: 'Design proposal<br>08 / Geology layers',
+          kicker: '08 / Geological scene study',
+          hero: 'From one formation<br>to a readable structure.',
+          thesis: 'Why it moves',
+          intro:
+            'Three independent strata separate as the visitor moves through the page. Each step changes the reading: context, the relation between layers, the geologist’s next question.',
+          scrollhint: 'Scroll · 3 stages',
+          artheading: 'SCHEMATIC SECTION / NOT SITE DATA',
+          toplabel: 'Surface',
+          midlabel: 'Rock contacts',
+          lowlabel: 'Lower layer',
+          artnote: 'Illustration · not to scale',
+          reviewlabel: 'Individual pieces',
+          reviewtitle: 'Three parts of one drawing.',
+          reviewintro:
+            'These are the three independent pieces in the scene. They share one footprint when assembled and read separately after the reveal.',
+          part1: 'Surface',
+          part1body: 'The relief and upper boundary establish context.',
+          part2: 'Middle stratum',
+          part2body: 'The main area for reading relationships between rocks.',
+          part3: 'Base',
+          part3body:
+            'The lower section completes the diagram without implying depth or scale.',
+          decisionlabel: 'For review.',
+          decision:
+            'Independent motion of raster parts, pacing between stages, and focus on the middle contact. Approval of the scene does not establish geological accuracy.',
+          source: 'Materials.',
+          sourcebody:
+            'A new composite raster is used. The logo is the technical A3 candidate; its exact vector form still awaits owner review.',
+          spec: 'Specification and limits',
+          previous: 'Earlier study',
+          nav: ['Context', 'Layers', 'Verification'],
+          stages: [
+            [
+              'See the whole',
+              'The geologist begins with the site form and the broad position of rock units.',
+              'What is known from maps, archives and observation?',
+            ],
+            [
+              'Separate the layers',
+              'The strata part to make their order and relationships visible.',
+              'Which contacts call for a closer reading?',
+            ],
+            [
+              'Choose a check',
+              'Attention moves to one contact as a question for further work.',
+              'What should be compared with archive and field materials?',
+            ],
+          ],
+        },
+        zh: {
+          prototype: '设计提案<br>08 / 地质分层',
+          kicker: '08 / 地质场景草案',
+          hero: '从完整地层<br>到清晰结构。',
+          thesis: '为何展开',
+          intro:
+            '三个独立地层随浏览逐步分开。每一步转换观察重点：整体背景、地层关系、地质师接下来要核查的问题。',
+          scrollhint: '滚动浏览 · 三个阶段',
+          artheading: '示意剖面 / 非地块数据',
+          toplabel: '地表',
+          midlabel: '岩层接触',
+          lowlabel: '下部地层',
+          artnote: '示意图 · 不按比例',
+          reviewlabel: '独立图层',
+          reviewtitle: '一幅图的三个部分。',
+          reviewintro:
+            '以下展示场景中的三个独立部分。合在一起形成整体，展开后可分别观察。',
+          part1: '地表',
+          part1body: '地形与上部边界提供整体背景。',
+          part2: '中部地层',
+          part2body: '观察岩层关系的主要区域。',
+          part3: '基底',
+          part3body: '下部剖面补全示意，不表示深度或比例。',
+          decisionlabel: '供审阅。',
+          decision:
+            '请评估图层分离、步骤节奏与中部接触带的视觉重点。认可场景不等于确认图中的地质准确性。',
+          source: '素材。',
+          sourcebody:
+            '场景使用新制作的复合位图。标志为 A3 技术候选稿，其精确矢量形态仍待业主审定。',
+          spec: '规格与限制',
+          previous: '上一版研究',
+          nav: ['整体', '分层', '核查'],
+          stages: [
+            [
+              '观察整体',
+              '地质师先看地形和岩层的大致位置。',
+              '地图、档案和观察资料已告诉我们什么？',
+            ],
+            [
+              '分开地层',
+              '地层展开后，更容易读懂顺序与相互关系。',
+              '哪些岩层接触关系值得细看？',
+            ],
+            [
+              '选择核查点',
+              '关注一个接触关系，并将它作为下一步工作的问题。',
+              '应与哪些档案和野外资料核对？',
+            ],
+          ],
+        },
+      };
+      let language = 'ru',
+        stage = 0;
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)'),
+        mobile = matchMedia('(max-width: 850px)');
+      if (reduced.matches) stage = 1;
+      const art = document.querySelector('.artboard');
+      function render() {
+        const t = i18n[language];
+        document.documentElement.lang = language === 'zh' ? 'zh-CN' : language;
+        document.body.classList.toggle('zh', language === 'zh');
+        document.querySelectorAll('[data-key]').forEach((el) => {
+          const v = t[el.dataset.key];
+          if (v !== undefined) {
+            if (el.dataset.key === 'hero' || el.dataset.key === 'prototype')
+              el.innerHTML = v;
+            else el.textContent = v;
+          }
+        });
+        document
+          .querySelectorAll('[data-stage-title]')
+          .forEach(
+            (el) => (el.textContent = t.stages[+el.dataset.stageTitle][0])
+          );
+        document
+          .querySelectorAll('[data-stage-body]')
+          .forEach(
+            (el) => (el.textContent = t.stages[+el.dataset.stageBody][1])
+          );
+        document.getElementById('stage-count').textContent =
+          `0${stage + 1} / 03 · ${t.nav[stage]}`;
+        document.getElementById('stage-title').textContent = t.stages[stage][0];
+        document.getElementById('stage-description').textContent =
+          t.stages[stage][1];
+        document.getElementById('stage-question').textContent =
+          t.stages[stage][2];
+        document.getElementById('progress-label').textContent =
+          `0${stage + 1} / 03`;
+        document.getElementById('progress').style.width =
+          `${((stage + 1) * 100) / 3}%`;
+        art.dataset.stage = stage;
+        art.setAttribute(
+          'aria-label',
+          t.artheading + ': ' + t.stages[stage][1]
+        );
+        document.querySelectorAll('.stage-nav button').forEach((b, n) => {
+          b.textContent = `0${n + 1} · ${t.nav[n]}`;
+          b.setAttribute('aria-pressed', String(n === stage));
+        });
+        document
+          .querySelectorAll('.lang')
+          .forEach((b) =>
+            b.setAttribute('aria-pressed', String(b.dataset.lang === language))
+          );
+        document
+          .querySelectorAll('.part-art .layer')
+          .forEach((el, n) =>
+            el.setAttribute('aria-label', t['part' + (n + 1)])
+          );
+      }
+      function select(n, clicked = false) {
+        stage = n;
+        render();
+        if (clicked && !mobile.matches && !reduced.matches)
+          document
+            .querySelector(`.marker[data-step="${n}"]`)
+            .scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      document.querySelectorAll('.lang').forEach((b) =>
+        b.addEventListener('click', () => {
+          language = b.dataset.lang;
+          render();
+        })
+      );
+      document
+        .querySelectorAll('.stage-nav button')
+        .forEach((b) =>
+          b.addEventListener('click', () => select(+b.dataset.stage, true))
+        );
+      document.querySelector('.theme-toggle').addEventListener('click', (e) => {
+        const dark = document.body.dataset.theme !== 'dark';
+        document.body.dataset.theme = dark ? 'dark' : 'light';
+        e.currentTarget.setAttribute('aria-pressed', String(dark));
+        e.currentTarget.textContent = dark ? 'Light' : 'Dark';
+      });
+      let ticking = false;
+      addEventListener(
+        'scroll',
+        () => {
+          if (ticking || mobile.matches || reduced.matches) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            const r = document.querySelector('.story').getBoundingClientRect();
+            if (r.top < innerHeight * 0.55 && r.bottom > innerHeight * 0.45) {
+              let best = 0,
+                dist = Infinity;
+              document.querySelectorAll('.marker').forEach((m, n) => {
+                const mr = m.getBoundingClientRect(),
+                  d = Math.abs((mr.top + mr.bottom) / 2 - innerHeight * 0.5);
+                if (d < dist) {
+                  dist = d;
+                  best = n;
+                }
+              });
+              if (best !== stage) select(best);
+            }
+            ticking = false;
+          });
+        },
+        { passive: true }
+      );
+      render();
+    </script>
+  </body>
 </html>

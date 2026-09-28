@@ -1,47 +1,1192 @@
 <!doctype html>
 <html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>QAZNEDR HOLDING — три направления айдентики</title>
-<style>
-:root{--paper:#eceae4;--ink:#202824;--muted:#5c665f;--rule:#c9cec7}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,a{font:inherit}a{color:inherit}button{cursor:pointer}.page{max-width:1600px;margin:auto;padding:28px clamp(18px,3.4vw,58px) 88px}.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}.mast{display:flex;justify-content:space-between;gap:24px;border-bottom:1px solid #9da79c;padding-bottom:20px}.mast .right{text-align:right;color:var(--muted);font-size:12px;line-height:1.5}.intro{padding:56px 0 44px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(240px,.5fr);gap:50px;align-items:end}.intro h1{font:normal clamp(48px,6vw,100px)/.95 Georgia,serif;letter-spacing:-.05em;margin:0;max-width:1100px}.intro p{max-width:390px;line-height:1.55;color:#465148;margin:0}.section-line{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:13px 0;border-top:1px solid #9da79c;font-size:12px}.section-line strong{font-size:14px}.overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.overview-card{background:var(--light);border:1px solid rgba(0,0,0,.15);min-width:0;display:flex;flex-direction:column;min-height:570px}.overview-visual{min-height:340px;background:var(--dark);color:var(--light);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(22px,2.5vw,42px);overflow:hidden}.overview-num{font-size:12px;letter-spacing:.16em;color:var(--accent-light)}.overview-logo{width:100%;max-width:360px;color:var(--light)}.overview-logo .logo-word{color:var(--light)}.overview-logo .logo-sub{color:var(--light)}.overview-bottom{font:normal clamp(22px,2.4vw,40px)/1.08 Georgia,serif;max-width:400px}.overview-meta{padding:23px 25px 30px;flex:1}.overview-meta h2{font:normal 30px/1.1 Georgia,serif;margin:0 0 13px}.overview-meta p{font-size:14px;line-height:1.5;margin:0 0 20px;color:var(--ink)}.tag-row{display:flex;gap:7px;flex-wrap:wrap}.tag{border:1px solid var(--line);padding:6px 9px;font-size:11px;color:var(--ink)}.jump{display:inline-block;margin-top:21px;font-size:12px;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:4px}.index{display:flex;gap:12px;flex-wrap:wrap;padding:25px 0 58px}.index a{font-size:12px;text-decoration:none;border:1px solid #aeb8ad;padding:11px 14px}.concept{margin-top:10px;padding-top:32px;border-top:2px solid #3b4a40}.concept-head{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1fr);gap:30px;align-items:start;margin-bottom:34px}.concept-head h2{font:normal clamp(48px,5vw,80px)/.95 Georgia,serif;letter-spacing:-.045em;margin:13px 0}.concept-head p{font-size:16px;line-height:1.55;max-width:750px;margin:15px 0 0}.concept-head .n{font-size:12px;letter-spacing:.16em}.concept-shell{--light:#f3f0e8;--dark:#172320;--text:#20302d;--accent-light:#d7b568;--accent-dark:#70511f;--line:#c8c8ba;color:var(--text)}.concept-shell.b{--light:#f2ede3;--dark:#102538;--text:#18334a;--accent-light:#dba88e;--accent-dark:#7f432e;--line:#c4c4bf}.concept-shell.c{--light:#f5f0e6;--dark:#102b24;--text:#17372e;--accent-light:#d0a66a;--accent-dark:#77572e;--line:#c8c3b4}.module{margin:32px 0 46px}.module-title{display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-bottom:1px solid #aeb8ad;padding-bottom:9px;margin-bottom:16px}.module-title h3{font-size:13px;letter-spacing:.13em;text-transform:uppercase;margin:0}.module-title span{font-size:11px;color:#5d655f}.grid{display:grid;gap:12px}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.specimen{min-width:0;padding:20px;min-height:205px;background:var(--light);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}.specimen.dark{background:var(--dark);color:var(--light);border-color:var(--dark)}.specimen.mono{background:#f8f8f6;color:#111;border-color:#b9bbb7}.cap{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:inherit;opacity:.75}.specimen .logo{max-width:100%}.logo{display:flex;align-items:center;gap:14px;color:var(--text)}.logo-mark{width:64px;height:64px;flex:0 0 auto}.logo-name{font-size:clamp(20px,2vw,31px);font-weight:700;letter-spacing:.10em;white-space:nowrap;line-height:1}.logo-holding{font-size:10px;font-weight:700;letter-spacing:.56em;margin-top:9px}.logo.stacked{flex-direction:column;gap:8px;text-align:center;align-items:center}.logo.stacked .logo-mark{width:72px;height:72px}.logo.stacked .logo-name{font-size:30px}.logo.stacked .logo-holding{font-size:11px}.logo.c .logo-name{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:.025em;font-size:clamp(24px,2.5vw,38px)}.logo.c .logo-holding{font-family:Arial,sans-serif;letter-spacing:.38em}.logo.c .word-rule{height:3px;background:var(--accent-dark);margin-top:6px}.logo.c .logo-mark{width:54px;height:54px}.logo.c.horizontal .logo-mark{display:none}.dark .logo,.dark .logo-name,.dark .logo-holding{color:var(--light)}.dark .logo.c .word-rule{background:var(--accent-light)}.mono .logo,.mono .logo-name,.mono .logo-holding{color:#111}.mono .logo.c .word-rule{background:#111}.mark-only{width:78px;height:78px}.mono svg{filter:grayscale(1) brightness(.12)}.dark svg.a-mark rect{fill:#f2eee2}.dark svg.a-mark .a-cut{stroke:#f2eee2}.logo .a-mark,.mark-only.a-mark{overflow:visible}.palette{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.palette-panel{border:1px solid var(--line);background:var(--light);padding:18px}.palette-panel.dark{background:var(--dark);color:var(--light);border-color:var(--dark)}.palette-heading{font-size:12px;font-weight:700;margin:0 0 15px}.swatches{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.swatch{height:52px;border:1px solid rgba(0,0,0,.14)}.swatch-label{font-size:10px;line-height:1.4;margin-top:8px}.type-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}.type-panel{background:var(--light);padding:24px;border:1px solid var(--line)}.type-panel.dark{background:var(--dark);color:var(--light);border-color:var(--dark)}.type-kicker{font-size:11px;letter-spacing:.13em;text-transform:uppercase}.type-display{font-size:clamp(27px,3vw,49px);line-height:1.15;margin:28px 0 18px}.type-body{font-size:15px;line-height:1.5;max-width:520px}.type-note{font-size:12px;line-height:1.5;color:#56635a}.cn-table{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.cn-item{background:var(--light);border:1px solid var(--line);padding:20px;min-width:0}.cn-item .chinese{font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC',sans-serif;font-size:clamp(19px,2.3vw,30px);margin:17px 0}.cn-item p{font-size:12px;line-height:1.45;margin:0}.cn-item small{display:block;margin-top:15px;color:var(--accent-dark);font-weight:700}.screen-pair{display:grid;grid-template-columns:minmax(0,1fr) 375px;gap:16px;align-items:start}.screen-card{background:#fff;border:1px solid #abb3a9;min-width:0;padding:12px}.screen-label{font-size:11px;color:#58645a;margin:0 0 10px}.desktop-screen{background:var(--light);height:345px;overflow:hidden}.site-nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:15px 23px;gap:10px}.site-nav .logo-mark{width:35px;height:35px}.site-nav .logo-name{font-size:17px}.site-nav .logo-holding{font-size:7px;margin-top:5px}.site-nav .logo.c .logo-name{font-size:21px}.nav-links{display:flex;gap:23px;align-items:center;font-size:11px;white-space:nowrap}.nav-contact{background:var(--text);color:#fff;padding:12px 15px;font-size:11px;white-space:nowrap}.site-hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:271px}.hero-copy{padding:31px 40px}.hero-copy .mini{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-dark)}.hero-copy h4{font:normal clamp(26px,3vw,44px)/1.06 Georgia,serif;margin:15px 0}.hero-copy p{font-size:11px;max-width:380px;line-height:1.5}.hero-photo{background:#c3c3b7;color:#39443d;display:flex;align-items:center;justify-content:center;font-size:12px}.mobile-screen{width:375px;height:680px;background:var(--light);overflow:hidden}.mobile-screen .site-nav{padding:15px}.mobile-screen .site-nav .logo-mark{width:31px;height:31px}.mobile-screen .site-nav .logo-name{font-size:16px}.mobile-screen .site-nav .logo.c .logo-name{font-size:20px}.mobile-screen .site-nav .logo-holding{font-size:7px}.mobile-menu{font-size:11px;border:1px solid var(--line);padding:12px}.mobile-screen .site-hero{display:block}.mobile-screen .hero-copy{padding:33px 21px}.mobile-screen .hero-copy h4{font-size:34px}.mobile-screen .hero-copy p{font-size:13px}.mobile-screen .hero-photo{height:155px}.mobile-actions{display:flex;gap:8px;padding:0 20px 20px}.mobile-actions span{background:var(--text);color:#fff;padding:14px 11px;font-size:12px;flex:1;text-align:center}.mobile-actions span:last-child{background:transparent;color:var(--text);border:1px solid var(--text)}.mobile-caption{padding:12px 20px;border-top:1px solid var(--line);font-size:11px;line-height:1.4}.applications{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:12px}.application{background:var(--light);border:1px solid var(--line);padding:20px;min-width:0;min-height:240px}.application h4{font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 20px}.fav-row{display:flex;align-items:end;gap:22px}.fav-size{text-align:center;font-size:11px}.fav-size svg{display:block;margin:0 auto 12px}.fav-zoom{display:flex;align-items:center;gap:12px;margin-top:25px}.fav-zoom svg{width:76px;height:76px}.avatar{height:120px;width:120px;margin:16px auto 0;background:var(--dark);border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden}.avatar svg{width:76px;height:76px}.card-front{aspect-ratio:1.7;background:var(--dark);padding:18px;display:flex;flex-direction:column;justify-content:space-between;color:var(--light)}.card-front .logo-mark{width:28px;height:28px}.card-front .logo-name{font-size:14px;color:var(--light)}.card-front .logo-holding{font-size:6px;color:var(--light);margin-top:4px}.card-front .logo.c .logo-name{font-size:18px}.card-front .logo.c .word-rule{height:1px;background:var(--accent-light)}.card-front p{font-size:10px;line-height:1.45;margin:0}.pdf{aspect-ratio:210/297;max-width:285px;margin:auto;background:var(--dark);color:var(--light);padding:22px;display:flex;flex-direction:column;justify-content:space-between}.pdf .logo-mark{width:26px;height:26px}.pdf .logo-name{font-size:13px;color:var(--light)}.pdf .logo-holding{font-size:6px;color:var(--light);margin-top:4px}.pdf .logo.c .logo-name{font-size:18px}.pdf .logo.c .word-rule{height:1px;background:var(--accent-light)}.pdf-top{font-size:9px;letter-spacing:.12em;text-transform:uppercase}.pdf h4{font:normal 30px/1.02 Georgia,serif;letter-spacing:-.025em;margin:0 0 10px}.pdf p{font-size:10px;line-height:1.5}.pdf-band{height:28px;background:var(--accent-light);margin:0 -22px 12px}.note{font-size:11px;line-height:1.5;color:#56635a}.recommendation{background:var(--light);padding:26px;border-left:4px solid var(--accent-dark);font-size:14px;line-height:1.55}.closing{margin-top:80px;border-top:2px solid #344438;padding-top:30px;display:grid;grid-template-columns:.7fr 1.3fr;gap:30px}.closing h2{font:normal 42px/1 Georgia,serif;margin:0}.closing li{margin:0 0 14px;line-height:1.45}.closing p{line-height:1.5}.tiny{font-size:11px;color:#56635a}.screen-card .logo{gap:7px}@media(max-width:1100px){.overview{grid-template-columns:1fr 1fr}.overview-card:last-child{grid-column:1/-1}.screen-pair{grid-template-columns:1fr}.mobile-screen{margin:auto}.applications{grid-template-columns:1fr 1fr}.applications .application:last-child{grid-column:1/-1}}@media(max-width:700px){.page{padding:18px 14px 60px}.mast{align-items:flex-start}.mast .right{font-size:10px}.intro{display:block;padding:46px 0 36px}.intro h1{font-size:54px}.intro p{margin-top:25px}.overview{grid-template-columns:1fr}.overview-card{min-height:unset}.overview-card:last-child{grid-column:auto}.overview-visual{min-height:310px}.concept-head{display:block}.g3,.g2,.palette,.type-wrap,.cn-table,.applications,.closing{grid-template-columns:1fr}.applications .application:last-child{grid-column:auto}.screen-card{overflow:auto}.mobile-screen{margin:0 auto}.specimen{min-height:185px}.module-title span{display:none}.index{padding-bottom:33px}.type-display{font-size:32px}.closing h2{margin-bottom:20px}}@media(max-width:390px){.mobile-screen{transform:scale(.86);transform-origin:top left;margin-bottom:-95px}.screen-card{height:620px}.logo-name{font-size:20px}.intro h1{font-size:47px}}@media print{body{background:#fff}.page{max-width:none;padding:0}.overview-card,.specimen,.palette-panel,.type-panel,.cn-item,.screen-card,.application{break-inside:avoid}.concept{break-before:page}.index{display:none}.screen-pair{grid-template-columns:1fr 375px}.overview{grid-template-columns:repeat(3,1fr)}.overview-card:last-child{grid-column:auto}}
-.overview-visual .logo,.overview-visual .logo-name,.overview-visual .logo-holding{color:var(--light)}.overview-visual .logo.c .word-rule,.card-front .logo.c .word-rule,.pdf .logo.c .word-rule{background:var(--accent-light)}.cn-item .logo{transform:scale(.77);transform-origin:top left;width:130%;margin-top:20px}.cn-item .logo-mark{width:46px;height:46px}.cn-item .logo-name{font-size:21px}.cn-item .logo-holding{font-size:7px;margin-top:6px}.cn-item .logo.c .logo-name{font-size:26px}.cn-item .chinese{border-top:1px solid var(--line);padding-top:11px}.dark svg.b-mark path:first-child,.avatar svg.b-mark path:first-child,.overview-visual svg.b-mark path:first-child,.card-front svg.b-mark path:first-child,.pdf svg.b-mark path:first-child{stroke:#F3EFE7}.dark svg.c-mark path:first-child,.avatar svg.c-mark path:first-child,.overview-visual svg.c-mark path:first-child,.card-front svg.c-mark path:first-child,.pdf svg.c-mark path:first-child{fill:#F5F0E6}.dark svg.a-mark rect,.avatar svg.a-mark rect,.overview-visual svg.a-mark rect,.card-front svg.a-mark rect,.pdf svg.a-mark rect{fill:#F3F0E8}.avatar svg.a-mark .a-cut,.overview-visual svg.a-mark .a-cut,.card-front svg.a-mark .a-cut,.pdf svg.a-mark .a-cut{stroke:#F3F0E8}.avatar svg.b-mark path:last-child{stroke:#102538}.avatar svg.c-mark path:last-child{stroke:#D0A66A}
-.dark svg.a-mark rect,.avatar svg.a-mark rect,.overview-visual svg.a-mark rect,.card-front svg.a-mark rect,.pdf svg.a-mark rect{fill:#20302D;stroke:#D7B568;stroke-width:1}.dark svg.a-mark .a-cut,.avatar svg.a-mark .a-cut,.overview-visual svg.a-mark .a-cut,.card-front svg.a-mark .a-cut,.pdf svg.a-mark .a-cut{stroke:#20302D}.desktop-screen{width:1440px;height:420px;zoom:var(--artboard-zoom,.65)}.desktop-screen .site-nav{padding:25px 42px}.desktop-screen .site-nav .logo-mark{width:52px;height:52px}.desktop-screen .site-nav .logo-name{font-size:27px}.desktop-screen .site-nav .logo-holding{font-size:10px}.desktop-screen .site-nav .logo.c .logo-name{font-size:34px}.desktop-screen .nav-links{font-size:17px;gap:35px}.desktop-screen .nav-contact{font-size:16px;padding:16px 23px}.desktop-screen .site-hero{min-height:331px}.desktop-screen .hero-copy{padding:46px 60px}.desktop-screen .hero-copy .mini{font-size:15px}.desktop-screen .hero-copy h4{font-size:60px;max-width:700px}.desktop-screen .hero-copy p{font-size:18px;max-width:600px}.desktop-screen .hero-photo{font-size:16px}.mobile-screen{zoom:.88;transform:none!important;margin-bottom:0!important}@media(max-width:390px){.screen-card{height:auto}}
-</style>
-</head>
-<body>
-<div class="page">
-<header class="mast"><div><div class="eyebrow">QAZNEDR HOLDING / identity review</div><div class="tiny" style="margin-top:7px">Задание 01 · шаг 1 · концепции для выбора владельца</div></div><div class="right">26 сентября 2026<br>Локальный файл · без внешних зависимостей</div></header>
-<section class="intro"><h1>Три характера<br>одной экспертизы.</h1><p>Сейчас выбираем характер бренда. Носители ниже — примеры для сравнения; детали доработаем после выбора. Это стартовые гипотезы, прежняя схема золота и чёрного необязательна.</p></section>
-<div class="section-line"><strong>Обзор направлений</strong><span>01 / 03</span></div>
-<div id="overview" class="overview"></div>
-<nav class="index" aria-label="Переход к концепциям"><a href="#a">A / Страты</a><a href="#b">B / Керн Q</a><a href="#c">C / Слово и недра</a></nav>
-<div id="details"></div>
-<section class="closing"><h2>Решение владельца</h2><div><ol><li>Какую концепцию выбрать: A, B, C или комбинацию элементов?</li><li>Какие правки нужны по знаку, надписи, цвету и носителям?</li><li>Какой вариант китайского названия передать переводчику компании: 卡兹涅德控股, 哈萨克地矿控股 или 卡兹矿业控股?</li></ol><p class="tiny">Все три китайских написания — рабочие кандидаты, не утверждённый перевод. Имя на китайском, терминологию, юридические и коммерческие формулировки проверяет переводчик до публикации. Макеты экранов, визиток и PDF содержат явно обозначенные заглушки; сведения об участках здесь не заявляются как факты.</p></div></section>
-</div>
-<script>
-const concepts={
-a:{letter:'A',name:'Страты',line:'Архивная глубина в строгом геологическом разрезе.',idea:'Три смещённых слоя читаются как карта недр и как след работы геолога. Квадратный силуэт выдерживает маленький размер, а тёплое золото даёт статус без декоративного блеска.',tags:['Геология','Доверие','Портфель'],mark:'<rect x="3" y="3" width="58" height="58" rx="3" fill="#20302D"/><path d="M8 20 26 17 41 22 56 18v9L41 31 26 26 8 29Z" fill="#D7B568"/><path d="M8 33 26 30 41 35 56 31v9L41 44 26 39 8 42Z" fill="#E9E0CB"/><path d="M8 46 26 43 41 48 56 44v12H8Z" fill="#A8844B"/><path class="a-cut" d="m30 8-6 48" stroke="#20302D" stroke-width="4"/>',paletteLight:[['Фон','#F3F0E8'],['Текст','#20302D'],['Акцент','#70511F'],['Линия','#C8C8BA'],['Слой','#A8844B']],paletteDark:[['Фон','#172320'],['Текст','#F3F0E8'],['Акцент','#D7B568'],['Линия','#53635A'],['Слой','#A8844B']],display:'Arial / Helvetica / системный sans',body:'Arial / Helvetica / системный sans',ru:'Геология для обоснованных решений',en:'Grounded in geological evidence',zh:'以地质研究支持投资判断',rec:'Сильнее всего для компании, которая хочет сразу показать специализацию: знак объясняет «недра» даже без подписи. Страты можно развить в аккуратную систему разделителей и схем.'},
-b:{letter:'B',name:'Керн Q',line:'Техническая точность, собранная в монограмму.',idea:'Разомкнутое кольцо Q напоминает срез керна. Диагональный хвост становится следом образца и делает знак узнаваемым в аватаре, фавиконе и документах.',tags:['Монограмма','Точность','Международность'],mark:'<path d="M48 44A22 22 0 1 1 51 36" fill="none" stroke="#18334A" stroke-width="11" stroke-linecap="butt"/><path d="m39 39 16 17" stroke="#AA684A" stroke-width="9" stroke-linecap="square"/><path d="m43 43 13 13" stroke="#F0E9DC" stroke-width="2"/>',paletteLight:[['Фон','#F2EDE3'],['Текст','#18334A'],['Акцент','#7F432E'],['Линия','#C4C4BF'],['Медь','#AA684A']],paletteDark:[['Фон','#102538'],['Текст','#F3EFE7'],['Акцент','#DBA88E'],['Линия','#526476'],['Медь','#AA684A']],display:'Arial / Helvetica / системный sans',body:'Arial / Helvetica / системный sans',ru:'Разведка начинается с точных данных',en:'Geological insight for every decision',zh:'以严谨地质研究连接合作机会',rec:'Сильнее всего в цифровых точках контакта: буква Q быстро узнаётся в WeChat и на маленькой вкладке. Синий добавляет техническую строгость, медь связывает знак с сырьевой темой.'},
-c:{letter:'C',name:'Слово и недра',line:'Название как главный носитель репутации.',idea:'Длинная элегантная надпись ставит имя компании в центр. Единственная бронзовая линия отсылает к горизонту породы; отдельная Q служит только маленьким цифровым форматам.',tags:['Название','Редакционный тон','Сдержанность'],mark:'<path fill="#17372E" fill-rule="evenodd" d="M32 7a24 24 0 1 0 0 48 24 24 0 0 0 0-48Zm0 8a16 16 0 1 1 0 32 16 16 0 0 1 0-32Z"/><path d="m42 44 12 13" stroke="#A47C45" stroke-width="5" stroke-linecap="square"/><path d="M9 60h46" stroke="#A47C45" stroke-width="2"/>',paletteLight:[['Фон','#F5F0E6'],['Текст','#17372E'],['Акцент','#77572E'],['Линия','#C8C3B4'],['Бронза','#A47C45']],paletteDark:[['Фон','#102B24'],['Текст','#F5F0E6'],['Акцент','#D0A66A'],['Линия','#566B5D'],['Бронза','#A47C45']],display:'Georgia / Times New Roman / системный serif',body:'Arial / Helvetica / системный sans',ru:'Экспертиза, которой доверяют решения',en:'A considered view beneath the surface',zh:'立足地质研究，审慎推进合作',rec:'Сильнее всего в документах и длинных редакционных материалах: надпись выглядит как подпись института или исследовательской компании. Для тесных форматов нужен отдельный служебный Q.'}
-};
-const cn=[['卡兹涅德控股','Фонетическая передача имени'],['哈萨克地矿控股','Смысл: казахстанский геолого-горный холдинг'],['卡兹矿业控股','Сокращённый смысловой вариант']];
-function mark(k,cls='',size='64'){return `<svg class="${cls} ${k}-mark" width="${size}" height="${size}" viewBox="0 0 64 64" role="img" aria-label="Знак концепции ${k.toUpperCase()}">${concepts[k].mark}</svg>`}
-function logo(k,mode='horizontal'){const c=concepts[k];return `<div class="logo ${mode} ${k}">${mark(k,'logo-mark')}<div class="word"><div class="logo-name">QAZNEDR</div>${k==='c'?'<div class="word-rule"></div>':''}<div class="logo-holding">HOLDING</div></div></div>`}
-function palette(items){return `<div class="swatches">${items.map(([role,hex])=>`<div><div class="swatch" style="background:${hex}"></div><div class="swatch-label">${role}<br><strong>${hex}</strong></div></div>`).join('')}</div>`}
-function website(k,mobile=false){const nav=`<div class="site-nav">${logo(k)}${mobile?'<span class="mobile-menu">Меню</span>':'<div class="nav-links"><span>Портфель</span><span>Услуги</span><span>О компании</span><span>RU / EN / 中文</span><span class="nav-contact">Связаться</span></div>'}</div>`;const hero=`<div class="site-hero"><div class="hero-copy"><div class="mini">QAZNEDR HOLDING · Казахстан</div><h4>Геологическая экспертиза для подготовки сделок</h4><p>Изучаем архивные материалы, отбираем перспективные свободные участки и сопровождаем путь к лицензии.</p></div><div class="hero-photo">Фото полевых работ будет · заглушка</div></div>`;return `<div class="${mobile?'mobile':'desktop'}-screen">${nav}${hero}${mobile?'<div class="mobile-actions"><span>WeChat</span><span>WhatsApp</span></div><div class="mobile-caption">Реальные данные о компании и контакты будут добавлены после проверки · заглушка</div>':''}</div>`}
-function overview(k){const c=concepts[k];return `<article class="overview-card concept-shell ${k}"><div class="overview-visual"><div class="overview-num">КОНЦЕПЦИЯ ${c.letter} / QAZNEDR</div><div class="overview-logo">${logo(k)}</div><div class="overview-bottom">${c.line}</div></div><div class="overview-meta"><h2>${c.name}</h2><p>${c.idea}</p><div class="tag-row">${c.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><a class="jump" href="#${k}">Рассмотреть направление ↓</a></div></article>`}
-function detail(k){const c=concepts[k];return `<section id="${k}" class="concept concept-shell ${k}"><div class="concept-head"><div><div class="n">0${'abc'.indexOf(k)+1} / КОНЦЕПЦИЯ ${c.letter}</div><h2>${c.name}</h2></div><p>${c.idea}</p></div>
-<div class="module"><div class="module-title"><h3>01 · Конструкция логотипа</h3><span>Горизонталь / вертикаль / знак</span></div><div class="grid g3"><div class="specimen"><span class="cap">Горизонтальная версия</span>${logo(k)}</div><div class="specimen"><span class="cap">Вертикальная версия</span>${logo(k,'stacked')}</div><div class="specimen"><span class="cap">Отдельный знак</span>${mark(k,'mark-only','78')}</div></div><div class="grid g3" style="margin-top:12px"><div class="specimen dark"><span class="cap">Тёмный фон</span>${logo(k)}</div><div class="specimen"><span class="cap">Светлый фон</span>${logo(k)}</div><div class="specimen mono"><span class="cap">Один цвет / печать</span>${logo(k)}</div></div><p class="note">Файлы SVG для горизонтальной, вертикальной, малой версии и фавиконов лежат рядом с обзором в ../mockups/01/. Латинские и кириллические надписи в SVG используют системные шрифты: перед промышленным выпуском потребуется выбрать и лицензировать точный self-hosted шрифт или перевести надпись в кривые.</p></div>
-<div class="module"><div class="module-title"><h3>02 · Палитра</h3><span>HEX / рабочие роли</span></div><div class="palette"><div class="palette-panel"><p class="palette-heading">Светлая тема</p>${palette(c.paletteLight)}</div><div class="palette-panel dark"><p class="palette-heading">Тёмная тема</p>${palette(c.paletteDark)}</div></div><p class="note">На светлом фоне акцентный текст набран тёмным ${c.paletteLight[2][1]}; более светлый металлический цвет используется для деталей и на тёмной теме. Основной текст рассчитан на WCAG AA.</p></div>
-<div class="module"><div class="module-title"><h3>03 · Типографика и языки</h3><span>Системные шрифты, без загрузки</span></div><div class="type-wrap"><div class="type-panel"><div class="type-kicker">Заголовок · RU / EN</div><div class="type-display" style="font-family:${k==='c'?'Georgia,serif':'Arial,Helvetica,sans-serif'}">${c.ru}</div><div class="type-body">${c.en}<br><br>Основной текст: геология изучена по архивным материалам; формат сотрудничества обсуждается отдельно.</div></div><div class="type-panel dark"><div class="type-kicker">中文 · системный CJK</div><div class="type-display" style="font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC',sans-serif">${c.zh}</div><div class="type-body">字体：苹方 / 微软雅黑 / 思源黑体（系统回退）</div></div></div><p class="type-note"><strong>Пара:</strong> ${c.display} для заголовков, ${c.body} для текста; китайский стек PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif. Это демонстрационные системные fallback, а не обещание одинакового рисунка на всех устройствах. Китайские фразы в макете — заглушки, требуют вычитки носителем.</p><div class="cn-table">${cn.map(([name,explanation],i)=>`<div class="cn-item"><div class="cap">Кандидат ${i+1} · версия логотипа 中文</div>${logo(k)}<div class="chinese">${name}</div><p>${explanation}</p><small>На проверку переводчику</small></div>`).join('')}</div></div>
-<div class="module"><div class="module-title"><h3>04 · Сайт</h3><span>Ориентиры: 1440 px и 375 px</span></div><div class="screen-pair"><div class="screen-card"><p class="screen-label">Десктоп · композиция для 1440 px (масштабируется по ширине окна)</p>${website(k)}</div><div class="screen-card"><p class="screen-label">Мобильный · 375 px, крупные зоны контакта</p>${website(k,true)}</div></div><p class="note">Тексты, фотография и детали интерфейса служат контекстом применения айдентики; это не утверждённый дизайн главной страницы. Контент про конкретные участки и юридические сведения здесь не приводится.</p></div>
-<div class="module"><div class="module-title"><h3>05 · Малые и печатные носители</h3><span>Favicon / WeChat / визитка / PDF</span></div><div class="applications"><div class="application"><h4>Favicon · реальные размеры</h4><div class="fav-row"><div class="fav-size">${mark(k,'','16')}16 × 16 px</div><div class="fav-size">${mark(k,'','32')}32 × 32 px</div></div><div class="fav-zoom">${mark(k)}<div class="note">Увеличение для просмотра геометрии. Экспортируемый SVG имеет viewBox 64 × 64.</div></div></div><div class="application"><h4>WeChat · круглая обрезка</h4><div class="avatar">${mark(k)}</div><p class="note">Тестовый круг показывает запас по краям при обрезке аватара.</p></div><div class="application"><h4>Визитка · лицевая сторона</h4><div class="card-front">${logo(k)}<p>Имя Фамилия · должность — заглушка<br>Контакты и реквизиты — заглушка</p></div></div><div class="application"><h4>PDF-тизер · обложка, не PDF-файл</h4><div class="pdf"><div>${logo(k)}<p class="pdf-top">Конфиденциально · пример оформления</p></div><div><div class="pdf-band"></div><h4>Геологический<br>обзор участка</h4><p>Регион / металл / код участка — заглушки.<br>Детали после знакомства и NDA.</p></div><p>QAZNEDR HOLDING · дата и контакт — заглушки</p></div></div><div class="application"><h4>Применение и характер</h4><div class="recommendation">${c.rec}</div><p class="note">Сведения на образцах помечены как заглушки. Никаких заявлений о владении участками, запасах или доходности.</p></div></div></div></section>`}
-document.getElementById('overview').innerHTML=Object.keys(concepts).map(overview).join('');
-document.getElementById('details').innerHTML=Object.keys(concepts).map(detail).join('');
-function fitArtboards(){document.querySelectorAll('.desktop-screen').forEach(el=>{el.style.setProperty('--artboard-zoom',Math.min(1,el.parentElement.clientWidth/1440))});document.querySelectorAll('.mobile-screen').forEach(el=>{el.style.zoom=Math.min(1,el.parentElement.clientWidth/375)}}
-fitArtboards();addEventListener('resize',fitArtboards);
-</script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QAZNEDR HOLDING — три направления айдентики</title>
+    <style>
+      :root {
+        --paper: #eceae4;
+        --ink: #202824;
+        --muted: #5c665f;
+        --rule: #c9cec7;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      button,
+      a {
+        font: inherit;
+      }
+      a {
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      .page {
+        max-width: 1600px;
+        margin: auto;
+        padding: 28px clamp(18px, 3.4vw, 58px) 88px;
+      }
+      .eyebrow {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .mast {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        border-bottom: 1px solid #9da79c;
+        padding-bottom: 20px;
+      }
+      .mast .right {
+        text-align: right;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .intro {
+        padding: 56px 0 44px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.5fr);
+        gap: 50px;
+        align-items: end;
+      }
+      .intro h1 {
+        font:
+          normal clamp(48px, 6vw, 100px) / 0.95 Georgia,
+          serif;
+        letter-spacing: -0.05em;
+        margin: 0;
+        max-width: 1100px;
+      }
+      .intro p {
+        max-width: 390px;
+        line-height: 1.55;
+        color: #465148;
+        margin: 0;
+      }
+      .section-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 20px;
+        padding: 13px 0;
+        border-top: 1px solid #9da79c;
+        font-size: 12px;
+      }
+      .section-line strong {
+        font-size: 14px;
+      }
+      .overview {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .overview-card {
+        background: var(--light);
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 570px;
+      }
+      .overview-visual {
+        min-height: 340px;
+        background: var(--dark);
+        color: var(--light);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: clamp(22px, 2.5vw, 42px);
+        overflow: hidden;
+      }
+      .overview-num {
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        color: var(--accent-light);
+      }
+      .overview-logo {
+        width: 100%;
+        max-width: 360px;
+        color: var(--light);
+      }
+      .overview-logo .logo-word {
+        color: var(--light);
+      }
+      .overview-logo .logo-sub {
+        color: var(--light);
+      }
+      .overview-bottom {
+        font:
+          normal clamp(22px, 2.4vw, 40px) / 1.08 Georgia,
+          serif;
+        max-width: 400px;
+      }
+      .overview-meta {
+        padding: 23px 25px 30px;
+        flex: 1;
+      }
+      .overview-meta h2 {
+        font:
+          normal 30px/1.1 Georgia,
+          serif;
+        margin: 0 0 13px;
+      }
+      .overview-meta p {
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 0 0 20px;
+        color: var(--ink);
+      }
+      .tag-row {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+      }
+      .tag {
+        border: 1px solid var(--line);
+        padding: 6px 9px;
+        font-size: 11px;
+        color: var(--ink);
+      }
+      .jump {
+        display: inline-block;
+        margin-top: 21px;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        border-bottom: 1px solid currentColor;
+        padding-bottom: 4px;
+      }
+      .index {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding: 25px 0 58px;
+      }
+      .index a {
+        font-size: 12px;
+        text-decoration: none;
+        border: 1px solid #aeb8ad;
+        padding: 11px 14px;
+      }
+      .concept {
+        margin-top: 10px;
+        padding-top: 32px;
+        border-top: 2px solid #3b4a40;
+      }
+      .concept-head {
+        display: grid;
+        grid-template-columns: minmax(0, 0.6fr) minmax(0, 1fr);
+        gap: 30px;
+        align-items: start;
+        margin-bottom: 34px;
+      }
+      .concept-head h2 {
+        font:
+          normal clamp(48px, 5vw, 80px) / 0.95 Georgia,
+          serif;
+        letter-spacing: -0.045em;
+        margin: 13px 0;
+      }
+      .concept-head p {
+        font-size: 16px;
+        line-height: 1.55;
+        max-width: 750px;
+        margin: 15px 0 0;
+      }
+      .concept-head .n {
+        font-size: 12px;
+        letter-spacing: 0.16em;
+      }
+      .concept-shell {
+        --light: #f3f0e8;
+        --dark: #172320;
+        --text: #20302d;
+        --accent-light: #d7b568;
+        --accent-dark: #70511f;
+        --line: #c8c8ba;
+        color: var(--text);
+      }
+      .concept-shell.b {
+        --light: #f2ede3;
+        --dark: #102538;
+        --text: #18334a;
+        --accent-light: #dba88e;
+        --accent-dark: #7f432e;
+        --line: #c4c4bf;
+      }
+      .concept-shell.c {
+        --light: #f5f0e6;
+        --dark: #102b24;
+        --text: #17372e;
+        --accent-light: #d0a66a;
+        --accent-dark: #77572e;
+        --line: #c8c3b4;
+      }
+      .module {
+        margin: 32px 0 46px;
+      }
+      .module-title {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 20px;
+        border-bottom: 1px solid #aeb8ad;
+        padding-bottom: 9px;
+        margin-bottom: 16px;
+      }
+      .module-title h3 {
+        font-size: 13px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .module-title span {
+        font-size: 11px;
+        color: #5d655f;
+      }
+      .grid {
+        display: grid;
+        gap: 12px;
+      }
+      .g3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .g2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .specimen {
+        min-width: 0;
+        padding: 20px;
+        min-height: 205px;
+        background: var(--light);
+        border: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+      .specimen.dark {
+        background: var(--dark);
+        color: var(--light);
+        border-color: var(--dark);
+      }
+      .specimen.mono {
+        background: #f8f8f6;
+        color: #111;
+        border-color: #b9bbb7;
+      }
+      .cap {
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: inherit;
+        opacity: 0.75;
+      }
+      .specimen .logo {
+        max-width: 100%;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: var(--text);
+      }
+      .logo-mark {
+        width: 64px;
+        height: 64px;
+        flex: 0 0 auto;
+      }
+      .logo-name {
+        font-size: clamp(20px, 2vw, 31px);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+        line-height: 1;
+      }
+      .logo-holding {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.56em;
+        margin-top: 9px;
+      }
+      .logo.stacked {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        align-items: center;
+      }
+      .logo.stacked .logo-mark {
+        width: 72px;
+        height: 72px;
+      }
+      .logo.stacked .logo-name {
+        font-size: 30px;
+      }
+      .logo.stacked .logo-holding {
+        font-size: 11px;
+      }
+      .logo.c .logo-name {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-weight: 400;
+        letter-spacing: 0.025em;
+        font-size: clamp(24px, 2.5vw, 38px);
+      }
+      .logo.c .logo-holding {
+        font-family: Arial, sans-serif;
+        letter-spacing: 0.38em;
+      }
+      .logo.c .word-rule {
+        height: 3px;
+        background: var(--accent-dark);
+        margin-top: 6px;
+      }
+      .logo.c .logo-mark {
+        width: 54px;
+        height: 54px;
+      }
+      .logo.c.horizontal .logo-mark {
+        display: none;
+      }
+      .dark .logo,
+      .dark .logo-name,
+      .dark .logo-holding {
+        color: var(--light);
+      }
+      .dark .logo.c .word-rule {
+        background: var(--accent-light);
+      }
+      .mono .logo,
+      .mono .logo-name,
+      .mono .logo-holding {
+        color: #111;
+      }
+      .mono .logo.c .word-rule {
+        background: #111;
+      }
+      .mark-only {
+        width: 78px;
+        height: 78px;
+      }
+      .mono svg {
+        filter: grayscale(1) brightness(0.12);
+      }
+      .dark svg.a-mark rect {
+        fill: #f2eee2;
+      }
+      .dark svg.a-mark .a-cut {
+        stroke: #f2eee2;
+      }
+      .logo .a-mark,
+      .mark-only.a-mark {
+        overflow: visible;
+      }
+      .palette {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .palette-panel {
+        border: 1px solid var(--line);
+        background: var(--light);
+        padding: 18px;
+      }
+      .palette-panel.dark {
+        background: var(--dark);
+        color: var(--light);
+        border-color: var(--dark);
+      }
+      .palette-heading {
+        font-size: 12px;
+        font-weight: 700;
+        margin: 0 0 15px;
+      }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .swatch {
+        height: 52px;
+        border: 1px solid rgba(0, 0, 0, 0.14);
+      }
+      .swatch-label {
+        font-size: 10px;
+        line-height: 1.4;
+        margin-top: 8px;
+      }
+      .type-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .type-panel {
+        background: var(--light);
+        padding: 24px;
+        border: 1px solid var(--line);
+      }
+      .type-panel.dark {
+        background: var(--dark);
+        color: var(--light);
+        border-color: var(--dark);
+      }
+      .type-kicker {
+        font-size: 11px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .type-display {
+        font-size: clamp(27px, 3vw, 49px);
+        line-height: 1.15;
+        margin: 28px 0 18px;
+      }
+      .type-body {
+        font-size: 15px;
+        line-height: 1.5;
+        max-width: 520px;
+      }
+      .type-note {
+        font-size: 12px;
+        line-height: 1.5;
+        color: #56635a;
+      }
+      .cn-table {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .cn-item {
+        background: var(--light);
+        border: 1px solid var(--line);
+        padding: 20px;
+        min-width: 0;
+      }
+      .cn-item .chinese {
+        font-family:
+          'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+          'Noto Sans CJK SC', sans-serif;
+        font-size: clamp(19px, 2.3vw, 30px);
+        margin: 17px 0;
+      }
+      .cn-item p {
+        font-size: 12px;
+        line-height: 1.45;
+        margin: 0;
+      }
+      .cn-item small {
+        display: block;
+        margin-top: 15px;
+        color: var(--accent-dark);
+        font-weight: 700;
+      }
+      .screen-pair {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 375px;
+        gap: 16px;
+        align-items: start;
+      }
+      .screen-card {
+        background: #fff;
+        border: 1px solid #abb3a9;
+        min-width: 0;
+        padding: 12px;
+      }
+      .screen-label {
+        font-size: 11px;
+        color: #58645a;
+        margin: 0 0 10px;
+      }
+      .desktop-screen {
+        background: var(--light);
+        height: 345px;
+        overflow: hidden;
+      }
+      .site-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+        padding: 15px 23px;
+        gap: 10px;
+      }
+      .site-nav .logo-mark {
+        width: 35px;
+        height: 35px;
+      }
+      .site-nav .logo-name {
+        font-size: 17px;
+      }
+      .site-nav .logo-holding {
+        font-size: 7px;
+        margin-top: 5px;
+      }
+      .site-nav .logo.c .logo-name {
+        font-size: 21px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 23px;
+        align-items: center;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .nav-contact {
+        background: var(--text);
+        color: #fff;
+        padding: 12px 15px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .site-hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        min-height: 271px;
+      }
+      .hero-copy {
+        padding: 31px 40px;
+      }
+      .hero-copy .mini {
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent-dark);
+      }
+      .hero-copy h4 {
+        font:
+          normal clamp(26px, 3vw, 44px) / 1.06 Georgia,
+          serif;
+        margin: 15px 0;
+      }
+      .hero-copy p {
+        font-size: 11px;
+        max-width: 380px;
+        line-height: 1.5;
+      }
+      .hero-photo {
+        background: #c3c3b7;
+        color: #39443d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+      }
+      .mobile-screen {
+        width: 375px;
+        height: 680px;
+        background: var(--light);
+        overflow: hidden;
+      }
+      .mobile-screen .site-nav {
+        padding: 15px;
+      }
+      .mobile-screen .site-nav .logo-mark {
+        width: 31px;
+        height: 31px;
+      }
+      .mobile-screen .site-nav .logo-name {
+        font-size: 16px;
+      }
+      .mobile-screen .site-nav .logo.c .logo-name {
+        font-size: 20px;
+      }
+      .mobile-screen .site-nav .logo-holding {
+        font-size: 7px;
+      }
+      .mobile-menu {
+        font-size: 11px;
+        border: 1px solid var(--line);
+        padding: 12px;
+      }
+      .mobile-screen .site-hero {
+        display: block;
+      }
+      .mobile-screen .hero-copy {
+        padding: 33px 21px;
+      }
+      .mobile-screen .hero-copy h4 {
+        font-size: 34px;
+      }
+      .mobile-screen .hero-copy p {
+        font-size: 13px;
+      }
+      .mobile-screen .hero-photo {
+        height: 155px;
+      }
+      .mobile-actions {
+        display: flex;
+        gap: 8px;
+        padding: 0 20px 20px;
+      }
+      .mobile-actions span {
+        background: var(--text);
+        color: #fff;
+        padding: 14px 11px;
+        font-size: 12px;
+        flex: 1;
+        text-align: center;
+      }
+      .mobile-actions span:last-child {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--text);
+      }
+      .mobile-caption {
+        padding: 12px 20px;
+        border-top: 1px solid var(--line);
+        font-size: 11px;
+        line-height: 1.4;
+      }
+      .applications {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1.2fr;
+        gap: 12px;
+      }
+      .application {
+        background: var(--light);
+        border: 1px solid var(--line);
+        padding: 20px;
+        min-width: 0;
+        min-height: 240px;
+      }
+      .application h4 {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin: 0 0 20px;
+      }
+      .fav-row {
+        display: flex;
+        align-items: end;
+        gap: 22px;
+      }
+      .fav-size {
+        text-align: center;
+        font-size: 11px;
+      }
+      .fav-size svg {
+        display: block;
+        margin: 0 auto 12px;
+      }
+      .fav-zoom {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 25px;
+      }
+      .fav-zoom svg {
+        width: 76px;
+        height: 76px;
+      }
+      .avatar {
+        height: 120px;
+        width: 120px;
+        margin: 16px auto 0;
+        background: var(--dark);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .avatar svg {
+        width: 76px;
+        height: 76px;
+      }
+      .card-front {
+        aspect-ratio: 1.7;
+        background: var(--dark);
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: var(--light);
+      }
+      .card-front .logo-mark {
+        width: 28px;
+        height: 28px;
+      }
+      .card-front .logo-name {
+        font-size: 14px;
+        color: var(--light);
+      }
+      .card-front .logo-holding {
+        font-size: 6px;
+        color: var(--light);
+        margin-top: 4px;
+      }
+      .card-front .logo.c .logo-name {
+        font-size: 18px;
+      }
+      .card-front .logo.c .word-rule {
+        height: 1px;
+        background: var(--accent-light);
+      }
+      .card-front p {
+        font-size: 10px;
+        line-height: 1.45;
+        margin: 0;
+      }
+      .pdf {
+        aspect-ratio: 210/297;
+        max-width: 285px;
+        margin: auto;
+        background: var(--dark);
+        color: var(--light);
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .pdf .logo-mark {
+        width: 26px;
+        height: 26px;
+      }
+      .pdf .logo-name {
+        font-size: 13px;
+        color: var(--light);
+      }
+      .pdf .logo-holding {
+        font-size: 6px;
+        color: var(--light);
+        margin-top: 4px;
+      }
+      .pdf .logo.c .logo-name {
+        font-size: 18px;
+      }
+      .pdf .logo.c .word-rule {
+        height: 1px;
+        background: var(--accent-light);
+      }
+      .pdf-top {
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .pdf h4 {
+        font:
+          normal 30px/1.02 Georgia,
+          serif;
+        letter-spacing: -0.025em;
+        margin: 0 0 10px;
+      }
+      .pdf p {
+        font-size: 10px;
+        line-height: 1.5;
+      }
+      .pdf-band {
+        height: 28px;
+        background: var(--accent-light);
+        margin: 0 -22px 12px;
+      }
+      .note {
+        font-size: 11px;
+        line-height: 1.5;
+        color: #56635a;
+      }
+      .recommendation {
+        background: var(--light);
+        padding: 26px;
+        border-left: 4px solid var(--accent-dark);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+      .closing {
+        margin-top: 80px;
+        border-top: 2px solid #344438;
+        padding-top: 30px;
+        display: grid;
+        grid-template-columns: 0.7fr 1.3fr;
+        gap: 30px;
+      }
+      .closing h2 {
+        font:
+          normal 42px/1 Georgia,
+          serif;
+        margin: 0;
+      }
+      .closing li {
+        margin: 0 0 14px;
+        line-height: 1.45;
+      }
+      .closing p {
+        line-height: 1.5;
+      }
+      .tiny {
+        font-size: 11px;
+        color: #56635a;
+      }
+      .screen-card .logo {
+        gap: 7px;
+      }
+      @media (max-width: 1100px) {
+        .overview {
+          grid-template-columns: 1fr 1fr;
+        }
+        .overview-card:last-child {
+          grid-column: 1/-1;
+        }
+        .screen-pair {
+          grid-template-columns: 1fr;
+        }
+        .mobile-screen {
+          margin: auto;
+        }
+        .applications {
+          grid-template-columns: 1fr 1fr;
+        }
+        .applications .application:last-child {
+          grid-column: 1/-1;
+        }
+      }
+      @media (max-width: 700px) {
+        .page {
+          padding: 18px 14px 60px;
+        }
+        .mast {
+          align-items: flex-start;
+        }
+        .mast .right {
+          font-size: 10px;
+        }
+        .intro {
+          display: block;
+          padding: 46px 0 36px;
+        }
+        .intro h1 {
+          font-size: 54px;
+        }
+        .intro p {
+          margin-top: 25px;
+        }
+        .overview {
+          grid-template-columns: 1fr;
+        }
+        .overview-card {
+          min-height: unset;
+        }
+        .overview-card:last-child {
+          grid-column: auto;
+        }
+        .overview-visual {
+          min-height: 310px;
+        }
+        .concept-head {
+          display: block;
+        }
+        .g3,
+        .g2,
+        .palette,
+        .type-wrap,
+        .cn-table,
+        .applications,
+        .closing {
+          grid-template-columns: 1fr;
+        }
+        .applications .application:last-child {
+          grid-column: auto;
+        }
+        .screen-card {
+          overflow: auto;
+        }
+        .mobile-screen {
+          margin: 0 auto;
+        }
+        .specimen {
+          min-height: 185px;
+        }
+        .module-title span {
+          display: none;
+        }
+        .index {
+          padding-bottom: 33px;
+        }
+        .type-display {
+          font-size: 32px;
+        }
+        .closing h2 {
+          margin-bottom: 20px;
+        }
+      }
+      @media (max-width: 390px) {
+        .mobile-screen {
+          transform: scale(0.86);
+          transform-origin: top left;
+          margin-bottom: -95px;
+        }
+        .screen-card {
+          height: 620px;
+        }
+        .logo-name {
+          font-size: 20px;
+        }
+        .intro h1 {
+          font-size: 47px;
+        }
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .page {
+          max-width: none;
+          padding: 0;
+        }
+        .overview-card,
+        .specimen,
+        .palette-panel,
+        .type-panel,
+        .cn-item,
+        .screen-card,
+        .application {
+          break-inside: avoid;
+        }
+        .concept {
+          break-before: page;
+        }
+        .index {
+          display: none;
+        }
+        .screen-pair {
+          grid-template-columns: 1fr 375px;
+        }
+        .overview {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .overview-card:last-child {
+          grid-column: auto;
+        }
+      }
+      .overview-visual .logo,
+      .overview-visual .logo-name,
+      .overview-visual .logo-holding {
+        color: var(--light);
+      }
+      .overview-visual .logo.c .word-rule,
+      .card-front .logo.c .word-rule,
+      .pdf .logo.c .word-rule {
+        background: var(--accent-light);
+      }
+      .cn-item .logo {
+        transform: scale(0.77);
+        transform-origin: top left;
+        width: 130%;
+        margin-top: 20px;
+      }
+      .cn-item .logo-mark {
+        width: 46px;
+        height: 46px;
+      }
+      .cn-item .logo-name {
+        font-size: 21px;
+      }
+      .cn-item .logo-holding {
+        font-size: 7px;
+        margin-top: 6px;
+      }
+      .cn-item .logo.c .logo-name {
+        font-size: 26px;
+      }
+      .cn-item .chinese {
+        border-top: 1px solid var(--line);
+        padding-top: 11px;
+      }
+      .dark svg.b-mark path:first-child,
+      .avatar svg.b-mark path:first-child,
+      .overview-visual svg.b-mark path:first-child,
+      .card-front svg.b-mark path:first-child,
+      .pdf svg.b-mark path:first-child {
+        stroke: #f3efe7;
+      }
+      .dark svg.c-mark path:first-child,
+      .avatar svg.c-mark path:first-child,
+      .overview-visual svg.c-mark path:first-child,
+      .card-front svg.c-mark path:first-child,
+      .pdf svg.c-mark path:first-child {
+        fill: #f5f0e6;
+      }
+      .dark svg.a-mark rect,
+      .avatar svg.a-mark rect,
+      .overview-visual svg.a-mark rect,
+      .card-front svg.a-mark rect,
+      .pdf svg.a-mark rect {
+        fill: #f3f0e8;
+      }
+      .avatar svg.a-mark .a-cut,
+      .overview-visual svg.a-mark .a-cut,
+      .card-front svg.a-mark .a-cut,
+      .pdf svg.a-mark .a-cut {
+        stroke: #f3f0e8;
+      }
+      .avatar svg.b-mark path:last-child {
+        stroke: #102538;
+      }
+      .avatar svg.c-mark path:last-child {
+        stroke: #d0a66a;
+      }
+      .dark svg.a-mark rect,
+      .avatar svg.a-mark rect,
+      .overview-visual svg.a-mark rect,
+      .card-front svg.a-mark rect,
+      .pdf svg.a-mark rect {
+        fill: #20302d;
+        stroke: #d7b568;
+        stroke-width: 1;
+      }
+      .dark svg.a-mark .a-cut,
+      .avatar svg.a-mark .a-cut,
+      .overview-visual svg.a-mark .a-cut,
+      .card-front svg.a-mark .a-cut,
+      .pdf svg.a-mark .a-cut {
+        stroke: #20302d;
+      }
+      .desktop-screen {
+        width: 1440px;
+        height: 420px;
+        zoom: var(--artboard-zoom, 0.65);
+      }
+      .desktop-screen .site-nav {
+        padding: 25px 42px;
+      }
+      .desktop-screen .site-nav .logo-mark {
+        width: 52px;
+        height: 52px;
+      }
+      .desktop-screen .site-nav .logo-name {
+        font-size: 27px;
+      }
+      .desktop-screen .site-nav .logo-holding {
+        font-size: 10px;
+      }
+      .desktop-screen .site-nav .logo.c .logo-name {
+        font-size: 34px;
+      }
+      .desktop-screen .nav-links {
+        font-size: 17px;
+        gap: 35px;
+      }
+      .desktop-screen .nav-contact {
+        font-size: 16px;
+        padding: 16px 23px;
+      }
+      .desktop-screen .site-hero {
+        min-height: 331px;
+      }
+      .desktop-screen .hero-copy {
+        padding: 46px 60px;
+      }
+      .desktop-screen .hero-copy .mini {
+        font-size: 15px;
+      }
+      .desktop-screen .hero-copy h4 {
+        font-size: 60px;
+        max-width: 700px;
+      }
+      .desktop-screen .hero-copy p {
+        font-size: 18px;
+        max-width: 600px;
+      }
+      .desktop-screen .hero-photo {
+        font-size: 16px;
+      }
+      .mobile-screen {
+        zoom: 0.88;
+        transform: none !important;
+        margin-bottom: 0 !important;
+      }
+      @media (max-width: 390px) {
+        .screen-card {
+          height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="mast">
+        <div>
+          <div class="eyebrow">QAZNEDR HOLDING / identity review</div>
+          <div class="tiny" style="margin-top: 7px">
+            Задание 01 · шаг 1 · концепции для выбора владельца
+          </div>
+        </div>
+        <div class="right">
+          26 сентября 2026<br />Локальный файл · без внешних зависимостей
+        </div>
+      </header>
+      <section class="intro">
+        <h1>Три характера<br />одной экспертизы.</h1>
+        <p>
+          Сейчас выбираем характер бренда. Носители ниже — примеры для
+          сравнения; детали доработаем после выбора. Это стартовые гипотезы,
+          прежняя схема золота и чёрного необязательна.
+        </p>
+      </section>
+      <div class="section-line">
+        <strong>Обзор направлений</strong><span>01 / 03</span>
+      </div>
+      <div id="overview" class="overview"></div>
+      <nav class="index" aria-label="Переход к концепциям">
+        <a href="#a">A / Страты</a><a href="#b">B / Керн Q</a
+        ><a href="#c">C / Слово и недра</a>
+      </nav>
+      <div id="details"></div>
+      <section class="closing">
+        <h2>Решение владельца</h2>
+        <div>
+          <ol>
+            <li>Какую концепцию выбрать: A, B, C или комбинацию элементов?</li>
+            <li>Какие правки нужны по знаку, надписи, цвету и носителям?</li>
+            <li>
+              Какой вариант китайского названия передать переводчику компании:
+              卡兹涅德控股, 哈萨克地矿控股 или 卡兹矿业控股?
+            </li>
+          </ol>
+          <p class="tiny">
+            Все три китайских написания — рабочие кандидаты, не утверждённый
+            перевод. Имя на китайском, терминологию, юридические и коммерческие
+            формулировки проверяет переводчик до публикации. Макеты экранов,
+            визиток и PDF содержат явно обозначенные заглушки; сведения об
+            участках здесь не заявляются как факты.
+          </p>
+        </div>
+      </section>
+    </div>
+    <script>
+      const concepts={
+      a:{letter:'A',name:'Страты',line:'Архивная глубина в строгом геологическом разрезе.',idea:'Три смещённых слоя читаются как карта недр и как след работы геолога. Квадратный силуэт выдерживает маленький размер, а тёплое золото даёт статус без декоративного блеска.',tags:['Геология','Доверие','Портфель'],mark:'<rect x="3" y="3" width="58" height="58" rx="3" fill="#20302D"/><path d="M8 20 26 17 41 22 56 18v9L41 31 26 26 8 29Z" fill="#D7B568"/><path d="M8 33 26 30 41 35 56 31v9L41 44 26 39 8 42Z" fill="#E9E0CB"/><path d="M8 46 26 43 41 48 56 44v12H8Z" fill="#A8844B"/><path class="a-cut" d="m30 8-6 48" stroke="#20302D" stroke-width="4"/>',paletteLight:[['Фон','#F3F0E8'],['Текст','#20302D'],['Акцент','#70511F'],['Линия','#C8C8BA'],['Слой','#A8844B']],paletteDark:[['Фон','#172320'],['Текст','#F3F0E8'],['Акцент','#D7B568'],['Линия','#53635A'],['Слой','#A8844B']],display:'Arial / Helvetica / системный sans',body:'Arial / Helvetica / системный sans',ru:'Геология для обоснованных решений',en:'Grounded in geological evidence',zh:'以地质研究支持投资判断',rec:'Сильнее всего для компании, которая хочет сразу показать специализацию: знак объясняет «недра» даже без подписи. Страты можно развить в аккуратную систему разделителей и схем.'},
+      b:{letter:'B',name:'Керн Q',line:'Техническая точность, собранная в монограмму.',idea:'Разомкнутое кольцо Q напоминает срез керна. Диагональный хвост становится следом образца и делает знак узнаваемым в аватаре, фавиконе и документах.',tags:['Монограмма','Точность','Международность'],mark:'<path d="M48 44A22 22 0 1 1 51 36" fill="none" stroke="#18334A" stroke-width="11" stroke-linecap="butt"/><path d="m39 39 16 17" stroke="#AA684A" stroke-width="9" stroke-linecap="square"/><path d="m43 43 13 13" stroke="#F0E9DC" stroke-width="2"/>',paletteLight:[['Фон','#F2EDE3'],['Текст','#18334A'],['Акцент','#7F432E'],['Линия','#C4C4BF'],['Медь','#AA684A']],paletteDark:[['Фон','#102538'],['Текст','#F3EFE7'],['Акцент','#DBA88E'],['Линия','#526476'],['Медь','#AA684A']],display:'Arial / Helvetica / системный sans',body:'Arial / Helvetica / системный sans',ru:'Разведка начинается с точных данных',en:'Geological insight for every decision',zh:'以严谨地质研究连接合作机会',rec:'Сильнее всего в цифровых точках контакта: буква Q быстро узнаётся в WeChat и на маленькой вкладке. Синий добавляет техническую строгость, медь связывает знак с сырьевой темой.'},
+      c:{letter:'C',name:'Слово и недра',line:'Название как главный носитель репутации.',idea:'Длинная элегантная надпись ставит имя компании в центр. Единственная бронзовая линия отсылает к горизонту породы; отдельная Q служит только маленьким цифровым форматам.',tags:['Название','Редакционный тон','Сдержанность'],mark:'<path fill="#17372E" fill-rule="evenodd" d="M32 7a24 24 0 1 0 0 48 24 24 0 0 0 0-48Zm0 8a16 16 0 1 1 0 32 16 16 0 0 1 0-32Z"/><path d="m42 44 12 13" stroke="#A47C45" stroke-width="5" stroke-linecap="square"/><path d="M9 60h46" stroke="#A47C45" stroke-width="2"/>',paletteLight:[['Фон','#F5F0E6'],['Текст','#17372E'],['Акцент','#77572E'],['Линия','#C8C3B4'],['Бронза','#A47C45']],paletteDark:[['Фон','#102B24'],['Текст','#F5F0E6'],['Акцент','#D0A66A'],['Линия','#566B5D'],['Бронза','#A47C45']],display:'Georgia / Times New Roman / системный serif',body:'Arial / Helvetica / системный sans',ru:'Экспертиза, которой доверяют решения',en:'A considered view beneath the surface',zh:'立足地质研究，审慎推进合作',rec:'Сильнее всего в документах и длинных редакционных материалах: надпись выглядит как подпись института или исследовательской компании. Для тесных форматов нужен отдельный служебный Q.'}
+      };
+      const cn=[['卡兹涅德控股','Фонетическая передача имени'],['哈萨克地矿控股','Смысл: казахстанский геолого-горный холдинг'],['卡兹矿业控股','Сокращённый смысловой вариант']];
+      function mark(k,cls='',size='64'){return `<svg class="${cls} ${k}-mark" width="${size}" height="${size}" viewBox="0 0 64 64" role="img" aria-label="Знак концепции ${k.toUpperCase()}">${concepts[k].mark}</svg>`}
+      function logo(k,mode='horizontal'){const c=concepts[k];return `<div class="logo ${mode} ${k}">${mark(k,'logo-mark')}<div class="word"><div class="logo-name">QAZNEDR</div>${k==='c'?'<div class="word-rule"></div>':''}<div class="logo-holding">HOLDING</div></div></div>`}
+      function palette(items){return `<div class="swatches">${items.map(([role,hex])=>`<div><div class="swatch" style="background:${hex}"></div><div class="swatch-label">${role}<br><strong>${hex}</strong></div></div>`).join('')}</div>`}
+      function website(k,mobile=false){const nav=`<div class="site-nav">${logo(k)}${mobile?'<span class="mobile-menu">Меню</span>':'<div class="nav-links"><span>Портфель</span><span>Услуги</span><span>О компании</span><span>RU / EN / 中文</span><span class="nav-contact">Связаться</span></div>'}</div>`;const hero=`<div class="site-hero"><div class="hero-copy"><div class="mini">QAZNEDR HOLDING · Казахстан</div><h4>Геологическая экспертиза для подготовки сделок</h4><p>Изучаем архивные материалы, отбираем перспективные свободные участки и сопровождаем путь к лицензии.</p></div><div class="hero-photo">Фото полевых работ будет · заглушка</div></div>`;return `<div class="${mobile?'mobile':'desktop'}-screen">${nav}${hero}${mobile?'<div class="mobile-actions"><span>WeChat</span><span>WhatsApp</span></div><div class="mobile-caption">Реальные данные о компании и контакты будут добавлены после проверки · заглушка</div>':''}</div>`}
+      function overview(k){const c=concepts[k];return `<article class="overview-card concept-shell ${k}"><div class="overview-visual"><div class="overview-num">КОНЦЕПЦИЯ ${c.letter} / QAZNEDR</div><div class="overview-logo">${logo(k)}</div><div class="overview-bottom">${c.line}</div></div><div class="overview-meta"><h2>${c.name}</h2><p>${c.idea}</p><div class="tag-row">${c.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><a class="jump" href="#${k}">Рассмотреть направление ↓</a></div></article>`}
+      function detail(k){const c=concepts[k];return `<section id="${k}" class="concept concept-shell ${k}"><div class="concept-head"><div><div class="n">0${'abc'.indexOf(k)+1} / КОНЦЕПЦИЯ ${c.letter}</div><h2>${c.name}</h2></div><p>${c.idea}</p></div>
+      <div class="module"><div class="module-title"><h3>01 · Конструкция логотипа</h3><span>Горизонталь / вертикаль / знак</span></div><div class="grid g3"><div class="specimen"><span class="cap">Горизонтальная версия</span>${logo(k)}</div><div class="specimen"><span class="cap">Вертикальная версия</span>${logo(k,'stacked')}</div><div class="specimen"><span class="cap">Отдельный знак</span>${mark(k,'mark-only','78')}</div></div><div class="grid g3" style="margin-top:12px"><div class="specimen dark"><span class="cap">Тёмный фон</span>${logo(k)}</div><div class="specimen"><span class="cap">Светлый фон</span>${logo(k)}</div><div class="specimen mono"><span class="cap">Один цвет / печать</span>${logo(k)}</div></div><p class="note">Файлы SVG для горизонтальной, вертикальной, малой версии и фавиконов лежат рядом с обзором в ../mockups/01/. Латинские и кириллические надписи в SVG используют системные шрифты: перед промышленным выпуском потребуется выбрать и лицензировать точный self-hosted шрифт или перевести надпись в кривые.</p></div>
+      <div class="module"><div class="module-title"><h3>02 · Палитра</h3><span>HEX / рабочие роли</span></div><div class="palette"><div class="palette-panel"><p class="palette-heading">Светлая тема</p>${palette(c.paletteLight)}</div><div class="palette-panel dark"><p class="palette-heading">Тёмная тема</p>${palette(c.paletteDark)}</div></div><p class="note">На светлом фоне акцентный текст набран тёмным ${c.paletteLight[2][1]}; более светлый металлический цвет используется для деталей и на тёмной теме. Основной текст рассчитан на WCAG AA.</p></div>
+      <div class="module"><div class="module-title"><h3>03 · Типографика и языки</h3><span>Системные шрифты, без загрузки</span></div><div class="type-wrap"><div class="type-panel"><div class="type-kicker">Заголовок · RU / EN</div><div class="type-display" style="font-family:${k==='c'?'Georgia,serif':'Arial,Helvetica,sans-serif'}">${c.ru}</div><div class="type-body">${c.en}<br><br>Основной текст: геология изучена по архивным материалам; формат сотрудничества обсуждается отдельно.</div></div><div class="type-panel dark"><div class="type-kicker">中文 · системный CJK</div><div class="type-display" style="font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC',sans-serif">${c.zh}</div><div class="type-body">字体：苹方 / 微软雅黑 / 思源黑体（系统回退）</div></div></div><p class="type-note"><strong>Пара:</strong> ${c.display} для заголовков, ${c.body} для текста; китайский стек PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif. Это демонстрационные системные fallback, а не обещание одинакового рисунка на всех устройствах. Китайские фразы в макете — заглушки, требуют вычитки носителем.</p><div class="cn-table">${cn.map(([name,explanation],i)=>`<div class="cn-item"><div class="cap">Кандидат ${i+1} · версия логотипа 中文</div>${logo(k)}<div class="chinese">${name}</div><p>${explanation}</p><small>На проверку переводчику</small></div>`).join('')}</div></div>
+      <div class="module"><div class="module-title"><h3>04 · Сайт</h3><span>Ориентиры: 1440 px и 375 px</span></div><div class="screen-pair"><div class="screen-card"><p class="screen-label">Десктоп · композиция для 1440 px (масштабируется по ширине окна)</p>${website(k)}</div><div class="screen-card"><p class="screen-label">Мобильный · 375 px, крупные зоны контакта</p>${website(k,true)}</div></div><p class="note">Тексты, фотография и детали интерфейса служат контекстом применения айдентики; это не утверждённый дизайн главной страницы. Контент про конкретные участки и юридические сведения здесь не приводится.</p></div>
+      <div class="module"><div class="module-title"><h3>05 · Малые и печатные носители</h3><span>Favicon / WeChat / визитка / PDF</span></div><div class="applications"><div class="application"><h4>Favicon · реальные размеры</h4><div class="fav-row"><div class="fav-size">${mark(k,'','16')}16 × 16 px</div><div class="fav-size">${mark(k,'','32')}32 × 32 px</div></div><div class="fav-zoom">${mark(k)}<div class="note">Увеличение для просмотра геометрии. Экспортируемый SVG имеет viewBox 64 × 64.</div></div></div><div class="application"><h4>WeChat · круглая обрезка</h4><div class="avatar">${mark(k)}</div><p class="note">Тестовый круг показывает запас по краям при обрезке аватара.</p></div><div class="application"><h4>Визитка · лицевая сторона</h4><div class="card-front">${logo(k)}<p>Имя Фамилия · должность — заглушка<br>Контакты и реквизиты — заглушка</p></div></div><div class="application"><h4>PDF-тизер · обложка, не PDF-файл</h4><div class="pdf"><div>${logo(k)}<p class="pdf-top">Конфиденциально · пример оформления</p></div><div><div class="pdf-band"></div><h4>Геологический<br>обзор участка</h4><p>Регион / металл / код участка — заглушки.<br>Детали после знакомства и NDA.</p></div><p>QAZNEDR HOLDING · дата и контакт — заглушки</p></div></div><div class="application"><h4>Применение и характер</h4><div class="recommendation">${c.rec}</div><p class="note">Сведения на образцах помечены как заглушки. Никаких заявлений о владении участками, запасах или доходности.</p></div></div></div></section>`}
+      document.getElementById('overview').innerHTML=Object.keys(concepts).map(overview).join('');
+      document.getElementById('details').innerHTML=Object.keys(concepts).map(detail).join('');
+      function fitArtboards(){document.querySelectorAll('.desktop-screen').forEach(el=>{el.style.setProperty('--artboard-zoom',Math.min(1,el.parentElement.clientWidth/1440))});document.querySelectorAll('.mobile-screen').forEach(el=>{el.style.zoom=Math.min(1,el.parentElement.clientWidth/375)}}
+      fitArtboards();addEventListener('resize',fitArtboards);
+    </script>
+  </body>
 </html>

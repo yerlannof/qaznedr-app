@@ -1,33 +1,2594 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QAZNEDR HOLDING · Site design preview</title><style>
-:root{--bg:#e9ece6;--paper:#f4f5f0;--ink:#253740;--soft:#51616a;--line:#64747a;--sul:#dde55e;--dark:#253740;--light:#e9ece6;--card:#f4f5f0}body.dark{--bg:#253740;--paper:#30434c;--ink:#e9ece6;--soft:#cad2ca;--line:#8fa19e;--card:#30434c}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}button,input,select,textarea{font:inherit}button,a,select,input,textarea{outline-offset:3px}button,a{min-height:44px}a{color:inherit}button{cursor:pointer}h1,h2,h3,p{margin:0 0 16px}h1,h2,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.045em}body[lang=zh] h1,body[lang=zh] h2,body[lang=zh] .serif{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;letter-spacing:0;font-weight:500}h1{font-size:clamp(3rem,6.2vw,6.6rem);line-height:1.03;max-width:13ch}body[lang=zh] h1{max-width:12em}h2{font-size:clamp(2.1rem,4.3vw,4.25rem);line-height:1.11;max-width:17ch}h3{font-size:1.25rem;line-height:1.25}p{max-width:65ch}.wrap{width:min(100% - 64px,1200px);margin:auto}.ey{font-size:.76rem;text-transform:uppercase;letter-spacing:.15em;font-weight:700}.num{font-variant-numeric:tabular-nums}.muted{color:var(--soft)}.line{border-top:1px solid var(--line)}.site-head{position:sticky;top:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--line)}.head{min-height:76px;display:flex;align-items:center;gap:24px}.wordmark{text-decoration:none;font-family:Georgia,serif;font-size:1.24rem;letter-spacing:-.035em;white-space:nowrap}.wordmark span{font:700 .54rem/1.1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.23em;display:block;margin-top:-4px}.desk-nav{display:flex;gap:26px;margin-left:auto;align-items:center}.desk-nav a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-size:.83rem;font-weight:650}.desk-nav a[aria-current=page]{border-bottom:2px solid var(--ink)}.head-tools{display:flex;gap:7px;align-items:center}.head-tools button,.mobile-tools button,.menu-btn,.filter-toggle,.reset{border:1px solid var(--line);background:transparent;color:var(--ink);padding:9px 11px;min-width:44px}.head-tools button[aria-pressed=true],.mobile-tools button[aria-pressed=true]{background:var(--ink);color:var(--bg)}button:disabled{opacity:.48;cursor:not-allowed}.menu-btn{display:none}.mobile-menu{display:none}.mobile-menu.open{display:grid}.mobile-menu a{padding:12px 0;text-decoration:none;border-bottom:1px solid var(--line)}.mobile-tools{display:flex;gap:6px;padding:18px 0}.hero{padding:78px 0 68px;border-bottom:1px solid var(--line)}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}.hero .ey{margin-bottom:32px}.lead{font-size:clamp(1.1rem,1.7vw,1.45rem);line-height:1.45}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:var(--bg);padding:11px 19px;font-size:.85rem;font-weight:700;line-height:1.25;min-height:48px}.btn.primary{background:var(--sul);border-color:var(--sul);color:#253740}.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}.btn:hover,.desk-nav a:hover,.tile-link:hover{text-decoration:underline;text-underline-offset:4px}.btn:active{transform:translateY(1px)}.hero-art{position:relative;overflow:hidden;aspect-ratio:1.08;background:#253740;border-radius:2px}.hero-art img{width:100%;height:100%;object-fit:cover}.caption{font-size:.72rem;letter-spacing:.04em;color:var(--soft)}.hero-art .caption,.feature-art .caption{position:absolute;bottom:0;left:0;right:0;padding:11px 16px;color:#e9ece6;background:#253740}.section{padding:84px 0;border-bottom:1px solid var(--line)}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:32px}.section-head p{max-width:45ch}.section-head h2{margin:0}.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.cols4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stat{border-top:1px solid var(--ink);padding-top:15px}.stat strong{display:block;font-family:Georgia,serif;font-weight:400;font-size:clamp(2rem,3.2vw,3.4rem);line-height:1.1;margin-bottom:10px}.stat p{font-size:.84rem}.feature{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}.feature-art{position:relative;background:#253740;aspect-ratio:1.18;overflow:hidden}.feature-art img{width:100%;height:100%;object-fit:cover}.kicker{display:block;color:var(--soft);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:15px}.tile{border-top:1px solid var(--ink);padding:20px 0;min-width:0}.tile .number{font-size:.75rem;color:var(--soft);margin-bottom:24px}.tile p{font-size:.9rem;color:var(--soft)}.tile-link{font-size:.82rem;font-weight:700;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:5px}.image-tile{position:relative;background:#d3d9d4;height:240px;overflow:hidden;margin-bottom:17px}.image-tile img{width:100%;height:100%;object-fit:cover}.image-tile img.gold,.image-tile img.copper{width:200%;max-width:none;height:100%;object-fit:cover}.image-tile img.gold{object-position:left center}.image-tile img.copper{transform:translateX(-50%);object-position:right center}.chip{display:inline-flex;border:1px solid var(--line);font-size:.72rem;font-weight:700;padding:3px 8px;letter-spacing:.04em}.process .tile{min-height:185px}.darkband{background:#253740;color:#e9ece6}.darkband .tile{border-color:#8d9ca0}.darkband .tile p,.darkband .caption,.darkband .kicker{color:#cdd7d3}.darkband .btn.ghost{color:#e9ece6;border-color:#839398}.photo-placeholder{min-height:260px;background:var(--paper);border:1px solid var(--line);display:grid;place-items:center;text-align:center;padding:25px;color:var(--soft);font-size:.85rem}.contact-block{background:#253740;color:#e9ece6}.contact-block .btn.primary{border-color:#dde55e;color:#253740;background:#dde55e}.contact-block .btn.ghost{border-color:#8fa19e;color:#e9ece6;background:transparent}.contact-block h2{max-width:20ch}.page-intro{padding:68px 0 45px}.page-intro .ey{margin-bottom:20px}.page-intro h1{max-width:16ch}.page-intro p{font-size:1.14rem}.filter-bar{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:12px;align-items:end;margin:30px 0}.field{display:grid;gap:7px;font-size:.78rem;font-weight:700}.field select,.field input,.field textarea{width:100%;background:var(--paper);border:1px solid var(--line);color:var(--ink);padding:11px;min-height:48px;border-radius:0}.field textarea{min-height:126px;resize:vertical}.form.was-submitted :invalid{border-color:#9a3d32;outline-color:#9a3d32}.filter-toggle{display:none}.project{border-top:1px solid var(--ink);padding:19px 0 24px}.project .image-tile{height:210px}.project .meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;border-top:1px solid var(--line);padding-top:13px;margin:17px 0}.project small{display:block;color:var(--soft)}.project h3{font-family:Georgia,serif;font-weight:400;font-size:1.7rem;margin:8px 0}.project .status{min-height:58px}.note{border-left:3px solid var(--sul);padding:11px 15px;background:var(--paper);font-size:.82rem;margin:15px 0}.specgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}.spec{border-top:1px solid var(--line);padding:16px 16px 22px 0}.spec small{display:block;color:var(--soft);margin-bottom:7px}.spec b{font-size:1rem;font-weight:600}.locked{border:1px solid var(--line);padding:35px;background:var(--paper)}.locked-lines{display:grid;gap:14px;margin:26px 0}.locked-lines i{display:block;width:80%;height:11px;background:var(--line);opacity:.55}.locked-lines i:nth-child(2){width:63%}.locked-lines i:nth-child(3){width:72%}.form{display:grid;gap:14px}.form .btn{justify-self:start}.form-status{font-size:.82rem}.qr{width:190px;height:190px;border:1px dashed var(--line);background:var(--paper);display:grid;place-items:center;text-align:center;font-size:.78rem;padding:20px}.tablebox{overflow-x:auto;border-top:1px solid var(--line)}table{border-collapse:collapse;width:100%;min-width:560px}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:16px 18px 16px 0;font-size:.85rem}th{color:var(--soft);font-weight:700}.article-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:70px}.toc{position:sticky;top:110px;align-self:start;border-top:1px solid var(--line);padding-top:15px}.toc a{display:block;padding:8px 0}.article-body{max-width:740px;min-width:0}.tablebox{max-width:100%}.article-body h2{font-size:2.3rem;margin:40px 0 15px}.article-body h3{margin-top:28px}.article-body p{line-height:1.8}.article-body ul{padding-left:20px}.faq details{border-top:1px solid var(--line);padding:15px 0}.faq summary{cursor:pointer;font-weight:700}.site-footer{padding:55px 0 95px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}.site-footer a{display:flex;align-items:center;min-height:44px;padding:8px 0}.float-contact{display:none}.reviewbar{background:#14252d;color:#e9ece6;padding:9px 18px;text-align:center;font-size:.78rem}.reviewbar a{display:inline-block;margin:0 7px;color:#e9ece6}.reviewbar[hidden]{display:none}.empty{padding:35px;background:var(--paper);border:1px solid var(--line)}:focus-visible{outline:3px solid #253740;outline-offset:3px}body.dark :focus-visible,.darkband :focus-visible,.contact-block :focus-visible{outline-color:#e9ece6}body[lang=zh] .ey{letter-spacing:0}@media(max-width:900px){.desk-nav,.head-tools{display:none}.menu-btn{display:block;margin-left:auto}.mobile-menu{padding:0 0 15px}.hero-grid{grid-template-columns:1fr;gap:32px}.hero-art{aspect-ratio:1.5}.cols4{grid-template-columns:repeat(2,1fr)}.feature{gap:25px}.filter-bar{grid-template-columns:repeat(3,1fr)}.filter-bar .reset{grid-column:1/-1;justify-self:start}}@media(max-width:600px){.wrap{width:min(100% - 40px,1200px)}.head{min-height:61px}.wordmark{font-size:1.08rem}.hero{padding:46px 0 48px}.hero .ey{margin-bottom:23px}h1{font-size:2.2rem;line-height:1.15}h2{font-size:2.15rem}.lead{font-size:1.08rem}.hero-art{aspect-ratio:1.15}.section{padding:56px 0}.section-head{display:block;margin-bottom:27px}.section-head p{margin-top:12px}.cols2,.cols3,.cols4,.feature,.specgrid,.article-layout,.footer-grid{grid-template-columns:1fr}.cols3{gap:6px}.cols4{gap:3px}.feature{gap:22px}.feature-art{aspect-ratio:1.05}.image-tile{height:215px}.process .tile{min-height:unset}.page-intro{padding:42px 0 25px}.page-intro h1{font-size:2.2rem}.filter-toggle{display:block;width:100%;text-align:left}.filter-bar{display:none}.filter-bar.open{display:grid;grid-template-columns:1fr;position:fixed;z-index:45;inset:0;margin:0;padding:58px 18px 20px;background:var(--bg);align-content:start;overflow:auto}.filter-bar .reset{grid-column:auto}.filter-head{display:none}.filter-bar.open .filter-head{display:flex;justify-content:space-between;align-items:center}.filter-bar.open .filter-head button{background:transparent;color:var(--ink);border:1px solid var(--line);min-width:44px;min-height:44px}.project .image-tile{height:230px}.spec{padding:14px 0}.article-layout{gap:24px}.toc{position:static}.site-footer{padding-bottom:110px}.float-contact{display:flex;position:fixed;z-index:35;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));background:var(--sul);color:#253740;padding:11px 17px;text-decoration:none;font-size:.85rem;font-weight:700;box-shadow:0 3px 13px #172d3580}.actions .btn{flex:1 1 100%}.qr{width:180px;height:180px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-</style></head><body><div id="app"></div><script>
-const params=new URLSearchParams(location.search),screens=["home","portfolio","teaser","services","about","contact","insights","article","metal"],screen=screens.includes(params.get("screen"))?params.get("screen"):"home",lang=["ru","en","zh"].includes(params.get("lang"))?params.get("lang"):"en",theme=params.get("theme")==="dark"?"dark":"light",knownCodes=["DEMO-A01","DEMO-B02","DEMO-C03"],rawCode=params.get("code"),code=rawCode===null?"DEMO-B02":knownCodes.includes(rawCode)?rawCode:null;document.body.classList.toggle("dark",theme==="dark");document.body.lang=lang;document.documentElement.lang=lang;
-const L={en:{nav:["Home","Portfolio","Services","About","Insights","Contact"],menu:"Menu",contact:"Contact",discuss:"Discuss a site",view:"View portfolio",read:"Read article",more:"View teaser",first:"WhatsApp",second:"WeChat",ey:"Kazakhstan · Geology and transaction preparation",homeTitle:"Kazakhstan prospects. Geological insight.",homeLead:"Geological research and transaction support. Our team studies archival reports, selects areas for review and supports investors through field work.",facts:["ore occurrences in an archival report database","focus on gold and copper","geologists available for field review"],scene:"From archive to field",sceneBody:"Our geologists trace the evidence in historical reports, compare geological context and identify areas for further review. The scene illustrates the method; it is not a map of a real site.",portfolio:"Selected opportunities",portfolioLead:"Open teasers offer a first view. Detailed material is shared after an introduction and NDA.",cooperation:"Ways to work together",coop:["Licence structured for an investor","Joint venture or earn-in","Area selection and analysis","Field review and exploration"],process:"A clear route to review",steps:["Share your interest","Exchange NDA and materials","Meet the geologists","Arrange a field visit"],people:"The people behind the evidence",peopleBody:"The team works with archival geology and visits the field. Verified portraits and names will appear here.",trust:"Check the company",trustBody:"Legal entity details, registration number and official registry links are awaiting owner verification.",guides:"A more informed first conversation",guidesBody:"Short guides explain the language of teasers, evidence and transaction preparation.",end:"Start with a metal, area or question",portfolioTitle:"Portfolio of areas",portfolioDesc:"Illustrative review cards. Codes are demonstrative; area, grade, status and terms require verification.",filter:"Filter areas",metalLabel:"Metal",region:"Region",type:"Type",all:"All",reset:"Reset filters",empty:"No demonstrative cards match these filters.",pending:"To be confirmed",closed:"Closed teaser",free:"Availability pending verification",grade:"Grade: data pending",neg:"In discussion",sold:"Unavailable",teaserTitle:"Copper area · initial teaser",teaserDesc:"A demonstrative project view for reviewing the page structure. The code and parameters do not identify a real area.",open:"Open facts",nda:"Materials after NDA",ndaBody:"After an introduction and NDA: archival reports, location detail, analytical data and transaction documents where available.",reply:"Discuss this area",replyBody:"Include the demonstrative code in your message so the team can follow the conversation.",deal:"Potential transaction formats",check:"How to check the information",checkBody:"Check the legal entity and current area status in official sources before relying on a teaser. Specific registry links and dates will be inserted after verification.",legal:"Legal and data note",legalBody:"This concept does not confirm ownership, licence availability, resources, grades or transaction terms. All such details need source and legal review.",services:"Services",servicesLead:"Geological work and transaction preparation, shaped to the investor’s question.",svc:[['Licensing support','Investors and project partners','Area selection, application preparation and process support','Initial scope → document review → filing support'],['Exploration and field work','Investors needing ground review','Geological site visits, sampling plans and field assessment','Brief → field programme → observations'],['Due diligence','Investors reviewing an area','Review of geological and legal source material with relevant specialists','Document list → gaps → review memo'],['Analysis','Teams screening Kazakhstan','Archival comparison, area screening and concise decision material','Question → source review → summary']],audience:"For",scope:"Scope",method:"Process",about:"About the company",aboutLead:"QAZNEDR HOLDING is a Kazakhstan geological exploration company built around the work of its geologists.",history:"A working archive",historyBody:"The team studies Soviet-era archival reports. Its database covers more than 7,000 ore occurrences and helps identify areas for deeper geological review.",team:"Geological team",teamBody:"Real portraits, names and short biographies will be placed here after verification.",requisites:"Company details and verification",requisitesBody:"Legal name, registration number and official registry links are pending confirmation.",contactTitle:"Get in touch",contactLead:"Tell us which metal, region or demonstrative project code interests you. We can agree on the next review step.",wechat:"WeChat",qr:"QR pending verified account",id:"WeChat ID pending",copy:"Copy ID",copyPending:"No verified ID is available to copy.",wa:"WhatsApp",waPending:"Verified number pending",email:"Email",emailPending:"Verified address pending",hours:"Reply languages and hours",hoursBody:"Languages, hours and time zone are awaiting confirmation.",form:"Send an inquiry",name:"Name",replyField:"Reply contact (WeChat ID, phone or email)",company:"Company (optional)",message:"Message or project code",send:"Review inquiry",formDemo:"Design preview only. This form does not send data.",formStatus:"Preview confirmed: no data was sent.",insights:"Insights and guides",insightsLead:"Plain language notes for the first stages of geological and transaction review.",topic:"Topic",language:"Language",articleTitle:"How to read a site teaser",articleLead:"An initial teaser is a starting point for questions. Read each field together with its source and verification date.",short:"At a glance",shortBody:"Check which facts are public, what remains behind NDA and which claims still need independent verification. A grade range needs both a source and a clear label; a local high is not an average.",toc:"On this page",articleHeads:["Identity and location","Grades and evidence","The NDA stage"],articleBody:["A code helps a conversation remain tied to one area. Location and current status need an official source and a date.","Separate average grade, a range and local spikes. None of those figures is shown for the demonstrative cards until project evidence is approved.","Request source reports, analytical material and transaction documents when a relevant area is identified."],source:"Sources and review date",sourceBody:"Source links and editorial update date are pending specialist review.",metalTitle:"Copper in Kazakhstan",metalLead:"A focused entry to the copper portfolio and the questions that shape early review.",metalFact:"Copper is one of the company’s main screening areas. Site level facts will be published after geological and legal verification.",context:"What an open teaser can show",contextBody:"An open teaser can name a metal and describe the review route. Detailed location, geology and transaction structure belong in direct discussion.",faq:"Questions before a field visit",faqs:[["Are the areas owned by QAZNEDR?","No ownership is claimed by this design preview. The relevant rights and proposed deal structure must be verified for each area."],["Are grades confirmed?","No figures are included in the demonstrative cards. Published grades would need clear source and measurement labels."]],photo:"Verified team / field photo pending",demo:"DESIGN EXAMPLE · NOT PROJECT DATA",update:"Update date pending"},ru:{nav:["Главная","Участки","Услуги","О компании","Гайды","Контакты"],menu:"Меню",contact:"Связаться",discuss:"Обсудить участок",view:"Смотреть портфель",read:"Читать статью",more:"Открыть тизер",first:"WhatsApp",second:"WeChat",ey:"Казахстан · Геология и подготовка сделок",homeTitle:"Геология как основа следующего решения.",homeLead:"Геологи QAZNEDR HOLDING изучают фондовые отчёты, отбирают перспективные свободные участки и сопровождают инвестора от первого обзора до полевых работ.",facts:["рудных объектов в базе фондовых отчётов","основной фокус — золото и медь","геологи выезжают в поле"],scene:"От архива к полю",sceneBody:"Наши геологи сопоставляют фондовые материалы, оценивают геологический контекст и выбирают участки для дальнейшего изучения. Иллюстрация показывает метод, а не реальный участок.",portfolio:"Отобранные направления",portfolioLead:"Открытые тизеры дают первое представление. Подробные материалы — после знакомства и NDA.",cooperation:"Форматы сотрудничества",coop:["Лицензия под инвестора","Совместное предприятие или earn-in","Подбор и аналитика","Полевые работы и разведка"],process:"Понятный порядок работы",steps:["Сообщите об интересе","NDA и обмен материалами","Встреча с геологами","Выезд на участок"],people:"Люди за данными",peopleBody:"Команда работает с архивной геологией и выезжает в поле. Реальные фото и имена будут добавлены после проверки.",trust:"Проверить компанию",trustBody:"Наименование ТОО, БИН и ссылки на официальные реестры ожидают подтверждения владельца.",guides:"Разговор на основе фактов",guidesBody:"Короткие материалы объясняют тизеры, геологические данные и подготовку сделки.",end:"Начнём с металла, региона или вопроса",portfolioTitle:"Портфель участков",portfolioDesc:"Демонстрационные карточки для оценки дизайна. Коды, регион, содержание, статус и условия требуют проверки.",filter:"Фильтровать участки",metalLabel:"Металл",region:"Регион",type:"Тип",all:"Все",reset:"Сбросить фильтры",empty:"По этим демонстрационным фильтрам карточек нет.",pending:"Требует подтверждения",closed:"Закрытый тизер",free:"Доступность требует проверки",grade:"Содержание: данные ожидаются",neg:"В переговорах",sold:"Недоступен",teaserTitle:"Медный участок · первый тизер",teaserDesc:"Демонстрационный вид проекта для оценки страницы. Код и параметры не обозначают реальный участок.",open:"Открытые параметры",nda:"Материалы после NDA",ndaBody:"После знакомства и NDA: фондовые отчёты, детализация местоположения, анализы и документы сделки при наличии.",reply:"Обсудить этот участок",replyBody:"Укажите демонстрационный код в сообщении, чтобы сохранить контекст разговора.",deal:"Возможные форматы сделки",check:"Как проверить сведения",checkBody:"Перед использованием тизера проверьте юрлицо и текущий статус участка в официальных источниках. Ссылки и дата проверки будут добавлены позднее.",legal:"Правовое уточнение",legalBody:"Этот макет не подтверждает право собственности, доступность лицензии, запасы, содержание или условия сделки. Нужна проверка документов и законодательства.",services:"Услуги",servicesLead:"Геологическая работа и подготовка сделки под вопрос инвестора.",svc:[["Сопровождение лицензирования","Инвесторам и партнёрам","Подбор участка, подготовка заявки и сопровождение процесса","Вводная задача → документы → подача"],["Разведка и поле","Тем, кому нужна проверка на местности","Выезд геологов, план опробования, полевая оценка","Задача → программа → наблюдения"],["Due diligence","Инвесторам при оценке участка","Проверка геологических и правовых материалов со специалистами","Список документов → пробелы → выводы"],["Аналитика","Командам, выбирающим направления","Сопоставление архивов, отбор участков и краткие материалы","Вопрос → источники → сводка"]],audience:"Кому",scope:"Что входит",method:"Как проходит",about:"О компании",aboutLead:"QAZNEDR HOLDING — казахстанская геологоразведочная компания, опирающаяся на труд своих геологов.",history:"Работа с архивом",historyBody:"Команда изучает советские фондовые отчёты. База охватывает более 7 000 рудных объектов и помогает выделять участки для дальнейшей геологической проверки.",team:"Команда геологов",teamBody:"Реальные портреты, имена и короткие биографии появятся после проверки.",requisites:"Реквизиты и проверка",requisitesBody:"Наименование ТОО, БИН и ссылки на официальные реестры ждут подтверждения.",contactTitle:"Связаться",contactLead:"Расскажите, какой металл, регион или демонстрационный код вас интересует. Согласуем следующий шаг проверки.",wechat:"WeChat",qr:"QR подтверждённого аккаунта появится здесь",id:"WeChat ID ожидает подтверждения",copy:"Копировать ID",copyPending:"Подтверждённого ID пока нет. Копирование недоступно.",wa:"WhatsApp",waPending:"Номер ожидает подтверждения",email:"Электронная почта",emailPending:"Адрес ожидает подтверждения",hours:"Языки и часы ответа",hoursBody:"Языки, часы и часовой пояс ответа ожидают подтверждения.",form:"Направить запрос",name:"Имя",replyField:"Контакт для ответа (WeChat ID, телефон или email)",company:"Компания (необязательно)",message:"Сообщение или код участка",send:"Проверить запрос",formDemo:"Макет: данные никуда не отправляются.",formStatus:"Макет подтверждает: данные не отправлены.",insights:"Гайды и аналитика",insightsLead:"Короткие материалы для первых этапов геологической оценки и подготовки сделки.",topic:"Тема",language:"Язык",articleTitle:"Как читать тизер участка",articleLead:"Тизер — начало разговора. Сопоставляйте каждый параметр с источником и датой проверки.",short:"Коротко",shortBody:"Разделяйте открытые сведения, материалы после NDA и данные, которые ещё нужно проверить. Диапазон содержания требует источника и ясной метки; локальный пик не является средним.",toc:"На этой странице",articleHeads:["Код и местоположение","Содержание и доказательства","Этап NDA"],articleBody:["Код удерживает обсуждение в контексте одного участка. Местоположение и текущий статус требуют официального источника и даты.","Среднее содержание, диапазон и локальный пик — разные показатели. В демонстрационных карточках таких чисел нет до проверки материалов.","Когда участок интересен, запросите отчёты, анализы и документы по сделке."],source:"Источники и дата",sourceBody:"Ссылки на источники и дата редакционного обновления ожидают проверки специалиста.",metalTitle:"Медь в Казахстане",metalLead:"Вход в медный портфель и вопросы для первого обзора.",metalFact:"Медь — одно из главных направлений отбора компании. Данные об участках будут опубликованы после геологической и правовой проверки.",context:"Что даёт открытый тизер",contextBody:"Открытый тизер обозначает металл и порядок обсуждения. Геология, точное местоположение и структура сделки обсуждаются напрямую.",faq:"Вопросы перед выездом",faqs:[["Участки принадлежат QAZNEDR?","Этот макет не заявляет права собственности. Права и структура сделки проверяются по каждому участку."],["Содержание подтверждено?","В демонстрационных карточках нет чисел. Публикуемые показатели потребуют источника и метки метода измерения."]],photo:"Место для проверенного фото команды / поля",demo:"ДЕМО · НЕ ДАННЫЕ УЧАСТКА",update:"Дата обновления ожидается"},zh:{nav:["首页","项目组合","服务","关于我们","指南","联系"],menu:"菜单",contact:"联系团队",discuss:"讨论项目",view:"查看项目组合",read:"阅读指南",more:"查看简介",first:"微信",second:"WhatsApp",ey:"哈萨克斯坦 · 地质研究与交易准备",homeTitle:"以地质证据，开启下一步对话。",homeLead:"QAZNEDR HOLDING 的地质团队研究历史档案，筛选有潜力的可申请区域，并协助投资者完成初步审阅与实地考察。",facts:["档案数据库中的矿点","主要方向：黄金与铜","地质人员可赴现场考察"],scene:"从档案到现场",sceneBody:"地质团队比对历史报告与地质背景，筛选值得进一步研究的区域。图像展示工作方法，不代表真实项目。",portfolio:"精选方向",portfolioLead:"公开简介用于初步了解。详细材料在沟通和签署保密协议后提供。",cooperation:"合作方式",coop:["为投资方安排许可申请","合资或阶段性投资","区域筛选与分析","现场考察与勘探"],process:"清晰的审阅路径",steps:["说明投资兴趣","保密协议与资料交流","与地质团队会面","安排现场考察"],people:"资料背后的地质团队",peopleBody:"团队研究历史地质档案，也会赴现场工作。经确认的人员照片和姓名将在此展示。",trust:"核实公司",trustBody:"法人名称、登记号码及官方查询链接待负责人确认。",guides:"从事实开始沟通",guidesBody:"简明指南解释项目简介、地质资料及交易准备。",end:"从矿种、地区或问题开始",portfolioTitle:"项目组合",portfolioDesc:"用于审阅设计的演示卡片。编号、地区、品位、状态及条款均需核实。",filter:"筛选项目",metalLabel:"矿种",region:"地区",type:"类型",all:"全部",reset:"重置筛选",empty:"此演示筛选条件下没有卡片。",pending:"待确认",closed:"保密项目简介",free:"可申请状态待核实",grade:"品位：数据待提供",neg:"洽谈中",sold:"暂不可用",teaserTitle:"铜项目 · 初步简介",teaserDesc:"用于审阅页面结构的演示项目。编号与参数并不对应真实区域。",open:"公开参数",nda:"保密协议后提供的材料",ndaBody:"初步沟通并签署保密协议后，可提供档案报告、位置细节、分析资料及现有交易文件。",reply:"讨论此项目",replyBody:"联系时请注明演示编号，以便团队了解您的问题。",deal:"可能的合作方式",check:"如何自行核实",checkBody:"使用简介前，请通过官方渠道核实企业信息及区域当前状态。具体链接和查询日期将于核实后补充。",legal:"法律与资料说明",legalBody:"本设计不确认所有权、许可可用性、资源量、品位或交易条款。相关内容须经资料和法律核查。",services:"服务",servicesLead:"围绕投资者的问题，提供地质工作与交易准备支持。",svc:[["许可申请支持","投资者与项目伙伴","筛选区域、准备申请并跟进流程","明确需求 → 审阅文件 → 协助申请"],["勘探与现场工作","需要现场判断的投资者","地质人员出行、采样计划与现场评估","提出需求 → 工作计划 → 现场观察"],["尽职调查","正在评估项目的投资者","与专业人员审核地质及法律基础资料","文件清单 → 识别缺口 → 审阅结论"],["分析","筛选哈萨克斯坦项目的团队","比较档案、筛选区域并整理简明材料","提出问题 → 审查资料 → 形成摘要"]],audience:"适合",scope:"工作范围",method:"流程",about:"关于公司",aboutLead:"QAZNEDR HOLDING 是一家哈萨克斯坦地质勘探公司，工作基于地质团队的专业研究。",history:"档案研究",historyBody:"团队研究苏联时期的地质档案报告。数据库覆盖 7,000 多个矿点，为进一步地质评估提供筛选基础。",team:"地质团队",teamBody:"经核实的真实照片、姓名和简历将在此展示。",requisites:"公司信息与核实",requisitesBody:"法人名称、登记号码及官方查询链接待确认。",contactTitle:"联系我们",contactLead:"请说明感兴趣的矿种、地区或演示项目编号。我们可共同确定下一步核查。",wechat:"微信",qr:"经确认的二维码将在此展示",id:"微信号待确认",copy:"复制微信号",copyPending:"目前没有经确认的微信号，无法复制。",wa:"WhatsApp",waPending:"号码待确认",email:"电子邮件",emailPending:"地址待确认",hours:"回复语言与时间",hoursBody:"回复语言、时间及所用时区待确认。",form:"提交咨询",name:"姓名",replyField:"回复方式（微信号、电话或邮箱）",company:"公司（选填）",message:"需求或项目编号",send:"检查咨询",formDemo:"仅供审阅：此表单不会发送数据。",formStatus:"演示确认：数据未发送。",insights:"指南与分析",insightsLead:"帮助初步地质审阅和交易准备的简明说明。",topic:"主题",language:"语言",articleTitle:"如何阅读项目简介",articleLead:"项目简介是提问的起点。请将每项参数与来源及核查日期一同理解。",short:"简要说明",shortBody:"区分公开信息、保密协议后提供的资料和仍需独立核实的内容。品位范围必须注明来源和标签；局部高值不等于平均值。",toc:"本文目录",articleHeads:["编号与位置","品位与证据","保密协议阶段"],articleBody:["项目编号让沟通始终指向同一区域。位置及当前状态需要官方来源与查询日期。","平均品位、范围和局部高值是不同指标。演示卡片在资料获批前不展示这些数字。","确认感兴趣的项目后，可申请原始报告、分析材料及交易文件。"],source:"来源与更新日期",sourceBody:"来源链接和编辑更新日期待专业人员核实。",metalTitle:"哈萨克斯坦铜项目",metalLead:"了解铜项目组合及初步审阅时应提出的问题。",metalFact:"铜是公司的主要筛选方向之一。具体项目数据将在地质与法律核实后发布。",context:"公开简介的作用",contextBody:"公开简介可说明矿种与沟通路径。地质细节、精确位置和交易结构需直接讨论。",faq:"现场考察前的问题",faqs:[["这些区域属于 QAZNEDR 吗？","本设计不声明所有权。每个项目的相关权利与交易结构都需核实。"],["品位已获确认吗？","演示卡片没有数值。未来发布的指标应提供来源和测量标签。"]],photo:"真实团队 / 现场照片待提供",demo:"演示内容 · 非真实项目数据",update:"更新日期待确认"}};const t=L[lang],topicKeys=["licensing","field","review","analysis"],rawTopic=params.get("topic"),topic=topicKeys.includes(rawTopic)?rawTopic:null,topicName=topic?t.svc[topicKeys.indexOf(topic)][0]:null,asset="../mockups/01/elements/",site=(s,extra="")=>"?screen="+s+"&lang="+lang+"&theme="+theme+(extra?"&code="+encodeURIComponent(extra):""),link=(s,label,cls="",extra="")=>"<a class=\""+cls+"\" href=\""+site(s,extra)+"\">"+label+"</a>",section=(title,body,cls="")=>"<section class=\"section "+cls+"\"><div class=\"wrap\"><div class=\"section-head\"><h2>"+title+"</h2></div>"+body+"</div></section>",tag=x=>"<span class=\"chip\">"+x+"</span>";
-function header(){let nav=["home","portfolio","services","about","insights","contact"].map((s,i)=>link(s,t.nav[i],screen===s?"current":"")).join("");let langs=["ru","en","zh"].map((l,i)=>"<button data-lang=\""+l+"\" aria-pressed=\""+(l===lang)+"\">"+["RU","EN","中文"][i]+"</button>").join("");return "<header class=\"site-head\"><div class=\"wrap head\">"+link("home","QAZNEDR<span>HOLDING</span>","wordmark")+"<nav class=\"desk-nav\" aria-label=\"Main\">"+nav+"</nav><div class=\"head-tools\">"+langs+"<button disabled title=\"Translation pending\">KZ</button><button class=\"theme\" aria-label=\"Toggle theme\">"+(theme==="dark"?"Light":"Dark")+"</button></div><button class=\"menu-btn\" aria-expanded=\"false\" aria-controls=\"mobile-menu\">"+t.menu+"</button></div><nav class=\"mobile-menu wrap\" id=\"mobile-menu\" aria-label=\"Mobile\">"+nav+"<div class=\"mobile-tools\">"+langs+"<button disabled title=\"Translation pending\">KZ</button><button class=\"theme\" aria-label=\"Toggle theme\">"+(theme==="dark"?"Light":"Dark")+"</button></div></nav></header>"}function footer(){let ctx=screen==="teaser"?code:"";return "<footer class=\"site-footer\"><div class=\"wrap footer-grid\"><div><div class=\"wordmark\">QAZNEDR<span>HOLDING</span></div><p class=\"muted\">"+t.aboutLead+"</p><small>"+t.demo+"</small></div><div><b>"+t.nav[1]+"</b>"+link("portfolio",t.view)+link("metal",t.metalTitle)+"</div><div><b>"+t.nav[5]+"</b>"+link("contact",t.contact,"",ctx)+"<p class=\"muted\">"+t.requisitesBody+"</p></div></div></footer>"+link("contact",t.contact,"float-contact",ctx)}function intro(ey,title,lead){return "<section class=\"page-intro\"><div class=\"wrap\"><p class=\"ey\">"+ey+"</p><h1>"+title+"</h1><p class=\"lead\">"+lead+"</p></div></section>"}function channels(ctx=""){return "<div class=\"actions\">"+link("contact",t.first,"btn primary",ctx)+link("contact",t.second,"btn ghost",ctx)+"</div>"}function stat(v,x){return "<div class=\"stat\"><strong>"+v+"</strong><p>"+x+"</p></div>"}function teaserCards(){let names=lang==="zh"?["黄金","铜","铅锌"]:lang==="ru"?["Золото","Медь","Свинец–цинк"]:["Gold","Copper","Lead–zinc"];return ["DEMO-A01","DEMO-B02","DEMO-C03"].map((c,i)=>"<article class=\"project\" data-metal=\""+i+"\" data-type=\""+(i===1?1:0)+"\">"+(i===2?"<div class=\"photo-placeholder\" style=\"height:210px;min-height:0\">"+({en:"Illustration pending",ru:"Иллюстрация ожидается",zh:"插图待提供"})[lang]+"</div>":"<div class=\"image-tile\"><img src=\""+asset+"portfolio-specimens.png\" class=\""+(i===1?"copper":"gold")+"\" alt=\"Illustrative geological specimen, not project evidence\"></div>")+"<p>"+tag(t.closed)+" "+tag(c)+"</p><h3>"+names[i]+"</h3><div class=\"meta\"><div><small>"+t.region+"</small><b>"+t.pending+"</b></div><div><small>"+t.type+"</small><b>"+t.pending+"</b></div></div><p>"+t.grade+"</p><p class=\"status muted\">"+(i===1?t.neg:i===2?t.sold:t.free)+"</p>"+link("teaser",t.more,"tile-link",c)+"</article>").join("")}function home(){return "<section class=\"hero\"><div class=\"wrap hero-grid\"><div><p class=\"ey\">"+t.ey+"</p><h1>"+t.homeTitle+"</h1><p class=\"lead\">"+t.homeLead+"</p>"+channels()+"</div><div class=\"hero-art\"><img src=\""+asset+"archive-to-field.png\" alt=\"Illustrative archival geology and core samples\"><span class=\"caption\">"+t.demo+"</span></div></div></section>"+section(({en:"Evidence at a glance",ru:"Опорные факты",zh:"关键事实"})[lang], "<div class=\"cols3\">"+stat("7,000+",t.facts[0])+stat(lang==="zh"?"金 / 铜":lang==="ru"?"Au / Cu":"Au / Cu",t.facts[1])+stat(({en:"Field",ru:"Поле",zh:"现场"})[lang],t.facts[2])+"</div>")+section(t.scene,"<div class=\"feature-art\" style=\"aspect-ratio:2.1\"><img src=\""+asset+"geology-cutaway.png\" alt=\"Illustrative geological cutaway showing strata and a vein, not a real area\"><span class=\"caption\">"+t.demo+"</span></div><p class=\"lead\" style=\"margin-top:25px\">"+t.sceneBody+"</p>")+section(t.portfolio,"<p class=\"lead\">"+t.portfolioLead+"</p><div class=\"cols3\">"+teaserCards()+"</div><div class=\"actions\">"+link("portfolio",t.view,"btn ghost")+"</div>")+section(t.cooperation,"<div class=\"cols4\">"+t.coop.map((x,i)=>"<div class=\"tile\"><div class=\"number\">0"+(i+1)+"</div><h3>"+x+"</h3></div>").join("")+"</div>","darkband")+section(t.process,"<div class=\"cols4 process\">"+t.steps.map((x,i)=>"<div class=\"tile\"><div class=\"number\">0"+(i+1)+"</div><h3>"+x+"</h3></div>").join("")+"</div>")+section(t.people,"<div class=\"feature\"><div><p class=\"lead\">"+t.peopleBody+"</p>"+link("about",t.nav[3],"tile-link")+"</div><div class=\"photo-placeholder\">"+t.photo+"</div></div>")+section(t.trust,"<p class=\"lead\">"+t.trustBody+"</p>"+link("about",t.nav[3],"tile-link"))+section(t.guides,"<div class=\"feature\"><p class=\"lead\">"+t.guidesBody+"</p>"+link("insights",t.nav[4],"btn ghost")+"</div>")+section(t.end,"<p class=\"lead\">"+t.contactLead+"</p>"+channels(),"contact-block")}function portfolio(){return intro("02 / "+t.nav[1],t.portfolioTitle,t.portfolioDesc)+"<section class=\"section\"><div class=\"wrap\"><button class=\"filter-toggle\" aria-controls=\"filters\" aria-expanded=\"false\">"+t.filter+"</button><div class=\"filter-bar\" id=\"filters\" role=\"group\" aria-label=\""+t.filter+"\"><div class=\"filter-head\"><b>"+t.filter+"</b><button class=\"filter-close\" aria-label=\"Close filters\">×</button></div><label class=\"field\">"+t.metalLabel+"<select id=\"metalFilter\"><option value=\"all\">"+t.all+"</option><option value=\"0\">Au</option><option value=\"1\">Cu</option><option value=\"2\">Pb–Zn</option></select></label><label class=\"field\">"+t.region+"<select id=\"regionFilter\"><option value=\"all\">"+t.all+"</option><option value=\"pending\">"+t.pending+"</option></select></label><label class=\"field\">"+t.type+"<select id=\"typeFilter\"><option value=\"all\">"+t.all+"</option><option value=\"0\">"+t.pending+"</option><option value=\"1\">"+t.pending+" · 02</option></select></label><button class=\"reset\" type=\"button\">"+t.reset+"</button></div><p class=\"note\">"+t.demo+" · "+t.portfolioDesc+"</p><div class=\"cols3\" id=\"results\">"+teaserCards()+"</div><div class=\"empty\" id=\"empty\" hidden>"+t.empty+"</div></div></section>"}function form(){return "<form class=\"form\"><p class=\"note\">"+t.formDemo+"</p><label class=\"field\">"+t.name+"<input name=\"name\" required></label><label class=\"field\">"+t.replyField+"<input name=\"reply\" required></label><label class=\"field\">"+t.company+"<input name=\"company\"></label><label class=\"field\">"+t.message+"<textarea name=\"message\" required>"+[((screen==="teaser"||params.has("code"))?(code||""):""),topicName||""].filter(Boolean).join(" · ")+"</textarea></label><button class=\"btn primary\" type=\"submit\">"+t.send+"</button><p class=\"form-status\" role=\"status\" hidden></p></form>"}function teaser(){if(!code)return intro("04 / "+t.pending,({en:"Project code not found",ru:"Код участка не найден",zh:"未找到项目编号"})[lang],({en:"This demonstrative code is not in the review portfolio.",ru:"Такого демонстрационного кода нет в портфеле для проверки.",zh:"此演示编号不在当前项目组合中。"})[lang])+section(t.portfolio,"<div class=\"actions\">"+link("portfolio",t.view,"btn primary")+"</div>");let ix=knownCodes.indexOf(code),mineral=({en:["Gold","Copper","Lead–zinc"],ru:["Золото","Медь","Свинец–цинк"],zh:["黄金","铜","铅锌"]})[lang][ix],symbol=["Au","Cu","Pb–Zn"][ix],status=ix===0?t.free:ix===1?t.neg:t.sold,heading=({en:mineral+" area · initial teaser",ru:mineral+" · первый тизер",zh:mineral+"项目 · 初步简介"})[lang],fields=[[t.metalLabel,mineral+" / "+symbol],[t.region,t.pending],[t.type,t.pending],[lang==="zh"?"面积":lang==="ru"?"Площадь":"Area",t.pending],[lang==="zh"?"许可类型":lang==="ru"?"Тип лицензии":"Licence type",t.pending],[lang==="zh"?"价格":lang==="ru"?"Условия":"Terms",lang==="zh"?"面议":t.pending]],alternatives=({en:["Other prospects","Ask about alternatives"],ru:["Другие участки","Спросить об альтернативах"],zh:["查看其他项目","咨询其他项目"]})[lang];return intro(code+" · "+t.demo,heading+" · "+status,t.teaserDesc)+(ix===2?section(alternatives[0],"<p class=\"lead\">"+t.sold+" · "+t.replyBody+" <b>"+code+"</b></p><div class=\"actions\">"+link("portfolio",alternatives[0],"btn primary")+link("contact",alternatives[1],"btn ghost",code)+"</div>"):"")+section(t.open,"<div class=\"specgrid\">"+fields.map(x=>"<div class=\"spec\"><small>"+x[0]+"</small><b>"+x[1]+"</b></div>").join("")+"</div><p class=\"note\">"+t.grade+" · "+status+"</p>")+(ix===2?"":section(t.nda,"<div class=\"locked\"><p>"+t.ndaBody+"</p><div class=\"locked-lines\" aria-hidden=\"true\"><i></i><i></i><i></i></div></div>"))+section(ix===2?alternatives[1]:t.reply,"<div class=\"cols2\"><div><p class=\"lead\">"+t.replyBody+" <b>"+code+"</b></p>"+channels(code)+"<p class=\"note\">"+t.id+" · "+t.waPending+"</p></div><div>"+form()+"</div></div>")+(ix===2?"":section(t.deal,"<div class=\"cols2\">"+t.coop.slice(0,2).map((x,i)=>"<div class=\"tile\"><div class=\"number\">0"+(i+1)+"</div><h3>"+x+"</h3></div>").join("")+"</div>"))+section(t.check,"<p class=\"lead\">"+t.checkBody+"</p>")+section(t.legal,"<p class=\"note\">"+t.legalBody+"</p>")}function services(){let art="<section class=\"page-intro\"><div class=\"wrap hero-grid\"><div><p class=\"ey\">03 / "+t.services+"</p><h1>"+t.services+"</h1><p class=\"lead\">"+t.servicesLead+"</p></div><div class=\"hero-art\"><img src=\""+asset+"archive-to-field.png\" alt=\"Illustrative archive and geological core specimens, not a real project\"><span class=\"caption\">"+t.demo+"</span></div></div></section>";return art+t.svc.map((x,i)=>section(x[0],"<div class=\"cols3\"><div class=\"tile\"><span class=\"kicker\">"+t.audience+"</span><p>"+x[1]+"</p></div><div class=\"tile\"><span class=\"kicker\">"+t.scope+"</span><p>"+x[2]+"</p></div><div class=\"tile\"><span class=\"kicker\">"+t.method+"</span><p>"+x[3]+"</p></div></div><div class=\"actions\"><a class=\"btn ghost\" href=\""+site("contact")+"&topic="+topicKeys[i]+"\">"+t.contact+"</a></div>",i===1?"darkband":"")).join("")}function about(){return intro("04 / "+t.about,t.about,t.aboutLead)+section(t.history,"<div class=\"feature\"><p class=\"lead\">"+t.historyBody+"</p><div class=\"feature-art\"><img src=\""+asset+"archive-to-field.png\" alt=\"Illustrative archive and geological core\"><span class=\"caption\">"+t.demo+"</span></div></div>")+section(t.team,"<p class=\"lead\">"+t.teamBody+"</p><div class=\"cols3\">"+[1,2,3].map(()=>"<div class=\"photo-placeholder\">"+t.photo+"</div>").join("")+"</div>")+section(t.requisites,"<p class=\"note\">"+t.requisitesBody+"</p><div class=\"cols2\"><div class=\"tile\"><h3>"+(lang==="zh"?"法人名称 / 登记号":lang==="ru"?"ТОО / БИН":"Legal name / registration")+"</h3><p>"+t.pending+"</p></div><div class=\"tile\"><h3>"+(lang==="zh"?"官方登记查询":lang==="ru"?"Официальные реестры":"Official registry check")+"</h3><p>"+t.pending+"</p></div></div>")}function contact(){let qr="<div class=\"tile\"><h3>"+t.wechat+"</h3><div class=\"qr\">"+t.qr+"</div><p>"+t.id+"</p><button class=\"btn ghost copy-id\" type=\"button\" disabled>"+t.copy+"</button><p class=\"muted\">"+t.copyPending+"</p></div>",wa="<div class=\"tile\"><h3>"+t.wa+"</h3><p>"+t.waPending+"</p><div class=\"line\"><h3>"+t.email+"</h3><p>"+t.emailPending+"</p></div></div>";return intro("05 / "+t.contactTitle,t.contactTitle,t.contactLead)+(params.has("code")&&code?"<div class=\"wrap note\">"+t.discuss+": "+code+(code==="DEMO-C03"?" · "+t.sold:"")+"</div>":"")+(topicName?"<div class=\"wrap note\">"+t.services+": "+topicName+"</div>":"")+section(({en:"Contact channels",ru:"Способы связи",zh:"联系方式"})[lang],"<div class=\"cols2\">"+(lang==="zh"?qr+wa:wa+qr)+"</div>")+section(t.form,"<div class=\"cols2\"><div><h3>"+t.hours+"</h3><p class=\"lead\">"+t.hoursBody+"</p></div>"+form()+"</div>")}const insightRecords=[
-  {id:"teaser-guide",topic:"deals",languages:["ru","en","zh"],page:"article",title:"articleTitle",lead:"articleLead"},
-  {id:"copper-hub",topic:"geology",languages:["ru","en"],page:"metal",title:"metalTitle",lead:"metalLead"}
-];
-const insightUi={
-  en:{count:n=>n+" demonstration item"+(n===1?"":"s"),empty:"No demonstration items match these filters.",reset:"Reset filters",metalLink:"View metal hub"},
-  ru:{count:n=>n+(n===1?" демонстрационный материал":n>=2&&n<=4?" демонстрационных материала":" демонстрационных материалов"),empty:"Нет демонстрационных материалов для этих фильтров.",reset:"Сбросить фильтры",metalLink:"Открыть страницу металла"},
-  zh:{count:n=>"演示内容："+n+" 项",empty:"没有符合这些筛选条件的演示内容。",reset:"重置筛选",metalLink:"查看金属专题"}
-};
-function insightCard(item,selectedLanguage){
-  const contentLanguage=selectedLanguage!=="all"?selectedLanguage:item.languages.includes(lang)?lang:item.languages[0];
-  const content=L[contentLanguage],topicLabel=item.topic==="geology"?({en:"Geology",ru:"Геология",zh:"地质"})[lang]:({en:"Transactions",ru:"Сделки",zh:"交易"})[lang];
-  return "<article class=\"tile\" data-insight-id=\""+item.id+"\" data-topic=\""+item.topic+"\" data-languages=\""+item.languages.join(",")+"\"><span class=\"kicker\">"+topicLabel+" / "+contentLanguage.toUpperCase()+"</span><h3>"+content[item.title]+"</h3><p>"+content[item.lead]+"</p>"+link(item.page,item.page==="metal"?insightUi[lang].metalLink:t.read,"tile-link")+"</article>";
-}
-function insights(){return intro("06 / "+t.insights,t.insights,t.insightsLead)+section(t.insights,
-  "<div class=\"filter-bar\" style=\"display:grid;grid-template-columns:1fr 1fr;max-width:600px\"><label class=\"field\">"+t.topic+"<select id=\"topicFilter\"><option value=\"all\">"+t.all+"</option><option value=\"geology\">"+({en:"Geology",ru:"Геология",zh:"地质"})[lang]+"</option><option value=\"deals\">"+({en:"Transactions",ru:"Сделки",zh:"交易"})[lang]+"</option></select></label><label class=\"field\">"+t.language+"<select id=\"languageFilter\"><option value=\"all\">"+t.all+"</option><option value=\"ru\">RU</option><option value=\"en\">EN</option><option value=\"zh\">中文</option></select></label><button class=\"reset\" id=\"insightReset\" type=\"button\" style=\"grid-column:1/-1;justify-self:start\">"+insightUi[lang].reset+"</button></div>"+
-  "<p id=\"insightCount\" class=\"caption\" role=\"status\" aria-live=\"polite\"></p><div class=\"cols2\" id=\"insightResults\"></div><div class=\"empty\" id=\"insightEmpty\" hidden><p>"+insightUi[lang].empty+"</p><button class=\"reset\" id=\"insightEmptyReset\" type=\"button\">"+insightUi[lang].reset+"</button></div>")}
-function updateInsights(){
-  const topic=document.querySelector("#topicFilter")?.value,language=document.querySelector("#languageFilter")?.value;
-  if(!topic||!language)return;
-  const shown=insightRecords.filter(item=>(topic==="all"||item.topic===topic)&&(language==="all"||item.languages.includes(language)));
-  document.querySelector("#insightResults").innerHTML=shown.map(item=>insightCard(item,language)).join("");
-  document.querySelector("#insightCount").textContent=insightUi[lang].count(shown.length);
-  document.querySelector("#insightEmpty").hidden=shown.length>0;
-}
-function resetInsights(){document.querySelector("#topicFilter").value="all";document.querySelector("#languageFilter").value="all";updateInsights()}
-function article(){let H=({en:["Teaser field","Preview value","How to read it"],ru:["Поле тизера","Значение в макете","Как читать"],zh:["简介字段","演示内容","阅读方式"]})[lang],R=({en:[["Code","DEMO-B02","Conversation reference only"],["Source","Pending","Ask for report and verification date"],["Grade","Pending","Separate average, range and local spike"],["Status","Pending","Confirm current position in official source"]],ru:[["Код","DEMO-B02","Ориентир для разговора"],["Источник","Ожидается","Запросить отчёт и дату проверки"],["Содержание","Ожидается","Разделять среднее, диапазон и локальный пик"],["Статус","Ожидается","Проверить по официальному источнику"]],zh:[["编号","DEMO-B02","仅用于沟通定位"],["来源","待提供","索取报告及核查日期"],["品位","待提供","区分平均值、范围与局部高值"],["状态","待确认","通过官方渠道核实当前状态"]]})[lang],foot=({en:"Any comparison among GKZ, JORC and GB/T 17766 needs review by a qualified geologist; this guide does not equate their categories.",ru:"Сопоставление ГКЗ, JORC и GB/T 17766 требует проверки квалифицированным геологом; этот гид не приравнивает их категории.",zh:"GKZ、JORC 与 GB/T 17766 的对应关系须由合格地质专家审核；本指南不将其类别等同。"})[lang];return intro("07 / "+t.nav[4]+" · "+t.update,t.articleTitle,t.articleLead)+section(t.short,"<p class=\"lead\">"+t.shortBody+"</p>")+"<section class=\"section\"><div class=\"wrap article-layout\"><nav class=\"toc\" aria-label=\""+t.toc+"\"><b>"+t.toc+"</b>"+t.articleHeads.map((x,i)=>"<a href=\"#a"+i+"\">"+x+"</a>").join("")+"</nav><article class=\"article-body\">"+t.articleHeads.map((x,i)=>"<section id=\"a"+i+"\"><h2>"+x+"</h2><p>"+t.articleBody[i]+"</p></section>").join("")+"<h2>"+({en:"Field reading example",ru:"Как читать поля",zh:"字段阅读示例"})[lang]+"</h2><div class=\"tablebox\"><table><thead><tr>"+H.map(x=>"<th>"+x+"</th>").join("")+"</tr></thead><tbody>"+R.map(row=>"<tr>"+row.map(x=>"<td>"+x+"</td>").join("")+"</tr>").join("")+"</tbody></table></div><p class=\"note\">"+foot+"</p><h2>"+t.source+"</h2><p class=\"note\">"+t.sourceBody+"</p>"+channels()+"</article></div></section>"}function metal(){return intro("08 / "+t.metalLabel,t.metalTitle,t.metalLead)+section(t.short,"<p class=\"lead\">"+t.metalFact+"</p>")+section(t.portfolio,"<div class=\"tablebox\"><table><thead><tr><th>"+({en:"Code",ru:"Код",zh:"编号"})[lang]+"</th><th>"+t.metalLabel+"</th><th>"+t.region+"</th><th>"+t.grade+"</th><th></th></tr></thead><tbody><tr><td>DEMO-B02</td><td>Cu</td><td>"+t.pending+"</td><td>"+t.pending+"</td><td>"+link("teaser",t.more,"", "DEMO-B02")+"</td></tr></tbody></table></div><p class=\"note\">"+t.demo+"</p>")+section(t.context,"<p class=\"lead\">"+t.contextBody+"</p>")+section(t.faq,"<div class=\"faq\">"+t.faqs.map(x=>"<details><summary>"+x[0]+"</summary><p>"+x[1]+"</p></details>").join("")+"</div><div class=\"actions\">"+link("contact",t.discuss,"btn primary")+"</div>")}const pages={home,portfolio,teaser,services,about,contact,insights,article,metal};document.getElementById("app").innerHTML=header()+"<main id=\"main\">"+pages[screen]()+"</main>"+footer();document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{params.set("lang",b.dataset.lang);location.search=params.toString()});document.querySelectorAll(".theme").forEach(b=>b.onclick=()=>{params.set("theme",theme==="dark"?"light":"dark");location.search=params.toString()});let menu=document.querySelector(".menu-btn"),mobile=document.querySelector(".mobile-menu");if(menu){menu.onclick=()=>{let open=menu.getAttribute("aria-expanded")!=="true";menu.setAttribute("aria-expanded",String(open));mobile.classList.toggle("open",open);if(open)mobile.querySelector("a")?.focus()};document.addEventListener("keydown",e=>{if(e.key==="Escape"&&mobile.classList.contains("open")){mobile.classList.remove("open");menu.setAttribute("aria-expanded","false");menu.focus()}})}const ff=document.querySelector(".filter-toggle"),filters=document.querySelector("#filters"),fc=document.querySelector(".filter-close");function closeFilters(){filters?.classList.remove("open");ff?.setAttribute("aria-expanded","false");ff?.focus()}if(ff){ff.onclick=()=>{filters.classList.add("open");ff.setAttribute("aria-expanded","true");filters.querySelector("select").focus()};fc.onclick=closeFilters;document.addEventListener("keydown",e=>{if(e.key==="Escape"&&filters.classList.contains("open"))closeFilters();if(e.key==="Tab"&&filters.classList.contains("open")){let els=[...filters.querySelectorAll("button,select")],first=els[0],last=els[els.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}})}function updateProjects(){let m=document.querySelector("#metalFilter").value,ty=document.querySelector("#typeFilter").value,shown=0;document.querySelectorAll(".project").forEach(el=>{let show=(m==="all"||m===el.dataset.metal)&&(ty==="all"||ty===el.dataset.type);el.hidden=!show;if(show)shown++});document.querySelector("#empty").hidden=shown>0}document.querySelectorAll("#filters select").forEach(x=>x.onchange=updateProjects);document.querySelector(".reset")?.addEventListener("click",()=>{document.querySelectorAll("#filters select").forEach(s=>s.value="all");updateProjects()});document.querySelector("#topicFilter")?.addEventListener("change",updateInsights);document.querySelector("#languageFilter")?.addEventListener("change",updateInsights);document.querySelector("#insightReset")?.addEventListener("click",resetInsights);document.querySelector("#insightEmptyReset")?.addEventListener("click",resetInsights);updateInsights();document.querySelectorAll(".form").forEach(f=>f.addEventListener("invalid",()=>f.classList.add("was-submitted"),true));document.querySelectorAll(".form").forEach(f=>f.onsubmit=e=>{e.preventDefault();let st=f.querySelector(".form-status");st.hidden=false;st.textContent=t.formStatus});
-</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>QAZNEDR HOLDING · Site design preview</title>
+    <style>
+      :root {
+        --bg: #e9ece6;
+        --paper: #f4f5f0;
+        --ink: #253740;
+        --soft: #51616a;
+        --line: #64747a;
+        --sul: #dde55e;
+        --dark: #253740;
+        --light: #e9ece6;
+        --card: #f4f5f0;
+      }
+      body.dark {
+        --bg: #253740;
+        --paper: #30434c;
+        --ink: #e9ece6;
+        --soft: #cad2ca;
+        --line: #8fa19e;
+        --card: #30434c;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          16px/1.55 -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          'PingFang SC',
+          'Hiragino Sans GB',
+          'Microsoft YaHei',
+          sans-serif;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button,
+      a,
+      select,
+      input,
+      textarea {
+        outline-offset: 3px;
+      }
+      button,
+      a {
+        min-height: 44px;
+      }
+      a {
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0 0 16px;
+      }
+      h1,
+      h2,
+      .serif {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-weight: 400;
+        letter-spacing: -0.045em;
+      }
+      body[lang='zh'] h1,
+      body[lang='zh'] h2,
+      body[lang='zh'] .serif {
+        font-family:
+          'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        letter-spacing: 0;
+        font-weight: 500;
+      }
+      h1 {
+        font-size: clamp(3rem, 6.2vw, 6.6rem);
+        line-height: 1.03;
+        max-width: 13ch;
+      }
+      body[lang='zh'] h1 {
+        max-width: 12em;
+      }
+      h2 {
+        font-size: clamp(2.1rem, 4.3vw, 4.25rem);
+        line-height: 1.11;
+        max-width: 17ch;
+      }
+      h3 {
+        font-size: 1.25rem;
+        line-height: 1.25;
+      }
+      p {
+        max-width: 65ch;
+      }
+      .wrap {
+        width: min(100% - 64px, 1200px);
+        margin: auto;
+      }
+      .ey {
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-weight: 700;
+      }
+      .num {
+        font-variant-numeric: tabular-nums;
+      }
+      .muted {
+        color: var(--soft);
+      }
+      .line {
+        border-top: 1px solid var(--line);
+      }
+      .site-head {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+      }
+      .head {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .wordmark {
+        text-decoration: none;
+        font-family: Georgia, serif;
+        font-size: 1.24rem;
+        letter-spacing: -0.035em;
+        white-space: nowrap;
+      }
+      .wordmark span {
+        font:
+          700 0.54rem/1.1 -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        letter-spacing: 0.23em;
+        display: block;
+        margin-top: -4px;
+      }
+      .desk-nav {
+        display: flex;
+        gap: 26px;
+        margin-left: auto;
+        align-items: center;
+      }
+      .desk-nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        text-decoration: none;
+        font-size: 0.83rem;
+        font-weight: 650;
+      }
+      .desk-nav a[aria-current='page'] {
+        border-bottom: 2px solid var(--ink);
+      }
+      .head-tools {
+        display: flex;
+        gap: 7px;
+        align-items: center;
+      }
+      .head-tools button,
+      .mobile-tools button,
+      .menu-btn,
+      .filter-toggle,
+      .reset {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        padding: 9px 11px;
+        min-width: 44px;
+      }
+      .head-tools button[aria-pressed='true'],
+      .mobile-tools button[aria-pressed='true'] {
+        background: var(--ink);
+        color: var(--bg);
+      }
+      button:disabled {
+        opacity: 0.48;
+        cursor: not-allowed;
+      }
+      .menu-btn {
+        display: none;
+      }
+      .mobile-menu {
+        display: none;
+      }
+      .mobile-menu.open {
+        display: grid;
+      }
+      .mobile-menu a {
+        padding: 12px 0;
+        text-decoration: none;
+        border-bottom: 1px solid var(--line);
+      }
+      .mobile-tools {
+        display: flex;
+        gap: 6px;
+        padding: 18px 0;
+      }
+      .hero {
+        padding: 78px 0 68px;
+        border-bottom: 1px solid var(--line);
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .hero .ey {
+        margin-bottom: 32px;
+      }
+      .lead {
+        font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+        line-height: 1.45;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-top: 28px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border: 1px solid var(--ink);
+        background: var(--ink);
+        color: var(--bg);
+        padding: 11px 19px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        line-height: 1.25;
+        min-height: 48px;
+      }
+      .btn.primary {
+        background: var(--sul);
+        border-color: var(--sul);
+        color: #253740;
+      }
+      .btn.ghost {
+        background: transparent;
+        color: var(--ink);
+        border-color: var(--line);
+      }
+      .btn:hover,
+      .desk-nav a:hover,
+      .tile-link:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .hero-art {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 1.08;
+        background: #253740;
+        border-radius: 2px;
+      }
+      .hero-art img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .caption {
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        color: var(--soft);
+      }
+      .hero-art .caption,
+      .feature-art .caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 11px 16px;
+        color: #e9ece6;
+        background: #253740;
+      }
+      .section {
+        padding: 84px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+        align-items: end;
+        margin-bottom: 32px;
+      }
+      .section-head p {
+        max-width: 45ch;
+      }
+      .section-head h2 {
+        margin: 0;
+      }
+      .cols2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+      .cols3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .cols4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .stat {
+        border-top: 1px solid var(--ink);
+        padding-top: 15px;
+      }
+      .stat strong {
+        display: block;
+        font-family: Georgia, serif;
+        font-weight: 400;
+        font-size: clamp(2rem, 3.2vw, 3.4rem);
+        line-height: 1.1;
+        margin-bottom: 10px;
+      }
+      .stat p {
+        font-size: 0.84rem;
+      }
+      .feature {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 55px;
+        align-items: center;
+      }
+      .feature-art {
+        position: relative;
+        background: #253740;
+        aspect-ratio: 1.18;
+        overflow: hidden;
+      }
+      .feature-art img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .kicker {
+        display: block;
+        color: var(--soft);
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+      }
+      .tile {
+        border-top: 1px solid var(--ink);
+        padding: 20px 0;
+        min-width: 0;
+      }
+      .tile .number {
+        font-size: 0.75rem;
+        color: var(--soft);
+        margin-bottom: 24px;
+      }
+      .tile p {
+        font-size: 0.9rem;
+        color: var(--soft);
+      }
+      .tile-link {
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-decoration: none;
+        border-bottom: 1px solid var(--ink);
+        padding-bottom: 5px;
+      }
+      .image-tile {
+        position: relative;
+        background: #d3d9d4;
+        height: 240px;
+        overflow: hidden;
+        margin-bottom: 17px;
+      }
+      .image-tile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .image-tile img.gold,
+      .image-tile img.copper {
+        width: 200%;
+        max-width: none;
+        height: 100%;
+        object-fit: cover;
+      }
+      .image-tile img.gold {
+        object-position: left center;
+      }
+      .image-tile img.copper {
+        transform: translateX(-50%);
+        object-position: right center;
+      }
+      .chip {
+        display: inline-flex;
+        border: 1px solid var(--line);
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 3px 8px;
+        letter-spacing: 0.04em;
+      }
+      .process .tile {
+        min-height: 185px;
+      }
+      .darkband {
+        background: #253740;
+        color: #e9ece6;
+      }
+      .darkband .tile {
+        border-color: #8d9ca0;
+      }
+      .darkband .tile p,
+      .darkband .caption,
+      .darkband .kicker {
+        color: #cdd7d3;
+      }
+      .darkband .btn.ghost {
+        color: #e9ece6;
+        border-color: #839398;
+      }
+      .photo-placeholder {
+        min-height: 260px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 25px;
+        color: var(--soft);
+        font-size: 0.85rem;
+      }
+      .contact-block {
+        background: #253740;
+        color: #e9ece6;
+      }
+      .contact-block .btn.primary {
+        border-color: #dde55e;
+        color: #253740;
+        background: #dde55e;
+      }
+      .contact-block .btn.ghost {
+        border-color: #8fa19e;
+        color: #e9ece6;
+        background: transparent;
+      }
+      .contact-block h2 {
+        max-width: 20ch;
+      }
+      .page-intro {
+        padding: 68px 0 45px;
+      }
+      .page-intro .ey {
+        margin-bottom: 20px;
+      }
+      .page-intro h1 {
+        max-width: 16ch;
+      }
+      .page-intro p {
+        font-size: 1.14rem;
+      }
+      .filter-bar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr) auto;
+        gap: 12px;
+        align-items: end;
+        margin: 30px 0;
+      }
+      .field {
+        display: grid;
+        gap: 7px;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+      .field select,
+      .field input,
+      .field textarea {
+        width: 100%;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        color: var(--ink);
+        padding: 11px;
+        min-height: 48px;
+        border-radius: 0;
+      }
+      .field textarea {
+        min-height: 126px;
+        resize: vertical;
+      }
+      .form.was-submitted :invalid {
+        border-color: #9a3d32;
+        outline-color: #9a3d32;
+      }
+      .filter-toggle {
+        display: none;
+      }
+      .project {
+        border-top: 1px solid var(--ink);
+        padding: 19px 0 24px;
+      }
+      .project .image-tile {
+        height: 210px;
+      }
+      .project .meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        border-top: 1px solid var(--line);
+        padding-top: 13px;
+        margin: 17px 0;
+      }
+      .project small {
+        display: block;
+        color: var(--soft);
+      }
+      .project h3 {
+        font-family: Georgia, serif;
+        font-weight: 400;
+        font-size: 1.7rem;
+        margin: 8px 0;
+      }
+      .project .status {
+        min-height: 58px;
+      }
+      .note {
+        border-left: 3px solid var(--sul);
+        padding: 11px 15px;
+        background: var(--paper);
+        font-size: 0.82rem;
+        margin: 15px 0;
+      }
+      .specgrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+      }
+      .spec {
+        border-top: 1px solid var(--line);
+        padding: 16px 16px 22px 0;
+      }
+      .spec small {
+        display: block;
+        color: var(--soft);
+        margin-bottom: 7px;
+      }
+      .spec b {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      .locked {
+        border: 1px solid var(--line);
+        padding: 35px;
+        background: var(--paper);
+      }
+      .locked-lines {
+        display: grid;
+        gap: 14px;
+        margin: 26px 0;
+      }
+      .locked-lines i {
+        display: block;
+        width: 80%;
+        height: 11px;
+        background: var(--line);
+        opacity: 0.55;
+      }
+      .locked-lines i:nth-child(2) {
+        width: 63%;
+      }
+      .locked-lines i:nth-child(3) {
+        width: 72%;
+      }
+      .form {
+        display: grid;
+        gap: 14px;
+      }
+      .form .btn {
+        justify-self: start;
+      }
+      .form-status {
+        font-size: 0.82rem;
+      }
+      .qr {
+        width: 190px;
+        height: 190px;
+        border: 1px dashed var(--line);
+        background: var(--paper);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font-size: 0.78rem;
+        padding: 20px;
+      }
+      .tablebox {
+        overflow-x: auto;
+        border-top: 1px solid var(--line);
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 560px;
+      }
+      th,
+      td {
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line);
+        padding: 16px 18px 16px 0;
+        font-size: 0.85rem;
+      }
+      th {
+        color: var(--soft);
+        font-weight: 700;
+      }
+      .article-layout {
+        display: grid;
+        grid-template-columns: 230px minmax(0, 1fr);
+        gap: 70px;
+      }
+      .toc {
+        position: sticky;
+        top: 110px;
+        align-self: start;
+        border-top: 1px solid var(--line);
+        padding-top: 15px;
+      }
+      .toc a {
+        display: block;
+        padding: 8px 0;
+      }
+      .article-body {
+        max-width: 740px;
+        min-width: 0;
+      }
+      .tablebox {
+        max-width: 100%;
+      }
+      .article-body h2 {
+        font-size: 2.3rem;
+        margin: 40px 0 15px;
+      }
+      .article-body h3 {
+        margin-top: 28px;
+      }
+      .article-body p {
+        line-height: 1.8;
+      }
+      .article-body ul {
+        padding-left: 20px;
+      }
+      .faq details {
+        border-top: 1px solid var(--line);
+        padding: 15px 0;
+      }
+      .faq summary {
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .site-footer {
+        padding: 55px 0 95px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 35px;
+      }
+      .site-footer a {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 0;
+      }
+      .float-contact {
+        display: none;
+      }
+      .reviewbar {
+        background: #14252d;
+        color: #e9ece6;
+        padding: 9px 18px;
+        text-align: center;
+        font-size: 0.78rem;
+      }
+      .reviewbar a {
+        display: inline-block;
+        margin: 0 7px;
+        color: #e9ece6;
+      }
+      .reviewbar[hidden] {
+        display: none;
+      }
+      .empty {
+        padding: 35px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+      }
+      :focus-visible {
+        outline: 3px solid #253740;
+        outline-offset: 3px;
+      }
+      body.dark :focus-visible,
+      .darkband :focus-visible,
+      .contact-block :focus-visible {
+        outline-color: #e9ece6;
+      }
+      body[lang='zh'] .ey {
+        letter-spacing: 0;
+      }
+      @media (max-width: 900px) {
+        .desk-nav,
+        .head-tools {
+          display: none;
+        }
+        .menu-btn {
+          display: block;
+          margin-left: auto;
+        }
+        .mobile-menu {
+          padding: 0 0 15px;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .hero-art {
+          aspect-ratio: 1.5;
+        }
+        .cols4 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature {
+          gap: 25px;
+        }
+        .filter-bar {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .filter-bar .reset {
+          grid-column: 1/-1;
+          justify-self: start;
+        }
+      }
+      @media (max-width: 600px) {
+        .wrap {
+          width: min(100% - 40px, 1200px);
+        }
+        .head {
+          min-height: 61px;
+        }
+        .wordmark {
+          font-size: 1.08rem;
+        }
+        .hero {
+          padding: 46px 0 48px;
+        }
+        .hero .ey {
+          margin-bottom: 23px;
+        }
+        h1 {
+          font-size: 2.2rem;
+          line-height: 1.15;
+        }
+        h2 {
+          font-size: 2.15rem;
+        }
+        .lead {
+          font-size: 1.08rem;
+        }
+        .hero-art {
+          aspect-ratio: 1.15;
+        }
+        .section {
+          padding: 56px 0;
+        }
+        .section-head {
+          display: block;
+          margin-bottom: 27px;
+        }
+        .section-head p {
+          margin-top: 12px;
+        }
+        .cols2,
+        .cols3,
+        .cols4,
+        .feature,
+        .specgrid,
+        .article-layout,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .cols3 {
+          gap: 6px;
+        }
+        .cols4 {
+          gap: 3px;
+        }
+        .feature {
+          gap: 22px;
+        }
+        .feature-art {
+          aspect-ratio: 1.05;
+        }
+        .image-tile {
+          height: 215px;
+        }
+        .process .tile {
+          min-height: unset;
+        }
+        .page-intro {
+          padding: 42px 0 25px;
+        }
+        .page-intro h1 {
+          font-size: 2.2rem;
+        }
+        .filter-toggle {
+          display: block;
+          width: 100%;
+          text-align: left;
+        }
+        .filter-bar {
+          display: none;
+        }
+        .filter-bar.open {
+          display: grid;
+          grid-template-columns: 1fr;
+          position: fixed;
+          z-index: 45;
+          inset: 0;
+          margin: 0;
+          padding: 58px 18px 20px;
+          background: var(--bg);
+          align-content: start;
+          overflow: auto;
+        }
+        .filter-bar .reset {
+          grid-column: auto;
+        }
+        .filter-head {
+          display: none;
+        }
+        .filter-bar.open .filter-head {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .filter-bar.open .filter-head button {
+          background: transparent;
+          color: var(--ink);
+          border: 1px solid var(--line);
+          min-width: 44px;
+          min-height: 44px;
+        }
+        .project .image-tile {
+          height: 230px;
+        }
+        .spec {
+          padding: 14px 0;
+        }
+        .article-layout {
+          gap: 24px;
+        }
+        .toc {
+          position: static;
+        }
+        .site-footer {
+          padding-bottom: 110px;
+        }
+        .float-contact {
+          display: flex;
+          position: fixed;
+          z-index: 35;
+          right: 14px;
+          bottom: calc(14px + env(safe-area-inset-bottom));
+          background: var(--sul);
+          color: #253740;
+          padding: 11px 17px;
+          text-decoration: none;
+          font-size: 0.85rem;
+          font-weight: 700;
+          box-shadow: 0 3px 13px #172d3580;
+        }
+        .actions .btn {
+          flex: 1 1 100%;
+        }
+        .qr {
+          width: 180px;
+          height: 180px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const params = new URLSearchParams(location.search),
+        screens = [
+          'home',
+          'portfolio',
+          'teaser',
+          'services',
+          'about',
+          'contact',
+          'insights',
+          'article',
+          'metal',
+        ],
+        screen = screens.includes(params.get('screen'))
+          ? params.get('screen')
+          : 'home',
+        lang = ['ru', 'en', 'zh'].includes(params.get('lang'))
+          ? params.get('lang')
+          : 'en',
+        theme = params.get('theme') === 'dark' ? 'dark' : 'light',
+        knownCodes = ['DEMO-A01', 'DEMO-B02', 'DEMO-C03'],
+        rawCode = params.get('code'),
+        code =
+          rawCode === null
+            ? 'DEMO-B02'
+            : knownCodes.includes(rawCode)
+              ? rawCode
+              : null;
+      document.body.classList.toggle('dark', theme === 'dark');
+      document.body.lang = lang;
+      document.documentElement.lang = lang;
+      const L = {
+        en: {
+          nav: [
+            'Home',
+            'Portfolio',
+            'Services',
+            'About',
+            'Insights',
+            'Contact',
+          ],
+          menu: 'Menu',
+          contact: 'Contact',
+          discuss: 'Discuss a site',
+          view: 'View portfolio',
+          read: 'Read article',
+          more: 'View teaser',
+          first: 'WhatsApp',
+          second: 'WeChat',
+          ey: 'Kazakhstan · Geology and transaction preparation',
+          homeTitle: 'Kazakhstan prospects. Geological insight.',
+          homeLead:
+            'Geological research and transaction support. Our team studies archival reports, selects areas for review and supports investors through field work.',
+          facts: [
+            'ore occurrences in an archival report database',
+            'focus on gold and copper',
+            'geologists available for field review',
+          ],
+          scene: 'From archive to field',
+          sceneBody:
+            'Our geologists trace the evidence in historical reports, compare geological context and identify areas for further review. The scene illustrates the method; it is not a map of a real site.',
+          portfolio: 'Selected opportunities',
+          portfolioLead:
+            'Open teasers offer a first view. Detailed material is shared after an introduction and NDA.',
+          cooperation: 'Ways to work together',
+          coop: [
+            'Licence structured for an investor',
+            'Joint venture or earn-in',
+            'Area selection and analysis',
+            'Field review and exploration',
+          ],
+          process: 'A clear route to review',
+          steps: [
+            'Share your interest',
+            'Exchange NDA and materials',
+            'Meet the geologists',
+            'Arrange a field visit',
+          ],
+          people: 'The people behind the evidence',
+          peopleBody:
+            'The team works with archival geology and visits the field. Verified portraits and names will appear here.',
+          trust: 'Check the company',
+          trustBody:
+            'Legal entity details, registration number and official registry links are awaiting owner verification.',
+          guides: 'A more informed first conversation',
+          guidesBody:
+            'Short guides explain the language of teasers, evidence and transaction preparation.',
+          end: 'Start with a metal, area or question',
+          portfolioTitle: 'Portfolio of areas',
+          portfolioDesc:
+            'Illustrative review cards. Codes are demonstrative; area, grade, status and terms require verification.',
+          filter: 'Filter areas',
+          metalLabel: 'Metal',
+          region: 'Region',
+          type: 'Type',
+          all: 'All',
+          reset: 'Reset filters',
+          empty: 'No demonstrative cards match these filters.',
+          pending: 'To be confirmed',
+          closed: 'Closed teaser',
+          free: 'Availability pending verification',
+          grade: 'Grade: data pending',
+          neg: 'In discussion',
+          sold: 'Unavailable',
+          teaserTitle: 'Copper area · initial teaser',
+          teaserDesc:
+            'A demonstrative project view for reviewing the page structure. The code and parameters do not identify a real area.',
+          open: 'Open facts',
+          nda: 'Materials after NDA',
+          ndaBody:
+            'After an introduction and NDA: archival reports, location detail, analytical data and transaction documents where available.',
+          reply: 'Discuss this area',
+          replyBody:
+            'Include the demonstrative code in your message so the team can follow the conversation.',
+          deal: 'Potential transaction formats',
+          check: 'How to check the information',
+          checkBody:
+            'Check the legal entity and current area status in official sources before relying on a teaser. Specific registry links and dates will be inserted after verification.',
+          legal: 'Legal and data note',
+          legalBody:
+            'This concept does not confirm ownership, licence availability, resources, grades or transaction terms. All such details need source and legal review.',
+          services: 'Services',
+          servicesLead:
+            'Geological work and transaction preparation, shaped to the investor’s question.',
+          svc: [
+            [
+              'Licensing support',
+              'Investors and project partners',
+              'Area selection, application preparation and process support',
+              'Initial scope → document review → filing support',
+            ],
+            [
+              'Exploration and field work',
+              'Investors needing ground review',
+              'Geological site visits, sampling plans and field assessment',
+              'Brief → field programme → observations',
+            ],
+            [
+              'Due diligence',
+              'Investors reviewing an area',
+              'Review of geological and legal source material with relevant specialists',
+              'Document list → gaps → review memo',
+            ],
+            [
+              'Analysis',
+              'Teams screening Kazakhstan',
+              'Archival comparison, area screening and concise decision material',
+              'Question → source review → summary',
+            ],
+          ],
+          audience: 'For',
+          scope: 'Scope',
+          method: 'Process',
+          about: 'About the company',
+          aboutLead:
+            'QAZNEDR HOLDING is a Kazakhstan geological exploration company built around the work of its geologists.',
+          history: 'A working archive',
+          historyBody:
+            'The team studies Soviet-era archival reports. Its database covers more than 7,000 ore occurrences and helps identify areas for deeper geological review.',
+          team: 'Geological team',
+          teamBody:
+            'Real portraits, names and short biographies will be placed here after verification.',
+          requisites: 'Company details and verification',
+          requisitesBody:
+            'Legal name, registration number and official registry links are pending confirmation.',
+          contactTitle: 'Get in touch',
+          contactLead:
+            'Tell us which metal, region or demonstrative project code interests you. We can agree on the next review step.',
+          wechat: 'WeChat',
+          qr: 'QR pending verified account',
+          id: 'WeChat ID pending',
+          copy: 'Copy ID',
+          copyPending: 'No verified ID is available to copy.',
+          wa: 'WhatsApp',
+          waPending: 'Verified number pending',
+          email: 'Email',
+          emailPending: 'Verified address pending',
+          hours: 'Reply languages and hours',
+          hoursBody:
+            'Languages, hours and time zone are awaiting confirmation.',
+          form: 'Send an inquiry',
+          name: 'Name',
+          replyField: 'Reply contact (WeChat ID, phone or email)',
+          company: 'Company (optional)',
+          message: 'Message or project code',
+          send: 'Review inquiry',
+          formDemo: 'Design preview only. This form does not send data.',
+          formStatus: 'Preview confirmed: no data was sent.',
+          insights: 'Insights and guides',
+          insightsLead:
+            'Plain language notes for the first stages of geological and transaction review.',
+          topic: 'Topic',
+          language: 'Language',
+          articleTitle: 'How to read a site teaser',
+          articleLead:
+            'An initial teaser is a starting point for questions. Read each field together with its source and verification date.',
+          short: 'At a glance',
+          shortBody:
+            'Check which facts are public, what remains behind NDA and which claims still need independent verification. A grade range needs both a source and a clear label; a local high is not an average.',
+          toc: 'On this page',
+          articleHeads: [
+            'Identity and location',
+            'Grades and evidence',
+            'The NDA stage',
+          ],
+          articleBody: [
+            'A code helps a conversation remain tied to one area. Location and current status need an official source and a date.',
+            'Separate average grade, a range and local spikes. None of those figures is shown for the demonstrative cards until project evidence is approved.',
+            'Request source reports, analytical material and transaction documents when a relevant area is identified.',
+          ],
+          source: 'Sources and review date',
+          sourceBody:
+            'Source links and editorial update date are pending specialist review.',
+          metalTitle: 'Copper in Kazakhstan',
+          metalLead:
+            'A focused entry to the copper portfolio and the questions that shape early review.',
+          metalFact:
+            'Copper is one of the company’s main screening areas. Site level facts will be published after geological and legal verification.',
+          context: 'What an open teaser can show',
+          contextBody:
+            'An open teaser can name a metal and describe the review route. Detailed location, geology and transaction structure belong in direct discussion.',
+          faq: 'Questions before a field visit',
+          faqs: [
+            [
+              'Are the areas owned by QAZNEDR?',
+              'No ownership is claimed by this design preview. The relevant rights and proposed deal structure must be verified for each area.',
+            ],
+            [
+              'Are grades confirmed?',
+              'No figures are included in the demonstrative cards. Published grades would need clear source and measurement labels.',
+            ],
+          ],
+          photo: 'Verified team / field photo pending',
+          demo: 'DESIGN EXAMPLE · NOT PROJECT DATA',
+          update: 'Update date pending',
+        },
+        ru: {
+          nav: [
+            'Главная',
+            'Участки',
+            'Услуги',
+            'О компании',
+            'Гайды',
+            'Контакты',
+          ],
+          menu: 'Меню',
+          contact: 'Связаться',
+          discuss: 'Обсудить участок',
+          view: 'Смотреть портфель',
+          read: 'Читать статью',
+          more: 'Открыть тизер',
+          first: 'WhatsApp',
+          second: 'WeChat',
+          ey: 'Казахстан · Геология и подготовка сделок',
+          homeTitle: 'Геология как основа следующего решения.',
+          homeLead:
+            'Геологи QAZNEDR HOLDING изучают фондовые отчёты, отбирают перспективные свободные участки и сопровождают инвестора от первого обзора до полевых работ.',
+          facts: [
+            'рудных объектов в базе фондовых отчётов',
+            'основной фокус — золото и медь',
+            'геологи выезжают в поле',
+          ],
+          scene: 'От архива к полю',
+          sceneBody:
+            'Наши геологи сопоставляют фондовые материалы, оценивают геологический контекст и выбирают участки для дальнейшего изучения. Иллюстрация показывает метод, а не реальный участок.',
+          portfolio: 'Отобранные направления',
+          portfolioLead:
+            'Открытые тизеры дают первое представление. Подробные материалы — после знакомства и NDA.',
+          cooperation: 'Форматы сотрудничества',
+          coop: [
+            'Лицензия под инвестора',
+            'Совместное предприятие или earn-in',
+            'Подбор и аналитика',
+            'Полевые работы и разведка',
+          ],
+          process: 'Понятный порядок работы',
+          steps: [
+            'Сообщите об интересе',
+            'NDA и обмен материалами',
+            'Встреча с геологами',
+            'Выезд на участок',
+          ],
+          people: 'Люди за данными',
+          peopleBody:
+            'Команда работает с архивной геологией и выезжает в поле. Реальные фото и имена будут добавлены после проверки.',
+          trust: 'Проверить компанию',
+          trustBody:
+            'Наименование ТОО, БИН и ссылки на официальные реестры ожидают подтверждения владельца.',
+          guides: 'Разговор на основе фактов',
+          guidesBody:
+            'Короткие материалы объясняют тизеры, геологические данные и подготовку сделки.',
+          end: 'Начнём с металла, региона или вопроса',
+          portfolioTitle: 'Портфель участков',
+          portfolioDesc:
+            'Демонстрационные карточки для оценки дизайна. Коды, регион, содержание, статус и условия требуют проверки.',
+          filter: 'Фильтровать участки',
+          metalLabel: 'Металл',
+          region: 'Регион',
+          type: 'Тип',
+          all: 'Все',
+          reset: 'Сбросить фильтры',
+          empty: 'По этим демонстрационным фильтрам карточек нет.',
+          pending: 'Требует подтверждения',
+          closed: 'Закрытый тизер',
+          free: 'Доступность требует проверки',
+          grade: 'Содержание: данные ожидаются',
+          neg: 'В переговорах',
+          sold: 'Недоступен',
+          teaserTitle: 'Медный участок · первый тизер',
+          teaserDesc:
+            'Демонстрационный вид проекта для оценки страницы. Код и параметры не обозначают реальный участок.',
+          open: 'Открытые параметры',
+          nda: 'Материалы после NDA',
+          ndaBody:
+            'После знакомства и NDA: фондовые отчёты, детализация местоположения, анализы и документы сделки при наличии.',
+          reply: 'Обсудить этот участок',
+          replyBody:
+            'Укажите демонстрационный код в сообщении, чтобы сохранить контекст разговора.',
+          deal: 'Возможные форматы сделки',
+          check: 'Как проверить сведения',
+          checkBody:
+            'Перед использованием тизера проверьте юрлицо и текущий статус участка в официальных источниках. Ссылки и дата проверки будут добавлены позднее.',
+          legal: 'Правовое уточнение',
+          legalBody:
+            'Этот макет не подтверждает право собственности, доступность лицензии, запасы, содержание или условия сделки. Нужна проверка документов и законодательства.',
+          services: 'Услуги',
+          servicesLead:
+            'Геологическая работа и подготовка сделки под вопрос инвестора.',
+          svc: [
+            [
+              'Сопровождение лицензирования',
+              'Инвесторам и партнёрам',
+              'Подбор участка, подготовка заявки и сопровождение процесса',
+              'Вводная задача → документы → подача',
+            ],
+            [
+              'Разведка и поле',
+              'Тем, кому нужна проверка на местности',
+              'Выезд геологов, план опробования, полевая оценка',
+              'Задача → программа → наблюдения',
+            ],
+            [
+              'Due diligence',
+              'Инвесторам при оценке участка',
+              'Проверка геологических и правовых материалов со специалистами',
+              'Список документов → пробелы → выводы',
+            ],
+            [
+              'Аналитика',
+              'Командам, выбирающим направления',
+              'Сопоставление архивов, отбор участков и краткие материалы',
+              'Вопрос → источники → сводка',
+            ],
+          ],
+          audience: 'Кому',
+          scope: 'Что входит',
+          method: 'Как проходит',
+          about: 'О компании',
+          aboutLead:
+            'QAZNEDR HOLDING — казахстанская геологоразведочная компания, опирающаяся на труд своих геологов.',
+          history: 'Работа с архивом',
+          historyBody:
+            'Команда изучает советские фондовые отчёты. База охватывает более 7 000 рудных объектов и помогает выделять участки для дальнейшей геологической проверки.',
+          team: 'Команда геологов',
+          teamBody:
+            'Реальные портреты, имена и короткие биографии появятся после проверки.',
+          requisites: 'Реквизиты и проверка',
+          requisitesBody:
+            'Наименование ТОО, БИН и ссылки на официальные реестры ждут подтверждения.',
+          contactTitle: 'Связаться',
+          contactLead:
+            'Расскажите, какой металл, регион или демонстрационный код вас интересует. Согласуем следующий шаг проверки.',
+          wechat: 'WeChat',
+          qr: 'QR подтверждённого аккаунта появится здесь',
+          id: 'WeChat ID ожидает подтверждения',
+          copy: 'Копировать ID',
+          copyPending: 'Подтверждённого ID пока нет. Копирование недоступно.',
+          wa: 'WhatsApp',
+          waPending: 'Номер ожидает подтверждения',
+          email: 'Электронная почта',
+          emailPending: 'Адрес ожидает подтверждения',
+          hours: 'Языки и часы ответа',
+          hoursBody: 'Языки, часы и часовой пояс ответа ожидают подтверждения.',
+          form: 'Направить запрос',
+          name: 'Имя',
+          replyField: 'Контакт для ответа (WeChat ID, телефон или email)',
+          company: 'Компания (необязательно)',
+          message: 'Сообщение или код участка',
+          send: 'Проверить запрос',
+          formDemo: 'Макет: данные никуда не отправляются.',
+          formStatus: 'Макет подтверждает: данные не отправлены.',
+          insights: 'Гайды и аналитика',
+          insightsLead:
+            'Короткие материалы для первых этапов геологической оценки и подготовки сделки.',
+          topic: 'Тема',
+          language: 'Язык',
+          articleTitle: 'Как читать тизер участка',
+          articleLead:
+            'Тизер — начало разговора. Сопоставляйте каждый параметр с источником и датой проверки.',
+          short: 'Коротко',
+          shortBody:
+            'Разделяйте открытые сведения, материалы после NDA и данные, которые ещё нужно проверить. Диапазон содержания требует источника и ясной метки; локальный пик не является средним.',
+          toc: 'На этой странице',
+          articleHeads: [
+            'Код и местоположение',
+            'Содержание и доказательства',
+            'Этап NDA',
+          ],
+          articleBody: [
+            'Код удерживает обсуждение в контексте одного участка. Местоположение и текущий статус требуют официального источника и даты.',
+            'Среднее содержание, диапазон и локальный пик — разные показатели. В демонстрационных карточках таких чисел нет до проверки материалов.',
+            'Когда участок интересен, запросите отчёты, анализы и документы по сделке.',
+          ],
+          source: 'Источники и дата',
+          sourceBody:
+            'Ссылки на источники и дата редакционного обновления ожидают проверки специалиста.',
+          metalTitle: 'Медь в Казахстане',
+          metalLead: 'Вход в медный портфель и вопросы для первого обзора.',
+          metalFact:
+            'Медь — одно из главных направлений отбора компании. Данные об участках будут опубликованы после геологической и правовой проверки.',
+          context: 'Что даёт открытый тизер',
+          contextBody:
+            'Открытый тизер обозначает металл и порядок обсуждения. Геология, точное местоположение и структура сделки обсуждаются напрямую.',
+          faq: 'Вопросы перед выездом',
+          faqs: [
+            [
+              'Участки принадлежат QAZNEDR?',
+              'Этот макет не заявляет права собственности. Права и структура сделки проверяются по каждому участку.',
+            ],
+            [
+              'Содержание подтверждено?',
+              'В демонстрационных карточках нет чисел. Публикуемые показатели потребуют источника и метки метода измерения.',
+            ],
+          ],
+          photo: 'Место для проверенного фото команды / поля',
+          demo: 'ДЕМО · НЕ ДАННЫЕ УЧАСТКА',
+          update: 'Дата обновления ожидается',
+        },
+        zh: {
+          nav: ['首页', '项目组合', '服务', '关于我们', '指南', '联系'],
+          menu: '菜单',
+          contact: '联系团队',
+          discuss: '讨论项目',
+          view: '查看项目组合',
+          read: '阅读指南',
+          more: '查看简介',
+          first: '微信',
+          second: 'WhatsApp',
+          ey: '哈萨克斯坦 · 地质研究与交易准备',
+          homeTitle: '以地质证据，开启下一步对话。',
+          homeLead:
+            'QAZNEDR HOLDING 的地质团队研究历史档案，筛选有潜力的可申请区域，并协助投资者完成初步审阅与实地考察。',
+          facts: [
+            '档案数据库中的矿点',
+            '主要方向：黄金与铜',
+            '地质人员可赴现场考察',
+          ],
+          scene: '从档案到现场',
+          sceneBody:
+            '地质团队比对历史报告与地质背景，筛选值得进一步研究的区域。图像展示工作方法，不代表真实项目。',
+          portfolio: '精选方向',
+          portfolioLead:
+            '公开简介用于初步了解。详细材料在沟通和签署保密协议后提供。',
+          cooperation: '合作方式',
+          coop: [
+            '为投资方安排许可申请',
+            '合资或阶段性投资',
+            '区域筛选与分析',
+            '现场考察与勘探',
+          ],
+          process: '清晰的审阅路径',
+          steps: [
+            '说明投资兴趣',
+            '保密协议与资料交流',
+            '与地质团队会面',
+            '安排现场考察',
+          ],
+          people: '资料背后的地质团队',
+          peopleBody:
+            '团队研究历史地质档案，也会赴现场工作。经确认的人员照片和姓名将在此展示。',
+          trust: '核实公司',
+          trustBody: '法人名称、登记号码及官方查询链接待负责人确认。',
+          guides: '从事实开始沟通',
+          guidesBody: '简明指南解释项目简介、地质资料及交易准备。',
+          end: '从矿种、地区或问题开始',
+          portfolioTitle: '项目组合',
+          portfolioDesc:
+            '用于审阅设计的演示卡片。编号、地区、品位、状态及条款均需核实。',
+          filter: '筛选项目',
+          metalLabel: '矿种',
+          region: '地区',
+          type: '类型',
+          all: '全部',
+          reset: '重置筛选',
+          empty: '此演示筛选条件下没有卡片。',
+          pending: '待确认',
+          closed: '保密项目简介',
+          free: '可申请状态待核实',
+          grade: '品位：数据待提供',
+          neg: '洽谈中',
+          sold: '暂不可用',
+          teaserTitle: '铜项目 · 初步简介',
+          teaserDesc:
+            '用于审阅页面结构的演示项目。编号与参数并不对应真实区域。',
+          open: '公开参数',
+          nda: '保密协议后提供的材料',
+          ndaBody:
+            '初步沟通并签署保密协议后，可提供档案报告、位置细节、分析资料及现有交易文件。',
+          reply: '讨论此项目',
+          replyBody: '联系时请注明演示编号，以便团队了解您的问题。',
+          deal: '可能的合作方式',
+          check: '如何自行核实',
+          checkBody:
+            '使用简介前，请通过官方渠道核实企业信息及区域当前状态。具体链接和查询日期将于核实后补充。',
+          legal: '法律与资料说明',
+          legalBody:
+            '本设计不确认所有权、许可可用性、资源量、品位或交易条款。相关内容须经资料和法律核查。',
+          services: '服务',
+          servicesLead: '围绕投资者的问题，提供地质工作与交易准备支持。',
+          svc: [
+            [
+              '许可申请支持',
+              '投资者与项目伙伴',
+              '筛选区域、准备申请并跟进流程',
+              '明确需求 → 审阅文件 → 协助申请',
+            ],
+            [
+              '勘探与现场工作',
+              '需要现场判断的投资者',
+              '地质人员出行、采样计划与现场评估',
+              '提出需求 → 工作计划 → 现场观察',
+            ],
+            [
+              '尽职调查',
+              '正在评估项目的投资者',
+              '与专业人员审核地质及法律基础资料',
+              '文件清单 → 识别缺口 → 审阅结论',
+            ],
+            [
+              '分析',
+              '筛选哈萨克斯坦项目的团队',
+              '比较档案、筛选区域并整理简明材料',
+              '提出问题 → 审查资料 → 形成摘要',
+            ],
+          ],
+          audience: '适合',
+          scope: '工作范围',
+          method: '流程',
+          about: '关于公司',
+          aboutLead:
+            'QAZNEDR HOLDING 是一家哈萨克斯坦地质勘探公司，工作基于地质团队的专业研究。',
+          history: '档案研究',
+          historyBody:
+            '团队研究苏联时期的地质档案报告。数据库覆盖 7,000 多个矿点，为进一步地质评估提供筛选基础。',
+          team: '地质团队',
+          teamBody: '经核实的真实照片、姓名和简历将在此展示。',
+          requisites: '公司信息与核实',
+          requisitesBody: '法人名称、登记号码及官方查询链接待确认。',
+          contactTitle: '联系我们',
+          contactLead:
+            '请说明感兴趣的矿种、地区或演示项目编号。我们可共同确定下一步核查。',
+          wechat: '微信',
+          qr: '经确认的二维码将在此展示',
+          id: '微信号待确认',
+          copy: '复制微信号',
+          copyPending: '目前没有经确认的微信号，无法复制。',
+          wa: 'WhatsApp',
+          waPending: '号码待确认',
+          email: '电子邮件',
+          emailPending: '地址待确认',
+          hours: '回复语言与时间',
+          hoursBody: '回复语言、时间及所用时区待确认。',
+          form: '提交咨询',
+          name: '姓名',
+          replyField: '回复方式（微信号、电话或邮箱）',
+          company: '公司（选填）',
+          message: '需求或项目编号',
+          send: '检查咨询',
+          formDemo: '仅供审阅：此表单不会发送数据。',
+          formStatus: '演示确认：数据未发送。',
+          insights: '指南与分析',
+          insightsLead: '帮助初步地质审阅和交易准备的简明说明。',
+          topic: '主题',
+          language: '语言',
+          articleTitle: '如何阅读项目简介',
+          articleLead:
+            '项目简介是提问的起点。请将每项参数与来源及核查日期一同理解。',
+          short: '简要说明',
+          shortBody:
+            '区分公开信息、保密协议后提供的资料和仍需独立核实的内容。品位范围必须注明来源和标签；局部高值不等于平均值。',
+          toc: '本文目录',
+          articleHeads: ['编号与位置', '品位与证据', '保密协议阶段'],
+          articleBody: [
+            '项目编号让沟通始终指向同一区域。位置及当前状态需要官方来源与查询日期。',
+            '平均品位、范围和局部高值是不同指标。演示卡片在资料获批前不展示这些数字。',
+            '确认感兴趣的项目后，可申请原始报告、分析材料及交易文件。',
+          ],
+          source: '来源与更新日期',
+          sourceBody: '来源链接和编辑更新日期待专业人员核实。',
+          metalTitle: '哈萨克斯坦铜项目',
+          metalLead: '了解铜项目组合及初步审阅时应提出的问题。',
+          metalFact:
+            '铜是公司的主要筛选方向之一。具体项目数据将在地质与法律核实后发布。',
+          context: '公开简介的作用',
+          contextBody:
+            '公开简介可说明矿种与沟通路径。地质细节、精确位置和交易结构需直接讨论。',
+          faq: '现场考察前的问题',
+          faqs: [
+            [
+              '这些区域属于 QAZNEDR 吗？',
+              '本设计不声明所有权。每个项目的相关权利与交易结构都需核实。',
+            ],
+            [
+              '品位已获确认吗？',
+              '演示卡片没有数值。未来发布的指标应提供来源和测量标签。',
+            ],
+          ],
+          photo: '真实团队 / 现场照片待提供',
+          demo: '演示内容 · 非真实项目数据',
+          update: '更新日期待确认',
+        },
+      };
+      const t = L[lang],
+        topicKeys = ['licensing', 'field', 'review', 'analysis'],
+        rawTopic = params.get('topic'),
+        topic = topicKeys.includes(rawTopic) ? rawTopic : null,
+        topicName = topic ? t.svc[topicKeys.indexOf(topic)][0] : null,
+        asset = '../mockups/01/elements/',
+        site = (s, extra = '') =>
+          '?screen=' +
+          s +
+          '&lang=' +
+          lang +
+          '&theme=' +
+          theme +
+          (extra ? '&code=' + encodeURIComponent(extra) : ''),
+        link = (s, label, cls = '', extra = '') =>
+          '<a class="' +
+          cls +
+          '" href="' +
+          site(s, extra) +
+          '">' +
+          label +
+          '</a>',
+        section = (title, body, cls = '') =>
+          '<section class="section ' +
+          cls +
+          '"><div class="wrap"><div class="section-head"><h2>' +
+          title +
+          '</h2></div>' +
+          body +
+          '</div></section>',
+        tag = (x) => '<span class="chip">' + x + '</span>';
+      function header() {
+        let nav = [
+          'home',
+          'portfolio',
+          'services',
+          'about',
+          'insights',
+          'contact',
+        ]
+          .map((s, i) => link(s, t.nav[i], screen === s ? 'current' : ''))
+          .join('');
+        let langs = ['ru', 'en', 'zh']
+          .map(
+            (l, i) =>
+              '<button data-lang="' +
+              l +
+              '" aria-pressed="' +
+              (l === lang) +
+              '">' +
+              ['RU', 'EN', '中文'][i] +
+              '</button>'
+          )
+          .join('');
+        return (
+          '<header class="site-head"><div class="wrap head">' +
+          link('home', 'QAZNEDR<span>HOLDING</span>', 'wordmark') +
+          '<nav class="desk-nav" aria-label="Main">' +
+          nav +
+          '</nav><div class="head-tools">' +
+          langs +
+          '<button disabled title="Translation pending">KZ</button><button class="theme" aria-label="Toggle theme">' +
+          (theme === 'dark' ? 'Light' : 'Dark') +
+          '</button></div><button class="menu-btn" aria-expanded="false" aria-controls="mobile-menu">' +
+          t.menu +
+          '</button></div><nav class="mobile-menu wrap" id="mobile-menu" aria-label="Mobile">' +
+          nav +
+          '<div class="mobile-tools">' +
+          langs +
+          '<button disabled title="Translation pending">KZ</button><button class="theme" aria-label="Toggle theme">' +
+          (theme === 'dark' ? 'Light' : 'Dark') +
+          '</button></div></nav></header>'
+        );
+      }
+      function footer() {
+        let ctx = screen === 'teaser' ? code : '';
+        return (
+          '<footer class="site-footer"><div class="wrap footer-grid"><div><div class="wordmark">QAZNEDR<span>HOLDING</span></div><p class="muted">' +
+          t.aboutLead +
+          '</p><small>' +
+          t.demo +
+          '</small></div><div><b>' +
+          t.nav[1] +
+          '</b>' +
+          link('portfolio', t.view) +
+          link('metal', t.metalTitle) +
+          '</div><div><b>' +
+          t.nav[5] +
+          '</b>' +
+          link('contact', t.contact, '', ctx) +
+          '<p class="muted">' +
+          t.requisitesBody +
+          '</p></div></div></footer>' +
+          link('contact', t.contact, 'float-contact', ctx)
+        );
+      }
+      function intro(ey, title, lead) {
+        return (
+          '<section class="page-intro"><div class="wrap"><p class="ey">' +
+          ey +
+          '</p><h1>' +
+          title +
+          '</h1><p class="lead">' +
+          lead +
+          '</p></div></section>'
+        );
+      }
+      function channels(ctx = '') {
+        return (
+          '<div class="actions">' +
+          link('contact', t.first, 'btn primary', ctx) +
+          link('contact', t.second, 'btn ghost', ctx) +
+          '</div>'
+        );
+      }
+      function stat(v, x) {
+        return (
+          '<div class="stat"><strong>' + v + '</strong><p>' + x + '</p></div>'
+        );
+      }
+      function teaserCards() {
+        let names =
+          lang === 'zh'
+            ? ['黄金', '铜', '铅锌']
+            : lang === 'ru'
+              ? ['Золото', 'Медь', 'Свинец–цинк']
+              : ['Gold', 'Copper', 'Lead–zinc'];
+        return ['DEMO-A01', 'DEMO-B02', 'DEMO-C03']
+          .map(
+            (c, i) =>
+              '<article class="project" data-metal="' +
+              i +
+              '" data-type="' +
+              (i === 1 ? 1 : 0) +
+              '">' +
+              (i === 2
+                ? '<div class="photo-placeholder" style="height:210px;min-height:0">' +
+                  {
+                    en: 'Illustration pending',
+                    ru: 'Иллюстрация ожидается',
+                    zh: '插图待提供',
+                  }[lang] +
+                  '</div>'
+                : '<div class="image-tile"><img src="' +
+                  asset +
+                  'portfolio-specimens.png" class="' +
+                  (i === 1 ? 'copper' : 'gold') +
+                  '" alt="Illustrative geological specimen, not project evidence"></div>') +
+              '<p>' +
+              tag(t.closed) +
+              ' ' +
+              tag(c) +
+              '</p><h3>' +
+              names[i] +
+              '</h3><div class="meta"><div><small>' +
+              t.region +
+              '</small><b>' +
+              t.pending +
+              '</b></div><div><small>' +
+              t.type +
+              '</small><b>' +
+              t.pending +
+              '</b></div></div><p>' +
+              t.grade +
+              '</p><p class="status muted">' +
+              (i === 1 ? t.neg : i === 2 ? t.sold : t.free) +
+              '</p>' +
+              link('teaser', t.more, 'tile-link', c) +
+              '</article>'
+          )
+          .join('');
+      }
+      function home() {
+        return (
+          '<section class="hero"><div class="wrap hero-grid"><div><p class="ey">' +
+          t.ey +
+          '</p><h1>' +
+          t.homeTitle +
+          '</h1><p class="lead">' +
+          t.homeLead +
+          '</p>' +
+          channels() +
+          '</div><div class="hero-art"><img src="' +
+          asset +
+          'archive-to-field.png" alt="Illustrative archival geology and core samples"><span class="caption">' +
+          t.demo +
+          '</span></div></div></section>' +
+          section(
+            { en: 'Evidence at a glance', ru: 'Опорные факты', zh: '关键事实' }[
+              lang
+            ],
+            '<div class="cols3">' +
+              stat('7,000+', t.facts[0]) +
+              stat(
+                lang === 'zh'
+                  ? '金 / 铜'
+                  : lang === 'ru'
+                    ? 'Au / Cu'
+                    : 'Au / Cu',
+                t.facts[1]
+              ) +
+              stat({ en: 'Field', ru: 'Поле', zh: '现场' }[lang], t.facts[2]) +
+              '</div>'
+          ) +
+          section(
+            t.scene,
+            '<div class="feature-art" style="aspect-ratio:2.1"><img src="' +
+              asset +
+              'geology-cutaway.png" alt="Illustrative geological cutaway showing strata and a vein, not a real area"><span class="caption">' +
+              t.demo +
+              '</span></div><p class="lead" style="margin-top:25px">' +
+              t.sceneBody +
+              '</p>'
+          ) +
+          section(
+            t.portfolio,
+            '<p class="lead">' +
+              t.portfolioLead +
+              '</p><div class="cols3">' +
+              teaserCards() +
+              '</div><div class="actions">' +
+              link('portfolio', t.view, 'btn ghost') +
+              '</div>'
+          ) +
+          section(
+            t.cooperation,
+            '<div class="cols4">' +
+              t.coop
+                .map(
+                  (x, i) =>
+                    '<div class="tile"><div class="number">0' +
+                    (i + 1) +
+                    '</div><h3>' +
+                    x +
+                    '</h3></div>'
+                )
+                .join('') +
+              '</div>',
+            'darkband'
+          ) +
+          section(
+            t.process,
+            '<div class="cols4 process">' +
+              t.steps
+                .map(
+                  (x, i) =>
+                    '<div class="tile"><div class="number">0' +
+                    (i + 1) +
+                    '</div><h3>' +
+                    x +
+                    '</h3></div>'
+                )
+                .join('') +
+              '</div>'
+          ) +
+          section(
+            t.people,
+            '<div class="feature"><div><p class="lead">' +
+              t.peopleBody +
+              '</p>' +
+              link('about', t.nav[3], 'tile-link') +
+              '</div><div class="photo-placeholder">' +
+              t.photo +
+              '</div></div>'
+          ) +
+          section(
+            t.trust,
+            '<p class="lead">' +
+              t.trustBody +
+              '</p>' +
+              link('about', t.nav[3], 'tile-link')
+          ) +
+          section(
+            t.guides,
+            '<div class="feature"><p class="lead">' +
+              t.guidesBody +
+              '</p>' +
+              link('insights', t.nav[4], 'btn ghost') +
+              '</div>'
+          ) +
+          section(
+            t.end,
+            '<p class="lead">' + t.contactLead + '</p>' + channels(),
+            'contact-block'
+          )
+        );
+      }
+      function portfolio() {
+        return (
+          intro('02 / ' + t.nav[1], t.portfolioTitle, t.portfolioDesc) +
+          '<section class="section"><div class="wrap"><button class="filter-toggle" aria-controls="filters" aria-expanded="false">' +
+          t.filter +
+          '</button><div class="filter-bar" id="filters" role="group" aria-label="' +
+          t.filter +
+          '"><div class="filter-head"><b>' +
+          t.filter +
+          '</b><button class="filter-close" aria-label="Close filters">×</button></div><label class="field">' +
+          t.metalLabel +
+          '<select id="metalFilter"><option value="all">' +
+          t.all +
+          '</option><option value="0">Au</option><option value="1">Cu</option><option value="2">Pb–Zn</option></select></label><label class="field">' +
+          t.region +
+          '<select id="regionFilter"><option value="all">' +
+          t.all +
+          '</option><option value="pending">' +
+          t.pending +
+          '</option></select></label><label class="field">' +
+          t.type +
+          '<select id="typeFilter"><option value="all">' +
+          t.all +
+          '</option><option value="0">' +
+          t.pending +
+          '</option><option value="1">' +
+          t.pending +
+          ' · 02</option></select></label><button class="reset" type="button">' +
+          t.reset +
+          '</button></div><p class="note">' +
+          t.demo +
+          ' · ' +
+          t.portfolioDesc +
+          '</p><div class="cols3" id="results">' +
+          teaserCards() +
+          '</div><div class="empty" id="empty" hidden>' +
+          t.empty +
+          '</div></div></section>'
+        );
+      }
+      function form() {
+        return (
+          '<form class="form"><p class="note">' +
+          t.formDemo +
+          '</p><label class="field">' +
+          t.name +
+          '<input name="name" required></label><label class="field">' +
+          t.replyField +
+          '<input name="reply" required></label><label class="field">' +
+          t.company +
+          '<input name="company"></label><label class="field">' +
+          t.message +
+          '<textarea name="message" required>' +
+          [
+            screen === 'teaser' || params.has('code') ? code || '' : '',
+            topicName || '',
+          ]
+            .filter(Boolean)
+            .join(' · ') +
+          '</textarea></label><button class="btn primary" type="submit">' +
+          t.send +
+          '</button><p class="form-status" role="status" hidden></p></form>'
+        );
+      }
+      function teaser() {
+        if (!code)
+          return (
+            intro(
+              '04 / ' + t.pending,
+              {
+                en: 'Project code not found',
+                ru: 'Код участка не найден',
+                zh: '未找到项目编号',
+              }[lang],
+              {
+                en: 'This demonstrative code is not in the review portfolio.',
+                ru: 'Такого демонстрационного кода нет в портфеле для проверки.',
+                zh: '此演示编号不在当前项目组合中。',
+              }[lang]
+            ) +
+            section(
+              t.portfolio,
+              '<div class="actions">' +
+                link('portfolio', t.view, 'btn primary') +
+                '</div>'
+            )
+          );
+        let ix = knownCodes.indexOf(code),
+          mineral = {
+            en: ['Gold', 'Copper', 'Lead–zinc'],
+            ru: ['Золото', 'Медь', 'Свинец–цинк'],
+            zh: ['黄金', '铜', '铅锌'],
+          }[lang][ix],
+          symbol = ['Au', 'Cu', 'Pb–Zn'][ix],
+          status = ix === 0 ? t.free : ix === 1 ? t.neg : t.sold,
+          heading = {
+            en: mineral + ' area · initial teaser',
+            ru: mineral + ' · первый тизер',
+            zh: mineral + '项目 · 初步简介',
+          }[lang],
+          fields = [
+            [t.metalLabel, mineral + ' / ' + symbol],
+            [t.region, t.pending],
+            [t.type, t.pending],
+            [
+              lang === 'zh' ? '面积' : lang === 'ru' ? 'Площадь' : 'Area',
+              t.pending,
+            ],
+            [
+              lang === 'zh'
+                ? '许可类型'
+                : lang === 'ru'
+                  ? 'Тип лицензии'
+                  : 'Licence type',
+              t.pending,
+            ],
+            [
+              lang === 'zh' ? '价格' : lang === 'ru' ? 'Условия' : 'Terms',
+              lang === 'zh' ? '面议' : t.pending,
+            ],
+          ],
+          alternatives = {
+            en: ['Other prospects', 'Ask about alternatives'],
+            ru: ['Другие участки', 'Спросить об альтернативах'],
+            zh: ['查看其他项目', '咨询其他项目'],
+          }[lang];
+        return (
+          intro(code + ' · ' + t.demo, heading + ' · ' + status, t.teaserDesc) +
+          (ix === 2
+            ? section(
+                alternatives[0],
+                '<p class="lead">' +
+                  t.sold +
+                  ' · ' +
+                  t.replyBody +
+                  ' <b>' +
+                  code +
+                  '</b></p><div class="actions">' +
+                  link('portfolio', alternatives[0], 'btn primary') +
+                  link('contact', alternatives[1], 'btn ghost', code) +
+                  '</div>'
+              )
+            : '') +
+          section(
+            t.open,
+            '<div class="specgrid">' +
+              fields
+                .map(
+                  (x) =>
+                    '<div class="spec"><small>' +
+                    x[0] +
+                    '</small><b>' +
+                    x[1] +
+                    '</b></div>'
+                )
+                .join('') +
+              '</div><p class="note">' +
+              t.grade +
+              ' · ' +
+              status +
+              '</p>'
+          ) +
+          (ix === 2
+            ? ''
+            : section(
+                t.nda,
+                '<div class="locked"><p>' +
+                  t.ndaBody +
+                  '</p><div class="locked-lines" aria-hidden="true"><i></i><i></i><i></i></div></div>'
+              )) +
+          section(
+            ix === 2 ? alternatives[1] : t.reply,
+            '<div class="cols2"><div><p class="lead">' +
+              t.replyBody +
+              ' <b>' +
+              code +
+              '</b></p>' +
+              channels(code) +
+              '<p class="note">' +
+              t.id +
+              ' · ' +
+              t.waPending +
+              '</p></div><div>' +
+              form() +
+              '</div></div>'
+          ) +
+          (ix === 2
+            ? ''
+            : section(
+                t.deal,
+                '<div class="cols2">' +
+                  t.coop
+                    .slice(0, 2)
+                    .map(
+                      (x, i) =>
+                        '<div class="tile"><div class="number">0' +
+                        (i + 1) +
+                        '</div><h3>' +
+                        x +
+                        '</h3></div>'
+                    )
+                    .join('') +
+                  '</div>'
+              )) +
+          section(t.check, '<p class="lead">' + t.checkBody + '</p>') +
+          section(t.legal, '<p class="note">' + t.legalBody + '</p>')
+        );
+      }
+      function services() {
+        let art =
+          '<section class="page-intro"><div class="wrap hero-grid"><div><p class="ey">03 / ' +
+          t.services +
+          '</p><h1>' +
+          t.services +
+          '</h1><p class="lead">' +
+          t.servicesLead +
+          '</p></div><div class="hero-art"><img src="' +
+          asset +
+          'archive-to-field.png" alt="Illustrative archive and geological core specimens, not a real project"><span class="caption">' +
+          t.demo +
+          '</span></div></div></section>';
+        return (
+          art +
+          t.svc
+            .map((x, i) =>
+              section(
+                x[0],
+                '<div class="cols3"><div class="tile"><span class="kicker">' +
+                  t.audience +
+                  '</span><p>' +
+                  x[1] +
+                  '</p></div><div class="tile"><span class="kicker">' +
+                  t.scope +
+                  '</span><p>' +
+                  x[2] +
+                  '</p></div><div class="tile"><span class="kicker">' +
+                  t.method +
+                  '</span><p>' +
+                  x[3] +
+                  '</p></div></div><div class="actions"><a class="btn ghost" href="' +
+                  site('contact') +
+                  '&topic=' +
+                  topicKeys[i] +
+                  '">' +
+                  t.contact +
+                  '</a></div>',
+                i === 1 ? 'darkband' : ''
+              )
+            )
+            .join('')
+        );
+      }
+      function about() {
+        return (
+          intro('04 / ' + t.about, t.about, t.aboutLead) +
+          section(
+            t.history,
+            '<div class="feature"><p class="lead">' +
+              t.historyBody +
+              '</p><div class="feature-art"><img src="' +
+              asset +
+              'archive-to-field.png" alt="Illustrative archive and geological core"><span class="caption">' +
+              t.demo +
+              '</span></div></div>'
+          ) +
+          section(
+            t.team,
+            '<p class="lead">' +
+              t.teamBody +
+              '</p><div class="cols3">' +
+              [1, 2, 3]
+                .map(
+                  () => '<div class="photo-placeholder">' + t.photo + '</div>'
+                )
+                .join('') +
+              '</div>'
+          ) +
+          section(
+            t.requisites,
+            '<p class="note">' +
+              t.requisitesBody +
+              '</p><div class="cols2"><div class="tile"><h3>' +
+              (lang === 'zh'
+                ? '法人名称 / 登记号'
+                : lang === 'ru'
+                  ? 'ТОО / БИН'
+                  : 'Legal name / registration') +
+              '</h3><p>' +
+              t.pending +
+              '</p></div><div class="tile"><h3>' +
+              (lang === 'zh'
+                ? '官方登记查询'
+                : lang === 'ru'
+                  ? 'Официальные реестры'
+                  : 'Official registry check') +
+              '</h3><p>' +
+              t.pending +
+              '</p></div></div>'
+          )
+        );
+      }
+      function contact() {
+        let qr =
+            '<div class="tile"><h3>' +
+            t.wechat +
+            '</h3><div class="qr">' +
+            t.qr +
+            '</div><p>' +
+            t.id +
+            '</p><button class="btn ghost copy-id" type="button" disabled>' +
+            t.copy +
+            '</button><p class="muted">' +
+            t.copyPending +
+            '</p></div>',
+          wa =
+            '<div class="tile"><h3>' +
+            t.wa +
+            '</h3><p>' +
+            t.waPending +
+            '</p><div class="line"><h3>' +
+            t.email +
+            '</h3><p>' +
+            t.emailPending +
+            '</p></div></div>';
+        return (
+          intro('05 / ' + t.contactTitle, t.contactTitle, t.contactLead) +
+          (params.has('code') && code
+            ? '<div class="wrap note">' +
+              t.discuss +
+              ': ' +
+              code +
+              (code === 'DEMO-C03' ? ' · ' + t.sold : '') +
+              '</div>'
+            : '') +
+          (topicName
+            ? '<div class="wrap note">' +
+              t.services +
+              ': ' +
+              topicName +
+              '</div>'
+            : '') +
+          section(
+            { en: 'Contact channels', ru: 'Способы связи', zh: '联系方式' }[
+              lang
+            ],
+            '<div class="cols2">' +
+              (lang === 'zh' ? qr + wa : wa + qr) +
+              '</div>'
+          ) +
+          section(
+            t.form,
+            '<div class="cols2"><div><h3>' +
+              t.hours +
+              '</h3><p class="lead">' +
+              t.hoursBody +
+              '</p></div>' +
+              form() +
+              '</div>'
+          )
+        );
+      }
+      const insightRecords = [
+        {
+          id: 'teaser-guide',
+          topic: 'deals',
+          languages: ['ru', 'en', 'zh'],
+          page: 'article',
+          title: 'articleTitle',
+          lead: 'articleLead',
+        },
+        {
+          id: 'copper-hub',
+          topic: 'geology',
+          languages: ['ru', 'en'],
+          page: 'metal',
+          title: 'metalTitle',
+          lead: 'metalLead',
+        },
+      ];
+      const insightUi = {
+        en: {
+          count: (n) => n + ' demonstration item' + (n === 1 ? '' : 's'),
+          empty: 'No demonstration items match these filters.',
+          reset: 'Reset filters',
+          metalLink: 'View metal hub',
+        },
+        ru: {
+          count: (n) =>
+            n +
+            (n === 1
+              ? ' демонстрационный материал'
+              : n >= 2 && n <= 4
+                ? ' демонстрационных материала'
+                : ' демонстрационных материалов'),
+          empty: 'Нет демонстрационных материалов для этих фильтров.',
+          reset: 'Сбросить фильтры',
+          metalLink: 'Открыть страницу металла',
+        },
+        zh: {
+          count: (n) => '演示内容：' + n + ' 项',
+          empty: '没有符合这些筛选条件的演示内容。',
+          reset: '重置筛选',
+          metalLink: '查看金属专题',
+        },
+      };
+      function insightCard(item, selectedLanguage) {
+        const contentLanguage =
+          selectedLanguage !== 'all'
+            ? selectedLanguage
+            : item.languages.includes(lang)
+              ? lang
+              : item.languages[0];
+        const content = L[contentLanguage],
+          topicLabel =
+            item.topic === 'geology'
+              ? { en: 'Geology', ru: 'Геология', zh: '地质' }[lang]
+              : { en: 'Transactions', ru: 'Сделки', zh: '交易' }[lang];
+        return (
+          '<article class="tile" data-insight-id="' +
+          item.id +
+          '" data-topic="' +
+          item.topic +
+          '" data-languages="' +
+          item.languages.join(',') +
+          '"><span class="kicker">' +
+          topicLabel +
+          ' / ' +
+          contentLanguage.toUpperCase() +
+          '</span><h3>' +
+          content[item.title] +
+          '</h3><p>' +
+          content[item.lead] +
+          '</p>' +
+          link(
+            item.page,
+            item.page === 'metal' ? insightUi[lang].metalLink : t.read,
+            'tile-link'
+          ) +
+          '</article>'
+        );
+      }
+      function insights() {
+        return (
+          intro('06 / ' + t.insights, t.insights, t.insightsLead) +
+          section(
+            t.insights,
+            '<div class="filter-bar" style="display:grid;grid-template-columns:1fr 1fr;max-width:600px"><label class="field">' +
+              t.topic +
+              '<select id="topicFilter"><option value="all">' +
+              t.all +
+              '</option><option value="geology">' +
+              { en: 'Geology', ru: 'Геология', zh: '地质' }[lang] +
+              '</option><option value="deals">' +
+              { en: 'Transactions', ru: 'Сделки', zh: '交易' }[lang] +
+              '</option></select></label><label class="field">' +
+              t.language +
+              '<select id="languageFilter"><option value="all">' +
+              t.all +
+              '</option><option value="ru">RU</option><option value="en">EN</option><option value="zh">中文</option></select></label><button class="reset" id="insightReset" type="button" style="grid-column:1/-1;justify-self:start">' +
+              insightUi[lang].reset +
+              '</button></div>' +
+              '<p id="insightCount" class="caption" role="status" aria-live="polite"></p><div class="cols2" id="insightResults"></div><div class="empty" id="insightEmpty" hidden><p>' +
+              insightUi[lang].empty +
+              '</p><button class="reset" id="insightEmptyReset" type="button">' +
+              insightUi[lang].reset +
+              '</button></div>'
+          )
+        );
+      }
+      function updateInsights() {
+        const topic = document.querySelector('#topicFilter')?.value,
+          language = document.querySelector('#languageFilter')?.value;
+        if (!topic || !language) return;
+        const shown = insightRecords.filter(
+          (item) =>
+            (topic === 'all' || item.topic === topic) &&
+            (language === 'all' || item.languages.includes(language))
+        );
+        document.querySelector('#insightResults').innerHTML = shown
+          .map((item) => insightCard(item, language))
+          .join('');
+        document.querySelector('#insightCount').textContent = insightUi[
+          lang
+        ].count(shown.length);
+        document.querySelector('#insightEmpty').hidden = shown.length > 0;
+      }
+      function resetInsights() {
+        document.querySelector('#topicFilter').value = 'all';
+        document.querySelector('#languageFilter').value = 'all';
+        updateInsights();
+      }
+      function article() {
+        let H = {
+            en: ['Teaser field', 'Preview value', 'How to read it'],
+            ru: ['Поле тизера', 'Значение в макете', 'Как читать'],
+            zh: ['简介字段', '演示内容', '阅读方式'],
+          }[lang],
+          R = {
+            en: [
+              ['Code', 'DEMO-B02', 'Conversation reference only'],
+              ['Source', 'Pending', 'Ask for report and verification date'],
+              ['Grade', 'Pending', 'Separate average, range and local spike'],
+              [
+                'Status',
+                'Pending',
+                'Confirm current position in official source',
+              ],
+            ],
+            ru: [
+              ['Код', 'DEMO-B02', 'Ориентир для разговора'],
+              ['Источник', 'Ожидается', 'Запросить отчёт и дату проверки'],
+              [
+                'Содержание',
+                'Ожидается',
+                'Разделять среднее, диапазон и локальный пик',
+              ],
+              ['Статус', 'Ожидается', 'Проверить по официальному источнику'],
+            ],
+            zh: [
+              ['编号', 'DEMO-B02', '仅用于沟通定位'],
+              ['来源', '待提供', '索取报告及核查日期'],
+              ['品位', '待提供', '区分平均值、范围与局部高值'],
+              ['状态', '待确认', '通过官方渠道核实当前状态'],
+            ],
+          }[lang],
+          foot = {
+            en: 'Any comparison among GKZ, JORC and GB/T 17766 needs review by a qualified geologist; this guide does not equate their categories.',
+            ru: 'Сопоставление ГКЗ, JORC и GB/T 17766 требует проверки квалифицированным геологом; этот гид не приравнивает их категории.',
+            zh: 'GKZ、JORC 与 GB/T 17766 的对应关系须由合格地质专家审核；本指南不将其类别等同。',
+          }[lang];
+        return (
+          intro(
+            '07 / ' + t.nav[4] + ' · ' + t.update,
+            t.articleTitle,
+            t.articleLead
+          ) +
+          section(t.short, '<p class="lead">' + t.shortBody + '</p>') +
+          '<section class="section"><div class="wrap article-layout"><nav class="toc" aria-label="' +
+          t.toc +
+          '"><b>' +
+          t.toc +
+          '</b>' +
+          t.articleHeads
+            .map((x, i) => '<a href="#a' + i + '">' + x + '</a>')
+            .join('') +
+          '</nav><article class="article-body">' +
+          t.articleHeads
+            .map(
+              (x, i) =>
+                '<section id="a' +
+                i +
+                '"><h2>' +
+                x +
+                '</h2><p>' +
+                t.articleBody[i] +
+                '</p></section>'
+            )
+            .join('') +
+          '<h2>' +
+          {
+            en: 'Field reading example',
+            ru: 'Как читать поля',
+            zh: '字段阅读示例',
+          }[lang] +
+          '</h2><div class="tablebox"><table><thead><tr>' +
+          H.map((x) => '<th>' + x + '</th>').join('') +
+          '</tr></thead><tbody>' +
+          R.map(
+            (row) =>
+              '<tr>' + row.map((x) => '<td>' + x + '</td>').join('') + '</tr>'
+          ).join('') +
+          '</tbody></table></div><p class="note">' +
+          foot +
+          '</p><h2>' +
+          t.source +
+          '</h2><p class="note">' +
+          t.sourceBody +
+          '</p>' +
+          channels() +
+          '</article></div></section>'
+        );
+      }
+      function metal() {
+        return (
+          intro('08 / ' + t.metalLabel, t.metalTitle, t.metalLead) +
+          section(t.short, '<p class="lead">' + t.metalFact + '</p>') +
+          section(
+            t.portfolio,
+            '<div class="tablebox"><table><thead><tr><th>' +
+              { en: 'Code', ru: 'Код', zh: '编号' }[lang] +
+              '</th><th>' +
+              t.metalLabel +
+              '</th><th>' +
+              t.region +
+              '</th><th>' +
+              t.grade +
+              '</th><th></th></tr></thead><tbody><tr><td>DEMO-B02</td><td>Cu</td><td>' +
+              t.pending +
+              '</td><td>' +
+              t.pending +
+              '</td><td>' +
+              link('teaser', t.more, '', 'DEMO-B02') +
+              '</td></tr></tbody></table></div><p class="note">' +
+              t.demo +
+              '</p>'
+          ) +
+          section(t.context, '<p class="lead">' + t.contextBody + '</p>') +
+          section(
+            t.faq,
+            '<div class="faq">' +
+              t.faqs
+                .map(
+                  (x) =>
+                    '<details><summary>' +
+                    x[0] +
+                    '</summary><p>' +
+                    x[1] +
+                    '</p></details>'
+                )
+                .join('') +
+              '</div><div class="actions">' +
+              link('contact', t.discuss, 'btn primary') +
+              '</div>'
+          )
+        );
+      }
+      const pages = {
+        home,
+        portfolio,
+        teaser,
+        services,
+        about,
+        contact,
+        insights,
+        article,
+        metal,
+      };
+      document.getElementById('app').innerHTML =
+        header() + '<main id="main">' + pages[screen]() + '</main>' + footer();
+      document.querySelectorAll('[data-lang]').forEach(
+        (b) =>
+          (b.onclick = () => {
+            params.set('lang', b.dataset.lang);
+            location.search = params.toString();
+          })
+      );
+      document.querySelectorAll('.theme').forEach(
+        (b) =>
+          (b.onclick = () => {
+            params.set('theme', theme === 'dark' ? 'light' : 'dark');
+            location.search = params.toString();
+          })
+      );
+      let menu = document.querySelector('.menu-btn'),
+        mobile = document.querySelector('.mobile-menu');
+      if (menu) {
+        menu.onclick = () => {
+          let open = menu.getAttribute('aria-expanded') !== 'true';
+          menu.setAttribute('aria-expanded', String(open));
+          mobile.classList.toggle('open', open);
+          if (open) mobile.querySelector('a')?.focus();
+        };
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && mobile.classList.contains('open')) {
+            mobile.classList.remove('open');
+            menu.setAttribute('aria-expanded', 'false');
+            menu.focus();
+          }
+        });
+      }
+      const ff = document.querySelector('.filter-toggle'),
+        filters = document.querySelector('#filters'),
+        fc = document.querySelector('.filter-close');
+      function closeFilters() {
+        filters?.classList.remove('open');
+        ff?.setAttribute('aria-expanded', 'false');
+        ff?.focus();
+      }
+      if (ff) {
+        ff.onclick = () => {
+          filters.classList.add('open');
+          ff.setAttribute('aria-expanded', 'true');
+          filters.querySelector('select').focus();
+        };
+        fc.onclick = closeFilters;
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && filters.classList.contains('open'))
+            closeFilters();
+          if (e.key === 'Tab' && filters.classList.contains('open')) {
+            let els = [...filters.querySelectorAll('button,select')],
+              first = els[0],
+              last = els[els.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        });
+      }
+      function updateProjects() {
+        let m = document.querySelector('#metalFilter').value,
+          ty = document.querySelector('#typeFilter').value,
+          shown = 0;
+        document.querySelectorAll('.project').forEach((el) => {
+          let show =
+            (m === 'all' || m === el.dataset.metal) &&
+            (ty === 'all' || ty === el.dataset.type);
+          el.hidden = !show;
+          if (show) shown++;
+        });
+        document.querySelector('#empty').hidden = shown > 0;
+      }
+      document
+        .querySelectorAll('#filters select')
+        .forEach((x) => (x.onchange = updateProjects));
+      document.querySelector('.reset')?.addEventListener('click', () => {
+        document
+          .querySelectorAll('#filters select')
+          .forEach((s) => (s.value = 'all'));
+        updateProjects();
+      });
+      document
+        .querySelector('#topicFilter')
+        ?.addEventListener('change', updateInsights);
+      document
+        .querySelector('#languageFilter')
+        ?.addEventListener('change', updateInsights);
+      document
+        .querySelector('#insightReset')
+        ?.addEventListener('click', resetInsights);
+      document
+        .querySelector('#insightEmptyReset')
+        ?.addEventListener('click', resetInsights);
+      updateInsights();
+      document
+        .querySelectorAll('.form')
+        .forEach((f) =>
+          f.addEventListener(
+            'invalid',
+            () => f.classList.add('was-submitted'),
+            true
+          )
+        );
+      document.querySelectorAll('.form').forEach(
+        (f) =>
+          (f.onsubmit = (e) => {
+            e.preventDefault();
+            let st = f.querySelector('.form-status');
+            st.hidden = false;
+            st.textContent = t.formStatus;
+          })
+      );
+    </script>
+  </body>
+</html>

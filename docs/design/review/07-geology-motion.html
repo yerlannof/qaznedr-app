@@ -1,46 +1,1000 @@
 <!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>QAZNEDR — Geology motion study</title>
-  <style>
-    :root{color-scheme:dark;--bg:#192a32;--panel:#253740;--ink:#e9ece6;--muted:#b9c7c5;--line:#6d8588;--signal:#dde55e;--header:#12232b}
-    [data-theme=light]{color-scheme:light;--bg:#e9ece6;--panel:#f5f6f1;--ink:#253740;--muted:#43565b;--line:#839598;--signal:#566207;--header:#e2e6df}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Helvetica Neue",sans-serif;line-height:1.45}button{font:inherit}button:focus-visible,a:focus-visible{outline:3px solid var(--signal);outline-offset:4px}a{color:inherit} .skip{position:absolute;left:-999px;top:8px;z-index:20}.skip:focus{left:8px;background:var(--signal);color:#253740;padding:10px}
-    .bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px clamp(20px,5vw,80px);border-bottom:1px solid var(--line);background:var(--header)}.brand{font-family:Georgia,serif;font-size:22px;letter-spacing:.06em;font-weight:bold}.brand small{font:10px Arial,sans-serif;display:block;letter-spacing:.25em}.controls{display:flex;gap:7px;align-items:center}.controls button,.stage-nav button{border:1px solid var(--line);background:transparent;color:var(--ink);min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer}.controls button[aria-pressed=true],.stage-nav button[aria-pressed=true]{background:var(--signal);border-color:var(--signal);color:#253740;font-weight:700}.controls .theme{min-width:72px}.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--signal)}[data-theme=light] .eyebrow{color:#495609}.intro{padding:clamp(44px,7vw,100px) clamp(20px,7vw,112px) 55px;max-width:1000px}.intro h1{font-family:Georgia,serif;font-weight:normal;font-size:clamp(44px,6vw,94px);line-height:1.03;letter-spacing:-.045em;margin:22px 0 24px}.intro p{font-size:clamp(17px,1.6vw,22px);max-width:650px;color:var(--muted);margin:0}.intro .rule{height:1px;background:var(--line);max-width:350px;margin-top:42px}.intro .micro{font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-top:16px}
-    .study{position:relative}.sticky{position:sticky;top:0;height:100vh;min-height:650px;overflow:hidden;background:#1b313c;display:grid;grid-template-columns:minmax(330px,36%) 1fr}.copy{z-index:2;display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,5vw,88px);background:#253740;color:#e9ece6;border-right:1px solid #647a7e}.copy .eyebrow{color:#dde55e}.copy h2{font-family:Georgia,serif;font-size:clamp(42px,4.4vw,68px);line-height:1.05;font-weight:normal;letter-spacing:-.035em;margin:15px 0 28px}.copy p{color:#c9d2cf;font-size:17px;max-width:420px;min-height:75px}.annotation{border-left:2px solid #dde55e;padding-left:18px;margin-top:16px;max-width:420px;color:#e9ece6!important}.progress{height:2px;background:#72898b;width:100%;margin-top:36px}.progress span{display:block;width:33.333%;height:100%;background:#dde55e;transition:width .5s ease}.stage-nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.stage-nav button{border-color:#809395;color:#e9ece6;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.stage-nav button[aria-pressed=true]{background:#dde55e;border-color:#dde55e}.canvas{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#1d3540}.art{position:absolute;width:min(140%,1450px);max-width:none;height:auto;left:50%;top:50%;transform:translate(-51%,-50%) scale(1);transition:transform .75s ease;filter:saturate(.87)}.canvas::after{content:"SCHEMATIC / NOT PROJECT DATA";position:absolute;bottom:32px;right:40px;color:#e9ece6;background:#253740;padding:8px 12px;font-size:10px;letter-spacing:.17em}.focus{position:absolute;border:2px solid #dde55e;width:21%;height:21%;left:49%;top:21%;opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease,left .6s ease,top .6s ease,width .6s ease,height .6s ease;pointer-events:none}.focus::before,.focus::after{content:"";position:absolute;background:#dde55e}.focus::before{width:35px;height:2px;right:-35px;top:-2px}.focus::after{width:2px;height:35px;right:-2px;top:-35px}.pin{position:absolute;width:9px;height:9px;background:#dde55e;transform:rotate(45deg);left:59%;top:31%;opacity:0;transition:opacity .6s ease,left .6s ease,top .6s ease}.pin-label{position:absolute;color:#dde55e;background:#253740;padding:6px 10px;left:60%;top:30%;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:0;transition:opacity .6s ease,left .6s ease,top .6s ease}.canvas[data-stage="1"] .focus{opacity:1;transform:none;left:44%;top:35%;width:28%;height:24%}.canvas[data-stage="1"] .pin{opacity:1;left:57%;top:47%}.canvas[data-stage="1"] .pin-label{opacity:1;left:58%;top:46%}.canvas[data-stage="2"] .focus{opacity:1;transform:none;left:52%;top:41%;width:17%;height:28%}.canvas[data-stage="2"] .pin{opacity:1;left:60%;top:54%}.canvas[data-stage="2"] .pin-label{opacity:1;left:61%;top:53%}.canvas[data-stage="1"] .art{transform:translate(calc(-51% - 12px),-50%) scale(1.03)}.canvas[data-stage="2"] .art{transform:translate(calc(-51% - 24px),-50%) scale(1.06)}.step-marker{height:85vh;min-height:560px;pointer-events:none}.step-marker:last-child{height:45vh}.mobile-story,.static-story{display:none}.closing{padding:70px clamp(20px,7vw,112px) 100px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}.closing h2{font:normal clamp(34px,4vw,58px)/1.07 Georgia,serif;letter-spacing:-.035em;margin:8px 0}.closing p{color:var(--muted);max-width:530px}.closing a{display:inline-flex;align-items:center;min-height:48px;border:1px solid var(--ink);padding:10px 20px;text-decoration:none;margin-top:12px}.spec{border-top:1px solid var(--line);padding:35px clamp(20px,7vw,112px) 60px;color:var(--muted);font-size:14px}.spec strong{color:var(--ink)}.spec p{max-width:1000px}.zh h1,.zh h2,.zh .brand,.zh .mobile-card h3{font-family:PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,sans-serif;letter-spacing:0}
-    @media(max-width:760px){.bar{padding:13px 20px;align-items:flex-start}.brand{font-size:15px;line-height:1.15}.controls{flex-wrap:wrap;justify-content:flex-end}.controls button{padding:6px 8px}.intro{padding:50px 20px 42px}.intro h1{font-size:48px}.study .sticky,.step-marker{display:none}.mobile-story{display:block;padding:0 20px 28px}.mobile-image{position:relative;overflow:hidden;background:#1d3540;aspect-ratio:1.15;margin:0 -20px 28px}.mobile-image img{display:block;width:172%;max-width:none;position:absolute;left:-47%;top:50%;transform:translateY(-50%)}.mobile-image .focus{opacity:1;transform:none;left:47%;top:40%;width:26%;height:27%}.mobile-image .pin,.mobile-image .pin-label{display:none}.mobile-image[data-stage="0"] .focus{opacity:0}.mobile-image[data-stage="2"] .focus{left:57%;top:47%;width:17%;height:29%}.mobile-image::after{content:"SCHEMATIC";position:absolute;bottom:12px;right:12px;color:#e9ece6;background:#253740;padding:5px 7px;font-size:9px;letter-spacing:.12em}.mobile-story .stage-nav{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:0 0 22px}.mobile-story .stage-nav button{font-size:10px;padding:6px 2px;min-height:48px}.mobile-card{border-top:1px solid var(--line);padding-top:20px}.mobile-card h3{font:normal 33px/1.1 Georgia,serif;margin:12px 0}.mobile-card p{font-size:16px;color:var(--muted)}.mobile-card .annotation{color:var(--ink)!important;font-size:15px}.closing{grid-template-columns:1fr;padding:55px 20px 75px}.spec{padding:24px 20px 45px}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.art,.focus,.pin,.pin-label,.progress span{transition:none!important}.study .sticky,.step-marker{display:none}.mobile-story{display:block;padding:0 clamp(20px,7vw,112px) 30px}.mobile-story .mobile-image,.mobile-story .stage-nav,.mobile-story .mobile-card{display:none}.static-story{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}.static-story article{padding:28px;background:var(--panel)}.static-story h3{font:normal 28px Georgia,serif}.static-story p{color:var(--muted)}}
-    @media(max-width:760px) and (prefers-reduced-motion:reduce){.static-story{grid-template-columns:1fr}}
-    .sticky .stage-nav button{flex:1;font-size:10px;letter-spacing:.02em;padding:6px 5px;white-space:nowrap}.nojs{display:none}.no-js .nojs{display:block}.no-js .study .sticky,.no-js .step-marker,.no-js .mobile-story{display:none}.no-js .static-story{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line)}.no-js .static-story article{background:var(--panel);padding:24px}.no-js .static-story h3{font:normal 28px Georgia,serif}.no-js .static-story p{color:var(--muted)}@media(max-width:760px){.no-js .static-story{grid-template-columns:1fr}}
-  </style>
-</head>
-<body class="no-js" data-theme="dark">
-<a class="skip" href="#main">Skip to study</a>
-<header class="bar"><div class="brand">QAZNEDR <small>HOLDING / MOTION STUDY 07</small></div><div class="controls" aria-label="Study controls"><button type="button" class="lang" data-lang="ru" aria-pressed="true">RU</button><button type="button" class="lang" data-lang="en" aria-pressed="false">EN</button><button type="button" class="lang" data-lang="zh" aria-pressed="false">中文</button><button type="button" class="theme" aria-pressed="false">Light</button></div></header>
-<main id="main">
-<section class="intro"><span class="eyebrow" data-key="eyebrow">07 / Исследование движения</span><h1 data-key="title">Читать структуру.<br>Задавать вопросы.</h1><p data-key="intro">Одна схематическая геологическая гравюра. Три шага показывают, как геолог переходит от общего контекста к проверяемой интерпретации.</p><div class="rule"></div><p class="micro" data-key="scroll">Прокрутите, чтобы изучить сцену · Схема, не данные участка</p></section>
-<section class="study" aria-label="Geology motion study">
-  <div class="sticky"><div class="copy"><div class="eyebrow" id="stage-count">01 / 03</div><h2 id="stage-title">Поверхность</h2><p id="stage-body">Сначала читаем положение объекта и общий геологический контекст.</p><p class="annotation" id="stage-note">Вопрос геолога: где искать границы и контакты?</p><div class="progress" aria-hidden="true"><span id="progress-fill"></span></div><div class="stage-nav" aria-label="Choose a stage"><button type="button" data-stage="0" aria-pressed="true">01 Surface</button><button type="button" data-stage="1" aria-pressed="false">02 Structure</button><button type="button" data-stage="2" aria-pressed="false">03 Interpretation</button></div></div><div class="canvas" data-stage="0"><img class="art" src="../mockups/01/elements/geology-cutaway.png" alt="Engraved schematic cutaway of a mountain and rock strata; the highlighted region is an illustrative focus of analysis, not measured data"><div class="focus" aria-hidden="true"></div><div class="pin" aria-hidden="true"></div><div class="pin-label" id="pin-label" aria-hidden="true">Area of focus</div></div></div>
-  <div class="step-marker" data-step="0"></div><div class="step-marker" data-step="1"></div><div class="step-marker" data-step="2"></div>
-  <div class="mobile-story"><div class="mobile-image" data-stage="0"><img src="../mockups/01/elements/geology-cutaway.png" alt="Schematic geological cutaway, with an illustrative area of focus"><div class="focus" aria-hidden="true"></div></div><div class="stage-nav" aria-label="Choose a stage"><button type="button" data-stage="0" aria-pressed="true">01 Surface</button><button type="button" data-stage="1" aria-pressed="false">02 Structure</button><button type="button" data-stage="2" aria-pressed="false">03 Interpretation</button></div><div class="mobile-card" aria-live="polite"><div class="eyebrow" id="mobile-count">01 / 03</div><h3 id="mobile-title">Поверхность</h3><p id="mobile-body">Сначала читаем положение объекта и общий геологический контекст.</p><p class="annotation" id="mobile-note">Вопрос геолога: где искать границы и контакты?</p></div></div>
-  <div class="static-story" id="static-story"><article><span class="eyebrow">01 / 03</span><h3 data-key="s0title">Поверхность</h3><p data-key="s0body">Сначала читаем положение объекта и общий геологический контекст.</p></article><article><span class="eyebrow">02 / 03</span><h3 data-key="s1title">Структура</h3><p data-key="s1body">Выделяем границы пластов и взаимное положение пород.</p></article><article><span class="eyebrow">03 / 03</span><h3 data-key="s2title">Интерпретация</h3><p data-key="s2body">Сопоставляем наблюдение с архивом и полевыми материалами.</p></article></div>
-</section>
-<section class="closing"><div><span class="eyebrow" data-key="endlabel">После сцены</span><h2 data-key="endtitle">Экспертиза начинается с проверки.</h2></div><div><p data-key="endbody">Выделение обозначает вопрос для анализа. Рисунок не сообщает содержание металлов, запасы, координаты или права на участок.</p><a href="mailto:info@qaznedr.kz" data-key="contact">Обсудить проект</a></div></section>
-<section class="spec"><strong data-key="speclabel">О прототипе</strong><p data-key="specbody">На десктопе три участка обычной прокрутки меняют подпись и положение одной иллюстрации. На телефоне этапы переключаются кнопками. Клавиатура работает через кнопки; при reduced motion и без JavaScript показаны все три смысловых шага без движения.</p><p data-key="limit">Это проверка ритма и читаемости, а не трёхмерная модель. Отдельных независимых 3D-слоёв в исходном изображении нет; для настоящего раскрытия потребуется новая раздельная графика и геологическая проверка подписей.</p></section>
-</main>
-<script>
-document.body.classList.remove('no-js');
-const copy={
- ru:{eyebrow:'07 / Исследование движения',title:'Читать структуру.<br>Задавать вопросы.',intro:'Одна схематическая геологическая гравюра. Три шага показывают, как геолог переходит от общего контекста к проверяемой интерпретации.',scroll:'Прокрутите, чтобы изучить сцену · Схема, не данные участка',endlabel:'После сцены',endtitle:'Экспертиза начинается с проверки.',endbody:'Выделение обозначает вопрос для анализа. Рисунок не сообщает содержание металлов, запасы, координаты или права на участок.',contact:'Обсудить проект',speclabel:'О прототипе',specbody:'На десктопе три участка обычной прокрутки меняют подпись и положение одной иллюстрации. На телефоне этапы переключаются кнопками. Клавиатура работает через кнопки; при reduced motion и без JavaScript показаны все три смысловых шага без движения.',limit:'Это проверка ритма и читаемости, а не трёхмерная модель. Отдельных независимых 3D-слоёв в исходном изображении нет; для настоящего раскрытия потребуется новая раздельная графика и геологическая проверка подписей.',stages:[['Поверхность','Сначала читаем положение объекта и общий геологический контекст.','Вопрос геолога: где искать границы и контакты?'],['Структура','Выделяем границы пластов и взаимное положение пород.','Вопрос геолога: какие контакты требуют проверки?'],['Интерпретация','Сопоставляем наблюдение с архивом и полевыми материалами.','Следующий шаг: проверить гипотезу по источникам.']],nav:['Поверхность','Структура','Интерпретация'],pin:'Зона внимания'},
- en:{eyebrow:'07 / Motion study',title:'Read the structure.<br>Ask better questions.',intro:'One schematic geological engraving. Three steps show how a geologist moves from context to an interpretation that can be checked.',scroll:'Scroll to explore · Diagram, not site data',endlabel:'After the scene',endtitle:'Expertise begins with verification.',endbody:'The highlight marks a question for analysis. The illustration does not state metal grades, reserves, coordinates or rights to a site.',contact:'Discuss a project',speclabel:'About the prototype',specbody:'On desktop, three normal scroll intervals change the annotation and position of one illustration. On a phone, buttons select each stage. Buttons work with a keyboard; reduced motion and no JavaScript show all three steps without movement.',limit:'This tests pacing and legibility, not a 3D model. The source image has no independent 3D layers; a real separation needs newly prepared artwork and geological review of the labels.',stages:[['Surface','Begin with the setting and the broader geological context.','Geologist’s question: where might boundaries and contacts lie?'],['Structure','Trace strata boundaries and the relationship between rock units.','Geologist’s question: which contacts need checking?'],['Interpretation','Compare the observation with archive and field material.','Next step: test the hypothesis against sources.']],nav:['Surface','Structure','Interpretation'],pin:'Area of focus'},
- zh:{eyebrow:'07 / 动效研究',title:'读懂结构。<br>提出问题。',intro:'以一幅示意性地质剖面图，分三步展示地质师如何从整体背景走向可核查的判断。',scroll:'向下滚动查看 · 示意图，非项目数据',endlabel:'场景之后',endtitle:'专业判断始于核查。',endbody:'高亮区域表示分析重点。图像不代表金属品位、储量、坐标或地块权属。',contact:'洽谈项目',speclabel:'关于原型',specbody:'桌面端通过正常滚动切换三段说明，并轻微移动同一幅图。手机端通过按钮切换。按钮支持键盘操作；减少动态效果或禁用 JavaScript 时，三个步骤均以静态内容呈现。',limit:'本原型检验节奏和可读性，并非三维模型。原图不含可独立移动的三维地层；真正的分层展示需要重新制作素材，并请地质专家核对文字。',stages:[['地表','先观察地形与整体地质背景。','地质师的问题：边界和接触带可能在哪里？'],['构造','辨认地层边界与岩石单元的相互关系。','地质师的问题：哪些接触关系需要核查？'],['解释','将观察结果与档案和野外资料对照。','下一步：依据资料检验假设。']],nav:['地表','构造','解释'],pin:'关注区域'}
-};
-let lang='ru',stage=0;const $=id=>document.getElementById(id), mobile=matchMedia('(max-width:760px)'), reduced=matchMedia('(prefers-reduced-motion:reduce)');
-function render(){const t=copy[lang];document.documentElement.lang=lang==='zh'?'zh-CN':lang;document.body.classList.toggle('zh',lang==='zh');document.querySelectorAll('[data-key]').forEach(el=>{const k=el.dataset.key;if(/^s[0-2](title|body)$/.test(k)){let i=Number(k[1]);el.textContent=t.stages[i][k.endsWith('title')?0:1]}else if(k==='title')el.innerHTML=t[k];else el.textContent=t[k]});['stage','mobile'].forEach(p=>{$(p+'-count').textContent=`0${stage+1} / 03`;$(p+'-title').textContent=t.stages[stage][0];$(p+'-body').textContent=t.stages[stage][1];$(p+'-note').textContent=t.stages[stage][2]});$('pin-label').textContent=t.pin;document.querySelectorAll('.stage-nav').forEach(nav=>nav.querySelectorAll('button').forEach((b,i)=>{b.textContent=`0${i+1} ${t.nav[i]}`;b.setAttribute('aria-pressed',String(i===stage))}));document.querySelector('.canvas').dataset.stage=stage;document.querySelector('.mobile-image').dataset.stage=stage;$('progress-fill').style.width=`${(stage+1)*100/3}%`;document.querySelectorAll('.lang').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)))}
-function choose(i,fromButton=false){stage=i;render();if(fromButton&&!mobile.matches&&!reduced.matches){document.querySelector(`[data-step="${i}"]`).scrollIntoView({behavior:'smooth',block:'center'})}}
-document.querySelectorAll('.lang').forEach(b=>b.addEventListener('click',()=>{lang=b.dataset.lang;render()}));document.querySelectorAll('.stage-nav button').forEach(b=>b.addEventListener('click',()=>choose(Number(b.dataset.stage),true)));document.querySelector('.theme').addEventListener('click',e=>{let light=document.body.dataset.theme!=='light';document.body.dataset.theme=light?'light':'dark';e.currentTarget.setAttribute('aria-pressed',String(light));e.currentTarget.textContent=light?'Dark':'Light'});
-let queued=false;function onScroll(){if(queued||mobile.matches||reduced.matches)return;queued=true;requestAnimationFrame(()=>{let markers=[...document.querySelectorAll('.step-marker')],center=innerHeight*.5,best=0,dist=Infinity;markers.forEach((m,i)=>{let r=m.getBoundingClientRect(),d=Math.abs((r.top+r.bottom)/2-center);if(d<dist){dist=d;best=i}});let section=document.querySelector('.study').getBoundingClientRect();if(section.top<innerHeight*.55&&section.bottom>innerHeight*.45&&best!==stage)choose(best);queued=false})}addEventListener('scroll',onScroll,{passive:true});render();
-</script>
-</body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>QAZNEDR — Geology motion study</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #192a32;
+        --panel: #253740;
+        --ink: #e9ece6;
+        --muted: #b9c7c5;
+        --line: #6d8588;
+        --signal: #dde55e;
+        --header: #12232b;
+      }
+      [data-theme='light'] {
+        color-scheme: light;
+        --bg: #e9ece6;
+        --panel: #f5f6f1;
+        --ink: #253740;
+        --muted: #43565b;
+        --line: #839598;
+        --signal: #566207;
+        --header: #e2e6df;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Arial, 'Helvetica Neue', sans-serif;
+        line-height: 1.45;
+      }
+      button {
+        font: inherit;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid var(--signal);
+        outline-offset: 4px;
+      }
+      a {
+        color: inherit;
+      }
+      .skip {
+        position: absolute;
+        left: -999px;
+        top: 8px;
+        z-index: 20;
+      }
+      .skip:focus {
+        left: 8px;
+        background: var(--signal);
+        color: #253740;
+        padding: 10px;
+      }
+      .bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 20px clamp(20px, 5vw, 80px);
+        border-bottom: 1px solid var(--line);
+        background: var(--header);
+      }
+      .brand {
+        font-family: Georgia, serif;
+        font-size: 22px;
+        letter-spacing: 0.06em;
+        font-weight: bold;
+      }
+      .brand small {
+        font:
+          10px Arial,
+          sans-serif;
+        display: block;
+        letter-spacing: 0.25em;
+      }
+      .controls {
+        display: flex;
+        gap: 7px;
+        align-items: center;
+      }
+      .controls button,
+      .stage-nav button {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        min-height: 44px;
+        min-width: 44px;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+      .controls button[aria-pressed='true'],
+      .stage-nav button[aria-pressed='true'] {
+        background: var(--signal);
+        border-color: var(--signal);
+        color: #253740;
+        font-weight: 700;
+      }
+      .controls .theme {
+        min-width: 72px;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--signal);
+      }
+      [data-theme='light'] .eyebrow {
+        color: #495609;
+      }
+      .intro {
+        padding: clamp(44px, 7vw, 100px) clamp(20px, 7vw, 112px) 55px;
+        max-width: 1000px;
+      }
+      .intro h1 {
+        font-family: Georgia, serif;
+        font-weight: normal;
+        font-size: clamp(44px, 6vw, 94px);
+        line-height: 1.03;
+        letter-spacing: -0.045em;
+        margin: 22px 0 24px;
+      }
+      .intro p {
+        font-size: clamp(17px, 1.6vw, 22px);
+        max-width: 650px;
+        color: var(--muted);
+        margin: 0;
+      }
+      .intro .rule {
+        height: 1px;
+        background: var(--line);
+        max-width: 350px;
+        margin-top: 42px;
+      }
+      .intro .micro {
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-top: 16px;
+      }
+      .study {
+        position: relative;
+      }
+      .sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        min-height: 650px;
+        overflow: hidden;
+        background: #1b313c;
+        display: grid;
+        grid-template-columns: minmax(330px, 36%) 1fr;
+      }
+      .copy {
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(32px, 5vw, 88px);
+        background: #253740;
+        color: #e9ece6;
+        border-right: 1px solid #647a7e;
+      }
+      .copy .eyebrow {
+        color: #dde55e;
+      }
+      .copy h2 {
+        font-family: Georgia, serif;
+        font-size: clamp(42px, 4.4vw, 68px);
+        line-height: 1.05;
+        font-weight: normal;
+        letter-spacing: -0.035em;
+        margin: 15px 0 28px;
+      }
+      .copy p {
+        color: #c9d2cf;
+        font-size: 17px;
+        max-width: 420px;
+        min-height: 75px;
+      }
+      .annotation {
+        border-left: 2px solid #dde55e;
+        padding-left: 18px;
+        margin-top: 16px;
+        max-width: 420px;
+        color: #e9ece6 !important;
+      }
+      .progress {
+        height: 2px;
+        background: #72898b;
+        width: 100%;
+        margin-top: 36px;
+      }
+      .progress span {
+        display: block;
+        width: 33.333%;
+        height: 100%;
+        background: #dde55e;
+        transition: width 0.5s ease;
+      }
+      .stage-nav {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+      .stage-nav button {
+        border-color: #809395;
+        color: #e9ece6;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .stage-nav button[aria-pressed='true'] {
+        background: #dde55e;
+        border-color: #dde55e;
+      }
+      .canvas {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #1d3540;
+      }
+      .art {
+        position: absolute;
+        width: min(140%, 1450px);
+        max-width: none;
+        height: auto;
+        left: 50%;
+        top: 50%;
+        transform: translate(-51%, -50%) scale(1);
+        transition: transform 0.75s ease;
+        filter: saturate(0.87);
+      }
+      .canvas::after {
+        content: 'SCHEMATIC / NOT PROJECT DATA';
+        position: absolute;
+        bottom: 32px;
+        right: 40px;
+        color: #e9ece6;
+        background: #253740;
+        padding: 8px 12px;
+        font-size: 10px;
+        letter-spacing: 0.17em;
+      }
+      .focus {
+        position: absolute;
+        border: 2px solid #dde55e;
+        width: 21%;
+        height: 21%;
+        left: 49%;
+        top: 21%;
+        opacity: 0;
+        transform: translateY(8px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease,
+          left 0.6s ease,
+          top 0.6s ease,
+          width 0.6s ease,
+          height 0.6s ease;
+        pointer-events: none;
+      }
+      .focus::before,
+      .focus::after {
+        content: '';
+        position: absolute;
+        background: #dde55e;
+      }
+      .focus::before {
+        width: 35px;
+        height: 2px;
+        right: -35px;
+        top: -2px;
+      }
+      .focus::after {
+        width: 2px;
+        height: 35px;
+        right: -2px;
+        top: -35px;
+      }
+      .pin {
+        position: absolute;
+        width: 9px;
+        height: 9px;
+        background: #dde55e;
+        transform: rotate(45deg);
+        left: 59%;
+        top: 31%;
+        opacity: 0;
+        transition:
+          opacity 0.6s ease,
+          left 0.6s ease,
+          top 0.6s ease;
+      }
+      .pin-label {
+        position: absolute;
+        color: #dde55e;
+        background: #253740;
+        padding: 6px 10px;
+        left: 60%;
+        top: 30%;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0;
+        transition:
+          opacity 0.6s ease,
+          left 0.6s ease,
+          top 0.6s ease;
+      }
+      .canvas[data-stage='1'] .focus {
+        opacity: 1;
+        transform: none;
+        left: 44%;
+        top: 35%;
+        width: 28%;
+        height: 24%;
+      }
+      .canvas[data-stage='1'] .pin {
+        opacity: 1;
+        left: 57%;
+        top: 47%;
+      }
+      .canvas[data-stage='1'] .pin-label {
+        opacity: 1;
+        left: 58%;
+        top: 46%;
+      }
+      .canvas[data-stage='2'] .focus {
+        opacity: 1;
+        transform: none;
+        left: 52%;
+        top: 41%;
+        width: 17%;
+        height: 28%;
+      }
+      .canvas[data-stage='2'] .pin {
+        opacity: 1;
+        left: 60%;
+        top: 54%;
+      }
+      .canvas[data-stage='2'] .pin-label {
+        opacity: 1;
+        left: 61%;
+        top: 53%;
+      }
+      .canvas[data-stage='1'] .art {
+        transform: translate(calc(-51% - 12px), -50%) scale(1.03);
+      }
+      .canvas[data-stage='2'] .art {
+        transform: translate(calc(-51% - 24px), -50%) scale(1.06);
+      }
+      .step-marker {
+        height: 85vh;
+        min-height: 560px;
+        pointer-events: none;
+      }
+      .step-marker:last-child {
+        height: 45vh;
+      }
+      .mobile-story,
+      .static-story {
+        display: none;
+      }
+      .closing {
+        padding: 70px clamp(20px, 7vw, 112px) 100px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .closing h2 {
+        font:
+          normal clamp(34px, 4vw, 58px) / 1.07 Georgia,
+          serif;
+        letter-spacing: -0.035em;
+        margin: 8px 0;
+      }
+      .closing p {
+        color: var(--muted);
+        max-width: 530px;
+      }
+      .closing a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
+        border: 1px solid var(--ink);
+        padding: 10px 20px;
+        text-decoration: none;
+        margin-top: 12px;
+      }
+      .spec {
+        border-top: 1px solid var(--line);
+        padding: 35px clamp(20px, 7vw, 112px) 60px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .spec strong {
+        color: var(--ink);
+      }
+      .spec p {
+        max-width: 1000px;
+      }
+      .zh h1,
+      .zh h2,
+      .zh .brand,
+      .zh .mobile-card h3 {
+        font-family:
+          PingFang SC,
+          Hiragino Sans GB,
+          Microsoft YaHei,
+          Noto Sans CJK SC,
+          sans-serif;
+        letter-spacing: 0;
+      }
+      @media (max-width: 760px) {
+        .bar {
+          padding: 13px 20px;
+          align-items: flex-start;
+        }
+        .brand {
+          font-size: 15px;
+          line-height: 1.15;
+        }
+        .controls {
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+        .controls button {
+          padding: 6px 8px;
+        }
+        .intro {
+          padding: 50px 20px 42px;
+        }
+        .intro h1 {
+          font-size: 48px;
+        }
+        .study .sticky,
+        .step-marker {
+          display: none;
+        }
+        .mobile-story {
+          display: block;
+          padding: 0 20px 28px;
+        }
+        .mobile-image {
+          position: relative;
+          overflow: hidden;
+          background: #1d3540;
+          aspect-ratio: 1.15;
+          margin: 0 -20px 28px;
+        }
+        .mobile-image img {
+          display: block;
+          width: 172%;
+          max-width: none;
+          position: absolute;
+          left: -47%;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        .mobile-image .focus {
+          opacity: 1;
+          transform: none;
+          left: 47%;
+          top: 40%;
+          width: 26%;
+          height: 27%;
+        }
+        .mobile-image .pin,
+        .mobile-image .pin-label {
+          display: none;
+        }
+        .mobile-image[data-stage='0'] .focus {
+          opacity: 0;
+        }
+        .mobile-image[data-stage='2'] .focus {
+          left: 57%;
+          top: 47%;
+          width: 17%;
+          height: 29%;
+        }
+        .mobile-image::after {
+          content: 'SCHEMATIC';
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          color: #e9ece6;
+          background: #253740;
+          padding: 5px 7px;
+          font-size: 9px;
+          letter-spacing: 0.12em;
+        }
+        .mobile-story .stage-nav {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 5px;
+          margin: 0 0 22px;
+        }
+        .mobile-story .stage-nav button {
+          font-size: 10px;
+          padding: 6px 2px;
+          min-height: 48px;
+        }
+        .mobile-card {
+          border-top: 1px solid var(--line);
+          padding-top: 20px;
+        }
+        .mobile-card h3 {
+          font:
+            normal 33px/1.1 Georgia,
+            serif;
+          margin: 12px 0;
+        }
+        .mobile-card p {
+          font-size: 16px;
+          color: var(--muted);
+        }
+        .mobile-card .annotation {
+          color: var(--ink) !important;
+          font-size: 15px;
+        }
+        .closing {
+          grid-template-columns: 1fr;
+          padding: 55px 20px 75px;
+        }
+        .spec {
+          padding: 24px 20px 45px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .art,
+        .focus,
+        .pin,
+        .pin-label,
+        .progress span {
+          transition: none !important;
+        }
+        .study .sticky,
+        .step-marker {
+          display: none;
+        }
+        .mobile-story {
+          display: block;
+          padding: 0 clamp(20px, 7vw, 112px) 30px;
+        }
+        .mobile-story .mobile-image,
+        .mobile-story .stage-nav,
+        .mobile-story .mobile-card {
+          display: none;
+        }
+        .static-story {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1px;
+          background: var(--line);
+          border: 1px solid var(--line);
+        }
+        .static-story article {
+          padding: 28px;
+          background: var(--panel);
+        }
+        .static-story h3 {
+          font:
+            normal 28px Georgia,
+            serif;
+        }
+        .static-story p {
+          color: var(--muted);
+        }
+      }
+      @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+        .static-story {
+          grid-template-columns: 1fr;
+        }
+      }
+      .sticky .stage-nav button {
+        flex: 1;
+        font-size: 10px;
+        letter-spacing: 0.02em;
+        padding: 6px 5px;
+        white-space: nowrap;
+      }
+      .nojs {
+        display: none;
+      }
+      .no-js .nojs {
+        display: block;
+      }
+      .no-js .study .sticky,
+      .no-js .step-marker,
+      .no-js .mobile-story {
+        display: none;
+      }
+      .no-js .static-story {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--line);
+      }
+      .no-js .static-story article {
+        background: var(--panel);
+        padding: 24px;
+      }
+      .no-js .static-story h3 {
+        font:
+          normal 28px Georgia,
+          serif;
+      }
+      .no-js .static-story p {
+        color: var(--muted);
+      }
+      @media (max-width: 760px) {
+        .no-js .static-story {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body class="no-js" data-theme="dark">
+    <a class="skip" href="#main">Skip to study</a>
+    <header class="bar">
+      <div class="brand">QAZNEDR <small>HOLDING / MOTION STUDY 07</small></div>
+      <div class="controls" aria-label="Study controls">
+        <button type="button" class="lang" data-lang="ru" aria-pressed="true">
+          RU</button
+        ><button type="button" class="lang" data-lang="en" aria-pressed="false">
+          EN</button
+        ><button type="button" class="lang" data-lang="zh" aria-pressed="false">
+          中文</button
+        ><button type="button" class="theme" aria-pressed="false">Light</button>
+      </div>
+    </header>
+    <main id="main">
+      <section class="intro">
+        <span class="eyebrow" data-key="eyebrow"
+          >07 / Исследование движения</span
+        >
+        <h1 data-key="title">Читать структуру.<br />Задавать вопросы.</h1>
+        <p data-key="intro">
+          Одна схематическая геологическая гравюра. Три шага показывают, как
+          геолог переходит от общего контекста к проверяемой интерпретации.
+        </p>
+        <div class="rule"></div>
+        <p class="micro" data-key="scroll">
+          Прокрутите, чтобы изучить сцену · Схема, не данные участка
+        </p>
+      </section>
+      <section class="study" aria-label="Geology motion study">
+        <div class="sticky">
+          <div class="copy">
+            <div class="eyebrow" id="stage-count">01 / 03</div>
+            <h2 id="stage-title">Поверхность</h2>
+            <p id="stage-body">
+              Сначала читаем положение объекта и общий геологический контекст.
+            </p>
+            <p class="annotation" id="stage-note">
+              Вопрос геолога: где искать границы и контакты?
+            </p>
+            <div class="progress" aria-hidden="true">
+              <span id="progress-fill"></span>
+            </div>
+            <div class="stage-nav" aria-label="Choose a stage">
+              <button type="button" data-stage="0" aria-pressed="true">
+                01 Surface</button
+              ><button type="button" data-stage="1" aria-pressed="false">
+                02 Structure</button
+              ><button type="button" data-stage="2" aria-pressed="false">
+                03 Interpretation
+              </button>
+            </div>
+          </div>
+          <div class="canvas" data-stage="0">
+            <img
+              class="art"
+              src="../mockups/01/elements/geology-cutaway.png"
+              alt="Engraved schematic cutaway of a mountain and rock strata; the highlighted region is an illustrative focus of analysis, not measured data"
+            />
+            <div class="focus" aria-hidden="true"></div>
+            <div class="pin" aria-hidden="true"></div>
+            <div class="pin-label" id="pin-label" aria-hidden="true">
+              Area of focus
+            </div>
+          </div>
+        </div>
+        <div class="step-marker" data-step="0"></div>
+        <div class="step-marker" data-step="1"></div>
+        <div class="step-marker" data-step="2"></div>
+        <div class="mobile-story">
+          <div class="mobile-image" data-stage="0">
+            <img
+              src="../mockups/01/elements/geology-cutaway.png"
+              alt="Schematic geological cutaway, with an illustrative area of focus"
+            />
+            <div class="focus" aria-hidden="true"></div>
+          </div>
+          <div class="stage-nav" aria-label="Choose a stage">
+            <button type="button" data-stage="0" aria-pressed="true">
+              01 Surface</button
+            ><button type="button" data-stage="1" aria-pressed="false">
+              02 Structure</button
+            ><button type="button" data-stage="2" aria-pressed="false">
+              03 Interpretation
+            </button>
+          </div>
+          <div class="mobile-card" aria-live="polite">
+            <div class="eyebrow" id="mobile-count">01 / 03</div>
+            <h3 id="mobile-title">Поверхность</h3>
+            <p id="mobile-body">
+              Сначала читаем положение объекта и общий геологический контекст.
+            </p>
+            <p class="annotation" id="mobile-note">
+              Вопрос геолога: где искать границы и контакты?
+            </p>
+          </div>
+        </div>
+        <div class="static-story" id="static-story">
+          <article>
+            <span class="eyebrow">01 / 03</span>
+            <h3 data-key="s0title">Поверхность</h3>
+            <p data-key="s0body">
+              Сначала читаем положение объекта и общий геологический контекст.
+            </p>
+          </article>
+          <article>
+            <span class="eyebrow">02 / 03</span>
+            <h3 data-key="s1title">Структура</h3>
+            <p data-key="s1body">
+              Выделяем границы пластов и взаимное положение пород.
+            </p>
+          </article>
+          <article>
+            <span class="eyebrow">03 / 03</span>
+            <h3 data-key="s2title">Интерпретация</h3>
+            <p data-key="s2body">
+              Сопоставляем наблюдение с архивом и полевыми материалами.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section class="closing">
+        <div>
+          <span class="eyebrow" data-key="endlabel">После сцены</span>
+          <h2 data-key="endtitle">Экспертиза начинается с проверки.</h2>
+        </div>
+        <div>
+          <p data-key="endbody">
+            Выделение обозначает вопрос для анализа. Рисунок не сообщает
+            содержание металлов, запасы, координаты или права на участок.
+          </p>
+          <a href="mailto:info@qaznedr.kz" data-key="contact"
+            >Обсудить проект</a
+          >
+        </div>
+      </section>
+      <section class="spec">
+        <strong data-key="speclabel">О прототипе</strong>
+        <p data-key="specbody">
+          На десктопе три участка обычной прокрутки меняют подпись и положение
+          одной иллюстрации. На телефоне этапы переключаются кнопками.
+          Клавиатура работает через кнопки; при reduced motion и без JavaScript
+          показаны все три смысловых шага без движения.
+        </p>
+        <p data-key="limit">
+          Это проверка ритма и читаемости, а не трёхмерная модель. Отдельных
+          независимых 3D-слоёв в исходном изображении нет; для настоящего
+          раскрытия потребуется новая раздельная графика и геологическая
+          проверка подписей.
+        </p>
+      </section>
+    </main>
+    <script>
+      document.body.classList.remove('no-js');
+      const copy = {
+        ru: {
+          eyebrow: '07 / Исследование движения',
+          title: 'Читать структуру.<br>Задавать вопросы.',
+          intro:
+            'Одна схематическая геологическая гравюра. Три шага показывают, как геолог переходит от общего контекста к проверяемой интерпретации.',
+          scroll: 'Прокрутите, чтобы изучить сцену · Схема, не данные участка',
+          endlabel: 'После сцены',
+          endtitle: 'Экспертиза начинается с проверки.',
+          endbody:
+            'Выделение обозначает вопрос для анализа. Рисунок не сообщает содержание металлов, запасы, координаты или права на участок.',
+          contact: 'Обсудить проект',
+          speclabel: 'О прототипе',
+          specbody:
+            'На десктопе три участка обычной прокрутки меняют подпись и положение одной иллюстрации. На телефоне этапы переключаются кнопками. Клавиатура работает через кнопки; при reduced motion и без JavaScript показаны все три смысловых шага без движения.',
+          limit:
+            'Это проверка ритма и читаемости, а не трёхмерная модель. Отдельных независимых 3D-слоёв в исходном изображении нет; для настоящего раскрытия потребуется новая раздельная графика и геологическая проверка подписей.',
+          stages: [
+            [
+              'Поверхность',
+              'Сначала читаем положение объекта и общий геологический контекст.',
+              'Вопрос геолога: где искать границы и контакты?',
+            ],
+            [
+              'Структура',
+              'Выделяем границы пластов и взаимное положение пород.',
+              'Вопрос геолога: какие контакты требуют проверки?',
+            ],
+            [
+              'Интерпретация',
+              'Сопоставляем наблюдение с архивом и полевыми материалами.',
+              'Следующий шаг: проверить гипотезу по источникам.',
+            ],
+          ],
+          nav: ['Поверхность', 'Структура', 'Интерпретация'],
+          pin: 'Зона внимания',
+        },
+        en: {
+          eyebrow: '07 / Motion study',
+          title: 'Read the structure.<br>Ask better questions.',
+          intro:
+            'One schematic geological engraving. Three steps show how a geologist moves from context to an interpretation that can be checked.',
+          scroll: 'Scroll to explore · Diagram, not site data',
+          endlabel: 'After the scene',
+          endtitle: 'Expertise begins with verification.',
+          endbody:
+            'The highlight marks a question for analysis. The illustration does not state metal grades, reserves, coordinates or rights to a site.',
+          contact: 'Discuss a project',
+          speclabel: 'About the prototype',
+          specbody:
+            'On desktop, three normal scroll intervals change the annotation and position of one illustration. On a phone, buttons select each stage. Buttons work with a keyboard; reduced motion and no JavaScript show all three steps without movement.',
+          limit:
+            'This tests pacing and legibility, not a 3D model. The source image has no independent 3D layers; a real separation needs newly prepared artwork and geological review of the labels.',
+          stages: [
+            [
+              'Surface',
+              'Begin with the setting and the broader geological context.',
+              'Geologist’s question: where might boundaries and contacts lie?',
+            ],
+            [
+              'Structure',
+              'Trace strata boundaries and the relationship between rock units.',
+              'Geologist’s question: which contacts need checking?',
+            ],
+            [
+              'Interpretation',
+              'Compare the observation with archive and field material.',
+              'Next step: test the hypothesis against sources.',
+            ],
+          ],
+          nav: ['Surface', 'Structure', 'Interpretation'],
+          pin: 'Area of focus',
+        },
+        zh: {
+          eyebrow: '07 / 动效研究',
+          title: '读懂结构。<br>提出问题。',
+          intro:
+            '以一幅示意性地质剖面图，分三步展示地质师如何从整体背景走向可核查的判断。',
+          scroll: '向下滚动查看 · 示意图，非项目数据',
+          endlabel: '场景之后',
+          endtitle: '专业判断始于核查。',
+          endbody:
+            '高亮区域表示分析重点。图像不代表金属品位、储量、坐标或地块权属。',
+          contact: '洽谈项目',
+          speclabel: '关于原型',
+          specbody:
+            '桌面端通过正常滚动切换三段说明，并轻微移动同一幅图。手机端通过按钮切换。按钮支持键盘操作；减少动态效果或禁用 JavaScript 时，三个步骤均以静态内容呈现。',
+          limit:
+            '本原型检验节奏和可读性，并非三维模型。原图不含可独立移动的三维地层；真正的分层展示需要重新制作素材，并请地质专家核对文字。',
+          stages: [
+            [
+              '地表',
+              '先观察地形与整体地质背景。',
+              '地质师的问题：边界和接触带可能在哪里？',
+            ],
+            [
+              '构造',
+              '辨认地层边界与岩石单元的相互关系。',
+              '地质师的问题：哪些接触关系需要核查？',
+            ],
+            [
+              '解释',
+              '将观察结果与档案和野外资料对照。',
+              '下一步：依据资料检验假设。',
+            ],
+          ],
+          nav: ['地表', '构造', '解释'],
+          pin: '关注区域',
+        },
+      };
+      let lang = 'ru',
+        stage = 0;
+      const $ = (id) => document.getElementById(id),
+        mobile = matchMedia('(max-width:760px)'),
+        reduced = matchMedia('(prefers-reduced-motion:reduce)');
+      function render() {
+        const t = copy[lang];
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+        document.body.classList.toggle('zh', lang === 'zh');
+        document.querySelectorAll('[data-key]').forEach((el) => {
+          const k = el.dataset.key;
+          if (/^s[0-2](title|body)$/.test(k)) {
+            let i = Number(k[1]);
+            el.textContent = t.stages[i][k.endsWith('title') ? 0 : 1];
+          } else if (k === 'title') el.innerHTML = t[k];
+          else el.textContent = t[k];
+        });
+        ['stage', 'mobile'].forEach((p) => {
+          $(p + '-count').textContent = `0${stage + 1} / 03`;
+          $(p + '-title').textContent = t.stages[stage][0];
+          $(p + '-body').textContent = t.stages[stage][1];
+          $(p + '-note').textContent = t.stages[stage][2];
+        });
+        $('pin-label').textContent = t.pin;
+        document.querySelectorAll('.stage-nav').forEach((nav) =>
+          nav.querySelectorAll('button').forEach((b, i) => {
+            b.textContent = `0${i + 1} ${t.nav[i]}`;
+            b.setAttribute('aria-pressed', String(i === stage));
+          })
+        );
+        document.querySelector('.canvas').dataset.stage = stage;
+        document.querySelector('.mobile-image').dataset.stage = stage;
+        $('progress-fill').style.width = `${((stage + 1) * 100) / 3}%`;
+        document
+          .querySelectorAll('.lang')
+          .forEach((b) =>
+            b.setAttribute('aria-pressed', String(b.dataset.lang === lang))
+          );
+      }
+      function choose(i, fromButton = false) {
+        stage = i;
+        render();
+        if (fromButton && !mobile.matches && !reduced.matches) {
+          document
+            .querySelector(`[data-step="${i}"]`)
+            .scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+      document.querySelectorAll('.lang').forEach((b) =>
+        b.addEventListener('click', () => {
+          lang = b.dataset.lang;
+          render();
+        })
+      );
+      document
+        .querySelectorAll('.stage-nav button')
+        .forEach((b) =>
+          b.addEventListener('click', () =>
+            choose(Number(b.dataset.stage), true)
+          )
+        );
+      document.querySelector('.theme').addEventListener('click', (e) => {
+        let light = document.body.dataset.theme !== 'light';
+        document.body.dataset.theme = light ? 'light' : 'dark';
+        e.currentTarget.setAttribute('aria-pressed', String(light));
+        e.currentTarget.textContent = light ? 'Dark' : 'Light';
+      });
+      let queued = false;
+      function onScroll() {
+        if (queued || mobile.matches || reduced.matches) return;
+        queued = true;
+        requestAnimationFrame(() => {
+          let markers = [...document.querySelectorAll('.step-marker')],
+            center = innerHeight * 0.5,
+            best = 0,
+            dist = Infinity;
+          markers.forEach((m, i) => {
+            let r = m.getBoundingClientRect(),
+              d = Math.abs((r.top + r.bottom) / 2 - center);
+            if (d < dist) {
+              dist = d;
+              best = i;
+            }
+          });
+          let section = document
+            .querySelector('.study')
+            .getBoundingClientRect();
+          if (
+            section.top < innerHeight * 0.55 &&
+            section.bottom > innerHeight * 0.45 &&
+            best !== stage
+          )
+            choose(best);
+          queued = false;
+        });
+      }
+      addEventListener('scroll', onScroll, { passive: true });
+      render();
+    </script>
+  </body>
+</html>

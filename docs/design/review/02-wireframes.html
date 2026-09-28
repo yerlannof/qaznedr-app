@@ -1,45 +1,1310 @@
 <!doctype html>
 <html lang="ru">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>02 — Схемы экранов | QAZNEDR HOLDING</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#e5e5e5;color:#171717;font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,a,input,select,textarea{font:inherit}button{cursor:pointer}.review-head{position:sticky;top:0;z-index:20;background:#f7f7f7;border-bottom:1px solid #888;padding:14px 24px;display:flex;gap:20px;align-items:center;justify-content:space-between}.review-head h1{font-size:20px;margin:0}.review-head p{margin:2px 0 0;color:#444;font-size:13px}.review-actions{display:flex;gap:8px;align-items:center}.review-actions button,.review-actions select{min-height:44px;padding:8px 13px;border:1px solid #555;background:#fff;color:#171717}.review-main{max-width:1840px;margin:auto;padding:30px 24px 80px}.intro{background:#f7f7f7;border:1px solid #aaa;padding:24px;margin-bottom:28px}.intro h2{font-size:24px;margin:0 0 8px}.intro p{margin:4px 0}.screen-row{background:#f6f6f6;border:1px solid #aaa;margin:0 0 32px;padding:20px}.row-title{display:flex;gap:16px;justify-content:space-between;align-items:baseline;margin-bottom:16px}.row-title h2{font-size:22px;margin:0}.row-title p{margin:0;color:#555}.previews{display:grid;grid-template-columns:315px minmax(800px,1fr);gap:20px;align-items:start;overflow-x:auto}.preview{min-width:0}.preview-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.preview-label strong{font-size:14px}.preview-label button{background:#fff;border:1px solid #555;padding:6px 10px;min-height:40px}.frame-clip{overflow:hidden;border:1px solid #777;background:#fff;width:100%;position:relative}.frame-clip iframe{border:0;display:block;transform-origin:top left;background:#fff}.questions{background:#f7f7f7;border:1px solid #888;padding:28px;margin:36px 0}.questions h2{margin-top:0}.questions li{margin:10px 0}.modal{position:fixed;inset:0;z-index:50;background:#222;display:none;flex-direction:column}.modal.open{display:flex}.modal-bar{background:#f7f7f7;padding:8px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}.modal-bar button{min-height:44px;padding:7px 16px;border:1px solid #555;background:#fff}.modal-scroll{overflow:auto;flex:1;text-align:center}.modal iframe{display:block;border:0;margin:0 auto;background:#fff}.solo{background:#fff}.solo #review{display:none}@media(max-width:1250px){.previews{grid-template-columns:315px 900px}}@media(max-width:600px){.review-head{position:static;display:block}.review-actions{margin-top:12px}.review-main{padding:16px}.screen-row{padding:12px}.row-title{display:block}}
-</style>
-<style id="prototype-style">
-:root{--bg:#fff;--panel:#f4f4f4;--panel2:#e9e9e9;--ink:#171717;--muted:#484848;--line:#999;--strong:#292929;--inverse:#fff}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif}body.dark{--bg:#171717;--panel:#252525;--panel2:#303030;--ink:#f5f5f5;--muted:#d2d2d2;--line:#888;--strong:#eee;--inverse:#171717}button,input,select,textarea{font:inherit}a{color:inherit;text-decoration:none}button{cursor:pointer;color:inherit}.site-shell{min-height:100vh}.container{width:min(100% - 64px,1160px);margin:auto}.site-header{border-bottom:1px solid var(--line);background:var(--bg)}.header-inner{width:min(100% - 64px,1160px);margin:auto;min-height:76px;display:flex;align-items:center;gap:24px}.wordmark{font-size:15px;font-weight:750;letter-spacing:.06em;white-space:nowrap}.brand-note{display:block;font-size:10px;font-weight:400;letter-spacing:.02em;color:var(--muted)}.desktop-nav{display:flex;gap:22px;margin-left:auto;font-size:13px}.desktop-nav a{padding:14px 0}.header-tools{display:flex;gap:8px;align-items:center}.lang{display:flex;gap:2px;border:1px solid var(--line);padding:2px}.lang button,.theme-btn,.menu-btn{border:0;background:transparent;min-width:38px;min-height:40px;font-size:12px}.lang button[aria-pressed=true]{background:var(--strong);color:var(--inverse);font-weight:700}.theme-btn{border:1px solid var(--line);padding:0 10px;white-space:nowrap}.menu-btn{display:none;border:1px solid var(--line);font-size:13px}.mobile-menu{display:none;border-bottom:1px solid var(--line);background:var(--bg);padding:12px 24px}.mobile-menu.open{display:grid;gap:3px}.mobile-menu a{min-height:48px;display:flex;align-items:center;border-bottom:1px solid var(--line)}.mobile-menu .menu-note{font-size:12px;color:var(--muted);padding:12px 0}.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted)}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(36px,5vw,62px);line-height:1.09;letter-spacing:-.035em;max-width:880px;margin-bottom:22px}h2{font-size:clamp(27px,3vw,40px);line-height:1.13;letter-spacing:-.025em;margin-bottom:14px}h3{font-size:20px;line-height:1.25;margin-bottom:10px}.lead{font-size:19px;max-width:720px;color:var(--muted)}.small{font-size:13px;color:var(--muted)}.section{padding:78px 0;border-bottom:1px solid var(--line)}.section.compact{padding:54px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:30px}.section-head p{max-width:540px;color:var(--muted);margin-bottom:0}.hero{padding:82px 0 74px}.hero-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr);gap:72px;align-items:center}.hero-aside{border:1px solid var(--line);padding:24px;background:var(--panel)}.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:48px}.stat{border-top:1px solid var(--strong);padding-top:14px}.stat strong{display:block;font-size:28px;line-height:1.15}.stat span{display:block;font-size:12px;color:var(--muted);margin-top:4px}.button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}.btn{border:1px solid var(--strong);background:var(--strong);color:var(--inverse);min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding:10px 18px;font-weight:650;text-align:center}.btn.secondary{background:transparent;color:var(--ink)}.btn.quiet{border-color:var(--line);background:var(--panel);color:var(--ink)}.btn.full{width:100%}.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.card{border:1px solid var(--line);padding:24px;background:var(--bg)}.card.muted{background:var(--panel)}.card p:last-child{margin-bottom:0}.card a.text-link,.text-link{text-decoration:underline;text-underline-offset:3px;font-weight:650}.photo{height:225px;border:1px solid var(--line);background:var(--panel2);display:grid;place-items:center;color:var(--muted);font-size:13px}.photo.tall{height:320px}.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0}.step{padding:20px;border-top:1px solid var(--strong);border-right:1px solid var(--line)}.step:last-child{border-right:0}.step-number{font-size:12px;color:var(--muted);display:block;margin-bottom:18px}.trust-list{display:grid;gap:12px}.trust-item{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding:14px 0}.trust-item span:last-child{color:var(--muted);text-align:right}.contact-band{background:var(--panel);border:1px solid var(--line);padding:32px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:25px}.site-footer{padding:52px 0 32px;background:var(--panel);border-top:1px solid var(--line)}.footer-grid{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:25px}.footer-grid h3{font-size:15px}.footer-grid a{display:block;font-size:13px;padding:6px 0}.footer-bottom{margin-top:38px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between}.bottom-nav{display:none}.page-intro{padding:62px 0 38px;border-bottom:1px solid var(--line)}.page-intro h1{margin-bottom:16px}.breadcrumbs{font-size:12px;color:var(--muted);margin-bottom:32px}.filter-bar{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:12px;padding:22px;border:1px solid var(--line);background:var(--panel);margin-bottom:25px}.field label{display:block;font-size:12px;font-weight:650;margin-bottom:7px}.field select,.field input,.field textarea{display:block;width:100%;min-height:46px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:10px}.field textarea{min-height:96px}.filter-count{font-size:13px;color:var(--muted);margin-bottom:18px}.tag{display:inline-block;border:1px solid var(--line);padding:3px 7px;font-size:11px;font-weight:700;letter-spacing:.02em}.lead-card{border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:13px}.lead-card h3{font-size:20px;margin:0}.lead-card dl{display:grid;grid-template-columns:1fr 1.4fr;gap:7px 12px;font-size:13px;margin:0}.lead-card dt{color:var(--muted)}.lead-card dd{margin:0;font-weight:600}.lead-card .status{font-size:12px;border-top:1px solid var(--line);padding-top:10px}.lead-card .btn{margin-top:auto}.teaser-layout{display:grid;grid-template-columns:1fr 320px;gap:48px}.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.fact{border-top:1px solid var(--line);padding-top:12px}.fact span{display:block;font-size:12px;color:var(--muted)}.fact strong{display:block;margin-top:4px;font-size:18px}.locked{border:1px dashed var(--line);background:var(--panel);padding:32px}.locked-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}.locked-list div{background:var(--panel2);padding:18px;font-size:13px}.sticky-box{border:1px solid var(--line);padding:22px;position:sticky;top:22px}.contact-primary{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wechat-note{padding:12px;border:1px solid var(--line);background:var(--panel);font-size:13px;margin:16px 0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-grid .wide{grid-column:1/-1}.form-result{display:none;border:1px solid var(--line);padding:12px;margin-top:12px;font-size:13px}.form-result.show{display:block}.disclaimer{font-size:13px;color:var(--muted);border-left:2px solid var(--line);padding-left:15px}.qr-placeholder{width:180px;height:180px;border:2px dashed var(--line);display:grid;place-items:center;text-align:center;font-size:13px;color:var(--muted);padding:15px;background:var(--panel)}.copy-line{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.copy-line code{border:1px solid var(--line);padding:10px;font:13px system-ui;background:var(--panel)}.copy-line button{min-height:44px;padding:8px 14px;border:1px solid var(--line);background:var(--bg)}.table-wrap{overflow:auto;border:1px solid var(--line)}table{border-collapse:collapse;width:100%;min-width:560px}th,td{text-align:left;padding:13px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--panel);font-size:12px}td{font-size:13px}.article-layout{display:grid;grid-template-columns:230px 1fr;gap:48px}.toc{border:1px solid var(--line);padding:18px;height:max-content;position:sticky;top:24px}.toc a{display:block;padding:7px 0;font-size:13px;text-decoration:underline;text-underline-offset:3px}.article-body{max-width:780px}.article-body h2{margin-top:52px}.article-body p{line-height:1.7}.article-body .note{padding:18px;background:var(--panel);border-left:2px solid var(--strong)}.mobile-only{display:none}.desktop-only{display:block}
-@media(max-width:700px){body{font-size:15px}.container{width:min(100% - 36px,560px)}.site-shell{padding-bottom:68px}.header-inner{width:100%;min-height:58px;padding:0 18px;gap:8px}.wordmark{font-size:12px}.brand-note{font-size:9px}.desktop-nav{display:none}.header-tools{margin-left:auto;gap:5px}.lang{gap:0}.lang button{min-width:31px;min-height:40px;font-size:10px;padding:0 3px}.theme-btn{font-size:11px;min-width:42px;padding:0 5px}.menu-btn{display:block;min-width:44px}.mobile-menu{display:none}.mobile-menu.open{display:grid}.hero{padding:45px 0 46px}.hero-grid,.split,.teaser-layout,.article-layout{display:block}.hero-aside{margin-top:30px}.hero h1,h1{font-size:36px;line-height:1.12}.lead{font-size:16px}.section{padding:54px 0}.section.compact{padding:42px 0}.section-head{display:block;margin-bottom:20px}.section-head p{margin-top:8px}.section-head .btn{margin-top:15px}.stat-grid{grid-template-columns:1fr 1fr;gap:22px 12px;margin-top:32px}.stat strong{font-size:23px}.button-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.button-row .btn{padding:10px 5px;font-size:13px}.grid-2,.grid-3,.grid-4,.facts,.locked-list,.footer-grid{grid-template-columns:1fr}.grid-2,.grid-3,.grid-4{display:grid;gap:12px}.card{padding:20px}.photo,.photo.tall{height:190px;margin-bottom:20px}.steps{display:block}.step{border-right:0;padding:18px 0}.step-number{margin-bottom:8px}.contact-band{display:block;padding:22px}.contact-band .button-row{margin-top:18px}.site-footer{padding:38px 0 22px}.footer-grid{display:grid;gap:18px}.footer-grid>div{border-bottom:1px solid var(--line);padding-bottom:12px}.footer-bottom{display:block;margin-top:20px}.bottom-nav{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;bottom:0;left:0;right:0;z-index:10;background:var(--bg);border-top:1px solid var(--line);height:68px}.bottom-nav a{min-height:54px;display:flex;justify-content:center;align-items:center;text-align:center;font-size:11px;padding:4px;border-right:1px solid var(--line)}.bottom-nav a:last-child{border-right:0}.bottom-nav a.active{font-weight:750;background:var(--panel)}.page-intro{padding:34px 0 26px}.breadcrumbs{margin-bottom:22px}.filter-bar{display:grid;grid-template-columns:1fr;gap:12px;padding:16px}.lead-card{padding:18px}.teaser-layout .sticky-box{position:static;margin-top:20px}.contact-primary{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.form-grid .wide{grid-column:auto}.qr-placeholder{width:160px;height:160px}.mobile-only{display:block}.desktop-only{display:none}.toc{position:static;margin-bottom:26px}.article-body h2{margin-top:36px}}
-</style>
-</head>
-<body>
-<div id="review"><header class="review-head"><div><h1>02 — Схемы ключевых экранов</h1><p>Структура и порядок блоков · серые wireframes · черновые тексты</p></div><div class="review-actions"><button id="theme-all">Тёмная тема</button><select id="jump"><option value="">Перейти к экрану</option></select></div></header><main class="review-main"><div class="intro"><h2>Сайт ведёт к разговору</h2><p>Китайский посетитель видит WeChat первым; WhatsApp и форма остаются альтернативами. Детальные данные участка раскрываются после знакомства и NDA.</p><p class="small">Мобильная колонка — исходные 375 px, десктоп — исходные 1440 px. «Открыть 1:1» показывает полный экран. Для PNG: открыть этот файл с параметрами <code>?screen=home&amp;view=mobile</code> или вызвать <code>window.openWireframe('home','mobile')</code>. Все значения с пометкой «заглушка» — пример структуры, не данные компании.</p></div><div id="rows"></div><section class="questions"><h2>Вопросы владельцу</h2><ol><li>Подходит ли порядок блоков на главной: доверие и портфель до подробного процесса, затем команда, проверка, гайды, контакты?</li><li>Что убрать или добавить на тизере участка? Достаточно ли открытых параметров до блока «после NDA»?</li><li>Устраивает ли мобильная нижняя панель: Главная / Участки / Услуги / Связаться?</li></ol><p>Порядок сделан вокруг первого контакта: сначала масштаб и доступные параметры, затем простой путь в WeChat; юридические детали и форматы сделки идут после основного действия.</p></section></main></div>
-<div id="modal" class="modal"><div class="modal-bar"><strong id="modal-title"></strong><div><button id="modal-theme">Сменить тему</button> <button id="modal-close">Закрыть</button></div></div><div class="modal-scroll"><iframe id="modal-frame" title="Просмотр 1:1"></iframe></div></div>
-<script>
-const screens=[['home','01. Главная','Маршрут: доверие → портфель → общение'],['portfolio','02. Портфель','Фильтры и закрытые тизеры'],['teaser','03. Тизер участка','Контакт до форматов сделки'],['contact','04. Контакты','WeChat, WhatsApp, email, форма'],['services','05. Услуги','Компетенции и процесс'],['about','06. О компании','Команда и проверка'],['guide','07. Статья-гайд','Оглавление, таблица, CTA'],['metal','08. Страница металла','Факт, таблица, контекст, CTA']];
-const names={home:'Главная',portfolio:'Участки',teaser:'Тизер участка',contact:'Контакты',services:'Услуги',about:'О компании',guide:'Статья-гайд',metal:'Медь в Казахстане'};
-const href=(s)=>'?screen='+s+'&view='+((window.innerWidth<700)?'mobile':'desktop');
-const btn=(label,style='',link='#contact-cta')=>`<a class="btn ${style}" href="${link}">${label}</a>`;
-const section=(id,title,body,lead='')=>`<section class="section" id="${id}"><div class="container"><div class="section-head"><div><div class="eyebrow">${id.replaceAll('-',' ')}</div><h2>${title}</h2></div>${lead?`<p>${lead}</p>`:''}</div>${body}</div></section>`;
-const photo=(text='фото будет')=>`<div class="photo" role="img" aria-label="${text}">${text}</div>`;
-const contactBand=()=>`<div class="contact-band" id="contact-cta"><div><div class="eyebrow">Следующий шаг</div><h2>Обсудим подходящий участок</h2><p>Напишите в WeChat или WhatsApp. Уточним запрос и предложим подходящие тизеры.</p><p class="small" lang="zh-CN">微信联系：请注明关注的地块编号。WhatsApp 也可联系。</p></div><div class="button-row">${btn('Написать в WeChat','','?screen=contact&view=mobile')}${btn('WhatsApp','secondary','?screen=contact&view=mobile')}</div></div>`;
-const disclaimer=()=>`<p class="disclaimer">Представленные материалы — предварительный информационный тизер. Участок не заявлен как собственность QAZNEDR HOLDING. Доступность и условия лицензирования требуют повторной официальной проверки и юридического оформления под конкретную сделку. Прогнозные данные не являются подтверждёнными запасами.</p>`;
-function header(active){return `<div class="site-shell"><header class="site-header"><div class="header-inner"><a class="wordmark" href="?screen=home&view=mobile">QAZNEDR HOLDING<span class="brand-note">текстовый маркер · логотип будет позже</span></a><nav class="desktop-nav" aria-label="Основное меню"><a href="?screen=home&view=desktop">Главная</a><a href="?screen=portfolio&view=desktop">Участки</a><a href="?screen=services&view=desktop">Услуги</a><a href="?screen=about&view=desktop">О компании</a><a href="?screen=guide&view=desktop">Гайды</a><a href="?screen=contact&view=desktop">Контакты</a></nav><div class="header-tools"><div class="lang" aria-label="Язык"><button type="button" data-lang="ru" aria-pressed="true">RU</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="zh" aria-pressed="false">中文</button><button type="button" data-lang="kz" aria-pressed="false">KZ</button></div><button type="button" class="theme-btn" id="theme-btn" aria-label="Переключить тему">Тема</button><button type="button" class="menu-btn" id="menu-btn" aria-expanded="false">Меню</button></div></div></header><nav class="mobile-menu" id="mobile-menu" aria-label="Мобильное меню"><a href="?screen=home&view=mobile">Главная</a><a href="?screen=portfolio&view=mobile">Участки</a><a href="?screen=services&view=mobile">Услуги</a><a href="?screen=about&view=mobile">О компании</a><a href="?screen=guide&view=mobile">Гайды</a><a href="?screen=contact&view=mobile">Контакты</a><div class="menu-note">RU / EN / 中文 / KZ · язык выбирается в шапке</div></nav><main>`}
-function footer(active){return `</main><footer class="site-footer"><div class="container"><div class="footer-grid"><div><strong>QAZNEDR HOLDING</strong><p class="small">Казахстанская геологоразведочная компания. Геологи изучают фондовые материалы и работают в поле.</p><p class="small">ТОО · БИН: [заглушка — подтвердить]</p></div><div><h3>Разделы</h3><a href="?screen=portfolio&view=mobile">Участки</a><a href="?screen=services&view=mobile">Услуги</a><a href="?screen=about&view=mobile">О компании</a></div><div><h3>Материалы</h3><a href="?screen=guide&view=mobile">Гайды</a><a href="?screen=metal&view=mobile">Медь в Казахстане</a><a href="?screen=about&view=mobile#check">Как нас проверить</a></div><div><h3>Связь</h3><a href="?screen=contact&view=mobile">WeChat</a><a href="?screen=contact&view=mobile">WhatsApp</a><a href="?screen=contact&view=mobile">Email</a></div></div><div class="footer-bottom"><span>© QAZNEDR HOLDING · схема, данные для публикации уточняются</span><span>RU / EN / 中文 / KZ</span></div></div></footer><nav class="bottom-nav" aria-label="Нижняя навигация"><a class="${active==='home'?'active':''}" href="?screen=home&view=mobile">Главная</a><a class="${active==='portfolio'||active==='teaser'?'active':''}" href="?screen=portfolio&view=mobile">Участки</a><a class="${active==='services'?'active':''}" href="?screen=services&view=mobile">Услуги</a><a class="${active==='contact'?'active':''}" href="?screen=contact&view=mobile">Связаться</a></nav></div>`}
-const formats=()=>`<div class="grid-4"><div class="card"><h3>Лицензия на инвестора</h3><p>Сопровождение получения лицензии под согласованную сделку.</p></div><div class="card"><h3>Лицензия на холдинг</h3><p>Возможный формат с последующей продажей; условия обсуждаются индивидуально.</p></div><div class="card"><h3>СП или earn-in</h3><p>Партнёрская структура и этапы участия обсуждаются после знакомства.</p></div><div class="card"><h3>Аналитика</h3><p>Подбор и оценка материалов под инвестиционные критерии.</p></div></div>`;
-const steps=()=>`<div class="steps"><div class="step"><span class="step-number">01</span><h3>Запрос</h3><p>Вы сообщаете металл, масштаб и инвестиционный фокус.</p></div><div class="step"><span class="step-number">02</span><h3>NDA</h3><p>Согласуем конфиденциальность для доступа к деталям.</p></div><div class="step"><span class="step-number">03</span><h3>Встреча</h3><p>Геологи разберут данные и варианты сделки.</p></div><div class="step"><span class="step-number">04</span><h3>Выезд</h3><p>При согласовании организуем осмотр участка.</p></div></div>`;
-const cardData=[['DEMO-01','Медь','Регион: заглушка','Рудное: заглушка','0,6–1,2% · среднее — заглушка','copper'],['DEMO-02','Золото','Регион: заглушка','Рудное: заглушка','1,4–3,0 г/т · спайк — заглушка','gold'],['DEMO-03','Цинк','Регион: заглушка','Тип: заглушка','0,8–1,6% · среднее — заглушка','zinc'],['DEMO-04','Медь','Регион: заглушка','Тип: заглушка','0,9–2,1% · спайк — заглушка','copper']];
-function leadCard(c){return `<article class="lead-card" data-metal="${c[5]}" data-region="placeholder" data-type="placeholder"><span class="tag">Закрытый тизер</span><div><div class="eyebrow">Код: ${c[0]} · заглушка</div><h3>${c[1]}</h3></div><dl><dt>Регион</dt><dd>${c[2]}</dd><dt>Тип</dt><dd>${c[3]}</dd><dt>Содержание</dt><dd>${c[4]}</dd></dl><div class="status">Свободен по нашей проверке на [дата — заглушка]. Статус требует повторной проверки.</div><a class="btn secondary" href="?screen=teaser&view=mobile">Смотреть тизер</a></article>`}
-function home(){return `<section class="hero"><div class="container"><div class="hero-grid"><div><div class="eyebrow">Геология Казахстана · работа с инвесторами</div><h1 data-copy="hero">Подготовленные участки для инвестиционного диалога</h1><p class="lead" data-copy="heroLead">Наши геологи изучают фондовые отчёты, отбирают перспективные свободные участки и сопровождают подготовку сделки.</p><div class="button-row">${btn('Связаться в WeChat','','?screen=contact&view=mobile')}${btn('WhatsApp','secondary','?screen=contact&view=mobile')}</div></div><div class="hero-aside"><div class="eyebrow">Первый контакт</div><h3>Кратко о вашем запросе</h3><p>Металл, критерии и удобный язык общения. Ответим через переводчика при необходимости.</p><p class="small" lang="zh-CN">欢迎通过微信联系，说明您关注的矿种。</p><a class="text-link" href="?screen=contact&view=mobile">Открыть контакты</a></div></div><div class="stat-grid"><div class="stat"><strong>7 000+</strong><span>рудных объектов в базе наших геологов</span></div><div class="stat"><strong>20–40</strong><span>цель для витрины тизеров · план, не факт</span></div><div class="stat"><strong>4</strong><span>обсуждаемых формата сотрудничества</span></div><div class="stat"><strong>2</strong><span>основных канала связи: WeChat и WhatsApp</span></div></div></div></section>${section('portfolio-preview','Портфель по металлам',`<div class="grid-4"><div class="card muted"><h3>Медь</h3><p>Тизеры с открытыми параметрами и детальным пакетом после NDA.</p><a class="text-link" href="?screen=metal&view=mobile">Смотреть медь</a></div><div class="card muted"><h3>Золото</h3><p>Отобранные геологами направления для первичного обсуждения.</p><a class="text-link" href="?screen=portfolio&view=mobile">Смотреть участки</a></div><div class="card muted"><h3>Свинец и цинк</h3><p>Архивная основа и проверки по каждому конкретному случаю.</p><a class="text-link" href="?screen=portfolio&view=mobile">Смотреть участки</a></div><div class="card muted"><h3>Другие металлы</h3><p>Молибден, вольфрам, железо, олово и никель.</p><a class="text-link" href="?screen=portfolio&view=mobile">Смотреть участки</a></div></div><div class="button-row">${btn('Все тизеры','secondary','?screen=portfolio&view=mobile')}</div>`,'Открытая витрина для знакомства. Координаты и документы доступны после NDA.')}${section('formats','Форматы сотрудничества',formats(),'Структуру сделки определяем вместе с инвестором после изучения запроса.')}${section('how','Как мы работаем',steps(),'От первого сообщения до предметного изучения участка.')}${section('team','Геологи и полевые работы',`<div class="split">${photo('фото команды будет')}<div><h3>Архивные материалы и выездная экспертиза</h3><p>Наши геологи ведут базу по советским фондовым отчётам, проверяют материалы и могут выезжать в поле.</p><p>Имена, фотографии и подтверждённые биографии добавляются после согласования с командой.</p><a class="text-link" href="?screen=about&view=mobile">О компании</a></div></div>`)}${section('trust','Как нас проверить',`<div class="split"><div><h3>Проверяемая компания</h3><p>Покажем юридические данные, контакты и последовательность проверки в открытых реестрах.</p><a class="text-link" href="?screen=about&view=mobile#check">Порядок проверки</a></div><div class="trust-list"><div class="trust-item"><strong>ТОО</strong><span>наименование подтверждается</span></div><div class="trust-item"><strong>БИН</strong><span>[заглушка — подтвердить]</span></div><div class="trust-item"><strong>Реестры</strong><span>ссылки добавятся после проверки</span></div></div></div>`)}${section('guides','Гайды для инвестора',`<div class="grid-3"><div class="card"><div class="eyebrow">Гайд</div><h3>Как работает лицензирование ТПИ</h3><p>Этапы, документы и вопросы для первой встречи.</p><a class="text-link" href="?screen=guide&view=mobile">Читать</a></div><div class="card"><div class="eyebrow">Металл</div><h3>Медь в Казахстане</h3><p>Контекст и доступные тизеры в одном месте.</p><a class="text-link" href="?screen=metal&view=mobile">Читать</a></div><div class="card"><div class="eyebrow">Гайд</div><h3>Что открывается после NDA</h3><p>Состав материалов для предметного рассмотрения.</p><a class="text-link" href="?screen=guide&view=mobile">Читать</a></div></div>`)}${section('contact','Контакты',contactBand())}`}
-function portfolio(){return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Участки</div><div class="eyebrow">Портфель · закрытые тизеры</div><h1>Участки для предметного обсуждения</h1><p class="lead">Первичные параметры открыты. Точные материалы и документы предоставляются после знакомства и NDA.</p></div></div><section class="section"><div class="container"><div class="filter-bar"><div class="field"><label for="metal-filter">Металл</label><select id="metal-filter"><option value="all">Все металлы</option><option value="copper">Медь</option><option value="gold">Золото</option><option value="zinc">Цинк</option></select></div><div class="field"><label for="region-filter">Регион</label><select id="region-filter"><option value="all">Все регионы</option><option value="placeholder">Регион — заглушка</option></select></div><div class="field"><label for="type-filter">Тип месторождения</label><select id="type-filter"><option value="all">Все типы</option><option value="placeholder">Тип — заглушка</option></select></div><button class="btn secondary" id="reset-filters" type="button">Сбросить</button></div><p class="filter-count" id="filter-count">Показано 4 демонстрационных карточки · все данные заглушки</p><div class="grid-2" id="lead-grid">${cardData.map(leadCard).join('')}</div><p class="small" style="margin-top:22px">Это примеры карточек для утверждения структуры. Публичный портфель будет наполняться только проверенными данными.</p></div></section>${section('contact','Не нашли нужный металл?',contactBand())}`}
-function teaser(){return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Участки / DEMO-01</div><span class="tag">Закрытый тизер</span><h1 style="margin-top:18px">Медный участок · DEMO-01</h1><p class="lead">Подготовленный участок: геология изучена по архивным данным; вариант оформления лицензии обсуждается под сделку.</p><p class="small">Код и все параметры ниже — демонстрационные заглушки.</p></div></div><section class="section compact"><div class="container"><div class="teaser-layout"><div><div class="eyebrow">Открытые параметры</div><h2>Что известно на первом этапе</h2><div class="facts"><div class="fact"><span>Код</span><strong>DEMO-01 · заглушка</strong></div><div class="fact"><span>Металл / 矿种</span><strong>Медь</strong></div><div class="fact"><span>Регион / 位置</span><strong>[заглушка]</strong></div><div class="fact"><span>Площадь / 面积</span><strong>[заглушка]</strong></div><div class="fact"><span>Тип / 许可类型</span><strong>[заглушка]</strong></div><div class="fact"><span>Содержание</span><strong>0,6–1,2% · среднее, заглушка</strong></div></div><p class="small" style="margin-top:18px">Свободен по нашей проверке на [дата — заглушка]. Перед сделкой статус проверяется повторно.</p></div><aside class="sticky-box desktop-only"><strong>Обсудить DEMO-01</strong><p class="small">WeChat — приоритетный канал для китайского инвестора.</p><div class="contact-primary">${btn('WeChat','','#teaser-contact')}${btn('WhatsApp','secondary','#teaser-contact')}</div><p class="small" lang="zh-CN">微信联系，请注明地块编号 DEMO-01</p></aside></div></div></section>${section('after-nda','Подробности после NDA',`<div class="locked"><h3>Закрытый пакет материалов</h3><p>После знакомства и соглашения о конфиденциальности обсудим фондовые отчёты, координаты, уточнённую геологию и возможную структуру сделки.</p><div class="locked-list"><div>Координаты · после NDA</div><div>Отчёты · после NDA</div><div>Условия · на встрече</div></div></div>`)}${section('teaser-contact','Обсудить участок',`<div class="split"><div><h3>Начните в удобном мессенджере</h3><p>Укажите код участка DEMO-01. Китайский контактный сценарий показан ниже.</p><div class="button-row">${btn('WeChat — написать','','?screen=contact&view=mobile')}${btn('WhatsApp','secondary','?screen=contact&view=mobile')}</div><div class="wechat-note" lang="zh-CN"><strong>联系讨论地块 DEMO-01</strong><br>请通过微信添加我们，并注明地块编号。价格面议；详细资料在保密协议后提供。</div></div><div class="card muted"><h3>Если мессенджер неудобен</h3>${inquiryForm('teaser')}</div></div>`,'Сначала WeChat, затем WhatsApp; форма остаётся запасным способом связи.')}${section('deal-formats','Возможные форматы сделки',formats(),'Выбор формата зависит от проверки статуса и переговоров.')}${section('legal','Юридическая оговорка',disclaimer())}`}
-function inquiryForm(id){return `<form class="demo-form" data-form="${id}"><div class="form-grid"><div class="field"><label>Имя</label><input required placeholder="Как к вам обращаться"></div><div class="field"><label>Email или мессенджер</label><input required placeholder="Контакт для ответа"></div><div class="field wide"><label>Сообщение</label><textarea placeholder="Металл, код участка или вопрос"></textarea></div></div><button class="btn full" type="submit" style="margin-top:14px">Отправить запрос</button><div class="form-result" role="status">Демо-прототип: запрос показан, но не отправлен. На рабочем сайте появится подтверждение отправки.</div></form>`}
-function contact(){return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Контакты</div><h1>Связаться с нами</h1><p class="lead">Напишите, какой металл и формат сотрудничества вас интересует. Для китайских инвесторов удобнее WeChat.</p></div></div>${section('wechat','WeChat — основной канал',`<div class="split"><div><h3 lang="zh-CN">添加微信，注明地块编号</h3><p lang="zh-CN">欢迎用中文发送您的关注矿种、地块编号和合作意向。详细资料在保密协议后提供。</p><p>Добавьте контакт и укажите код участка. Общение при необходимости идёт через переводчика.</p><div class="copy-line"><code>WeChat ID: [заглушка]</code><button type="button" id="copy-wechat">复制 / Копировать</button></div><p class="small" id="copy-status">Реальный ID будет добавлен после подтверждения владельцем.</p></div><div class="qr-placeholder">QR будет<br>Нейтральная заглушка<br>Не сканируется</div></div>`)}${section('other-channels','Другие каналы',`<div class="grid-2"><div class="card"><h3>WhatsApp</h3><p>Для запроса по участку укажите его код и удобный язык общения.</p><button type="button" class="btn secondary" data-demo-contact="WhatsApp">Открыть WhatsApp</button><p class="small">Номер — заглушка до подтверждения.</p></div><div class="card"><h3>Email</h3><p>Для письма с запросом и документами.</p><button type="button" class="btn secondary" data-demo-contact="Email">Написать email</button><p class="small">Адрес — заглушка до подтверждения.</p></div></div><p class="form-result" id="channel-result" role="status">Контактные данные пока не подтверждены; переход в мессенджер отключён в демо.</p>`)}${section('contact-form','Оставить короткий запрос',`<div style="max-width:680px">${inquiryForm('contact')}</div>`)}${section('before-call','Что указать в первом сообщении',`<div class="grid-3"><div class="card muted"><h3>Металл</h3><p>Например, медь или золото.</p></div><div class="card muted"><h3>Критерии</h3><p>Масштаб, регион, стадия изучения.</p></div><div class="card muted"><h3>Участок</h3><p>Код тизера, если вы его уже выбрали.</p></div></div>`)}`}
-function services(){return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Услуги</div><h1>Геологическая экспертиза и сопровождение сделки</h1><p class="lead">Наши геологи изучают фондовые материалы и выезжают в поле. Формат работы зависит от цели инвестора.</p></div></div>${section('service-grid','Направления работы',`<div class="grid-2"><div class="card"><div class="eyebrow">01</div><h3>Лицензирование</h3><p>Консультация и сопровождение оформления лицензии на разведку под согласованную структуру сделки.</p><a class="text-link" href="?screen=contact&view=mobile">Обсудить задачу</a></div><div class="card"><div class="eyebrow">02</div><h3>Геологоразведка и полевые работы</h3><p>Проверка архивной основы, программа работ и выезд геологов на участок.</p><a class="text-link" href="?screen=contact&view=mobile">Обсудить задачу</a></div><div class="card"><div class="eyebrow">03</div><h3>Due diligence</h3><p>Разбор исходных материалов, рисков и вопросов для независимой юридической и технической проверки.</p><a class="text-link" href="?screen=contact&view=mobile">Обсудить задачу</a></div><div class="card"><div class="eyebrow">04</div><h3>Аналитика</h3><p>Подбор перспективных направлений по заданным инвестором критериям.</p><a class="text-link" href="?screen=contact&view=mobile">Обсудить задачу</a></div></div>`)}${section('service-process','Как начинается работа',steps())}${section('service-team','Работа геологов',`<div class="split">${photo('фото полевых работ будет')}<div><h3>От отчёта к полевой проверке</h3><p>Архивный материал становится основой для вопросов, проверки статуса и программы следующих действий.</p><p>Объём полевых работ согласуем после изучения задачи.</p></div></div>`)}${section('service-cta','Обсудить задачу',contactBand())}`}
-function about(){return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / О компании</div><h1>QAZNEDR HOLDING</h1><p class="lead">Казахстанская геологоразведочная компания. Основа нашей работы — труд геологов, архивные отчёты и проверка перспективных направлений.</p></div></div>${section('history','Как устроена наша работа',`<div class="split"><div><p>Геологи ведут базу по советским фондовым отчётам: более 7 000 рудных объектов. На её основе отбираются перспективные свободные участки для последующей проверки и подготовки сделки.</p><p>Мы сопровождаем разговор инвестора с момента запроса до обсуждения лицензии, партнёрства и полевого осмотра.</p></div>${photo('фото архива или команды будет')}</div>`)}${section('geologists','Команда геологов',`<div class="grid-3"><div class="card">${photo('портрет будет')}<h3>Геолог · имя позже</h3><p>Биография и специализация после согласования.</p></div><div class="card">${photo('портрет будет')}<h3>Геолог · имя позже</h3><p>Биография и специализация после согласования.</p></div><div class="card">${photo('полевая команда будет')}<h3>Полевые работы</h3><p>Состав и опыт команды подтвердим перед публикацией.</p></div></div>`)}${section('legal-details','Юридические сведения',`<div class="trust-list"><div class="trust-item"><strong>Юридическое лицо</strong><span>ТОО QAZNEDR HOLDING · подтвердить написание</span></div><div class="trust-item"><strong>БИН</strong><span>[заглушка — подтвердить]</span></div><div class="trust-item"><strong>Адрес</strong><span>[заглушка — подтвердить]</span></div><div class="trust-item"><strong>Контакт</strong><span>см. страницу контактов</span></div></div>`)}${section('check','Как нас проверить',`<div class="grid-3"><div class="card muted"><h3>1. Сверить БИН</h3><p>Проверить юрлицо по официальному государственному реестру.</p></div><div class="card muted"><h3>2. Запросить документы</h3><p>Попросить реквизиты и документы компании у нашего представителя.</p></div><div class="card muted"><h3>3. Встретиться с геологами</h3><p>Обсудить метод работы и конкретные материалы.</p></div></div><p class="small" style="margin-top:18px">Ссылки на реестры добавятся после проверки реквизитов.</p>`)}${section('about-contact','Начать знакомство',contactBand())}`}
-function guide(){return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Гайды / Лицензирование</div><div class="eyebrow">Гайд · черновой контент для схемы</div><h1>Как подготовиться к разговору о лицензии на разведку</h1><p class="lead">Короткий маршрут для инвестора: исходные данные, проверка статуса, NDA и обсуждение структуры сделки.</p><p class="small">Автор и дата публикации будут добавлены после редакционной проверки.</p></div></div><section class="section"><div class="container article-layout"><nav class="toc" aria-label="Оглавление"><strong>На этой странице</strong><a href="#guide-start">С чего начать</a><a href="#guide-docs">Что запросить</a><a href="#guide-table">Этапы</a><a href="#guide-risk">Что проверить</a><a href="#guide-end">Следующий шаг</a></nav><article class="article-body"><h2 id="guide-start">С чего начать</h2><p>До обсуждения лицензии полезно определить металл, стадию геологической изученности и предполагаемую роль инвестора. Эти вводные помогают сузить выбор участка и понять, какие материалы понадобятся.</p><div class="note">Этот гайд показывает структуру будущего материала. Юридические формулировки и факты пройдут отдельную проверку перед публикацией.</div><h2 id="guide-docs">Какие материалы запросить</h2><p>Для первого разговора достаточно открытых параметров тизера. Подробные фондовые отчёты, координаты и условия предоставляются после знакомства и NDA.</p><p>Проверка статуса участка проводится на конкретную дату и должна повторяться перед оформлением сделки.</p><h2 id="guide-table">Этапы обсуждения</h2><div class="table-wrap"><table><thead><tr><th>Этап</th><th>Что получает инвестор</th><th>Результат</th></tr></thead><tbody><tr><td>Первый запрос</td><td>Открытый тизер</td><td>Понимание интереса</td></tr><tr><td>NDA</td><td>Согласованный пакет материалов</td><td>Предметная оценка</td></tr><tr><td>Встреча</td><td>Обсуждение геологии и структуры сделки</td><td>План проверки</td></tr><tr><td>Выезд</td><td>Осмотр при согласовании</td><td>Решение о следующих шагах</td></tr></tbody></table></div><h2 id="guide-risk">Что проверить отдельно</h2><p>Юридический статус участка, доступность лицензирования, качество исходных данных и применимость выбранного формата сделки. Прогнозные данные нельзя представлять как подтверждённые запасы.</p><h2 id="guide-end">Следующий шаг</h2>${contactBand()}</article></div></section>`}
-function metal(){return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Металлы / Медь</div><div class="eyebrow">Хаб металла · черновой контент</div><h1>Медь в Казахстане</h1><p class="lead">Наши геологи изучают фондовые материалы по меди и отбирают направления для дальнейшей проверки. Ниже — структура будущей витрины, без реальных данных участков.</p></div></div>${section('metal-table','Тизеры по меди',`<div class="table-wrap"><table><thead><tr><th>Код</th><th>Регион</th><th>Тип</th><th>Содержание</th><th>Статус</th><th></th></tr></thead><tbody><tr><td>DEMO-01 · заглушка</td><td>[заглушка]</td><td>[заглушка]</td><td>0,6–1,2% · среднее, заглушка</td><td>Свободен по проверке на [дата — заглушка]</td><td><a class="text-link" href="?screen=teaser&view=mobile">Тизер</a></td></tr><tr><td>DEMO-04 · заглушка</td><td>[заглушка]</td><td>[заглушка]</td><td>0,9–2,1% · спайк, заглушка</td><td>Свободен по проверке на [дата — заглушка]</td><td><a class="text-link" href="?screen=teaser&view=mobile">Тизер</a></td></tr></tbody></table></div><p class="small" style="margin-top:16px">Все строки демонстрационные. Доступность участка требует повторной проверки.</p>`)}${section('metal-context','Контекст для инвестора',`<div class="split"><div><h3>От общего интереса к конкретному участку</h3><p>При оценке медного направления важны стадия изученности, качество архивных данных и программа дальнейших работ.</p><p>Мы помогаем сопоставить интерес инвестора с доступными материалами и обсудить путь к лицензии.</p><a class="text-link" href="?screen=guide&view=mobile">Гайд по первому разговору</a></div>${photo('фото керна или поля будет')}</div>`)}${section('metal-cta','Обсудить медное направление',contactBand())}`}
-const builders={home,portfolio,teaser,contact,services,about,guide,metal};
-const innerScript=String.raw`(function(){
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>02 — Схемы экранов | QAZNEDR HOLDING</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #e5e5e5;
+        color: #171717;
+        font:
+          15px/1.5 system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+      }
+      button,
+      a,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      .review-head {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: #f7f7f7;
+        border-bottom: 1px solid #888;
+        padding: 14px 24px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .review-head h1 {
+        font-size: 20px;
+        margin: 0;
+      }
+      .review-head p {
+        margin: 2px 0 0;
+        color: #444;
+        font-size: 13px;
+      }
+      .review-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .review-actions button,
+      .review-actions select {
+        min-height: 44px;
+        padding: 8px 13px;
+        border: 1px solid #555;
+        background: #fff;
+        color: #171717;
+      }
+      .review-main {
+        max-width: 1840px;
+        margin: auto;
+        padding: 30px 24px 80px;
+      }
+      .intro {
+        background: #f7f7f7;
+        border: 1px solid #aaa;
+        padding: 24px;
+        margin-bottom: 28px;
+      }
+      .intro h2 {
+        font-size: 24px;
+        margin: 0 0 8px;
+      }
+      .intro p {
+        margin: 4px 0;
+      }
+      .screen-row {
+        background: #f6f6f6;
+        border: 1px solid #aaa;
+        margin: 0 0 32px;
+        padding: 20px;
+      }
+      .row-title {
+        display: flex;
+        gap: 16px;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 16px;
+      }
+      .row-title h2 {
+        font-size: 22px;
+        margin: 0;
+      }
+      .row-title p {
+        margin: 0;
+        color: #555;
+      }
+      .previews {
+        display: grid;
+        grid-template-columns: 315px minmax(800px, 1fr);
+        gap: 20px;
+        align-items: start;
+        overflow-x: auto;
+      }
+      .preview {
+        min-width: 0;
+      }
+      .preview-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .preview-label strong {
+        font-size: 14px;
+      }
+      .preview-label button {
+        background: #fff;
+        border: 1px solid #555;
+        padding: 6px 10px;
+        min-height: 40px;
+      }
+      .frame-clip {
+        overflow: hidden;
+        border: 1px solid #777;
+        background: #fff;
+        width: 100%;
+        position: relative;
+      }
+      .frame-clip iframe {
+        border: 0;
+        display: block;
+        transform-origin: top left;
+        background: #fff;
+      }
+      .questions {
+        background: #f7f7f7;
+        border: 1px solid #888;
+        padding: 28px;
+        margin: 36px 0;
+      }
+      .questions h2 {
+        margin-top: 0;
+      }
+      .questions li {
+        margin: 10px 0;
+      }
+      .modal {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: #222;
+        display: none;
+        flex-direction: column;
+      }
+      .modal.open {
+        display: flex;
+      }
+      .modal-bar {
+        background: #f7f7f7;
+        padding: 8px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+      .modal-bar button {
+        min-height: 44px;
+        padding: 7px 16px;
+        border: 1px solid #555;
+        background: #fff;
+      }
+      .modal-scroll {
+        overflow: auto;
+        flex: 1;
+        text-align: center;
+      }
+      .modal iframe {
+        display: block;
+        border: 0;
+        margin: 0 auto;
+        background: #fff;
+      }
+      .solo {
+        background: #fff;
+      }
+      .solo #review {
+        display: none;
+      }
+      @media (max-width: 1250px) {
+        .previews {
+          grid-template-columns: 315px 900px;
+        }
+      }
+      @media (max-width: 600px) {
+        .review-head {
+          position: static;
+          display: block;
+        }
+        .review-actions {
+          margin-top: 12px;
+        }
+        .review-main {
+          padding: 16px;
+        }
+        .screen-row {
+          padding: 12px;
+        }
+        .row-title {
+          display: block;
+        }
+      }
+    </style>
+    <style id="prototype-style">
+      :root {
+        --bg: #fff;
+        --panel: #f4f4f4;
+        --panel2: #e9e9e9;
+        --ink: #171717;
+        --muted: #484848;
+        --line: #999;
+        --strong: #292929;
+        --inverse: #fff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          16px/1.5 system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          'PingFang SC',
+          'Hiragino Sans GB',
+          'Microsoft YaHei',
+          'Noto Sans CJK SC',
+          sans-serif;
+      }
+      body.dark {
+        --bg: #171717;
+        --panel: #252525;
+        --panel2: #303030;
+        --ink: #f5f5f5;
+        --muted: #d2d2d2;
+        --line: #888;
+        --strong: #eee;
+        --inverse: #171717;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        cursor: pointer;
+        color: inherit;
+      }
+      .site-shell {
+        min-height: 100vh;
+      }
+      .container {
+        width: min(100% - 64px, 1160px);
+        margin: auto;
+      }
+      .site-header {
+        border-bottom: 1px solid var(--line);
+        background: var(--bg);
+      }
+      .header-inner {
+        width: min(100% - 64px, 1160px);
+        margin: auto;
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .wordmark {
+        font-size: 15px;
+        font-weight: 750;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+      }
+      .brand-note {
+        display: block;
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        color: var(--muted);
+      }
+      .desktop-nav {
+        display: flex;
+        gap: 22px;
+        margin-left: auto;
+        font-size: 13px;
+      }
+      .desktop-nav a {
+        padding: 14px 0;
+      }
+      .header-tools {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .lang {
+        display: flex;
+        gap: 2px;
+        border: 1px solid var(--line);
+        padding: 2px;
+      }
+      .lang button,
+      .theme-btn,
+      .menu-btn {
+        border: 0;
+        background: transparent;
+        min-width: 38px;
+        min-height: 40px;
+        font-size: 12px;
+      }
+      .lang button[aria-pressed='true'] {
+        background: var(--strong);
+        color: var(--inverse);
+        font-weight: 700;
+      }
+      .theme-btn {
+        border: 1px solid var(--line);
+        padding: 0 10px;
+        white-space: nowrap;
+      }
+      .menu-btn {
+        display: none;
+        border: 1px solid var(--line);
+        font-size: 13px;
+      }
+      .mobile-menu {
+        display: none;
+        border-bottom: 1px solid var(--line);
+        background: var(--bg);
+        padding: 12px 24px;
+      }
+      .mobile-menu.open {
+        display: grid;
+        gap: 3px;
+      }
+      .mobile-menu a {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+      }
+      .mobile-menu .menu-note {
+        font-size: 12px;
+        color: var(--muted);
+        padding: 12px 0;
+      }
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--muted);
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+      h1 {
+        font-size: clamp(36px, 5vw, 62px);
+        line-height: 1.09;
+        letter-spacing: -0.035em;
+        max-width: 880px;
+        margin-bottom: 22px;
+      }
+      h2 {
+        font-size: clamp(27px, 3vw, 40px);
+        line-height: 1.13;
+        letter-spacing: -0.025em;
+        margin-bottom: 14px;
+      }
+      h3 {
+        font-size: 20px;
+        line-height: 1.25;
+        margin-bottom: 10px;
+      }
+      .lead {
+        font-size: 19px;
+        max-width: 720px;
+        color: var(--muted);
+      }
+      .small {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .section {
+        padding: 78px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .section.compact {
+        padding: 54px 0;
+      }
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 30px;
+      }
+      .section-head p {
+        max-width: 540px;
+        color: var(--muted);
+        margin-bottom: 0;
+      }
+      .hero {
+        padding: 82px 0 74px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+        gap: 72px;
+        align-items: center;
+      }
+      .hero-aside {
+        border: 1px solid var(--line);
+        padding: 24px;
+        background: var(--panel);
+      }
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 48px;
+      }
+      .stat {
+        border-top: 1px solid var(--strong);
+        padding-top: 14px;
+      }
+      .stat strong {
+        display: block;
+        font-size: 28px;
+        line-height: 1.15;
+      }
+      .stat span {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .button-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 26px;
+      }
+      .btn {
+        border: 1px solid var(--strong);
+        background: var(--strong);
+        color: var(--inverse);
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 18px;
+        font-weight: 650;
+        text-align: center;
+      }
+      .btn.secondary {
+        background: transparent;
+        color: var(--ink);
+      }
+      .btn.quiet {
+        border-color: var(--line);
+        background: var(--panel);
+        color: var(--ink);
+      }
+      .btn.full {
+        width: 100%;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        padding: 24px;
+        background: var(--bg);
+      }
+      .card.muted {
+        background: var(--panel);
+      }
+      .card p:last-child {
+        margin-bottom: 0;
+      }
+      .card a.text-link,
+      .text-link {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        font-weight: 650;
+      }
+      .photo {
+        height: 225px;
+        border: 1px solid var(--line);
+        background: var(--panel2);
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .photo.tall {
+        height: 320px;
+      }
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+      }
+      .step {
+        padding: 20px;
+        border-top: 1px solid var(--strong);
+        border-right: 1px solid var(--line);
+      }
+      .step:last-child {
+        border-right: 0;
+      }
+      .step-number {
+        font-size: 12px;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 18px;
+      }
+      .trust-list {
+        display: grid;
+        gap: 12px;
+      }
+      .trust-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        border-bottom: 1px solid var(--line);
+        padding: 14px 0;
+      }
+      .trust-item span:last-child {
+        color: var(--muted);
+        text-align: right;
+      }
+      .contact-band {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        padding: 32px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 25px;
+      }
+      .site-footer {
+        padding: 52px 0 32px;
+        background: var(--panel);
+        border-top: 1px solid var(--line);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr repeat(3, 1fr);
+        gap: 25px;
+      }
+      .footer-grid h3 {
+        font-size: 15px;
+      }
+      .footer-grid a {
+        display: block;
+        font-size: 13px;
+        padding: 6px 0;
+      }
+      .footer-bottom {
+        margin-top: 38px;
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        color: var(--muted);
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .bottom-nav {
+        display: none;
+      }
+      .page-intro {
+        padding: 62px 0 38px;
+        border-bottom: 1px solid var(--line);
+      }
+      .page-intro h1 {
+        margin-bottom: 16px;
+      }
+      .breadcrumbs {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 32px;
+      }
+      .filter-bar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr) auto;
+        gap: 12px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        margin-bottom: 25px;
+      }
+      .field label {
+        display: block;
+        font-size: 12px;
+        font-weight: 650;
+        margin-bottom: 7px;
+      }
+      .field select,
+      .field input,
+      .field textarea {
+        display: block;
+        width: 100%;
+        min-height: 46px;
+        border: 1px solid var(--line);
+        background: var(--bg);
+        color: var(--ink);
+        padding: 10px;
+      }
+      .field textarea {
+        min-height: 96px;
+      }
+      .filter-count {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 18px;
+      }
+      .tag {
+        display: inline-block;
+        border: 1px solid var(--line);
+        padding: 3px 7px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      .lead-card {
+        border: 1px solid var(--line);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+      }
+      .lead-card h3 {
+        font-size: 20px;
+        margin: 0;
+      }
+      .lead-card dl {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 7px 12px;
+        font-size: 13px;
+        margin: 0;
+      }
+      .lead-card dt {
+        color: var(--muted);
+      }
+      .lead-card dd {
+        margin: 0;
+        font-weight: 600;
+      }
+      .lead-card .status {
+        font-size: 12px;
+        border-top: 1px solid var(--line);
+        padding-top: 10px;
+      }
+      .lead-card .btn {
+        margin-top: auto;
+      }
+      .teaser-layout {
+        display: grid;
+        grid-template-columns: 1fr 320px;
+        gap: 48px;
+      }
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+      .fact {
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+      .fact span {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .fact strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 18px;
+      }
+      .locked {
+        border: 1px dashed var(--line);
+        background: var(--panel);
+        padding: 32px;
+      }
+      .locked-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 22px;
+      }
+      .locked-list div {
+        background: var(--panel2);
+        padding: 18px;
+        font-size: 13px;
+      }
+      .sticky-box {
+        border: 1px solid var(--line);
+        padding: 22px;
+        position: sticky;
+        top: 22px;
+      }
+      .contact-primary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .wechat-note {
+        padding: 12px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        font-size: 13px;
+        margin: 16px 0;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .form-grid .wide {
+        grid-column: 1/-1;
+      }
+      .form-result {
+        display: none;
+        border: 1px solid var(--line);
+        padding: 12px;
+        margin-top: 12px;
+        font-size: 13px;
+      }
+      .form-result.show {
+        display: block;
+      }
+      .disclaimer {
+        font-size: 13px;
+        color: var(--muted);
+        border-left: 2px solid var(--line);
+        padding-left: 15px;
+      }
+      .qr-placeholder {
+        width: 180px;
+        height: 180px;
+        border: 2px dashed var(--line);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font-size: 13px;
+        color: var(--muted);
+        padding: 15px;
+        background: var(--panel);
+      }
+      .copy-line {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .copy-line code {
+        border: 1px solid var(--line);
+        padding: 10px;
+        font: 13px system-ui;
+        background: var(--panel);
+      }
+      .copy-line button {
+        min-height: 44px;
+        padding: 8px 14px;
+        border: 1px solid var(--line);
+        background: var(--bg);
+      }
+      .table-wrap {
+        overflow: auto;
+        border: 1px solid var(--line);
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 560px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 13px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      th {
+        background: var(--panel);
+        font-size: 12px;
+      }
+      td {
+        font-size: 13px;
+      }
+      .article-layout {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+        gap: 48px;
+      }
+      .toc {
+        border: 1px solid var(--line);
+        padding: 18px;
+        height: max-content;
+        position: sticky;
+        top: 24px;
+      }
+      .toc a {
+        display: block;
+        padding: 7px 0;
+        font-size: 13px;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .article-body {
+        max-width: 780px;
+      }
+      .article-body h2 {
+        margin-top: 52px;
+      }
+      .article-body p {
+        line-height: 1.7;
+      }
+      .article-body .note {
+        padding: 18px;
+        background: var(--panel);
+        border-left: 2px solid var(--strong);
+      }
+      .mobile-only {
+        display: none;
+      }
+      .desktop-only {
+        display: block;
+      }
+      @media (max-width: 700px) {
+        body {
+          font-size: 15px;
+        }
+        .container {
+          width: min(100% - 36px, 560px);
+        }
+        .site-shell {
+          padding-bottom: 68px;
+        }
+        .header-inner {
+          width: 100%;
+          min-height: 58px;
+          padding: 0 18px;
+          gap: 8px;
+        }
+        .wordmark {
+          font-size: 12px;
+        }
+        .brand-note {
+          font-size: 9px;
+        }
+        .desktop-nav {
+          display: none;
+        }
+        .header-tools {
+          margin-left: auto;
+          gap: 5px;
+        }
+        .lang {
+          gap: 0;
+        }
+        .lang button {
+          min-width: 31px;
+          min-height: 40px;
+          font-size: 10px;
+          padding: 0 3px;
+        }
+        .theme-btn {
+          font-size: 11px;
+          min-width: 42px;
+          padding: 0 5px;
+        }
+        .menu-btn {
+          display: block;
+          min-width: 44px;
+        }
+        .mobile-menu {
+          display: none;
+        }
+        .mobile-menu.open {
+          display: grid;
+        }
+        .hero {
+          padding: 45px 0 46px;
+        }
+        .hero-grid,
+        .split,
+        .teaser-layout,
+        .article-layout {
+          display: block;
+        }
+        .hero-aside {
+          margin-top: 30px;
+        }
+        .hero h1,
+        h1 {
+          font-size: 36px;
+          line-height: 1.12;
+        }
+        .lead {
+          font-size: 16px;
+        }
+        .section {
+          padding: 54px 0;
+        }
+        .section.compact {
+          padding: 42px 0;
+        }
+        .section-head {
+          display: block;
+          margin-bottom: 20px;
+        }
+        .section-head p {
+          margin-top: 8px;
+        }
+        .section-head .btn {
+          margin-top: 15px;
+        }
+        .stat-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 22px 12px;
+          margin-top: 32px;
+        }
+        .stat strong {
+          font-size: 23px;
+        }
+        .button-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+        }
+        .button-row .btn {
+          padding: 10px 5px;
+          font-size: 13px;
+        }
+        .grid-2,
+        .grid-3,
+        .grid-4,
+        .facts,
+        .locked-list,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .grid-2,
+        .grid-3,
+        .grid-4 {
+          display: grid;
+          gap: 12px;
+        }
+        .card {
+          padding: 20px;
+        }
+        .photo,
+        .photo.tall {
+          height: 190px;
+          margin-bottom: 20px;
+        }
+        .steps {
+          display: block;
+        }
+        .step {
+          border-right: 0;
+          padding: 18px 0;
+        }
+        .step-number {
+          margin-bottom: 8px;
+        }
+        .contact-band {
+          display: block;
+          padding: 22px;
+        }
+        .contact-band .button-row {
+          margin-top: 18px;
+        }
+        .site-footer {
+          padding: 38px 0 22px;
+        }
+        .footer-grid {
+          display: grid;
+          gap: 18px;
+        }
+        .footer-grid > div {
+          border-bottom: 1px solid var(--line);
+          padding-bottom: 12px;
+        }
+        .footer-bottom {
+          display: block;
+          margin-top: 20px;
+        }
+        .bottom-nav {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 10;
+          background: var(--bg);
+          border-top: 1px solid var(--line);
+          height: 68px;
+        }
+        .bottom-nav a {
+          min-height: 54px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          font-size: 11px;
+          padding: 4px;
+          border-right: 1px solid var(--line);
+        }
+        .bottom-nav a:last-child {
+          border-right: 0;
+        }
+        .bottom-nav a.active {
+          font-weight: 750;
+          background: var(--panel);
+        }
+        .page-intro {
+          padding: 34px 0 26px;
+        }
+        .breadcrumbs {
+          margin-bottom: 22px;
+        }
+        .filter-bar {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 12px;
+          padding: 16px;
+        }
+        .lead-card {
+          padding: 18px;
+        }
+        .teaser-layout .sticky-box {
+          position: static;
+          margin-top: 20px;
+        }
+        .contact-primary {
+          grid-template-columns: 1fr;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .form-grid .wide {
+          grid-column: auto;
+        }
+        .qr-placeholder {
+          width: 160px;
+          height: 160px;
+        }
+        .mobile-only {
+          display: block;
+        }
+        .desktop-only {
+          display: none;
+        }
+        .toc {
+          position: static;
+          margin-bottom: 26px;
+        }
+        .article-body h2 {
+          margin-top: 36px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="review">
+      <header class="review-head">
+        <div>
+          <h1>02 — Схемы ключевых экранов</h1>
+          <p>Структура и порядок блоков · серые wireframes · черновые тексты</p>
+        </div>
+        <div class="review-actions">
+          <button id="theme-all">Тёмная тема</button
+          ><select id="jump">
+            <option value="">Перейти к экрану</option>
+          </select>
+        </div>
+      </header>
+      <main class="review-main">
+        <div class="intro">
+          <h2>Сайт ведёт к разговору</h2>
+          <p>
+            Китайский посетитель видит WeChat первым; WhatsApp и форма остаются
+            альтернативами. Детальные данные участка раскрываются после
+            знакомства и NDA.
+          </p>
+          <p class="small">
+            Мобильная колонка — исходные 375 px, десктоп — исходные 1440 px.
+            «Открыть 1:1» показывает полный экран. Для PNG: открыть этот файл с
+            параметрами <code>?screen=home&amp;view=mobile</code> или вызвать
+            <code>window.openWireframe('home','mobile')</code>. Все значения с
+            пометкой «заглушка» — пример структуры, не данные компании.
+          </p>
+        </div>
+        <div id="rows"></div>
+        <section class="questions">
+          <h2>Вопросы владельцу</h2>
+          <ol>
+            <li>
+              Подходит ли порядок блоков на главной: доверие и портфель до
+              подробного процесса, затем команда, проверка, гайды, контакты?
+            </li>
+            <li>
+              Что убрать или добавить на тизере участка? Достаточно ли открытых
+              параметров до блока «после NDA»?
+            </li>
+            <li>
+              Устраивает ли мобильная нижняя панель: Главная / Участки / Услуги
+              / Связаться?
+            </li>
+          </ol>
+          <p>
+            Порядок сделан вокруг первого контакта: сначала масштаб и доступные
+            параметры, затем простой путь в WeChat; юридические детали и форматы
+            сделки идут после основного действия.
+          </p>
+        </section>
+      </main>
+    </div>
+    <div id="modal" class="modal">
+      <div class="modal-bar">
+        <strong id="modal-title"></strong>
+        <div>
+          <button id="modal-theme">Сменить тему</button>
+          <button id="modal-close">Закрыть</button>
+        </div>
+      </div>
+      <div class="modal-scroll">
+        <iframe id="modal-frame" title="Просмотр 1:1"></iframe>
+      </div>
+    </div>
+    <script>
+      const screens = [
+        ['home', '01. Главная', 'Маршрут: доверие → портфель → общение'],
+        ['portfolio', '02. Портфель', 'Фильтры и закрытые тизеры'],
+        ['teaser', '03. Тизер участка', 'Контакт до форматов сделки'],
+        ['contact', '04. Контакты', 'WeChat, WhatsApp, email, форма'],
+        ['services', '05. Услуги', 'Компетенции и процесс'],
+        ['about', '06. О компании', 'Команда и проверка'],
+        ['guide', '07. Статья-гайд', 'Оглавление, таблица, CTA'],
+        ['metal', '08. Страница металла', 'Факт, таблица, контекст, CTA'],
+      ];
+      const names = {
+        home: 'Главная',
+        portfolio: 'Участки',
+        teaser: 'Тизер участка',
+        contact: 'Контакты',
+        services: 'Услуги',
+        about: 'О компании',
+        guide: 'Статья-гайд',
+        metal: 'Медь в Казахстане',
+      };
+      const href = (s) =>
+        '?screen=' +
+        s +
+        '&view=' +
+        (window.innerWidth < 700 ? 'mobile' : 'desktop');
+      const btn = (label, style = '', link = '#contact-cta') =>
+        `<a class="btn ${style}" href="${link}">${label}</a>`;
+      const section = (id, title, body, lead = '') =>
+        `<section class="section" id="${id}"><div class="container"><div class="section-head"><div><div class="eyebrow">${id.replaceAll('-', ' ')}</div><h2>${title}</h2></div>${lead ? `<p>${lead}</p>` : ''}</div>${body}</div></section>`;
+      const photo = (text = 'фото будет') =>
+        `<div class="photo" role="img" aria-label="${text}">${text}</div>`;
+      const contactBand = () =>
+        `<div class="contact-band" id="contact-cta"><div><div class="eyebrow">Следующий шаг</div><h2>Обсудим подходящий участок</h2><p>Напишите в WeChat или WhatsApp. Уточним запрос и предложим подходящие тизеры.</p><p class="small" lang="zh-CN">微信联系：请注明关注的地块编号。WhatsApp 也可联系。</p></div><div class="button-row">${btn('Написать в WeChat', '', '?screen=contact&view=mobile')}${btn('WhatsApp', 'secondary', '?screen=contact&view=mobile')}</div></div>`;
+      const disclaimer = () =>
+        `<p class="disclaimer">Представленные материалы — предварительный информационный тизер. Участок не заявлен как собственность QAZNEDR HOLDING. Доступность и условия лицензирования требуют повторной официальной проверки и юридического оформления под конкретную сделку. Прогнозные данные не являются подтверждёнными запасами.</p>`;
+      function header(active) {
+        return `<div class="site-shell"><header class="site-header"><div class="header-inner"><a class="wordmark" href="?screen=home&view=mobile">QAZNEDR HOLDING<span class="brand-note">текстовый маркер · логотип будет позже</span></a><nav class="desktop-nav" aria-label="Основное меню"><a href="?screen=home&view=desktop">Главная</a><a href="?screen=portfolio&view=desktop">Участки</a><a href="?screen=services&view=desktop">Услуги</a><a href="?screen=about&view=desktop">О компании</a><a href="?screen=guide&view=desktop">Гайды</a><a href="?screen=contact&view=desktop">Контакты</a></nav><div class="header-tools"><div class="lang" aria-label="Язык"><button type="button" data-lang="ru" aria-pressed="true">RU</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="zh" aria-pressed="false">中文</button><button type="button" data-lang="kz" aria-pressed="false">KZ</button></div><button type="button" class="theme-btn" id="theme-btn" aria-label="Переключить тему">Тема</button><button type="button" class="menu-btn" id="menu-btn" aria-expanded="false">Меню</button></div></div></header><nav class="mobile-menu" id="mobile-menu" aria-label="Мобильное меню"><a href="?screen=home&view=mobile">Главная</a><a href="?screen=portfolio&view=mobile">Участки</a><a href="?screen=services&view=mobile">Услуги</a><a href="?screen=about&view=mobile">О компании</a><a href="?screen=guide&view=mobile">Гайды</a><a href="?screen=contact&view=mobile">Контакты</a><div class="menu-note">RU / EN / 中文 / KZ · язык выбирается в шапке</div></nav><main>`;
+      }
+      function footer(active) {
+        return `</main><footer class="site-footer"><div class="container"><div class="footer-grid"><div><strong>QAZNEDR HOLDING</strong><p class="small">Казахстанская геологоразведочная компания. Геологи изучают фондовые материалы и работают в поле.</p><p class="small">ТОО · БИН: [заглушка — подтвердить]</p></div><div><h3>Разделы</h3><a href="?screen=portfolio&view=mobile">Участки</a><a href="?screen=services&view=mobile">Услуги</a><a href="?screen=about&view=mobile">О компании</a></div><div><h3>Материалы</h3><a href="?screen=guide&view=mobile">Гайды</a><a href="?screen=metal&view=mobile">Медь в Казахстане</a><a href="?screen=about&view=mobile#check">Как нас проверить</a></div><div><h3>Связь</h3><a href="?screen=contact&view=mobile">WeChat</a><a href="?screen=contact&view=mobile">WhatsApp</a><a href="?screen=contact&view=mobile">Email</a></div></div><div class="footer-bottom"><span>© QAZNEDR HOLDING · схема, данные для публикации уточняются</span><span>RU / EN / 中文 / KZ</span></div></div></footer><nav class="bottom-nav" aria-label="Нижняя навигация"><a class="${active === 'home' ? 'active' : ''}" href="?screen=home&view=mobile">Главная</a><a class="${active === 'portfolio' || active === 'teaser' ? 'active' : ''}" href="?screen=portfolio&view=mobile">Участки</a><a class="${active === 'services' ? 'active' : ''}" href="?screen=services&view=mobile">Услуги</a><a class="${active === 'contact' ? 'active' : ''}" href="?screen=contact&view=mobile">Связаться</a></nav></div>`;
+      }
+      const formats = () =>
+        `<div class="grid-4"><div class="card"><h3>Лицензия на инвестора</h3><p>Сопровождение получения лицензии под согласованную сделку.</p></div><div class="card"><h3>Лицензия на холдинг</h3><p>Возможный формат с последующей продажей; условия обсуждаются индивидуально.</p></div><div class="card"><h3>СП или earn-in</h3><p>Партнёрская структура и этапы участия обсуждаются после знакомства.</p></div><div class="card"><h3>Аналитика</h3><p>Подбор и оценка материалов под инвестиционные критерии.</p></div></div>`;
+      const steps = () =>
+        `<div class="steps"><div class="step"><span class="step-number">01</span><h3>Запрос</h3><p>Вы сообщаете металл, масштаб и инвестиционный фокус.</p></div><div class="step"><span class="step-number">02</span><h3>NDA</h3><p>Согласуем конфиденциальность для доступа к деталям.</p></div><div class="step"><span class="step-number">03</span><h3>Встреча</h3><p>Геологи разберут данные и варианты сделки.</p></div><div class="step"><span class="step-number">04</span><h3>Выезд</h3><p>При согласовании организуем осмотр участка.</p></div></div>`;
+      const cardData = [
+        [
+          'DEMO-01',
+          'Медь',
+          'Регион: заглушка',
+          'Рудное: заглушка',
+          '0,6–1,2% · среднее — заглушка',
+          'copper',
+        ],
+        [
+          'DEMO-02',
+          'Золото',
+          'Регион: заглушка',
+          'Рудное: заглушка',
+          '1,4–3,0 г/т · спайк — заглушка',
+          'gold',
+        ],
+        [
+          'DEMO-03',
+          'Цинк',
+          'Регион: заглушка',
+          'Тип: заглушка',
+          '0,8–1,6% · среднее — заглушка',
+          'zinc',
+        ],
+        [
+          'DEMO-04',
+          'Медь',
+          'Регион: заглушка',
+          'Тип: заглушка',
+          '0,9–2,1% · спайк — заглушка',
+          'copper',
+        ],
+      ];
+      function leadCard(c) {
+        return `<article class="lead-card" data-metal="${c[5]}" data-region="placeholder" data-type="placeholder"><span class="tag">Закрытый тизер</span><div><div class="eyebrow">Код: ${c[0]} · заглушка</div><h3>${c[1]}</h3></div><dl><dt>Регион</dt><dd>${c[2]}</dd><dt>Тип</dt><dd>${c[3]}</dd><dt>Содержание</dt><dd>${c[4]}</dd></dl><div class="status">Свободен по нашей проверке на [дата — заглушка]. Статус требует повторной проверки.</div><a class="btn secondary" href="?screen=teaser&view=mobile">Смотреть тизер</a></article>`;
+      }
+      function home() {
+        return `<section class="hero"><div class="container"><div class="hero-grid"><div><div class="eyebrow">Геология Казахстана · работа с инвесторами</div><h1 data-copy="hero">Подготовленные участки для инвестиционного диалога</h1><p class="lead" data-copy="heroLead">Наши геологи изучают фондовые отчёты, отбирают перспективные свободные участки и сопровождают подготовку сделки.</p><div class="button-row">${btn('Связаться в WeChat', '', '?screen=contact&view=mobile')}${btn('WhatsApp', 'secondary', '?screen=contact&view=mobile')}</div></div><div class="hero-aside"><div class="eyebrow">Первый контакт</div><h3>Кратко о вашем запросе</h3><p>Металл, критерии и удобный язык общения. Ответим через переводчика при необходимости.</p><p class="small" lang="zh-CN">欢迎通过微信联系，说明您关注的矿种。</p><a class="text-link" href="?screen=contact&view=mobile">Открыть контакты</a></div></div><div class="stat-grid"><div class="stat"><strong>7 000+</strong><span>рудных объектов в базе наших геологов</span></div><div class="stat"><strong>20–40</strong><span>цель для витрины тизеров · план, не факт</span></div><div class="stat"><strong>4</strong><span>обсуждаемых формата сотрудничества</span></div><div class="stat"><strong>2</strong><span>основных канала связи: WeChat и WhatsApp</span></div></div></div></section>${section('portfolio-preview', 'Портфель по металлам', `<div class="grid-4"><div class="card muted"><h3>Медь</h3><p>Тизеры с открытыми параметрами и детальным пакетом после NDA.</p><a class="text-link" href="?screen=metal&view=mobile">Смотреть медь</a></div><div class="card muted"><h3>Золото</h3><p>Отобранные геологами направления для первичного обсуждения.</p><a class="text-link" href="?screen=portfolio&view=mobile">Смотреть участки</a></div><div class="card muted"><h3>Свинец и цинк</h3><p>Архивная основа и проверки по каждому конкретному случаю.</p><a class="text-link" href="?screen=portfolio&view=mobile">Смотреть участки</a></div><div class="card muted"><h3>Другие металлы</h3><p>Молибден, вольфрам, железо, олово и никель.</p><a class="text-link" href="?screen=portfolio&view=mobile">Смотреть участки</a></div></div><div class="button-row">${btn('Все тизеры', 'secondary', '?screen=portfolio&view=mobile')}</div>`, 'Открытая витрина для знакомства. Координаты и документы доступны после NDA.')}${section('formats', 'Форматы сотрудничества', formats(), 'Структуру сделки определяем вместе с инвестором после изучения запроса.')}${section('how', 'Как мы работаем', steps(), 'От первого сообщения до предметного изучения участка.')}${section('team', 'Геологи и полевые работы', `<div class="split">${photo('фото команды будет')}<div><h3>Архивные материалы и выездная экспертиза</h3><p>Наши геологи ведут базу по советским фондовым отчётам, проверяют материалы и могут выезжать в поле.</p><p>Имена, фотографии и подтверждённые биографии добавляются после согласования с командой.</p><a class="text-link" href="?screen=about&view=mobile">О компании</a></div></div>`)}${section('trust', 'Как нас проверить', `<div class="split"><div><h3>Проверяемая компания</h3><p>Покажем юридические данные, контакты и последовательность проверки в открытых реестрах.</p><a class="text-link" href="?screen=about&view=mobile#check">Порядок проверки</a></div><div class="trust-list"><div class="trust-item"><strong>ТОО</strong><span>наименование подтверждается</span></div><div class="trust-item"><strong>БИН</strong><span>[заглушка — подтвердить]</span></div><div class="trust-item"><strong>Реестры</strong><span>ссылки добавятся после проверки</span></div></div></div>`)}${section('guides', 'Гайды для инвестора', `<div class="grid-3"><div class="card"><div class="eyebrow">Гайд</div><h3>Как работает лицензирование ТПИ</h3><p>Этапы, документы и вопросы для первой встречи.</p><a class="text-link" href="?screen=guide&view=mobile">Читать</a></div><div class="card"><div class="eyebrow">Металл</div><h3>Медь в Казахстане</h3><p>Контекст и доступные тизеры в одном месте.</p><a class="text-link" href="?screen=metal&view=mobile">Читать</a></div><div class="card"><div class="eyebrow">Гайд</div><h3>Что открывается после NDA</h3><p>Состав материалов для предметного рассмотрения.</p><a class="text-link" href="?screen=guide&view=mobile">Читать</a></div></div>`)}${section('contact', 'Контакты', contactBand())}`;
+      }
+      function portfolio() {
+        return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Участки</div><div class="eyebrow">Портфель · закрытые тизеры</div><h1>Участки для предметного обсуждения</h1><p class="lead">Первичные параметры открыты. Точные материалы и документы предоставляются после знакомства и NDA.</p></div></div><section class="section"><div class="container"><div class="filter-bar"><div class="field"><label for="metal-filter">Металл</label><select id="metal-filter"><option value="all">Все металлы</option><option value="copper">Медь</option><option value="gold">Золото</option><option value="zinc">Цинк</option></select></div><div class="field"><label for="region-filter">Регион</label><select id="region-filter"><option value="all">Все регионы</option><option value="placeholder">Регион — заглушка</option></select></div><div class="field"><label for="type-filter">Тип месторождения</label><select id="type-filter"><option value="all">Все типы</option><option value="placeholder">Тип — заглушка</option></select></div><button class="btn secondary" id="reset-filters" type="button">Сбросить</button></div><p class="filter-count" id="filter-count">Показано 4 демонстрационных карточки · все данные заглушки</p><div class="grid-2" id="lead-grid">${cardData.map(leadCard).join('')}</div><p class="small" style="margin-top:22px">Это примеры карточек для утверждения структуры. Публичный портфель будет наполняться только проверенными данными.</p></div></section>${section('contact', 'Не нашли нужный металл?', contactBand())}`;
+      }
+      function teaser() {
+        return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Участки / DEMO-01</div><span class="tag">Закрытый тизер</span><h1 style="margin-top:18px">Медный участок · DEMO-01</h1><p class="lead">Подготовленный участок: геология изучена по архивным данным; вариант оформления лицензии обсуждается под сделку.</p><p class="small">Код и все параметры ниже — демонстрационные заглушки.</p></div></div><section class="section compact"><div class="container"><div class="teaser-layout"><div><div class="eyebrow">Открытые параметры</div><h2>Что известно на первом этапе</h2><div class="facts"><div class="fact"><span>Код</span><strong>DEMO-01 · заглушка</strong></div><div class="fact"><span>Металл / 矿种</span><strong>Медь</strong></div><div class="fact"><span>Регион / 位置</span><strong>[заглушка]</strong></div><div class="fact"><span>Площадь / 面积</span><strong>[заглушка]</strong></div><div class="fact"><span>Тип / 许可类型</span><strong>[заглушка]</strong></div><div class="fact"><span>Содержание</span><strong>0,6–1,2% · среднее, заглушка</strong></div></div><p class="small" style="margin-top:18px">Свободен по нашей проверке на [дата — заглушка]. Перед сделкой статус проверяется повторно.</p></div><aside class="sticky-box desktop-only"><strong>Обсудить DEMO-01</strong><p class="small">WeChat — приоритетный канал для китайского инвестора.</p><div class="contact-primary">${btn('WeChat', '', '#teaser-contact')}${btn('WhatsApp', 'secondary', '#teaser-contact')}</div><p class="small" lang="zh-CN">微信联系，请注明地块编号 DEMO-01</p></aside></div></div></section>${section('after-nda', 'Подробности после NDA', `<div class="locked"><h3>Закрытый пакет материалов</h3><p>После знакомства и соглашения о конфиденциальности обсудим фондовые отчёты, координаты, уточнённую геологию и возможную структуру сделки.</p><div class="locked-list"><div>Координаты · после NDA</div><div>Отчёты · после NDA</div><div>Условия · на встрече</div></div></div>`)}${section('teaser-contact', 'Обсудить участок', `<div class="split"><div><h3>Начните в удобном мессенджере</h3><p>Укажите код участка DEMO-01. Китайский контактный сценарий показан ниже.</p><div class="button-row">${btn('WeChat — написать', '', '?screen=contact&view=mobile')}${btn('WhatsApp', 'secondary', '?screen=contact&view=mobile')}</div><div class="wechat-note" lang="zh-CN"><strong>联系讨论地块 DEMO-01</strong><br>请通过微信添加我们，并注明地块编号。价格面议；详细资料在保密协议后提供。</div></div><div class="card muted"><h3>Если мессенджер неудобен</h3>${inquiryForm('teaser')}</div></div>`, 'Сначала WeChat, затем WhatsApp; форма остаётся запасным способом связи.')}${section('deal-formats', 'Возможные форматы сделки', formats(), 'Выбор формата зависит от проверки статуса и переговоров.')}${section('legal', 'Юридическая оговорка', disclaimer())}`;
+      }
+      function inquiryForm(id) {
+        return `<form class="demo-form" data-form="${id}"><div class="form-grid"><div class="field"><label>Имя</label><input required placeholder="Как к вам обращаться"></div><div class="field"><label>Email или мессенджер</label><input required placeholder="Контакт для ответа"></div><div class="field wide"><label>Сообщение</label><textarea placeholder="Металл, код участка или вопрос"></textarea></div></div><button class="btn full" type="submit" style="margin-top:14px">Отправить запрос</button><div class="form-result" role="status">Демо-прототип: запрос показан, но не отправлен. На рабочем сайте появится подтверждение отправки.</div></form>`;
+      }
+      function contact() {
+        return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Контакты</div><h1>Связаться с нами</h1><p class="lead">Напишите, какой металл и формат сотрудничества вас интересует. Для китайских инвесторов удобнее WeChat.</p></div></div>${section('wechat', 'WeChat — основной канал', `<div class="split"><div><h3 lang="zh-CN">添加微信，注明地块编号</h3><p lang="zh-CN">欢迎用中文发送您的关注矿种、地块编号和合作意向。详细资料在保密协议后提供。</p><p>Добавьте контакт и укажите код участка. Общение при необходимости идёт через переводчика.</p><div class="copy-line"><code>WeChat ID: [заглушка]</code><button type="button" id="copy-wechat">复制 / Копировать</button></div><p class="small" id="copy-status">Реальный ID будет добавлен после подтверждения владельцем.</p></div><div class="qr-placeholder">QR будет<br>Нейтральная заглушка<br>Не сканируется</div></div>`)}${section('other-channels', 'Другие каналы', `<div class="grid-2"><div class="card"><h3>WhatsApp</h3><p>Для запроса по участку укажите его код и удобный язык общения.</p><button type="button" class="btn secondary" data-demo-contact="WhatsApp">Открыть WhatsApp</button><p class="small">Номер — заглушка до подтверждения.</p></div><div class="card"><h3>Email</h3><p>Для письма с запросом и документами.</p><button type="button" class="btn secondary" data-demo-contact="Email">Написать email</button><p class="small">Адрес — заглушка до подтверждения.</p></div></div><p class="form-result" id="channel-result" role="status">Контактные данные пока не подтверждены; переход в мессенджер отключён в демо.</p>`)}${section('contact-form', 'Оставить короткий запрос', `<div style="max-width:680px">${inquiryForm('contact')}</div>`)}${section('before-call', 'Что указать в первом сообщении', `<div class="grid-3"><div class="card muted"><h3>Металл</h3><p>Например, медь или золото.</p></div><div class="card muted"><h3>Критерии</h3><p>Масштаб, регион, стадия изучения.</p></div><div class="card muted"><h3>Участок</h3><p>Код тизера, если вы его уже выбрали.</p></div></div>`)}`;
+      }
+      function services() {
+        return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Услуги</div><h1>Геологическая экспертиза и сопровождение сделки</h1><p class="lead">Наши геологи изучают фондовые материалы и выезжают в поле. Формат работы зависит от цели инвестора.</p></div></div>${section('service-grid', 'Направления работы', `<div class="grid-2"><div class="card"><div class="eyebrow">01</div><h3>Лицензирование</h3><p>Консультация и сопровождение оформления лицензии на разведку под согласованную структуру сделки.</p><a class="text-link" href="?screen=contact&view=mobile">Обсудить задачу</a></div><div class="card"><div class="eyebrow">02</div><h3>Геологоразведка и полевые работы</h3><p>Проверка архивной основы, программа работ и выезд геологов на участок.</p><a class="text-link" href="?screen=contact&view=mobile">Обсудить задачу</a></div><div class="card"><div class="eyebrow">03</div><h3>Due diligence</h3><p>Разбор исходных материалов, рисков и вопросов для независимой юридической и технической проверки.</p><a class="text-link" href="?screen=contact&view=mobile">Обсудить задачу</a></div><div class="card"><div class="eyebrow">04</div><h3>Аналитика</h3><p>Подбор перспективных направлений по заданным инвестором критериям.</p><a class="text-link" href="?screen=contact&view=mobile">Обсудить задачу</a></div></div>`)}${section('service-process', 'Как начинается работа', steps())}${section('service-team', 'Работа геологов', `<div class="split">${photo('фото полевых работ будет')}<div><h3>От отчёта к полевой проверке</h3><p>Архивный материал становится основой для вопросов, проверки статуса и программы следующих действий.</p><p>Объём полевых работ согласуем после изучения задачи.</p></div></div>`)}${section('service-cta', 'Обсудить задачу', contactBand())}`;
+      }
+      function about() {
+        return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / О компании</div><h1>QAZNEDR HOLDING</h1><p class="lead">Казахстанская геологоразведочная компания. Основа нашей работы — труд геологов, архивные отчёты и проверка перспективных направлений.</p></div></div>${section('history', 'Как устроена наша работа', `<div class="split"><div><p>Геологи ведут базу по советским фондовым отчётам: более 7 000 рудных объектов. На её основе отбираются перспективные свободные участки для последующей проверки и подготовки сделки.</p><p>Мы сопровождаем разговор инвестора с момента запроса до обсуждения лицензии, партнёрства и полевого осмотра.</p></div>${photo('фото архива или команды будет')}</div>`)}${section('geologists', 'Команда геологов', `<div class="grid-3"><div class="card">${photo('портрет будет')}<h3>Геолог · имя позже</h3><p>Биография и специализация после согласования.</p></div><div class="card">${photo('портрет будет')}<h3>Геолог · имя позже</h3><p>Биография и специализация после согласования.</p></div><div class="card">${photo('полевая команда будет')}<h3>Полевые работы</h3><p>Состав и опыт команды подтвердим перед публикацией.</p></div></div>`)}${section('legal-details', 'Юридические сведения', `<div class="trust-list"><div class="trust-item"><strong>Юридическое лицо</strong><span>ТОО QAZNEDR HOLDING · подтвердить написание</span></div><div class="trust-item"><strong>БИН</strong><span>[заглушка — подтвердить]</span></div><div class="trust-item"><strong>Адрес</strong><span>[заглушка — подтвердить]</span></div><div class="trust-item"><strong>Контакт</strong><span>см. страницу контактов</span></div></div>`)}${section('check', 'Как нас проверить', `<div class="grid-3"><div class="card muted"><h3>1. Сверить БИН</h3><p>Проверить юрлицо по официальному государственному реестру.</p></div><div class="card muted"><h3>2. Запросить документы</h3><p>Попросить реквизиты и документы компании у нашего представителя.</p></div><div class="card muted"><h3>3. Встретиться с геологами</h3><p>Обсудить метод работы и конкретные материалы.</p></div></div><p class="small" style="margin-top:18px">Ссылки на реестры добавятся после проверки реквизитов.</p>`)}${section('about-contact', 'Начать знакомство', contactBand())}`;
+      }
+      function guide() {
+        return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Гайды / Лицензирование</div><div class="eyebrow">Гайд · черновой контент для схемы</div><h1>Как подготовиться к разговору о лицензии на разведку</h1><p class="lead">Короткий маршрут для инвестора: исходные данные, проверка статуса, NDA и обсуждение структуры сделки.</p><p class="small">Автор и дата публикации будут добавлены после редакционной проверки.</p></div></div><section class="section"><div class="container article-layout"><nav class="toc" aria-label="Оглавление"><strong>На этой странице</strong><a href="#guide-start">С чего начать</a><a href="#guide-docs">Что запросить</a><a href="#guide-table">Этапы</a><a href="#guide-risk">Что проверить</a><a href="#guide-end">Следующий шаг</a></nav><article class="article-body"><h2 id="guide-start">С чего начать</h2><p>До обсуждения лицензии полезно определить металл, стадию геологической изученности и предполагаемую роль инвестора. Эти вводные помогают сузить выбор участка и понять, какие материалы понадобятся.</p><div class="note">Этот гайд показывает структуру будущего материала. Юридические формулировки и факты пройдут отдельную проверку перед публикацией.</div><h2 id="guide-docs">Какие материалы запросить</h2><p>Для первого разговора достаточно открытых параметров тизера. Подробные фондовые отчёты, координаты и условия предоставляются после знакомства и NDA.</p><p>Проверка статуса участка проводится на конкретную дату и должна повторяться перед оформлением сделки.</p><h2 id="guide-table">Этапы обсуждения</h2><div class="table-wrap"><table><thead><tr><th>Этап</th><th>Что получает инвестор</th><th>Результат</th></tr></thead><tbody><tr><td>Первый запрос</td><td>Открытый тизер</td><td>Понимание интереса</td></tr><tr><td>NDA</td><td>Согласованный пакет материалов</td><td>Предметная оценка</td></tr><tr><td>Встреча</td><td>Обсуждение геологии и структуры сделки</td><td>План проверки</td></tr><tr><td>Выезд</td><td>Осмотр при согласовании</td><td>Решение о следующих шагах</td></tr></tbody></table></div><h2 id="guide-risk">Что проверить отдельно</h2><p>Юридический статус участка, доступность лицензирования, качество исходных данных и применимость выбранного формата сделки. Прогнозные данные нельзя представлять как подтверждённые запасы.</p><h2 id="guide-end">Следующий шаг</h2>${contactBand()}</article></div></section>`;
+      }
+      function metal() {
+        return `<div class="page-intro"><div class="container"><div class="breadcrumbs">Главная / Металлы / Медь</div><div class="eyebrow">Хаб металла · черновой контент</div><h1>Медь в Казахстане</h1><p class="lead">Наши геологи изучают фондовые материалы по меди и отбирают направления для дальнейшей проверки. Ниже — структура будущей витрины, без реальных данных участков.</p></div></div>${section('metal-table', 'Тизеры по меди', `<div class="table-wrap"><table><thead><tr><th>Код</th><th>Регион</th><th>Тип</th><th>Содержание</th><th>Статус</th><th></th></tr></thead><tbody><tr><td>DEMO-01 · заглушка</td><td>[заглушка]</td><td>[заглушка]</td><td>0,6–1,2% · среднее, заглушка</td><td>Свободен по проверке на [дата — заглушка]</td><td><a class="text-link" href="?screen=teaser&view=mobile">Тизер</a></td></tr><tr><td>DEMO-04 · заглушка</td><td>[заглушка]</td><td>[заглушка]</td><td>0,9–2,1% · спайк, заглушка</td><td>Свободен по проверке на [дата — заглушка]</td><td><a class="text-link" href="?screen=teaser&view=mobile">Тизер</a></td></tr></tbody></table></div><p class="small" style="margin-top:16px">Все строки демонстрационные. Доступность участка требует повторной проверки.</p>`)}${section('metal-context', 'Контекст для инвестора', `<div class="split"><div><h3>От общего интереса к конкретному участку</h3><p>При оценке медного направления важны стадия изученности, качество архивных данных и программа дальнейших работ.</p><p>Мы помогаем сопоставить интерес инвестора с доступными материалами и обсудить путь к лицензии.</p><a class="text-link" href="?screen=guide&view=mobile">Гайд по первому разговору</a></div>${photo('фото керна или поля будет')}</div>`)}${section('metal-cta', 'Обсудить медное направление', contactBand())}`;
+      }
+      const builders = {
+        home,
+        portfolio,
+        teaser,
+        contact,
+        services,
+        about,
+        guide,
+        metal,
+      };
+      const innerScript = String.raw`(function(){
 const params=new URLSearchParams(location.search);const current=params.get('screen')||'home';const view=params.get('view')||'mobile';const qs=(s)=>document.querySelector(s);const all=(s)=>[...document.querySelectorAll(s)];
 qs('#menu-btn')?.addEventListener('click',()=>{let e=qs('#mobile-menu');e.classList.toggle('open');qs('#menu-btn').setAttribute('aria-expanded',e.classList.contains('open'))});
 qs('#theme-btn')?.addEventListener('click',()=>document.body.classList.toggle('dark'));
@@ -50,12 +1315,129 @@ let mf=qs('#metal-filter'),rf=qs('#region-filter'),tf=qs('#type-filter');functio
 all('.demo-form').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();f.querySelector('.form-result').classList.add('show')}));qs('#copy-wechat')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText('[заглушка]');qs('#copy-status').textContent='Скопирована демонстрационная заглушка. Реальный ID ожидает подтверждения.'}catch(e){qs('#copy-status').textContent='ID пока не подтверждён. Копирование в file:// может быть недоступно.'}});all('[data-demo-contact]').forEach(b=>b.addEventListener('click',()=>{qs('#channel-result').classList.add('show')}));
 all('a[href^="?screen="]').forEach(a=>a.addEventListener('click',e=>{if(window.parent!==window){e.preventDefault();window.parent.postMessage({type:'navigate',href:a.getAttribute('href')},'*')}}));
 })();`;
-function documentFor(screen,view,dark=false){const css=document.getElementById('prototype-style').textContent;let html=header(screen)+builders[screen]()+footer(screen);return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=${view==='mobile'?375:1440},initial-scale=1"><style>${css}</style></head><body class="${dark?'dark':''}" data-screen="${screen}" data-view="${view}">${html}<script>${innerScript.replaceAll('</script','<\\/script')}<\/script></body></html>`}
-let dark=false;const rows=document.getElementById('rows');const params=new URLSearchParams(location.search);window.openWireframe=(screen,view)=>{let url=new URL(location.href);url.searchParams.set('screen',screen);url.searchParams.set('view',view);window.open(url.href,'_blank')};
-function makeFrame(screen,view,scale){const width=view==='mobile'?375:1440;const wrap=document.createElement('div');wrap.className='preview';wrap.innerHTML=`<div class="preview-label"><strong>${view==='mobile'?'Мобильная · 375 px':'Десктоп · 1440 px'}</strong><button type="button">Открыть 1:1</button></div><div class="frame-clip"></div>`;const frame=document.createElement('iframe');frame.title=names[screen]+' '+view;frame.dataset.screen=screen;frame.dataset.view=view;frame.width=width;frame.style.width=width+'px';frame.style.transform=`scale(${scale})`;frame.srcdoc=documentFor(screen,view,dark);wrap.querySelector('.frame-clip').append(frame);frame.addEventListener('load',()=>{let height=frame.contentDocument.documentElement.scrollHeight;frame.style.height=height+'px';wrap.querySelector('.frame-clip').style.height=Math.ceil(height*scale)+'px'});wrap.querySelector('button').onclick=()=>showModal(screen,view);return wrap}
-function showModal(screen,view){const m=document.getElementById('modal'),f=document.getElementById('modal-frame');document.getElementById('modal-title').textContent=names[screen]+' · '+(view==='mobile'?'375':'1440')+' px';f.width=view==='mobile'?375:1440;f.srcdoc=documentFor(screen,view,dark);f.onload=()=>{f.style.height=f.contentDocument.documentElement.scrollHeight+'px'};m.classList.add('open')}
-document.getElementById('modal-close').onclick=()=>document.getElementById('modal').classList.remove('open');document.getElementById('modal-theme').onclick=()=>{dark=!dark;document.getElementById('modal-frame').contentWindow.postMessage({type:'theme',dark},'*')};document.getElementById('theme-all').onclick=()=>{dark=!dark;document.getElementById('theme-all').textContent=dark?'Светлая тема':'Тёмная тема';document.querySelectorAll('iframe').forEach(f=>f.contentWindow?.postMessage({type:'theme',dark},'*'))};document.getElementById('jump').onchange=e=>{if(e.target.value)document.getElementById('row-'+e.target.value).scrollIntoView({behavior:'smooth'})};
-window.addEventListener('message',e=>{if(e.data?.type==='navigate'){const m=e.data.href.match(/screen=([a-z]+)/);if(m&&builders[m[1]]){document.getElementById('row-'+m[1])?.scrollIntoView({behavior:'smooth'});if(document.getElementById('modal').classList.contains('open'))showModal(m[1],new URLSearchParams(e.data.href.slice(1)).get('view')||'mobile')}}});
-if(params.has('screen')){const screen=params.get('screen'),view=params.get('view')==='desktop'?'desktop':'mobile';if(builders[screen]){document.body.classList.add('solo');document.body.innerHTML=header(screen)+builders[screen]()+footer(screen)+`<script>${innerScript.replaceAll('</script','<\\/script')}<\/script>`;let s=document.createElement('script');s.textContent=innerScript;document.body.append(s);document.body.dataset.screen=screen;document.body.dataset.view=view}}else{screens.forEach(([key,title,desc])=>{let row=document.createElement('section');row.className='screen-row';row.id='row-'+key;row.innerHTML=`<div class="row-title"><h2>${title}</h2><p>${desc}</p></div><div class="previews"></div>`;row.querySelector('.previews').append(makeFrame(key,'mobile',.8),makeFrame(key,'desktop',.68));rows.append(row);document.getElementById('jump').add(new Option(title,key))})}
-</script>
-</body></html>
+      function documentFor(screen, view, dark = false) {
+        const css = document.getElementById('prototype-style').textContent;
+        let html = header(screen) + builders[screen]() + footer(screen);
+        return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=${view === 'mobile' ? 375 : 1440},initial-scale=1"><style>${css}</style></head><body class="${dark ? 'dark' : ''}" data-screen="${screen}" data-view="${view}">${html}<script>${innerScript.replaceAll('</script', '<\\/script')}<\/script></body></html>`;
+      }
+      let dark = false;
+      const rows = document.getElementById('rows');
+      const params = new URLSearchParams(location.search);
+      window.openWireframe = (screen, view) => {
+        let url = new URL(location.href);
+        url.searchParams.set('screen', screen);
+        url.searchParams.set('view', view);
+        window.open(url.href, '_blank');
+      };
+      function makeFrame(screen, view, scale) {
+        const width = view === 'mobile' ? 375 : 1440;
+        const wrap = document.createElement('div');
+        wrap.className = 'preview';
+        wrap.innerHTML = `<div class="preview-label"><strong>${view === 'mobile' ? 'Мобильная · 375 px' : 'Десктоп · 1440 px'}</strong><button type="button">Открыть 1:1</button></div><div class="frame-clip"></div>`;
+        const frame = document.createElement('iframe');
+        frame.title = names[screen] + ' ' + view;
+        frame.dataset.screen = screen;
+        frame.dataset.view = view;
+        frame.width = width;
+        frame.style.width = width + 'px';
+        frame.style.transform = `scale(${scale})`;
+        frame.srcdoc = documentFor(screen, view, dark);
+        wrap.querySelector('.frame-clip').append(frame);
+        frame.addEventListener('load', () => {
+          let height = frame.contentDocument.documentElement.scrollHeight;
+          frame.style.height = height + 'px';
+          wrap.querySelector('.frame-clip').style.height =
+            Math.ceil(height * scale) + 'px';
+        });
+        wrap.querySelector('button').onclick = () => showModal(screen, view);
+        return wrap;
+      }
+      function showModal(screen, view) {
+        const m = document.getElementById('modal'),
+          f = document.getElementById('modal-frame');
+        document.getElementById('modal-title').textContent =
+          names[screen] + ' · ' + (view === 'mobile' ? '375' : '1440') + ' px';
+        f.width = view === 'mobile' ? 375 : 1440;
+        f.srcdoc = documentFor(screen, view, dark);
+        f.onload = () => {
+          f.style.height =
+            f.contentDocument.documentElement.scrollHeight + 'px';
+        };
+        m.classList.add('open');
+      }
+      document.getElementById('modal-close').onclick = () =>
+        document.getElementById('modal').classList.remove('open');
+      document.getElementById('modal-theme').onclick = () => {
+        dark = !dark;
+        document
+          .getElementById('modal-frame')
+          .contentWindow.postMessage({ type: 'theme', dark }, '*');
+      };
+      document.getElementById('theme-all').onclick = () => {
+        dark = !dark;
+        document.getElementById('theme-all').textContent = dark
+          ? 'Светлая тема'
+          : 'Тёмная тема';
+        document
+          .querySelectorAll('iframe')
+          .forEach((f) =>
+            f.contentWindow?.postMessage({ type: 'theme', dark }, '*')
+          );
+      };
+      document.getElementById('jump').onchange = (e) => {
+        if (e.target.value)
+          document
+            .getElementById('row-' + e.target.value)
+            .scrollIntoView({ behavior: 'smooth' });
+      };
+      window.addEventListener('message', (e) => {
+        if (e.data?.type === 'navigate') {
+          const m = e.data.href.match(/screen=([a-z]+)/);
+          if (m && builders[m[1]]) {
+            document
+              .getElementById('row-' + m[1])
+              ?.scrollIntoView({ behavior: 'smooth' });
+            if (document.getElementById('modal').classList.contains('open'))
+              showModal(
+                m[1],
+                new URLSearchParams(e.data.href.slice(1)).get('view') ||
+                  'mobile'
+              );
+          }
+        }
+      });
+      if (params.has('screen')) {
+        const screen = params.get('screen'),
+          view = params.get('view') === 'desktop' ? 'desktop' : 'mobile';
+        if (builders[screen]) {
+          document.body.classList.add('solo');
+          document.body.innerHTML =
+            header(screen) +
+            builders[screen]() +
+            footer(screen) +
+            `<script>${innerScript.replaceAll('</script', '<\\/script')}<\/script>`;
+          let s = document.createElement('script');
+          s.textContent = innerScript;
+          document.body.append(s);
+          document.body.dataset.screen = screen;
+          document.body.dataset.view = view;
+        }
+      } else {
+        screens.forEach(([key, title, desc]) => {
+          let row = document.createElement('section');
+          row.className = 'screen-row';
+          row.id = 'row-' + key;
+          row.innerHTML = `<div class="row-title"><h2>${title}</h2><p>${desc}</p></div><div class="previews"></div>`;
+          row
+            .querySelector('.previews')
+            .append(
+              makeFrame(key, 'mobile', 0.8),
+              makeFrame(key, 'desktop', 0.68)
+            );
+          rows.append(row);
+          document.getElementById('jump').add(new Option(title, key));
+        });
+      }
+    </script>
+  </body>
+</html>

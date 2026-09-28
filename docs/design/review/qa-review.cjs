@@ -24,18 +24,27 @@ const viewports = [
 
 function isWithinDesign(candidate) {
   const relative = path.relative(root, candidate);
-  return relative !== '..' && !relative.startsWith(`..${path.sep}`) && !path.isAbsolute(relative);
+  return (
+    relative !== '..' &&
+    !relative.startsWith(`..${path.sep}`) &&
+    !path.isAbsolute(relative)
+  );
 }
 
 function outDirFor(pagePath, index) {
   const match = path.basename(pagePath).match(/^(01|02)/);
-  const outputDir = path.resolve(root, 'mockups', match ? match[1] : String(index + 1).padStart(2, '0'));
-  if (!isWithinDesign(outputDir)) throw new Error(`Refusing output outside docs/design: ${outputDir}`);
+  const outputDir = path.resolve(
+    root,
+    'mockups',
+    match ? match[1] : String(index + 1).padStart(2, '0')
+  );
+  if (!isWithinDesign(outputDir))
+    throw new Error(`Refusing output outside docs/design: ${outputDir}`);
   return outputDir;
 }
 
 async function main() {
-  const absent = pages.filter(p => !fs.existsSync(p));
+  const absent = pages.filter((p) => !fs.existsSync(p));
   if (absent.length) {
     console.error(`Missing review page(s): ${absent.join(', ')}`);
     process.exitCode = 2;
@@ -43,7 +52,8 @@ async function main() {
   }
   const browser = await chromium.launch({
     headless: true,
-    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    executablePath:
+      '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   });
   const violations = [];
   try {
@@ -56,43 +66,90 @@ async function main() {
       for (const viewport of viewports) {
         const page = await browser.newPage({ viewport, deviceScaleFactor: 1 });
         const label = `${path.basename(filePath)} @ ${viewport.width}x${viewport.height}`;
-        page.on('pageerror', error => violations.push(`[JS] ${label}: ${error.message}`));
-        page.on('requestfailed', request => {
-          violations.push(`[request] ${label}: ${request.url()} (${request.failure()?.errorText || 'failed'})`);
+        page.on('pageerror', (error) =>
+          violations.push(`[JS] ${label}: ${error.message}`)
+        );
+        page.on('requestfailed', (request) => {
+          violations.push(
+            `[request] ${label}: ${request.url()} (${request.failure()?.errorText || 'failed'})`
+          );
         });
-        page.on('request', request => {
-          if (/^https?:/i.test(request.url())) violations.push(`[external] ${label}: ${request.url()}`);
+        page.on('request', (request) => {
+          if (/^https?:/i.test(request.url()))
+            violations.push(`[external] ${label}: ${request.url()}`);
         });
         await page.goto(fileUrl, { waitUntil: 'load' });
-        const screenshotPath = path.resolve(outputDir, `qa-${viewport.width}.png`);
-        if (!isWithinDesign(screenshotPath)) throw new Error(`Refusing output outside docs/design: ${screenshotPath}`);
+        const screenshotPath = path.resolve(
+          outputDir,
+          `qa-${viewport.width}.png`
+        );
+        if (!isWithinDesign(screenshotPath))
+          throw new Error(
+            `Refusing output outside docs/design: ${screenshotPath}`
+          );
         await page.screenshot({ path: screenshotPath, fullPage: false });
         const findings = await page.evaluate(() => {
           const issues = [];
-          if (document.documentElement.scrollWidth > document.documentElement.clientWidth) {
-            issues.push(`horizontal overflow (${document.documentElement.scrollWidth}px > ${document.documentElement.clientWidth}px)`);
+          if (
+            document.documentElement.scrollWidth >
+            document.documentElement.clientWidth
+          ) {
+            issues.push(
+              `horizontal overflow (${document.documentElement.scrollWidth}px > ${document.documentElement.clientWidth}px)`
+            );
           }
           for (const img of document.images) {
-            if (!img.complete || img.naturalWidth === 0) issues.push(`broken image: ${img.currentSrc || img.src || '(no src)'}`);
+            if (!img.complete || img.naturalWidth === 0)
+              issues.push(
+                `broken image: ${img.currentSrc || img.src || '(no src)'}`
+              );
           }
-          const parseColor = value => {
+          const parseColor = (value) => {
             const m = value.match(/^rgba?\(([^)]+)\)$/i);
             if (!m) return null;
-            const nums = m[1].split(',').map(s => parseFloat(s.trim()));
-            if (nums.length < 3 || nums.slice(0, 3).some(Number.isNaN)) return null;
-            return { r: nums[0], g: nums[1], b: nums[2], a: nums.length > 3 && !Number.isNaN(nums[3]) ? nums[3] : 1 };
+            const nums = m[1].split(',').map((s) => parseFloat(s.trim()));
+            if (nums.length < 3 || nums.slice(0, 3).some(Number.isNaN))
+              return null;
+            return {
+              r: nums[0],
+              g: nums[1],
+              b: nums[2],
+              a: nums.length > 3 && !Number.isNaN(nums[3]) ? nums[3] : 1,
+            };
           };
-          const luminance = c => {
-            const channel = v => { const x = v / 255; return x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; };
-            return 0.2126 * channel(c.r) + 0.7152 * channel(c.g) + 0.0722 * channel(c.b);
+          const luminance = (c) => {
+            const channel = (v) => {
+              const x = v / 255;
+              return x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4;
+            };
+            return (
+              0.2126 * channel(c.r) +
+              0.7152 * channel(c.g) +
+              0.0722 * channel(c.b)
+            );
           };
-          const ratio = (a, b) => { const x = luminance(a), y = luminance(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
-          const visible = el => {
-            const s = getComputedStyle(el), rect = el.getBoundingClientRect();
-            return s.display !== 'none' && s.visibility !== 'hidden' && Number(s.opacity) !== 0 && rect.width > 0 && rect.height > 0;
+          const ratio = (a, b) => {
+            const x = luminance(a),
+              y = luminance(b);
+            return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
           };
-          const bgFor = el => {
-            for (let n = el; n && n !== document.documentElement; n = n.parentElement) {
+          const visible = (el) => {
+            const s = getComputedStyle(el),
+              rect = el.getBoundingClientRect();
+            return (
+              s.display !== 'none' &&
+              s.visibility !== 'hidden' &&
+              Number(s.opacity) !== 0 &&
+              rect.width > 0 &&
+              rect.height > 0
+            );
+          };
+          const bgFor = (el) => {
+            for (
+              let n = el;
+              n && n !== document.documentElement;
+              n = n.parentElement
+            ) {
               const color = parseColor(getComputedStyle(n).backgroundColor);
               if (color && color.a === 1) return color;
               // Ignore semi-transparent layers: accurate compositing can be complex.
@@ -100,24 +157,40 @@ async function main() {
             }
             return { r: 255, g: 255, b: 255, a: 1 };
           };
-          const colorString = c => `rgb(${Math.round(c.r)}, ${Math.round(c.g)}, ${Math.round(c.b)})`;
-          const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+          const colorString = (c) =>
+            `rgb(${Math.round(c.r)}, ${Math.round(c.g)}, ${Math.round(c.b)})`;
+          const walker = document.createTreeWalker(
+            document.body,
+            NodeFilter.SHOW_TEXT
+          );
           while (walker.nextNode()) {
             const node = walker.currentNode;
             const text = node.nodeValue.replace(/\s+/g, ' ').trim();
             const el = node.parentElement;
             if (!text || !el || !visible(el)) continue;
-            const fg = parseColor(getComputedStyle(el).color), bg = bgFor(el);
+            const fg = parseColor(getComputedStyle(el).color),
+              bg = bgFor(el);
             if (!fg || !bg || fg.a !== 1) continue;
-            const style = getComputedStyle(el), size = parseFloat(style.fontSize) || 16;
-            const large = size >= 24 || (size >= 18.66 && (style.fontWeight === 'bold' || Number(style.fontWeight) >= 700));
-            const actual = ratio(fg, bg), required = large ? 3 : 4.5;
-            if (actual < required) issues.push(`contrast ${actual.toFixed(2)}:1 (needs ${required}:1), “${text.slice(0, 90)}”, ${colorString(fg)} on ${colorString(bg)}`);
+            const style = getComputedStyle(el),
+              size = parseFloat(style.fontSize) || 16;
+            const large =
+              size >= 24 ||
+              (size >= 18.66 &&
+                (style.fontWeight === 'bold' ||
+                  Number(style.fontWeight) >= 700));
+            const actual = ratio(fg, bg),
+              required = large ? 3 : 4.5;
+            if (actual < required)
+              issues.push(
+                `contrast ${actual.toFixed(2)}:1 (needs ${required}:1), “${text.slice(0, 90)}”, ${colorString(fg)} on ${colorString(bg)}`
+              );
           }
           return issues;
         });
         for (const finding of findings) {
-          const prefix = finding.startsWith('contrast') ? '[AA contrast]' : '[layout/assets]';
+          const prefix = finding.startsWith('contrast')
+            ? '[AA contrast]'
+            : '[layout/assets]';
           violations.push(`${prefix} ${label}: ${finding}`);
         }
         await page.close();
@@ -131,11 +204,13 @@ async function main() {
     for (const issue of violations) console.log(`- ${issue}`);
     process.exitCode = 1;
   } else {
-    console.log('No focused QA findings. Contrast sampling is heuristic; this is not a full WCAG audit.');
+    console.log(
+      'No focused QA findings. Contrast sampling is heuristic; this is not a full WCAG audit.'
+    );
   }
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.error(`QA runner failed: ${error.stack || error.message}`);
   process.exitCode = 2;
 });

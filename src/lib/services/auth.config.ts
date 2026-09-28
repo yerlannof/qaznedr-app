@@ -3,22 +3,15 @@ import { AdapterUser } from 'next-auth/adapters';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
-import { createClient, createServiceClient } from '@/lib/supabase/server';
-import bcrypt from 'bcryptjs';
 import { getSecureAuthConfig } from '@/lib/auth/jwt-security';
 import { ValidationSchemas } from '@/lib/middleware/input-validation';
-import { verifyEnvAdmin } from '@/lib/auth/env-admin';
-
-interface User {
-  id: string;
-  email: string;
-  name: string | null;
-  password: string;
-  image: string | null;
-}
+import { verifyEnvAdmin, isEnvAdminEmail } from '@/lib/auth/env-admin';
+import { provisionGoogleIdentity } from '@/lib/auth/marketplace-identity';
 
 const googleEnabled = Boolean(
-  process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+  process.env.MARKETPLACE_IDENTITY_ENABLED === 'true' &&
+    process.env.GOOGLE_CLIENT_ID &&
+    process.env.GOOGLE_CLIENT_SECRET
 );
 
 export const authOptions = {
@@ -72,101 +65,8 @@ export const authOptions = {
         );
         if (envAdmin) return envAdmin;
 
-        const supabase = await createClient();
-
-        // Use parameterized query to prevent SQL injection
-        const { data: user, error } = (await supabase
-          .from('users')
-          .select(
-            'id, email, name, password, image, is_verified, failed_login_attempts, last_failed_login'
-          )
-          .eq('email', credentials.email.toLowerCase().trim())
-          .single()) as {
-          data:
-            | (User & {
-                is_verified?: boolean;
-                failed_login_attempts?: number;
-                last_failed_login?: string;
-              })
-            | null;
-          error: any;
-        };
-
-        if (error || !user || !user.password) {
-          // Log failed attempt (but don't specify what failed)
-          console.warn(`Login attempt failed for email: ${credentials.email}`);
-          throw new Error('Invalid credentials');
-        }
-
-        // Check if account is locked due to too many failed attempts
-        if (user.failed_login_attempts && user.failed_login_attempts >= 5) {
-          const lastFailedLogin = user.last_failed_login
-            ? new Date(user.last_failed_login)
-            : new Date(0);
-          const lockoutExpiry = new Date(
-            lastFailedLogin.getTime() + 15 * 60 * 1000
-          ); // 15 minute lockout
-
-          if (new Date() < lockoutExpiry) {
-            console.warn(`Account locked for email: ${credentials.email}`);
-            throw new Error(
-              'Account temporarily locked due to too many failed attempts'
-            );
-          }
-        }
-
-        // Verify password with timing attack protection
-        let isPasswordValid = false;
-        try {
-          isPasswordValid = await bcrypt.compare(
-            credentials.password,
-            user.password
-          );
-        } catch (error) {
-          console.error('Password verification error:', error);
-          isPasswordValid = false;
-        }
-
-        if (!isPasswordValid) {
-          // Update failed login attempts
-          const updateData = {
-            failed_login_attempts: (user.failed_login_attempts || 0) + 1,
-            last_failed_login: new Date().toISOString(),
-          };
-          await (supabase.from('users') as any)
-            .update(updateData)
-            .eq('id', user.id);
-
-          console.warn(`Invalid password for email: ${credentials.email}`);
-          throw new Error('Invalid credentials');
-        }
-
-        // Check if email is verified (if you have email verification)
-        if (user.is_verified === false) {
-          throw new Error('Please verify your email address before logging in');
-        }
-
-        // Reset failed login attempts on successful login
-        if (user.failed_login_attempts && user.failed_login_attempts > 0) {
-          const resetData = {
-            failed_login_attempts: 0,
-            last_failed_login: null,
-            last_login: new Date().toISOString(),
-          };
-          await (supabase.from('users') as any)
-            .update(resetData)
-            .eq('id', user.id);
-        }
-
-        // Log successful login
-        console.log(`Successful login for user: ${user.id}`);
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          image: user.image,
-        };
+        // Public password registration is closed; only the owner credential path exists.
+        return null;
       },
     }),
   ],
@@ -214,61 +114,40 @@ export const authOptions = {
     async signIn({
       user,
       account,
+      profile,
     }: {
       user: NextAuthUser | AdapterUser;
-      account: { provider: string } | null;
+      account: { provider: string; providerAccountId?: string } | null;
+      profile?: { sub?: string; email?: string; email_verified?: unknown };
     }) {
-      if (account?.provider === 'google' && user.email) {
-        try {
-          const supabase = await createServiceClient();
-          const email = user.email.toLowerCase().trim();
-
-          const { data: existing } = (await (supabase as any)
-            .from('users')
-            .select('id')
-            .eq('email', email)
-            .maybeSingle()) as { data: { id: string } | null };
-
-          let userId = existing?.id;
-
-          if (!userId) {
-            const placeholder = await bcrypt.hash(
-              `oauth-${Date.now()}-${Math.random()}`,
-              10
-            );
-            const { data: created } = (await (supabase as any)
-              .from('users')
-              .insert({
-                email,
-                name: user.name ?? null,
-                image: user.image ?? null,
-                password: placeholder,
-                verified: true,
-                email_verified: new Date().toISOString(),
-              })
-              .select('id')
-              .single()) as { data: { id: string } | null };
-            userId = created?.id;
-          }
-
-          if (userId) {
-            user.id = userId;
-            await (supabase as any).from('profiles').upsert(
-              {
-                id: userId,
-                full_name: user.name || email.split('@')[0],
-                email,
-                avatar_url: user.image ?? null,
-              },
-              { onConflict: 'id' }
-            );
-          }
-        } catch (err) {
-          console.error('Google signIn provisioning failed:', err);
-          return false;
-        }
+      if (account?.provider === 'credentials') return true;
+      if (
+        account?.provider !== 'google' ||
+        process.env.MARKETPLACE_IDENTITY_ENABLED !== 'true' ||
+        !account.providerAccountId ||
+        !profile?.sub ||
+        profile.sub !== account.providerAccountId ||
+        profile.email_verified !== true ||
+        !profile.email ||
+        !user.email ||
+        profile.email.trim().toLowerCase() !==
+          user.email.trim().toLowerCase() ||
+        isEnvAdminEmail(profile.email)
+      )
+        return false;
+      try {
+        const identity = await provisionGoogleIdentity({
+          subject: profile.sub,
+          email: profile.email,
+          name: user.name ?? null,
+          image: user.image ?? null,
+        });
+        Object.assign(user, identity);
+        return true;
+      } catch {
+        // Do not log provider claims or database conflict details.
+        return false;
       }
-      return true;
     },
     async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
       // Ensure redirect URLs are safe

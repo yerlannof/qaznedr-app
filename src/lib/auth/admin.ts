@@ -23,7 +23,10 @@ export async function getCurrentAdmin(): Promise<AdminContext | null> {
   const userId = (session.user as any).id as string | undefined;
   if (!userId) return null;
 
-  if (isEnvAdminEmail(session.user.email)) {
+  if (
+    isEnvAdminEmail(session.user.email) &&
+    userId === `env-admin:${session.user.email?.trim().toLowerCase()}`
+  ) {
     return { userId, email: session.user.email ?? null, role: 'super_admin' };
   }
 

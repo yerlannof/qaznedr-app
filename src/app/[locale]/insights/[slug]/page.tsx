@@ -8,7 +8,7 @@ import ClosingCta from '@/components/features/ClosingCta';
 import ArticleToc from '@/components/insights/ArticleToc';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { getArticle, listArticles } from '@/lib/insights/content';
-import { INSIGHTS, findInsight } from '@/lib/insights/registry';
+import { GUIDE, INSIGHTS, findInsight } from '@/lib/insights/registry';
 import { formatCheckDate } from '@/lib/leads/check-date';
 import { articleJsonLd } from '@/lib/seo/article-jsonld';
 import { buildPageMetadata } from '@/lib/seo/metadata';
@@ -173,7 +173,11 @@ export default async function InsightArticlePage({
           </section>
         )}
 
-        <ClosingCta locale={locale} variant="brand" />
+        <ClosingCta
+          locale={locale}
+          variant="brand"
+          serviceTopic={slug === GUIDE.geologicalMap ? 'geology' : undefined}
+        />
       </div>
       <Footer />
     </>

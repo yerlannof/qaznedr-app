@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import GuideLinks from '@/components/features/GuideLinks';
+import GeologicalSupport from '@/components/features/GeologicalSupport';
 import ClosingCta from '@/components/features/ClosingCta';
 import {
   ServiceDetail,
@@ -59,6 +60,7 @@ export default async function GeologicalServicesPage({
             <ServiceDetail locale={locale} topic="geology" />
           </div>
         </article>
+        <GeologicalSupport locale={locale} />
         <section className="brand-container pb-16 lg:pb-24">
           <GuideLinks locale={locale} heading={t('insights.servicesHeading')} />
         </section>

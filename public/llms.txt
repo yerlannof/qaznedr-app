@@ -37,7 +37,8 @@ All guides: https://qaznedr.kz/en/insights
 Services: https://qaznedr.kz/en/services
 
 - Licensing: https://qaznedr.kz/en/services/legal
-- Geology and fieldwork: https://qaznedr.kz/en/services/geological
+- Geological maps, material interpretation and fieldwork: https://qaznedr.kz/en/services/geological
+  Discuss a region and task with our geologists; map symbols alone do not establish reserves, area rights or licence eligibility. Scope and deliverables are agreed after reviewing the task.
 - Area due diligence: https://qaznedr.kz/en/services#due-diligence
 - Analytics: https://qaznedr.kz/en/services#analytics
 

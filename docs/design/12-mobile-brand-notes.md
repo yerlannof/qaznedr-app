@@ -1,6 +1,6 @@
 # 12 · Мобильная геосцена и сдержанные фирменные детали — предложение
 
-Статус: **для просмотра владельцем; не утверждено, не опубликовано**. Макет: [`review/12-mobile-brand-polish.html`](review/12-mobile-brand-polish.html). Основа — утверждённая сцена 10 и действующие активы A3/D2: `public/brand/geology-realistic.png`, SVG-логотип, Source Serif 4 и IBM Plex Sans. Новые картинки, логотип или цветовая система не предлагаются.
+Статус: **утверждено владельцем 29.09.2026: «да давай дальше»; внедрение**. Макет: [`review/12-mobile-brand-polish.html`](review/12-mobile-brand-polish.html). Основа — утверждённая сцена 10 и действующие активы A3/D2: `public/brand/geology-realistic.png`, SVG-логотип, Source Serif 4 и IBM Plex Sans. Новые картинки, логотип или цветовая система не предлагаются.
 
 ## Что предлагается
 

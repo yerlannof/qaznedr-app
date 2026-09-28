@@ -60,6 +60,19 @@ export const translations = {
       start: 'С чего начать',
       links: 'Участки · Контакты · Вопросы и ответы',
     },
+    mapSupport: {
+      title: 'Геологические карты и материалы по вашему участку',
+      body: 'Ищете карту золота ВКО, карту полезных ископаемых или геологические материалы по другому региону Казахстана? Напишите нам, какой район и задача вас интересуют. Обсудим, какие карты, архивные и полевые материалы нужны для вашей работы и чем могут помочь наши геологи.',
+      inputs:
+        'Для первого обращения достаточно региона, интересующего металла и цели: поиск участка, чтение карты или проверка геологических материалов. Если карта уже есть, укажите её название, год и масштаб.',
+      limits:
+        'Наличие объекта на карте само по себе не подтверждает запасы, право на участок или возможность получения лицензии. Объём и результат работы согласуем после знакомства с задачей.',
+      action: 'Обсудить задачу',
+      ctaTitle: 'От карты к предметному разговору',
+      cta: 'Нужна геологическая карта или оценка участка? Укажите регион и задачу — обсудим, какие материалы и анализ помогут.',
+      whatsapp: 'Обсудить в WhatsApp',
+      wechat: 'Обсудить в WeChat',
+    },
     holdingServices: {
       licensing: {
         title: 'Лицензирование',
@@ -179,9 +192,9 @@ export const translations = {
           'Сопровождение получения лицензии на недропользование в Казахстане, полевые геологические работы, due diligence участков и аналитика для инвесторов.',
       },
       servicesGeological: {
-        title: 'Геологоразведка и полевые работы в Казахстане',
+        title: 'Геологические карты и геологоразведка в Казахстане',
         description:
-          'Штатные геологи QAZNEDR HOLDING: выезд на участок, опробование, оценка перспектив по архивным и полевым данным.',
+          'Помощь геологов с картами и материалами по участкам Казахстана, архивный анализ и полевые работы. Обсудите регион и задачу с QAZNEDR HOLDING.',
       },
       servicesLegal: {
         title: 'Лицензирование недропользования в Казахстане',
@@ -916,6 +929,19 @@ export const translations = {
       start: 'Неден бастау керек',
       links: 'Учаскелер · Байланыс · Сұрақ-жауап',
     },
+    mapSupport: {
+      title: 'Учаскеңіз бойынша геологиялық карталар мен материалдар',
+      body: 'Шығыс Қазақстандағы алтын картасын, пайдалы қазбалар картасын немесе Қазақстанның басқа өңірі бойынша геологиялық материалдарды іздеп жүрсіз бе? Қай аудан мен қандай міндет қызықтыратынын жазыңыз. Жұмысыңызға қандай карталар, мұрағаттық және далалық материалдар қажет екенін және геологтарымыз қалай көмектесе алатынын талқылаймыз.',
+      inputs:
+        'Алғашқы өтініште өңірді, қызықтыратын металды және мақсатты көрсетсеңіз жеткілікті: учаске іздеу, картаны түсіну немесе геологиялық материалдарды тексеру. Картаңыз бар болса, оның атауын, жылын және масштабын жазыңыз.',
+      limits:
+        'Нысанның картада болуы қорларды, учаскеге құқықты немесе лицензия алу мүмкіндігін өздігінен растамайды. Жұмыстың көлемі мен нәтижесін міндетпен танысқаннан кейін келісеміз.',
+      action: 'Міндетті талқылау',
+      ctaTitle: 'Картадан нақты талқылауға',
+      cta: 'Геологиялық карта немесе учаскені бағалау қажет пе? Өңір мен міндетті көрсетіңіз — қандай материалдар мен талдау көмектесетінін талқылаймыз.',
+      whatsapp: 'WhatsApp арқылы талқылау',
+      wechat: 'WeChat арқылы талқылау',
+    },
     holdingServices: {
       licensing: {
         title: 'Лицензиялау',
@@ -1039,9 +1065,9 @@ export const translations = {
           'Қазақстанда жер қойнауын пайдалану лицензиясын алуды сүйемелдеу, далалық геологиялық жұмыстар, учаскелердің due diligence және инвесторларға арналған талдау.',
       },
       servicesGeological: {
-        title: 'Қазақстандағы геологиялық барлау және далалық жұмыстар',
+        title: 'Қазақстандағы геологиялық карталар мен геологиялық барлау',
         description:
-          'QAZNEDR HOLDING штаттағы геологтары: учаскеге шығу, сынама алу, архивтік және далалық деректер бойынша болашағын бағалау.',
+          'Қазақстан учаскелері бойынша карталар мен материалдар, мұрағаттық талдау және далалық жұмыстар жөнінде геологтардың көмегі. Өңір мен міндетті QAZNEDR HOLDING-пен талқылаңыз.',
       },
       servicesLegal: {
         title: 'Қазақстанда жер қойнауын пайдалану лицензиясы',
@@ -1703,6 +1729,19 @@ export const translations = {
       start: 'How to start',
       links: 'Areas · Contact · FAQ',
     },
+    mapSupport: {
+      title: 'Geological maps and materials for your area',
+      body: 'Looking for a gold map of East Kazakhstan, a mineral map or geological materials for another region of Kazakhstan? Tell us the area and the question you are working on. We will discuss which maps, archival and field materials your work needs and how our geologists can help.',
+      inputs:
+        'For an initial enquiry, provide the region, metal of interest and your goal: finding an area, interpreting a map or reviewing geological materials. If you already have a map, include its title, year and scale.',
+      limits:
+        'An object shown on a map does not by itself confirm reserves, rights to an area or the possibility of obtaining a licence. We agree the scope and deliverable after reviewing your task.',
+      action: 'Discuss your task',
+      ctaTitle: 'From a map to a focused discussion',
+      cta: 'Need a geological map or an area assessment? Tell us the region and your task — we will discuss which materials and analysis can help.',
+      whatsapp: 'Discuss on WhatsApp',
+      wechat: 'Discuss on WeChat',
+    },
     holdingServices: {
       licensing: {
         title: 'Licensing',
@@ -1819,9 +1858,9 @@ export const translations = {
           'Support in obtaining a subsoil use licence in Kazakhstan, field geology, due diligence of areas and analytics for investors.',
       },
       servicesGeological: {
-        title: 'Exploration and Field Geology in Kazakhstan',
+        title: 'Geological maps and exploration in Kazakhstan',
         description:
-          'QAZNEDR HOLDING staff geologists: site visits, sampling and prospect evaluation based on archival and field data.',
+          'Geologists helping with maps and materials for areas in Kazakhstan, archival analysis and fieldwork. Discuss your region and task with QAZNEDR HOLDING.',
       },
       servicesLegal: {
         title: 'Subsoil Licensing in Kazakhstan',
@@ -2471,6 +2510,19 @@ export const translations = {
       start: '如何开始',
       links: '矿区 · 联系方式 · 常见问题',
     },
+    mapSupport: {
+      title: '与您关注矿区相关的地质图和资料',
+      body: '您在寻找东哈萨克斯坦的金矿分布图、矿产图，或哈萨克斯坦其他地区的地质资料吗？请告诉我们您关注的区域和具体问题。我们将讨论您的工作需要哪些地图、档案和野外资料，以及我们的地质专家能提供什么帮助。',
+      inputs:
+        '首次咨询只需提供地区、关注的矿种和目标：寻找矿区、解读地图或核查地质资料。如果已有地图，请注明图名、年份和比例尺。',
+      limits:
+        '地图上标有某个对象，本身并不能证明储量、矿区权利或取得许可证的可能性。了解您的任务后，我们再商定工作范围和交付成果。',
+      action: '讨论您的需求',
+      ctaTitle: '从地图到具体问题的讨论',
+      cta: '需要地质图或矿区评估？请说明地区和任务，我们将讨论哪些资料和分析能够提供帮助。',
+      whatsapp: '通过 WhatsApp 沟通',
+      wechat: '通过微信沟通',
+    },
     holdingServices: {
       licensing: {
         title: '许可证办理',
@@ -2579,9 +2631,9 @@ export const translations = {
           '协助在哈萨克斯坦办理矿产资源勘查许可证、野外地质工作、矿区尽职调查及投资分析。',
       },
       servicesGeological: {
-        title: '哈萨克斯坦地质勘探与野外工作',
+        title: '哈萨克斯坦地质图与地质勘探',
         description:
-          'QAZNEDR HOLDING 自有地质团队：实地踏勘、采样，基于档案资料与野外数据评价找矿前景。',
+          '提供哈萨克斯坦矿区地图与资料解读、档案分析及野外工作的地质专业帮助。与 QAZNEDR HOLDING 讨论您关注的地区和任务。',
       },
       servicesLegal: {
         title: '哈萨克斯坦矿权许可证办理',

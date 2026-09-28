@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Scale } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
+import GeologicalSupport from '@/components/features/GeologicalSupport';
 import ClosingCta from '@/components/features/ClosingCta';
 import ArticleToc from '@/components/insights/ArticleToc';
 import { getServerTranslation } from '@/lib/i18n/translations';
@@ -173,11 +174,11 @@ export default async function InsightArticlePage({
           </section>
         )}
 
-        <ClosingCta
-          locale={locale}
-          variant="brand"
-          serviceTopic={slug === GUIDE.geologicalMap ? 'geology' : undefined}
-        />
+        {slug === GUIDE.geologicalMap ? (
+          <GeologicalSupport locale={locale} compact />
+        ) : (
+          <ClosingCta locale={locale} variant="brand" />
+        )}
       </div>
       <Footer />
     </>

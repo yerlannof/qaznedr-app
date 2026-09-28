@@ -26,6 +26,8 @@ export const GUIDE = {
   reserveClassification: 'reserve-classification-gkz-kazrc-jorc-gbt17766',
   rightsTransfer: 'subsoil-rights-transfer-permission-kazakhstan',
   geologicalMap: 'geological-map-kazakhstan',
+  artisanalMining: 'artisanal-mining-licence-kazakhstan',
+  pugfn: 'pugfn-subsoil-fund-program-kazakhstan',
 } as const;
 
 export type GuideKey = keyof typeof GUIDE;
@@ -64,9 +66,9 @@ export const INSIGHTS: readonly InsightEntry[] = [
     slug: GUIDE.rightsTransfer,
     category: 'law',
     published: '2026-09-26',
-    updated: '2026-09-26',
+    updated: '2026-09-29',
     legal: true,
-    lawAsOf: '2026-09-26',
+    lawAsOf: '2026-09-29',
     locales: WRITTEN,
   },
   {
@@ -75,6 +77,24 @@ export const INSIGHTS: readonly InsightEntry[] = [
     published: '2026-09-28',
     updated: '2026-09-28',
     legal: false,
+    locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.artisanalMining,
+    category: 'licensing',
+    published: '2026-09-29',
+    updated: '2026-09-29',
+    legal: true,
+    lawAsOf: '2026-09-29',
+    locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.pugfn,
+    category: 'licensing',
+    published: '2026-09-29',
+    updated: '2026-09-29',
+    legal: true,
+    lawAsOf: '2026-09-29',
     locales: WRITTEN,
   },
 ];

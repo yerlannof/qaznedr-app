@@ -63,7 +63,13 @@ export default async function LegalServicesPage({
           <GuideLinks
             locale={locale}
             heading={t('insights.servicesHeading')}
-            keys={['foreignInvestor', 'explorationLicence', 'rightsTransfer']}
+            keys={[
+              'foreignInvestor',
+              'explorationLicence',
+              'rightsTransfer',
+              'artisanalMining',
+              'pugfn',
+            ]}
           />
         </section>
       </div>

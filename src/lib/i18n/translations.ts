@@ -143,16 +143,22 @@ export const translations = {
         geology: 'Геология',
       },
       links: {
+        artisanalMining: 'Старательство в Казахстане: лицензия и правила',
+        pugfn: 'ПУГФН: как проверить участок перед заявкой',
         foreignInvestor:
           'Как иностранному инвестору получить право недропользования',
         explorationLicence: 'Лицензия на разведку ТПИ: процесс по шагам',
         reserveClassification:
           'Классификации запасов: ГКЗ, KAZRC/JORC, GB/T 17766',
         rightsTransfer:
-          'Сделки с правом недропользования: разрешение на переход',
+          'Можно ли продать лицензию на недропользование в Казахстане?',
         geologicalMap: 'Геологическая карта Казахстана: выбор масштаба',
       },
       summaries: {
+        artisanalMining:
+          'Кто может получить лицензию, ограничения работ, документы и порядок подготовки.',
+        pugfn:
+          'Чем программа отличается от карты и лицензии; где проверять территорию и ограничения.',
         foreignInvestor:
           'Кто может стать недропользователем и три пути входа: новая лицензия, покупка права или доли, совместное предприятие.',
         explorationLicence:
@@ -1013,15 +1019,22 @@ export const translations = {
         geology: 'Геология',
       },
       links: {
+        artisanalMining: 'Қазақстандағы кен іздеушілік: лицензия және ережелер',
+        pugfn:
+          'Жер қойнауының мемлекеттік қорын басқару бағдарламасы: учаскені тексеру',
         foreignInvestor: 'Шетелдік инвесторға жер қойнауын пайдалану құқығы',
         explorationLicence:
           'Қатты пайдалы қазбаларды барлау лицензиясы: қадамдар',
         reserveClassification: 'Қор жіктемелері: ГКЗ, KAZRC/JORC, GB/T 17766',
         rightsTransfer:
-          'Жер қойнауын пайдалану құқығымен мәмілелер: өтуге рұқсат',
+          'Қазақстанда жер қойнауын пайдалану лицензиясын сатуға бола ма?',
         geologicalMap: 'Қазақстанның геологиялық картасы: масштабты таңдау',
       },
       summaries: {
+        artisanalMining:
+          'Лицензияны кім ала алады, жұмыс шектеулері, құжаттар және дайындық тәртібі.',
+        pugfn:
+          'Бағдарламаның карта мен лицензиядан айырмашылығы; аумақ пен шектеулерді қайдан тексеруге болады.',
         foreignInvestor:
           'Кім жер қойнауын пайдаланушы бола алады және кірудің үш жолы: жаңа лицензия, құқықты не үлесті сатып алу, бірлескен кәсіпорын.',
         explorationLicence:
@@ -1811,14 +1824,20 @@ export const translations = {
         geology: 'Geology',
       },
       links: {
+        artisanalMining: 'Artisanal mining in Kazakhstan: licence and rules',
+        pugfn: 'PUGFN: checking an area before applying',
         foreignInvestor: 'Subsoil use rights for foreign investors',
         explorationLicence: 'Solid-minerals exploration licence, step by step',
         reserveClassification:
           'Reserve classifications: GKZ, KAZRC/JORC, GB/T 17766',
-        rightsTransfer: 'Subsoil rights transactions: transfer permission',
+        rightsTransfer: 'Can you sell a subsoil licence in Kazakhstan?',
         geologicalMap: 'Geological maps of Kazakhstan: choosing a scale',
       },
       summaries: {
+        artisanalMining:
+          'Who can apply, limits on operations, documents and preparation steps.',
+        pugfn:
+          'How the programme differs from a map or licence; where to check an area and restrictions.',
         foreignInvestor:
           'Who can hold subsoil use rights and three ways in: a new licence, buying a right or a stake, a joint venture.',
         explorationLicence:
@@ -2587,13 +2606,17 @@ export const translations = {
         geology: '地质',
       },
       links: {
+        artisanalMining: '哈萨克斯坦手工采矿：许可证与规则',
+        pugfn: 'PUGFN：申请前如何核查矿区',
         foreignInvestor: '外国投资者如何在哈萨克斯坦取得矿业权',
         explorationLicence: '固体矿产勘查许可证：办理流程',
         reserveClassification: '储量分类对照：GKZ、KAZRC/JORC、GB/T 17766',
-        rightsTransfer: '矿业权交易：转让许可',
+        rightsTransfer: '哈萨克斯坦的底土利用许可证可以出售吗？',
         geologicalMap: '哈萨克斯坦地质图：选择比例尺',
       },
       summaries: {
+        artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',
+        pugfn: '区分国家地下资源基金管理计划、地图和许可证，核查区域及限制。',
         foreignInvestor:
           '谁可以成为矿业权人，以及三种进入方式：申请新许可证、收购矿业权或股权、成立合资企业。',
         explorationLicence: '申请、区块、期限、义务及转入开采。',

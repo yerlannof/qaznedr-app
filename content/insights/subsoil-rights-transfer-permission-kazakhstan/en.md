@@ -1,9 +1,26 @@
 ---
-title: Subsoil use rights deals in Kazakhstan: transfer permission and the 2026 amendments
-description: When a deal over a subsoil licence or a stake in a subsoil user in Kazakhstan needs permission, review times, the State pre-emptive right and Law No. 337-VIII.
+title: Can you sell a subsoil licence in Kazakhstan?
+description: When a subsoil use right can be transferred in Kazakhstan, which licences cannot be transferred, when permission is needed and how a company share sale differs.
 ---
 
-In Kazakhstan, a transfer of a subsoil use right, and of stakes and shares in a subsoil user and in the companies that control it, requires a permission from the competent authority (Art. 44 of the Code on Subsoil and Subsoil Use), except for the exemptions in Art. 44(2). A solid minerals exploration licence cannot be transferred during the first year of its term (Art. 40). From 7 September 2026, Law No. 337-VIII exempted from the permission requirement acquisitions of stakes and shares after which the buyer holds less than 25% (previously less than 1%), and replaced the rule that a transaction made without permission is void with the possibility for a court to declare it invalid on a claim by the competent authority. This guide is based on the text of the legislation as of 26 September 2026 and is not legal advice.
+In some cases, yes, but legally this is a transfer of a subsoil use right. Permission may be required. The transfer itself is recorded by re-issuing a licence or, for a contract, amending the contract. Selling a stake in a company is a different transaction with its own conditions. Whether a deal is possible depends on the licence type, its term and what exactly is being transferred.
+
+First check the document and the subject of the offer: the right itself, an interest in the right or a stake in a company. The phrase “deposit for sale” can conceal very different arrangements.
+
+This guide reflects rules checked on 29 September 2026 and does not replace a specialist's review of your case.
+
+## Quick check
+
+| Situation                                                                                                   | Where to start                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| A solid-minerals exploration licence is less than one year old, and someone proposes transferring the right | Article 40 prohibits the transfer in the first year                                                                                     |
+| Someone proposes transferring a right under an artisanal mining licence                                     | Articles 40 and 263 prohibit transfer                                                                                                   |
+| Someone proposes transferring a right under a geological study licence                                      | Article 40 prohibits transfer                                                                                                           |
+| A right under another licence or contract is being transferred                                              | Check prohibitions and whether permission is needed; record the transfer by re-issuing the licence or amending the contract             |
+| A company stake or shares are being sold                                                                    | Check whether they are objects related to a subsoil use right and whether permission is required                                        |
+| Someone says “less than 25%, so anything is allowed”                                                        | The Article 44 exemption concerns certain stakes, units and shares, not an interest in the right itself; check the specific transaction |
+
+The sections below explain permissions, re-issue, the 2026 changes and documents to check before a transaction.
 
 ## Which transactions require permission
 

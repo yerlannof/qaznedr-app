@@ -21,4 +21,8 @@ Owner approved review12 and exact map service copy with “да давай да�
 
 ## Publication
 
-Pending push, CI/Production verification and IndexNow submission; record exact release below after completion.
+Code commit: `4425ea8252ba530cca532112e5a8b1f661322431`.
+CI `36471340423`: success. Production `6718540654`: success, same SHA.
+All eight service/guide URLs: HTTP 200, self canonical, ru/kk/en/zh-CN hreflang, description and new support block. IndexNow: HTTP 200 for 8 URLs.
+Live mobile homepage375×812: scroll mode, geometry progress and no overflow verified. RU WhatsApp includes geology topic; Chinese button “通过微信沟通” routes to /zh/contact?service=geology. No messages or leads submitted.
+A documentation-only follow-up records these results; no application changes after the verified code commit.

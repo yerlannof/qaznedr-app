@@ -51,3 +51,12 @@ it('renders the approved Chinese headline without spaces between fragments', () 
     '面向投资者的哈萨克斯坦矿区'
   );
 });
+
+it('shows no area or region counts while the showcase is empty', () => {
+  render(<PortalWelcomeHero locale="ru" stats={{ total: 0, regions: 0 }} />);
+  expect(
+    screen.getByText('Рудных объектов в нашем реестре')
+  ).toBeInTheDocument();
+  expect(screen.queryByText('Участков на витрине')).not.toBeInTheDocument();
+  expect(screen.queryByText('Областей Казахстана')).not.toBeInTheDocument();
+});

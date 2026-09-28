@@ -98,7 +98,7 @@ export default function PortalWelcomeHero({
               {number(7152)}
             </dd>
           </div>
-          {stats && (
+          {stats && stats.total > 0 && (
             <>
               <div>
                 <dt className="text-sm text-brand-muted">

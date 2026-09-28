@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>11 · Согласие на аналитику — предложение</title>
+    <style>
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-Regular.woff2')
+          format('woff2');
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-SemiBold.woff2')
+          format('woff2');
+        font-weight: 600;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Serif;
+        src: url('../../../public/brand/fonts/SourceSerif4Display-Regular.ttf.woff2')
+          format('woff2');
+        font-display: swap;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      :root {
+        color-scheme: light;
+        font-family: Plex, Arial, sans-serif;
+        background: #e9ece6;
+        color: #253740;
+      }
+      body {
+        margin: 0;
+      }
+      button,
+      input {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible {
+        outline: 3px solid #9ca32f;
+        outline-offset: 3px;
+      }
+      .review {
+        max-width: 1440px;
+        margin: auto;
+        padding: 34px 24px 80px;
+      }
+      .review h1 {
+        font:
+          400 clamp(32px, 4vw, 52px) / 1.08 Serif,
+          Georgia,
+          serif;
+        margin: 0 0 12px;
+      }
+      .intro {
+        max-width: 840px;
+        font-size: 16px;
+        line-height: 1.55;
+        color: #51616a;
+        margin: 0 0 30px;
+      }
+      .rule {
+        border-top: 1px solid #64747a;
+        padding-top: 18px;
+        margin: 34px 0 14px;
+      }
+      .rule h2 {
+        font:
+          400 28px/1.15 Serif,
+          Georgia,
+          serif;
+        margin: 0 0 8px;
+      }
+      .rule p {
+        color: #51616a;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .frame {
+        margin: 22px 0 42px;
+        border: 1px solid #64747a;
+        box-shadow: 0 2px 8px #25374018;
+      }
+      .frame-label {
+        background: #253740;
+        color: #e9ece6;
+        font-size: 12px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        padding: 9px 14px;
+      }
+      .screen {
+        --bg: #e9ece6;
+        --surface: #f4f5f0;
+        --ink: #253740;
+        --muted: #51616a;
+        --line: #64747a;
+        --action: #253740;
+        --action-ink: #e9ece6;
+        --focus: #253740;
+        position: relative;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+      }
+      .screen[data-theme='dark'] {
+        --bg: #253740;
+        --surface: #30434c;
+        --ink: #e9ece6;
+        --muted: #cad2ca;
+        --line: #8fa19e;
+        --action: #e9ece6;
+        --action-ink: #253740;
+        --focus: #dde55e;
+      }
+      .screen button:focus-visible,
+      .screen a:focus-visible,
+      .screen input:focus-visible {
+        outline-color: var(--focus);
+      }
+      .desktop .screen {
+        min-height: 620px;
+      }
+      .mobile {
+        width: 375px;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .mobile .screen {
+        min-height: 667px;
+      }
+      .site-nav {
+        height: 76px;
+        max-width: 1200px;
+        padding: 0 26px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+      }
+      .site-nav img {
+        width: 156px;
+        height: auto;
+      }
+      .screen[data-theme='dark'] .logo-light {
+        display: none;
+      }
+      .screen[data-theme='light'] .logo-dark {
+        display: none;
+      }
+      .nav-text {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .page {
+        max-width: 1200px;
+        margin: auto;
+        padding: 45px 26px 160px;
+      }
+      .eyebrow {
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin: 0 0 20px;
+      }
+      .page h3 {
+        font:
+          400 clamp(34px, 5vw, 58px) / 1.09 Serif,
+          Georgia,
+          serif;
+        max-width: 680px;
+        margin: 0 0 22px;
+      }
+      .page p:last-child {
+        max-width: 580px;
+        color: var(--muted);
+        line-height: 1.55;
+        margin: 0;
+      }
+      .site-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-top: 1px solid var(--line);
+        min-height: 58px;
+        padding: 14px 26px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .footer-open {
+        border: 0;
+        padding: 10px 0;
+        background: transparent;
+        color: var(--ink);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        min-height: 44px;
+      }
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: #13262d70;
+        z-index: 2;
+        display: none;
+      }
+      .screen[data-mode='settings'] .overlay {
+        display: block;
+      }
+      .consent {
+        position: absolute;
+        z-index: 3;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 22px max(26px, calc((100% - 1200px) / 2));
+        background: var(--surface);
+        border-top: 2px solid var(--line);
+      }
+      .consent[hidden] {
+        display: none;
+      }
+      .consent-head {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .consent h4 {
+        font:
+          400 28px/1.12 Serif,
+          Georgia,
+          serif;
+        margin: 0 0 10px;
+      }
+      .consent-copy {
+        max-width: 730px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.48;
+        margin: 0;
+      }
+      .consent-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+      .action {
+        background: var(--action);
+        color: var(--action-ink);
+        border: 1px solid var(--action);
+        min-height: 48px;
+        padding: 11px 18px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .action:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .settings-open {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        min-height: 48px;
+        padding: 11px 18px;
+        font-size: 14px;
+      }
+      .settings {
+        display: none;
+        position: absolute;
+        z-index: 4;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 24px;
+        width: min(540px, calc(100% - 32px));
+        background: var(--surface);
+        color: var(--ink);
+        border: 1px solid var(--line);
+        padding: 24px;
+        max-height: calc(100% - 48px);
+        overflow: auto;
+      }
+      .screen[data-mode='settings'] .settings {
+        display: block;
+      }
+      .settings h4 {
+        font:
+          400 28px/1.12 Serif,
+          Georgia,
+          serif;
+        margin: 0 0 12px;
+      }
+      .settings-lead,
+      .settings-note {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+        margin: 0 0 16px;
+      }
+      .option {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        padding: 16px 0;
+        border-top: 1px solid var(--line);
+      }
+      .option strong {
+        display: block;
+        font-size: 15px;
+        margin-bottom: 5px;
+      }
+      .option p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+        margin: 0;
+      }
+      .option input {
+        width: 22px;
+        height: 22px;
+        accent-color: #253740;
+        margin: 2px;
+      }
+      .option input:disabled {
+        opacity: 0.6;
+      }
+      .settings .action {
+        width: 100%;
+      }
+      .settings .settings-close {
+        border: 0;
+        color: var(--ink);
+        background: transparent;
+        min-height: 44px;
+        padding: 8px 0;
+        margin-top: 8px;
+        text-decoration: underline;
+      }
+      .state {
+        display: none;
+        position: absolute;
+        z-index: 2;
+        right: 26px;
+        bottom: 76px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        color: var(--ink);
+        padding: 10px 14px;
+        font-size: 12px;
+      }
+      .screen[data-mode='decided'] .state {
+        display: block;
+      }
+      .mobile .site-nav {
+        height: 68px;
+        padding: 0 18px;
+      }
+      .mobile .site-nav img {
+        width: 137px;
+      }
+      .mobile .nav-text {
+        font-size: 12px;
+      }
+      .mobile .page {
+        padding: 36px 18px 200px;
+      }
+      .mobile .page h3 {
+        font-size: 36px;
+      }
+      .mobile .page p:last-child {
+        font-size: 14px;
+      }
+      .mobile .site-footer {
+        padding: 8px 18px;
+      }
+      .mobile .consent {
+        padding: 18px;
+      }
+      .mobile .consent h4 {
+        font-size: 24px;
+      }
+      .mobile .consent-copy {
+        font-size: 12px;
+        line-height: 1.42;
+      }
+      .mobile .consent-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 7px;
+        margin-top: 13px;
+      }
+      .mobile .action,
+      .mobile .settings-open {
+        width: 100%;
+        min-height: 48px;
+        font-size: 13px;
+        padding: 9px 12px;
+      }
+      .mobile .settings {
+        bottom: 10px;
+        max-height: calc(100% - 20px);
+        padding: 18px;
+      }
+      .mobile .settings h4 {
+        font-size: 24px;
+      }
+      .mobile .settings-lead,
+      .mobile .settings-note,
+      .mobile .option p {
+        font-size: 12px;
+      }
+      .mobile .state {
+        right: 18px;
+        bottom: 70px;
+      }
+      .control {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0 0 14px;
+      }
+      .control button {
+        min-height: 38px;
+        border: 1px solid #64747a;
+        background: transparent;
+        color: #253740;
+        padding: 7px 12px;
+      }
+      .control button[aria-pressed='true'] {
+        background: #253740;
+        color: #e9ece6;
+      }
+      .notes {
+        padding: 22px;
+        border: 1px solid #64747a;
+        background: #f4f5f0;
+        line-height: 1.55;
+        max-width: 850px;
+      }
+      .notes p {
+        margin: 0 0 10px;
+      }
+      .notes p:last-child {
+        margin-bottom: 0;
+      }
+      @media (max-width: 700px) {
+        .review {
+          padding: 24px 12px 60px;
+        }
+        .desktop .consent {
+          padding: 18px;
+        }
+        .desktop .page {
+          padding: 32px 18px 230px;
+        }
+        .desktop .consent-actions {
+          display: grid;
+        }
+        .desktop .consent-actions > * {
+          width: 100%;
+        }
+        .desktop .site-nav {
+          padding: 0 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="review">
+      <h1>11 · Согласие на аналитику</h1>
+      <p class="intro">
+        Предложение для QAZNEDR HOLDING: компактный нижний блок, равные решения
+        «Принять аналитику» и «Отклонить», отдельные настройки. Это просмотр
+        дизайна; кнопки ниже не загружают счётчики и не сохраняют выбор.
+      </p>
+      <div class="control" aria-label="Тема макета">
+        <span>Показать тему:</span>
+        <button type="button" data-review-theme="light" aria-pressed="true">
+          Светлая
+        </button>
+        <button type="button" data-review-theme="dark" aria-pressed="false">
+          Тёмная
+        </button>
+      </div>
+      <div class="rule">
+        <h2>Широкий экран · 1440 px</h2>
+        <p>
+          Нижний блок не перекрывает основное действие страницы. Кнопки согласия
+          одинаковы по весу и размеру.
+        </p>
+      </div>
+      <div class="frame desktop">
+        <div class="frame-label">Desktop · интерактивный просмотр</div>
+        <div class="screen" data-theme="light" data-mode="banner"></div>
+      </div>
+      <div class="rule">
+        <h2>Телефон · 375 px</h2>
+        <p>
+          Три действия помещаются без горизонтальной прокрутки. Каждая кнопка
+          доступна для нажатия большим пальцем.
+        </p>
+      </div>
+      <div class="frame mobile">
+        <div class="frame-label">Mobile · 375 px</div>
+        <div class="screen" data-theme="light" data-mode="banner"></div>
+      </div>
+      <div class="notes">
+        <p>
+          <strong>Решение владельца:</strong> принять этот текст и расположение
+          блока либо указать правки. Новый GA4/Метрика код появится только после
+          отдельного технического выпуска с реальными ID, проверкой согласия и
+          переводов RU/KZ/EN/ZH.
+        </p>
+        <p>
+          Реклама выключена и недоступна; Webvisor/Вебвизор и рекламные пиксели
+          не входят в решение. Макет не подтверждает юридическую достаточность
+          текста.
+        </p>
+      </div>
+    </main>
+    <template id="site">
+      <div class="site-nav">
+        <img
+          class="logo-light"
+          src="../../../public/brand/logo-horizontal.svg"
+          alt="QAZNEDR HOLDING"
+        /><img
+          class="logo-dark"
+          src="../../../public/brand/logo-horizontal-inverse.svg"
+          alt="QAZNEDR HOLDING"
+        /><span class="nav-text">RU · KZ · EN · 中文</span>
+      </div>
+      <div class="page">
+        <p class="eyebrow">QAZNEDR HOLDING</p>
+        <h3>Участки недр Казахстана для инвесторов</h3>
+        <p>
+          Сайт-витрина отобранных геологами участков, геологических работ и
+          сопровождения лицензирования.
+        </p>
+      </div>
+      <div class="site-footer">
+        <span>QAZNEDR HOLDING</span
+        ><button class="footer-open" type="button">Настройки аналитики</button>
+      </div>
+      <div class="state" role="status">Выбор сохранён для макета</div>
+      <div class="consent">
+        <div class="consent-head">
+          <div>
+            <h4>Настройки аналитики</h4>
+            <p class="consent-copy">
+              С вашего согласия Google Analytics 4 и Яндекс Метрика помогут нам
+              понять, какие страницы смотрят и какие действия выполняют
+              посетители. Мы не передаём этим счётчикам контакты и текст заявок.
+              Они могут получать технические данные браузера. Рекламные
+              инструменты пока не подключены.
+            </p>
+          </div>
+        </div>
+        <div class="consent-actions">
+          <button class="action accept" type="button">Принять аналитику</button
+          ><button class="action reject" type="button">Отклонить</button
+          ><button class="settings-open" type="button">Настройки</button>
+        </div>
+      </div>
+      <div class="overlay"></div>
+      <div
+        class="settings"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Настройки аналитики"
+      >
+        <h4>Настройки аналитики</h4>
+        <p class="settings-lead">
+          Выберите, какие необязательные инструменты можно использовать. Без
+          выбора аналитика не запускается.
+        </p>
+        <label class="option"
+          ><span
+            ><strong>Аналитика</strong>
+            <p>
+              Посещения страниц и действия на сайте для улучшения витрины.
+              Google Analytics 4 и Яндекс Метрика загружаются только после
+              согласия.
+            </p></span
+          ><input class="analytics-choice" type="checkbox" /></label
+        ><label class="option"
+          ><span
+            ><strong>Реклама</strong>
+            <p>
+              Пока не используется. Рекламные инструменты будут отдельным
+              решением и потребуют нового согласия.
+            </p></span
+          ><input type="checkbox" disabled aria-label="Реклама пока недоступна"
+        /></label>
+        <p class="settings-note">
+          Выбор можно изменить через ссылку в футере. Отключение остановит
+          будущий сбор, но не удалит уже переданные данные.
+        </p>
+        <button class="action save" type="button">Сохранить выбор</button
+        ><button class="settings-close" type="button">Вернуться</button>
+      </div>
+    </template>
+    <script>
+      const markup = document.getElementById('site').innerHTML;
+      document.querySelectorAll('.screen').forEach((screen) => {
+        screen.innerHTML = markup;
+        const banner = screen.querySelector('.consent');
+        const choice = screen.querySelector('.analytics-choice');
+        const showSettings = () => {
+          screen.dataset.mode = 'settings';
+          choice.focus();
+        };
+        const decide = (analytics) => {
+          choice.checked = analytics;
+          banner.hidden = true;
+          screen.dataset.mode = 'decided';
+          screen.querySelector('.state').textContent = analytics
+            ? 'Аналитика: включена · реклама: выключена'
+            : 'Аналитика: выключена · реклама: выключена';
+        };
+        screen
+          .querySelector('.accept')
+          .addEventListener('click', () => decide(true));
+        screen
+          .querySelector('.reject')
+          .addEventListener('click', () => decide(false));
+        screen
+          .querySelector('.settings-open')
+          .addEventListener('click', showSettings);
+        screen
+          .querySelector('.footer-open')
+          .addEventListener('click', showSettings);
+        screen
+          .querySelector('.save')
+          .addEventListener('click', () => decide(choice.checked));
+        screen
+          .querySelector('.settings-close')
+          .addEventListener('click', () => {
+            screen.dataset.mode = banner.hidden ? 'decided' : 'banner';
+          });
+      });
+      document.querySelectorAll('[data-review-theme]').forEach((button) =>
+        button.addEventListener('click', () => {
+          const theme = button.dataset.reviewTheme;
+          document.querySelectorAll('.screen').forEach((screen) => {
+            screen.dataset.theme = theme;
+          });
+          document.querySelectorAll('[data-review-theme]').forEach((item) => {
+            item.setAttribute('aria-pressed', String(item === button));
+          });
+        })
+      );
+    </script>
+  </body>
+</html>

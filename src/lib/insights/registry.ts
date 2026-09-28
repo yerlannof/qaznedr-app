@@ -30,7 +30,7 @@ export const GUIDE = {
 export type GuideKey = keyof typeof GUIDE;
 export const GUIDE_KEYS = Object.keys(GUIDE) as GuideKey[];
 
-const WRITTEN: readonly Locale[] = ['ru', 'en', 'zh'];
+const WRITTEN: readonly Locale[] = ['ru', 'en', 'zh', 'kz'];
 
 export const INSIGHTS: readonly InsightEntry[] = [
   {

@@ -6,7 +6,7 @@ import GuideLinks from '@/components/features/GuideLinks';
 import { faqFor, faqJsonLd } from '@/lib/content/faq';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
-import { toLocale } from '@/lib/seo/site';
+import { HREFLANG, toLocale } from '@/lib/seo/site';
 
 export async function generateMetadata({
   params,
@@ -58,7 +58,7 @@ export default async function FaqPage({
             {items.map(({ q, a }) => (
               <div
                 key={q}
-                lang={locale === 'kz' ? 'ru' : locale}
+                lang={HREFLANG[locale]}
                 className="py-8 first:pt-0 last:pb-0"
               >
                 <h2 className="font-serif text-2xl text-brand-ink tracking-tight mb-3">

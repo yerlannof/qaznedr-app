@@ -10,10 +10,10 @@ describe('insightHref', () => {
     );
   });
 
-  it('links kz readers straight to the ru version (no 308 hop)', () => {
-    expect(insightHref('kz', GUIDE.rightsTransfer)).toBe(
-      `/ru/insights/${GUIDE.rightsTransfer}`
-    );
+  it('links kz readers to the translated guide (no 308 hop)', () => {
+    for (const slug of Object.values(GUIDE)) {
+      expect(insightHref('kz', slug)).toBe(`/kz/insights/${slug}`);
+    }
   });
 });
 

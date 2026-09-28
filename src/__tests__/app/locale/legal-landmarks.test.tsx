@@ -9,22 +9,35 @@ jest.mock('@/components/layouts/Footer', () => () => null);
 jest.mock('@/components/features/ClosingCta', () => () => null);
 jest.mock('@/components/features/GuideLinks', () => () => null);
 
-describe('localized FAQ and Russian terms landmarks', () => {
-  it('marks the Russian FAQ fallback with lang=ru for kz readers', async () => {
+describe('localized FAQ and terms landmarks', () => {
+  it.each([
+    ['ru', 'ru', 'Что делает QAZNEDR HOLDING?'],
+    ['kz', 'kk', 'QAZNEDR HOLDING немен айналысады?'],
+    ['en', 'en', 'What does QAZNEDR HOLDING do?'],
+    ['zh', 'zh-CN', 'QAZNEDR HOLDING 做什么？'],
+  ])('renders FAQ in %s with lang=%s', async (locale, lang, question) => {
     const html = renderToStaticMarkup(
-      await FaqPage({ params: Promise.resolve({ locale: 'kz' }) })
+      await FaqPage({ params: Promise.resolve({ locale }) })
     );
-    expect(html).toContain('lang="ru"');
-    expect(html).toContain('Что делает QAZNEDR HOLDING?');
+    expect(html).toContain(`lang="${lang}"`);
+    expect(html).toContain(question);
   });
 
-  it('keeps Russian terms language-marked without nesting a main landmark', async () => {
-    const html = renderToStaticMarkup(
-      await TermsPage({ params: Promise.resolve({ locale: 'en' }) })
-    );
-    expect(html).toContain('lang="ru"');
-    expect(html).not.toContain('<main');
-    expect(html).not.toContain('</main>');
-    expect(html).toContain('Условия использования');
-  });
+  it.each([
+    ['ru', 'ru', 'Условия использования'],
+    ['kz', 'kk', 'Пайдалану шарттары'],
+    ['en', 'en', 'Terms of Use'],
+    ['zh', 'zh-CN', '使用条款'],
+  ])(
+    'renders terms in %s with lang=%s without nested main',
+    async (locale, lang, heading) => {
+      const html = renderToStaticMarkup(
+        await TermsPage({ params: Promise.resolve({ locale }) })
+      );
+      expect(html).toContain(`lang="${lang}"`);
+      expect(html).toContain(heading);
+      expect(html).not.toContain('<main');
+      expect(html).not.toContain('</main>');
+    }
+  );
 });

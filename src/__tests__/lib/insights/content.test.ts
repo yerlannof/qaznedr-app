@@ -138,11 +138,10 @@ describe('parseArticle rejects a second H1', () => {
 });
 
 describe('listArticles', () => {
-  // Runs against the real content/ folder; guides land in Task 7–8.
-  it('falls back to the ru version for locales without a translation', () => {
+  it('lists all translated guides in Kazakh', () => {
     const cards = listArticles('kz');
-    for (const card of cards) expect(card.locale).toBe('ru');
-    expect(cards.length).toBeLessThanOrEqual(INSIGHTS.length);
+    expect(cards).toHaveLength(INSIGHTS.length);
+    for (const card of cards) expect(card.locale).toBe('kz');
   });
 });
 
@@ -162,7 +161,7 @@ describe('getArticle', () => {
     expect(() => getArticle(GUIDE.foreignInvestor, 'ru')).toThrow(/ENOENT/);
   });
 
-  it('returns null for a language the guide is not written in', () => {
-    expect(getArticle(GUIDE.foreignInvestor, 'kz')).toBeNull();
+  it('returns the Kazakh guide when the registry lists its translation', () => {
+    expect(getArticle(GUIDE.foreignInvestor, 'kz')?.locale).toBe('kz');
   });
 });

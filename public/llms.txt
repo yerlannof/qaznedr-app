@@ -24,12 +24,12 @@
 | Қазақша | https://qaznedr.kz/kz | https://qaznedr.kz/kz/leads | https://qaznedr.kz/kz/contact |
 
 ## Guides
-| Guide | English | 中文 | Русский |
-|---|---|---|---|
-| Subsoil use rights for foreign investors | https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan | https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan | https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan |
-| Solid-minerals exploration licence, step by step | https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan | https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan | https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan |
-| Reserve classifications: GKZ, KAZRC/JORC, GB/T 17766 | https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766 | https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766 | https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766 |
-| Subsoil rights transactions: transfer permission | https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan | https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan | https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan |
+| Guide | English | 中文 | Русский | Қазақша |
+|---|---|---|---|---|
+| Subsoil use rights for foreign investors | https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan | https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan | https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan | https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan |
+| Solid-minerals exploration licence, step by step | https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan | https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan | https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan | https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan |
+| Reserve classifications: GKZ, KAZRC/JORC, GB/T 17766 | https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766 | https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766 | https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766 | https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766 |
+| Subsoil rights transactions: transfer permission | https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan | https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan | https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan | https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan |
 
 All guides: https://qaznedr.kz/en/insights
 

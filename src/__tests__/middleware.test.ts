@@ -88,35 +88,30 @@ describe('hidden marketplace routes', () => {
   });
 });
 
-describe('guides without a translation', () => {
+describe('translated Kazakh guides', () => {
   const slug = 'foreign-investor-subsoil-rights-kazakhstan';
 
-  it('sends kz readers to the ru version with 308', () => {
+  it('serves the Kazakh guide without a redirect', () => {
     const res = middleware(
       new NextRequest(`https://qaznedr.kz/kz/insights/${slug}`)
     );
-    expect(res.status).toBe(308);
-    expect(res.headers.get('location')).toBe(
-      `https://qaznedr.kz/ru/insights/${slug}`
-    );
+    expect(res.headers.get('location')).toBeNull();
   });
 
-  it('preserves UTM and other query parameter values', () => {
+  it('keeps query parameters on the Kazakh guide without redirecting', () => {
     const res = middleware(
       new NextRequest(
         `https://qaznedr.kz/kz/insights/${slug}?utm_source=wechat&utm_campaign=a%20b`
       )
     );
-    expect(res.status).toBe(308);
-    expect(res.headers.get('location')).toBe(
-      `https://qaznedr.kz/ru/insights/${slug}?utm_source=wechat&utm_campaign=a%20b`
-    );
+    expect(res.headers.get('location')).toBeNull();
   });
 
   it('serves written languages, the index and unknown slugs as is', () => {
     for (const p of [
       `/zh/insights/${slug}`,
       `/ru/insights/${slug}`,
+      `/kz/insights/${slug}`,
       '/kz/insights',
       '/kz/insights/unknown-guide',
     ]) {

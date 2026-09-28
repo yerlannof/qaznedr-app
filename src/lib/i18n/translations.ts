@@ -3,6 +3,25 @@
 
 export const translations = {
   ru: {
+    consent: {
+      title: 'Настройки аналитики',
+      banner:
+        'С вашего согласия Google Analytics 4 и Яндекс Метрика помогут нам понять, какие страницы смотрят и какие действия выполняют посетители. Мы не передаём этим счётчикам контакты и текст заявок. Они могут получать технические данные браузера. Рекламные инструменты пока не подключены.',
+      accept: 'Принять аналитику',
+      reject: 'Отклонить',
+      settings: 'Настройки',
+      settingsLead:
+        'Выберите, какие необязательные инструменты можно использовать. Без выбора аналитика не запускается.',
+      analytics: 'Аналитика',
+      analyticsText:
+        'Посещения страниц и действия на сайте для улучшения витрины. Google Analytics 4 и Яндекс Метрика загружаются только после согласия.',
+      advertising: 'Реклама',
+      advertisingText:
+        'Пока не используется. Рекламные инструменты будут отдельным решением и потребуют нового согласия.',
+      note: 'Выбор можно изменить через ссылку в футере. Отключение остановит будущий сбор, но не удалит уже переданные данные.',
+      save: 'Сохранить выбор',
+      back: 'Вернуться',
+    },
     geologyScene: {
       section: '01 — 03 / чтение разреза',
       note: 'Иллюстрация условная: показывает способ чтения геологического материала, не глубину, масштаб или данные какого-либо участка.',
@@ -834,6 +853,25 @@ export const translations = {
     },
   },
   kz: {
+    consent: {
+      title: 'Аналитика баптаулары',
+      banner:
+        'Сіздің келісіміңізбен Google Analytics 4 және Яндекс Метрика келушілер қандай беттерді қарап, сайтта қандай әрекеттер жасайтынын түсінуге көмектеседі. Біз бұл есептегіштерге байланыс деректерін және өтінім мәтінін жібермейміз. Олар браузердің техникалық деректерін алуы мүмкін. Жарнама құралдары әзірге қосылмаған.',
+      accept: 'Аналитиканы қабылдау',
+      reject: 'Бас тарту',
+      settings: 'Баптаулар',
+      settingsLead:
+        'Қай міндетті емес құралдарды қолдануға болатынын таңдаңыз. Таңдау жасалмайынша аналитика қосылмайды.',
+      analytics: 'Аналитика',
+      analyticsText:
+        'Сайтты жақсарту үшін беттерді қарау мен сайттағы әрекеттер. Google Analytics 4 және Яндекс Метрика келісімнен кейін ғана жүктеледі.',
+      advertising: 'Жарнама',
+      advertisingText:
+        'Әзірге қолданылмайды. Жарнама құралдары бөлек шешімді және жаңа келісімді талап етеді.',
+      note: 'Таңдауды футердегі сілтеме арқылы өзгертуге болады. Өшіру болашақ жинауды тоқтатады, бірақ бұрын жіберілген деректерді жоймайды.',
+      save: 'Таңдауды сақтау',
+      back: 'Артқа',
+    },
     geologyScene: {
       section: '01 — 03 / қиманы оқу',
       note: 'Бұл сызба геологиялық материалды оқу тәсілін ғана көрсетеді; нақты учаскенің тереңдігін, масштабын немесе деректерін білдірмейді.',
@@ -1600,6 +1638,25 @@ export const translations = {
     },
   },
   en: {
+    consent: {
+      title: 'Analytics settings',
+      banner:
+        'With your consent, Google Analytics 4 and Yandex Metrica help us understand which pages visitors view and which actions they take on the site. We do not send contact details or inquiry text to these counters. They may receive technical browser data. Advertising tools are not connected yet.',
+      accept: 'Accept analytics',
+      reject: 'Reject',
+      settings: 'Settings',
+      settingsLead:
+        'Choose which optional tools may be used. Analytics stays off until you decide.',
+      analytics: 'Analytics',
+      analyticsText:
+        'Page visits and site actions to improve the showcase. Google Analytics 4 and Yandex Metrica load only after consent.',
+      advertising: 'Advertising',
+      advertisingText:
+        'Not in use yet. Advertising tools will require a separate decision and fresh consent.',
+      note: 'You can change your choice through the footer link. Turning analytics off stops future collection but does not delete data already sent.',
+      save: 'Save choice',
+      back: 'Back',
+    },
     geologyScene: {
       section: '01 — 03 / reading the section',
       note: 'This illustration shows a way to read geological material. It does not represent the depth, scale or data of any area.',
@@ -2351,6 +2408,24 @@ export const translations = {
     },
   },
   zh: {
+    consent: {
+      title: '数据分析设置',
+      banner:
+        '经您同意后，Google Analytics 4 和 Yandex Metrica 将帮助我们了解访客浏览的页面及在网站上的操作。我们不会向这些统计工具发送联系方式或咨询内容。它们可能接收浏览器技术数据。广告工具目前尚未启用。',
+      accept: '接受数据分析',
+      reject: '拒绝',
+      settings: '设置',
+      settingsLead:
+        '请选择允许使用的非必要工具。在您作出选择前，数据分析不会启用。',
+      analytics: '数据分析',
+      analyticsText:
+        '用于改进展示网站的页面访问和站内操作统计。Google Analytics 4 和 Yandex Metrica 仅在获得同意后加载。',
+      advertising: '广告',
+      advertisingText: '目前未使用。广告工具将另行决定，并需要重新取得同意。',
+      note: '您可通过页脚链接更改选择。关闭后将停止今后的收集，但不会删除已发送的数据。',
+      save: '保存选择',
+      back: '返回',
+    },
     geologyScene: {
       section: '01 — 03 / 阅读剖面',
       note: '此示意图仅展示地质材料的阅读方式，不表示任何矿区的深度、比例或数据。',

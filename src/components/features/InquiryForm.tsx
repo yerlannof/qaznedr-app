@@ -1,14 +1,17 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { track } from '@vercel/analytics';
+import { safeTrack } from '@/lib/analytics/events';
+import { readAttribution } from '@/lib/analytics/attribution';
 import { CheckCircle2 } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import { INQUIRY_CHANNELS, type InquiryChannel } from '@/lib/inquiries/schema';
+import type { ServiceTopic } from '@/lib/services/topics';
 
 interface InquiryFormProps {
   locale: string;
   leadCode?: string;
+  serviceTopic?: ServiceTopic;
   initialMessage?: string;
 }
 
@@ -26,19 +29,10 @@ const input =
   'brand-focus w-full min-h-11 border border-brand-line bg-brand-surface px-3 py-2 text-sm text-brand-ink';
 const label = 'mb-1 block text-xs font-medium text-brand-muted';
 
-function readUtm(): Record<string, string> | undefined {
-  const params = new URLSearchParams(window.location.search);
-  const utm: Record<string, string> = {};
-  for (const key of ['source', 'medium', 'campaign', 'term', 'content']) {
-    const value = params.get(`utm_${key}`);
-    if (value) utm[key] = value.slice(0, 200);
-  }
-  return Object.keys(utm).length ? utm : undefined;
-}
-
 export default function InquiryForm({
   locale,
   leadCode,
+  serviceTopic,
   initialMessage = '',
 }: InquiryFormProps) {
   const t = (key: string) => translate(locale, key);
@@ -66,7 +60,10 @@ export default function InquiryForm({
           leadCode,
           locale,
           sourcePath: window.location.pathname,
-          utm: readUtm(),
+          utm: readAttribution(
+            window.location.pathname,
+            window.location.search
+          ),
           website: form.get('website') ?? '',
           elapsedMs: Date.now() - startedAt.current,
         }),
@@ -75,7 +72,12 @@ export default function InquiryForm({
       if (res.status === 400) return setState('invalid');
       const json = await res.json();
       if (!json.success) return setState('error');
-      track('inquiry_submit', { lead: leadCode ?? '', channel });
+      safeTrack('inquiry_submit', {
+        lead: leadCode ?? '',
+        channel,
+        locale,
+        topic: serviceTopic,
+      });
       setState('done');
     } catch {
       setState('error');

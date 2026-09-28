@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { isPublicPath } from '@/lib/analytics/attribution';
 
 export const INQUIRY_CHANNELS = [
   'wechat',
@@ -42,6 +43,17 @@ export const inquirySchema = z.object({
       campaign: utmValue,
       term: utmValue,
       content: utmValue,
+      landing_path: z
+        .string()
+        .max(300)
+        .regex(/^\/(?:ru|kz|en|zh)(?:\/[A-Za-z0-9/-]*)?$/)
+        .refine(isPublicPath)
+        .optional(),
+      referrer_host: z
+        .string()
+        .max(253)
+        .regex(/^[a-z0-9-]+(?:\.[a-z0-9-]+)+$/i)
+        .optional(),
     })
     .optional(),
   // Honeypot: real users never see or fill this field.

@@ -1,5 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import ContactChannels from '@/components/features/ContactChannels';
+import { track } from '@vercel/analytics';
 
 jest.mock('@vercel/analytics', () => ({ track: jest.fn() }));
 
@@ -16,6 +17,7 @@ const order = (container: HTMLElement) =>
   );
 
 describe('ContactChannels', () => {
+  beforeEach(() => (track as jest.Mock).mockReset());
   it('puts WeChat first for Chinese visitors', () => {
     const { container } = render(
       <ContactChannels config={full} locale="zh" leadCode="AU-1" />
@@ -78,6 +80,48 @@ describe('ContactChannels', () => {
     render(<ContactChannels config={full} locale="zh" />);
     fireEvent.click(screen.getByRole('button', { name: '复制' }));
     expect(await screen.findByText('已复制')).toBeInTheDocument();
+    expect(track).toHaveBeenCalledWith(
+      'wechat_copy',
+      expect.objectContaining({ locale: 'zh', lead: '' })
+    );
+  });
+
+  it('tracks only successful copies and tracks email context without contact content', async () => {
+    const writeText = jest.fn().mockRejectedValue(new Error('denied'));
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText },
+      configurable: true,
+    });
+    render(
+      <ContactChannels
+        config={full}
+        locale="en"
+        leadCode="AU-1"
+        serviceTopic="licensing"
+      />
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Copy' }));
+    await waitFor(() => expect(writeText).toHaveBeenCalledTimes(1));
+    expect(track).not.toHaveBeenCalledWith('wechat_copy', expect.anything());
+    writeText.mockResolvedValue(undefined);
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Copy AU-1 · Licensing' })
+    );
+    await waitFor(() =>
+      expect(track).toHaveBeenCalledWith('contact_context_copy', {
+        locale: 'en',
+        lead: 'AU-1',
+        topic: 'licensing',
+      })
+    );
+    const email = screen.getByRole('link', { name: 'info@qaznedr.kz' });
+    email.addEventListener('click', (event) => event.preventDefault());
+    fireEvent.click(email);
+    expect(track).toHaveBeenCalledWith('click_email', {
+      locale: 'en',
+      lead: 'AU-1',
+      topic: 'licensing',
+    });
   });
 
   it('keeps the area code visible by WeChat and copies it separately from the WeChat ID', async () => {

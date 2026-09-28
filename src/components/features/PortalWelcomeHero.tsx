@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight, MessageCircle } from 'lucide-react';
-import { track } from '@vercel/analytics';
+import { safeTrack } from '@/lib/analytics/events';
 import { translate } from '@/lib/i18n/translations';
 import { getContactConfig, primaryContactCta } from '@/lib/config/contacts';
 
@@ -54,7 +54,11 @@ export default function PortalWelcomeHero({
                   rel="noopener noreferrer"
                   className="brand-button-secondary"
                   onClick={() =>
-                    track('click_whatsapp', { lead: '', place: 'hero' })
+                    safeTrack('click_whatsapp', {
+                      locale,
+                      lead: '',
+                      place: 'hero',
+                    })
                   }
                 >
                   <MessageCircle aria-hidden className="w-5 h-5 shrink-0" />

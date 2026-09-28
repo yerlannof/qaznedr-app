@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { track } from '@vercel/analytics';
+import { safeTrack } from '@/lib/analytics/events';
 import { Check, Copy, Mail, MessageCircle } from 'lucide-react';
 import type { ServiceTopic } from '@/lib/services/topics';
 import { translate } from '@/lib/i18n/translations';
@@ -42,10 +42,15 @@ export default function ContactChannels({
 
   const copyWeChat = async () => {
     if (!config.wechatId) return;
-    track('wechat_copy', { lead: leadCode ?? '' });
     try {
-      await navigator.clipboard?.writeText(config.wechatId);
-      if (navigator.clipboard) setCopied(true);
+      if (!navigator.clipboard) return;
+      await navigator.clipboard.writeText(config.wechatId);
+      setCopied(true);
+      safeTrack('wechat_copy', {
+        locale,
+        lead: leadCode ?? '',
+        topic: serviceTopic,
+      });
     } catch {
       // Clipboard blocked (e.g. WeChat in-app browser): ID stays selectable.
     }
@@ -54,8 +59,14 @@ export default function ContactChannels({
   const copyLeadCode = async () => {
     if (!context) return;
     try {
-      await navigator.clipboard?.writeText(context);
-      if (navigator.clipboard) setCodeCopied(true);
+      if (!navigator.clipboard) return;
+      await navigator.clipboard.writeText(context);
+      setCodeCopied(true);
+      safeTrack('contact_context_copy', {
+        locale,
+        lead: leadCode ?? '',
+        topic: serviceTopic,
+      });
     } catch {
       // The code remains visible and selectable when clipboard access fails.
     }
@@ -135,7 +146,13 @@ export default function ContactChannels({
         href={whatsappLink(config.whatsappNumber, message)}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() => track('click_whatsapp', { lead: leadCode ?? '' })}
+        onClick={() =>
+          safeTrack('click_whatsapp', {
+            locale,
+            lead: leadCode ?? '',
+            topic: serviceTopic,
+          })
+        }
         className="brand-button brand-focus mt-3 w-full"
       >
         <MessageCircle aria-hidden className="w-4 h-4" />
@@ -151,6 +168,13 @@ export default function ContactChannels({
       </h3>
       <a
         href={`mailto:${config.email}${context ? `?body=${encodeURIComponent(message)}` : ''}`}
+        onClick={() =>
+          safeTrack('click_email', {
+            locale,
+            lead: leadCode ?? '',
+            topic: serviceTopic,
+          })
+        }
         className="brand-focus mt-2 inline-flex min-h-11 items-center gap-2 text-sm text-brand-ink underline underline-offset-4 decoration-brand-line hover:text-brand-muted"
       >
         <Mail aria-hidden className="w-4 h-4" />

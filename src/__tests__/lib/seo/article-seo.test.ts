@@ -3,10 +3,13 @@ import { articleJsonLd, breadcrumbJsonLd } from '@/lib/seo/article-jsonld';
 
 describe('buildLanguageAlternates', () => {
   it('limits hreflang to the given locales, x-default → ru', () => {
-    expect(buildLanguageAlternates('/insights/x', ['ru', 'en', 'zh'])).toEqual({
+    expect(
+      buildLanguageAlternates('/insights/x', ['ru', 'en', 'zh', 'kz'])
+    ).toEqual({
       ru: 'https://qaznedr.kz/ru/insights/x',
       en: 'https://qaznedr.kz/en/insights/x',
       'zh-CN': 'https://qaznedr.kz/zh/insights/x',
+      kk: 'https://qaznedr.kz/kz/insights/x',
       'x-default': 'https://qaznedr.kz/ru/insights/x',
     });
   });
@@ -28,7 +31,7 @@ describe('buildPageMetadata for an article', () => {
     path: '/insights/x',
     title: '标题',
     description: '描述',
-    locales: ['ru', 'en', 'zh'],
+    locales: ['ru', 'en', 'zh', 'kz'],
     article: { published: '2026-09-26', modified: '2026-09-27' },
   });
 
@@ -41,9 +44,29 @@ describe('buildPageMetadata for an article', () => {
     });
   });
 
-  it('has no kk alternate', () => {
-    expect(meta.alternates?.languages).not.toHaveProperty('kk');
+  it('has the Kazakh alternate and keeps the article canonical', () => {
+    expect(meta.alternates?.languages).toHaveProperty(
+      'kk',
+      'https://qaznedr.kz/kz/insights/x'
+    );
     expect(meta.alternates?.canonical).toBe('https://qaznedr.kz/zh/insights/x');
+  });
+
+  it('uses the Kazakh URL as canonical for the translated article', () => {
+    const kazakhMeta = buildPageMetadata({
+      locale: 'kz',
+      path: '/insights/x',
+      title: 'Тақырып',
+      description: 'Сипаттама',
+      locales: ['ru', 'en', 'zh', 'kz'],
+    });
+    expect(kazakhMeta.alternates?.canonical).toBe(
+      'https://qaznedr.kz/kz/insights/x'
+    );
+    expect(kazakhMeta.alternates?.languages).toHaveProperty(
+      'kk',
+      'https://qaznedr.kz/kz/insights/x'
+    );
   });
 });
 

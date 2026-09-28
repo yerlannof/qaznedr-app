@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import BrandLogo from '@/components/brand/BrandLogo';
+import ConsentSettingsButton from '@/components/analytics/ConsentSettingsButton';
 import { getServiceTopic, type ServiceTopic } from '@/lib/services/topics';
 
 const languages = [
@@ -132,6 +133,7 @@ export default function Footer({
 
         <div className="mt-10 flex flex-wrap justify-between gap-2 border-t border-brand-line pt-5 text-xs text-brand-muted">
           <span>{t('footerNav.bottom.rights', { year: '2026' })}</span>
+          <ConsentSettingsButton label={t('consent.title')} />
           <span>{t('footerNav.bottom.city')}</span>
         </div>
       </div>

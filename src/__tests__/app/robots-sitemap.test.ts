@@ -49,7 +49,7 @@ describe('sitemap', () => {
     expect(urls).toContain(
       'https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766'
     );
-    expect(urls).not.toContain(
+    expect(urls).toContain(
       'https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766'
     );
     expect(urls.some((u) => /\/(blog|education|knowledge|news)$/.test(u))).toBe(
@@ -78,6 +78,7 @@ describe('sitemap', () => {
       'ru',
       'en',
       'zh-CN',
+      'kk',
       'x-default',
     ]);
   });

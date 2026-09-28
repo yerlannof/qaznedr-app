@@ -53,6 +53,25 @@ describe('inquirySchema', () => {
     });
     expect(r.utm).toEqual({ source: 'baidu' });
   });
+
+  it('accepts bounded attribution fields and rejects URLs or oversized values', () => {
+    expect(
+      inquirySchema.parse({
+        ...valid,
+        utm: { landing_path: '/zh/leads', referrer_host: 'www.baidu.com' },
+      }).utm
+    ).toEqual({ landing_path: '/zh/leads', referrer_host: 'www.baidu.com' });
+    for (const utm of [
+      { landing_path: 'https://site/path?x=1' },
+      { landing_path: '/zh/contact?email=a' },
+      { landing_path: '/zh/contact/private-email' },
+      { landing_path: '/' + 'x'.repeat(301) },
+      { referrer_host: 'site.com/path' },
+      { referrer_host: 'x'.repeat(254) },
+    ]) {
+      expect(inquirySchema.safeParse({ ...valid, utm }).success).toBe(false);
+    }
+  });
 });
 
 describe('isLikelySpam', () => {

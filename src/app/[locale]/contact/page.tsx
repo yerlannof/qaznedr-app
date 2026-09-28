@@ -96,6 +96,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
               <InquiryForm
                 key={`${locale}-${topic ?? ''}`}
                 locale={locale}
+                serviceTopic={topic}
                 initialMessage={subject}
               />
             </section>

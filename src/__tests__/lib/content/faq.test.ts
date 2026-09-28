@@ -3,13 +3,18 @@ import { translations } from '@/lib/i18n/translations';
 
 describe('FAQ content', () => {
   it('has the same questions in every language', () => {
+    expect(FAQ.kz).toHaveLength(FAQ.ru.length);
     expect(FAQ.en).toHaveLength(FAQ.ru.length);
     expect(FAQ.zh).toHaveLength(FAQ.ru.length);
   });
 
-  it('has no Russian left in en and zh', () => {
+  it('has no Russian left in kz, en and zh', () => {
     for (const item of [...FAQ.en, ...FAQ.zh]) {
       expect(`${item.q} ${item.a}`).not.toMatch(/[А-Яа-яЁё]/);
+    }
+    for (const [index, item] of FAQ.kz.entries()) {
+      expect(item.q).not.toBe(FAQ.ru[index].q);
+      expect(item.a).not.toBe(FAQ.ru[index].a);
     }
   });
 
@@ -24,8 +29,9 @@ describe('FAQ content', () => {
     );
   });
 
-  it('serves ru to kz until a Kazakh FAQ exists', () => {
-    expect(faqFor('kz')).toBe(FAQ.ru);
+  it('serves a complete Kazakh FAQ without falling back to Russian', () => {
+    expect(faqFor('kz')).toEqual(FAQ.kz);
+    expect(faqFor('kz')).not.toBe(FAQ.ru);
     expect(faqFor('zh')).toBe(FAQ.zh);
   });
 

@@ -18,7 +18,7 @@ export const INSIGHTS_DIR = path.join(process.cwd(), 'content', 'insights');
 
 export interface ArticleCard {
   slug: string;
-  /** Language of the text, which may differ from the page (kz → ru). */
+  /** Language of the text, which may differ from the page when a fallback is used. */
   locale: Locale;
   title: string;
   description: string;

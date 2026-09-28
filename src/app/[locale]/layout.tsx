@@ -6,6 +6,8 @@ import { Toaster } from 'sonner';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { WebVitalsTracker } from '@/components/monitoring/WebVitalsTracker';
+import AttributionCapture from '@/components/analytics/AttributionCapture';
+import ConsentManager from '@/components/analytics/ConsentManager';
 import MobileTabBar from '@/components/layouts/MobileTabBar';
 import type { Metadata, Viewport } from 'next';
 import '../../styles/globals.css';
@@ -124,6 +126,8 @@ export default async function LocaleLayout({
         <ThemeProvider>
           <AuthProvider>
             <WebVitalsTracker pageName={`/${locale}`} />
+            <AttributionCapture />
+            <ConsentManager locale={locale} />
             <main id="main" tabIndex={-1} className="pb-24 md:pb-0">
               {children}
             </main>

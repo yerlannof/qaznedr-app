@@ -15,6 +15,7 @@ const SOURCES_HEADING: Record<string, RegExp> = {
   ru: /^## Источники\s*$/m,
   en: /^## Sources\s*$/m,
   zh: /^## 参考资料\s*$/m,
+  kz: /^## Дереккөздер\s*$/m,
 };
 
 // Copy red lines (pivot spec §3, session 3 spec §8–9). Negations such as
@@ -122,9 +123,9 @@ describe('guide files', () => {
     }
   });
 
-  it('every guide is written in ru, en and zh', () => {
+  it('every published guide is written in ru, en, zh and kz', () => {
     for (const entry of INSIGHTS) {
-      expect([...entry.locales].sort()).toEqual(['en', 'ru', 'zh']);
+      expect([...entry.locales].sort()).toEqual(['en', 'kz', 'ru', 'zh']);
     }
   });
 

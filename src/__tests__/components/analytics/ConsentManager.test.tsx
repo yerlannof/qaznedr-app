@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { usePathname } from 'next/navigation';
 import ConsentManager from '@/components/analytics/ConsentManager';
 import ConsentSettingsButton from '@/components/analytics/ConsentSettingsButton';
+import { revokeProviders, syncProviders } from '@/lib/analytics/providers';
 import { CONSENT_KEY, writeConsent } from '@/lib/analytics/consent';
 
 jest.mock('next/navigation', () => ({ usePathname: jest.fn() }));
@@ -12,23 +13,21 @@ jest.mock('@/lib/analytics/providers', () => ({
 
 beforeEach(() => {
   localStorage.clear();
+  jest.clearAllMocks();
   (usePathname as jest.Mock).mockReturnValue('/ru/contact');
 });
 
-it('offers equal accept/reject controls; settings can opt in and later withdraw with focus return', () => {
+it('stays unobtrusive until footer settings open, then permits opt-in and withdrawal', () => {
   render(
     <>
       <ConsentManager locale="ru" />
       <ConsentSettingsButton label="Настройки аналитики" />
     </>
   );
-  expect(
-    screen.getByRole('button', { name: 'Принять аналитику' })
-  ).toBeInTheDocument();
-  fireEvent.click(screen.getByRole('button', { name: 'Отклонить' }));
-  expect(
-    screen.queryByRole('button', { name: 'Принять аналитику' })
-  ).not.toBeInTheDocument();
+  expect(screen.queryByRole('region')).not.toBeInTheDocument();
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(syncProviders).toHaveBeenCalledWith('/ru/contact', false);
+  expect(localStorage.getItem(CONSENT_KEY)).toBeNull();
   const footer = screen.getByRole('button', { name: 'Настройки аналитики' });
   expect(footer).not.toHaveFocus();
   footer.focus();
@@ -49,6 +48,26 @@ it('offers equal accept/reject controls; settings can opt in and later withdraw 
     false
   );
 });
+
+it.each(['ru', 'kz', 'en', 'zh'])(
+  'does not interrupt a first visit or navigation in %s',
+  (locale) => {
+    (usePathname as jest.Mock).mockReturnValue(`/${locale}`);
+    const { rerender } = render(<ConsentManager locale={locale} />);
+    expect(screen.queryByRole('region')).not.toBeInTheDocument();
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    (usePathname as jest.Mock).mockReturnValue(
+      `/${locale}/services/geological`
+    );
+    rerender(<ConsentManager locale={locale} />);
+    expect(screen.queryByRole('region')).not.toBeInTheDocument();
+    expect(syncProviders).toHaveBeenLastCalledWith(
+      `/${locale}/services/geological`,
+      false
+    );
+    expect(localStorage.getItem(CONSENT_KEY)).toBeNull();
+  }
+);
 
 it('does not render controls on private routes', () => {
   (usePathname as jest.Mock).mockReturnValue('/ru/admin');
@@ -78,23 +97,30 @@ it('closes settings with Escape and restores the footer focus', () => {
 });
 
 it.each(['Escape', 'Back'])(
-  'restores the banner Settings focus after %s',
+  'restores footer focus for an undecided visitor after %s',
   (action) => {
-    render(<ConsentManager locale="ru" />);
-    const opener = screen.getByRole('button', { name: 'Настройки' });
+    render(
+      <>
+        <ConsentManager locale="ru" />
+        <ConsentSettingsButton label="Настройки аналитики" />
+      </>
+    );
+    const opener = screen.getByRole('button', { name: 'Настройки аналитики' });
     opener.focus();
     fireEvent.click(opener);
     if (action === 'Escape')
       fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' });
     else fireEvent.click(screen.getByRole('button', { name: 'Вернуться' }));
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Настройки' })).toHaveFocus();
+    expect(opener).toHaveFocus();
+    expect(localStorage.getItem(CONSENT_KEY)).toBeNull();
   }
 );
 
-it('reopens consent when the stored decision expires during an open page', () => {
+it('stops providers without showing a banner when the stored decision expires', () => {
   writeConsent(true);
   render(<ConsentManager locale="ru" />);
+  expect(syncProviders).toHaveBeenCalledWith('/ru/contact', true);
   expect(
     screen.queryByRole('button', { name: 'Принять аналитику' })
   ).not.toBeInTheDocument();
@@ -109,6 +135,7 @@ it('reopens consent when the stored decision expires during an open page', () =>
   );
   fireEvent(document, new Event('visibilitychange'));
   expect(
-    screen.getByRole('button', { name: 'Принять аналитику' })
-  ).toBeInTheDocument();
+    screen.queryByRole('button', { name: 'Принять аналитику' })
+  ).not.toBeInTheDocument();
+  expect(revokeProviders).toHaveBeenCalled();
 });

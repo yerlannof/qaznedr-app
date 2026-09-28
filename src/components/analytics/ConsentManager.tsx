@@ -96,11 +96,7 @@ export default function ConsentManager({ locale }: { locale: string }) {
     restoreFocus.current = false;
     const target = trigger.current?.isConnected
       ? trigger.current
-      : document.querySelector<HTMLElement>(
-          !choice
-            ? '[data-consent-banner-settings-button]'
-            : '[data-consent-settings-button]'
-        );
+      : document.querySelector<HTMLElement>('[data-consent-settings-button]');
     target?.focus();
   }, [settingsOpen, choice]);
 
@@ -145,43 +141,6 @@ export default function ConsentManager({ locale }: { locale: string }) {
   if (!ready || !isPublicPath(pathname)) return null;
   return (
     <>
-      {!choice && !settingsOpen && (
-        <section
-          aria-label={t('title')}
-          className="fixed inset-x-0 bottom-0 z-[90] border-t-2 border-brand-line bg-brand-surface px-5 py-5 text-brand-ink shadow-[0_-4px_18px_#25374022] md:px-8"
-        >
-          <div className="mx-auto max-w-[1200px]">
-            <h2 className="font-serif text-2xl leading-tight">{t('title')}</h2>
-            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-brand-muted">
-              {t('banner')}
-            </p>
-            <div className="mt-4 grid gap-2 sm:flex sm:flex-wrap">
-              <button
-                type="button"
-                onClick={() => decide(true)}
-                className="brand-focus min-h-12 border border-brand-ink bg-brand-ink px-5 text-sm font-semibold text-brand-bg"
-              >
-                {t('accept')}
-              </button>
-              <button
-                type="button"
-                onClick={() => decide(false)}
-                className="brand-focus min-h-12 border border-brand-ink bg-brand-ink px-5 text-sm font-semibold text-brand-bg"
-              >
-                {t('reject')}
-              </button>
-              <button
-                type="button"
-                data-consent-banner-settings-button
-                onClick={openSettings}
-                className="brand-focus min-h-12 border border-brand-line px-5 text-sm text-brand-ink"
-              >
-                {t('settings')}
-              </button>
-            </div>
-          </div>
-        </section>
-      )}
       {settingsOpen && (
         <div
           className="fixed inset-0 z-[100] flex items-end justify-center bg-brand-ink/70 p-3 sm:items-center"

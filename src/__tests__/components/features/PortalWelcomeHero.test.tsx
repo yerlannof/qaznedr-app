@@ -1,6 +1,7 @@
 jest.mock('@vercel/analytics', () => ({ track: jest.fn() }));
 import { render, screen } from '@testing-library/react';
 import PortalWelcomeHero from '@/components/features/PortalWelcomeHero';
+import { translate } from '@/lib/i18n/translations';
 
 it('keeps Kazakh counts stable even when the browser falls back to English ICU formatting', () => {
   const fallback = jest.spyOn(Intl, 'NumberFormat').mockImplementation(
@@ -60,3 +61,28 @@ it('shows no area or region counts while the showcase is empty', () => {
   expect(screen.queryByText('Участков на витрине')).not.toBeInTheDocument();
   expect(screen.queryByText('Областей Казахстана')).not.toBeInTheDocument();
 });
+
+it.each(['ru', 'kz', 'en', 'zh'])(
+  'keeps %s copy and CTA ahead of the decorative hero art on a chalk section',
+  (locale) => {
+    const { container } = render(
+      <PortalWelcomeHero locale={locale} stats={null} />
+    );
+    const hero = container.querySelector('section');
+    expect(hero).toHaveClass('brand-hero-chalk');
+    const heading = screen.getByRole('heading', { level: 1 });
+    const art = hero?.querySelector(
+      'img[src*="archive-to-field-chalk-1536.webp"]'
+    );
+    expect(art).toHaveAttribute('alt', '');
+    expect(heading.compareDocumentPosition(art!)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING
+    );
+    expect(
+      screen.getByRole('link', {
+        name: new RegExp(translate(locale, 'portal.ctaLeads')),
+      })
+    ).toHaveAttribute('href', `/${locale}/leads`);
+    expect(hero?.querySelector('svg[aria-hidden="true"]')).toBeInTheDocument();
+  }
+);

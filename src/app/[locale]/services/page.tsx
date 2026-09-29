@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import BrandContour from '@/components/features/BrandContour';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import GuideLinks from '@/components/features/GuideLinks';
@@ -33,14 +33,9 @@ export default async function ServicesPage({
               {t('services.hero.title')}
             </h1>
           </div>
-          <Image
-            src="/brand/archive-to-field-960.webp"
-            alt=""
-            width={960}
-            height={640}
-            sizes="(max-width: 1024px) 100vw, 480px"
-            className="h-auto w-full lg:col-span-5"
-          />
+          <div className="brand-services-motif lg:col-span-5">
+            <BrandContour variant="services" className="w-full h-auto" />
+          </div>
         </header>
         <section className="brand-container py-12 lg:py-20">
           <HoldingServices locale={locale} />

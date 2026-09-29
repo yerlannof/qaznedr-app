@@ -69,3 +69,45 @@ it('renders a featured showcase teaser with its number type and one caveat', () 
     '/ru/leads/QN-99'
   );
 });
+
+it.each(['ru', 'kz', 'en', 'zh'])(
+  'uses the conditional geology cutaway with a real %s caption and keeps the about link',
+  (locale) => {
+    const { container } = render(
+      <HomePageContent
+        locale={locale as 'ru' | 'kz' | 'en' | 'zh'}
+        snapshot={{ stats: { total: 0, regions: 0 }, leads: [] }}
+      />
+    );
+    expect(
+      container.querySelector('img[src*="geology-cutaway-960.webp"]')
+    ).toHaveAttribute('alt', '');
+    expect(
+      screen.getByText(translate(locale, 'geologyScene.note'))
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: translate(locale, 'navigation.about') })
+    ).toHaveAttribute('href', `/${locale}/about`);
+    expect(
+      container.querySelector('img[src*="archive-to-field-960.webp"]')
+    ).not.toBeInTheDocument();
+  }
+);
+
+it('links all three homepage guides to their existing Kazakh versions', () => {
+  render(
+    <HomePageContent
+      locale="kz"
+      snapshot={{ stats: { total: 0, regions: 0 }, leads: [] }}
+    />
+  );
+  for (const slug of [
+    'foreign-investor-subsoil-rights-kazakhstan',
+    'solid-minerals-exploration-licence-kazakhstan',
+    'reserve-classification-gkz-kazrc-jorc-gbt17766',
+  ]) {
+    expect(
+      document.querySelector(`a[href="/kz/insights/${slug}"]`)
+    ).toBeInTheDocument();
+  }
+});

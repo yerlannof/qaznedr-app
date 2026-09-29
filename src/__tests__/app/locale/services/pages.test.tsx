@@ -44,6 +44,8 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     expect(html).toContain(`/${locale}/services/legal`);
     expect(html).toContain('"@type":"Service"');
     expect(html).toContain('"@type":"BreadcrumbList"');
+    expect(html).toContain('data-brand-contour="services"');
+    expect(html).not.toContain('/brand/archive-to-field-960.webp');
     expect(html).not.toMatch(
       /Идёт набор|поставщик|Найдите эксперта|type="search"/i
     );

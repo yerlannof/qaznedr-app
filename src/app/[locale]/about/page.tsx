@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import DealSteps from '@/components/features/DealSteps';
+import BrandIllustration from '@/components/features/BrandIllustration';
 import ClosingCta from '@/components/features/ClosingCta';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { getServerTranslation } from '@/lib/i18n/translations';
@@ -61,15 +61,17 @@ export default async function AboutPage({
             <h1 className="holding-title mt-5">{t('holdingCompany.title')}</h1>
             <p className="holding-lead mt-7">{t('holdingCompany.intro')}</p>
           </div>
-          <Image
-            src="/brand/archive-to-field-960.webp"
-            alt=""
-            width={960}
-            height={640}
-            className="w-full border border-brand-line"
-            sizes="(max-width: 1023px) 100vw, 45vw"
-            priority
-          />
+          <figure>
+            <BrandIllustration
+              kind="cutaway"
+              className="w-full h-auto"
+              sizes="(max-width: 1023px) 100vw, 45vw"
+              priority
+            />
+            <figcaption className="brand-illustration-note">
+              {t('geologyScene.note')}
+            </figcaption>
+          </figure>
         </header>
         <section className="brand-container border-t border-brand-line py-12 lg:py-20">
           <h2 className="font-serif text-3xl lg:text-4xl">

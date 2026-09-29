@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowUpRight, FileText } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import PortalWelcomeHero from '@/components/features/PortalWelcomeHero';
+import BrandIllustration from '@/components/features/BrandIllustration';
 import GeologyScene from '@/components/features/GeologyScene';
 import { translate } from '@/lib/i18n/translations';
 import { GUIDE } from '@/lib/insights/registry';
@@ -27,7 +27,6 @@ export default function HomePageContent({
   snapshot: HomeSnapshot;
 }) {
   const t = (key: string) => translate(locale, key);
-  const guideLocale = locale === 'kz' ? 'ru' : locale;
   const organizationJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -180,14 +179,12 @@ export default function HomePageContent({
               <ArrowUpRight aria-hidden className="w-5 h-5" />
             </Link>
           </div>
-          <Image
-            src="/brand/archive-to-field-960.webp"
-            alt=""
-            width={960}
-            height={640}
-            sizes="(max-width:768px) 90vw, 550px"
-            className="w-full h-auto"
-          />
+          <figure>
+            <BrandIllustration kind="cutaway" className="w-full h-auto" />
+            <figcaption className="brand-illustration-note">
+              {t('geologyScene.note')}
+            </figcaption>
+          </figure>
         </div>
       </section>
       <section className="holding-section">
@@ -211,7 +208,7 @@ export default function HomePageContent({
             {guides.map(([key, slug]) => (
               <Link
                 key={key}
-                href={`/${guideLocale}/insights/${slug}`}
+                href={`/${locale}/insights/${slug}`}
                 className="grid grid-cols-[24px_1fr_24px] gap-5 items-center py-6"
               >
                 <FileText aria-hidden className="w-5 h-5" />

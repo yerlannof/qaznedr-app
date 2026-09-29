@@ -69,30 +69,38 @@ export default async function InsightsPage({
         </section>
 
         <section className="brand-container max-w-[760px] py-14 lg:py-20">
-          <ul className="space-y-5">
-            {cards.map((card) => (
+          <ul className="border-t border-brand-line">
+            {cards.map((card, index) => (
               <li key={card.slug}>
                 <Link
                   href={`/${card.locale}/insights/${card.slug}`}
                   lang={
                     card.locale === locale ? undefined : HREFLANG[card.locale]
                   }
-                  className="brand-focus block border border-brand-line bg-brand-surface p-5 sm:p-6 transition-colors hover:bg-brand-bg"
+                  className="insight-index-row brand-focus grid grid-cols-[2rem_1fr] gap-3 border-b border-brand-line py-6 sm:grid-cols-[3rem_1fr] sm:gap-6 sm:py-8"
                 >
-                  <span className="text-xs font-semibold uppercase text-brand-muted">
-                    {t(`insights.categories.${card.category}`)}
+                  <span
+                    aria-hidden="true"
+                    className="font-serif text-2xl text-brand-muted tabular-nums"
+                  >
+                    {String(index + 1).padStart(2, '0')}
                   </span>
-                  <h2 className="mt-3 font-serif text-2xl tracking-tight text-brand-ink">
-                    {card.title}
-                  </h2>
-                  <p className="mt-3 text-base text-brand-muted leading-relaxed">
-                    {card.description}
-                  </p>
-                  <p className="mt-4 text-sm text-brand-muted">
-                    {t('insights.updated')}{' '}
-                    {formatCheckDate(card.updated, locale)} ·{' '}
-                    {t('insights.readingTime', { n: card.readingMinutes })}
-                  </p>
+                  <div>
+                    <p className="text-xs font-semibold uppercase text-brand-muted">
+                      {t(`insights.categories.${card.category}`)}
+                    </p>
+                    <h2 className="mt-3 font-serif text-2xl tracking-tight text-brand-ink">
+                      {card.title}
+                    </h2>
+                    <p className="mt-3 text-base text-brand-muted leading-relaxed">
+                      {card.description}
+                    </p>
+                    <p className="mt-4 text-sm text-brand-muted">
+                      {t('insights.updated')}{' '}
+                      {formatCheckDate(card.updated, locale)} ·{' '}
+                      {t('insights.readingTime', { n: card.readingMinutes })}
+                    </p>
+                  </div>
                 </Link>
               </li>
             ))}

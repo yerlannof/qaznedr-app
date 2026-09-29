@@ -441,6 +441,122 @@ body {
     --brand-surface: #30434c;
     --brand-line: #8fa19e;
   }
+  .brand-hero-chalk {
+    position: relative;
+    overflow: hidden;
+    background: #e9ece6;
+    color: #253740;
+    --brand-ink: #253740;
+    --brand-muted: #51616a;
+    --brand-surface: #f4f5f0;
+    --brand-line: #64747a;
+  }
+  .brand-hero-layout {
+    position: relative;
+    display: flex;
+    min-height: 650px;
+    align-items: center;
+  }
+  .brand-hero-copy {
+    position: relative;
+    z-index: 1;
+    width: 57%;
+    padding: 100px 0 90px;
+  }
+  .brand-hero-art {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .brand-hero-image {
+    position: absolute;
+    top: 10px;
+    right: -95px;
+    width: 900px;
+    max-width: none;
+    height: auto;
+    mix-blend-mode: darken;
+  }
+  .brand-hero-contour {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 260px;
+    height: 170px;
+    color: #253740;
+    opacity: 0.35;
+  }
+  .brand-hero-marker {
+    position: absolute;
+    right: 5%;
+    bottom: 40px;
+    width: 42px;
+    height: 3px;
+    background: #253740;
+  }
+  .brand-hero-chalk .brand-button-secondary {
+    color: #253740;
+    border-color: #64747a;
+  }
+  .brand-hero-chalk a:focus-visible {
+    outline-color: #253740;
+  }
+  .brand-illustration-note {
+    margin-top: 10px;
+    border-top: 1px solid var(--brand-line);
+    padding-top: 12px;
+    color: var(--brand-muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .brand-services-motif {
+    color: var(--brand-ink);
+    opacity: 0.7;
+  }
+  .insight-index-row:hover {
+    background: var(--brand-surface);
+  }
+}
+@media (max-width: 1023px) {
+  .brand-hero-layout {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 112px;
+  }
+  .brand-hero-copy {
+    width: 100%;
+    padding: 0;
+  }
+  .brand-hero-art {
+    position: relative;
+    aspect-ratio: 1.75;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+  .brand-hero-image {
+    top: 50%;
+    right: 0;
+    width: 115%;
+    transform: translateY(-50%);
+  }
+  .brand-hero-contour,
+  .brand-hero-marker {
+    display: none;
+  }
+}
+@media (max-width: 560px) {
+  .brand-hero-layout {
+    padding-top: 100px;
+  }
+  .brand-hero-art {
+    aspect-ratio: 1.1;
+    margin-top: 18px;
+  }
+  .brand-hero-image {
+    width: 170%;
+  }
 }
 html[lang='zh-CN'] body,
 html[lang='zh-CN'] .font-serif {

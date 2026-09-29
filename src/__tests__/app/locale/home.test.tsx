@@ -32,9 +32,8 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     ]);
     expect(html.match(/<h1\b/g)).toHaveLength(1);
     expect(html).toContain(translate(locale, 'portal.headlineLine1'));
-    const guideLocale = locale === 'kz' ? 'ru' : locale;
     expect(html).toContain(
-      `/${guideLocale}/insights/foreign-investor-subsoil-rights-kazakhstan`
+      `/${locale}/insights/foreign-investor-subsoil-rights-kazakhstan`
     );
     expect(html).toContain(`/${locale}/contact`);
     expect(html).toContain('7');

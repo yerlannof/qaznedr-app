@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowUpRight, MessageCircle } from 'lucide-react';
+import BrandIllustration from '@/components/features/BrandIllustration';
+import BrandContour from '@/components/features/BrandContour';
 import { safeTrack } from '@/lib/analytics/events';
 import { translate } from '@/lib/i18n/translations';
 import { getContactConfig, primaryContactCta } from '@/lib/config/contacts';
@@ -26,9 +27,9 @@ export default function PortalWelcomeHero({
     );
   return (
     <>
-      <section className="brand-container pt-28 pb-14 lg:pt-36 lg:pb-20">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          <div className="lg:col-span-7">
+      <section className="brand-hero-chalk">
+        <div className="brand-container brand-hero-layout">
+          <div className="brand-hero-copy">
             <p className="text-xs uppercase tracking-[.12em] text-brand-muted mb-6">
               {t('portal.eyebrow')}
             </p>
@@ -72,16 +73,14 @@ export default function PortalWelcomeHero({
               )}
             </div>
           </div>
-          <div className="lg:col-span-5">
-            <Image
-              src="/brand/archive-to-field-960.webp"
-              alt=""
-              width={960}
-              height={640}
+          <div className="brand-hero-art" aria-hidden="true">
+            <BrandContour variant="hero" className="brand-hero-contour" />
+            <BrandIllustration
+              kind="archive"
               priority
-              sizes="(max-width:1023px) 90vw, 480px"
-              className="w-full h-auto"
+              className="brand-hero-image"
             />
+            <span className="brand-hero-marker" />
           </div>
         </div>
       </section>

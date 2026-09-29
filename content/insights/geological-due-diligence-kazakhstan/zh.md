@@ -60,6 +60,8 @@ description: 在哈萨克斯坦勘查矿区前，应索取哪些报告、地图�
 
 更多信息见[地质服务](/zh/services/geological)和[交易前矿区核查](/zh/services#due-diligence)。可通过 [WhatsApp 或 WeChat](/zh/contact)联系团队。团队所介绍矿区的准确坐标及补充资料将在会面并签署 NDA 后披露。
 
+如果资料中包含钻探记录，请阅读[岩芯能说明什么，以及核查岩芯资料需要哪些记录](/zh/insights/core-drilling-geological-exploration)。
+
 ## 参考资料
 
 - [哈萨克斯坦工业和建设部：EPN 及可查询的地质资料](https://www.gov.kz/memleket/entities/mps/press/news/details/945522?lang=ru)。

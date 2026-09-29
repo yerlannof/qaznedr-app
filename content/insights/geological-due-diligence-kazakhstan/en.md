@@ -60,6 +60,8 @@ Start with a short message: **“Hello! I am contacting you through qaznedr.kz. 
 
 Read more about [geological services](/en/services/geological) and [reviewing an area before a transaction](/en/services#due-diligence). You can contact the team through [WhatsApp or WeChat](/en/contact). Exact coordinates and additional materials for areas presented by the team are disclosed after a meeting and a signed NDA.
 
+If your materials include drilling records, read [what drill core can show and which records help you check it](/en/insights/core-drilling-geological-exploration).
+
 ## Sources
 
 - [Kazakhstan Ministry of Industry and Construction: EPN and the geological materials available](https://www.gov.kz/memleket/entities/mps/press/news/details/945522?lang=ru).

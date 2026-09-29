@@ -29,6 +29,7 @@ export const GUIDE = {
   eastKazakhstanGoldMap: 'east-kazakhstan-gold-map-guide',
   whatIsGeology: 'what-is-geology',
   geologicalDueDiligence: 'geological-due-diligence-kazakhstan',
+  coreDrilling: 'core-drilling-geological-exploration',
   artisanalMining: 'artisanal-mining-licence-kazakhstan',
   pugfn: 'pugfn-subsoil-fund-program-kazakhstan',
 } as const;
@@ -100,6 +101,14 @@ export const INSIGHTS: readonly InsightEntry[] = [
   },
   {
     slug: GUIDE.geologicalDueDiligence,
+    category: 'geology',
+    published: '2026-09-29',
+    updated: '2026-09-29',
+    legal: false,
+    locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.coreDrilling,
     category: 'geology',
     published: '2026-09-29',
     updated: '2026-09-29',

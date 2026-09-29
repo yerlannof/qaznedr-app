@@ -1,6 +1,18 @@
 import { GUIDE, INSIGHTS, insightHref } from '@/lib/insights/registry';
 
 describe('insightHref', () => {
+  it('registers the core drilling guide in all four languages', () => {
+    expect(
+      INSIGHTS.find((entry) => entry.slug === GUIDE.coreDrilling)
+    ).toMatchObject({
+      slug: 'core-drilling-geological-exploration',
+      category: 'geology',
+      published: '2026-09-29',
+      updated: '2026-09-29',
+      legal: false,
+      locales: ['ru', 'en', 'zh', 'kz'],
+    });
+  });
   it('registers the East Kazakhstan gold data guide for all four languages', () => {
     expect(
       INSIGHTS.find((entry) => entry.slug === GUIDE.eastKazakhstanGoldMap)

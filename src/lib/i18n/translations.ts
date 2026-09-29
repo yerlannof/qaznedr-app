@@ -156,6 +156,7 @@ export const translations = {
         eastKazakhstanGoldMap: 'Карта золота ВКО: где искать данные',
         whatIsGeology: 'Геология простыми словами: минерал, порода и руда',
         geologicalDueDiligence: 'Проверка геологических материалов',
+        coreDrilling: 'Колонковое бурение: что показывает керн',
       },
       summaries: {
         artisanalMining:
@@ -178,6 +179,8 @@ export const translations = {
           'Что изучает геология, чем различаются минерал, порода и руда и что делает геолог.',
         geologicalDueDiligence:
           'Какие отчёты, карты и данные опробования собрать и какие вопросы задать до следующего этапа работ.',
+        coreDrilling:
+          'Керн и шлам, выход образцов и документы для проверки результатов разведочного бурения.',
       },
     },
     seo: {
@@ -1070,6 +1073,7 @@ export const translations = {
           'ШҚО алтын картасы: деректерді қайдан іздеу керек',
         whatIsGeology: 'Геология деген не: минерал, тау жынысы және кен',
         geologicalDueDiligence: 'Геологиялық материалдарды тексеру',
+        coreDrilling: 'Керндік бұрғылау: керн нені көрсетеді',
       },
       summaries: {
         artisanalMining:
@@ -1092,6 +1096,8 @@ export const translations = {
           'Геология нені зерттейді, минерал, тау жынысы мен кеннің айырмасы және геологтың жұмысы.',
         geologicalDueDiligence:
           'Келесі жұмыс кезеңіне дейін қандай есептерді, карталарды және сынама деректерін жинап, қандай сұрақтар қою керегін біліңіз.',
+        coreDrilling:
+          'Керн мен бұрғылау шламы, үлгілердің шығымы және барлау бұрғылауының нәтижелерін тексеруге қажет құжаттар.',
       },
     },
     seo: {
@@ -1911,6 +1917,7 @@ export const translations = {
           'East Kazakhstan gold maps: finding the evidence',
         whatIsGeology: 'What is geology? Minerals, rocks and ore',
         geologicalDueDiligence: 'Reviewing geological materials',
+        coreDrilling: 'Core drilling: what drill core can show',
       },
       summaries: {
         artisanalMining:
@@ -1933,6 +1940,8 @@ export const translations = {
           'What geology studies, how minerals, rocks and ore differ, and what geologists do.',
         geologicalDueDiligence:
           'Which reports, maps and sampling records to gather, and which questions to ask before the next stage of work.',
+        coreDrilling:
+          'Core and cuttings, sample recovery and records for checking exploration drilling results.',
       },
     },
     seo: {
@@ -2729,6 +2738,7 @@ export const translations = {
         eastKazakhstanGoldMap: '东哈萨克斯坦黄金地图：查找地质资料',
         whatIsGeology: '什么是地质学？认识矿物、岩石与矿石',
         geologicalDueDiligence: '地质资料核查',
+        coreDrilling: '岩芯钻探：岩芯能说明什么',
       },
       summaries: {
         artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',
@@ -2747,6 +2757,8 @@ export const translations = {
           '了解地质学、矿物、岩石和矿石的区别，以及地质学家的工作。',
         geologicalDueDiligence:
           '了解下一阶段工作前应收集哪些报告、地图和取样记录，以及需要核实的问题。',
+        coreDrilling:
+          '了解岩芯与钻屑、样品采取率，以及核查勘查钻探结果所需的记录。',
       },
     },
     seo: {

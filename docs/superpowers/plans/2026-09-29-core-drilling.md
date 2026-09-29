@@ -11,3 +11,5 @@
 7. Явные пути commit, push master; exact-SHA CI/Production success; проверка HTML/sitemap/OG, IndexNow. Записать подтверждённые результаты без обещаний трафика или цитирования LLM.
 
 Документация подготовки и код публикации — отдельные коммиты. Чужой `docs/visibility/2026-09-28-mail-review.md` не включать.
+
+Выпуск завершён: `c0d1220`, CI36569178588/Production6734908661 success, живые HTML/OG200, sitemap128, IndexNow200/48URL. Отчёт — `docs/visibility/2026-09-29-core-drilling-release.md`.

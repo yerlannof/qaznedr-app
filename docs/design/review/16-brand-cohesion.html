@@ -1,0 +1,1257 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>QAZNEDR — единая подача изображений · варианты A и B</title>
+    <style>
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-Regular.woff2')
+          format('woff2');
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-SemiBold.woff2')
+          format('woff2');
+        font-weight: 600;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Source;
+        src: url('../../../public/brand/fonts/SourceSerif4Display-Regular.ttf.woff2')
+          format('woff2');
+        font-display: swap;
+      }
+      :root {
+        --bg: #e9ece6;
+        --surface: #f4f5f0;
+        --ink: #253740;
+        --muted: #51616a;
+        --line: #64747a;
+        --accent: #dde55e;
+        --slate: #253740;
+        --slate2: #30434c;
+        --chalk: #e9ece6;
+        --slateMuted: #cad2ca;
+        --focus: #253740;
+      }
+      [data-theme='dark'] {
+        --bg: #253740;
+        --surface: #30434c;
+        --ink: #e9ece6;
+        --muted: #cad2ca;
+        --line: #8fa19e;
+        --focus: #dde55e;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Plex, Arial, sans-serif;
+      }
+      body[lang='zh'] {
+        font-family:
+          PingFang SC,
+          Hiragino Sans GB,
+          Microsoft YaHei,
+          Noto Sans CJK SC,
+          sans-serif;
+      }
+      button,
+      a {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        width: min(1200px, calc(100% - 40px));
+        margin: auto;
+      }
+      .top {
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        position: relative;
+        z-index: 1;
+      }
+      .top .wrap {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 22px;
+      }
+      .logo {
+        width: 205px;
+        max-width: 48vw;
+        height: auto;
+      }
+      .controls {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: end;
+      }
+      .controls button {
+        min-height: 44px;
+        padding: 0 13px;
+        background: transparent;
+        border: 1px solid var(--line);
+        color: var(--ink);
+      }
+      .controls button[aria-pressed='true'] {
+        background: var(--ink);
+        color: var(--bg);
+      }
+      .theme {
+        min-width: 82px;
+      }
+      .review-note {
+        padding: 15px 0;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .review-note strong {
+        color: var(--ink);
+      }
+      .variant-nav {
+        display: flex;
+        gap: 10px;
+        padding: 0 0 16px;
+      }
+      .variant-nav a {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        padding: 8px 16px;
+        border: 1px solid var(--line);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .hero-band {
+        background: var(--slate);
+        color: var(--chalk);
+        overflow: hidden;
+      }
+      .hero-band .wrap {
+        position: relative;
+      }
+      .contour {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.17;
+      }
+      .contour path {
+        fill: none;
+        stroke: #e9ece6;
+        stroke-width: 1;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 7fr 5fr;
+        gap: 44px;
+        align-items: center;
+        padding: 102px 0 88px;
+        position: relative;
+      }
+      .copy {
+        position: relative;
+        z-index: 1;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--slateMuted);
+        margin: 0 0 24px;
+      }
+      .hero h1 {
+        font-family: Source, Georgia, serif;
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        font-size: clamp(36px, 4.45vw, 64px);
+        line-height: 1.08;
+        max-width: 750px;
+        margin: 0;
+      }
+      .hero p.lead {
+        font-size: 18px;
+        line-height: 1.6;
+        max-width: 670px;
+        margin: 24px 0 0;
+        color: var(--slateMuted);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 12px 22px;
+        text-decoration: none;
+        font-weight: 600;
+        gap: 20px;
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: var(--slate);
+      }
+      .btn.alt {
+        border-color: #cad2ca;
+        background: transparent;
+        color: var(--chalk);
+      }
+      .btn:focus-visible,
+      .controls button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 3px;
+      }
+      .a-band a:focus-visible {
+        outline-color: #253740;
+      }
+      .hero-band a:focus-visible {
+        outline-color: #dde55e;
+      }
+      .visual {
+        position: relative;
+        margin-right: -24px;
+        align-self: stretch;
+        display: flex;
+        align-items: center;
+      }
+      .visual img {
+        display: block;
+        width: 110%;
+        max-width: none;
+        height: auto;
+        mix-blend-mode: lighten;
+      }
+      .visual::after {
+        content: '';
+        position: absolute;
+        width: 36px;
+        height: 3px;
+        right: 3%;
+        bottom: 11%;
+        background: var(--accent);
+      }
+      .shared-edge {
+        border-top: 1px solid #8fa19e;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        padding: 24px 0 34px;
+        align-items: center;
+        color: var(--slateMuted);
+        font-size: 14px;
+        position: relative;
+      }
+      .shared-edge strong {
+        font-family: Source, Georgia, serif;
+        font-weight: 400;
+        font-size: 22px;
+        color: var(--chalk);
+      }
+      .shared-edge .rule {
+        width: 96px;
+        height: 1px;
+        background: var(--accent);
+      }
+      .variant-label {
+        padding: 36px 0 14px;
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: baseline;
+      }
+      .variant-label h2 {
+        font:
+          400 28px Source,
+          Georgia,
+          serif;
+        margin: 0;
+      }
+      .variant-label p {
+        font-size: 14px;
+        color: var(--muted);
+        max-width: 700px;
+        line-height: 1.5;
+        margin: 0;
+      }
+      .a-band {
+        background: #e9ece6;
+        color: #253740;
+        overflow: hidden;
+      }
+      .a-band .wrap {
+        position: relative;
+      }
+      .a-scene {
+        position: relative;
+        min-height: 690px;
+        display: flex;
+        align-items: center;
+      }
+      .a-scene .copy {
+        width: 57%;
+        padding: 70px 0 92px;
+      }
+      .a-scene .eyebrow {
+        color: #51616a;
+      }
+      .a-scene h1 {
+        font:
+          400 clamp(36px, 4.45vw, 64px) / 1.08 Source,
+          Georgia,
+          serif;
+        letter-spacing: -0.03em;
+        margin: 0;
+        max-width: 750px;
+      }
+      .a-scene .lead {
+        color: #51616a;
+        font-size: 18px;
+        line-height: 1.6;
+        max-width: 670px;
+        margin: 24px 0 0;
+      }
+      .a-scene .btn.alt {
+        color: #253740;
+        border-color: #64747a;
+      }
+      .a-art {
+        position: absolute;
+        width: 900px;
+        height: auto;
+        right: -95px;
+        top: 10px;
+        mix-blend-mode: darken;
+        pointer-events: none;
+      }
+      .a-contour {
+        position: absolute;
+        width: 260px;
+        height: 170px;
+        right: 0;
+        top: 40px;
+        opacity: 0.35;
+        pointer-events: none;
+      }
+      .a-contour path {
+        fill: none;
+        stroke: #253740;
+        stroke-width: 1;
+      }
+      .a-marker {
+        width: 42px;
+        height: 3px;
+        background: #253740;
+        position: absolute;
+        bottom: 40px;
+        right: 5%;
+      }
+      .a-edge {
+        border-top: 1px solid #64747a;
+        padding: 22px 0 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        font:
+          400 22px Source,
+          Georgia,
+          serif;
+      }
+      .a-edge small {
+        font:
+          400 13px Plex,
+          Arial,
+          sans-serif;
+        color: #51616a;
+      }
+      .section {
+        padding: 88px 0;
+      }
+      .section-head {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: end;
+        margin-bottom: 34px;
+      }
+      .kicker {
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 13px;
+      }
+      .section h2 {
+        font:
+          400 clamp(30px, 3vw, 44px) / 1.12 Source,
+          Georgia,
+          serif;
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+      .section .desc {
+        line-height: 1.6;
+        font-size: 17px;
+        color: var(--muted);
+        margin: 0;
+      }
+      .tile-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .tile {
+        border-top: 1px solid var(--line);
+        padding-top: 17px;
+      }
+      .tile .line-art {
+        height: 120px;
+        margin: 0 0 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .tile .line-art svg {
+        width: 100%;
+        height: 100%;
+      }
+      .tile h3 {
+        font:
+          400 27px/1.18 Source,
+          Georgia,
+          serif;
+        margin: 0 0 12px;
+      }
+      .tile p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--muted);
+        margin: 0;
+      }
+      .mark {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .mark::before {
+        content: '';
+        width: 24px;
+        height: 2px;
+        background: var(--ink);
+      }
+      .story {
+        background: var(--surface);
+        border-block: 1px solid var(--line);
+      }
+      .story-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+      .story img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .story .caption {
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+        margin-top: 10px;
+      }
+      .story .text {
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      .story .small-link {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        font-weight: 600;
+        text-decoration: none;
+        border-bottom: 1px solid var(--ink);
+      }
+      .guide-list {
+        border-top: 1px solid var(--line);
+      }
+      .guide-row {
+        display: grid;
+        grid-template-columns: 64px 1fr auto;
+        align-items: center;
+        gap: 25px;
+        padding: 27px 0;
+        border-bottom: 1px solid var(--line);
+        text-decoration: none;
+      }
+      .guide-row .num {
+        font:
+          400 24px Source,
+          Georgia,
+          serif;
+      }
+      .guide-row strong {
+        font-weight: 600;
+        font-size: 19px;
+      }
+      .guide-row .arrow {
+        font-size: 24px;
+      }
+      .footer {
+        border-top: 1px solid var(--line);
+        padding: 35px 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      @media (max-width: 850px) {
+        .hero {
+          grid-template-columns: 1fr;
+          padding: 60px 0 44px;
+          gap: 24px;
+        }
+        .visual {
+          max-width: 600px;
+          margin: 0 auto;
+          width: 100%;
+          align-self: auto;
+        }
+        .visual img {
+          width: 100%;
+        }
+        .section-head,
+        .story-grid {
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
+        .tile-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .story-grid {
+          gap: 32px;
+        }
+      }
+      @media (max-width: 850px) {
+        .a-scene {
+          display: flex;
+          flex-direction: column;
+          min-height: 0;
+          padding-top: 52px;
+        }
+        .a-scene .copy {
+          order: 1;
+        }
+        .a-scene .a-art {
+          order: 2;
+        }
+        .a-scene .a-marker,
+        .a-scene .a-contour {
+          display: none;
+        }
+        .a-scene .copy {
+          width: 100%;
+          padding: 0;
+        }
+        .a-art {
+          position: relative;
+          right: auto;
+          top: auto;
+          width: calc(100% + 60px);
+          max-width: none;
+          margin: 10px -30px -18px;
+        }
+        .a-contour {
+          right: 2%;
+          top: 30px;
+          width: 150px;
+        }
+        .a-marker {
+          right: 4%;
+          bottom: 26px;
+        }
+        .a-edge {
+          padding-top: 20px;
+        }
+      }
+      @media (max-width: 560px) {
+        .top .wrap {
+          min-height: 66px;
+          align-items: flex-start;
+          padding: 12px 0;
+          flex-direction: column;
+        }
+        .logo {
+          width: 180px;
+        }
+        .controls {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .controls button {
+          padding: 0 11px;
+        }
+        .hero {
+          padding: 47px 0 35px;
+        }
+        .hero h1 {
+          font-size: 36px;
+          line-height: 1.13;
+        }
+        .hero p.lead {
+          font-size: 16px;
+          margin-top: 22px;
+        }
+        .actions {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .btn {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .visual {
+          margin: 0 -20px;
+          width: calc(100% + 40px);
+        }
+        .visual img {
+          width: 100%;
+        }
+        .shared-edge {
+          grid-template-columns: 1fr;
+          padding: 18px 0 25px;
+        }
+        .shared-edge .rule {
+          display: none;
+        }
+        .section {
+          padding: 58px 0;
+        }
+        .tile-grid {
+          grid-template-columns: 1fr;
+          gap: 33px;
+        }
+        .tile .line-art {
+          height: 86px;
+        }
+        .guide-row {
+          grid-template-columns: 32px 1fr 18px;
+          gap: 11px;
+        }
+        .guide-row strong {
+          font-size: 16px;
+        }
+        .story-grid {
+          gap: 25px;
+        }
+      }
+      @media (max-width: 560px) {
+        .variant-label {
+          display: block;
+          padding-top: 28px;
+        }
+        .variant-label p {
+          margin-top: 5px;
+        }
+        .a-scene {
+          padding-top: 43px;
+        }
+        .a-scene h1 {
+          font-size: 36px;
+        }
+        .a-scene .lead {
+          font-size: 16px;
+        }
+        .a-art {
+          width: calc(100% + 46px);
+          margin: 20px -23px -5px;
+        }
+        .a-edge {
+          display: block;
+          font-size: 20px;
+        }
+        .a-edge small {
+          display: block;
+          margin-top: 5px;
+        }
+      }
+      body[lang='zh'] h1,
+      body[lang='zh'] h2,
+      body[lang='zh'] h3,
+      body[lang='zh'] .shared-edge strong,
+      body[lang='zh'] .a-edge,
+      body[lang='zh'] .guide-row .num {
+        font-family:
+          PingFang SC,
+          Hiragino Sans GB,
+          Microsoft YaHei,
+          Noto Sans CJK SC,
+          sans-serif !important;
+        letter-spacing: 0;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <header class="top">
+      <div class="wrap">
+        <img
+          id="logo"
+          class="logo"
+          src="../../../public/brand/logo-horizontal.svg"
+          alt="QAZNEDR HOLDING"
+        />
+        <div class="controls" role="group" aria-label="Preview settings">
+          <div id="langs"></div>
+          <button id="theme" class="theme" type="button" aria-pressed="false">
+            Тёмная
+          </button>
+        </div>
+      </div>
+    </header>
+    <div class="wrap review-note">
+      <strong>На рассмотрение · A / B</strong> — два способа связать архивную
+      иллюстрацию с фирменной плоскостью страницы. Это макет, не опубликованная
+      страница.
+    </div>
+    <nav class="wrap variant-nav" aria-label="Варианты дизайна">
+      <a href="#variant-a">Вариант A</a><a href="#variant-b">Вариант B</a>
+    </nav>
+    <main>
+      <div class="wrap variant-label">
+        <h2>A · Свободная меловая сцена</h2>
+        <p>
+          Рекомендация: меловой фон рисунка соединён с общей поверхностью hero.
+          В обеих темах весь hero остаётся цельным меловым разворотом с
+          подписью.
+        </p>
+      </div>
+      <section id="variant-a" class="a-band">
+        <div class="wrap">
+          <div class="a-scene">
+            <svg class="a-contour" viewBox="0 0 260 170" aria-hidden="true">
+              <path
+                d="M4 99c37-25 77-45 116-25s79-27 137-55M4 121c47-31 85-42 118-25s83-22 135-42M4 143c49-29 87-36 121-20s88-14 132-31"
+              /></svg
+            ><img
+              class="a-art"
+              src="../mockups/16/archive-to-field-chalk.png"
+              alt=""
+              width="1536"
+              height="1024"
+            />
+            <div class="copy">
+              <p class="eyebrow" data-t="eyebrow"></p>
+              <h1 data-t="hero"></h1>
+              <p class="lead" data-t="subtitle"></p>
+              <div class="actions">
+                <a class="btn" id="aleads" href="https://qaznedr.kz/ru/leads"
+                  ><span data-t="ctaLeads"></span
+                  ><svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 17 7M7 7h10v10" /></svg></a
+                ><a
+                  class="btn alt"
+                  id="acontact"
+                  href="https://qaznedr.kz/ru/contact"
+                  ><span data-t="ctaContact"></span
+                  ><svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 17 7M7 7h10v10" /></svg
+                ></a>
+              </div>
+            </div>
+            <span class="a-marker" aria-hidden="true"></span>
+          </div>
+          <div class="a-edge">
+            <span data-t="archiveTitle"></span
+            ><small data-t="archiveDesc"></small>
+          </div>
+        </div>
+      </section>
+      <div class="wrap variant-label">
+        <h2>B · Общая сланцевая полоса</h2>
+        <p>
+          Исходная иллюстрация живёт внутри всей сланцевой секции; снизу — её
+          смысловое продолжение, а не отдельная рамка вокруг картинки.
+        </p>
+      </div>
+      <section id="variant-b" class="hero-band">
+        <div class="wrap">
+          <svg
+            class="contour"
+            viewBox="0 0 1200 720"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M710 0C753 72 732 130 776 171S868 228 838 300s-16 111 64 137 121 61 110 137"
+            />
+            <path
+              d="M754 0C798 65 778 126 815 166s91 61 64 140-15 102 65 136 112 55 111 132"
+            />
+            <path
+              d="M797 0c45 60 29 122 62 161s88 68 63 149-12 99 65 128 107 56 111 139"
+            />
+          </svg>
+          <div class="hero">
+            <div class="copy">
+              <p class="eyebrow" data-t="eyebrow"></p>
+              <h1 data-t="hero"></h1>
+              <p class="lead" data-t="subtitle"></p>
+              <div class="actions">
+                <a class="btn" id="leads" href="https://qaznedr.kz/ru/leads"
+                  ><span data-t="ctaLeads"></span
+                  ><svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 17 7M7 7h10v10" /></svg></a
+                ><a
+                  class="btn alt"
+                  id="contact"
+                  href="https://qaznedr.kz/ru/contact"
+                  ><span data-t="ctaContact"></span
+                  ><svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 17 7M7 7h10v10" /></svg
+                ></a>
+              </div>
+            </div>
+            <div class="visual">
+              <img
+                src="../mockups/01/elements/archive-to-field.png"
+                alt=""
+                width="1536"
+                height="1024"
+              />
+            </div>
+          </div>
+          <div class="shared-edge">
+            <strong data-t="archiveTitle"></strong
+            ><span class="rule" aria-hidden="true"></span>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="kicker" data-t="servicesNav"></p>
+              <h2 data-t="servicesTitle"></h2>
+            </div>
+            <p class="desc" data-t="serviceIntro"></p>
+          </div>
+          <div class="tile-grid">
+            <article class="tile">
+              <div class="line-art" aria-hidden="true">
+                <svg viewBox="0 0 280 100">
+                  <g fill="none" stroke="currentColor" stroke-width="1">
+                    <path
+                      d="M0 71c44-36 64-26 97-51s61 20 91 8 41 12 92 3M0 82c40-29 69-27 103-43s56 12 86 5 52 9 91 0M0 91c38-20 67-22 109-33s51 8 82 4 55 6 89-2"
+                    />
+                  </g>
+                  <path d="M14 94h28" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </div>
+              <h3 data-t="archiveTitle"></h3>
+              <p data-t="archiveDesc"></p>
+            </article>
+            <article class="tile">
+              <div class="line-art" aria-hidden="true">
+                <svg viewBox="0 0 280 100">
+                  <g fill="none" stroke="currentColor" stroke-width="1">
+                    <path
+                      d="M26 8v85m46-85v85m46-85v85m46-85v85m46-85v85m46-85v85M0 31h280M0 58h280M0 85h280"
+                    />
+                    <path
+                      d="M4 73c46-15 59-11 97-28s75 25 105-5 51-9 74-24"
+                      stroke-width="2"
+                    />
+                  </g>
+                </svg>
+              </div>
+              <h3 data-t="serviceGeology"></h3>
+              <p data-t="companyGeology"></p>
+            </article>
+            <article class="tile">
+              <div class="line-art" aria-hidden="true">
+                <svg viewBox="0 0 280 100">
+                  <g fill="none" stroke="currentColor" stroke-width="1">
+                    <path
+                      d="M17 18h191v69H17zM36 38h151M36 56h151M36 74h93M215 18l31 30-31 39"
+                    />
+                  </g>
+                  <path d="M182 74h26" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </div>
+              <h3 data-t="guideHeading"></h3>
+              <p data-t="guideIntro"></p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section story">
+        <div class="wrap story-grid">
+          <div>
+            <img
+              src="../../../public/brand/geology-cutaway-960.webp"
+              width="960"
+              height="640"
+              alt=""
+            />
+            <p class="caption" data-t="illustrationNote"></p>
+          </div>
+          <div>
+            <p class="kicker" data-t="aboutNav"></p>
+            <h2 data-t="aboutTitle"></h2>
+            <p class="text" data-t="aboutIntro"></p>
+            <a
+              class="small-link"
+              id="about"
+              href="https://qaznedr.kz/ru/about"
+              data-t="aboutNav"
+            ></a>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="kicker" data-t="insightsEyebrow"></p>
+              <h2 data-t="insightsTitle"></h2>
+            </div>
+            <p class="desc" data-t="insightsSubtitle"></p>
+          </div>
+          <div class="guide-list">
+            <a
+              class="guide-row"
+              id="guide1"
+              href="https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan"
+              ><span class="num">01</span><strong data-t="guide1"></strong
+              ><span class="arrow" aria-hidden="true"
+                ><svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 17 7M7 7h10v10" /></svg></span></a
+            ><a
+              class="guide-row"
+              id="guide2"
+              href="https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan"
+              ><span class="num">02</span><strong data-t="guide2"></strong
+              ><span class="arrow" aria-hidden="true"
+                ><svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 17 7M7 7h10v10" /></svg></span></a
+            ><a
+              class="guide-row"
+              id="guide3"
+              href="https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+              ><span class="num">03</span><strong data-t="guide3"></strong
+              ><span class="arrow" aria-hidden="true"
+                ><svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 17 7M7 7h10v10" /></svg></span
+            ></a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="wrap">
+        QAZNEDR HOLDING · Design review 16 · A / B. Контурные линии условны и не
+        описывают реальные участки.
+      </div>
+    </footer>
+    <script>
+      const copy = {
+        ru: {
+          eyebrow: 'QAZNEDR HOLDING · геология и недропользование Казахстана',
+          hero: 'Участки недр Казахстана для инвесторов',
+          subtitle:
+            'Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов. В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом. Обсуждаем конкретный участок и формат сотрудничества, сопровождаем лицензирование, проверку и полевые работы.',
+          ctaLeads: 'Смотреть участки',
+          ctaContact: 'Обсудить участок',
+          archiveTitle: 'Работа наших геологов',
+          archiveDesc:
+            'Геологию каждого участка изучают наши геологи по фондовым отчётам.',
+          servicesNav: 'Услуги',
+          servicesTitle: 'Услуги в области недропользования',
+          serviceIntro:
+            'Геология и консалтинг. Экспертиза наших геологов, сопровождение лицензирования и полевые работы.',
+          serviceGeology: 'Геология и консалтинг',
+          companyGeology:
+            'Экспертиза наших геологов, сопровождение лицензирования и полевые работы.',
+          guideHeading: 'Гайды по лицензированию и сделкам',
+          guideIntro:
+            'Право недропользования, лицензирование и классификации запасов в Казахстане — коротко и со ссылками на источники.',
+          aboutNav: 'О компании',
+          aboutTitle:
+            'QAZNEDR HOLDING — Участки недр Казахстана для инвесторов',
+          aboutIntro:
+            'Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов. В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом. Обсуждаем конкретный участок и формат сотрудничества, сопровождаем лицензирование, проверку и полевые работы.',
+          insightsEyebrow: 'Гайды',
+          insightsTitle: 'Гайды для инвестора',
+          insightsSubtitle:
+            'Право недропользования, лицензирование и классификации запасов в Казахстане — коротко и со ссылками на источники.',
+          guide1: 'Как иностранному инвестору получить право недропользования',
+          guide2: 'Лицензия на разведку ТПИ: процесс по шагам',
+          guide3: 'Классификации запасов: ГКЗ, KAZRC/JORC, GB/T 17766',
+          illustrationNote:
+            'Условная иллюстрация, не данные конкретного участка.',
+        },
+        kz: {
+          eyebrow:
+            'QAZNEDR HOLDING · Қазақстан геологиясы және жер қойнауын пайдалану',
+          hero: 'Инвесторларға арналған Қазақстанның жер қойнауы учаскелері',
+          subtitle:
+            'Геологиялық материалдарды зерделеу негізінде геологтарымыз іріктеген учаскелерді ұсынамыз. Біздің командада қазақстандық мамандар, соның ішінде 50 жылдық тәжірибесі бар геологтар бар. Нақты учаскені және ынтымақтастық форматын талқылаймыз, лицензиялау, тексеру және далалық жұмыстарға қолдау көрсетеміз.',
+          ctaLeads: 'Учаскелерді қарау',
+          ctaContact: 'Учаскені талқылау',
+          archiveTitle: 'Геологтарымыздың жұмысы',
+          archiveDesc:
+            'Әр учаскенің геологиясын геологтарымыз қордағы есептер бойынша зерттейді.',
+          servicesNav: 'Қызметтер',
+          servicesTitle: 'Жер қойнауын пайдалану саласындағы қызметтер',
+          serviceIntro:
+            'Геология және консалтинг. Геологтарымыздың сараптамасы, лицензиялау рәсімін сүйемелдеу және далалық жұмыстар.',
+          serviceGeology: 'Геология және консалтинг',
+          companyGeology:
+            'Геологтарымыздың сараптамасы, лицензиялау рәсімін сүйемелдеу және далалық жұмыстар.',
+          guideHeading: 'Лицензиялау және мәмілелер бойынша нұсқаулықтар',
+          guideIntro:
+            'Қазақстандағы жер қойнауын пайдалану құқығы, лицензиялау және қор жіктемелері — қысқа әрі дереккөздерге сілтемелермен.',
+          aboutNav: 'Компания туралы',
+          aboutTitle:
+            'QAZNEDR HOLDING — Инвесторларға арналған Қазақстанның жер қойнауы учаскелері',
+          aboutIntro:
+            'Геологиялық материалдарды зерделеу негізінде геологтарымыз іріктеген учаскелерді ұсынамыз. Біздің командада қазақстандық мамандар, соның ішінде 50 жылдық тәжірибесі бар геологтар бар. Нақты учаскені және ынтымақтастық форматын талқылаймыз, лицензиялау, тексеру және далалық жұмыстарға қолдау көрсетеміз.',
+          insightsEyebrow: 'Нұсқаулықтар',
+          insightsTitle: 'Инвесторға арналған нұсқаулықтар',
+          insightsSubtitle:
+            'Қазақстандағы жер қойнауын пайдалану құқығы, лицензиялау және қор жіктемелері — қысқа әрі дереккөздерге сілтемелермен.',
+          guide1: 'Шетелдік инвесторға жер қойнауын пайдалану құқығы',
+          guide2: 'Қатты пайдалы қазбаларды барлау лицензиясы: қадамдар',
+          guide3: 'Қор жіктемелері: ГКЗ, KAZRC/JORC, GB/T 17766',
+          illustrationNote: 'Шартты иллюстрация; нақты учаске деректері емес.',
+        },
+        en: {
+          eyebrow: 'QAZNEDR HOLDING · Kazakhstan geology and subsoil use',
+          hero: 'Mineral areas in Kazakhstan for investors',
+          subtitle:
+            'We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience. We discuss a specific area and the form of cooperation, and support licensing, due diligence, and fieldwork.',
+          ctaLeads: 'View areas',
+          ctaContact: 'Discuss an area',
+          archiveTitle: "Our geologists' work",
+          archiveDesc:
+            'Our geologists study each area using archival geological reports.',
+          servicesNav: 'Services',
+          servicesTitle: 'Subsoil-use services',
+          serviceIntro:
+            'Geology and consulting. Our geologists’ expertise, licensing support, and fieldwork.',
+          serviceGeology: 'Geology and consulting',
+          companyGeology:
+            'Our geologists’ expertise, licensing support, and fieldwork.',
+          guideHeading: 'Guides on licensing and transactions',
+          guideIntro:
+            'Subsoil use rights, licensing and reserve classifications in Kazakhstan — briefly, with links to the sources.',
+          aboutNav: 'About',
+          aboutTitle:
+            'QAZNEDR HOLDING — Mineral areas in Kazakhstan for investors',
+          aboutIntro:
+            'We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience. We discuss a specific area and the form of cooperation, and support licensing, due diligence, and fieldwork.',
+          insightsEyebrow: 'Guides',
+          insightsTitle: 'Guides for investors',
+          insightsSubtitle:
+            'Subsoil use rights, licensing and reserve classifications in Kazakhstan — briefly, with links to the sources.',
+          guide1: 'Subsoil use rights for foreign investors',
+          guide2: 'Solid-minerals exploration licence, step by step',
+          guide3: 'Reserve classifications: GKZ, KAZRC/JORC, GB/T 17766',
+          illustrationNote:
+            'Concept illustration; not data from a specific area.',
+        },
+        zh: {
+          eyebrow: 'QAZNEDR HOLDING · 哈萨克斯坦地质与矿业权',
+          hero: '面向投资者的哈萨克斯坦矿区',
+          subtitle:
+            '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。我们就具体矿区及合作方式进行沟通，并为许可证办理、尽职调查和野外工作提供支持。',
+          ctaLeads: '查看矿区',
+          ctaContact: '洽谈矿区',
+          archiveTitle: '我方地质师的研究',
+          archiveDesc: '每个地块的地质情况均由我方地质师依据档案报告研究。',
+          servicesNav: '服务',
+          servicesTitle: '地下资源利用服务',
+          serviceIntro:
+            '地质与咨询。由我们的地质师提供专业分析、许可证办理协助及野外工作。',
+          serviceGeology: '地质与咨询',
+          companyGeology:
+            '由我们的地质师提供专业分析、许可证办理协助及野外工作。',
+          guideHeading: '许可证与交易指南',
+          guideIntro:
+            '哈萨克斯坦矿业权、许可证办理与储量分类——简明扼要，并附资料来源。',
+          aboutNav: '关于我们',
+          aboutTitle: 'QAZNEDR HOLDING — 面向投资者的哈萨克斯坦矿区',
+          aboutIntro:
+            '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。我们就具体矿区及合作方式进行沟通，并为许可证办理、尽职调查和野外工作提供支持。',
+          insightsEyebrow: '投资指南',
+          insightsTitle: '投资者指南',
+          insightsSubtitle:
+            '哈萨克斯坦矿业权、许可证办理与储量分类——简明扼要，并附资料来源。',
+          guide1: '外国投资者如何在哈萨克斯坦取得矿业权',
+          guide2: '固体矿产勘查许可证：办理流程',
+          guide3: '储量分类对照：GKZ、KAZRC/JORC、GB/T 17766',
+          illustrationNote: '示意插图，并非具体矿区数据。',
+        },
+      };
+      const labels = { ru: 'RU', kz: 'KZ', en: 'EN', zh: '中文' };
+      let locale = 'ru';
+      const langs = document.getElementById('langs');
+      Object.keys(copy).forEach((key) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = labels[key];
+        button.dataset.lang = key;
+        button.setAttribute('aria-pressed', key === locale ? 'true' : 'false');
+        button.addEventListener('click', () => setLocale(key));
+        langs.appendChild(button);
+      });
+      function setLocale(key) {
+        locale = key;
+        document.documentElement.lang =
+          key === 'kz' ? 'kk' : key === 'zh' ? 'zh-CN' : key;
+        document.body.lang = key;
+        document.querySelectorAll('[data-t]').forEach((el) => {
+          el.textContent = copy[key][el.dataset.t] || '';
+        });
+        document
+          .querySelectorAll('[data-lang]')
+          .forEach((el) =>
+            el.setAttribute(
+              'aria-pressed',
+              el.dataset.lang === key ? 'true' : 'false'
+            )
+          );
+        for (const id of ['leads', 'aleads'])
+          document.getElementById(id).href = `https://qaznedr.kz/${key}/leads`;
+        for (const id of ['contact', 'acontact'])
+          document.getElementById(id).href =
+            `https://qaznedr.kz/${key}/contact`;
+        document.getElementById('about').href =
+          `https://qaznedr.kz/${key}/about`;
+        document.getElementById('guide1').href =
+          `https://qaznedr.kz/${key}/insights/foreign-investor-subsoil-rights-kazakhstan`;
+        document.getElementById('guide2').href =
+          `https://qaznedr.kz/${key}/insights/solid-minerals-exploration-licence-kazakhstan`;
+        document.getElementById('guide3').href =
+          `https://qaznedr.kz/${key}/insights/reserve-classification-gkz-kazrc-jorc-gbt17766`;
+      }
+      setLocale(locale);
+      document.getElementById('theme').addEventListener('click', (event) => {
+        const dark = document.body.dataset.theme !== 'dark';
+        document.body.dataset.theme = dark ? 'dark' : 'light';
+        event.currentTarget.setAttribute('aria-pressed', String(dark));
+        event.currentTarget.textContent = dark ? 'Светлая' : 'Тёмная';
+        document.getElementById('logo').src = dark
+          ? '../../../public/brand/logo-horizontal-inverse.svg'
+          : '../../../public/brand/logo-horizontal.svg';
+      });
+    </script>
+  </body>
+</html>

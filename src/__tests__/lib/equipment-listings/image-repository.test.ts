@@ -7,6 +7,10 @@ import {
   listImages,
   readImage,
   storeImage,
+  removeImage,
+  reorderImages,
+  moderationSnapshot,
+  readSnapshotImage,
 } from '@/lib/equipment-listings/image-repository';
 
 const listingId = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
@@ -228,4 +232,147 @@ it('bounds trusted input and IDs before any service call', async () => {
     })
   ).rejects.toMatchObject({ code: 'UNAVAILABLE' });
   expect(createServiceClient).not.toHaveBeenCalled();
+});
+
+it('deletes by server-side RPC without any inline storage cleanup', async () => {
+  db.rpc.mockResolvedValue({
+    data: { revision: 2, status: 'PENDING_MODERATION' },
+    error: null,
+  });
+  expect(await removeImage(listingId, ownerId, 1, imageId)).toEqual({
+    revision: 2,
+    status: 'PENDING_MODERATION',
+  });
+  expect(db.rpc).toHaveBeenCalledWith('remove_equipment_image', {
+    p_listing_id: listingId,
+    p_owner_id: ownerId,
+    p_expected_revision: 1,
+    p_image_id: imageId,
+  });
+  expect(db.storage.from).not.toHaveBeenCalled();
+  expect(bucket.remove).not.toHaveBeenCalled();
+  db.rpc.mockRejectedValue(new Error('unknown commit outcome'));
+  await expect(
+    removeImage(listingId, ownerId, 1, imageId)
+  ).rejects.toMatchObject({ code: 'UNAVAILABLE' });
+  expect(bucket.remove).not.toHaveBeenCalled();
+});
+
+it('passes only complete ID sequence and accepts confirmed no-op revision', async () => {
+  db.rpc.mockResolvedValue({
+    data: { revision: 1, status: 'ACTIVE' },
+    error: null,
+  });
+  expect(await reorderImages(listingId, ownerId, 1, [imageId])).toEqual({
+    revision: 1,
+    status: 'ACTIVE',
+  });
+  expect(db.rpc).toHaveBeenCalledWith('reorder_equipment_images', {
+    p_listing_id: listingId,
+    p_owner_id: ownerId,
+    p_expected_revision: 1,
+    p_image_ids: [imageId],
+  });
+  await expect(
+    reorderImages(listingId, ownerId, 1, [imageId, imageId])
+  ).rejects.toMatchObject({ code: 'INVALID' });
+  db.rpc.mockResolvedValue({
+    data: { revision: 3, status: 'PENDING_MODERATION' },
+    error: null,
+  });
+  await expect(
+    reorderImages(listingId, ownerId, 1, [imageId])
+  ).rejects.toMatchObject({ code: 'UNAVAILABLE' });
+});
+
+it('accepts a committed image change while listing remains REJECTED', async () => {
+  db.rpc.mockResolvedValue({
+    data: { revision: 2, status: 'REJECTED' },
+    error: null,
+  });
+  expect(await removeImage(listingId, ownerId, 1, imageId)).toEqual({
+    revision: 2,
+    status: 'REJECTED',
+  });
+  expect(await reorderImages(listingId, ownerId, 1, [imageId])).toEqual({
+    revision: 2,
+    status: 'REJECTED',
+  });
+});
+
+it('gets moderator snapshot and downloads only a path present in that snapshot', async () => {
+  db.rpc.mockResolvedValue({
+    data: { revision: 1, images: [row] },
+    error: null,
+  });
+  expect(await moderationSnapshot(listingId, 1)).toEqual({
+    revision: 1,
+    images: [{ id: imageId, width: 12, height: 8, bytes: 3, position: 0 }],
+  });
+  expect(await readSnapshotImage(listingId, imageId, 1)).toEqual(
+    Buffer.from('abc')
+  );
+  expect(db.rpc).toHaveBeenCalledWith('equipment_moderation_images', {
+    p_listing_id: listingId,
+    p_expected_revision: 1,
+  });
+  expect(bucket.download).toHaveBeenCalledWith(row.storage_path);
+  bucket.download.mockClear();
+  expect(await readSnapshotImage(listingId, ownerId, 1)).toBeNull();
+  expect(bucket.download).not.toHaveBeenCalled();
+  db.rpc.mockResolvedValue({
+    data: { revision: 2, images: [row] },
+    error: null,
+  });
+  await expect(moderationSnapshot(listingId, 1)).rejects.toMatchObject({
+    code: 'UNAVAILABLE',
+  });
+});
+
+it('maps SQL mutation and snapshot errors without leaking internals', async () => {
+  for (const [code, mapped] of [
+    ['P0002', 'NOT_FOUND'],
+    ['40001', 'CONFLICT'],
+    ['22023', 'INVALID'],
+  ]) {
+    db.rpc.mockResolvedValue({ data: null, error: { code } });
+    await expect(
+      removeImage(listingId, ownerId, 1, imageId)
+    ).rejects.toMatchObject({ code: mapped });
+    await expect(moderationSnapshot(listingId, 1)).rejects.toMatchObject({
+      code: mapped,
+    });
+  }
+});
+
+it('rejects malformed moderator rows before any private download', async () => {
+  const malformedSnapshots = [
+    { revision: 1, images: [{ ...row, storage_path: '../wrong.webp' }] },
+    { revision: 1, images: [row, { ...row, position: 1 }] },
+    { revision: 1, images: [{ ...row, position: 1 }] },
+    { revision: 1, images: [{ ...row, listing_id: ownerId }] },
+  ];
+  for (const data of malformedSnapshots) {
+    db.rpc.mockResolvedValue({ data, error: null });
+    await expect(
+      readSnapshotImage(listingId, imageId, 1)
+    ).rejects.toMatchObject({ code: 'UNAVAILABLE' });
+    expect(bucket.download).not.toHaveBeenCalled();
+  }
+});
+
+it('fails closed on impossible successful mutation replies without inline removal', async () => {
+  for (const data of [
+    null,
+    { revision: 3, status: 'REJECTED' },
+    { revision: 2, status: 'ACTIVE' },
+    { revision: 2, status: 'ARCHIVED' },
+  ]) {
+    db.rpc.mockResolvedValue({ data, error: null });
+    await expect(
+      removeImage(listingId, ownerId, 1, imageId)
+    ).rejects.toMatchObject({ code: 'UNAVAILABLE' });
+    expect(db.storage.from).not.toHaveBeenCalled();
+    expect(bucket.remove).not.toHaveBeenCalled();
+  }
 });

@@ -13,3 +13,7 @@ export async function GET(request: Request, context: ImagesContext) {
 export async function POST(request: Request, context: ImagesContext) {
   return imageHandler('upload')(request, context);
 }
+
+export async function PUT(request: Request, context: ImagesContext) {
+  return imageHandler('reorder')(request, context);
+}

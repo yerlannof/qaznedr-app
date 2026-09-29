@@ -1,0 +1,93 @@
+{
+  "passed": 5,
+  "races": [
+    {
+      "case": "delete_first",
+      "second_waited_for_parent_lock": true,
+      "second": "40001",
+      "state": {
+        "events": 1,
+        "images": [
+          "6b030df7-010a-4097-ab96-c3b7c30d9746",
+          "efa0e3fa-fd22-45f8-a9f6-839bddda69a0"
+        ],
+        "queued": 1,
+        "status": "PENDING_MODERATION",
+        "objects": 3,
+        "revision": 2,
+        "positions": [0, 1]
+      }
+    },
+    {
+      "case": "reorder_first",
+      "second_waited_for_parent_lock": true,
+      "second": "40001",
+      "state": {
+        "events": 1,
+        "images": [
+          "961b4b8f-2892-46ff-a9ab-e64c9bb445e4",
+          "147b02c0-11ce-4d74-a4ee-c29fa22cc35f",
+          "54061e6d-c31e-485c-8135-bbf21d4d4042"
+        ],
+        "queued": 0,
+        "status": "PENDING_MODERATION",
+        "objects": 3,
+        "revision": 2,
+        "positions": [0, 1, 2]
+      }
+    },
+    {
+      "case": "approval_first",
+      "second_waited_for_parent_lock": true,
+      "second": "40001",
+      "state": {
+        "events": 1,
+        "images": [
+          "5ced8d66-edd1-45d1-a432-74ae93d6f4cb",
+          "60147d45-22f8-4938-985b-bf281cdeb94a",
+          "9bde3e20-1eb0-434b-b3e0-3aabf5cd7ded"
+        ],
+        "queued": 0,
+        "status": "ACTIVE",
+        "objects": 3,
+        "revision": 2,
+        "positions": [0, 1, 2]
+      }
+    },
+    {
+      "case": "preview_first",
+      "second_waited_for_parent_lock": true,
+      "second": "success",
+      "state": {
+        "events": 1,
+        "images": [
+          "c1595e84-bf5f-46f7-ab47-390417254ed3",
+          "0c8bce8a-de39-42d3-80ec-e8895cb54f17"
+        ],
+        "queued": 1,
+        "status": "PENDING_MODERATION",
+        "objects": 3,
+        "revision": 2,
+        "positions": [0, 1]
+      }
+    },
+    {
+      "case": "noop_first",
+      "second_waited_for_parent_lock": true,
+      "second": "success",
+      "state": {
+        "events": 1,
+        "images": [
+          "d0df9471-86b9-4899-89ab-48f7f676b2ff",
+          "9961a522-790b-49fa-b81e-3119f5ae5a21",
+          "67aa17d4-bd93-4583-b65b-8080895286a2"
+        ],
+        "queued": 0,
+        "status": "ACTIVE",
+        "objects": 3,
+        "revision": 2,
+        "positions": [0, 1, 2]
+      }
+    }
+  ]
+}

@@ -43,14 +43,23 @@ type ImageBucket = {
 type ImageClient = {
   from(table: 'equipment_listing_images'): Query;
   rpc(
-    name: 'attach_equipment_image',
+    name:
+      | 'attach_equipment_image'
+      | 'remove_equipment_image'
+      | 'reorder_equipment_images'
+      | 'equipment_moderation_images',
     args: Record<string, unknown>
   ): Promise<DbResult>;
   storage: { from(bucket: typeof BUCKET): ImageBucket };
 };
 export class ImageRepositoryError extends Error {
   constructor(
-    public readonly code: 'NOT_FOUND' | 'CONFLICT' | 'LIMIT' | 'UNAVAILABLE'
+    public readonly code:
+      | 'NOT_FOUND'
+      | 'CONFLICT'
+      | 'LIMIT'
+      | 'INVALID'
+      | 'UNAVAILABLE'
   ) {
     super(code);
     this.name = 'ImageRepositoryError';
@@ -70,7 +79,9 @@ function failure(error: DbError): ImageRepositoryError {
         ? 'LIMIT'
         : error?.code === 'P0002'
           ? 'NOT_FOUND'
-          : 'UNAVAILABLE'
+          : error?.code === '22023'
+            ? 'INVALID'
+            : 'UNAVAILABLE'
   );
 }
 function hydrate(value: unknown, listingId: string): ImageRow {
@@ -249,6 +260,160 @@ export async function readImage(
   try {
     const result = await db.storage.from(BUCKET).download(image.storage_path);
     if (result.error || !result.data || result.data.size !== image.bytes)
+      throw new ImageRepositoryError('UNAVAILABLE');
+    return Buffer.from(await result.data.arrayBuffer());
+  } catch {
+    throw new ImageRepositoryError('UNAVAILABLE');
+  }
+}
+
+const revisionSchema = z
+  .object({
+    revision: z.number().int().positive().max(2147483647),
+    status: z.enum(EQUIPMENT_STATUSES),
+  })
+  .strict();
+
+function requireRevision(revision: number): void {
+  if (!Number.isInteger(revision) || revision < 1 || revision > 2147483646)
+    throw new ImageRepositoryError('INVALID');
+}
+
+async function revisionMutation(
+  name: 'remove_equipment_image' | 'reorder_equipment_images',
+  listingId: string,
+  ownerId: string,
+  expectedRevision: number,
+  args: Record<string, unknown>,
+  allowNoop: boolean
+): Promise<{ revision: number; status: EquipmentStatus }> {
+  requireId(listingId);
+  requireId(ownerId);
+  requireRevision(expectedRevision);
+  const db = await client();
+  let result: DbResult;
+  try {
+    result = await db.rpc(name, {
+      p_listing_id: listingId,
+      p_owner_id: ownerId,
+      p_expected_revision: expectedRevision,
+      ...args,
+    });
+  } catch {
+    throw new ImageRepositoryError('UNAVAILABLE');
+  }
+  if (result.error) throw failure(result.error);
+  const parsed = revisionSchema.safeParse(result.data);
+  if (
+    !parsed.success ||
+    (parsed.data.revision !== expectedRevision + 1 &&
+      !(allowNoop && parsed.data.revision === expectedRevision)) ||
+    parsed.data.status === 'ARCHIVED' ||
+    (parsed.data.revision === expectedRevision + 1 &&
+      !['DRAFT', 'PENDING_MODERATION', 'REJECTED'].includes(parsed.data.status))
+  )
+    throw new ImageRepositoryError('UNAVAILABLE');
+  return parsed.data;
+}
+
+/** SQL deletes the attachment and queues its exact storage path; this never removes bytes inline. */
+export async function removeImage(
+  listingId: string,
+  ownerId: string,
+  expectedRevision: number,
+  imageId: string
+) {
+  requireId(imageId);
+  return revisionMutation(
+    'remove_equipment_image',
+    listingId,
+    ownerId,
+    expectedRevision,
+    { p_image_id: imageId },
+    false
+  );
+}
+
+export async function reorderImages(
+  listingId: string,
+  ownerId: string,
+  expectedRevision: number,
+  imageIds: string[]
+) {
+  if (
+    !Array.isArray(imageIds) ||
+    imageIds.length > 8 ||
+    new Set(imageIds).size !== imageIds.length ||
+    !imageIds.every((id) => uuid.safeParse(id).success)
+  )
+    throw new ImageRepositoryError('INVALID');
+  return revisionMutation(
+    'reorder_equipment_images',
+    listingId,
+    ownerId,
+    expectedRevision,
+    { p_image_ids: imageIds },
+    true
+  );
+}
+
+type ModerationSnapshot = { revision: number; images: EquipmentImage[] };
+async function snapshotRows(
+  listingId: string,
+  expectedRevision: number
+): Promise<{ revision: number; rows: ImageRow[] }> {
+  requireId(listingId);
+  requireRevision(expectedRevision);
+  let result: DbResult;
+  try {
+    result = await (
+      await client()
+    ).rpc('equipment_moderation_images', {
+      p_listing_id: listingId,
+      p_expected_revision: expectedRevision,
+    });
+  } catch {
+    throw new ImageRepositoryError('UNAVAILABLE');
+  }
+  if (result.error) throw failure(result.error);
+  const parsed = z
+    .object({ revision: z.number().int(), images: z.array(z.unknown()).max(8) })
+    .safeParse(result.data);
+  if (!parsed.success || parsed.data.revision !== expectedRevision)
+    throw new ImageRepositoryError('UNAVAILABLE');
+  const rows = parsed.data.images.map((value) => hydrate(value, listingId));
+  if (
+    new Set(rows.map((row) => row.id)).size !== rows.length ||
+    rows.some((row, index) => row.position !== index)
+  )
+    throw new ImageRepositoryError('UNAVAILABLE');
+  return { revision: parsed.data.revision, rows };
+}
+
+/** Call only after requireAdmin; the RPC verifies PENDING_MODERATION and version. */
+export async function moderationSnapshot(
+  listingId: string,
+  expectedRevision: number
+): Promise<ModerationSnapshot> {
+  const snapshot = await snapshotRows(listingId, expectedRevision);
+  return { revision: snapshot.revision, images: snapshot.rows.map(safeImage) };
+}
+
+/** Download only the path confirmed by a fresh moderation snapshot. */
+export async function readSnapshotImage(
+  listingId: string,
+  imageId: string,
+  expectedRevision: number
+): Promise<Buffer | null> {
+  requireId(imageId);
+  const snapshot = await snapshotRows(listingId, expectedRevision);
+  const row = snapshot.rows.find((image) => image.id === imageId);
+  if (!row) return null;
+  try {
+    const result = await (await client()).storage
+      .from(BUCKET)
+      .download(row.storage_path);
+    if (result.error || !result.data || result.data.size !== row.bytes)
       throw new ImageRepositoryError('UNAVAILABLE');
     return Buffer.from(await result.data.arrayBuffer());
   } catch {

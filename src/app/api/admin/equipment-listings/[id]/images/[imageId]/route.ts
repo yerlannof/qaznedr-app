@@ -7,9 +7,5 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request, context: ImageContext) {
-  return imageHandler('read')(request, context);
-}
-
-export async function DELETE(request: Request, context: ImageContext) {
-  return imageHandler('remove')(request, context);
+  return imageHandler('admin-read')(request, context);
 }

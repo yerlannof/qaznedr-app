@@ -18,7 +18,9 @@ const KEYS = [
   'seo.home.description',
   'seo.leads.description',
   'portal.subtitle',
+  'leadsHero.title',
   'leadsHero.subtitle',
+  'showcase.contactNote',
 ];
 
 describe.each(['ru', 'kz', 'en', 'zh'])('%s copy', (locale) => {
@@ -27,5 +29,20 @@ describe.each(['ru', 'kz', 'en', 'zh'])('%s copy', (locale) => {
     expect(
       FREE[locale].test(value) ? QUALIFIED[locale].test(value) : true
     ).toBe(true);
+  });
+});
+
+// The holding selects areas and takes on licensing for a buyer; it does not
+// own them (pivot spec red line 1, geobase showcase contract).
+const OWNERSHIP: Record<string, RegExp> = {
+  ru: /наш(и|его|ему|им|ем)?\s+участ|участ\S*\s+(холдинга|наш)/i,
+  kz: /біздің\s+учаске/i,
+  en: /\bour\s+(areas?|sites?|plots?|deposits?)\b/i,
+  zh: /我们的(矿区|地块|矿)/,
+};
+
+describe.each(['ru', 'kz', 'en', 'zh'])('%s ownership', (locale) => {
+  it.each(KEYS)('%s never claims the areas as ours', (key) => {
+    expect(translate(locale, key)).not.toMatch(OWNERSHIP[locale]);
   });
 });

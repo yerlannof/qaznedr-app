@@ -387,9 +387,9 @@ export const translations = {
     },
     leadsHero: {
       eyebrow: 'Витрина участков · статус по нашей проверке',
-      title: 'Свободные участки с изученной геологией',
+      title: 'Участки, отобранные нашими геологами',
       subtitle:
-        'В карточке — металл, регион, геология и статус на дату проверки. Название, координаты и материалы — после NDA.',
+        'Свободны по нашей проверке на дату в карточке. Если участок вам интересен, берём на себя оформление лицензии под ваш проект и сопровождаем сделку. Название, координаты и материалы — после встречи и NDA.',
       ctaBrowse: 'Все участки',
       ctaFree: 'Только свободные',
       freshHeading: 'Новые участки',
@@ -435,7 +435,8 @@ export const translations = {
       openScan: 'Открыть фрагмент в полном размере',
       rightsHeading: 'Статус прав',
       contactHeading: 'Обсудить участок',
-      contactNote: 'Напишите номер карточки — геолог ответит по объекту.',
+      contactNote:
+        'Напишите номер карточки — геолог ответит по объекту. Под заинтересованный проект берём на себя оформление лицензии.',
       mapCredit:
         'Границы областей: © участники OpenStreetMap, geoBoundaries (ODbL)',
       seoTitle: '{commodity} — участок {code}, {oblast}',
@@ -1298,9 +1299,9 @@ export const translations = {
     },
     leadsHero: {
       eyebrow: 'Учаскелер витринасы · мәртебе біздің тексеруімізбен',
-      title: 'Геологиясы зерттелген бос учаскелер',
+      title: 'Біздің геологтар іріктеген учаскелер',
       subtitle:
-        'Карточкада — металл, өңір, геология және тексеру күніндегі мәртебе. Атауы, координаттары және материалдары — NDA-дан кейін.',
+        'Карточкадағы күнге біздің тексеруімізше бос. Учаске қызықтырса, жобаңызға лицензия ресімдеуді өзімізге аламыз және мәмілені сүйемелдейміз. Атауы, координаттары және материалдары — кездесу мен NDA-дан кейін.',
       ctaBrowse: 'Барлық учаскелер',
       ctaFree: 'Тек бостары',
       freshHeading: 'Жаңа учаскелер',
@@ -1347,7 +1348,7 @@ export const translations = {
       rightsHeading: 'Құқық мәртебесі',
       contactHeading: 'Учаскені талқылау',
       contactNote:
-        'Карточка нөмірін жазыңыз — геолог объект бойынша жауап береді.',
+        'Карточка нөмірін жазыңыз — геолог объект бойынша жауап береді. Мүдделі жоба үшін лицензия ресімдеуді өзімізге аламыз.',
       mapCredit:
         'Облыс шекаралары: © OpenStreetMap қатысушылары, geoBoundaries (ODbL)',
       seoTitle: '{commodity} — {code} учаскесі, {oblast}',
@@ -2125,9 +2126,9 @@ export const translations = {
     },
     leadsHero: {
       eyebrow: 'Areas on display · status per our check',
-      title: 'Free areas with studied geology',
+      title: 'Areas selected by our geologists',
       subtitle:
-        'Each card shows the metal, region, geology and status as of the check date. Name, coordinates and materials — after an NDA.',
+        'Free per our check on the date in each card. If an area interests you, we take on licensing it for your project and support the deal. Name, coordinates and materials follow a meeting and an NDA.',
       ctaBrowse: 'All areas',
       ctaFree: 'Free only',
       freshHeading: 'New areas',
@@ -2174,7 +2175,7 @@ export const translations = {
       rightsHeading: 'Rights status',
       contactHeading: 'Discuss the area',
       contactNote:
-        'Send the card number — a geologist will reply about the object.',
+        'Send the card number — a geologist will reply about the object. For an interested project we take on the licensing.',
       mapCredit:
         'Region boundaries: © OpenStreetMap contributors, geoBoundaries (ODbL)',
       seoTitle: '{commodity} — area {code}, {oblast}',
@@ -2922,9 +2923,9 @@ export const translations = {
     },
     leadsHero: {
       eyebrow: '在展地块 · 状态以我方核查为准',
-      title: '地质已研究的空白地块',
+      title: '我们地质师精选的矿区',
       subtitle:
-        '卡片列明矿种、地区、地质情况及核查日期的状态。名称、坐标及资料在签署保密协议后提供。',
+        '按卡片所示日期我方核查，未设矿权。如您对某矿区感兴趣，我们负责为您的项目办理许可证并协助完成交易。名称、坐标和资料在会面并签署保密协议后提供。',
       ctaBrowse: '全部地块',
       ctaFree: '仅看空白地块',
       freshHeading: '最新地块',
@@ -2969,7 +2970,8 @@ export const translations = {
       openScan: '查看原尺寸片段',
       rightsHeading: '权利状态',
       contactHeading: '咨询该矿区',
-      contactNote: '请发送卡片编号，地质师将就该矿点回复。',
+      contactNote:
+        '请发送卡片编号，地质师将就该矿点回复。对有意向的项目，我们负责办理许可证。',
       mapCredit: '州界：© OpenStreetMap 贡献者，geoBoundaries（ODbL）',
       seoTitle: '{commodity} — 矿区 {code}，{oblast}',
       seoDescription:

@@ -4,9 +4,10 @@ jest.mock('@/components/features/PortalWelcomeHero', () => () => null);
 jest.mock('@/components/features/GeologyScene', () => () => null);
 import { render, screen } from '@testing-library/react';
 import HomePageContent from '@/components/features/HomePageContent';
+import { translate } from '@/lib/i18n/translations';
 import type { LeadTeaser } from '@/lib/leads/types';
 
-const areasTitle = 'Свободные участки с изученной геологией';
+const areasTitle = translate('ru', 'leadsHero.title');
 
 it('omits the areas section while no area is published', () => {
   render(

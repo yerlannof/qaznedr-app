@@ -15,6 +15,8 @@ import {
 import { INSTAGRAM_URL, type Locale } from '@/lib/seo/site';
 import type { HomeSnapshot } from '@/lib/leads/home';
 import { formatCheckDate } from '@/lib/leads/check-date';
+import { parseShowcase } from '@/lib/leads/showcase';
+import ShowcaseHomeTeaser from '@/components/showcase/ShowcaseHomeTeaser';
 
 export default function HomePageContent({
   locale,
@@ -78,35 +80,44 @@ export default function HomePageContent({
               <p className="holding-lead">{t('leadsHero.subtitle')}</p>
             </div>
             <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-              {snapshot.leads.map((lead) => (
-                <article
-                  key={lead.code}
-                  className="border-t border-brand-line pt-6"
-                >
-                  <p className="text-sm text-brand-muted">
-                    {lead.code} ·{' '}
-                    {leadRegionName(lead.region, locale) ||
-                      t('leadCard.regionFallback')}
-                  </p>
-                  <h3 className="font-serif text-3xl mt-4">
-                    {leadMineralName(lead.mineral, locale)}
-                  </h3>
-                  <p className="holding-lead mt-4">
-                    {leadSeoText(lead, locale).description}
-                  </p>
-                  <p className="text-sm text-brand-muted mt-4">
-                    {t('leadDetail.verifyDate')}{' '}
-                    {formatCheckDate(lead.last_verified, locale)}
-                  </p>
-                  <Link
-                    href={`/${locale}/leads/${lead.code}`}
-                    className="inline-flex min-h-12 items-center gap-3 mt-5 font-semibold"
+              {snapshot.leads.map((lead) => {
+                const card = parseShowcase(lead.showcase);
+                return card?.featured ? (
+                  <ShowcaseHomeTeaser
+                    key={lead.code}
+                    card={card}
+                    locale={locale}
+                  />
+                ) : (
+                  <article
+                    key={lead.code}
+                    className="border-t border-brand-line pt-6"
                   >
-                    {t('leadCard.open')}
-                    <ArrowUpRight aria-hidden className="w-5 h-5" />
-                  </Link>
-                </article>
-              ))}
+                    <p className="text-sm text-brand-muted">
+                      {lead.code} ·{' '}
+                      {leadRegionName(lead.region, locale) ||
+                        t('leadCard.regionFallback')}
+                    </p>
+                    <h3 className="font-serif text-3xl mt-4">
+                      {leadMineralName(lead.mineral, locale)}
+                    </h3>
+                    <p className="holding-lead mt-4">
+                      {leadSeoText(lead, locale).description}
+                    </p>
+                    <p className="text-sm text-brand-muted mt-4">
+                      {t('leadDetail.verifyDate')}{' '}
+                      {formatCheckDate(lead.last_verified, locale)}
+                    </p>
+                    <Link
+                      href={`/${locale}/leads/${lead.code}`}
+                      className="inline-flex min-h-12 items-center gap-3 mt-5 font-semibold"
+                    >
+                      {t('leadCard.open')}
+                      <ArrowUpRight aria-hidden className="w-5 h-5" />
+                    </Link>
+                  </article>
+                );
+              })}
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link

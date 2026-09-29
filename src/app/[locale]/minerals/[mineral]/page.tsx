@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import LeadCard from '@/components/cards/LeadCard';
+import ShowcaseList, { legacyLeads } from '@/components/showcase/ShowcaseList';
+import { getContactConfig } from '@/lib/config/contacts';
 import ClosingCta from '@/components/features/ClosingCta';
 import { mineralHub, hubMineralName, MINERAL_HUBS } from '@/lib/leads/minerals';
 import { listPublishedLeads } from '@/lib/leads/public-queries';
@@ -101,11 +103,21 @@ export default async function MineralPage({ params }: Props) {
             {t('leadsCatalog.foundCount', { count: total })}
           </p>
           {leads.length ? (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {leads.map((lead) => (
-                <LeadCard key={lead.code} lead={lead} locale={locale} />
-              ))}
-            </div>
+            <>
+              <ShowcaseList
+                leads={leads}
+                locale={locale}
+                contacts={getContactConfig()}
+                overview={false}
+              />
+              {legacyLeads(leads).length > 0 && (
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {legacyLeads(leads).map((lead) => (
+                    <LeadCard key={lead.code} lead={lead} locale={locale} />
+                  ))}
+                </div>
+              )}
+            </>
           ) : (
             <p className="py-10 border-y border-brand-line">
               {t('leadsCatalog.emptyTitle')}

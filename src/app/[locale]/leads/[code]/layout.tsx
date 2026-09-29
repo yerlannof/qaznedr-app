@@ -3,6 +3,8 @@ import { getPublishedLeadByCode } from '@/lib/leads/public-queries';
 import { translate } from '@/lib/i18n/translations';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { leadSeoText } from '@/lib/seo/lead-metadata';
+import { parseShowcase } from '@/lib/leads/showcase';
+import { showcaseSeoText } from '@/lib/seo/showcase-seo';
 import { toLocale } from '@/lib/seo/site';
 
 export async function generateMetadata({
@@ -19,7 +21,10 @@ export async function generateMetadata({
       robots: { index: false, follow: false },
     };
   }
-  const { title, description } = leadSeoText(lead, locale);
+  const showcase = parseShowcase(lead.showcase);
+  const { title, description } = showcase
+    ? showcaseSeoText(showcase, locale)
+    : leadSeoText(lead, locale);
   return buildPageMetadata({
     locale,
     path: `/leads/${lead.code}`,

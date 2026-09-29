@@ -31,6 +31,9 @@ export interface LeadTeaser {
   confidence: number | null;
   status: LeadStatus;
   sold_count: number;
+  /** Geobase showcase card (see lib/leads/showcase.ts); null for legacy rows. */
+  showcase?: unknown;
+  sort_order?: number | null;
 }
 
 /** Explicit allow-list of teaser columns — used in every public .select() (never `*`). */
@@ -38,7 +41,7 @@ export const TEASER_COLUMNS =
   'code,mineral,type,region,tier,exclusivity,teaser_title,teaser_summary,' +
   'grade_display,grade_label,byproducts_display,reserve_categories,license_status,' +
   'last_verified,distance_band,map_centroid,fair_value_min_usd_m,fair_value_max_usd_m,' +
-  'jorc_potential_usd_m,confidence,status,sold_count';
+  'jorc_potential_usd_m,confidence,status,sold_count,showcase,sort_order';
 
 /** Gated — server-only. Never imported into a client component. */
 export interface LeadPrivate {

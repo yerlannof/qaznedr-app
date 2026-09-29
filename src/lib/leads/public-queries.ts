@@ -60,6 +60,10 @@ export async function listPublishedLeads(
   if (f.exclusivity) q = q.eq('exclusivity', f.exclusivity);
   if (f.freeOnly) q = q.ilike('license_status', '%FREE%');
 
+  if (!f.sort || f.sort === 'newest')
+    // Showcase cards keep the delivered package order (gold first); the
+    // contract forbids re-sorting by how impressive a number looks.
+    q = q.order('sort_order', { ascending: true, nullsFirst: false });
   if (f.sort === 'value_desc')
     q = q.order('fair_value_max_usd_m', {
       ascending: false,

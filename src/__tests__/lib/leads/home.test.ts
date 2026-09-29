@@ -62,3 +62,32 @@ it('retries immediately after unavailable data instead of caching failure', asyn
   expect((await loadHomeSnapshot()).stats).toBeNull();
   expect((await loadHomeSnapshot()).stats).toEqual({ total: 0, regions: 0 });
 });
+
+describe('featured showcase teasers', () => {
+  const { fakeShowcase } = jest.requireActual('../../mocks/showcase-fixture');
+  const card = (code: string, featured?: number) => ({
+    code,
+    region: 'Карагандинская',
+    showcase: {
+      ...fakeShowcase,
+      card_id: code,
+      ...(featured
+        ? { featured: { rank: featured, fact: { ru: 'Оговорка' } } }
+        : {}),
+    },
+  });
+
+  it('shows only cards the geobase marked as featured, in their rank', async () => {
+    read.mockResolvedValue({
+      leads: [card('QN-01'), card('QN-02', 2), card('QN-03', 1)],
+      total: 3,
+    });
+    const result = await loadHomeSnapshot();
+    expect(result.leads.map((l) => l.code)).toEqual(['QN-03', 'QN-02']);
+  });
+
+  it('shows no teaser rather than an unmarked card', async () => {
+    read.mockResolvedValue({ leads: [card('QN-01')], total: 1 });
+    expect((await loadHomeSnapshot()).leads).toEqual([]);
+  });
+});

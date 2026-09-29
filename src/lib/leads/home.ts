@@ -2,6 +2,7 @@ import 'server-only';
 import { listPublishedLeads } from './public-queries';
 import { collectLeadStats, LEADS_PAGE_SIZE } from './stats';
 import type { LeadTeaser } from './types';
+import { parseShowcase } from './showcase';
 
 export interface HomeSnapshot {
   stats: { total: number; regions: number } | null;
@@ -11,6 +12,23 @@ export interface HomeSnapshot {
 const TTL_MS = 60_000;
 let cached: { at: number; value: HomeSnapshot } | null = null;
 
+/**
+ * Showcase cards reach the home page only when the geobase marked them as
+ * featured (a spike or untyped number without its caveats would oversell).
+ * Legacy rows without a showcase card keep the first-two behaviour.
+ */
+function pickHomeLeads(rows: LeadTeaser[]): LeadTeaser[] {
+  const cards = rows
+    .map((lead) => ({ lead, card: parseShowcase(lead.showcase) }))
+    .filter((x) => x.card);
+  if (!cards.length) return rows.slice(0, 2);
+  return cards
+    .filter((x) => x.card!.featured)
+    .sort((a, b) => a.card!.featured!.rank - b.card!.featured!.rank)
+    .slice(0, 2)
+    .map((x) => x.lead);
+}
+
 /** Server-render real teasers; an unavailable database is never a made-up count. */
 export async function loadHomeSnapshot(): Promise<HomeSnapshot> {
   if (cached && Date.now() - cached.at < TTL_MS) return cached.value;
@@ -18,7 +36,7 @@ export async function loadHomeSnapshot(): Promise<HomeSnapshot> {
   try {
     const stats = await collectLeadStats(async (page) => {
       const result = await listPublishedLeads({ page, limit: LEADS_PAGE_SIZE });
-      if (page === 1) leads = result.leads.slice(0, 2);
+      if (page === 1) leads = pickHomeLeads(result.leads);
       return result;
     });
     const value = { stats, leads };

@@ -4,6 +4,8 @@ import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import LeadCard from '@/components/cards/LeadCard';
 import LeadFilters from '@/components/features/LeadFilters';
+import ShowcaseList, { legacyLeads } from '@/components/showcase/ShowcaseList';
+import { getContactConfig } from '@/lib/config/contacts';
 import {
   listPublishedLeads,
   listLeadRegions,
@@ -150,11 +152,18 @@ export default async function LeadsCatalogPage({
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                  {leads.map((lead) => (
-                    <LeadCard key={lead.code} lead={lead} locale={locale} />
-                  ))}
-                </div>
+                <ShowcaseList
+                  leads={leads}
+                  locale={locale}
+                  contacts={getContactConfig()}
+                />
+                {legacyLeads(leads).length > 0 && (
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+                    {legacyLeads(leads).map((lead) => (
+                      <LeadCard key={lead.code} lead={lead} locale={locale} />
+                    ))}
+                  </div>
+                )}
                 {totalPages > 1 && (
                   <nav
                     aria-label={t('leadsCatalog.foundCount', { count: total })}

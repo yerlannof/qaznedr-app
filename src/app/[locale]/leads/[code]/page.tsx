@@ -16,6 +16,9 @@ import {
   leadRegionName,
 } from '@/lib/seo/lead-metadata';
 import { getPublishedLeadByCode } from '@/lib/leads/public-queries';
+import { parseShowcase } from '@/lib/leads/showcase';
+import { showcaseSeoText } from '@/lib/seo/showcase-seo';
+import ShowcaseDetail from '@/components/showcase/ShowcaseDetail';
 import { isFreeStatus } from '@/lib/leads/types';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { GUIDE, insightHref } from '@/lib/insights/registry';
@@ -35,6 +38,33 @@ export default async function LeadTeaserPage({
   const { t } = getServerTranslation(locale);
   const lead = await getPublishedLeadByCode(code);
   if (!lead) notFound();
+  const showcase = parseShowcase(lead.showcase);
+  if (showcase) {
+    const text = showcaseSeoText(showcase, locale);
+    const jsonLd = leadJsonLd(lead, locale, text);
+    return (
+      <>
+        <Navigation />
+        <div className="bg-brand-bg text-brand-ink pt-20 lg:pt-24">
+          <ShowcaseDetail
+            showcase={showcase}
+            locale={locale}
+            contacts={getContactConfig()}
+          />
+        </div>
+        <Footer />
+        {[jsonLd.place, jsonLd.breadcrumb].map((data, i) => (
+          <script
+            key={i}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+            }}
+          />
+        ))}
+      </>
+    );
+  }
   const free = isFreeStatus(lead.license_status);
   const coordVerified =
     free &&

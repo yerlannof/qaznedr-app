@@ -416,6 +416,32 @@ export const translations = {
         city: 'Астана, Казахстан',
       },
     },
+    showcase: {
+      rightsChecked: 'Проверено {date}, не выписка.',
+      disclaimer:
+        'Карточки подготовлены нашими геологами по фондовым геологическим отчётам. Числа приведены так, как они записаны в отчёте, с указанием типа значения (максимум отдельной пробы, среднее, прогнозные ресурсы и т. п.); это не запасы, подсчитанные по современным стандартам. Статус прав — наша проверка по публичной карте недропользования на указанную дату, не выписка и не юридическое заключение. Место объекта показано условно: он находится внутри круга, центр круга с объектом не совпадает. Витрина не является публичной офертой. Материалы по объекту — после встречи.',
+      disclaimerLabel: 'Оговорка',
+      whatsappCta: 'Обсудить {code} в WhatsApp',
+      wechatCta: 'Обсудить {code}',
+      more: 'Подробнее',
+      overviewLabel: 'Схема Казахстана: условные круги участков',
+      overviewCaption:
+        'Каждый круг — условное место одного участка; объект находится внутри круга.',
+      cardMapLabel: 'Схема: {oblast}, условный круг',
+      cardMapCaption: '{oblast} · место условно, внутри круга',
+      detailMapCaption:
+        'Место показано условно: объект внутри круга. Точное место и материалы — после встречи.',
+      scansHeading: 'Фрагменты отчёта',
+      openScan: 'Открыть фрагмент в полном размере',
+      rightsHeading: 'Статус прав',
+      contactHeading: 'Обсудить участок',
+      contactNote: 'Напишите номер карточки — геолог ответит по объекту.',
+      mapCredit:
+        'Границы областей: © участники OpenStreetMap, geoBoundaries (ODbL)',
+      seoTitle: '{commodity} — участок {code}, {oblast}',
+      seoDescription:
+        '{headline}. {oblast}. Статус прав — наша проверка по карте на {date}, не выписка. Карточка {code}.',
+    },
     leadCard: {
       badge: { sold: 'ПРОДАНО', free: 'СВОБОДЕН' },
       types: { placer: 'Россыпь', bedrock: 'Коренное', other: 'Объект' },
@@ -1301,6 +1327,33 @@ export const translations = {
         city: 'Астана, Қазақстан',
       },
     },
+    showcase: {
+      rightsChecked: '{date} тексерілді, үзінді көшірме емес.',
+      disclaimer:
+        'Карточкаларды біздің геологтар қордағы геологиялық есептер бойынша дайындады. Сандар есепте жазылғандай, мән түрі көрсетіліп берілген (жеке сынаманың ең жоғары мәні, орташа мән, болжамды ресурстар және т.б.); бұл заманауи стандарттар бойынша есептелген қорлар емес. Құқық мәртебесі — көрсетілген күнгі жер қойнауын пайдаланудың жария картасы бойынша біздің тексеруіміз, үзінді көшірме де, заңгерлік қорытынды да емес. Объектінің орны шартты түрде көрсетілген: ол шеңбердің ішінде орналасқан, шеңбердің ортасы объектімен сәйкес келмейді. Витрина жария оферта болып табылмайды. Объект бойынша материалдар — кездесуден кейін.',
+      disclaimerLabel: 'Ескерту',
+      whatsappCta: '{code} WhatsApp арқылы талқылау',
+      wechatCta: '{code} талқылау',
+      more: 'Толығырақ',
+      overviewLabel: 'Қазақстан сызбасы: учаскелердің шартты шеңберлері',
+      overviewCaption:
+        'Әр шеңбер — бір учаскенің шартты орны; объект шеңбердің ішінде.',
+      cardMapLabel: 'Сызба: {oblast}, шартты шеңбер',
+      cardMapCaption: '{oblast} · орны шартты, шеңбер ішінде',
+      detailMapCaption:
+        'Орны шартты көрсетілген: объект шеңбердің ішінде. Нақты орны мен материалдар — кездесуден кейін.',
+      scansHeading: 'Есеп үзінділері',
+      openScan: 'Үзіндіні толық өлшемде ашу',
+      rightsHeading: 'Құқық мәртебесі',
+      contactHeading: 'Учаскені талқылау',
+      contactNote:
+        'Карточка нөмірін жазыңыз — геолог объект бойынша жауап береді.',
+      mapCredit:
+        'Облыс шекаралары: © OpenStreetMap қатысушылары, geoBoundaries (ODbL)',
+      seoTitle: '{commodity} — {code} учаскесі, {oblast}',
+      seoDescription:
+        '{headline}. {oblast}. Құқық мәртебесі — {date} картадағы біздің тексеруіміз, үзінді көшірме емес. Карточка {code}.',
+    },
     leadCard: {
       badge: { sold: 'САТЫЛДЫ', free: 'БОС' },
       types: { placer: 'Шашыранды', bedrock: 'Қазба орны', other: 'Объект' },
@@ -2101,6 +2154,33 @@ export const translations = {
         city: 'Astana, Kazakhstan',
       },
     },
+    showcase: {
+      rightsChecked: 'Checked {date}; not an official extract.',
+      disclaimer:
+        'The cards were prepared by our geologists from archival geological reports. Figures are given as recorded in the report, with the type of value stated (maximum of a single sample, average, prognostic resources, etc.); they are not reserves estimated under modern standards. The rights status is our check against the public subsoil-use map on the stated date, not an official extract or a legal opinion. The location of each object is shown approximately: it lies inside the circle, and the centre of the circle does not coincide with the object. The showcase is not a public offer. Materials on an object are provided after a meeting.',
+      disclaimerLabel: 'Disclaimer',
+      whatsappCta: 'Discuss {code} on WhatsApp',
+      wechatCta: 'Discuss {code}',
+      more: 'Details',
+      overviewLabel: 'Map of Kazakhstan: approximate circles of the areas',
+      overviewCaption:
+        'Each circle is the approximate place of one area; the object lies inside the circle.',
+      cardMapLabel: 'Map: {oblast}, approximate circle',
+      cardMapCaption: '{oblast} · approximate place, inside the circle',
+      detailMapCaption:
+        'The place is shown approximately: the object lies inside the circle. The exact place and materials follow a meeting.',
+      scansHeading: 'Report fragments',
+      openScan: 'Open the fragment at full size',
+      rightsHeading: 'Rights status',
+      contactHeading: 'Discuss the area',
+      contactNote:
+        'Send the card number — a geologist will reply about the object.',
+      mapCredit:
+        'Region boundaries: © OpenStreetMap contributors, geoBoundaries (ODbL)',
+      seoTitle: '{commodity} — area {code}, {oblast}',
+      seoDescription:
+        '{headline}. {oblast}. Rights status per our check against the map on {date}; not an official extract. Card {code}.',
+    },
     leadCard: {
       badge: { sold: 'SOLD', free: 'FREE' },
       types: { placer: 'Placer', bedrock: 'Bedrock', other: 'Object' },
@@ -2870,6 +2950,30 @@ export const translations = {
         rights: '© {year} QAZNEDR. 版权所有。',
         city: '哈萨克斯坦阿斯塔纳',
       },
+    },
+    showcase: {
+      rightsChecked: '核查日期 {date}，非官方摘录。',
+      disclaimer:
+        '卡片由我们的地质师根据地质档案报告编制。数值按报告原文给出，并注明数值类型（单个样品最高值、平均值、预测资源量等）；这些不是按现代标准估算的储量。权利状态为我们在所示日期对公开底土使用地图的核查结果，不是官方摘录，也不是法律意见。矿点位置为示意：矿点位于圆圈之内，圆心与矿点位置不重合。本展示不构成公开要约。矿点资料在会面后提供。',
+      disclaimerLabel: '说明',
+      whatsappCta: '通过 WhatsApp 咨询 {code}',
+      wechatCta: '咨询 {code}',
+      more: '详情',
+      overviewLabel: '哈萨克斯坦示意图：矿区的示意圆圈',
+      overviewCaption: '每个圆圈是一个矿区的示意位置；矿点位于圆圈之内。',
+      cardMapLabel: '示意图：{oblast}，示意圆圈',
+      cardMapCaption: '{oblast} · 位置为示意，位于圆圈内',
+      detailMapCaption:
+        '位置为示意：矿点位于圆圈之内。确切位置和资料在会面后提供。',
+      scansHeading: '报告片段',
+      openScan: '查看原尺寸片段',
+      rightsHeading: '权利状态',
+      contactHeading: '咨询该矿区',
+      contactNote: '请发送卡片编号，地质师将就该矿点回复。',
+      mapCredit: '州界：© OpenStreetMap 贡献者，geoBoundaries（ODbL）',
+      seoTitle: '{commodity} — 矿区 {code}，{oblast}',
+      seoDescription:
+        '{headline}。{oblast}。权利状态为我方于 {date} 对照地图的核查，非官方摘录。卡片 {code}。',
     },
     leadCard: {
       badge: { sold: '已售出', free: '空闲' },

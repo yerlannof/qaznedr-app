@@ -99,3 +99,24 @@ describe('mineral and geological type filters', () => {
     }
   });
 });
+
+describe('showcase order', () => {
+  beforeEach(() => {
+    orders.length = 0;
+  });
+
+  it('shows cards in the delivered package order by default', async () => {
+    await listPublishedLeads();
+    expect(orders[0]).toEqual([
+      'sort_order',
+      { ascending: true, nullsFirst: false },
+    ]);
+  });
+
+  it('ships the showcase card with every public teaser row', () => {
+    const { TEASER_COLUMNS } = jest.requireActual('@/lib/leads/types');
+    expect(TEASER_COLUMNS.split(',')).toEqual(
+      expect.arrayContaining(['showcase', 'sort_order'])
+    );
+  });
+});

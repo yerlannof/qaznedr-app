@@ -34,3 +34,34 @@ it('keeps the areas section with published teasers', () => {
   );
   expect(screen.getByText(areasTitle)).toBeInTheDocument();
 });
+
+it('renders a featured showcase teaser with its number type and one caveat', () => {
+  const { fakeShowcase } = jest.requireActual('../../mocks/showcase-fixture');
+  const lead = {
+    code: 'QN-99',
+    mineral: 'Au+Cu',
+    region: 'Карагандинская',
+    type: 'bedrock',
+    last_verified: '2026-09-28',
+    showcase: {
+      ...fakeShowcase,
+      headline: { ru: 'Среднее содержание: золото 1,0 г/т' },
+      headline_type: 'average',
+      featured: { rank: 1, fact: { ru: 'Одна оговорка дословно' } },
+    },
+  } as unknown as LeadTeaser;
+  render(
+    <HomePageContent
+      locale="ru"
+      snapshot={{ stats: { total: 1, regions: 1 }, leads: [lead] }}
+    />
+  );
+  expect(screen.getByText('Среднее содержание:')).toBeInTheDocument();
+  expect(screen.getByText('золото 1,0 г/т')).toBeInTheDocument();
+  expect(screen.getByText('Одна оговорка дословно')).toBeInTheDocument();
+  expect(screen.queryByText(fakeShowcase.facts.ru[0])).not.toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /QN-99|Открыть/ })).toHaveAttribute(
+    'href',
+    '/ru/leads/QN-99'
+  );
+});

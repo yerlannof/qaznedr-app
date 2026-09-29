@@ -39,6 +39,7 @@ export interface WebVitalsMetrics {
   FCP?: number; // First Contentful Paint
   LCP?: number; // Largest Contentful Paint
   FID?: number; // First Input Delay
+  INP?: number; // Interaction to Next Paint
   CLS?: number; // Cumulative Layout Shift
   TTFB?: number; // Time to First Byte
 }
@@ -311,69 +312,36 @@ export class PerformanceMonitoringService {
    * Track Web Vitals metrics
    */
   trackWebVitals(metrics: WebVitalsMetrics, userId?: string): void {
-    // Track Core Web Vitals
-    if (metrics.FCP) {
-      sentryMiningService.trackMetric(
-        MiningMetric.API_REQUEST_PROCESSED,
-        metrics.FCP,
-        { userId },
-        {
-          metric_type: 'fcp',
-          performance_category:
-            metrics.FCP < 1800
-              ? 'good'
-              : metrics.FCP < 3000
-                ? 'needs_improvement'
-                : 'poor',
-        }
-      );
-    }
+    const thresholds: Record<
+      keyof WebVitalsMetrics,
+      { good: number; poor: number }
+    > = {
+      FCP: { good: 1800, poor: 3000 },
+      LCP: { good: 2500, poor: 4000 },
+      FID: { good: 100, poor: 300 },
+      INP: { good: 200, poor: 500 },
+      CLS: { good: 0.1, poor: 0.25 },
+      TTFB: { good: 800, poor: 1800 },
+    };
+    const validMetrics: WebVitalsMetrics = {};
 
-    if (metrics.LCP) {
+    for (const name of Object.keys(thresholds) as (keyof WebVitalsMetrics)[]) {
+      const value = metrics[name];
+      if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) {
+        continue;
+      }
+      validMetrics[name] = value;
+      const { good, poor } = thresholds[name];
       sentryMiningService.trackMetric(
         MiningMetric.API_REQUEST_PROCESSED,
-        metrics.LCP,
+        value,
         { userId },
         {
-          metric_type: 'lcp',
+          metric_type: name.toLowerCase(),
           performance_category:
-            metrics.LCP < 2500
+            value <= good
               ? 'good'
-              : metrics.LCP < 4000
-                ? 'needs_improvement'
-                : 'poor',
-        }
-      );
-    }
-
-    if (metrics.FID) {
-      sentryMiningService.trackMetric(
-        MiningMetric.API_REQUEST_PROCESSED,
-        metrics.FID,
-        { userId },
-        {
-          metric_type: 'fid',
-          performance_category:
-            metrics.FID < 100
-              ? 'good'
-              : metrics.FID < 300
-                ? 'needs_improvement'
-                : 'poor',
-        }
-      );
-    }
-
-    if (metrics.CLS) {
-      sentryMiningService.trackMetric(
-        MiningMetric.API_REQUEST_PROCESSED,
-        metrics.CLS,
-        { userId },
-        {
-          metric_type: 'cls',
-          performance_category:
-            metrics.CLS < 0.1
-              ? 'good'
-              : metrics.CLS < 0.25
+              : value <= poor
                 ? 'needs_improvement'
                 : 'poor',
         }
@@ -384,7 +352,7 @@ export class PerformanceMonitoringService {
     sentryMiningService.addMiningBreadcrumb(
       'Web Vitals metrics recorded',
       'api',
-      { ...metrics, userId },
+      { ...validMetrics, userId },
       'info'
     );
   }

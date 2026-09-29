@@ -12,6 +12,7 @@ const WEB_VITALS_THRESHOLDS = {
   FCP: { good: 1800, poor: 3000 }, // First Contentful Paint
   LCP: { good: 2500, poor: 4000 }, // Largest Contentful Paint
   FID: { good: 100, poor: 300 }, // First Input Delay
+  INP: { good: 200, poor: 500 }, // Interaction to Next Paint
   CLS: { good: 0.1, poor: 0.25 }, // Cumulative Layout Shift
   TTFB: { good: 800, poor: 1800 }, // Time to First Byte
 } as const;
@@ -22,15 +23,61 @@ interface WebVitalsTrackerProps {
 }
 
 export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
-  const metricsRef = useRef<Partial<WebVitalsMetrics>>({});
-  const reportedRef = useRef<Set<string>>(new Set());
+  const contextRef = useRef({ userId, pageName });
+  useEffect(() => {
+    contextRef.current = { userId, pageName };
+  }, [userId, pageName]);
+  const activeRef = useRef(false);
+  const generationRef = useRef(0);
+  const libraryRegisteredRef = useRef(false);
+  const reportedRef = useRef<Map<string, number>>(new Map());
 
   useEffect(() => {
     // Only run in browser environment
     if (typeof window === 'undefined') return;
+    activeRef.current = true;
+    const generation = ++generationRef.current;
+    let localActive = true;
+    const observers: PerformanceObserver[] = [];
 
-    // Track page load time
-    const startTime = performance.now();
+    const reportMetric = (
+      name: keyof WebVitalsMetrics,
+      value: number,
+      id = 'legacy'
+    ) => {
+      if (
+        !activeRef.current ||
+        typeof value !== 'number' ||
+        !Number.isFinite(value) ||
+        value < 0
+      )
+        return;
+      const key = `${name}:${id}`;
+      if (reportedRef.current.get(key) === value) return;
+      reportedRef.current.set(key, value);
+      const thresholds = WEB_VITALS_THRESHOLDS[name];
+      const rating =
+        value <= thresholds.good
+          ? 'good'
+          : value <= thresholds.poor
+            ? 'needs-improvement'
+            : 'poor';
+      const { userId: currentUserId, pageName: currentPageName } =
+        contextRef.current;
+      const unit = name === 'CLS' ? '' : 'ms';
+      sentryMiningService.addMiningBreadcrumb(
+        `Web Vital ${name}: ${value.toFixed(2)}${unit} (${rating})`,
+        'api',
+        {
+          metric: name,
+          value: value.toFixed(2),
+          rating,
+          page: currentPageName || 'unknown',
+          userId: currentUserId,
+        }
+      );
+      performanceMonitoring.trackWebVitals({ [name]: value }, currentUserId);
+    };
 
     // Track navigation timing
     const trackNavigationTiming = () => {
@@ -39,13 +86,7 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
       )[0] as PerformanceNavigationTiming;
       if (navigation) {
         const ttfb = navigation.responseStart - navigation.requestStart;
-        metricsRef.current.TTFB = ttfb;
-
-        // Report TTFB immediately
-        if (!reportedRef.current.has('TTFB')) {
-          reportedRef.current.add('TTFB');
-          reportMetric('TTFB', ttfb);
-        }
+        reportMetric('TTFB', ttfb);
       }
     };
 
@@ -54,52 +95,42 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
       try {
         // Try to import web-vitals dynamically - v5 uses different API
         const webVitals = await import('web-vitals');
+        if (
+          !activeRef.current ||
+          generation !== generationRef.current ||
+          libraryRegisteredRef.current
+        )
+          return;
+        libraryRegisteredRef.current = true;
 
         // For web-vitals v5, use onMetric functions or direct imports
         if (webVitals.onCLS) {
-          webVitals.onCLS((metric) => {
-            if (!reportedRef.current.has('CLS')) {
-              reportedRef.current.add('CLS');
-              metricsRef.current.CLS = metric.value;
-              reportMetric('CLS', metric.value);
-            }
-          });
+          webVitals.onCLS((metric) =>
+            reportMetric('CLS', metric.value, metric.id)
+          );
         }
 
         // onFID is deprecated in v5, use onINP instead
         if (webVitals.onINP) {
-          webVitals.onINP((metric) => {
-            if (!reportedRef.current.has('FID')) {
-              reportedRef.current.add('FID');
-              metricsRef.current.FID = metric.value;
-              reportMetric('FID', metric.value);
-            }
-          });
+          webVitals.onINP((metric) =>
+            reportMetric('INP', metric.value, metric.id)
+          );
         }
 
         if (webVitals.onFCP) {
-          webVitals.onFCP((metric) => {
-            if (!reportedRef.current.has('FCP')) {
-              reportedRef.current.add('FCP');
-              metricsRef.current.FCP = metric.value;
-              reportMetric('FCP', metric.value);
-            }
-          });
+          webVitals.onFCP((metric) =>
+            reportMetric('FCP', metric.value, metric.id)
+          );
         }
 
         if (webVitals.onLCP) {
-          webVitals.onLCP((metric) => {
-            if (!reportedRef.current.has('LCP')) {
-              reportedRef.current.add('LCP');
-              metricsRef.current.LCP = metric.value;
-              reportMetric('LCP', metric.value);
-            }
-          });
+          webVitals.onLCP((metric) =>
+            reportMetric('LCP', metric.value, metric.id)
+          );
         }
-      } catch (error) {
+      } catch {
         // Fallback to manual tracking if web-vitals is not available
-        console.warn('Web Vitals library not available, using manual tracking');
-        trackWebVitalsManually();
+        if (localActive && activeRef.current) trackWebVitalsManually();
       }
     };
 
@@ -110,9 +141,7 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
       const fcpEntry = paintEntries.find(
         (entry) => entry.name === 'first-contentful-paint'
       );
-      if (fcpEntry && !reportedRef.current.has('FCP')) {
-        reportedRef.current.add('FCP');
-        metricsRef.current.FCP = fcpEntry.startTime;
+      if (fcpEntry) {
         reportMetric('FCP', fcpEntry.startTime);
       }
 
@@ -121,15 +150,14 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
         const lcpObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries();
           const lastEntry = entries[entries.length - 1] as any;
-          if (lastEntry && !reportedRef.current.has('LCP')) {
-            reportedRef.current.add('LCP');
-            metricsRef.current.LCP = lastEntry.startTime;
+          if (localActive && lastEntry) {
             reportMetric('LCP', lastEntry.startTime);
           }
         });
 
         try {
           lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+          observers.push(lcpObserver);
         } catch (e) {
           // Ignore if not supported
         }
@@ -142,15 +170,14 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
               clsValue += (entry as any).value;
             }
           }
-          if (clsValue > 0 && !reportedRef.current.has('CLS')) {
-            reportedRef.current.add('CLS');
-            metricsRef.current.CLS = clsValue;
+          if (localActive) {
             reportMetric('CLS', clsValue);
           }
         });
 
         try {
           clsObserver.observe({ entryTypes: ['layout-shift'] });
+          observers.push(clsObserver);
         } catch (e) {
           // Ignore if not supported
         }
@@ -158,56 +185,27 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
         // Track FID manually
         const fidObserver = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
-            if (!reportedRef.current.has('FID')) {
-              reportedRef.current.add('FID');
-              metricsRef.current.FID =
-                (entry as any).processingStart - entry.startTime;
-              reportMetric('FID', metricsRef.current.FID!);
+            if (localActive && !reportedRef.current.has('FID:legacy')) {
+              reportMetric(
+                'FID',
+                (entry as any).processingStart - entry.startTime
+              );
             }
           }
         });
 
         try {
           fidObserver.observe({ entryTypes: ['first-input'] });
+          observers.push(fidObserver);
         } catch (e) {
           // Ignore if not supported
         }
       }
     };
 
-    // Report individual metrics
-    const reportMetric = (name: string, value: number) => {
-      const thresholds =
-        WEB_VITALS_THRESHOLDS[name as keyof typeof WEB_VITALS_THRESHOLDS];
-      let rating: 'good' | 'needs-improvement' | 'poor' = 'good';
-
-      if (thresholds) {
-        if (value > thresholds.poor) {
-          rating = 'poor';
-        } else if (value > thresholds.good) {
-          rating = 'needs-improvement';
-        }
-      }
-
-      // Add breadcrumb for individual metric
-      sentryMiningService.addMiningBreadcrumb(
-        `Web Vital ${name}: ${value.toFixed(2)}ms (${rating})`,
-        'api',
-        {
-          metric: name,
-          value: value.toFixed(2),
-          rating,
-          page: pageName || 'unknown',
-          userId,
-        }
-      );
-
-      // Track in Sentry as custom metric
-      performanceMonitoring.trackWebVitals({ [name]: value }, userId);
-    };
-
     // Track additional mining-specific performance metrics
     const trackMiningSpecificMetrics = () => {
+      const currentPageName = contextRef.current.pageName;
       // Track resource loading for mining-related assets
       const resourceEntries = performance.getEntriesByType(
         'resource'
@@ -252,7 +250,7 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
           {
             metric: 'image_load_time',
             value: imageLoadTime.toFixed(2),
-            page: pageName || 'unknown',
+            page: currentPageName || 'unknown',
           }
         );
       }
@@ -264,7 +262,7 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
           {
             metric: 'api_call_time',
             value: apiCallTime.toFixed(2),
-            page: pageName || 'unknown',
+            page: currentPageName || 'unknown',
           }
         );
       }
@@ -277,7 +275,7 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
           {
             metric: 'resource_size',
             value: sizeMB.toFixed(2),
-            page: pageName || 'unknown',
+            page: currentPageName || 'unknown',
           }
         );
       }
@@ -288,37 +286,18 @@ export function WebVitalsTracker({ userId, pageName }: WebVitalsTrackerProps) {
     trackWebVitals();
 
     // Track mining-specific metrics after a delay to allow resources to load
-    setTimeout(trackMiningSpecificMetrics, 2000);
-
-    // Report all metrics at the end
-    const reportAllMetrics = () => {
-      if (Object.keys(metricsRef.current).length > 0) {
-        performanceMonitoring.trackWebVitals(metricsRef.current, userId);
-
-        sentryMiningService.addMiningBreadcrumb(
-          'Complete Web Vitals report generated',
-          'api',
-          {
-            metrics: metricsRef.current,
-            page: pageName || 'unknown',
-            userId,
-          }
-        );
-      }
-    };
-
-    // Report metrics before page unload
-    const handleBeforeUnload = () => {
-      reportAllMetrics();
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    const resourceTimer = setTimeout(() => {
+      if (localActive) trackMiningSpecificMetrics();
+    }, 2000);
 
     // Cleanup
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      localActive = false;
+      activeRef.current = false;
+      clearTimeout(resourceTimer);
+      observers.forEach((observer) => observer.disconnect());
     };
-  }, [userId, pageName]);
+  }, []);
 
   // This component doesn't render anything visible
   return null;

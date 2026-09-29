@@ -35,6 +35,8 @@ description: Геологиялық картаның лицензиялар ме
 
 Командамыздың геологиялық материалдармен жұмысы туралы [геологиялық қызметтер](/kz/services/geological) бетінен оқи аласыз. Шикізат туралы жалпы мәлімет үшін [Қазақстан алтынына шолуды](/kz/minerals/gold) қараңыз.
 
+Карталар мен есептерді жинап болсаңыз, келесі жұмыс туралы шешім қабылдамас бұрын [геологиялық материалдар жинағын тексеріңіз](/kz/insights/geological-due-diligence-kazakhstan).
+
 ## Дереккөздер
 
 - [USGS: Geologic Framework Mapping](https://www.usgs.gov/special-topics/earth-mri/geologic-framework-mapping)

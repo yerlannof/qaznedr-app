@@ -27,6 +27,7 @@ export const GUIDE = {
   rightsTransfer: 'subsoil-rights-transfer-permission-kazakhstan',
   geologicalMap: 'geological-map-kazakhstan',
   whatIsGeology: 'what-is-geology',
+  geologicalDueDiligence: 'geological-due-diligence-kazakhstan',
   artisanalMining: 'artisanal-mining-licence-kazakhstan',
   pugfn: 'pugfn-subsoil-fund-program-kazakhstan',
 } as const;
@@ -59,7 +60,7 @@ export const INSIGHTS: readonly InsightEntry[] = [
     slug: GUIDE.reserveClassification,
     category: 'geology',
     published: '2026-09-26',
-    updated: '2026-09-26',
+    updated: '2026-09-29',
     legal: false,
     locales: WRITTEN,
   },
@@ -82,6 +83,14 @@ export const INSIGHTS: readonly InsightEntry[] = [
   },
   {
     slug: GUIDE.whatIsGeology,
+    category: 'geology',
+    published: '2026-09-29',
+    updated: '2026-09-29',
+    legal: false,
+    locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.geologicalDueDiligence,
     category: 'geology',
     published: '2026-09-29',
     updated: '2026-09-29',

@@ -1,6 +1,14 @@
 import { GUIDE, INSIGHTS, insightHref } from '@/lib/insights/registry';
 
 describe('insightHref', () => {
+  it('publishes the geological data review in all four languages', () => {
+    const entry = INSIGHTS.find(
+      (guide) => guide.slug === GUIDE.geologicalDueDiligence
+    );
+    expect(entry).toMatchObject({ category: 'geology', legal: false });
+    expect(entry?.locales).toEqual(['ru', 'en', 'zh', 'kz']);
+  });
+
   it('links to the reader language when the guide is written in it', () => {
     expect(insightHref('en', GUIDE.rightsTransfer)).toBe(
       `/en/insights/${GUIDE.rightsTransfer}`

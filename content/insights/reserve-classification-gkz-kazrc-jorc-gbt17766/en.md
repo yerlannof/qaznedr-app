@@ -117,6 +117,8 @@ None of the areas on display has yet been estimated under KAZRC or JORC. We labe
 - We carry out due diligence before a deal: we reconcile the figures with the primary documentation and state records, and handle the legal side together with [lawyers](/en/services/legal).
 - We provide support but do not guarantee the outcome: the category is assigned by a Competent Person, and the licence is granted by the state. The areas are on the [areas page](/en/leads); for questions, use the [contact page](/en/contact).
 
+Before discussing an estimate, it helps to [review the source geological materials](/en/insights/geological-due-diligence-kazakhstan): reports, sample locations and the origin of assay results.
+
 ## Sources
 
 - [Classification of Reserves of Deposits and Prognostic Resources of Solid Minerals, approved by Resolution No. 1128 of the USSR Council of Ministers of 30 November 1981, paras 4, 8, 15, 16, 20 (text reproduced in a database of USSR laws) (in Russian)](https://www.economics.kiev.ua/download/ZakonySSSR/data02/tex13392.htm)

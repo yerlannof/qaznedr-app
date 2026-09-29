@@ -154,6 +154,7 @@ export const translations = {
           'Можно ли продать лицензию на недропользование в Казахстане?',
         geologicalMap: 'Геологическая карта Казахстана: выбор масштаба',
         whatIsGeology: 'Геология простыми словами: минерал, порода и руда',
+        geologicalDueDiligence: 'Проверка геологических материалов',
       },
       summaries: {
         artisanalMining:
@@ -172,6 +173,8 @@ export const translations = {
           'Чем отличаются геологическая карта, карта рудопроявлений и карта недропользования; как проверить масштаб и источник.',
         whatIsGeology:
           'Что изучает геология, чем различаются минерал, порода и руда и что делает геолог.',
+        geologicalDueDiligence:
+          'Какие отчёты, карты и данные опробования собрать и какие вопросы задать до следующего этапа работ.',
       },
     },
     seo: {
@@ -1061,6 +1064,7 @@ export const translations = {
           'Қазақстанда жер қойнауын пайдалану лицензиясын сатуға бола ма?',
         geologicalMap: 'Қазақстанның геологиялық картасы: масштабты таңдау',
         whatIsGeology: 'Геология деген не: минерал, тау жынысы және кен',
+        geologicalDueDiligence: 'Геологиялық материалдарды тексеру',
       },
       summaries: {
         artisanalMining:
@@ -1079,6 +1083,8 @@ export const translations = {
           'Геологиялық карта, кен көріністері және жер қойнауын пайдалану карталарының айырмасы; масштаб пен дереккөзді тексеру.',
         whatIsGeology:
           'Геология нені зерттейді, минерал, тау жынысы мен кеннің айырмасы және геологтың жұмысы.',
+        geologicalDueDiligence:
+          'Келесі жұмыс кезеңіне дейін қандай есептерді, карталарды және сынама деректерін жинап, қандай сұрақтар қою керегін біліңіз.',
       },
     },
     seo: {
@@ -1895,6 +1901,7 @@ export const translations = {
         rightsTransfer: 'Can you sell a subsoil licence in Kazakhstan?',
         geologicalMap: 'Geological maps of Kazakhstan: choosing a scale',
         whatIsGeology: 'What is geology? Minerals, rocks and ore',
+        geologicalDueDiligence: 'Reviewing geological materials',
       },
       summaries: {
         artisanalMining:
@@ -1913,6 +1920,8 @@ export const translations = {
           'How geological, occurrence and subsoil use maps differ, and how to check scale and provenance.',
         whatIsGeology:
           'What geology studies, how minerals, rocks and ore differ, and what geologists do.',
+        geologicalDueDiligence:
+          'Which reports, maps and sampling records to gather, and which questions to ask before the next stage of work.',
       },
     },
     seo: {
@@ -2707,6 +2716,7 @@ export const translations = {
         rightsTransfer: '哈萨克斯坦的底土利用许可证可以出售吗？',
         geologicalMap: '哈萨克斯坦地质图：选择比例尺',
         whatIsGeology: '什么是地质学？认识矿物、岩石与矿石',
+        geologicalDueDiligence: '地质资料核查',
       },
       summaries: {
         artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',
@@ -2721,6 +2731,8 @@ export const translations = {
           '区分地质图、矿化点图与矿业权地图，并核查比例尺和资料来源。',
         whatIsGeology:
           '了解地质学、矿物、岩石和矿石的区别，以及地质学家的工作。',
+        geologicalDueDiligence:
+          '了解下一阶段工作前应收集哪些报告、地图和取样记录，以及需要核实的问题。',
       },
     },
     seo: {

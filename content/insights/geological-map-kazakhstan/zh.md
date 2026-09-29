@@ -35,6 +35,8 @@ description: 区分地质图、矿业权地图与矿床和矿化点图，理解 
 
 团队如何处理地质资料，可见[地质服务](/zh/services/geological)页面。关于矿产的总体背景，可参考[哈萨克斯坦黄金概览](/zh/minerals/gold)。
 
+如果已经收集地图和报告，决定后续工作前，请先[核查地质资料](/zh/insights/geological-due-diligence-kazakhstan)。
+
 ## 参考资料
 
 - [USGS：地质框架填图](https://www.usgs.gov/special-topics/earth-mri/geologic-framework-mapping)

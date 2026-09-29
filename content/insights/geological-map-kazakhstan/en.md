@@ -35,6 +35,8 @@ State the area, your task and the material you already have. For example: “We 
 
 See how our team works with geological material on the [geological services page](/en/services/geological). For wider mineral context, read the [overview of gold in Kazakhstan](/en/minerals/gold).
 
+If you have gathered the maps and reports, the next step is to [review the geological materials](/en/insights/geological-due-diligence-kazakhstan) before deciding on further work.
+
 ## Sources
 
 - [USGS: Geologic Framework Mapping](https://www.usgs.gov/special-topics/earth-mri/geologic-framework-mapping)

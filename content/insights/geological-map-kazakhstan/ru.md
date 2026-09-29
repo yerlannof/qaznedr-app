@@ -35,6 +35,8 @@ description: Чем геологическая карта отличается �
 
 С тем, как команда работает с геологическими материалами, можно ознакомиться на странице [геологических услуг](/ru/services/geological). Для общего контекста по сырью есть [обзор золота Казахстана](/ru/minerals/gold).
 
+Если вы уже собрали карты и отчёты, следующий шаг — [проверить комплект геологических материалов](/ru/insights/geological-due-diligence-kazakhstan) перед решением о дальнейших работах.
+
 ## Источники
 
 - [USGS: Geologic Framework Mapping](https://www.usgs.gov/special-topics/earth-mri/geologic-framework-mapping)

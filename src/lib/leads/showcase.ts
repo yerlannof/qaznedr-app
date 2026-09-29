@@ -144,6 +144,9 @@ export function isShowcaseRow(row: { showcase?: unknown }): boolean {
 /**
  * Public API shape: the circle centre is drawn on the page but is not handed
  * to agents as plain coordinates they could quote as the object location.
+ * Legacy tier/exclusivity codes (internal jargon such as "TIER2_BOMB") and the
+ * bare license_status code are dropped too: the card carries its own rights
+ * text with the check date and caveat.
  */
 export function apiTeaser<
   T extends { showcase?: unknown; map_centroid?: unknown },
@@ -151,5 +154,12 @@ export function apiTeaser<
   if (!isShowcaseRow(row)) return row;
   const card = { ...(row.showcase as Record<string, unknown>) };
   delete card.zone;
-  return { ...row, map_centroid: null, showcase: card };
+  return {
+    ...row,
+    map_centroid: null,
+    tier: null,
+    exclusivity: null,
+    license_status: null,
+    showcase: card,
+  };
 }

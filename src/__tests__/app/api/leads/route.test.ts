@@ -67,6 +67,9 @@ it('does not hand showcase circle centres to API clients as coordinates', async 
     leads: [
       {
         code: 'QN-99',
+        tier: 'TIER2_BOMB',
+        exclusivity: 'MASS',
+        license_status: 'FREE_SHOWCASE_CHECKED',
         map_centroid: { lat: 49, lon: 72 },
         showcase: {
           card_id: 'QN-99',
@@ -80,4 +83,10 @@ it('does not hand showcase circle centres to API clients as coordinates', async 
   expect(body.data.leads[0].map_centroid).toBeNull();
   expect(body.data.leads[0].showcase.zone).toBeUndefined();
   expect(JSON.stringify(body)).not.toMatch(/center_lat|center_lon/);
+  // Legacy jargon and a bare "FREE" code must not be quoted by agents; the
+  // card carries its own rights text with the check date.
+  expect(body.data.leads[0].tier).toBeNull();
+  expect(body.data.leads[0].exclusivity).toBeNull();
+  expect(body.data.leads[0].license_status).toBeNull();
+  expect(JSON.stringify(body)).not.toMatch(/BOMB|FREE_/);
 });

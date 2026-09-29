@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { usePathname } from 'next/navigation';
 import Footer from '@/components/layouts/Footer';
+import { GUIDE } from '@/lib/insights/registry';
 
 jest.mock('next/navigation', () => ({ usePathname: jest.fn() }));
 jest.mock('@/components/ui/ThemeToggle', () => ({
@@ -8,6 +9,22 @@ jest.mock('@/components/ui/ThemeToggle', () => ({
 }));
 
 describe('Footer', () => {
+  it('preserves guide context in article contact and contact language links', () => {
+    (usePathname as jest.Mock).mockReturnValue(
+      `/ru/insights/${GUIDE.geologicalMap}`
+    );
+    const { rerender } = render(<Footer />);
+    expect(screen.getByRole('link', { name: 'Контакты' })).toHaveAttribute(
+      'href',
+      `/ru/contact?guide=${GUIDE.geologicalMap}`
+    );
+    (usePathname as jest.Mock).mockReturnValue('/ru/contact');
+    rerender(<Footer guideSlug={GUIDE.geologicalMap} />);
+    expect(screen.getByRole('link', { name: 'English' })).toHaveAttribute(
+      'href',
+      `/en/contact?guide=${GUIDE.geologicalMap}`
+    );
+  });
   it('keeps the current page when switching language', () => {
     (usePathname as jest.Mock).mockReturnValue('/kz/insights/guide');
     render(<Footer />);

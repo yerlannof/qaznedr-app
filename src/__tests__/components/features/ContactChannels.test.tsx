@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import ContactChannels from '@/components/features/ContactChannels';
 import { track } from '@vercel/analytics';
+import { GUIDE } from '@/lib/insights/registry';
 
 jest.mock('@vercel/analytics', () => ({ track: jest.fn() }));
 
@@ -18,6 +19,35 @@ const order = (container: HTMLElement) =>
 
 describe('ContactChannels', () => {
   beforeEach(() => (track as jest.Mock).mockReset());
+  it('uses the short guide title in both messenger actions and tracks its slug', async () => {
+    const writeText = jest.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText },
+      configurable: true,
+    });
+    const { container } = render(
+      <ContactChannels
+        config={full}
+        locale="zh"
+        guideSlug={GUIDE.geologicalDueDiligence}
+      />
+    );
+    const message = new URL(
+      screen.getByRole('link', { name: /WhatsApp/ }).getAttribute('href')!
+    ).searchParams.get('text')!;
+    expect(message).toContain('地质资料核查');
+    expect(message).toContain('qaznedr.kz');
+    const copy = container.querySelectorAll(
+      '[data-channel="wechat"] button'
+    )[1];
+    fireEvent.click(copy);
+    await waitFor(() => expect(writeText).toHaveBeenCalledWith(message));
+    expect(track).toHaveBeenCalledWith('contact_context_copy', {
+      locale: 'zh',
+      lead: '',
+      guide: GUIDE.geologicalDueDiligence,
+    });
+  });
   it('puts WeChat first for Chinese visitors', () => {
     const { container } = render(
       <ContactChannels config={full} locale="zh" leadCode="AU-1" />

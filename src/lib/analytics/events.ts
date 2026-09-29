@@ -1,5 +1,6 @@
 import { track } from '@vercel/analytics';
 import { trackConsentEvent } from '@/lib/analytics/providers';
+import { getGuideSlug } from '@/lib/insights/contact-context';
 
 export type ContactEvent =
   | 'inquiry_submit'
@@ -16,12 +17,16 @@ export function safeTrack(
     topic?: string;
     channel?: string;
     place?: string;
+    guide?: string;
   }
 ): void {
   try {
     const context = Object.fromEntries(
       Object.entries(properties).filter(([, value]) => value !== undefined)
     );
+    const guide = getGuideSlug(properties.guide);
+    if (guide) context.guide = guide;
+    else delete context.guide;
     track(event, context);
   } catch {
     // Analytics must not interrupt a contact action.

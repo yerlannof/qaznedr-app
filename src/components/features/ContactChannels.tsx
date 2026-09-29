@@ -7,12 +7,15 @@ import { Check, Copy, Mail, MessageCircle } from 'lucide-react';
 import type { ServiceTopic } from '@/lib/services/topics';
 import { translate } from '@/lib/i18n/translations';
 import { whatsappLink, type ContactConfig } from '@/lib/config/contacts';
+import { getGuideSlug, guideTitle } from '@/lib/insights/contact-context';
+import { toLocale } from '@/lib/seo/site';
 
 interface ContactChannelsProps {
   config: ContactConfig;
   locale: string;
   leadCode?: string;
   serviceTopic?: ServiceTopic;
+  guideSlug?: string;
 }
 
 const card = 'border border-brand-line bg-brand-surface p-5';
@@ -22,12 +25,14 @@ export default function ContactChannels({
   locale,
   leadCode,
   serviceTopic,
+  guideSlug,
 }: ContactChannelsProps) {
   const t = (key: string, params?: Record<string, unknown>) =>
     translate(locale, key, params);
-  const subject = serviceTopic
-    ? t(`holdingServices.${serviceTopic}.title`)
-    : '';
+  const guide = getGuideSlug(guideSlug);
+  const subject =
+    (guide ? guideTitle(toLocale(locale), guide) : undefined) ??
+    (serviceTopic ? t(`holdingServices.${serviceTopic}.title`) : '');
   const context = [leadCode, subject].filter(Boolean).join(' · ');
   const message = [
     leadCode
@@ -50,6 +55,7 @@ export default function ContactChannels({
         locale,
         lead: leadCode ?? '',
         topic: serviceTopic,
+        guide,
       });
     } catch {
       // Clipboard blocked (e.g. WeChat in-app browser): ID stays selectable.
@@ -65,6 +71,7 @@ export default function ContactChannels({
         locale,
         lead: leadCode ?? '',
         topic: serviceTopic,
+        guide,
       });
     } catch {
       // The message remains visible and selectable when clipboard access fails.
@@ -146,6 +153,7 @@ export default function ContactChannels({
             locale,
             lead: leadCode ?? '',
             topic: serviceTopic,
+            guide,
           })
         }
         className="brand-button brand-focus mt-3 w-full"
@@ -168,6 +176,7 @@ export default function ContactChannels({
             locale,
             lead: leadCode ?? '',
             topic: serviceTopic,
+            guide,
           })
         }
         className="brand-focus mt-2 inline-flex min-h-11 items-center gap-2 text-sm text-brand-ink underline underline-offset-4 decoration-brand-line hover:text-brand-muted"

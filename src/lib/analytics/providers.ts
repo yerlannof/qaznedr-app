@@ -6,6 +6,7 @@ import {
 } from '@/lib/analytics/config';
 import { readConsent } from '@/lib/analytics/consent';
 import { SERVICE_TOPICS } from '@/lib/services/topics';
+import { getGuideSlug } from '@/lib/insights/contact-context';
 
 type MeasurementWindow = Window & {
   dataLayer?: IArguments[];
@@ -295,6 +296,8 @@ export function trackConsentEvent(
     )
       params.channel = properties.channel;
     if (properties.place === 'hero') params.place = 'hero';
+    const guide = getGuideSlug(properties.guide);
+    if (guide) params.guide = guide;
     params.page_location = safeLocation(window.location.pathname);
     params.page_referrer = currentPageReferrer;
     if (gaLoaded) measurementWindow().gtag?.('event', event, params);

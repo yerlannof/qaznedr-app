@@ -2,16 +2,19 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import type { ServiceTopic } from '@/lib/services/topics';
+import { guideContactHref } from '@/lib/insights/contact-context';
 
 /** Closing dark band: view the areas or contact us. Hook-free (RSC-safe). */
 export default function ClosingCta({
   locale,
   variant = 'legacy',
   serviceTopic,
+  guideSlug,
 }: {
   locale: string;
   variant?: 'legacy' | 'brand';
   serviceTopic?: ServiceTopic;
+  guideSlug?: string;
 }) {
   const t = (key: string) => translate(locale, key);
   const isBrand = variant === 'brand';
@@ -61,7 +64,7 @@ export default function ClosingCta({
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </Link>
           <Link
-            href={`/${locale}/contact${serviceTopic ? `?service=${serviceTopic}` : ''}`}
+            href={guideContactHref(locale, guideSlug, serviceTopic)}
             className={
               isBrand
                 ? 'brand-button-secondary brand-focus'

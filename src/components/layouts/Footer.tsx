@@ -8,6 +8,11 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import BrandLogo from '@/components/brand/BrandLogo';
 import ConsentSettingsButton from '@/components/analytics/ConsentSettingsButton';
 import { getServiceTopic, type ServiceTopic } from '@/lib/services/topics';
+import {
+  getGuideSlug,
+  guideContactHref,
+  guideFromPath,
+} from '@/lib/insights/contact-context';
 
 const languages = [
   { code: 'ru', label: 'Русский' },
@@ -18,13 +23,17 @@ const languages = [
 
 export default function Footer({
   serviceTopic,
+  guideSlug,
 }: {
   serviceTopic?: ServiceTopic;
+  guideSlug?: string;
 }) {
   const { t, locale } = useTranslation();
   const pathname = usePathname() || '/';
   const preserveHomeScroll = /^\/(ru|kz|en|zh)\/?$/.test(pathname);
   const topic = getServiceTopic(serviceTopic);
+  const guide = getGuideSlug(guideSlug) ?? guideFromPath(pathname);
+  const contactHref = guideContactHref(locale, guide, topic);
 
   const switchLocalePath = (newLocale: string) => {
     const segments = pathname.split('/');
@@ -34,8 +43,8 @@ export default function Footer({
       segments.splice(1, 0, newLocale);
     }
     const path = segments.join('/') || `/${newLocale}`;
-    return topic && pathname.split('/').filter(Boolean)[1] === 'contact'
-      ? `${path}?service=${topic}`
+    return pathname.split('/').filter(Boolean)[1] === 'contact'
+      ? guideContactHref(newLocale, guide, topic)
       : path;
   };
 
@@ -46,7 +55,7 @@ export default function Footer({
   ];
   const infoLinks = [
     { href: `/${locale}/about`, label: t('footerNav.info.about') },
-    { href: `/${locale}/contact`, label: t('footerNav.info.contacts') },
+    { href: contactHref, label: t('footerNav.info.contacts') },
     { href: `/${locale}/faq`, label: t('footerNav.info.faq') },
     { href: `/${locale}/legal/terms`, label: t('footerNav.info.terms') },
     { href: INSTAGRAM_URL, label: 'Instagram @qaznedr.kz' },

@@ -1,5 +1,6 @@
 import { track } from '@vercel/analytics';
 import { safeTrack } from '@/lib/analytics/events';
+import { GUIDE } from '@/lib/insights/registry';
 
 jest.mock('@vercel/analytics', () => ({ track: jest.fn() }));
 
@@ -24,4 +25,17 @@ it('absorbs analytics failure', () => {
   expect(() =>
     safeTrack('inquiry_submit', { locale: 'en', channel: 'wechat' })
   ).not.toThrow();
+});
+
+it('forwards only a registered guide slug', () => {
+  safeTrack('click_whatsapp', {
+    locale: 'en',
+    guide: GUIDE.geologicalMap,
+  });
+  expect(track).toHaveBeenCalledWith('click_whatsapp', {
+    locale: 'en',
+    guide: GUIDE.geologicalMap,
+  });
+  safeTrack('click_whatsapp', { locale: 'en', guide: 'private-notes' });
+  expect(track).toHaveBeenLastCalledWith('click_whatsapp', { locale: 'en' });
 });

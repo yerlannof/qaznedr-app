@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import InquiryForm from '@/components/features/InquiryForm';
 import { track } from '@vercel/analytics';
+import { GUIDE } from '@/lib/insights/registry';
 
 jest.mock('@vercel/analytics', () => ({ track: jest.fn() }));
 
@@ -21,6 +22,23 @@ function fill() {
 }
 
 describe('InquiryForm', () => {
+  it('stores the guide source path without the query and tracks the slug', async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      status: 200,
+      json: async () => ({ success: true }),
+    }) as unknown as typeof fetch;
+    render(<InquiryForm locale="en" guideSlug={GUIDE.geologicalMap} />);
+    fill();
+    fireEvent.click(screen.getByRole('button', { name: 'Send inquiry' }));
+    await screen.findByText('Inquiry sent');
+    expect(
+      JSON.parse((global.fetch as jest.Mock).mock.calls[0][1].body).sourcePath
+    ).toBe(`/en/insights/${GUIDE.geologicalMap}`);
+    expect(track).toHaveBeenCalledWith(
+      'inquiry_submit',
+      expect.objectContaining({ guide: GUIDE.geologicalMap })
+    );
+  });
   it('posts the inquiry with the area code and shows success', async () => {
     global.fetch = jest.fn().mockResolvedValue({
       status: 200,

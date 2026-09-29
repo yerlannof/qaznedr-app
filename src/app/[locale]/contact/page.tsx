@@ -8,6 +8,7 @@ import { getContactConfig, hasAnyChannel } from '@/lib/config/contacts';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { getServiceTopic } from '@/lib/services/topics';
+import { getGuideSlug, guideTitle } from '@/lib/insights/contact-context';
 import {
   SITE_NAME,
   SITE_URL,
@@ -28,7 +29,10 @@ export default async function ContactPage({ params, searchParams }: Props) {
   const locale = toLocale((await params).locale);
   const { t } = getServerTranslation(locale);
   const config = getContactConfig();
-  const topic = getServiceTopic((await searchParams)?.service);
+  const query = await searchParams;
+  const topic = getServiceTopic(query?.service);
+  const guideSlug = getGuideSlug(query?.guide);
+  const guideSubject = guideSlug ? guideTitle(locale, guideSlug) : undefined;
   const subject = topic ? t(`holdingServices.${topic}.title`) : '';
   const schema = {
     '@context': 'https://schema.org',
@@ -44,7 +48,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
   };
   return (
     <>
-      <Navigation serviceTopic={topic} />
+      <Navigation serviceTopic={topic} guideSlug={guideSlug} />
       <div className="bg-brand-bg text-brand-ink pt-20 lg:pt-24">
         <div className="brand-container py-12 lg:py-20">
           <header className="max-w-3xl">
@@ -57,13 +61,16 @@ export default async function ContactPage({ params, searchParams }: Props) {
               Instagram @qaznedr.kz
             </a>
           </header>
-          {topic && (
+          {(topic || guideSubject) && (
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-brand-line py-4">
               <p>
                 <span className="text-brand-muted">
-                  {t('navigation.services')} ·{' '}
+                  {t(
+                    guideSubject ? 'navigation.insights' : 'navigation.services'
+                  )}{' '}
+                  ·{' '}
                 </span>
-                {subject}
+                {guideSubject ?? subject}
               </p>
               <Link
                 className="brand-focus inline-flex min-h-11 items-center underline underline-offset-4"
@@ -82,10 +89,11 @@ export default async function ContactPage({ params, searchParams }: Props) {
                   {t('contact.channelsHeading')}
                 </h2>
                 <ContactChannels
-                  key={`${locale}-${topic ?? ''}`}
+                  key={`${locale}-${topic ?? ''}-${guideSlug ?? ''}`}
                   config={config}
                   locale={locale}
                   serviceTopic={topic}
+                  guideSlug={guideSlug}
                 />
               </section>
             )}
@@ -94,16 +102,17 @@ export default async function ContactPage({ params, searchParams }: Props) {
                 {t('contact.formTitle')}
               </h2>
               <InquiryForm
-                key={`${locale}-${topic ?? ''}`}
+                key={`${locale}-${topic ?? ''}-${guideSlug ?? ''}`}
                 locale={locale}
                 serviceTopic={topic}
-                initialMessage={subject}
+                guideSlug={guideSlug}
+                initialMessage={guideSubject ?? subject}
               />
             </section>
           </div>
         </div>
       </div>
-      <Footer serviceTopic={topic} />
+      <Footer serviceTopic={topic} guideSlug={guideSlug} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

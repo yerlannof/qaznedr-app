@@ -10,6 +10,11 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import BrandLogo from '@/components/brand/BrandLogo';
 import { getServiceTopic, type ServiceTopic } from '@/lib/services/topics';
 import {
+  getGuideSlug,
+  guideContactHref,
+  guideFromPath,
+} from '@/lib/insights/contact-context';
+import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -28,8 +33,10 @@ const languages = [
 /** Fixed 56/64 px header. Page content starts below it. */
 export default function Navigation({
   serviceTopic,
+  guideSlug,
 }: {
   serviceTopic?: ServiceTopic;
+  guideSlug?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname() || '/';
@@ -37,7 +44,8 @@ export default function Navigation({
   const { t, locale } = useTranslation();
   const { data: session } = useSession();
   const topic = getServiceTopic(serviceTopic);
-  const contactHref = `/${locale}/contact${topic ? `?service=${topic}` : ''}`;
+  const guide = getGuideSlug(guideSlug) ?? guideFromPath(pathname);
+  const contactHref = guideContactHref(locale, guide, topic);
 
   const switchLocalePath = (newLocale: string) => {
     const segments = pathname.split('/');
@@ -47,8 +55,8 @@ export default function Navigation({
       segments.splice(1, 0, newLocale);
     }
     const path = segments.join('/') || `/${newLocale}`;
-    return topic && pathname.split('/').filter(Boolean)[1] === 'contact'
-      ? `${path}?service=${topic}`
+    return pathname.split('/').filter(Boolean)[1] === 'contact'
+      ? guideContactHref(newLocale, guide, topic)
       : path;
   };
 

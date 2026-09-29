@@ -4,6 +4,10 @@ import { MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { translate } from '@/lib/i18n/translations';
+import {
+  guideContactHref,
+  guideFromPath,
+} from '@/lib/insights/contact-context';
 
 export default function MobileTabBar() {
   const pathname = usePathname() || '/';
@@ -32,7 +36,7 @@ export default function MobileTabBar() {
       : undefined;
   const href = isTeaser
     ? `${pathname.replace(/\/$/, '')}#contact-channels`
-    : `/${locale}/contact${serviceTopic ? `?service=${serviceTopic}` : ''}`;
+    : guideContactHref(locale, guideFromPath(pathname), serviceTopic);
 
   return (
     <div

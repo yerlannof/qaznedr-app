@@ -37,6 +37,8 @@ description: Чем геологическая карта отличается �
 
 Если вы уже собрали карты и отчёты, следующий шаг — [проверить комплект геологических материалов](/ru/insights/geological-due-diligence-kazakhstan) перед решением о дальнейших работах.
 
+Для востока Казахстана есть отдельный разбор: [где искать данные для карты золота ВКО](/ru/insights/east-kazakhstan-gold-map-guide) и как учитывать старые границы области.
+
 ## Источники
 
 - [USGS: Geologic Framework Mapping](https://www.usgs.gov/special-topics/earth-mri/geologic-framework-mapping)

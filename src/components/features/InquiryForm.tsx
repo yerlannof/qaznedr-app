@@ -7,12 +7,15 @@ import { CheckCircle2 } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import { INQUIRY_CHANNELS, type InquiryChannel } from '@/lib/inquiries/schema';
 import type { ServiceTopic } from '@/lib/services/topics';
+import { getGuideSlug, guideSourcePath } from '@/lib/insights/contact-context';
+import { toLocale } from '@/lib/seo/site';
 
 interface InquiryFormProps {
   locale: string;
   leadCode?: string;
   serviceTopic?: ServiceTopic;
   initialMessage?: string;
+  guideSlug?: string;
 }
 
 type State = 'idle' | 'sending' | 'done' | 'error' | 'rate' | 'invalid';
@@ -34,6 +37,7 @@ export default function InquiryForm({
   leadCode,
   serviceTopic,
   initialMessage = '',
+  guideSlug,
 }: InquiryFormProps) {
   const t = (key: string) => translate(locale, key);
   const startedAt = useRef(Date.now());
@@ -41,6 +45,7 @@ export default function InquiryForm({
   const [channel, setChannel] = useState<InquiryChannel>(
     locale === 'zh' ? 'wechat' : 'whatsapp'
   );
+  const guide = getGuideSlug(guideSlug);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -59,7 +64,9 @@ export default function InquiryForm({
           message: form.get('message'),
           leadCode,
           locale,
-          sourcePath: window.location.pathname,
+          sourcePath: guide
+            ? guideSourcePath(toLocale(locale), guide)
+            : window.location.pathname,
           utm: readAttribution(
             window.location.pathname,
             window.location.search
@@ -77,6 +84,7 @@ export default function InquiryForm({
         channel,
         locale,
         topic: serviceTopic,
+        guide,
       });
       setState('done');
     } catch {

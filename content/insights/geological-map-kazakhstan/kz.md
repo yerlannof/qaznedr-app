@@ -37,6 +37,8 @@ description: Геологиялық картаның лицензиялар ме
 
 Карталар мен есептерді жинап болсаңыз, келесі жұмыс туралы шешім қабылдамас бұрын [геологиялық материалдар жинағын тексеріңіз](/kz/insights/geological-due-diligence-kazakhstan).
 
+Қазақстанның шығысы үшін бөлек нұсқаулық бар: [ШҚО алтын картасына деректерді қайдан іздеу керек](/kz/insights/east-kazakhstan-gold-map-guide) және облыстың бұрынғы шекарасын қалай ескеру қажет.
+
 ## Дереккөздер
 
 - [USGS: Geologic Framework Mapping](https://www.usgs.gov/special-topics/earth-mri/geologic-framework-mapping)

@@ -3,6 +3,7 @@ import GeologicalSupport from '@/components/features/GeologicalSupport';
 import { getContactConfig } from '@/lib/config/contacts';
 import { safeTrack } from '@/lib/analytics/events';
 import { translate } from '@/lib/i18n/translations';
+import { GUIDE } from '@/lib/insights/registry';
 
 jest.mock('@/lib/config/contacts', () => ({
   ...jest.requireActual('@/lib/config/contacts'),
@@ -50,6 +51,25 @@ it('offers a contextual WhatsApp action and tracks only its known topic', () => 
   expect(safeTrack).toHaveBeenCalledWith('click_whatsapp', {
     locale: 'en',
     topic: 'geology',
+    place: 'map_support',
+  });
+});
+it('keeps the map guide title and slug in its direct WhatsApp action', () => {
+  render(
+    <GeologicalSupport locale="en" compact guideSlug={GUIDE.geologicalMap} />
+  );
+  const link = screen.getByRole('link', {
+    name: translate('en', 'mapSupport.whatsapp'),
+  });
+  expect(
+    new URL(link.getAttribute('href')!).searchParams.get('text')
+  ).toContain(translate('en', 'insights.links.geologicalMap'));
+  link.addEventListener('click', (event) => event.preventDefault());
+  fireEvent.click(link);
+  expect(safeTrack).toHaveBeenCalledWith('click_whatsapp', {
+    locale: 'en',
+    topic: 'geology',
+    guide: GUIDE.geologicalMap,
     place: 'map_support',
   });
 });

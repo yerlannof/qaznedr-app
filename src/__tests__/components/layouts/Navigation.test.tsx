@@ -2,6 +2,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import Navigation from '@/components/layouts/Navigation';
+import { GUIDE } from '@/lib/insights/registry';
 
 jest.mock('next/navigation', () => ({ usePathname: jest.fn() }));
 jest.mock('next-auth/react', () => ({
@@ -18,6 +19,22 @@ beforeEach(() => {
 });
 
 describe('Navigation', () => {
+  it('preserves guide context in article contact and contact language links', () => {
+    (usePathname as jest.Mock).mockReturnValue(
+      `/ru/insights/${GUIDE.geologicalMap}`
+    );
+    const { rerender } = render(<Navigation />);
+    expect(screen.getByRole('link', { name: 'Связаться' })).toHaveAttribute(
+      'href',
+      `/ru/contact?guide=${GUIDE.geologicalMap}`
+    );
+    (usePathname as jest.Mock).mockReturnValue('/ru/contact');
+    rerender(<Navigation guideSlug={GUIDE.geologicalMap} />);
+    expect(screen.getByRole('link', { name: 'English' })).toHaveAttribute(
+      'href',
+      `/en/contact?guide=${GUIDE.geologicalMap}`
+    );
+  });
   it('keeps the current path when changing language on desktop and mobile', () => {
     render(<Navigation />);
     expect(screen.getByRole('link', { name: 'English' })).toHaveAttribute(

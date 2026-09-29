@@ -37,6 +37,8 @@ See how our team works with geological material on the [geological services page
 
 If you have gathered the maps and reports, the next step is to [review the geological materials](/en/insights/geological-due-diligence-kazakhstan) before deciding on further work.
 
+For eastern Kazakhstan, see our separate guide to [finding data for East Kazakhstan gold maps](/en/insights/east-kazakhstan-gold-map-guide) and accounting for former regional boundaries.
+
 ## Sources
 
 - [USGS: Geologic Framework Mapping](https://www.usgs.gov/special-topics/earth-mri/geologic-framework-mapping)

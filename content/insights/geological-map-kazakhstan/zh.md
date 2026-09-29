@@ -37,6 +37,8 @@ description: 区分地质图、矿业权地图与矿床和矿化点图，理解 
 
 如果已经收集地图和报告，决定后续工作前，请先[核查地质资料](/zh/insights/geological-due-diligence-kazakhstan)。
 
+关于哈萨克斯坦东部地区，另请阅读[东哈萨克斯坦黄金地图的资料查找指南](/zh/insights/east-kazakhstan-gold-map-guide)，了解如何考虑旧州界。
+
 ## 参考资料
 
 - [USGS：地质框架填图](https://www.usgs.gov/special-topics/earth-mri/geologic-framework-mapping)

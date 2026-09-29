@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { usePathname } from 'next/navigation';
 import MobileTabBar from '@/components/layouts/MobileTabBar';
+import { GUIDE } from '@/lib/insights/registry';
 
 jest.mock('next/navigation', () => ({ usePathname: jest.fn() }));
 
@@ -8,6 +9,14 @@ const setPath = (path: string) =>
   (usePathname as jest.Mock).mockReturnValue(path);
 
 describe('MobileTabBar', () => {
+  it('keeps a published article slug in its mobile contact action', () => {
+    setPath(`/zh/insights/${GUIDE.geologicalMap}`);
+    render(<MobileTabBar />);
+    expect(screen.getByRole('link')).toHaveAttribute(
+      'href',
+      `/zh/contact?guide=${GUIDE.geologicalMap}`
+    );
+  });
   it('shows one localized contact action without navigation tabs', () => {
     setPath('/zh/leads');
     render(<MobileTabBar />);

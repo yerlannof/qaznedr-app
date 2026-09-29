@@ -55,7 +55,9 @@ it.each(['ru', 'kz', 'en', 'zh'] as const)(
       expect(meta.description).toBe(article.description);
       const html = renderToStaticMarkup(await InsightArticlePage({ params }));
       expect((html.match(/<h1\b/g) ?? []).length).toBe(1);
-      expect(html).toContain(`href="/${locale}/contact?service=geology"`);
+      expect(html).toContain(
+        `href="/${locale}/contact?service=geology&amp;guide=${slug}"`
+      );
       const scripts = [
         ...html.matchAll(
           /<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/g

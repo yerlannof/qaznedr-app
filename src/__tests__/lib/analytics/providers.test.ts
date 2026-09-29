@@ -5,6 +5,7 @@ import {
   revokeProviders,
 } from '@/lib/analytics/providers';
 import { CONSENT_KEY, writeConsent } from '@/lib/analytics/consent';
+import { GUIDE } from '@/lib/insights/registry';
 
 it('gates requests by consent, host and public path; sanitizes events and stops on revoke', () => {
   window.history.replaceState(
@@ -89,6 +90,24 @@ it('gates requests by consent, host and public path; sanitizes events and stops 
   const custom = calls
     .filter((call) => call[0] === 'event' && call[1] === 'click_whatsapp')
     .at(-1) as unknown[];
+  trackConsentEvent('click_whatsapp', {
+    locale: 'zh',
+    guide: GUIDE.geologicalMap,
+  });
+  expect(
+    calls
+      .filter((call) => call[0] === 'event' && call[1] === 'click_whatsapp')
+      .at(-1)?.[2]
+  ).toMatchObject({ guide: GUIDE.geologicalMap });
+  trackConsentEvent('click_whatsapp', {
+    locale: 'zh',
+    guide: 'private-notes',
+  });
+  expect(
+    calls
+      .filter((call) => call[0] === 'event' && call[1] === 'click_whatsapp')
+      .at(-1)?.[2]
+  ).not.toHaveProperty('guide');
   expect(custom[2]).toMatchObject({
     page_location: 'https://qaznedr.kz/zh/contact',
     page_referrer: 'https://qaznedr.kz/zh/leads',

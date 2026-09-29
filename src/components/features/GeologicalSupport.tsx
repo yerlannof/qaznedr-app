@@ -5,21 +5,33 @@ import { ArrowUpRight } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import { getContactConfig, whatsappLink } from '@/lib/config/contacts';
 import { safeTrack } from '@/lib/analytics/events';
+import {
+  getGuideSlug,
+  guideContactHref,
+  guideTitle,
+} from '@/lib/insights/contact-context';
+import { toLocale } from '@/lib/seo/site';
 
 /** Approved service copy and contour motif; no map data is published here. */
 export default function GeologicalSupport({
   locale,
   compact = false,
+  guideSlug,
 }: {
   locale: string;
   compact?: boolean;
+  guideSlug?: string;
 }) {
   const t = (key: string) => translate(locale, key);
   const config = getContactConfig();
-  const contact = `/${locale}/contact?service=geology`;
+  const guide = getGuideSlug(guideSlug);
+  const contact = guideContactHref(locale, guide, 'geology');
   const wechat = locale === 'zh' && (config.wechatId || config.wechatQrSrc);
   const whatsapp = compact && locale !== 'zh' && config.whatsappNumber;
-  const message = `${t('contact.whatsappTextGeneral')}\n${t('holdingServices.geology.title')}`;
+  const message = `${t('contact.whatsappTextGeneral')}\n${
+    (guide ? guideTitle(toLocale(locale), guide) : undefined) ??
+    t('holdingServices.geology.title')
+  }`;
   const href = whatsapp ? whatsappLink(whatsapp, message) : contact;
   const label = compact
     ? wechat
@@ -97,6 +109,7 @@ export default function GeologicalSupport({
                     safeTrack('click_whatsapp', {
                       locale,
                       topic: 'geology',
+                      ...(guide ? { guide } : {}),
                       place: 'map_support',
                     })
                 : undefined

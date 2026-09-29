@@ -153,6 +153,7 @@ export const translations = {
         rightsTransfer:
           'Можно ли продать лицензию на недропользование в Казахстане?',
         geologicalMap: 'Геологическая карта Казахстана: выбор масштаба',
+        eastKazakhstanGoldMap: 'Карта золота ВКО: где искать данные',
         whatIsGeology: 'Геология простыми словами: минерал, порода и руда',
         geologicalDueDiligence: 'Проверка геологических материалов',
       },
@@ -171,6 +172,8 @@ export const translations = {
           'Какие сделки требуют разрешения на переход права и что изменилось с 7 сентября 2026 года.',
         geologicalMap:
           'Чем отличаются геологическая карта, карта рудопроявлений и карта недропользования; как проверить масштаб и источник.',
+        eastKazakhstanGoldMap:
+          'Как искать отчёты по востоку Казахстана и проверять границы, качество материалов и статус территории.',
         whatIsGeology:
           'Что изучает геология, чем различаются минерал, порода и руда и что делает геолог.',
         geologicalDueDiligence:
@@ -1063,6 +1066,8 @@ export const translations = {
         rightsTransfer:
           'Қазақстанда жер қойнауын пайдалану лицензиясын сатуға бола ма?',
         geologicalMap: 'Қазақстанның геологиялық картасы: масштабты таңдау',
+        eastKazakhstanGoldMap:
+          'ШҚО алтын картасы: деректерді қайдан іздеу керек',
         whatIsGeology: 'Геология деген не: минерал, тау жынысы және кен',
         geologicalDueDiligence: 'Геологиялық материалдарды тексеру',
       },
@@ -1081,6 +1086,8 @@ export const translations = {
           'Қандай мәмілелерге құқықтың өтуіне рұқсат керек және 2026 жылғы 7 қыркүйектен бастап не өзгерді.',
         geologicalMap:
           'Геологиялық карта, кен көріністері және жер қойнауын пайдалану карталарының айырмасы; масштаб пен дереккөзді тексеру.',
+        eastKazakhstanGoldMap:
+          'Қазақстанның шығысы бойынша есептерді іздеу, шекараларды, материалдардың сапасын және аумақ мәртебесін тексеру.',
         whatIsGeology:
           'Геология нені зерттейді, минерал, тау жынысы мен кеннің айырмасы және геологтың жұмысы.',
         geologicalDueDiligence:
@@ -1900,6 +1907,8 @@ export const translations = {
           'Reserve classifications: GKZ, KAZRC/JORC, GB/T 17766',
         rightsTransfer: 'Can you sell a subsoil licence in Kazakhstan?',
         geologicalMap: 'Geological maps of Kazakhstan: choosing a scale',
+        eastKazakhstanGoldMap:
+          'East Kazakhstan gold maps: finding the evidence',
         whatIsGeology: 'What is geology? Minerals, rocks and ore',
         geologicalDueDiligence: 'Reviewing geological materials',
       },
@@ -1918,6 +1927,8 @@ export const translations = {
           'Which transactions need a transfer permission and what changed on 7 September 2026.',
         geologicalMap:
           'How geological, occurrence and subsoil use maps differ, and how to check scale and provenance.',
+        eastKazakhstanGoldMap:
+          'How to find regional reports and check boundaries, data quality and the status of an area.',
         whatIsGeology:
           'What geology studies, how minerals, rocks and ore differ, and what geologists do.',
         geologicalDueDiligence:
@@ -2715,6 +2726,7 @@ export const translations = {
         reserveClassification: '储量分类对照：GKZ、KAZRC/JORC、GB/T 17766',
         rightsTransfer: '哈萨克斯坦的底土利用许可证可以出售吗？',
         geologicalMap: '哈萨克斯坦地质图：选择比例尺',
+        eastKazakhstanGoldMap: '东哈萨克斯坦黄金地图：查找地质资料',
         whatIsGeology: '什么是地质学？认识矿物、岩石与矿石',
         geologicalDueDiligence: '地质资料核查',
       },
@@ -2729,6 +2741,8 @@ export const translations = {
         rightsTransfer: '哪些交易需要转让许可，以及2026年9月7日起的变化。',
         geologicalMap:
           '区分地质图、矿化点图与矿业权地图，并核查比例尺和资料来源。',
+        eastKazakhstanGoldMap:
+          '如何查找区域报告，并核对边界、资料质量和矿区权利状态。',
         whatIsGeology:
           '了解地质学、矿物、岩石和矿石的区别，以及地质学家的工作。',
         geologicalDueDiligence:

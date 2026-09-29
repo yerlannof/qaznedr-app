@@ -1,6 +1,18 @@
 import { GUIDE, INSIGHTS, insightHref } from '@/lib/insights/registry';
 
 describe('insightHref', () => {
+  it('registers the East Kazakhstan gold data guide for all four languages', () => {
+    expect(
+      INSIGHTS.find((entry) => entry.slug === GUIDE.eastKazakhstanGoldMap)
+    ).toMatchObject({
+      slug: 'east-kazakhstan-gold-map-guide',
+      category: 'geology',
+      published: '2026-09-29',
+      updated: '2026-09-29',
+      legal: false,
+      locales: ['ru', 'en', 'zh', 'kz'],
+    });
+  });
   it('publishes the geological data review in all four languages', () => {
     const entry = INSIGHTS.find(
       (guide) => guide.slug === GUIDE.geologicalDueDiligence

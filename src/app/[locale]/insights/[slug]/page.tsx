@@ -84,7 +84,7 @@ export default async function InsightArticlePage({
           }}
         />
       ))}
-      <Navigation />
+      <Navigation guideSlug={slug} />
       <div className="min-h-screen bg-brand-bg text-brand-ink pt-20 lg:pt-24">
         <article className="brand-container max-w-[760px] pt-10 pb-16 lg:pt-14 lg:pb-20">
           <nav
@@ -175,12 +175,12 @@ export default async function InsightArticlePage({
         )}
 
         {slug === GUIDE.geologicalMap ? (
-          <GeologicalSupport locale={locale} compact />
+          <GeologicalSupport locale={locale} compact guideSlug={slug} />
         ) : (
-          <ClosingCta locale={locale} variant="brand" />
+          <ClosingCta locale={locale} variant="brand" guideSlug={slug} />
         )}
       </div>
-      <Footer />
+      <Footer guideSlug={slug} />
     </>
   );
 }

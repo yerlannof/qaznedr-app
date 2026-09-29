@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import About from '@/app/[locale]/about/page';
 import Contact from '@/app/[locale]/contact/page';
 import { translate } from '@/lib/i18n/translations';
+import { GUIDE } from '@/lib/insights/registry';
 jest.mock('@/components/layouts/Navigation', () => () => null);
 jest.mock('@/components/layouts/Footer', () => () => null);
 jest.mock('@/lib/config/contacts', () => ({
@@ -52,6 +53,38 @@ it('ignores unapproved query text', async () => {
     })
   );
   expect(html).not.toContain('untrusted-business-offer');
+});
+
+it.each(['ru', 'kz', 'en', 'zh'] as const)(
+  'keeps the %s guide topic in contact channels and form',
+  async (locale) => {
+    const html = renderToStaticMarkup(
+      await Contact({
+        params: Promise.resolve({ locale }),
+        searchParams: Promise.resolve({ guide: GUIDE.geologicalDueDiligence }),
+      })
+    );
+    const title = translate(locale, 'insights.links.geologicalDueDiligence');
+    expect(html).toContain(title);
+    expect(decodeURIComponent(html)).toContain(title);
+    expect(html).toContain(`href="/${locale}/contact"`);
+    expect(html).toContain(`>${title}</textarea>`);
+  }
+);
+
+it('ignores unknown and repeated guide values', async () => {
+  for (const guide of ['private-notes', [GUIDE.geologicalMap]]) {
+    const html = renderToStaticMarkup(
+      await Contact({
+        params: Promise.resolve({ locale: 'en' }),
+        searchParams: Promise.resolve({ guide }),
+      })
+    );
+    expect(html).not.toContain('private-notes');
+    expect(html).not.toContain(
+      'Geological maps of Kazakhstan: choosing a scale'
+    );
+  }
 });
 
 it.each(['ru', 'kz', 'en', 'zh'])(

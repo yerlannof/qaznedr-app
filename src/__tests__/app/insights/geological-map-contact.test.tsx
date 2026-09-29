@@ -15,11 +15,13 @@ it.each(['ru', 'kz', 'en', 'zh'])(
         params: Promise.resolve({ locale, slug: GUIDE.geologicalMap }),
       })
     );
-    expect(html).toContain(`href="/${locale}/contact?service=geology"`);
+    expect(html).toContain(
+      `href="/${locale}/contact?service=geology&amp;guide=${GUIDE.geologicalMap}"`
+    );
   }
 );
 
-it('keeps the generic contact action on other guides', async () => {
+it('keeps the guide slug on other contact actions', async () => {
   const html = renderToStaticMarkup(
     await InsightArticlePage({
       params: Promise.resolve({
@@ -28,6 +30,8 @@ it('keeps the generic contact action on other guides', async () => {
       }),
     })
   );
-  expect(html).toContain('href="/en/contact"');
+  expect(html).toContain(
+    `href="/en/contact?guide=${GUIDE.reserveClassification}"`
+  );
   expect(html).not.toContain('href="/en/contact?service=geology"');
 });

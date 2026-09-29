@@ -13,3 +13,12 @@
 
 Дальше: проверенный cleanup worker/retention и квоты, полный live Storage/HTTP
 lifecycle, утверждённая форма и модераторский экран. Этот шаг не запускает каталог.
+
+## Итог
+
+Все пять пунктов выполнены: код `d763b8a`, CI36640496110/Production6747060073
+success,39 targeted тестов и пять SQL-гонок, новый lifecycle/rollback тест,
+strong review Ready и10 live HTTP checks. SQL-миграция проверена только в
+удалённой после проверки локальной fixture-БД; в production не применялась.
+Release/roadmap дописаны служебным checkpoint, его финальная синхронизация
+проверяется после push. Следующий этап остаётся в закрытом контуре.

@@ -1,0 +1,55 @@
+BEGIN
+CREATE FUNCTION
+CREATE FUNCTION
+ assert_true 
+-------------
+ 
+(1 row)
+
+ assert_true 
+-------------
+ 
+(1 row)
+
+ assert_true 
+-------------
+ 
+(1 row)
+
+DO
+SET
+ expect_error 
+--------------
+ 
+(1 row)
+
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+SET
+ expect_error 
+--------------
+ 
+(1 row)
+
+RESET
+SET
+DO
+RESET
+CREATE FUNCTION
+CREATE TRIGGER
+SET
+DO
+RESET
+DROP TRIGGER
+SET
+ assert_true 
+-------------
+ 
+(1 row)
+
+RESET
+ROLLBACK

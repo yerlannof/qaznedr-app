@@ -56,9 +56,17 @@ no-store/noindex/nosniff, feature off404 раньше auth/Storage.
 
 ## Выпуск
 
-Готов к push после проверок. Exact CI/Production и live smoke фиксируются
-следующим служебным checkpoint после завершения деплоя. Публичные маршруты,
-metadata/sitemap/LLM-доступность не менялись, IndexNow для закрытого API не нужен.
+Код `d763b8aa60e7f4fb200d36f63c121fa653c37ec3`: CI36640496110success,
+Production6747060073success (29.09.2026 22:38 UTC). CI разрешает exit1
+тестового шага для известной baseline; вывод о новых failures основан на
+отдельном полном локальном сравнении, а не только зелёном CI. Живые10 HTTP checks
+прошли: новые/старые фото-методы и регистрация404 с приватными заголовками,
+RU/ZH200. `proofs/2026-09-30-photo-management/production-http.json`.
+
+Публичные маршруты, metadata/sitemap/LLM-доступность не менялись, IndexNow для
+закрытого API не нужен. Production-миграции/флаги не менялись. Локальные сервер3107
+и отдельная fixture-БД остановлены/удалены. Следующий служебный checkpoint
+фиксирует отчёт/roadmap; его exact CI/Production SHA проверяется отдельно.
 
 ## Продолжение
 

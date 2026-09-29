@@ -157,6 +157,8 @@ export const translations = {
         whatIsGeology: 'Геология простыми словами: минерал, порода и руда',
         geologicalDueDiligence: 'Проверка геологических материалов',
         coreDrilling: 'Колонковое бурение: что показывает керн',
+        satelliteGoldMap:
+          'Можно ли найти золото в Казахстане по спутниковой карте?',
       },
       summaries: {
         artisanalMining:
@@ -181,6 +183,8 @@ export const translations = {
           'Какие отчёты, карты и данные опробования собрать и какие вопросы задать до следующего этапа работ.',
         coreDrilling:
           'Керн и шлам, выход образцов и документы для проверки результатов разведочного бурения.',
+        satelliteGoldMap:
+          'Что видно на снимке, какие признаки проверяет геолог и почему карта не подтверждает золото, запасы или права на участок.',
       },
     },
     seo: {
@@ -1074,6 +1078,8 @@ export const translations = {
         whatIsGeology: 'Геология деген не: минерал, тау жынысы және кен',
         geologicalDueDiligence: 'Геологиялық материалдарды тексеру',
         coreDrilling: 'Керндік бұрғылау: керн нені көрсетеді',
+        satelliteGoldMap:
+          'Қазақстанда алтынды спутниктік картадан табуға бола ма?',
       },
       summaries: {
         artisanalMining:
@@ -1098,6 +1104,8 @@ export const translations = {
           'Келесі жұмыс кезеңіне дейін қандай есептерді, карталарды және сынама деректерін жинап, қандай сұрақтар қою керегін біліңіз.',
         coreDrilling:
           'Керн мен бұрғылау шламы, үлгілердің шығымы және барлау бұрғылауының нәтижелерін тексеруге қажет құжаттар.',
+        satelliteGoldMap:
+          'Суретте не көрінеді, геолог қандай белгілерді тексереді және карта неліктен алтынды, қорды не учаскеге құқықты растамайды.',
       },
     },
     seo: {
@@ -1918,6 +1926,7 @@ export const translations = {
         whatIsGeology: 'What is geology? Minerals, rocks and ore',
         geologicalDueDiligence: 'Reviewing geological materials',
         coreDrilling: 'Core drilling: what drill core can show',
+        satelliteGoldMap: 'Can a satellite map reveal gold in Kazakhstan?',
       },
       summaries: {
         artisanalMining:
@@ -1942,6 +1951,8 @@ export const translations = {
           'Which reports, maps and sampling records to gather, and which questions to ask before the next stage of work.',
         coreDrilling:
           'Core and cuttings, sample recovery and records for checking exploration drilling results.',
+        satelliteGoldMap:
+          'What imagery can show, which signs a geologist checks and why a map cannot confirm gold, reserves or rights to an area.',
       },
     },
     seo: {
@@ -2739,6 +2750,7 @@ export const translations = {
         whatIsGeology: '什么是地质学？认识矿物、岩石与矿石',
         geologicalDueDiligence: '地质资料核查',
         coreDrilling: '岩芯钻探：岩芯能说明什么',
+        satelliteGoldMap: '能通过卫星地图找到哈萨克斯坦的黄金吗？',
       },
       summaries: {
         artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',
@@ -2759,6 +2771,8 @@ export const translations = {
           '了解下一阶段工作前应收集哪些报告、地图和取样记录，以及需要核实的问题。',
         coreDrilling:
           '了解岩芯与钻屑、样品采取率，以及核查勘查钻探结果所需的记录。',
+        satelliteGoldMap:
+          '了解影像能显示哪些地表特征、地质学家如何核查，以及为什么地图不能确认黄金、储量或矿区权利。',
       },
     },
     seo: {

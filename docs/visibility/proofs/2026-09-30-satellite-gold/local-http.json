@@ -1,0 +1,346 @@
+{
+  "base": "http://localhost:3107",
+  "sitemap": 132,
+  "guide_pages": [
+    {
+      "path": "/ru/insights",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights",
+      "lang": "ru"
+    },
+    {
+      "path": "/kz/insights",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights",
+      "lang": "kk"
+    },
+    {
+      "path": "/en/insights",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/geological-map-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/geological-map-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/geological-map-kazakhstan",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/geological-map-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/geological-map-kazakhstan",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/geological-map-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/geological-map-kazakhstan",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/east-kazakhstan-gold-map-guide",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/east-kazakhstan-gold-map-guide",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/east-kazakhstan-gold-map-guide",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/what-is-geology",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/what-is-geology",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/what-is-geology",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/what-is-geology",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/what-is-geology",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/what-is-geology",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/what-is-geology",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/what-is-geology",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/geological-due-diligence-kazakhstan",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/geological-due-diligence-kazakhstan",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/geological-due-diligence-kazakhstan",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/core-drilling-geological-exploration",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/core-drilling-geological-exploration",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/core-drilling-geological-exploration",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/satellite-gold-map-guide",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/satellite-gold-map-guide",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/satellite-gold-map-guide",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/satellite-gold-map-guide",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/satellite-gold-map-guide",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/satellite-gold-map-guide",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/satellite-gold-map-guide",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/artisanal-mining-licence-kazakhstan",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/artisanal-mining-licence-kazakhstan",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/artisanal-mining-licence-kazakhstan",
+      "lang": "kk"
+    },
+    {
+      "path": "/ru/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "lang": "ru"
+    },
+    {
+      "path": "/en/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/en/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "lang": "en"
+    },
+    {
+      "path": "/zh/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/zh/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "lang": "zh-CN"
+    },
+    {
+      "path": "/kz/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "canonical": "https://qaznedr.kz/kz/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "lang": "kk"
+    }
+  ],
+  "private_routes": [
+    {
+      "path": "/api/equipment-listings/11111111-1111-4111-8111-111111111111/images",
+      "method": "GET",
+      "status": 404,
+      "cache": "private, no-store"
+    },
+    {
+      "path": "/api/equipment-listings/11111111-1111-4111-8111-111111111111/images",
+      "method": "POST",
+      "status": 404,
+      "cache": "private, no-store"
+    },
+    {
+      "path": "/api/equipment-listings/11111111-1111-4111-8111-111111111111/images/22222222-2222-4222-8222-222222222222",
+      "method": "GET",
+      "status": 404,
+      "cache": "private, no-store"
+    },
+    {
+      "path": "/api/auth/register",
+      "method": "POST",
+      "status": 404,
+      "cache": "private, no-store"
+    }
+  ],
+  "og_images": 4,
+  "llms": 200
+}

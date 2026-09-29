@@ -30,6 +30,7 @@ export const GUIDE = {
   whatIsGeology: 'what-is-geology',
   geologicalDueDiligence: 'geological-due-diligence-kazakhstan',
   coreDrilling: 'core-drilling-geological-exploration',
+  satelliteGoldMap: 'satellite-gold-map-guide',
   artisanalMining: 'artisanal-mining-licence-kazakhstan',
   pugfn: 'pugfn-subsoil-fund-program-kazakhstan',
 } as const;
@@ -112,6 +113,14 @@ export const INSIGHTS: readonly InsightEntry[] = [
     category: 'geology',
     published: '2026-09-29',
     updated: '2026-09-29',
+    legal: false,
+    locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.satelliteGoldMap,
+    category: 'geology',
+    published: '2026-09-30',
+    updated: '2026-09-30',
     legal: false,
     locales: WRITTEN,
   },

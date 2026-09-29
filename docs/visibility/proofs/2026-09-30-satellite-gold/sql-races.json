@@ -1,0 +1,17 @@
+{
+  "fixture": "isolated local PostgreSQL; database removed after verification",
+  "moderation_race": {
+    "rejected_sqlstate": "40001",
+    "status": "PENDING_MODERATION",
+    "revision": 2,
+    "images": 1,
+    "events": 1
+  },
+  "last_slot_race": {
+    "rejected_sqlstate": "40001",
+    "status": "DRAFT",
+    "revision": 2,
+    "images": 8,
+    "events": 1
+  }
+}

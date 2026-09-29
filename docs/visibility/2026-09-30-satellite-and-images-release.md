@@ -72,8 +72,19 @@ Mail/outreach journals не входят в технический релиз. �
 
 ## Выпуск
 
-Локальный пакет готов к обычному pushmaster. Точный SHA, CI/Production и живые
-HTTP/OG/sitemap/IndexNow фиксируются после подтверждения деплоя.
+Код `b2f67c95cb7dd67d2da8cdcdbe7f36c4893ba6f1` опубликован через pushmaster.
+CI36634351309: build/type-check/lint/test jobs success (старые Jest failures
+сопоставлены локально; CI test использует continue-on-error). Production6746079969
+success, точный SHA совпадает. Живой протокол:52HTML200, canonical/lang/hreflang
+и обратные ссылки, четыре OG200, sitemap132URL, llms200. Закрытые image/list/upload
+и регистрация404/no-store/noindex. В Chrome RU1440 и ZH375 без overflow;
+в форме тема сохранена, WhatsApp/WeChat дают короткий текст с qaznedr.kz и темой.
+Сообщение/заявка не отправлялись. IndexNow HTTP200 принял52изменённых публичных
+URL; это приём уведомления, не доказательство обхода, индексации или трафика.
+Живые снимки и протокол — `proofs/2026-09-30-satellite-gold/live-*` и `indexnow.json`.
+Временная QA-вкладка закрыта, viewport восстановлен, свой локальный сервер остановлен.
+Следующий служебный коммит сохраняет итог; его точный Production SHA сверяется
+после push без повторного изменения кода.
 
 ## Продолжение
 

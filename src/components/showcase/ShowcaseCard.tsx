@@ -38,6 +38,7 @@ export default function ShowcaseCard({
   const headline = pickText(card.headline, locale);
   const facts = pickList(card.facts, locale);
   const rights = pickText(card.rights.status, locale);
+  const satellite = card.satellite ? pickList(card.satellite, locale) : null;
   const scan = card.images[0];
   const detailHref = `/${locale}/leads/${code}`;
   const waText = pickText(card.whatsapp_text, locale).text;
@@ -52,9 +53,9 @@ export default function ShowcaseCard({
           <span className="bg-brand-accent px-2 py-0.5 font-semibold tracking-wide text-brand-slate">
             {code}
           </span>
-          <span className="font-semibold">
-            {commodityLabel(card.commodity, locale)}
-          </span>
+          <h2 className="font-semibold">
+            {commodityLabel(card.commodity, locale, card.commodity_ru)}
+          </h2>
         </p>
         <p className="mt-2 text-brand-muted">
           <span lang={oblast.lang}>{oblast.text}</span>
@@ -82,6 +83,18 @@ export default function ShowcaseCard({
             </li>
           ))}
         </ul>
+        {satellite && satellite.items.length > 0 && (
+          <ul lang={satellite.lang}>
+            {satellite.items.map((line) => (
+              <li
+                key={line}
+                className="border-t border-brand-line py-2 text-[15px] leading-relaxed"
+              >
+                {line}
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="mt-4 flex gap-2 text-sm text-brand-muted">
           <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0" />
           <div>

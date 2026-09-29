@@ -1,5 +1,5 @@
 import 'server-only';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, createServiceClient } from '@/lib/supabase/server';
 import { TEASER_COLUMNS, type LeadTeaser, type LeadType } from './types';
 import { mineralHub, matchesMineral } from './minerals';
 
@@ -72,6 +72,8 @@ export async function listPublishedLeads(
   else if (f.sort === 'confidence_desc')
     q = q.order('confidence', { ascending: false, nullsFirst: false });
   else q = q.order('published_at', { ascending: false, nullsFirst: false });
+  if (f.sort === 'value_desc' || f.sort === 'confidence_desc')
+    q = q.order('sort_order', { ascending: true, nullsFirst: false });
   // Unique tiebreaker: rows with equal sort values keep one order, so OFFSET
   // pages never overlap or skip (e.g. a batch published at the same time).
   q = q.order('code', { ascending: true });
@@ -135,4 +137,24 @@ async function listPublishedMinerals(): Promise<string[]> {
     if (!data || data.length < 1000) return Array.from(values);
   }
   throw new Error('Unable to load complete mineral list');
+}
+
+/**
+ * A showcase card that was live and then withdrawn gets a neutral notice on
+ * its old address (geobase contract): no reason, no "occupied". Codes that
+ * were never published stay a plain 404. ARCHIVED rows are invisible to anon,
+ * so this server-only check reads with the service role.
+ */
+export async function isWithdrawnShowcase(code: string): Promise<boolean> {
+  if (!/^QN-\d{2,}$/.test(code)) return false;
+  const supabase = await createServiceClient();
+  const { data, error } = await (supabase as any)
+    .from('leads')
+    .select('code')
+    .eq('code', code)
+    .eq('status', 'ARCHIVED')
+    .not('published_at', 'is', null)
+    .not('showcase', 'is', null)
+    .maybeSingle();
+  return !error && !!data;
 }

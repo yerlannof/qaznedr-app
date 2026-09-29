@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { withRateLimit } from '@/lib/middleware/rate-limiting';
 import { getPublishedLeadByCode } from '@/lib/leads/public-queries';
+import { apiTeaser } from '@/lib/leads/showcase';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +16,7 @@ async function handler(req: NextRequest): Promise<NextResponse> {
       { status: 404 }
     );
   }
-  return NextResponse.json({ success: true, data: lead });
+  return NextResponse.json({ success: true, data: apiTeaser(lead) });
 }
 
 export const GET = withRateLimit(handler, 'search');

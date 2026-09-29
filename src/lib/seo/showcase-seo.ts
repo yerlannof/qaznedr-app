@@ -16,7 +16,7 @@ export function showcaseSeoText(
   const clean = (s: string) => s.replace(/\s+/g, ' ').trim();
   const title = clean(
     translate(locale, 'showcase.seoTitle', {
-      commodity: commodityLabel(card.commodity, locale),
+      commodity: commodityLabel(card.commodity, locale, card.commodity_ru),
       code: card.card_id,
       oblast,
     })

@@ -10,6 +10,7 @@ import LeadWatermark from '@/components/features/LeadWatermark';
 import LeadUnlockForm from '@/components/features/LeadUnlockForm';
 import { Lock, MapPin, FileText, ChevronRight } from 'lucide-react';
 import { getPublishedLeadByCode } from '@/lib/leads/public-queries';
+import { isShowcaseRow } from '@/lib/leads/showcase';
 import { readPrivateForEntitled } from '@/lib/leads/private-access';
 
 export const dynamic = 'force-dynamic';
@@ -24,6 +25,8 @@ export default async function LeadFullPage({
   // Unknown/unpublished code → 404 (no existence leak), before any auth work.
   const teaser = await getPublishedLeadByCode(code);
   if (!teaser) notFound();
+  // Showcase cards have no gated part; their materials follow a meeting.
+  if (isShowcaseRow(teaser)) notFound();
 
   const session = await getServerSession(authOptions);
   if (!session?.user) {

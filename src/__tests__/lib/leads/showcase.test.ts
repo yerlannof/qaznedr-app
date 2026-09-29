@@ -115,3 +115,48 @@ describe('splitHeadline', () => {
 it('prints the rights date as DD.MM.YYYY', () => {
   expect(formatRightsDate('2026-09-28')).toBe('28.09.2026');
 });
+
+describe('fail-closed showcase rows', () => {
+  const { isShowcaseRow, apiTeaser } = jest.requireActual(
+    '@/lib/leads/showcase'
+  );
+
+  it('treats any row carrying a showcase value as a showcase row, even if invalid', () => {
+    expect(isShowcaseRow({ showcase: { broken: true } })).toBe(true);
+    expect(isShowcaseRow({ showcase: null })).toBe(false);
+    expect(isShowcaseRow({})).toBe(false);
+  });
+
+  it('keeps zone centres out of the public API but leaves legacy rows untouched', () => {
+    const row = {
+      code: 'QN-98',
+      map_centroid: { lat: 49, lon: 72 },
+      showcase: { ...valid, card_id: 'QN-98' },
+    };
+    const out = apiTeaser(row);
+    expect(out.map_centroid).toBeNull();
+    expect(out.showcase.zone).toBeUndefined();
+    expect(out.showcase.headline).toEqual(valid.headline);
+    expect(row.showcase.zone).toBeDefined();
+    const legacy = { code: 'AU-1', map_centroid: null, showcase: null };
+    expect(apiTeaser(legacy)).toBe(legacy);
+  });
+});
+
+describe('commodity labels', () => {
+  const { commodityLabel } = jest.requireActual('@/lib/leads/showcase');
+  it('uses the delivered Russian label and never lowercases unknown codes', () => {
+    expect(commodityLabel(['Au', 'Sb'], 'en')).toBe('Gold, Sb');
+    expect(commodityLabel(['Au', 'Cu'], 'ru', 'Золото, медь')).toBe(
+      'Золото, медь'
+    );
+  });
+});
+
+it('accepts optional satellite lines', () => {
+  const card = parseShowcase({
+    ...valid,
+    satellite: { ru: ['Снимок ASTER: у точки признаки изменения'] },
+  });
+  expect(card?.satellite?.ru).toHaveLength(1);
+});

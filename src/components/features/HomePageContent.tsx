@@ -17,6 +17,7 @@ import type { HomeSnapshot } from '@/lib/leads/home';
 import { formatCheckDate } from '@/lib/leads/check-date';
 import { parseShowcase } from '@/lib/leads/showcase';
 import ShowcaseHomeTeaser from '@/components/showcase/ShowcaseHomeTeaser';
+import ShowcaseDisclaimer from '@/components/showcase/ShowcaseDisclaimer';
 
 export default function HomePageContent({
   locale,
@@ -119,6 +120,9 @@ export default function HomePageContent({
                 );
               })}
             </div>
+            {snapshot.leads.some((l) => parseShowcase(l.showcase)) && (
+              <ShowcaseDisclaimer locale={locale} />
+            )}
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href={`/${locale}/leads`}

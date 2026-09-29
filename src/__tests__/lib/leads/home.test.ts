@@ -91,3 +91,13 @@ describe('featured showcase teasers', () => {
     expect((await loadHomeSnapshot()).leads).toEqual([]);
   });
 });
+
+it('never falls back to legacy teasers for an unparsable showcase row', async () => {
+  read.mockResolvedValue({
+    leads: [
+      { code: 'QN-01', region: 'Карагандинская', showcase: { broken: true } },
+    ],
+    total: 1,
+  });
+  expect((await loadHomeSnapshot()).leads).toEqual([]);
+});

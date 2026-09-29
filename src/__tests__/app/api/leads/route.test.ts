@@ -59,3 +59,25 @@ it('passes only recognized geological types through the public API', async () =>
     expect.objectContaining({ type: undefined })
   );
 });
+
+it('does not hand showcase circle centres to API clients as coordinates', async () => {
+  read.mockResolvedValue({
+    ...empty,
+    total: 1,
+    leads: [
+      {
+        code: 'QN-99',
+        map_centroid: { lat: 49, lon: 72 },
+        showcase: {
+          card_id: 'QN-99',
+          zone: { center_lat: 49, center_lon: 72, radius_km: 50 },
+        },
+      },
+    ],
+  });
+  const res = await GET(request('zones'));
+  const body = await res.json();
+  expect(body.data.leads[0].map_centroid).toBeNull();
+  expect(body.data.leads[0].showcase.zone).toBeUndefined();
+  expect(JSON.stringify(body)).not.toMatch(/center_lat|center_lon/);
+});

@@ -97,3 +97,10 @@ it('draws a single circle on the mini map and links to the card page', () => {
     '/ru/leads/QN-99'
   );
 });
+
+it('gives each card a heading for its metals', () => {
+  renderCard();
+  expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
+    'Золото, медь'
+  );
+});

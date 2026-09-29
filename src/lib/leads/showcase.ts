@@ -34,6 +34,7 @@ const showcaseSchema = z.object({
   package: z.string().min(1),
   card_id: z.string().regex(/^QN-\d{2,}$/),
   commodity: z.array(z.string().min(1)).min(1),
+  commodity_ru: z.string().min(1).optional(),
   oblast: localized,
   zone: z.object({
     center_lat: z.number().min(40).max(56),
@@ -44,6 +45,7 @@ const showcaseSchema = z.object({
   headline_type: z.enum(HEADLINE_TYPES),
   object_type: localized.nullable(),
   facts: localizedList,
+  satellite: localizedList.optional(),
   source: localized.nullable(),
   images: z.array(
     z.object({
@@ -108,9 +110,46 @@ export function formatRightsDate(iso: string): string {
   return `${d}.${m}.${y}`;
 }
 
-/** "Золото, медь" / "Gold, copper" / "金、铜" from the commodity codes. */
-export function commodityLabel(commodity: string[], locale: Locale): string {
-  const names = commodity.map((code) => leadMineralName(code, locale));
-  if (locale === 'zh') return names.join('、');
-  return [names[0], ...names.slice(1).map((n) => n.toLowerCase())].join(', ');
+/**
+ * "Золото, медь" / "Gold, copper" / "金、铜". Russian prefers the delivered
+ * commodity_ru; unknown codes are kept verbatim (never lowercased).
+ */
+export function commodityLabel(
+  commodity: string[],
+  locale: Locale,
+  ruLabel?: string
+): string {
+  if (locale === 'ru' && ruLabel) return ruLabel;
+  const names = commodity.map((code) => ({
+    code,
+    name: leadMineralName(code, locale),
+  }));
+  if (locale === 'zh') return names.map((n) => n.name).join('、');
+  return names
+    .map((n, i) =>
+      i === 0 || n.name === n.code ? n.name : n.name.toLowerCase()
+    )
+    .join(', ');
+}
+
+/**
+ * A row that carries any showcase value is a showcase row even when the value
+ * fails validation: it must then be hidden, never rendered by the legacy card
+ * (which would print a bare "free" badge and number without caveats).
+ */
+export function isShowcaseRow(row: { showcase?: unknown }): boolean {
+  return row.showcase !== null && row.showcase !== undefined;
+}
+
+/**
+ * Public API shape: the circle centre is drawn on the page but is not handed
+ * to agents as plain coordinates they could quote as the object location.
+ */
+export function apiTeaser<
+  T extends { showcase?: unknown; map_centroid?: unknown },
+>(row: T): T {
+  if (!isShowcaseRow(row)) return row;
+  const card = { ...(row.showcase as Record<string, unknown>) };
+  delete card.zone;
+  return { ...row, map_centroid: null, showcase: card };
 }

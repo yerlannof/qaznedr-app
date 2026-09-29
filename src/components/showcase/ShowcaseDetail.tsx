@@ -41,6 +41,7 @@ export default function ShowcaseDetail({
   const facts = pickList(card.facts, locale);
   const rights = pickText(card.rights.status, locale);
   const source = card.source ? pickText(card.source, locale) : null;
+  const satellite = card.satellite ? pickList(card.satellite, locale) : null;
   return (
     <div className="brand-container pb-12 lg:pb-20">
       <nav
@@ -66,7 +67,7 @@ export default function ShowcaseDetail({
         )}
       </p>
       <h1 className="holding-title mt-3 max-w-4xl">
-        {commodityLabel(card.commodity, locale)} —{' '}
+        {commodityLabel(card.commodity, locale, card.commodity_ru)} —{' '}
         <span lang={oblast.lang}>{oblast.text}</span>
       </h1>
       <div className="mt-8 grid gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,1fr)_340px]">
@@ -87,6 +88,18 @@ export default function ShowcaseDetail({
               </li>
             ))}
           </ul>
+          {satellite && satellite.items.length > 0 && (
+            <ul lang={satellite.lang} className="mt-3">
+              {satellite.items.map((line) => (
+                <li
+                  key={line}
+                  className="border-t border-brand-line py-2.5 leading-relaxed"
+                >
+                  {line}
+                </li>
+              ))}
+            </ul>
+          )}
           <h2 className={`${h2} mt-10`}>{t('showcase.scansHeading')}</h2>
           <div className="mt-5 grid gap-6">
             {card.images.map((img) => {

@@ -15,8 +15,12 @@ import {
   leadMineralName,
   leadRegionName,
 } from '@/lib/seo/lead-metadata';
-import { getPublishedLeadByCode } from '@/lib/leads/public-queries';
-import { parseShowcase } from '@/lib/leads/showcase';
+import {
+  getPublishedLeadByCode,
+  isWithdrawnShowcase,
+} from '@/lib/leads/public-queries';
+import { isShowcaseRow, parseShowcase } from '@/lib/leads/showcase';
+import ShowcaseWithdrawn from '@/components/showcase/ShowcaseWithdrawn';
 import { showcaseSeoText } from '@/lib/seo/showcase-seo';
 import ShowcaseDetail from '@/components/showcase/ShowcaseDetail';
 import { isFreeStatus } from '@/lib/leads/types';
@@ -37,8 +41,22 @@ export default async function LeadTeaserPage({
   const locale = toLocale(raw);
   const { t } = getServerTranslation(locale);
   const lead = await getPublishedLeadByCode(code);
-  if (!lead) notFound();
+  if (!lead) {
+    if (!(await isWithdrawnShowcase(code))) notFound();
+    return (
+      <>
+        <Navigation />
+        <div className="bg-brand-bg text-brand-ink pt-20 lg:pt-24">
+          <ShowcaseWithdrawn locale={locale} />
+        </div>
+        <Footer />
+      </>
+    );
+  }
   const showcase = parseShowcase(lead.showcase);
+  // Fail closed: a showcase row that does not validate is never rendered by
+  // the legacy teaser (bare "free" badge and number without caveats).
+  if (isShowcaseRow(lead) && !showcase) notFound();
   if (showcase) {
     const text = showcaseSeoText(showcase, locale);
     const jsonLd = leadJsonLd(lead, locale, text);

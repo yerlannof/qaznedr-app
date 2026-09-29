@@ -61,3 +61,21 @@ it('draws the region scheme with the single circle and the boundary credit', () 
     screen.getByText(translate('ru', 'showcase.mapCredit'))
   ).toBeInTheDocument();
 });
+
+it('shows satellite lines only when the package has them', () => {
+  const { rerender } = renderDetail();
+  expect(screen.queryByText(/Снимок ASTER/)).not.toBeInTheDocument();
+  rerender(
+    <ShowcaseDetail
+      showcase={{
+        ...fakeShowcase,
+        satellite: { ru: ['Снимок ASTER: у точки признаки изменения'] },
+      }}
+      locale="ru"
+      contacts={contacts}
+    />
+  );
+  expect(
+    screen.getByText('Снимок ASTER: у точки признаки изменения')
+  ).toBeInTheDocument();
+});

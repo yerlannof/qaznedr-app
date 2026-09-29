@@ -21,9 +21,9 @@ it('omits the areas section while no area is published', () => {
 
 it('keeps the areas section with published teasers', () => {
   const lead = {
-    code: 'QN-06',
+    code: 'QN-99',
     mineral: 'Au',
-    region: 'Жамбылская',
+    region: 'Карагандинская',
     type: 'bedrock',
     last_verified: '2026-09-28',
   } as unknown as LeadTeaser;
@@ -61,6 +61,9 @@ it('renders a featured showcase teaser with its number type and one caveat', () 
   expect(screen.getByText('золото 1,0 г/т')).toBeInTheDocument();
   expect(screen.getByText('Одна оговорка дословно')).toBeInTheDocument();
   expect(screen.queryByText(fakeShowcase.facts.ru[0])).not.toBeInTheDocument();
+  expect(
+    screen.getByText(translate('ru', 'showcase.disclaimer'))
+  ).toBeInTheDocument();
   expect(screen.getByRole('link', { name: /QN-99|Открыть/ })).toHaveAttribute(
     'href',
     '/ru/leads/QN-99'

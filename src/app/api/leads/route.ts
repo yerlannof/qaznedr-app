@@ -5,6 +5,7 @@ import {
   listPublishedLeads,
   type LeadListResult,
 } from '@/lib/leads/public-queries';
+import { apiTeaser } from '@/lib/leads/showcase';
 
 export const dynamic = 'force-dynamic';
 
@@ -58,6 +59,7 @@ async function handler(req: NextRequest): Promise<NextResponse> {
       { status: 503, headers: { 'Cache-Control': 'no-store' } }
     );
   }
+  result = { ...result, leads: result.leads.map(apiTeaser) };
   responseCache.set(cacheKey, { ts: Date.now(), value: result });
   return NextResponse.json({ success: true, data: result });
 }

@@ -120,3 +120,16 @@ describe('showcase order', () => {
     );
   });
 });
+
+describe('package order survives every sort', () => {
+  beforeEach(() => {
+    orders.length = 0;
+  });
+  it.each(['value_desc', 'confidence_desc'] as const)('%s', async (sort) => {
+    await listPublishedLeads({ sort });
+    expect(orders.at(-2)).toEqual([
+      'sort_order',
+      { ascending: true, nullsFirst: false },
+    ]);
+  });
+});

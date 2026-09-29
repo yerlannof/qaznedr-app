@@ -2,6 +2,7 @@ import { translate } from '@/lib/i18n/translations';
 
 const KEYS = [
   'showcase.rightsChecked',
+  'showcase.withdrawn',
   'showcase.disclaimer',
   'showcase.disclaimerLabel',
   'showcase.whatsappCta',

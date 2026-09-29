@@ -29,7 +29,7 @@ export default function ShowcaseHomeTeaser({
         {card.card_id} · <span lang={oblast.lang}>{oblast.text}</span>
       </p>
       <h3 className="font-serif text-3xl mt-4">
-        {commodityLabel(card.commodity, locale)}
+        {commodityLabel(card.commodity, locale, card.commodity_ru)}
       </h3>
       <div className="mt-4">
         <HeadlineBlock

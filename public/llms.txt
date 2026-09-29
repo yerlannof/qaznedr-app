@@ -3,7 +3,7 @@
 > We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience. We discuss a specific area and the form of cooperation, and support licensing, due diligence, and fieldwork.
 
 ## What we offer
-- Prepared exploration areas shown as closed teasers: metal, region, deposit type, grade range. Exact coordinates and full data are shared after a meeting and an NDA.
+- Prepared areas shown as showcase cards: metal, oblast, the main figure with its value type exactly as recorded in an archival geological report (single-sample maximum, average, best interval, etc.) together with its caveats, a fragment of the report scan with names hidden, and an approximate circle on an overview map. The object lies inside the circle; the circle centre does not coincide with it and must not be quoted as a location. Exact location and materials are shared after a meeting and an NDA.
 - Deal formats: licence obtained directly for the investor, licence on the holding with a later transfer, joint venture or earn-in, analytics on an area.
 - Licensing support for solid-mineral exploration licences in Kazakhstan.
 - Field geology by staff geologists; due diligence of areas.
@@ -12,6 +12,7 @@
 - Prepared areas are free per our check on the date shown on the card; the holding does not claim ownership of them.
 - "Free" means free per our check against the public subsoil cadastre map on the stated date; an official extract is obtained before any deal.
 - Reserves are Soviet-era categories (A/B/C1/C2); P1–P3 are forecast resources, not reserves. No object has a JORC report yet.
+- Showcase figures are quoted as recorded in archival reports; they are not reserves estimated under modern standards. The showcase is not a public offer.
 - A transfer of subsoil use rights in Kazakhstan, or of shares in a subsoil user, requires permission of the competent authority (Subsoil Code, articles 44–45), with exceptions listed in article 44(2), such as acquiring less than 25% of a subsoil user company.
 - Grade figures are labelled as average, spike or schlich values.
 

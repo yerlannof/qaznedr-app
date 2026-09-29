@@ -6,11 +6,15 @@
 // Keep it in the gitignored data/showcase/<version>/ folder.
 //
 //   node scripts/import-showcase.mjs --dir data/showcase/v1 [--dry-run]
+//   node scripts/import-showcase.mjs --dir data/showcase/v1 --update-published
 //   node scripts/import-showcase.mjs --dir data/showcase/v1 --publish
 //
-// Import writes new cards as DRAFT and never changes an existing status.
-// --publish flips exactly the package's active cards to PUBLISHED; run it only
-// after the geobase leak gate and the owner's "yes".
+// Order: validate everything → archive withdrawn/dropped cards → upload scans
+// → upsert DRAFT rows → delete unreferenced scans. New cards land as DRAFT and
+// an existing status is never changed by import. Changing the content of an
+// already PUBLISHED card needs --update-published. --publish flips exactly the
+// package's active cards to PUBLISHED and refuses a rights check older than
+// RIGHTS_VALID_DAYS or a database that differs from the package.
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
@@ -25,7 +29,10 @@ const option = (name, fallback) => {
 const dir = resolve(option('dir', 'data/showcase/v1'));
 const dryRun = flag('dry-run');
 const publish = flag('publish');
+const updatePublished = flag('update-published');
 const BUCKET = 'showcase';
+const RIGHTS_VALID_DAYS = 7;
+const LOCALES = ['kz', 'en', 'zh'];
 
 function env() {
   const text = readFileSync('.env.local', 'utf8');
@@ -44,6 +51,10 @@ const auth = { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` };
 const sha12 = (buf) =>
   createHash('sha256').update(buf).digest('hex').slice(0, 12);
 const json = (p) => JSON.parse(readFileSync(join(dir, p), 'utf8'));
+const pkgFolder = dir.split('/').pop();
+const objectPath = (file) => `${pkgFolder}/${file}`;
+const publicUrl = (file) =>
+  `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${objectPath(file)}`;
 
 // Oblast names as delivered (pre-2022 grid) → leads.region short value.
 const REGION = {
@@ -63,6 +74,14 @@ const REGION = {
   'Туркестанская область': 'Туркестанская',
   'Южно-Казахстанская область': 'Туркестанская',
 };
+const HEADLINE_TYPES = [
+  'spike',
+  'average',
+  'best_interval',
+  'forecast',
+  'reserve',
+  'unknown',
+];
 
 async function rest(path, init = {}) {
   const res = await fetch(`${SUPABASE_URL}${path}`, {
@@ -80,6 +99,8 @@ function verifyPackage(cards, manifest) {
   for (const card of cards) {
     if (!/^QN-\d{2,}$/.test(card.card_id))
       throw new Error(`bad card_id ${card.card_id}`);
+    if (!['active', 'withdrawn'].includes(card.status))
+      throw new Error(`${card.card_id}: bad status ${card.status}`);
     if (card.status === 'active')
       for (const img of card.images) refs.add(img.file);
   }
@@ -92,20 +113,59 @@ function verifyPackage(cards, manifest) {
   }
 }
 
+// Mirrors the zod schema in src/lib/leads/showcase.ts: a card the site would
+// refuse to render must never be written.
+function validateShowcase(s) {
+  const fail = (why) => {
+    throw new Error(`${s.card_id}: invalid card (${why})`);
+  };
+  const text = (v) => typeof v === 'string' && v.length > 0;
+  const loc = (v, name) => (v && text(v.ru)) || fail(name);
+  const list = (v, name) =>
+    (v && Array.isArray(v.ru) && v.ru.every(text)) || fail(name);
+  if (!/^QN-\d{2,}$/.test(s.card_id)) fail('card_id');
+  if (!Array.isArray(s.commodity) || !s.commodity.length) fail('commodity');
+  loc(s.oblast, 'oblast');
+  const z = s.zone ?? {};
+  if (
+    !(z.center_lat >= 40 && z.center_lat <= 56) ||
+    !(z.center_lon >= 46 && z.center_lon <= 88) ||
+    !(z.radius_km > 0 && z.radius_km <= 200)
+  )
+    fail('zone');
+  loc(s.headline, 'headline');
+  if (!HEADLINE_TYPES.includes(s.headline_type)) fail('headline_type');
+  list(s.facts, 'facts');
+  if (s.satellite) list(s.satellite, 'satellite');
+  for (const img of s.images) {
+    if (!/^https:\/\//.test(img.url)) fail('image url');
+    if (!(Number.isInteger(img.width) && img.width > 0)) fail('image width');
+    if (!(Number.isInteger(img.height) && img.height > 0)) fail('image height');
+    if (!/^[0-9a-f]{12}$/.test(img.v)) fail('image v');
+    loc(img.caption, 'image caption');
+  }
+  loc(s.rights?.status, 'rights status');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(s.rights?.checked_at ?? ''))
+    fail('rights date');
+  loc(s.whatsapp_text, 'whatsapp_text');
+}
+
 function localized(ru, t = {}) {
   const out = { ru };
-  for (const loc of ['kz', 'en', 'zh']) if (t[loc]) out[loc] = t[loc];
+  if (!translationsReviewed) return out;
+  for (const l of LOCALES) if (t[l]) out[l] = t[l];
   return out;
 }
 
 function localizedList(ru, t = {}) {
   const out = { ru };
-  for (const loc of ['kz', 'en', 'zh'])
-    if (Array.isArray(t[loc]) && t[loc].length === ru.length) out[loc] = t[loc];
+  if (!translationsReviewed) return out;
+  for (const l of LOCALES)
+    if (Array.isArray(t[l]) && t[l].length === ru.length) out[l] = t[l];
   return out;
 }
 
-function buildShowcase(card, tr, trOblast, pkg, publicUrl) {
+function buildShowcase(card, tr, trOblast, pkg) {
   const typeLine = card.facts.find((f) => f.startsWith('Тип объекта:'));
   const sourceLine = card.facts.find((f) => f.startsWith('Источник:'));
   const facts = card.facts.filter((f) => f !== typeLine && f !== sourceLine);
@@ -113,6 +173,7 @@ function buildShowcase(card, tr, trOblast, pkg, publicUrl) {
     package: pkg,
     card_id: card.card_id,
     commodity: card.commodity,
+    commodity_ru: card.commodity_ru,
     oblast: localized(card.oblast, trOblast),
     zone: card.zone,
     headline: localized(card.headline, tr.headline),
@@ -135,52 +196,100 @@ function buildShowcase(card, tr, trOblast, pkg, publicUrl) {
     },
     whatsapp_text: localized(card.whatsapp_text, tr.whatsapp_text),
   };
+  if (Array.isArray(card.satellite) && card.satellite.length)
+    showcase.satellite = localizedList(card.satellite, tr.satellite);
   if (tr.featured) {
     const fact = facts[tr.featured.fact_index];
     if (!fact)
       throw new Error(`${card.card_id}: featured fact_index out of range`);
     const factTr = {};
-    for (const loc of ['kz', 'en', 'zh'])
-      if (showcase.facts[loc])
-        factTr[loc] = showcase.facts[loc][tr.featured.fact_index];
+    for (const l of LOCALES)
+      if (showcase.facts[l])
+        factTr[l] = showcase.facts[l][tr.featured.fact_index];
     showcase.featured = {
       rank: tr.featured.rank,
       fact: localized(fact, factTr),
     };
   }
+  validateShowcase(showcase);
   return showcase;
 }
 
+function buildRow(card, index) {
+  const region = REGION[card.oblast];
+  if (!region)
+    throw new Error(`${card.card_id}: unknown oblast ${card.oblast}`);
+  const showcase = buildShowcase(
+    card,
+    i18n.cards?.[card.card_id] ?? {},
+    i18n.oblasts?.[card.oblast] ?? {},
+    manifest.package
+  );
+  return {
+    code: card.card_id,
+    registry_ref: `showcase:${card.card_id}`,
+    mineral: card.commodity.join('+'),
+    type: 'bedrock',
+    region,
+    tier: 'TIER2_BOMB',
+    teaser_title: `${card.commodity_ru} · ${card.oblast}`,
+    teaser_summary: null,
+    grade_display: card.headline,
+    grade_label: card.headline_type,
+    byproducts_display: null,
+    reserve_categories: null,
+    license_status: 'FREE_SHOWCASE_CHECKED',
+    last_verified: card.rights.checked_at,
+    distance_band: null,
+    // The circle centre is drawn on the page only; the column documents a
+    // region centroid, never an object point.
+    map_centroid: null,
+    showcase,
+    sort_order: index + 1,
+  };
+}
+
+// jsonb does not keep key order: compare with keys sorted at every level.
+const canonical = (v) =>
+  Array.isArray(v)
+    ? v.map(canonical)
+    : v && typeof v === 'object'
+      ? Object.fromEntries(
+          Object.keys(v)
+            .sort()
+            .map((k) => [k, canonical(v[k])])
+        )
+      : v;
+const sameJson = (a, b) =>
+  JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
+const inList = (codes) => `(${codes.map((c) => `"${c}"`).join(',')})`;
+
 async function uploadImage(file) {
   const bytes = readFileSync(join(dir, file));
-  const objectPath = `${pkgFolder}/${file}`;
-  if (!dryRun) {
-    const res = await fetch(
-      `${SUPABASE_URL}/storage/v1/object/${BUCKET}/${objectPath}`,
-      {
-        method: 'POST',
-        headers: {
-          ...auth,
-          'Content-Type': 'image/webp',
-          'Cache-Control': 'max-age=3600',
-          'x-upsert': 'true',
-        },
-        body: bytes,
-      }
-    );
-    if (!res.ok)
-      throw new Error(`upload ${file}: ${res.status} ${await res.text()}`);
-    const back = Buffer.from(
-      await (
-        await fetch(
-          `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${objectPath}`
-        )
-      ).arrayBuffer()
-    );
-    if (sha12(back) !== sha12(bytes))
-      throw new Error(`${file}: stored bytes differ`);
-  }
-  return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${objectPath}`;
+  if (dryRun) return;
+  const res = await fetch(
+    `${SUPABASE_URL}/storage/v1/object/${BUCKET}/${objectPath(file)}`,
+    {
+      method: 'POST',
+      headers: {
+        ...auth,
+        'Content-Type': 'image/webp',
+        'Cache-Control': 'max-age=3600',
+        'x-upsert': 'true',
+      },
+      body: bytes,
+    }
+  );
+  if (!res.ok)
+    throw new Error(`upload ${file}: ${res.status} ${await res.text()}`);
+  // Read back through the authenticated endpoint (no CDN cache in between).
+  const back = await fetch(
+    `${SUPABASE_URL}/storage/v1/object/authenticated/${BUCKET}/${objectPath(file)}`,
+    { headers: auth }
+  );
+  const stored = Buffer.from(await back.arrayBuffer());
+  if (!back.ok || sha12(stored) !== sha12(bytes))
+    throw new Error(`${file}: stored bytes differ`);
 }
 
 async function ensureBucket() {
@@ -201,30 +310,66 @@ async function ensureBucket() {
   console.log(`created public bucket ${BUCKET}`);
 }
 
+async function listBucket(prefix = '') {
+  const entries = await rest(`/storage/v1/object/list/${BUCKET}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prefix, limit: 1000 }),
+  });
+  const files = [];
+  for (const e of entries ?? []) {
+    const path = prefix ? `${prefix}/${e.name}` : e.name;
+    if (e.id === null) files.push(...(await listBucket(path)));
+    else files.push(path);
+  }
+  return files;
+}
+
+// ---------------------------------------------------------------- main
 const cards = json('cards.json');
 const manifest = json('manifest.json');
 const i18n = json('i18n.json');
-const pkgFolder = dir.split('/').pop();
+const translationsReviewed = Boolean(i18n.reviewed?.by && i18n.reviewed?.at);
 verifyPackage(cards, manifest);
 console.log(
-  `package ${manifest.package}: ${cards.length} cards, images verified`
+  `package ${manifest.package}: ${cards.length} cards, images verified; translations ${
+    translationsReviewed
+      ? `reviewed by ${i18n.reviewed.by} ${i18n.reviewed.at}`
+      : 'NOT reviewed → Russian only'
+  }`
 );
 
 const active = cards.filter((c) => c.status === 'active');
-const withdrawn = cards.filter((c) => c.status === 'withdrawn');
+const rows = active.map(buildRow);
+const existing = await rest(
+  '/rest/v1/leads?select=code,status,showcase,sort_order&registry_ref=like.showcase:*'
+);
+const byCode = new Map(existing.map((r) => [r.code, r]));
 
 if (publish) {
-  const codes = active.map((c) => c.card_id);
-  const rows = await rest(
-    `/rest/v1/leads?select=code,status,showcase&code=in.(${codes.map((c) => `"${c}"`).join(',')})`
+  const stale = active.filter(
+    (c) =>
+      Date.now() - Date.parse(`${c.rights.checked_at}T00:00:00Z`) >
+      (RIGHTS_VALID_DAYS + 1) * 86400000
   );
-  if (rows.length !== codes.length || rows.some((r) => !r.showcase))
-    throw new Error('import the package before publishing');
+  if (stale.length)
+    throw new Error(
+      `rights check too old for ${stale.map((c) => c.card_id).join(', ')}: ask the geobase for a fresh check`
+    );
+  const differs = rows.filter(
+    (r) =>
+      !byCode.get(r.code) || !sameJson(byCode.get(r.code).showcase, r.showcase)
+  );
+  if (differs.length)
+    throw new Error(
+      `database differs from the package for ${differs.map((r) => r.code).join(', ')}: import first`
+    );
+  const codes = rows.map((r) => r.code);
   if (dryRun) {
     console.log(`would publish ${codes.join(', ')}`);
   } else {
     const changed = await rest(
-      `/rest/v1/leads?status=eq.DRAFT&code=in.(${codes.map((c) => `"${c}"`).join(',')})`,
+      `/rest/v1/leads?status=eq.DRAFT&code=in.${inList(codes)}`,
       {
         method: 'PATCH',
         headers: {
@@ -238,109 +383,26 @@ if (publish) {
       }
     );
     console.log(
-      `published ${changed.length}: ${changed.map((r) => r.code).join(', ')}`
+      `published ${changed.length} at ${new Date().toISOString()}: ${changed.map((r) => r.code).join(', ')}`
     );
   }
   process.exit(0);
 }
 
-await ensureBucket();
-const publicUrls = new Map();
-for (const card of active)
-  for (const img of card.images)
-    if (!publicUrls.has(img.file))
-      publicUrls.set(img.file, await uploadImage(img.file));
-console.log(
-  `images in storage: ${publicUrls.size}${dryRun ? ' (dry run)' : ''}`
-);
-
-// A scan that left the package must not stay reachable by its old URL.
-const stored = await rest(`/storage/v1/object/list/${BUCKET}`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ prefix: `${pkgFolder}/img`, limit: 1000 }),
+const liveChanges = rows.filter((r) => {
+  const cur = byCode.get(r.code);
+  return (
+    cur?.status === 'PUBLISHED' &&
+    (!sameJson(cur.showcase, r.showcase) || cur.sort_order !== r.sort_order)
+  );
 });
-const stale = stored
-  .map((o) => `img/${o.name}`)
-  .filter((file) => !publicUrls.has(file))
-  .map((file) => `${pkgFolder}/${file}`);
-if (stale.length) {
-  if (dryRun) console.log(`would delete ${stale.join(', ')}`);
-  else {
-    await rest(`/storage/v1/object/${BUCKET}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prefixes: stale }),
-    });
-    console.log(`deleted from storage: ${stale.join(', ')}`);
-  }
-}
-
-const rows = active.map((card, index) => {
-  const region = REGION[card.oblast];
-  if (!region)
-    throw new Error(`${card.card_id}: unknown oblast ${card.oblast}`);
-  const showcase = buildShowcase(
-    card,
-    i18n.cards?.[card.card_id] ?? {},
-    i18n.oblasts?.[card.oblast] ?? {},
-    manifest.package,
-    (file) => publicUrls.get(file)
+if (liveChanges.length && !updatePublished)
+  throw new Error(
+    `published cards would change (${liveChanges.map((r) => r.code).join(', ')}); rerun with --update-published after the owner's yes`
   );
-  return {
-    code: card.card_id,
-    registry_ref: `showcase:${card.card_id}`,
-    mineral: card.commodity.join('+'),
-    type: 'bedrock',
-    region,
-    tier: 'TIER2_BOMB',
-    teaser_title: `${card.commodity_ru} · ${card.oblast}`,
-    teaser_summary: null,
-    grade_display: card.headline,
-    grade_label: card.headline_type,
-    byproducts_display: null,
-    reserve_categories: null,
-    license_status: 'FREE_SHOWCASE_CHECKED',
-    last_verified: card.rights.checked_at,
-    distance_band: null,
-    map_centroid: { lat: card.zone.center_lat, lon: card.zone.center_lon },
-    showcase,
-    sort_order: index + 1,
-  };
-});
 
-if (dryRun) {
-  console.log(
-    JSON.stringify(
-      rows.map((r) => ({
-        code: r.code,
-        sort: r.sort_order,
-        langs: Object.keys(r.showcase.headline),
-        featured: r.showcase.featured?.rank ?? null,
-      })),
-      null,
-      1
-    )
-  );
-} else {
-  const saved = await rest('/rest/v1/leads?on_conflict=code', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Prefer: 'resolution=merge-duplicates,return=representation',
-    },
-    body: JSON.stringify(rows),
-  });
-  console.log(
-    `upserted ${saved.length}: ${saved.map((r) => `${r.code}=${r.status}`).join(', ')}`
-  );
-}
-
-// Withdrawn or dropped cards leave the showcase (their scans were deleted above).
-const existing = await rest(
-  `/rest/v1/leads?select=code,status&registry_ref=like.showcase:*`
-);
-const keep = new Set(active.map((c) => c.card_id));
+// 1. Withdrawn or dropped cards leave the showcase first.
+const keep = new Set(rows.map((r) => r.code));
 const gone = existing.filter(
   (r) => !keep.has(r.code) && r.status !== 'ARCHIVED'
 );
@@ -356,7 +418,48 @@ for (const row of gone) {
   });
   console.log(`archived ${row.code}`);
 }
-if (withdrawn.length)
+
+// 2. Scans.
+await ensureBucket();
+const files = [...new Set(active.flatMap((c) => c.images.map((i) => i.file)))];
+for (const file of files) await uploadImage(file);
+console.log(`images in storage: ${files.length}${dryRun ? ' (dry run)' : ''}`);
+
+// 3. Rows (status untouched: new rows default to DRAFT).
+if (dryRun) {
   console.log(
-    `withdrawn in package: ${withdrawn.map((c) => c.card_id).join(', ')}`
+    rows
+      .map(
+        (r) =>
+          `${r.code} sort=${r.sort_order} langs=${Object.keys(r.showcase.headline).join('/')} featured=${r.showcase.featured?.rank ?? '-'} current=${byCode.get(r.code)?.status ?? 'new'}`
+      )
+      .join('\n')
   );
+} else {
+  const saved = await rest('/rest/v1/leads?on_conflict=code', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Prefer: 'resolution=merge-duplicates,return=representation',
+    },
+    body: JSON.stringify(rows),
+  });
+  console.log(
+    `upserted ${saved.length}: ${saved.map((r) => `${r.code}=${r.status}`).join(', ')}`
+  );
+}
+
+// 4. No scan outside the active package stays reachable (any folder).
+const referenced = new Set(files.map(objectPath));
+const staleFiles = (await listBucket()).filter((p) => !referenced.has(p));
+if (staleFiles.length) {
+  if (dryRun) console.log(`would delete ${staleFiles.join(', ')}`);
+  else {
+    await rest(`/storage/v1/object/${BUCKET}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prefixes: staleFiles }),
+    });
+    console.log(`deleted from storage: ${staleFiles.join(', ')}`);
+  }
+}

@@ -3,7 +3,11 @@ import ShowcaseDisclaimer from './ShowcaseDisclaimer';
 import ZoneMap from './ZoneMap';
 import { translate } from '@/lib/i18n/translations';
 import type { ContactConfig } from '@/lib/config/contacts';
-import { parseShowcase, type Showcase } from '@/lib/leads/showcase';
+import {
+  isShowcaseRow,
+  parseShowcase,
+  type Showcase,
+} from '@/lib/leads/showcase';
 import type { LeadTeaser } from '@/lib/leads/types';
 import type { Locale } from '@/lib/seo/site';
 
@@ -15,7 +19,7 @@ export function showcaseCards(leads: LeadTeaser[]): Showcase[] {
 }
 
 export function legacyLeads(leads: LeadTeaser[]): LeadTeaser[] {
-  return leads.filter((lead) => !parseShowcase(lead.showcase));
+  return leads.filter((lead) => !isShowcaseRow(lead));
 }
 
 /** Overview scheme, the cards in package order and the verbatim disclaimer. */

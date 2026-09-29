@@ -33,3 +33,7 @@ GA4 G-HPGRR5049G и Метрика113126250 работают только на q
 - Выпуск: push master, CI/Production точного SHA и проверка live8статей/контактов/sitemap/OG, IndexNow фактически изменённыхURL. Результат принятия IndexNow не считать индексацией.
 
 Первичные технические источники: [Google Consent Mode](https://developers.google.com/tag-platform/security/concepts/consent-mode), [Vercel custom events](https://vercel.com/docs/analytics/custom-events), [Vercel privacy](https://vercel.com/docs/analytics/privacy-policy).
+
+## Подтверждённый выпуск
+
+Код41d311630af0483afe6e6ebdcd1fb17df8f977cd: GitHub CI36553998586 и Production6732167266 — success. Проверены8статей HTTP200, собственныеcanonical,5hreflang,1H1,JSON-LD;4новыеOG-карточки200/image. Sitemap96URL, все8адресов присутствуют; IndexNow200 на8новых/обновлённыхстатей. Контакты4локалей200, живой браузер подтверждает копируемое сообщение и WAprefill с источником/темой; безсогласияGA/МетрикаSDKотсутствуют. Перед выпускомполныйобход92старыхURL:0ошибок/0страницбезпереходакконтактам. Подробный результат обхода во временном /tmp/qaznedr-contact-coverage.json. Индексация и рост обращений не утверждаются.

@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>15 · Компактное согласие — предложение</title>
+    <style>
+      [hidden] {
+        display: none !important;
+      }
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-Regular.woff2')
+          format('woff2');
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-SemiBold.woff2')
+          format('woff2');
+        font-weight: 600;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Serif;
+        src: url('../../../public/brand/fonts/SourceSerif4Display-Regular.ttf.woff2')
+          format('woff2');
+        font-display: swap;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #e9ece6;
+        color: #253740;
+        font:
+          15px/1.5 Plex,
+          Arial,
+          sans-serif;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      button:focus-visible {
+        outline: 3px solid #a0a932;
+        outline-offset: 3px;
+      }
+      .review {
+        max-width: 1440px;
+        margin: auto;
+        padding: 32px 24px 64px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: Serif, Georgia, serif;
+        font-weight: 400;
+      }
+      h1 {
+        font-size: clamp(32px, 4vw, 48px);
+        line-height: 1.1;
+        margin: 0 0 10px;
+      }
+      .intro {
+        max-width: 780px;
+        margin: 0 0 30px;
+        color: #40535c;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 375px;
+        gap: 24px;
+        align-items: start;
+      }
+      .sample h2 {
+        font-size: 25px;
+        margin: 0 0 10px;
+      }
+      .frame {
+        border: 1px solid #73838a;
+      }
+      .label {
+        padding: 7px 12px;
+        background: #253740;
+        color: #e9ece6;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .screen {
+        --bg: #e9ece6;
+        --surface: #f6f7f2;
+        --ink: #253740;
+        --muted: #40535c;
+        --line: #829198;
+        --button: #253740;
+        --button-ink: #fff;
+        position: relative;
+        min-height: 600px;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+      }
+      .screen.dark {
+        --bg: #253740;
+        --surface: #30434c;
+        --ink: #e9ece6;
+        --muted: #d0d9d2;
+        --line: #99aaa8;
+        --button: #e9ece6;
+        --button-ink: #253740;
+      }
+      .screen button:focus-visible {
+        outline-color: var(--ink);
+      }
+      .site-head {
+        height: 72px;
+        max-width: 1160px;
+        margin: auto;
+        padding: 0 24px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .site-head img {
+        display: block;
+        width: 155px;
+        height: auto;
+      }
+      .dark .logo-light,
+      .screen:not(.dark) .logo-dark {
+        display: none;
+      }
+      .site-head span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .content {
+        max-width: 1160px;
+        margin: auto;
+        padding: 54px 24px 190px;
+      }
+      .content h3 {
+        font-size: clamp(32px, 4vw, 54px);
+        line-height: 1.08;
+        max-width: 620px;
+        margin: 0 0 20px;
+      }
+      .content p {
+        max-width: 480px;
+        color: var(--muted);
+        margin: 0;
+      }
+      .site-foot {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        min-height: 64px;
+        padding: 10px 24px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .foot-settings {
+        border: 0;
+        background: none;
+        color: var(--ink);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        min-height: 44px;
+        padding: 6px;
+      }
+      .consent {
+        position: absolute;
+        z-index: 2;
+        left: 24px;
+        right: 24px;
+        bottom: 76px;
+        max-width: 960px;
+        margin: auto;
+        background: var(--surface);
+        border: 1px solid var(--ink);
+        box-shadow: 0 5px 18px #14293129;
+        padding: 20px 22px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 16px 26px;
+        align-items: center;
+      }
+      .consent[hidden],
+      .settings[hidden] {
+        display: none;
+      }
+      .eyebrow {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 7px;
+      }
+      .copy {
+        margin: 0;
+        max-width: 620px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .action {
+        min-height: 44px;
+        padding: 9px 13px;
+        border: 1px solid var(--ink);
+        background: var(--button);
+        color: var(--button-ink);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .action.decline {
+        background: transparent;
+        color: var(--ink);
+      }
+      .settings-open {
+        min-height: 44px;
+        padding: 7px 5px;
+        border: 0;
+        background: none;
+        color: var(--ink);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .settings {
+        position: absolute;
+        z-index: 3;
+        left: 24px;
+        right: 24px;
+        bottom: 76px;
+        max-width: 620px;
+        margin: auto;
+        padding: 21px 22px;
+        background: var(--surface);
+        border: 1px solid var(--ink);
+        box-shadow: 0 5px 18px #14293129;
+      }
+      .settings h3 {
+        font-size: 26px;
+        margin: 0 0 8px;
+      }
+      .settings p {
+        margin: 0 0 14px;
+        font-size: 14px;
+      }
+      .settings .row {
+        padding: 12px 0;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .settings .row span:last-child {
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .settings .note {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .settings .actions {
+        justify-content: flex-end;
+      }
+      .editorial {
+        max-width: 960px;
+        margin: 30px 0 0;
+        padding: 18px 20px;
+        border-left: 3px solid #7a812d;
+        background: #f6f7f2;
+      }
+      .editorial h2 {
+        font-size: 24px;
+        margin: 0 0 7px;
+      }
+      .editorial p {
+        margin: 0 0 9px;
+      }
+      .editorial p:last-child {
+        margin: 0;
+      }
+      .mobile .screen {
+        min-height: 700px;
+      }
+      .mobile .site-head {
+        height: 60px;
+        padding: 0 16px;
+      }
+      .mobile .site-head img {
+        width: 124px;
+      }
+      .mobile .content {
+        padding: 34px 16px 260px;
+      }
+      .mobile .content h3 {
+        font-size: 36px;
+      }
+      .mobile .site-foot {
+        padding: 8px 16px;
+      }
+      .mobile .consent,
+      .mobile .settings {
+        left: 12px;
+        right: 12px;
+        bottom: 72px;
+        padding: 16px;
+      }
+      .mobile .consent {
+        display: block;
+      }
+      .mobile .consent[hidden] {
+        display: none;
+      }
+      .mobile .copy {
+        font-size: 13px;
+      }
+      .mobile .actions {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .mobile .action {
+        padding: 8px;
+      }
+      .mobile .settings-open {
+        grid-column: 1/-1;
+        justify-self: start;
+      }
+      .mobile .settings .actions {
+        display: flex;
+      }
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .mobile {
+          max-width: 375px;
+        }
+      }
+      @media (max-width: 700px) {
+        .review {
+          padding: 22px 12px 48px;
+        }
+        .desktop .consent {
+          display: block;
+        }
+        .desktop .actions {
+          margin-top: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="review">
+      <h1>Компактное согласие на аналитику</h1>
+      <p class="intro">
+        Предложение 15 · один шаг для согласия на раскрытую аналитику. Нажмите
+        действия в каждом экране, чтобы увидеть состояние после выбора и
+        настройки. Это дизайн-показ, он не сохраняет выбор и не загружает
+        аналитику.
+      </p>
+      <div class="grid">
+        <section class="sample desktop">
+          <h2>1440 px · светлая тема</h2>
+          <div class="frame">
+            <div class="label">Десктоп</div>
+            <div class="screen"></div>
+          </div>
+        </section>
+        <section class="sample mobile">
+          <h2>375 px · тёмная тема</h2>
+          <div class="frame">
+            <div class="label">Телефон</div>
+            <div class="screen dark"></div>
+          </div>
+        </section>
+      </div>
+      <aside class="editorial">
+        <h2>Редакционная пометка · для решения владельца</h2>
+        <p>
+          Сейчас утверждено отсутствие автоматического баннера. Показанный здесь
+          нижний блок заменит это решение только после отдельного «да»
+          владельца.
+        </p>
+        <p>
+          «Принять всё» в этом предложении включает лишь указанные сейчас Google
+          Analytics и Яндекс Метрику. Рекламные инструменты остаются
+          выключенными. Их возможное добавление потребует нового раскрытия и
+          отдельного согласования; прежнее «Принять всё» не распространяется на
+          них.
+        </p>
+      </aside>
+    </main>
+    <template id="screen-template">
+      <header class="site-head">
+        <img
+          class="logo-light"
+          src="../../../public/brand/logo-horizontal.svg"
+          alt="QAZNEDR HOLDING"
+        /><img
+          class="logo-dark"
+          src="../../../public/brand/logo-horizontal-inverse.svg"
+          alt="QAZNEDR HOLDING"
+        /><span>RU / KZ / EN / 中文</span>
+      </header>
+      <div class="content">
+        <span class="eyebrow">QAZNEDR HOLDING</span>
+        <h3>Геология Казахстана.<br />Основа для решений.</h3>
+        <p>Ознакомьтесь с участками и работами наших геологов.</p>
+      </div>
+      <footer class="site-foot">
+        <span>© QAZNEDR HOLDING</span
+        ><button type="button" class="foot-settings">
+          Настройки аналитики
+        </button>
+      </footer>
+      <section class="consent" aria-label="Согласие на аналитику">
+        <div>
+          <span class="eyebrow">Аналитика</span>
+          <p class="copy">
+            Аналитика помогает нам улучшать сайт. Разрешить Google Analytics и
+            Яндекс Метрику? Рекламные инструменты пока выключены.
+          </p>
+        </div>
+        <div class="actions">
+          <button class="action accept" type="button">Принять всё</button
+          ><button class="action decline" type="button">Отклонить</button
+          ><button class="settings-open" type="button">Настройки</button>
+        </div>
+      </section>
+      <section class="settings" aria-label="Настройки аналитики" hidden>
+        <h3>Настройки аналитики</h3>
+        <p>
+          Выберите, разрешить ли Google Analytics и Яндекс Метрику. Без выбора
+          эти два счётчика выключены.
+        </p>
+        <div class="row">
+          <span>Необходимые функции сайта</span><span>Всегда включены</span>
+        </div>
+        <div class="row">
+          <span>Google Analytics и Яндекс Метрика</span
+          ><span>Выключены до согласия</span>
+        </div>
+        <div class="row">
+          <span>Рекламные инструменты</span><span>Недоступны</span>
+        </div>
+        <p class="note">
+          Это демонстрация раскрытия категорий. Действия ниже закрывают панель;
+          выбор не сохраняется.
+        </p>
+        <div class="actions">
+          <button class="action accept" type="button">Принять аналитику</button
+          ><button class="action decline" type="button">Отклонить</button
+          ><button class="settings-close" type="button">Вернуться</button>
+        </div>
+      </section>
+    </template>
+    <script>
+      const template = document.querySelector('#screen-template');
+      document.querySelectorAll('.screen').forEach((screen) => {
+        screen.append(template.content.cloneNode(true));
+        const banner = screen.querySelector('.consent');
+        const settings = screen.querySelector('.settings');
+        screen.querySelectorAll('.accept, .decline').forEach((button) =>
+          button.addEventListener('click', () => {
+            banner.hidden = true;
+            settings.hidden = true;
+          })
+        );
+        screen
+          .querySelectorAll('.settings-open, .foot-settings')
+          .forEach((button) =>
+            button.addEventListener('click', () => {
+              settings.hidden = false;
+            })
+          );
+        screen
+          .querySelector('.settings-close')
+          .addEventListener('click', () => {
+            settings.hidden = true;
+          });
+      });
+    </script>
+  </body>
+</html>

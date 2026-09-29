@@ -38,7 +38,7 @@ export default function ContactChannels({
     .filter(Boolean)
     .join('\n');
   const [copied, setCopied] = useState(false);
-  const [codeCopied, setCodeCopied] = useState(false);
+  const [messageCopied, setMessageCopied] = useState(false);
 
   const copyWeChat = async () => {
     if (!config.wechatId) return;
@@ -56,19 +56,18 @@ export default function ContactChannels({
     }
   };
 
-  const copyLeadCode = async () => {
-    if (!context) return;
+  const copyMessage = async () => {
     try {
       if (!navigator.clipboard) return;
-      await navigator.clipboard.writeText(context);
-      setCodeCopied(true);
+      await navigator.clipboard.writeText(message);
+      setMessageCopied(true);
       safeTrack('contact_context_copy', {
         locale,
         lead: leadCode ?? '',
         topic: serviceTopic,
       });
     } catch {
-      // The code remains visible and selectable when clipboard access fails.
+      // The message remains visible and selectable when clipboard access fails.
     }
   };
 
@@ -80,11 +79,7 @@ export default function ContactChannels({
           {t('contact.wechatTitle')}
         </h3>
         <p className="mt-1 text-xs text-brand-muted">
-          {t(
-            serviceTopic && !leadCode
-              ? 'contact.wechatServiceHint'
-              : 'contact.wechatHint'
-          )}
+          {t(!leadCode ? 'contact.wechatServiceHint' : 'contact.wechatHint')}
         </p>
         {config.wechatQrSrc && (
           <Image
@@ -114,23 +109,23 @@ export default function ContactChannels({
             </button>
           </div>
         )}
-        {context && (
+        {message && (
           <div className="mt-4 border-t border-brand-line pt-4">
-            <span className="select-all font-mono text-sm text-brand-ink">
-              {context}
+            <span className="whitespace-pre-line break-words select-all text-sm text-brand-ink">
+              {message}
             </span>
             <button
               type="button"
-              onClick={copyLeadCode}
-              aria-label={`${codeCopied ? t('contact.copied') : t('contact.copy')} ${context}`}
+              onClick={copyMessage}
+              aria-label={`${messageCopied ? t('contact.copied') : t('contact.copy')} ${message.replace(/\s+/g, ' ')}`}
               className="brand-focus ml-3 inline-flex min-h-11 items-center gap-1 border border-brand-line px-3 text-xs text-brand-ink hover:bg-brand-bg transition-colors"
             >
-              {codeCopied ? (
+              {messageCopied ? (
                 <Check aria-hidden className="size-4" />
               ) : (
                 <Copy aria-hidden className="size-4" />
               )}
-              {codeCopied ? t('contact.copied') : t('contact.copy')}
+              {messageCopied ? t('contact.copied') : t('contact.copy')}
             </button>
           </div>
         )}

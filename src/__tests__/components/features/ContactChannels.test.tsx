@@ -105,7 +105,9 @@ describe('ContactChannels', () => {
     expect(track).not.toHaveBeenCalledWith('wechat_copy', expect.anything());
     writeText.mockResolvedValue(undefined);
     fireEvent.click(
-      screen.getByRole('button', { name: 'Copy AU-1 · Licensing' })
+      screen.getByRole('button', {
+        name: 'Copy Hello! I am interested in area AU-1 on qaznedr.kz. Licensing',
+      })
     );
     await waitFor(() =>
       expect(track).toHaveBeenCalledWith('contact_context_copy', {
@@ -124,7 +126,7 @@ describe('ContactChannels', () => {
     });
   });
 
-  it('keeps the area code visible by WeChat and copies it separately from the WeChat ID', async () => {
+  it('copies a short source-labelled area message separately from the WeChat ID', async () => {
     const writeText = jest.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, 'clipboard', {
       value: { writeText },
@@ -137,10 +139,18 @@ describe('ContactChannels', () => {
       '[data-channel="wechat"]'
     ) as HTMLElement;
     expect(wechat).toHaveTextContent('AU-1');
-    fireEvent.click(screen.getByRole('button', { name: '复制 AU-1' }));
-    expect(writeText).toHaveBeenCalledWith('AU-1');
+    fireEvent.click(
+      screen.getByRole('button', {
+        name: '复制 您好！我对 qaznedr.kz 上的项目 AU-1 感兴趣。',
+      })
+    );
+    expect(writeText).toHaveBeenCalledWith(
+      '您好！我对 qaznedr.kz 上的项目 AU-1 感兴趣。'
+    );
     expect(
-      await screen.findByRole('button', { name: '已复制 AU-1' })
+      await screen.findByRole('button', {
+        name: '已复制 您好！我对 qaznedr.kz 上的项目 AU-1 感兴趣。',
+      })
     ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '复制' })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: '复制' }));
@@ -191,10 +201,18 @@ it('preserves the approved service topic in WhatsApp, WeChat copy and email', as
         .getAttribute('href')!
     )
   ).toContain('Licensing');
-  fireEvent.click(screen.getByRole('button', { name: 'Copy Licensing' }));
-  expect(writeText).toHaveBeenCalledWith('Licensing');
+  fireEvent.click(
+    screen.getByRole('button', {
+      name: 'Copy Hello! I am writing from qaznedr.kz. Licensing',
+    })
+  );
+  expect(writeText).toHaveBeenCalledWith(
+    'Hello! I am writing from qaznedr.kz.\nLicensing'
+  );
   expect(
-    await screen.findByRole('button', { name: 'Copied Licensing' })
+    await screen.findByRole('button', {
+      name: 'Copied Hello! I am writing from qaznedr.kz. Licensing',
+    })
   ).toBeInTheDocument();
 });
 
@@ -210,5 +228,34 @@ it.each([
       <ContactChannels config={full} locale={locale} serviceTopic="analytics" />
     );
     expect(screen.getByText(hint)).toBeInTheDocument();
+  }
+);
+
+it.each(['ru', 'kz', 'en', 'zh'])(
+  'copies the same source-labelled message as WhatsApp for a general %s inquiry',
+  async (locale) => {
+    const writeText = jest.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText },
+      configurable: true,
+    });
+    const { container } = render(
+      <ContactChannels config={full} locale={locale} />
+    );
+    const message = new URL(
+      screen.getByRole('link', { name: /WhatsApp/ }).getAttribute('href')!
+    ).searchParams.get('text')!;
+    const buttons = container.querySelectorAll(
+      '[data-channel="wechat"] button'
+    );
+    expect(buttons).toHaveLength(2);
+    fireEvent.click(buttons[1]);
+    await waitFor(() => expect(writeText).toHaveBeenCalledWith(message));
+    expect(message).toContain('qaznedr.kz');
+    expect(message.length).toBeLessThan(100);
+    expect(track).toHaveBeenCalledWith('contact_context_copy', {
+      locale,
+      lead: '',
+    });
   }
 );

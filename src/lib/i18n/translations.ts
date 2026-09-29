@@ -153,6 +153,7 @@ export const translations = {
         rightsTransfer:
           'Можно ли продать лицензию на недропользование в Казахстане?',
         geologicalMap: 'Геологическая карта Казахстана: выбор масштаба',
+        whatIsGeology: 'Геология простыми словами: минерал, порода и руда',
       },
       summaries: {
         artisanalMining:
@@ -169,6 +170,8 @@ export const translations = {
           'Какие сделки требуют разрешения на переход права и что изменилось с 7 сентября 2026 года.',
         geologicalMap:
           'Чем отличаются геологическая карта, карта рудопроявлений и карта недропользования; как проверить масштаб и источник.',
+        whatIsGeology:
+          'Что изучает геология, чем различаются минерал, порода и руда и что делает геолог.',
       },
     },
     seo: {
@@ -1029,6 +1032,7 @@ export const translations = {
         rightsTransfer:
           'Қазақстанда жер қойнауын пайдалану лицензиясын сатуға бола ма?',
         geologicalMap: 'Қазақстанның геологиялық картасы: масштабты таңдау',
+        whatIsGeology: 'Геология деген не: минерал, тау жынысы және кен',
       },
       summaries: {
         artisanalMining:
@@ -1045,6 +1049,8 @@ export const translations = {
           'Қандай мәмілелерге құқықтың өтуіне рұқсат керек және 2026 жылғы 7 қыркүйектен бастап не өзгерді.',
         geologicalMap:
           'Геологиялық карта, кен көріністері және жер қойнауын пайдалану карталарының айырмасы; масштаб пен дереккөзді тексеру.',
+        whatIsGeology:
+          'Геология нені зерттейді, минерал, тау жынысы мен кеннің айырмасы және геологтың жұмысы.',
       },
     },
     seo: {
@@ -1832,6 +1838,7 @@ export const translations = {
           'Reserve classifications: GKZ, KAZRC/JORC, GB/T 17766',
         rightsTransfer: 'Can you sell a subsoil licence in Kazakhstan?',
         geologicalMap: 'Geological maps of Kazakhstan: choosing a scale',
+        whatIsGeology: 'What is geology? Minerals, rocks and ore',
       },
       summaries: {
         artisanalMining:
@@ -1848,6 +1855,8 @@ export const translations = {
           'Which transactions need a transfer permission and what changed on 7 September 2026.',
         geologicalMap:
           'How geological, occurrence and subsoil use maps differ, and how to check scale and provenance.',
+        whatIsGeology:
+          'What geology studies, how minerals, rocks and ore differ, and what geologists do.',
       },
     },
     seo: {
@@ -2613,6 +2622,7 @@ export const translations = {
         reserveClassification: '储量分类对照：GKZ、KAZRC/JORC、GB/T 17766',
         rightsTransfer: '哈萨克斯坦的底土利用许可证可以出售吗？',
         geologicalMap: '哈萨克斯坦地质图：选择比例尺',
+        whatIsGeology: '什么是地质学？认识矿物、岩石与矿石',
       },
       summaries: {
         artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',
@@ -2625,6 +2635,8 @@ export const translations = {
         rightsTransfer: '哪些交易需要转让许可，以及2026年9月7日起的变化。',
         geologicalMap:
           '区分地质图、矿化点图与矿业权地图，并核查比例尺和资料来源。',
+        whatIsGeology:
+          '了解地质学、矿物、岩石和矿石的区别，以及地质学家的工作。',
       },
     },
     seo: {

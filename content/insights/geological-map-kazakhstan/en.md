@@ -5,6 +5,8 @@ description: How a geological map differs from maps of licences and mineral occu
 
 A search for a geological map of Kazakhstan returns materials made for different purposes. Some show rocks and faults; others show deposits or current subsoil use rights. Before using a map to assess an area, establish its purpose, original scale, coverage and date. A point on a map coinciding with an area of interest does not, by itself, establish either a mineral deposit or a right to work there.
 
+For the basic terms, start with our guide to [what geology is](/en/insights/what-is-geology).
+
 ## Three maps answer different questions
 
 **A geological map** describes the territory's geology: the distribution and age of rocks, contacts and structures. Colours and symbols only make sense with the legend. The map helps place an area in geological context and form an exploration hypothesis; it does not prove that an economic deposit exists at a particular point. This is consistent with [USGS's description of geological mapping](https://www.usgs.gov/special-topics/earth-mri/geologic-framework-mapping); Kazakhstan's Geology Committee likewise discusses rocks and faults in its account of [1:50 000 mapping](https://www.gov.kz/memleket/entities/geology/press/news/details/1143562?lang=ru).

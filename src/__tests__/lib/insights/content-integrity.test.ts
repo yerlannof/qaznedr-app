@@ -203,7 +203,7 @@ describe('geological map guide', () => {
     expect(entry).toMatchObject({
       category: 'geology',
       published: '2026-09-28',
-      updated: '2026-09-28',
+      updated: '2026-09-29',
       legal: false,
       locales: ['ru', 'en', 'zh', 'kz'],
     });

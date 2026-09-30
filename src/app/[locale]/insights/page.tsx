@@ -8,6 +8,7 @@ import { listArticles } from '@/lib/insights/content';
 import { formatCheckDate } from '@/lib/leads/check-date';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd, insightsBreadcrumb } from '@/lib/seo/article-jsonld';
+import { insightsCollectionJsonLd } from '@/lib/seo/insights-jsonld';
 import { HREFLANG, LOCALES, toLocale } from '@/lib/seo/site';
 
 export const dynamic = 'force-static';
@@ -37,6 +38,12 @@ export default async function InsightsPage({
   const cards = listArticles(locale);
   const fallback = cards.some((card) => card.locale !== locale);
   const breadcrumb = breadcrumbJsonLd(insightsBreadcrumb(locale));
+  const collection = insightsCollectionJsonLd(
+    locale,
+    t('insights.title'),
+    t('insights.subtitle'),
+    cards
+  );
 
   return (
     <>
@@ -44,6 +51,12 @@ export default async function InsightsPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumb).replace(/</g, '\\u003c'),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(collection).replace(/</g, '\\u003c'),
         }}
       />
       <Navigation />

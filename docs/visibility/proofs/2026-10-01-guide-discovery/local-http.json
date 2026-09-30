@@ -1,0 +1,579 @@
+{
+  "base": "http://localhost:3107",
+  "checks": 52,
+  "passed": 52,
+  "pages": [
+    {
+      "path": "/ru/insights",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 12,
+      "firstLinks": [
+        "/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      ]
+    },
+    {
+      "path": "/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "/ru/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/ru/insights/artisanal-mining-licence-kazakhstan",
+        "/ru/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/geological-due-diligence-kazakhstan",
+        "/ru/insights/core-drilling-geological-exploration",
+        "/ru/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/ru/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/ru/insights/geological-map-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/east-kazakhstan-gold-map-guide",
+        "/ru/insights/satellite-gold-map-guide",
+        "/ru/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/ru/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/geological-map-kazakhstan",
+        "/ru/insights/satellite-gold-map-guide",
+        "/ru/insights/core-drilling-geological-exploration"
+      ]
+    },
+    {
+      "path": "/ru/insights/what-is-geology",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/geological-map-kazakhstan",
+        "/ru/insights/core-drilling-geological-exploration",
+        "/ru/insights/geological-due-diligence-kazakhstan"
+      ]
+    },
+    {
+      "path": "/ru/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "/ru/insights/core-drilling-geological-exploration",
+        "/ru/insights/geological-map-kazakhstan"
+      ]
+    },
+    {
+      "path": "/ru/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/geological-due-diligence-kazakhstan",
+        "/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "/ru/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/ru/insights/satellite-gold-map-guide",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/geological-map-kazakhstan",
+        "/ru/insights/east-kazakhstan-gold-map-guide",
+        "/ru/insights/geological-due-diligence-kazakhstan"
+      ]
+    },
+    {
+      "path": "/ru/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/ru/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/ru/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/ru/insights/subsoil-rights-transfer-permission-kazakhstan"
+      ]
+    },
+    {
+      "path": "/kz/insights",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 12,
+      "firstLinks": [
+        "/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      ]
+    },
+    {
+      "path": "/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "/kz/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/kz/insights/artisanal-mining-licence-kazakhstan",
+        "/kz/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/geological-due-diligence-kazakhstan",
+        "/kz/insights/core-drilling-geological-exploration",
+        "/kz/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/kz/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/kz/insights/geological-map-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/east-kazakhstan-gold-map-guide",
+        "/kz/insights/satellite-gold-map-guide",
+        "/kz/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/kz/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/geological-map-kazakhstan",
+        "/kz/insights/satellite-gold-map-guide",
+        "/kz/insights/core-drilling-geological-exploration"
+      ]
+    },
+    {
+      "path": "/kz/insights/what-is-geology",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/geological-map-kazakhstan",
+        "/kz/insights/core-drilling-geological-exploration",
+        "/kz/insights/geological-due-diligence-kazakhstan"
+      ]
+    },
+    {
+      "path": "/kz/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "/kz/insights/core-drilling-geological-exploration",
+        "/kz/insights/geological-map-kazakhstan"
+      ]
+    },
+    {
+      "path": "/kz/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/geological-due-diligence-kazakhstan",
+        "/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "/kz/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/kz/insights/satellite-gold-map-guide",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/geological-map-kazakhstan",
+        "/kz/insights/east-kazakhstan-gold-map-guide",
+        "/kz/insights/geological-due-diligence-kazakhstan"
+      ]
+    },
+    {
+      "path": "/kz/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/kz/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/kz/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/kz/insights/subsoil-rights-transfer-permission-kazakhstan"
+      ]
+    },
+    {
+      "path": "/en/insights",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 12,
+      "firstLinks": [
+        "/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/en/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      ]
+    },
+    {
+      "path": "/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "/en/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/en/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/en/insights/artisanal-mining-licence-kazakhstan",
+        "/en/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/geological-due-diligence-kazakhstan",
+        "/en/insights/core-drilling-geological-exploration",
+        "/en/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/en/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/en/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/en/insights/geological-map-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/east-kazakhstan-gold-map-guide",
+        "/en/insights/satellite-gold-map-guide",
+        "/en/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/en/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/geological-map-kazakhstan",
+        "/en/insights/satellite-gold-map-guide",
+        "/en/insights/core-drilling-geological-exploration"
+      ]
+    },
+    {
+      "path": "/en/insights/what-is-geology",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/geological-map-kazakhstan",
+        "/en/insights/core-drilling-geological-exploration",
+        "/en/insights/geological-due-diligence-kazakhstan"
+      ]
+    },
+    {
+      "path": "/en/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "/en/insights/core-drilling-geological-exploration",
+        "/en/insights/geological-map-kazakhstan"
+      ]
+    },
+    {
+      "path": "/en/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/geological-due-diligence-kazakhstan",
+        "/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "/en/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/en/insights/satellite-gold-map-guide",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/geological-map-kazakhstan",
+        "/en/insights/east-kazakhstan-gold-map-guide",
+        "/en/insights/geological-due-diligence-kazakhstan"
+      ]
+    },
+    {
+      "path": "/en/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/en/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/en/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/en/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/en/insights/subsoil-rights-transfer-permission-kazakhstan"
+      ]
+    },
+    {
+      "path": "/zh/insights",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 12,
+      "firstLinks": [
+        "/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      ]
+    },
+    {
+      "path": "/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "/zh/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/zh/insights/artisanal-mining-licence-kazakhstan",
+        "/zh/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/geological-due-diligence-kazakhstan",
+        "/zh/insights/core-drilling-geological-exploration",
+        "/zh/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/zh/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/zh/insights/geological-map-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/east-kazakhstan-gold-map-guide",
+        "/zh/insights/satellite-gold-map-guide",
+        "/zh/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/zh/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/geological-map-kazakhstan",
+        "/zh/insights/satellite-gold-map-guide",
+        "/zh/insights/core-drilling-geological-exploration"
+      ]
+    },
+    {
+      "path": "/zh/insights/what-is-geology",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/geological-map-kazakhstan",
+        "/zh/insights/core-drilling-geological-exploration",
+        "/zh/insights/geological-due-diligence-kazakhstan"
+      ]
+    },
+    {
+      "path": "/zh/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "/zh/insights/core-drilling-geological-exploration",
+        "/zh/insights/geological-map-kazakhstan"
+      ]
+    },
+    {
+      "path": "/zh/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/geological-due-diligence-kazakhstan",
+        "/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "/zh/insights/what-is-geology"
+      ]
+    },
+    {
+      "path": "/zh/insights/satellite-gold-map-guide",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/geological-map-kazakhstan",
+        "/zh/insights/east-kazakhstan-gold-map-guide",
+        "/zh/insights/geological-due-diligence-kazakhstan"
+      ]
+    },
+    {
+      "path": "/zh/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/zh/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ]
+    },
+    {
+      "path": "/zh/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "h1": 1,
+      "guideLinks": 11,
+      "firstLinks": [
+        "/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+        "/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "/zh/insights/subsoil-rights-transfer-permission-kazakhstan"
+      ]
+    }
+  ]
+}

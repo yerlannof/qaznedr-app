@@ -10,6 +10,7 @@ import ArticleToc from '@/components/insights/ArticleToc';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { getArticle, listArticles } from '@/lib/insights/content';
 import { GUIDE, INSIGHTS, findInsight } from '@/lib/insights/registry';
+import { orderRelatedArticles } from '@/lib/insights/related';
 import { formatCheckDate } from '@/lib/leads/check-date';
 import { articleJsonLd } from '@/lib/seo/article-jsonld';
 import { buildPageMetadata } from '@/lib/seo/metadata';
@@ -63,7 +64,7 @@ export default async function InsightArticlePage({
   const updated = formatCheckDate(entry.updated, locale);
   // The legal note dates the rules, not the last text edit.
   const lawAsOf = formatCheckDate(entry.lawAsOf ?? entry.updated, locale);
-  const others = listArticles(locale).filter((card) => card.slug !== slug);
+  const others = orderRelatedArticles(slug, listArticles(locale));
   const jsonLd = articleJsonLd({
     slug,
     locale,

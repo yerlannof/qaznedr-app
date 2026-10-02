@@ -9,7 +9,7 @@
 - [x] Отдельный черновик доказательств команды/кейса: docs/content-drafts/2026-10-02-investor-evidence-gaps.md; не публиковать.
 - [x] Точечные тесты, все Jest с baseline, ESLint/format/build, HTTP/browser, read-only сверка базы, проверка Production переменных уведомления без значений.
 - [x] Независимое сильное ревью, устранение важных замечаний.
-- [ ] Явный commit feat(analytics): report saved inquiries without QA; push, exact SHA Production success, production smoke. Обновить HOLDING_ROADMAP.md и итог проверки.
+- [x] Явный commit feat(analytics): report saved inquiries without QA; push, exact SHA Production success, production smoke. Обновить HOLDING_ROADMAP.md и итог проверки.
 
 Публичный интерфейс и тексты, согласие, уведомления, антиспам и данные участков не изменяются.
 

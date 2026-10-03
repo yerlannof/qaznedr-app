@@ -1,0 +1,1123 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>17 · Техника и буровые услуги — макет подачи</title>
+    <style>
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-Regular.woff2');
+      }
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-SemiBold.woff2');
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: Source;
+        src: url('../../../public/brand/fonts/SourceSerif4Display-Regular.ttf.woff2');
+      }
+      :root {
+        --bg: #e9ece6;
+        --surface: #f8f9f5;
+        --ink: #253740;
+        --muted: #43585f;
+        --line: #9aa8a5;
+        --accent: #dde55e;
+        --soft: #dbe2dc;
+        --error: #9c3027;
+        font-family: Plex, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      body[data-theme='dark'] {
+        --bg: #17272e;
+        --surface: #253740;
+        --ink: #f0f2ec;
+        --muted: #cbd7d1;
+        --line: #82999c;
+        --soft: #354a52;
+        --error: #ffb2a7;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        color: var(--ink);
+        background: var(--bg);
+        margin: 0;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        min-height: 48px;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid #a1ac15;
+        outline-offset: 2px;
+      }
+      a {
+        color: inherit;
+      }
+      p {
+        line-height: 1.55;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.16;
+      }
+      h1 {
+        font:
+          normal clamp(2rem, 4vw, 3.5rem) / 1.07 Source,
+          Georgia,
+          serif;
+        margin: 0 0 16px;
+      }
+      h2 {
+        font-size: 1.55rem;
+        margin: 0 0 16px;
+      }
+      h3 {
+        font-size: 1.12rem;
+        margin: 0 0 9px;
+      }
+      .shell {
+        max-width: 1260px;
+        margin: auto;
+        padding: 0 24px;
+      }
+      .top {
+        border-bottom: 1px solid var(--line);
+        background: var(--surface);
+      }
+      .topinner {
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .logo {
+        width: 176px;
+        max-width: 43vw;
+      }
+      .tools {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .tools select,
+      .tools button {
+        padding: 0 12px;
+        background: var(--surface);
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+      .tools button {
+        min-width: 80px;
+      }
+      .demo {
+        background: var(--accent);
+        color: #253740;
+        padding: 12px 24px;
+        font-weight: 600;
+        font-size: 0.89rem;
+        text-align: center;
+      }
+      .nav {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 25px 0;
+      }
+      .nav button,
+      .pill {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        padding: 0 20px;
+        font-weight: 600;
+      }
+      .nav button[aria-selected='true'],
+      .pill.active {
+        background: var(--ink);
+        color: var(--bg);
+      }
+      main {
+        padding-bottom: 70px;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        gap: 24px;
+        align-items: end;
+        padding: 26px 0 32px;
+        border-bottom: 1px solid var(--line);
+      }
+      .eyebrow {
+        font-size: 0.77rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      .intro {
+        font-size: 1.1rem;
+        max-width: 680px;
+        margin: 0;
+      }
+      .heroaside {
+        border-left: 3px solid var(--accent);
+        padding: 15px 20px;
+        background: var(--surface);
+      }
+      .heroaside p {
+        margin: 5px 0 0;
+      }
+      .filters {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+        align-items: end;
+        padding: 25px 0;
+      }
+      .field {
+        display: grid;
+        gap: 7px;
+      }
+      .field label,
+      .field legend {
+        font-weight: 600;
+        font-size: 0.96rem;
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 0;
+        color: var(--ink);
+        padding: 10px 13px;
+      }
+      .field textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+      .hint {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin: 0;
+      }
+      .cataloghead {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        align-items: center;
+        margin: 10px 0 15px;
+      }
+      .cataloghead h2 {
+        margin: 0;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 15px;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+      }
+      .cardtop {
+        min-height: 115px;
+        background: var(--soft);
+        padding: 18px;
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .type,
+      .demotag {
+        font-size: 0.73rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .type {
+        border: 1px solid var(--ink);
+        padding: 7px 9px;
+      }
+      .demotag {
+        background: var(--accent);
+        color: #253740;
+        padding: 7px 9px;
+      }
+      .cardbody {
+        padding: 19px;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+      }
+      .cardbody p {
+        margin: 0 0 9px;
+      }
+      .specs {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .price {
+        font-weight: 600;
+        font-size: 1.18rem;
+        margin-top: auto !important;
+        padding-top: 16px;
+      }
+      .card button {
+        margin: 0 19px 19px;
+      }
+      .primary,
+      .secondary {
+        border: 1px solid var(--ink);
+        padding: 0 20px;
+        font-weight: 600;
+        min-height: 50px;
+      }
+      .primary {
+        background: var(--ink);
+        color: var(--bg);
+      }
+      .secondary {
+        background: transparent;
+        color: var(--ink);
+      }
+      .sulfur {
+        background: var(--accent);
+        color: #253740;
+        border-color: var(--accent);
+      }
+      .empty {
+        padding: 30px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+      }
+      .flow {
+        max-width: 830px;
+        margin: 28px auto;
+      }
+      .progress {
+        display: flex;
+        gap: 8px;
+        margin: 18px 0 26px;
+      }
+      .progress span {
+        height: 7px;
+        background: var(--line);
+        flex: 1;
+      }
+      .progress span.on {
+        background: var(--accent);
+      }
+      .stepcount {
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        padding: clamp(20px, 4vw, 38px);
+      }
+      .panel h2 {
+        font:
+          normal clamp(1.65rem, 3vw, 2.35rem) / 1.12 Source,
+          Georgia,
+          serif;
+      }
+      .stack {
+        display: grid;
+        gap: 18px;
+      }
+      .choicegrid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .choice {
+        position: relative;
+      }
+      .choice input {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        inset: 0;
+        cursor: pointer;
+      }
+      .choice span {
+        display: flex;
+        align-items: center;
+        min-height: 82px;
+        padding: 15px;
+        background: var(--bg);
+        border: 2px solid var(--line);
+        font-weight: 600;
+      }
+      .choice input:checked + span {
+        border-color: var(--ink);
+        box-shadow: inset 0 0 0 3px var(--accent);
+      }
+      .choice input:focus-visible + span {
+        outline: 3px solid #a1ac15;
+        outline-offset: 2px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 26px;
+      }
+      .actions button {
+        min-width: 145px;
+      }
+      .error {
+        color: var(--error);
+        font-size: 0.86rem;
+        margin: 4px 0 0;
+        font-weight: 600;
+      }
+      .note {
+        border-left: 4px solid var(--accent);
+        background: var(--bg);
+        padding: 14px 18px;
+      }
+      .help {
+        margin-top: 22px;
+        padding: 20px;
+        border: 1px solid var(--line);
+        background: var(--soft);
+      }
+      .help p {
+        margin: 5px 0 15px;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 10px 15px;
+        margin: 0;
+      }
+      .summary dt {
+        color: var(--muted);
+      }
+      .summary dd {
+        margin: 0;
+        font-weight: 600;
+        overflow-wrap: anywhere;
+      }
+      .result {
+        padding: 25px;
+        background: var(--soft);
+        border-left: 5px solid var(--accent);
+      }
+      .result p {
+        margin-bottom: 0;
+      }
+      .fine {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .hidden {
+        display: none !important;
+      }
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 26px 0;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      @media (max-width: 800px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .filters {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 570px) {
+        .shell {
+          padding: 0 16px;
+        }
+        .topinner {
+          min-height: 74px;
+        }
+        .logo {
+          width: 137px;
+        }
+        .tools {
+          gap: 5px;
+        }
+        .tools select,
+        .tools button {
+          padding: 0 5px;
+          min-width: 55px;
+          font-size: 0.86rem;
+        }
+        .hero {
+          gap: 18px;
+        }
+        .filters,
+        .cards,
+        .row {
+          grid-template-columns: 1fr;
+        }
+        .choicegrid {
+          grid-template-columns: 1fr;
+        }
+        .choice span {
+          min-height: 60px;
+        }
+        .actions button {
+          min-width: 0;
+          flex: 1;
+        }
+        .summary {
+          grid-template-columns: 1fr;
+          gap: 2px;
+        }
+        .summary dd {
+          margin-bottom: 10px;
+        }
+        .cataloghead {
+          align-items: start;
+        }
+        .panel {
+          padding: 19px;
+        }
+      }
+      .technical {
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        display: grid;
+        gap: 14px;
+        min-width: 0;
+      }
+      .technical h3 {
+        margin: 0;
+      }
+      .technical .row,
+      .capability {
+        min-width: 0;
+      }
+      .capability {
+        border-left: 3px solid var(--accent);
+        padding-left: 12px;
+      }
+      details {
+        border: 1px solid var(--line);
+        padding: 12px;
+        min-width: 0;
+      }
+      details summary {
+        cursor: pointer;
+        font-weight: 600;
+      }
+      details .row,
+      details .stack {
+        margin-top: 16px;
+      }
+      .auth-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      .auth-actions button {
+        flex: 1 1 210px;
+      }
+      .contact-choice {
+        border: 0;
+        padding: 0;
+        margin: 0;
+      }
+      .contact-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .stack,
+      .panel,
+      .flow {
+        min-width: 0;
+      }
+      @media (max-width: 570px) {
+        .contact-options {
+          grid-template-columns: 1fr;
+        }
+        .topinner {
+          gap: 8px;
+        }
+      }
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .photo-grid figure {
+        margin: 0;
+        min-width: 0;
+        border: 1px solid var(--line);
+        padding: 6px;
+      }
+      .photo-grid img {
+        display: block;
+        width: 100%;
+        height: 86px;
+        object-fit: cover;
+      }
+      .photo-grid figcaption {
+        font-size: 0.75rem;
+        overflow-wrap: anywhere;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <div class="demo" id="demoNotice"></div>
+    <header class="top">
+      <div class="shell topinner">
+        <img
+          class="logo"
+          id="brand"
+          src="../../../public/brand/logo-horizontal.svg"
+          alt="QAZNEDR HOLDING"
+        />
+        <div class="tools">
+          <label class="hidden" for="lang">Language</label
+          ><select id="lang" aria-label="Language">
+            <option value="ru">RU</option>
+            <option value="kz">KZ</option>
+            <option value="en">EN</option>
+            <option value="zh">中文</option></select
+          ><button id="theme" type="button"></button>
+        </div>
+      </div>
+    </header>
+    <main class="shell">
+      <nav class="nav" aria-label="Prototype views">
+        <button type="button" id="catalogTab" aria-selected="true"></button
+        ><button type="button" id="submitTab" aria-selected="false"></button>
+      </nav>
+      <section id="catalog"></section>
+      <section id="submit" class="hidden"></section>
+    </main>
+    <footer><div class="shell" id="footer"></div></footer>
+    <script>
+      // Review-only prototype: all state stays in this page's memory.
+      const ui = {
+        ru: {
+          catalog: 'Каталог',
+          submit: 'Подать объявление',
+          light: 'Светлая',
+          dark: 'Тёмная',
+        },
+        kz: {
+          catalog: 'Каталог',
+          submit: 'Хабарландыру беру',
+          light: 'Ашық',
+          dark: 'Қараңғы',
+        },
+        en: {
+          catalog: 'Catalogue',
+          submit: 'Post an offer',
+          light: 'Light',
+          dark: 'Dark',
+        },
+        zh: {
+          catalog: '目录',
+          submit: '发布信息',
+          light: '浅色',
+          dark: '深色',
+        },
+      };
+      const labels = {
+        drill: 'Буровая установка',
+        excavator: 'Экскаватор',
+        compressor: 'Компрессор',
+        transport: 'Транспорт',
+        drillService: 'Буровые работы',
+        geoService: 'Геологические работы',
+        rent: 'Аренда',
+        sale: 'Продажа',
+        works: 'Услуга',
+      };
+      const equipment = ['drill', 'excavator', 'compressor', 'transport'];
+      const services = ['drillService', 'geoService'];
+      const methods = [
+        ['core', 'CORE — керновое'],
+        ['rc', 'RC'],
+        ['auger', 'Шнековое'],
+        ['rotary', 'Роторное без керна'],
+        ['dth', 'Пневмоударное'],
+        ['sonic', 'Соник'],
+        ['other', 'Другое'],
+      ];
+      const purposes = [
+        ['exploration', 'Разведка'],
+        ['water', 'Вода'],
+        ['engineering', 'Инженерные работы'],
+        ['blast', 'Взрывные скважины'],
+        ['geothermal', 'Геотермальные'],
+        ['hdd', 'ГНБ'],
+        ['other', 'Другое'],
+      ];
+      let lang = 'ru',
+        theme = 'light',
+        view = 'submit',
+        step = 1,
+        result = false;
+      const blank = () => ({
+        offer: 'rent',
+        category: '',
+        title: '',
+        city: '',
+        availability: '',
+        description: '',
+        price: '',
+        currency: 'KZT',
+        unit: 'SHIFT',
+        conditions: '',
+        purpose: '',
+        method: '',
+        method2: '',
+        coreBit: '',
+        depth: '',
+        diameter: '',
+        depth2: '',
+        diameter2: '',
+        bucket: '',
+        mass: '',
+        pressure: '',
+        flow: '',
+        capacity: '',
+        regions: '',
+        mobilization: '',
+        operator: '',
+        delivery: '',
+        chassis: '',
+        demoEmail: '',
+        contactName: '',
+        surname: '',
+        company: '',
+        phone: '',
+        publish: '',
+      });
+      let data = blank();
+      let photos = [];
+      function revokePhotos() {
+        for (const photo of photos) URL.revokeObjectURL(photo.url);
+        photos = [];
+      }
+      window.addEventListener('beforeunload', revokePhotos);
+      const escapeHtml = (value) =>
+        String(value ?? '').replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              '&': '&amp;',
+              '<': '&lt;',
+              '>': '&gt;',
+              '"': '&quot;',
+              "'": '&#39;',
+            })[c]
+        );
+      const option = (value, label, current) =>
+        `<option value="${value}" ${current === value ? 'selected' : ''}>${escapeHtml(label)}</option>`;
+      const field = (key, label, type = 'text', placeholder = '', hint = '') =>
+        `<div class="field"><label for="${key}">${escapeHtml(label)}</label><input id="${key}" name="${key}" type="${type}" value="${escapeHtml(data[key])}" placeholder="${escapeHtml(placeholder)}" ${type === 'number' ? 'min="0" step="any"' : ''}><p class="error" id="err-${key}" hidden></p>${hint ? `<p class="hint">${hint}</p>` : ''}</div>`;
+      const select = (key, label, opts) =>
+        `<div class="field"><label for="${key}">${escapeHtml(label)}</label><select id="${key}" name="${key}">${opts.map(([v, l]) => option(v, l, data[key])).join('')}</select></div>`;
+      const note =
+        'Макет 17: новые поля формы пока показаны на русском языке. OAuth, письмо, сохранение и публикация не выполняются.';
+      function chrome() {
+        document.documentElement.lang =
+          lang === 'kz' ? 'kk' : lang === 'zh' ? 'zh-CN' : lang;
+        document.getElementById('lang').value = lang;
+        document.getElementById('demoNotice').textContent =
+          'МАКЕТ ДЛЯ СОГЛАСОВАНИЯ · ДАННЫЕ НЕ ОТПРАВЛЯЮТСЯ';
+        document.getElementById('catalogTab').textContent = ui[lang].catalog;
+        document.getElementById('submitTab').textContent = ui[lang].submit;
+        document
+          .getElementById('catalogTab')
+          .setAttribute('aria-selected', view === 'catalog');
+        document
+          .getElementById('submitTab')
+          .setAttribute('aria-selected', view === 'submit');
+        document.getElementById('theme').textContent =
+          theme === 'light' ? ui[lang].dark : ui[lang].light;
+        document.getElementById('brand').src =
+          `../../../public/brand/logo-horizontal${theme === 'dark' ? '-inverse' : ''}.svg`;
+        document.getElementById('footer').textContent = note;
+        document
+          .getElementById('catalog')
+          .classList.toggle('hidden', view !== 'catalog');
+        document
+          .getElementById('submit')
+          .classList.toggle('hidden', view !== 'submit');
+      }
+      function catalog() {
+        document.getElementById('catalog').innerHTML =
+          `<div class="hero"><div><p class="eyebrow">ТЕХНИКА И УСЛУГИ · МАКЕТ 17</p><h1>Предложения для полевых работ</h1><p class="intro">Проверяем новую форму подачи. Ниже нет действующих объявлений.</p></div><div class="heroaside"><strong>Своя техника или услуги?</strong><p>Заполните демонстрационную форму из четырёх шагов.</p><button class="primary sulfur" id="start" type="button">Перейти к форме</button></div></div><p class="note">${note}</p>`;
+        document.getElementById('start').onclick = () => switchView('submit');
+      }
+      function switchView(next) {
+        view = next;
+        render();
+        window.scrollTo(0, 0);
+      }
+      function categories() {
+        return data.offer === 'works' ? services : equipment;
+      }
+      function step1() {
+        return `<h2>1. Что хотите разместить?</h2><p>Сначала выберите тип предложения и категорию.</p><div class="choicegrid">${[
+          ['rent', 'Сдаю технику'],
+          ['sale', 'Продаю технику'],
+          ['works', 'Выполняю работы'],
+        ]
+          .map(
+            ([v, l]) =>
+              `<label class="choice"><input type="radio" name="offer" value="${v}" ${data.offer === v ? 'checked' : ''}><span>${l}</span></label>`
+          )
+          .join(
+            ''
+          )}</div><div class="stack" style="margin-top:20px">${select('category', 'Категория', [['', 'Выберите категорию'], ...categories().map((v) => [v, labels[v]])])}<p class="error" id="err-category" hidden></p><p class="note">Характеристики появятся на следующем шаге только для выбранной категории.</p></div>`;
+      }
+      function technical() {
+        if (data.category === 'drill' || data.category === 'drillService')
+          return `<div class="technical"><h3>Бурение</h3><p class="hint">Назначение и метод — разные признаки. Если точные параметры неизвестны, оставьте пустыми.</p>${select('purpose', 'Назначение (необязательно)', [['', 'Уточню'], ...purposes])}<div class="capability"><p class="hint">Возможность 1: один метод, глубина и диаметр скважины относятся к одной комплектации.</p>${select('method', 'Метод для возможности 1', [['', 'Уточню'], ...methods])}${
+            data.method === 'core'
+              ? select(
+                  'coreBit',
+                  'Для CORE: алмазная коронка (отдельный параметр)',
+                  [
+                    ['', 'Уточню'],
+                    ['yes', 'Да'],
+                    ['no', 'Нет'],
+                  ]
+                )
+              : ''
+          }<div class="row">${field('depth', 'Глубина до, м', 'number')}${field('diameter', 'Диаметр скважины, мм', 'number')}</div></div><details id="moreDepth" ${data.method2 || data.depth2 || data.diameter2 ? 'open' : ''}><summary>Добавить вторую возможность</summary>${select('method2', 'Метод для возможности 2', [['', 'Уточню'], ...methods])}<div class="row">${field('depth2', 'Глубина до, м', 'number')}${field('diameter2', 'Диаметр скважины, мм', 'number')}</div></details></div>`;
+        if (data.category === 'excavator')
+          return `<div class="technical"><h3>Экскаватор</h3><div class="row">${field('bucket', 'Ковш, м³', 'number')}${field('mass', 'Масса, т', 'number')}</div></div>`;
+        if (data.category === 'compressor')
+          return `<div class="technical"><h3>Компрессор</h3><div class="row">${field('pressure', 'Давление, бар', 'number')}${field('flow', 'Производительность, м³/мин', 'number')}</div></div>`;
+        if (data.category === 'transport')
+          return `<div class="technical"><h3>Транспорт</h3>${field('capacity', 'Грузоподъёмность, т', 'number')}</div>`;
+        return '';
+      }
+      function extra() {
+        if (data.offer === 'works')
+          return `<div class="technical"><h3>Работы и выезд</h3><div class="row">${field('regions', 'Регионы выезда', 'text', 'Например, Карагандинская и Акмолинская области')}${field('mobilization', 'Мобилизация', 'text', 'Например, по договорённости')}</div></div>`;
+        return `<div class="technical"><h3>Комплектация техники</h3><div class="row">${select(
+          'operator',
+          'Оператор',
+          [
+            ['', 'Уточню'],
+            ['yes', 'Входит'],
+            ['no', 'Не входит'],
+          ]
+        )}${select('delivery', 'Доставка', [
+          ['', 'Уточню'],
+          ['yes', 'Возможна'],
+          ['no', 'Не предусмотрена'],
+        ])}</div>${select('chassis', 'Тип ходовой', [
+          ['', 'Уточню'],
+          ['tracked', 'Гусеничная'],
+          ['wheeled', 'Колёсная'],
+          ['stationary', 'Стационарная'],
+          ['other', 'Другое'],
+        ])}</div>`;
+      }
+      function step2() {
+        const units =
+          data.offer === 'sale'
+            ? [['ITEM', 'За единицу']]
+            : [
+                ['HOUR', 'Час'],
+                ['SHIFT', 'Смена'],
+                ['DAY', 'Сутки'],
+                ['METER', 'Метр'],
+                ['OBJECT', 'Объект'],
+              ];
+        return `<h2>2. Расскажите о предложении</h2><p class="hint">Большинство характеристик можно уточнить позже. Обязательны только название и местоположение.</p><div class="stack">${field('title', 'Название / модель', 'text', 'Например, буровая установка XY-1')}${field('city', 'Город / область', 'text', 'Например, Караганда')}${field('availability', 'Срок / доступность (необязательно)', 'text', 'Например, с ноября или по договорённости')}<div class="row">${field('price', 'Цена (необязательно)', 'number', '', 'Пусто = цена по запросу')}${select(
+          'currency',
+          'Валюта',
+          [
+            ['KZT', 'KZT'],
+            ['USD', 'USD'],
+            ['CNY', 'CNY'],
+          ]
+        )}</div>${select('unit', 'Единица цены', units)}${technical()}${extra()}<div class="technical"><h3>Фото · локальное демо</h3><div class="field"><label for="photos">Выберите изображения (необязательно)</label><input id="photos" type="file" accept="image/*" multiple><p class="hint">Показываются только в этой вкладке. Загрузка на сервер не выполняется.</p></div>${photoPreview()}</div><details class="more" ${data.description || data.conditions ? 'open' : ''}><summary>Добавить описание и условия</summary><div class="stack"><div class="field"><label for="description">Краткое описание</label><textarea name="description" id="description">${escapeHtml(data.description)}</textarea></div><div class="field"><label for="conditions">Условия / комплектация</label><textarea name="conditions" id="conditions">${escapeHtml(data.conditions)}</textarea></div></div></details></div>`;
+      }
+      function photoPreview() {
+        return photos.length
+          ? `<div class="photo-grid">${photos.map((photo) => `<figure><img src="${escapeHtml(photo.url)}" alt="Локальный предпросмотр"><figcaption>${escapeHtml(photo.name)}</figcaption></figure>`).join('')}</div>`
+          : '';
+      }
+      function step3() {
+        return `<h2>3. Контакт и вход</h2><div class="stack"><div class="note"><strong>Вход в будущем сервисе</strong><p>Google или email по одноразовой ссылке. Сейчас это только демонстрация: OAuth не запускается, письмо не отправляется.</p>${field('demoEmail', 'Email для одноразовой ссылки (необязательно)', 'email', 'example@example.com', 'Только демонстрация. Не вводите реальный адрес: письмо не отправляется.')}<div class="auth-actions"><button class="secondary" id="googleDemo" type="button">Продолжить с Google · демо</button><button class="secondary" id="emailDemo" type="button">Получить ссылку по email · демо</button></div><p id="authStatus" class="hint" role="status">Вход не требуется для просмотра этого макета.</p></div>${field('contactName', 'Имя для связи')}${field('surname', 'Фамилия (необязательно)')}${field('company', 'Компания (необязательно)')}${field('phone', 'Контактный телефон, отдельно от входа', 'tel', '+7 …')}<fieldset class="field contact-choice"><legend>Показывать телефон после модерации?</legend><div class="choicegrid contact-options"><label class="choice"><input type="radio" name="publish" value="yes" ${data.publish === 'yes' ? 'checked' : ''}><span>Да, показывать в объявлении</span></label><label class="choice"><input type="radio" name="publish" value="no" ${data.publish === 'no' ? 'checked' : ''}><span>Нет, только для связи редакции</span></label></div><p class="error" id="err-publish" hidden></p></fieldset><p class="hint">Не вводите реальные личные данные в макет. Контакт не сохраняется и не отправляется.</p></div>`;
+      }
+      function preview() {
+        const values = [
+          ['Тип', labels[data.offer]],
+          ['Категория', labels[data.category]],
+          ['Название', data.title],
+          ['Место', data.city],
+          ['Срок / доступность', data.availability],
+          [
+            'Цена',
+            data.price
+              ? `${data.price} ${data.currency} / ${data.unit}`
+              : 'По запросу',
+          ],
+          ['Характеристики', technicalSummary()],
+          ['Описание', data.description],
+          ['Условия / комплектация', data.conditions],
+          [
+            'Фото',
+            photos.length
+              ? `${photos.length} локальных превью, без загрузки`
+              : 'Не выбраны',
+          ],
+          [
+            'Контакт',
+            [data.contactName, data.surname].filter(Boolean).join(' '),
+          ],
+          ['Компания', data.company],
+          [
+            'Телефон',
+            data.publish === 'yes' ? data.phone : 'Скрыт от посетителей',
+          ],
+        ];
+        return `<h2>4. Предпросмотр</h2><p class="note">Проверьте пример объявления. Нажатие ниже лишь покажет статус «на модерации» внутри макета.</p><dl class="summary">${values.map(([a, b]) => `<dt>${escapeHtml(a)}</dt><dd>${escapeHtml(b || 'Уточнить')}</dd>`).join('')}</dl><p class="fine">Никакая заявка, письмо или объявление не создаётся.</p>`;
+      }
+      function technicalSummary() {
+        const parts = [];
+        if (data.category === 'drill' || data.category === 'drillService') {
+          if (data.purpose)
+            parts.push(
+              `Назначение: ${purposes.find((x) => x[0] === data.purpose)?.[1]}`
+            );
+          if (data.method || data.depth || data.diameter) {
+            const method =
+              methods.find((x) => x[0] === data.method)?.[1] ||
+              'метод уточняется';
+            parts.push(
+              `1: ${method}; до ${data.depth || '?'} м / диаметр скважины ${data.diameter || '?'} мм`
+            );
+          }
+          if (data.method === 'core' && data.coreBit)
+            parts.push(
+              `алмазная коронка: ${data.coreBit === 'yes' ? 'да' : 'нет'}`
+            );
+          if (data.method2 || data.depth2 || data.diameter2) {
+            const method =
+              methods.find((x) => x[0] === data.method2)?.[1] ||
+              'метод уточняется';
+            parts.push(
+              `2: ${method}; до ${data.depth2 || '?'} м / диаметр скважины ${data.diameter2 || '?'} мм`
+            );
+          }
+        } else if (data.category === 'excavator') {
+          if (data.bucket) parts.push(`${data.bucket} м³ ковш`);
+          if (data.mass) parts.push(`${data.mass} т масса`);
+        } else if (data.category === 'compressor') {
+          if (data.pressure) parts.push(`${data.pressure} бар`);
+          if (data.flow) parts.push(`${data.flow} м³/мин`);
+        } else if (data.category === 'transport' && data.capacity) {
+          parts.push(`${data.capacity} т грузоподъёмность`);
+        }
+        if (data.offer === 'works') {
+          if (data.regions) parts.push(`Выезд: ${data.regions}`);
+          if (data.mobilization)
+            parts.push(`Мобилизация: ${data.mobilization}`);
+        } else {
+          if (data.operator)
+            parts.push(
+              `Оператор: ${data.operator === 'yes' ? 'входит' : 'не входит'}`
+            );
+          if (data.delivery)
+            parts.push(
+              `Доставка: ${data.delivery === 'yes' ? 'возможна' : 'нет'}`
+            );
+          if (data.chassis)
+            parts.push(
+              `Ходовая: ${{ tracked: 'гусеничная', wheeled: 'колёсная', stationary: 'стационарная', other: 'другое' }[data.chassis]}`
+            );
+        }
+        return parts.join(' · ') || 'Можно уточнить';
+      }
+      function stepBody() {
+        if (result)
+          return `<div class="result" role="status"><h2>Демо: на модерации</h2><p>Так будет выглядеть состояние после отправки в будущем сервисе. Сейчас ничего не отправлено и не опубликовано.</p></div><div class="actions"><button class="secondary" id="again" type="button">Начать новое демо</button><button class="primary" id="toCatalog" type="button">Каталог</button></div>`;
+        return [step1, step2, step3, preview][step - 1]();
+      }
+      function validate() {
+        let error = null;
+        const set = (id, msg) => {
+          const e = document.getElementById('err-' + id);
+          if (e) {
+            e.textContent = msg;
+            e.hidden = false;
+          }
+          if (!error)
+            error =
+              document.getElementById(id) ||
+              document.querySelector(`[name="${id}"]`);
+        };
+        if (step === 1 && !data.category) set('category', 'Выберите категорию');
+        if (step === 2) {
+          for (const k of ['title', 'city'])
+            if (!data[k].trim()) set(k, 'Заполните поле');
+          for (const k of [
+            'price',
+            'depth',
+            'diameter',
+            'depth2',
+            'diameter2',
+            'bucket',
+            'mass',
+            'pressure',
+            'flow',
+            'capacity',
+          ])
+            if (data[k] && (!Number.isFinite(+data[k]) || +data[k] <= 0))
+              set(k, 'Укажите число больше нуля');
+        }
+        if (step === 3) {
+          if (!data.contactName.trim()) set('contactName', 'Укажите имя');
+          if (!/^\+\d[\d\s()\-]{6,}$/.test(data.phone.trim()))
+            set('phone', 'Укажите телефон с кодом страны');
+          if (!data.publish) set('publish', 'Выберите видимость телефона');
+        }
+        if (error) {
+          error.focus();
+          return false;
+        }
+        return true;
+      }
+      function bind() {
+        const root = document.getElementById('submit');
+        root.querySelectorAll('input,select,textarea').forEach((el) =>
+          el.addEventListener('input', (event) => {
+            const name = event.target.name;
+            data[name] = event.target.value;
+            const err = document.getElementById('err-' + name);
+            if (err) err.hidden = true;
+            if (name === 'offer') {
+              if (!categories().includes(data.category)) data.category = '';
+              data.unit = data.offer === 'sale' ? 'ITEM' : 'SHIFT';
+              renderSubmit();
+            }
+            if (name === 'method') {
+              renderSubmit();
+            }
+          })
+        );
+        const back = document.getElementById('back');
+        if (back)
+          back.onclick = () => {
+            step--;
+            renderSubmit();
+            window.scrollTo(0, 0);
+          };
+        const next = document.getElementById('next');
+        if (next)
+          next.onclick = () => {
+            if (!validate()) return;
+            if (step < 4) step++;
+            else result = true;
+            renderSubmit();
+            window.scrollTo(0, 0);
+          };
+        const again = document.getElementById('again');
+        if (again)
+          again.onclick = () => {
+            revokePhotos();
+            data = blank();
+            result = false;
+            step = 1;
+            renderSubmit();
+          };
+        const photoInput = document.getElementById('photos');
+        if (photoInput)
+          photoInput.onchange = () => {
+            revokePhotos();
+            photos = Array.from(photoInput.files || [])
+              .filter((file) => file.type.startsWith('image/'))
+              .slice(0, 8)
+              .map((file) => ({
+                name: file.name,
+                url: URL.createObjectURL(file),
+              }));
+            renderSubmit();
+          };
+        const to = document.getElementById('toCatalog');
+        if (to) to.onclick = () => switchView('catalog');
+        for (const id of ['googleDemo', 'emailDemo']) {
+          const button = document.getElementById(id);
+          if (button)
+            button.onclick = () => {
+              document.getElementById('authStatus').textContent =
+                'Только макет: вход не выполнен, письмо не отправлено.';
+            };
+        }
+      }
+      function renderSubmit() {
+        document.getElementById('submit').innerHTML =
+          `<div class="flow">${result ? '' : `<div class="stepcount">Шаг ${step} из 4</div><div class="progress" aria-label="Шаг ${step} из 4">${[1, 2, 3, 4].map((n) => `<span class="${n <= step ? 'on' : ''}"></span>`).join('')}</div>`}<div class="panel">${stepBody()}${result ? '' : `<div class="actions">${step > 1 ? '<button class="secondary" id="back" type="button">Назад</button>' : '<span></span>'}<button class="primary sulfur" id="next" type="button">${step === 4 ? 'Показать демо-статус' : 'Продолжить'}</button></div>`}</div></div>`;
+        bind();
+      }
+      function render() {
+        chrome();
+        if (view === 'catalog') catalog();
+        else renderSubmit();
+      }
+      document.getElementById('catalogTab').onclick = () =>
+        switchView('catalog');
+      document.getElementById('submitTab').onclick = () => switchView('submit');
+      document.getElementById('lang').onchange = (e) => {
+        lang = e.target.value;
+        render();
+      };
+      document.getElementById('theme').onclick = () => {
+        theme = theme === 'light' ? 'dark' : 'light';
+        document.body.dataset.theme = theme;
+        render();
+      };
+      render();
+    </script>
+  </body>
+</html>

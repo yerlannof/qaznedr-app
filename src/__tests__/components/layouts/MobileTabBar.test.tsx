@@ -45,12 +45,16 @@ describe('MobileTabBar', () => {
     expect(screen.getByRole('link')).toHaveAttribute('href', href);
   });
 
-  it.each(['/en/contact', '/ru/admin', '/ru/auth/signin', '/en/dashboard'])(
-    'is hidden on %s',
-    (path) => {
-      setPath(path);
-      const { container } = render(<MobileTabBar />);
-      expect(container).toBeEmptyDOMElement();
-    }
-  );
+  it.each([
+    '/en/contact',
+    '/ru/admin',
+    '/ru/auth/signin',
+    '/en/dashboard',
+    '/ru/equipment/new',
+    '/zh/equipment/new',
+  ])('is hidden on %s', (path) => {
+    setPath(path);
+    const { container } = render(<MobileTabBar />);
+    expect(container).toBeEmptyDOMElement();
+  });
 });

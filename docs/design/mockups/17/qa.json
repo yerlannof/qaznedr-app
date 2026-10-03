@@ -1,0 +1,33 @@
+{
+  "results": [
+    {
+      "width": 375,
+      "overflow": false,
+      "checks": [
+        "conditional fields",
+        "back retention",
+        "demo login",
+        "local photo preview",
+        "category-safe preview",
+        "description/conditions preview",
+        "demo submit"
+      ]
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "checks": [
+        "conditional fields",
+        "back retention",
+        "demo login",
+        "local photo preview",
+        "category-safe preview",
+        "description/conditions preview",
+        "demo submit"
+      ]
+    }
+  ],
+  "issues": [],
+  "testedAt": "2026-10-02T20:00:09.297Z",
+  "scope": "Local synthetic prototype; no OAuth, email, upload or production request"
+}

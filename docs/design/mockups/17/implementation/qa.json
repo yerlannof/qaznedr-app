@@ -1,0 +1,146 @@
+[
+  {
+    "locale": "ru",
+    "width": 375,
+    "theme": "light",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "ru",
+    "width": 375,
+    "theme": "dark",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "ru",
+    "width": 1440,
+    "theme": "light",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "ru",
+    "width": 1440,
+    "theme": "dark",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "kz",
+    "width": 375,
+    "theme": "light",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "kz",
+    "width": 375,
+    "theme": "dark",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "kz",
+    "width": 1440,
+    "theme": "light",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "kz",
+    "width": 1440,
+    "theme": "dark",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "en",
+    "width": 375,
+    "theme": "light",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "en",
+    "width": 375,
+    "theme": "dark",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "theme": "light",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "theme": "dark",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "zh",
+    "width": 375,
+    "theme": "light",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "zh",
+    "width": 375,
+    "theme": "dark",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "zh",
+    "width": 1440,
+    "theme": "light",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  },
+  {
+    "locale": "zh",
+    "width": 1440,
+    "theme": "dark",
+    "status": "PASS",
+    "overflow": false,
+    "requests": 6,
+    "photos": 1
+  }
+]

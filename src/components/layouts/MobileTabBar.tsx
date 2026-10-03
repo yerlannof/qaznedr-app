@@ -20,7 +20,8 @@ export default function MobileTabBar() {
   if (
     ['contact', 'admin', 'auth', 'dashboard', 'login', 'register'].includes(
       section
-    )
+    ) ||
+    (section === 'equipment' && segments[2] === 'new')
   ) {
     return null;
   }

@@ -27,6 +27,7 @@
     "node_modules",
     "mcp-servers",
     "scripts",
+    "docs/media-drafts",
     ".cloudflare",
     "tests/e2e/**/*",
     "playwright.config.ts",

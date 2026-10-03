@@ -50,7 +50,13 @@ Chrome375/1440 ×RU/KZ/EN/ZH ×light/dark:16PASS, проверен фактич�
 Ведущий просмотрел итоговые снимки, перекрытие устранено. Доказательства:
 `docs/design/mockups/17/implementation/qa.json` и четыре снимка рядом.
 
-Production сверяется после push, публичные флаги остаются выключены.
+Выпуск кода `40b789ec7837c0c4d836cadd1c0a2f34d8e9812c`: CI37156285069 success;
+Production6833524684 для exact SHA success,03.10.2026 21:50:21UTC.
+После подтверждения деплоя11 live HTTP checks PASS: четыре главные200,
+четыре формы404, owner/catalog API404 с no-store, sitemap200 без /equipment/new.
+Результаты — `docs/design/mockups/17/implementation/production-http.json`.
+Публичные флаги остаются выключены; свои локальные сервер/Chrome закрыты.
+Следующий служебный коммит сохраняет этот результат, код формы в нём не меняется.
 
 ## Продолжение
 

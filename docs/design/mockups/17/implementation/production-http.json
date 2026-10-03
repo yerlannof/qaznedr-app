@@ -1,0 +1,57 @@
+[
+  {
+    "path": "/ru",
+    "status": 200,
+    "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/kz",
+    "status": 200,
+    "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/en",
+    "status": 200,
+    "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/zh",
+    "status": 200,
+    "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/ru/equipment/new",
+    "status": 404,
+    "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/kz/equipment/new",
+    "status": 404,
+    "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/en/equipment/new",
+    "status": 404,
+    "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/zh/equipment/new",
+    "status": 404,
+    "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/api/equipment-listings",
+    "status": 404,
+    "cacheControl": "private, no-store"
+  },
+  {
+    "path": "/api/equipment-catalog",
+    "status": 404,
+    "cacheControl": "no-store"
+  },
+  {
+    "path": "/sitemap.xml",
+    "status": 200,
+    "cacheControl": "public, max-age=0, must-revalidate"
+  }
+]

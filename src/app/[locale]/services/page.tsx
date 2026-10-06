@@ -9,14 +9,18 @@ import HoldingServices, {
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { SERVICE_TOPICS } from '@/lib/services/topics';
 import { toLocale } from '@/lib/seo/site';
+import { getGuideSlug } from '@/lib/insights/contact-context';
 
 export default async function ServicesPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale: raw } = await params;
   const locale = toLocale(raw);
+  const guideSlug = getGuideSlug((await searchParams)?.guide);
   const { t } = getServerTranslation(locale);
   return (
     <>
@@ -25,7 +29,7 @@ export default async function ServicesPage({
         path="/services"
         topics={SERVICE_TOPICS}
       />
-      <Navigation />
+      <Navigation guideSlug={guideSlug} />
       <div className="min-h-screen bg-brand-bg pt-14 text-brand-ink lg:pt-16">
         <header className="brand-container grid items-center gap-8 border-b border-brand-line py-12 lg:grid-cols-12 lg:gap-12 lg:py-20">
           <div className="lg:col-span-7">
@@ -38,14 +42,14 @@ export default async function ServicesPage({
           </div>
         </header>
         <section className="brand-container py-12 lg:py-20">
-          <HoldingServices locale={locale} />
+          <HoldingServices locale={locale} guideSlug={guideSlug} />
         </section>
         <section className="brand-container pb-16 lg:pb-24">
           <GuideLinks locale={locale} heading={t('insights.servicesHeading')} />
         </section>
       </div>
-      <ClosingCta locale={locale} variant="brand" />
-      <Footer />
+      <ClosingCta locale={locale} variant="brand" guideSlug={guideSlug} />
+      <Footer guideSlug={guideSlug} />
     </>
   );
 }

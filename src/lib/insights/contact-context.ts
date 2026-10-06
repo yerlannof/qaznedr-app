@@ -32,6 +32,23 @@ export function guideContactHref(
   return `/${locale}/contact${search ? `?${search}` : ''}`;
 }
 
+/** Only the existing service routes can carry public guide context. */
+export type ServicePath =
+  | '/services'
+  | '/services/legal'
+  | '/services/geological'
+  | `/services#${string}`;
+
+export function guideServiceHref(
+  locale: string,
+  path: ServicePath,
+  slug?: string
+): string {
+  const [servicePath, anchor] = path.split('#');
+  const guide = getGuideSlug(slug);
+  return `/${locale}${servicePath}${guide ? `?guide=${encodeURIComponent(guide)}` : ''}${anchor ? `#${anchor}` : ''}`;
+}
+
 export function guideFromPath(pathname: string): string | undefined {
   const match = /^\/(ru|kz|en|zh)\/insights\/([a-z0-9-]+)\/?$/.exec(pathname);
   if (!match || !isLocale(match[1])) return undefined;

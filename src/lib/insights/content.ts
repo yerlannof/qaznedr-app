@@ -11,7 +11,11 @@ import {
   type InsightCategory,
   type InsightEntry,
 } from './registry';
-import { guideContactHref } from './contact-context';
+import {
+  guideContactHref,
+  guideServiceHref,
+  type ServicePath,
+} from './contact-context';
 import { getServiceTopic } from '@/lib/services/topics';
 
 // Server only (fs). Pages that use it are prerendered at build time.
@@ -155,14 +159,23 @@ export function parseArticle(
     category: entry.category,
     updated: entry.updated,
     readingMinutes: readingMinutes(body, locale),
-    html: html.replace(
-      new RegExp(`href="/${locale}/contact(?:\\?service=([^"&]+))?"`, 'g'),
-      (original, rawService: string | undefined) => {
-        const service = rawService ? getServiceTopic(rawService) : undefined;
-        if (rawService && !service) return original;
-        return `href="${guideContactHref(locale, entry.slug, service).replaceAll('&', '&amp;')}"`;
-      }
-    ),
+    html: html
+      .replace(
+        new RegExp(`href="/${locale}/contact(?:\\?service=([^"&]+))?"`, 'g'),
+        (original, rawService: string | undefined) => {
+          const service = rawService ? getServiceTopic(rawService) : undefined;
+          if (rawService && !service) return original;
+          return `href="${guideContactHref(locale, entry.slug, service).replaceAll('&', '&amp;')}"`;
+        }
+      )
+      .replace(
+        new RegExp(
+          `href="/${locale}(/services(?:#[a-z0-9-]+|/(?:legal|geological))?)"`,
+          'g'
+        ),
+        (_original, path: ServicePath) =>
+          `href="${guideServiceHref(locale, path, entry.slug)}"`
+      ),
     toc,
   };
 }

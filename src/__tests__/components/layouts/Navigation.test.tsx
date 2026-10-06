@@ -99,4 +99,40 @@ describe('Navigation', () => {
       })
     ).toHaveAttribute('href', '/ru/contact?service=licensing');
   });
+
+  it('keeps a validated guide across service language and contact links', () => {
+    (usePathname as jest.Mock).mockReturnValue('/ru/services/legal');
+    render(
+      <Navigation serviceTopic="licensing" guideSlug={GUIDE.geologicalMap} />
+    );
+    expect(screen.getByRole('link', { name: 'Связаться' })).toHaveAttribute(
+      'href',
+      `/ru/contact?service=licensing&guide=${GUIDE.geologicalMap}`
+    );
+    expect(screen.getByRole('link', { name: 'English' })).toHaveAttribute(
+      'href',
+      `/en/services/legal?guide=${GUIDE.geologicalMap}`
+    );
+  });
+});
+
+it('keeps the service navigation active when its href carries a guide', () => {
+  (usePathname as jest.Mock).mockReturnValue('/ru/services/legal');
+  render(
+    <Navigation serviceTopic="licensing" guideSlug={GUIDE.geologicalMap} />
+  );
+  expect(screen.getByRole('link', { name: 'Услуги' })).toHaveAttribute(
+    'aria-current',
+    'page'
+  );
+});
+it('carries the current article into the services navigation link', () => {
+  (usePathname as jest.Mock).mockReturnValue(
+    `/ru/insights/${GUIDE.geologicalMap}`
+  );
+  render(<Navigation />);
+  expect(screen.getByRole('link', { name: 'Услуги' })).toHaveAttribute(
+    'href',
+    `/ru/services?guide=${GUIDE.geologicalMap}`
+  );
 });

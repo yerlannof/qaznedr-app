@@ -12,14 +12,17 @@ import {
   getGuideSlug,
   guideContactHref,
   guideFromPath,
+  guideServiceHref,
+  type ServicePath,
 } from '@/lib/insights/contact-context';
+import type { Locale } from '@/lib/seo/site';
 
 const languages = [
   { code: 'ru', label: 'Русский' },
   { code: 'kz', label: 'Қазақша' },
   { code: 'en', label: 'English' },
   { code: 'zh', label: '中文' },
-];
+] as const;
 
 export default function Footer({
   serviceTopic,
@@ -34,8 +37,10 @@ export default function Footer({
   const topic = getServiceTopic(serviceTopic);
   const guide = getGuideSlug(guideSlug) ?? guideFromPath(pathname);
   const contactHref = guideContactHref(locale, guide, topic);
+  const servicePage =
+    /^\/(ru|kz|en|zh)\/services(?:\/(?:legal|geological))?\/?$/.test(pathname);
 
-  const switchLocalePath = (newLocale: string) => {
+  const switchLocalePath = (newLocale: Locale) => {
     const segments = pathname.split('/');
     if (['ru', 'kz', 'en', 'zh'].includes(segments[1])) {
       segments[1] = newLocale;
@@ -43,6 +48,14 @@ export default function Footer({
       segments.splice(1, 0, newLocale);
     }
     const path = segments.join('/') || `/${newLocale}`;
+    if (servicePage && guide) {
+      const servicePath: ServicePath = pathname.includes('/services/legal')
+        ? '/services/legal'
+        : pathname.includes('/services/geological')
+          ? '/services/geological'
+          : '/services';
+      return guideServiceHref(newLocale, servicePath, guide);
+    }
     return pathname.split('/').filter(Boolean)[1] === 'contact'
       ? guideContactHref(newLocale, guide, topic)
       : path;
@@ -50,7 +63,10 @@ export default function Footer({
 
   const platformLinks = [
     { href: `/${locale}/leads`, label: t('footerNav.platform.leads') },
-    { href: `/${locale}/services`, label: t('footerNav.platform.services') },
+    {
+      href: guideServiceHref(locale, '/services', guide),
+      label: t('footerNav.platform.services'),
+    },
     { href: `/${locale}/insights`, label: t('navigation.insights') },
   ];
   const infoLinks = [

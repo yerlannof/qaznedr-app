@@ -1,0 +1,390 @@
+{
+  "matrix": [
+    {
+      "activeService": "/ru/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/ru/services/legal",
+      "contactLinks": [
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": false,
+      "overflow": false,
+      "url": "/ru/services/legal",
+      "width": 375
+    },
+    {
+      "activeService": "/ru/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/ru/services/legal",
+      "contactLinks": [
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": true,
+      "overflow": false,
+      "url": "/ru/services/legal",
+      "width": 375
+    },
+    {
+      "activeService": "/kz/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/kz/services/legal",
+      "contactLinks": [
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": true,
+      "overflow": false,
+      "url": "/kz/services/legal",
+      "width": 375
+    },
+    {
+      "activeService": "/kz/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/kz/services/legal",
+      "contactLinks": [
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": false,
+      "overflow": false,
+      "url": "/kz/services/legal",
+      "width": 375
+    },
+    {
+      "activeService": "/en/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/en/services/legal",
+      "contactLinks": [
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": false,
+      "overflow": false,
+      "url": "/en/services/legal",
+      "width": 375
+    },
+    {
+      "activeService": "/en/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/en/services/legal",
+      "contactLinks": [
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": true,
+      "overflow": false,
+      "url": "/en/services/legal",
+      "width": 375
+    },
+    {
+      "activeService": "/zh/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/zh/services/legal",
+      "contactLinks": [
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": true,
+      "overflow": false,
+      "url": "/zh/services/legal",
+      "width": 375
+    },
+    {
+      "activeService": "/zh/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/zh/services/legal",
+      "contactLinks": [
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": false,
+      "overflow": false,
+      "url": "/zh/services/legal",
+      "width": 375
+    },
+    {
+      "activeService": "/ru/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/ru/services/legal",
+      "contactLinks": [
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": false,
+      "overflow": false,
+      "url": "/ru/services/legal",
+      "width": 1440
+    },
+    {
+      "activeService": "/ru/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/ru/services/legal",
+      "contactLinks": [
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": true,
+      "overflow": false,
+      "url": "/ru/services/legal",
+      "width": 1440
+    },
+    {
+      "activeService": "/kz/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/kz/services/legal",
+      "contactLinks": [
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": true,
+      "overflow": false,
+      "url": "/kz/services/legal",
+      "width": 1440
+    },
+    {
+      "activeService": "/kz/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/kz/services/legal",
+      "contactLinks": [
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": false,
+      "overflow": false,
+      "url": "/kz/services/legal",
+      "width": 1440
+    },
+    {
+      "activeService": "/en/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/en/services/legal",
+      "contactLinks": [
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": false,
+      "overflow": false,
+      "url": "/en/services/legal",
+      "width": 1440
+    },
+    {
+      "activeService": "/en/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/en/services/legal",
+      "contactLinks": [
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": true,
+      "overflow": false,
+      "url": "/en/services/legal",
+      "width": 1440
+    },
+    {
+      "activeService": "/zh/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/zh/services/legal",
+      "contactLinks": [
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": true,
+      "overflow": false,
+      "url": "/zh/services/legal",
+      "width": 1440
+    },
+    {
+      "activeService": "/zh/services?guide=geological-map-kazakhstan",
+      "canonical": "https://qaznedr.kz/zh/services/legal",
+      "contactLinks": [
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan"
+      ],
+      "dark": false,
+      "overflow": false,
+      "url": "/zh/services/legal",
+      "width": 1440
+    }
+  ],
+  "additional": [
+    {
+      "canonical": "https://qaznedr.kz/ru/services",
+      "links": [
+        "/ru/contact?guide=geological-map-kazakhstan",
+        "/ru/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/ru/services/legal?guide=geological-map-kazakhstan",
+        "/ru/contact?service=geology&guide=geological-map-kazakhstan",
+        "/ru/services/geological?guide=geological-map-kazakhstan",
+        "/ru/contact?service=due-diligence&guide=geological-map-kazakhstan",
+        "/ru/contact?service=analytics&guide=geological-map-kazakhstan",
+        "/ru/contact?guide=geological-map-kazakhstan",
+        "/ru/contact?guide=geological-map-kazakhstan",
+        "/ru/contact?guide=geological-map-kazakhstan"
+      ],
+      "path": "/ru/services"
+    },
+    {
+      "canonical": "https://qaznedr.kz/ru/services/geological",
+      "links": [
+        "/ru/services/geological?guide=geological-map-kazakhstan",
+        "/kz/services/geological?guide=geological-map-kazakhstan",
+        "/en/services/geological?guide=geological-map-kazakhstan",
+        "/zh/services/geological?guide=geological-map-kazakhstan",
+        "/ru/contact?service=geology&guide=geological-map-kazakhstan",
+        "/ru/contact?service=geology&guide=geological-map-kazakhstan",
+        "/ru/contact?service=geology&guide=geological-map-kazakhstan",
+        "/ru/contact?service=geology&guide=geological-map-kazakhstan",
+        "/ru/contact?service=geology&guide=geological-map-kazakhstan",
+        "/ru/services/geological?guide=geological-map-kazakhstan",
+        "/kz/services/geological?guide=geological-map-kazakhstan",
+        "/en/services/geological?guide=geological-map-kazakhstan",
+        "/zh/services/geological?guide=geological-map-kazakhstan",
+        "/ru/contact?service=geology&guide=geological-map-kazakhstan"
+      ],
+      "path": "/ru/services/geological"
+    },
+    {
+      "canonical": "https://qaznedr.kz/kz/services",
+      "links": [
+        "/kz/contact?guide=geological-map-kazakhstan",
+        "/kz/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/kz/services/legal?guide=geological-map-kazakhstan",
+        "/kz/contact?service=geology&guide=geological-map-kazakhstan",
+        "/kz/services/geological?guide=geological-map-kazakhstan",
+        "/kz/contact?service=due-diligence&guide=geological-map-kazakhstan",
+        "/kz/contact?service=analytics&guide=geological-map-kazakhstan",
+        "/kz/contact?guide=geological-map-kazakhstan",
+        "/kz/contact?guide=geological-map-kazakhstan",
+        "/kz/contact?guide=geological-map-kazakhstan"
+      ],
+      "path": "/kz/services"
+    },
+    {
+      "canonical": "https://qaznedr.kz/kz/services/geological",
+      "links": [
+        "/ru/services/geological?guide=geological-map-kazakhstan",
+        "/kz/services/geological?guide=geological-map-kazakhstan",
+        "/en/services/geological?guide=geological-map-kazakhstan",
+        "/zh/services/geological?guide=geological-map-kazakhstan",
+        "/kz/contact?service=geology&guide=geological-map-kazakhstan",
+        "/kz/contact?service=geology&guide=geological-map-kazakhstan",
+        "/kz/contact?service=geology&guide=geological-map-kazakhstan",
+        "/kz/contact?service=geology&guide=geological-map-kazakhstan",
+        "/kz/contact?service=geology&guide=geological-map-kazakhstan",
+        "/ru/services/geological?guide=geological-map-kazakhstan",
+        "/kz/services/geological?guide=geological-map-kazakhstan",
+        "/en/services/geological?guide=geological-map-kazakhstan",
+        "/zh/services/geological?guide=geological-map-kazakhstan",
+        "/kz/contact?service=geology&guide=geological-map-kazakhstan"
+      ],
+      "path": "/kz/services/geological"
+    },
+    {
+      "canonical": "https://qaznedr.kz/en/services",
+      "links": [
+        "/en/contact?guide=geological-map-kazakhstan",
+        "/en/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/en/services/legal?guide=geological-map-kazakhstan",
+        "/en/contact?service=geology&guide=geological-map-kazakhstan",
+        "/en/services/geological?guide=geological-map-kazakhstan",
+        "/en/contact?service=due-diligence&guide=geological-map-kazakhstan",
+        "/en/contact?service=analytics&guide=geological-map-kazakhstan",
+        "/en/contact?guide=geological-map-kazakhstan",
+        "/en/contact?guide=geological-map-kazakhstan",
+        "/en/contact?guide=geological-map-kazakhstan"
+      ],
+      "path": "/en/services"
+    },
+    {
+      "canonical": "https://qaznedr.kz/en/services/geological",
+      "links": [
+        "/ru/services/geological?guide=geological-map-kazakhstan",
+        "/kz/services/geological?guide=geological-map-kazakhstan",
+        "/en/services/geological?guide=geological-map-kazakhstan",
+        "/zh/services/geological?guide=geological-map-kazakhstan",
+        "/en/contact?service=geology&guide=geological-map-kazakhstan",
+        "/en/contact?service=geology&guide=geological-map-kazakhstan",
+        "/en/contact?service=geology&guide=geological-map-kazakhstan",
+        "/en/contact?service=geology&guide=geological-map-kazakhstan",
+        "/en/contact?service=geology&guide=geological-map-kazakhstan",
+        "/ru/services/geological?guide=geological-map-kazakhstan",
+        "/kz/services/geological?guide=geological-map-kazakhstan",
+        "/en/services/geological?guide=geological-map-kazakhstan",
+        "/zh/services/geological?guide=geological-map-kazakhstan",
+        "/en/contact?service=geology&guide=geological-map-kazakhstan"
+      ],
+      "path": "/en/services/geological"
+    },
+    {
+      "canonical": "https://qaznedr.kz/zh/services",
+      "links": [
+        "/zh/contact?guide=geological-map-kazakhstan",
+        "/zh/contact?service=licensing&guide=geological-map-kazakhstan",
+        "/zh/services/legal?guide=geological-map-kazakhstan",
+        "/zh/contact?service=geology&guide=geological-map-kazakhstan",
+        "/zh/services/geological?guide=geological-map-kazakhstan",
+        "/zh/contact?service=due-diligence&guide=geological-map-kazakhstan",
+        "/zh/contact?service=analytics&guide=geological-map-kazakhstan",
+        "/zh/contact?guide=geological-map-kazakhstan",
+        "/zh/contact?guide=geological-map-kazakhstan",
+        "/zh/contact?guide=geological-map-kazakhstan"
+      ],
+      "path": "/zh/services"
+    },
+    {
+      "canonical": "https://qaznedr.kz/zh/services/geological",
+      "links": [
+        "/ru/services/geological?guide=geological-map-kazakhstan",
+        "/kz/services/geological?guide=geological-map-kazakhstan",
+        "/en/services/geological?guide=geological-map-kazakhstan",
+        "/zh/services/geological?guide=geological-map-kazakhstan",
+        "/zh/contact?service=geology&guide=geological-map-kazakhstan",
+        "/zh/contact?service=geology&guide=geological-map-kazakhstan",
+        "/zh/contact?service=geology&guide=geological-map-kazakhstan",
+        "/zh/contact?service=geology&guide=geological-map-kazakhstan",
+        "/zh/contact?service=geology&guide=geological-map-kazakhstan",
+        "/ru/services/geological?guide=geological-map-kazakhstan",
+        "/kz/services/geological?guide=geological-map-kazakhstan",
+        "/en/services/geological?guide=geological-map-kazakhstan",
+        "/zh/services/geological?guide=geological-map-kazakhstan",
+        "/zh/contact?service=geology&guide=geological-map-kazakhstan"
+      ],
+      "path": "/zh/services/geological"
+    }
+  ]
+}

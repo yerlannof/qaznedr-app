@@ -4,8 +4,13 @@ import { translate } from '@/lib/i18n/translations';
 import { SERVICE_TOPICS, type ServiceTopic } from '@/lib/services/topics';
 import { breadcrumbJsonLd } from '@/lib/seo/article-jsonld';
 import { localeUrl, SITE_NAME, SITE_URL, type Locale } from '@/lib/seo/site';
+import {
+  guideContactHref,
+  guideServiceHref,
+  type ServicePath,
+} from '@/lib/insights/contact-context';
 
-const detailPath: Partial<Record<ServiceTopic, string>> = {
+const detailPath: Partial<Record<ServiceTopic, ServicePath>> = {
   licensing: '/services/legal',
   geology: '/services/geological',
 };
@@ -56,9 +61,11 @@ export function ServiceSchemas({
 export function ServiceDetail({
   locale,
   topic,
+  guideSlug,
 }: {
   locale: Locale;
   topic: ServiceTopic;
+  guideSlug?: string;
 }) {
   const t = (key: string) => translate(locale, key);
   return (
@@ -71,7 +78,7 @@ export function ServiceDetail({
           {t(`holdingServices.${topic}.deliverable`)}
         </p>
         <Link
-          href={`/${locale}/contact?service=${topic}`}
+          href={guideContactHref(locale, guideSlug, topic)}
           className="brand-button brand-focus"
         >
           {t('navigation.contact')}{' '}
@@ -82,7 +89,13 @@ export function ServiceDetail({
   );
 }
 
-export default function HoldingServices({ locale }: { locale: Locale }) {
+export default function HoldingServices({
+  locale,
+  guideSlug,
+}: {
+  locale: Locale;
+  guideSlug?: string;
+}) {
   const t = (key: string) => translate(locale, key);
   return (
     <div className="divide-y divide-brand-line border-y border-brand-line">
@@ -109,7 +122,7 @@ export default function HoldingServices({ locale }: { locale: Locale }) {
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <Link
-                href={`/${locale}/contact?service=${topic}`}
+                href={guideContactHref(locale, guideSlug, topic)}
                 className="brand-button brand-focus"
               >
                 {t('navigation.contact')}{' '}
@@ -117,7 +130,7 @@ export default function HoldingServices({ locale }: { locale: Locale }) {
               </Link>
               {detailPath[topic] && (
                 <Link
-                  href={`/${locale}${detailPath[topic]}`}
+                  href={guideServiceHref(locale, detailPath[topic], guideSlug)}
                   className="brand-focus inline-flex min-h-11 items-center font-semibold text-brand-ink underline underline-offset-4"
                 >
                   {t(`holdingServices.${topic}.title`)}

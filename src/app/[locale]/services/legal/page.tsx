@@ -11,6 +11,7 @@ import {
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { toLocale } from '@/lib/seo/site';
+import { getGuideSlug, guideServiceHref } from '@/lib/insights/contact-context';
 
 type Params = Promise<{ locale: string }>;
 
@@ -30,11 +31,14 @@ export async function generateMetadata({
 
 export default async function LegalServicesPage({
   params,
+  searchParams,
 }: {
   params: Params;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale: raw } = await params;
   const locale = toLocale(raw);
+  const guideSlug = getGuideSlug((await searchParams)?.guide);
   const { t } = getServerTranslation(locale);
   return (
     <>
@@ -43,11 +47,11 @@ export default async function LegalServicesPage({
         path="/services/legal"
         topics={['licensing']}
       />
-      <Navigation serviceTopic="licensing" />
+      <Navigation serviceTopic="licensing" guideSlug={guideSlug} />
       <div className="min-h-screen bg-brand-bg pt-14 text-brand-ink lg:pt-16">
         <article className="brand-container py-12 lg:py-20">
           <Link
-            href={`/${locale}/services`}
+            href={guideServiceHref(locale, '/services', guideSlug)}
             className="brand-focus inline-flex min-h-11 items-center text-sm text-brand-muted underline underline-offset-4"
           >
             {t('navigation.services')}
@@ -56,7 +60,11 @@ export default async function LegalServicesPage({
             {t('holdingServices.licensing.title')}
           </h1>
           <div className="mt-10">
-            <ServiceDetail locale={locale} topic="licensing" />
+            <ServiceDetail
+              locale={locale}
+              topic="licensing"
+              guideSlug={guideSlug}
+            />
           </div>
         </article>
         <section className="brand-container pb-16 lg:pb-24">
@@ -73,8 +81,16 @@ export default async function LegalServicesPage({
           />
         </section>
       </div>
-      <ClosingCta locale={locale} variant="brand" serviceTopic="licensing" />
-      <Footer />
+      <ClosingCta
+        locale={locale}
+        variant="brand"
+        serviceTopic="licensing"
+        guideSlug={guideSlug}
+      />
+      <Footer
+        serviceTopic={guideSlug ? 'licensing' : undefined}
+        guideSlug={guideSlug}
+      />
     </>
   );
 }

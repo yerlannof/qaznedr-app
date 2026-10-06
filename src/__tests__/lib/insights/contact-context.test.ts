@@ -1,5 +1,6 @@
 import {
   guideContactHref,
+  guideServiceHref,
   guideFromPath,
   guideSourcePath,
   guideTitle,
@@ -36,6 +37,25 @@ it('keeps existing service context alongside a guide', () => {
   );
   expect(guideFromPath('/en/insights/private-notes')).toBeUndefined();
 });
+
+it.each(['ru', 'kz', 'en', 'zh'] as const)(
+  'keeps the guide before a service anchor in %s',
+  (locale) => {
+    const slug = GUIDE.geologicalDueDiligence;
+    expect(guideServiceHref(locale, '/services#due-diligence', slug)).toBe(
+      `/${locale}/services?guide=${slug}#due-diligence`
+    );
+    expect(guideServiceHref(locale, '/services/legal', slug)).toBe(
+      `/${locale}/services/legal?guide=${slug}`
+    );
+    expect(guideServiceHref(locale, '/services/legal', undefined)).toBe(
+      `/${locale}/services/legal`
+    );
+    expect(getArticle(slug, locale)?.html).toContain(
+      `href="/${locale}/services?guide=${slug}#due-diligence"`
+    );
+  }
+);
 
 it('rewrites a plain internal article contact link', () => {
   const guide = getArticle(GUIDE.geologicalDueDiligence, 'ru');

@@ -1,0 +1,3009 @@
+{
+  "snapshot": "2026-10-06-before-release",
+  "sitemap_count": 120,
+  "problem_rows": [],
+  "duplicate_titles": {},
+  "pages": [
+    {
+      "url": "https://qaznedr.kz/ru",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru",
+      "issues": [],
+      "title": "QAZNEDR HOLDING — Участки недр Казахстана для инвесторов",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru",
+        "kk": "https://qaznedr.kz/kz",
+        "en": "https://qaznedr.kz/en",
+        "zh-CN": "https://qaznedr.kz/zh",
+        "x-default": "https://qaznedr.kz/ru"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов. В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/leads",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/leads",
+      "issues": [],
+      "title": "Участки недр Казахстана: золото, медь и другие металлы | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/leads"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads",
+        "kk": "https://qaznedr.kz/kz/leads",
+        "en": "https://qaznedr.kz/en/leads",
+        "zh-CN": "https://qaznedr.kz/zh/leads",
+        "x-default": "https://qaznedr.kz/ru/leads"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Подготовленные рудные участки Казахстана, свободные по нашей проверке на дату в карточке. В тизере: металл, регион, тип месторождения, содержание. Детали — после встречи и NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/services",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/services",
+      "issues": [],
+      "title": "Услуги: лицензирование, геологоразведка, due diligence | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/services"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services",
+        "kk": "https://qaznedr.kz/kz/services",
+        "en": "https://qaznedr.kz/en/services",
+        "zh-CN": "https://qaznedr.kz/zh/services",
+        "x-default": "https://qaznedr.kz/ru/services"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Сопровождение получения лицензии на недропользование в Казахстане, полевые геологические работы, due diligence участков и аналитика для инвесторов."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/services/geological",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/services/geological",
+      "issues": [],
+      "title": "Геологические карты и геологоразведка в Казахстане | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/services/geological"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services/geological",
+        "kk": "https://qaznedr.kz/kz/services/geological",
+        "en": "https://qaznedr.kz/en/services/geological",
+        "zh-CN": "https://qaznedr.kz/zh/services/geological",
+        "x-default": "https://qaznedr.kz/ru/services/geological"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Помощь геологов с картами и материалами по участкам Казахстана, архивный анализ и полевые работы. Обсудите регион и задачу с QAZNEDR HOLDING."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/services/legal",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/services/legal",
+      "issues": [],
+      "title": "Лицензирование недропользования в Казахстане | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/services/legal"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services/legal",
+        "kk": "https://qaznedr.kz/kz/services/legal",
+        "en": "https://qaznedr.kz/en/services/legal",
+        "zh-CN": "https://qaznedr.kz/zh/services/legal",
+        "x-default": "https://qaznedr.kz/ru/services/legal"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Сопровождение получения лицензии на разведку твёрдых полезных ископаемых: подбор участка, подготовка заявки, работа с Единой платформой недропользования."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/about",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/about",
+      "issues": [],
+      "title": "О компании QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/about"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/about",
+        "kk": "https://qaznedr.kz/kz/about",
+        "en": "https://qaznedr.kz/en/about",
+        "zh-CN": "https://qaznedr.kz/zh/about",
+        "x-default": "https://qaznedr.kz/ru/about"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов. В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/contact",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/contact",
+      "issues": [],
+      "title": "Контакты: WeChat и WhatsApp | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/contact"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/contact",
+        "kk": "https://qaznedr.kz/kz/contact",
+        "en": "https://qaznedr.kz/en/contact",
+        "zh-CN": "https://qaznedr.kz/zh/contact",
+        "x-default": "https://qaznedr.kz/ru/contact"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Свяжитесь с QAZNEDR HOLDING через WeChat, WhatsApp или форму заявки. Обсудим участок, формат сделки и встречу."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/faq",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/faq",
+      "issues": [],
+      "title": "Вопросы и ответы | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/faq"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/faq",
+        "kk": "https://qaznedr.kz/kz/faq",
+        "en": "https://qaznedr.kz/en/faq",
+        "zh-CN": "https://qaznedr.kz/zh/faq",
+        "x-default": "https://qaznedr.kz/ru/faq"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Как устроена работа с QAZNEDR HOLDING: участки, форматы сделок, лицензирование в Казахстане, NDA и встречи."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/legal/terms",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/legal/terms",
+      "issues": [],
+      "title": "Условия использования | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/legal/terms"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/legal/terms",
+        "kk": "https://qaznedr.kz/kz/legal/terms",
+        "en": "https://qaznedr.kz/en/legal/terms",
+        "zh-CN": "https://qaznedr.kz/zh/legal/terms",
+        "x-default": "https://qaznedr.kz/ru/legal/terms"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Условия использования сайта qaznedr.kz компании QAZNEDR HOLDING."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights",
+      "issues": [],
+      "title": "Гайды для инвестора: недропользование в Казахстане | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights",
+        "kk": "https://qaznedr.kz/kz/insights",
+        "en": "https://qaznedr.kz/en/insights",
+        "zh-CN": "https://qaznedr.kz/zh/insights",
+        "x-default": "https://qaznedr.kz/ru/insights"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Как иностранному инвестору получить право недропользования в Казахстане, лицензия на разведку, классификации запасов и сделки с правом — со ссылками на закон."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/minerals/gold",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/minerals/gold",
+      "issues": [],
+      "title": "Золото · Участки | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/minerals/gold"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/gold",
+        "kk": "https://qaznedr.kz/kz/minerals/gold",
+        "en": "https://qaznedr.kz/en/minerals/gold",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/gold",
+        "x-default": "https://qaznedr.kz/ru/minerals/gold"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Золото: Геологию изучили наши геологи по фондовым отчётам. Название, координаты и материалы — после NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/minerals/copper",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/minerals/copper",
+      "issues": [],
+      "title": "Медь · Участки | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/minerals/copper"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/copper",
+        "kk": "https://qaznedr.kz/kz/minerals/copper",
+        "en": "https://qaznedr.kz/en/minerals/copper",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/copper",
+        "x-default": "https://qaznedr.kz/ru/minerals/copper"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Медь: Геологию изучили наши геологи по фондовым отчётам. Название, координаты и материалы — после NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/minerals/lead-zinc",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/minerals/lead-zinc",
+      "issues": [],
+      "title": "Свинец-цинк · Участки | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/minerals/lead-zinc"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/lead-zinc",
+        "kk": "https://qaznedr.kz/kz/minerals/lead-zinc",
+        "en": "https://qaznedr.kz/en/minerals/lead-zinc",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/lead-zinc",
+        "x-default": "https://qaznedr.kz/ru/minerals/lead-zinc"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Свинец-цинк: Геологию изучили наши геологи по фондовым отчётам. Название, координаты и материалы — после NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/minerals/molybdenum",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/minerals/molybdenum",
+      "issues": [],
+      "title": "Молибден · Участки | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/minerals/molybdenum"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/molybdenum",
+        "kk": "https://qaznedr.kz/kz/minerals/molybdenum",
+        "en": "https://qaznedr.kz/en/minerals/molybdenum",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/molybdenum",
+        "x-default": "https://qaznedr.kz/ru/minerals/molybdenum"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Молибден: Геологию изучили наши геологи по фондовым отчётам. Название, координаты и материалы — после NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/minerals/tungsten",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/minerals/tungsten",
+      "issues": [],
+      "title": "Вольфрам · Участки | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/minerals/tungsten"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/tungsten",
+        "kk": "https://qaznedr.kz/kz/minerals/tungsten",
+        "en": "https://qaznedr.kz/en/minerals/tungsten",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/tungsten",
+        "x-default": "https://qaznedr.kz/ru/minerals/tungsten"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Вольфрам: Геологию изучили наши геологи по фондовым отчётам. Название, координаты и материалы — после NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/minerals/iron",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/minerals/iron",
+      "issues": [],
+      "title": "Железо · Участки | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/minerals/iron"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/iron",
+        "kk": "https://qaznedr.kz/kz/minerals/iron",
+        "en": "https://qaznedr.kz/en/minerals/iron",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/iron",
+        "x-default": "https://qaznedr.kz/ru/minerals/iron"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Железо: Геологию изучили наши геологи по фондовым отчётам. Название, координаты и материалы — после NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz",
+      "issues": [],
+      "title": "QAZNEDR HOLDING — Инвесторларға арналған Қазақстанның жер қойнауы учаскелері",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru",
+        "kk": "https://qaznedr.kz/kz",
+        "en": "https://qaznedr.kz/en",
+        "zh-CN": "https://qaznedr.kz/zh",
+        "x-default": "https://qaznedr.kz/ru"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Геологиялық материалдарды зерделеу негізінде геологтарымыз іріктеген учаскелерді ұсынамыз. Біздің командада қазақстандық мамандар, соның ішінде 50 жылдық тәжірибесі бар геологтар бар."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/leads",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/leads",
+      "issues": [],
+      "title": "Қазақстан жер қойнауы учаскелері: алтын, мыс және басқа металдар | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/leads"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads",
+        "kk": "https://qaznedr.kz/kz/leads",
+        "en": "https://qaznedr.kz/en/leads",
+        "zh-CN": "https://qaznedr.kz/zh/leads",
+        "x-default": "https://qaznedr.kz/ru/leads"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Қазақстанның дайындалған кен учаскелері, карточкадағы күнге біздің тексеруімізше бос. Тизерде: металл, өңір, кен орнының түрі, құрамы. Толығы — кездесу мен NDA-дан кейін."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/services",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/services",
+      "issues": [],
+      "title": "Қызметтер: лицензиялау, геологиялық барлау, due diligence | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/services"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services",
+        "kk": "https://qaznedr.kz/kz/services",
+        "en": "https://qaznedr.kz/en/services",
+        "zh-CN": "https://qaznedr.kz/zh/services",
+        "x-default": "https://qaznedr.kz/ru/services"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Қазақстанда жер қойнауын пайдалану лицензиясын алуды сүйемелдеу, далалық геологиялық жұмыстар, учаскелердің due diligence және инвесторларға арналған талдау."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/services/geological",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/services/geological",
+      "issues": [],
+      "title": "Қазақстандағы геологиялық карталар мен геологиялық барлау | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/services/geological"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services/geological",
+        "kk": "https://qaznedr.kz/kz/services/geological",
+        "en": "https://qaznedr.kz/en/services/geological",
+        "zh-CN": "https://qaznedr.kz/zh/services/geological",
+        "x-default": "https://qaznedr.kz/ru/services/geological"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Қазақстан учаскелері бойынша карталар мен материалдар, мұрағаттық талдау және далалық жұмыстар жөнінде геологтардың көмегі. Өңір мен міндетті QAZNEDR HOLDING-пен талқылаңыз."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/services/legal",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/services/legal",
+      "issues": [],
+      "title": "Қазақстанда жер қойнауын пайдалану лицензиясы | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/services/legal"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services/legal",
+        "kk": "https://qaznedr.kz/kz/services/legal",
+        "en": "https://qaznedr.kz/en/services/legal",
+        "zh-CN": "https://qaznedr.kz/zh/services/legal",
+        "x-default": "https://qaznedr.kz/ru/services/legal"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Қатты пайдалы қазбаларды барлау лицензиясын алуды сүйемелдеу: учаскені іріктеу, өтінімді дайындау, Жер қойнауын пайдаланудың бірыңғай платформасымен жұмыс."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/about",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/about",
+      "issues": [],
+      "title": "QAZNEDR HOLDING туралы",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/about"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/about",
+        "kk": "https://qaznedr.kz/kz/about",
+        "en": "https://qaznedr.kz/en/about",
+        "zh-CN": "https://qaznedr.kz/zh/about",
+        "x-default": "https://qaznedr.kz/ru/about"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Геологиялық материалдарды зерделеу негізінде геологтарымыз іріктеген учаскелерді ұсынамыз. Біздің командада қазақстандық мамандар, соның ішінде 50 жылдық тәжірибесі бар геологтар бар."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/contact",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/contact",
+      "issues": [],
+      "title": "Байланыс: WeChat және WhatsApp | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/contact"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/contact",
+        "kk": "https://qaznedr.kz/kz/contact",
+        "en": "https://qaznedr.kz/en/contact",
+        "zh-CN": "https://qaznedr.kz/zh/contact",
+        "x-default": "https://qaznedr.kz/ru/contact"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "QAZNEDR HOLDING-пен WeChat, WhatsApp немесе өтінім формасы арқылы байланысыңыз. Учаскені, мәміле форматын және кездесуді талқылаймыз."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/faq",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/faq",
+      "issues": [],
+      "title": "Сұрақтар мен жауаптар | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/faq"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/faq",
+        "kk": "https://qaznedr.kz/kz/faq",
+        "en": "https://qaznedr.kz/en/faq",
+        "zh-CN": "https://qaznedr.kz/zh/faq",
+        "x-default": "https://qaznedr.kz/ru/faq"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "QAZNEDR HOLDING-пен жұмыс: учаскелер, мәміле форматтары, Қазақстандағы лицензиялау, NDA және кездесулер."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/legal/terms",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/legal/terms",
+      "issues": [],
+      "title": "Пайдалану шарттары | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/legal/terms"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/legal/terms",
+        "kk": "https://qaznedr.kz/kz/legal/terms",
+        "en": "https://qaznedr.kz/en/legal/terms",
+        "zh-CN": "https://qaznedr.kz/zh/legal/terms",
+        "x-default": "https://qaznedr.kz/ru/legal/terms"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "QAZNEDR HOLDING компаниясының qaznedr.kz сайтын пайдалану шарттары."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights",
+      "issues": [],
+      "title": "Инвесторға арналған нұсқаулықтар: Қазақстандағы жер қойнауын пайдалану | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights",
+        "kk": "https://qaznedr.kz/kz/insights",
+        "en": "https://qaznedr.kz/en/insights",
+        "zh-CN": "https://qaznedr.kz/zh/insights",
+        "x-default": "https://qaznedr.kz/ru/insights"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Шетелдік инвестор Қазақстанда жер қойнауын пайдалану құқығын қалай алады, барлау лицензиясы, қор жіктемелері және құқықпен мәмілелер — заңға сілтемелермен."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/minerals/gold",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/minerals/gold",
+      "issues": [],
+      "title": "Алтын · Учаскелер | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/minerals/gold"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/gold",
+        "kk": "https://qaznedr.kz/kz/minerals/gold",
+        "en": "https://qaznedr.kz/en/minerals/gold",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/gold",
+        "x-default": "https://qaznedr.kz/ru/minerals/gold"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Алтын: Геологиясын геологтарымыз қордағы есептер бойынша зерттеді. Атауы, координаттары және материалдары — NDA-дан кейін."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/minerals/copper",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/minerals/copper",
+      "issues": [],
+      "title": "Мыс · Учаскелер | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/minerals/copper"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/copper",
+        "kk": "https://qaznedr.kz/kz/minerals/copper",
+        "en": "https://qaznedr.kz/en/minerals/copper",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/copper",
+        "x-default": "https://qaznedr.kz/ru/minerals/copper"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Мыс: Геологиясын геологтарымыз қордағы есептер бойынша зерттеді. Атауы, координаттары және материалдары — NDA-дан кейін."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/minerals/lead-zinc",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/minerals/lead-zinc",
+      "issues": [],
+      "title": "Қорғасын-мырыш · Учаскелер | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/minerals/lead-zinc"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/lead-zinc",
+        "kk": "https://qaznedr.kz/kz/minerals/lead-zinc",
+        "en": "https://qaznedr.kz/en/minerals/lead-zinc",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/lead-zinc",
+        "x-default": "https://qaznedr.kz/ru/minerals/lead-zinc"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Қорғасын-мырыш: Геологиясын геологтарымыз қордағы есептер бойынша зерттеді. Атауы, координаттары және материалдары — NDA-дан кейін."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/minerals/molybdenum",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/minerals/molybdenum",
+      "issues": [],
+      "title": "Молибден · Учаскелер | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/minerals/molybdenum"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/molybdenum",
+        "kk": "https://qaznedr.kz/kz/minerals/molybdenum",
+        "en": "https://qaznedr.kz/en/minerals/molybdenum",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/molybdenum",
+        "x-default": "https://qaznedr.kz/ru/minerals/molybdenum"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Молибден: Геологиясын геологтарымыз қордағы есептер бойынша зерттеді. Атауы, координаттары және материалдары — NDA-дан кейін."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/minerals/tungsten",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/minerals/tungsten",
+      "issues": [],
+      "title": "Вольфрам · Учаскелер | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/minerals/tungsten"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/tungsten",
+        "kk": "https://qaznedr.kz/kz/minerals/tungsten",
+        "en": "https://qaznedr.kz/en/minerals/tungsten",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/tungsten",
+        "x-default": "https://qaznedr.kz/ru/minerals/tungsten"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Вольфрам: Геологиясын геологтарымыз қордағы есептер бойынша зерттеді. Атауы, координаттары және материалдары — NDA-дан кейін."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/minerals/iron",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/minerals/iron",
+      "issues": [],
+      "title": "Темір · Учаскелер | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/minerals/iron"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/iron",
+        "kk": "https://qaznedr.kz/kz/minerals/iron",
+        "en": "https://qaznedr.kz/en/minerals/iron",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/iron",
+        "x-default": "https://qaznedr.kz/ru/minerals/iron"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Темір: Геологиясын геологтарымыз қордағы есептер бойынша зерттеді. Атауы, координаттары және материалдары — NDA-дан кейін."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en",
+      "issues": [],
+      "title": "QAZNEDR HOLDING — Mineral areas in Kazakhstan for investors",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru",
+        "kk": "https://qaznedr.kz/kz",
+        "en": "https://qaznedr.kz/en",
+        "zh-CN": "https://qaznedr.kz/zh",
+        "x-default": "https://qaznedr.kz/ru"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/leads",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/leads",
+      "issues": [],
+      "title": "Exploration Areas in Kazakhstan: Gold, Copper and More | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/leads"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads",
+        "kk": "https://qaznedr.kz/kz/leads",
+        "en": "https://qaznedr.kz/en/leads",
+        "zh-CN": "https://qaznedr.kz/zh/leads",
+        "x-default": "https://qaznedr.kz/ru/leads"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Prepared ore areas in Kazakhstan, free per our check as of the date on each card. The teaser shows metal, region, deposit type and grade; details after a meeting and an NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/services",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/services",
+      "issues": [],
+      "title": "Services: Licensing, Exploration, Due Diligence | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/services"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services",
+        "kk": "https://qaznedr.kz/kz/services",
+        "en": "https://qaznedr.kz/en/services",
+        "zh-CN": "https://qaznedr.kz/zh/services",
+        "x-default": "https://qaznedr.kz/ru/services"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Support in obtaining a subsoil use licence in Kazakhstan, field geology, due diligence of areas and analytics for investors."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/services/geological",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/services/geological",
+      "issues": [],
+      "title": "Geological maps and exploration in Kazakhstan | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/services/geological"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services/geological",
+        "kk": "https://qaznedr.kz/kz/services/geological",
+        "en": "https://qaznedr.kz/en/services/geological",
+        "zh-CN": "https://qaznedr.kz/zh/services/geological",
+        "x-default": "https://qaznedr.kz/ru/services/geological"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Geologists helping with maps and materials for areas in Kazakhstan, archival analysis and fieldwork. Discuss your region and task with QAZNEDR HOLDING."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/services/legal",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/services/legal",
+      "issues": [],
+      "title": "Subsoil Licensing in Kazakhstan | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/services/legal"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services/legal",
+        "kk": "https://qaznedr.kz/kz/services/legal",
+        "en": "https://qaznedr.kz/en/services/legal",
+        "zh-CN": "https://qaznedr.kz/zh/services/legal",
+        "x-default": "https://qaznedr.kz/ru/services/legal"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Support in obtaining an exploration licence for solid minerals: area selection, application preparation and work with the Unified Subsoil Use Platform."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/about",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/about",
+      "issues": [],
+      "title": "About QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/about"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/about",
+        "kk": "https://qaznedr.kz/kz/about",
+        "en": "https://qaznedr.kz/en/about",
+        "zh-CN": "https://qaznedr.kz/zh/about",
+        "x-default": "https://qaznedr.kz/ru/about"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/contact",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/contact",
+      "issues": [],
+      "title": "Contact: WeChat and WhatsApp | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/contact"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/contact",
+        "kk": "https://qaznedr.kz/kz/contact",
+        "en": "https://qaznedr.kz/en/contact",
+        "zh-CN": "https://qaznedr.kz/zh/contact",
+        "x-default": "https://qaznedr.kz/ru/contact"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Contact QAZNEDR HOLDING via WeChat, WhatsApp or the inquiry form to discuss an area, a deal format and a meeting."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/faq",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/faq",
+      "issues": [],
+      "title": "FAQ | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/faq"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/faq",
+        "kk": "https://qaznedr.kz/kz/faq",
+        "en": "https://qaznedr.kz/en/faq",
+        "zh-CN": "https://qaznedr.kz/zh/faq",
+        "x-default": "https://qaznedr.kz/ru/faq"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "How working with QAZNEDR HOLDING works: areas, deal formats, licensing in Kazakhstan, NDA and meetings."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/legal/terms",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/legal/terms",
+      "issues": [],
+      "title": "Terms of Use | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/legal/terms"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/legal/terms",
+        "kk": "https://qaznedr.kz/kz/legal/terms",
+        "en": "https://qaznedr.kz/en/legal/terms",
+        "zh-CN": "https://qaznedr.kz/zh/legal/terms",
+        "x-default": "https://qaznedr.kz/ru/legal/terms"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Terms of use of qaznedr.kz, the website of QAZNEDR HOLDING."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights",
+      "issues": [],
+      "title": "Guides for investors: subsoil use in Kazakhstan | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights",
+        "kk": "https://qaznedr.kz/kz/insights",
+        "en": "https://qaznedr.kz/en/insights",
+        "zh-CN": "https://qaznedr.kz/zh/insights",
+        "x-default": "https://qaznedr.kz/ru/insights"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "How a foreign investor acquires subsoil use rights in Kazakhstan, the exploration licence, reserve classifications and rights transfers — with links to the law."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/minerals/gold",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/minerals/gold",
+      "issues": [],
+      "title": "Gold · Areas | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/minerals/gold"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/gold",
+        "kk": "https://qaznedr.kz/kz/minerals/gold",
+        "en": "https://qaznedr.kz/en/minerals/gold",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/gold",
+        "x-default": "https://qaznedr.kz/ru/minerals/gold"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Gold: Our geologists studied the geology from archival reports. Name, coordinates and materials — after an NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/minerals/copper",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/minerals/copper",
+      "issues": [],
+      "title": "Copper · Areas | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/minerals/copper"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/copper",
+        "kk": "https://qaznedr.kz/kz/minerals/copper",
+        "en": "https://qaznedr.kz/en/minerals/copper",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/copper",
+        "x-default": "https://qaznedr.kz/ru/minerals/copper"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Copper: Our geologists studied the geology from archival reports. Name, coordinates and materials — after an NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/minerals/lead-zinc",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/minerals/lead-zinc",
+      "issues": [],
+      "title": "Lead-Zinc · Areas | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/minerals/lead-zinc"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/lead-zinc",
+        "kk": "https://qaznedr.kz/kz/minerals/lead-zinc",
+        "en": "https://qaznedr.kz/en/minerals/lead-zinc",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/lead-zinc",
+        "x-default": "https://qaznedr.kz/ru/minerals/lead-zinc"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Lead-Zinc: Our geologists studied the geology from archival reports. Name, coordinates and materials — after an NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/minerals/molybdenum",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/minerals/molybdenum",
+      "issues": [],
+      "title": "Molybdenum · Areas | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/minerals/molybdenum"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/molybdenum",
+        "kk": "https://qaznedr.kz/kz/minerals/molybdenum",
+        "en": "https://qaznedr.kz/en/minerals/molybdenum",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/molybdenum",
+        "x-default": "https://qaznedr.kz/ru/minerals/molybdenum"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Molybdenum: Our geologists studied the geology from archival reports. Name, coordinates and materials — after an NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/minerals/tungsten",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/minerals/tungsten",
+      "issues": [],
+      "title": "Tungsten · Areas | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/minerals/tungsten"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/tungsten",
+        "kk": "https://qaznedr.kz/kz/minerals/tungsten",
+        "en": "https://qaznedr.kz/en/minerals/tungsten",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/tungsten",
+        "x-default": "https://qaznedr.kz/ru/minerals/tungsten"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Tungsten: Our geologists studied the geology from archival reports. Name, coordinates and materials — after an NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/minerals/iron",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/minerals/iron",
+      "issues": [],
+      "title": "Iron · Areas | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/minerals/iron"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/iron",
+        "kk": "https://qaznedr.kz/kz/minerals/iron",
+        "en": "https://qaznedr.kz/en/minerals/iron",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/iron",
+        "x-default": "https://qaznedr.kz/ru/minerals/iron"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Iron: Our geologists studied the geology from archival reports. Name, coordinates and materials — after an NDA."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh",
+      "issues": [],
+      "title": "QAZNEDR HOLDING — 面向投资者的哈萨克斯坦矿区",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru",
+        "kk": "https://qaznedr.kz/kz",
+        "en": "https://qaznedr.kz/en",
+        "zh-CN": "https://qaznedr.kz/zh",
+        "x-default": "https://qaznedr.kz/ru"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/leads",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/leads",
+      "issues": [],
+      "title": "哈萨克斯坦矿区项目库：金矿、铜矿等空白探矿区 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/leads"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads",
+        "kk": "https://qaznedr.kz/kz/leads",
+        "en": "https://qaznedr.kz/en/leads",
+        "zh-CN": "https://qaznedr.kz/zh/leads",
+        "x-default": "https://qaznedr.kz/ru/leads"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "经我方核查（日期见地块卡片）未设矿权的空白矿区项目。公开简介包含矿种、位置、矿床类型与品位；详细资料在会面并签署保密协议（NDA）后提供。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/services",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/services",
+      "issues": [],
+      "title": "服务：探矿权办理、地质勘探、尽职调查 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/services"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services",
+        "kk": "https://qaznedr.kz/kz/services",
+        "en": "https://qaznedr.kz/en/services",
+        "zh-CN": "https://qaznedr.kz/zh/services",
+        "x-default": "https://qaznedr.kz/ru/services"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "协助在哈萨克斯坦办理矿产资源勘查许可证、野外地质工作、矿区尽职调查及投资分析。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/services/geological",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/services/geological",
+      "issues": [],
+      "title": "哈萨克斯坦地质图与地质勘探 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/services/geological"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services/geological",
+        "kk": "https://qaznedr.kz/kz/services/geological",
+        "en": "https://qaznedr.kz/en/services/geological",
+        "zh-CN": "https://qaznedr.kz/zh/services/geological",
+        "x-default": "https://qaznedr.kz/ru/services/geological"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "提供哈萨克斯坦矿区地图与资料解读、档案分析及野外工作的地质专业帮助。与 QAZNEDR HOLDING 讨论您关注的地区和任务。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/services/legal",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/services/legal",
+      "issues": [],
+      "title": "哈萨克斯坦矿权许可证办理 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/services/legal"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/services/legal",
+        "kk": "https://qaznedr.kz/kz/services/legal",
+        "en": "https://qaznedr.kz/en/services/legal",
+        "zh-CN": "https://qaznedr.kz/zh/services/legal",
+        "x-default": "https://qaznedr.kz/ru/services/legal"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "协助办理固体矿产勘查许可证：矿区筛选、申请材料准备，通过哈萨克斯坦统一矿产资源利用平台提交。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/about",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/about",
+      "issues": [],
+      "title": "关于 QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/about"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/about",
+        "kk": "https://qaznedr.kz/kz/about",
+        "en": "https://qaznedr.kz/en/about",
+        "zh-CN": "https://qaznedr.kz/zh/about",
+        "x-default": "https://qaznedr.kz/ru/about"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/contact",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/contact",
+      "issues": [],
+      "title": "联系我们：微信和 WhatsApp | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/contact"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/contact",
+        "kk": "https://qaznedr.kz/kz/contact",
+        "en": "https://qaznedr.kz/en/contact",
+        "zh-CN": "https://qaznedr.kz/zh/contact",
+        "x-default": "https://qaznedr.kz/ru/contact"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "通过微信、WhatsApp 或在线表单联系 QAZNEDR HOLDING，洽谈矿区项目、合作方式及会面安排。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/faq",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/faq",
+      "issues": [],
+      "title": "常见问题 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/faq"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/faq",
+        "kk": "https://qaznedr.kz/kz/faq",
+        "en": "https://qaznedr.kz/en/faq",
+        "zh-CN": "https://qaznedr.kz/zh/faq",
+        "x-default": "https://qaznedr.kz/ru/faq"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "与 QAZNEDR HOLDING 合作流程：矿区项目、合作方式、哈萨克斯坦许可证办理、保密协议与会面。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/legal/terms",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/legal/terms",
+      "issues": [],
+      "title": "使用条款 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/legal/terms"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/legal/terms",
+        "kk": "https://qaznedr.kz/kz/legal/terms",
+        "en": "https://qaznedr.kz/en/legal/terms",
+        "zh-CN": "https://qaznedr.kz/zh/legal/terms",
+        "x-default": "https://qaznedr.kz/ru/legal/terms"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "QAZNEDR HOLDING 官网 qaznedr.kz 使用条款。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights",
+      "issues": [],
+      "title": "哈萨克斯坦矿业投资指南：矿业权、勘查许可证与储量分类 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights",
+        "kk": "https://qaznedr.kz/kz/insights",
+        "en": "https://qaznedr.kz/en/insights",
+        "zh-CN": "https://qaznedr.kz/zh/insights",
+        "x-default": "https://qaznedr.kz/ru/insights"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "外国投资者如何在哈萨克斯坦取得矿业权、固体矿产勘查许可证流程、储量分类对照及矿业权转让许可——附法律原文链接。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/minerals/gold",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/minerals/gold",
+      "issues": [],
+      "title": "金 · 地块 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/minerals/gold"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/gold",
+        "kk": "https://qaznedr.kz/kz/minerals/gold",
+        "en": "https://qaznedr.kz/en/minerals/gold",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/gold",
+        "x-default": "https://qaznedr.kz/ru/minerals/gold"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "金: 地质情况由我方地质师依据档案报告研究。名称、坐标及资料在签署保密协议后提供。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/minerals/copper",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/minerals/copper",
+      "issues": [],
+      "title": "铜 · 地块 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/minerals/copper"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/copper",
+        "kk": "https://qaznedr.kz/kz/minerals/copper",
+        "en": "https://qaznedr.kz/en/minerals/copper",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/copper",
+        "x-default": "https://qaznedr.kz/ru/minerals/copper"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "铜: 地质情况由我方地质师依据档案报告研究。名称、坐标及资料在签署保密协议后提供。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/minerals/lead-zinc",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/minerals/lead-zinc",
+      "issues": [],
+      "title": "铅锌 · 地块 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/minerals/lead-zinc"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/lead-zinc",
+        "kk": "https://qaznedr.kz/kz/minerals/lead-zinc",
+        "en": "https://qaznedr.kz/en/minerals/lead-zinc",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/lead-zinc",
+        "x-default": "https://qaznedr.kz/ru/minerals/lead-zinc"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "铅锌: 地质情况由我方地质师依据档案报告研究。名称、坐标及资料在签署保密协议后提供。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/minerals/molybdenum",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/minerals/molybdenum",
+      "issues": [],
+      "title": "钼 · 地块 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/minerals/molybdenum"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/molybdenum",
+        "kk": "https://qaznedr.kz/kz/minerals/molybdenum",
+        "en": "https://qaznedr.kz/en/minerals/molybdenum",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/molybdenum",
+        "x-default": "https://qaznedr.kz/ru/minerals/molybdenum"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "钼: 地质情况由我方地质师依据档案报告研究。名称、坐标及资料在签署保密协议后提供。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/minerals/tungsten",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/minerals/tungsten",
+      "issues": [],
+      "title": "钨 · 地块 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/minerals/tungsten"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/tungsten",
+        "kk": "https://qaznedr.kz/kz/minerals/tungsten",
+        "en": "https://qaznedr.kz/en/minerals/tungsten",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/tungsten",
+        "x-default": "https://qaznedr.kz/ru/minerals/tungsten"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "钨: 地质情况由我方地质师依据档案报告研究。名称、坐标及资料在签署保密协议后提供。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/minerals/iron",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/minerals/iron",
+      "issues": [],
+      "title": "铁 · 地块 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/minerals/iron"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/minerals/iron",
+        "kk": "https://qaznedr.kz/kz/minerals/iron",
+        "en": "https://qaznedr.kz/en/minerals/iron",
+        "zh-CN": "https://qaznedr.kz/zh/minerals/iron",
+        "x-default": "https://qaznedr.kz/ru/minerals/iron"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "铁: 地质情况由我方地质师依据档案报告研究。名称、坐标及资料在签署保密协议后提供。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "issues": [],
+      "title": "Как иностранному инвестору получить право недропользования в Казахстане (2026) | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Кто может быть недропользователем в РК, какие есть лицензии на ТПИ и три пути входа для иностранца: новая лицензия, покупка права или доли, СП или earn-in."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "issues": [],
+      "title": "Subsoil use rights in Kazakhstan for foreign investors: new licence, acquisition or JV (2026) | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Who can hold subsoil use rights in Kazakhstan, which solid minerals licences exist and three routes in: a new licence, buying a right or stake, a JV or earn-in."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "issues": [],
+      "title": "外国投资者如何取得哈萨克斯坦矿业权：申请新许可证、收购或合资（2026） | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "哈萨克斯坦哪些主体可以成为底土利用者，固体矿产许可证有哪几类，外国投资者有3种进入路径：申请新许可证、收购底土利用权或公司股权、组建合资企业或采用earn-in模式。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "issues": [],
+      "title": "Шетелдік инвестор Қазақстанда жер қойнауын пайдалану құқығын қалай ала алады (2026) | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Қазақстанда кім жер қойнауын пайдаланушы бола алады, қатты пайдалы қазбаларға қандай лицензиялар бар және шетелдік инвестордың үш жолы: жаңа лицензия, құқықты не үлесті сатып алу, БК немесе earn-in."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+      "issues": [],
+      "title": "Лицензия на разведку твёрдых полезных ископаемых в Казахстане: процесс по шагам (2026) | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Как получить лицензию на разведку ТПИ в Казахстане: очерёдность и аукцион, блоки, сроки, подписной бонус, минимальные расходы, платежи и переход к добыче."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+      "issues": [],
+      "title": "Solid minerals exploration licence in Kazakhstan: the process step by step (2026) | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "How to apply for a solid minerals exploration licence in Kazakhstan: priority and auctions, blocks, timelines, signature bonus, minimum spend, fees, mining."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+      "issues": [],
+      "title": "哈萨克斯坦固体矿产勘查许可证申请流程分步详解（2026） | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "如何在哈萨克斯坦申请固体矿产勘查许可证：申请先后顺序与拍卖规则、区块划分、办理期限、签约奖金、最低勘查支出、区块使用费，以及如何转为开采许可证。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+      "issues": [],
+      "title": "Қазақстанда қатты пайдалы қазбаларды барлау лицензиясы: қадамдық рәсім (2026) | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Қазақстанда қатты пайдалы қазбаларды барлау лицензиясын алу: кезектілік пен аукцион, блоктар, мерзімдер, қол қою бонусы, ең төменгі шығындар, төлемдер және өндіруге көшу."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "issues": [],
+      "title": "Классификации запасов ГКЗ, KAZRC/JORC и китайского GB/T 17766-2020: как сопоставлять категории | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "en": "https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "zh-CN": "https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "kk": "https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "x-default": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Категории ГКЗ (A–C2, P1–P3), KAZRC/JORC и GB/T 17766-2020: приблизительное соответствие, историческая оценка и почему советские C1 и C2 не являются JORC."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "issues": [],
+      "title": "GKZ, KAZRC/JORC and GB/T 17766-2020 reserve classifications in Kazakhstan: how the categories compare | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "en": "https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "zh-CN": "https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "kk": "https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "x-default": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "GKZ categories (A–C2, P1–P3), KAZRC/JORC and GB/T 17766-2020: approximate correspondence, historical estimates and why Soviet C1 and C2 are not JORC."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "issues": [],
+      "title": "哈萨克斯坦储量分类对照：GKZ、KAZRC/JORC与GB/T 17766-2020的类别如何对应 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "en": "https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "zh-CN": "https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "kk": "https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "x-default": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "苏联/哈萨克斯坦国家储量委员会（GKZ）储量类别（A–C2级、P1–P3级）与KAZRC/JORC规范、中国GB/T 17766-2020标准之间的近似对应关系，历史估算的含义与表述方式，以及为何苏联C1、C2级储量不能称为JORC类别。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "issues": [],
+      "title": "ГКЗ, KAZRC/JORC және Қытайдың GB/T 17766-2020 қор жіктемелері: санаттарды қалай салыстыруға болады | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "en": "https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "zh-CN": "https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "kk": "https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+        "x-default": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "ГКЗ санаттары (A–C2, P1–P3), KAZRC/JORC және GB/T 17766-2020: шамамен сәйкестік, тарихи бағалау және кеңестік C1 мен C2 неліктен JORC санаттары емес."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "issues": [],
+      "title": "Можно ли продать лицензию на недропользование в Казахстане? | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Когда возможен переход права недропользования в Казахстане, какие лицензии нельзя передать, когда нужно разрешение и чем отличается продажа доли компании."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "issues": [],
+      "title": "Can you sell a subsoil licence in Kazakhstan? | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "When a subsoil use right can be transferred in Kazakhstan, which licences cannot be transferred, when permission is needed and how a company share sale differs."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "issues": [],
+      "title": "哈萨克斯坦的底土利用许可证可以出售吗？ | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "说明哈萨克斯坦底土利用权何时可以转让、哪些许可证禁止转让、何时需要主管机关许可，以及公司股权交易与权利转让的区别和交易前应核查的事项，以及最新法规依据。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "issues": [],
+      "title": "Қазақстанда жер қойнауын пайдалану лицензиясын сатуға бола ма? | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Қазақстанда жер қойнауын пайдалану құқығын қашан беруге болады, қай лицензиялар берілмейді, рұқсат қашан қажет және компания үлесін сатудың айырмасы қандай."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan",
+      "issues": [],
+      "title": "Геологическая карта Казахстана: как выбрать масштаб и проверить материал | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/geological-map-kazakhstan"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/geological-map-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/geological-map-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/geological-map-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Чем геологическая карта отличается от карты лицензий и рудопроявлений, как читать масштаб 1:200 000 и 1:50 000 и что уточнить у геолога перед работой с материалом."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/geological-map-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/geological-map-kazakhstan",
+      "issues": [],
+      "title": "Geological maps of Kazakhstan: choosing a scale and checking the source | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/geological-map-kazakhstan"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/geological-map-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/geological-map-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/geological-map-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "How a geological map differs from maps of licences and mineral occurrences, what 1:200 000 and 1:50 000 mean, and what to ask a geologist before using a map."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/geological-map-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/geological-map-kazakhstan",
+      "issues": [],
+      "title": "哈萨克斯坦地质图：比例尺选择与资料核查 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/geological-map-kazakhstan"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/geological-map-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/geological-map-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/geological-map-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "区分地质图、矿业权地图与矿床和矿化点图，理解 1:200 000 和 1:50 000 比例尺，并在使用地图前明确需要向地质专家核实的问题。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/geological-map-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/geological-map-kazakhstan",
+      "issues": [],
+      "title": "Қазақстанның геологиялық картасы: масштабты таңдау және материалды тексеру | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/geological-map-kazakhstan"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/geological-map-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/geological-map-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/geological-map-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Геологиялық картаның лицензиялар мен кен көріністері карталарынан айырмасы, 1:200 000 және 1:50 000 масштабтарын оқу және материалды қолданар алдында геологтан не сұрау керегі."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide",
+      "issues": [],
+      "title": "Карта золота ВКО: где искать геологические данные и как проверить район | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide",
+        "en": "https://qaznedr.kz/en/insights/east-kazakhstan-gold-map-guide",
+        "zh-CN": "https://qaznedr.kz/zh/insights/east-kazakhstan-gold-map-guide",
+        "kk": "https://qaznedr.kz/kz/insights/east-kazakhstan-gold-map-guide",
+        "x-default": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Где искать данные по золоту Восточного Казахстана: отчёты ЕПН, старые границы ВКО и области Абай, геологические карты и отдельная проверка прав на участок."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/east-kazakhstan-gold-map-guide",
+      "issues": [],
+      "title": "Gold map of East Kazakhstan: where to find geological data and check an area | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/east-kazakhstan-gold-map-guide"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide",
+        "en": "https://qaznedr.kz/en/insights/east-kazakhstan-gold-map-guide",
+        "zh-CN": "https://qaznedr.kz/zh/insights/east-kazakhstan-gold-map-guide",
+        "kk": "https://qaznedr.kz/kz/insights/east-kazakhstan-gold-map-guide",
+        "x-default": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Where to find gold data for East Kazakhstan: government geological reports, the former East Kazakhstan Region and today's Abai Region, maps and a separate check of area rights."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/east-kazakhstan-gold-map-guide",
+      "issues": [],
+      "title": "东哈萨克斯坦黄金地图：从哪里查地质资料，如何核查目标区域 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/east-kazakhstan-gold-map-guide"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide",
+        "en": "https://qaznedr.kz/en/insights/east-kazakhstan-gold-map-guide",
+        "zh-CN": "https://qaznedr.kz/zh/insights/east-kazakhstan-gold-map-guide",
+        "kk": "https://qaznedr.kz/kz/insights/east-kazakhstan-gold-map-guide",
+        "x-default": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "了解如何查找东哈萨克斯坦的黄金地质资料：统一矿业权平台的报告、旧东哈州与现今阿拜州的边界、地质图，以及独立核查目标区域的矿业权状态；同时记录资料年份、比例尺和核查日期。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/east-kazakhstan-gold-map-guide",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/east-kazakhstan-gold-map-guide",
+      "issues": [],
+      "title": "ШҚО алтын картасы: геологиялық деректерді қайдан іздеп, ауданды қалай тексеруге болады | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/east-kazakhstan-gold-map-guide"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide",
+        "en": "https://qaznedr.kz/en/insights/east-kazakhstan-gold-map-guide",
+        "zh-CN": "https://qaznedr.kz/zh/insights/east-kazakhstan-gold-map-guide",
+        "kk": "https://qaznedr.kz/kz/insights/east-kazakhstan-gold-map-guide",
+        "x-default": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Шығыс Қазақстандағы алтын туралы деректерді іздеу: платформа есептері, бұрынғы ШҚО мен қазіргі Абай облысының шекарасы, геологиялық карталар және жер қойнауын пайдалану құқығын бөлек тексеру."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/what-is-geology",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/what-is-geology",
+      "issues": [],
+      "title": "Геология простыми словами: что изучает геолог и чем порода отличается от минерала | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/what-is-geology"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/what-is-geology",
+        "en": "https://qaznedr.kz/en/insights/what-is-geology",
+        "zh-CN": "https://qaznedr.kz/zh/insights/what-is-geology",
+        "kk": "https://qaznedr.kz/kz/insights/what-is-geology",
+        "x-default": "https://qaznedr.kz/ru/insights/what-is-geology"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Что изучает геология, чем различаются минерал, горная порода и руда, что делает геолог и как перейти от базовых понятий к чтению геологической карты."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/what-is-geology",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/what-is-geology",
+      "issues": [],
+      "title": "What is geology? A simple guide to minerals, rocks, ore and a geologist's work | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/what-is-geology"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/what-is-geology",
+        "en": "https://qaznedr.kz/en/insights/what-is-geology",
+        "zh-CN": "https://qaznedr.kz/zh/insights/what-is-geology",
+        "kk": "https://qaznedr.kz/kz/insights/what-is-geology",
+        "x-default": "https://qaznedr.kz/ru/insights/what-is-geology"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Learn what geology studies, how minerals, rocks and ore differ, what geologists do, and where to begin reading a geological map of Kazakhstan."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/what-is-geology",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/what-is-geology",
+      "issues": [],
+      "title": "什么是地质学？认识矿物、岩石、矿石与地质工作 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/what-is-geology"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/what-is-geology",
+        "en": "https://qaznedr.kz/en/insights/what-is-geology",
+        "zh-CN": "https://qaznedr.kz/zh/insights/what-is-geology",
+        "kk": "https://qaznedr.kz/kz/insights/what-is-geology",
+        "x-default": "https://qaznedr.kz/ru/insights/what-is-geology"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "用通俗语言了解地质学研究什么，矿物、岩石和矿石有何区别，地质学家在野外和资料研究中做什么，以及如何开始阅读哈萨克斯坦地质图、理解图例与比例尺，并区分地质信息和矿业权信息。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/what-is-geology",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/what-is-geology",
+      "issues": [],
+      "title": "Геология деген не: геолог нені зерттейді және тау жынысы минералдан несімен өзгеше | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/what-is-geology"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/what-is-geology",
+        "en": "https://qaznedr.kz/en/insights/what-is-geology",
+        "zh-CN": "https://qaznedr.kz/zh/insights/what-is-geology",
+        "kk": "https://qaznedr.kz/kz/insights/what-is-geology",
+        "x-default": "https://qaznedr.kz/ru/insights/what-is-geology"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Геология нені зерттейтінін, минерал, тау жынысы мен кеннің айырмасын, геологтың жұмысын және геологиялық картаны оқуды неден бастау керегін қарапайым тілмен түсіндіреміз."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan",
+      "issues": [],
+      "title": "Проверка геологических материалов участка в Казахстане: с чего начать | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/geological-due-diligence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/geological-due-diligence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/geological-due-diligence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Какие отчёты, карты и сведения о пробах запросить перед разведкой рудного участка в Казахстане. Практический чек-лист и пример проверки исходных данных."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/geological-due-diligence-kazakhstan",
+      "issues": [],
+      "title": "Reviewing geological materials for an area in Kazakhstan: where to start | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/geological-due-diligence-kazakhstan"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/geological-due-diligence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/geological-due-diligence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/geological-due-diligence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "What reports, maps and sample records to request before exploring a mineral area in Kazakhstan. A practical checklist and a worked example."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/geological-due-diligence-kazakhstan",
+      "issues": [],
+      "title": "哈萨克斯坦矿区地质资料核查：从哪里开始 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/geological-due-diligence-kazakhstan"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/geological-due-diligence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/geological-due-diligence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/geological-due-diligence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "在哈萨克斯坦勘查矿区前，应索取哪些报告、地图和样品记录？了解如何核对资料覆盖范围、分析结果来源和资源量估算依据，通过实用清单与教学示例明确缺失材料及下一步核查问题。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/geological-due-diligence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/geological-due-diligence-kazakhstan",
+      "issues": [],
+      "title": "Қазақстандағы учаскенің геологиялық материалдарын тексеру: неден бастау керек | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/geological-due-diligence-kazakhstan"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/geological-due-diligence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/geological-due-diligence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/geological-due-diligence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/geological-due-diligence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Кенді учаскені барлауға дейін қандай есептерді, карталарды және сынама деректерін сұрату керек? Бастапқы деректерді тексеру тізімі мен мысал."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration",
+      "issues": [],
+      "title": "Колонковое бурение в геологоразведке: что показывает керн | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration",
+        "en": "https://qaznedr.kz/en/insights/core-drilling-geological-exploration",
+        "zh-CN": "https://qaznedr.kz/zh/insights/core-drilling-geological-exploration",
+        "kk": "https://qaznedr.kz/kz/insights/core-drilling-geological-exploration",
+        "x-default": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Что такое керн, чем он отличается от бурового шлама и какие документы нужны для проверки результатов разведочного бурения участка в Казахстане."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/core-drilling-geological-exploration",
+      "issues": [],
+      "title": "Core drilling in mineral exploration: what a drill core can show | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/core-drilling-geological-exploration"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration",
+        "en": "https://qaznedr.kz/en/insights/core-drilling-geological-exploration",
+        "zh-CN": "https://qaznedr.kz/zh/insights/core-drilling-geological-exploration",
+        "kk": "https://qaznedr.kz/kz/insights/core-drilling-geological-exploration",
+        "x-default": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "What drill core is, how it differs from drill cuttings, and which records help check exploration drilling results for an area in Kazakhstan."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/core-drilling-geological-exploration",
+      "issues": [],
+      "title": "矿产勘查中的岩芯钻探：岩芯能说明什么 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/core-drilling-geological-exploration"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration",
+        "en": "https://qaznedr.kz/en/insights/core-drilling-geological-exploration",
+        "zh-CN": "https://qaznedr.kz/zh/insights/core-drilling-geological-exploration",
+        "kk": "https://qaznedr.kz/kz/insights/core-drilling-geological-exploration",
+        "x-default": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "解释岩芯是什么、它与钻屑有何区别，以及核查哈萨克斯坦勘查区钻探结果时应查看哪些记录和文件；同时说明取样、化验和岩芯采取率为何重要，为什么不能仅凭照片判断金品位或储量。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/core-drilling-geological-exploration",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/core-drilling-geological-exploration",
+      "issues": [],
+      "title": "Геологиялық барлаудағы керндік бұрғылау: керн нені көрсетеді | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/core-drilling-geological-exploration"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration",
+        "en": "https://qaznedr.kz/en/insights/core-drilling-geological-exploration",
+        "zh-CN": "https://qaznedr.kz/zh/insights/core-drilling-geological-exploration",
+        "kk": "https://qaznedr.kz/kz/insights/core-drilling-geological-exploration",
+        "x-default": "https://qaznedr.kz/ru/insights/core-drilling-geological-exploration"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Керннің не екенін, оның бұрғылау шламынан айырмасын және Қазақстандағы барлау бұрғылауының нәтижелерін тексеруге қандай құжаттар қажет екенін түсіндіреміз."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide",
+      "issues": [],
+      "title": "Можно ли найти золото в Казахстане по спутниковой карте? | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/satellite-gold-map-guide"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide",
+        "en": "https://qaznedr.kz/en/insights/satellite-gold-map-guide",
+        "zh-CN": "https://qaznedr.kz/zh/insights/satellite-gold-map-guide",
+        "kk": "https://qaznedr.kz/kz/insights/satellite-gold-map-guide",
+        "x-default": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Что спутниковые снимки могут показать геологу, как распознают поверхностные признаки изменения пород и почему для подтверждения золота нужны другие данные."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/satellite-gold-map-guide",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/satellite-gold-map-guide",
+      "issues": [],
+      "title": "Can you find gold in Kazakhstan on a satellite map? | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/satellite-gold-map-guide"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide",
+        "en": "https://qaznedr.kz/en/insights/satellite-gold-map-guide",
+        "zh-CN": "https://qaznedr.kz/zh/insights/satellite-gold-map-guide",
+        "kk": "https://qaznedr.kz/kz/insights/satellite-gold-map-guide",
+        "x-default": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "What satellite images can show a geologist, how surface signs of altered rock are identified, and why other evidence is needed to confirm gold."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/satellite-gold-map-guide",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/satellite-gold-map-guide",
+      "issues": [],
+      "title": "能通过卫星地图在哈萨克斯坦找到黄金吗？ | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/satellite-gold-map-guide"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide",
+        "en": "https://qaznedr.kz/en/insights/satellite-gold-map-guide",
+        "zh-CN": "https://qaznedr.kz/zh/insights/satellite-gold-map-guide",
+        "kk": "https://qaznedr.kz/kz/insights/satellite-gold-map-guide",
+        "x-default": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "卫星影像能向地质人员展示什么、如何识别地表岩石蚀变迹象，以及为什么确认黄金仍需要其他证据。本文还说明卫星图像不能证明金的品位、储量或土地权利，核查时应如何结合地质图、取样和钻探资料。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/satellite-gold-map-guide",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/satellite-gold-map-guide",
+      "issues": [],
+      "title": "Қазақстанда алтынды спутниктік картадан табуға бола ма? | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/satellite-gold-map-guide"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide",
+        "en": "https://qaznedr.kz/en/insights/satellite-gold-map-guide",
+        "zh-CN": "https://qaznedr.kz/zh/insights/satellite-gold-map-guide",
+        "kk": "https://qaznedr.kz/kz/insights/satellite-gold-map-guide",
+        "x-default": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Спутниктік суреттер геологқа нені көрсете алады, жыныстардың жер бетіндегі өзгеру белгілері қалай анықталады және алтынды растау үшін неге басқа деректер қажет."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan",
+      "issues": [],
+      "title": "Старательство в Казахстане: лицензия и правила | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/artisanal-mining-licence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/artisanal-mining-licence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/artisanal-mining-licence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Кто может получить старательскую лицензию в Казахстане, как выбрать территорию и подать заявление через ЕПН. Документы, ограничения и изменения 2026 года."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/artisanal-mining-licence-kazakhstan",
+      "issues": [],
+      "title": "Artisanal mining in Kazakhstan: licence and rules | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/artisanal-mining-licence-kazakhstan"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/artisanal-mining-licence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/artisanal-mining-licence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/artisanal-mining-licence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Who may obtain an artisanal mining licence in Kazakhstan, how to check an area and apply through the EPN, and the documents, restrictions and 2026 changes."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/artisanal-mining-licence-kazakhstan",
+      "issues": [],
+      "title": "哈萨克斯坦个体小规模采矿：许可证与规则 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/artisanal-mining-licence-kazakhstan"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/artisanal-mining-licence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/artisanal-mining-licence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/artisanal-mining-licence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "谁能申请哈萨克斯坦个体小规模采矿许可证，如何核查目标区域并通过EPN申请，以及所需文件、机械和作业限制、开工条件与2026年程序变化，并附官方法规来源。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/artisanal-mining-licence-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/artisanal-mining-licence-kazakhstan",
+      "issues": [],
+      "title": "Қазақстандағы кен іздеушілік: лицензия және ережелер | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/artisanal-mining-licence-kazakhstan"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/artisanal-mining-licence-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/artisanal-mining-licence-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/artisanal-mining-licence-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/artisanal-mining-licence-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Қазақстанда кен іздеушілікке арналған лицензияны кім алады, аумақты қалай тексеріп, ЕПН арқылы өтініш береді және 2026 жылғы құжаттар мен шектеулер қандай."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "issues": [],
+      "title": "ПУГФН Казахстана: что это и как проверить участок | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Что означает ПУГФН, где искать актуальные сведения и как проверить участок перед заявкой. Отличия программы, геологической карты и лицензии на недропользование."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "issues": [],
+      "title": "Kazakhstan's PUGFN: what it is and how to check an area | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "What the State Subsoil Fund Management Programme means, where to find current information and how to check an area before applying. Programme, geological map and licence compared."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "issues": [],
+      "title": "哈萨克斯坦PUGFN是什么：如何查询矿区 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "说明哈萨克斯坦国家底土资源管理计划PUGFN的用途、现行官方资料查询和申请前矿区核查步骤，并区分计划、地质图和许可证各自能证明的事项，并附官方文件来源。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "issues": [],
+      "title": "Қазақстандағы ПУГФН: бұл не және учаскені қалай тексеруге болады | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/insights/pugfn-subsoil-fund-program-kazakhstan"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "en": "https://qaznedr.kz/en/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "zh-CN": "https://qaznedr.kz/zh/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "kk": "https://qaznedr.kz/kz/insights/pugfn-subsoil-fund-program-kazakhstan",
+        "x-default": "https://qaznedr.kz/ru/insights/pugfn-subsoil-fund-program-kazakhstan"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Мемлекеттік жер қойнауы қорын басқару бағдарламасы нені білдіреді, өзекті мәліметті қайдан табуға және өтінішке дейін учаскені қалай тексеруге болады."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/leads/QN-04",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/leads/QN-04",
+      "issues": [],
+      "title": "Золото, цинк — участок QN-04, Кызылординская область | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/leads/QN-04"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads/QN-04",
+        "kk": "https://qaznedr.kz/kz/leads/QN-04",
+        "en": "https://qaznedr.kz/en/leads/QN-04",
+        "zh-CN": "https://qaznedr.kz/zh/leads/QN-04",
+        "x-default": "https://qaznedr.kz/ru/leads/QN-04"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Лучший интервал (среднее по интервалу): золото 3,47 г/т. Кызылординская область. Статус прав — наша проверка по карте на 30.09.2026, не выписка. Карточка QN-04."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/leads/QN-04",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/leads/QN-04",
+      "issues": [],
+      "title": "Алтын, мырыш — QN-04 учаскесі, Қызылорда облысы | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/leads/QN-04"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads/QN-04",
+        "kk": "https://qaznedr.kz/kz/leads/QN-04",
+        "en": "https://qaznedr.kz/en/leads/QN-04",
+        "zh-CN": "https://qaznedr.kz/zh/leads/QN-04",
+        "x-default": "https://qaznedr.kz/ru/leads/QN-04"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Ең жақсы интервал (интервал бойынша орташа): алтын 3,47 г/т. Қызылорда облысы. Құқық мәртебесі — 30.09.2026 картадағы біздің тексеруіміз, үзінді көшірме емес. Карточка QN-04."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/leads/QN-04",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/leads/QN-04",
+      "issues": [],
+      "title": "Gold, zinc — area QN-04, Kyzylorda Region | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/leads/QN-04"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads/QN-04",
+        "kk": "https://qaznedr.kz/kz/leads/QN-04",
+        "en": "https://qaznedr.kz/en/leads/QN-04",
+        "zh-CN": "https://qaznedr.kz/zh/leads/QN-04",
+        "x-default": "https://qaznedr.kz/ru/leads/QN-04"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Best interval (average over the interval): gold 3.47 g/t. Kyzylorda Region. Rights status per our check against the map on 30.09.2026; not an official extract. Card QN-04."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/leads/QN-04",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/leads/QN-04",
+      "issues": [],
+      "title": "金、锌 — 矿区 QN-04，克孜勒奥尔达州 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/leads/QN-04"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads/QN-04",
+        "kk": "https://qaznedr.kz/kz/leads/QN-04",
+        "en": "https://qaznedr.kz/en/leads/QN-04",
+        "zh-CN": "https://qaznedr.kz/zh/leads/QN-04",
+        "x-default": "https://qaznedr.kz/ru/leads/QN-04"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "最佳区间（区间平均值）：金 3.47 克/吨。克孜勒奥尔达州。权利状态为我方于 30.09.2026 对照地图的核查，非官方摘录。卡片 QN-04。"
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/ru/leads/QN-17",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/ru/leads/QN-17",
+      "issues": [],
+      "title": "Свинец — участок QN-17, Жамбылская область | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/ru/leads/QN-17"
+      ],
+      "lang": "ru",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads/QN-17",
+        "kk": "https://qaznedr.kz/kz/leads/QN-17",
+        "en": "https://qaznedr.kz/en/leads/QN-17",
+        "zh-CN": "https://qaznedr.kz/zh/leads/QN-17",
+        "x-default": "https://qaznedr.kz/ru/leads/QN-17"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Максимум в отдельной пробе: свинец до 12 %. Жамбылская область. Статус прав — наша проверка по карте на 30.09.2026, не выписка. Карточка QN-17."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/leads/QN-17",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/kz/leads/QN-17",
+      "issues": [],
+      "title": "Қорғасын — QN-17 учаскесі, Жамбыл облысы | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/kz/leads/QN-17"
+      ],
+      "lang": "kk",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads/QN-17",
+        "kk": "https://qaznedr.kz/kz/leads/QN-17",
+        "en": "https://qaznedr.kz/en/leads/QN-17",
+        "zh-CN": "https://qaznedr.kz/zh/leads/QN-17",
+        "x-default": "https://qaznedr.kz/ru/leads/QN-17"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Жеке сынамадағы ең жоғары мән: қорғасын 12 %-ға дейін. Жамбыл облысы. Құқық мәртебесі — 30.09.2026 картадағы біздің тексеруіміз, үзінді көшірме емес. Карточка QN-17."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/leads/QN-17",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/en/leads/QN-17",
+      "issues": [],
+      "title": "Lead — area QN-17, Zhambyl Region | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/en/leads/QN-17"
+      ],
+      "lang": "en",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads/QN-17",
+        "kk": "https://qaznedr.kz/kz/leads/QN-17",
+        "en": "https://qaznedr.kz/en/leads/QN-17",
+        "zh-CN": "https://qaznedr.kz/zh/leads/QN-17",
+        "x-default": "https://qaznedr.kz/ru/leads/QN-17"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "Maximum in a single sample: lead up to 12%. Zhambyl Region. Rights status per our check against the map on 30.09.2026; not an official extract. Card QN-17."
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/leads/QN-17",
+      "status": 200,
+      "final_url": "https://qaznedr.kz/zh/leads/QN-17",
+      "issues": [],
+      "title": "铅 — 矿区 QN-17，江布尔州 | QAZNEDR HOLDING",
+      "h1": 1,
+      "canonical": [
+        "https://qaznedr.kz/zh/leads/QN-17"
+      ],
+      "lang": "zh-CN",
+      "alternates": {
+        "ru": "https://qaznedr.kz/ru/leads/QN-17",
+        "kk": "https://qaznedr.kz/kz/leads/QN-17",
+        "en": "https://qaznedr.kz/en/leads/QN-17",
+        "zh-CN": "https://qaznedr.kz/zh/leads/QN-17",
+        "x-default": "https://qaznedr.kz/ru/leads/QN-17"
+      },
+      "robots": [
+        "index, follow"
+      ],
+      "description": [
+        "单个样品最高值：铅 最高 12%。江布尔州。权利状态为我方于 30.09.2026 对照地图的核查，非官方摘录。卡片 QN-17。"
+      ]
+    }
+  ],
+  "language_issues": []
+}

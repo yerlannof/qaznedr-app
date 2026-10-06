@@ -12,6 +12,7 @@ import {
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { toLocale } from '@/lib/seo/site';
+import { getGuideSlug, guideServiceHref } from '@/lib/insights/contact-context';
 
 type Params = Promise<{ locale: string }>;
 
@@ -31,11 +32,14 @@ export async function generateMetadata({
 
 export default async function GeologicalServicesPage({
   params,
+  searchParams,
 }: {
   params: Params;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale: raw } = await params;
   const locale = toLocale(raw);
+  const guideSlug = getGuideSlug((await searchParams)?.guide);
   const { t } = getServerTranslation(locale);
   return (
     <>
@@ -44,11 +48,11 @@ export default async function GeologicalServicesPage({
         path="/services/geological"
         topics={['geology']}
       />
-      <Navigation serviceTopic="geology" />
+      <Navigation serviceTopic="geology" guideSlug={guideSlug} />
       <div className="min-h-screen bg-brand-bg pt-14 text-brand-ink lg:pt-16">
         <article className="brand-container py-12 lg:py-20">
           <Link
-            href={`/${locale}/services`}
+            href={guideServiceHref(locale, '/services', guideSlug)}
             className="brand-focus inline-flex min-h-11 items-center text-sm text-brand-muted underline underline-offset-4"
           >
             {t('navigation.services')}
@@ -57,16 +61,28 @@ export default async function GeologicalServicesPage({
             {t('holdingServices.geology.title')}
           </h1>
           <div className="mt-10">
-            <ServiceDetail locale={locale} topic="geology" />
+            <ServiceDetail
+              locale={locale}
+              topic="geology"
+              guideSlug={guideSlug}
+            />
           </div>
         </article>
-        <GeologicalSupport locale={locale} />
+        <GeologicalSupport locale={locale} guideSlug={guideSlug} />
         <section className="brand-container pb-16 lg:pb-24">
           <GuideLinks locale={locale} heading={t('insights.servicesHeading')} />
         </section>
       </div>
-      <ClosingCta locale={locale} variant="brand" serviceTopic="geology" />
-      <Footer />
+      <ClosingCta
+        locale={locale}
+        variant="brand"
+        serviceTopic="geology"
+        guideSlug={guideSlug}
+      />
+      <Footer
+        serviceTopic={guideSlug ? 'geology' : undefined}
+        guideSlug={guideSlug}
+      />
     </>
   );
 }

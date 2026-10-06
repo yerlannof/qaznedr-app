@@ -41,7 +41,10 @@ TDD73/73, полный2419pass/27 прежних legacy failures, lint/TS/build 
 гайд→услуги→контакт и EN прошли. Три страницы услуг теперь dynamic; mobile
 сохраняет обычный SSR CTA и получает guide после hydration. Выпуск из чистой
 worktree от e1b8cd1; исходные грязные документы не затронуты. Деплой/живые
-проверки фиксируются в отчёте после push. Отчёт:
+проверки закрыты: Production6886672288 exact4f0e2f6 success; 34 live HTTP
+PASS, реальный mobile→контакт с темой и коротким WhatsApp/WeChat текстом.
+IndexNow200 принял60 URL. CI build/types/test pass; формат двух JSON поправлен,
+полный format:check pass. Служебный docs checkpoint сверяется после push. Отчёт:
 `docs/visibility/2026-10-06-guide-service-context-release.md`.
 Следом: сопоставимые поисковые периоды и обращения, затем подтверждённые кейсы
 команды и утверждённые тексты; геобазу самостоятельно не публиковать.

@@ -1,0 +1,215 @@
+{
+  "checkedAtUTC": "2026-10-06T14:31:14.775488+00:00",
+  "checks": 34,
+  "problems": [],
+  "rows": [
+    {
+      "url": "https://qaznedr.kz/ru/services",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/ru/services"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/ru/services?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/ru/services"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/ru/services/legal",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/ru/services/legal"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/ru/services/legal?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/ru/services/legal"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/ru/services/geological",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/ru/services/geological"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/ru/services/geological?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/ru/services/geological"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/ru/insights/geological-map-kazakhstan"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/ru/contact?service=geology&guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/ru/contact"],
+      "issues": [],
+      "whatsappConfigured": true
+    },
+    {
+      "url": "https://qaznedr.kz/kz/services",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/kz/services"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/kz/services?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/kz/services"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/kz/services/legal",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/kz/services/legal"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/kz/services/legal?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/kz/services/legal"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/kz/services/geological",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/kz/services/geological"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/kz/services/geological?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/kz/services/geological"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/kz/insights/geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/kz/insights/geological-map-kazakhstan"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/kz/contact?service=geology&guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/kz/contact"],
+      "issues": [],
+      "whatsappConfigured": true
+    },
+    {
+      "url": "https://qaznedr.kz/en/services",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/en/services"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/en/services?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/en/services"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/en/services/legal",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/en/services/legal"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/en/services/legal?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/en/services/legal"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/en/services/geological",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/en/services/geological"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/en/services/geological?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/en/services/geological"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/en/insights/geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/en/insights/geological-map-kazakhstan"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/en/contact?service=geology&guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/en/contact"],
+      "issues": [],
+      "whatsappConfigured": true
+    },
+    {
+      "url": "https://qaznedr.kz/zh/services",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/zh/services"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/zh/services?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/zh/services"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/zh/services/legal",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/zh/services/legal"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/zh/services/legal?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/zh/services/legal"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/zh/services/geological",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/zh/services/geological"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/zh/services/geological?guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/zh/services/geological"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/zh/insights/geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/zh/insights/geological-map-kazakhstan"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/zh/contact?service=geology&guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/zh/contact"],
+      "issues": [],
+      "whatsappConfigured": true
+    },
+    {
+      "url": "https://qaznedr.kz/en/services/legal?guide=unknown",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/en/services/legal"],
+      "issues": []
+    },
+    {
+      "url": "https://qaznedr.kz/en/services/legal?guide=geological-map-kazakhstan&guide=geological-map-kazakhstan",
+      "status": 200,
+      "canonical": ["https://qaznedr.kz/en/services/legal"],
+      "issues": []
+    }
+  ]
+}

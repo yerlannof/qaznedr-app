@@ -16,6 +16,11 @@ import { GUIDE, insightHref } from '@/lib/insights/registry';
 
 export const dynamic = 'force-dynamic';
 type Props = { params: Promise<{ locale: string; mineral: string }> };
+const GOLD_GUIDE_KEYS = [
+  'geologicalMap',
+  'eastKazakhstanGoldMap',
+  'satelliteGoldMap',
+] as const;
 
 export async function generateMetadata({ params }: Props) {
   const { locale: raw, mineral } = await params;
@@ -146,6 +151,16 @@ export default async function MineralPage({ params }: Props) {
             ))}
           </ol>
           <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+            {mineral === 'gold' &&
+              GOLD_GUIDE_KEYS.map((key) => (
+                <Link
+                  key={key}
+                  className="brand-focus inline-flex min-h-11 items-center underline underline-offset-4"
+                  href={insightHref(locale, GUIDE[key])}
+                >
+                  {t(`insights.links.${key}`)}
+                </Link>
+              ))}
             <Link
               className="brand-focus inline-flex min-h-11 items-center underline underline-offset-4"
               href={insightHref(locale, GUIDE.reserveClassification)}

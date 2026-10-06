@@ -1,0 +1,617 @@
+{
+  "results": [
+    {
+      "url": "https://qaznedr.kz/",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/",
+          "to": "https://qaznedr.kz/ru"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru",
+      "status": 200,
+      "title": "QAZNEDR HOLDING — Участки недр Казахстана для инвесторов",
+      "canonical": "https://qaznedr.kz/ru",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://qaznedr.kz/ru",
+      "redirects": [],
+      "finalURL": "https://qaznedr.kz/ru",
+      "status": 200,
+      "title": "QAZNEDR HOLDING — Участки недр Казахстана для инвесторов",
+      "canonical": "https://qaznedr.kz/ru",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://qaznedr.kz/ru/insights",
+      "redirects": [],
+      "finalURL": "https://qaznedr.kz/ru/insights",
+      "status": 200,
+      "title": "Гайды для инвестора: недропользование в Казахстане | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/ru/insights",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://qaznedr.kz/ru/news",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/ru/news",
+          "to": "https://qaznedr.kz/ru/insights"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/insights",
+      "status": 200,
+      "title": "Гайды для инвестора: недропользование в Казахстане | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/ru/insights",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-CF434C",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-CF434C",
+          "to": "https://qaznedr.kz/ru/leads/AU-CF434C"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-CF434C",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-31",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-31",
+          "to": "https://qaznedr.kz/ru/leads/AU-31"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-31",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-C24D29",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-C24D29",
+          "to": "https://qaznedr.kz/ru/leads/AU-C24D29"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-C24D29",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-508A4C",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-508A4C",
+          "to": "https://qaznedr.kz/ru/leads/AU-508A4C"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-508A4C",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-823417",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-823417",
+          "to": "https://qaznedr.kz/ru/leads/AU-823417"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-823417",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/kz/listings",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/kz/listings",
+          "to": "https://qaznedr.kz/kz/listings"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/kz/listings",
+          "to": "https://qaznedr.kz/kz/leads"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/kz/leads",
+      "status": 200,
+      "title": "Қазақстан жер қойнауы учаскелері: алтын, мыс және басқа металдар | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/kz/leads",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/listings/create",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/listings/create",
+          "to": "https://qaznedr.kz/ru/listings/create"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/ru/listings/create",
+          "to": "https://qaznedr.kz/ru/leads"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads",
+      "status": 200,
+      "title": "Участки недр Казахстана: золото, медь и другие металлы | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/en/listings",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/en/listings",
+          "to": "https://qaznedr.kz/en/listings"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/en/listings",
+          "to": "https://qaznedr.kz/en/leads"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/en/leads",
+      "status": 200,
+      "title": "Exploration Areas in Kazakhstan: Gold, Copper and More | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/en/leads",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/listings",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/listings",
+          "to": "https://qaznedr.kz/ru/listings"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/ru/listings",
+          "to": "https://qaznedr.kz/ru/leads"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads",
+      "status": 200,
+      "title": "Участки недр Казахстана: золото, медь и другие металлы | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/en/companies",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/en/companies",
+          "to": "https://qaznedr.kz/en/companies"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/en/companies",
+          "to": "https://qaznedr.kz/en/about"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/en/about",
+      "status": 200,
+      "title": "About QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/en/about",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/companies",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/companies",
+          "to": "https://qaznedr.kz/ru/companies"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/ru/companies",
+          "to": "https://qaznedr.kz/ru/about"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/about",
+      "status": 200,
+      "title": "О компании QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/ru/about",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/kz/companies",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/kz/companies",
+          "to": "https://qaznedr.kz/kz/companies"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/kz/companies",
+          "to": "https://qaznedr.kz/kz/about"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/kz/about",
+      "status": 200,
+      "title": "QAZNEDR HOLDING туралы",
+      "canonical": "https://qaznedr.kz/kz/about",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/kz/services/catalog",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/kz/services/catalog",
+          "to": "https://qaznedr.kz/kz/services/catalog"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/kz/services/catalog",
+          "to": "https://qaznedr.kz/kz/services"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/kz/services",
+      "status": 200,
+      "title": "Қызметтер: лицензиялау, геологиялық барлау, due diligence | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/kz/services",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/services/catalog",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/services/catalog",
+          "to": "https://qaznedr.kz/ru/services/catalog"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/ru/services/catalog",
+          "to": "https://qaznedr.kz/ru/services"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/services",
+      "status": 200,
+      "title": "Услуги: лицензирование, геологоразведка, due diligence | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/ru/services",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-279C3B",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-279C3B",
+          "to": "https://qaznedr.kz/ru/leads/AU-279C3B"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-279C3B",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-4B4226",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-4B4226",
+          "to": "https://qaznedr.kz/ru/leads/AU-4B4226"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-4B4226",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-F62533",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-F62533",
+          "to": "https://qaznedr.kz/ru/leads/AU-F62533"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-F62533",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-B80C71",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-B80C71",
+          "to": "https://qaznedr.kz/ru/leads/AU-B80C71"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-B80C71",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-A5D643",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-A5D643",
+          "to": "https://qaznedr.kz/ru/leads/AU-A5D643"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-A5D643",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-91F5BA",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-91F5BA",
+          "to": "https://qaznedr.kz/ru/leads/AU-91F5BA"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-91F5BA",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-46E1F5",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-46E1F5",
+          "to": "https://qaznedr.kz/ru/leads/AU-46E1F5"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-46E1F5",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-A9B82E",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-A9B82E",
+          "to": "https://qaznedr.kz/ru/leads/AU-A9B82E"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-A9B82E",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-4D5014",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-4D5014",
+          "to": "https://qaznedr.kz/ru/leads/AU-4D5014"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-4D5014",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-854887",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-854887",
+          "to": "https://qaznedr.kz/ru/leads/AU-854887"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-854887",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/leads/AU-40",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/leads/AU-40",
+          "to": "https://qaznedr.kz/ru/leads/AU-40"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads/AU-40",
+      "status": 404,
+      "title": "Участок не найден",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/en/leads/AU-40",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/en/leads/AU-40",
+          "to": "https://qaznedr.kz/en/leads/AU-40"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/en/leads/AU-40",
+      "status": 404,
+      "title": "Area not found",
+      "canonical": "https://qaznedr.kz/en/leads",
+      "robots": "noindex"
+    },
+    {
+      "url": "https://www.qaznedr.kz/zh/dashboard",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/zh/dashboard",
+          "to": "https://qaznedr.kz/zh/dashboard"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/zh/dashboard",
+          "to": "https://qaznedr.kz/zh/leads"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/zh/leads",
+      "status": 200,
+      "title": "哈萨克斯坦矿区项目库：金矿、铜矿等空白探矿区 | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/zh/leads",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/en/dashboard",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/en/dashboard",
+          "to": "https://qaznedr.kz/en/dashboard"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/en/dashboard",
+          "to": "https://qaznedr.kz/en/leads"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/en/leads",
+      "status": 200,
+      "title": "Exploration Areas in Kazakhstan: Gold, Copper and More | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/en/leads",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/dashboard",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/dashboard",
+          "to": "https://qaznedr.kz/ru/dashboard"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/ru/dashboard",
+          "to": "https://qaznedr.kz/ru/leads"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/leads",
+      "status": 200,
+      "title": "Участки недр Казахстана: золото, медь и другие металлы | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/kz/blog",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/kz/blog",
+          "to": "https://qaznedr.kz/kz/blog"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/kz/blog",
+          "to": "https://qaznedr.kz/kz/insights"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/kz/insights",
+      "status": 200,
+      "title": "Инвесторға арналған нұсқаулықтар: Қазақстандағы жер қойнауын пайдалану | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/kz/insights",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/ru/blog",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/ru/blog",
+          "to": "https://qaznedr.kz/ru/blog"
+        },
+        {
+          "status": 308,
+          "from": "https://qaznedr.kz/ru/blog",
+          "to": "https://qaznedr.kz/ru/insights"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/ru/insights",
+      "status": 200,
+      "title": "Гайды для инвестора: недропользование в Казахстане | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/ru/insights",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/en/about",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/en/about",
+          "to": "https://qaznedr.kz/en/about"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/en/about",
+      "status": 200,
+      "title": "About QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/en/about",
+      "robots": "index, follow"
+    },
+    {
+      "url": "https://www.qaznedr.kz/zh/about",
+      "redirects": [
+        {
+          "status": 308,
+          "from": "https://www.qaznedr.kz/zh/about",
+          "to": "https://qaznedr.kz/zh/about"
+        }
+      ],
+      "finalURL": "https://qaznedr.kz/zh/about",
+      "status": 200,
+      "title": "关于 QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/zh/about",
+      "robots": "index, follow"
+    }
+  ]
+}

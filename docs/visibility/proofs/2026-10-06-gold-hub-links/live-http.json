@@ -1,0 +1,144 @@
+{
+  "results": [
+    {
+      "url": "https://qaznedr.kz/ru/minerals/gold",
+      "finalURL": "https://qaznedr.kz/ru/minerals/gold",
+      "status": 200,
+      "title": "Золото · Участки | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/ru/minerals/gold",
+      "robots": "index, follow",
+      "checks": {
+        "http": true,
+        "canonical": true,
+        "singleH1": true,
+        "indexable": true,
+        "allGuideLinks": true,
+        "collectionSchema": true,
+        "language": true
+      },
+      "destinations": [
+        {
+          "url": "https://qaznedr.kz/ru/insights/geological-map-kazakhstan",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/ru/insights/east-kazakhstan-gold-map-guide",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/ru/insights/satellite-gold-map-guide",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/kz/minerals/gold",
+      "finalURL": "https://qaznedr.kz/kz/minerals/gold",
+      "status": 200,
+      "title": "Алтын · Учаскелер | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/kz/minerals/gold",
+      "robots": "index, follow",
+      "checks": {
+        "http": true,
+        "canonical": true,
+        "singleH1": true,
+        "indexable": true,
+        "allGuideLinks": true,
+        "collectionSchema": true,
+        "language": true
+      },
+      "destinations": [
+        {
+          "url": "https://qaznedr.kz/kz/insights/geological-map-kazakhstan",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/kz/insights/east-kazakhstan-gold-map-guide",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/kz/insights/satellite-gold-map-guide",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/en/minerals/gold",
+      "finalURL": "https://qaznedr.kz/en/minerals/gold",
+      "status": 200,
+      "title": "Gold · Areas | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/en/minerals/gold",
+      "robots": "index, follow",
+      "checks": {
+        "http": true,
+        "canonical": true,
+        "singleH1": true,
+        "indexable": true,
+        "allGuideLinks": true,
+        "collectionSchema": true,
+        "language": true
+      },
+      "destinations": [
+        {
+          "url": "https://qaznedr.kz/en/insights/geological-map-kazakhstan",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/en/insights/east-kazakhstan-gold-map-guide",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/en/insights/satellite-gold-map-guide",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "url": "https://qaznedr.kz/zh/minerals/gold",
+      "finalURL": "https://qaznedr.kz/zh/minerals/gold",
+      "status": 200,
+      "title": "金 · 地块 | QAZNEDR HOLDING",
+      "canonical": "https://qaznedr.kz/zh/minerals/gold",
+      "robots": "index, follow",
+      "checks": {
+        "http": true,
+        "canonical": true,
+        "singleH1": true,
+        "indexable": true,
+        "allGuideLinks": true,
+        "collectionSchema": true,
+        "language": true
+      },
+      "destinations": [
+        {
+          "url": "https://qaznedr.kz/zh/insights/geological-map-kazakhstan",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/zh/insights/east-kazakhstan-gold-map-guide",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/zh/insights/satellite-gold-map-guide",
+          "status": 200
+        },
+        {
+          "url": "https://qaznedr.kz/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+          "status": 200
+        }
+      ]
+    }
+  ]
+}

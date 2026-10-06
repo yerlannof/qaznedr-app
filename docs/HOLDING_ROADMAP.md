@@ -39,8 +39,11 @@ Chrome16 сочетаний, реальный переход в гайд и не
 Bing42 в панели /38 строк /37 уникальных наблюдаемых URL; все37 проверены:
 20 final200 (13 канонических страниц с уникальными title),17 старых404,
 35 цепочек redirect. Панель ещё не обновилась, ошибку не выдавать за закрытую.
-Отчёт `docs/visibility/2026-10-06-gold-hub-links-release.md`; после push
-сверить exact CI/Production и4 live gold URL, IndexNow только4 clean URL.
+Отчёт `docs/visibility/2026-10-06-gold-hub-links-release.md`; код d86a571 опубликован:
+CI37489153515 все4 jobs success, Production6888441091 exact SHA success;
+4 gold hubs +16 guide destinations live PASS, реальный клик/скриншот RU375.
+IndexNow200 принял4 clean URL; это не доказательство индексации/роста.
+Служебный checkpoint с этими доказательствами сверяется после push.
 Следом сопоставимые метрики/реальные обращения и подтверждённые кейсы.
 
 **SEO и источник обращения, 06.10.2026:** устранена потеря guide в переходе

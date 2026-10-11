@@ -725,7 +725,8 @@ export const translations = {
       viewList: 'Список',
       unverified: 'Не верифицировано',
       verified: 'Верифицировано QAZNEDR',
-      unverifiedHint: 'Команда QAZNEDR ещё не проверила объект и документы',
+      unverifiedHint:
+        'Полная проверка объекта и документов командой QAZNEDR ещё не проведена',
       verifiedHint: 'Объект и документы проверены командой QAZNEDR',
       published: 'Опубликовано {date}',
       priceOnRequest: 'Цена: по запросу',
@@ -733,9 +734,6 @@ export const translations = {
       afterNda: 'Материалы — после NDA',
       zoneApprox: 'Место показано условно',
       crewFound: 'Бригада найдена',
-      latestTitle: 'Последние предложения',
-      allCatalogue: 'Вся витрина',
-      open: 'Открыть {code}',
     },
     showcase: {
       rightsChecked: 'Проверено {date}, не выписка.',
@@ -1961,7 +1959,8 @@ export const translations = {
       viewList: 'Тізім',
       unverified: 'Верификацияланбаған',
       verified: 'QAZNEDR верификациялаған',
-      unverifiedHint: 'QAZNEDR командасы нысан мен құжаттарды әлі тексермеген',
+      unverifiedHint:
+        'Нысан мен құжаттарды QAZNEDR командасы әлі толық тексермеген',
       verifiedHint: 'Нысан мен құжаттарды QAZNEDR командасы тексерген',
       published: 'Жарияланды: {date}',
       priceOnRequest: 'Бағасы: сұрау бойынша',
@@ -1969,9 +1968,6 @@ export const translations = {
       afterNda: 'Материалдар — NDA-дан кейін',
       zoneApprox: 'Орны шартты түрде көрсетілген',
       crewFound: 'Бригада табылды',
-      latestTitle: 'Соңғы ұсыныстар',
-      allCatalogue: 'Бүкіл витрина',
-      open: '{code} ашу',
     },
     showcase: {
       rightsChecked: '{date} тексерілді, үзінді көшірме емес.',
@@ -3112,7 +3108,7 @@ export const translations = {
       unverified: 'Not verified',
       verified: 'Verified by QAZNEDR',
       unverifiedHint:
-        'The QAZNEDR team has not yet checked the object and documents',
+        'The QAZNEDR team has not yet completed a full check of the object and documents',
       verifiedHint: 'The object and documents were checked by the QAZNEDR team',
       published: 'Published {date}',
       priceOnRequest: 'Price: on request',
@@ -3120,9 +3116,6 @@ export const translations = {
       afterNda: 'Materials after an NDA',
       zoneApprox: 'Location shown approximately',
       crewFound: 'Crew found',
-      latestTitle: 'Latest offers',
-      allCatalogue: 'Full catalogue',
-      open: 'Open {code}',
     },
     showcase: {
       rightsChecked: 'Checked {date}; not an official extract.',
@@ -4222,7 +4215,7 @@ export const translations = {
       viewList: '列表',
       unverified: '未核验',
       verified: '已由 QAZNEDR 核验',
-      unverifiedHint: 'QAZNEDR 团队尚未核查该项目及文件',
+      unverifiedHint: 'QAZNEDR 团队尚未完成对该项目及文件的全面核查',
       verifiedHint: '该项目及文件已由 QAZNEDR 团队核查',
       published: '发布于 {date}',
       priceOnRequest: '价格：面议',
@@ -4230,9 +4223,6 @@ export const translations = {
       afterNda: '资料在签署保密协议后提供',
       zoneApprox: '位置为示意',
       crewFound: '已找到作业队',
-      latestTitle: '最新项目',
-      allCatalogue: '查看全部',
-      open: '打开 {code}',
     },
     showcase: {
       rightsChecked: '核查日期 {date}，非官方摘录。',

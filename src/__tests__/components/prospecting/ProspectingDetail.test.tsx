@@ -33,3 +33,7 @@ it('replaces the contact block with a note once a crew is found', () => {
   expect(html).not.toContain('Обсудить работу на участке');
   expect(html).toContain('id="contact"');
 });
+
+it('keeps the north arrow at the top right of the plot page outline', () => {
+  expect(render(plot)).toContain('M530 54V20');
+});

@@ -143,12 +143,12 @@ export function ShowcaseGridCard({
   const parts = splitHeadline(headline.text);
   // The number never travels without its caveat: the one chosen by the
   // geobase for the home page, otherwise the card's first fact.
-  const first = pickList(card.facts, locale);
-  const caveat = card.featured
-    ? pickText(card.featured.fact, locale)
-    : first.items[0]
-      ? { text: first.items[0], lang: first.lang }
-      : null;
+  // The number never travels without its caveats: on the home page the one
+  // line the geobase chose (featured), elsewhere every fact of the card.
+  const facts = pickList(card.facts, locale);
+  const caveats = card.featured
+    ? [pickText(card.featured.fact, locale)]
+    : facts.items.map((text) => ({ text, lang: facts.lang }));
   const label = commodityLabel(card.commodity, locale, card.commodity_ru);
   return (
     <CatalogGridCard
@@ -171,14 +171,12 @@ export function ShowcaseGridCard({
       where={t('catalogGrid.zoneApprox')}
       commodity={{ label, gold: card.commodity.includes('Au') }}
       figures={[
-        {
-          label: parts.type || headline.text,
-          value: parts.type ? parts.value : '',
-          lang: headline.lang,
-        },
-      ].filter((f) => f.value)}
+        parts.type
+          ? { label: parts.type, value: parts.value, lang: headline.lang }
+          : { label: '', value: headline.text, lang: headline.lang },
+      ]}
       notes={[
-        ...(caveat ? [{ text: caveat.text, lang: caveat.lang }] : []),
+        ...caveats.map((c) => ({ text: c.text, lang: c.lang })),
         {
           text: t('showcase.rightsChecked', {
             date: formatRightsDate(card.rights.checked_at),

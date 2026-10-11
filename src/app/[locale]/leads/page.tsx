@@ -23,6 +23,7 @@ import { getContactConfig } from '@/lib/config/contacts';
 import {
   activeFilterCount,
   catalogQuery,
+  EMPTY_PARAMS,
   facetCounts,
   filterCatalog,
   parseCatalogParams,
@@ -381,7 +382,7 @@ export default async function LeadsCatalogPage({
                   </h2>
                   <div className="mt-6 flex flex-wrap justify-center gap-3">
                     <Link
-                      href={`/${locale}/leads`}
+                      href={href({ ...EMPTY_PARAMS, view: filters.view })}
                       className="brand-button-secondary brand-focus min-h-12"
                     >
                       {t('catalog.reset')}
@@ -396,9 +397,16 @@ export default async function LeadsCatalogPage({
                   </div>
                 </div>
               ) : filters.view === 'grid' ? (
-                <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                  {shown.map(renderGridItem)}
-                </div>
+                <>
+                  <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                    {shown.map(renderGridItem)}
+                  </div>
+                  {shownFinds.length > 0 && onlyKind !== 'find' && (
+                    <p className="mt-3 text-xs text-brand-muted">
+                      {t('showcase.mapCredit')}
+                    </p>
+                  )}
+                </>
               ) : (
                 <div>{shown.map(renderItem)}</div>
               )}

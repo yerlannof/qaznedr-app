@@ -51,12 +51,19 @@ export default function HomePageContent({
   // Home grid (approved design 19): the newest asset, the featured finds
   // chosen by the geobase (with their caveat) and plots up to four cards.
   const HOME_CARDS = 4;
-  const featured = snapshot.leads.filter((l) => parseShowcase(l.showcase));
-  const legacyLeads = snapshot.leads.filter((l) => !parseShowcase(l.showcase));
+  const featured = snapshot.leads.filter(
+    (l) => parseShowcase(l.showcase)?.featured
+  );
+  const legacyLeads = snapshot.leads
+    .filter((l) => !parseShowcase(l.showcase))
+    .slice(0, Math.max(0, HOME_CARDS - 1 - featured.length));
   const offers = listPublishedOffers().slice(0, 1);
   const plots = listPublicPlots().slice(
     0,
-    Math.max(0, HOME_CARDS - offers.length - featured.length)
+    Math.max(
+      0,
+      HOME_CARDS - offers.length - featured.length - legacyLeads.length
+    )
   );
   const hasCards =
     offers.length + featured.length + plots.length + legacyLeads.length > 0;
@@ -154,6 +161,11 @@ export default function HomePageContent({
                 </article>
               ))}
             </div>
+            {featured.length > 0 && (
+              <p className="mt-3 text-xs text-brand-muted">
+                {t('showcase.mapCredit')}
+              </p>
+            )}
             {snapshot.leads.some((l) => parseShowcase(l.showcase)) && (
               <ShowcaseDisclaimer locale={locale} />
             )}

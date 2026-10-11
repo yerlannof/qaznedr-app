@@ -100,7 +100,11 @@ export default function PlotOutline({
             d={`M24 ${H - 22}h${(scale * k).toFixed(1)}M24 ${H - 28}v12M${(24 + scale * k).toFixed(1)} ${H - 28}v12`}
           />
           <path
-            d={`M${W - 30} ${H - 22}V${H - 56}M${W - 38} ${H - 46}l8-10 8 10`}
+            d={
+              fill
+                ? `M${W - 30} ${H - 22}V${H - 56}M${W - 38} ${H - 46}l8-10 8 10`
+                : `M${W - 30} 54V20M${W - 38} 30l8-10 8 10`
+            }
           />
         </g>
         <text x={24} y={H - 34} className="fill-brand-muted text-[13px]">
@@ -108,7 +112,7 @@ export default function PlotOutline({
         </text>
         <text
           x={W - 30}
-          y={H - 64}
+          y={fill ? H - 64 : 72}
           textAnchor="middle"
           className="fill-brand-muted text-[13px]"
         >

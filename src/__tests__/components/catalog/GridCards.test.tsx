@@ -72,3 +72,25 @@ it('ShowcaseGridCard keeps the number with its type and a caveat', () => {
   expect(html).toContain('Проверено');
   expect(html).toContain('Материалы — после NDA');
 });
+
+it('keeps a headline without a type colon instead of dropping the number', () => {
+  const card = { ...fakeShowcase, headline: { ru: 'Золото 5 г/т' } };
+  const html = renderToStaticMarkup(
+    <ShowcaseGridCard card={card} locale="ru" />
+  );
+  expect(html).toContain('Золото 5 г/т');
+});
+
+it('shows every caveat of a find that is not featured', () => {
+  const html = renderToStaticMarkup(
+    <ShowcaseGridCard card={fakeShowcase} locale="ru" />
+  );
+  for (const fact of fakeShowcase.facts.ru) expect(html).toContain(fact);
+});
+
+it('gives the verification hint to screen readers', () => {
+  const html = renderToStaticMarkup(
+    <ProspectingGridCard plot={p07} locale="ru" />
+  );
+  expect(html).toContain('Полная проверка объекта и документов');
+});

@@ -275,7 +275,13 @@ export default function CatalogFilters({
             <div className="flex gap-3 border-t border-brand-line px-4 py-3">
               <button
                 type="button"
-                onClick={() => setDraft({ ...EMPTY_PARAMS, sort: draft.sort })}
+                onClick={() =>
+                  setDraft({
+                    ...EMPTY_PARAMS,
+                    sort: draft.sort,
+                    view: draft.view,
+                  })
+                }
                 className="brand-button-secondary brand-focus min-h-12 flex-1"
               >
                 {t('catalog.resetShort')}
@@ -306,6 +312,9 @@ export default function CatalogFilters({
         {params.kinds.map((k) => (
           <input key={k} type="hidden" name="kind" value={k} />
         ))}
+        {params.view === 'list' && (
+          <input type="hidden" name="view" value="list" />
+        )}
         {groups(
           params,
           liveCounts,
@@ -324,7 +333,7 @@ export default function CatalogFilters({
             href={`/${locale}/leads`}
             onClick={(e) => {
               e.preventDefault();
-              go({ ...EMPTY_PARAMS, sort: params.sort });
+              go({ ...EMPTY_PARAMS, sort: params.sort, view: params.view });
             }}
             className="brand-focus mt-3 inline-flex min-h-11 items-center text-sm text-brand-muted underline underline-offset-4"
           >

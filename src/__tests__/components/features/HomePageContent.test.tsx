@@ -119,3 +119,14 @@ it('links all three homepage guides to their existing Kazakh versions', () => {
     ).toBeInTheDocument();
   }
 });
+
+it('shows at most four cards on the home page', () => {
+  const { container } = render(
+    <HomePageContent
+      locale="ru"
+      snapshot={{ stats: { total: 0, regions: 0 }, leads: [] }}
+    />
+  );
+  const section = container.querySelector('[aria-labelledby="home-areas"]')!;
+  expect(section.querySelectorAll('article').length).toBeLessThanOrEqual(4);
+});

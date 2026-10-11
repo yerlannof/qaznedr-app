@@ -90,8 +90,11 @@ export default function MobileTabBar() {
     );
   }
 
+  const isOffer = section === 'offers' && segments.length === 3;
   const href = isTeaser
     ? `${pathname.replace(/\/$/, '')}#contact-channels`
-    : guideContactHref(locale, guideFromPath(pathname));
+    : isOffer
+      ? `${pathname.replace(/\/$/, '')}#contact`
+      : guideContactHref(locale, guideFromPath(pathname));
   return <ContactAction locale={locale} href={href} />;
 }

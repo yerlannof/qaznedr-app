@@ -7,14 +7,14 @@ import { leadMineralName } from '@/lib/seo/lead-metadata';
 // reviewed translations. The contract forbids rewriting numbers, their type
 // words or caveats, so rendering only picks and splits — it never composes.
 
-const localized = z.object({
+export const localized = z.object({
   ru: z.string().min(1),
   kz: z.string().min(1).optional(),
   en: z.string().min(1).optional(),
   zh: z.string().min(1).optional(),
 });
 
-const localizedList = z.object({
+export const localizedList = z.object({
   ru: z.array(z.string().min(1)),
   kz: z.array(z.string().min(1)).optional(),
   en: z.array(z.string().min(1)).optional(),

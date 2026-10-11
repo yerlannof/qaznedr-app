@@ -4,6 +4,8 @@
 
 ## What we offer
 - Prepared areas shown as showcase cards: metal, oblast, the main figure with its value type exactly as recorded in an archival geological report (single-sample maximum, average, best interval, etc.) together with its caveats, a fragment of the report scan with names hidden, and an approximate circle on an overview map. The object lies inside the circle; the circle centre does not coincide with it and must not be quoted as a location. Exact location and materials are shared after a meeting and an NDA.
+- Operating assets offered for sale by their owners, shown anonymously with technical figures, reserve standard, legal status and check date; price and documents after an NDA. The holding does not own these assets. First asset: an operating crushed-stone quarry with a crushing and screening plant in Almaty Region, about 10 km from Konaev — 3,081.76 thousand m³ of balance reserves (Kazakhstan State Reserves Committee categories, as of 1 Jan 2025, not JORC), design output 315 thousand m³ a year, crushing plant up to 250 t/h; sale of 100% of the subsoil user company: https://qaznedr.kz/en/offers/QN-A01
+- One catalogue with filters by offer type (our finds, assets for sale), commodity group (metals or construction materials), commodity, region and stage: https://qaznedr.kz/en/leads
 - Deal formats: licence obtained directly for the investor, licence on the holding with a later transfer, joint venture or earn-in, analytics on an area.
 - Licensing support for solid-mineral exploration licences in Kazakhstan.
 - Field geology by staff geologists; due diligence of areas.
@@ -17,7 +19,7 @@
 - Grade figures are labelled as average, spike or schlich values.
 
 ## Key pages
-| Language | Home | Areas | Contact |
+| Language | Home | Areas and assets | Contact |
 |---|---|---|---|
 | English | https://qaznedr.kz/en | https://qaznedr.kz/en/leads | https://qaznedr.kz/en/contact |
 | 中文 | https://qaznedr.kz/zh | https://qaznedr.kz/zh/leads | https://qaznedr.kz/zh/contact |

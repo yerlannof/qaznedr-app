@@ -16,6 +16,8 @@ interface ContactChannelsProps {
   leadCode?: string;
   serviceTopic?: ServiceTopic;
   guideSlug?: string;
+  /** Ready message from an approved card (e.g. an asset offer). */
+  message?: string;
 }
 
 const card = 'border border-brand-line bg-brand-surface p-5';
@@ -26,6 +28,7 @@ export default function ContactChannels({
   leadCode,
   serviceTopic,
   guideSlug,
+  message: presetMessage,
 }: ContactChannelsProps) {
   const t = (key: string, params?: Record<string, unknown>) =>
     translate(locale, key, params);
@@ -34,14 +37,16 @@ export default function ContactChannels({
     (guide ? guideTitle(toLocale(locale), guide) : undefined) ??
     (serviceTopic ? t(`holdingServices.${serviceTopic}.title`) : '');
   const context = [leadCode, subject].filter(Boolean).join(' · ');
-  const message = [
-    leadCode
-      ? t('contact.whatsappTextLead', { code: leadCode })
-      : t('contact.whatsappTextGeneral'),
-    subject,
-  ]
-    .filter(Boolean)
-    .join('\n');
+  const message =
+    presetMessage ??
+    [
+      leadCode
+        ? t('contact.whatsappTextLead', { code: leadCode })
+        : t('contact.whatsappTextGeneral'),
+      subject,
+    ]
+      .filter(Boolean)
+      .join('\n');
   const [copied, setCopied] = useState(false);
   const [messageCopied, setMessageCopied] = useState(false);
 

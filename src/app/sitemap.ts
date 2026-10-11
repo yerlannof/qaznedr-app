@@ -4,6 +4,7 @@ import { buildLanguageAlternates } from '@/lib/seo/metadata';
 import { PUBLIC_PAGES } from '@/lib/seo/pages';
 import { LOCALES, localeUrl } from '@/lib/seo/site';
 import { loadSitemapLeadCodes } from '@/lib/seo/sitemap-leads';
+import { listPublishedOffers } from '@/lib/offers';
 
 export const revalidate = 3600;
 
@@ -40,5 +41,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  return [...staticEntries, ...insightEntries, ...leadEntries];
+  // Asset cards ship with the code, so their list is always complete.
+  const offerEntries: MetadataRoute.Sitemap = listPublishedOffers().flatMap(
+    (offer) =>
+      LOCALES.map((locale) => ({
+        url: localeUrl(locale, `/offers/${offer.code}`),
+        lastModified: new Date(offer.published_at),
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+        alternates: {
+          languages: buildLanguageAlternates(`/offers/${offer.code}`),
+        },
+      }))
+  );
+
+  return [...staticEntries, ...insightEntries, ...leadEntries, ...offerEntries];
 }

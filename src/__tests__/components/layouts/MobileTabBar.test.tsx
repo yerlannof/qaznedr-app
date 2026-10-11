@@ -44,6 +44,15 @@ describe('MobileTabBar', () => {
     );
   });
 
+  it('sends an asset page visitor to that asset’s contact block', () => {
+    setPath('/en/offers/QN-A01');
+    render(<MobileTabBar />);
+    expect(screen.getByRole('link')).toHaveAttribute(
+      'href',
+      '/en/offers/QN-A01#contact'
+    );
+  });
+
   it.each([
     ['/ru/services/legal', '/ru/contact?service=licensing'],
     ['/zh/services/geological', '/zh/contact?service=geology'],

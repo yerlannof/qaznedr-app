@@ -41,10 +41,9 @@ describe('Footer', () => {
   it('keeps the approved public navigation links', () => {
     (usePathname as jest.Mock).mockReturnValue('/ru');
     render(<Footer />);
-    expect(screen.getByRole('link', { name: 'Участки' })).toHaveAttribute(
-      'href',
-      '/ru/leads'
-    );
+    expect(
+      screen.getByRole('link', { name: 'Участки и объекты' })
+    ).toHaveAttribute('href', '/ru/leads');
     expect(screen.getByRole('link', { name: 'Контакты' })).toHaveAttribute(
       'href',
       '/ru/contact'

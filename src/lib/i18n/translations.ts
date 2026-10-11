@@ -341,9 +341,9 @@ export const translations = {
           'Предлагаем участки, отобранные нашими геологами на основе изучения геологических материалов. В нашей команде — казахстанские специалисты, в том числе геологи с 50-летним опытом.',
       },
       leads: {
-        title: 'Участки недр Казахстана: золото, медь и другие металлы',
+        title: 'Участки и объекты недр Казахстана: металлы, карьеры на продажу',
         description:
-          'Подготовленные рудные участки Казахстана, свободные по нашей проверке на дату в карточке. В тизере: металл, регион, тип месторождения, содержание. Детали — после встречи и NDA.',
+          'Рудные участки, отобранные нашими геологами, и действующие карьеры и месторождения на продажу. Фильтр по сырью, региону и стадии; статус и цифры — на дату проверки в карточке, детали — после NDA.',
       },
       services: {
         title: 'Услуги: лицензирование, геологоразведка, due diligence',
@@ -450,7 +450,7 @@ export const translations = {
     },
     navigation: {
       insights: 'Гайды',
-      leads: 'Участки',
+      leads: 'Участки и объекты',
       listings: 'Объявления',
       map: 'Карта',
       services: 'Услуги',
@@ -548,7 +548,7 @@ export const translations = {
     footerNav: {
       platform: {
         title: 'Компания',
-        leads: 'Участки',
+        leads: 'Участки и объекты',
         listings: 'Объявления',
         services: 'Услуги',
         companies: 'Компании',
@@ -565,6 +565,68 @@ export const translations = {
         rights: '© {year} QAZNEDR. Все права защищены.',
         city: 'Астана, Казахстан',
       },
+    },
+    catalog: {
+      eyebrow: 'Витрина · статус и цифры — на дату проверки в карточке',
+      title: 'Участки и объекты недр Казахстана',
+      lede: 'Участки, отобранные нашими геологами; лицензии на старательство, где держатель ищет бригаду; действующие карьеры и месторождения, которые продают владельцы. Название, координаты и документы — после NDA, если в карточке не сказано иное.',
+      ledeNoPlots:
+        'Участки, отобранные нашими геологами, и действующие карьеры и месторождения, которые продают владельцы. Название, координаты и документы — после NDA, если в карточке не сказано иное.',
+      kindLabel: 'Тип предложения',
+      all: 'Все',
+      kinds: {
+        asset: 'Объекты на продажу',
+        find: 'Наши находки',
+        prospecting: 'Старательство',
+      },
+      groupsLabel: 'Группа сырья',
+      groups: {
+        metals_tpi: 'Металлы (ТПИ)',
+        opi: 'Стройматериалы (ОПИ)',
+      },
+      commoditiesLabel: 'Сырьё',
+      regionsLabel: 'Регион',
+      stagesLabel: 'Стадия',
+      stages: {
+        occurrence: 'Рудопроявление',
+        prospecting: 'Старательская добыча',
+        production: 'Действующая добыча',
+      },
+      infraLabel: 'Инфраструктура',
+      infraOption: 'Есть техника, ЛЭП, жильё',
+      filters: 'Фильтры',
+      apply: 'Показать {count}',
+      reset: 'Сбросить фильтры',
+      resetShort: 'Сбросить',
+      close: 'Закрыть фильтры',
+      shown: 'Показано {count}',
+      noFilters: 'Все типы · фильтры не выбраны',
+      sortLabel: 'Порядок',
+      sorts: {
+        newest: 'Сначала новые',
+        area_desc: 'По площади участка',
+        valid_desc: 'По сроку лицензии',
+      },
+      removeFilter: 'Убрать фильтр: {label}',
+      emptyTitle: 'По этим фильтрам пока ничего нет',
+    },
+    offer: {
+      breadcrumb: 'Объекты на продажу',
+      keyFigures: 'Ключевые цифры',
+      rightsHeading: 'Правовой статус',
+      rightsChecked: 'Проверено {date} {basis}',
+      ndaHeading: 'Доступно после NDA',
+      galleryHeading: 'Фото и видео',
+      videoBadge: 'Видео {duration}',
+      photoCredit: 'фото продавца',
+      cta: 'Обсудить {code}',
+      more: 'Подробнее об объекте',
+      contactHeading: 'Обсудить объект {code}',
+      contactNote:
+        'Пришлём NDA, затем — план горных работ, документы по запасам и праву, цену. Код объекта уже в сообщении.',
+      openImage: 'Открыть фото полностью',
+      unavailable: 'Объект снят с публикации',
+      notFound: 'Объект не найден',
     },
     showcase: {
       rightsChecked: 'Проверено {date}, не выписка.',
@@ -1403,9 +1465,9 @@ export const translations = {
       },
       leads: {
         title:
-          'Қазақстан жер қойнауы учаскелері: алтын, мыс және басқа металдар',
+          'Қазақстанның жер қойнауы учаскелері мен нысандары: металдар, сатылатын карьерлер',
         description:
-          'Қазақстанның дайындалған кен учаскелері, карточкадағы күнге біздің тексеруімізше бос. Тизерде: металл, өңір, кен орнының түрі, құрамы. Толығы — кездесу мен NDA-дан кейін.',
+          'Геологтарымыз іріктеген кен учаскелері және сатылатын жұмыс істеп тұрған карьерлер мен кен орындары. Шикізат, өңір және кезең бойынша сүзгі; мәртебе мен сандар — карточкадағы тексеру күніне, толығы — NDA-дан кейін.',
       },
       services: {
         title: 'Қызметтер: лицензиялау, геологиялық барлау, due diligence',
@@ -1513,7 +1575,7 @@ export const translations = {
     },
     navigation: {
       insights: 'Нұсқаулықтар',
-      leads: 'Учаскелер',
+      leads: 'Учаскелер мен нысандар',
       listings: 'Хабарландырулар',
       map: 'Карта',
       services: 'Қызметтер',
@@ -1612,7 +1674,7 @@ export const translations = {
     footerNav: {
       platform: {
         title: 'Компания',
-        leads: 'Учаскелер',
+        leads: 'Учаскелер мен нысандар',
         listings: 'Хабарландырулар',
         services: 'Қызметтер',
         companies: 'Компаниялар',
@@ -1629,6 +1691,68 @@ export const translations = {
         rights: '© {year} QAZNEDR. Барлық құқықтар қорғалған.',
         city: 'Астана, Қазақстан',
       },
+    },
+    catalog: {
+      eyebrow: 'Витрина · мәртебе мен сандар — карточкадағы тексеру күніне',
+      title: 'Қазақстанның жер қойнауы учаскелері мен нысандары',
+      lede: 'Геологтарымыз іріктеген учаскелер; ұстаушысы бригада іздеп жүрген өндірушілік лицензиялары; иелері сатып жатқан жұмыс істеп тұрған карьерлер мен кен орындары. Атауы, координаттары мен құжаттары — карточкада басқаша айтылмаса, NDA-дан кейін.',
+      ledeNoPlots:
+        'Геологтарымыз іріктеген учаскелер және иелері сатып жатқан жұмыс істеп тұрған карьерлер мен кен орындары. Атауы, координаттары мен құжаттары — карточкада басқаша айтылмаса, NDA-дан кейін.',
+      kindLabel: 'Ұсыныс түрі',
+      all: 'Барлығы',
+      kinds: {
+        asset: 'Сатылатын нысандар',
+        find: 'Біздің олжалар',
+        prospecting: 'Өндірушілік',
+      },
+      groupsLabel: 'Шикізат тобы',
+      groups: {
+        metals_tpi: 'Металдар (ҚПҚ)',
+        opi: 'Құрылыс материалдары (КТПҚ)',
+      },
+      commoditiesLabel: 'Шикізат',
+      regionsLabel: 'Өңір',
+      stagesLabel: 'Кезең',
+      stages: {
+        occurrence: 'Кен білінімі',
+        prospecting: 'Өндірушілік өндіру',
+        production: 'Жұмыс істеп тұрған өндіру',
+      },
+      infraLabel: 'Инфрақұрылым',
+      infraOption: 'Техника, электр желісі, тұрғын үй бар',
+      filters: 'Сүзгілер',
+      apply: '{count} көрсету',
+      reset: 'Сүзгілерді тазарту',
+      resetShort: 'Тазарту',
+      close: 'Сүзгілерді жабу',
+      shown: 'Көрсетілді: {count}',
+      noFilters: 'Барлық түрлер · сүзгі таңдалмаған',
+      sortLabel: 'Реті',
+      sorts: {
+        newest: 'Алдымен жаңалары',
+        area_desc: 'Учаске ауданы бойынша',
+        valid_desc: 'Лицензия мерзімі бойынша',
+      },
+      removeFilter: 'Сүзгіні алып тастау: {label}',
+      emptyTitle: 'Бұл сүзгілер бойынша әзірге ештеңе жоқ',
+    },
+    offer: {
+      breadcrumb: 'Сатылатын нысандар',
+      keyFigures: 'Негізгі сандар',
+      rightsHeading: 'Құқықтық мәртебе',
+      rightsChecked: '{date} тексерілді, {basis}',
+      ndaHeading: 'NDA-дан кейін қолжетімді',
+      galleryHeading: 'Фото және бейне',
+      videoBadge: 'Бейне {duration}',
+      photoCredit: 'сатушының фотосы',
+      cta: '{code} талқылау',
+      more: 'Нысан туралы толығырақ',
+      contactHeading: '{code} нысанын талқылау',
+      contactNote:
+        'NDA жібереміз, содан кейін — тау-кен жұмыстарының жоспары, қорлар мен құқық бойынша құжаттар, баға. Нысан коды хабарламада бар.',
+      openImage: 'Фотоны толық ашу',
+      unavailable: 'Нысан жариялаудан алынды',
+      notFound: 'Нысан табылмады',
     },
     showcase: {
       rightsChecked: '{date} тексерілді, үзінді көшірме емес.',
@@ -2382,9 +2506,10 @@ export const translations = {
           'We present areas selected by our geologists based on their review of geological materials. Our team includes Kazakhstani specialists, including geologists with 50 years of experience.',
       },
       leads: {
-        title: 'Exploration Areas in Kazakhstan: Gold, Copper and More',
+        title:
+          'Mineral Areas and Assets for Sale in Kazakhstan: Metals, Quarries',
         description:
-          'Prepared ore areas in Kazakhstan, free per our check as of the date on each card. The teaser shows metal, region, deposit type and grade; details after a meeting and an NDA.',
+          'Ore areas selected by our geologists, plus operating quarries and deposits offered for sale. Filter by commodity, region and stage; status and figures as of the check date on each card, details after an NDA.',
       },
       services: {
         title: 'Services: Licensing, Exploration, Due Diligence',
@@ -2491,7 +2616,7 @@ export const translations = {
     },
     navigation: {
       insights: 'Guides',
-      leads: 'Areas',
+      leads: 'Areas & assets',
       listings: 'Listings',
       map: 'Map',
       services: 'Services',
@@ -2589,7 +2714,7 @@ export const translations = {
     footerNav: {
       platform: {
         title: 'Company',
-        leads: 'Areas',
+        leads: 'Areas & assets',
         listings: 'Listings',
         services: 'Services',
         companies: 'Companies',
@@ -2606,6 +2731,69 @@ export const translations = {
         rights: '© {year} QAZNEDR. All rights reserved.',
         city: 'Astana, Kazakhstan',
       },
+    },
+    catalog: {
+      eyebrow:
+        'Showcase · status and figures as of the check date on each card',
+      title: 'Mineral areas and assets in Kazakhstan',
+      lede: 'Areas selected by our geologists; artisanal mining licences whose holders are looking for a crew; operating quarries and deposits offered by their owners. Name, coordinates and documents follow an NDA unless the card says otherwise.',
+      ledeNoPlots:
+        'Areas selected by our geologists, and operating quarries and deposits offered by their owners. Name, coordinates and documents follow an NDA unless the card says otherwise.',
+      kindLabel: 'Offer type',
+      all: 'All',
+      kinds: {
+        asset: 'Assets for sale',
+        find: 'Our finds',
+        prospecting: 'Artisanal mining',
+      },
+      groupsLabel: 'Commodity group',
+      groups: {
+        metals_tpi: 'Metals (solid minerals)',
+        opi: 'Construction materials (common minerals)',
+      },
+      commoditiesLabel: 'Commodity',
+      regionsLabel: 'Region',
+      stagesLabel: 'Stage',
+      stages: {
+        occurrence: 'Ore occurrence',
+        prospecting: 'Artisanal mining',
+        production: 'Operating production',
+      },
+      infraLabel: 'Infrastructure',
+      infraOption: 'Equipment, power line, housing in place',
+      filters: 'Filters',
+      apply: 'Show {count}',
+      reset: 'Reset filters',
+      resetShort: 'Reset',
+      close: 'Close filters',
+      shown: 'Showing {count}',
+      noFilters: 'All types · no filters selected',
+      sortLabel: 'Order',
+      sorts: {
+        newest: 'Newest first',
+        area_desc: 'By plot area',
+        valid_desc: 'By licence term',
+      },
+      removeFilter: 'Remove filter: {label}',
+      emptyTitle: 'Nothing matches these filters yet',
+    },
+    offer: {
+      breadcrumb: 'Assets for sale',
+      keyFigures: 'Key figures',
+      rightsHeading: 'Legal status',
+      rightsChecked: 'Checked {date} {basis}',
+      ndaHeading: 'Available after an NDA',
+      galleryHeading: 'Photos and video',
+      videoBadge: 'Video {duration}',
+      photoCredit: 'seller’s photos',
+      cta: 'Discuss {code}',
+      more: 'More about the asset',
+      contactHeading: 'Discuss asset {code}',
+      contactNote:
+        'We send an NDA, then the mining plan, reserve and title documents, and the price. The asset code is already in the message.',
+      openImage: 'Open full photo',
+      unavailable: 'This asset is no longer listed',
+      notFound: 'Asset not found',
     },
     showcase: {
       rightsChecked: 'Checked {date}; not an official extract.',
@@ -3337,9 +3525,9 @@ export const translations = {
           '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。',
       },
       leads: {
-        title: '哈萨克斯坦矿区项目库：金矿、铜矿等空白探矿区',
+        title: '哈萨克斯坦矿区与出售项目：金属矿区、在产采石场',
         description:
-          '经我方核查（日期见地块卡片）未设矿权的空白矿区项目。公开简介包含矿种、位置、矿床类型与品位；详细资料在会面并签署保密协议（NDA）后提供。',
+          '我们的地质师筛选的矿区，以及业主出售的在产采石场和矿床。可按矿种、地区和阶段筛选；状态和数据以卡片上的核查日期为准，详细资料在签署保密协议（NDA）后提供。',
       },
       services: {
         title: '服务：探矿权办理、地质勘探、尽职调查',
@@ -3440,7 +3628,7 @@ export const translations = {
     },
     navigation: {
       insights: '指南',
-      leads: '地块',
+      leads: '矿区与项目',
       listings: '信息列表',
       map: '地图',
       services: '服务',
@@ -3534,7 +3722,7 @@ export const translations = {
     footerNav: {
       platform: {
         title: '公司',
-        leads: '地块',
+        leads: '矿区与项目',
         listings: '信息列表',
         services: '服务',
         companies: '公司',
@@ -3551,6 +3739,68 @@ export const translations = {
         rights: '© {year} QAZNEDR. 版权所有。',
         city: '哈萨克斯坦阿斯塔纳',
       },
+    },
+    catalog: {
+      eyebrow: '展示 · 状态和数据以卡片上的核查日期为准',
+      title: '哈萨克斯坦矿区与项目',
+      lede: '我们的地质师筛选的矿区；持证人正在寻找作业队的手工采矿许可证；业主出售的在产采石场和矿床。除卡片另有说明外，名称、坐标和文件在签署保密协议后提供。',
+      ledeNoPlots:
+        '我们的地质师筛选的矿区，以及业主出售的在产采石场和矿床。除卡片另有说明外，名称、坐标和文件在签署保密协议后提供。',
+      kindLabel: '类型',
+      all: '全部',
+      kinds: {
+        asset: '出售项目',
+        find: '我们的发现',
+        prospecting: '手工采矿',
+      },
+      groupsLabel: '矿产类别',
+      groups: {
+        metals_tpi: '金属（固体矿产）',
+        opi: '建材（普通矿产）',
+      },
+      commoditiesLabel: '矿种',
+      regionsLabel: '地区',
+      stagesLabel: '阶段',
+      stages: {
+        occurrence: '矿化点',
+        prospecting: '手工采矿',
+        production: '在产开采',
+      },
+      infraLabel: '基础设施',
+      infraOption: '已有设备、输电线路、住宿',
+      filters: '筛选',
+      apply: '显示{count}项',
+      reset: '清除筛选',
+      resetShort: '清除',
+      close: '关闭筛选',
+      shown: '共{count}项',
+      noFilters: '全部类型 · 未选择筛选条件',
+      sortLabel: '排序',
+      sorts: {
+        newest: '最新优先',
+        area_desc: '按地块面积',
+        valid_desc: '按许可证期限',
+      },
+      removeFilter: '移除筛选：{label}',
+      emptyTitle: '暂无符合这些条件的结果',
+    },
+    offer: {
+      breadcrumb: '出售项目',
+      keyFigures: '关键数据',
+      rightsHeading: '法律状态',
+      rightsChecked: '{date}核查，{basis}',
+      ndaHeading: '签署保密协议后提供',
+      galleryHeading: '照片和视频',
+      videoBadge: '视频 {duration}',
+      photoCredit: '卖方照片',
+      cta: '咨询{code}',
+      more: '查看项目详情',
+      contactHeading: '咨询项目{code}',
+      contactNote:
+        '我们先发送保密协议，随后提供采矿计划、储量和权属文件以及价格。消息中已包含项目编号。',
+      openImage: '查看大图',
+      unavailable: '该项目已下架',
+      notFound: '未找到项目',
     },
     showcase: {
       rightsChecked: '核查日期 {date}，非官方摘录。',

@@ -26,6 +26,13 @@ const MINERALS: Record<string, Record<Locale, string>> = {
   MN: { ru: 'Марганец', kz: 'Марганец', en: 'Manganese', zh: '锰' },
   CR: { ru: 'Хром', kz: 'Хром', en: 'Chromium', zh: '铬' },
   U: { ru: 'Уран', kz: 'Уран', en: 'Uranium', zh: '铀' },
+  // Construction stone (ОПИ) in the unified catalogue; not a chemical symbol.
+  STONE: {
+    ru: 'Строительный камень',
+    kz: 'Құрылыс тасы',
+    en: 'Construction stone',
+    zh: '建筑石材',
+  },
 };
 
 // Region spellings used by the leads export that differ from filter-config.

@@ -49,6 +49,7 @@ const plotSchema = z.object({
   corners_dms: z.array(corner),
   status: z.enum(['open', 'matched', 'hidden']),
   holder_confirmed_at: z.string().regex(ISO_DATE).nullable(),
+  published_at: z.string().regex(ISO_DATE).nullable(),
   corrected_corners: z.array(z.number().int().min(1)),
   hidden_reason: z.string().nullable().optional(),
 });

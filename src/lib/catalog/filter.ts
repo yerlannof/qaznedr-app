@@ -16,6 +16,10 @@ import {
 export const CATALOG_SORTS = ['newest', 'area_desc', 'valid_desc'] as const;
 export type CatalogSort = (typeof CATALOG_SORTS)[number];
 
+/** Cards by default (approved design 19); the list stays one click away. */
+export const CATALOG_VIEWS = ['grid', 'list'] as const;
+export type CatalogView = (typeof CATALOG_VIEWS)[number];
+
 export interface CatalogParams {
   kinds: CatalogKind[];
   groups: CommodityGroup[];
@@ -24,6 +28,7 @@ export interface CatalogParams {
   stages: CatalogStage[];
   infra: boolean;
   sort: CatalogSort;
+  view: CatalogView;
 }
 
 export type FacetKey =
@@ -74,6 +79,7 @@ export function parseCatalogParams(sp: RawParams): CatalogParams {
     sort: (CATALOG_SORTS as readonly string[]).includes(sort ?? '')
       ? (sort as CatalogSort)
       : 'newest',
+    view: values(sp.view)[0] === 'list' ? 'list' : 'grid',
   };
 }
 
@@ -85,6 +91,7 @@ export const EMPTY_PARAMS: CatalogParams = {
   stages: [],
   infra: false,
   sort: 'newest',
+  view: 'grid',
 };
 
 /** Canonical query string: fixed key order, comma-joined, defaults omitted. */
@@ -97,6 +104,7 @@ export function catalogQuery(p: CatalogParams): string {
   if (p.stages.length) q.set('stage', p.stages.join(','));
   if (p.infra) q.set('infra', '1');
   if (p.sort !== 'newest') q.set('sort', p.sort);
+  if (p.view !== 'grid') q.set('view', p.view);
   const s = q.toString();
   return s ? `?${s}` : '';
 }

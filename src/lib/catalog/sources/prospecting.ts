@@ -13,7 +13,7 @@ export function fromProspectingPlot(plot: Plot): CatalogItem {
     region: plot.region,
     stage: 'prospecting',
     hasInfrastructure: false,
-    publishedAt: plot.holder_confirmed_at,
+    publishedAt: plot.published_at,
     sortOrder: Number(plot.code.slice(-2)),
     areaHa: plot.area_ha,
     validUntil: plot.valid_until,

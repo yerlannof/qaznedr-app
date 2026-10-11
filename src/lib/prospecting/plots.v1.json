@@ -36,7 +36,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P02",
@@ -72,7 +73,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P03",
@@ -108,7 +110,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": [4]
+      "corrected_corners": [4],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P04",
@@ -134,7 +137,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P05",
@@ -165,7 +169,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P06",
@@ -196,7 +201,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P07",
@@ -227,7 +233,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P08",
@@ -254,7 +261,8 @@
       "status": "hidden",
       "holder_confirmed_at": null,
       "corrected_corners": [],
-      "hidden_reason": "coordinates cut off in photo"
+      "hidden_reason": "coordinates cut off in photo",
+      "published_at": null
     },
     {
       "code": "QN-P09",
@@ -281,7 +289,8 @@
       "status": "hidden",
       "holder_confirmed_at": null,
       "corrected_corners": [],
-      "hidden_reason": "coordinates cut off in photo"
+      "hidden_reason": "coordinates cut off in photo",
+      "published_at": null
     },
     {
       "code": "QN-P10",
@@ -312,7 +321,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P11",
@@ -339,7 +349,8 @@
       "status": "hidden",
       "holder_confirmed_at": null,
       "corrected_corners": [],
-      "hidden_reason": "licence number and coordinates unreadable"
+      "hidden_reason": "licence number and coordinates unreadable",
+      "published_at": null
     },
     {
       "code": "QN-P12",
@@ -366,7 +377,8 @@
       "status": "hidden",
       "holder_confirmed_at": null,
       "corrected_corners": [],
-      "hidden_reason": "coordinates cut off in photo"
+      "hidden_reason": "coordinates cut off in photo",
+      "published_at": null
     },
     {
       "code": "QN-P13",
@@ -397,7 +409,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P14",
@@ -428,7 +441,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P15",
@@ -459,7 +473,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P16",
@@ -490,7 +505,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P17",
@@ -521,7 +537,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P18",
@@ -552,7 +569,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P19",
@@ -583,7 +601,8 @@
       ],
       "status": "open",
       "holder_confirmed_at": "2026-10-11",
-      "corrected_corners": []
+      "corrected_corners": [],
+      "published_at": "2026-10-12"
     }
   ],
   "_note": "Public data: licence numbers and corner coordinates are published by the owner's decision (2026-10-11). Holder names are never stored here. holder_confirmed_at = date the holders confirmed the licence is in force and the signing bonus is paid."

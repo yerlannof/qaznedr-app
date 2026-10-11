@@ -197,7 +197,7 @@ export default function CatalogFilters({
 
   const sortSelect = (id: string) =>
     sorts.length > 1 ? (
-      <label className="flex items-center gap-2 text-sm text-brand-muted">
+      <label className="flex min-w-0 items-center gap-2 text-sm text-brand-muted">
         <span className="sr-only sm:not-sr-only">{t('catalog.sortLabel')}</span>
         <select
           id={id}
@@ -206,7 +206,7 @@ export default function CatalogFilters({
           onChange={(e) =>
             go({ ...params, sort: e.target.value as CatalogSort })
           }
-          className="brand-focus min-h-11 border border-brand-line bg-brand-surface px-2 text-brand-ink"
+          className="brand-focus min-h-11 min-w-0 max-w-[11rem] border border-brand-line bg-brand-surface px-2 text-brand-ink sm:max-w-none"
         >
           {sorts.map((s) => (
             <option key={s} value={s}>

@@ -8,6 +8,12 @@ import CatalogFilters, {
   type FilterOption,
 } from '@/components/catalog/CatalogFilters';
 import OfferCard from '@/components/offers/OfferCard';
+import ViewToggle from '@/components/catalog/ViewToggle';
+import {
+  OfferGridCard,
+  ProspectingGridCard,
+  ShowcaseGridCard,
+} from '@/components/catalog/GridCards';
 import ShowcaseCard from '@/components/showcase/ShowcaseCard';
 import ShowcaseDisclaimer from '@/components/showcase/ShowcaseDisclaimer';
 import ZoneMap from '@/components/showcase/ZoneMap';
@@ -216,6 +222,24 @@ export default async function LeadsCatalogPage({
     }
     return null;
   };
+  const renderGridItem = (item: CatalogItem) => {
+    if (item.kind === 'find') {
+      const card = showcases.get(item.code);
+      return card ? (
+        <ShowcaseGridCard key={item.code} card={card} locale={locale} />
+      ) : null;
+    }
+    if (item.kind === 'asset') {
+      const offer = offers.get(item.code);
+      return offer ? (
+        <OfferGridCard key={item.code} offer={offer} locale={locale} />
+      ) : null;
+    }
+    const plot = plots.get(item.code);
+    return plot ? (
+      <ProspectingGridCard key={item.code} plot={plot} locale={locale} />
+    ) : null;
+  };
 
   return (
     <>
@@ -321,6 +345,12 @@ export default async function LeadsCatalogPage({
                 <div className="flex items-center gap-4">
                   <span>{t('catalog.shown', { count: shown.length })}</span>
                   <SortSelect locale={locale} params={filters} sorts={sorts} />
+                  <ViewToggle
+                    locale={locale}
+                    view={filters.view}
+                    gridHref={href({ ...filters, view: 'grid' })}
+                    listHref={href({ ...filters, view: 'list' })}
+                  />
                 </div>
               </div>
 
@@ -364,6 +394,10 @@ export default async function LeadsCatalogPage({
                       <ArrowUpRight aria-hidden className="size-4" />
                     </Link>
                   </div>
+                </div>
+              ) : filters.view === 'grid' ? (
+                <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                  {shown.map(renderGridItem)}
                 </div>
               ) : (
                 <div>{shown.map(renderItem)}</div>

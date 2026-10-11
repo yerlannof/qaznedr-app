@@ -7,16 +7,25 @@ import HomePageContent from '@/components/features/HomePageContent';
 import { translate } from '@/lib/i18n/translations';
 import type { LeadTeaser } from '@/lib/leads/types';
 
-const areasTitle = translate('ru', 'leadsHero.title');
+const areasTitle = translate('ru', 'catalog.title');
 
-it('omits the areas section while no area is published', () => {
+it('shows artisanal plots as cards even while no find is published', () => {
   render(
     <HomePageContent
       locale="ru"
       snapshot={{ stats: { total: 0, regions: 0 }, leads: [] }}
     />
   );
-  expect(screen.queryByText(areasTitle)).not.toBeInTheDocument();
+  expect(screen.getByText(areasTitle)).toBeInTheDocument();
+  expect(
+    document.querySelector('a[href="/ru/prospecting/QN-P01"]')
+  ).toBeInTheDocument();
+  expect(
+    document.querySelector('a[href="/ru/offers/QN-A01"]')
+  ).toBeInTheDocument();
+  expect(
+    screen.getAllByText(translate('ru', 'catalogGrid.unverified')).length
+  ).toBeGreaterThan(0);
 });
 
 it('keeps the areas section with published teasers', () => {
@@ -64,10 +73,9 @@ it('renders a featured showcase teaser with its number type and one caveat', () 
   expect(
     screen.getByText(translate('ru', 'showcase.disclaimer'))
   ).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /QN-99|Открыть/ })).toHaveAttribute(
-    'href',
-    '/ru/leads/QN-99'
-  );
+  expect(
+    document.querySelector('a[href="/ru/leads/QN-99"]')
+  ).toBeInTheDocument();
 });
 
 it.each(['ru', 'kz', 'en', 'zh'])(

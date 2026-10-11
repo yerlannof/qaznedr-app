@@ -4,6 +4,8 @@ import { ArrowRight, BookOpen } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import ProspectingCard from '@/components/prospecting/ProspectingCard';
+import ViewToggle from '@/components/catalog/ViewToggle';
+import { ProspectingGridCard } from '@/components/catalog/GridCards';
 import { getContactConfig } from '@/lib/config/contacts';
 import { GUIDE, insightHref } from '@/lib/insights/registry';
 import { listPublicPlots } from '@/lib/prospecting/plots';
@@ -36,10 +38,13 @@ export async function generateMetadata({
 
 export default async function ProspectingIndexPage({
   params,
+  searchParams,
 }: {
   params: Params;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const locale = toLocale((await params).locale);
+  const view = (await searchParams)?.view === 'list' ? 'list' : 'grid';
   const { t } = getServerTranslation(locale);
   const plots = listPublicPlots();
   const contacts = getContactConfig();
@@ -99,14 +104,34 @@ export default async function ProspectingIndexPage({
               {t('prospecting.catalogLink')}
             </Link>
           </header>
-          {plots.map((plot) => (
-            <ProspectingCard
-              key={plot.code}
-              plot={plot}
+          <div className="flex justify-end border-b border-brand-line py-3">
+            <ViewToggle
               locale={locale}
-              contacts={contacts}
+              view={view}
+              gridHref={`/${locale}${PROSPECTING_PATH}`}
+              listHref={`/${locale}${PROSPECTING_PATH}?view=list`}
             />
-          ))}
+          </div>
+          {view === 'grid' ? (
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {plots.map((plot) => (
+                <ProspectingGridCard
+                  key={plot.code}
+                  plot={plot}
+                  locale={locale}
+                />
+              ))}
+            </div>
+          ) : (
+            plots.map((plot) => (
+              <ProspectingCard
+                key={plot.code}
+                plot={plot}
+                locale={locale}
+                contacts={contacts}
+              />
+            ))
+          )}
           <p className="mt-8 max-w-3xl text-sm text-brand-muted">
             <strong className="text-brand-ink">
               {t('prospecting.disclaimerLabel')}

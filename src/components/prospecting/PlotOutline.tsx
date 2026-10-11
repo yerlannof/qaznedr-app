@@ -13,10 +13,13 @@ export default function PlotOutline({
   plot,
   locale,
   compact = false,
+  fill = false,
 }: {
   plot: Plot;
   locale: Locale;
   compact?: boolean;
+  /** Fills a card's media box (grid card), no frame or caption. */
+  fill?: boolean;
 }) {
   const t = (key: string, params?: Record<string, unknown>) =>
     translate(locale, key, params);
@@ -46,12 +49,16 @@ export default function PlotOutline({
   const label = t('prospecting.outlineLabel', { code: plot.code });
 
   return (
-    <figure className="m-0">
+    <figure className={fill ? 'm-0 h-full bg-brand-surface pt-10' : 'm-0'}>
       <svg
         viewBox={`0 0 ${W} ${H}`}
         role="img"
         aria-label={label}
-        className="block h-auto w-full border border-brand-line bg-brand-surface"
+        className={
+          fill
+            ? 'block h-full w-full bg-brand-surface'
+            : 'block h-auto w-full border border-brand-line bg-brand-surface'
+        }
       >
         <g className="stroke-brand-line" strokeOpacity={0.35} strokeWidth={1}>
           {[60, 120, 180, 240, 300].map((y) => (
@@ -92,21 +99,23 @@ export default function PlotOutline({
           <path
             d={`M24 ${H - 22}h${(scale * k).toFixed(1)}M24 ${H - 28}v12M${(24 + scale * k).toFixed(1)} ${H - 28}v12`}
           />
-          <path d={`M${W - 30} 54V20M${W - 38} 30l8-10 8 10`} />
+          <path
+            d={`M${W - 30} ${H - 22}V${H - 56}M${W - 38} ${H - 46}l8-10 8 10`}
+          />
         </g>
         <text x={24} y={H - 34} className="fill-brand-muted text-[13px]">
           {scale} {t('prospecting.metres')}
         </text>
         <text
           x={W - 30}
-          y={72}
+          y={H - 64}
           textAnchor="middle"
           className="fill-brand-muted text-[13px]"
         >
           {t('prospecting.north')}
         </text>
       </svg>
-      {!compact && (
+      {!compact && !fill && (
         <figcaption className="mt-2 text-sm text-brand-muted">
           {t('prospecting.outlineCaption', { scale })}
         </figcaption>

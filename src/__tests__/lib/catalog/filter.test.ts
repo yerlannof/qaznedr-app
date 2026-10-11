@@ -103,6 +103,20 @@ describe('parseCatalogParams', () => {
     expect(catalogQuery(EMPTY_PARAMS)).toBe('');
     expect(activeFilterCount(p)).toBe(3);
   });
+
+  it('keeps the list view in the query and grid as the silent default', () => {
+    expect(parseCatalogParams({}).view).toBe('grid');
+    expect(parseCatalogParams({ view: 'bogus' }).view).toBe('grid');
+    const list = parseCatalogParams({ kind: 'prospecting', view: 'list' });
+    expect(list.view).toBe('list');
+    expect(catalogQuery(list)).toBe('?kind=prospecting&view=list');
+    expect(
+      parseCatalogParams(
+        Object.fromEntries(new URLSearchParams(catalogQuery(list)))
+      )
+    ).toEqual(list);
+    expect(activeFilterCount(list)).toBe(1);
+  });
 });
 
 describe('filterCatalog', () => {

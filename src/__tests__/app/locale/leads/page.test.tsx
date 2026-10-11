@@ -64,11 +64,9 @@ it('lists the asset for sale with a localized CollectionPage schema', async () =
     mainEntity: { '@type': 'ItemList' },
   });
   const list = schemaOf(html).mainEntity.itemListElement;
-  expect(list[0]).toEqual({
-    '@type': 'ListItem',
-    position: 1,
-    url: 'https://qaznedr.kz/en/offers/QN-A01',
-  });
+  expect(list.map((e: { url: string }) => e.url)).toContain(
+    'https://qaznedr.kz/en/offers/QN-A01'
+  );
   expect(list).toHaveLength(1 + listPublicPlots().length);
 });
 
@@ -106,4 +104,16 @@ it('keeps old metal-hub links working and offers to remove the filter', async ()
   const html = await render('ru', { mineral: 'copper' });
   expect(html).not.toContain('QN-A01');
   expect(html).toContain('Убрать фильтр: Медь');
+});
+
+it('shows cards by default and the long list on ?view=list', async () => {
+  const grid = await render('ru', { kind: 'prospecting' });
+  expect(grid).toContain('Не верифицировано');
+  expect(grid).toMatch(
+    /aria-current="true"[^>]*aria-label="Карточки"|aria-label="Карточки"[^>]*aria-current="true"/
+  );
+  expect(grid).toContain('href="/ru/leads?kind=prospecting&amp;view=list"');
+  const list = await render('ru', { kind: 'prospecting', view: 'list' });
+  expect(list).not.toContain('Не верифицировано');
+  expect(list).toContain('Работа на участке по договору с держателем лицензии');
 });

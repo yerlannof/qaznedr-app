@@ -16,7 +16,13 @@ import { INSTAGRAM_URL, type Locale } from '@/lib/seo/site';
 import type { HomeSnapshot } from '@/lib/leads/home';
 import { formatCheckDate } from '@/lib/leads/check-date';
 import { parseShowcase } from '@/lib/leads/showcase';
-import ShowcaseHomeTeaser from '@/components/showcase/ShowcaseHomeTeaser';
+import {
+  OfferGridCard,
+  ProspectingGridCard,
+  ShowcaseGridCard,
+} from '@/components/catalog/GridCards';
+import { listPublishedOffers } from '@/lib/offers';
+import { listPublicPlots } from '@/lib/prospecting/plots';
 import ShowcaseDisclaimer from '@/components/showcase/ShowcaseDisclaimer';
 
 export default function HomePageContent({
@@ -42,6 +48,18 @@ export default function HomePageContent({
       availableLanguage: ['ru', 'kk', 'en', 'zh'],
     },
   };
+  // Home grid (approved design 19): the newest asset, the featured finds
+  // chosen by the geobase (with their caveat) and plots up to four cards.
+  const HOME_CARDS = 4;
+  const featured = snapshot.leads.filter((l) => parseShowcase(l.showcase));
+  const legacyLeads = snapshot.leads.filter((l) => !parseShowcase(l.showcase));
+  const offers = listPublishedOffers().slice(0, 1);
+  const plots = listPublicPlots().slice(
+    0,
+    Math.max(0, HOME_CARDS - offers.length - featured.length)
+  );
+  const hasCards =
+    offers.length + featured.length + plots.length + legacyLeads.length > 0;
   const guides = [
     ['foreignInvestor', GUIDE.foreignInvestor],
     ['explorationLicence', GUIDE.explorationLicence],
@@ -70,54 +88,71 @@ export default function HomePageContent({
       <Navigation />
       <PortalWelcomeHero locale={locale} stats={snapshot.stats} />
       <GeologyScene locale={locale} />
-      {snapshot.stats?.total !== 0 && (
+      {hasCards && (
         <section className="holding-section" aria-labelledby="home-areas">
           <div className="brand-container">
             <div className="grid md:grid-cols-2 gap-6 mb-10">
               <h2 id="home-areas" className="holding-title">
-                {t('leadsHero.title')}
+                {t('catalog.title')}
               </h2>
-              <p className="holding-lead">{t('leadsHero.subtitle')}</p>
+              <p className="holding-lead">
+                {t(plots.length ? 'catalog.lede' : 'catalog.ledeNoPlots')}
+              </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-              {snapshot.leads.map((lead) => {
-                const card = parseShowcase(lead.showcase);
-                return card?.featured ? (
-                  <ShowcaseHomeTeaser
-                    key={lead.code}
-                    card={card}
-                    locale={locale}
-                  />
-                ) : (
-                  <article
-                    key={lead.code}
-                    className="border-t border-brand-line pt-6"
+            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+              {offers.map((offer) => (
+                <OfferGridCard
+                  key={offer.code}
+                  offer={offer}
+                  locale={locale}
+                  headingLevel="h3"
+                />
+              ))}
+              {featured.map((lead) => (
+                <ShowcaseGridCard
+                  key={lead.code}
+                  card={parseShowcase(lead.showcase)!}
+                  locale={locale}
+                  headingLevel="h3"
+                />
+              ))}
+              {plots.map((plot) => (
+                <ProspectingGridCard
+                  key={plot.code}
+                  plot={plot}
+                  locale={locale}
+                  headingLevel="h3"
+                />
+              ))}
+              {legacyLeads.map((lead) => (
+                <article
+                  key={lead.code}
+                  className="border-t border-brand-line pt-6"
+                >
+                  <p className="text-sm text-brand-muted">
+                    {lead.code} ·{' '}
+                    {leadRegionName(lead.region, locale) ||
+                      t('leadCard.regionFallback')}
+                  </p>
+                  <h3 className="font-serif text-3xl mt-4">
+                    {leadMineralName(lead.mineral, locale)}
+                  </h3>
+                  <p className="holding-lead mt-4">
+                    {leadSeoText(lead, locale).description}
+                  </p>
+                  <p className="text-sm text-brand-muted mt-4">
+                    {t('leadDetail.verifyDate')}{' '}
+                    {formatCheckDate(lead.last_verified, locale)}
+                  </p>
+                  <Link
+                    href={`/${locale}/leads/${lead.code}`}
+                    className="inline-flex min-h-12 items-center gap-3 mt-5 font-semibold"
                   >
-                    <p className="text-sm text-brand-muted">
-                      {lead.code} ·{' '}
-                      {leadRegionName(lead.region, locale) ||
-                        t('leadCard.regionFallback')}
-                    </p>
-                    <h3 className="font-serif text-3xl mt-4">
-                      {leadMineralName(lead.mineral, locale)}
-                    </h3>
-                    <p className="holding-lead mt-4">
-                      {leadSeoText(lead, locale).description}
-                    </p>
-                    <p className="text-sm text-brand-muted mt-4">
-                      {t('leadDetail.verifyDate')}{' '}
-                      {formatCheckDate(lead.last_verified, locale)}
-                    </p>
-                    <Link
-                      href={`/${locale}/leads/${lead.code}`}
-                      className="inline-flex min-h-12 items-center gap-3 mt-5 font-semibold"
-                    >
-                      {t('leadCard.open')}
-                      <ArrowUpRight aria-hidden className="w-5 h-5" />
-                    </Link>
-                  </article>
-                );
-              })}
+                    {t('leadCard.open')}
+                    <ArrowUpRight aria-hidden className="w-5 h-5" />
+                  </Link>
+                </article>
+              ))}
             </div>
             {snapshot.leads.some((l) => parseShowcase(l.showcase)) && (
               <ShowcaseDisclaimer locale={locale} />

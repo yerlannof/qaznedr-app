@@ -1,0 +1,590 @@
+{
+  "contract": "qaznedr-prospecting-v1",
+  "source_received": "2026-10-11",
+  "plots": [
+    {
+      "code": "QN-P01",
+      "license_number": "KZ92VZJ00000093",
+      "issued_at": "2026-06-24",
+      "valid_until": "2029-06-24",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Аксуский район",
+        "kz": "Ақсу ауданы",
+        "en": "Aksu District",
+        "zh": "阿克苏区"
+      },
+      "locality": {
+        "ru": "с. Баласаз",
+        "kz": "Баласаз ауылы",
+        "en": "Balasaz village",
+        "zh": "巴拉萨兹村"
+      },
+      "plot_name": {
+        "ru": "участок «№1»",
+        "kz": "«№1» учаскесі",
+        "en": "plot No. 1",
+        "zh": "1号地块"
+      },
+      "area_ha": 4.859,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [45, 8, 49.6, 79, 23, 2.67],
+        [45, 8, 49.44, 79, 23, 7.83],
+        [45, 8, 35.65, 79, 23, 6.82],
+        [45, 8, 35.84, 79, 23, 1.31]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P02",
+      "license_number": "KZ92VZJ00000084",
+      "issued_at": "2026-06-20",
+      "valid_until": "2029-06-20",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Аксуский район",
+        "kz": "Ақсу ауданы",
+        "en": "Aksu District",
+        "zh": "阿克苏区"
+      },
+      "locality": {
+        "ru": "с. Баласаз",
+        "kz": "Баласаз ауылы",
+        "en": "Balasaz village",
+        "zh": "巴拉萨兹村"
+      },
+      "plot_name": {
+        "ru": "участок «14»",
+        "kz": "«14» учаскесі",
+        "en": "plot 14",
+        "zh": "14号地块"
+      },
+      "area_ha": 4.859,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [45, 7, 55.3, 79, 24, 6],
+        [45, 7, 55.3, 79, 24, 15.5],
+        [45, 7, 47.7, 79, 24, 15.5],
+        [45, 7, 47.7, 79, 24, 6]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P03",
+      "license_number": "KZ92VZJ00000072",
+      "issued_at": "2025-12-25",
+      "valid_until": "2027-12-25",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Аксуский район",
+        "kz": "Ақсу ауданы",
+        "en": "Aksu District",
+        "zh": "阿克苏区"
+      },
+      "locality": {
+        "ru": "с. Баласаз",
+        "kz": "Баласаз ауылы",
+        "en": "Balasaz village",
+        "zh": "巴拉萨兹村"
+      },
+      "plot_name": {
+        "ru": "участок «9а»",
+        "kz": "«9а» учаскесі",
+        "en": "plot 9a",
+        "zh": "9a号地块"
+      },
+      "area_ha": 4.7482,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [45, 8, 3.4, 79, 24, 23.1],
+        [45, 8, 3.4, 79, 24, 31.1],
+        [45, 7, 54.6, 79, 24, 31.1],
+        [45, 7, 54.6, 79, 24, 23.1]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": [4]
+    },
+    {
+      "code": "QN-P04",
+      "license_number": "KZ33VZJ00000548",
+      "issued_at": "2026-03-18",
+      "valid_until": "2029-03-18",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Аксуский район",
+        "kz": "Ақсу ауданы",
+        "en": "Aksu District",
+        "zh": "阿克苏区"
+      },
+      "locality": null,
+      "plot_name": null,
+      "area_ha": 4.9,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [45, 22, 49.14, 79, 15, 57.74],
+        [45, 22, 52.81, 79, 15, 36.64],
+        [45, 22, 42.86, 79, 15, 54.3],
+        [45, 22, 45.65, 79, 15, 55.93]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P05",
+      "license_number": "KZ64VZJ00000378",
+      "issued_at": "2025-04-28",
+      "valid_until": "2028-04-28",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Сарканский район",
+        "kz": "Сарқан ауданы",
+        "en": "Sarkand District",
+        "zh": "萨尔坎德区"
+      },
+      "locality": {
+        "ru": "с. Карабогет",
+        "kz": "Қарабөгет ауылы",
+        "en": "Karaboget village",
+        "zh": "卡拉博格特村"
+      },
+      "plot_name": null,
+      "area_ha": 4.9,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [45, 50, 31.88, 80, 11, 4.19],
+        [45, 50, 34.36, 80, 10, 37.53],
+        [45, 50, 37.22, 80, 10, 37.86],
+        [45, 50, 34.44, 80, 11, 4.84]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P06",
+      "license_number": "KZ16VZJ00000563",
+      "issued_at": "2026-04-07",
+      "valid_until": "2029-04-07",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Алакольский район",
+        "kz": "Алакөл ауданы",
+        "en": "Alakol District",
+        "zh": "阿拉科尔区"
+      },
+      "locality": {
+        "ru": "с. Коктума",
+        "kz": "Көктұма ауылы",
+        "en": "Koktuma village",
+        "zh": "科克图马村"
+      },
+      "plot_name": null,
+      "area_ha": 4.87,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [45, 41, 26.8633, 81, 56, 49.7795],
+        [45, 41, 23.7336, 81, 57, 10.8294],
+        [45, 41, 20.3611, 81, 57, 10.0956],
+        [45, 41, 23.3289, 81, 56, 49.6636]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P07",
+      "license_number": "KZ00VZJ00000560",
+      "issued_at": "2026-04-07",
+      "valid_until": "2029-04-05",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Алакольский район",
+        "kz": "Алакөл ауданы",
+        "en": "Alakol District",
+        "zh": "阿拉科尔区"
+      },
+      "locality": {
+        "ru": "с. Коктума",
+        "kz": "Көктұма ауылы",
+        "en": "Koktuma village",
+        "zh": "科克图马村"
+      },
+      "plot_name": null,
+      "area_ha": 4.96,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [45, 41, 8.8534, 81, 59, 6.0346],
+        [45, 41, 4.914, 81, 59, 3.9586],
+        [45, 41, 0.3133, 81, 59, 20.3544],
+        [45, 41, 4.1584, 81, 59, 22.6428]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P08",
+      "license_number": "KZ70VZJ00000561",
+      "issued_at": "2026-04-07",
+      "valid_until": "2029-04-02",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Алакольский район",
+        "kz": "Алакөл ауданы",
+        "en": "Alakol District",
+        "zh": "阿拉科尔区"
+      },
+      "locality": {
+        "ru": "с. Коктума",
+        "kz": "Көктұма ауылы",
+        "en": "Koktuma village",
+        "zh": "科克图马村"
+      },
+      "plot_name": null,
+      "area_ha": 4.95,
+      "mineral": "placer_gold",
+      "corners_dms": [],
+      "status": "hidden",
+      "holder_confirmed_at": null,
+      "corrected_corners": [],
+      "hidden_reason": "coordinates cut off in photo"
+    },
+    {
+      "code": "QN-P09",
+      "license_number": "KZ43VZJ00000562",
+      "issued_at": "2026-04-07",
+      "valid_until": "2029-04-02",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Алакольский район",
+        "kz": "Алакөл ауданы",
+        "en": "Alakol District",
+        "zh": "阿拉科尔区"
+      },
+      "locality": {
+        "ru": "с. Коктума",
+        "kz": "Көктұма ауылы",
+        "en": "Koktuma village",
+        "zh": "科克图马村"
+      },
+      "plot_name": null,
+      "area_ha": 4.85,
+      "mineral": "placer_gold",
+      "corners_dms": [],
+      "status": "hidden",
+      "holder_confirmed_at": null,
+      "corrected_corners": [],
+      "hidden_reason": "coordinates cut off in photo"
+    },
+    {
+      "code": "QN-P10",
+      "license_number": "KZ91VZJ00000571",
+      "issued_at": "2026-04-09",
+      "valid_until": "2029-04-07",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Алакольский район",
+        "kz": "Алакөл ауданы",
+        "en": "Alakol District",
+        "zh": "阿拉科尔区"
+      },
+      "locality": {
+        "ru": "с. Ынталы",
+        "kz": "Ынталы ауылы",
+        "en": "Yntaly village",
+        "zh": "因塔雷村"
+      },
+      "plot_name": null,
+      "area_ha": 4.97,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [46, 0, 7.8164, 80, 59, 56.9796],
+        [46, 0, 21.4184, 81, 0, 3.6229],
+        [46, 0, 20.3453, 81, 0, 8.5668],
+        [46, 0, 6.5017, 81, 0, 1.769]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P11",
+      "license_number": "KZ75VZJ000",
+      "issued_at": "2026-04-08",
+      "valid_until": "2029-04-07",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Алакольский район",
+        "kz": "Алакөл ауданы",
+        "en": "Alakol District",
+        "zh": "阿拉科尔区"
+      },
+      "locality": {
+        "ru": "Жанаминский с. о.",
+        "kz": "Жанама ауылдық округі",
+        "en": "Zhanama rural district",
+        "zh": "扎纳马农村区"
+      },
+      "plot_name": null,
+      "area_ha": 4.91,
+      "mineral": "placer_gold",
+      "corners_dms": [],
+      "status": "hidden",
+      "holder_confirmed_at": null,
+      "corrected_corners": [],
+      "hidden_reason": "licence number and coordinates unreadable"
+    },
+    {
+      "code": "QN-P12",
+      "license_number": "KZ05VZJ00000567",
+      "issued_at": "2026-04-08",
+      "valid_until": "2029-04-07",
+      "region": "zhetysu",
+      "district": {
+        "ru": "Алакольский район",
+        "kz": "Алакөл ауданы",
+        "en": "Alakol District",
+        "zh": "阿拉科尔区"
+      },
+      "locality": {
+        "ru": "Жанаминский с. о.",
+        "kz": "Жанама ауылдық округі",
+        "en": "Zhanama rural district",
+        "zh": "扎纳马农村区"
+      },
+      "plot_name": null,
+      "area_ha": 4.95,
+      "mineral": "placer_gold",
+      "corners_dms": [],
+      "status": "hidden",
+      "holder_confirmed_at": null,
+      "corrected_corners": [],
+      "hidden_reason": "coordinates cut off in photo"
+    },
+    {
+      "code": "QN-P13",
+      "license_number": "KZ72VZJ00000525",
+      "issued_at": "2025-12-24",
+      "valid_until": "2028-12-17",
+      "region": "zhambyl",
+      "district": {
+        "ru": "Мойынкумский район",
+        "kz": "Мойынқұм ауданы",
+        "en": "Moiynkum District",
+        "zh": "莫因库姆区"
+      },
+      "locality": {
+        "ru": "с. Мойынкум",
+        "kz": "Мойынқұм ауылы",
+        "en": "Moiynkum village",
+        "zh": "莫因库姆村"
+      },
+      "plot_name": null,
+      "area_ha": 4.484,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [44, 56, 4.28, 73, 3, 55.28],
+        [44, 55, 58.03, 73, 4, 4.08],
+        [44, 55, 55.0, 73, 3, 59.09],
+        [44, 56, 0.03, 73, 3, 48.99]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P14",
+      "license_number": "KZ84VZJ00000406",
+      "issued_at": "2025-06-05",
+      "valid_until": "2028-06-05",
+      "region": "east-kz",
+      "district": {
+        "ru": "Маркакольский район",
+        "kz": "Марқакөл ауданы",
+        "en": "Markakol District",
+        "zh": "马尔卡科尔区"
+      },
+      "locality": null,
+      "plot_name": {
+        "ru": "участок «Алтай-4»",
+        "kz": "«Алтай-4» учаскесі",
+        "en": "Altai-4 plot",
+        "zh": "阿尔泰-4地块"
+      },
+      "area_ha": 4.9,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [48, 25, 16.76, 85, 10, 4.67],
+        [48, 25, 20.87, 85, 10, 7.53],
+        [48, 25, 16.12, 85, 10, 22.98],
+        [48, 25, 12, 85, 10, 20.12]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P15",
+      "license_number": "50-PL",
+      "issued_at": "2026-09-22",
+      "valid_until": "2029-09-22",
+      "region": "east-kz",
+      "district": {
+        "ru": "Маркакольский район",
+        "kz": "Марқакөл ауданы",
+        "en": "Markakol District",
+        "zh": "马尔卡科尔区"
+      },
+      "locality": null,
+      "plot_name": {
+        "ru": "участок «Бастеректы №2»",
+        "kz": "«Бастеректі №2» учаскесі",
+        "en": "Basterekty No. 2 plot",
+        "zh": "巴斯捷列克特2号地块"
+      },
+      "area_ha": 4.21,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [48, 28, 15, 85, 50, 3],
+        [48, 28, 17, 85, 50, 7],
+        [48, 28, 8, 85, 50, 21],
+        [48, 28, 6, 85, 50, 17]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P16",
+      "license_number": "53-PL",
+      "issued_at": "2026-09-24",
+      "valid_until": "2029-09-24",
+      "region": "east-kz",
+      "district": {
+        "ru": "Маркакольский район",
+        "kz": "Марқакөл ауданы",
+        "en": "Markakol District",
+        "zh": "马尔卡科尔区"
+      },
+      "locality": null,
+      "plot_name": {
+        "ru": "участок «Бастеректы №3»",
+        "kz": "«Бастеректі №3» учаскесі",
+        "en": "Basterekty No. 3 plot",
+        "zh": "巴斯捷列克特3号地块"
+      },
+      "area_ha": 3.42,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [48, 28, 33, 85, 49, 46],
+        [48, 28, 35, 85, 49, 51],
+        [48, 28, 27, 85, 49, 57],
+        [48, 28, 25, 85, 49, 52]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P17",
+      "license_number": "54-PL",
+      "issued_at": "2026-09-24",
+      "valid_until": "2029-09-24",
+      "region": "east-kz",
+      "district": {
+        "ru": "Маркакольский район",
+        "kz": "Марқакөл ауданы",
+        "en": "Markakol District",
+        "zh": "马尔卡科尔区"
+      },
+      "locality": null,
+      "plot_name": {
+        "ru": "участок «Бастеректы №4»",
+        "kz": "«Бастеректі №4» учаскесі",
+        "en": "Basterekty No. 4 plot",
+        "zh": "巴斯捷列克特4号地块"
+      },
+      "area_ha": 3.87,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [48, 28, 24.8, 85, 49, 55],
+        [48, 28, 27.1, 85, 49, 59],
+        [48, 28, 19.7, 85, 50, 11],
+        [48, 28, 17.2, 85, 50, 7]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P18",
+      "license_number": "49-PL",
+      "issued_at": "2026-09-22",
+      "valid_until": "2029-09-22",
+      "region": "east-kz",
+      "district": {
+        "ru": "Маркакольский район",
+        "kz": "Марқакөл ауданы",
+        "en": "Markakol District",
+        "zh": "马尔卡科尔区"
+      },
+      "locality": null,
+      "plot_name": {
+        "ru": "участок «Аксай №3»",
+        "kz": "«Ақсай №3» учаскесі",
+        "en": "Aksai No. 3 plot",
+        "zh": "阿克赛3号地块"
+      },
+      "area_ha": 0.46,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [48, 23, 54.36, 85, 12, 1.6],
+        [48, 23, 54.26, 85, 12, 4.81],
+        [48, 23, 52.11, 85, 12, 4.43],
+        [48, 23, 52.3, 85, 12, 1.06]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    },
+    {
+      "code": "QN-P19",
+      "license_number": "51-PL",
+      "issued_at": "2026-09-22",
+      "valid_until": "2029-09-22",
+      "region": "east-kz",
+      "district": {
+        "ru": "Маркакольский район",
+        "kz": "Марқакөл ауданы",
+        "en": "Markakol District",
+        "zh": "马尔卡科尔区"
+      },
+      "locality": null,
+      "plot_name": {
+        "ru": "участок «Карагаш 3»",
+        "kz": "«Қарағаш 3» учаскесі",
+        "en": "Karagash 3 plot",
+        "zh": "卡拉加什3号地块"
+      },
+      "area_ha": 2.55,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [48, 39, 8.9, 85, 6, 7.06],
+        [48, 39, 15.54, 85, 6, 1.36],
+        [48, 39, 17.21, 85, 6, 5.79],
+        [48, 39, 10.96, 85, 6, 11.45]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
+      "corrected_corners": []
+    }
+  ],
+  "_note": "Public data: licence numbers and corner coordinates are published by the owner's decision (2026-10-11). Holder names are never stored here. holder_confirmed_at = date the holders confirmed the licence is in force and the signing bonus is paid."
+}

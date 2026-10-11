@@ -4,6 +4,7 @@ import { LOCALES } from './site';
 export const PUBLIC_PAGES = [
   '',
   '/leads',
+  '/prospecting',
   '/services',
   '/services/geological',
   '/services/legal',

@@ -91,9 +91,10 @@ export default function MobileTabBar() {
   }
 
   const isOffer = section === 'offers' && segments.length === 3;
+  const isPlot = section === 'prospecting' && segments.length === 3;
   const href = isTeaser
     ? `${pathname.replace(/\/$/, '')}#contact-channels`
-    : isOffer
+    : isOffer || isPlot
       ? `${pathname.replace(/\/$/, '')}#contact`
       : guideContactHref(locale, guideFromPath(pathname));
   return <ContactAction locale={locale} href={href} />;

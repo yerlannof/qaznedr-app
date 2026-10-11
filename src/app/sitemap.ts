@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next';
 import { INSIGHTS } from '@/lib/insights/registry';
 import { buildLanguageAlternates } from '@/lib/seo/metadata';
 import { PUBLIC_PAGES } from '@/lib/seo/pages';
+import { listPublicPlots } from '@/lib/prospecting/plots';
+import { plotPath } from '@/lib/prospecting/present';
 import { LOCALES, localeUrl } from '@/lib/seo/site';
 import { loadSitemapLeadCodes } from '@/lib/seo/sitemap-leads';
 import { listPublishedOffers } from '@/lib/offers';
@@ -55,5 +57,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }))
   );
 
-  return [...staticEntries, ...insightEntries, ...leadEntries, ...offerEntries];
+  // Static licence data (src/lib/prospecting/plots.v1.json), no network.
+  const plotEntries: MetadataRoute.Sitemap = listPublicPlots().flatMap((plot) =>
+    LOCALES.map((locale) => ({
+      url: localeUrl(locale, plotPath(plot.code)),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+      alternates: { languages: buildLanguageAlternates(plotPath(plot.code)) },
+    }))
+  );
+
+  return [
+    ...staticEntries,
+    ...insightEntries,
+    ...leadEntries,
+    ...offerEntries,
+    ...plotEntries,
+  ];
 }

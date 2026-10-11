@@ -53,6 +53,15 @@ describe('MobileTabBar', () => {
     );
   });
 
+  it('sends a prospecting plot to its own contact block', () => {
+    setPath('/ru/prospecting/QN-P07');
+    render(<MobileTabBar />);
+    expect(screen.getByRole('link')).toHaveAttribute(
+      'href',
+      '/ru/prospecting/QN-P07#contact'
+    );
+  });
+
   it.each([
     ['/ru/services/legal', '/ru/contact?service=licensing'],
     ['/zh/services/geological', '/zh/contact?service=geology'],

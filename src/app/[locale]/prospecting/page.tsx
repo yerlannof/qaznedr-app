@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { BookOpen } from 'lucide-react';
+import { ArrowRight, BookOpen } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import ProspectingCard from '@/components/prospecting/ProspectingCard';
@@ -86,10 +86,17 @@ export default async function ProspectingIndexPage({
             </p>
             <Link
               href={insightHref(locale, GUIDE.artisanalMining)}
-              className="brand-focus mt-5 inline-flex min-h-11 items-center gap-3 underline underline-offset-4"
+              className="brand-focus mt-5 flex min-h-11 items-center gap-3 underline underline-offset-4"
             >
               <BookOpen aria-hidden className="size-4 shrink-0" />
               {t('prospecting.guideLink')}
+            </Link>
+            <Link
+              href={`/${locale}/leads?kind=prospecting`}
+              className="brand-focus mt-1 flex min-h-11 items-center gap-3 underline underline-offset-4"
+            >
+              <ArrowRight aria-hidden className="size-4 shrink-0" />
+              {t('prospecting.catalogLink')}
             </Link>
           </header>
           {plots.map((plot) => (

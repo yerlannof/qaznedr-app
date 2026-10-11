@@ -25,6 +25,9 @@ import {
 } from '@/lib/catalog/filter';
 import { fromAssetOffer } from '@/lib/catalog/sources/offers';
 import { fromShowcaseLead } from '@/lib/catalog/sources/showcase';
+import { fromProspectingPlot } from '@/lib/catalog/sources/prospecting';
+import ProspectingCard from '@/components/prospecting/ProspectingCard';
+import { listPublicPlots, type Plot } from '@/lib/prospecting/plots';
 import {
   CATALOG_KINDS,
   type CatalogItem,
@@ -87,6 +90,11 @@ export default async function LeadsCatalogPage({
   for (const offer of listPublishedOffers()) {
     offers.set(offer.code, offer);
     items.push(fromAssetOffer(offer));
+  }
+  const plots = new Map<string, Plot>();
+  for (const plot of listPublicPlots()) {
+    plots.set(plot.code, plot);
+    items.push(fromProspectingPlot(plot));
   }
   const legacy = legacyLeads(leads);
 
@@ -190,6 +198,17 @@ export default async function LeadsCatalogPage({
         <OfferCard
           key={item.code}
           offer={offer}
+          locale={locale}
+          contacts={contacts}
+        />
+      ) : null;
+    }
+    if (item.kind === 'prospecting') {
+      const plot = plots.get(item.code);
+      return plot ? (
+        <ProspectingCard
+          key={item.code}
+          plot={plot}
           locale={locale}
           contacts={contacts}
         />

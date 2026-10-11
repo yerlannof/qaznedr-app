@@ -2,6 +2,7 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import LeadsCatalogPage from '@/app/[locale]/leads/page';
+import { listPublicPlots } from '@/lib/prospecting/plots';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { listPublishedLeads } from '@/lib/leads/public-queries';
 
@@ -60,17 +61,26 @@ it('lists the asset for sale with a localized CollectionPage schema', async () =
     name: t('catalog.title'),
     url: 'https://qaznedr.kz/en/leads',
     inLanguage: 'en',
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          url: 'https://qaznedr.kz/en/offers/QN-A01',
-        },
-      ],
-    },
+    mainEntity: { '@type': 'ItemList' },
   });
+  const list = schemaOf(html).mainEntity.itemListElement;
+  expect(list[0]).toEqual({
+    '@type': 'ListItem',
+    position: 1,
+    url: 'https://qaznedr.kz/en/offers/QN-A01',
+  });
+  expect(list).toHaveLength(1 + listPublicPlots().length);
+});
+
+it('lists artisanal-mining plots as their own kind', async () => {
+  const html = await render('ru', { kind: 'prospecting' });
+  const urls = schemaOf(html).mainEntity.itemListElement.map(
+    (e: { url: string }) => e.url
+  );
+  expect(urls).toHaveLength(listPublicPlots().length);
+  expect(urls).toContain('https://qaznedr.kz/ru/prospecting/QN-P07');
+  expect(html).toContain('href="/ru/prospecting/QN-P07"');
+  expect(html).not.toContain('QN-A01');
 });
 
 it('never renders unrelated legacy rows next to filtered results', async () => {

@@ -32,10 +32,10 @@ describe('plots.v1.json', () => {
   });
 
   it.each(visible.map((p) => [p.code, p] as const))(
-    '%s: outline area is within 10 %% of the licence area',
+    '%s: outline area is within 5 %% of the licence area',
     (_code, plot) => {
       const { areaHa } = plotGeometry(plot);
-      expect(Math.abs(areaHa / plot.area_ha - 1)).toBeLessThan(0.1);
+      expect(Math.abs(areaHa / plot.area_ha - 1)).toBeLessThan(0.05);
     }
   );
 

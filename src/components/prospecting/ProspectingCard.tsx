@@ -68,12 +68,12 @@ export default function ProspectingCard({
           {figures.map(([value, label], i) => (
             <div
               key={label}
-              className={`py-3 pr-3 ${i ? 'border-l border-brand-line pl-3' : ''}`}
+              className={`flex flex-col-reverse gap-1 py-3 pr-3 ${i ? 'border-l border-brand-line pl-3' : ''}`}
             >
+              <dt className="text-xs text-brand-muted">{label}</dt>
               <dd className="font-serif text-lg leading-tight lg:text-2xl">
                 {value}
               </dd>
-              <dt className="mt-1 text-xs text-brand-muted">{label}</dt>
             </div>
           ))}
         </dl>

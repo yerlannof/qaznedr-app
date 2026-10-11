@@ -134,7 +134,10 @@ export default function ProspectingDetail({
             </tbody>
           </table>
           {!open && (
-            <p className="mt-4 border border-brand-line bg-brand-surface p-4 text-sm">
+            <p
+              id="contact"
+              className="mt-4 scroll-mt-24 border border-brand-line bg-brand-surface p-4 text-sm"
+            >
               {t('prospecting.matchedNote')}{' '}
               <Link
                 href={`/${locale}${PROSPECTING_PATH}`}

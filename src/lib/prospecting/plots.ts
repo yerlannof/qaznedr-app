@@ -17,7 +17,7 @@ import {
 export const PLOT_CODE = /^QN-P\d{2}$/;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 /** Outline must reproduce the licence area; PL licences run ~4 % low. */
-const AREA_TOLERANCE = 0.1;
+const AREA_TOLERANCE = 0.05;
 
 const localized = z.object({
   ru: z.string().min(1),

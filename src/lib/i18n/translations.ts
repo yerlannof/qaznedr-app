@@ -627,6 +627,7 @@ export const translations = {
       openImage: 'Открыть фото полностью',
       unavailable: 'Объект снят с публикации',
       notFound: 'Объект не найден',
+    },
     prospecting: {
       kind: 'Лицензия на старательство',
       statusOpen: 'ищем бригаду',
@@ -651,8 +652,8 @@ export const translations = {
       factShare: 'Доля бригады и держателя',
       factShareValue: 'по договору с держателем',
       factStatus: 'Статус',
-      factConfirmed: 'Сведения подтверждены',
-      factConfirmedValue: '{date}, держателем лицензии',
+      factConfirmed: 'Со слов держателя',
+      factConfirmedValue: '{date}: лицензия действует, подписной бонус оплачен',
       outlineLabel: 'Схема участка {code} по угловым точкам лицензии',
       outlineCaption:
         'Схема по координатам лицензии. Север сверху, масштабная линейка — {scale} м. Это не снимок местности.',
@@ -660,11 +661,11 @@ export const translations = {
       metres: 'м',
       boundsHeading: 'Границы участка',
       boundsNote:
-        'Угловые точки — как в лицензии. Нижняя граница — 3 м от самой низкой точки поверхности участка.',
+        'Угловые точки — по лицензии. Нижняя граница — 3 м от самой низкой точки поверхности участка.',
       correctedNote:
         'В копии лицензии долгота точки {points} напечатана с опечаткой; схема построена по исправленному значению, которое даёт площадь из лицензии. Уточняем у держателя.',
       colPoint: 'Точка',
-      colAsWritten: 'Как в лицензии (с. ш. / в. д.)',
+      colAsWritten: 'Широта / долгота (° ′ ″)',
       colDecimal: 'Десятичные градусы',
       openGoogle: 'Открыть в Google Картах',
       open2gis: 'Открыть в 2ГИС',
@@ -681,12 +682,12 @@ export const translations = {
         'После работ — рекультивация; берега и дно водоёмов не разрушаются',
       limitsSource: 'Ст. 270–271 Кодекса РК «О недрах и недропользовании».',
       whoHeading: 'Кого ищем',
-      who1: 'Граждан Казахстана: держатель лицензии — только гражданин РК, а часть лицензий прямо запрещает иностранную рабочую силу',
+      who1: 'Граждан Казахстана: часть лицензий прямо запрещает привлекать иностранную рабочую силу',
       who2: 'Бригаду или отдельных старателей с опытом промывки россыпного золота',
       who3: 'Готовность выехать на сезон',
       disclaimerLabel: 'Важно.',
       disclaimer:
-        'Участок не принадлежит QAZNEDR. Право пользования недрами — у держателя лицензии на старательство; оно не продаётся и не передаётся (ст. 263 Кодекса РК «О недрах и недропользовании»). QAZNEDR знакомит бригады с держателями; договор о работе бригада заключает с держателем. Сведения — по копии лицензии и подтверждению держателя на указанную дату. Содержание золота и объём добычи не гарантируются.',
+        'Участок не принадлежит QAZNEDR. Право пользования недрами — у держателя лицензии на старательство; оно не продаётся и не передаётся (ст. 263 Кодекса РК «О недрах и недропользовании»). QAZNEDR знакомит бригады с держателями; договор о работе бригада заключает с держателем. Сведения — по копии лицензии и словам держателя на указанную дату. Содержание золота и объём добычи не гарантируются.',
       contactHeading: 'Обсудить работу на участке',
       contactNote:
         'Расскажите о бригаде — передадим держателю участка {code} и договоримся о выезде.',
@@ -696,6 +697,7 @@ export const translations = {
         'Бригада для этого участка уже найдена. Посмотрите другие участки.',
       guideLink:
         'Лицензия на старательство в Казахстане: как получить и что разрешено',
+      catalogLink: 'Все участки и объекты в общей витрине',
       allPlots: 'Все старательские участки',
       more: 'Подробнее',
       discuss: 'Обсудить {code}',
@@ -1842,6 +1844,7 @@ export const translations = {
       openImage: 'Фотоны толық ашу',
       unavailable: 'Нысан жариялаудан алынды',
       notFound: 'Нысан табылмады',
+    },
     prospecting: {
       kind: 'Кен іздеушілікке арналған лицензия',
       statusOpen: 'бригада іздейміз',
@@ -1866,8 +1869,8 @@ export const translations = {
       factShare: 'Бригада мен лицензия иесінің үлесі',
       factShareValue: 'лицензия иесімен шарт бойынша',
       factStatus: 'Мәртебесі',
-      factConfirmed: 'Мәліметтерді растаған',
-      factConfirmedValue: 'лицензия иесі, {date}',
+      factConfirmed: 'Лицензия иесінің сөзімен',
+      factConfirmedValue: '{date}: лицензия жарамды, қол қою бонусы төленген',
       outlineLabel:
         '{code} учаскесінің лицензиядағы бұрыштық нүктелер бойынша сызбасы',
       outlineCaption:
@@ -1876,11 +1879,11 @@ export const translations = {
       metres: 'м',
       boundsHeading: 'Учаске шекаралары',
       boundsNote:
-        'Бұрыштық нүктелер — лицензиядағыдай. Төменгі шекара — учаске бетінің ең төменгі нүктесінен 3 м.',
+        'Бұрыштық нүктелер — лицензия бойынша. Төменгі шекара — учаске бетінің ең төменгі нүктесінен 3 м.',
       correctedNote:
         'Лицензия көшірмесінде {points}-нүктенің бойлығы қате басылған; сызба лицензиядағы алаңды беретін түзетілген мән бойынша салынды. Лицензия иесінен нақтылап жатырмыз.',
       colPoint: 'Нүкте',
-      colAsWritten: 'Лицензиядағыдай (с. е. / ш. б.)',
+      colAsWritten: 'Ендік / бойлық (° ′ ″)',
       colDecimal: 'Ондық градустар',
       openGoogle: 'Google Карталарда ашу',
       open2gis: '2ГИС-те ашу',
@@ -1898,12 +1901,12 @@ export const translations = {
       limitsSource:
         'ҚР «Жер қойнауы және жер қойнауын пайдалану туралы» кодексінің 270–271-баптары.',
       whoHeading: 'Кімді іздейміз',
-      who1: 'Қазақстан азаматтарын: лицензия иесі тек ҚР азаматы бола алады, ал кейбір лицензиялар шетелдік жұмыс күшін тартуға тікелей тыйым салады',
+      who1: 'Қазақстан азаматтарын: кейбір лицензиялар шетелдік жұмыс күшін тартуға тікелей тыйым салады',
       who2: 'Шашыранды алтынды жуу тәжірибесі бар бригаданы немесе жеке кен іздеушілерді',
       who3: 'Маусымға шығуға дайындық',
       disclaimerLabel: 'Маңызды.',
       disclaimer:
-        'Учаске QAZNEDR-ге тиесілі емес. Жер қойнауын пайдалану құқығы кен іздеушілікке арналған лицензия иесінде; ол сатылмайды және берілмейді (ҚР «Жер қойнауы және жер қойнауын пайдалану туралы» кодексінің 263-бабы). QAZNEDR бригадаларды лицензия иелерімен таныстырады; жұмыс туралы шартты бригада лицензия иесімен жасайды. Мәліметтер — лицензия көшірмесі және көрсетілген күнгі лицензия иесінің растауы бойынша. Алтынның құрамы мен өндіру көлеміне кепілдік берілмейді.',
+        'Учаске QAZNEDR-ге тиесілі емес. Жер қойнауын пайдалану құқығы кен іздеушілікке арналған лицензия иесінде; ол сатылмайды және берілмейді (ҚР «Жер қойнауы және жер қойнауын пайдалану туралы» кодексінің 263-бабы). QAZNEDR бригадаларды лицензия иелерімен таныстырады; жұмыс туралы шартты бригада лицензия иесімен жасайды. Мәліметтер — лицензия көшірмесі және көрсетілген күнгі лицензия иесінің сөзі бойынша. Алтынның құрамы мен өндіру көлеміне кепілдік берілмейді.',
       contactHeading: 'Учаскедегі жұмысты талқылау',
       contactNote:
         'Бригадаңыз туралы айтыңыз — {code} учаскесінің иесіне жеткізіп, баруды келісеміз.',
@@ -1912,9 +1915,10 @@ export const translations = {
       matchedNote: 'Бұл учаскеге бригада табылды. Басқа учаскелерді қараңыз.',
       guideLink:
         'Қазақстандағы кен іздеушілікке арналған лицензия: қалай алуға болады және не рұқсат етілген',
+      catalogLink: 'Жалпы витринадағы барлық учаскелер мен нысандар',
       allPlots: 'Барлық кен іздеу учаскелері',
       more: 'Толығырақ',
-      discuss: '{code} талқылау',
+      discuss: '{code} учаскесін талқылау',
       cardArea: 'учаске алаңы',
       cardValidUntil: 'лицензия мерзімі',
       cardShare: 'бригада мен иесінің үлесі',
@@ -2973,6 +2977,7 @@ export const translations = {
       openImage: 'Open full photo',
       unavailable: 'This asset is no longer listed',
       notFound: 'Asset not found',
+    },
     prospecting: {
       kind: 'Artisanal mining licence',
       statusOpen: 'crew wanted',
@@ -2997,8 +3002,8 @@ export const translations = {
       factShare: 'Crew and holder shares',
       factShareValue: 'under a contract with the holder',
       factStatus: 'Status',
-      factConfirmed: 'Details confirmed',
-      factConfirmedValue: '{date}, by the licence holder',
+      factConfirmed: 'According to the holder',
+      factConfirmedValue: '{date}: licence in force, signing bonus paid',
       outlineLabel: 'Outline of plot {code} from the licence corner points',
       outlineCaption:
         'Outline drawn from the licence coordinates. North is up; scale bar {scale} m. This is not an image of the terrain.',
@@ -3006,11 +3011,11 @@ export const translations = {
       metres: 'm',
       boundsHeading: 'Plot boundaries',
       boundsNote:
-        'Corner points as written in the licence. The lower boundary is 3 m below the lowest point of the plot surface.',
+        'Corner points from the licence. The lower boundary is 3 m below the lowest point of the plot surface.',
       correctedNote:
         'In the copy of the licence the longitude of point {points} is misprinted; the outline uses the corrected value, which reproduces the licence area. We are confirming it with the holder.',
       colPoint: 'Point',
-      colAsWritten: 'As in the licence (N / E)',
+      colAsWritten: 'Latitude / longitude (° ′ ″)',
       colDecimal: 'Decimal degrees',
       openGoogle: 'Open in Google Maps',
       open2gis: 'Open in 2GIS',
@@ -3027,12 +3032,12 @@ export const translations = {
         'Land is restored after work; river banks and beds are not damaged',
       limitsSource: 'Articles 270–271 of the Subsoil Code of Kazakhstan.',
       whoHeading: 'Who we are looking for',
-      who1: 'Citizens of Kazakhstan: only a Kazakhstan citizen can hold the licence, and some licences expressly ban foreign workers',
+      who1: 'Citizens of Kazakhstan: some licences expressly ban hiring foreign workers',
       who2: 'A crew or individual miners with experience in washing placer gold',
       who3: 'Ready to work for a season',
       disclaimerLabel: 'Important.',
       disclaimer:
-        'The plot does not belong to QAZNEDR. The subsoil use right belongs to the holder of the artisanal mining licence; it is not sold or transferred (Subsoil Code of Kazakhstan, art. 263). QAZNEDR introduces crews to holders; the crew signs the work contract with the holder. Details are based on a copy of the licence and the holder’s confirmation on the stated date. Gold content and output are not guaranteed.',
+        'The plot does not belong to QAZNEDR. The subsoil use right belongs to the holder of the artisanal mining licence; it is not sold or transferred (Subsoil Code of Kazakhstan, art. 263). QAZNEDR introduces crews to holders; the crew signs the work contract with the holder. Details are based on a copy of the licence and the holder’s statement on the stated date. Gold content and output are not guaranteed.',
       contactHeading: 'Discuss work on the plot',
       contactNote:
         'Tell us about your crew — we will pass it to the holder of plot {code} and arrange a visit.',
@@ -3042,6 +3047,7 @@ export const translations = {
         'A crew has already been found for this plot. See other plots.',
       guideLink:
         'Artisanal mining licence in Kazakhstan: how to get one and what it allows',
+      catalogLink: 'All areas and assets in the catalogue',
       allPlots: 'All artisanal mining plots',
       more: 'Details',
       discuss: 'Discuss {code}',
@@ -4069,6 +4075,7 @@ export const translations = {
       openImage: '查看大图',
       unavailable: '该项目已下架',
       notFound: '未找到项目',
+    },
     prospecting: {
       kind: '个体小规模采矿许可证',
       statusOpen: '招募作业队',
@@ -4092,19 +4099,19 @@ export const translations = {
       factShare: '作业队与持有人分成',
       factShareValue: '依据与持有人的合同',
       factStatus: '状态',
-      factConfirmed: '信息确认',
-      factConfirmedValue: '{date}，由许可证持有人确认',
+      factConfirmed: '据持有人告知',
+      factConfirmedValue: '{date}：许可证有效，签字费已缴纳',
       outlineLabel: '地块 {code} 依据许可证拐点绘制的示意图',
       outlineCaption:
         '依据许可证坐标绘制的示意图。上方为北，比例尺 {scale} 米。并非实地影像。',
       north: '北',
       metres: '米',
       boundsHeading: '地块边界',
-      boundsNote: '拐点坐标与许可证一致。下边界为地块地表最低点以下3米。',
+      boundsNote: '拐点坐标依据许可证。下边界为地块地表最低点以下3米。',
       correctedNote:
         '许可证副本中第 {points} 点的经度存在印刷错误；示意图采用修正值，修正后面积与许可证一致。我们正在向持有人核实。',
       colPoint: '点',
-      colAsWritten: '许可证原文（北纬 / 东经）',
+      colAsWritten: '纬度 / 经度（° ′ ″）',
       colDecimal: '十进制度',
       openGoogle: '在谷歌地图中打开',
       open2gis: '在 2GIS 中打开',
@@ -4120,12 +4127,12 @@ export const translations = {
       limit5: '作业后须复垦；不得破坏水体岸线和水底',
       limitsSource: '《底土与底土利用法典》第270–271条。',
       whoHeading: '我们寻找',
-      who1: '哈萨克斯坦公民：许可证持有人只能是哈萨克斯坦公民，部分许可证明确禁止使用外籍劳工',
+      who1: '哈萨克斯坦公民：部分许可证明确禁止使用外籍劳工',
       who2: '有砂金淘洗经验的作业队或个人',
       who3: '能够按季节出工',
       disclaimerLabel: '重要提示。',
       disclaimer:
-        '该地块不属于 QAZNEDR。底土使用权属于个体小规模采矿许可证持有人，不出售、不转让（《底土与底土利用法典》第263条）。QAZNEDR 负责介绍作业队与持有人认识；工作合同由作业队与持有人签订。信息依据许可证副本及持有人在所示日期的确认。不保证含金量和产量。',
+        '该地块不属于 QAZNEDR。底土使用权属于个体小规模采矿许可证持有人，不出售、不转让（《底土与底土利用法典》第263条）。QAZNEDR 负责介绍作业队与持有人认识；工作合同由作业队与持有人签订。信息依据许可证副本及持有人在所示日期的说明。不保证含金量和产量。',
       contactHeading: '洽谈地块作业',
       contactNote:
         '请介绍您的作业队，我们会转交地块 {code} 的持有人并安排考察。',
@@ -4133,6 +4140,7 @@ export const translations = {
         '您好！我们希望在小规模采矿地块 {code}（{district}）作业。我们共 … 人，均为哈萨克斯坦公民，经验：…',
       matchedNote: '该地块已找到作业队。请查看其他地块。',
       guideLink: '哈萨克斯坦个体小规模采矿许可证：如何申请、允许做什么',
+      catalogLink: '在总目录中查看全部矿区与项目',
       allPlots: '全部小规模采矿地块',
       more: '详情',
       discuss: '洽谈 {code}',

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>19 · Витрина карточками</title>
+    <style>
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-Regular.woff2');
+      }
+      @font-face {
+        font-family: Plex;
+        src: url('../../../public/brand/fonts/IBMPlexSans-SemiBold.woff2');
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: Source;
+        src: url('../../../public/brand/fonts/SourceSerif4Display-Regular.ttf.woff2');
+      }
+      :root {
+        --bg: #e9ece6;
+        --surface: #f4f5f0;
+        --ink: #253740;
+        --muted: #51616a;
+        --line: #64747a;
+        --hair: #c4ccc6;
+        --accent: #dde55e;
+        font-family: Plex, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--ink); }
+      img, video { display: block; max-width: 100%; }
+      a { color: inherit; }
+      p { line-height: 1.55; margin: 0 0 10px; }
+      h1 { font: 400 clamp(2.1rem, 4vw, 3.4rem) / 1.08 Source, Georgia, serif; margin: 0 0 14px; }
+      h2 { font: 400 clamp(1.6rem, 2.6vw, 2.2rem) / 1.15 Source, Georgia, serif; margin: 0 0 14px; }
+      h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 8px; }
+      button { font: inherit; cursor: pointer; }
+      button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #a1ac15; outline-offset: 2px; }
+      .shell { max-width: 1264px; margin: auto; padding: 0 32px; }
+      .demo { background: var(--accent); color: #253740; padding: 12px 24px; font-weight: 600; font-size: 0.9rem; text-align: center; }
+      .review-head { padding: 40px 0 24px; border-bottom: 1px solid var(--line); }
+      .review-head p { max-width: 860px; color: var(--muted); }
+      .section-label { margin: 56px 0 16px; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+      .frame { background: var(--bg); border: 1px solid var(--line); }
+      .frame-bar { display: flex; justify-content: space-between; padding: 8px 14px; font-size: 0.78rem; color: var(--muted); border-bottom: 1px solid var(--hair); background: var(--surface); }
+
+      /* site chrome */
+      .site-top { background: var(--surface); border-bottom: 1px solid var(--line); }
+      .site-top .in { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 32px; }
+      .site-top nav { display: flex; gap: 26px; font-size: 0.95rem; }
+      .site-top nav a { text-decoration: none; }
+      .site-top nav a[aria-current] { border-bottom: 2px solid var(--ink); padding-bottom: 4px; }
+      .logo { width: 168px; }
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 20px; background: var(--ink); color: var(--bg); border: 0; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+      .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+      .btn.accent { background: var(--accent); color: #253740; }
+      .ico { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+      /* catalogue */
+      .cat { padding: 40px 32px 56px; }
+      .eyebrow { font-size: 0.82rem; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 10px; }
+      .lede { max-width: 760px; color: var(--muted); font-size: 1.05rem; }
+      .kinds { display: flex; gap: 0; margin: 28px 0 0; border: 1px solid var(--line); width: max-content; max-width: 100%; overflow-x: auto; }
+      .kinds button { min-height: 48px; padding: 0 18px; border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--ink); white-space: nowrap; }
+      .kinds button:last-child { border-right: 0; }
+      .kinds button[aria-pressed='true'] { background: var(--ink); color: var(--bg); }
+      .kinds .n { color: inherit; opacity: 0.7; margin-left: 6px; font-size: 0.85rem; }
+      .cat-grid { display: grid; grid-template-columns: 264px minmax(0, 1fr); gap: 40px; margin-top: 32px; }
+      .filters { border-top: 1px solid var(--line); }
+      .fgroup { border-bottom: 1px solid var(--hair); padding: 16px 0; }
+      .fgroup h3 { font-size: 0.9rem; margin-bottom: 10px; }
+      .check { display: flex; align-items: center; gap: 10px; min-height: 36px; font-size: 0.94rem; }
+      .check input { width: 18px; height: 18px; accent-color: #253740; margin: 0; }
+      .check .c { margin-left: auto; color: var(--muted); font-size: 0.85rem; }
+      .reset { margin-top: 14px; font-size: 0.9rem; color: var(--muted); }
+      .results-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding: 12px 0; font-size: 0.92rem; color: var(--muted); }
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+      .chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); padding: 4px 10px; font-size: 0.85rem; color: var(--ink); background: var(--surface); }
+
+      .card { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; padding: 28px 0; border-top: 1px solid var(--line); }
+      .card .media { aspect-ratio: 16 / 10; background: #d7ddd6; overflow: hidden; position: relative; }
+      .card .media img { width: 100%; height: 100%; object-fit: cover; }
+      .card .media .tag { position: absolute; left: 0; bottom: 0; background: rgba(37, 55, 64, 0.88); color: #e9ece6; font-size: 0.75rem; padding: 4px 8px; display: flex; gap: 6px; align-items: center; }
+      .card .media.scan { background: var(--surface); display: grid; place-items: center; border: 1px solid var(--hair); }
+      .card .media.scan .ph { color: var(--muted); font-size: 0.85rem; text-align: center; padding: 16px; }
+      .meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 0.84rem; }
+      .code { background: var(--accent); color: #253740; font-weight: 600; padding: 2px 8px; letter-spacing: 0.03em; }
+      .kind { border: 1px solid var(--line); padding: 2px 8px; }
+      .card h3 { font-size: 1.25rem; margin: 10px 0 4px; }
+      .where { color: var(--muted); font-size: 0.95rem; margin-bottom: 14px; }
+      .figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--hair); }
+      .fig { padding: 12px 14px 12px 0; }
+      .fig + .fig { padding-left: 14px; border-left: 1px solid var(--hair); }
+      .fig b { display: block; font: 400 1.5rem / 1.15 Source, Georgia, serif; }
+      .fig span { font-size: 0.8rem; color: var(--muted); }
+      .note { font-size: 0.84rem; color: var(--muted); display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; align-items: center; }
+      .linkmore { display: inline-flex; gap: 6px; align-items: center; font-weight: 600; min-height: 44px; }
+      .placeholder-card { opacity: 0.82; }
+      .placeholder-card .figs .fig b { color: var(--muted); }
+      .pending { font-size: 0.78rem; background: var(--surface); border: 1px dashed var(--line); padding: 2px 8px; color: var(--muted); }
+
+      /* mobile */
+      .phones { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+      .phone { width: 375px; border: 1px solid var(--line); background: var(--bg); position: relative; overflow: hidden; height: 760px; }
+      .phone .site-top .in { padding: 0 16px; min-height: 60px; }
+      .phone .logo { width: 132px; }
+      .phone .cat { padding: 20px 16px; }
+      .phone h1 { font-size: 1.85rem; }
+      .phone .lede { font-size: 0.95rem; }
+      .phone .kinds { margin-top: 16px; width: 100%; }
+      .phone .kinds button { padding: 0 12px; font-size: 0.88rem; }
+      .mbar { position: sticky; top: 0; display: flex; gap: 8px; margin: 14px 0 0; }
+      .mbar .btn { flex: 1; min-height: 44px; font-size: 0.9rem; }
+      .phone .card { grid-template-columns: 1fr; gap: 12px; padding: 18px 0; }
+      .phone .figs { grid-template-columns: 1fr 1fr 1fr; }
+      .phone .fig b { font-size: 1.12rem; }
+      .phone .card h3 { font-size: 1.08rem; }
+      .scrim { position: absolute; inset: 0; background: rgba(23, 39, 46, 0.45); }
+      .sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--line); max-height: 82%; display: flex; flex-direction: column; }
+      .sheet header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--hair); }
+      .sheet header b { font-size: 1.05rem; }
+      .sheet .body { padding: 0 16px; overflow: auto; }
+      .sheet footer { display: flex; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--hair); }
+      .sheet footer .btn { flex: 1; }
+      .iconbtn { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line); background: transparent; }
+
+      /* detail */
+      .detail { padding: 36px 32px 56px; }
+      .crumbs { font-size: 0.86rem; color: var(--muted); margin-bottom: 18px; }
+      .hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 36px; align-items: start; }
+      .video { position: relative; background: #17272e; aspect-ratio: 16 / 9; }
+      .video video { width: 100%; height: 100%; object-fit: cover; }
+      .video .cap { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
+      .ktable { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+      .ktable th, .ktable td { text-align: left; padding: 10px 0; border-top: 1px solid var(--hair); vertical-align: top; }
+      .ktable th { font-weight: 400; color: var(--muted); width: 48%; padding-right: 16px; }
+      .ktable td { font-weight: 600; }
+      .std { font-size: 0.84rem; color: var(--muted); margin-top: 10px; }
+      .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 44px; border-top: 1px solid var(--line); padding-top: 28px; }
+      .cols ul { margin: 0; padding: 0; list-style: none; }
+      .cols li { border-top: 1px solid var(--hair); padding: 9px 0; font-size: 0.93rem; line-height: 1.5; }
+      .gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 40px; }
+      .gallery img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+      .gallery-cap { font-size: 0.82rem; color: var(--muted); margin-top: 8px; }
+      .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; margin-top: 44px; border-top: 1px solid var(--line); padding-top: 28px; }
+      .legal { background: var(--surface); border: 1px solid var(--hair); padding: 18px 20px; font-size: 0.9rem; color: var(--muted); }
+      .cta-band { margin-top: 40px; background: #253740; color: #e9ece6; padding: 28px 32px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 18px; }
+      .cta-band p { margin: 0; color: #cad2ca; max-width: 620px; }
+
+      /* questions */
+      .qs { margin: 56px 0 80px; border-top: 1px solid var(--line); padding-top: 24px; }
+      .qs ol { padding-left: 20px; max-width: 900px; }
+      .qs li { margin-bottom: 14px; line-height: 1.55; }
+      .qs .rec { color: var(--muted); }
+
+      @media (max-width: 1100px) {
+        .cat-grid { grid-template-columns: 1fr; }
+        .filters { display: none; }
+        .hero, .split { grid-template-columns: 1fr; }
+        .cols { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 760px) {
+        .card { grid-template-columns: 1fr; }
+        .gallery { grid-template-columns: 1fr 1fr; }
+        .site-top nav { display: none; }
+      }
+      @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+      /* 19 · grid */
+      .toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 10px 0; font-size: 0.92rem; color: var(--muted); }
+      .toolbar .right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+      .seg { display: inline-flex; border: 1px solid var(--line); }
+      .seg button { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; border: 0; background: transparent; color: var(--ink); font-size: 0.9rem; }
+      .seg button + button { border-left: 1px solid var(--line); }
+      .seg button[aria-pressed='true'] { background: var(--ink); color: var(--bg); }
+      .select { min-height: 44px; border: 1px solid var(--line); padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; color: var(--ink); background: var(--surface); }
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
+      .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .gcard { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--hair); text-decoration: none; color: inherit; }
+      .gcard:hover { border-color: var(--line); }
+      .gmedia { position: relative; aspect-ratio: 16 / 10; background: var(--bg); border-bottom: 1px solid var(--hair); overflow: hidden; }
+      .gmedia img { width: 100%; height: 100%; object-fit: cover; }
+      .gmedia svg { width: 100%; height: 100%; display: block; }
+      .badge { position: absolute; left: 12px; top: 12px; display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; padding: 4px 8px; }
+      .badge .ico { width: 14px; height: 14px; }
+      .badge.unv { background: var(--surface); color: var(--muted); border: 1px dashed var(--line); }
+      .badge.ver { background: var(--accent); color: #253740; }
+      .badge.done { background: var(--ink); color: var(--bg); }
+      .gcode { position: absolute; right: 12px; top: 12px; background: rgba(244,245,240,.92); color: #253740; font-size: 0.78rem; font-weight: 600; padding: 3px 7px; letter-spacing: .03em; }
+      .gbody { display: flex; flex-direction: column; gap: 10px; padding: 16px 18px 18px; flex: 1; }
+      .gkind { font-size: 0.8rem; color: var(--muted); }
+      .gbody h3 { font-size: 1.08rem; line-height: 1.3; margin: 0; }
+      .gwhere { font-size: 0.88rem; color: var(--muted); margin: 0; }
+      .gmin { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+      .dot { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--line); flex: none; }
+      .dot.au { background: radial-gradient(circle at 35% 35%, #f3e7a1, #c9b04a); }
+      .dot.pb { background: radial-gradient(circle at 35% 35%, #d3d8dc, #7d8890); }
+      .dot.stone { background: radial-gradient(circle at 35% 35%, #d9d6cf, #8f8a80); }
+      .gfigs { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--hair); margin-top: auto; }
+      .gfigs > div { padding: 10px 10px 0 0; }
+      .gfigs > div + div { border-left: 1px solid var(--hair); padding-left: 12px; }
+      .gfigs span { display: block; font-size: 0.74rem; color: var(--muted); }
+      .gfigs b { display: block; font: 400 1.2rem / 1.2 Source, Georgia, serif; margin-top: 2px; }
+      .gfoot { display: flex; justify-content: space-between; gap: 8px; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--hair); padding-top: 10px; }
+      .gfoot b { color: var(--ink); font-weight: 600; }
+      .typeline { font-size: 0.74rem; color: var(--muted); }
+      .zone { background: repeating-linear-gradient(135deg, var(--bg) 0 8px, #dfe3dc 8px 9px); }
+      .states { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+      .states .badge { position: static; }
+      .phone .grid { grid-template-columns: 1fr; gap: 16px; }
+      .phone .toolbar { gap: 8px; }
+      .phone .seg button { padding: 0 10px; }
+      .home-sec { padding: 40px 32px 48px; border-top: 1px solid var(--line); }
+      .home-sec .head { display: flex; justify-content: space-between; align-items: end; gap: 16px; }
+      .shot { border: 1px solid var(--line); max-width: 100%; display: block; }
+      @media (max-width: 1100px) { .grid, .grid.four { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 640px) { .grid, .grid.four { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <!-- Lucide paths -->
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+      <symbol id="i-filter" viewBox="0 0 24 24"><path d="M10 20a1 1 0 0 0 .55.9l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .52-1.34L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.74 1.67l7.22 7.99A2 2 0 0 1 10 14z"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+      <symbol id="i-video" viewBox="0 0 24 24"><path d="m16 13 5.22 3.48a.5.5 0 0 0 .78-.42V7.94a.5.5 0 0 0-.76-.43L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></symbol>
+      <symbol id="i-sort" viewBox="0 0 24 24"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></symbol>
+      <symbol id="i-shieldq" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><path d="M3 12h.01"/><path d="M3 18h.01"/><path d="M3 6h.01"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M8 6h13"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
+    </svg>
+
+    <div class="demo">Макет 19 · на рассмотрении. Карточки сеткой вместо длинного списка, переключатель «Карточки / Список», пометка верификации. Данные — реальные с сайта.</div>
+    <div class="shell">
+      <header class="review-head">
+        <h1>Витрина карточками</h1>
+        <p>Сейчас в витрине <b>/leads</b> каждая позиция — длинная строка. Делаем как в присланном примере: сетка компактных карточек (по умолчанию везде, включая главную) и переключатель «Карточки / Список» рядом с сортировкой — список остаётся для тех, кому так удобнее. Выбор вида сохраняется в адресе (<code>?view=list</code>), канонический адрес — без него.</p>
+        <p>В карточке: метка верификации и код объекта поверх картинки; тип предложения; заголовок; место; сырьё; две ключевые цифры; дата публикации. Картинка — только то, что честно относится к объекту: кадр с дрона у объекта на продажу, схема контура по лицензии у старательского участка, условная зона на карте у наших находок (фото «похожих» камней не подставляем). Цена — только «по запросу» у объекта на продажу; у остальных цены нет. Стиль A3/D2 без новых цветов и шрифтов.</p>
+      </header>
+
+      <p class="section-label">1 · Витрина, 1440 px — вид «Карточки»</p>
+      <div class="frame">
+        <div class="frame-bar"><span>qaznedr.kz/ru/leads</span><span>1440</span></div>
+        <div class="site-top"><div class="in"><img class="logo" src="../../../public/brand/logo-horizontal.svg" alt="QAZNEDR HOLDING" /><nav aria-label="Основное меню"><a href="#" aria-current="page">Участки и объекты</a><a href="#">Услуги</a><a href="#">Гайды</a><a href="#">О компании</a></nav><a class="btn" href="#"><svg class="ico"><use href="#i-msg" /></svg>Связаться</a></div></div>
+        <section class="cat">
+          <h1>Участки и объекты недр Казахстана</h1>
+          <div class="kinds"><button aria-pressed="true">Все<span class="n">18</span></button><button>Объекты на продажу<span class="n">1</span></button><button>Наши находки<span class="n">2</span></button><button>Старательство<span class="n">15</span></button></div>
+          <div class="cat-grid">
+            <aside class="filters"><div class="fgroup"><h3>Группа сырья</h3><label class="check"><input type="checkbox" />Металлы (ТПИ)<span class="c">17</span></label><label class="check"><input type="checkbox" />Стройматериалы (ОПИ)<span class="c">1</span></label></div><div class="fgroup"><h3>Регион</h3><label class="check"><input type="checkbox" />Жетісу<span class="c">9</span></label><label class="check"><input type="checkbox" />ВКО<span class="c">6</span></label><label class="check"><input type="checkbox" />Жамбылская<span class="c">2</span></label></div><div class="fgroup"><h3>Стадия</h3><label class="check"><input type="checkbox" />Рудопроявление<span class="c">2</span></label><label class="check"><input type="checkbox" />Старательская добыча<span class="c">15</span></label><label class="check"><input type="checkbox" />Действующая добыча<span class="c">1</span></label></div></aside>
+            <div>
+              <div class="toolbar"><span>Показано 18 · <span class="chip">Все типы</span></span><div class="right"><div class="seg" role="group" aria-label="Вид"><button aria-pressed="true"><svg class="ico"><use href="#i-grid"/></svg>Карточки</button><button aria-pressed="false"><svg class="ico"><use href="#i-list"/></svg>Список</button></div><span class="select">Сначала новые <svg class="ico" style="width:14px"><use href="#i-sort"/></svg></span></div></div>
+              <div class="grid"><a class="gcard" href="#"><div class="gmedia"><img src="../../../public/offers/QN-A01/poster.webp" alt=""><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-A01</span></div><div class="gbody"><span class="gkind">Объект на продажу · 100 % ТОО</span><h3>Щебёночный карьер с дробильно-сортировочным комплексом</h3><p class="gwhere">Алматинская область, ~10 км от Конаева</p><div class="gmin"><span class="dot stone"></span>Строительный камень (ОПИ)</div><div class="gfigs"><div><span>тыс. м³ запасов, ГКЗ РК, 01.01.2025</span><b>3 081,76</b></div><div><span>тыс. м³/год, проектная добыча</span><b>315</b></div></div><div class="gfoot"><span>Опубликовано 11.10.2026</span><span>Цена: <b>по запросу</b></span></div></div></a><a class="gcard" href="#"><div class="gmedia"><svg viewBox="0 0 400 250" aria-hidden="true"><g stroke="#c4ccc6" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M50 0V250M100 0V250M150 0V250M200 0V250M250 0V250M300 0V250M350 0V250"/></g><polygon points="92,34 61,118 305,216 339,134" fill="#dde55e" fill-opacity=".7" stroke="#253740" stroke-width="2"/><circle cx="92" cy="34" r="3.5" fill="#253740"/><circle cx="61" cy="118" r="3.5" fill="#253740"/><circle cx="305" cy="216" r="3.5" fill="#253740"/><circle cx="339" cy="134" r="3.5" fill="#253740"/><path d="M16 232h69M16 227v10M85 227v10" stroke="#253740" stroke-width="2"/><text x="16" y="220" font-size="11" fill="#51616a" font-family="Plex">100 м</text></svg><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-P07</span></div><div class="gbody"><span class="gkind">Старательство · ищем бригаду</span><h3>Россыпное золото · 4,96&nbsp;га</h3><p class="gwhere">Алакольский р-н, Жетісу · с. Коктума</p><div class="gmin"><span class="dot au"></span>Россыпное золото</div><div class="gfigs"><div><span>площадь участка</span><b>4,96 га</b></div><div><span>лицензия до</span><b>05.04.2029</b></div></div><div class="gfoot"><span>Опубликовано 12.10.2026</span><span>Доля: <b>по договору</b></span></div></div></a><a class="gcard" href="#"><div class="gmedia"><svg viewBox="0 0 400 250" aria-hidden="true"><g stroke="#c4ccc6" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M50 0V250M100 0V250M150 0V250M200 0V250M250 0V250M300 0V250M350 0V250"/></g><polygon points="101,67 145,34 299,183 255,216" fill="#dde55e" fill-opacity=".7" stroke="#253740" stroke-width="2"/><circle cx="101" cy="67" r="3.5" fill="#253740"/><circle cx="145" cy="34" r="3.5" fill="#253740"/><circle cx="299" cy="183" r="3.5" fill="#253740"/><circle cx="255" cy="216" r="3.5" fill="#253740"/><path d="M16 232h107M16 227v10M123 227v10" stroke="#253740" stroke-width="2"/><text x="16" y="220" font-size="11" fill="#51616a" font-family="Plex">200 м</text></svg><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-P15</span></div><div class="gbody"><span class="gkind">Старательство · ищем бригаду</span><h3>Россыпное золото · 4,21&nbsp;га</h3><p class="gwhere">Маркакольский р-н, ВКО · «Бастеректы №2»</p><div class="gmin"><span class="dot au"></span>Россыпное золото</div><div class="gfigs"><div><span>площадь участка</span><b>4,21 га</b></div><div><span>лицензия до</span><b>22.09.2029</b></div></div><div class="gfoot"><span>Опубликовано 12.10.2026</span><span>Доля: <b>по договору</b></span></div></div></a><a class="gcard" href="#"><div class="gmedia"><svg viewBox="0 0 400 250" aria-hidden="true" class="zone"><rect width="400" height="250" fill="url(#hatch)"/><path d="M40 70 L120 40 L260 50 L360 90 L340 190 L220 215 L90 200 L50 150Z" fill="#f4f5f0" stroke="#64747a" stroke-width="1.5"/><circle cx="210" cy="130" r="44" fill="#dde55e" fill-opacity=".45" stroke="#253740" stroke-dasharray="4 3"/><text x="200" y="236" text-anchor="middle" font-size="11" fill="#51616a" font-family="Plex">Кызылординская обл. · зона ≈ 50 км</text></svg><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-04</span></div><div class="gbody"><span class="gkind">Наша находка</span><h3>Золото, цинк — Кызылординская область</h3><p class="gwhere">Место показано условно</p><div class="gmin"><span class="dot au"></span>Золото, цинк</div><div class="gfigs"><div><span>Лучший интервал (среднее по интервалу)</span><b>золото 3,47 г/т</b></div><div><span>Проверено</span><b>30.09.2026</b></div></div><div class="gfoot"><span>Опубликовано 29.09.2026</span><span>Материалы — после NDA</span></div></div></a><a class="gcard" href="#"><div class="gmedia"><svg viewBox="0 0 400 250" aria-hidden="true" class="zone"><rect width="400" height="250" fill="url(#hatch)"/><path d="M40 70 L120 40 L260 50 L360 90 L340 190 L220 215 L90 200 L50 150Z" fill="#f4f5f0" stroke="#64747a" stroke-width="1.5"/><circle cx="210" cy="130" r="44" fill="#dde55e" fill-opacity=".45" stroke="#253740" stroke-dasharray="4 3"/><text x="200" y="236" text-anchor="middle" font-size="11" fill="#51616a" font-family="Plex">Жамбылская обл. · зона ≈ 75 км</text></svg><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-17</span></div><div class="gbody"><span class="gkind">Наша находка</span><h3>Свинец — Жамбылская область</h3><p class="gwhere">Место показано условно</p><div class="gmin"><span class="dot pb"></span>Свинец</div><div class="gfigs"><div><span>Максимум в отдельной пробе</span><b>свинец до 12 %</b></div><div><span>Проверено</span><b>30.09.2026</b></div></div><div class="gfoot"><span>Опубликовано 29.09.2026</span><span>Материалы — после NDA</span></div></div></a><a class="gcard" href="#"><div class="gmedia"><svg viewBox="0 0 400 250" aria-hidden="true"><g stroke="#c4ccc6" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M50 0V250M100 0V250M150 0V250M200 0V250M250 0V250M300 0V250M350 0V250"/></g><polygon points="183,34 230,36 221,216 170,214" fill="#dde55e" fill-opacity=".7" stroke="#253740" stroke-width="2"/><circle cx="183" cy="34" r="3.5" fill="#253740"/><circle cx="230" cy="36" r="3.5" fill="#253740"/><circle cx="221" cy="216" r="3.5" fill="#253740"/><circle cx="170" cy="214" r="3.5" fill="#253740"/><path d="M16 232h84M16 227v10M100 227v10" stroke="#253740" stroke-width="2"/><text x="16" y="220" font-size="11" fill="#51616a" font-family="Plex">200 м</text></svg><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-P01</span></div><div class="gbody"><span class="gkind">Старательство · ищем бригаду</span><h3>Россыпное золото · 4,859&nbsp;га</h3><p class="gwhere">Аксуский р-н, Жетісу · участок «№1»</p><div class="gmin"><span class="dot au"></span>Россыпное золото</div><div class="gfigs"><div><span>площадь участка</span><b>4,859 га</b></div><div><span>лицензия до</span><b>24.06.2029</b></div></div><div class="gfoot"><span>Опубликовано 12.10.2026</span><span>Доля: <b>по договору</b></span></div></div></a></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <p class="section-label">2 · Телефон, 375 px — карточки в одну колонку; вид, фильтры и сортировка в одной строке</p>
+      <div class="phones">
+        <div class="phone" style="height:900px">
+          <div class="site-top"><div class="in"><img class="logo" src="../../../public/brand/logo-horizontal.svg" alt="QAZNEDR HOLDING" /><button class="iconbtn" aria-label="Меню"><svg class="ico"><use href="#i-menu" /></svg></button></div></div>
+          <section class="cat"><h1>Участки и объекты недр Казахстана</h1><div class="toolbar"><button class="btn ghost" style="min-height:44px"><svg class="ico"><use href="#i-filter"/></svg>Фильтры · 1</button><div class="right"><div class="seg" role="group" aria-label="Вид"><button aria-pressed="true"><svg class="ico"><use href="#i-grid"/></svg></button><button aria-pressed="false"><svg class="ico"><use href="#i-list"/></svg></button></div><span class="select">Новые <svg class="ico" style="width:14px"><use href="#i-sort"/></svg></span></div></div><div class="grid"><a class="gcard" href="#"><div class="gmedia"><svg viewBox="0 0 400 250" aria-hidden="true"><g stroke="#c4ccc6" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M50 0V250M100 0V250M150 0V250M200 0V250M250 0V250M300 0V250M350 0V250"/></g><polygon points="92,34 61,118 305,216 339,134" fill="#dde55e" fill-opacity=".7" stroke="#253740" stroke-width="2"/><circle cx="92" cy="34" r="3.5" fill="#253740"/><circle cx="61" cy="118" r="3.5" fill="#253740"/><circle cx="305" cy="216" r="3.5" fill="#253740"/><circle cx="339" cy="134" r="3.5" fill="#253740"/><path d="M16 232h69M16 227v10M85 227v10" stroke="#253740" stroke-width="2"/><text x="16" y="220" font-size="11" fill="#51616a" font-family="Plex">100 м</text></svg><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-P07</span></div><div class="gbody"><span class="gkind">Старательство · ищем бригаду</span><h3>Россыпное золото · 4,96&nbsp;га</h3><p class="gwhere">Алакольский р-н, Жетісу · с. Коктума</p><div class="gmin"><span class="dot au"></span>Россыпное золото</div><div class="gfigs"><div><span>площадь участка</span><b>4,96 га</b></div><div><span>лицензия до</span><b>05.04.2029</b></div></div><div class="gfoot"><span>Опубликовано 12.10.2026</span><span>Доля: <b>по договору</b></span></div></div></a><a class="gcard" href="#"><div class="gmedia"><img src="../../../public/offers/QN-A01/poster.webp" alt=""><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-A01</span></div><div class="gbody"><span class="gkind">Объект на продажу · 100 % ТОО</span><h3>Щебёночный карьер с дробильно-сортировочным комплексом</h3><p class="gwhere">Алматинская область, ~10 км от Конаева</p><div class="gmin"><span class="dot stone"></span>Строительный камень (ОПИ)</div><div class="gfigs"><div><span>тыс. м³ запасов, ГКЗ РК, 01.01.2025</span><b>3 081,76</b></div><div><span>тыс. м³/год, проектная добыча</span><b>315</b></div></div><div class="gfoot"><span>Опубликовано 11.10.2026</span><span>Цена: <b>по запросу</b></span></div></div></a></div></section>
+        </div>
+      </div>
+
+      <p class="section-label">3 · Главная, 1440 px — блок «Участки и объекты» теми же карточками</p>
+      <div class="frame">
+        <div class="frame-bar"><span>qaznedr.kz/ru</span><span>1440</span></div>
+        <section class="home-sec">
+          <div class="head"><div><p class="eyebrow">Участки и объекты</p><h2 style="margin:0">Последние предложения</h2></div><a class="linkmore" href="#">Вся витрина <svg class="ico"><use href="#i-arrow" /></svg></a></div>
+          <div class="grid four"><a class="gcard" href="#"><div class="gmedia"><img src="../../../public/offers/QN-A01/poster.webp" alt=""><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-A01</span></div><div class="gbody"><span class="gkind">Объект на продажу · 100 % ТОО</span><h3>Щебёночный карьер с дробильно-сортировочным комплексом</h3><p class="gwhere">Алматинская область, ~10 км от Конаева</p><div class="gmin"><span class="dot stone"></span>Строительный камень (ОПИ)</div><div class="gfigs"><div><span>тыс. м³ запасов, ГКЗ РК, 01.01.2025</span><b>3 081,76</b></div><div><span>тыс. м³/год, проектная добыча</span><b>315</b></div></div><div class="gfoot"><span>Опубликовано 11.10.2026</span><span>Цена: <b>по запросу</b></span></div></div></a><a class="gcard" href="#"><div class="gmedia"><svg viewBox="0 0 400 250" aria-hidden="true"><g stroke="#c4ccc6" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M50 0V250M100 0V250M150 0V250M200 0V250M250 0V250M300 0V250M350 0V250"/></g><polygon points="92,34 61,118 305,216 339,134" fill="#dde55e" fill-opacity=".7" stroke="#253740" stroke-width="2"/><circle cx="92" cy="34" r="3.5" fill="#253740"/><circle cx="61" cy="118" r="3.5" fill="#253740"/><circle cx="305" cy="216" r="3.5" fill="#253740"/><circle cx="339" cy="134" r="3.5" fill="#253740"/><path d="M16 232h69M16 227v10M85 227v10" stroke="#253740" stroke-width="2"/><text x="16" y="220" font-size="11" fill="#51616a" font-family="Plex">100 м</text></svg><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-P07</span></div><div class="gbody"><span class="gkind">Старательство · ищем бригаду</span><h3>Россыпное золото · 4,96&nbsp;га</h3><p class="gwhere">Алакольский р-н, Жетісу · с. Коктума</p><div class="gmin"><span class="dot au"></span>Россыпное золото</div><div class="gfigs"><div><span>площадь участка</span><b>4,96 га</b></div><div><span>лицензия до</span><b>05.04.2029</b></div></div><div class="gfoot"><span>Опубликовано 12.10.2026</span><span>Доля: <b>по договору</b></span></div></div></a><a class="gcard" href="#"><div class="gmedia"><svg viewBox="0 0 400 250" aria-hidden="true" class="zone"><rect width="400" height="250" fill="url(#hatch)"/><path d="M40 70 L120 40 L260 50 L360 90 L340 190 L220 215 L90 200 L50 150Z" fill="#f4f5f0" stroke="#64747a" stroke-width="1.5"/><circle cx="210" cy="130" r="44" fill="#dde55e" fill-opacity=".45" stroke="#253740" stroke-dasharray="4 3"/><text x="200" y="236" text-anchor="middle" font-size="11" fill="#51616a" font-family="Plex">Кызылординская обл. · зона ≈ 50 км</text></svg><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-04</span></div><div class="gbody"><span class="gkind">Наша находка</span><h3>Золото, цинк — Кызылординская область</h3><p class="gwhere">Место показано условно</p><div class="gmin"><span class="dot au"></span>Золото, цинк</div><div class="gfigs"><div><span>Лучший интервал (среднее по интервалу)</span><b>золото 3,47 г/т</b></div><div><span>Проверено</span><b>30.09.2026</b></div></div><div class="gfoot"><span>Опубликовано 29.09.2026</span><span>Материалы — после NDA</span></div></div></a><a class="gcard" href="#"><div class="gmedia"><svg viewBox="0 0 400 250" aria-hidden="true"><g stroke="#c4ccc6" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M50 0V250M100 0V250M150 0V250M200 0V250M250 0V250M300 0V250M350 0V250"/></g><polygon points="101,67 145,34 299,183 255,216" fill="#dde55e" fill-opacity=".7" stroke="#253740" stroke-width="2"/><circle cx="101" cy="67" r="3.5" fill="#253740"/><circle cx="145" cy="34" r="3.5" fill="#253740"/><circle cx="299" cy="183" r="3.5" fill="#253740"/><circle cx="255" cy="216" r="3.5" fill="#253740"/><path d="M16 232h107M16 227v10M123 227v10" stroke="#253740" stroke-width="2"/><text x="16" y="220" font-size="11" fill="#51616a" font-family="Plex">200 м</text></svg><span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="gcode">QN-P15</span></div><div class="gbody"><span class="gkind">Старательство · ищем бригаду</span><h3>Россыпное золото · 4,21&nbsp;га</h3><p class="gwhere">Маркакольский р-н, ВКО · «Бастеректы №2»</p><div class="gmin"><span class="dot au"></span>Россыпное золото</div><div class="gfigs"><div><span>площадь участка</span><b>4,21 га</b></div><div><span>лицензия до</span><b>22.09.2029</b></div></div><div class="gfoot"><span>Опубликовано 12.10.2026</span><span>Доля: <b>по договору</b></span></div></div></a></div>
+        </section>
+      </div>
+
+      <p class="section-label">4 · Метка верификации — варианты</p>
+      <div class="states">
+        <span class="badge unv"><svg class="ico"><use href="#i-shieldq"/></svg>Не верифицировано</span><span class="badge ver"><svg class="ico"><use href="#i-shield"/></svg>Верифицировано</span><span class="badge done">Бригада найдена</span>
+      </div>
+      <p class="std" style="max-width:860px">По умолчанию у всех объектов — «Не верифицировано». «Верифицировано» ставим только по твоему слову, отдельно для каждого кода. Пример верифицированной карточки:</p>
+      <div class="grid" style="max-width:420px;grid-template-columns:1fr"><a class="gcard" href="#"><div class="gmedia"><svg viewBox="0 0 400 250" aria-hidden="true"><g stroke="#c4ccc6" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M50 0V250M100 0V250M150 0V250M200 0V250M250 0V250M300 0V250M350 0V250"/></g><polygon points="358,172 34,128 38,78 366,127" fill="#dde55e" fill-opacity=".7" stroke="#253740" stroke-width="2"/><circle cx="358" cy="172" r="3.5" fill="#253740"/><circle cx="34" cy="128" r="3.5" fill="#253740"/><circle cx="38" cy="78" r="3.5" fill="#253740"/><circle cx="366" cy="127" r="3.5" fill="#253740"/><path d="M16 232h113M16 227v10M129 227v10" stroke="#253740" stroke-width="2"/><text x="16" y="220" font-size="11" fill="#51616a" font-family="Plex">200 м</text></svg><span class="badge ver"><svg class="ico"><use href="#i-shield"/></svg>Верифицировано</span><span class="gcode">QN-P05</span></div><div class="gbody"><span class="gkind">Старательство · ищем бригаду</span><h3>Россыпное золото · 4,9&nbsp;га</h3><p class="gwhere">Сарканский р-н, Жетісу · с. Карабогет</p><div class="gmin"><span class="dot au"></span>Россыпное золото</div><div class="gfigs"><div><span>площадь участка</span><b>4,9 га</b></div><div><span>лицензия до</span><b>28.04.2028</b></div></div><div class="gfoot"><span>Опубликовано 12.10.2026</span><span>Доля: <b>по договору</b></span></div></div></a></div>
+
+      <p class="section-label">5 · Вид «Список» — как сейчас</p>
+      <img class="shot" src="../mockups/19/list-view-1440.png" alt="Текущий вид списком" />
+
+      <section class="qs">
+        <h2>Что нужно решить</h2>
+        <ol>
+          <li><b>Текст метки.</b> На карточках уже есть «Проверено 30.09.2026» (свободность по карте или документы продавца). Чтобы не было противоречия, метка должна говорить, ЧТО подтверждено. Варианты: (А) «Не верифицировано / Верифицировано QAZNEDR» с подсказкой «объект и документы проверены нашей командой»; (Б) «Данные не проверены / Данные проверены». <span class="rec">Рекомендую А.</span></li>
+          <li><b>Проданные объекты.</b> Как в примере, показывать проданные с меткой «Продано» (для доверия) или скрывать? Сейчас проданных нет. <span class="rec">Рекомендую показывать, когда появятся, — отдельным решением.</span></li>
+          <li><b>Колонки.</b> В витрине с фильтрами — 3 карточки в ряд, на главной — 4. <span class="rec">Так и оставить.</span></li>
+          <li><b>Просмотры.</b> Счётчика просмотров, как в примере, у нас нет и выдумывать его не будем. <span class="rec">Не показываем.</span></li>
+        </ol>
+      </section>
+    </div>  </body>
+</html>

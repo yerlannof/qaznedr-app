@@ -43,6 +43,14 @@ WhatsApp с кодом участка, JSON-LD Place с GeoShape, sitemap, llms.
 общей витрины `/leads` сессии «актив» (адаптер `fromProspectingLicense` после
 коммита CatalogItem). Макет/решения — `docs/design/APPROVED.md`, тексты —
 `docs/copy/2026-10-11-prospecting-plots-draft.md`.
+На проде `755405d` (12.10): участки также в общей витрине `/leads` вкладкой
+«Старательство 15». Живые 200 для списка/участков, скрытый QN-P08 — 404, sitemap
+64 адреса старательства, canonical qaznedr.kz; IndexNow 200 принял 72 URL (не
+доказательство индексации). Full Jest — 28 прежних failures (5 legacy + CSRF
+timing), lint/TS/build PASS, Playwright 375/1440 и обе темы без overflow,
+независимое ревью — замечания исправлены. ⚠ Общая папка `qaznedr-app`: локальный
+коммит `958ba1c` случайно захватил три чужих застейдженных файла (mail-review с
+Gmail и др.) — в origin их нет; при синхронизации папки не переносить его как есть.
 
 **Золотой хаб и Bing-аудит,06.10.2026:** добавлены3 уже утверждённых гайда
 в существующую строку ссылок gold на RU/KZ/EN/ZH; остальные5 хабов, данные

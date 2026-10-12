@@ -59,7 +59,9 @@ export function plotSeoText(
   };
   return {
     title: translate(locale, 'prospecting.seoTitle', params),
-    description: translate(locale, 'prospecting.seoDescription', params),
+    // Neighbouring plots can share a district and licence term. Include their
+    // already-public identifier so descriptions do not collapse into duplicates.
+    description: `${plot.code}. ${translate(locale, 'prospecting.seoDescription', params)}`,
   };
 }
 

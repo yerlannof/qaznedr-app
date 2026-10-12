@@ -5,11 +5,7 @@ import ContactChannels from '@/components/features/ContactChannels';
 import { translate } from '@/lib/i18n/translations';
 import { hasAnyChannel, type ContactConfig } from '@/lib/config/contacts';
 import { formatRightsDate, pickList, pickText } from '@/lib/leads/showcase';
-import {
-  formatPrice,
-  mediaSrc,
-  type AssetOffer,
-} from '@/lib/offers/contract';
+import { formatPrice, mediaSrc, type AssetOffer } from '@/lib/offers/contract';
 import type { Locale } from '@/lib/seo/site';
 
 const h2 = 'font-serif text-2xl lg:text-3xl leading-tight';
@@ -298,9 +294,7 @@ export default function OfferDetail({
         className="mt-10 scroll-mt-24 border-t border-brand-line pt-8"
       >
         <h2 className={h2}>{t('offer.contactHeading', { code })}</h2>
-        <p className="mt-2 mb-5 max-w-2xl text-brand-muted">
-          {contactNote}
-        </p>
+        <p className="mt-2 mb-5 max-w-2xl text-brand-muted">{contactNote}</p>
         <div className="max-w-3xl">
           {hasAnyChannel(contacts) ? (
             <ContactChannels

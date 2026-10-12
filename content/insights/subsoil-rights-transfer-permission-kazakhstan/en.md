@@ -142,7 +142,7 @@ Under Art. 2 of the Law, one provision takes effect from 1 January 2027: Art. 17
 
 ## A free area: when a permission will be needed
 
-The [areas on display on our site](/en/leads) are free according to our check as of a given date: to our knowledge, there is no valid licence over them, and the licence is applied for as part of the deal. A transfer permission will be needed if the licence is issued to one company and then the licence, or a stake in its holder, has to pass to another. For an exploration licence, the first-year prohibition also applies. It is therefore better to decide in whose name the licence will be applied for before filing the application. For more, see our guides [how a foreign investor can acquire a subsoil use right](/en/insights/foreign-investor-subsoil-rights-kazakhstan) and [solid minerals exploration licence, step by step](/en/insights/solid-minerals-exploration-licence-kazakhstan).
+The [areas on display on our site](/en/leads?kind=find) are free according to our check as of a given date: to our knowledge, there is no valid licence over them, and the licence is applied for as part of the deal. A transfer permission will be needed if the licence is issued to one company and then the licence, or a stake in its holder, has to pass to another. For an exploration licence, the first-year prohibition also applies. It is therefore better to decide in whose name the licence will be applied for before filing the application. For more, see our guides [how a foreign investor can acquire a subsoil use right](/en/insights/foreign-investor-subsoil-rights-kazakhstan) and [solid minerals exploration licence, step by step](/en/insights/solid-minerals-exploration-licence-kazakhstan).
 
 ## Pre-deal checklist
 

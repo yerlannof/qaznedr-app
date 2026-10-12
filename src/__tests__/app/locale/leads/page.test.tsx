@@ -98,6 +98,119 @@ it('never renders unrelated legacy rows next to filtered results', async () => {
   expect(await render('ru', { kind: 'asset' })).not.toContain('CU-42');
 });
 
+const legacyRows = [{ code: 'CU-42' }, { code: 'AU-43' }];
+const locales = ['ru', 'kz', 'en', 'zh'];
+const views = ['grid', 'list'];
+
+describe.each(locales.flatMap((locale) => views.map((view) => [locale, view])))(
+  'legacy catalogue rows in %s, %s view',
+  (locale, view) => {
+    beforeEach(() => {
+      (listPublishedLeads as jest.Mock).mockResolvedValue({
+        leads: legacyRows,
+        total: legacyRows.length,
+        page: 1,
+        totalPages: 1,
+      });
+    });
+
+    it.each([{}, { kind: 'find' }, { sort: 'area_desc' }])(
+      'includes visible rows in the count and JSON-LD for %j',
+      async (facets) => {
+        const html = await render(locale, { ...facets, view });
+        const list = schemaOf(html).mainEntity.itemListElement;
+        const unifiedCount =
+          'kind' in facets
+            ? 0
+            : listPublishedOffers().length + listPublicPlots().length;
+        const { t } = getServerTranslation(locale as 'ru' | 'kz' | 'en' | 'zh');
+        const count = unifiedCount + legacyRows.length;
+        const shown = t('catalog.shown', { count });
+        expect(html).toContain(`aria-label="${shown}"`);
+        expect(html).toContain(`<span>${shown}</span>`);
+        expect(html).toContain('>CU-42</article>');
+        expect(html).toContain('>AU-43</article>');
+        expect(list.map((item: { position: number }) => item.position)).toEqual(
+          Array.from({ length: count }, (_, index) => index + 1)
+        );
+        expect(list.slice(-2).map((item: { url: string }) => item.url)).toEqual(
+          [
+            `https://qaznedr.kz/${locale}/leads/CU-42`,
+            `https://qaznedr.kz/${locale}/leads/AU-43`,
+          ]
+        );
+      }
+    );
+
+    it.each([{}, { kind: 'asset' }])(
+      'keeps the find tab and legacy count for %j',
+      async (facets) => {
+        const html = await render(locale, { ...facets, view });
+        const href = `/${locale}/leads?kind=find${view === 'list' ? '&amp;view=list' : ''}`;
+        const tab = [
+          ...html.matchAll(/<a[^>]*href="([^"]+)"[^>]*>(.*?)<\/a>/g),
+        ].find((match) => match[1] === href);
+        expect(tab).toBeDefined();
+        expect(tab![2]).toContain(
+          `<span class="text-sm opacity-70">${legacyRows.length}</span>`
+        );
+      }
+    );
+
+    it.each([
+      { commodity: 'Au' },
+      { region: 'zhetysu' },
+      { stage: 'occurrence' },
+      { infra: '1' },
+      { group: 'metals_tpi' },
+    ])('excludes legacy rows with find and facet %j', async (facet) => {
+      const html = await render(locale, { kind: 'find', ...facet, view });
+      expect(html).not.toContain('>CU-42</article>');
+      expect(html).not.toContain('>AU-43</article>');
+      const list = schemaOf(html).mainEntity.itemListElement;
+      expect(list).toEqual([]);
+      const { t } = getServerTranslation(locale as 'ru' | 'kz' | 'en' | 'zh');
+      const shown = t('catalog.shown', { count: 0 });
+      expect(html).toContain(`aria-label="${shown}"`);
+      expect(html).toContain(`<span>${shown}</span>`);
+    });
+
+    it('excludes legacy rows when a facet is selected without a kind', async () => {
+      const html = await render(locale, { commodity: 'Au', view });
+      expect(html).not.toContain('>CU-42</article>');
+      expect(html).not.toContain('>AU-43</article>');
+      const list = schemaOf(html).mainEntity.itemListElement;
+      expect(list).toHaveLength(listPublicPlots().length + 1);
+      expect(
+        list.every((item: { url: string }) => !item.url.endsWith('CU-42'))
+      ).toBe(true);
+      const { t } = getServerTranslation(locale as 'ru' | 'kz' | 'en' | 'zh');
+      const shown = t('catalog.shown', { count: list.length });
+      expect(html).toContain(`aria-label="${shown}"`);
+      expect(html).toContain(`<span>${shown}</span>`);
+    });
+  }
+);
+
+it('does not count or expose an invalid showcase as a legacy row', async () => {
+  (listPublishedLeads as jest.Mock).mockResolvedValue({
+    leads: [...legacyRows, { code: 'QN-99', showcase: {} }],
+    total: 3,
+    page: 1,
+    totalPages: 1,
+  });
+  const html = await render('ru');
+  const list = schemaOf(html).mainEntity.itemListElement;
+  expect(html).not.toContain('>QN-99</article>');
+  expect(html).not.toContain('/ru/leads/QN-99');
+  expect(list).toHaveLength(
+    listPublishedOffers().length + listPublicPlots().length + legacyRows.length
+  );
+  expect(html).toContain(
+    `aria-label="${getServerTranslation('ru').t('catalog.shown', { count: list.length })}"`
+  );
+});
+
 it('shows an honest empty state and an empty ItemList when filters match nothing', async () => {
   const html = await render('ru', { kind: 'find' });
   expect(html).toContain('Сбросить фильтры');

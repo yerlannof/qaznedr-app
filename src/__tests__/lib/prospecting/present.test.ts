@@ -36,6 +36,18 @@ it('builds SEO text with code, area, district and licence term', () => {
   expect(description).toContain('по договору с держателем');
 });
 
+it.each(['ru', 'kz', 'en', 'zh'] as const)(
+  'distinguishes the descriptions of adjacent plots with the same licence term in %s',
+  (locale) => {
+    const first = plotSeoText(p07, locale);
+    const adjacent = plotSeoText({ ...p07, code: 'QN-P99' }, locale);
+    expect(first.description).toContain(p07.code);
+    expect(adjacent.description).toContain('QN-P99');
+    expect(first.description).not.toBe(adjacent.description);
+    expect(first.description).toContain(formatDate(p07.valid_until));
+  }
+);
+
 it('pre-fills the WhatsApp message with the plot code', () => {
   expect(whatsappText(p07, 'ru')).toContain('QN-P07 (Алакольский район)');
 });

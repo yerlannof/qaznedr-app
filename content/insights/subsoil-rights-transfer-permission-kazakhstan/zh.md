@@ -142,7 +142,7 @@ description: 说明哈萨克斯坦底土利用权何时可以转让、哪些许�
 
 ## 空白地块：何时需要转让许可
 
-[我们在展的地块](/zh/leads)经我方截至核查日期的核查属于空白地块：据我们掌握的信息，其上没有有效的许可证，许可证根据具体交易申请办理。如果许可证登记在一家公司名下，之后需要将许可证或其持有人的股权转给另一家公司，就需要转让许可。对于勘查许可证，还适用第一年内禁止转让的规定。因此，最好在提交申请前确定以哪家公司的名义申请许可证。详见指南[外国投资者如何取得矿业权](/zh/insights/foreign-investor-subsoil-rights-kazakhstan)和[固体矿产勘查许可证办理步骤](/zh/insights/solid-minerals-exploration-licence-kazakhstan)。
+[我们在展的地块](/zh/leads?kind=find)经我方截至核查日期的核查属于空白地块：据我们掌握的信息，其上没有有效的许可证，许可证根据具体交易申请办理。如果许可证登记在一家公司名下，之后需要将许可证或其持有人的股权转给另一家公司，就需要转让许可。对于勘查许可证，还适用第一年内禁止转让的规定。因此，最好在提交申请前确定以哪家公司的名义申请许可证。详见指南[外国投资者如何取得矿业权](/zh/insights/foreign-investor-subsoil-rights-kazakhstan)和[固体矿产勘查许可证办理步骤](/zh/insights/solid-minerals-exploration-licence-kazakhstan)。
 
 ## 交易前核对清单
 

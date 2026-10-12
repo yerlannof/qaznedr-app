@@ -108,7 +108,10 @@ export default async function LeadsCatalogPage({
   const shown = filterCatalog(items, filters);
   const counts = facetCounts(items, filters);
   const active = activeFilterCount(filters);
-  const kinds = CATALOG_KINDS.filter((k) => items.some((i) => i.kind === k));
+  const kinds = CATALOG_KINDS.filter(
+    (k) =>
+      items.some((i) => i.kind === k) || (k === 'find' && legacy.length > 0)
+  );
   const sorts: CatalogSort[] = ['newest'];
   if (items.some((i) => i.areaHa != null)) sorts.push('area_desc');
   if (items.some((i) => i.validUntil)) sorts.push('valid_desc');
@@ -168,7 +171,12 @@ export default async function LeadsCatalogPage({
   ];
 
   const shownFinds = shown.filter((i) => i.kind === 'find');
-  const showLegacy = legacy.length > 0 && (active === 0 || onlyKind === 'find');
+  const legacyFacetEligible = active === filters.kinds.length;
+  const visibleLegacy =
+    legacyFacetEligible && (filters.kinds.length === 0 || onlyKind === 'find')
+      ? legacy
+      : [];
+  const visibleCount = shown.length + visibleLegacy.length;
 
   const collectionJsonLd = {
     '@context': 'https://schema.org',
@@ -179,11 +187,18 @@ export default async function LeadsCatalogPage({
     inLanguage: HREFLANG[locale],
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: shown.map((item, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        url: localeUrl(locale, item.path),
-      })),
+      itemListElement: [
+        ...shown.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: localeUrl(locale, item.path),
+        })),
+        ...visibleLegacy.map((lead, index) => ({
+          '@type': 'ListItem',
+          position: shown.length + index + 1,
+          url: localeUrl(locale, `/leads/${lead.code}`),
+        })),
+      ],
     },
   };
 
@@ -286,10 +301,15 @@ export default async function LeadsCatalogPage({
               {[null, ...kinds].map((k) => {
                 const current =
                   k === null ? filters.kinds.length === 0 : onlyKind === k;
-                const n =
+                const unifiedCount =
                   k === null
                     ? Object.values(counts.kinds).reduce((a, b) => a + b, 0)
                     : (counts.kinds[k] ?? 0);
+                const n =
+                  unifiedCount +
+                  (legacyFacetEligible && (k === null || k === 'find')
+                    ? legacy.length
+                    : 0);
                 return (
                   <Link
                     key={k ?? 'all'}
@@ -319,7 +339,7 @@ export default async function LeadsCatalogPage({
             </aside>
 
             <section
-              aria-label={t('catalog.shown', { count: shown.length })}
+              aria-label={t('catalog.shown', { count: visibleCount })}
               className="min-w-0"
             >
               <div className="flex flex-wrap items-center justify-between gap-3 border-y border-brand-line py-3 text-sm text-brand-muted">
@@ -344,7 +364,7 @@ export default async function LeadsCatalogPage({
                   )}
                 </div>
                 <div className="flex items-center gap-4">
-                  <span>{t('catalog.shown', { count: shown.length })}</span>
+                  <span>{t('catalog.shown', { count: visibleCount })}</span>
                   <SortSelect locale={locale} params={filters} sorts={sorts} />
                   <ViewToggle
                     locale={locale}
@@ -371,7 +391,7 @@ export default async function LeadsCatalogPage({
                 </figure>
               )}
 
-              {shown.length === 0 && !showLegacy ? (
+              {visibleCount === 0 ? (
                 <div className="mt-6 border border-brand-line bg-brand-surface px-6 py-14 text-center">
                   <FileSearch
                     aria-hidden
@@ -411,9 +431,9 @@ export default async function LeadsCatalogPage({
                 <div>{shown.map(renderItem)}</div>
               )}
 
-              {showLegacy && (
+              {visibleLegacy.length > 0 && (
                 <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-                  {legacy.map((lead) => (
+                  {visibleLegacy.map((lead) => (
                     <LeadCard key={lead.code} lead={lead} locale={locale} />
                   ))}
                 </div>

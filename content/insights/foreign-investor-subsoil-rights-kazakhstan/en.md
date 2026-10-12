@@ -114,7 +114,7 @@ The state buys through a national holding or a national company at a price no le
 
 ## How QAZNEDR HOLDING can help
 
-- **Area selection.** Our geologists select prospective areas based on archived geological reports. The [areas page](/en/leads) lists areas that are free according to our check as of the date shown. A licence for such an area is applied for as part of a specific transaction; the decision to grant it rests with the state.
+- **Area selection.** Our geologists select prospective areas based on archived geological reports. The [areas page](/en/leads?kind=find) lists areas that are free according to our check as of the date shown. A licence for such an area is applied for as part of a specific transaction; the decision to grant it rests with the state.
 - **Status check.** Before filing, we check the blocks on the unified subsoil use platform and in the PUGFN.
 - **Application support.** We prepare the document package and the work description, and track deadlines. The licence is granted by the state: we support the process but do not guarantee the outcome.
 - **Due diligence.** When you buy a right or a stake, we review the licence, the obligations and the history of the area. More on the [legal support](/en/services/legal) page.

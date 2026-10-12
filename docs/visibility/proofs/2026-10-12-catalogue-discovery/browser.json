@@ -1,0 +1,904 @@
+{
+  "catalogue": [
+    {
+      "width": 375,
+      "locale": "ru",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "count": 22,
+      "dark": false,
+      "h1": 1,
+      "overflow": false,
+      "title": "Участки и объекты недр Казахстана: металлы, карьеры на продажу | QAZNEDR HOLDING"
+    },
+    {
+      "width": 375,
+      "locale": "ru",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "count": 22,
+      "dark": true,
+      "h1": 1,
+      "overflow": false,
+      "title": "Участки и объекты недр Казахстана: металлы, карьеры на продажу | QAZNEDR HOLDING"
+    },
+    {
+      "width": 375,
+      "locale": "kz",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/leads",
+      "count": 22,
+      "dark": false,
+      "h1": 1,
+      "overflow": false,
+      "title": "Қазақстанның жер қойнауы учаскелері мен нысандары: металдар, сатылатын карьерлер | QAZNEDR HOLDING"
+    },
+    {
+      "width": 375,
+      "locale": "kz",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/leads",
+      "count": 22,
+      "dark": true,
+      "h1": 1,
+      "overflow": false,
+      "title": "Қазақстанның жер қойнауы учаскелері мен нысандары: металдар, сатылатын карьерлер | QAZNEDR HOLDING"
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/leads",
+      "count": 22,
+      "dark": false,
+      "h1": 1,
+      "overflow": false,
+      "title": "Mineral Areas and Assets for Sale in Kazakhstan: Metals, Quarries | QAZNEDR HOLDING"
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/leads",
+      "count": 22,
+      "dark": true,
+      "h1": 1,
+      "overflow": false,
+      "title": "Mineral Areas and Assets for Sale in Kazakhstan: Metals, Quarries | QAZNEDR HOLDING"
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/leads",
+      "count": 22,
+      "dark": false,
+      "h1": 1,
+      "overflow": false,
+      "title": "哈萨克斯坦矿区与出售项目：金属矿区、在产采石场 | QAZNEDR HOLDING"
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/leads",
+      "count": 22,
+      "dark": true,
+      "h1": 1,
+      "overflow": false,
+      "title": "哈萨克斯坦矿区与出售项目：金属矿区、在产采石场 | QAZNEDR HOLDING"
+    },
+    {
+      "width": 1440,
+      "locale": "ru",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "count": 22,
+      "dark": false,
+      "h1": 1,
+      "overflow": false,
+      "title": "Участки и объекты недр Казахстана: металлы, карьеры на продажу | QAZNEDR HOLDING"
+    },
+    {
+      "width": 1440,
+      "locale": "ru",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/leads",
+      "count": 22,
+      "dark": true,
+      "h1": 1,
+      "overflow": false,
+      "title": "Участки и объекты недр Казахстана: металлы, карьеры на продажу | QAZNEDR HOLDING"
+    },
+    {
+      "width": 1440,
+      "locale": "kz",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/leads",
+      "count": 22,
+      "dark": false,
+      "h1": 1,
+      "overflow": false,
+      "title": "Қазақстанның жер қойнауы учаскелері мен нысандары: металдар, сатылатын карьерлер | QAZNEDR HOLDING"
+    },
+    {
+      "width": 1440,
+      "locale": "kz",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/leads",
+      "count": 22,
+      "dark": true,
+      "h1": 1,
+      "overflow": false,
+      "title": "Қазақстанның жер қойнауы учаскелері мен нысандары: металдар, сатылатын карьерлер | QAZNEDR HOLDING"
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/leads",
+      "count": 22,
+      "dark": false,
+      "h1": 1,
+      "overflow": false,
+      "title": "Mineral Areas and Assets for Sale in Kazakhstan: Metals, Quarries | QAZNEDR HOLDING"
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/leads",
+      "count": 22,
+      "dark": true,
+      "h1": 1,
+      "overflow": false,
+      "title": "Mineral Areas and Assets for Sale in Kazakhstan: Metals, Quarries | QAZNEDR HOLDING"
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/leads",
+      "count": 22,
+      "dark": false,
+      "h1": 1,
+      "overflow": false,
+      "title": "哈萨克斯坦矿区与出售项目：金属矿区、在产采石场 | QAZNEDR HOLDING"
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/leads",
+      "count": 22,
+      "dark": true,
+      "h1": 1,
+      "overflow": false,
+      "title": "哈萨克斯坦矿区与出售项目：金属矿区、在产采石场 | QAZNEDR HOLDING"
+    }
+  ],
+  "details": [
+    {
+      "description": "QN-P08. Лицензия на старательство до 02.04.2029, Алакольский район, область Жетісу. Держатель ищет партнёра для работы на участке; работа по договору с держателем лицензии. Координаты угловых точек — на странице.",
+      "overflow": false,
+      "url": "/ru/prospecting/QN-P08"
+    },
+    {
+      "findLinks": ["/ru/leads?kind=find"],
+      "overflow": false,
+      "url": "/ru/insights/foreign-investor-subsoil-rights-kazakhstan"
+    },
+    {
+      "findLinks": ["/ru/leads?kind=find"],
+      "overflow": false,
+      "url": "/ru/insights/solid-minerals-exploration-licence-kazakhstan"
+    },
+    {
+      "findLinks": ["/ru/leads?kind=find"],
+      "overflow": false,
+      "url": "/ru/insights/subsoil-rights-transfer-permission-kazakhstan"
+    },
+    {
+      "description": "QN-P08. Кен іздеушілікке арналған лицензия 02.04.2029 дейін, Алакөл ауданы, Жетісу облысы. Лицензия иесі учаскеде жұмыс істеуге серіктес іздейді; жұмыс лицензия иесімен шарт бойынша. Бұрыштық нүктелердің координаттары — бетте.",
+      "overflow": false,
+      "url": "/kz/prospecting/QN-P08"
+    },
+    {
+      "findLinks": ["/kz/leads?kind=find"],
+      "overflow": false,
+      "url": "/kz/insights/foreign-investor-subsoil-rights-kazakhstan"
+    },
+    {
+      "findLinks": ["/kz/leads?kind=find"],
+      "overflow": false,
+      "url": "/kz/insights/solid-minerals-exploration-licence-kazakhstan"
+    },
+    {
+      "findLinks": ["/kz/leads?kind=find"],
+      "overflow": false,
+      "url": "/kz/insights/subsoil-rights-transfer-permission-kazakhstan"
+    },
+    {
+      "description": "QN-P08. Artisanal mining licence valid until 02.04.2029, Alakol District, Zhetysu Region. The holder is looking for a partner to work the plot; work is under a contract with the licence holder. Corner coordinates on the page.",
+      "overflow": false,
+      "url": "/en/prospecting/QN-P08"
+    },
+    {
+      "findLinks": ["/en/leads?kind=find"],
+      "overflow": false,
+      "url": "/en/insights/foreign-investor-subsoil-rights-kazakhstan"
+    },
+    {
+      "findLinks": ["/en/leads?kind=find"],
+      "overflow": false,
+      "url": "/en/insights/solid-minerals-exploration-licence-kazakhstan"
+    },
+    {
+      "findLinks": ["/en/leads?kind=find"],
+      "overflow": false,
+      "url": "/en/insights/subsoil-rights-transfer-permission-kazakhstan"
+    },
+    {
+      "description": "QN-P08. 个体小规模采矿许可证有效期至 02.04.2029，杰特苏州阿拉科尔区。许可证持有人正在寻找在地块上作业的合作伙伴；工作依据与许可证持有人签订的合同进行。页面提供拐点坐标。",
+      "overflow": false,
+      "url": "/zh/prospecting/QN-P08"
+    },
+    {
+      "findLinks": ["/zh/leads?kind=find"],
+      "overflow": false,
+      "url": "/zh/insights/foreign-investor-subsoil-rights-kazakhstan"
+    },
+    {
+      "findLinks": ["/zh/leads?kind=find"],
+      "overflow": false,
+      "url": "/zh/insights/solid-minerals-exploration-licence-kazakhstan"
+    },
+    {
+      "findLinks": ["/zh/leads?kind=find"],
+      "overflow": false,
+      "url": "/zh/insights/subsoil-rights-transfer-permission-kazakhstan"
+    }
+  ],
+  "responsiveDetails": [
+    {
+      "width": 375,
+      "locale": "ru",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/prospecting/QN-P08",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "ru",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/prospecting/QN-P08",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "ru",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "ru",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "ru",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "ru",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "ru",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "ru",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "kz",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/prospecting/QN-P08",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "kz",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/prospecting/QN-P08",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "kz",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "kz",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "kz",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "kz",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "kz",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "kz",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/prospecting/QN-P08",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/prospecting/QN-P08",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "en",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/prospecting/QN-P08",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/prospecting/QN-P08",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 375,
+      "locale": "zh",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "ru",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/prospecting/QN-P08",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "ru",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/prospecting/QN-P08",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "ru",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "ru",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "ru",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "ru",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "ru",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "ru",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "kz",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/prospecting/QN-P08",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "kz",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/prospecting/QN-P08",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "kz",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "kz",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "kz",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "kz",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "kz",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "kz",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/prospecting/QN-P08",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/prospecting/QN-P08",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "en",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/prospecting/QN-P08",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "path": "/prospecting/QN-P08",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/prospecting/QN-P08",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "path": "/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "path": "/insights/solid-minerals-exploration-licence-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": false,
+      "h1": 1,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "locale": "zh",
+      "path": "/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "brokenImages": 0,
+      "canonical": "https://qaznedr.kz/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "dark": true,
+      "h1": 1,
+      "overflow": false
+    }
+  ]
+}

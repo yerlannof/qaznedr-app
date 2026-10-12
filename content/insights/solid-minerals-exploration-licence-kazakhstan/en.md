@@ -124,7 +124,7 @@ The holder of an exploration licence has the exclusive right to a mining licence
 
 ## How QAZNEDR HOLDING can help
 
-- **Area selection.** Our geologists study archived geological reports and select blocks to suit the investor's objectives. The [areas on our site](/en/leads) are free according to our check as of the date shown; the licence is applied for as part of the deal.
+- **Area selection.** Our geologists study archived geological reports and select blocks to suit the investor's objectives. The [areas on our site](/en/leads?kind=find) are free according to our check as of the date shown; the licence is applied for as part of the deal.
 - **Status check.** We check the blocks against the EPN, the State Subsoil Fund Management Programme and the restrictions of Art. 25, and determine whether the order-of-filing rule or an auction will apply.
 - **Application support.** We prepare the work plan, check the documents and track the deadlines.
 - **Due diligence and deal structure.** We check the area or the subsoil user company and help choose the format: a new licence, the purchase of a right or a stake, or a joint venture.

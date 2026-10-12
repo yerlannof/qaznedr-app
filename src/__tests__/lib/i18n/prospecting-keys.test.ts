@@ -68,3 +68,23 @@ it('states in every language that the right is not sold or transferred', () => {
   expect(copy.en.disclaimer).toMatch(/not sold or transferred/);
   expect(copy.zh.disclaimer).toMatch(/不出售、不转让/);
 });
+
+// Owner 2026-10-12: holders look for partners, not crews.
+const CREW: Record<(typeof LOCALES)[number], RegExp> = {
+  ru: /бригад/i,
+  kz: /бригада/i,
+  en: /\bcrews?\b/i,
+  zh: /作业队/,
+};
+
+it.each(LOCALES)('%s prospecting copy speaks of partners, not crews', (l) => {
+  const grid = (translations[l] as unknown as { catalogGrid: Tree })
+    .catalogGrid;
+  for (const value of [
+    ...Object.values(copy[l]),
+    ...Object.values(flatten(grid)),
+  ]) {
+    expect(value).not.toMatch(CREW[l]);
+  }
+  expect(copy[l].statusOpen.length).toBeGreaterThan(0);
+});

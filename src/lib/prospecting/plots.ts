@@ -9,7 +9,7 @@ import {
 } from './coords';
 
 // Prospecting licences (лицензии на старательство) whose holders look for
-// crews; QAZNEDR introduces the crew to the holder. Licence numbers and
+// partners; QAZNEDR introduces the partner to the holder. Licence numbers and
 // corner coordinates are public by the owner's decision (2026-10-11); holder
 // names never enter this file. The right itself is not sold or transferred
 // (Subsoil Code art. 263(4)).

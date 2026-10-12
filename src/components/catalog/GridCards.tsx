@@ -47,7 +47,7 @@ export function ProspectingGridCard({
       media={<PlotOutline plot={plot} locale={locale} fill />}
       verifiedOn={verifiedOn(plot.code)}
       statusLabel={
-        plot.status === 'matched' ? t('catalogGrid.crewFound') : undefined
+        plot.status === 'matched' ? t('catalogGrid.partnerFound') : undefined
       }
       kindLabel={`${t('prospecting.kind')} · ${t(
         plot.status === 'open'

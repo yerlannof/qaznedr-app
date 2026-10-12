@@ -27,9 +27,9 @@ it('falls back to the contact page when no channel is configured', () => {
   expect(render(plot)).toContain('href="/ru/contact"');
 });
 
-it('replaces the contact block with a note once a crew is found', () => {
+it('replaces the contact block with a note once a partner is found', () => {
   const html = render({ ...plot, status: 'matched' });
-  expect(html).toContain('бригада найдена');
+  expect(html).toContain('партнёр найден');
   expect(html).not.toContain('Обсудить работу на участке');
   expect(html).toContain('id="contact"');
 });

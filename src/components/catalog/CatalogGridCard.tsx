@@ -16,7 +16,7 @@ export interface GridCardProps {
   media: React.ReactNode;
   /** ISO date the QAZNEDR team verified the object, or null. */
   verifiedOn: string | null;
-  /** Replaces the verification label, e.g. «Бригада найдена». */
+  /** Replaces the verification label, e.g. «Партнёр найден». */
   statusLabel?: string;
   kindLabel: string;
   title: string;

@@ -569,7 +569,7 @@ export const translations = {
     catalog: {
       eyebrow: 'Витрина · статус и цифры — на дату проверки в карточке',
       title: 'Участки и объекты недр Казахстана',
-      lede: 'Участки, отобранные нашими геологами; лицензии на старательство, где держатель ищет бригаду; действующие карьеры и месторождения, которые продают владельцы. Название, координаты и документы — после NDA, если в карточке не сказано иное.',
+      lede: 'Участки, отобранные нашими геологами; лицензии на старательство, где держатель ищет партнёра; действующие карьеры и месторождения, которые продают владельцы. Название, координаты и документы — после NDA, если в карточке не сказано иное.',
       ledeNoPlots:
         'Участки, отобранные нашими геологами, и действующие карьеры и месторождения, которые продают владельцы. Название, координаты и документы — после NDA, если в карточке не сказано иное.',
       kindLabel: 'Тип предложения',
@@ -630,17 +630,17 @@ export const translations = {
     },
     prospecting: {
       kind: 'Лицензия на старательство',
-      statusOpen: 'ищем бригаду',
-      statusMatched: 'бригада найдена',
+      statusOpen: 'ищем партнёра',
+      statusMatched: 'партнёр найден',
       mineral: 'россыпное золото',
       ha: 'га',
       cardTitle: 'Россыпное золото · {area} га',
       title: 'Старательский участок {code}: россыпное золото, {area} га',
-      lead: 'Держатель лицензии ищет бригаду старателей.',
+      lead: 'Держатель лицензии ищет партнёра для работы на участке.',
       seoTitle:
         'Старательский участок {code}: россыпное золото, {area} га, {district}',
       seoDescription:
-        'Лицензия на старательство до {date}, {district}, {region}. Держатель ищет бригаду старателей; работа по договору с держателем лицензии. Координаты угловых точек — на странице.',
+        'Лицензия на старательство до {date}, {district}, {region}. Держатель ищет партнёра для работы на участке; работа по договору с держателем лицензии. Координаты угловых точек — на странице.',
       breadcrumb: 'Старательские участки',
       note: 'Работа на участке по договору с держателем лицензии. Право по лицензии не продаётся и не передаётся (ст. 263 Кодекса о недрах).',
       factMineral: 'Металл',
@@ -649,7 +649,7 @@ export const translations = {
       factLicenseValue: '№ {number}, выдана {date}',
       factValidUntil: 'Действует до',
       factValidUntilValue: '{date}; можно продлить один раз на 3 года',
-      factShare: 'Доля бригады и держателя',
+      factShare: 'Доля партнёра и держателя',
       factShareValue: 'по договору с держателем',
       factStatus: 'Статус',
       factConfirmed: 'Со слов держателя',
@@ -670,9 +670,9 @@ export const translations = {
       openGoogle: 'Открыть в Google Картах',
       open2gis: 'Открыть в 2ГИС',
       howHeading: 'Как устроена работа',
-      how1: 'Напишите нам в WhatsApp или WeChat: код участка, сколько человек в бригаде, опыт, когда готовы выехать.',
+      how1: 'Напишите нам в WhatsApp или WeChat: код участка, сколько у вас людей, опыт, когда готовы выехать.',
       how2: 'Мы передаём заявку держателю лицензии и договариваемся о знакомстве и выезде на участок.',
-      how3: 'Долю добычи, сроки и проживание бригада обсуждает с держателем и закрепляет в договоре с ним.',
+      how3: 'Долю добычи, сроки и проживание партнёр обсуждает с держателем и закрепляет в договоре с ним.',
       limitsHeading: 'Что разрешает лицензия',
       limit1: 'Работы на глубине не больше 3 м',
       limit2: 'Без химических реагентов и взрывчатки',
@@ -683,18 +683,18 @@ export const translations = {
       limitsSource: 'Ст. 270–271 Кодекса РК «О недрах и недропользовании».',
       whoHeading: 'Кого ищем',
       who1: 'Граждан Казахстана: часть лицензий прямо запрещает привлекать иностранную рабочую силу',
-      who2: 'Бригаду или отдельных старателей с опытом промывки россыпного золота',
+      who2: 'Партнёров с опытом промывки россыпного золота: команду или отдельных старателей',
       who3: 'Готовность выехать на сезон',
       disclaimerLabel: 'Важно.',
       disclaimer:
-        'Участок не принадлежит QAZNEDR. Право пользования недрами — у держателя лицензии на старательство; оно не продаётся и не передаётся (ст. 263 Кодекса РК «О недрах и недропользовании»). QAZNEDR знакомит бригады с держателями; договор о работе бригада заключает с держателем. Сведения — по копии лицензии и словам держателя на указанную дату. Содержание золота и объём добычи не гарантируются.',
+        'Участок не принадлежит QAZNEDR. Право пользования недрами — у держателя лицензии на старательство; оно не продаётся и не передаётся (ст. 263 Кодекса РК «О недрах и недропользовании»). QAZNEDR знакомит партнёров с держателями; договор о работе партнёр заключает с держателем. Сведения — по копии лицензии и словам держателя на указанную дату. Содержание золота и объём добычи не гарантируются.',
       contactHeading: 'Обсудить работу на участке',
       contactNote:
-        'Расскажите о бригаде — передадим держателю участка {code} и договоримся о выезде.',
+        'Расскажите о себе — передадим держателю участка {code} и договоримся о выезде.',
       whatsappText:
         'Здравствуйте! Хотим работать на старательском участке {code} ({district}). Нас … человек, все граждане РК, опыт: …',
       matchedNote:
-        'Бригада для этого участка уже найдена. Посмотрите другие участки.',
+        'Партнёр для этого участка уже найден. Посмотрите другие участки.',
       guideLink:
         'Лицензия на старательство в Казахстане: как получить и что разрешено',
       catalogLink: 'Все участки и объекты в общей витрине',
@@ -703,16 +703,16 @@ export const translations = {
       discuss: 'Обсудить {code}',
       cardArea: 'площадь участка',
       cardValidUntil: 'лицензия действует до',
-      cardShare: 'доля бригады и держателя',
+      cardShare: 'доля партнёра и держателя',
       cardShareValue: 'По договору',
       indexTitle: 'Старательские участки с россыпным золотом',
       indexLead:
-        'Держатели лицензий на старательство ищут бригады для работы на участках с россыпным золотом. Мы знакомим бригаду с держателем; условия работы — по договору с ним. Координаты и номер лицензии — на странице каждого участка.',
+        'Держатели лицензий на старательство ищут партнёров для работы на участках с россыпным золотом. Мы знакомим партнёра с держателем; условия работы — по договору с ним. Координаты и номер лицензии — на странице каждого участка.',
       indexCount: 'Участков: {count}',
       seoIndexTitle:
-        'Старательские участки: работа для бригад старателей, россыпное золото',
+        'Старательские участки: держатели лицензий ищут партнёров, россыпное золото',
       seoIndexDescription:
-        'Лицензии на старательство в Жетісу, Жамбылской и Восточно-Казахстанской областях: держатели ищут бригады старателей. Площадь, срок лицензии и координаты участков; работа по договору с держателем.',
+        'Лицензии на старательство в Жетісу, Жамбылской и Восточно-Казахстанской областях: держатели ищут партнёров для работы на участках. Площадь, срок лицензии и координаты участков; работа по договору с держателем.',
       regions: {
         zhetysu: 'область Жетісу',
         zhambyl: 'Жамбылская область',
@@ -733,7 +733,7 @@ export const translations = {
       shareByContract: 'Доля: по договору',
       afterNda: 'Материалы — после NDA',
       zoneApprox: 'Место показано условно',
-      crewFound: 'Бригада найдена',
+      partnerFound: 'Партнёр найден',
     },
     showcase: {
       rightsChecked: 'Проверено {date}, не выписка.',
@@ -1802,7 +1802,7 @@ export const translations = {
     catalog: {
       eyebrow: 'Витрина · мәртебе мен сандар — карточкадағы тексеру күніне',
       title: 'Қазақстанның жер қойнауы учаскелері мен нысандары',
-      lede: 'Геологтарымыз іріктеген учаскелер; ұстаушысы бригада іздеп жүрген өндірушілік лицензиялары; иелері сатып жатқан жұмыс істеп тұрған карьерлер мен кен орындары. Атауы, координаттары мен құжаттары — карточкада басқаша айтылмаса, NDA-дан кейін.',
+      lede: 'Геологтарымыз іріктеген учаскелер; ұстаушысы серіктес іздеп жүрген өндірушілік лицензиялары; иелері сатып жатқан жұмыс істеп тұрған карьерлер мен кен орындары. Атауы, координаттары мен құжаттары — карточкада басқаша айтылмаса, NDA-дан кейін.',
       ledeNoPlots:
         'Геологтарымыз іріктеген учаскелер және иелері сатып жатқан жұмыс істеп тұрған карьерлер мен кен орындары. Атауы, координаттары мен құжаттары — карточкада басқаша айтылмаса, NDA-дан кейін.',
       kindLabel: 'Ұсыныс түрі',
@@ -1863,17 +1863,17 @@ export const translations = {
     },
     prospecting: {
       kind: 'Кен іздеушілікке арналған лицензия',
-      statusOpen: 'бригада іздейміз',
-      statusMatched: 'бригада табылды',
+      statusOpen: 'серіктес іздейміз',
+      statusMatched: 'серіктес табылды',
       mineral: 'шашыранды алтын',
       ha: 'га',
       cardTitle: 'Шашыранды алтын · {area} га',
       title: '{code} кен іздеу учаскесі: шашыранды алтын, {area} га',
-      lead: 'Лицензия иесі кен іздеушілер бригадасын іздейді.',
+      lead: 'Лицензия иесі учаскеде жұмыс істеуге серіктес іздейді.',
       seoTitle:
         '{code} кен іздеу учаскесі: шашыранды алтын, {area} га, {district}',
       seoDescription:
-        'Кен іздеушілікке арналған лицензия {date} дейін, {district}, {region}. Лицензия иесі кен іздеушілер бригадасын іздейді; жұмыс лицензия иесімен шарт бойынша. Бұрыштық нүктелердің координаттары — бетте.',
+        'Кен іздеушілікке арналған лицензия {date} дейін, {district}, {region}. Лицензия иесі учаскеде жұмыс істеуге серіктес іздейді; жұмыс лицензия иесімен шарт бойынша. Бұрыштық нүктелердің координаттары — бетте.',
       breadcrumb: 'Кен іздеу учаскелері',
       note: 'Учаскедегі жұмыс лицензия иесімен шарт бойынша жүргізіледі. Лицензия бойынша құқық сатылмайды және берілмейді (Жер қойнауы туралы кодекстің 263-бабы).',
       factMineral: 'Металл',
@@ -1882,7 +1882,7 @@ export const translations = {
       factLicenseValue: '№ {number}, {date} берілген',
       factValidUntil: 'Жарамдылық мерзімі',
       factValidUntilValue: '{date} дейін; бір рет 3 жылға ұзартуға болады',
-      factShare: 'Бригада мен лицензия иесінің үлесі',
+      factShare: 'Серіктес пен лицензия иесінің үлесі',
       factShareValue: 'лицензия иесімен шарт бойынша',
       factStatus: 'Мәртебесі',
       factConfirmed: 'Лицензия иесінің сөзімен',
@@ -1904,9 +1904,9 @@ export const translations = {
       openGoogle: 'Google Карталарда ашу',
       open2gis: '2ГИС-те ашу',
       howHeading: 'Жұмыс қалай ұйымдастырылады',
-      how1: 'Бізге WhatsApp немесе WeChat арқылы жазыңыз: учаске коды, бригадада неше адам бар, тәжірибеңіз, қашан шыға аласыз.',
+      how1: 'Бізге WhatsApp немесе WeChat арқылы жазыңыз: учаске коды, сізде неше адам бар, тәжірибеңіз, қашан шыға аласыз.',
       how2: 'Өтінімді лицензия иесіне жеткіземіз, танысу мен учаскеге баруды келісеміз.',
-      how3: 'Өндіру үлесін, мерзімдерді және тұруды бригада лицензия иесімен талқылап, онымен жасалатын шартта бекітеді.',
+      how3: 'Өндіру үлесін, мерзімдерді және тұруды серіктес лицензия иесімен талқылап, онымен жасалатын шартта бекітеді.',
       limitsHeading: 'Лицензия нені рұқсат етеді',
       limit1: 'Жұмыстар 3 м-ден аспайтын тереңдікте',
       limit2: 'Химиялық реагенттерсіз және жарылғыш заттарсыз',
@@ -1918,17 +1918,17 @@ export const translations = {
         'ҚР «Жер қойнауы және жер қойнауын пайдалану туралы» кодексінің 270–271-баптары.',
       whoHeading: 'Кімді іздейміз',
       who1: 'Қазақстан азаматтарын: кейбір лицензиялар шетелдік жұмыс күшін тартуға тікелей тыйым салады',
-      who2: 'Шашыранды алтынды жуу тәжірибесі бар бригаданы немесе жеке кен іздеушілерді',
+      who2: 'Шашыранды алтынды жуу тәжірибесі бар серіктестерді: команданы немесе жеке кен іздеушілерді',
       who3: 'Маусымға шығуға дайындық',
       disclaimerLabel: 'Маңызды.',
       disclaimer:
-        'Учаске QAZNEDR-ге тиесілі емес. Жер қойнауын пайдалану құқығы кен іздеушілікке арналған лицензия иесінде; ол сатылмайды және берілмейді (ҚР «Жер қойнауы және жер қойнауын пайдалану туралы» кодексінің 263-бабы). QAZNEDR бригадаларды лицензия иелерімен таныстырады; жұмыс туралы шартты бригада лицензия иесімен жасайды. Мәліметтер — лицензия көшірмесі және көрсетілген күнгі лицензия иесінің сөзі бойынша. Алтынның құрамы мен өндіру көлеміне кепілдік берілмейді.',
+        'Учаске QAZNEDR-ге тиесілі емес. Жер қойнауын пайдалану құқығы кен іздеушілікке арналған лицензия иесінде; ол сатылмайды және берілмейді (ҚР «Жер қойнауы және жер қойнауын пайдалану туралы» кодексінің 263-бабы). QAZNEDR серіктестерді лицензия иелерімен таныстырады; жұмыс туралы шартты серіктес лицензия иесімен жасайды. Мәліметтер — лицензия көшірмесі және көрсетілген күнгі лицензия иесінің сөзі бойынша. Алтынның құрамы мен өндіру көлеміне кепілдік берілмейді.',
       contactHeading: 'Учаскедегі жұмысты талқылау',
       contactNote:
-        'Бригадаңыз туралы айтыңыз — {code} учаскесінің иесіне жеткізіп, баруды келісеміз.',
+        'Өзіңіз туралы айтыңыз — {code} учаскесінің иесіне жеткізіп, баруды келісеміз.',
       whatsappText:
         'Сәлеметсіз бе! {code} кен іздеу учаскесінде ({district}) жұмыс істегіміз келеді. Бізде … адам, бәріміз ҚР азаматымыз, тәжірибеміз: …',
-      matchedNote: 'Бұл учаскеге бригада табылды. Басқа учаскелерді қараңыз.',
+      matchedNote: 'Бұл учаскеге серіктес табылды. Басқа учаскелерді қараңыз.',
       guideLink:
         'Қазақстандағы кен іздеушілікке арналған лицензия: қалай алуға болады және не рұқсат етілген',
       catalogLink: 'Жалпы витринадағы барлық учаскелер мен нысандар',
@@ -1937,16 +1937,16 @@ export const translations = {
       discuss: '{code} учаскесін талқылау',
       cardArea: 'учаске алаңы',
       cardValidUntil: 'лицензия мерзімі',
-      cardShare: 'бригада мен иесінің үлесі',
+      cardShare: 'серіктес пен иесінің үлесі',
       cardShareValue: 'Шарт бойынша',
       indexTitle: 'Шашыранды алтыны бар кен іздеу учаскелері',
       indexLead:
-        'Кен іздеушілікке арналған лицензия иелері шашыранды алтыны бар учаскелерде жұмыс істейтін бригадаларды іздейді. Біз бригаданы лицензия иесімен таныстырамыз; жұмыс шарттары — онымен жасалатын шарт бойынша. Координаттар мен лицензия нөмірі — әр учаскенің бетінде.',
+        'Кен іздеушілікке арналған лицензия иелері шашыранды алтыны бар учаскелерде жұмыс істеуге серіктестер іздейді. Біз серіктесті лицензия иесімен таныстырамыз; жұмыс шарттары — онымен жасалатын шарт бойынша. Координаттар мен лицензия нөмірі — әр учаскенің бетінде.',
       indexCount: 'Учаскелер: {count}',
       seoIndexTitle:
-        'Кен іздеу учаскелері: кен іздеушілер бригадасына жұмыс, шашыранды алтын',
+        'Кен іздеу учаскелері: лицензия иелері серіктес іздейді, шашыранды алтын',
       seoIndexDescription:
-        'Жетісу, Жамбыл және Шығыс Қазақстан облыстарындағы кен іздеушілікке арналған лицензиялар: лицензия иелері кен іздеушілер бригадасын іздейді. Учаскелердің алаңы, лицензия мерзімі және координаттары; жұмыс лицензия иесімен шарт бойынша.',
+        'Жетісу, Жамбыл және Шығыс Қазақстан облыстарындағы кен іздеушілікке арналған лицензиялар: лицензия иелері учаскеде жұмыс істеуге серіктес іздейді. Учаскелердің алаңы, лицензия мерзімі және координаттары; жұмыс лицензия иесімен шарт бойынша.',
       regions: {
         zhetysu: 'Жетісу облысы',
         zhambyl: 'Жамбыл облысы',
@@ -1967,7 +1967,7 @@ export const translations = {
       shareByContract: 'Үлес: шарт бойынша',
       afterNda: 'Материалдар — NDA-дан кейін',
       zoneApprox: 'Орны шартты түрде көрсетілген',
-      crewFound: 'Бригада табылды',
+      partnerFound: 'Серіктес табылды',
     },
     showcase: {
       rightsChecked: '{date} тексерілді, үзінді көшірме емес.',
@@ -2951,7 +2951,7 @@ export const translations = {
       eyebrow:
         'Showcase · status and figures as of the check date on each card',
       title: 'Mineral areas and assets in Kazakhstan',
-      lede: 'Areas selected by our geologists; artisanal mining licences whose holders are looking for a crew; operating quarries and deposits offered by their owners. Name, coordinates and documents follow an NDA unless the card says otherwise.',
+      lede: 'Areas selected by our geologists; artisanal mining licences whose holders are looking for a partner; operating quarries and deposits offered by their owners. Name, coordinates and documents follow an NDA unless the card says otherwise.',
       ledeNoPlots:
         'Areas selected by our geologists, and operating quarries and deposits offered by their owners. Name, coordinates and documents follow an NDA unless the card says otherwise.',
       kindLabel: 'Offer type',
@@ -3012,17 +3012,17 @@ export const translations = {
     },
     prospecting: {
       kind: 'Artisanal mining licence',
-      statusOpen: 'crew wanted',
-      statusMatched: 'crew found',
+      statusOpen: 'partner wanted',
+      statusMatched: 'partner found',
       mineral: 'placer gold',
       ha: 'ha',
       cardTitle: 'Placer gold · {area} ha',
       title: 'Artisanal mining plot {code}: placer gold, {area} ha',
-      lead: 'The licence holder is looking for a crew of artisanal miners.',
+      lead: 'The licence holder is looking for a partner to work the plot.',
       seoTitle:
         'Artisanal mining plot {code}: placer gold, {area} ha, {district}',
       seoDescription:
-        'Artisanal mining licence valid until {date}, {district}, {region}. The holder is looking for a crew of artisanal miners; work is under a contract with the licence holder. Corner coordinates on the page.',
+        'Artisanal mining licence valid until {date}, {district}, {region}. The holder is looking for a partner to work the plot; work is under a contract with the licence holder. Corner coordinates on the page.',
       breadcrumb: 'Artisanal mining plots',
       note: 'Work on the plot is under a contract with the licence holder. The licence right is not sold or transferred (Subsoil Code, art. 263).',
       factMineral: 'Metal',
@@ -3031,7 +3031,7 @@ export const translations = {
       factLicenseValue: 'No. {number}, issued {date}',
       factValidUntil: 'Valid until',
       factValidUntilValue: '{date}; can be extended once for 3 years',
-      factShare: 'Crew and holder shares',
+      factShare: 'Partner and holder shares',
       factShareValue: 'under a contract with the holder',
       factStatus: 'Status',
       factConfirmed: 'According to the holder',
@@ -3052,9 +3052,9 @@ export const translations = {
       openGoogle: 'Open in Google Maps',
       open2gis: 'Open in 2GIS',
       howHeading: 'How it works',
-      how1: 'Message us on WhatsApp or WeChat: the plot code, crew size, experience and when you can travel.',
+      how1: 'Message us on WhatsApp or WeChat: the plot code, how many people you have, experience and when you can travel.',
       how2: 'We pass your request to the licence holder and arrange an introduction and a visit to the plot.',
-      how3: 'The crew agrees the share of the output, dates and accommodation with the holder and records them in a contract with the holder.',
+      how3: 'The partner agrees the share of the output, dates and accommodation with the holder and records them in a contract with the holder.',
       limitsHeading: 'What the licence allows',
       limit1: 'Work no deeper than 3 m',
       limit2: 'No chemical reagents or explosives',
@@ -3065,18 +3065,18 @@ export const translations = {
       limitsSource: 'Articles 270–271 of the Subsoil Code of Kazakhstan.',
       whoHeading: 'Who we are looking for',
       who1: 'Citizens of Kazakhstan: some licences expressly ban hiring foreign workers',
-      who2: 'A crew or individual miners with experience in washing placer gold',
+      who2: 'Partners with experience in washing placer gold: a team or individual miners',
       who3: 'Ready to work for a season',
       disclaimerLabel: 'Important.',
       disclaimer:
-        'The plot does not belong to QAZNEDR. The subsoil use right belongs to the holder of the artisanal mining licence; it is not sold or transferred (Subsoil Code of Kazakhstan, art. 263). QAZNEDR introduces crews to holders; the crew signs the work contract with the holder. Details are based on a copy of the licence and the holder’s statement on the stated date. Gold content and output are not guaranteed.',
+        'The plot does not belong to QAZNEDR. The subsoil use right belongs to the holder of the artisanal mining licence; it is not sold or transferred (Subsoil Code of Kazakhstan, art. 263). QAZNEDR introduces partners to holders; the partner signs the work contract with the holder. Details are based on a copy of the licence and the holder’s statement on the stated date. Gold content and output are not guaranteed.',
       contactHeading: 'Discuss work on the plot',
       contactNote:
-        'Tell us about your crew — we will pass it to the holder of plot {code} and arrange a visit.',
+        'Tell us about yourself — we will pass it to the holder of plot {code} and arrange a visit.',
       whatsappText:
         'Hello! We would like to work on artisanal mining plot {code} ({district}). We are … people, all citizens of Kazakhstan, experience: …',
       matchedNote:
-        'A crew has already been found for this plot. See other plots.',
+        'A partner has already been found for this plot. See other plots.',
       guideLink:
         'Artisanal mining licence in Kazakhstan: how to get one and what it allows',
       catalogLink: 'All areas and assets in the catalogue',
@@ -3085,16 +3085,16 @@ export const translations = {
       discuss: 'Discuss {code}',
       cardArea: 'plot area',
       cardValidUntil: 'licence valid until',
-      cardShare: 'crew and holder shares',
+      cardShare: 'partner and holder shares',
       cardShareValue: 'By contract',
       indexTitle: 'Artisanal placer gold plots',
       indexLead:
-        'Holders of artisanal mining licences are looking for crews to work placer gold plots. We introduce the crew to the holder; working terms are agreed in a contract with the holder. Coordinates and the licence number are on each plot page.',
+        'Holders of artisanal mining licences are looking for partners to work placer gold plots. We introduce the partner to the holder; working terms are agreed in a contract with the holder. Coordinates and the licence number are on each plot page.',
       indexCount: 'Plots: {count}',
       seoIndexTitle:
-        'Artisanal mining plots in Kazakhstan: work for miner crews, placer gold',
+        'Artisanal mining plots in Kazakhstan: licence holders seeking partners, placer gold',
       seoIndexDescription:
-        'Artisanal mining licences in Zhetysu, Zhambyl and East Kazakhstan regions whose holders are looking for crews. Plot area, licence term and coordinates; work under a contract with the holder.',
+        'Artisanal mining licences in Zhetysu, Zhambyl and East Kazakhstan regions whose holders are looking for partners to work the plots. Plot area, licence term and coordinates; work under a contract with the holder.',
       regions: {
         zhetysu: 'Zhetysu Region',
         zhambyl: 'Zhambyl Region',
@@ -3115,7 +3115,7 @@ export const translations = {
       shareByContract: 'Share: by contract',
       afterNda: 'Materials after an NDA',
       zoneApprox: 'Location shown approximately',
-      crewFound: 'Crew found',
+      partnerFound: 'Partner found',
     },
     showcase: {
       rightsChecked: 'Checked {date}; not an official extract.',
@@ -4065,7 +4065,7 @@ export const translations = {
     catalog: {
       eyebrow: '展示 · 状态和数据以卡片上的核查日期为准',
       title: '哈萨克斯坦矿区与项目',
-      lede: '我们的地质师筛选的矿区；持证人正在寻找作业队的手工采矿许可证；业主出售的在产采石场和矿床。除卡片另有说明外，名称、坐标和文件在签署保密协议后提供。',
+      lede: '我们的地质师筛选的矿区；持证人正在寻找合作伙伴的手工采矿许可证；业主出售的在产采石场和矿床。除卡片另有说明外，名称、坐标和文件在签署保密协议后提供。',
       ledeNoPlots:
         '我们的地质师筛选的矿区，以及业主出售的在产采石场和矿床。除卡片另有说明外，名称、坐标和文件在签署保密协议后提供。',
       kindLabel: '类型',
@@ -4126,16 +4126,16 @@ export const translations = {
     },
     prospecting: {
       kind: '个体小规模采矿许可证',
-      statusOpen: '招募作业队',
-      statusMatched: '已找到作业队',
+      statusOpen: '寻找合作伙伴',
+      statusMatched: '已找到合作伙伴',
       mineral: '砂金',
       ha: '公顷',
       cardTitle: '砂金 · {area} 公顷',
       title: '小规模采矿地块 {code}：砂金，{area} 公顷',
-      lead: '许可证持有人正在寻找淘金作业队。',
+      lead: '许可证持有人正在寻找在地块上作业的合作伙伴。',
       seoTitle: '小规模采矿地块 {code}：砂金，{area} 公顷，{district}',
       seoDescription:
-        '个体小规模采矿许可证有效期至 {date}，{region}{district}。许可证持有人正在寻找淘金作业队；工作依据与许可证持有人签订的合同进行。页面提供拐点坐标。',
+        '个体小规模采矿许可证有效期至 {date}，{region}{district}。许可证持有人正在寻找在地块上作业的合作伙伴；工作依据与许可证持有人签订的合同进行。页面提供拐点坐标。',
       breadcrumb: '小规模采矿地块',
       note: '在地块上的工作依据与许可证持有人签订的合同进行。许可证权利不出售、不转让（《底土法》第263条）。',
       factMineral: '金属',
@@ -4144,7 +4144,7 @@ export const translations = {
       factLicenseValue: '编号 {number}，签发日期 {date}',
       factValidUntil: '有效期至',
       factValidUntilValue: '{date}；可延期一次，期限3年',
-      factShare: '作业队与持有人分成',
+      factShare: '合作伙伴与持有人分成',
       factShareValue: '依据与持有人的合同',
       factStatus: '状态',
       factConfirmed: '据持有人告知',
@@ -4164,9 +4164,9 @@ export const translations = {
       openGoogle: '在谷歌地图中打开',
       open2gis: '在 2GIS 中打开',
       howHeading: '合作方式',
-      how1: '通过 WhatsApp 或微信联系我们：地块编号、作业队人数、经验以及可出发时间。',
+      how1: '通过 WhatsApp 或微信联系我们：地块编号、人数、经验以及可出发时间。',
       how2: '我们将申请转交许可证持有人，并安排见面和实地考察。',
-      how3: '产出分成、工期和住宿由作业队与持有人商定，并写入与持有人签订的合同。',
+      how3: '产出分成、工期和住宿由合作伙伴与持有人商定，并写入与持有人签订的合同。',
       limitsHeading: '许可证允许的范围',
       limit1: '作业深度不超过3米',
       limit2: '不得使用化学药剂和爆炸物',
@@ -4176,17 +4176,16 @@ export const translations = {
       limitsSource: '《底土与底土利用法典》第270–271条。',
       whoHeading: '我们寻找',
       who1: '哈萨克斯坦公民：部分许可证明确禁止使用外籍劳工',
-      who2: '有砂金淘洗经验的作业队或个人',
+      who2: '有砂金淘洗经验的合作伙伴：团队或个人',
       who3: '能够按季节出工',
       disclaimerLabel: '重要提示。',
       disclaimer:
-        '该地块不属于 QAZNEDR。底土使用权属于个体小规模采矿许可证持有人，不出售、不转让（《底土与底土利用法典》第263条）。QAZNEDR 负责介绍作业队与持有人认识；工作合同由作业队与持有人签订。信息依据许可证副本及持有人在所示日期的说明。不保证含金量和产量。',
+        '该地块不属于 QAZNEDR。底土使用权属于个体小规模采矿许可证持有人，不出售、不转让（《底土与底土利用法典》第263条）。QAZNEDR 负责介绍合作伙伴与持有人认识；工作合同由合作伙伴与持有人签订。信息依据许可证副本及持有人在所示日期的说明。不保证含金量和产量。',
       contactHeading: '洽谈地块作业',
-      contactNote:
-        '请介绍您的作业队，我们会转交地块 {code} 的持有人并安排考察。',
+      contactNote: '请介绍您的情况，我们会转交地块 {code} 的持有人并安排考察。',
       whatsappText:
         '您好！我们希望在小规模采矿地块 {code}（{district}）作业。我们共 … 人，均为哈萨克斯坦公民，经验：…',
-      matchedNote: '该地块已找到作业队。请查看其他地块。',
+      matchedNote: '该地块已找到合作伙伴。请查看其他地块。',
       guideLink: '哈萨克斯坦个体小规模采矿许可证：如何申请、允许做什么',
       catalogLink: '在总目录中查看全部矿区与项目',
       allPlots: '全部小规模采矿地块',
@@ -4194,15 +4193,15 @@ export const translations = {
       discuss: '洽谈 {code}',
       cardArea: '地块面积',
       cardValidUntil: '许可证有效期至',
-      cardShare: '作业队与持有人分成',
+      cardShare: '合作伙伴与持有人分成',
       cardShareValue: '按合同',
       indexTitle: '砂金小规模采矿地块',
       indexLead:
-        '个体小规模采矿许可证持有人正在为砂金地块寻找作业队。我们介绍作业队与持有人认识；工作条件依据与持有人的合同确定。每个地块页面列有坐标和许可证编号。',
+        '个体小规模采矿许可证持有人正在为砂金地块寻找合作伙伴。我们介绍合作伙伴与持有人认识；工作条件依据与持有人的合同确定。每个地块页面列有坐标和许可证编号。',
       indexCount: '地块数量：{count}',
-      seoIndexTitle: '哈萨克斯坦小规模采矿地块：淘金作业队招募，砂金',
+      seoIndexTitle: '哈萨克斯坦小规模采矿地块：持证人寻找合作伙伴，砂金',
       seoIndexDescription:
-        '杰特苏州、江布尔州和东哈萨克斯坦州的个体小规模采矿许可证，持有人正在寻找作业队。地块面积、许可证期限和坐标；依据与持有人的合同作业。',
+        '杰特苏州、江布尔州和东哈萨克斯坦州的个体小规模采矿许可证，持有人正在寻找合作伙伴。地块面积、许可证期限和坐标；依据与持有人的合同作业。',
       regions: {
         zhetysu: '杰特苏州',
         zhambyl: '江布尔州',
@@ -4222,7 +4221,7 @@ export const translations = {
       shareByContract: '分成：按合同',
       afterNda: '资料在签署保密协议后提供',
       zoneApprox: '位置为示意',
-      crewFound: '已找到作业队',
+      partnerFound: '已找到合作伙伴',
     },
     showcase: {
       rightsChecked: '核查日期 {date}，非官方摘录。',

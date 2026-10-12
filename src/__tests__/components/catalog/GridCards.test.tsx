@@ -35,11 +35,11 @@ describe('ProspectingGridCard', () => {
     expect(html).toContain('Верифицировано QAZNEDR');
   });
 
-  it('marks a plot whose crew is found', () => {
+  it('marks a plot whose partner is found', () => {
     const html = renderToStaticMarkup(
       <ProspectingGridCard plot={{ ...p07, status: 'matched' }} locale="ru" />
     );
-    expect(html).toContain('Бригада найдена');
+    expect(html).toContain('Партнёр найден');
   });
 });
 

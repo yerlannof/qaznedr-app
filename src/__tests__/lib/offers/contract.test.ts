@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import raw from '@/lib/offers/offers.v1.json';
-import { parseOffer, mediaSrc } from '@/lib/offers/contract';
+import { parseOffer, mediaSrc, formatPrice } from '@/lib/offers/contract';
 import { getOffer, listPublishedOffers } from '@/lib/offers';
 import { fromAssetOffer } from '@/lib/catalog/sources/offers';
 
@@ -11,7 +11,10 @@ const LOCALES = ['ru', 'kz', 'en', 'zh'] as const;
 describe('qaznedr-offer-v1 contract', () => {
   it('validates every shipped card', () => {
     for (const row of rows) expect(parseOffer(row)).not.toBeNull();
-    expect(listPublishedOffers().map((o) => o.code)).toEqual(['QN-A01']);
+    expect(listPublishedOffers().map((o) => o.code)).toEqual([
+      'QN-A01',
+      'QN-A02',
+    ]);
   });
 
   it('rejects a card with a broken field instead of half-rendering it', () => {
@@ -33,33 +36,39 @@ describe('qaznedr-offer-v1 contract', () => {
     ).toBeNull();
   });
 
-  it('has every media file on disk with the declared hash', () => {
-    const offer = getOffer('QN-A01')!;
-    const media = [...offer.images, ...(offer.video ? [offer.video] : [])];
-    for (const m of media) {
-      const file = path.join(process.cwd(), 'public', m.url);
-      expect(fs.existsSync(file)).toBe(true);
-      const sha = require('crypto')
-        .createHash('sha256')
-        .update(fs.readFileSync(file))
-        .digest('hex');
-      expect(sha.slice(0, 12)).toBe(m.v);
-      expect(mediaSrc(m)).toBe(`${m.url}?v=${m.v}`);
+  it.each(['QN-A01', 'QN-A02'])(
+    '%s has every media file on disk with the declared hash',
+    (code) => {
+      const offer = getOffer(code)!;
+      const media = [...offer.images, ...(offer.video ? [offer.video] : [])];
+      for (const m of media) {
+        const file = path.join(process.cwd(), 'public', m.url);
+        expect(fs.existsSync(file)).toBe(true);
+        const sha = require('crypto')
+          .createHash('sha256')
+          .update(fs.readFileSync(file))
+          .digest('hex');
+        expect(sha.slice(0, 12)).toBe(m.v);
+        expect(mediaSrc(m)).toBe(`${m.url}?v=${m.v}`);
+      }
     }
-  });
+  );
 
-  it('carries all four languages for the approved text', () => {
-    const offer = getOffer('QN-A01')!;
-    for (const l of LOCALES) {
-      expect(offer.h1[l]).toBeTruthy();
-      expect(offer.legal[l]).toBeTruthy();
-      expect(offer.nda_documents[l]?.length).toBe(
-        offer.nda_documents.ru.length
-      );
-      for (const s of offer.sections)
-        expect(s.items[l]?.length).toBe(s.items.ru.length);
+  it.each(['QN-A01', 'QN-A02'])(
+    '%s carries all four languages for the approved text',
+    (code) => {
+      const offer = getOffer(code)!;
+      for (const l of LOCALES) {
+        expect(offer.h1[l]).toBeTruthy();
+        expect(offer.legal[l]).toBeTruthy();
+        expect(offer.nda_documents[l]?.length).toBe(
+          offer.nda_documents.ru.length
+        );
+        for (const s of offer.sections)
+          expect(s.items[l]?.length).toBe(s.items.ru.length);
+      }
     }
-  });
+  );
 
   it('maps to a catalogue item', () => {
     expect(fromAssetOffer(getOffer('QN-A01')!)).toMatchObject({
@@ -71,6 +80,25 @@ describe('qaznedr-offer-v1 contract', () => {
       stage: 'production',
       hasInfrastructure: true,
     });
+    expect(fromAssetOffer(getOffer('QN-A02')!)).toMatchObject({
+      kind: 'asset',
+      path: '/offers/QN-A02',
+      commodityGroup: 'metals_tpi',
+      commodities: ['Au'],
+      region: 'east-kz',
+      stage: 'exploration',
+      hasInfrastructure: false,
+    });
+  });
+
+  it('shows a seller price only where the card carries one', () => {
+    expect(getOffer('QN-A01')!.price).toBeUndefined();
+    const price = getOffer('QN-A02')!.price!;
+    expect(formatPrice(price, 'ru').replace(/\s/g, ' ')).toBe('1 000 000 $');
+    expect(formatPrice(price, 'en')).toBe('$1,000,000');
+    expect(
+      parseOffer({ ...rows[1], price: { amount: -1, currency: 'USD' } })
+    ).toBeNull();
   });
 });
 

@@ -5,7 +5,11 @@ import ContactChannels from '@/components/features/ContactChannels';
 import { translate } from '@/lib/i18n/translations';
 import { hasAnyChannel, type ContactConfig } from '@/lib/config/contacts';
 import { formatRightsDate, pickList, pickText } from '@/lib/leads/showcase';
-import { mediaSrc, type AssetOffer } from '@/lib/offers/contract';
+import {
+  formatPrice,
+  mediaSrc,
+  type AssetOffer,
+} from '@/lib/offers/contract';
 import type { Locale } from '@/lib/seo/site';
 
 const h2 = 'font-serif text-2xl lg:text-3xl leading-tight';
@@ -35,6 +39,12 @@ export default function OfferDetail({
   const credit = pick(offer.media_credit);
   const assetsNote = offer.assets_note ? pick(offer.assets_note) : null;
   const caption = offer.video ? pick(offer.video.caption) : null;
+  const contactNote = offer.contact_note
+    ? pick(offer.contact_note).text
+    : t('offer.contactNote');
+  // Without a video the first photo leads the page.
+  const heroImage = offer.video ? null : (offer.images[0] ?? null);
+  const heroAlt = heroImage ? pick(heroImage.alt) : null;
   return (
     <div className="brand-container pb-12 lg:pb-20">
       <nav
@@ -80,6 +90,11 @@ export default function OfferDetail({
           >
             {intro.text}
           </p>
+          {offer.price && (
+            <p className="mt-5 font-serif text-2xl leading-tight">
+              {t('offer.price', { price: formatPrice(offer.price, locale) })}
+            </p>
+          )}
           <a
             href="#contact"
             className="brand-button brand-focus mt-6 w-full sm:w-auto"
@@ -109,6 +124,26 @@ export default function OfferDetail({
                 {caption.text}
               </figcaption>
             )}
+          </figure>
+        )}
+        {heroImage && heroAlt && (
+          <figure className="m-0 lg:order-1">
+            <Image
+              src={heroImage.url}
+              width={heroImage.width}
+              height={heroImage.height}
+              alt={heroAlt.text}
+              unoptimized
+              priority
+              sizes="(max-width: 1024px) 100vw, 640px"
+              className="block aspect-[4/3] h-auto w-full border border-brand-line object-cover"
+            />
+            <figcaption
+              lang={credit.lang}
+              className="mt-2 text-sm text-brand-muted"
+            >
+              {credit.text}
+            </figcaption>
           </figure>
         )}
       </div>
@@ -180,7 +215,11 @@ export default function OfferDetail({
         </section>
       </div>
 
-      <div className="mt-12 grid gap-x-10 gap-y-8 border-t border-brand-line pt-8 md:grid-cols-3">
+      <div
+        className={`mt-12 grid gap-x-10 gap-y-8 border-t border-brand-line pt-8 ${
+          offer.sections.length % 3 ? 'md:grid-cols-2' : 'md:grid-cols-3'
+        }`}
+      >
         {offer.sections.map((section, i) => {
           const title = pick(section.title);
           const items = pickList(section.items, locale);
@@ -260,7 +299,7 @@ export default function OfferDetail({
       >
         <h2 className={h2}>{t('offer.contactHeading', { code })}</h2>
         <p className="mt-2 mb-5 max-w-2xl text-brand-muted">
-          {t('offer.contactNote')}
+          {contactNote}
         </p>
         <div className="max-w-3xl">
           {hasAnyChannel(contacts) ? (

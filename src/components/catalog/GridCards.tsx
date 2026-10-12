@@ -13,7 +13,7 @@ import {
   type Showcase,
 } from '@/lib/leads/showcase';
 import { showcaseRegionId } from '@/lib/leads/showcase-regions';
-import type { AssetOffer } from '@/lib/offers/contract';
+import { formatPrice, type AssetOffer } from '@/lib/offers/contract';
 import type { Plot } from '@/lib/prospecting/plots';
 import {
   formatArea,
@@ -127,7 +127,11 @@ export function OfferGridCard({
       footLeft={t('catalogGrid.published', {
         date: formatDate(offer.published_at),
       })}
-      footRight={t('catalogGrid.priceOnRequest')}
+      footRight={
+        offer.price
+          ? t('offer.price', { price: formatPrice(offer.price, locale) })
+          : t('catalogGrid.priceOnRequest')
+      }
     />
   );
 }

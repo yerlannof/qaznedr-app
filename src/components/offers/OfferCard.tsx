@@ -5,7 +5,7 @@ import ShowcaseWhatsAppLink from '@/components/showcase/ShowcaseWhatsAppLink';
 import { translate } from '@/lib/i18n/translations';
 import { whatsappLink, type ContactConfig } from '@/lib/config/contacts';
 import { formatRightsDate, pickText } from '@/lib/leads/showcase';
-import type { AssetOffer } from '@/lib/offers/contract';
+import { formatPrice, type AssetOffer } from '@/lib/offers/contract';
 import type { Locale } from '@/lib/seo/site';
 
 export function formatDuration(seconds: number): string {
@@ -98,6 +98,11 @@ export default function OfferCard({
             );
           })}
         </dl>
+        {offer.price && (
+          <p className="mt-3 font-semibold">
+            {t('offer.price', { price: formatPrice(offer.price, locale) })}
+          </p>
+        )}
         <div className="mt-3 flex gap-2 text-sm text-brand-muted">
           <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0" />
           <div>

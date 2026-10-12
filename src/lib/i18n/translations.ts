@@ -590,6 +590,7 @@ export const translations = {
       stages: {
         occurrence: 'Рудопроявление',
         prospecting: 'Старательская добыча',
+        exploration: 'Разведка',
         production: 'Действующая добыча',
       },
       infraLabel: 'Инфраструктура',
@@ -627,6 +628,7 @@ export const translations = {
       openImage: 'Открыть фото полностью',
       unavailable: 'Объект снят с публикации',
       notFound: 'Объект не найден',
+      price: 'Цена: {price}',
     },
     prospecting: {
       kind: 'Лицензия на старательство',
@@ -1823,6 +1825,7 @@ export const translations = {
       stages: {
         occurrence: 'Кен білінімі',
         prospecting: 'Өндірушілік өндіру',
+        exploration: 'Барлау',
         production: 'Жұмыс істеп тұрған өндіру',
       },
       infraLabel: 'Инфрақұрылым',
@@ -1860,6 +1863,7 @@ export const translations = {
       openImage: 'Фотоны толық ашу',
       unavailable: 'Нысан жариялаудан алынды',
       notFound: 'Нысан табылмады',
+      price: 'Бағасы: {price}',
     },
     prospecting: {
       kind: 'Кен іздеушілікке арналған лицензия',
@@ -2972,6 +2976,7 @@ export const translations = {
       stages: {
         occurrence: 'Ore occurrence',
         prospecting: 'Artisanal mining',
+        exploration: 'Exploration',
         production: 'Operating production',
       },
       infraLabel: 'Infrastructure',
@@ -3009,6 +3014,7 @@ export const translations = {
       openImage: 'Open full photo',
       unavailable: 'This asset is no longer listed',
       notFound: 'Asset not found',
+      price: 'Price: {price}',
     },
     prospecting: {
       kind: 'Artisanal mining licence',
@@ -4086,6 +4092,7 @@ export const translations = {
       stages: {
         occurrence: '矿化点',
         prospecting: '手工采矿',
+        exploration: '勘探',
         production: '在产开采',
       },
       infraLabel: '基础设施',
@@ -4123,6 +4130,7 @@ export const translations = {
       openImage: '查看大图',
       unavailable: '该项目已下架',
       notFound: '未找到项目',
+      price: '价格：{price}',
     },
     prospecting: {
       kind: '个体小规模采矿许可证',

@@ -3,6 +3,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import LeadsCatalogPage from '@/app/[locale]/leads/page';
 import { listPublicPlots } from '@/lib/prospecting/plots';
+import { listPublishedOffers } from '@/lib/offers';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { listPublishedLeads } from '@/lib/leads/public-queries';
 
@@ -67,7 +68,12 @@ it('lists the asset for sale with a localized CollectionPage schema', async () =
   expect(list.map((e: { url: string }) => e.url)).toContain(
     'https://qaznedr.kz/en/offers/QN-A01'
   );
-  expect(list).toHaveLength(1 + listPublicPlots().length);
+  expect(list.map((e: { url: string }) => e.url)).toContain(
+    'https://qaznedr.kz/en/offers/QN-A02'
+  );
+  expect(list).toHaveLength(
+    listPublishedOffers().length + listPublicPlots().length
+  );
 });
 
 it('lists artisanal-mining plots as their own kind', async () => {

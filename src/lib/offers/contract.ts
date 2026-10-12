@@ -37,6 +37,13 @@ export const offerSchema = z
     key_figures: z.array(pair).length(3),
     facts_table: z.array(pair).min(1),
     reserve_note: localized,
+    /** Asking price set by the seller; absent means «price on request». */
+    price: z
+      .object({
+        amount: z.number().int().positive(),
+        currency: z.enum(['USD', 'KZT']),
+      })
+      .optional(),
     sections: z
       .array(z.object({ title: localized, items: localizedList }))
       .min(1),
@@ -49,6 +56,8 @@ export const offerSchema = z
     }),
     nda_documents: localizedList,
     legal: localized,
+    /** Replaces the default contact note when the NDA package differs. */
+    contact_note: localized.optional(),
     video: z
       .object({
         url: mediaPath,
@@ -86,6 +95,24 @@ export type AssetOffer = z.infer<typeof offerSchema>;
 export function parseOffer(raw: unknown): AssetOffer | null {
   const parsed = offerSchema.safeParse(raw);
   return parsed.success ? parsed.data : null;
+}
+
+const PRICE_LOCALE: Record<string, string> = {
+  ru: 'ru-RU',
+  kz: 'kk-KZ',
+  en: 'en-US',
+  zh: 'zh-CN',
+};
+
+export function formatPrice(
+  price: NonNullable<AssetOffer['price']>,
+  locale: string
+): string {
+  return new Intl.NumberFormat(PRICE_LOCALE[locale] ?? 'ru-RU', {
+    style: 'currency',
+    currency: price.currency,
+    maximumFractionDigits: 0,
+  }).format(price.amount);
 }
 
 export function mediaSrc(m: { url: string; v: string }): string {

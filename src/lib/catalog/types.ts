@@ -13,9 +13,10 @@ export type CatalogKind = (typeof CATALOG_KINDS)[number];
 export const COMMODITY_GROUPS = ['metals_tpi', 'opi'] as const;
 export type CommodityGroup = (typeof COMMODITY_GROUPS)[number];
 
-/** Occurrence (our finds), artisanal mining, operating production. */
+/** Occurrence (our finds), exploration licence, artisanal mining, operating production. */
 export const CATALOG_STAGES = [
   'occurrence',
+  'exploration',
   'prospecting',
   'production',
 ] as const;

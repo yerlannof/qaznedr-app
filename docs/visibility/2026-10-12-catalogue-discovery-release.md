@@ -100,14 +100,36 @@ Legacy-only cases use unit fixtures; live data currently has two showcase finds,
 Independent strong review found no code blocker; its single P2 report wording
 was corrected to distinguish parseable JSON-LD from pages without schema. The
 review verified all seven formatted files byte-for-byte against Prettier of
-their base versions. Final deployment verification follows below.
+their base versions. Local HTTP **104/104** also checks code descriptions,
+Place/metadata parity, twelve contextual guide links and visible-card/schema
+parity on five catalogue variants in four languages.
+
+Code commit **2163565201865574988118c8c409c1c8a474aba5** is published on master.
+CI **38287793292 success**, all four jobs success (the test job permits the
+known legacy failures; the actual full Jest outcome is recorded above).
+Vercel Production **H4ehpkg3esu4wLyDvEqSQBfhzaUQ Ready**, source branch/master and
+exact source commit verified in the authorised dashboard. GitHub's deployment
+API was still returning the previous 9062858 record at this observation; use
+the saved Vercel proof rather than claiming a newer GitHub deployment id.
+Live checks: **104/104 pass**; rendered RU `leads?kind=find` lists two cards with
+clean canonical. IndexNow **200** accepted **88 changed canonical URLs**; this
+does not prove indexing or ranking. Proofs include deployment, local/production
+HTTP results, IndexNow and the production screenshot.
 
 ## Remaining review
 
-The gold mineral hub still intentionally uses the earlier finds-only layout.
+The gold mineral hub still uses the earlier finds-only layout.
 It omits gold prospecting plots and sale assets that the unified gold catalogue
 contains. Correcting that scope requires showing the catalogue-aware page and
 checking its prose with the owner; do not append unrelated asset/plot cards under
 the current claim that all cards are our geologists' findings. The ready
 `docs/content-drafts/2026-10-01-read-geological-map.md` is still unpublished pending
 explicit approval. No Chinese account or ad audience was activated here.
+
+New ready RU draft: `docs/content-drafts/2026-10-12-gold-licence-types.md`,
+exploration/extraction/artisanal comparison for the measured licensing ambiguity.
+Primary Code/EPN and independent strong review checked; the parent corrected the
+exclusive right wording and the alternative to a resource/reserve report.
+Source consolidation limits are recorded in the draft. Exact owner approval
+for four-language publication was requested; **no approval received at close**.
+Nothing was added to the live article registry or sitemap for this draft.

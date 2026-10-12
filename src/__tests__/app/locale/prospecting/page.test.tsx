@@ -61,7 +61,7 @@ describe('/prospecting/[code]', () => {
     expect(html).toContain('напечатана с опечаткой');
   });
 
-  it.each(['QN-P08', 'QN-P99', 'nope'])('404s for %s', async (code) => {
+  it.each(['QN-P12', 'QN-P99', 'nope'])('404s for %s', async (code) => {
     await expect(render('ru', code)).rejects.toThrow('NEXT_NOT_FOUND');
   });
 
@@ -74,7 +74,7 @@ describe('/prospecting/[code]', () => {
   });
 
   it('keeps hidden plots out of the index', async () => {
-    const meta = await generateMetadata(params('ru', 'QN-P08'));
+    const meta = await generateMetadata(params('ru', 'QN-P12'));
     expect(meta.robots).toEqual({ index: false, follow: false });
   });
 });

@@ -257,12 +257,16 @@
       "plot_name": null,
       "area_ha": 4.95,
       "mineral": "placer_gold",
-      "corners_dms": [],
-      "status": "hidden",
-      "holder_confirmed_at": null,
+      "corners_dms": [
+        [45, 41, 31.9894, 81, 54, 54.4488],
+        [45, 41, 34.0398, 81, 54, 54.4874],
+        [45, 41, 32.6909, 81, 55, 28.3991],
+        [45, 41, 30.3707, 81, 55, 28.2446]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
       "corrected_corners": [],
-      "hidden_reason": "coordinates cut off in photo",
-      "published_at": null
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P09",
@@ -285,12 +289,16 @@
       "plot_name": null,
       "area_ha": 4.85,
       "mineral": "placer_gold",
-      "corners_dms": [],
-      "status": "hidden",
-      "holder_confirmed_at": null,
+      "corners_dms": [
+        [45, 41, 36.7917, 81, 55, 38.0164],
+        [45, 41, 33.2035, 81, 55, 38.7503],
+        [45, 41, 34.0938, 81, 55, 58.9891],
+        [45, 41, 37.5471, 81, 55, 58.796]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
       "corrected_corners": [],
-      "hidden_reason": "coordinates cut off in photo",
-      "published_at": null
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P10",
@@ -326,7 +334,7 @@
     },
     {
       "code": "QN-P11",
-      "license_number": "KZ75VZJ000",
+      "license_number": "KZ75VZJ00000568",
       "issued_at": "2026-04-08",
       "valid_until": "2029-04-07",
       "region": "zhetysu",
@@ -345,12 +353,16 @@
       "plot_name": null,
       "area_ha": 4.91,
       "mineral": "placer_gold",
-      "corners_dms": [],
-      "status": "hidden",
-      "holder_confirmed_at": null,
+      "corners_dms": [
+        [46, 0, 45.4543, 81, 0, 26.2565],
+        [46, 0, 42.1818, 81, 0, 27.5697],
+        [46, 0, 37.9971, 81, 0, 5.4769],
+        [46, 0, 40.8405, 81, 0, 4.0092]
+      ],
+      "status": "open",
+      "holder_confirmed_at": "2026-10-11",
       "corrected_corners": [],
-      "hidden_reason": "licence number and coordinates unreadable",
-      "published_at": null
+      "published_at": "2026-10-12"
     },
     {
       "code": "QN-P12",
@@ -377,7 +389,7 @@
       "status": "hidden",
       "holder_confirmed_at": null,
       "corrected_corners": [],
-      "hidden_reason": "coordinates cut off in photo",
+      "hidden_reason": "point 4 longitude cut off at the page edge in the 12.10.2026 scan; only 80°59'43.7510\" matches the licence area — confirm with the holder",
       "published_at": null
     },
     {
@@ -603,6 +615,44 @@
       "holder_confirmed_at": "2026-10-11",
       "corrected_corners": [],
       "published_at": "2026-10-12"
+    },
+    {
+      "code": "QN-P20",
+      "license_number": "KZ38VZJ00000749",
+      "issued_at": "2026-07-14",
+      "valid_until": "2029-07-14",
+      "region": "east-kz",
+      "district": {
+        "ru": "Маркакольский район",
+        "kz": "Марқакөл ауданы",
+        "en": "Markakol District",
+        "zh": "马尔卡科尔区"
+      },
+      "locality": {
+        "ru": "с. Калжыр",
+        "kz": "Қалжыр ауылы",
+        "en": "Kalzhyr village",
+        "zh": "卡尔日尔村"
+      },
+      "plot_name": {
+        "ru": "участок «Байшуак»",
+        "kz": "«Байшұақ» учаскесі",
+        "en": "Baishuak plot",
+        "zh": "拜舒阿克地块"
+      },
+      "area_ha": 4.2,
+      "mineral": "placer_gold",
+      "corners_dms": [
+        [48, 16, 20, 85, 9, 59],
+        [48, 16, 20, 85, 9, 48],
+        [48, 16, 26, 85, 9, 48],
+        [48, 16, 26, 85, 9, 59]
+      ],
+      "status": "hidden",
+      "holder_confirmed_at": null,
+      "corrected_corners": [],
+      "published_at": null,
+      "hidden_reason": "new licence from the 12.10.2026 scan; awaiting the holder's consent and signing-bonus confirmation"
     }
   ],
   "_note": "Public data: licence numbers and corner coordinates are published by the owner's decision (2026-10-11). Holder names are never stored here. holder_confirmed_at = date the holders confirmed the licence is in force and the signing bonus is paid."

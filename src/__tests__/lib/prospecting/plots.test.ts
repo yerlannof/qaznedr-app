@@ -16,17 +16,17 @@ describe('plots.v1.json', () => {
     expect(() => parsePlotsFile(raw)).not.toThrow();
   });
 
-  it('has 19 licences with unique codes and licence numbers', () => {
+  it('has 20 licences with unique codes and licence numbers', () => {
     const plots = parsePlotsFile(raw);
-    expect(plots).toHaveLength(19);
-    expect(new Set(plots.map((p) => p.code)).size).toBe(19);
-    expect(new Set(plots.map((p) => p.license_number)).size).toBe(19);
+    expect(plots).toHaveLength(20);
+    expect(new Set(plots.map((p) => p.code)).size).toBe(20);
+    expect(new Set(plots.map((p) => p.license_number)).size).toBe(20);
   });
 
-  it('publishes the 15 readable licences only', () => {
-    expect(visible).toHaveLength(15);
+  it('publishes the 18 readable licences only', () => {
+    expect(visible).toHaveLength(18);
     const codes = visible.map((p) => p.code);
-    for (const hidden of ['QN-P08', 'QN-P09', 'QN-P11', 'QN-P12']) {
+    for (const hidden of ['QN-P12', 'QN-P20']) {
       expect(codes).not.toContain(hidden);
     }
   });
@@ -85,7 +85,7 @@ describe('getPublicPlot', () => {
   });
 
   it('returns null for hidden, unknown and malformed codes', () => {
-    expect(getPublicPlot('QN-P08')).toBeNull();
+    expect(getPublicPlot('QN-P12')).toBeNull();
     expect(getPublicPlot('QN-P99')).toBeNull();
     expect(getPublicPlot('../etc')).toBeNull();
   });

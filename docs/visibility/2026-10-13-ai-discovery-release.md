@@ -59,4 +59,13 @@ and was not uploaded to the service. Mail automation remains paused.
 
 Working base: clean attached worktree HEAD/origin `5237f56`, previous exact Vercel
 Production Ready confirmed. Main checkout remains old and dirty and was not reset.
-Push/exact production verification and IndexNow result are recorded after deployment.
+Code release `1eb4aaab7a86e435cfc7b39e390348fca7bf43a7` is live. Vercel Production
+`HTNTzhMaefpuM9NEhGCxJ7m5FCsf` Ready/exact commit confirmed in the authorised UI
+and GitHub commit status. Live48/48, logo200, readable SearchBot-UA request200;
+IndexNow200 accepted48 changed canonical guides (not indexing proof).
+
+Initial CI38370647227 flagged only missing final newlines in the two proof JSON
+files. Both were formatted; the complete repository `npm run format:check` now
+passes. The closing checkpoint contains only documentation/evidence/format fixes,
+not new application behaviour; its CI and exact production synchronisation are
+verified after push and retained in private `qaznedr-private/seo/2026-10-13-atp/final-release.json`.

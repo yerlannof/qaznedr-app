@@ -1,0 +1,260 @@
+{
+  "base": "https://qaznedr.kz",
+  "checks": 48,
+  "passed": 48,
+  "rows": [
+    {
+      "path": "/ru/insights/artisanal-mining-licence-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/artisanal-mining-licence-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/artisanal-mining-licence-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/artisanal-mining-licence-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/core-drilling-geological-exploration",
+      "sources": 2,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/core-drilling-geological-exploration",
+      "sources": 2,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/core-drilling-geological-exploration",
+      "sources": 2,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/core-drilling-geological-exploration",
+      "sources": 2,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/east-kazakhstan-gold-map-guide",
+      "sources": 6,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/east-kazakhstan-gold-map-guide",
+      "sources": 6,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/east-kazakhstan-gold-map-guide",
+      "sources": 6,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/east-kazakhstan-gold-map-guide",
+      "sources": 6,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "sources": 2,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "sources": 2,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "sources": 2,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/foreign-investor-subsoil-rights-kazakhstan",
+      "sources": 2,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/geological-due-diligence-kazakhstan",
+      "sources": 3,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/geological-due-diligence-kazakhstan",
+      "sources": 3,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/geological-due-diligence-kazakhstan",
+      "sources": 3,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/geological-due-diligence-kazakhstan",
+      "sources": 3,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/geological-map-kazakhstan",
+      "sources": 6,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/geological-map-kazakhstan",
+      "sources": 6,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/geological-map-kazakhstan",
+      "sources": 6,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/geological-map-kazakhstan",
+      "sources": 6,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/pugfn-subsoil-fund-program-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "sources": 17,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "sources": 17,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "sources": 17,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766",
+      "sources": 17,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/satellite-gold-map-guide",
+      "sources": 3,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/satellite-gold-map-guide",
+      "sources": 3,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/satellite-gold-map-guide",
+      "sources": 3,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/satellite-gold-map-guide",
+      "sources": 3,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/solid-minerals-exploration-licence-kazakhstan",
+      "sources": 7,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/solid-minerals-exploration-licence-kazakhstan",
+      "sources": 7,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/solid-minerals-exploration-licence-kazakhstan",
+      "sources": 7,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/solid-minerals-exploration-licence-kazakhstan",
+      "sources": 7,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/subsoil-rights-transfer-permission-kazakhstan",
+      "sources": 4,
+      "errors": []
+    },
+    {
+      "path": "/ru/insights/what-is-geology",
+      "sources": 5,
+      "errors": []
+    },
+    {
+      "path": "/kz/insights/what-is-geology",
+      "sources": 5,
+      "errors": []
+    },
+    {
+      "path": "/en/insights/what-is-geology",
+      "sources": 5,
+      "errors": []
+    },
+    {
+      "path": "/zh/insights/what-is-geology",
+      "sources": 5,
+      "errors": []
+    }
+  ],
+  "aux": {
+    "logo": {
+      "path": "/brand/apple-touch-icon.png",
+      "status": 200
+    },
+    "llms_types": true,
+    "robots": "User-Agent: *\nAllow: /\nAllow: /api/openapi.json$\nDisallow: /api/\nDisallow: /*/admin\nDisallow: /*/auth/\nDisallow: /*/dashboard\nDisallow: /*/favorites\nDisallow: /*/leads/*/full\n\nUser-Agent: Yandex\nAllow: /\nAllow: /api/openapi.json$\nDisallow: /api/\nDisallow: /*/admin\nDisallow: /*/auth/\nDisallow: /*/dashboard\nDisallow: /*/favorites\nDisallow: /*/leads/*/full\nCrawl-delay: 2\n\nHost: https://qaznedr.kz\nSitemap: https://qaznedr.kz/sitemap.xml\n",
+    "searchbot_useragent_http": {
+      "status": 200,
+      "readable": true,
+      "limit": "UA simulation only; not a real crawler/IP/indexing check"
+    }
+  }
+}

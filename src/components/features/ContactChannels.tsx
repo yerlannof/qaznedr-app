@@ -6,7 +6,11 @@ import { safeTrack } from '@/lib/analytics/events';
 import { Check, Copy, Mail, MessageCircle } from 'lucide-react';
 import type { ServiceTopic } from '@/lib/services/topics';
 import { translate } from '@/lib/i18n/translations';
-import { whatsappLink, type ContactConfig } from '@/lib/config/contacts';
+import {
+  prepareContactMessage,
+  whatsappLink,
+  type ContactConfig,
+} from '@/lib/config/contacts';
 import { getGuideSlug, guideTitle } from '@/lib/insights/contact-context';
 import { toLocale } from '@/lib/seo/site';
 
@@ -37,16 +41,17 @@ export default function ContactChannels({
     (guide ? guideTitle(toLocale(locale), guide) : undefined) ??
     (serviceTopic ? t(`holdingServices.${serviceTopic}.title`) : '');
   const context = [leadCode, subject].filter(Boolean).join(' · ');
-  const message =
+  const message = prepareContactMessage(
     presetMessage ??
-    [
-      leadCode
-        ? t('contact.whatsappTextLead', { code: leadCode })
-        : t('contact.whatsappTextGeneral'),
-      subject,
-    ]
-      .filter(Boolean)
-      .join('\n');
+      [
+        leadCode
+          ? t('contact.whatsappTextLead', { code: leadCode })
+          : t('contact.whatsappTextGeneral'),
+        subject,
+      ]
+        .filter(Boolean)
+        .join('\n')
+  );
   const [copied, setCopied] = useState(false);
   const [messageCopied, setMessageCopied] = useState(false);
 

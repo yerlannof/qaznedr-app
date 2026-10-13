@@ -35,8 +35,15 @@ export function getContactConfig(): ContactConfig {
   });
 }
 
+export function prepareContactMessage(text: string): string {
+  const greeting = 'Здравствуйте!';
+  return text.startsWith(greeting)
+    ? `${translate('ru', 'contact.whatsappGreeting')}${text.slice(greeting.length)}`
+    : text;
+}
+
 export function whatsappLink(number: string, text: string): string {
-  return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+  return `https://wa.me/${number}?text=${encodeURIComponent(prepareContactMessage(text))}`;
 }
 
 export function hasAnyChannel(c: ContactConfig): boolean {

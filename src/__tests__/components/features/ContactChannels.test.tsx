@@ -289,3 +289,63 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     });
   }
 );
+
+it.each([
+  [undefined, 'Ассаляму алейкум! Пишу с сайта qaznedr.kz.'],
+  ['AU-1', 'Ассаляму алейкум! Интересует участок AU-1 на qaznedr.kz.'],
+])(
+  'shows and copies the Russian %s inquiry exactly as linked',
+  async (leadCode, expected) => {
+    const writeText = jest.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText },
+      configurable: true,
+    });
+    const { container } = render(
+      <ContactChannels config={full} locale="ru" leadCode={leadCode} />
+    );
+    const linked = new URL(
+      screen.getByRole('link', { name: /WhatsApp/ }).getAttribute('href')!
+    ).searchParams.get('text');
+    expect(linked).toBe(expected);
+    expect(
+      container.querySelector('[data-channel="wechat"]')
+    ).toHaveTextContent(expected);
+    const copy = container.querySelectorAll(
+      '[data-channel="wechat"] button'
+    )[1];
+    fireEvent.click(copy);
+    await waitFor(() => expect(writeText).toHaveBeenCalledWith(expected));
+  }
+);
+
+it('keeps the approved Russian offer code and NDA wording identical in WhatsApp and WeChat', async () => {
+  const preset =
+    'Здравствуйте! Интересует объект QN-A01 — щебёночный карьер с ДСК в Алматинской области. Прошу прислать NDA и материалы.';
+  const expected = preset.replace(/^Здравствуйте!/, 'Ассаляму алейкум!');
+  const writeText = jest.fn().mockResolvedValue(undefined);
+  Object.defineProperty(navigator, 'clipboard', {
+    value: { writeText },
+    configurable: true,
+  });
+  const { container } = render(
+    <ContactChannels
+      config={full}
+      locale="ru"
+      leadCode="QN-A01"
+      message={preset}
+    />
+  );
+  expect(
+    new URL(
+      screen.getByRole('link', { name: /WhatsApp/ }).getAttribute('href')!
+    ).searchParams.get('text')
+  ).toBe(expected);
+  expect(container.querySelector('[data-channel="wechat"]')).toHaveTextContent(
+    expected
+  );
+  fireEvent.click(
+    container.querySelectorAll('[data-channel="wechat"] button')[1]
+  );
+  await waitFor(() => expect(writeText).toHaveBeenCalledWith(expected));
+});

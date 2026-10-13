@@ -417,9 +417,10 @@ export const translations = {
       whatsappCta: 'Написать в WhatsApp',
       emailTitle: 'Email',
       formTitle: 'Оставить заявку',
+      whatsappGreeting: 'Ассаляму алейкум!',
       whatsappTextLead:
-        'Здравствуйте! Интересует участок {code} на qaznedr.kz.',
-      whatsappTextGeneral: 'Здравствуйте! Пишу с сайта qaznedr.kz.',
+        'Ассаляму алейкум! Интересует участок {code} на qaznedr.kz.',
+      whatsappTextGeneral: 'Ассаляму алейкум! Пишу с сайта qaznedr.kz.',
       discussHeading: 'Обсудить участок',
       discussNote:
         'Детали, формат сделки и документы — на встрече после подписания NDA.',
@@ -694,7 +695,7 @@ export const translations = {
       contactNote:
         'Расскажите о себе — передадим держателю участка {code} и договоримся о выезде.',
       whatsappText:
-        'Здравствуйте! Хотим работать на старательском участке {code} ({district}). Нас … человек, все граждане РК, опыт: …',
+        'Ассаляму алейкум! Хотим работать на старательском участке {code} ({district}). Нас … человек, все граждане РК, опыт: …',
       matchedNote:
         'Партнёр для этого участка уже найден. Посмотрите другие участки.',
       guideLink:
@@ -1650,6 +1651,7 @@ export const translations = {
       whatsappCta: 'WhatsApp-қа жазу',
       emailTitle: 'Email',
       formTitle: 'Өтінім қалдыру',
+      whatsappGreeting: 'Сәлеметсіз бе!',
       whatsappTextLead:
         'Сәлеметсіз бе! qaznedr.kz сайтындағы {code} учаскесі қызықтырады.',
       whatsappTextGeneral: 'Сәлеметсіз бе! qaznedr.kz сайтынан жазып отырмын.',
@@ -2802,6 +2804,7 @@ export const translations = {
       whatsappCta: 'Message on WhatsApp',
       emailTitle: 'Email',
       formTitle: 'Send an inquiry',
+      whatsappGreeting: 'Hello!',
       whatsappTextLead: 'Hello! I am interested in area {code} on qaznedr.kz.',
       whatsappTextGeneral: 'Hello! I am writing from qaznedr.kz.',
       discussHeading: 'Discuss this area',
@@ -3926,6 +3929,7 @@ export const translations = {
       whatsappCta: '通过 WhatsApp 联系',
       emailTitle: '邮箱',
       formTitle: '在线咨询',
+      whatsappGreeting: '您好！',
       whatsappTextLead: '您好！我对 qaznedr.kz 上的项目 {code} 感兴趣。',
       whatsappTextGeneral: '您好！我从 qaznedr.kz 联系您。',
       discussHeading: '洽谈该项目',

@@ -7,15 +7,13 @@ import { GUIDE } from '@/lib/insights/registry';
 jest.mock('@/components/layouts/Navigation', () => () => null);
 jest.mock('@/components/layouts/Footer', () => () => null);
 jest.mock('@/lib/config/contacts', () => ({
+  ...jest.requireActual('@/lib/config/contacts'),
   getContactConfig: () => ({
     whatsappNumber: '77001234567',
     wechatQrSrc: '/contacts/wechat-qr.png',
     wechatId: null,
     email: null,
   }),
-  hasAnyChannel: () => true,
-  whatsappLink: (n: string, text: string) =>
-    'https://wa.me/' + n + '?text=' + encodeURIComponent(text),
 }));
 it.each(['ru', 'kz', 'en', 'zh'])(
   'renders approved %s company copy and one localized page heading',

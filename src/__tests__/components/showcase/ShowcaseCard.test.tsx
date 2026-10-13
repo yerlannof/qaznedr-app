@@ -54,9 +54,8 @@ it('offers exactly one WhatsApp button with the card text', () => {
     .getAllByRole('link')
     .filter((a) => a.getAttribute('href')?.startsWith('https://wa.me/'));
   expect(wa).toHaveLength(1);
-  expect(wa[0]).toHaveAttribute(
-    'href',
-    `https://wa.me/77001234567?text=${encodeURIComponent(fakeShowcase.whatsapp_text.ru)}`
+  expect(new URL(wa[0].getAttribute('href')!).searchParams.get('text')).toBe(
+    'Ассаляму алейкум! Интересует карточка QN-99 с сайта qaznedr.kz.'
   );
   expect(wa[0]).toHaveTextContent('Обсудить QN-99 в WhatsApp');
 });

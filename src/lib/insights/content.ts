@@ -36,6 +36,7 @@ export interface ArticleCard {
 export interface Article extends ArticleCard {
   html: string;
   toc: ArticleTocItem[];
+  citations: string[];
 }
 
 export interface ArticleTocItem {
@@ -136,6 +137,76 @@ export function readingMinutes(markdown: string, locale: Locale): number {
   return Math.max(1, Math.round(units));
 }
 
+type SourceToken = {
+  type: string;
+  text?: string;
+  depth?: number;
+  href?: string;
+  tokens?: SourceToken[];
+  items?: SourceToken[];
+};
+
+const SOURCE_HEADINGS = new Set([
+  'Источники',
+  'Sources',
+  'Дереккөздер',
+  '参考资料',
+]);
+
+/** Links in the article's visible Sources section, not links in its body. */
+export function sourceCitations(markdown: string): string[] {
+  const citations: string[] = [];
+  const seen = new Set<string>();
+  let inSources = false;
+  const visit = (token: SourceToken): void => {
+    if (
+      token.type === 'code' ||
+      token.type === 'codespan' ||
+      token.type === 'html' ||
+      token.type === 'image'
+    )
+      return;
+    if (token.type === 'link' && token.href) {
+      try {
+        // Markdown can retain HTML entities in a token's href.
+        const href = token.href.replace(/&(?:amp|#38|#x26);/gi, '&');
+        const url = new URL(href);
+        const host = url.hostname.toLowerCase().replace(/\.+$/, '');
+        if (
+          (url.protocol === 'http:' || url.protocol === 'https:') &&
+          !url.username &&
+          !url.password &&
+          host !== 'qaznedr.kz' &&
+          !host.endsWith('.qaznedr.kz') &&
+          host !== 'localhost' &&
+          !host.endsWith('.localhost') &&
+          host !== '127.0.0.1' &&
+          host !== '[::1]' &&
+          !token.tokens?.some((child) => child.type === 'image') &&
+          !seen.has(url.href)
+        ) {
+          seen.add(url.href);
+          citations.push(url.href);
+        }
+      } catch {
+        // Invalid source URLs stay in the article text but not in JSON-LD.
+      }
+      return;
+    }
+    for (const child of token.tokens ?? []) visit(child);
+    for (const child of token.items ?? []) visit(child);
+  };
+  for (const token of marked.lexer(markdown) as unknown as SourceToken[]) {
+    if (token.type === 'heading' && (token.depth ?? 0) <= 2) {
+      inSources =
+        token.depth === 2 && SOURCE_HEADINGS.has(token.text?.trim() ?? '');
+      continue;
+    }
+    if (inSources) visit(token);
+  }
+  return citations;
+}
+
 export function parseArticle(
   source: string,
   entry: InsightEntry,
@@ -159,6 +230,7 @@ export function parseArticle(
     category: entry.category,
     updated: entry.updated,
     readingMinutes: readingMinutes(body, locale),
+    citations: sourceCitations(body),
     html: html
       .replace(
         new RegExp(`href="/${locale}/contact(?:\\?service=([^"&]+))?"`, 'g'),

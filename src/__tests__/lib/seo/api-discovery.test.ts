@@ -8,6 +8,29 @@ const readJson = (file: string) =>
 const api = readJson('api/openapi.json');
 const manifest = readJson('.well-known/ai-plugin.json');
 
+it('advertises an existing approved brand image for the discovery logo', () => {
+  const logo = new URL(manifest.logo_url);
+  expect(logo.origin).toBe('https://qaznedr.kz');
+  expect(fs.existsSync(path.join(process.cwd(), 'public', logo.pathname))).toBe(
+    true
+  );
+  expect(logo.pathname).toMatch(/^\/brand\//);
+});
+
+it('includes all published offer kinds in the catalogue discovery summary', () => {
+  const text = fs.readFileSync(
+    path.join(process.cwd(), 'public/llms.txt'),
+    'utf8'
+  );
+  const summary = text
+    .split('\n')
+    .find((line) => line.startsWith('- One catalogue'));
+  expect(summary).toContain('our finds');
+  expect(summary).toContain('artisanal mining plots');
+  expect(summary).toContain('assets for sale');
+  expect(summary).toContain('https://qaznedr.kz/en/leads');
+});
+
 describe('public API discovery contract', () => {
   it('advertises only existing read-only area endpoints', () => {
     expect(Object.keys(api.paths).sort()).toEqual([

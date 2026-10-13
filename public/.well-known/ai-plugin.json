@@ -11,7 +11,7 @@
     "type": "openapi",
     "url": "https://qaznedr.kz/api/openapi.json"
   },
-  "logo_url": "https://qaznedr.kz/icon-512.png",
+  "logo_url": "https://qaznedr.kz/brand/apple-touch-icon.png",
   "contact_email": "info@qaznedr.kz",
   "legal_info_url": "https://qaznedr.kz/ru/legal/terms"
 }

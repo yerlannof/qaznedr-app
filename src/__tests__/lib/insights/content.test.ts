@@ -66,6 +66,35 @@ describe('readingMinutes', () => {
 });
 
 describe('parseArticle', () => {
+  it.each(['Источники', 'Sources', 'Дереккөздер', '参考资料'])(
+    'extracts only approved web links under %s',
+    (heading) => {
+      const md = `---\ntitle: T\ndescription: D\n---\n\n[Outside](https://outside.example/a)\n\n## ${heading}\n\n- [Primary](https://example.org/закон?x=1&amp;y=2#part)\n  - [Second](https://example.net/b)\n- ![Photo](https://images.example/photo.jpg)\n- [Own](https://qaznedr.kz/en/insights/x)\n- [Credentials](https://user:pass@example.org/private)\n- [Mail](mailto:source@example.org)\n- [Repeat](https://example.net/b)\n\n### More sources\n\n[Third](http://example.edu/c)\n\n\`[Code](https://code.example/a)\`\n\n\`\`\`md\n[Block](https://block.example/a)\n\`\`\`\n\n## Next section\n\n[After](https://after.example/a)`;
+      expect(parseArticle(md, entry, 'ru').citations).toEqual([
+        'https://example.org/%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD?x=1&y=2#part',
+        'https://example.net/b',
+        'http://example.edu/c',
+      ]);
+    }
+  );
+
+  it('leaves citations empty when a guide has no Sources section', () => {
+    expect(
+      parseArticle(
+        '---\ntitle: T\ndescription: D\n---\n\n[Body](https://example.org/a)',
+        entry,
+        'ru'
+      ).citations
+    ).toEqual([]);
+  });
+
+  it('ignores local, malformed, raw HTML and image-only source references', () => {
+    const md =
+      '---\ntitle: T\ndescription: D\n---\n\n## Sources\n\n[Local](http://localhost:3000/a)\n\n[Local dot](http://localhost.:3000/a)\n\n[Own dot](https://qaznedr.kz./ru/a)\n\n[Own subdomain dot](https://sub.qaznedr.kz./a)\n\n[Malformed](https://%/bad)\n\n<a href="https://raw.example/a">Raw</a>\n\n[![Image](https://img.example/a.png)](https://gallery.example/a)\n\n[Valid](https://valid.example/a?x=1#part)';
+    expect(parseArticle(md, entry, 'en').citations).toEqual([
+      'https://valid.example/a?x=1#part',
+    ]);
+  });
   it('labels tables in the article language', () => {
     const md =
       '---\ntitle: 标题\ndescription: 描述\n---\n\n| A |\n|---|\n| 1 |\n';

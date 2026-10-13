@@ -96,6 +96,23 @@ describe('articleJsonLd', () => {
     });
   });
 
+  it('emits only supplied source citations and omits an empty citation field', () => {
+    expect(article).not.toHaveProperty('citation');
+    const cited = articleJsonLd({
+      slug: 'x',
+      locale: 'en',
+      title: 'Title',
+      description: 'Desc',
+      published: '2026-09-26',
+      updated: '2026-09-27',
+      citations: ['https://example.org/a', 'https://example.net/b'],
+    });
+    expect(cited.article).toHaveProperty('citation', [
+      'https://example.org/a',
+      'https://example.net/b',
+    ]);
+  });
+
   it('builds home → guides → article breadcrumbs', () => {
     expect(breadcrumb).toMatchObject({
       '@type': 'BreadcrumbList',

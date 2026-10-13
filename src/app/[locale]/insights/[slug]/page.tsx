@@ -72,6 +72,7 @@ export default async function InsightArticlePage({
     description: article.description,
     published: entry.published,
     updated: entry.updated,
+    citations: article.citations,
   });
 
   return (

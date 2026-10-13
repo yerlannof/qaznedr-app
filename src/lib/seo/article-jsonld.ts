@@ -34,6 +34,7 @@ export interface ArticleJsonLdInput {
   description: string;
   published: string;
   updated: string;
+  citations?: string[];
 }
 
 export function articleJsonLd(input: ArticleJsonLdInput) {
@@ -52,6 +53,7 @@ export function articleJsonLd(input: ArticleJsonLdInput) {
       isAccessibleForFree: true,
       author: HOLDING,
       publisher: HOLDING,
+      ...(input.citations?.length ? { citation: input.citations } : {}),
     },
     breadcrumb: breadcrumbJsonLd([
       ...insightsBreadcrumb(input.locale),

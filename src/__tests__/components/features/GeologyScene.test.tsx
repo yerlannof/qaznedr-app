@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import GeologyScene from '@/components/features/GeologyScene';
+import { getImageProps } from 'next/image';
 import { translate } from '@/lib/i18n/translations';
 
 type Media = MediaQueryList & { update: (matches: boolean) => void };
@@ -139,4 +140,29 @@ it('keeps localized labels and existing realistic layers across locale changes',
     'd',
     'M 740 365 H 710 L 500 545'
   );
+});
+
+it('requests image widths that follow the short, reduced-motion, mobile and desktop art sizes', () => {
+  const { container } = render(<GeologyScene locale="ru" />);
+  const images = [...container.querySelectorAll('img')];
+  const sizes =
+    '(max-height: 640px) min(220px,60vw), (prefers-reduced-motion: reduce) min(220px,60vw), (max-width: 800px) min(263px,75.24vw), min(71vw,753px,calc(114dvh - 125px))';
+  const expected = getImageProps({
+    src: '/brand/geology-realistic.png',
+    alt: '',
+    width: 1254,
+    height: 1254,
+    sizes,
+  }).props;
+  expect(images).toHaveLength(3);
+  for (const image of images) {
+    expect(image).toHaveAttribute('sizes', sizes);
+    expect(image.getAttribute('srcset')).toBe(expected.srcSet);
+    expect(image.getAttribute('srcset')).toContain(' 256w');
+    expect(image.getAttribute('srcset')).toContain(' 384w');
+    const widths = [...expected.srcSet!.matchAll(/ (\d+)w/g)].map((match) =>
+      Number(match[1])
+    );
+    expect(widths.find((width) => width >= 230 * 1.14)).toBe(384);
+  }
 });

@@ -7,6 +7,10 @@ import styles from './GeologyScene.module.css';
 
 const REDUCED = '(prefers-reduced-motion: reduce)';
 const SHORT = '(max-height: 640px)';
+// Keep vw terms tight inside min(): Next's bare-vw scanner then includes the
+// 256/384px candidates needed for the smaller art states.
+const ART_SIZES =
+  '(max-height: 640px) min(220px,60vw), (prefers-reduced-motion: reduce) min(220px,60vw), (max-width: 800px) min(263px,75.24vw), min(71vw,753px,calc(114dvh - 125px))';
 const STEPS = [1, 2, 3] as const;
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 type Mode = 'static' | 'scroll';
@@ -120,7 +124,7 @@ export default function GeologyScene({ locale }: { locale: string }) {
                       alt=""
                       width={1254}
                       height={1254}
-                      sizes="(max-width: 639px) 100vw, (max-width: 1023px) 600px, 740px"
+                      sizes={ART_SIZES}
                       className={styles.image}
                     />
                     <span

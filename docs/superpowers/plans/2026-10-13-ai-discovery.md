@@ -13,3 +13,6 @@
 7. Targeted/full tests, lint, format, build, browser, independent review.
 8. Explicit-path commit/push, verify Vercel exact commit and live article schema,
    IndexNow changed canonical URLs, roadmap/evidence and worktree handoff.
+9. Follow-up: fix clean-CI Jest loader (`package.json`, `package-lock.json`) and
+   set compatible loader options in `jest.config.ts` and enforce the focused SEO checks in `.github/workflows/ci.yml`; review, release
+   and inspect actual CI test output rather than only the workflow conclusion.

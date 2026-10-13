@@ -69,3 +69,16 @@ files. Both were formatted; the complete repository `npm run format:check` now
 passes. The closing checkpoint contains only documentation/evidence/format fixes,
 not new application behaviour; its CI and exact production synchronisation are
 verified after push and retained in private `qaznedr-private/seo/2026-10-13-atp/final-release.json`.
+
+### CI loader follow-up
+
+`5a93474`/CI38371403413 completed successfully overall, but inspection of its test
+log showed **no full tests actually ran**: the clean install lacked `ts-node` for
+the TypeScript Jest config. Historical `continue-on-error` hid that setup error.
+Local Node26 uses native TypeScript. This does not invalidate the executed local tests; it also cannot be described as
+successful CI test coverage. A pinned development dependency `ts-node@10.9.2`
+repairs the missing loader. Explicit CommonJS/node compiler options for this config
+avoid the application's bundler resolution (`TS5095`); a blocking four-suite SEO check now precedes the legacy
+nonblocking full-suite step. Exact focused command passes88 locally. Final CI logs
+must explicitly show the focused tests running and passing before task closure.
+No application wording/design/schema behaviour changes in this follow-up.

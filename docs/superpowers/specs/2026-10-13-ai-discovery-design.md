@@ -46,3 +46,17 @@ independent strong review. Public HTML must remain readable without JavaScript;
 HTTP/robots tests are access checks, not evidence of indexing or citations.
 Normal GitHub/Vercel deploy, live source-parity and brand-asset checks, one IndexNow
 submission for changed canonical guides. Save no raw private analytics in Git.
+
+## Validation follow-up discovered during release
+
+CI38371403413 reports success overall, but its historical nonblocking full test
+step could not load `jest.config.ts` because the clean dependency install lacks
+`ts-node`. Local Node26 tests ran; that is not evidence the Node20 CI ran tests.
+Add the official loader as a pinned development dependency10.9.2 and a blocking,
+focused four-suite SEO test step before the existing nonblocking legacy full run.
+Use explicit CommonJS/node compiler options for the Jest loader in `jest.config.ts`:
+the application uses bundler resolution, which is incompatible with CommonJS
+(`TS5095`), and the local native TypeScript runtime bypasses this loader path.
+Preserve the known marketplace test boundary. No site behaviour/public copy change.
+Use a package-lock-only install to preserve shared local node_modules; verify
+the minimal lock diff, focused tests, formatting, independent review and clean CI.

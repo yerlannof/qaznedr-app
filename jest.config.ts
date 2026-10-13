@@ -1,3 +1,4 @@
+/** @jest-config-loader-options {"compilerOptions":{"module":"CommonJS","moduleResolution":"node"}} */
 import nextJest from 'next/jest.js';
 
 const createJestConfig = nextJest({

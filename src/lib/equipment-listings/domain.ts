@@ -8,6 +8,17 @@ import {
   DRILLING_SITES,
   DRILLING_TRAJECTORIES,
   MACHINE_CONDITIONS,
+  EQUIPMENT_CATEGORIES,
+  EQUIPMENT_KINDS,
+  ALL_SERVICE_METHODS,
+  LISTING_CATEGORIES,
+  PRICE_UNITS,
+  REGION_IDS,
+  SERVICE_AREAS,
+  isServiceCategory,
+  kindsFor,
+  priceUnitsFor,
+  serviceMethodsFor,
 } from './taxonomy';
 
 export const EQUIPMENT_STATUSES = [
@@ -19,14 +30,7 @@ export const EQUIPMENT_STATUSES = [
 ] as const;
 export type EquipmentStatus = (typeof EQUIPMENT_STATUSES)[number];
 
-const equipmentCategories = [
-  'drill',
-  'excavator',
-  'compressor',
-  'transport',
-] as const;
-const serviceCategories = ['drillService', 'geoService'] as const;
-const priceUnits = ['HOUR', 'SHIFT', 'DAY', 'METER', 'OBJECT', 'ITEM'] as const;
+const equipmentCategories = EQUIPMENT_CATEGORIES;
 const positive = z.number().finite().positive();
 const shortText = z.string().trim().min(1).max(160);
 const bounded = (max: number) => positive.max(max);
@@ -51,14 +55,14 @@ const capability = z
 const fields = z
   .object({
     offerType: z.enum(['RENT', 'SALE', 'SERVICE']).optional(),
-    category: z.enum([...equipmentCategories, ...serviceCategories]).optional(),
+    category: z.enum(LISTING_CATEGORIES).optional(),
     title: shortText.optional(),
     description: z.string().trim().max(5000).optional(),
-    region: shortText.optional(),
+    region: z.enum(REGION_IDS).optional(),
     city: shortText.optional(),
     price: positive.optional(),
     currency: z.enum(['KZT', 'USD', 'CNY']).optional(),
-    priceUnit: z.enum(priceUnits).optional(),
+    priceUnit: z.enum(PRICE_UNITS).optional(),
     availability: shortText.optional(),
     conditions: z.string().trim().max(3000).optional(),
     sourceLanguage: z.enum(['ru', 'kz', 'en', 'zh']).optional(),
@@ -101,6 +105,23 @@ const fields = z
     machineCondition: z.enum(MACHINE_CONDITIONS).optional(),
     shiftHours: bounded(24).optional(),
     priceIncludes: z.string().trim().min(1).max(1000).optional(),
+    kind: z.enum(EQUIPMENT_KINDS).optional(),
+    serviceMethods: z
+      .array(z.enum(ALL_SERVICE_METHODS))
+      .min(1)
+      .max(ALL_SERVICE_METHODS.length)
+      .refine((rows) => new Set(rows).size === rows.length, 'Duplicate method')
+      .optional(),
+    accredited: z.boolean().optional(),
+    accreditationNumber: z.string().trim().min(1).max(80).optional(),
+    serviceArea: z
+      .array(z.enum(SERVICE_AREAS))
+      .min(1)
+      .max(SERVICE_AREAS.length)
+      .refine((rows) => new Set(rows).size === rows.length, 'Duplicate region')
+      .optional(),
+    ownCrew: z.boolean().optional(),
+    powerKw: bounded(5000).optional(),
   })
   .strict();
 
@@ -117,9 +138,7 @@ function compatible(
       path: [path],
       message,
     });
-  const isService =
-    data.category &&
-    (serviceCategories as readonly string[]).includes(data.category);
+  const isService = isServiceCategory(data.category);
   if (data.offerType === 'SERVICE' && data.category && !isService)
     issue('category', 'Service requires a service category');
   if ((data.offerType === 'RENT' || data.offerType === 'SALE') && isService)
@@ -160,6 +179,35 @@ function compatible(
           issue(field, 'Field is not relevant to category');
     if (data.category !== 'transport' && data.payload !== undefined)
       issue('payload', 'Field is not relevant to category');
+    const kinds = kindsFor(data.category);
+    if (data.kind !== undefined && !kinds.includes(data.kind))
+      issue('kind', 'Type is not valid for this category');
+    if (submitted && kinds.length && data.kind === undefined)
+      issue('kind', 'Choose a type');
+    const methods = serviceMethodsFor(data.category);
+    if (
+      data.serviceMethods?.some((method) => !methods.includes(method)) ??
+      false
+    )
+      issue('serviceMethods', 'Method is not valid for this category');
+    if (submitted && methods.length && !data.serviceMethods?.length)
+      issue('serviceMethods', 'Choose at least one method');
+    if (data.category !== 'labService')
+      for (const field of ['accredited', 'accreditationNumber'] as const)
+        if (data[field] !== undefined)
+          issue(field, 'Field is not relevant to category');
+    if (data.accreditationNumber !== undefined && data.accredited !== true)
+      issue('accreditationNumber', 'Number requires accreditation');
+    if (data.serviceArea !== undefined) {
+      if (data.offerType === 'SALE')
+        issue('serviceArea', 'Service area is not used for sale');
+      if (data.serviceArea.includes('ALL_KZ') && data.serviceArea.length > 1)
+        issue('serviceArea', 'Whole country excludes single regions');
+    }
+    if (data.offerType !== 'SERVICE' && data.ownCrew !== undefined)
+      issue('ownCrew', 'Field is only for services');
+    if (data.category !== 'camp' && data.powerKw !== undefined)
+      issue('powerKw', 'Field is not relevant to category');
     if (data.offerType !== 'SALE')
       for (const field of ['machineYear', 'machineCondition'] as const)
         if (data[field] !== undefined) issue(field, 'Field is only for sale');
@@ -197,14 +245,13 @@ function compatible(
         issue('shiftHours', 'Shift hours require SHIFT unit');
     }
     if (data.priceUnit) {
-      const allowed =
-        data.offerType === 'SALE'
+      const allowed: readonly string[] = data.category
+        ? priceUnitsFor(data.category, data.offerType)
+        : data.offerType === 'SALE'
           ? ['ITEM']
           : data.offerType === 'RENT'
             ? ['HOUR', 'SHIFT', 'DAY']
-            : data.category === 'drillService'
-              ? ['HOUR', 'SHIFT', 'DAY', 'METER', 'OBJECT']
-              : ['HOUR', 'SHIFT', 'DAY', 'OBJECT'];
+            : ['HOUR', 'SHIFT', 'DAY', 'OBJECT'];
       if (!allowed.includes(data.priceUnit))
         issue('priceUnit', 'Unit is not valid for this offer');
     }
@@ -226,6 +273,13 @@ function compatible(
       'machineCondition',
       'shiftHours',
       'priceIncludes',
+      'kind',
+      'serviceMethods',
+      'accredited',
+      'accreditationNumber',
+      'serviceArea',
+      'ownCrew',
+      'powerKw',
     ] as const)
       if (data[field] !== undefined)
         issue(field, 'Field requires schemaVersion 2');
@@ -434,6 +488,13 @@ export function projectPublicListing(listing: EquipmentListing) {
     machineCondition: data.machineCondition,
     shiftHours: data.shiftHours,
     priceIncludes: data.priceIncludes,
+    kind: data.kind,
+    serviceMethods: data.serviceMethods,
+    accredited: data.accredited,
+    accreditationNumber: data.accreditationNumber,
+    serviceArea: data.serviceArea,
+    ownCrew: data.ownCrew,
+    powerKw: data.powerKw,
     method: data.method,
     diameter: data.diameter,
     depth: data.depth,

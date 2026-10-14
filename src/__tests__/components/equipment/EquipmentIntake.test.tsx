@@ -65,7 +65,7 @@ it('releases abandoned UI flight locks when the same owner session refreshes', a
       offerType: 'RENT',
       category: 'drill',
       title: 'Rig',
-      region: 'Almaty',
+      region: 'almaty-region',
       city: 'Almaty',
       availability: 'Now',
     },
@@ -129,7 +129,7 @@ it('blocks autosave when initial known-ID fetch fails', async () => {
         offerType: 'RENT',
         category: 'drill',
         title: 'Own rig',
-        region: 'Almaty',
+        region: 'almaty-region',
         city: 'Almaty',
         availability: 'Now',
       },
@@ -158,7 +158,7 @@ it('keeps a durable uncertain marker while a create is in flight and after unmou
         offerType: 'RENT',
         category: 'drill',
         title: 'Own rig',
-        region: 'Almaty',
+        region: 'almaty-region',
         city: 'Almaty',
         availability: 'Now',
       },
@@ -191,7 +191,7 @@ it('binds the acknowledged draft ID before clearing the create marker', async ()
         offerType: 'RENT',
         category: 'drill',
         title: 'Own rig',
-        region: 'Almaty',
+        region: 'almaty-region',
         city: 'Almaty',
         availability: 'Now',
       },
@@ -318,8 +318,8 @@ it('uses taxonomy codes in translated selects and previews linked capability', (
   fireEvent.change(screen.getByRole('textbox', { name: 'Название *' }), {
     target: { value: 'NEW' },
   });
-  fireEvent.change(screen.getByRole('textbox', { name: 'Область *' }), {
-    target: { value: 'Алматинская' },
+  fireEvent.change(screen.getByRole('combobox', { name: 'Область *' }), {
+    target: { value: 'almaty-region' },
   });
   fireEvent.change(screen.getByRole('textbox', { name: 'Город *' }), {
     target: { value: 'Алматы' },
@@ -373,7 +373,7 @@ it('rejects an empty image before making an upload request', () => {
   mockSessionUserId = 'owner-a';
   const view = render(<EquipmentIntake locale="ru" googleEnabled={true} />);
   fireEvent.click(screen.getByRole('radio', { name: 'Аренда' }));
-  fireEvent.click(screen.getByRole('radio', { name: 'Компрессор' }));
+  fireEvent.click(screen.getByRole('radio', { name: 'Компрессоры и насосы' }));
   fireEvent.click(screen.getByRole('button', { name: 'Продолжить' }));
   const input = view.container.querySelector(
     'input[type="file"]'
@@ -396,13 +396,16 @@ it('does not persist contact fields during a photo upload after visiting contact
   });
   const view = render(<EquipmentIntake locale="ru" googleEnabled={true} />);
   fireEvent.click(screen.getByRole('radio', { name: 'Аренда' }));
-  fireEvent.click(screen.getByRole('radio', { name: 'Компрессор' }));
+  fireEvent.click(screen.getByRole('radio', { name: 'Компрессоры и насосы' }));
   fireEvent.click(screen.getByRole('button', { name: 'Продолжить' }));
+  fireEvent.change(screen.getByRole('combobox', { name: 'Тип техники *' }), {
+    target: { value: 'COMPRESSOR' },
+  });
   fireEvent.change(screen.getByRole('textbox', { name: 'Название *' }), {
     target: { value: 'Compressor' },
   });
-  fireEvent.change(screen.getByRole('textbox', { name: 'Область *' }), {
-    target: { value: 'Almaty' },
+  fireEvent.change(screen.getByRole('combobox', { name: 'Область *' }), {
+    target: { value: 'almaty-region' },
   });
   fireEvent.change(screen.getByRole('textbox', { name: 'Город *' }), {
     target: { value: 'Almaty' },

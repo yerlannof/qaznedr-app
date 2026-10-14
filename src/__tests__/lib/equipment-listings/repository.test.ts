@@ -19,7 +19,7 @@ const submitted = {
   category: 'drill' as const,
   title: 'Drill',
   city: 'Almaty',
-  region: 'Almaty',
+  region: 'almaty-region',
   currency: 'KZT' as const,
   priceUnit: 'DAY' as const,
   availability: 'Now',

@@ -14,7 +14,7 @@ const complete = {
   category: 'drill',
   title: 'Буровая установка XY-1',
   city: 'Караганда',
-  region: 'Карагандинская',
+  region: 'karagandy',
   price: 180000,
   currency: 'KZT',
   priceUnit: 'SHIFT',

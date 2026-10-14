@@ -17,7 +17,7 @@ const row = {
     category: 'drill',
     offerType: 'RENT',
     title: 'Drill',
-    region: 'Караганда',
+    region: 'karagandy',
     city: 'Караганда',
     availability: 'Now',
     contactName: 'Hidden Name',

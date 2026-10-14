@@ -137,7 +137,7 @@ it('never accepts a different owner or a mismatched listing ID', async () => {
 it('validates submission before saving and stops edits once pending', async () => {
   const data = {
     ...draft,
-    region: 'Абай',
+    region: 'abai',
     city: 'Семей',
     availability: 'Ноябрь',
     contactName: 'Автор',

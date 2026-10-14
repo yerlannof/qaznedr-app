@@ -29,7 +29,14 @@ import {
   DRILLING_SITES,
   DRILLING_TRAJECTORIES,
   MACHINE_CONDITIONS,
+  EQUIPMENT_CATEGORIES,
+  REGION_IDS,
+  SERVICE_CATEGORIES,
+  kindsFor,
+  priceUnitsFor,
+  serviceMethodsFor,
 } from '@/lib/equipment-listings/taxonomy';
+import { regionLabel } from '@/lib/data/filter-config';
 
 type Props = { locale: string; googleEnabled: boolean };
 type FieldProps = {
@@ -212,8 +219,12 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
           offerType,
           category: '',
           priceUnit: '',
+          kind: '',
+          accredited: '',
+          accreditationNumber: '',
           capabilities: [],
           purposes: [],
+          serviceMethods: [],
         }) as unknown as IntakeValue
     );
     setErrors([]);
@@ -224,8 +235,13 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
         ({
           ...old,
           category,
+          priceUnit: '',
+          kind: '',
+          accredited: '',
+          accreditationNumber: '',
           capabilities: [],
           purposes: [],
+          serviceMethods: [],
         }) as unknown as IntakeValue
     );
     setErrors([]);
@@ -419,10 +435,62 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
     t,
   ]);
 
-  const categories =
-    value.offerType === 'SERVICE'
-      ? ['drillService', 'geoService']
-      : ['drill', 'excavator', 'compressor', 'transport'];
+  const categories: readonly string[] =
+    value.offerType === 'SERVICE' ? SERVICE_CATEGORIES : EQUIPMENT_CATEGORIES;
+  const kinds = kindsFor(value.category);
+  const serviceMethods = serviceMethodsFor(value.category);
+  const toggleList = (
+    name: 'serviceMethods' | 'serviceArea',
+    item: string,
+    checked: boolean
+  ) => {
+    setValue((old) => {
+      let next = checked
+        ? [...old[name], item]
+        : old[name].filter((entry) => entry !== item);
+      // The whole country replaces single regions and the other way round.
+      if (name === 'serviceArea' && checked)
+        next =
+          item === 'ALL_KZ'
+            ? ['ALL_KZ']
+            : next.filter((entry) => entry !== 'ALL_KZ');
+      return { ...old, [name]: next } as IntakeValue;
+    });
+    setErrors((old) => old.filter((key) => key !== name));
+  };
+  const checklist = (
+    name: 'serviceMethods' | 'serviceArea',
+    items: readonly string[],
+    label: (item: string) => string,
+    required = false
+  ) => (
+    <fieldset>
+      <legend className="mb-2 text-sm font-semibold">
+        {t(name)}
+        {required ? ' *' : ''}
+      </legend>
+      {name === 'serviceArea' && (
+        <p className="mb-2 text-sm text-brand-muted">{t('serviceAreaHint')}</p>
+      )}
+      <div className="grid gap-2 sm:grid-cols-2">
+        {items.map((item) => (
+          <label key={item} className="flex min-h-11 items-center gap-3">
+            <input
+              type="checkbox"
+              checked={value[name].includes(item)}
+              onChange={(event) => toggleList(name, item, event.target.checked)}
+            />
+            {label(item)}
+          </label>
+        ))}
+      </div>
+      {errors.includes(name) && (
+        <p role="alert" className="mt-2 text-red-700 dark:text-red-300">
+          {t('required')}
+        </p>
+      )}
+    </fieldset>
+  );
   const drilling =
     value.category === 'drill' || value.category === 'drillService';
   const inputClass =
@@ -486,7 +554,7 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
         value={value[name] ?? ''}
         onChange={(event) => change(name, event.target.value)}
       >
-        <option value="">{t('optional')}</option>
+        <option value="">{t(required ? 'choose' : 'optional')}</option>
         {values.map((item) => (
           <option key={item} value={item}>
             {t('codes.' + item) === `equipmentIntake.codes.${item}`
@@ -738,14 +806,10 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
     setRecoveryListings([]);
   };
 
-  const priceUnits =
-    value.offerType === 'SALE'
-      ? ['ITEM']
-      : value.offerType === 'SERVICE' && value.category === 'drillService'
-        ? ['HOUR', 'SHIFT', 'DAY', 'METER', 'OBJECT']
-        : value.offerType === 'SERVICE'
-          ? ['HOUR', 'SHIFT', 'DAY', 'OBJECT']
-          : ['HOUR', 'SHIFT', 'DAY'];
+  const priceUnits = priceUnitsFor(
+    value.category,
+    (value.offerType || undefined) as 'RENT' | 'SALE' | 'SERVICE' | undefined
+  );
   const imageBase = clientRef.current?.listing?.id;
   const imageList = useMemo(
     () => [...images].sort((a, b) => a.position - b.position),
@@ -769,9 +833,23 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
         'site',
         'operator',
         'delivery',
+        'kind',
+        'accredited',
+        'ownCrew',
       ].includes(key)
     )
       return labelCode(code);
+    if (key === 'region') return regionLabel(code, locale);
+    if (key === 'serviceMethods' && Array.isArray(content))
+      return content.map((item) => labelCode(String(item))).join(', ');
+    if (key === 'serviceArea' && Array.isArray(content))
+      return content
+        .map((item) =>
+          item === 'ALL_KZ'
+            ? labelCode(item)
+            : regionLabel(String(item), locale)
+        )
+        .join(', ');
     return code;
   };
 
@@ -881,9 +959,33 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
             )}
             {step === 2 && (
               <div className="space-y-5">
+                {kinds.length > 0 &&
+                  select({ name: 'kind', values: kinds, required: true })}
                 {field({ name: 'title', required: true })}
                 <div className="grid gap-4 sm:grid-cols-2">
-                  {field({ name: 'region', required: true })}
+                  <label className="block space-y-2 text-sm font-semibold text-brand-ink">
+                    <span>{t('region')} *</span>
+                    <select
+                      className={inputClass}
+                      value={value.region ?? ''}
+                      onChange={(event) => change('region', event.target.value)}
+                    >
+                      <option value="">{t('chooseRegion')}</option>
+                      {REGION_IDS.map((region) => (
+                        <option key={region} value={region}>
+                          {regionLabel(region, locale)}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.includes('region') && (
+                      <span
+                        role="alert"
+                        className="block text-red-700 dark:text-red-300"
+                      >
+                        {t('required')}
+                      </span>
+                    )}
+                  </label>
                   {field({ name: 'city', required: true })}
                 </div>
                 {field({ name: 'availability', required: true })}
@@ -909,6 +1011,24 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
                   value.priceUnit === 'SHIFT' &&
                   field({ name: 'shiftHours', type: 'number', required: true })}
                 {value.price.trim() && field({ name: 'priceIncludes' })}
+                {serviceMethods.length > 0 &&
+                  checklist('serviceMethods', serviceMethods, labelCode, true)}
+                {value.category === 'labService' && (
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {select({ name: 'accredited', values: ['true', 'false'] })}
+                    {value.accredited === 'true' &&
+                      field({ name: 'accreditationNumber' })}
+                  </div>
+                )}
+                {value.offerType === 'SERVICE' &&
+                  select({ name: 'ownCrew', values: ['true', 'false'] })}
+                {value.offerType &&
+                  value.offerType !== 'SALE' &&
+                  checklist('serviceArea', ['ALL_KZ', ...REGION_IDS], (item) =>
+                    item === 'ALL_KZ'
+                      ? labelCode(item)
+                      : regionLabel(item, locale)
+                  )}
                 {drilling && (
                   <div className="space-y-4 border-t border-brand-line pt-5">
                     <h3 className="font-semibold">{t('capabilities')}</h3>
@@ -1120,6 +1240,8 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
                     )}
                     {value.category === 'transport' &&
                       field({ name: 'payload', type: 'number' })}
+                    {value.category === 'camp' &&
+                      field({ name: 'powerKw', type: 'number' })}
                     {value.offerType !== 'SERVICE' && (
                       <>
                         <div className="grid gap-4 sm:grid-cols-2">

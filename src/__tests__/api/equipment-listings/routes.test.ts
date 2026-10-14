@@ -37,7 +37,7 @@ const fixture = {
     offerType: 'RENT',
     category: 'drill',
     title: 'Synthetic drill',
-    region: 'Test',
+    region: 'karagandy',
     city: 'Test',
     currency: 'KZT',
     priceUnit: 'DAY',

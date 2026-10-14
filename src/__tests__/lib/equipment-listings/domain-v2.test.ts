@@ -13,7 +13,7 @@ const base = {
   category: 'drill',
   title: 'Drill',
   city: 'Karaganda',
-  region: 'Karaganda',
+  region: 'karagandy',
   availability: 'Now',
   contactName: 'Owner',
   phone: '+77001234567',
@@ -178,6 +178,7 @@ describe('versioned equipment listing', () => {
       ownerSubmissionSchema.safeParse({
         ...base,
         category: 'compressor',
+        kind: 'COMPRESSOR',
         capabilities: undefined,
         pressure: 20,
         flow: 10,
@@ -187,6 +188,7 @@ describe('versioned equipment listing', () => {
       ownerSubmissionSchema.safeParse({
         ...base,
         category: 'transport',
+        kind: 'DUMP_TRUCK',
         capabilities: undefined,
         payload: 12,
       }).success

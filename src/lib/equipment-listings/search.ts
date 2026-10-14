@@ -7,6 +7,15 @@ import {
   DRILLING_TRAJECTORIES,
   CHASSIS_TYPES,
   MACHINE_CONDITIONS,
+  ALL_SERVICE_METHODS,
+  EQUIPMENT_KINDS,
+  LISTING_CATEGORIES,
+  PRICE_UNITS,
+  REGION_IDS,
+  isServiceCategory,
+  kindsFor,
+  priceUnitsFor,
+  serviceMethodsFor,
 } from './taxonomy';
 
 const amount = (max: number) => z.coerce.number().finite().positive().max(max);
@@ -30,17 +39,11 @@ const querySchema = z
       .refine((value) => !/[\u0000-\u001f\u007f]/.test(value))
       .optional(),
     offerType: z.enum(['RENT', 'SALE', 'SERVICE']).optional(),
-    category: z
-      .enum([
-        'drill',
-        'excavator',
-        'compressor',
-        'transport',
-        'drillService',
-        'geoService',
-      ])
-      .optional(),
-    region: z.string().trim().min(1).max(160).optional(),
+    category: z.enum(LISTING_CATEGORIES).optional(),
+    region: z.enum(REGION_IDS).optional(),
+    kind: z.enum(EQUIPMENT_KINDS).optional(),
+    serviceMethod: z.enum(ALL_SERVICE_METHODS).optional(),
+    accredited: boolean.optional(),
     method: z.enum(DRILLING_METHODS).optional(),
     purpose: z.enum(DRILLING_PURPOSES).optional(),
     coreSize: z.enum(CORE_SIZES).optional(),
@@ -60,9 +63,7 @@ const querySchema = z
     operator: boolean.optional(),
     delivery: boolean.optional(),
     currency: z.enum(['KZT', 'USD', 'CNY']).optional(),
-    priceUnit: z
-      .enum(['HOUR', 'SHIFT', 'DAY', 'METER', 'OBJECT', 'ITEM'])
-      .optional(),
+    priceUnit: z.enum(PRICE_UNITS).optional(),
     shiftHours: amount(24).optional(),
     sort: z.enum(['NEWEST', 'PRICE_ASC']).default('NEWEST'),
     page: integer(1000, 1),
@@ -76,8 +77,7 @@ const querySchema = z
         path: [path],
         message: 'Incompatible search filter',
       });
-    const service =
-      data.category === 'drillService' || data.category === 'geoService';
+    const service = isServiceCategory(data.category);
     if (
       data.category &&
       data.offerType &&
@@ -115,11 +115,25 @@ const querySchema = z
       issue('priceUnit');
     if (
       data.category &&
-      data.category !== 'drillService' &&
-      data.priceUnit === 'METER'
+      data.priceUnit &&
+      !priceUnitsFor(data.category, data.offerType).includes(data.priceUnit)
     )
       issue('priceUnit');
-    if (!data.category) return;
+    if (!data.category) {
+      // Type, method and accreditation only make sense inside a section.
+      for (const field of ['kind', 'serviceMethod', 'accredited'] as const)
+        if (data[field] !== undefined) issue(field);
+      return;
+    }
+    if (data.kind && !kindsFor(data.category).includes(data.kind))
+      issue('kind');
+    if (
+      data.serviceMethod &&
+      !serviceMethodsFor(data.category).includes(data.serviceMethod)
+    )
+      issue('serviceMethod');
+    if (data.accredited !== undefined && data.category !== 'labService')
+      issue('accredited');
     const drilling =
       data.category === 'drill' || data.category === 'drillService';
     if (!drilling)
@@ -185,7 +199,6 @@ export function parseEquipmentSearchQuery(params: URLSearchParams) {
     : [];
   return {
     ...data,
-    region: data.region ? normalizeEquipmentSearchText(data.region) : undefined,
     tokens,
   };
 }
@@ -198,6 +211,9 @@ export function equipmentSearchRpcArgs(query: EquipmentSearchQuery) {
     p_offer_type: query.offerType ?? null,
     p_category: query.category ?? null,
     p_region: query.region ?? null,
+    p_kind: query.kind ?? null,
+    p_service_method: query.serviceMethod ?? null,
+    p_accredited: query.accredited ?? null,
     p_method: query.method ?? null,
     p_purpose: query.purpose ?? null,
     p_core_size: query.coreSize ?? null,

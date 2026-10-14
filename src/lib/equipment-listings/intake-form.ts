@@ -3,7 +3,7 @@ import {
   ownerSubmissionSchema,
   type OwnerDraft,
 } from './domain';
-import { DRILLING_METHODS } from './taxonomy';
+import { DRILLING_METHODS, kindsFor, serviceMethodsFor } from './taxonomy';
 
 export type IntakeCapability = {
   method: string;
@@ -15,6 +15,8 @@ export type IntakeCapability = {
 export type IntakeValue = Record<string, string> & {
   capabilities: IntakeCapability[];
   purposes: string[];
+  serviceMethods: string[];
+  serviceArea: string[];
 };
 
 export function emptyIntake(): IntakeValue {
@@ -50,8 +52,15 @@ export function emptyIntake(): IntakeValue {
     company: '',
     phone: '',
     contactVisibility: '',
+    kind: '',
+    accredited: '',
+    accreditationNumber: '',
+    ownCrew: '',
+    powerKw: '',
     capabilities: [],
     purposes: [],
+    serviceMethods: [],
+    serviceArea: [],
   } as unknown as IntakeValue;
 }
 
@@ -68,6 +77,7 @@ const textFields = [
   'phone',
   'brand',
   'model',
+  'accreditationNumber',
 ] as const;
 const numberFields = [
   'price',
@@ -78,6 +88,7 @@ const numberFields = [
   'bucket',
   'mass',
   'machineYear',
+  'powerKw',
 ] as const;
 const selectFields = [
   'offerType',
@@ -89,7 +100,9 @@ const selectFields = [
   'trajectory',
   'site',
   'contactVisibility',
+  'kind',
 ] as const;
+const arrayFields = ['purposes', 'serviceMethods', 'serviceArea'] as const;
 
 export function relevantFields(value: IntakeValue): Set<string> {
   const fields = new Set<string>([
@@ -129,6 +142,16 @@ export function relevantFields(value: IntakeValue): Set<string> {
       fields.delete(key)
     );
   if (value.priceUnit !== 'SHIFT') fields.delete('shiftHours');
+  if (!kindsFor(value.category).length) fields.delete('kind');
+  if (serviceMethodsFor(value.category).length) fields.add('serviceMethods');
+  if (value.category === 'labService') {
+    fields.add('accredited');
+    if (value.accredited === 'true') fields.add('accreditationNumber');
+    else fields.delete('accreditationNumber');
+  } else fields.delete('accreditationNumber');
+  if (value.offerType && value.offerType !== 'SALE') fields.add('serviceArea');
+  if (value.offerType === 'SERVICE') fields.add('ownCrew');
+  if (value.category === 'camp') fields.add('powerKw');
   return fields;
 }
 
@@ -149,8 +172,10 @@ export function normalizeIntake(value: IntakeValue): OwnerDraft {
     result.operator = value.operator === 'true';
   if (relevant.has('delivery') && value.delivery)
     result.delivery = value.delivery === 'true';
-  if (relevant.has('purposes') && value.purposes.length)
-    result.purposes = value.purposes;
+  for (const key of ['accredited', 'ownCrew'] as const)
+    if (relevant.has(key) && value[key]) result[key] = value[key] === 'true';
+  for (const key of arrayFields)
+    if (relevant.has(key) && value[key].length) result[key] = value[key];
   if (relevant.has('capabilities') && value.capabilities.length) {
     result.capabilities = value.capabilities
       .filter((row) => row.method)
@@ -175,6 +200,12 @@ export function validateIntakeStep(value: IntakeValue, step: number): string[] {
   if (step >= 2) {
     for (const key of ['title', 'region', 'city', 'availability'])
       if (!value[key]?.trim()) errors.push(key);
+    if (kindsFor(value.category).length && !value.kind) errors.push('kind');
+    if (
+      serviceMethodsFor(value.category).length &&
+      !value.serviceMethods.length
+    )
+      errors.push('serviceMethods');
     for (const key of numberFields) {
       if (!relevantFields(value).has(key) || !value[key]?.trim()) continue;
       const n = Number(value[key]);
@@ -244,7 +275,11 @@ export function validateIntakeStep(value: IntakeValue, step: number): string[] {
 export function fromDraft(data: OwnerDraft): IntakeValue {
   const value = emptyIntake();
   for (const [key, field] of Object.entries(data)) {
-    if (key === 'capabilities' || key === 'purposes' || key === 'schemaVersion')
+    if (
+      key === 'capabilities' ||
+      key === 'schemaVersion' ||
+      (arrayFields as readonly string[]).includes(key)
+    )
       continue;
     if (field !== undefined && field !== null) value[key] = String(field);
   }
@@ -256,5 +291,7 @@ export function fromDraft(data: OwnerDraft): IntakeValue {
     source: row.source ?? '',
   }));
   value.purposes = data.purposes ?? [];
+  value.serviceMethods = data.serviceMethods ?? [];
+  value.serviceArea = data.serviceArea ?? [];
   return value;
 }

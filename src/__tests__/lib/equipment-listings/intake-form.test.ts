@@ -2,6 +2,7 @@ import {
   normalizeIntake,
   validateIntakeStep,
   emptyIntake,
+  fromDraft,
 } from '@/lib/equipment-listings/intake-form';
 
 describe('equipment intake mapping', () => {
@@ -53,7 +54,7 @@ describe('equipment intake mapping', () => {
       offerType: 'RENT',
       category: 'compressor',
       title: 'Unit',
-      region: 'Almaty',
+      region: 'almaty-region',
       city: 'Almaty',
       availability: 'Now',
       trajectory: 'VERTICAL',
@@ -67,5 +68,80 @@ describe('equipment intake mapping', () => {
     expect(normalizeIntake(value)).not.toHaveProperty('site');
     expect(validateIntakeStep(value, 2)).not.toContain('capabilities.0.method');
     expect(validateIntakeStep(value, 3)).toContain('phone');
+  });
+});
+
+describe('intake for the new sections', () => {
+  it('keeps only fields relevant to the chosen section', () => {
+    const lab = {
+      ...emptyIntake(),
+      offerType: 'SERVICE',
+      category: 'labService',
+      accredited: 'true',
+      accreditationNumber: 'KZ.T.02.1234',
+      ownCrew: 'true',
+      kind: 'BULLDOZER',
+      powerKw: '100',
+      serviceMethods: ['FIRE_ASSAY'],
+      serviceArea: ['ALL_KZ'],
+    };
+    expect(normalizeIntake(lab)).toMatchObject({
+      accredited: true,
+      accreditationNumber: 'KZ.T.02.1234',
+      ownCrew: true,
+      serviceMethods: ['FIRE_ASSAY'],
+      serviceArea: ['ALL_KZ'],
+    });
+    expect(normalizeIntake(lab)).not.toHaveProperty('kind');
+    expect(normalizeIntake(lab)).not.toHaveProperty('powerKw');
+    const generator = {
+      ...emptyIntake(),
+      offerType: 'SALE',
+      category: 'camp',
+      kind: 'GENERATOR',
+      powerKw: '120',
+      serviceArea: ['abai'],
+    };
+    expect(normalizeIntake(generator)).toMatchObject({
+      kind: 'GENERATOR',
+      powerKw: 120,
+    });
+    expect(normalizeIntake(generator)).not.toHaveProperty('serviceArea');
+  });
+
+  it('asks for a machine type and service methods on the details step', () => {
+    const base = {
+      ...emptyIntake(),
+      title: 'X',
+      region: 'abai',
+      city: 'Semey',
+      availability: 'Now',
+    };
+    expect(
+      validateIntakeStep(
+        { ...base, offerType: 'RENT', category: 'excavator' },
+        2
+      )
+    ).toContain('kind');
+    expect(
+      validateIntakeStep(
+        { ...base, offerType: 'SERVICE', category: 'geophysService' },
+        2
+      )
+    ).toContain('serviceMethods');
+  });
+
+  it('restores arrays from a saved draft', () => {
+    const value = fromDraft({
+      schemaVersion: 2,
+      offerType: 'SERVICE',
+      category: 'geochemService',
+      serviceMethods: ['SOIL'],
+      serviceArea: ['abai'],
+      ownCrew: true,
+    });
+    expect(value.serviceMethods).toEqual(['SOIL']);
+    expect(value.serviceArea).toEqual(['abai']);
+    expect(value.ownCrew).toBe('true');
   });
 });

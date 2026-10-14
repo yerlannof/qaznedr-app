@@ -5,7 +5,7 @@ select ('aaaaaaaa-aaaa-4aaa-aaaa-' || lpad(n::text,12,'0'))::uuid, 'private-owne
  case when n = 4 then 'DRAFT' when n = 5 then 'ARCHIVED' else 'ACTIVE' end,
  jsonb_build_object('schemaVersion',2,'offerType',case when n=2 then 'SALE' else 'RENT' end,'category','drill',
  'title',case when n = 3 then 'Керновое бурение XY-1' else 'Drill XY-1' end,
- 'region','Караганда','city','Караганда','availability','Now',
+ 'region','karagandy','city','Караганда','availability','Now',
  'contactName','Hidden Seller','phone','+77001112233','contactVisibility','PRIVATE',
  'price',100*n,'currency','KZT','priceUnit',case when n=2 then 'ITEM' else 'HOUR' end,
  'site','SURFACE','chassis','TRACKED','trajectory','INCLINED',
@@ -14,6 +14,18 @@ select ('aaaaaaaa-aaaa-4aaa-aaaa-' || lpad(n::text,12,'0'))::uuid, 'private-owne
  when n = 2 then '[{"method":"CORE","depth":1000,"diameter":200,"coreSize":"HQ"}]'::jsonb
  else '[{"method":"CORE"}]'::jsonb end), '2026-10-03 00:00Z'::timestamptz
 from generate_series(1,5) n;
+
+-- Taxonomy v3 sections: a bulldozer for rent and an accredited lab serving the whole country.
+insert into public.equipment_listings(id, owner_id, status, data, updated_at) values
+ ('aaaaaaaa-aaaa-4aaa-aaaa-000000000006','private-owner','ACTIVE',
+  jsonb_build_object('schemaVersion',2,'offerType','RENT','category','excavator','kind','BULLDOZER',
+  'title','Бульдозер SD22','region','abai','city','Семей','availability','Now','serviceArea',jsonb_build_array('abai','east-kz'),
+  'contactName','Hidden Seller','phone','+77001112233','contactVisibility','PRIVATE'), '2026-10-01 00:00Z'),
+ ('aaaaaaaa-aaaa-4aaa-aaaa-000000000007','private-owner','ACTIVE',
+  jsonb_build_object('schemaVersion',2,'offerType','SERVICE','category','labService',
+  'serviceMethods',jsonb_build_array('FIRE_ASSAY','ICP_MS'),'accredited',true,'serviceArea',jsonb_build_array('ALL_KZ'),
+  'title','Пробирная лаборатория','region','almaty-region','city','Алматы','availability','Now',
+  'contactName','Hidden Seller','phone','+77001112233','contactVisibility','PRIVATE'), '2026-10-01 00:00Z');
 
 set local role service_role;
 do $$ declare result jsonb; begin
@@ -30,22 +42,42 @@ do $$ declare result jsonb; begin
  result := public.search_equipment_catalog(p_method=>'RC',p_depth=>900);
  if (result->>'total')::int <> 0 then raise exception 'Cross-method false match'; end if;
  result := public.search_equipment_catalog();
- if (result->>'total')::int <> 3 then raise exception 'Non-ACTIVE visibility leak'; end if;
+ if (result->>'total')::int <> 5 then raise exception 'Non-ACTIVE visibility leak'; end if;
  result := public.search_equipment_catalog(p_tokens=>array['+77001112233']);
  if (result->>'total')::int <> 0 then raise exception 'Private contact searchable'; end if;
  result := public.search_equipment_catalog(p_tokens=>array['private-owner']);
  if (result->>'total')::int <> 0 then raise exception 'Private owner searchable'; end if;
- result := public.search_equipment_catalog(p_tokens=>array['core','бурение'],p_region=>'карагaнда');
- if (result->>'total')::int <> 0 then raise exception 'Unexpected region match'; end if;
- result := public.search_equipment_catalog(p_tokens=>array['core','бурение'],p_region=>'караганда');
- if (result->>'total')::int <> 1 then raise exception 'Method synonym/region not normalized'; end if;
- result := public.search_equipment_catalog(p_limit=>1,p_offset=>1);
+ result := public.search_equipment_catalog(p_tokens=>array['core','бурение'],p_region=>'karagandy');
+ if (result->>'total')::int <> 1 then raise exception 'Method synonym/region id not matched'; end if;
+ result := public.search_equipment_catalog(p_category=>'excavator',p_kind=>'BULLDOZER',p_region=>'east-kz');
+ if (result->>'total')::int <> 1 then raise exception 'Kind or service area not matched: %', result; end if;
+ result := public.search_equipment_catalog(p_category=>'excavator',p_kind=>'LOADER');
+ if (result->>'total')::int <> 0 then raise exception 'Wrong kind matched'; end if;
+ result := public.search_equipment_catalog(p_region=>'karagandy',p_category=>'labService',p_service_method=>'FIRE_ASSAY',p_accredited=>true);
+ if (result->>'total')::int <> 1 then raise exception 'Whole-country lab not matched in a region: %', result; end if;
+ result := public.search_equipment_catalog(p_category=>'labService',p_service_method=>'XRF');
+ if (result->>'total')::int <> 0 then raise exception 'Wrong service method matched'; end if;
+ result := public.search_equipment_catalog(p_region=>'mangystau',p_category=>'excavator');
+ if (result->>'total')::int <> 0 then raise exception 'Region outside service area matched'; end if;
+ begin
+   perform public.search_equipment_catalog(p_region=>'Караганда');
+   raise exception 'Free-text region accepted';
+ exception when invalid_parameter_value then null; end;
+ begin
+   perform public.search_equipment_catalog(p_kind=>'BULLDOZER');
+   raise exception 'Kind without section accepted';
+ exception when invalid_parameter_value then null; end;
+ begin
+   perform public.search_equipment_catalog(p_category=>'geochemService',p_accredited=>true);
+   raise exception 'Accreditation outside labs accepted';
+ exception when invalid_parameter_value then null; end;
+ result := public.search_equipment_catalog(p_category=>'drill',p_limit=>1,p_offset=>1);
  if (result->>'total')::int <> 3 or jsonb_array_length(result->'rows') <> 1
  or result#>>'{rows,0,id}' <> 'aaaaaaaa-aaaa-4aaa-aaaa-000000000002' then
    raise exception 'Pagination unstable';
  end if;
  result := public.search_equipment_catalog(p_limit=>1,p_offset=>100);
- if (result->>'total')::int <> 3 or jsonb_array_length(result->'rows') <> 0 then raise exception 'Empty page lost total'; end if;
+ if (result->>'total')::int <> 5 or jsonb_array_length(result->'rows') <> 0 then raise exception 'Empty page lost total'; end if;
  result := public.search_equipment_catalog(p_sort=>'PRICE_ASC',p_currency=>'KZT',p_price_unit=>'HOUR');
  if result#>>'{rows,0,id}' <> 'aaaaaaaa-aaaa-4aaa-aaaa-000000000001' then raise exception 'Price order wrong'; end if;
  begin

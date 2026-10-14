@@ -3,8 +3,19 @@ jest.mock('server-only', () => ({}));
 jest.mock('next-auth', () => ({ getServerSession: jest.fn() }));
 jest.mock('@/lib/services/auth.config', () => ({ authOptions: {} }));
 jest.mock('@/lib/auth/admin', () => ({ requireModerator: jest.fn() }));
+jest.mock('@/lib/equipment-listings/submission-hooks', () => ({
+  afterSubmission: jest.fn(),
+}));
+jest.mock('@/lib/equipment-listings/moderation-repository', () => ({
+  TRUST_MARKS: ['PHONE_CONFIRMED', 'DOCUMENTS_REVIEWED', 'VERIFIED_QAZNEDR'],
+  trustMarksFor: jest.fn(async () => ({})),
+  prechecksFor: jest.fn(async () => ({})),
+  setTrustMark: jest.fn(),
+}));
 jest.mock('@/lib/equipment-listings/repository', () => ({
   createDraft: jest.fn(),
+  listByStatus: jest.fn(async () => []),
+  getModeratable: jest.fn(),
   listOwned: jest.fn(),
   getOwned: jest.fn(),
   listPending: jest.fn(),

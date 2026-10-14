@@ -146,6 +146,35 @@ export const equipmentRepository = {
     return hydrateList(result.data);
   },
 
+  async listByStatus(
+    status: 'PENDING_MODERATION' | 'ACTIVE'
+  ): Promise<EquipmentListing[]> {
+    const db = await client();
+    const result = await db
+      .from('equipment_listings')
+      .select('id,owner_id,status,revision,data,moderation_notes')
+      .eq('status', status)
+      .order('updated_at', { ascending: status === 'PENDING_MODERATION' })
+      .limit(100);
+    check(result.error);
+    return hydrateList(result.data);
+  },
+
+  /** A listing a moderator may mark: under review or published. */
+  async getModeratable(id: string): Promise<EquipmentListing | null> {
+    requireId(id);
+    const db = await client();
+    const result = await db
+      .from('equipment_listings')
+      .select('id,owner_id,status,revision,data,moderation_notes')
+      .eq('id', id)
+      .maybeSingle();
+    check(result.error);
+    if (result.data === null) return null;
+    const listing = hydrate(result.data);
+    return requiresSubmission(listing.status) ? listing : null;
+  },
+
   async getForModeration(id: string): Promise<EquipmentListing | null> {
     requireId(id);
     const db = await client();
@@ -196,6 +225,8 @@ export const {
   listOwned,
   getOwned,
   listPending,
+  listByStatus,
+  getModeratable,
   getForModeration,
   saveTransition,
 } = equipmentRepository;

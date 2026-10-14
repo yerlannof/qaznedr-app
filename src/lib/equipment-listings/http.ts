@@ -13,6 +13,13 @@ import {
   submitListing,
 } from './domain';
 import * as repository from './repository';
+import {
+  TRUST_MARKS,
+  prechecksFor,
+  setTrustMark,
+  trustMarksFor,
+} from './moderation-repository';
+import { afterSubmission } from './submission-hooks';
 
 export type ItemContext = { params: Promise<{ id: string }> };
 type Action =
@@ -23,7 +30,8 @@ type Action =
   | 'submit'
   | 'archive'
   | 'queue'
-  | 'moderate';
+  | 'moderate'
+  | 'trust';
 class HttpError extends Error {
   constructor(
     public status: number,
@@ -44,6 +52,13 @@ const moderationBody = revisionBody
   })
   .strict()
   .refine((value) => value.decision !== 'REJECT' || !!value.reason);
+const trustBody = z
+  .object({
+    mark: z.enum(TRUST_MARKS),
+    enabled: z.boolean(),
+    note: z.string().trim().max(500).optional(),
+  })
+  .strict();
 const response = (data: unknown, status = 200) =>
   NextResponse.json(data, {
     status,
@@ -98,7 +113,8 @@ export function equipmentHandler(action: Action) {
     if (process.env.EQUIPMENT_MARKETPLACE_ENABLED !== 'true')
       return response({ success: false, error: 'Not found' }, 404);
     try {
-      const adminAction = action === 'queue' || action === 'moderate';
+      const adminAction =
+        action === 'queue' || action === 'moderate' || action === 'trust';
       let actorId: string;
       if (adminAction) {
         const admin = await requireModerator();
@@ -117,12 +133,24 @@ export function equipmentHandler(action: Action) {
           data: await repository.listOwned(actorId),
           limit: 100,
         });
-      if (action === 'queue')
+      if (action === 'queue') {
+        const status =
+          new URL(request.url).searchParams.get('status') === 'ACTIVE'
+            ? 'ACTIVE'
+            : 'PENDING_MODERATION';
+        const listings = await repository.listByStatus(status);
+        const [trustMarks, prechecks] = await Promise.all([
+          trustMarksFor(listings.map((listing) => listing.id)),
+          prechecksFor(listings),
+        ]);
         return response({
           success: true,
-          data: await repository.listPending(),
+          data: listings,
+          trustMarks,
+          prechecks,
           limit: 100,
         });
+      }
       if (action === 'create') {
         const input = ownerDraftSchema.parse(await jsonBody(request));
         return response(
@@ -134,6 +162,16 @@ export function equipmentHandler(action: Action) {
         .string()
         .uuid()
         .parse((await context?.params)?.id);
+      if (action === 'trust') {
+        const body = trustBody.parse(await jsonBody(request));
+        const listing = await repository.getModeratable(id);
+        if (!listing) throw new HttpError(404, 'Not found');
+        await setTrustMark(id, body.mark, body.enabled, actorId, body.note);
+        return response({
+          success: true,
+          data: (await trustMarksFor([id]))[id] ?? [],
+        });
+      }
       const input = action === 'detail' ? null : await jsonBody(request);
       const parsed =
         action === 'detail'
@@ -189,6 +227,11 @@ export function equipmentHandler(action: Action) {
         next === previous
           ? previous
           : await repository.saveTransition(previous, next, actorId);
+      if (
+        saved.status === 'PENDING_MODERATION' &&
+        previous.status !== 'PENDING_MODERATION'
+      )
+        afterSubmission(saved);
       return response({ success: true, data: saved });
     } catch (error) {
       if (error instanceof HttpError)

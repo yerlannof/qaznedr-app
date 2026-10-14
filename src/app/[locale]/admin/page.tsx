@@ -148,6 +148,13 @@ export default function AdminHome() {
             />
 
             <SectionTile
+              href={`/${locale}/admin/equipment`}
+              title="Техника и услуги"
+              description="Модерация объявлений маркетплейса, отметки доверия"
+              icon={ShieldCheck}
+            />
+
+            <SectionTile
               href={`/${locale}/admin/listings`}
               title="Объявления"
               description="Модерация, редактирование, удаление, featured / verified"

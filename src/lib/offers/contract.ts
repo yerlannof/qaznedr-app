@@ -111,6 +111,8 @@ export function formatPrice(
   return new Intl.NumberFormat(PRICE_LOCALE[locale] ?? 'ru-RU', {
     style: 'currency',
     currency: price.currency,
+    // «₸» rather than the ISO code; USD keeps the default «$» / «US$».
+    ...(price.currency === 'KZT' ? { currencyDisplay: 'narrowSymbol' } : {}),
     maximumFractionDigits: 0,
   }).format(price.amount);
 }

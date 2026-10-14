@@ -29,7 +29,7 @@ export interface CatalogItem {
   /** Locale-free detail path, e.g. '/offers/QN-A01'. */
   path: string;
   commodityGroup: CommodityGroup;
-  /** Element symbols ('Au', 'Zn', 'Pb') or 'stone' for construction stone. */
+  /** Element symbols ('Au', 'Zn', 'Pb'), 'stone' for construction stone or 'tuff'. */
   commodities: string[];
   /** Region id from src/lib/data/filter-config.ts REGIONS. */
   region: string | null;

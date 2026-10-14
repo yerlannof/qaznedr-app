@@ -14,6 +14,7 @@ describe('qaznedr-offer-v1 contract', () => {
     expect(listPublishedOffers().map((o) => o.code)).toEqual([
       'QN-A01',
       'QN-A02',
+      'QN-A03',
     ]);
   });
 
@@ -36,7 +37,7 @@ describe('qaznedr-offer-v1 contract', () => {
     ).toBeNull();
   });
 
-  it.each(['QN-A01', 'QN-A02'])(
+  it.each(['QN-A01', 'QN-A02', 'QN-A03'])(
     '%s has every media file on disk with the declared hash',
     (code) => {
       const offer = getOffer(code)!;
@@ -54,7 +55,7 @@ describe('qaznedr-offer-v1 contract', () => {
     }
   );
 
-  it.each(['QN-A01', 'QN-A02'])(
+  it.each(['QN-A01', 'QN-A02', 'QN-A03'])(
     '%s carries all four languages for the approved text',
     (code) => {
       const offer = getOffer(code)!;
@@ -89,6 +90,12 @@ describe('qaznedr-offer-v1 contract', () => {
       stage: 'exploration',
       hasInfrastructure: false,
     });
+    expect(fromAssetOffer(getOffer('QN-A03')!)).toMatchObject({
+      commodityGroup: 'opi',
+      commodities: ['tuff'],
+      region: 'almaty-region',
+      stage: 'exploration',
+    });
   });
 
   it('shows a seller price only where the card carries one', () => {
@@ -96,6 +103,9 @@ describe('qaznedr-offer-v1 contract', () => {
     const price = getOffer('QN-A02')!.price!;
     expect(formatPrice(price, 'ru').replace(/\s/g, ' ')).toBe('1 000 000 $');
     expect(formatPrice(price, 'en')).toBe('$1,000,000');
+    expect(
+      formatPrice(getOffer('QN-A03')!.price!, 'ru').replace(/\s/g, ' ')
+    ).toBe('20 000 000 ₸');
     expect(
       parseOffer({ ...rows[1], price: { amount: -1, currency: 'USD' } })
     ).toBeNull();

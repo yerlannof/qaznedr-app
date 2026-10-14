@@ -33,6 +33,8 @@ const MINERALS: Record<string, Record<Locale, string>> = {
     en: 'Construction stone',
     zh: '建筑石材',
   },
+  // Tuff (facing and wall stone, ОПИ); not a chemical symbol.
+  TUFF: { ru: 'Туф', kz: 'Туф', en: 'Tuff', zh: '凝灰岩' },
 };
 
 // Region spellings used by the leads export that differ from filter-config.

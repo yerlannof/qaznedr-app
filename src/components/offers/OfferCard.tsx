@@ -50,7 +50,9 @@ export default function OfferCard({
   return (
     <article
       id={code}
-      className="grid gap-x-10 gap-y-4 border-b border-brand-line py-8 md:grid-cols-[minmax(0,1fr)_340px] lg:py-10"
+      className={`grid gap-x-10 gap-y-4 border-b border-brand-line py-8 lg:py-10 ${
+        cover ? 'md:grid-cols-[minmax(0,1fr)_340px]' : ''
+      }`}
     >
       <div className="min-w-0">
         <p className="flex flex-wrap items-center gap-3 text-sm">

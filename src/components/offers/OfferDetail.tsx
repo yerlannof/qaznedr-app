@@ -64,7 +64,13 @@ export default function OfferDetail({
         <span>{code}</span>
       </nav>
 
-      <div className="grid items-start gap-x-10 gap-y-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+      <div
+        className={`grid items-start gap-x-10 gap-y-8 ${
+          offer.video || heroImage
+            ? 'lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]'
+            : 'max-w-3xl'
+        }`}
+      >
         <div className="lg:order-2">
           <p className="flex flex-wrap items-center gap-3 text-sm">
             <span className="bg-brand-accent px-2 py-0.5 font-semibold tracking-wide text-brand-slate">

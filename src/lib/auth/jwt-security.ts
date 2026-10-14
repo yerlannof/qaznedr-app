@@ -248,16 +248,29 @@ export class SecureJwtSecretProvider {
   }
 }
 
+/** Marketplace users stay signed in; the owner's env-admin session stays short. */
+export const USER_SESSION_SECONDS = 30 * 24 * 60 * 60;
+export const ADMIN_SESSION_SECONDS = 15 * 60;
+
+function isEnvAdminToken(token: { sub?: unknown } | undefined): boolean {
+  return typeof token?.sub === 'string' && token.sub.startsWith('env-admin:');
+}
+
+export function sessionSecondsFor(token?: { sub?: unknown }): number {
+  return isEnvAdminToken(token) ? ADMIN_SESSION_SECONDS : USER_SESSION_SECONDS;
+}
+
 /**
  * Secure NextAuth configuration helper
  */
 export function getSecureAuthConfig() {
   const secretProvider = SecureJwtSecretProvider.getInstance();
+  const secureCookies = process.env.NODE_ENV === 'production';
 
   return {
     secret: secretProvider.getSecret(),
     jwt: {
-      maxAge: 15 * 60, // 15 minutes (short-lived for security)
+      maxAge: USER_SESSION_SECONDS,
       // Use secure JWT algorithm
       encode: async ({
         secret,
@@ -270,9 +283,12 @@ export function getSecureAuthConfig() {
         const secretStr =
           secret instanceof Buffer ? secret.toString('utf-8') : secret;
         if (!token) return '';
-        return jwt.sign(token, secretStr, {
+        // A refreshed token still carries the registered claims of the previous one;
+        // jsonwebtoken refuses to sign a payload with exp/aud/iss alongside options.
+        const { exp: _exp, aud: _aud, iss: _iss, nbf: _nbf, ...claims } = token;
+        return jwt.sign(claims, secretStr, {
           algorithm: 'HS256',
-          expiresIn: '15m',
+          expiresIn: sessionSecondsFor(token),
           issuer: 'qaznedr.kz',
           audience: 'qaznedr-app',
         });
@@ -294,31 +310,33 @@ export function getSecureAuthConfig() {
             issuer: 'qaznedr.kz',
             audience: 'qaznedr-app',
           }) as any;
-        } catch (error) {
-          console.error('JWT verification failed:', error);
+        } catch {
           return null;
         }
       },
     },
     session: {
       strategy: 'jwt' as const,
-      maxAge: 15 * 60, // 15 minutes
-      updateAge: 5 * 60, // Update every 5 minutes
+      maxAge: USER_SESSION_SECONDS,
+      updateAge: 5 * 60, // Re-issue at most every 5 minutes of activity
     },
-    // Security-focused cookie settings
     cookies: {
       sessionToken: {
-        name: '__Secure-next-auth.session-token',
+        // The __Secure- prefix is rejected by browsers on plain-http localhost.
+        name: secureCookies
+          ? '__Secure-next-auth.session-token'
+          : 'next-auth.session-token',
         options: {
           httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'strict' as const,
+          secure: secureCookies,
+          // Lax, not strict: a strict cookie is withheld on the first page after the
+          // cross-site Google redirect, so a fresh sign-in looked signed out.
+          sameSite: 'lax' as const,
           path: '/',
         },
       },
     },
-    // Additional security headers
-    useSecureCookies: process.env.NODE_ENV === 'production',
+    useSecureCookies: secureCookies,
   };
 }
 

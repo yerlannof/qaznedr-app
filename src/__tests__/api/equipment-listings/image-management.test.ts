@@ -2,7 +2,7 @@
 jest.mock('server-only', () => ({}));
 jest.mock('next-auth', () => ({ getServerSession: jest.fn() }));
 jest.mock('@/lib/services/auth.config', () => ({ authOptions: {} }));
-jest.mock('@/lib/auth/admin', () => ({ requireAdmin: jest.fn() }));
+jest.mock('@/lib/auth/admin', () => ({ requireModerator: jest.fn() }));
 jest.mock('@/lib/equipment-listings/repository', () => ({
   getOwned: jest.fn(),
   RepositoryError: class extends Error {
@@ -35,7 +35,7 @@ jest.mock('@/lib/equipment-listings/image-repository', () => ({
   },
 }));
 import { getServerSession } from 'next-auth';
-import { requireAdmin } from '@/lib/auth/admin';
+import { requireModerator } from '@/lib/auth/admin';
 import { getOwned } from '@/lib/equipment-listings/repository';
 import * as images from '@/lib/equipment-listings/image-repository';
 import { PUT } from '@/app/api/equipment-listings/[id]/images/route';
@@ -73,7 +73,7 @@ beforeEach(() => {
   process.env.EQUIPMENT_MARKETPLACE_ENABLED = 'true';
   (getServerSession as jest.Mock).mockResolvedValue({ user: { id: ownerId } });
   (getOwned as jest.Mock).mockResolvedValue(listing);
-  (requireAdmin as jest.Mock).mockResolvedValue({
+  (requireModerator as jest.Mock).mockResolvedValue({
     userId: 'env-admin:a@example.com',
     role: 'super_admin',
   });
@@ -108,7 +108,7 @@ it('keeps all new routes dark before auth and storage', async () => {
   expect((await adminList(adminRequest(), context)).status).toBe(404);
   expect((await adminRead(adminRequest(), imageContext)).status).toBe(404);
   expect(getServerSession).not.toHaveBeenCalled();
-  expect(requireAdmin).not.toHaveBeenCalled();
+  expect(requireModerator).not.toHaveBeenCalled();
 });
 
 it('enforces owner, revision and exact JSON shape for mutations', async () => {
@@ -230,7 +230,7 @@ it('allows env-admin, requires version and projects safe snapshot metadata', asy
   expect(read.headers.get('x-content-type-options')).toBe('nosniff');
   expect(images.readSnapshotImage).toHaveBeenCalledWith(id, imageId, 1);
   expect((await adminList(new Request(url), context)).status).toBe(400);
-  (requireAdmin as jest.Mock).mockResolvedValue(null);
+  (requireModerator as jest.Mock).mockResolvedValue(null);
   expect((await adminList(adminRequest(), context)).status).toBe(403);
 });
 

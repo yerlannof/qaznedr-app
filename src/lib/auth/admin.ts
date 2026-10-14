@@ -4,7 +4,7 @@ import { authOptions } from '@/lib/services/auth.config';
 import { createServiceClient } from '@/lib/supabase/server';
 import { isEnvAdminEmail } from '@/lib/auth/env-admin';
 
-export type AdminRole = 'user' | 'admin' | 'super_admin';
+export type AdminRole = 'user' | 'moderator' | 'admin' | 'super_admin';
 
 export interface AdminContext {
   userId: string;
@@ -60,6 +60,20 @@ export function isAdminRole(role: AdminRole | undefined): boolean {
 export async function requireAdmin(): Promise<AdminContext | null> {
   const admin = await getCurrentAdmin();
   if (!admin || !isAdminRole(admin.role)) return null;
+  return admin;
+}
+
+/**
+ * Marketplace moderators review equipment listings only; admins can do so too.
+ * A moderator is not an admin anywhere else.
+ */
+export function isModeratorRole(role: AdminRole | undefined): boolean {
+  return role === 'moderator' || isAdminRole(role);
+}
+
+export async function requireModerator(): Promise<AdminContext | null> {
+  const admin = await getCurrentAdmin();
+  if (!admin || !isModeratorRole(admin.role)) return null;
   return admin;
 }
 

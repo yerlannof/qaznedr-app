@@ -2,6 +2,7 @@
 jest.mock('server-only', () => ({}));
 jest.mock('@/lib/auth/jwt-security', () => ({
   getSecureAuthConfig: () => ({ session: { strategy: 'jwt' } }),
+  sessionSecondsFor: () => 30 * 24 * 60 * 60,
 }));
 jest.mock('@/lib/auth/env-admin', () => ({
   verifyEnvAdmin: jest.fn(),

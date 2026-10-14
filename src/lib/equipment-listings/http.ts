@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { z, ZodError } from 'zod';
 import { authOptions } from '@/lib/services/auth.config';
-import { requireAdmin } from '@/lib/auth/admin';
+import { requireModerator } from '@/lib/auth/admin';
 import { SITE_URL } from '@/lib/seo/site';
 import {
   archiveListing,
@@ -101,7 +101,7 @@ export function equipmentHandler(action: Action) {
       const adminAction = action === 'queue' || action === 'moderate';
       let actorId: string;
       if (adminAction) {
-        const admin = await requireAdmin();
+        const admin = await requireModerator();
         if (!admin) throw new HttpError(403, 'Forbidden');
         actorId = admin.userId;
       } else {

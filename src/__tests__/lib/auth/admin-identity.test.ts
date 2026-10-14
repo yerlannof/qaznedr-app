@@ -4,7 +4,11 @@ jest.mock('@/lib/services/auth.config', () => ({ authOptions: {} }));
 jest.mock('@/lib/supabase/server', () => ({ createServiceClient: jest.fn() }));
 import { getServerSession } from 'next-auth';
 import { createServiceClient } from '@/lib/supabase/server';
-import { getCurrentAdmin, requireAdmin } from '@/lib/auth/admin';
+import {
+  getCurrentAdmin,
+  requireAdmin,
+  requireModerator,
+} from '@/lib/auth/admin';
 beforeEach(() => {
   jest.clearAllMocks();
   process.env.ADMIN_EMAILS = 'owner@example.invalid';
@@ -55,5 +59,30 @@ it('keeps explicitly stored moderator roles valid', async () => {
   expect(await requireAdmin()).toMatchObject({
     role: 'admin',
     userId: 'moderator-id',
+  });
+});
+describe('marketplace moderator role', () => {
+  function storedRole(role: string) {
+    (getServerSession as jest.Mock).mockResolvedValue({
+      user: { id: 'google-user', email: 'partner@example.invalid' },
+    });
+    (createServiceClient as jest.Mock).mockResolvedValue({
+      from: () => ({
+        select: () => ({
+          eq: () => ({ single: async () => ({ data: { role } }) }),
+        }),
+      }),
+    });
+  }
+  it('lets a moderator review listings without admin powers', async () => {
+    storedRole('moderator');
+    expect(await requireModerator()).toMatchObject({ role: 'moderator' });
+    expect(await requireAdmin()).toBeNull();
+  });
+  it('lets admins moderate and refuses ordinary users', async () => {
+    storedRole('admin');
+    expect(await requireModerator()).toMatchObject({ role: 'admin' });
+    storedRole('user');
+    expect(await requireModerator()).toBeNull();
   });
 });

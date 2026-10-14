@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 import { authOptions } from '@/lib/services/auth.config';
 import { SITE_URL } from '@/lib/seo/site';
-import { requireAdmin } from '@/lib/auth/admin';
+import { requireModerator } from '@/lib/auth/admin';
 import { z } from 'zod';
 import { getOwned, RepositoryError } from './repository';
 import {
@@ -167,7 +167,8 @@ export function imageHandler(action: Action) {
       const adminAction = action === 'admin-list' || action === 'admin-read';
       let ownerId: string | undefined;
       if (adminAction) {
-        if (!(await requireAdmin())) throw new ImageHttpError(403, 'Forbidden');
+        if (!(await requireModerator()))
+          throw new ImageHttpError(403, 'Forbidden');
       } else {
         const session = await getServerSession(authOptions);
         const id = (session?.user as { id?: unknown } | undefined)?.id;

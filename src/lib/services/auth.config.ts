@@ -3,7 +3,10 @@ import { AdapterUser } from 'next-auth/adapters';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
-import { getSecureAuthConfig } from '@/lib/auth/jwt-security';
+import {
+  getSecureAuthConfig,
+  sessionSecondsFor,
+} from '@/lib/auth/jwt-security';
 import { ValidationSchemas } from '@/lib/middleware/input-validation';
 import { verifyEnvAdmin, isEnvAdminEmail } from '@/lib/auth/env-admin';
 import { provisionGoogleIdentity } from '@/lib/auth/marketplace-identity';
@@ -106,8 +109,9 @@ export const authOptions = {
         session.user.name = token.name as string;
         session.user.image = token.image as string;
 
-        // Add security info to session
-        session.expires = new Date(Date.now() + 15 * 60 * 1000).toISOString(); // 15 minutes
+        session.expires = new Date(
+          Date.now() + sessionSecondsFor(token) * 1000
+        ).toISOString();
       }
       return session;
     },

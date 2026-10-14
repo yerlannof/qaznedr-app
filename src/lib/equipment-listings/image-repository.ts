@@ -390,7 +390,7 @@ async function snapshotRows(
   return { revision: parsed.data.revision, rows };
 }
 
-/** Call only after requireAdmin; the RPC verifies PENDING_MODERATION and version. */
+/** Call only after requireModerator; the RPC verifies PENDING_MODERATION and version. */
 export async function moderationSnapshot(
   listingId: string,
   expectedRevision: number

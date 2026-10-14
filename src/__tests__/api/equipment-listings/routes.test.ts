@@ -2,7 +2,7 @@
 jest.mock('server-only', () => ({}));
 jest.mock('next-auth', () => ({ getServerSession: jest.fn() }));
 jest.mock('@/lib/services/auth.config', () => ({ authOptions: {} }));
-jest.mock('@/lib/auth/admin', () => ({ requireAdmin: jest.fn() }));
+jest.mock('@/lib/auth/admin', () => ({ requireModerator: jest.fn() }));
 jest.mock('@/lib/equipment-listings/repository', () => ({
   createDraft: jest.fn(),
   listOwned: jest.fn(),
@@ -17,7 +17,7 @@ jest.mock('@/lib/equipment-listings/repository', () => ({
   },
 }));
 import { getServerSession } from 'next-auth';
-import { requireAdmin } from '@/lib/auth/admin';
+import { requireModerator } from '@/lib/auth/admin';
 import * as repo from '@/lib/equipment-listings/repository';
 import { GET, POST } from '@/app/api/equipment-listings/route';
 import { GET as detail, PATCH } from '@/app/api/equipment-listings/[id]/route';
@@ -66,7 +66,7 @@ beforeEach(() => {
   jest.clearAllMocks();
   process.env.EQUIPMENT_MARKETPLACE_ENABLED = 'true';
   (getServerSession as jest.Mock).mockResolvedValue({ user: { id: 'owner' } });
-  (requireAdmin as jest.Mock).mockResolvedValue(null);
+  (requireModerator as jest.Mock).mockResolvedValue(null);
   (repo.getOwned as jest.Mock).mockResolvedValue(structuredClone(fixture));
   (repo.getForModeration as jest.Mock).mockResolvedValue({
     ...structuredClone(fixture),
@@ -187,7 +187,7 @@ it('passes checked old version and trusted actor into atomic save', async () => 
 it('implements submit, approval, edited-active remoderation and archive', async () => {
   let result = await submit(req('POST', { expectedRevision: 1 }), context);
   expect((await result.json()).data.status).toBe('PENDING_MODERATION');
-  (requireAdmin as jest.Mock).mockResolvedValue({
+  (requireModerator as jest.Mock).mockResolvedValue({
     userId: 'moderator',
     role: 'admin',
   });
@@ -219,7 +219,7 @@ it('requires a moderator and blocks self-approval', async () => {
     ).status
   ).toBe(403);
   expect(repo.getForModeration).not.toHaveBeenCalled();
-  (requireAdmin as jest.Mock).mockResolvedValue({
+  (requireModerator as jest.Mock).mockResolvedValue({
     userId: 'owner',
     role: 'admin',
   });
@@ -234,7 +234,7 @@ it('requires a moderator and blocks self-approval', async () => {
   expect(repo.saveTransition).not.toHaveBeenCalled();
 });
 it('requires rejection reason and rejects injected role fields', async () => {
-  (requireAdmin as jest.Mock).mockResolvedValue({
+  (requireModerator as jest.Mock).mockResolvedValue({
     userId: 'moderator',
     role: 'admin',
   });
@@ -309,7 +309,7 @@ it('does not permit a browser header to enable the feature', async () => {
   expect(repo.listOwned).not.toHaveBeenCalled();
 });
 it('blocks cross-origin moderation as well as owner writes', async () => {
-  (requireAdmin as jest.Mock).mockResolvedValue({
+  (requireModerator as jest.Mock).mockResolvedValue({
     userId: 'moderator',
     role: 'admin',
   });

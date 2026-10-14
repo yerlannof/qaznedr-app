@@ -12,6 +12,12 @@ export function isPublicPath(path: string): boolean {
   if (!['ru', 'kz', 'en', 'zh'].includes(parts[0])) return false;
   if (parts.length === 1) return true;
   if (['about', 'contact', 'faq'].includes(parts[1])) return parts.length === 2;
+  if (parts[1] === 'prospecting')
+    return (
+      parts.length === 2 || (parts.length === 3 && /^QN-P\d{2}$/.test(parts[2]))
+    );
+  if (parts[1] === 'offers')
+    return parts.length === 3 && /^QN-A\d{2,}$/.test(parts[2]);
   if (parts[1] === 'leads')
     return (
       parts.length === 2 ||

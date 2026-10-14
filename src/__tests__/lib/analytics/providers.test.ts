@@ -7,6 +7,161 @@ import {
 import { CONSENT_KEY, writeConsent } from '@/lib/analytics/consent';
 import { GUIDE } from '@/lib/insights/registry';
 
+it('measures a consented plot view and contact action without leaking URL or referrer details', () => {
+  const originalReferrer = Object.getOwnPropertyDescriptor(
+    document,
+    'referrer'
+  );
+  Object.defineProperty(document, 'referrer', {
+    configurable: true,
+    value: 'https://www.baidu.com/s?query=private',
+  });
+  try {
+    jest.isolateModules(() => {
+      delete (window as unknown as { ym?: unknown }).ym;
+      delete (window as unknown as { gtag?: unknown }).gtag;
+      delete (window as unknown as { dataLayer?: unknown }).dataLayer;
+      const isolated =
+        require('@/lib/analytics/providers') as typeof import('@/lib/analytics/providers');
+      try {
+        const plot = '/zh/prospecting/QN-P01';
+        window.history.replaceState({}, '', `${plot}?token=private#secret`);
+        writeConsent(false);
+        isolated.syncProviders(plot, true, 'qaznedr.kz');
+        expect(
+          document.querySelector('script[data-consent-provider]')
+        ).toBeNull();
+
+        writeConsent(true);
+        isolated.syncProviders(plot, true, 'qaznedr.kz');
+        expect(
+          document.querySelectorAll('script[data-consent-provider="ga4"]')
+        ).toHaveLength(1);
+        expect(
+          document.querySelectorAll('script[data-consent-provider="metrika"]')
+        ).toHaveLength(1);
+        const calls = (window as unknown as { dataLayer: IArguments[] })
+          .dataLayer;
+        expect(
+          calls.find(
+            (call) => call[0] === 'consent' && call[1] === 'default'
+          )?.[2]
+        ).toMatchObject({
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+        });
+        expect(
+          calls.find(
+            (call) => call[0] === 'consent' && call[1] === 'update'
+          )?.[2]
+        ).toMatchObject({
+          analytics_storage: 'granted',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+        });
+        const plotView = calls.find(
+          (call) => call[0] === 'event' && call[1] === 'page_view'
+        );
+        expect(plotView?.[2]).toMatchObject({
+          page_location: `https://qaznedr.kz${plot}`,
+          page_referrer: 'https://www.baidu.com/',
+        });
+
+        window.history.replaceState({}, '', '/zh/contact?email=private#secret');
+        isolated.trackConsentEvent('click_whatsapp', {
+          locale: 'zh',
+          lead: 'QN-P01',
+        });
+        const goal = calls.find(
+          (call) => call[0] === 'event' && call[1] === 'click_whatsapp'
+        );
+        expect(goal?.[2]).toMatchObject({
+          lead: 'QN-P01',
+          page_location: 'https://qaznedr.kz/zh/contact',
+          page_referrer: `https://qaznedr.kz${plot}`,
+        });
+        const queue = (window as unknown as { ym: { a: IArguments[] } }).ym.a;
+        expect(queue.find((call) => call[1] === 'hit')?.[2]).toBe(
+          `https://qaznedr.kz${plot}`
+        );
+        expect(
+          queue.find(
+            (call) => call[1] === 'reachGoal' && call[2] === 'click_whatsapp'
+          )?.[3]
+        ).toMatchObject({ page_referrer: `https://qaznedr.kz${plot}` });
+        expect(JSON.stringify(calls)).not.toContain('private');
+        expect(JSON.stringify(queue)).not.toContain('private');
+        expect(JSON.stringify(calls)).not.toContain('/s?');
+        expect(JSON.stringify(queue)).not.toContain('/s?');
+      } finally {
+        isolated.revokeProviders();
+        writeConsent(false);
+      }
+    });
+  } finally {
+    if (originalReferrer)
+      Object.defineProperty(document, 'referrer', originalReferrer);
+    else Reflect.deleteProperty(document, 'referrer');
+  }
+});
+
+it.each([
+  ['/zh/prospecting/QN-P01', 'QN-P01'],
+  ['/en/offers/QN-A01', 'QN-A01'],
+])('records a same-page WhatsApp click on %s', (path, lead) => {
+  jest.isolateModules(() => {
+    delete (window as unknown as { ym?: unknown }).ym;
+    delete (window as unknown as { gtag?: unknown }).gtag;
+    delete (window as unknown as { dataLayer?: unknown }).dataLayer;
+    const isolated =
+      require('@/lib/analytics/providers') as typeof import('@/lib/analytics/providers');
+    try {
+      window.history.replaceState({}, '', `${path}?email=private#secret`);
+      writeConsent(false);
+      isolated.syncProviders(path, true, 'qaznedr.kz');
+      expect(
+        document.querySelector('script[data-consent-provider]')
+      ).toBeNull();
+      writeConsent(true);
+      isolated.syncProviders(path, true, 'qaznedr.kz');
+      expect(
+        document.querySelectorAll('script[data-consent-provider="ga4"]')
+      ).toHaveLength(1);
+      expect(
+        document.querySelectorAll('script[data-consent-provider="metrika"]')
+      ).toHaveLength(1);
+      isolated.trackConsentEvent('click_whatsapp', {
+        locale: path.split('/')[1],
+        lead,
+      });
+
+      const calls = (window as unknown as { dataLayer: IArguments[] })
+        .dataLayer;
+      const queue = (window as unknown as { ym: { a: IArguments[] } }).ym.a;
+      const goal = calls.find(
+        (call) => call[0] === 'event' && call[1] === 'click_whatsapp'
+      );
+      expect(goal?.[2]).toMatchObject({
+        lead,
+        page_location: `https://qaznedr.kz${path}`,
+      });
+      expect(
+        queue.find(
+          (call) => call[1] === 'reachGoal' && call[2] === 'click_whatsapp'
+        )?.[3]
+      ).toMatchObject({ lead, page_location: `https://qaznedr.kz${path}` });
+      expect(JSON.stringify(calls)).not.toContain('private');
+      expect(JSON.stringify(queue)).not.toContain('private');
+    } finally {
+      isolated.revokeProviders();
+      writeConsent(false);
+    }
+  });
+});
+
 it('gates requests by consent, host and public path; sanitizes events and stops on revoke', () => {
   window.history.replaceState(
     {},

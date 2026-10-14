@@ -44,6 +44,9 @@ jobs:
       - name: Check AI discovery and contact tests
         run: npx jest --coverage=false --runInBand src/__tests__/lib/insights/content.test.ts src/__tests__/lib/seo/article-seo.test.ts src/__tests__/lib/seo/api-discovery.test.ts src/__tests__/app/insights/source-citations.test.tsx src/__tests__/components/features/GeologyScene.test.tsx src/__tests__/lib/config/contacts.test.ts src/__tests__/components/features/ContactChannels.test.tsx src/__tests__/app/locale/company-contact.test.tsx src/__tests__/components/showcase/ShowcaseCard.test.tsx
 
+      - name: Check consent-gated measurement
+        run: npx jest --coverage=false --runInBand src/__tests__/lib/analytics src/__tests__/components/analytics
+
       - name: Run tests
         run: npm run test
         continue-on-error: true

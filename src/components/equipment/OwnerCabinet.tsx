@@ -163,6 +163,29 @@ export default function OwnerCabinet({
     }
     navigate(`/${locale}/equipment/new${edit ? '?edit=1' : ''}`);
   };
+  // A company with several similar rigs fills one form and copies it.
+  const duplicate = async (listing: EquipmentListing) => {
+    setBusy(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/equipment-listings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(listing.data),
+      });
+      const json = res.ok ? await res.json() : null;
+      const id = json?.data?.id;
+      if (typeof id === 'string') {
+        openInIntake(id);
+        return;
+      }
+      setError(t(res.status === 429 ? 'limitReached' : 'actionError'));
+    } catch {
+      setError(t('actionError'));
+    } finally {
+      setBusy(false);
+    }
+  };
   const archive = async (listing: EquipmentListing) => {
     setBusy(true);
     setError(null);
@@ -458,6 +481,14 @@ export default function OwnerCabinet({
                             </button>
                           </>
                         )}
+                        <button
+                          type="button"
+                          disabled={busy}
+                          onClick={() => void duplicate(listing)}
+                          className="min-h-11 px-2 text-sm font-semibold underline"
+                        >
+                          {t('duplicate')}
+                        </button>
                         {listing.status !== 'ARCHIVED' &&
                           (confirming === listing.id ? (
                             <span className="flex flex-wrap items-center gap-2 text-sm">

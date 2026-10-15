@@ -164,3 +164,44 @@ it('asks a visitor to sign in first', () => {
     screen.getByRole('button', { name: 'Продолжить с Google' })
   ).toBeInTheDocument();
 });
+
+it('copies a listing into a new draft and opens it in the form', async () => {
+  const fn = mockFetch();
+  const base = fn.getMockImplementation()!;
+  fn.mockImplementation(async (url: string, init?: RequestInit) =>
+    url === '/api/equipment-listings' && init?.method === 'POST'
+      ? ({
+          ok: true,
+          status: 201,
+          json: async () => ({
+            success: true,
+            data: { id: '00000000-0000-4000-8000-000000000009' },
+          }),
+        } as never)
+      : base(url, init)
+  );
+  const navigate = jest.fn();
+  render(
+    <OwnerCabinet
+      locale="ru"
+      googleEnabled
+      whatsappNumber={null}
+      navigate={navigate}
+    />
+  );
+  await screen.findByText('Буровая');
+  fireEvent.click(
+    screen.getAllByRole('button', { name: 'Разместить похожее' })[1]
+  );
+  await waitFor(() =>
+    expect(navigate).toHaveBeenCalledWith('/ru/equipment/new')
+  );
+  const post = fn.mock.calls.find(
+    ([url, init]) =>
+      url === '/api/equipment-listings' && init?.method === 'POST'
+  )!;
+  expect(JSON.parse(String(post[1]!.body)).title).toBe('Буровая');
+  expect(localStorage.getItem('qaznedr:equipment-draft:owner-1')).toBe(
+    '00000000-0000-4000-8000-000000000009'
+  );
+});

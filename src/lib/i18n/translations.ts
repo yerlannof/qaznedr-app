@@ -43,6 +43,9 @@ export const translations = {
       mailIgnore: 'Если вы не запрашивали вход, просто удалите это письмо.',
     },
     equipmentCabinet: {
+      duplicate: 'Разместить похожее',
+      limitReached:
+        'Достигнут лимит: не больше 20 объявлений на аккаунт и 5 новых в сутки.',
       tab: 'Мои объявления',
       eyebrow: 'Личный кабинет',
       title: 'Мои объявления',
@@ -184,6 +187,12 @@ export const translations = {
       photo: 'Фото {n}',
     },
     equipmentIntake: {
+      assistedText:
+        'Нет времени заполнять? Пришлите фото и пару слов в WhatsApp — разместим за вас.',
+      assistedButton: 'Написать в WhatsApp',
+      assistedMessage:
+        'Здравствуйте! Хочу разместить объявление на QAZNEDR. Пришлю фото и описание.',
+      photoPreparing: 'Готовим фото…',
       priceOnRequest: 'По договорённости',
       noPhotos: 'Без фото',
       hoursShort: 'ч',
@@ -472,7 +481,8 @@ export const translations = {
       emailUnavailable: 'Вход по email пока недоступен.',
       googleUnavailable: 'Вход через Google сейчас недоступен.',
       photos: 'Фото',
-      photoHint: 'JPEG, PNG или WebP, до 3 МБ каждое, не более 8.',
+      photoHint:
+        'Фото с телефона можно загружать как есть, до 8 штук: большие снимки уменьшим сами.',
       upload: 'Загрузить фото',
       remove: 'Удалить',
       photoError: 'Файл не подходит или лимит фото исчерпан.',
@@ -1616,6 +1626,9 @@ export const translations = {
       mailIgnore: 'Егер кіруді сұрамаған болсаңыз, бұл хатты жойыңыз.',
     },
     equipmentCabinet: {
+      duplicate: 'Ұқсасын орналастыру',
+      limitReached:
+        'Шекке жеттіңіз: бір аккаунтқа 20 хабарландыру және тәулігіне 5 жаңа.',
       tab: 'Менің хабарландыруларым',
       eyebrow: 'Жеке кабинет',
       title: 'Менің хабарландыруларым',
@@ -1759,6 +1772,12 @@ export const translations = {
       photo: '{n}-фото',
     },
     equipmentIntake: {
+      assistedText:
+        'Толтыруға уақыт жоқ па? WhatsApp-қа фото мен бірнеше сөз жіберіңіз — өзіміз орналастырамыз.',
+      assistedButton: 'WhatsApp-қа жазу',
+      assistedMessage:
+        'Сәлеметсіз бе! QAZNEDR-де хабарландыру орналастырғым келеді. Фото мен сипаттама жіберемін.',
+      photoPreparing: 'Фото дайындалуда…',
       priceOnRequest: 'Келісім бойынша',
       noPhotos: 'Фотосыз',
       hoursShort: 'сағ',
@@ -2048,7 +2067,7 @@ export const translations = {
       googleUnavailable: 'Google арқылы кіру қолжетімсіз.',
       photos: 'Фотосуреттер',
       photoHint:
-        'JPEG, PNG немесе WebP; әрқайсысы 3 МБ дейін, барлығы 8 дейін.',
+        'Телефондағы фотоны сол күйінде жүктей беріңіз, 8 данаға дейін: үлкен суреттерді өзіміз кішірейтеміз.',
       upload: 'Фото жүктеу',
       remove: 'Жою',
       photoError: 'Файл жарамсыз немесе фото лимиті толды.',
@@ -3129,6 +3148,9 @@ export const translations = {
       mailIgnore: 'If you did not ask to sign in, just delete this email.',
     },
     equipmentCabinet: {
+      duplicate: 'Post a similar one',
+      limitReached:
+        'Limit reached: up to 20 listings per account and 5 new ones a day.',
       tab: 'My listings',
       eyebrow: 'Account',
       title: 'My listings',
@@ -3271,6 +3293,12 @@ export const translations = {
       photo: 'Photo {n}',
     },
     equipmentIntake: {
+      assistedText:
+        'No time to fill in the form? Send photos and a few words on WhatsApp and we will post it for you.',
+      assistedButton: 'Message on WhatsApp',
+      assistedMessage:
+        'Hello! I would like to post a listing on QAZNEDR. I will send photos and a description.',
+      photoPreparing: 'Preparing photos…',
       priceOnRequest: 'By agreement',
       noPhotos: 'No photos',
       hoursShort: 'h',
@@ -3559,7 +3587,8 @@ export const translations = {
       emailUnavailable: 'Email sign-in is unavailable.',
       googleUnavailable: 'Google sign-in is unavailable.',
       photos: 'Photos',
-      photoHint: 'JPEG, PNG or WebP, up to 3 MB each, 8 total.',
+      photoHint:
+        'Upload phone photos as they are, up to 8: we shrink large ones for you.',
       upload: 'Upload photo',
       remove: 'Remove',
       photoError: 'Invalid file or photo limit reached.',
@@ -4617,6 +4646,8 @@ export const translations = {
       mailIgnore: '如果不是您本人申请登录，请直接删除此邮件。',
     },
     equipmentCabinet: {
+      duplicate: '发布类似信息',
+      limitReached: '已达上限：每个账户最多 20 条，每天最多新建 5 条。',
       tab: '我的信息',
       eyebrow: '个人中心',
       title: '我的信息',
@@ -4743,6 +4774,11 @@ export const translations = {
       photo: '照片 {n}',
     },
     equipmentIntake: {
+      assistedText:
+        '没有时间填写？通过 WhatsApp 发送照片和简要说明，我们替您发布。',
+      assistedButton: 'WhatsApp 联系',
+      assistedMessage: '您好！我想在 QAZNEDR 发布信息，稍后发送照片和说明。',
+      photoPreparing: '正在处理照片…',
       priceOnRequest: '面议',
       noPhotos: '无照片',
       hoursShort: '小时',
@@ -5029,7 +5065,7 @@ export const translations = {
       emailUnavailable: '邮箱登录暂不可用。',
       googleUnavailable: 'Google 登录暂不可用。',
       photos: '照片',
-      photoHint: 'JPEG、PNG 或 WebP，单张不超过 3 MB，最多 8 张。',
+      photoHint: '手机照片可直接上传，最多 8 张：大图会自动压缩。',
       upload: '上传照片',
       remove: '删除',
       photoError: '文件不符合要求或已达到照片上限。',

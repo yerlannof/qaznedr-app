@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { getContactConfig } from '@/lib/config/contacts';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import { emailLinkEnabled } from '@/lib/auth/email-link';
@@ -45,6 +46,7 @@ export default async function Page({ params }: Props) {
           locale={locale}
           googleEnabled={googleEnabled}
           emailEnabled={emailLinkEnabled()}
+          whatsappNumber={getContactConfig().whatsappNumber}
         />
       </main>
       <Footer />

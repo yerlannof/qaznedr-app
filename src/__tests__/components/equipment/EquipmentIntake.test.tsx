@@ -371,7 +371,7 @@ it('uses taxonomy codes in translated selects and previews linked capability', (
   expect(screen.getByText('Сдаю в аренду')).toBeInTheDocument();
 });
 
-it('rejects an empty image before making an upload request', () => {
+it('rejects an empty image before making an upload request', async () => {
   mockSessionStatus = 'authenticated';
   mockSessionUserId = 'owner-a';
   const view = render(<EquipmentIntake locale="ru" googleEnabled={true} />);
@@ -384,7 +384,8 @@ it('rejects an empty image before making an upload request', () => {
   fireEvent.change(input, {
     target: { files: [new File([], 'empty.jpg', { type: 'image/jpeg' })] },
   });
-  expect(screen.getByRole('status')).toHaveTextContent('Файл не подходит');
+  expect(await screen.findByText(/Файл не подходит/)).toBeInTheDocument();
+  expect(mockClient.upload).not.toHaveBeenCalled();
 });
 
 it('does not persist contact fields during a photo upload after visiting contact step', async () => {

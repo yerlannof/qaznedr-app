@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { ChevronLeft, Plus, Trash2, Upload } from 'lucide-react';
+import { ChevronLeft, MessageCircle, Plus, Trash2, Upload } from 'lucide-react';
+import { whatsappLink } from '@/lib/config/contacts';
 import { translate } from '@/lib/i18n/translations';
 import {
   ownerDraftSchema,
@@ -43,11 +44,13 @@ import {
 } from '@/lib/equipment-listings/taxonomy';
 import { regionLabel } from '@/lib/data/filter-config';
 import MarketplaceSignIn from './MarketplaceSignIn';
+import { prepareListingPhoto } from '@/lib/equipment-listings/photo-prepare';
 
 type Props = {
   locale: string;
   googleEnabled: boolean;
   emailEnabled?: boolean;
+  whatsappNumber?: string | null;
 };
 type FieldProps = {
   name: string;
@@ -158,6 +161,7 @@ export function EquipmentIntake({
   locale,
   googleEnabled,
   emailEnabled = false,
+  whatsappNumber = null,
 }: Props) {
   const t = useCallback(
     (key: string, params?: Record<string, unknown>) =>
@@ -788,9 +792,23 @@ export function EquipmentIntake({
       setNotice(t('loginRequired'));
       return;
     }
+    if (files.length + images.length > 8) {
+      setNotice(t('photoError'));
+      return;
+    }
+    // Phone photos are usually larger than the limit: shrink them here first.
+    let prepared: File[];
+    try {
+      setNotice(t('photoPreparing'));
+      prepared = await Promise.all(
+        Array.from(files).map((file) => prepareListingPhoto(file))
+      );
+    } catch {
+      setNotice(t('photoError'));
+      return;
+    }
     if (
-      files.length + images.length > 8 ||
-      Array.from(files).some(
+      prepared.some(
         (file) =>
           !photoTypes.has(file.type) ||
           file.size < 1 ||
@@ -814,7 +832,7 @@ export function EquipmentIntake({
     } = normalizeIntake(value);
     setBusy(true);
     try {
-      for (const file of Array.from(files)) {
+      for (const file of prepared) {
         await client.upload(file, safeData);
         if (clientRef.current !== client || ownerRef.current !== ownerId)
           return;
@@ -1047,6 +1065,20 @@ export function EquipmentIntake({
     >
       <h1 className="mb-3 font-serif text-4xl">{t('title')}</h1>
       <p className="mb-6 text-brand-muted">{t('intro')}</p>
+      {whatsappNumber && !submitted && !editingActive && step === 1 && (
+        <div className="mb-6 flex flex-col gap-3 border-l-4 border-brand-accent bg-brand-surface p-4 sm:flex-row sm:items-center sm:justify-between">
+          <p>{t('assistedText')}</p>
+          <a
+            href={whatsappLink(whatsappNumber, t('assistedMessage'))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="brand-button-secondary brand-focus shrink-0 gap-2"
+          >
+            <MessageCircle aria-hidden size={18} />
+            {t('assistedButton')}
+          </a>
+        </div>
+      )}
       {editingActive && (
         <div
           role="note"

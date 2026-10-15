@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { MessageCircle, Phone, ShieldCheck } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import { whatsappLink, type ContactConfig } from '@/lib/config/contacts';
+import ContactBeacon from './ContactBeacon';
+import ResponseForm from './ResponseForm';
 import type { PublicEquipmentListing } from '@/lib/equipment-listings/catalog-repository';
 import {
   cardTag,
@@ -109,55 +111,65 @@ export default function EquipmentDetail({
         {/* On phones the price and contact come first; on desktop they sit in the side column. */}
         <aside className="order-first space-y-6 border border-brand-line bg-brand-surface p-6 lg:order-none">
           <p className="text-2xl font-semibold">{priceText(listing, locale)}</p>
-          <section>
-            <h2 className="font-semibold">{t('contactTitle')}</h2>
-            {ownerPhone ? (
-              <div className="mt-3 space-y-3">
-                <p>
-                  {[listing.contactName, listing.company]
-                    .filter(Boolean)
-                    .join(', ')}
-                </p>
-                <a
-                  href={`tel:${ownerPhone.replace(/[^\d+]/g, '')}`}
-                  className="brand-button brand-focus w-full justify-center"
-                >
-                  <Phone aria-hidden className="size-4" />
-                  {t('call')} {ownerPhone}
-                </a>
-                <a
-                  href={whatsappLink(
-                    ownerPhone.replace(/\D/g, ''),
-                    t('ownerMessage', { title })
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="brand-button-secondary brand-focus w-full justify-center"
-                >
-                  <MessageCircle aria-hidden className="size-4" />
-                  {t('whatsappOwner')}
-                </a>
-              </div>
-            ) : (
-              <div className="mt-3 space-y-3">
-                <p className="text-sm text-brand-muted">{t('contactHidden')}</p>
-                {contacts.whatsappNumber && (
+          <ContactBeacon listingId={listing.id}>
+            <section>
+              <h2 className="font-semibold">{t('contactTitle')}</h2>
+              {ownerPhone ? (
+                <div className="mt-3 space-y-3">
+                  <p>
+                    {[listing.contactName, listing.company]
+                      .filter(Boolean)
+                      .join(', ')}
+                  </p>
                   <a
+                    data-contact
+                    href={`tel:${ownerPhone.replace(/[^\d+]/g, '')}`}
+                    className="brand-button brand-focus w-full justify-center"
+                  >
+                    <Phone aria-hidden className="size-4" />
+                    {t('call')} {ownerPhone}
+                  </a>
+                  <a
+                    data-contact
                     href={whatsappLink(
-                      contacts.whatsappNumber,
-                      t('teamMessage', { title, url })
+                      ownerPhone.replace(/\D/g, ''),
+                      t('ownerMessage', { title })
                     )}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="brand-button brand-focus w-full justify-center"
+                    className="brand-button-secondary brand-focus w-full justify-center"
                   >
                     <MessageCircle aria-hidden className="size-4" />
-                    {t('contactTeam')}
+                    {t('whatsappOwner')}
                   </a>
-                )}
-              </div>
-            )}
-          </section>
+                </div>
+              ) : (
+                <div className="mt-3 space-y-3">
+                  <p className="text-sm text-brand-muted">
+                    {t('contactHidden')}
+                  </p>
+                  {contacts.whatsappNumber && (
+                    <a
+                      data-contact
+                      href={whatsappLink(
+                        contacts.whatsappNumber,
+                        t('teamMessage', { title, url })
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="brand-button brand-focus w-full justify-center"
+                    >
+                      <MessageCircle aria-hidden className="size-4" />
+                      {t('contactTeam')}
+                    </a>
+                  )}
+                </div>
+              )}
+            </section>
+          </ContactBeacon>
+          {listing.offerType === 'WANTED' && (
+            <ResponseForm listingId={listing.id} locale={locale} />
+          )}
           <section>
             <h2 className="flex items-center gap-2 font-semibold">
               <ShieldCheck aria-hidden className="size-4" />

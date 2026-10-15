@@ -20,6 +20,7 @@ import {
   trustMarksFor,
 } from './moderation-repository';
 import { afterModeration, afterSubmission } from './submission-hooks';
+import { responsesFor, statsFor } from './engagement';
 
 /** Abuse guard per account; the team can post more on request. */
 export const LISTING_QUOTA = { open: 20, perDay: 5 } as const;
@@ -136,10 +137,23 @@ export function equipmentHandler(action: Action) {
         const trustMarks = await trustMarksFor(
           listings.map((listing) => listing.id)
         ).catch(() => ({}));
+        // Stats and responses are extras: a failure must not hide the list.
+        const [stats, responses] = await Promise.all([
+          statsFor(
+            listings.filter((l) => l.status === 'ACTIVE').map((l) => l.id)
+          ).catch(() => ({})),
+          responsesFor(
+            listings
+              .filter((l) => l.data.offerType === 'WANTED')
+              .map((l) => l.id)
+          ).catch(() => ({})),
+        ]);
         return response({
           success: true,
           data: listings,
           trustMarks,
+          stats,
+          responses,
           limit: 100,
         });
       }

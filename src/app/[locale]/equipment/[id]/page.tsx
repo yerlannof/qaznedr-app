@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { headers } from 'next/headers';
+import { after } from 'next/server';
+import {
+  BOT_AGENT,
+  recordListingEvent,
+} from '@/lib/equipment-listings/engagement';
 import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
@@ -186,6 +192,16 @@ export default async function EquipmentListingPage({ params }: Props) {
         <Footer />
       </>
     );
+  // Count real visits for the author's stats, after the page is sent.
+  if (!BOT_AGENT.test((await headers()).get('user-agent') ?? '')) {
+    const task = () =>
+      recordListingEvent(listing.id, 'view').catch(() => undefined);
+    try {
+      after(task);
+    } catch {
+      void task();
+    }
+  }
   const [images, marks] = await Promise.all([
     listImages(listing.id)
       .then((rows) => rows.map((row) => row.id))

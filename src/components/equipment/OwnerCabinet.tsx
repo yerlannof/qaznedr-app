@@ -86,6 +86,21 @@ export default function OwnerCabinet({
   const ownerId = (session?.user as { id?: string } | undefined)?.id ?? null;
   const [listings, setListings] = useState<EquipmentListing[] | null>(null);
   const [marks, setMarks] = useState<Record<string, Mark[]>>({});
+  const [stats, setStats] = useState<
+    Record<string, { views: number; contacts: number }>
+  >({});
+  const [responses, setResponses] = useState<
+    Record<
+      string,
+      {
+        id: string;
+        name: string;
+        phone: string;
+        message: string;
+        createdAt: string;
+      }[]
+    >
+  >({});
   const [profile, setProfile] = useState<Profile | null>(null);
   const [filter, setFilter] = useState<Filter>('ALL');
   const [view, setView] = useState<'cards' | 'list'>('cards');
@@ -115,6 +130,8 @@ export default function OwnerCabinet({
       if (!json?.success) throw new Error('load');
       setListings(json.data);
       setMarks(json.trustMarks ?? {});
+      setStats(json.stats ?? {});
+      setResponses(json.responses ?? {});
     } catch {
       setListings([]);
       setError(t('loadError'));
@@ -526,6 +543,57 @@ export default function OwnerCabinet({
                           {t('editNote')}
                         </p>
                       )}
+                      {listing.status === 'ACTIVE' && (
+                        <p className="text-sm font-semibold">
+                          {t('stats', {
+                            views: stats[listing.id]?.views ?? 0,
+                            contacts: stats[listing.id]?.contacts ?? 0,
+                          })}
+                        </p>
+                      )}
+                      {listing.data.offerType === 'WANTED' &&
+                        listing.status === 'ACTIVE' && (
+                          <details
+                            className="border-t border-brand-line pt-2"
+                            open={(responses[listing.id]?.length ?? 0) > 0}
+                          >
+                            <summary className="min-h-11 cursor-pointer py-2 font-semibold">
+                              {t('responses', {
+                                count: responses[listing.id]?.length ?? 0,
+                              })}
+                            </summary>
+                            {responses[listing.id]?.length ? (
+                              <ul className="space-y-3">
+                                {responses[listing.id].map((row) => (
+                                  <li
+                                    key={row.id}
+                                    className="border-l-4 border-brand-accent pl-3 text-sm"
+                                  >
+                                    <p className="font-semibold">
+                                      {row.name} ·{' '}
+                                      <a
+                                        href={`tel:${row.phone}`}
+                                        className="underline"
+                                      >
+                                        {row.phone}
+                                      </a>
+                                    </p>
+                                    <p className="whitespace-pre-line">
+                                      {row.message}
+                                    </p>
+                                    <p className="text-brand-muted">
+                                      {formatDate(row.createdAt)}
+                                    </p>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-sm text-brand-muted">
+                                {t('noResponses')}
+                              </p>
+                            )}
+                          </details>
+                        )}
                     </div>
                   </li>
                 );

@@ -205,3 +205,52 @@ it('copies a listing into a new draft and opens it in the form', async () => {
     '00000000-0000-4000-8000-000000000009'
   );
 });
+
+it('shows 30-day stats and responses to a request', async () => {
+  const fn = mockFetch();
+  const base = fn.getMockImplementation()!;
+  const wanted = {
+    ...listings[1],
+    id: '00000000-0000-4000-8000-000000000004',
+    data: { ...listings[1].data, offerType: 'WANTED', title: 'Нужна буровая' },
+  };
+  fn.mockImplementation(async (url: string, init?: RequestInit) =>
+    url === '/api/equipment-listings' && !init?.method
+      ? ({
+          ok: true,
+          json: async () => ({
+            success: true,
+            data: [listings[1], wanted],
+            trustMarks: {},
+            stats: {
+              '00000000-0000-4000-8000-000000000002': {
+                views: 12,
+                contacts: 3,
+              },
+            },
+            responses: {
+              '00000000-0000-4000-8000-000000000004': [
+                {
+                  id: 'r1',
+                  name: 'Бур-Сервис',
+                  phone: '+77011234567',
+                  message: 'Есть УКБ-5',
+                  createdAt: '2026-10-16T08:00:00Z',
+                },
+              ],
+            },
+          }),
+        } as never)
+      : base(url, init)
+  );
+  render(<OwnerCabinet locale="ru" googleEnabled whatsappNumber={null} />);
+  expect(
+    await screen.findByText('За 30 дней: просмотров 12, нажали «связаться» 3')
+  ).toBeInTheDocument();
+  expect(screen.getByText('Отклики (1)')).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: '+77011234567' })).toHaveAttribute(
+    'href',
+    'tel:+77011234567'
+  );
+  expect(screen.getByText('Есть УКБ-5')).toBeInTheDocument();
+});

@@ -368,7 +368,7 @@ it('uses taxonomy codes in translated selects and previews linked capability', (
   expect(screen.getByText('Владелец')).toBeInTheDocument();
   expect(screen.getByText('NEW')).toBeInTheDocument();
   expect(screen.getByText('OWNER')).toBeInTheDocument();
-  expect(screen.getByText('Аренда')).toBeInTheDocument();
+  expect(screen.getByText('Сдаю в аренду')).toBeInTheDocument();
 });
 
 it('rejects an empty image before making an upload request', () => {
@@ -465,4 +465,28 @@ it('asks for the section first and offers the actions that section allows', () =
     'Например: Требуется помощник бурильщика на сезон'
   );
   expect(screen.queryByText('Дополнительные параметры')).toBeNull();
+});
+
+it('returns a visitor to the same step with picked regions after sign-in', () => {
+  sessionStorage.setItem(
+    'qaznedr:equipment-intake:v2',
+    JSON.stringify({
+      ownerId: null,
+      value: {
+        offerType: 'SERVICE',
+        category: 'geophysService',
+        title: 'Электроразведка ВП',
+        region: 'karagandy',
+        serviceMethods: ['IP'],
+        serviceArea: ['karagandy', 'ulytau'],
+      },
+    })
+  );
+  sessionStorage.setItem('qaznedr:equipment-intake:step', '2');
+  render(<EquipmentIntake locale="ru" googleEnabled={true} />);
+  expect(screen.getByText('Шаг 2 из 4')).toBeInTheDocument();
+  expect(
+    screen.getByRole('checkbox', { name: 'ВП (вызванная поляризация)' })
+  ).toBeChecked();
+  expect(screen.getByRole('checkbox', { name: 'Улытауская' })).toBeChecked();
 });

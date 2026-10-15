@@ -184,11 +184,18 @@ export const translations = {
       photo: 'Фото {n}',
     },
     equipmentIntake: {
+      priceOnRequest: 'По договорённости',
+      noPhotos: 'Без фото',
+      hoursShort: 'ч',
+      signInToSend:
+        'Чтобы отправить объявление, войдите. Всё, что вы заполнили, сохранится.',
+      drillingExtra: 'Назначение, траектория, площадка',
       tools: 'Буровой инструмент и запчасти',
       instruments: 'Приборы и оборудование',
       staff: 'Специалисты и вакансии',
       WANTED: 'Ищу',
-      whatYouHave: 'Что вы размещаете?',
+      whatYouHave: 'Выберите раздел',
+      chooseRegions: 'Выбрать области',
       whatYouWant: 'Что хотите сделать?',
       chooseOffer: 'Выберите вариант',
       groups: {
@@ -247,7 +254,7 @@ export const translations = {
       archived: 'Объявление в архиве',
       archivedHint: 'Этот черновик доступен только для просмотра.',
 
-      title: 'Разместить технику или услуги',
+      title: 'Разместить объявление',
       intro:
         'Заполните предложение для проверки редакцией. Публикация возможна только после модерации.',
       codes: {
@@ -1752,11 +1759,18 @@ export const translations = {
       photo: '{n}-фото',
     },
     equipmentIntake: {
+      priceOnRequest: 'Келісім бойынша',
+      noPhotos: 'Фотосыз',
+      hoursShort: 'сағ',
+      signInToSend:
+        'Хабарландыруды жіберу үшін кіріңіз. Толтырғаныңыздың бәрі сақталады.',
+      drillingExtra: 'Мақсаты, траекториясы, алаңы',
       tools: 'Бұрғылау құралы мен қосалқы бөлшектер',
       instruments: 'Аспаптар мен жабдық',
       staff: 'Мамандар мен бос орындар',
       WANTED: 'Іздеймін',
-      whatYouHave: 'Не орналастырасыз?',
+      whatYouHave: 'Бөлімді таңдаңыз',
+      chooseRegions: 'Облыстарды таңдау',
       whatYouWant: 'Не істегіңіз келеді?',
       chooseOffer: 'Нұсқаны таңдаңыз',
       groups: {
@@ -1815,7 +1829,7 @@ export const translations = {
       archived: 'Хабарландыру мұрағатта',
       archivedHint: 'Бұл жазба тек қарауға қолжетімді.',
 
-      title: 'Техника немесе қызмет орналастыру',
+      title: 'Хабарландыру орналастыру',
       intro:
         'Редакция тексеруі үшін ұсынысты толтырыңыз. Жариялау модерациядан кейін ғана мүмкін.',
       codes: {
@@ -3257,11 +3271,18 @@ export const translations = {
       photo: 'Photo {n}',
     },
     equipmentIntake: {
+      priceOnRequest: 'By agreement',
+      noPhotos: 'No photos',
+      hoursShort: 'h',
+      signInToSend:
+        'Sign in to send the listing. Everything you have filled in is kept.',
+      drillingExtra: 'Purpose, trajectory, site',
       tools: 'Drilling tools and spare parts',
       instruments: 'Instruments and equipment',
       staff: 'Specialists and vacancies',
       WANTED: 'Wanted',
-      whatYouHave: 'What are you posting?',
+      whatYouHave: 'Choose a section',
+      chooseRegions: 'Choose regions',
       whatYouWant: 'What do you want to do?',
       chooseOffer: 'Choose an option',
       groups: {
@@ -3320,7 +3341,7 @@ export const translations = {
       archived: 'Listing archived',
       archivedHint: 'This listing is read-only.',
 
-      title: 'List equipment or services',
+      title: 'Post a listing',
       intro:
         'Complete an offer for editorial review. It can appear only after moderation.',
       codes: {
@@ -4722,11 +4743,17 @@ export const translations = {
       photo: '照片 {n}',
     },
     equipmentIntake: {
+      priceOnRequest: '面议',
+      noPhotos: '无照片',
+      hoursShort: '小时',
+      signInToSend: '请登录后提交信息。您填写的内容会保留。',
+      drillingExtra: '用途、轨迹、场地',
       tools: '钻具和配件',
       instruments: '仪器和设备',
       staff: '专业人员和招聘',
       WANTED: '求购/求租',
-      whatYouHave: '您要发布什么？',
+      whatYouHave: '选择栏目',
+      chooseRegions: '选择州',
       whatYouWant: '您想做什么？',
       chooseOffer: '请选择一项',
       groups: {
@@ -4785,7 +4812,7 @@ export const translations = {
       archived: '信息已归档',
       archivedHint: '此信息仅供查看。',
 
-      title: '发布设备或服务',
+      title: '发布信息',
       intro: '填写供应信息供编辑审核。审核通过后才可能发布。',
       codes: {
         CORE_BITS: '取心钻头和钻头',

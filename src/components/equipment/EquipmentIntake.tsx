@@ -127,6 +127,16 @@ function restoreSafe(value: unknown): IntakeValue | null {
     blank.purposes = record.purposes
       .filter((item): item is string => typeof item === 'string')
       .slice(0, 7);
+  // Lists picked before the sign-in redirect must survive it too.
+  for (const key of ['serviceMethods', 'serviceArea'] as const)
+    if (Array.isArray(record[key]))
+      blank[key] = [
+        ...new Set(
+          (record[key] as unknown[]).filter(
+            (item): item is string => typeof item === 'string'
+          )
+        ),
+      ].slice(0, 20);
   if (Array.isArray(record.capabilities))
     blank.capabilities = record.capabilities
       .filter((item) => item && typeof item === 'object')
@@ -567,8 +577,8 @@ export function EquipmentIntake({
       {name === 'serviceArea' && (
         <p className="mb-2 text-sm text-brand-muted">{t('serviceAreaHint')}</p>
       )}
-      <div className="grid gap-2 sm:grid-cols-2">
-        {items.map((item) => (
+      {(() => {
+        const box = (item: string) => (
           <label key={item} className="flex min-h-11 items-center gap-3">
             <input
               type="checkbox"
@@ -577,8 +587,30 @@ export function EquipmentIntake({
             />
             {label(item)}
           </label>
-        ))}
-      </div>
+        );
+        if (name !== 'serviceArea')
+          return (
+            <div className="grid gap-2 sm:grid-cols-2">{items.map(box)}</div>
+          );
+        // Seventeen regions are a full phone screen: keep them one tap away.
+        const regions = items.filter((item) => item !== 'ALL_KZ');
+        return (
+          <>
+            {box('ALL_KZ')}
+            <details
+              className="mt-1"
+              open={value.serviceArea.some((item) => item !== 'ALL_KZ')}
+            >
+              <summary className="min-h-11 cursor-pointer py-2 font-semibold">
+                {t('chooseRegions')}
+              </summary>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {regions.map(box)}
+              </div>
+            </details>
+          </>
+        );
+      })()}
       {errors.includes(name) && (
         <p role="alert" className="mt-2 text-red-700 dark:text-red-300">
           {t('required')}
@@ -954,6 +986,60 @@ export function EquipmentIntake({
     return code;
   };
 
+  // Preview reads like the listing: what, price, where, details, then contact.
+  const previewOrder = [
+    'category',
+    'offerType',
+    'kind',
+    'title',
+    'price',
+    'region',
+    'city',
+    'serviceArea',
+    'availability',
+  ];
+  const contactKeys = ['contactName', 'company', 'phone', 'contactVisibility'];
+  const priceText = () => {
+    if (previewData.price === undefined) return t('priceOnRequest');
+    const amount = new Intl.NumberFormat(
+      { ru: 'ru-RU', kz: 'kk-KZ', en: 'en-US', zh: 'zh-CN' }[locale] ?? 'ru-RU'
+    ).format(previewData.price);
+    const unit = previewData.priceUnit ? labelCode(previewData.priceUnit) : '';
+    const shift =
+      previewData.priceUnit === 'SHIFT' && previewData.shiftHours
+        ? ` (${previewData.shiftHours} ${t('hoursShort')})`
+        : '';
+    return `${amount} ${previewData.currency ?? ''} · ${unit}${shift}`.trim();
+  };
+  const previewRows: [string, string][] = (() => {
+    const entries = Object.entries(previewData).filter(
+      ([key]) =>
+        ![
+          'schemaVersion',
+          'capabilities',
+          'purposes',
+          'currency',
+          'priceUnit',
+          'shiftHours',
+          'price',
+        ].includes(key)
+    );
+    const rank = (key: string) => {
+      const main = previewOrder.indexOf(key);
+      if (main >= 0) return main;
+      const contact = contactKeys.indexOf(key);
+      return contact >= 0 ? 100 + contact : 50;
+    };
+    const rows: [string, string][] = entries.map(([key, content]) => [
+      key,
+      key === 'offerType' && choiceGroup
+        ? t(`offerChoice.${choiceGroup}.${String(content)}`)
+        : previewValue(key, content),
+    ]);
+    rows.push(['price', priceText()]);
+    return rows.sort(([a], [b]) => rank(a) - rank(b));
+  })();
+
   return (
     <section
       className="mx-auto max-w-3xl px-5 py-8 text-brand-ink"
@@ -1316,7 +1402,7 @@ export function EquipmentIntake({
                     </button>
                     <details className="border-t border-brand-line pt-3">
                       <summary className="min-h-11 cursor-pointer font-semibold">
-                        {t('technicalExtra')}
+                        {t('drillingExtra')}
                       </summary>
                       <div className="mt-3 space-y-4">
                         <fieldset>
@@ -1526,23 +1612,12 @@ export function EquipmentIntake({
             {step === 4 && (
               <div className="space-y-5">
                 <dl className="grid gap-3 sm:grid-cols-[10rem_1fr]">
-                  {Object.entries(previewData)
-                    .filter(
-                      ([key]) =>
-                        !['schemaVersion', 'capabilities', 'purposes'].includes(
-                          key
-                        )
-                    )
-                    .map(([key, content]) => (
-                      <div key={key} className="contents">
-                        <dt className="font-semibold">
-                          {t(key === 'title' ? 'listingTitle' : key)}
-                        </dt>
-                        <dd className="break-words">
-                          {previewValue(key, content)}
-                        </dd>
-                      </div>
-                    ))}
+                  {previewRows.map(([key, content]) => (
+                    <div key={key} className="contents">
+                      <dt className="font-semibold">{labelFor(key)}</dt>
+                      <dd className="break-words">{content}</dd>
+                    </div>
+                  ))}
                   {previewData.purposes?.length ? (
                     <div className="contents">
                       <dt className="font-semibold">{t('purposes')}</dt>
@@ -1551,7 +1626,7 @@ export function EquipmentIntake({
                   ) : null}
                   <div className="contents">
                     <dt className="font-semibold">{t('photos')}</dt>
-                    <dd>{images.length}</dd>
+                    <dd>{images.length || t('noPhotos')}</dd>
                   </div>
                 </dl>
                 {previewData.capabilities?.length ? (
@@ -1592,6 +1667,21 @@ export function EquipmentIntake({
                     ))}
                   </div>
                 ) : null}
+                {!ownerId && (
+                  <div className="space-y-3 border-t border-brand-line pt-5">
+                    <p className="font-semibold">{t('signInToSend')}</p>
+                    <MarketplaceSignIn
+                      locale={locale}
+                      googleEnabled={googleEnabled}
+                      emailEnabled={emailEnabled}
+                      callbackUrl={
+                        typeof window === 'undefined'
+                          ? `/${locale}/equipment/new`
+                          : window.location.pathname + window.location.search
+                      }
+                    />
+                  </div>
+                )}
               </div>
             )}
             {notice && (

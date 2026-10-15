@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { emailDeliveryConfigured } from '@/lib/email/resend';
 import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
@@ -114,6 +115,7 @@ export default async function EquipmentCatalogPage({
           }
           covers={covers}
           marks={marks}
+          subscribeEnabled={emailDeliveryConfigured()}
         />
       </main>
       <Footer />

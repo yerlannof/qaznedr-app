@@ -13,6 +13,7 @@ import {
 import { codeLabel, intakeLabel } from '@/lib/equipment-listings/present';
 import AutoSubmitForm from './AutoSubmitForm';
 import EquipmentCard from './EquipmentCard';
+import SubscribeForm from './SubscribeForm';
 
 export type CatalogFilters = {
   offerType?: string;
@@ -40,12 +41,14 @@ export default function EquipmentCatalog({
   result,
   covers,
   marks,
+  subscribeEnabled = false,
 }: {
   locale: string;
   filters: CatalogFilters;
   result: Result;
   covers: Record<string, string>;
   marks: Record<string, string[]>;
+  subscribeEnabled?: boolean;
 }) {
   const t = (key: string, params?: Record<string, string | number>) =>
     translate(locale, `equipmentCatalog.${key}`, params);
@@ -273,6 +276,24 @@ export default function EquipmentCatalog({
           </>
         )}
       </section>
+      {subscribeEnabled && (
+        <SubscribeForm
+          locale={locale}
+          filters={Object.fromEntries(
+            (
+              [
+                'offerType',
+                'category',
+                'region',
+                'kind',
+                'serviceMethod',
+              ] as const
+            )
+              .filter((key) => filters[key])
+              .map((key) => [key, String(filters[key])])
+          )}
+        />
+      )}
       <p className="mt-12 max-w-3xl border-t border-brand-line pt-6 text-sm text-brand-muted">
         {t('disclaimer')}
       </p>

@@ -64,6 +64,13 @@ export default function EquipmentCard({
           </p>
         )}
         <p className="mt-auto pt-3 text-lg font-semibold">
+          {listing.offerType === 'WANTED' &&
+            `${translate(
+              locale,
+              listing.category === 'staff'
+                ? 'equipmentIntake.salaryOffered'
+                : 'equipmentIntake.budget'
+            )}: `}
           {priceText(listing, locale)}
         </p>
         <Link

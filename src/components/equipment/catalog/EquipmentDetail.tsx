@@ -112,7 +112,21 @@ export default function EquipmentDetail({
 
         {/* On phones the price and contact come first; on desktop they sit in the side column. */}
         <aside className="order-first space-y-6 border border-brand-line bg-brand-surface p-6 lg:order-none">
-          <p className="text-2xl font-semibold">{priceText(listing, locale)}</p>
+          <div>
+            {listing.offerType === 'WANTED' && (
+              <p className="text-sm font-semibold uppercase tracking-widest text-brand-muted">
+                {translate(
+                  locale,
+                  listing.category === 'staff'
+                    ? 'equipmentIntake.salaryOffered'
+                    : 'equipmentIntake.budget'
+                )}
+              </p>
+            )}
+            <p className="text-2xl font-semibold">
+              {priceText(listing, locale)}
+            </p>
+          </div>
           <ContactBeacon listingId={listing.id}>
             <section>
               <h2 className="font-semibold">{t('contactTitle')}</h2>

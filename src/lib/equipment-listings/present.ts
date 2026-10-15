@@ -203,7 +203,11 @@ export function specRows(
           : formatNumber(value, locale)
         : codeLabel(locale, String(value));
     const label =
-      key === 'kind' && listing.category === 'staff' ? 'profession' : key;
+      key === 'kind' && listing.category === 'staff'
+        ? 'profession'
+        : key === 'availability' && listing.offerType === 'WANTED'
+          ? 'neededWhen'
+          : key;
     rows.push({ label: intakeLabel(locale, label), value: text });
   }
   for (const row of listing.capabilities ?? [])

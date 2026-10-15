@@ -4,6 +4,8 @@
 export const translations = {
   ru: {
     marketplaceSignIn: {
+      consentBefore: 'Продолжая, вы соглашаетесь на обработку данных по ',
+      consentLink: 'политике конфиденциальности',
       approvedSubject: 'Объявление опубликовано: {title}',
       approvedText:
         'Ваше объявление «{title}» прошло проверку и опубликовано в каталоге QAZNEDR.',
@@ -1660,6 +1662,8 @@ export const translations = {
   },
   kz: {
     marketplaceSignIn: {
+      consentBefore: 'Жалғастыра отырып, деректерді өңдеуге келісесіз: ',
+      consentLink: 'құпиялылық саясаты',
       approvedSubject: 'Хабарландыру жарияланды: {title}',
       approvedText:
         '«{title}» хабарландыруыңыз тексеруден өтіп, QAZNEDR каталогында жарияланды.',
@@ -3256,6 +3260,8 @@ export const translations = {
   },
   en: {
     marketplaceSignIn: {
+      consentBefore: 'By continuing, you agree to data processing under the ',
+      consentLink: 'privacy policy',
       approvedSubject: 'Listing published: {title}',
       approvedText:
         'Your listing “{title}” passed review and is now published in the QAZNEDR catalogue.',
@@ -4833,6 +4839,8 @@ export const translations = {
   },
   zh: {
     marketplaceSignIn: {
+      consentBefore: '继续即表示您同意按照以下条款处理数据：',
+      consentLink: '隐私政策',
       approvedSubject: '信息已发布：{title}',
       approvedText: '您的信息“{title}”已通过审核，并在 QAZNEDR 目录中发布。',
       rejectedSubject: '信息未通过审核：{title}',

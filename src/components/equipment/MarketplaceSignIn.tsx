@@ -59,6 +59,18 @@ export default function MarketplaceSignIn({
 
   return (
     <div className="max-w-md space-y-5">
+      <p className="text-sm text-brand-muted">
+        {t('consentBefore')}
+        <a
+          href={`/${locale}/legal/privacy`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-4"
+        >
+          {t('consentLink')}
+        </a>
+        .
+      </p>
       {googleEnabled && (
         <button
           type="button"

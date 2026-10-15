@@ -604,7 +604,7 @@ export function EquipmentIntake({
               <summary className="min-h-11 cursor-pointer py-2 font-semibold">
                 {t('chooseRegions')}
               </summary>
-              <div className="grid gap-2 sm:grid-cols-2">
+              <div className="grid grid-cols-2 gap-x-3 text-sm">
                 {regions.map(box)}
               </div>
             </details>

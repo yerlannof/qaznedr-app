@@ -19,7 +19,7 @@ import {
   setTrustMark,
   trustMarksFor,
 } from './moderation-repository';
-import { afterSubmission } from './submission-hooks';
+import { afterModeration, afterSubmission } from './submission-hooks';
 
 export type ItemContext = { params: Promise<{ id: string }> };
 type Action =
@@ -239,6 +239,7 @@ export function equipmentHandler(action: Action) {
         previous.status !== 'PENDING_MODERATION'
       )
         afterSubmission(saved);
+      if (action === 'moderate' && saved !== previous) afterModeration(saved);
       return response({ success: true, data: saved });
     } catch (error) {
       if (error instanceof HttpError)

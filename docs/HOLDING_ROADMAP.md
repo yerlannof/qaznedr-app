@@ -84,8 +84,18 @@ RU/KZ/EN/ZH новые — показать владельцу до запуск
 архив с подтверждением, контакт по умолчанию. Открытый вопрос владельцу: показывать ли
 прежнюю версию во время перепроверки. Telegram: `TELEGRAM_BOT_TOKEN/CHAT_ID` внесены в
 Vercel 15.10 (бот @geodezistvideobot), прод передеплоен. Resend: домен qaznedr.kz
-добавлен (eu-west-1), DNS-записи ждут входа владельца в Cloudflare (NS mina/patrick).
-Осталось: этап 3 (записи DNS → вход по ссылке на почту, письма автору), этап 7
+добавлен (eu-west-1). Зоны qaznedr.kz нет в Cloudflare владельца (аккаунт
+yerlannof@gmail.com пуст) — 4 записи Resend (DKIM `resend._domainkey`, CNAME `rsend`,
+CNAME `send`, `_dmarc`) добавит держатель зоны (Мухтар/хостинг), значения — со страницы
+домена в Resend. **Этап 3 в коде (16.10):** вход по ссылке на почту (`email-link.ts`,
+`/api/auth/email-link`, `/[locale]/auth/email`, провайдер NextAuth `email-link`; токен
+во фрагменте ссылки, в БД только SHA-256, 15 мин, одноразовый, лимиты 3/15 мин и 10/сутки
+на адрес, 10/час на IP; без склейки с Google), общий блок `MarketplaceSignIn` в форме и
+кабинете, письма автору об одобрении/отказе (`afterModeration`, пока на русском). Всё
+спит, пока нет `RESEND_API_KEY`. Миграция `20261016_marketplace_email_login.sql`
+проверена локально (`scripts/test-marketplace-email-login.sql`), в прод НЕ применена —
+применить с «да» владельца вместе с ключом Resend. Осталось: DNS → проверка домена →
+ключ в Vercel (+`EMAIL_FROM` по желанию) → миграция → живой тест; этап 7
 (условия и конфиденциальность, пилот 10–20 объявлений, флаги, sitemap/llms/IndexNow,
 меню, публикация экрана Google OAuth).
 

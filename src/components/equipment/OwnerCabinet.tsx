@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import MarketplaceSignIn from './MarketplaceSignIn';
 import { LayoutGrid, List, Loader2, MessageCircle, Plus } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import { regionLabel } from '@/lib/data/filter-config';
@@ -64,11 +65,13 @@ function Thumb({ listing }: { listing: EquipmentListing }) {
 export default function OwnerCabinet({
   locale,
   googleEnabled,
+  emailEnabled = false,
   whatsappNumber,
   navigate = (url: string) => window.location.assign(url),
 }: {
   locale: string;
   googleEnabled: boolean;
+  emailEnabled?: boolean;
   whatsappNumber: string | null;
   /** Full page load so the intake re-reads the bound draft; replaceable in tests. */
   navigate?: (url: string) => void;
@@ -218,19 +221,14 @@ export default function OwnerCabinet({
       <section className="brand-container max-w-2xl py-16">
         <h1 className="holding-title">{t('signInTitle')}</h1>
         <p className="mt-4 text-brand-muted">{t('signInText')}</p>
-        {googleEnabled ? (
-          <button
-            type="button"
-            className="brand-button brand-focus mt-8"
-            onClick={() =>
-              void signIn('google', { callbackUrl: `/${locale}/equipment/my` })
-            }
-          >
-            {t('google')}
-          </button>
-        ) : (
-          <p className="mt-8">{intake('googleUnavailable')}</p>
-        )}
+        <div className="mt-8">
+          <MarketplaceSignIn
+            locale={locale}
+            googleEnabled={googleEnabled}
+            emailEnabled={emailEnabled}
+            callbackUrl={`/${locale}/equipment/my`}
+          />
+        </div>
       </section>
     );
 

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { emailLinkEnabled } from '@/lib/auth/email-link';
 import { EquipmentIntake } from '@/components/equipment/EquipmentIntake';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { toLocale } from '@/lib/seo/site';
@@ -34,5 +35,11 @@ export default async function Page({ params }: Props) {
       process.env.GOOGLE_CLIENT_ID &&
       process.env.GOOGLE_CLIENT_SECRET
   );
-  return <EquipmentIntake locale={locale} googleEnabled={googleEnabled} />;
+  return (
+    <EquipmentIntake
+      locale={locale}
+      googleEnabled={googleEnabled}
+      emailEnabled={emailLinkEnabled()}
+    />
+  );
 }

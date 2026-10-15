@@ -3,6 +3,45 @@
 
 export const translations = {
   ru: {
+    marketplaceSignIn: {
+      approvedSubject: 'Объявление опубликовано: {title}',
+      approvedText:
+        'Ваше объявление «{title}» прошло проверку и опубликовано в каталоге QAZNEDR.',
+      rejectedSubject: 'Объявление не прошло проверку: {title}',
+      rejectedText:
+        'Ваше объявление «{title}» не прошло проверку. Причина: {reason}',
+      rejectedHint: 'Исправьте объявление в кабинете и отправьте его снова.',
+      cabinetButton: 'Открыть мои объявления',
+      google: 'Продолжить с Google',
+      orEmail: 'или по почте, без пароля',
+      emailLabel: 'Электронная почта',
+      emailButton: 'Прислать ссылку для входа',
+      emailHint:
+        'Пароль не нужен: пришлём письмо со ссылкой. Она действует 15 минут.',
+      sent: 'Письмо отправлено на {email}. Откройте его и нажмите «Войти». Если письма нет, проверьте папку «Спам».',
+      anotherEmail: 'Указать другую почту',
+      rateLimited: 'Слишком много запросов. Попробуйте через 15 минут.',
+      invalidEmail: 'Проверьте адрес почты.',
+      failed:
+        'Не удалось отправить письмо. Попробуйте ещё раз или напишите нам в WhatsApp.',
+      unavailable:
+        'Вход сейчас недоступен. Напишите нам в WhatsApp, поможем разместить объявление.',
+      confirmTitle: 'Вход на QAZNEDR',
+      confirmText:
+        'Нажмите кнопку, чтобы войти с адреса, на который пришло письмо.',
+      confirmButton: 'Войти',
+      linkInvalid: 'Ссылка устарела или уже использована. Запросите новую.',
+      googleAccount:
+        'Этот адрес уже привязан ко входу через Google. Войдите через Google.',
+      newLink: 'Запросить новую ссылку',
+      metaTitle: 'Вход по ссылке из письма | QAZNEDR',
+      metaDescription: 'Подтверждение входа в кабинет объявлений QAZNEDR.',
+      mailSubject: 'Вход на QAZNEDR',
+      mailIntro: 'Вы запросили вход на qaznedr.kz в раздел «Техника и услуги».',
+      mailButton: 'Войти',
+      mailExpiry: 'Ссылка действует 15 минут и срабатывает один раз.',
+      mailIgnore: 'Если вы не запрашивали вход, просто удалите это письмо.',
+    },
     equipmentCabinet: {
       tab: 'Мои объявления',
       eyebrow: 'Личный кабинет',
@@ -1447,6 +1486,46 @@ export const translations = {
     },
   },
   kz: {
+    marketplaceSignIn: {
+      approvedSubject: 'Хабарландыру жарияланды: {title}',
+      approvedText:
+        '«{title}» хабарландыруыңыз тексеруден өтіп, QAZNEDR каталогында жарияланды.',
+      rejectedSubject: 'Хабарландыру тексеруден өтпеді: {title}',
+      rejectedText:
+        '«{title}» хабарландыруыңыз тексеруден өтпеді. Себебі: {reason}',
+      rejectedHint: 'Хабарландыруды кабинетте түзетіп, қайта жіберіңіз.',
+      cabinetButton: 'Менің хабарландыруларымды ашу',
+      google: 'Google арқылы жалғастыру',
+      orEmail: 'немесе поштамен, құпиясөзсіз',
+      emailLabel: 'Электрондық пошта',
+      emailButton: 'Кіру сілтемесін жіберу',
+      emailHint:
+        'Құпиясөз керек емес: сілтемесі бар хат жібереміз. Ол 15 минут жарамды.',
+      sent: 'Хат {email} адресіне жіберілді. Оны ашып, «Кіру» түймесін басыңыз. Хат келмесе, «Спам» қалтасын тексеріңіз.',
+      anotherEmail: 'Басқа поштаны көрсету',
+      rateLimited: 'Сұраулар тым көп. 15 минуттан кейін қайталаңыз.',
+      invalidEmail: 'Пошта адресін тексеріңіз.',
+      failed:
+        'Хат жіберілмеді. Қайталап көріңіз немесе бізге WhatsApp арқылы жазыңыз.',
+      unavailable:
+        'Кіру қазір қолжетімсіз. Бізге WhatsApp арқылы жазыңыз, хабарландыруды орналастыруға көмектесеміз.',
+      confirmTitle: 'QAZNEDR-ге кіру',
+      confirmText: 'Хат келген адреспен кіру үшін түймені басыңыз.',
+      confirmButton: 'Кіру',
+      linkInvalid:
+        'Сілтеменің мерзімі өткен немесе ол қолданылған. Жаңасын сұраңыз.',
+      googleAccount:
+        'Бұл адрес Google арқылы кіруге байланған. Google арқылы кіріңіз.',
+      newLink: 'Жаңа сілтеме сұрау',
+      metaTitle: 'Хаттағы сілтеме арқылы кіру | QAZNEDR',
+      metaDescription: 'QAZNEDR хабарландырулар кабинетіне кіруді растау.',
+      mailSubject: 'QAZNEDR-ге кіру',
+      mailIntro:
+        'Сіз qaznedr.kz сайтындағы «Техника және қызметтер» бөліміне кіруді сұрадыңыз.',
+      mailButton: 'Кіру',
+      mailExpiry: 'Сілтеме 15 минут жарамды және бір рет қана жұмыс істейді.',
+      mailIgnore: 'Егер кіруді сұрамаған болсаңыз, бұл хатты жойыңыз.',
+    },
     equipmentCabinet: {
       tab: 'Менің хабарландыруларым',
       eyebrow: 'Жеке кабинет',
@@ -2831,6 +2910,46 @@ export const translations = {
     },
   },
   en: {
+    marketplaceSignIn: {
+      approvedSubject: 'Listing published: {title}',
+      approvedText:
+        'Your listing “{title}” passed review and is now published in the QAZNEDR catalogue.',
+      rejectedSubject: 'Listing not approved: {title}',
+      rejectedText:
+        'Your listing “{title}” did not pass review. Reason: {reason}',
+      rejectedHint: 'Fix the listing in your account and send it again.',
+      cabinetButton: 'Open my listings',
+      google: 'Continue with Google',
+      orEmail: 'or by email, no password',
+      emailLabel: 'Email',
+      emailButton: 'Send me a sign-in link',
+      emailHint:
+        'No password needed: we will email you a link. It works for 15 minutes.',
+      sent: 'We sent an email to {email}. Open it and press “Sign in”. If it is not there, check your spam folder.',
+      anotherEmail: 'Use another email',
+      rateLimited: 'Too many requests. Try again in 15 minutes.',
+      invalidEmail: 'Check the email address.',
+      failed: 'Could not send the email. Try again or message us on WhatsApp.',
+      unavailable:
+        'Sign-in is unavailable right now. Message us on WhatsApp and we will help you post a listing.',
+      confirmTitle: 'Sign in to QAZNEDR',
+      confirmText:
+        'Press the button to sign in with the address that received the email.',
+      confirmButton: 'Sign in',
+      linkInvalid:
+        'This link has expired or was already used. Request a new one.',
+      googleAccount:
+        'This address is already linked to Google sign-in. Sign in with Google.',
+      newLink: 'Request a new link',
+      metaTitle: 'Sign in with an email link | QAZNEDR',
+      metaDescription: 'Confirm sign-in to your QAZNEDR listings account.',
+      mailSubject: 'Sign in to QAZNEDR',
+      mailIntro:
+        'You asked to sign in to the Equipment and services section on qaznedr.kz.',
+      mailButton: 'Sign in',
+      mailExpiry: 'The link works for 15 minutes and only once.',
+      mailIgnore: 'If you did not ask to sign in, just delete this email.',
+    },
     equipmentCabinet: {
       tab: 'My listings',
       eyebrow: 'Account',
@@ -4197,6 +4316,39 @@ export const translations = {
     },
   },
   zh: {
+    marketplaceSignIn: {
+      approvedSubject: '信息已发布：{title}',
+      approvedText: '您的信息“{title}”已通过审核，并在 QAZNEDR 目录中发布。',
+      rejectedSubject: '信息未通过审核：{title}',
+      rejectedText: '您的信息“{title}”未通过审核。原因：{reason}',
+      rejectedHint: '请在账户中修改信息后重新提交。',
+      cabinetButton: '查看我的信息',
+      google: '使用 Google 继续',
+      orEmail: '或通过邮箱登录，无需密码',
+      emailLabel: '电子邮箱',
+      emailButton: '发送登录链接',
+      emailHint: '无需密码：我们会发送一封带链接的邮件，链接 15 分钟内有效。',
+      sent: '邮件已发送至 {email}。请打开邮件并点击“登录”。如未收到，请检查垃圾邮件文件夹。',
+      anotherEmail: '使用其他邮箱',
+      rateLimited: '请求过多，请 15 分钟后再试。',
+      invalidEmail: '请检查邮箱地址。',
+      failed: '邮件发送失败。请重试，或通过 WhatsApp 联系我们。',
+      unavailable:
+        '登录暂不可用。请通过 WhatsApp 联系我们，我们会协助发布信息。',
+      confirmTitle: '登录 QAZNEDR',
+      confirmText: '点击按钮，使用收到邮件的地址登录。',
+      confirmButton: '登录',
+      linkInvalid: '链接已过期或已被使用，请重新获取。',
+      googleAccount: '该地址已绑定 Google 登录，请使用 Google 登录。',
+      newLink: '重新获取链接',
+      metaTitle: '通过邮件链接登录 | QAZNEDR',
+      metaDescription: '确认登录 QAZNEDR 信息发布账户。',
+      mailSubject: '登录 QAZNEDR',
+      mailIntro: '您申请登录 qaznedr.kz 的“设备与服务”栏目。',
+      mailButton: '登录',
+      mailExpiry: '链接 15 分钟内有效，且仅可使用一次。',
+      mailIgnore: '如果不是您本人申请登录，请直接删除此邮件。',
+    },
     equipmentCabinet: {
       tab: '我的信息',
       eyebrow: '个人中心',

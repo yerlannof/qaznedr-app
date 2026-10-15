@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { signIn, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { ChevronLeft, Plus, Trash2, Upload } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import {
@@ -37,8 +37,13 @@ import {
   serviceMethodsFor,
 } from '@/lib/equipment-listings/taxonomy';
 import { regionLabel } from '@/lib/data/filter-config';
+import MarketplaceSignIn from './MarketplaceSignIn';
 
-type Props = { locale: string; googleEnabled: boolean };
+type Props = {
+  locale: string;
+  googleEnabled: boolean;
+  emailEnabled?: boolean;
+};
 type FieldProps = {
   name: string;
   type?: string;
@@ -133,7 +138,11 @@ function restoreSafe(value: unknown): IntakeValue | null {
   return blank;
 }
 
-export function EquipmentIntake({ locale, googleEnabled }: Props) {
+export function EquipmentIntake({
+  locale,
+  googleEnabled,
+  emailEnabled = false,
+}: Props) {
   const t = useCallback(
     (key: string, params?: Record<string, unknown>) =>
       translate(locale, `equipmentIntake.${key}`, params),
@@ -1361,25 +1370,18 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
             {step === 3 && (
               <div className="space-y-5">
                 <p>{t('loginRequired')}</p>
-                {!ownerId && googleEnabled && (
-                  <button
-                    type="button"
-                    className={buttonClass}
-                    onClick={() =>
-                      void signIn('google', {
-                        callbackUrl: window.location.href,
-                      })
+                {!ownerId && (
+                  <MarketplaceSignIn
+                    locale={locale}
+                    googleEnabled={googleEnabled}
+                    emailEnabled={emailEnabled}
+                    callbackUrl={
+                      typeof window === 'undefined'
+                        ? `/${locale}/equipment/new`
+                        : window.location.pathname + window.location.search
                     }
-                  >
-                    {t('google')}
-                  </button>
+                  />
                 )}
-                {!ownerId && !googleEnabled && (
-                  <p role="status">{t('googleUnavailable')}</p>
-                )}
-                <p className="text-sm text-brand-muted">
-                  {t('emailUnavailable')}
-                </p>
                 {field({ name: 'contactName', required: true })}
                 {field({ name: 'company' })}
                 {field({ name: 'phone', type: 'tel', required: true })}

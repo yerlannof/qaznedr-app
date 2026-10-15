@@ -10,6 +10,12 @@ import {
 import { ValidationSchemas } from '@/lib/middleware/input-validation';
 import { verifyEnvAdmin, isEnvAdminEmail } from '@/lib/auth/env-admin';
 import { provisionGoogleIdentity } from '@/lib/auth/marketplace-identity';
+import {
+  EMAIL_LINK_PROVIDER,
+  EmailLinkError,
+  emailLinkEnabled,
+  signInWithEmailToken,
+} from '@/lib/auth/email-link';
 
 const googleEnabled = Boolean(
   process.env.MARKETPLACE_IDENTITY_ENABLED === 'true' &&
@@ -24,6 +30,27 @@ export const authOptions = {
           GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+          }),
+        ]
+      : []),
+    ...(emailLinkEnabled()
+      ? [
+          CredentialsProvider({
+            id: EMAIL_LINK_PROVIDER,
+            name: 'Email link',
+            credentials: { token: { label: 'Token', type: 'text' } },
+            async authorize(credentials) {
+              try {
+                return await signInWithEmailToken(credentials?.token);
+              } catch (error) {
+                // The client maps these codes to a message; nothing else leaks.
+                throw new Error(
+                  error instanceof EmailLinkError
+                    ? error.reason
+                    : 'INVALID_LINK'
+                );
+              }
+            },
           }),
         ]
       : []),
@@ -125,6 +152,8 @@ export const authOptions = {
       profile?: { sub?: string; email?: string; email_verified?: unknown };
     }) {
       if (account?.provider === 'credentials') return true;
+      if (account?.provider === EMAIL_LINK_PROVIDER)
+        return emailLinkEnabled() && Boolean(user.id && user.email);
       if (
         account?.provider !== 'google' ||
         process.env.MARKETPLACE_IDENTITY_ENABLED !== 'true' ||

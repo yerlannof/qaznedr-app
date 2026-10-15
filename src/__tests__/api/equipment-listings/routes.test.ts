@@ -5,6 +5,7 @@ jest.mock('@/lib/services/auth.config', () => ({ authOptions: {} }));
 jest.mock('@/lib/auth/admin', () => ({ requireModerator: jest.fn() }));
 jest.mock('@/lib/equipment-listings/submission-hooks', () => ({
   afterSubmission: jest.fn(),
+  afterModeration: jest.fn(),
 }));
 jest.mock('@/lib/equipment-listings/moderation-repository', () => ({
   TRUST_MARKS: ['PHONE_CONFIRMED', 'DOCUMENTS_REVIEWED', 'VERIFIED_QAZNEDR'],
@@ -36,6 +37,7 @@ import { POST as submit } from '@/app/api/equipment-listings/[id]/submit/route';
 import { POST as archive } from '@/app/api/equipment-listings/[id]/archive/route';
 import { GET as queue } from '@/app/api/admin/equipment-listings/route';
 import { POST as moderate } from '@/app/api/admin/equipment-listings/[id]/moderate/route';
+import { afterModeration } from '@/lib/equipment-listings/submission-hooks';
 import { POST as register } from '@/app/api/auth/register/route';
 const id = '00000000-0000-4000-8000-000000000001';
 const context = { params: Promise.resolve({ id }) };
@@ -207,6 +209,9 @@ it('implements submit, approval, edited-active remoderation and archive', async 
     context
   );
   expect((await result.json()).data.status).toBe('ACTIVE');
+  expect(afterModeration).toHaveBeenCalledWith(
+    expect.objectContaining({ status: 'ACTIVE' })
+  );
   (repo.getOwned as jest.Mock).mockResolvedValue({
     ...fixture,
     status: 'ACTIVE',

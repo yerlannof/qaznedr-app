@@ -147,3 +147,18 @@ export async function prechecksFor(
       byListing[row.listing_id] = row;
   return byListing;
 }
+
+/** Contact address of the listing author's marketplace account, if any. */
+export async function ownerEmailFor(ownerId: string): Promise<string | null> {
+  const client = await createServiceClient();
+  const { data, error } = await client
+    .from('marketplace_accounts' as never)
+    .select('email')
+    .eq('id', ownerId)
+    .maybeSingle();
+  if (error) throw new RepositoryError('UNAVAILABLE');
+  const parsed = z
+    .object({ email: z.string().email() })
+    .safeParse(data ?? undefined);
+  return parsed.success ? parsed.data.email : null;
+}

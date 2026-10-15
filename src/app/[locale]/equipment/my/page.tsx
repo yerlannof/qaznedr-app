@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { emailLinkEnabled } from '@/lib/auth/email-link';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import OwnerCabinet from '@/components/equipment/OwnerCabinet';
@@ -44,6 +45,7 @@ export default async function OwnerCabinetPage({ params }: Props) {
         <OwnerCabinet
           locale={locale}
           googleEnabled={googleEnabled}
+          emailEnabled={emailLinkEnabled()}
           whatsappNumber={getContactConfig().whatsappNumber}
         />
       </main>

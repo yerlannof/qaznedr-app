@@ -5,6 +5,7 @@ jest.mock('@/lib/services/auth.config', () => ({ authOptions: {} }));
 jest.mock('@/lib/auth/admin', () => ({ requireModerator: jest.fn() }));
 jest.mock('@/lib/equipment-listings/submission-hooks', () => ({
   afterSubmission: jest.fn(),
+  afterModeration: jest.fn(),
 }));
 jest.mock('@/lib/equipment-listings/moderation-repository', () => ({
   TRUST_MARKS: ['PHONE_CONFIRMED', 'DOCUMENTS_REVIEWED', 'VERIFIED_QAZNEDR'],

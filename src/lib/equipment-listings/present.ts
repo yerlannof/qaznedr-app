@@ -160,6 +160,8 @@ export function workAreaText(listing: Listing, locale: string): string | null {
 
 const SPEC_KEYS = [
   'kind',
+  'experienceYears',
+  'workFormat',
   'brand',
   'model',
   'chassis',
@@ -200,7 +202,9 @@ export function specRows(
           ? String(value)
           : formatNumber(value, locale)
         : codeLabel(locale, String(value));
-    rows.push({ label: intakeLabel(locale, key), value: text });
+    const label =
+      key === 'kind' && listing.category === 'staff' ? 'profession' : key;
+    rows.push({ label: intakeLabel(locale, label), value: text });
   }
   for (const row of listing.capabilities ?? [])
     rows.push({

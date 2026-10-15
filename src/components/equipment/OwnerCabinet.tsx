@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import MarketplaceSignIn from './MarketplaceSignIn';
+import CompanyProfileEditor from './CompanyProfileEditor';
 import { LayoutGrid, List, Loader2, MessageCircle, Plus } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import { regionLabel } from '@/lib/data/filter-config';
@@ -680,6 +681,7 @@ export default function OwnerCabinet({
               </>
             )}
           </div>
+          <CompanyProfileEditor locale={locale} />
           {whatsappNumber && (
             <div className="space-y-3 border border-brand-line bg-brand-surface p-5">
               <h2 className="font-semibold">{t('helpTitle')}</h2>

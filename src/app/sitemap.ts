@@ -9,6 +9,7 @@ import { loadSitemapLeadCodes } from '@/lib/seo/sitemap-leads';
 import { listPublishedOffers } from '@/lib/offers';
 import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 import { listActiveForSitemap } from '@/lib/equipment-listings/catalog-repository';
+import { listCompanies } from '@/lib/equipment-listings/companies';
 
 export const revalidate = 3600;
 
@@ -78,6 +79,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           priority: 0.8,
           alternates: { languages: buildLanguageAlternates('/equipment') },
         })),
+        ...(await listCompanies('ACTIVE')).flatMap((company) =>
+          LOCALES.map((locale) => ({
+            url: localeUrl(locale, `/equipment/company/${company.slug}`),
+            lastModified: new Date(company.updatedAt),
+            changeFrequency: 'weekly' as const,
+            priority: 0.6,
+            alternates: {
+              languages: buildLanguageAlternates(
+                `/equipment/company/${company.slug}`
+              ),
+            },
+          }))
+        ),
         ...(await listActiveForSitemap()).flatMap((listing) =>
           LOCALES.map((locale) => ({
             url: localeUrl(locale, `/equipment/${listing.id}`),

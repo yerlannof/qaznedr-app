@@ -511,6 +511,8 @@ export function projectPublicListing(listing: EquipmentListing) {
     serviceArea: data.serviceArea,
     ownCrew: data.ownCrew,
     powerKw: data.powerKw,
+    experienceYears: data.experienceYears,
+    workFormat: data.workFormat,
     method: data.method,
     diameter: data.diameter,
     depth: data.depth,

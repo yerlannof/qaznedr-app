@@ -4,13 +4,14 @@ import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Check, Loader2, ShieldCheck, X } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
+import CompanyModeration from '@/components/equipment/CompanyModeration';
 import { useTranslation } from '@/hooks/useTranslation';
 import { translate } from '@/lib/i18n/translations';
 import { regionLabel } from '@/lib/data/filter-config';
 import type { EquipmentListing } from '@/lib/equipment-listings/domain';
 
 // The moderation console is internal and Russian-only, like the other admin pages.
-type Tab = 'PENDING' | 'ACTIVE';
+type Tab = 'PENDING' | 'ACTIVE' | 'COMPANIES';
 type Mark = 'PHONE_CONFIRMED' | 'DOCUMENTS_REVIEWED' | 'VERIFIED_QAZNEDR';
 type Precheck = {
   verdict: 'OK' | 'REVIEW' | 'REJECT_SUGGESTED';
@@ -129,6 +130,7 @@ export default function AdminEquipmentPage() {
   }, []);
 
   useEffect(() => {
+    if (tab === 'COMPANIES') return;
     void load(tab);
   }, [load, tab]);
 
@@ -177,8 +179,8 @@ export default function AdminEquipmentPage() {
       <p className="mt-2 text-brand-muted">
         Автопроверка только подсказывает. Решение принимает модератор.
       </p>
-      <div role="tablist" className="mt-6 flex gap-2">
-        {(['PENDING', 'ACTIVE'] as Tab[]).map((item) => (
+      <div role="tablist" className="mt-6 flex flex-wrap gap-2">
+        {(['PENDING', 'ACTIVE', 'COMPANIES'] as Tab[]).map((item) => (
           <button
             key={item}
             role="tab"
@@ -186,7 +188,11 @@ export default function AdminEquipmentPage() {
             onClick={() => setTab(item)}
             className={`min-h-11 rounded border px-4 font-semibold ${tab === item ? 'border-brand-ink bg-brand-ink text-brand-bg' : 'border-brand-line'}`}
           >
-            {item === 'PENDING' ? 'На проверке' : 'Опубликованные'}
+            {item === 'PENDING'
+              ? 'На проверке'
+              : item === 'ACTIVE'
+                ? 'Опубликованные'
+                : 'Компании'}
           </button>
         ))}
       </div>
@@ -195,7 +201,9 @@ export default function AdminEquipmentPage() {
           {error}
         </p>
       )}
-      {!payload ? (
+      {tab === 'COMPANIES' ? (
+        <CompanyModeration />
+      ) : !payload ? (
         <p className="mt-8 flex items-center gap-2 text-brand-muted">
           <Loader2 aria-hidden className="animate-spin" size={18} /> Загрузка…
         </p>

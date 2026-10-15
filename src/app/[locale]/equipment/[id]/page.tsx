@@ -5,8 +5,10 @@ import { headers } from 'next/headers';
 import { after } from 'next/server';
 import {
   BOT_AGENT,
+  ownerOfActiveListing,
   recordListingEvent,
 } from '@/lib/equipment-listings/engagement';
+import { activeCompanyOf } from '@/lib/equipment-listings/companies';
 import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
@@ -202,13 +204,16 @@ export default async function EquipmentListingPage({ params }: Props) {
       void task();
     }
   }
-  const [images, marks] = await Promise.all([
+  const [images, marks, company] = await Promise.all([
     listImages(listing.id)
       .then((rows) => rows.map((row) => row.id))
       .catch(() => [] as string[]),
     trustMarksFor([listing.id])
       .then((rows) => rows[listing.id] ?? [])
       .catch(() => []),
+    ownerOfActiveListing(listing.id)
+      .then((owner) => (owner ? activeCompanyOf(owner.ownerId) : null))
+      .catch(() => null),
   ]);
   return (
     <>
@@ -220,6 +225,7 @@ export default async function EquipmentListingPage({ params }: Props) {
           images={images}
           marks={marks}
           contacts={getContactConfig()}
+          company={company && { name: company.name, slug: company.slug }}
         />
       </main>
       <Footer />

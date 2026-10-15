@@ -180,3 +180,54 @@ export async function listActiveForSitemap(): Promise<
     .parse(data)
     .map((row) => ({ id: row.id, updatedAt: row.updated_at }));
 }
+
+/** Published listings of one author, for the company page. */
+export async function activeListingsOfOwner(ownerId: string) {
+  const client = await createServiceClient();
+  const { data, error } = await (
+    client as unknown as {
+      from(table: string): {
+        select(columns: string): {
+          eq(
+            column: string,
+            value: string
+          ): {
+            eq(
+              column: string,
+              value: string
+            ): {
+              order(
+                column: string,
+                options: { ascending: boolean }
+              ): {
+                limit(
+                  count: number
+                ): Promise<{ data: unknown; error: unknown }>;
+              };
+            };
+          };
+        };
+      };
+    }
+  )
+    .from('equipment_listings')
+    .select('id,owner_id,status,revision,data,moderation_notes,updated_at')
+    .eq('owner_id', ownerId)
+    .eq('status', 'ACTIVE')
+    .order('updated_at', { ascending: false })
+    .limit(50);
+  if (error) throw new Error('Equipment catalogue unavailable');
+  return z
+    .array(wireRow)
+    .parse(data ?? [])
+    .map((row) => ({
+      ...projectPublicListing({
+        id: row.id,
+        ownerId: row.owner_id,
+        status: row.status,
+        revision: row.revision,
+        data: row.data,
+      })!,
+      updatedAt: row.updated_at,
+    }));
+}

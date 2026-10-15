@@ -22,12 +22,14 @@ export default function EquipmentDetail({
   images,
   marks,
   contacts,
+  company = null,
 }: {
   listing: PublicEquipmentListing;
   locale: string;
   images: string[];
   marks: { mark: string; setAt: string }[];
   contacts: ContactConfig;
+  company?: { name: string; slug: string } | null;
 }) {
   const t = (key: string, params?: Record<string, string | number>) =>
     translate(locale, `equipmentCatalog.${key}`, params);
@@ -167,6 +169,16 @@ export default function EquipmentDetail({
               )}
             </section>
           </ContactBeacon>
+          {company && (
+            <Link
+              href={`/${locale}/equipment/company/${company.slug}`}
+              className="brand-focus block text-sm font-semibold underline"
+            >
+              {translate(locale, 'equipmentCompany.allListings', {
+                name: company.name,
+              })}
+            </Link>
+          )}
           {listing.offerType === 'WANTED' && (
             <ResponseForm listingId={listing.id} locale={locale} />
           )}

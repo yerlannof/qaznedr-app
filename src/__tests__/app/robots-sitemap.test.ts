@@ -5,6 +5,11 @@ import { listActiveForSitemap } from '@/lib/equipment-listings/catalog-repositor
 jest.mock('@/lib/equipment-listings/catalog-repository', () => ({
   listActiveForSitemap: jest.fn(),
 }));
+jest.mock('@/lib/equipment-listings/companies', () => ({
+  listCompanies: jest.fn(async () => [
+    { slug: 'bur-servis', updatedAt: '2026-10-16T08:00:00Z' },
+  ]),
+}));
 
 // Unit tests exercise the loader on every call; Next owns persistence/ISR.
 jest.mock('next/cache', () => ({
@@ -187,6 +192,9 @@ describe('sitemap', () => {
       const entries = await sitemap();
       const urls = entries.map((e) => e.url);
       expect(urls).toContain('https://qaznedr.kz/kz/equipment');
+      expect(urls).toContain(
+        'https://qaznedr.kz/en/equipment/company/bur-servis'
+      );
       const entry = entries.find(
         (e) => e.url === `https://qaznedr.kz/zh/equipment/${listingId}`
       );

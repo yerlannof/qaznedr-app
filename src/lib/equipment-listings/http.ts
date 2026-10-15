@@ -127,12 +127,19 @@ export function equipmentHandler(action: Action) {
           throw new HttpError(401, 'Unauthorized');
         actorId = id;
       }
-      if (action === 'list')
+      if (action === 'list') {
+        const listings = await repository.listOwned(actorId);
+        // Trust marks are public anyway; a failure here must not hide the owner's list.
+        const trustMarks = await trustMarksFor(
+          listings.map((listing) => listing.id)
+        ).catch(() => ({}));
         return response({
           success: true,
-          data: await repository.listOwned(actorId),
+          data: listings,
+          trustMarks,
           limit: 100,
         });
+      }
       if (action === 'queue') {
         const status =
           new URL(request.url).searchParams.get('status') === 'ACTIVE'

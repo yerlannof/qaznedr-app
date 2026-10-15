@@ -147,6 +147,8 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
   const [notice, setNotice] = useState('');
   const [busy, setBusy] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  // Editing a published listing: no autosave; one explicit resubmit to moderation.
+  const [editingActive, setEditingActive] = useState(false);
   const [listingStatus, setListingStatus] = useState<
     EquipmentListing['status'] | null
   >(null);
@@ -316,7 +318,13 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
             setValue(fromDraft(listing.data));
             setSavedRevision(listing.revision);
             setListingStatus(listing.status);
-            setSubmitted(!['DRAFT', 'REJECTED'].includes(listing.status));
+            const editRequested =
+              new URLSearchParams(window.location.search).get('edit') === '1';
+            const editable = listing.status === 'ACTIVE' && editRequested;
+            setEditingActive(editable);
+            setSubmitted(
+              !editable && !['DRAFT', 'REJECTED'].includes(listing.status)
+            );
             storage.remove(uncertainKey(ownerId!));
             setConflict(false);
             return client.images();
@@ -365,6 +373,7 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
       !storageAvailable ||
       pendingRef.current ||
       submitted ||
+      editingActive ||
       conflict ||
       busy ||
       (ownerId && storage.get(uncertainKey(ownerId!)))
@@ -432,6 +441,7 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
     busy,
     storageAvailable,
     savedRevision,
+    editingActive,
     t,
   ]);
 
@@ -616,7 +626,10 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
     pendingRef.current = true;
     setBusy(true);
     try {
-      const listing = await client.submit(normalizeIntake(value));
+      const listing = editingActive
+        ? await client.resubmit(normalizeIntake(value))
+        : await client.submit(normalizeIntake(value));
+      setEditingActive(false);
       if (clientRef.current !== client || ownerRef.current !== ownerId) return;
       if (!acknowledgeWrite(ownerId, listing)) return;
       storage.remove(storageKey);
@@ -860,6 +873,15 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
     >
       <h1 className="mb-3 font-serif text-4xl">{t('title')}</h1>
       <p className="mb-6 text-brand-muted">{t('intro')}</p>
+      {editingActive && (
+        <div
+          role="note"
+          className="mb-6 border-l-4 border-amber-700 bg-brand-surface p-4 text-sm dark:border-amber-300"
+        >
+          <p className="font-semibold">{t('editingActive')}</p>
+          <p>{t('photosLocked')}</p>
+        </div>
+      )}
       {submitted ? (
         <div
           role="status"
@@ -1289,7 +1311,9 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
                   <button
                     type="button"
                     className={buttonClass}
-                    disabled={!ownerId || busy || images.length >= 8}
+                    disabled={
+                      !ownerId || busy || editingActive || images.length >= 8
+                    }
                     onClick={() => fileRef.current?.click()}
                   >
                     <Upload aria-hidden size={18} className="mr-2 inline" />
@@ -1314,7 +1338,7 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
                         <button
                           type="button"
                           className={buttonClass}
-                          disabled={busy}
+                          disabled={busy || editingActive}
                           onClick={() => void removeImage(image.id)}
                         >
                           {t('remove')}
@@ -1521,7 +1545,9 @@ export function EquipmentIntake({ locale, googleEnabled }: Props) {
                 disabled={busy || conflict || (step === 4 && !ownerId)}
                 onClick={() => void nextStep()}
               >
-                {step === 4 ? t('submit') : t('next')}
+                {step === 4
+                  ? t(editingActive ? 'resubmit' : 'submit')
+                  : t('next')}
               </button>
             </div>
             {ownerId && savedRevision > 0 && (

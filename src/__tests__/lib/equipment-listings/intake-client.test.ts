@@ -263,3 +263,50 @@ it('does not silently load a legacy draft into the v2 form', async () => {
   await expect(client.load(id)).rejects.toMatchObject({ code: 'INVALID' });
   expect(client.listing).toBeNull();
 });
+
+describe('editing a published listing', () => {
+  const published = {
+    ...draft,
+    region: 'karagandy' as const,
+    city: 'Karaganda',
+    availability: 'Now',
+    contactName: 'Owner',
+    phone: '+77001234567',
+    contactVisibility: 'PRIVATE' as const,
+    capabilities: [{ method: 'CORE' as const }],
+  };
+  it('sends all edits in one patch and expects the listing back in moderation', async () => {
+    fetcher.mockImplementationOnce(() => reply(record(3, published, 'ACTIVE')));
+    fetcher.mockImplementationOnce(() =>
+      reply(record(4, { ...published, title: 'XY-2' }, 'PENDING_MODERATION'))
+    );
+    const client = new EquipmentDraftClient(owner);
+    await client.load(id);
+    const saved = await client.resubmit({ ...published, title: 'XY-2' });
+    expect(fetcher.mock.calls[1][1].method).toBe('PATCH');
+    expect(JSON.parse(fetcher.mock.calls[1][1].body)).toEqual({
+      expectedRevision: 3,
+      patch: { title: 'XY-2' },
+    });
+    expect(saved.status).toBe('PENDING_MODERATION');
+  });
+
+  it('refuses ordinary autosave on a published listing and treats a non-moderation reply as uncertain', async () => {
+    fetcher.mockImplementationOnce(() => reply(record(3, published, 'ACTIVE')));
+    fetcher.mockImplementationOnce(() =>
+      reply(record(4, { ...published, title: 'XY-2' }, 'ACTIVE'))
+    );
+    const client = new EquipmentDraftClient(owner);
+    await client.load(id);
+    await expect(
+      client.save({ ...published, title: 'XY-3' })
+    ).rejects.toMatchObject({
+      code: 'INVALID',
+    });
+    await expect(
+      client.resubmit({ ...published, title: 'XY-2' })
+    ).rejects.toMatchObject({
+      code: 'UNCERTAIN',
+    });
+  });
+});

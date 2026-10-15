@@ -90,6 +90,12 @@ export default function EquipmentCatalog({
         >
           {t('tabSubmit')}
         </Link>
+        <Link
+          href={`${base}/my`}
+          className="brand-button-secondary brand-focus"
+        >
+          {translate(locale, 'equipmentCabinet.tab')}
+        </Link>
       </nav>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_20rem] lg:items-start">

@@ -234,6 +234,49 @@ export class EquipmentDraftClient {
       return this.listing!;
     });
   }
+  /**
+   * Send edits of a published listing in one request. The server moves it back
+   * to moderation, so published listings are never autosaved field by field.
+   */
+  async resubmit(data: OwnerDraft): Promise<EquipmentListing> {
+    const snapshot = this.snapshot(data, true);
+    return this.queue(async () => {
+      if (this.blocked) throw new IntakeClientError(this.blocked);
+      const previous = this.current;
+      if (!previous || previous.status !== 'ACTIVE')
+        throw new IntakeClientError('INVALID');
+      const patch: Record<string, unknown> = {};
+      for (const key of new Set([
+        ...Object.keys(previous.data),
+        ...Object.keys(snapshot),
+      ])) {
+        const field = key as keyof OwnerDraft;
+        if (
+          JSON.stringify(previous.data[field]) !==
+          JSON.stringify(snapshot[field])
+        )
+          patch[key] = snapshot[field] ?? null;
+      }
+      if (!Object.keys(patch).length) return this.listing!;
+      const value = await this.request(
+        `/api/equipment-listings/${previous.id}`,
+        {
+          method: 'PATCH',
+          ...this.json({ expectedRevision: previous.revision, patch }),
+        }
+      );
+      const saved = this.accept(value, previous.id, true);
+      if (
+        saved.status !== 'PENDING_MODERATION' ||
+        saved.revision <= previous.revision
+      ) {
+        this.blocked = 'UNCERTAIN';
+        throw new IntakeClientError('UNCERTAIN');
+      }
+      this.current = saved;
+      return this.listing!;
+    });
+  }
   async images(): Promise<IntakeImage[]> {
     return this.queue(async () => {
       if (!this.current) return [];

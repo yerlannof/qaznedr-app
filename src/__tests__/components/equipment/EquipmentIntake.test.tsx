@@ -256,11 +256,15 @@ it('clears the previous account identity and draft on user switch', () => {
   mockSessionStatus = 'authenticated';
   mockSessionUserId = 'owner-a';
   const view = render(<EquipmentIntake locale="ru" googleEnabled={true} />);
-  fireEvent.click(screen.getByRole('radio', { name: 'Продажа' }));
-  expect(screen.getByRole('radio', { name: 'Продажа' })).toBeChecked();
+  fireEvent.click(screen.getByRole('radio', { name: 'Буровая установка' }));
+  fireEvent.click(screen.getByRole('radio', { name: 'Продаю' }));
+  expect(screen.getByRole('radio', { name: 'Продаю' })).toBeChecked();
   mockSessionUserId = 'owner-b';
   view.rerender(<EquipmentIntake locale="ru" googleEnabled={true} />);
-  expect(screen.getByRole('radio', { name: 'Продажа' })).not.toBeChecked();
+  expect(
+    screen.getByRole('radio', { name: 'Буровая установка' })
+  ).not.toBeChecked();
+  expect(screen.queryByRole('radio', { name: 'Продаю' })).toBeNull();
   expect(sessionStorage.getItem('qaznedr:equipment-intake:owner')).toBe(
     'owner-b'
   );
@@ -312,8 +316,8 @@ it('preserves the technical draft through auth loading and drops contact on rest
 
 it('uses taxonomy codes in translated selects and previews linked capability', () => {
   render(<EquipmentIntake locale="ru" googleEnabled={false} />);
-  fireEvent.click(screen.getByRole('radio', { name: 'Аренда' }));
   fireEvent.click(screen.getByRole('radio', { name: 'Буровая установка' }));
+  fireEvent.click(screen.getByRole('radio', { name: 'Сдаю в аренду' }));
   fireEvent.click(screen.getByRole('button', { name: 'Продолжить' }));
   fireEvent.change(screen.getByRole('textbox', { name: 'Название *' }), {
     target: { value: 'NEW' },
@@ -321,11 +325,11 @@ it('uses taxonomy codes in translated selects and previews linked capability', (
   fireEvent.change(screen.getByRole('combobox', { name: 'Область *' }), {
     target: { value: 'almaty-region' },
   });
-  fireEvent.change(screen.getByRole('textbox', { name: 'Город *' }), {
+  fireEvent.change(screen.getByRole('textbox', { name: 'Город' }), {
     target: { value: 'Алматы' },
   });
   fireEvent.change(
-    screen.getByRole('textbox', { name: 'Доступность / срок *' }),
+    screen.getByRole('textbox', { name: 'Доступность / срок' }),
     { target: { value: 'С октября' } }
   );
   fireEvent.click(screen.getByRole('button', { name: 'Добавить возможность' }));
@@ -351,10 +355,9 @@ it('uses taxonomy codes in translated selects and previews linked capability', (
   fireEvent.change(screen.getByRole('textbox', { name: 'Компания' }), {
     target: { value: 'OWNER' },
   });
-  fireEvent.change(
-    screen.getByRole('textbox', { name: 'Телефон с кодом страны *' }),
-    { target: { value: '+77000000000' } }
-  );
+  fireEvent.change(screen.getByRole('textbox', { name: 'Телефон *' }), {
+    target: { value: '+77000000000' },
+  });
   fireEvent.click(screen.getByRole('radio', { name: 'Нет, только редакции' }));
   expect(sessionStorage.getItem('qaznedr:equipment-intake:v2')).not.toContain(
     'Ерлан'
@@ -372,8 +375,8 @@ it('rejects an empty image before making an upload request', () => {
   mockSessionStatus = 'authenticated';
   mockSessionUserId = 'owner-a';
   const view = render(<EquipmentIntake locale="ru" googleEnabled={true} />);
-  fireEvent.click(screen.getByRole('radio', { name: 'Аренда' }));
   fireEvent.click(screen.getByRole('radio', { name: 'Компрессоры и насосы' }));
+  fireEvent.click(screen.getByRole('radio', { name: 'Сдаю в аренду' }));
   fireEvent.click(screen.getByRole('button', { name: 'Продолжить' }));
   const input = view.container.querySelector(
     'input[type="file"]'
@@ -395,8 +398,8 @@ it('does not persist contact fields during a photo upload after visiting contact
     position: 0,
   });
   const view = render(<EquipmentIntake locale="ru" googleEnabled={true} />);
-  fireEvent.click(screen.getByRole('radio', { name: 'Аренда' }));
   fireEvent.click(screen.getByRole('radio', { name: 'Компрессоры и насосы' }));
+  fireEvent.click(screen.getByRole('radio', { name: 'Сдаю в аренду' }));
   fireEvent.click(screen.getByRole('button', { name: 'Продолжить' }));
   fireEvent.change(screen.getByRole('combobox', { name: 'Тип техники *' }), {
     target: { value: 'COMPRESSOR' },
@@ -407,21 +410,20 @@ it('does not persist contact fields during a photo upload after visiting contact
   fireEvent.change(screen.getByRole('combobox', { name: 'Область *' }), {
     target: { value: 'almaty-region' },
   });
-  fireEvent.change(screen.getByRole('textbox', { name: 'Город *' }), {
+  fireEvent.change(screen.getByRole('textbox', { name: 'Город' }), {
     target: { value: 'Almaty' },
   });
   fireEvent.change(
-    screen.getByRole('textbox', { name: 'Доступность / срок *' }),
+    screen.getByRole('textbox', { name: 'Доступность / срок' }),
     { target: { value: 'Now' } }
   );
   fireEvent.click(screen.getByRole('button', { name: 'Продолжить' }));
   fireEvent.change(screen.getByRole('textbox', { name: 'Имя для связи *' }), {
     target: { value: 'Private Person' },
   });
-  fireEvent.change(
-    screen.getByRole('textbox', { name: 'Телефон с кодом страны *' }),
-    { target: { value: '+77000000000' } }
-  );
+  fireEvent.change(screen.getByRole('textbox', { name: 'Телефон *' }), {
+    target: { value: '+77000000000' },
+  });
   fireEvent.click(screen.getByRole('button', { name: 'Назад' }));
   const input = view.container.querySelector(
     'input[type="file"]'
@@ -432,4 +434,35 @@ it('does not persist contact fields during a photo upload after visiting contact
   await waitFor(() => expect(mockClient.upload).toHaveBeenCalledTimes(1));
   expect(mockClient.upload.mock.calls[0][1]).not.toHaveProperty('contactName');
   expect(mockClient.upload.mock.calls[0][1]).not.toHaveProperty('phone');
+});
+
+it('asks for the section first and offers the actions that section allows', () => {
+  render(<EquipmentIntake locale="ru" googleEnabled={true} />);
+  expect(screen.queryByRole('radio', { name: 'Сдаю в аренду' })).toBeNull();
+  fireEvent.click(
+    screen.getByRole('radio', { name: 'Буровой инструмент и запчасти' })
+  );
+  expect(screen.getByRole('radio', { name: 'Продаю' })).toBeInTheDocument();
+  expect(screen.queryByRole('radio', { name: 'Сдаю в аренду' })).toBeNull();
+  fireEvent.click(
+    screen.getByRole('radio', { name: 'Специалисты и вакансии' })
+  );
+  expect(
+    screen.getByRole('radio', { name: 'Ищу работу (резюме)' })
+  ).toBeInTheDocument();
+  fireEvent.click(
+    screen.getByRole('radio', { name: 'Ищу сотрудника (вакансия)' })
+  );
+  fireEvent.click(screen.getByRole('button', { name: 'Продолжить' }));
+  expect(
+    screen.getByRole('combobox', { name: 'Профессия *' })
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('combobox', { name: 'Формат работы' })
+  ).toBeInTheDocument();
+  expect(screen.getByRole('textbox', { name: 'Название *' })).toHaveAttribute(
+    'placeholder',
+    'Например: Требуется помощник бурильщика на сезон'
+  );
+  expect(screen.queryByText('Дополнительные параметры')).toBeNull();
 });

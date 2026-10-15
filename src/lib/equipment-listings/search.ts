@@ -11,9 +11,10 @@ import {
   EQUIPMENT_KINDS,
   LISTING_CATEGORIES,
   PRICE_UNITS,
+  OFFER_TYPES,
   REGION_IDS,
-  isServiceCategory,
   kindsFor,
+  offerTypesFor,
   priceUnitsFor,
   serviceMethodsFor,
 } from './taxonomy';
@@ -38,7 +39,7 @@ const querySchema = z
       .max(160)
       .refine((value) => !/[\u0000-\u001f\u007f]/.test(value))
       .optional(),
-    offerType: z.enum(['RENT', 'SALE', 'SERVICE']).optional(),
+    offerType: z.enum(OFFER_TYPES).optional(),
     category: z.enum(LISTING_CATEGORIES).optional(),
     region: z.enum(REGION_IDS).optional(),
     kind: z.enum(EQUIPMENT_KINDS).optional(),
@@ -77,11 +78,10 @@ const querySchema = z
         path: [path],
         message: 'Incompatible search filter',
       });
-    const service = isServiceCategory(data.category);
     if (
       data.category &&
       data.offerType &&
-      (data.offerType === 'SERVICE') !== service
+      !offerTypesFor(data.category).includes(data.offerType)
     )
       issue('category');
     if (data.sort === 'PRICE_ASC') {
@@ -95,7 +95,7 @@ const querySchema = z
       issue('coreSize');
     if (data.minYear && data.maxYear && data.minYear > data.maxYear)
       issue('minYear');
-    if (data.offerType && data.offerType !== 'SALE') {
+    if (data.offerType && !['SALE', 'WANTED'].includes(data.offerType)) {
       for (const field of ['machineCondition', 'minYear', 'maxYear'] as const)
         if (data[field] !== undefined) issue(field);
     }

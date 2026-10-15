@@ -1,6 +1,6 @@
 import { translate } from '@/lib/i18n/translations';
 import { regionLabel } from '@/lib/data/filter-config';
-import { isServiceCategory } from './taxonomy';
+import { groupOf } from './taxonomy';
 import type { PublicEquipmentListing } from './catalog-repository';
 
 /** Display helpers shared by the public catalogue card and listing page. */
@@ -85,20 +85,24 @@ export function priceText(listing: Listing, locale: string): string {
   }).trim();
 }
 
-/** Small uppercase tag: "Техника · Аренда" / "Услуги · Геофизика". */
+/** Small uppercase tag: "Техника · Аренда" / "Услуги · Геофизика" / "Люди · Вакансия". */
 export function cardTag(listing: Listing, locale: string): string {
-  const service = isServiceCategory(listing.category);
-  return [
-    translate(
-      locale,
-      service
-        ? 'equipmentCatalog.groupService'
-        : 'equipmentCatalog.groupEquipment'
-    ),
-    service
-      ? intakeLabel(locale, String(listing.category))
-      : intakeLabel(locale, String(listing.offerType)),
-  ].join(' · ');
+  const group = groupOf(listing.category) ?? 'machinery';
+  const wanted = listing.offerType === 'WANTED';
+  const detail =
+    group === 'people'
+      ? translate(
+          locale,
+          `equipmentCatalog.${wanted ? 'vacancy' : 'lookingForWork'}`
+        )
+      : wanted
+        ? intakeLabel(locale, 'WANTED')
+        : group === 'services'
+          ? intakeLabel(locale, String(listing.category))
+          : intakeLabel(locale, String(listing.offerType));
+  return [translate(locale, `equipmentIntake.groups.${group}`), detail].join(
+    ' · '
+  );
 }
 
 /** The one or two most useful figures for a card, by section. */

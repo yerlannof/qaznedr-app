@@ -3,12 +3,12 @@ import { translate } from '@/lib/i18n/translations';
 import { regionLabel } from '@/lib/data/filter-config';
 import type { PublicEquipmentListing } from '@/lib/equipment-listings/catalog-repository';
 import {
-  EQUIPMENT_CATEGORIES,
+  CATEGORY_GROUPS,
   REGION_IDS,
-  SERVICE_CATEGORIES,
-  isServiceCategory,
   kindsFor,
+  offerTypesFor,
   serviceMethodsFor,
+  type CategoryGroup,
 } from '@/lib/equipment-listings/taxonomy';
 import { codeLabel, intakeLabel } from '@/lib/equipment-listings/present';
 import AutoSubmitForm from './AutoSubmitForm';
@@ -52,12 +52,7 @@ export default function EquipmentCatalog({
   const base = `/${locale}/equipment`;
   const kinds = kindsFor(filters.category);
   const methods = serviceMethodsFor(filters.category);
-  const service = isServiceCategory(filters.category);
-  const offerTypes = filters.category
-    ? service
-      ? ['SERVICE']
-      : ['RENT', 'SALE']
-    : ['RENT', 'SALE', 'SERVICE'];
+  const offerTypes = offerTypesFor(filters.category);
   const pageHref = (page: number) => {
     const params = new URLSearchParams();
     for (const key of [
@@ -127,20 +122,18 @@ export default function EquipmentCatalog({
             className={selectClass}
           >
             <option value="">{t('all')}</option>
-            <optgroup label={t('groupEquipment')}>
-              {EQUIPMENT_CATEGORIES.map((category) => (
-                <option key={category} value={category}>
-                  {intakeLabel(locale, category)}
-                </option>
-              ))}
-            </optgroup>
-            <optgroup label={t('groupService')}>
-              {SERVICE_CATEGORIES.map((category) => (
-                <option key={category} value={category}>
-                  {intakeLabel(locale, category)}
-                </option>
-              ))}
-            </optgroup>
+            {(Object.keys(CATEGORY_GROUPS) as CategoryGroup[]).map((group) => (
+              <optgroup
+                key={group}
+                label={intakeLabel(locale, `groups.${group}`)}
+              >
+                {CATEGORY_GROUPS[group].map((category) => (
+                  <option key={category} value={category}>
+                    {intakeLabel(locale, category)}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
           </select>
         </label>
         {offerTypes.length > 1 && (

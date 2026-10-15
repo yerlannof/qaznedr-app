@@ -1,4 +1,6 @@
 import { notFound } from 'next/navigation';
+import Navigation from '@/components/layouts/Navigation';
+import Footer from '@/components/layouts/Footer';
 import { emailLinkEnabled } from '@/lib/auth/email-link';
 import { EquipmentIntake } from '@/components/equipment/EquipmentIntake';
 import { buildPageMetadata } from '@/lib/seo/metadata';
@@ -36,10 +38,16 @@ export default async function Page({ params }: Props) {
       process.env.GOOGLE_CLIENT_SECRET
   );
   return (
-    <EquipmentIntake
-      locale={locale}
-      googleEnabled={googleEnabled}
-      emailEnabled={emailLinkEnabled()}
-    />
+    <>
+      <Navigation />
+      <main className="bg-brand-bg pt-20 text-brand-ink lg:pt-24">
+        <EquipmentIntake
+          locale={locale}
+          googleEnabled={googleEnabled}
+          emailEnabled={emailLinkEnabled()}
+        />
+      </main>
+      <Footer />
+    </>
   );
 }

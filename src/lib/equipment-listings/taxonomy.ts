@@ -46,6 +46,8 @@ export const EQUIPMENT_CATEGORIES = [
   'compressor', // compressors and pumps
   'transport',
   'camp', // field camp: trailers, generators, lighting
+  'tools', // drilling tools, consumables and spare parts
+  'instruments', // field and lab instruments
 ] as const;
 export const SERVICE_CATEGORIES = [
   'drillService',
@@ -57,17 +59,56 @@ export const SERVICE_CATEGORIES = [
   'designService',
   'geoService', // other geological services
 ] as const;
+/** People: CVs (offer SERVICE) and vacancies (offer WANTED). */
+export const PEOPLE_CATEGORIES = ['staff'] as const;
 export type EquipmentCategory = (typeof EQUIPMENT_CATEGORIES)[number];
 export type ServiceCategory = (typeof SERVICE_CATEGORIES)[number];
-export type ListingCategory = EquipmentCategory | ServiceCategory;
+export type PeopleCategory = (typeof PEOPLE_CATEGORIES)[number];
+export type ListingCategory =
+  | EquipmentCategory
+  | ServiceCategory
+  | PeopleCategory;
 export const LISTING_CATEGORIES = [
   ...EQUIPMENT_CATEGORIES,
   ...SERVICE_CATEGORIES,
+  ...PEOPLE_CATEGORIES,
 ] as const;
 
 export function isServiceCategory(category: unknown): boolean {
   return (SERVICE_CATEGORIES as readonly unknown[]).includes(category);
 }
+export function isPeopleCategory(category: unknown): boolean {
+  return (PEOPLE_CATEGORIES as readonly unknown[]).includes(category);
+}
+
+/** Groups shown in the intake and catalogue, in display order. */
+export const CATEGORY_GROUPS = {
+  machinery: ['drill', 'excavator', 'compressor', 'transport', 'camp'],
+  toolsInstruments: ['tools', 'instruments'],
+  services: SERVICE_CATEGORIES,
+  people: PEOPLE_CATEGORIES,
+} as const;
+export type CategoryGroup = keyof typeof CATEGORY_GROUPS;
+export function groupOf(category: unknown): CategoryGroup | null {
+  for (const [group, items] of Object.entries(CATEGORY_GROUPS))
+    if ((items as readonly unknown[]).includes(category))
+      return group as CategoryGroup;
+  return null;
+}
+
+/** WANTED is a request ("ищу"): equipment to rent/buy, a contractor, or staff. */
+export const OFFER_TYPES = ['RENT', 'SALE', 'SERVICE', 'WANTED'] as const;
+export type OfferType = (typeof OFFER_TYPES)[number];
+export function offerTypesFor(category: unknown): readonly OfferType[] {
+  if (category === 'tools') return ['SALE', 'WANTED'];
+  if (isServiceCategory(category) || isPeopleCategory(category))
+    return ['SERVICE', 'WANTED'];
+  if ((EQUIPMENT_CATEGORIES as readonly unknown[]).includes(category))
+    return ['RENT', 'SALE', 'WANTED'];
+  return OFFER_TYPES;
+}
+
+export const WORK_FORMATS = ['ROTATION', 'PERMANENT', 'PROJECT'] as const;
 
 /** Machine type inside an equipment section; required on submission where listed. */
 export const CATEGORY_KINDS = {
@@ -83,7 +124,41 @@ export const CATEGORY_KINDS = {
     'OTHER',
   ],
   camp: ['CAMP_TRAILER', 'GENERATOR', 'LIGHT_TOWER', 'WATER_TANK', 'OTHER'],
-} as const satisfies Partial<Record<EquipmentCategory, readonly string[]>>;
+  tools: [
+    'CORE_BITS',
+    'DRILL_RODS',
+    'CORE_BARRELS',
+    'CASING',
+    'CORE_BOXES',
+    'DRILLING_FLUIDS',
+    'SPARE_PARTS',
+    'OTHER',
+  ],
+  instruments: [
+    'GEOPHYSICAL_INSTRUMENT',
+    'GNSS_RECEIVER',
+    'DRONE',
+    'XRF_ANALYZER',
+    'LAB_EQUIPMENT',
+    'SAMPLE_PREP_EQUIPMENT',
+    'OTHER',
+  ],
+  staff: [
+    'GEOLOGIST',
+    'DRILLER',
+    'DRILLER_HELPER',
+    'GEOPHYSICIST',
+    'SURVEYOR',
+    'LAB_TECHNICIAN',
+    'MINING_ENGINEER',
+    'MACHINE_OPERATOR',
+    'DRIVER',
+    'CAMP_STAFF',
+    'OTHER',
+  ],
+} as const satisfies Partial<
+  Record<EquipmentCategory | PeopleCategory, readonly string[]>
+>;
 export const EQUIPMENT_KINDS = [
   ...new Set(Object.values(CATEGORY_KINDS).flat()),
 ] as [string, ...string[]];
@@ -195,6 +270,7 @@ export const PRICE_UNITS = [
   'SAMPLE',
   'LINE_KM',
   'HECTARE',
+  'MONTH',
 ] as const;
 export type PriceUnit = (typeof PRICE_UNITS)[number];
 
@@ -212,9 +288,13 @@ const serviceUnitExtras: Partial<Record<ServiceCategory, PriceUnit[]>> = {
  */
 export function priceUnitsFor(
   category: unknown,
-  offerType?: 'RENT' | 'SALE' | 'SERVICE'
+  offerType?: OfferType
 ): readonly PriceUnit[] {
+  if (isPeopleCategory(category)) return ['SHIFT', 'DAY', 'MONTH'];
+  if (category === 'tools') return ['ITEM'];
   const service = isServiceCategory(category);
+  // A request states a budget in the same units its offers use.
+  if (offerType === 'WANTED') return priceUnitsFor(category);
   if (offerType === 'SALE') return service ? [] : ['ITEM'];
   if (offerType === 'RENT') return service ? [] : ['HOUR', 'SHIFT', 'DAY'];
   if (offerType === 'SERVICE' || service) {

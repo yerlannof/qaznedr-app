@@ -15,8 +15,12 @@ import {
   PRICE_UNITS,
   REGION_IDS,
   SERVICE_AREAS,
+  OFFER_TYPES,
+  WORK_FORMATS,
+  isPeopleCategory,
   isServiceCategory,
   kindsFor,
+  offerTypesFor,
   priceUnitsFor,
   serviceMethodsFor,
 } from './taxonomy';
@@ -54,7 +58,7 @@ const capability = z
 
 const fields = z
   .object({
-    offerType: z.enum(['RENT', 'SALE', 'SERVICE']).optional(),
+    offerType: z.enum(OFFER_TYPES).optional(),
     category: z.enum(LISTING_CATEGORIES).optional(),
     title: shortText.optional(),
     description: z.string().trim().max(5000).optional(),
@@ -122,6 +126,8 @@ const fields = z
       .optional(),
     ownCrew: z.boolean().optional(),
     powerKw: bounded(5000).optional(),
+    experienceYears: z.number().int().min(0).max(60).optional(),
+    workFormat: z.enum(WORK_FORMATS).optional(),
   })
   .strict();
 
@@ -138,15 +144,23 @@ function compatible(
       path: [path],
       message,
     });
-  const isService = isServiceCategory(data.category);
-  if (data.offerType === 'SERVICE' && data.category && !isService)
-    issue('category', 'Service requires a service category');
-  if ((data.offerType === 'RENT' || data.offerType === 'SALE') && isService)
-    issue('category', 'Equipment offer requires equipment category');
+  const people = isPeopleCategory(data.category);
+  if (
+    data.offerType &&
+    data.category &&
+    !offerTypesFor(data.category).includes(data.offerType)
+  )
+    issue('category', 'Offer type is not valid for this category');
   if (data.offerType === 'SALE' && data.priceUnit && data.priceUnit !== 'ITEM')
     issue('priceUnit', 'Sale price must be per item');
-  if (data.offerType !== 'SALE' && data.offerType && data.priceUnit === 'ITEM')
+  if (
+    (data.offerType === 'RENT' || data.offerType === 'SERVICE') &&
+    data.priceUnit === 'ITEM'
+  )
     issue('priceUnit', 'Per-item price is only for sale');
+  if (!people)
+    for (const field of ['experienceYears', 'workFormat'] as const)
+      if (data[field] !== undefined) issue(field, 'Field is only for people');
   if (data.schemaVersion === 2) {
     for (const field of ['method', 'diameter', 'depth'] as const)
       if (data[field] !== undefined)
@@ -168,7 +182,7 @@ function compatible(
       data.chassis !== undefined
     )
       issue('chassis', 'Field is not relevant to category');
-    if (data.offerType === 'SERVICE') {
+    if (data.offerType === 'SERVICE' || people) {
       for (const field of ['brand', 'model', 'operator', 'delivery'] as const)
         if (data[field] !== undefined)
           issue(field, 'Field is not relevant to service');
@@ -199,12 +213,12 @@ function compatible(
     if (data.accreditationNumber !== undefined && data.accredited !== true)
       issue('accreditationNumber', 'Number requires accreditation');
     if (data.serviceArea !== undefined) {
-      if (data.offerType === 'SALE')
-        issue('serviceArea', 'Service area is not used for sale');
+      if (data.offerType === 'SALE' || data.offerType === 'WANTED')
+        issue('serviceArea', 'Service area is not used for sale or requests');
       if (data.serviceArea.includes('ALL_KZ') && data.serviceArea.length > 1)
         issue('serviceArea', 'Whole country excludes single regions');
     }
-    if (data.offerType !== 'SERVICE' && data.ownCrew !== undefined)
+    if ((data.offerType !== 'SERVICE' || people) && data.ownCrew !== undefined)
       issue('ownCrew', 'Field is only for services');
     if (data.category !== 'camp' && data.powerKw !== undefined)
       issue('powerKw', 'Field is not relevant to category');
@@ -251,7 +265,9 @@ function compatible(
           ? ['ITEM']
           : data.offerType === 'RENT'
             ? ['HOUR', 'SHIFT', 'DAY']
-            : ['HOUR', 'SHIFT', 'DAY', 'OBJECT'];
+            : data.offerType === 'WANTED'
+              ? ['HOUR', 'SHIFT', 'DAY', 'OBJECT', 'ITEM', 'MONTH']
+              : ['HOUR', 'SHIFT', 'DAY', 'OBJECT'];
       if (!allowed.includes(data.priceUnit))
         issue('priceUnit', 'Unit is not valid for this offer');
     }
@@ -280,6 +296,8 @@ function compatible(
       'serviceArea',
       'ownCrew',
       'powerKw',
+      'experienceYears',
+      'workFormat',
     ] as const)
       if (data[field] !== undefined)
         issue(field, 'Field requires schemaVersion 2');
@@ -319,9 +337,7 @@ const requiredFields = fields.required({
   offerType: true,
   category: true,
   title: true,
-  city: true,
   region: true,
-  availability: true,
   contactName: true,
   phone: true,
   contactVisibility: true,

@@ -29,12 +29,17 @@ import {
   DRILLING_SITES,
   DRILLING_TRAJECTORIES,
   MACHINE_CONDITIONS,
-  EQUIPMENT_CATEGORIES,
+  CATEGORY_GROUPS,
   REGION_IDS,
-  SERVICE_CATEGORIES,
+  WORK_FORMATS,
+  groupOf,
+  isPeopleCategory,
   kindsFor,
+  offerTypesFor,
   priceUnitsFor,
   serviceMethodsFor,
+  type CategoryGroup,
+  type OfferType,
 } from '@/lib/equipment-listings/taxonomy';
 import { regionLabel } from '@/lib/data/filter-config';
 import MarketplaceSignIn from './MarketplaceSignIn';
@@ -50,6 +55,7 @@ type FieldProps = {
   multiline?: boolean;
   required?: boolean;
 };
+const stepKey = 'qaznedr:equipment-intake:step';
 const photoTypes = new Set(['image/jpeg', 'image/png', 'image/webp']);
 const maxPhotoBytes = 3 * 1024 * 1024;
 const storageKey = 'qaznedr:equipment-intake:v2';
@@ -152,6 +158,8 @@ export function EquipmentIntake({
   const ownerId = session?.user?.id ?? null;
   const [value, setValue] = useState<IntakeValue>(emptyIntake);
   const [step, setStep] = useState(1);
+  const offerRef = useRef<HTMLFieldSetElement>(null);
+  const scrollToOfferRef = useRef(false);
   const [errors, setErrors] = useState<string[]>([]);
   const [notice, setNotice] = useState('');
   const [busy, setBusy] = useState(false);
@@ -228,24 +236,24 @@ export function EquipmentIntake({
         ({
           ...old,
           offerType,
-          category: '',
           priceUnit: '',
-          kind: '',
-          accredited: '',
-          accreditationNumber: '',
-          capabilities: [],
-          purposes: [],
-          serviceMethods: [],
         }) as unknown as IntakeValue
     );
     setErrors([]);
   };
   const changeCategory = (category: string) => {
+    scrollToOfferRef.current = true;
     setValue(
       (old) =>
         ({
           ...old,
           category,
+          // Keep the chosen action when the new section allows it.
+          offerType: offerTypesFor(category).includes(
+            old.offerType as OfferType
+          )
+            ? old.offerType
+            : '',
           priceUnit: '',
           kind: '',
           accredited: '',
@@ -272,6 +280,7 @@ export function EquipmentIntake({
     const priorOwner = storage.get(identityKey);
     if (priorOwner && priorOwner !== ownerId) {
       storage.remove(storageKey);
+      storage.remove(stepKey);
       const blank = emptyIntake();
       switchedValueRef.current = blank;
       setValue(blank);
@@ -299,7 +308,18 @@ export function EquipmentIntake({
           };
           if ((!parsed.ownerId || parsed.ownerId === ownerId) && parsed.value) {
             const restored = restoreSafe(parsed.value);
-            if (restored) setValue(restored);
+            if (restored) {
+              setValue(restored);
+              // Return to the step the visitor left for the sign-in page.
+              const saved = Number(storage.get(stepKey));
+              if (
+                Number.isInteger(saved) &&
+                saved > 1 &&
+                saved <= 4 &&
+                !validateIntakeStep(restored, saved - 1).length
+              )
+                setStep(saved);
+            }
           }
         }
       } catch {
@@ -370,10 +390,11 @@ export function EquipmentIntake({
     } = value;
     try {
       storage.set(storageKey, JSON.stringify({ ownerId, value: safe }));
+      storage.set(stepKey, String(step));
     } catch {
       /* storage may be unavailable */
     }
-  }, [value, ownerId, storageReady, authStatus]);
+  }, [value, ownerId, storageReady, authStatus, step]);
 
   useEffect(() => {
     const client = clientRef.current;
@@ -456,8 +477,61 @@ export function EquipmentIntake({
     t,
   ]);
 
-  const categories: readonly string[] =
-    value.offerType === 'SERVICE' ? SERVICE_CATEGORIES : EQUIPMENT_CATEGORIES;
+  // The section list is long on phones: bring the next question into view.
+  useEffect(() => {
+    if (!scrollToOfferRef.current || !offerRef.current) return;
+    scrollToOfferRef.current = false;
+    const reduce = window.matchMedia?.(
+      '(prefers-reduced-motion: reduce)'
+    )?.matches;
+    offerRef.current.scrollIntoView?.({
+      behavior: reduce ? 'auto' : 'smooth',
+      block: 'center',
+    });
+  }, [value.category]);
+  const group = groupOf(value.category);
+  const people = isPeopleCategory(value.category);
+  const wanted = value.offerType === 'WANTED';
+  const choiceGroup =
+    value.category === 'tools'
+      ? 'tools'
+      : group === 'toolsInstruments'
+        ? 'machinery'
+        : group;
+  const labelFor = (name: string) => {
+    if (name === 'title') return t('listingTitle');
+    if (name === 'kind' && people) return t('profession');
+    if (name === 'price')
+      return t(
+        people
+          ? wanted
+            ? 'salaryOffered'
+            : 'salaryWanted'
+          : wanted
+            ? 'budget'
+            : 'price'
+      );
+    if (name === 'availability') return t(wanted ? 'neededWhen' : name);
+    return t(name);
+  };
+  const placeholderFor = (name: string): string | undefined => {
+    if (name === 'title')
+      return t(
+        'titleExample.' +
+          (people
+            ? wanted
+              ? 'vacancy'
+              : 'cv'
+            : wanted
+              ? 'wanted'
+              : (group ?? 'machinery'))
+      );
+    if (name === 'city') return t('cityExample');
+    if (name === 'availability')
+      return t(wanted ? 'neededExample' : 'availabilityExample');
+    if (name === 'phone') return t('phoneExample');
+    return undefined;
+  };
   const kinds = kindsFor(value.category);
   const serviceMethods = serviceMethodsFor(value.category);
   const toggleList = (
@@ -529,7 +603,7 @@ export function EquipmentIntake({
   }: FieldProps) => (
     <label className="block space-y-2 text-sm font-semibold text-brand-ink">
       <span>
-        {t(name === 'title' ? 'listingTitle' : name)}
+        {labelFor(name)}
         {required ? ' *' : ''}
       </span>
       {multiline ? (
@@ -537,14 +611,17 @@ export function EquipmentIntake({
           className={inputClass}
           value={value[name] ?? ''}
           onChange={(event) => change(name, event.target.value)}
+          placeholder={placeholderFor(name)}
           rows={3}
         />
       ) : (
         <input
           className={inputClass}
           type={type}
+          inputMode={name === 'phone' ? 'tel' : undefined}
           value={value[name] ?? ''}
           onChange={(event) => change(name, event.target.value)}
+          placeholder={placeholderFor(name)}
           min={type === 'number' ? '0' : undefined}
           step={type === 'number' ? 'any' : undefined}
         />
@@ -567,7 +644,7 @@ export function EquipmentIntake({
   }) => (
     <label className="block space-y-2 text-sm font-semibold text-brand-ink">
       <span>
-        {t(name === 'title' ? 'listingTitle' : name)}
+        {labelFor(name)}
         {required ? ' *' : ''}
       </span>
       <select
@@ -935,51 +1012,40 @@ export function EquipmentIntake({
               {t(['', 'offers', 'details', 'contact', 'preview'][step])}
             </h2>
             {step === 1 && (
-              <div className="space-y-5">
+              <div className="space-y-6">
                 <fieldset>
-                  <legend className="mb-2 font-semibold">
-                    {t('offerType')}
+                  <legend className="mb-3 font-semibold">
+                    {t('whatYouHave')}
                   </legend>
-                  <div className="grid gap-2 sm:grid-cols-3">
-                    {['RENT', 'SALE', 'SERVICE'].map((offer) => (
-                      <label
-                        key={offer}
-                        className={`${buttonClass} flex items-center gap-3`}
-                      >
-                        <input
-                          type="radio"
-                          name="offerType"
-                          value={offer}
-                          checked={value.offerType === offer}
-                          onChange={() => changeOffer(offer)}
-                        />
-                        {t(offer)}
-                      </label>
-                    ))}
+                  <div className="space-y-5">
+                    {(Object.keys(CATEGORY_GROUPS) as CategoryGroup[]).map(
+                      (groupKey) => (
+                        <div key={groupKey}>
+                          <p className="mb-2 text-sm font-semibold text-brand-muted">
+                            {t(`groups.${groupKey}`)}
+                          </p>
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {CATEGORY_GROUPS[groupKey].map((category) => (
+                              <label
+                                key={category}
+                                className={`${buttonClass} flex items-center gap-3`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="category"
+                                  value={category}
+                                  checked={value.category === category}
+                                  onChange={() => changeCategory(category)}
+                                />
+                                {t(category)}
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    )}
                   </div>
-                </fieldset>
-                <fieldset>
-                  <legend className="mb-2 font-semibold">
-                    {t('category')}
-                  </legend>
-                  <div className="grid gap-2 sm:grid-cols-2">
-                    {categories.map((category) => (
-                      <label
-                        key={category}
-                        className={`${buttonClass} flex items-center gap-3`}
-                      >
-                        <input
-                          type="radio"
-                          name="category"
-                          value={category}
-                          checked={value.category === category}
-                          onChange={() => changeCategory(category)}
-                        />
-                        {t(category)}
-                      </label>
-                    ))}
-                  </div>
-                  {errors.includes('category') && (
+                  {errors.includes('category') && !value.category && (
                     <p
                       role="alert"
                       className="mt-2 text-red-700 dark:text-red-300"
@@ -988,6 +1054,38 @@ export function EquipmentIntake({
                     </p>
                   )}
                 </fieldset>
+                {value.category && (
+                  <fieldset ref={offerRef}>
+                    <legend className="mb-2 font-semibold">
+                      {t('whatYouWant')}
+                    </legend>
+                    <div className="grid gap-2">
+                      {offerTypesFor(value.category).map((offer) => (
+                        <label
+                          key={offer}
+                          className={`${buttonClass} flex items-center gap-3`}
+                        >
+                          <input
+                            type="radio"
+                            name="offerType"
+                            value={offer}
+                            checked={value.offerType === offer}
+                            onChange={() => changeOffer(offer)}
+                          />
+                          {t(`offerChoice.${choiceGroup}.${offer}`)}
+                        </label>
+                      ))}
+                    </div>
+                    {errors.includes('category') && !value.offerType && (
+                      <p
+                        role="alert"
+                        className="mt-2 text-red-700 dark:text-red-300"
+                      >
+                        {t('chooseOffer')}
+                      </p>
+                    )}
+                  </fieldset>
+                )}
               </div>
             )}
             {step === 2 && (
@@ -1019,9 +1117,15 @@ export function EquipmentIntake({
                       </span>
                     )}
                   </label>
-                  {field({ name: 'city', required: true })}
+                  {field({ name: 'city' })}
                 </div>
-                {field({ name: 'availability', required: true })}
+                {people && (
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {field({ name: 'experienceYears', type: 'number' })}
+                    {select({ name: 'workFormat', values: WORK_FORMATS })}
+                  </div>
+                )}
+                {field({ name: 'availability' })}
                 <div className="grid gap-4 sm:grid-cols-3">
                   {field({ name: 'price', type: 'number' })}
                   {value.price.trim() && (
@@ -1054,9 +1158,10 @@ export function EquipmentIntake({
                   </div>
                 )}
                 {value.offerType === 'SERVICE' &&
+                  !people &&
                   select({ name: 'ownCrew', values: ['true', 'false'] })}
-                {value.offerType &&
-                  value.offerType !== 'SALE' &&
+                {(value.offerType === 'RENT' ||
+                  value.offerType === 'SERVICE') &&
                   checklist('serviceArea', ['ALL_KZ', ...REGION_IDS], (item) =>
                     item === 'ALL_KZ'
                       ? labelCode(item)
@@ -1254,58 +1359,60 @@ export function EquipmentIntake({
                     </details>
                   </div>
                 )}
-                <details className="border-t border-brand-line pt-3">
-                  <summary className="min-h-11 cursor-pointer font-semibold">
-                    {t('technicalExtra')}
-                  </summary>
-                  <div className="mt-3 space-y-4">
-                    {value.category === 'excavator' && (
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        {field({ name: 'bucket', type: 'number' })}
-                        {field({ name: 'mass', type: 'number' })}
-                      </div>
-                    )}
-                    {value.category === 'compressor' && (
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        {field({ name: 'pressure', type: 'number' })}
-                        {field({ name: 'flow', type: 'number' })}
-                      </div>
-                    )}
-                    {value.category === 'transport' &&
-                      field({ name: 'payload', type: 'number' })}
-                    {value.category === 'camp' &&
-                      field({ name: 'powerKw', type: 'number' })}
-                    {value.offerType !== 'SERVICE' && (
-                      <>
+                {!people && (
+                  <details className="border-t border-brand-line pt-3">
+                    <summary className="min-h-11 cursor-pointer font-semibold">
+                      {t('technicalExtra')}
+                    </summary>
+                    <div className="mt-3 space-y-4">
+                      {value.category === 'excavator' && (
                         <div className="grid gap-4 sm:grid-cols-2">
-                          {field({ name: 'brand' })}
-                          {field({ name: 'model' })}
+                          {field({ name: 'bucket', type: 'number' })}
+                          {field({ name: 'mass', type: 'number' })}
                         </div>
-                        {['drill', 'excavator'].includes(value.category) &&
-                          select({ name: 'chassis', values: CHASSIS_TYPES })}
+                      )}
+                      {value.category === 'compressor' && (
                         <div className="grid gap-4 sm:grid-cols-2">
+                          {field({ name: 'pressure', type: 'number' })}
+                          {field({ name: 'flow', type: 'number' })}
+                        </div>
+                      )}
+                      {value.category === 'transport' &&
+                        field({ name: 'payload', type: 'number' })}
+                      {value.category === 'camp' &&
+                        field({ name: 'powerKw', type: 'number' })}
+                      {value.offerType !== 'SERVICE' && (
+                        <>
+                          <div className="grid gap-4 sm:grid-cols-2">
+                            {field({ name: 'brand' })}
+                            {field({ name: 'model' })}
+                          </div>
+                          {['drill', 'excavator'].includes(value.category) &&
+                            select({ name: 'chassis', values: CHASSIS_TYPES })}
+                          <div className="grid gap-4 sm:grid-cols-2">
+                            {select({
+                              name: 'operator',
+                              values: ['true', 'false'],
+                            })}
+                            {select({
+                              name: 'delivery',
+                              values: ['true', 'false'],
+                            })}
+                          </div>
+                        </>
+                      )}
+                      {value.offerType === 'SALE' && (
+                        <div className="grid gap-4 sm:grid-cols-2">
+                          {field({ name: 'machineYear', type: 'number' })}
                           {select({
-                            name: 'operator',
-                            values: ['true', 'false'],
-                          })}
-                          {select({
-                            name: 'delivery',
-                            values: ['true', 'false'],
+                            name: 'machineCondition',
+                            values: MACHINE_CONDITIONS,
                           })}
                         </div>
-                      </>
-                    )}
-                    {value.offerType === 'SALE' && (
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        {field({ name: 'machineYear', type: 'number' })}
-                        {select({
-                          name: 'machineCondition',
-                          values: MACHINE_CONDITIONS,
-                        })}
-                      </div>
-                    )}
-                  </div>
-                </details>
+                      )}
+                    </div>
+                  </details>
+                )}
                 <div className="border-t border-brand-line pt-5">
                   <h3 className="mb-2 font-semibold">{t('photos')}</h3>
                   <p className="mb-3 text-sm text-brand-muted">

@@ -3,7 +3,31 @@ import {
   ownerSubmissionSchema,
   type OwnerDraft,
 } from './domain';
-import { DRILLING_METHODS, kindsFor, serviceMethodsFor } from './taxonomy';
+import {
+  DRILLING_METHODS,
+  isPeopleCategory,
+  kindsFor,
+  serviceMethodsFor,
+} from './taxonomy';
+
+/**
+ * Kazakhstan numbers as people type them: 8 701 123 45 67, 7012345678,
+ * +7 (701) 123-45-67. Anything else is kept as typed for validation.
+ */
+export function normalizePhone(raw: string): string {
+  const text = raw.trim();
+  const digits = text.replace(/\D/g, '');
+  if (text.startsWith('+')) return `+${digits}`;
+  if (digits.length === 11 && /^[78]/.test(digits))
+    return `+7${digits.slice(1)}`;
+  if (digits.length === 10 && digits.startsWith('7')) return `+7${digits}`;
+  return text;
+}
+export function validPhone(raw: string): boolean {
+  const phone = normalizePhone(raw);
+  const digits = phone.replace(/\D/g, '').length;
+  return /^\+\d[\d\s()\-]*$/.test(phone) && digits >= 7 && digits <= 15;
+}
 
 export type IntakeCapability = {
   method: string;
@@ -57,6 +81,8 @@ export function emptyIntake(): IntakeValue {
     accreditationNumber: '',
     ownCrew: '',
     powerKw: '',
+    experienceYears: '',
+    workFormat: '',
     capabilities: [],
     purposes: [],
     serviceMethods: [],
@@ -89,6 +115,7 @@ const numberFields = [
   'mass',
   'machineYear',
   'powerKw',
+  'experienceYears',
 ] as const;
 const selectFields = [
   'offerType',
@@ -101,6 +128,7 @@ const selectFields = [
   'site',
   'contactVisibility',
   'kind',
+  'workFormat',
 ] as const;
 const arrayFields = ['purposes', 'serviceMethods', 'serviceArea'] as const;
 
@@ -128,10 +156,13 @@ export function relevantFields(value: IntakeValue): Set<string> {
   if (value.category === 'compressor')
     ['pressure', 'flow'].forEach((key) => fields.add(key));
   if (value.category === 'transport') fields.add('payload');
-  if (value.offerType === 'SERVICE')
+  const people = isPeopleCategory(value.category);
+  if (value.offerType === 'SERVICE' || people)
     ['brand', 'model', 'operator', 'delivery'].forEach((key) =>
       fields.delete(key)
     );
+  if (people) ['experienceYears', 'workFormat'].forEach((k) => fields.add(k));
+  else ['experienceYears', 'workFormat'].forEach((k) => fields.delete(k));
   if (!['drill', 'excavator'].includes(value.category))
     fields.delete('chassis');
   if (value.offerType !== 'SALE')
@@ -149,8 +180,9 @@ export function relevantFields(value: IntakeValue): Set<string> {
     if (value.accredited === 'true') fields.add('accreditationNumber');
     else fields.delete('accreditationNumber');
   } else fields.delete('accreditationNumber');
-  if (value.offerType && value.offerType !== 'SALE') fields.add('serviceArea');
-  if (value.offerType === 'SERVICE') fields.add('ownCrew');
+  if (value.offerType === 'RENT' || value.offerType === 'SERVICE')
+    fields.add('serviceArea');
+  if (value.offerType === 'SERVICE' && !people) fields.add('ownCrew');
   if (value.category === 'camp') fields.add('powerKw');
   return fields;
 }
@@ -160,7 +192,8 @@ export function normalizeIntake(value: IntakeValue): OwnerDraft {
   const result: Record<string, unknown> = { schemaVersion: 2 };
   for (const key of [...textFields, ...selectFields]) {
     if (relevant.has(key) && value[key]?.trim())
-      result[key] = value[key].trim();
+      result[key] =
+        key === 'phone' ? normalizePhone(value[key]) : value[key].trim();
   }
   for (const key of numberFields) {
     if (relevant.has(key) && value[key]?.trim()) {
@@ -198,7 +231,7 @@ export function validateIntakeStep(value: IntakeValue, step: number): string[] {
   if (step >= 1 && (!value.offerType || !value.category))
     errors.push('category');
   if (step >= 2) {
-    for (const key of ['title', 'region', 'city', 'availability'])
+    for (const key of ['title', 'region'])
       if (!value[key]?.trim()) errors.push(key);
     if (kindsFor(value.category).length && !value.kind) errors.push('kind');
     if (
@@ -211,8 +244,10 @@ export function validateIntakeStep(value: IntakeValue, step: number): string[] {
       const n = Number(value[key]);
       if (
         !Number.isFinite(n) ||
-        n <= 0 ||
-        (key === 'machineYear' && !Number.isInteger(n))
+        n < 0 ||
+        (n === 0 && key !== 'experienceYears') ||
+        (['machineYear', 'experienceYears'].includes(key) &&
+          !Number.isInteger(n))
       )
         errors.push(key);
     }
@@ -255,13 +290,7 @@ export function validateIntakeStep(value: IntakeValue, step: number): string[] {
   if (step >= 3) {
     for (const key of ['contactName', 'phone', 'contactVisibility'])
       if (!value[key]?.trim()) errors.push(key);
-    if (
-      value.phone &&
-      (!/^\+\d[\d\s()\-]*$/.test(value.phone.trim()) ||
-        value.phone.replace(/\D/g, '').length < 7 ||
-        value.phone.replace(/\D/g, '').length > 15)
-    )
-      errors.push('phone');
+    if (value.phone && !validPhone(value.phone)) errors.push('phone');
   }
   if (step >= 4) {
     const parsed = ownerSubmissionSchema.safeParse(normalizeIntake(value));

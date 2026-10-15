@@ -22,7 +22,10 @@ import {
   priceText,
   specRows,
 } from '@/lib/equipment-listings/present';
-import { isServiceCategory } from '@/lib/equipment-listings/taxonomy';
+import {
+  isPeopleCategory,
+  isServiceCategory,
+} from '@/lib/equipment-listings/taxonomy';
 
 export const dynamic = 'force-dynamic';
 
@@ -131,8 +134,11 @@ function listingJsonLd(
           value: row.value,
         })),
       };
+  // Requests and people are not products or services on offer.
+  const describable =
+    listing.offerType !== 'WANTED' && !isPeopleCategory(listing.category);
   return [
-    main,
+    ...(describable ? [main] : []),
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',

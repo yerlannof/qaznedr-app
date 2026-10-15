@@ -49,7 +49,7 @@ describe('catalogue presentation', () => {
 
   it('builds tags and key facts per section in the visitor language', () => {
     expect(cardTag(drill, 'ru')).toBe('Техника · Аренда');
-    expect(cardTag(lab, 'ru')).toBe('Услуги · Лаборатория, анализы');
+    expect(cardTag(lab, 'ru')).toBe('Услуги и работы · Лаборатория, анализы');
     expect(keyFacts(drill, 'ru')).toEqual(['Колонковое, 1\u00a0200 м']);
     expect(keyFacts(drill, 'zh')[0]).toContain('米');
     expect(keyFacts(lab, 'ru')).toEqual([

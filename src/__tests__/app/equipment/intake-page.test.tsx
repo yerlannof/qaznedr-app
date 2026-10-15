@@ -3,6 +3,8 @@ jest.mock(
   () => ({ EquipmentIntake: () => null }),
   { virtual: true }
 );
+jest.mock('@/components/layouts/Navigation', () => () => null);
+jest.mock('@/components/layouts/Footer', () => () => null);
 jest.mock('next/navigation', () => ({
   notFound: jest.fn(() => {
     throw new Error('404');
@@ -10,6 +12,17 @@ jest.mock('next/navigation', () => ({
 }));
 import Page, { generateMetadata } from '@/app/[locale]/equipment/new/page';
 import { notFound } from 'next/navigation';
+import { EquipmentIntake } from '@/components/equipment/EquipmentIntake';
+import type { ReactElement } from 'react';
+
+// The page wraps the form in the site header, <main> and footer.
+const form = (page: ReactElement) => {
+  const children = (page.props as { children: ReactElement[] }).children;
+  const main = children.find((child) => child.type === 'main')!;
+  const inner = (main.props as { children: ReactElement }).children;
+  expect(inner.type).toBe(EquipmentIntake);
+  return inner;
+};
 
 const params = Promise.resolve({ locale: 'ru' });
 const env = process.env;
@@ -35,12 +48,12 @@ it('stays closed unless owner API and intake flags are both enabled', async () =
 it('renders the approved form without pretending Google is configured', async () => {
   process.env.EQUIPMENT_MARKETPLACE_ENABLED = 'true';
   process.env.EQUIPMENT_INTAKE_ENABLED = 'true';
-  const element = await Page({ params });
+  const element = form(await Page({ params }));
   expect(element.props).toMatchObject({ locale: 'ru', googleEnabled: false });
   process.env.MARKETPLACE_IDENTITY_ENABLED = 'true';
   process.env.GOOGLE_CLIENT_ID = 'test';
   process.env.GOOGLE_CLIENT_SECRET = 'test';
-  expect((await Page({ params })).props.googleEnabled).toBe(true);
+  expect(form(await Page({ params })).props.googleEnabled).toBe(true);
 });
 it('keeps the private intake page outside search indexing', async () => {
   const metadata = await generateMetadata({ params });

@@ -35,6 +35,22 @@ describe('Navigation', () => {
       `/en/contact?guide=${GUIDE.geologicalMap}`
     );
   });
+  it('shows the equipment section only after launch', () => {
+    const { unmount } = render(<Navigation />);
+    expect(
+      screen.queryByRole('link', { name: 'Техника и услуги' })
+    ).not.toBeInTheDocument();
+    unmount();
+    process.env.NEXT_PUBLIC_EQUIPMENT_MENU = 'true';
+    try {
+      render(<Navigation />);
+      expect(
+        screen.getByRole('link', { name: 'Техника и услуги' })
+      ).toHaveAttribute('href', '/ru/equipment');
+    } finally {
+      delete process.env.NEXT_PUBLIC_EQUIPMENT_MENU;
+    }
+  });
   it('keeps the current path when changing language on desktop and mobile', () => {
     render(<Navigation />);
     expect(screen.getByRole('link', { name: 'English' })).toHaveAttribute(

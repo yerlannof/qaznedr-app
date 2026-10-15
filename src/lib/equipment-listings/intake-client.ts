@@ -36,7 +36,8 @@ export type IntakeErrorCode =
   | 'CONFLICT'
   | 'UNAVAILABLE'
   | 'INVALID'
-  | 'UNCERTAIN';
+  | 'UNCERTAIN'
+  | 'LIMIT';
 export class IntakeClientError extends Error {
   constructor(public readonly code: IntakeErrorCode) {
     super(code);
@@ -100,11 +101,13 @@ export class EquipmentDraftClient {
             ? 'UNAUTHORIZED'
             : response.status === 409
               ? 'CONFLICT'
-              : [400, 413, 415].includes(response.status)
-                ? 'INVALID'
-                : mutation && response.status >= 500
-                  ? 'UNCERTAIN'
-                  : 'UNAVAILABLE';
+              : response.status === 429
+                ? 'LIMIT'
+                : [400, 413, 415].includes(response.status)
+                  ? 'INVALID'
+                  : mutation && response.status >= 500
+                    ? 'UNCERTAIN'
+                    : 'UNAVAILABLE';
         throw new IntakeClientError(code);
       }
       const body = await response.json();

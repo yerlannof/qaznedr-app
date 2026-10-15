@@ -432,7 +432,9 @@ export function EquipmentIntake({
                 ? 'conflict'
                 : error.code === 'UNCERTAIN'
                   ? 'uncertain'
-                  : 'saveError'
+                  : error.code === 'LIMIT'
+                    ? 'limitReached'
+                    : 'saveError'
             )
           );
         })

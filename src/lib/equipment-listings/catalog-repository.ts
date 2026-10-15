@@ -139,3 +139,44 @@ export async function getActiveListing(id: string) {
 export type PublicEquipmentListing = NonNullable<
   Awaited<ReturnType<typeof getActiveListing>>
 >;
+
+const sitemapRow = z.object({
+  id: z.string().uuid(),
+  updated_at: z.string().datetime({ offset: true }),
+});
+
+/** Every published listing for the sitemap; throws rather than return a partial list. */
+export async function listActiveForSitemap(): Promise<
+  { id: string; updatedAt: string }[]
+> {
+  const client = await createServiceClient();
+  const { data, error } = await (
+    client as unknown as {
+      from(table: string): {
+        select(columns: string): {
+          eq(
+            column: string,
+            value: string
+          ): {
+            order(
+              column: string,
+              options: { ascending: boolean }
+            ): {
+              limit(count: number): Promise<{ data: unknown; error: unknown }>;
+            };
+          };
+        };
+      };
+    }
+  )
+    .from('equipment_listings')
+    .select('id,updated_at')
+    .eq('status', 'ACTIVE')
+    .order('updated_at', { ascending: false })
+    .limit(5000);
+  if (error) throw new Error('Equipment catalogue unavailable');
+  return z
+    .array(sitemapRow)
+    .parse(data)
+    .map((row) => ({ id: row.id, updatedAt: row.updated_at }));
+}

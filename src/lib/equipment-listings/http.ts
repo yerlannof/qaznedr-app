@@ -21,6 +21,9 @@ import {
 } from './moderation-repository';
 import { afterModeration, afterSubmission } from './submission-hooks';
 
+/** Abuse guard per account; the team can post more on request. */
+export const LISTING_QUOTA = { open: 20, perDay: 5 } as const;
+
 export type ItemContext = { params: Promise<{ id: string }> };
 type Action =
   | 'list'
@@ -160,6 +163,12 @@ export function equipmentHandler(action: Action) {
       }
       if (action === 'create') {
         const input = ownerDraftSchema.parse(await jsonBody(request));
+        const usage = await repository.quotaUsage(actorId);
+        if (
+          usage.open >= LISTING_QUOTA.open ||
+          usage.today >= LISTING_QUOTA.perDay
+        )
+          throw new HttpError(429, 'Listing limit reached');
         return response(
           { success: true, data: await repository.createDraft(actorId, input) },
           201

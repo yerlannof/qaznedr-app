@@ -23,6 +23,20 @@ describe('hiddenRouteRedirect', () => {
     expect(hiddenRouteRedirect(from)).toBe(to);
   });
 
+  it('sends the old equipment page to the new catalogue once it is open', () => {
+    process.env.EQUIPMENT_MARKETPLACE_ENABLED = 'true';
+    process.env.EQUIPMENT_CATALOG_ENABLED = 'true';
+    try {
+      expect(hiddenRouteRedirect('/kz/services/equipment')).toBe(
+        '/kz/equipment'
+      );
+      expect(hiddenRouteRedirect('/kz/services/catalog')).toBe('/kz/services');
+    } finally {
+      delete process.env.EQUIPMENT_MARKETPLACE_ENABLED;
+      delete process.env.EQUIPMENT_CATALOG_ENABLED;
+    }
+  });
+
   it.each([
     '/ru',
     '/ru/leads',

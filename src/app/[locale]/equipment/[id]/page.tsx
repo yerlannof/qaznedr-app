@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import EquipmentDetail from '@/components/equipment/catalog/EquipmentDetail';
@@ -27,9 +28,7 @@ export const dynamic = 'force-dynamic';
 
 type Props = { params: Promise<{ locale: string; id: string }> };
 
-const enabled = () =>
-  process.env.EQUIPMENT_MARKETPLACE_ENABLED === 'true' &&
-  process.env.EQUIPMENT_CATALOG_ENABLED === 'true';
+const enabled = equipmentCatalogEnabled;
 
 async function load(id: string): Promise<PublicEquipmentListing | null> {
   if (!enabled()) return null;

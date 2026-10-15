@@ -15,6 +15,7 @@ jest.mock('@/lib/equipment-listings/moderation-repository', () => ({
 }));
 jest.mock('@/lib/equipment-listings/repository', () => ({
   createDraft: jest.fn(),
+  quotaUsage: jest.fn(async () => ({ open: 0, today: 0 })),
   listByStatus: jest.fn(async () => []),
   getModeratable: jest.fn(),
   listOwned: jest.fn(),
@@ -280,6 +281,16 @@ it('creates a draft with the server owner and returns 201', async () => {
   expect(r.status).toBe(201);
   expect(repo.createDraft).toHaveBeenCalledWith('owner', { title: 'Draft' });
 });
+it.each([[{ open: 20, today: 0 }], [{ open: 3, today: 5 }]])(
+  'refuses new drafts over the account quota %o',
+  async (usage) => {
+    (repo.quotaUsage as jest.Mock).mockResolvedValueOnce(usage);
+    const r = await POST(req('POST', { title: 'Draft' }));
+    expect(r.status).toBe(429);
+    expect(repo.quotaUsage).toHaveBeenCalledWith('owner');
+    expect(repo.createDraft).not.toHaveBeenCalled();
+  }
+);
 it('rejects malformed JSON and strict action-body overrides', async () => {
   expect(
     (

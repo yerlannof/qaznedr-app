@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import EquipmentCatalog from '@/components/equipment/catalog/EquipmentCatalog';
@@ -25,9 +26,7 @@ type Props = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-const enabled = () =>
-  process.env.EQUIPMENT_MARKETPLACE_ENABLED === 'true' &&
-  process.env.EQUIPMENT_CATALOG_ENABLED === 'true';
+const enabled = equipmentCatalogEnabled;
 
 export async function generateMetadata({
   params,

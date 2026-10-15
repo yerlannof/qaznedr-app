@@ -99,6 +99,15 @@ it('stops automatic creation after an uncertain network outcome', async () => {
   expect(fetcher).toHaveBeenCalledTimes(1);
 });
 
+it('reports the account quota without blocking later saves', async () => {
+  fetcher
+    .mockImplementationOnce(() => reply(null, 429))
+    .mockImplementationOnce(() => reply(record(), 201));
+  const client = new EquipmentDraftClient(owner);
+  await expect(client.save(draft)).rejects.toMatchObject({ code: 'LIMIT' });
+  await expect(client.save(draft)).resolves.toBeTruthy();
+});
+
 it('stops conflict retries until a deliberate reload', async () => {
   fetcher
     .mockImplementationOnce(() => reply(record(), 201))

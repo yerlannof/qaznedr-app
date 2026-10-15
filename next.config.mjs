@@ -2,6 +2,14 @@ import crypto from 'crypto';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    // Build-time switch for the menu item; the routes check the server flags.
+    NEXT_PUBLIC_EQUIPMENT_MENU:
+      process.env.EQUIPMENT_MARKETPLACE_ENABLED === 'true' &&
+      process.env.EQUIPMENT_CATALOG_ENABLED === 'true'
+        ? 'true'
+        : 'false',
+  },
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 

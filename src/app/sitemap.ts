@@ -7,6 +7,8 @@ import { plotPath } from '@/lib/prospecting/present';
 import { LOCALES, localeUrl } from '@/lib/seo/site';
 import { loadSitemapLeadCodes } from '@/lib/seo/sitemap-leads';
 import { listPublishedOffers } from '@/lib/offers';
+import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
+import { listActiveForSitemap } from '@/lib/equipment-listings/catalog-repository';
 
 export const revalidate = 3600;
 
@@ -67,11 +69,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
+  // Closed until launch; once on, a failed read fails the sitemap like leads do.
+  const equipmentEntries: MetadataRoute.Sitemap = equipmentCatalogEnabled()
+    ? [
+        ...LOCALES.map((locale) => ({
+          url: localeUrl(locale, '/equipment'),
+          changeFrequency: 'daily' as const,
+          priority: 0.8,
+          alternates: { languages: buildLanguageAlternates('/equipment') },
+        })),
+        ...(await listActiveForSitemap()).flatMap((listing) =>
+          LOCALES.map((locale) => ({
+            url: localeUrl(locale, `/equipment/${listing.id}`),
+            lastModified: new Date(listing.updatedAt),
+            changeFrequency: 'weekly' as const,
+            priority: 0.7,
+            alternates: {
+              languages: buildLanguageAlternates(`/equipment/${listing.id}`),
+            },
+          }))
+        ),
+      ]
+    : [];
+
   return [
     ...staticEntries,
     ...insightEntries,
     ...leadEntries,
     ...offerEntries,
     ...plotEntries,
+    ...equipmentEntries,
   ];
 }

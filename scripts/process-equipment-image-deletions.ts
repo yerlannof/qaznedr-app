@@ -1,4 +1,4 @@
-/** Run manually after an explicit target review. Never scheduled by the app. */
+/** Manual run against an explicit target; production also runs /api/cron/equipment-images daily. */
 import { createClient } from '@supabase/supabase-js';
 import {
   createTimedCleanupFetch,

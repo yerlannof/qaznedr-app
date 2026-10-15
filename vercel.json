@@ -16,6 +16,9 @@
     },
     "src/app/api/**/*": {
       "maxDuration": 10
+    },
+    "src/app/api/cron/equipment-images/route.ts": {
+      "maxDuration": 60
     }
   },
   "regions": ["fra1"],
@@ -92,5 +95,11 @@
   ],
   "env": {
     "NEXT_TELEMETRY_DISABLED": "1"
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/equipment-images",
+      "schedule": "30 2 * * *"
+    }
+  ]
 }

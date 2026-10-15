@@ -182,6 +182,8 @@ export const translations = {
       photo: 'Фото {n}',
     },
     equipmentIntake: {
+      limitReached:
+        'Достигнут лимит: не больше 20 объявлений на аккаунт и 5 новых в сутки. Если нужно больше, напишите нам в WhatsApp.',
       storageUnavailable:
         'Хранилище браузера недоступно. Сохранение и отправка остановлены, чтобы не создать дубликат.',
       technicalExtra: 'Дополнительные параметры',
@@ -1668,6 +1670,8 @@ export const translations = {
       photo: '{n}-фото',
     },
     equipmentIntake: {
+      limitReached:
+        'Шекке жеттіңіз: бір аккаунтқа 20 хабарландырудан және тәулігіне 5 жаңасынан артық емес. Көбірек керек болса, бізге WhatsApp арқылы жазыңыз.',
       storageUnavailable:
         'Браузер жады қолжетімсіз. Қайталанатын жазба болмауы үшін сақтау мен жіберу тоқтатылды.',
       technicalExtra: 'Қосымша параметрлер',
@@ -3091,6 +3095,8 @@ export const translations = {
       photo: 'Photo {n}',
     },
     equipmentIntake: {
+      limitReached:
+        'Limit reached: up to 20 listings per account and 5 new ones a day. Message us on WhatsApp if you need more.',
       storageUnavailable:
         'Browser storage is unavailable. Saving and submission are paused to avoid duplicates.',
       technicalExtra: 'Additional parameters',
@@ -4474,6 +4480,8 @@ export const translations = {
       photo: '照片 {n}',
     },
     equipmentIntake: {
+      limitReached:
+        '已达上限：每个账户最多 20 条信息，每天最多新建 5 条。如需更多，请通过 WhatsApp 联系我们。',
       storageUnavailable:
         '浏览器存储不可用。已暂停保存和提交，以免生成重复信息。',
       technicalExtra: '其他参数',

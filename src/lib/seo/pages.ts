@@ -1,4 +1,5 @@
 import { LOCALES } from './site';
+import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 
 /** Indexable pages (without locale prefix). Drives sitemap.xml. */
 export const PUBLIC_PAGES = [
@@ -54,6 +55,9 @@ export function hiddenRouteRedirect(pathname: string): string | null {
   const [, locale, rest = ''] = match;
   for (const [prefix, target] of HIDDEN_ROUTE_REDIRECTS) {
     if (rest === prefix || rest.startsWith(`${prefix}/`)) {
+      // The old equipment page points to the new catalogue once it is open.
+      if (prefix === '/services/equipment' && equipmentCatalogEnabled())
+        return `/${locale}/equipment`;
       return `/${locale}${target}`;
     }
   }

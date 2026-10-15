@@ -1,5 +1,10 @@
 import robots from '@/app/robots';
 import sitemap from '@/app/sitemap';
+import { listActiveForSitemap } from '@/lib/equipment-listings/catalog-repository';
+
+jest.mock('@/lib/equipment-listings/catalog-repository', () => ({
+  listActiveForSitemap: jest.fn(),
+}));
 
 // Unit tests exercise the loader on every call; Next owns persistence/ISR.
 jest.mock('next/cache', () => ({
@@ -156,5 +161,44 @@ describe('sitemap', () => {
     expect(
       entries.find((e) => e.url.includes('/insights/'))?.lastModified
     ).toBeInstanceOf(Date);
+  });
+
+  describe('equipment catalogue', () => {
+    const listingId = '00000000-0000-4000-8000-000000000001';
+    afterEach(() => {
+      delete process.env.EQUIPMENT_MARKETPLACE_ENABLED;
+      delete process.env.EQUIPMENT_CATALOG_ENABLED;
+    });
+
+    it('stays out of the sitemap until launch', async () => {
+      global.fetch = jest.fn().mockResolvedValue(pageResponse());
+      const urls = (await sitemap()).map((e) => e.url);
+      expect(urls.some((u) => u.includes('/equipment'))).toBe(false);
+      expect(listActiveForSitemap).not.toHaveBeenCalled();
+    });
+
+    it('lists the catalogue and published listings once enabled', async () => {
+      process.env.EQUIPMENT_MARKETPLACE_ENABLED = 'true';
+      process.env.EQUIPMENT_CATALOG_ENABLED = 'true';
+      (listActiveForSitemap as jest.Mock).mockResolvedValue([
+        { id: listingId, updatedAt: '2026-10-16T08:00:00Z' },
+      ]);
+      global.fetch = jest.fn().mockResolvedValue(pageResponse());
+      const entries = await sitemap();
+      const urls = entries.map((e) => e.url);
+      expect(urls).toContain('https://qaznedr.kz/kz/equipment');
+      const entry = entries.find(
+        (e) => e.url === `https://qaznedr.kz/zh/equipment/${listingId}`
+      );
+      expect(entry?.lastModified).toEqual(new Date('2026-10-16T08:00:00Z'));
+    });
+
+    it('fails instead of serving a partial list', async () => {
+      process.env.EQUIPMENT_MARKETPLACE_ENABLED = 'true';
+      process.env.EQUIPMENT_CATALOG_ENABLED = 'true';
+      (listActiveForSitemap as jest.Mock).mockRejectedValue(new Error('down'));
+      global.fetch = jest.fn().mockResolvedValue(pageResponse());
+      await expect(sitemap()).rejects.toThrow('down');
+    });
   });
 });

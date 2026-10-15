@@ -18,11 +18,17 @@ const rowSchema = z.object({
   moderation_notes: z.string().nullable(),
 });
 
-type DbResult = { data: unknown; error: { code?: string } | null };
+type DbResult = {
+  data: unknown;
+  error: { code?: string } | null;
+  count?: number | null;
+};
 type Query = PromiseLike<DbResult> & {
-  select(columns: string): Query;
+  select(columns: string, options?: { count: 'exact'; head: boolean }): Query;
   insert(values: Record<string, unknown>): Query;
   eq(column: string, value: string): Query;
+  neq(column: string, value: string): Query;
+  gte(column: string, value: string): Query;
   order(column: string, options: { ascending: boolean }): Query;
   limit(count: number): Query;
   maybeSingle(): Promise<DbResult>;
@@ -102,6 +108,28 @@ export const equipmentRepository = {
       .single();
     check(result.error);
     return hydrate(result.data);
+  },
+
+  /** Open (non-archived) listings and drafts created in the last 24 hours. */
+  async quotaUsage(ownerId: string): Promise<{ open: number; today: number }> {
+    requireId(ownerId);
+    const db = await client();
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const [open, today] = await Promise.all([
+      db
+        .from('equipment_listings')
+        .select('id', { count: 'exact', head: true })
+        .eq('owner_id', ownerId)
+        .neq('status', 'ARCHIVED'),
+      db
+        .from('equipment_listings')
+        .select('id', { count: 'exact', head: true })
+        .eq('owner_id', ownerId)
+        .gte('created_at', since),
+    ]);
+    check(open.error);
+    check(today.error);
+    return { open: open.count ?? 0, today: today.count ?? 0 };
   },
 
   async listOwned(ownerId: string): Promise<EquipmentListing[]> {
@@ -222,6 +250,7 @@ export const equipmentRepository = {
 
 export const {
   createDraft,
+  quotaUsage,
   listOwned,
   getOwned,
   listPending,

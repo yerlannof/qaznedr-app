@@ -79,6 +79,14 @@ export default function Navigation({
       label: t('navigation.services'),
       href: guideServiceHref(locale, '/services', guide),
     },
+    ...(process.env.NEXT_PUBLIC_EQUIPMENT_MENU === 'true'
+      ? [
+          {
+            label: t('equipmentCatalog.eyebrow'),
+            href: `/${locale}/equipment`,
+          },
+        ]
+      : []),
     { label: t('navigation.insights'), href: `/${locale}/insights` },
     { label: t('navigation.about'), href: `/${locale}/about` },
   ];

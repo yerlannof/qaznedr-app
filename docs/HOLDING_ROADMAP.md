@@ -113,7 +113,14 @@ CNAME `send`, `_dmarc`) добавит держатель зоны (Мухтар
 (cron `/api/cron/equipment-digest`). Миграция `20261016_marketplace_engagement.sql`
 проверена локально (`scripts/test-marketplace-engagement.sql`), в прод применена 16.10 с «да» владельца (RLS, у anon доступа нет).
 Новые экраны (страница компании, форма отклика, подписка, вкладка «Компании») сделаны
-на существующих компонентах D2 и ещё не показаны владельцу — снимки до запуска.
+на существующих компонентах D2; владелец посмотрел снимки и принял (`APPROVED.md`, 16.10).
+**Пилот открыт 16.10:** с «да» владельца в Vercel production включены
+`EQUIPMENT_MARKETPLACE_ENABLED`, `EQUIPMENT_INTAKE_ENABLED`, `MARKETPLACE_IDENTITY_ENABLED`
+(каталог `EQUIPMENT_CATALOG_ENABLED` и пункт меню выключены — подача только по ссылке
+`/ru/equipment/new`). Страница `/[locale]/legal/privacy` — черновая редакция от 16.10, noindex,
+под кнопками входа строка согласия. Экран входа Google опубликован (In production; домен,
+политика и условия заполнены). План и приглашения RU/KZ: `docs/outreach/2026-10-16-marketplace-pilot.md`.
+Каталог и меню включать, когда опубликовано 15+ объявлений; затем IndexNow, llms.txt, реклама.
 (условия и конфиденциальность, пилот 10–20 объявлений, флаги, sitemap/llms/IndexNow,
 меню, публикация экрана Google OAuth).
 

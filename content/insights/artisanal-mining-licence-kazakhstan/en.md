@@ -11,8 +11,6 @@ This guide reflects rules checked on 29 September 2026. It is general informatio
 
 Under Article 263 of the Code on Subsoil and Subsoil Use (the Subsoil Code), one person may hold one artisanal mining licence. The right may neither be transferred to another person nor encumbered. An offer to “buy an existing artisanal mining licence” therefore needs particular scrutiny: an ordinary sale of this right is prohibited.
 
-If you are looking for work on a plot rather than a licence of your own, see [artisanal mining plots whose licence holders are looking for partners](/en/prospecting). There the partner works under a contract with the holder, and the licence right is not transferred to anyone.
-
 The licence is for manual work or low-power equipment within the legal limits. It does not replace an industrial mining licence. A foreign investor needs to consider another legal regime; see the [foreign-investor guide](/en/insights/foreign-investor-subsoil-rights-kazakhstan).
 
 The licence lasts three years and may be extended once for another three years if Article 268's conditions are met. The area must measure between 500 m² and 5 hectares (Article 269).

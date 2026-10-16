@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { INSIGHTS } from '@/lib/insights/registry';
 import { buildLanguageAlternates } from '@/lib/seo/metadata';
 import { PUBLIC_PAGES } from '@/lib/seo/pages';
+import { prospectingEnabled } from '@/lib/prospecting/flags';
 import { listPublicPlots } from '@/lib/prospecting/plots';
 import { plotPath } from '@/lib/prospecting/present';
 import { LOCALES, localeUrl } from '@/lib/seo/site';
@@ -15,7 +16,9 @@ export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
-    PUBLIC_PAGES.map((page) => ({
+    PUBLIC_PAGES.filter(
+      (page) => page !== '/prospecting' || prospectingEnabled()
+    ).map((page) => ({
       url: localeUrl(locale, page),
       changeFrequency: 'weekly' as const,
       priority: page === '' ? 1.0 : 0.8,

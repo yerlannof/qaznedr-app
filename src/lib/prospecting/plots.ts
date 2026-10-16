@@ -7,6 +7,7 @@ import {
   type Corner,
   type Point,
 } from './coords';
+import { prospectingEnabled } from './flags';
 
 // Prospecting licences (лицензии на старательство) whose holders look for
 // partners; QAZNEDR introduces the partner to the holder. Licence numbers and
@@ -89,11 +90,12 @@ export function isPublishable(plot: Plot): boolean {
 const ALL = parsePlotsFile(raw);
 const PUBLIC = ALL.filter(isPublishable);
 
+/** Plots shown on the site; none while the section is off (flags.ts). */
 export function listPublicPlots(): Plot[] {
-  return PUBLIC;
+  return prospectingEnabled() ? PUBLIC : [];
 }
 
 export function getPublicPlot(code: string): Plot | null {
   if (!PLOT_CODE.test(code)) return null;
-  return PUBLIC.find((p) => p.code === code) ?? null;
+  return listPublicPlots().find((p) => p.code === code) ?? null;
 }

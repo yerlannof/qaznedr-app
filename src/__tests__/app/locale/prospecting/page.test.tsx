@@ -135,3 +135,27 @@ describeLeak('holder names never reach public output', () => {
     }
   });
 });
+
+describe('while prospecting is switched off', () => {
+  const saved = process.env.PROSPECTING_ENABLED;
+  beforeEach(() => {
+    delete process.env.PROSPECTING_ENABLED;
+  });
+  afterEach(() => {
+    process.env.PROSPECTING_ENABLED = saved;
+  });
+
+  it('404s the plot pages', async () => {
+    await expect(render('ru', 'QN-P07')).rejects.toThrow('NEXT_NOT_FOUND');
+  });
+
+  it('404s the list page and keeps it out of the index', async () => {
+    await expect(
+      IndexPage({ params: Promise.resolve({ locale: 'ru' }) })
+    ).rejects.toThrow('NEXT_NOT_FOUND');
+    const meta = await indexMetadata({
+      params: Promise.resolve({ locale: 'ru' }),
+    });
+    expect(meta.robots).toEqual({ index: false, follow: false });
+  });
+});

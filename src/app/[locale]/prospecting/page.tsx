@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { ArrowRight, BookOpen } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
@@ -8,6 +9,7 @@ import ViewToggle from '@/components/catalog/ViewToggle';
 import { ProspectingGridCard } from '@/components/catalog/GridCards';
 import { getContactConfig } from '@/lib/config/contacts';
 import { GUIDE, insightHref } from '@/lib/insights/registry';
+import { prospectingEnabled } from '@/lib/prospecting/flags';
 import { listPublicPlots } from '@/lib/prospecting/plots';
 import { PROSPECTING_PATH, plotPath } from '@/lib/prospecting/present';
 import { getServerTranslation } from '@/lib/i18n/translations';
@@ -28,6 +30,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const locale = toLocale((await params).locale);
   const { t } = getServerTranslation(locale);
+  if (!prospectingEnabled()) {
+    return { robots: { index: false, follow: false } };
+  }
   return buildPageMetadata({
     locale,
     path: PROSPECTING_PATH,
@@ -43,6 +48,7 @@ export default async function ProspectingIndexPage({
   params: Params;
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
+  if (!prospectingEnabled()) notFound();
   const locale = toLocale((await params).locale);
   const view = (await searchParams)?.view === 'list' ? 'list' : 'grid';
   const { t } = getServerTranslation(locale);

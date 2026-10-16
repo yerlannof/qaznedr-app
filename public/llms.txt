@@ -20,16 +20,6 @@
 - A transfer of subsoil use rights in Kazakhstan, or of shares in a subsoil user, requires permission of the competent authority (Subsoil Code, articles 44–45), with exceptions listed in article 44(2), such as acquiring less than 25% of a subsoil user company.
 - Grade figures are labelled as average, spike or schlich values.
 
-## Artisanal mining plots (prospecting licences)
-Holders of artisanal mining licences (лицензии на старательство) for placer gold in Zhetysu, Zhambyl and East Kazakhstan regions are looking for partners to work the plots. QAZNEDR introduces a partner to the holder; the partner works under a contract with the holder. The licence right is not sold or transferred (Subsoil Code, art. 263), and the plots do not belong to QAZNEDR. Each plot page lists the licence number, term, area and corner coordinates as written in the licence; details are confirmed by the holder on the stated date. Gold content and output are not guaranteed.
-
-| Language | Plots |
-|---|---|
-| English | https://qaznedr.kz/en/prospecting |
-| 中文 | https://qaznedr.kz/zh/prospecting |
-| Русский | https://qaznedr.kz/ru/prospecting |
-| Қазақша | https://qaznedr.kz/kz/prospecting |
-
 ## Key pages
 | Language | Home | Areas and assets | Contact |
 |---|---|---|---|

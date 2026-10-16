@@ -5,6 +5,10 @@ import { loadEnvConfig } from '@next/env';
 // Load environment variables for testing
 loadEnvConfig(process.cwd());
 
+// Prospecting plots are off on the live site (src/lib/prospecting/flags.ts);
+// tests render them unless a test switches the flag off itself.
+process.env.PROSPECTING_ENABLED = 'true';
+
 // Polyfill for Node.js environment
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;

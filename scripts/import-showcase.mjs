@@ -12,13 +12,13 @@
 // Order: validate everything → archive withdrawn/dropped cards → upload scans
 // → upsert DRAFT rows → delete unreferenced scans. Several packages (metals
 // v1, coal) share the table and the bucket: archiving touches only rows of
-// this manifest.package, and scans of other packages' live rows are kept. New cards land as DRAFT and
+// this manifest.package, and scan cleanup only this package's folder. New cards land as DRAFT and
 // an existing status is never changed by import. Changing the content of an
 // already PUBLISHED card needs --update-published. --publish flips exactly the
 // package's active cards to PUBLISHED and refuses a rights check older than
 // RIGHTS_VALID_DAYS or a database that differs from the package.
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const args = process.argv.slice(2);
@@ -330,7 +330,8 @@ async function listBucket(prefix = '') {
 // ---------------------------------------------------------------- main
 const cards = json('cards.json');
 const manifest = json('manifest.json');
-const i18n = json('i18n.json');
+// A package may ship without reviewed translations (coal v1): Russian only.
+const i18n = existsSync(join(dir, 'i18n.json')) ? json('i18n.json') : {};
 const translationsReviewed = Boolean(i18n.reviewed?.by && i18n.reviewed?.at);
 verifyPackage(cards, manifest);
 console.log(
@@ -459,18 +460,12 @@ if (dryRun) {
   );
 }
 
-// 4. No scan outside the live packages stays reachable (any folder).
-const storagePath = (url) =>
-  decodeURIComponent(
-    url.split(`/object/public/${BUCKET}/`)[1]?.split('?')[0] ?? ''
-  );
-const referenced = new Set([
-  ...files.map(objectPath),
-  ...existing
-    .filter((r) => !ownPackage(r) && r.status !== 'ARCHIVED')
-    .flatMap((r) => (r.showcase?.images ?? []).map((i) => storagePath(i.url))),
-]);
-const staleFiles = (await listBucket()).filter((p) => !referenced.has(p));
+// 4. No scan of this package's folder outside its active cards stays
+// reachable. Other packages' folders are theirs to clean.
+const referenced = new Set(files.map(objectPath));
+const staleFiles = (await listBucket(pkgFolder)).filter(
+  (p) => !referenced.has(p)
+);
 if (staleFiles.length) {
   if (dryRun) console.log(`would delete ${staleFiles.join(', ')}`);
   else {

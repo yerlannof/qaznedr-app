@@ -56,7 +56,7 @@ function oneOf<T extends string>(allowed: readonly T[], raw: string[]): T[] {
   return raw.filter((v): v is T => (allowed as readonly string[]).includes(v));
 }
 
-const SYMBOL = /^(?:[A-Z][a-z]?|stone)$/;
+const SYMBOL = /^(?:[A-Z][a-z]?|stone|tuff|coal)$/;
 const REGION_ID = /^[a-z]+(?:-[a-z]+)*$/;
 
 export function parseCatalogParams(sp: RawParams): CatalogParams {

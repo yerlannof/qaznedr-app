@@ -439,7 +439,12 @@ export default async function LeadsCatalogPage({
                 </div>
               )}
 
-              {shownFinds.length > 0 && <ShowcaseDisclaimer locale={locale} />}
+              {shownFinds.length > 0 && (
+                <ShowcaseDisclaimer
+                  locale={locale}
+                  cards={shownFinds.map((i) => showcases.get(i.code)!)}
+                />
+              )}
             </section>
           </div>
         </div>

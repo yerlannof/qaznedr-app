@@ -63,7 +63,7 @@ export default function ShowcaseList({
           />
         ))}
       </div>
-      <ShowcaseDisclaimer locale={locale} />
+      <ShowcaseDisclaimer locale={locale} cards={cards} />
     </div>
   );
 }

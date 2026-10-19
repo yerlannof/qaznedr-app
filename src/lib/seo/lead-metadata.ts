@@ -26,6 +26,8 @@ const MINERALS: Record<string, Record<Locale, string>> = {
   MN: { ru: 'Марганец', kz: 'Марганец', en: 'Manganese', zh: '锰' },
   CR: { ru: 'Хром', kz: 'Хром', en: 'Chromium', zh: '铬' },
   U: { ru: 'Уран', kz: 'Уран', en: 'Uranium', zh: '铀' },
+  // Coal (ТПИ) from the coal showcase package; not a chemical symbol.
+  COAL: { ru: 'Уголь', kz: 'Көмір', en: 'Coal', zh: '煤炭' },
   // Construction stone (ОПИ) in the unified catalogue; not a chemical symbol.
   STONE: {
     ru: 'Строительный камень',

@@ -77,6 +77,11 @@ export function parseShowcase(raw: unknown): Showcase | null {
   return parsed.success ? parsed.data : null;
 }
 
+/** Coal package card: its own disclaimer, catalogue group and stage. */
+export function isCoalShowcase(card: Pick<Showcase, 'commodity'>): boolean {
+  return card.commodity.includes('coal');
+}
+
 /** Locale text, or the Russian source marked with lang="ru". */
 export function pickText(
   value: Localized,

@@ -38,6 +38,22 @@ it('shows every scan, the source line and the verbatim disclaimer', () => {
   ).toBeInTheDocument();
 });
 
+it('gives a coal card the coal disclaimer instead of the metals one', () => {
+  render(
+    <ShowcaseDetail
+      showcase={{ ...fakeShowcase, commodity: ['coal'], commodity_ru: 'Уголь' }}
+      locale="ru"
+      contacts={contacts}
+    />
+  );
+  expect(
+    screen.getByText(translate('ru', 'showcase.disclaimerCoal'))
+  ).toBeInTheDocument();
+  expect(
+    screen.queryByText(translate('ru', 'showcase.disclaimer'))
+  ).not.toBeInTheDocument();
+});
+
 it('keeps the caveats next to the number', () => {
   renderDetail();
   for (const fact of fakeShowcase.facts.ru) {

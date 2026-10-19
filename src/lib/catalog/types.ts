@@ -9,13 +9,17 @@ import type { Localized } from '@/lib/leads/showcase';
 export const CATALOG_KINDS = ['asset', 'find', 'prospecting'] as const;
 export type CatalogKind = (typeof CATALOG_KINDS)[number];
 
-/** ТПИ metals vs ОПИ construction materials. */
-export const COMMODITY_GROUPS = ['metals_tpi', 'opi'] as const;
+/** ТПИ metals, coal (ТПИ) and ОПИ construction materials. */
+export const COMMODITY_GROUPS = ['metals_tpi', 'coal', 'opi'] as const;
 export type CommodityGroup = (typeof COMMODITY_GROUPS)[number];
 
-/** Occurrence (our finds), exploration licence, artisanal mining, operating production. */
+/**
+ * Occurrence (our metal finds), deposit with a historical reserve estimate
+ * (our coal finds), exploration licence, artisanal mining, operating production.
+ */
 export const CATALOG_STAGES = [
   'occurrence',
+  'deposit',
   'exploration',
   'prospecting',
   'production',
@@ -29,7 +33,7 @@ export interface CatalogItem {
   /** Locale-free detail path, e.g. '/offers/QN-A01'. */
   path: string;
   commodityGroup: CommodityGroup;
-  /** Element symbols ('Au', 'Zn', 'Pb'), 'stone' for construction stone or 'tuff'. */
+  /** Element symbols ('Au', 'Zn', 'Pb'), 'coal', 'stone' for construction stone or 'tuff'. */
   commodities: string[];
   /** Region id from src/lib/data/filter-config.ts REGIONS. */
   region: string | null;

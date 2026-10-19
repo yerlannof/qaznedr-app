@@ -171,7 +171,7 @@ export default function ShowcaseDetail({
           </section>
         </aside>
       </div>
-      <ShowcaseDisclaimer locale={locale} />
+      <ShowcaseDisclaimer locale={locale} cards={[card]} />
     </div>
   );
 }

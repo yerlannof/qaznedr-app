@@ -1017,12 +1017,14 @@ export const translations = {
       groups: {
         metals_tpi: 'Металлы (ТПИ)',
         opi: 'Стройматериалы (ОПИ)',
+        coal: 'Уголь (ТПИ)',
       },
       commoditiesLabel: 'Сырьё',
       regionsLabel: 'Регион',
       stagesLabel: 'Стадия',
       stages: {
         occurrence: 'Рудопроявление',
+        deposit: 'Месторождение (исторический подсчёт)',
         prospecting: 'Старательская добыча',
         exploration: 'Разведка',
         production: 'Действующая добыча',
@@ -1176,6 +1178,8 @@ export const translations = {
       withdrawn: 'Карточка снята с витрины',
       disclaimer:
         'Карточки подготовлены нашими геологами по фондовым геологическим отчётам. Числа приведены так, как они записаны в отчёте, с указанием типа значения (максимум отдельной пробы, среднее, прогнозные ресурсы и т. п.); это не запасы, подсчитанные по современным стандартам. Статус прав — наша проверка по публичной карте недропользования на указанную дату, не выписка и не юридическое заключение. Место объекта показано условно: он находится внутри круга, центр круга с объектом не совпадает. Витрина не является публичной офертой. Материалы по объекту — после встречи.',
+      disclaimerCoal:
+        'Карточки подготовлены нашими геологами по фондовым геологическим отчётам и Государственному балансу запасов. Запасы показаны классом размера в категориях советской классификации, с указанием стандарта. Это не оценка по JORC или иным современным стандартам. Статус прав — наша проверка по публичной карте недропользования на указанную дату, не выписка и не юридическое заключение. Место объекта показано условно: он находится внутри круга, центр круга с объектом не совпадает. Витрина не является публичной офертой. Материалы по объекту — после встречи.',
       disclaimerLabel: 'Оговорка',
       whatsappCta: 'Обсудить {code} в WhatsApp',
       wechatCta: 'Обсудить {code}',
@@ -2688,12 +2692,14 @@ export const translations = {
       groups: {
         metals_tpi: 'Металдар (ҚПҚ)',
         opi: 'Құрылыс материалдары (КТПҚ)',
+        coal: 'Көмір (ҚПҚ)',
       },
       commoditiesLabel: 'Шикізат',
       regionsLabel: 'Өңір',
       stagesLabel: 'Кезең',
       stages: {
         occurrence: 'Кен білінімі',
+        deposit: 'Кен орны (тарихи есептеу)',
         prospecting: 'Өндірушілік өндіру',
         exploration: 'Барлау',
         production: 'Жұмыс істеп тұрған өндіру',
@@ -2848,6 +2854,8 @@ export const translations = {
       withdrawn: 'Карточка витринадан алынды',
       disclaimer:
         'Карточкаларды біздің геологтар қордағы геологиялық есептер бойынша дайындады. Сандар есепте жазылғандай, мән түрі көрсетіліп берілген (жеке сынаманың ең жоғары мәні, орташа мән, болжамды ресурстар және т.б.); бұл заманауи стандарттар бойынша есептелген қорлар емес. Құқық мәртебесі — көрсетілген күнгі жер қойнауын пайдаланудың жария картасы бойынша біздің тексеруіміз, үзінді көшірме де, заңгерлік қорытынды да емес. Объектінің орны шартты түрде көрсетілген: ол шеңбердің ішінде орналасқан, шеңбердің ортасы объектімен сәйкес келмейді. Витрина жария оферта болып табылмайды. Объект бойынша материалдар — кездесуден кейін.',
+      disclaimerCoal:
+        'Карточкаларды біздің геологтар қордағы геологиялық есептер мен Пайдалы қазбалар қорларының мемлекеттік балансы бойынша дайындады. Қорлар кеңестік жіктеу санаттарында, стандарты көрсетіліп, көлем класымен берілген. Бұл JORC немесе басқа заманауи стандарттар бойынша бағалау емес. Құқық мәртебесі — көрсетілген күнгі жер қойнауын пайдаланудың жария картасы бойынша біздің тексеруіміз, үзінді көшірме де, заңгерлік қорытынды да емес. Объектінің орны шартты түрде көрсетілген: ол шеңбердің ішінде орналасқан, шеңбердің ортасы объектімен сәйкес келмейді. Витрина жария оферта болып табылмайды. Объект бойынша материалдар — кездесуден кейін.',
       disclaimerLabel: 'Ескерту',
       whatsappCta: '{code} WhatsApp арқылы талқылау',
       wechatCta: '{code} талқылау',
@@ -4273,12 +4281,14 @@ export const translations = {
       groups: {
         metals_tpi: 'Metals (solid minerals)',
         opi: 'Construction materials (common minerals)',
+        coal: 'Coal (solid minerals)',
       },
       commoditiesLabel: 'Commodity',
       regionsLabel: 'Region',
       stagesLabel: 'Stage',
       stages: {
         occurrence: 'Ore occurrence',
+        deposit: 'Deposit (historical estimate)',
         prospecting: 'Artisanal mining',
         exploration: 'Exploration',
         production: 'Operating production',
@@ -4432,6 +4442,8 @@ export const translations = {
       withdrawn: 'This card has been removed from the showcase',
       disclaimer:
         'The cards were prepared by our geologists from archival geological reports. Figures are given as recorded in the report, with the type of value stated (maximum of a single sample, average, prognostic resources, etc.); they are not reserves estimated under modern standards. The rights status is our check against the public subsoil-use map on the stated date, not an official extract or a legal opinion. The location of each object is shown approximately: it lies inside the circle, and the centre of the circle does not coincide with the object. The showcase is not a public offer. Materials on an object are provided after a meeting.',
+      disclaimerCoal:
+        'The cards were prepared by our geologists from archival geological reports and the State Balance of Mineral Reserves. Reserves are shown as a size class in Soviet classification categories, with the standard stated. This is not an estimate under JORC or other modern standards. The rights status is our check against the public subsoil-use map on the stated date, not an official extract or a legal opinion. The location of each object is shown approximately: it lies inside the circle, and the centre of the circle does not coincide with the object. The showcase is not a public offer. Materials on an object are provided after a meeting.',
       disclaimerLabel: 'Disclaimer',
       whatsappCta: 'Discuss {code} on WhatsApp',
       wechatCta: 'Discuss {code}',
@@ -5793,12 +5805,14 @@ export const translations = {
       groups: {
         metals_tpi: '金属（固体矿产）',
         opi: '建材（普通矿产）',
+        coal: '煤炭（固体矿产）',
       },
       commoditiesLabel: '矿种',
       regionsLabel: '地区',
       stagesLabel: '阶段',
       stages: {
         occurrence: '矿化点',
+        deposit: '矿床（历史估算）',
         prospecting: '手工采矿',
         exploration: '勘探',
         production: '在产开采',
@@ -5944,6 +5958,8 @@ export const translations = {
       withdrawn: '该卡片已从展示中撤下',
       disclaimer:
         '卡片由我们的地质师根据地质档案报告编制。数值按报告原文给出，并注明数值类型（单个样品最高值、平均值、预测资源量等）；这些不是按现代标准估算的储量。权利状态为我们在所示日期对公开底土使用地图的核查结果，不是官方摘录，也不是法律意见。矿点位置为示意：矿点位于圆圈之内，圆心与矿点位置不重合。本展示不构成公开要约。矿点资料在会面后提供。',
+      disclaimerCoal:
+        '卡片由我们的地质师根据地质档案报告和国家矿产储量平衡表编制。储量按苏联分类类别以规模区间给出，并注明标准。这不是按JORC或其他现代标准进行的估算。权利状态为我们在所示日期对公开底土使用地图的核查结果，不是官方摘录，也不是法律意见。矿点位置为示意：矿点位于圆圈之内，圆心与矿点位置不重合。本展示不构成公开要约。矿点资料在会面后提供。',
       disclaimerLabel: '说明',
       whatsappCta: '通过 WhatsApp 咨询 {code}',
       wechatCta: '咨询 {code}',

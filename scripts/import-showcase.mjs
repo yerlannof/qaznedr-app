@@ -10,7 +10,9 @@
 //   node scripts/import-showcase.mjs --dir data/showcase/v1 --publish
 //
 // Order: validate everything → archive withdrawn/dropped cards → upload scans
-// → upsert DRAFT rows → delete unreferenced scans. New cards land as DRAFT and
+// → upsert DRAFT rows → delete unreferenced scans. Several packages (metals
+// v1, coal) share the table and the bucket: archiving touches only rows of
+// this manifest.package, and scans of other packages' live rows are kept. New cards land as DRAFT and
 // an existing status is never changed by import. Changing the content of an
 // already PUBLISHED card needs --update-published. --publish flips exactly the
 // package's active cards to PUBLISHED and refuses a rights check older than
@@ -345,6 +347,14 @@ const existing = await rest(
   '/rest/v1/leads?select=code,status,showcase,sort_order&registry_ref=like.showcase:*'
 );
 const byCode = new Map(existing.map((r) => [r.code, r]));
+const ownPackage = (r) => r.showcase?.package === manifest.package;
+const foreign = rows.filter(
+  (r) => byCode.has(r.code) && !ownPackage(byCode.get(r.code))
+);
+if (foreign.length)
+  throw new Error(
+    `codes already used by another package: ${foreign.map((r) => `${r.code} (${byCode.get(r.code).showcase?.package})`).join(', ')}`
+  );
 
 if (publish) {
   const stale = active.filter(
@@ -404,7 +414,7 @@ if (liveChanges.length && !updatePublished)
 // 1. Withdrawn or dropped cards leave the showcase first.
 const keep = new Set(rows.map((r) => r.code));
 const gone = existing.filter(
-  (r) => !keep.has(r.code) && r.status !== 'ARCHIVED'
+  (r) => ownPackage(r) && !keep.has(r.code) && r.status !== 'ARCHIVED'
 );
 for (const row of gone) {
   if (dryRun) {
@@ -449,8 +459,17 @@ if (dryRun) {
   );
 }
 
-// 4. No scan outside the active package stays reachable (any folder).
-const referenced = new Set(files.map(objectPath));
+// 4. No scan outside the live packages stays reachable (any folder).
+const storagePath = (url) =>
+  decodeURIComponent(
+    url.split(`/object/public/${BUCKET}/`)[1]?.split('?')[0] ?? ''
+  );
+const referenced = new Set([
+  ...files.map(objectPath),
+  ...existing
+    .filter((r) => !ownPackage(r) && r.status !== 'ARCHIVED')
+    .flatMap((r) => (r.showcase?.images ?? []).map((i) => storagePath(i.url))),
+]);
 const staleFiles = (await listBucket()).filter((p) => !referenced.has(p));
 if (staleFiles.length) {
   if (dryRun) console.log(`would delete ${staleFiles.join(', ')}`);

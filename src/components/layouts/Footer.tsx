@@ -161,6 +161,9 @@ export default function Footer({
           <ConsentSettingsButton label={t('consent.title')} />
           <span>{t('footerNav.bottom.city')}</span>
         </div>
+        <p className="mt-3 text-xs text-brand-muted">
+          {t('homeV2.photosNote')}
+        </p>
       </div>
     </footer>
   );

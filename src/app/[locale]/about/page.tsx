@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
+import PageHero from '@/components/home/PageHero';
+import { SCENES } from '@/lib/brand/photos';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import DealSteps from '@/components/features/DealSteps';
-import BrandIllustration from '@/components/features/BrandIllustration';
 import ClosingCta from '@/components/features/ClosingCta';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { getServerTranslation } from '@/lib/i18n/translations';
@@ -53,27 +54,18 @@ export default async function AboutPage({
   ];
   return (
     <>
-      <Navigation />
-      <div className="bg-brand-bg text-brand-ink pt-20 lg:pt-24">
-        <header className="brand-container grid items-center gap-10 py-12 lg:grid-cols-[1.25fr_1fr] lg:py-20">
-          <div>
-            <p className="text-sm text-brand-muted">{t('navigation.about')}</p>
-            <h1 className="holding-title mt-5">{t('holdingCompany.title')}</h1>
-            <p className="holding-lead mt-7">{t('holdingCompany.intro')}</p>
-          </div>
-          <figure>
-            <BrandIllustration
-              kind="cutaway"
-              className="w-full h-auto"
-              sizes="(max-width: 1023px) 100vw, 45vw"
-              priority
-            />
-            <figcaption className="brand-illustration-note">
-              {t('geologyScene.note')}
-            </figcaption>
-          </figure>
-        </header>
-        <section className="brand-container border-t border-brand-line py-12 lg:py-20">
+      <Navigation overlay />
+      <PageHero
+        locale={locale}
+        src={SCENES.geologists}
+        eyebrow={t('navigation.about')}
+        title={t('holdingCompany.title')}
+        lede={t('holdingCompany.intro')}
+        label={t('homeV2.illustration')}
+        position="center 30%"
+      />
+      <div className="bg-brand-bg text-brand-ink">
+        <section className="brand-container py-14 lg:py-24">
           <h2 className="font-serif text-3xl lg:text-4xl">
             {t('holdingCompany.what')}
           </h2>

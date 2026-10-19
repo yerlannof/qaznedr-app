@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import PageHero from '@/components/home/PageHero';
+import { SCENES } from '@/lib/brand/photos';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
@@ -48,12 +50,17 @@ export default async function ContactPage({ params, searchParams }: Props) {
   };
   return (
     <>
-      <Navigation serviceTopic={topic} guideSlug={guideSlug} />
-      <div className="bg-brand-bg text-brand-ink pt-20 lg:pt-24">
+      <Navigation serviceTopic={topic} guideSlug={guideSlug} overlay />
+      <PageHero
+        locale={locale}
+        src={SCENES.foothills}
+        title={t('contact.title')}
+        lede={t('contact.subtitle')}
+        label={t('homeV2.illustration')}
+      />
+      <div className="bg-brand-bg text-brand-ink">
         <div className="brand-container py-12 lg:py-20">
           <header className="max-w-3xl">
-            <h1 className="holding-title">{t('contact.title')}</h1>
-            <p className="holding-lead mt-6">{t('contact.subtitle')}</p>
             <a
               href={INSTAGRAM_URL}
               className="brand-focus mt-4 inline-flex min-h-11 items-center underline underline-offset-4"

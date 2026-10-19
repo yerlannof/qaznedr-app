@@ -3,6 +3,18 @@
 
 export const translations = {
   ru: {
+    homeV2: {
+      coalTile: 'В каталоге: {count}',
+      illustration: 'Иллюстрация',
+      showcaseEyebrow: 'Витрина',
+      showcaseTitle: 'Участки, отобранные нашими геологами',
+      mineralsEyebrow: 'Полезные ископаемые',
+      mineralsTitle: 'Что ищут инвесторы в Казахстане',
+      mineralsNote: 'Иллюстрации: образцы руд, не с наших участков',
+      servicesTitle: 'Сопровождаем от выбора участка до лицензии',
+      photosNote:
+        'Фотографии на сайте — иллюстрации, они не изображают реальные участки.',
+    },
     marketplaceSignIn: {
       consentBefore: 'Продолжая, вы соглашаетесь на обработку данных по ',
       consentLink: 'политике конфиденциальности',
@@ -1669,6 +1681,18 @@ export const translations = {
     },
   },
   kz: {
+    homeV2: {
+      coalTile: 'Каталогта: {count}',
+      illustration: 'Иллюстрация',
+      showcaseEyebrow: 'Витрина',
+      showcaseTitle: 'Геологтарымыз іріктеген учаскелер',
+      mineralsEyebrow: 'Пайдалы қазбалар',
+      mineralsTitle: 'Қазақстанда инвесторлар іздейтін шикізат',
+      mineralsNote: 'Иллюстрациялар: кен үлгілері, біздің учаскелерден емес',
+      servicesTitle: 'Учаскені таңдаудан лицензияға дейін сүйемелдейміз',
+      photosNote:
+        'Сайттағы суреттер — иллюстрациялар, олар нақты учаскелерді бейнелемейді.',
+    },
     marketplaceSignIn: {
       consentBefore: 'Жалғастыра отырып, деректерді өңдеуге келісесіз: ',
       consentLink: 'құпиялылық саясаты',
@@ -3275,6 +3299,18 @@ export const translations = {
     },
   },
   en: {
+    homeV2: {
+      coalTile: 'In the catalogue: {count}',
+      illustration: 'Illustration',
+      showcaseEyebrow: 'Showcase',
+      showcaseTitle: 'Areas selected by our geologists',
+      mineralsEyebrow: 'Commodities',
+      mineralsTitle: 'What investors look for in Kazakhstan',
+      mineralsNote: 'Illustrations: ore specimens, not from our areas',
+      servicesTitle: 'Support from choosing an area to the licence',
+      photosNote:
+        'Photos on this site are illustrations; they do not depict actual areas.',
+    },
     marketplaceSignIn: {
       consentBefore: 'By continuing, you agree to data processing under the ',
       consentLink: 'privacy policy',
@@ -4862,6 +4898,17 @@ export const translations = {
     },
   },
   zh: {
+    homeV2: {
+      coalTile: '目录中共 {count} 个',
+      illustration: '示意图',
+      showcaseEyebrow: '项目展示',
+      showcaseTitle: '由我们的地质师精选的矿区',
+      mineralsEyebrow: '矿种',
+      mineralsTitle: '投资者在哈萨克斯坦关注的矿种',
+      mineralsNote: '示意图：矿石标本，并非来自我们的矿区',
+      servicesTitle: '从选择矿区到取得许可证的全程支持',
+      photosNote: '网站图片均为示意图，并非实际矿区。',
+    },
     marketplaceSignIn: {
       consentBefore: '继续即表示您同意按照以下条款处理数据：',
       consentLink: '隐私政策',

@@ -71,24 +71,19 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 
+// Geologica (OFL), variable 300–600, subset: Latin, Cyrillic incl. Kazakh, ₸.
+// Both legacy variable names point at it: --font-inter (UI) and
+// --font-fraunces (headings) are compatibility aliases.
 const inter = localFont({
-  src: [
-    {
-      path: '../../../public/brand/fonts/IBMPlexSans-Regular.woff2',
-      weight: '400',
-    },
-    {
-      path: '../../../public/brand/fonts/IBMPlexSans-SemiBold.woff2',
-      weight: '600',
-    },
-  ],
+  src: '../../../public/brand/fonts/Geologica-var.woff2',
   variable: '--font-inter',
+  weight: '300 600',
   display: 'swap',
 });
 const fraunces = localFont({
-  src: '../../../public/brand/fonts/SourceSerif4Display-Regular.ttf.woff2',
+  src: '../../../public/brand/fonts/Geologica-var.woff2',
   variable: '--font-fraunces',
-  weight: '400',
+  weight: '300 600',
   display: 'swap',
 });
 

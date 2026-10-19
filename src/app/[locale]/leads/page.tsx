@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import PageHero from '@/components/home/PageHero';
+import { SCENES } from '@/lib/brand/photos';
 import { ArrowUpRight, FileSearch, X } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
@@ -259,25 +261,20 @@ export default async function LeadsCatalogPage({
 
   return (
     <>
-      <Navigation />
-      <div className="min-h-screen bg-brand-bg pt-14 text-brand-ink lg:pt-16">
-        <div className="brand-container pb-16 pt-10 lg:pt-16">
-          <header className="max-w-3xl">
-            <p className="text-sm font-semibold text-brand-muted">
-              {t('catalog.eyebrow')}
-            </p>
-            <h1 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">
-              {t('catalog.title')}
-            </h1>
-            <p className="mt-5 text-base leading-relaxed text-brand-muted">
-              {t(
-                kinds.includes('prospecting')
-                  ? 'catalog.lede'
-                  : 'catalog.ledeNoPlots'
-              )}
-            </p>
-          </header>
-
+      <Navigation overlay />
+      <PageHero
+        locale={locale}
+        compact
+        src={SCENES.folds}
+        eyebrow={t('catalog.eyebrow')}
+        title={t('catalog.title')}
+        lede={t(
+          kinds.includes('prospecting') ? 'catalog.lede' : 'catalog.ledeNoPlots'
+        )}
+        label={t('homeV2.illustration')}
+      />
+      <div className="min-h-screen bg-brand-bg text-brand-ink">
+        <div className="brand-container pb-16 pt-8 lg:pt-10">
           <nav
             aria-label={t('listingsFilters.mineral')}
             className="mt-6 flex flex-wrap gap-x-6 gap-y-2"

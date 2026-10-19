@@ -1,5 +1,6 @@
-import BrandContour from '@/components/features/BrandContour';
 import Navigation from '@/components/layouts/Navigation';
+import PageHero from '@/components/home/PageHero';
+import { SCENES } from '@/lib/brand/photos';
 import Footer from '@/components/layouts/Footer';
 import GuideLinks from '@/components/features/GuideLinks';
 import ClosingCta from '@/components/features/ClosingCta';
@@ -29,19 +30,17 @@ export default async function ServicesPage({
         path="/services"
         topics={SERVICE_TOPICS}
       />
-      <Navigation guideSlug={guideSlug} />
-      <div className="min-h-screen bg-brand-bg pt-14 text-brand-ink lg:pt-16">
-        <header className="brand-container grid items-center gap-8 border-b border-brand-line py-12 lg:grid-cols-12 lg:gap-12 lg:py-20">
-          <div className="lg:col-span-7">
-            <h1 className="font-serif text-4xl leading-tight md:text-6xl">
-              {t('services.hero.title')}
-            </h1>
-          </div>
-          <div className="brand-services-motif lg:col-span-5">
-            <BrandContour variant="services" className="w-full h-auto" />
-          </div>
-        </header>
-        <section className="brand-container py-12 lg:py-20">
+      <Navigation guideSlug={guideSlug} overlay />
+      <PageHero
+        locale={locale}
+        src={SCENES.mapDesk}
+        eyebrow={t('navigation.services')}
+        title={t('services.hero.title')}
+        lede={t('homeV2.servicesTitle')}
+        label={t('homeV2.illustration')}
+      />
+      <div className="bg-brand-bg text-brand-ink">
+        <section className="brand-container py-14 lg:py-24">
           <HoldingServices locale={locale} guideSlug={guideSlug} />
         </section>
         <section className="brand-container pb-16 lg:pb-24">

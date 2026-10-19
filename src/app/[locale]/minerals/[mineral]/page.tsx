@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import PageHero from '@/components/home/PageHero';
+import { SCENES, SPECIMENS, type SpecimenKey } from '@/lib/brand/photos';
 import { notFound } from 'next/navigation';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
@@ -80,35 +82,38 @@ export default async function MineralPage({ params }: Props) {
   ];
   return (
     <>
-      <Navigation />
-      <div className="bg-brand-bg text-brand-ink pt-20 lg:pt-24">
-        <header className="brand-container py-12 lg:py-20 border-b border-brand-line">
-          <Link
-            href={`/${locale}/leads`}
-            className="brand-focus inline-flex min-h-11 items-center underline underline-offset-4 text-sm"
-          >
-            {t('leadDetail.breadcrumbLeads')}
-          </Link>
-          <h1 className="holding-title mt-5">{title}</h1>
-          <p className="holding-lead mt-6 max-w-2xl">
-            {t('leadsCatalog.valueProp2')}
-          </p>
-          <nav
-            aria-label={t('listingsFilters.mineral')}
-            className="mt-8 flex flex-wrap gap-x-6 gap-y-2"
-          >
-            {MINERAL_HUBS.map((hub) => (
-              <Link
-                key={hub.slug}
-                href={`/${locale}/minerals/${hub.slug}`}
-                aria-current={hub.slug === mineral ? 'page' : undefined}
-                className="brand-focus inline-flex min-h-11 items-center underline underline-offset-4"
-              >
-                {hubMineralName(hub.slug, locale)}
-              </Link>
-            ))}
-          </nav>
-        </header>
+      <Navigation overlay />
+      <PageHero
+        locale={locale}
+        compact
+        src={SPECIMENS[mineral as SpecimenKey] ?? SCENES.coreStill}
+        title={title}
+        lede={t('leadsCatalog.valueProp2')}
+        label={t('homeV2.illustration')}
+      >
+        <Link
+          href={`/${locale}/leads`}
+          className="order-first inline-flex min-h-11 w-max items-center text-sm underline underline-offset-4 text-brand-chalk/85"
+        >
+          {t('leadDetail.breadcrumbLeads')}
+        </Link>
+      </PageHero>
+      <div className="bg-brand-bg text-brand-ink">
+        <nav
+          aria-label={t('listingsFilters.mineral')}
+          className="brand-container flex flex-wrap gap-x-6 gap-y-2 pt-8"
+        >
+          {MINERAL_HUBS.map((hub) => (
+            <Link
+              key={hub.slug}
+              href={`/${locale}/minerals/${hub.slug}`}
+              aria-current={hub.slug === mineral ? 'page' : undefined}
+              className="brand-focus inline-flex min-h-11 items-center underline underline-offset-4 aria-[current=page]:font-semibold aria-[current=page]:no-underline"
+            >
+              {hubMineralName(hub.slug, locale)}
+            </Link>
+          ))}
+        </nav>
         <section className="brand-container py-12 lg:py-16">
           <p className="mb-6 text-brand-muted">
             {t('leadsCatalog.foundCount', { count: total })}

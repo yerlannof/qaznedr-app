@@ -44,7 +44,9 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     expect(html).toContain(`/${locale}/services/legal`);
     expect(html).toContain('"@type":"Service"');
     expect(html).toContain('"@type":"BreadcrumbList"');
-    expect(html).toContain('data-brand-contour="services"');
+    // Redesign 20: photo header labelled as an illustration.
+    expect(html).toContain('%2Fbrand%2Fphoto%2Fscene-map-desk.webp');
+    expect(html).toContain(translate(locale, 'homeV2.illustration'));
     expect(html).not.toContain('/brand/archive-to-field-960.webp');
     expect(html).not.toMatch(
       /Идёт набор|поставщик|Найдите эксперта|type="search"/i

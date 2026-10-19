@@ -49,14 +49,14 @@ export default function ShowcaseCard({
       className="grid gap-x-10 gap-y-4 border-b border-brand-line py-8 md:grid-cols-[minmax(0,1fr)_340px] lg:py-10"
     >
       <div className="min-w-0">
-        <p className="flex flex-wrap items-baseline gap-3 text-sm">
+        <div className="flex flex-wrap items-baseline gap-3 text-sm">
           <span className="bg-brand-accent px-2 py-0.5 font-semibold tracking-wide text-brand-slate">
             {code}
           </span>
           <h2 className="font-semibold">
             {commodityLabel(card.commodity, locale, card.commodity_ru)}
           </h2>
-        </p>
+        </div>
         <p className="mt-2 text-brand-muted">
           <span lang={oblast.lang}>{oblast.text}</span>
           {objectType && (

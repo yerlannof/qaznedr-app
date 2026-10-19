@@ -58,7 +58,7 @@ describe('public pages', () => {
   it('scans the home page and its sections', () => {
     const names = files.map((f) => path.basename(f));
     expect(names).toEqual(
-      expect.arrayContaining(['HomePageContent.tsx', 'PortalWelcomeHero.tsx'])
+      expect.arrayContaining(['HomePageContent.tsx', 'HomeHero.tsx'])
     );
   });
 

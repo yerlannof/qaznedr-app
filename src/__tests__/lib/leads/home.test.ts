@@ -34,6 +34,7 @@ it('keeps a real zero distinct from unavailable statistics', async () => {
   expect(await loadHomeSnapshot()).toEqual({
     stats: { total: 0, regions: 0 },
     leads: [],
+    coal: 0,
   });
 });
 it('hides partial data and invented fallback counts when any page fails', async () => {
@@ -43,7 +44,11 @@ it('hides partial data and invented fallback counts when any page fails', async 
       total: 51,
     })
     .mockRejectedValueOnce(new Error('offline'));
-  expect(await loadHomeSnapshot()).toEqual({ stats: null, leads: [] });
+  expect(await loadHomeSnapshot()).toEqual({
+    stats: null,
+    leads: [],
+    coal: 0,
+  });
 });
 
 it('reuses only a complete successful snapshot for one minute', async () => {

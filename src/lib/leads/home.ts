@@ -2,11 +2,13 @@ import 'server-only';
 import { listPublishedLeads } from './public-queries';
 import { collectLeadStats, LEADS_PAGE_SIZE } from './stats';
 import type { LeadTeaser } from './types';
-import { isShowcaseRow, parseShowcase } from './showcase';
+import { isCoalShowcase, isShowcaseRow, parseShowcase } from './showcase';
 
 export interface HomeSnapshot {
   stats: { total: number; regions: number } | null;
   leads: LeadTeaser[];
+  /** Published coal finds, for the home tile into the coal filter. */
+  coal: number;
 }
 
 const TTL_MS = 60_000;
@@ -34,16 +36,21 @@ function pickHomeLeads(rows: LeadTeaser[]): LeadTeaser[] {
 export async function loadHomeSnapshot(): Promise<HomeSnapshot> {
   if (cached && Date.now() - cached.at < TTL_MS) return cached.value;
   let leads: LeadTeaser[] = [];
+  let coal = 0;
   try {
     const stats = await collectLeadStats(async (page) => {
       const result = await listPublishedLeads({ page, limit: LEADS_PAGE_SIZE });
       if (page === 1) leads = pickHomeLeads(result.leads);
+      coal += result.leads.filter((lead) => {
+        const card = parseShowcase(lead.showcase);
+        return card ? isCoalShowcase(card) : false;
+      }).length;
       return result;
     });
-    const value = { stats, leads };
+    const value = { stats, leads, coal };
     cached = { at: Date.now(), value };
     return value;
   } catch {
-    return { stats: null, leads: [] };
+    return { stats: null, leads: [], coal: 0 };
   }
 }

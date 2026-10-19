@@ -1,19 +1,19 @@
 jest.mock('@/components/layouts/Navigation', () => () => null);
 jest.mock('@/components/layouts/Footer', () => () => null);
-jest.mock('@/components/features/PortalWelcomeHero', () => () => null);
+jest.mock('@/components/home/HomeHero', () => () => null);
 jest.mock('@/components/features/GeologyScene', () => () => null);
 import { render, screen } from '@testing-library/react';
 import HomePageContent from '@/components/features/HomePageContent';
 import { translate } from '@/lib/i18n/translations';
 import type { LeadTeaser } from '@/lib/leads/types';
 
-const areasTitle = translate('ru', 'catalog.title');
+const areasTitle = translate('ru', 'homeV2.showcaseTitle');
 
 it('shows artisanal plots as cards even while no find is published', () => {
   render(
     <HomePageContent
       locale="ru"
-      snapshot={{ stats: { total: 0, regions: 0 }, leads: [] }}
+      snapshot={{ stats: { total: 0, regions: 0 }, leads: [], coal: 0 }}
     />
   );
   expect(screen.getByText(areasTitle)).toBeInTheDocument();
@@ -39,7 +39,7 @@ it('keeps the areas section with published teasers', () => {
   render(
     <HomePageContent
       locale="ru"
-      snapshot={{ stats: { total: 1, regions: 1 }, leads: [lead] }}
+      snapshot={{ stats: { total: 1, regions: 1 }, leads: [lead], coal: 0 }}
     />
   );
   expect(screen.getByText(areasTitle)).toBeInTheDocument();
@@ -63,7 +63,7 @@ it('renders a featured showcase teaser with its number type and one caveat', () 
   render(
     <HomePageContent
       locale="ru"
-      snapshot={{ stats: { total: 1, regions: 1 }, leads: [lead] }}
+      snapshot={{ stats: { total: 1, regions: 1 }, leads: [lead], coal: 0 }}
     />
   );
   expect(screen.getByText('Среднее содержание:')).toBeInTheDocument();
@@ -79,34 +79,54 @@ it('renders a featured showcase teaser with its number type and one caveat', () 
 });
 
 it.each(['ru', 'kz', 'en', 'zh'])(
-  'uses the conditional geology cutaway with a real %s caption and keeps the about link',
+  'shows the team over a labelled illustration and keeps the about link (%s)',
   (locale) => {
     const { container } = render(
       <HomePageContent
         locale={locale as 'ru' | 'kz' | 'en' | 'zh'}
-        snapshot={{ stats: { total: 0, regions: 0 }, leads: [] }}
+        snapshot={{ stats: { total: 0, regions: 0 }, leads: [], coal: 0 }}
       />
     );
     expect(
-      container.querySelector('img[src*="geology-cutaway-960.webp"]')
-    ).toHaveAttribute('alt', '');
-    expect(
-      screen.getByText(translate(locale, 'geologyScene.note'))
+      screen.getByRole('heading', {
+        // zh keeps names unbroken in spans; compare without whitespace.
+        name: (name) =>
+          name.replace(/\s/g, '') ===
+          translate(locale, 'holdingCompany.team').replace(/\s/g, ''),
+      })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('link', { name: translate(locale, 'navigation.about') })
-    ).toHaveAttribute('href', `/${locale}/about`);
+      container.querySelector('img[src*="scene-geologists"]')
+    ).toHaveAttribute('alt', '');
     expect(
-      container.querySelector('img[src*="archive-to-field-960.webp"]')
-    ).not.toBeInTheDocument();
+      screen.getAllByText(translate(locale, 'homeV2.illustration')).length
+    ).toBeGreaterThan(0);
+    expect(
+      screen
+        .getAllByRole('link', { name: translate(locale, 'navigation.about') })
+        .some((a) => a.getAttribute('href') === `/${locale}/about`)
+    ).toBe(true);
   }
 );
+
+it('links the coal tile to the coal filter with the published count', () => {
+  render(
+    <HomePageContent
+      locale="ru"
+      snapshot={{ stats: { total: 0, regions: 0 }, leads: [], coal: 9 }}
+    />
+  );
+  const tile = document.querySelector(
+    'a[href="/ru/leads?commodity=coal"][class*="min-h-"]'
+  );
+  expect(tile).toHaveTextContent('В каталоге: 9');
+});
 
 it('links all three homepage guides to their existing Kazakh versions', () => {
   render(
     <HomePageContent
       locale="kz"
-      snapshot={{ stats: { total: 0, regions: 0 }, leads: [] }}
+      snapshot={{ stats: { total: 0, regions: 0 }, leads: [], coal: 0 }}
     />
   );
   for (const slug of [
@@ -124,7 +144,7 @@ it('shows at most four cards on the home page', () => {
   const { container } = render(
     <HomePageContent
       locale="ru"
-      snapshot={{ stats: { total: 0, regions: 0 }, leads: [] }}
+      snapshot={{ stats: { total: 0, regions: 0 }, leads: [], coal: 0 }}
     />
   );
   const section = container.querySelector('[aria-labelledby="home-areas"]')!;

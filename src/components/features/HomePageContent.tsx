@@ -1,10 +1,13 @@
 import Link from 'next/link';
+import { keepWords } from '@/lib/i18n/keep-words';
 import { ArrowUpRight, FileText } from 'lucide-react';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
-import PortalWelcomeHero from '@/components/features/PortalWelcomeHero';
-import BrandIllustration from '@/components/features/BrandIllustration';
-import GeologyScene from '@/components/features/GeologyScene';
+import HomeHero from '@/components/home/HomeHero';
+import HomeMinerals from '@/components/home/HomeMinerals';
+import HomeServices from '@/components/home/HomeServices';
+import PhotoBand from '@/components/home/PhotoBand';
+import { SCENES } from '@/lib/brand/photos';
 import { translate } from '@/lib/i18n/translations';
 import { GUIDE } from '@/lib/insights/registry';
 import {
@@ -16,6 +19,8 @@ import { INSTAGRAM_URL, type Locale } from '@/lib/seo/site';
 import type { HomeSnapshot } from '@/lib/leads/home';
 import { formatCheckDate } from '@/lib/leads/check-date';
 import { parseShowcase } from '@/lib/leads/showcase';
+import Image from 'next/image';
+import { SPECIMENS } from '@/lib/brand/photos';
 import {
   OfferGridCard,
   ProspectingGridCard,
@@ -48,16 +53,18 @@ export default function HomePageContent({
       availableLanguage: ['ru', 'kk', 'en', 'zh'],
     },
   };
-  // Home grid (approved design 19): the newest asset, the featured finds
-  // chosen by the geobase (with their caveat) and plots up to four cards.
-  const HOME_CARDS = 4;
-  const featured = snapshot.leads.filter(
-    (l) => parseShowcase(l.showcase)?.featured
-  );
+  // Home grid (redesign 20): two cards plus a tile into the coal finds keep
+  // the 3-column grid full. Featured finds keep their one chosen caveat.
+  const HOME_CARDS = 2;
+  const coalCount = snapshot.coal;
+  // One published offer first, then the geobase's featured finds, then plots.
+  const offers = listPublishedOffers().slice(0, 1);
+  const featured = snapshot.leads
+    .filter((l) => parseShowcase(l.showcase)?.featured)
+    .slice(0, Math.max(0, HOME_CARDS - offers.length));
   const legacyLeads = snapshot.leads
     .filter((l) => !parseShowcase(l.showcase))
-    .slice(0, Math.max(0, HOME_CARDS - 1 - featured.length));
-  const offers = listPublishedOffers().slice(0, 1);
+    .slice(0, Math.max(0, HOME_CARDS - offers.length - featured.length));
   const plots = listPublicPlots().slice(
     0,
     Math.max(
@@ -92,21 +99,25 @@ export default function HomePageContent({
           }),
         }}
       />
-      <Navigation />
-      <PortalWelcomeHero locale={locale} stats={snapshot.stats} />
-      <GeologyScene locale={locale} />
+      <Navigation overlay />
+      <HomeHero locale={locale} stats={snapshot.stats} />
       {hasCards && (
         <section className="holding-section" aria-labelledby="home-areas">
           <div className="brand-container">
-            <div className="grid md:grid-cols-2 gap-6 mb-10">
-              <h2 id="home-areas" className="holding-title">
-                {t('catalog.title')}
-              </h2>
+            <div className="grid md:grid-cols-[1.2fr_1fr] gap-6 lg:gap-16 items-end mb-10 lg:mb-14">
+              <div>
+                <span className="holding-eyebrow">
+                  {t('homeV2.showcaseEyebrow')}
+                </span>
+                <h2 id="home-areas" className="holding-title mt-4">
+                  {keepWords(t('homeV2.showcaseTitle'), locale)}
+                </h2>
+              </div>
               <p className="holding-lead">
                 {t(plots.length ? 'catalog.lede' : 'catalog.ledeNoPlots')}
               </p>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
               {offers.map((offer) => (
                 <OfferGridCard
                   key={offer.code}
@@ -121,6 +132,7 @@ export default function HomePageContent({
                   card={parseShowcase(lead.showcase)!}
                   locale={locale}
                   headingLevel="h3"
+                  photo
                 />
               ))}
               {plots.map((plot) => (
@@ -160,12 +172,44 @@ export default function HomePageContent({
                   </Link>
                 </article>
               ))}
+              {coalCount > 0 && (
+                <Link
+                  href={`/${locale}/leads?commodity=coal`}
+                  className="group relative flex min-h-[420px] flex-col justify-end overflow-hidden bg-brand-deep p-6 text-brand-chalk"
+                >
+                  <Image
+                    src={SPECIMENS.coal}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-t from-brand-deep via-brand-deep/60 to-transparent"
+                  />
+                  <span className="relative text-xs text-brand-chalk/70">
+                    {t('catalog.kinds.find')}
+                  </span>
+                  <span className="relative mt-3 font-serif text-[30px] leading-tight">
+                    {t('catalog.groups.coal')}
+                  </span>
+                  <span className="relative mt-2 text-brand-chalk/80">
+                    {t('homeV2.coalTile').replace('{count}', String(coalCount))}
+                  </span>
+                  <span className="relative mt-6 inline-flex items-center gap-2 font-medium">
+                    {t('portal.ctaLeads')}
+                    <ArrowUpRight
+                      aria-hidden
+                      className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    />
+                  </span>
+                  <span className="absolute right-3 top-3 text-[11px] text-brand-chalk/55">
+                    {t('homeV2.illustration')}
+                  </span>
+                </Link>
+              )}
             </div>
-            {featured.length > 0 && (
-              <p className="mt-3 text-xs text-brand-muted">
-                {t('showcase.mapCredit')}
-              </p>
-            )}
             {snapshot.leads.some((l) => parseShowcase(l.showcase)) && (
               <ShowcaseDisclaimer locale={locale} />
             )}
@@ -181,25 +225,20 @@ export default function HomePageContent({
           </div>
         </section>
       )}
-      <section className="holding-section holding-dark">
-        <div className="brand-container grid md:grid-cols-2 gap-8">
-          <h2 className="holding-title">{t('dealSteps.step3Title')}</h2>
-          <div>
-            <p className="holding-lead">{t('dealSteps.step3Desc')}</p>
-            <Link className="brand-button mt-7" href={`/${locale}/services`}>
-              {t('navigation.services')}
-              <ArrowUpRight aria-hidden className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-      <section className="holding-section">
+      <HomeMinerals locale={locale} />
+      <HomeServices locale={locale} />
+      <section className="holding-section bg-brand-surface">
         <div className="brand-container">
-          <h2 className="holding-title">{t('dealSteps.title')}</h2>
-          <ol className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <h2 className="holding-title">
+            {keepWords(t('dealSteps.title'), locale)}
+          </h2>
+          <ol className="mt-10 lg:mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
             {[1, 2, 3, 4].map((n) => (
               <li key={n} className="border-t border-brand-line pt-5">
-                <span aria-hidden className="font-serif text-3xl">
+                <span
+                  aria-hidden
+                  className="font-serif font-light text-5xl text-brand-accent"
+                >
                   0{n}
                 </span>
                 <h3 className="text-lg font-semibold mt-5">
@@ -213,27 +252,26 @@ export default function HomePageContent({
           </ol>
         </div>
       </section>
-      <section className="holding-section">
-        <div className="brand-container grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
-          <div>
-            <h2 className="holding-title">{t('portal.trust.archiveTitle')}</h2>
-            <p className="holding-lead mt-6">{t('holdingCompany.team')}</p>
-            <Link
-              href={`/${locale}/about`}
-              className="brand-button-secondary mt-7"
-            >
-              {t('navigation.about')}
-              <ArrowUpRight aria-hidden className="w-5 h-5" />
-            </Link>
-          </div>
-          <figure>
-            <BrandIllustration kind="cutaway" className="w-full h-auto" />
-            <figcaption className="brand-illustration-note">
-              {t('geologyScene.note')}
-            </figcaption>
-          </figure>
-        </div>
-      </section>
+      <PhotoBand
+        src={SCENES.geologists}
+        label={t('homeV2.illustration')}
+        labelledBy="home-team"
+      >
+        <span className="holding-eyebrow">{t('navigation.about')}</span>
+        <h2
+          id="home-team"
+          className="font-serif font-light mt-5 max-w-[22ch] text-[30px] md:text-[42px] lg:text-[52px] leading-[1.12] tracking-[-0.02em]"
+        >
+          {keepWords(t('holdingCompany.team'), locale)}
+        </h2>
+        <Link
+          href={`/${locale}/about`}
+          className="brand-button-secondary home-hero-ghost mt-9"
+        >
+          {t('navigation.about')}
+          <ArrowUpRight aria-hidden className="w-5 h-5" />
+        </Link>
+      </PhotoBand>
       <section className="holding-section">
         <div className="brand-container grid md:grid-cols-3 gap-8">
           {(['verified', 'gates', 'discipline'] as const).map((key) => (
@@ -273,18 +311,25 @@ export default function HomePageContent({
           </div>
         </div>
       </section>
-      <section className="holding-section holding-dark">
-        <div className="brand-container grid md:grid-cols-2 gap-8 items-center">
-          <h2 className="holding-title">{t('insights.ctaTitle')}</h2>
-          <div>
-            <p className="holding-lead">{t('contact.subtitle')}</p>
-            <Link href={`/${locale}/contact`} className="brand-button mt-7">
-              {t('navigation.contact')}
-              <ArrowUpRight aria-hidden className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PhotoBand
+        src={SCENES.foothills}
+        label={t('homeV2.illustration')}
+        labelledBy="home-cta"
+      >
+        <h2
+          id="home-cta"
+          className="font-serif font-light max-w-[16ch] text-[36px] md:text-[54px] lg:text-[68px] leading-[1.03] tracking-[-0.025em]"
+        >
+          {keepWords(t('insights.ctaTitle'), locale)}
+        </h2>
+        <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-brand-chalk/85">
+          {t('contact.subtitle')}
+        </p>
+        <Link href={`/${locale}/contact`} className="brand-button mt-9">
+          {t('navigation.contact')}
+          <ArrowUpRight aria-hidden className="w-5 h-5" />
+        </Link>
+      </PhotoBand>
       <Footer />
     </div>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { LogOut, Menu, Shield } from 'lucide-react';
@@ -33,15 +33,29 @@ const languages = [
   { code: 'zh', label: '中文' },
 ] as const;
 
-/** Fixed 56/64 px header. Page content starts below it. */
+/**
+ * Fixed 56/64 px header. Page content starts below it, except with `overlay`
+ * (home): the header is transparent over the hero until the page scrolls.
+ */
 export default function Navigation({
   serviceTopic,
   guideSlug,
+  overlay = false,
 }: {
   serviceTopic?: ServiceTopic;
   guideSlug?: string;
+  overlay?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    if (!overlay) return;
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [overlay]);
+  const clear = overlay && !scrolled && !isOpen;
   const pathname = usePathname() || '/';
   const preserveHomeScroll = /^\/(ru|kz|en|zh)\/?$/.test(pathname);
   const { t, locale } = useTranslation();
@@ -98,7 +112,12 @@ export default function Navigation({
   return (
     <nav
       aria-label={t('common.menu')}
-      className="fixed inset-x-0 top-0 z-50 border-b border-brand-line bg-brand-bg text-brand-ink"
+      data-clear={clear || undefined}
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
+        clear
+          ? 'nav-clear border-transparent bg-transparent text-brand-chalk'
+          : 'border-brand-line/40 bg-brand-bg text-brand-ink'
+      }`}
     >
       <div className="brand-container flex h-14 items-center justify-between gap-4 lg:h-16">
         <Link
@@ -106,7 +125,7 @@ export default function Navigation({
           className="brand-focus inline-flex min-h-11 items-center shrink-0"
           aria-label="QAZNEDR HOLDING"
         >
-          <BrandLogo className="w-40" />
+          <BrandLogo className="w-40" inverse={clear} />
         </Link>
 
         <div className="hidden items-center gap-1 lg:flex">

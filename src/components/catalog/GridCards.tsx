@@ -3,6 +3,7 @@ import CatalogGridCard from './CatalogGridCard';
 import PlotOutline from '@/components/prospecting/PlotOutline';
 import ZoneMap from '@/components/showcase/ZoneMap';
 import { verifiedOn } from '@/lib/catalog/verified';
+import { SPECIMENS, specimenFor } from '@/lib/brand/photos';
 import { translate } from '@/lib/i18n/translations';
 import {
   commodityLabel,
@@ -142,13 +143,16 @@ export function ShowcaseGridCard({
   card,
   locale,
   headingLevel,
-}: Common & { card: Showcase }) {
+  photo = false,
+}: Common & {
+  card: Showcase;
+  /** Home page: a labelled specimen illustration instead of the zone map. */
+  photo?: boolean;
+}) {
   const t = tr(locale);
   const oblast = pickText(card.oblast, locale);
   const headline = pickText(card.headline, locale);
   const parts = splitHeadline(headline.text);
-  // The number never travels without its caveat: the one chosen by the
-  // geobase for the home page, otherwise the card's first fact.
   // The number never travels without its caveats: on the home page the one
   // line the geobase chose (featured), elsewhere every fact of the card.
   const facts = pickList(card.facts, locale);
@@ -156,6 +160,7 @@ export function ShowcaseGridCard({
     ? [pickText(card.featured.fact, locale)]
     : facts.items.map((text) => ({ text, lang: facts.lang }));
   const label = commodityLabel(card.commodity, locale, card.commodity_ru);
+  const specimen = photo ? specimenFor(card.commodity) : null;
   return (
     <CatalogGridCard
       locale={locale}
@@ -163,13 +168,26 @@ export function ShowcaseGridCard({
       code={card.card_id}
       href={`/${locale}/leads/${card.card_id}`}
       media={
-        <ZoneMap
-          zones={[card.zone]}
-          highlight={showcaseRegionId(card.oblast.ru)}
-          view="region"
-          label={t('showcase.cardMapLabel', { oblast: oblast.text })}
-          className="h-full w-full"
-        />
+        specimen ? (
+          <>
+            <Image
+              src={SPECIMENS[specimen]}
+              alt=""
+              fill
+              sizes="(min-width: 1280px) 300px, (min-width: 640px) 50vw, 100vw"
+              className="object-cover"
+            />
+            <span className="photo-chip">{t('homeV2.illustration')}</span>
+          </>
+        ) : (
+          <ZoneMap
+            zones={[card.zone]}
+            highlight={showcaseRegionId(card.oblast.ru)}
+            view="region"
+            label={t('showcase.cardMapLabel', { oblast: oblast.text })}
+            className="h-full w-full"
+          />
+        )
       }
       verifiedOn={verifiedOn(card.card_id)}
       kindLabel={t('catalog.kinds.find')}

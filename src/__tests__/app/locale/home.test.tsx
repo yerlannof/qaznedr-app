@@ -4,7 +4,9 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import Home from '@/app/[locale]/page';
 import { translate } from '@/lib/i18n/translations';
 jest.mock('@/lib/leads/home', () => ({
-  loadHomeSnapshot: jest.fn().mockResolvedValue({ stats: null, leads: [] }),
+  loadHomeSnapshot: jest
+    .fn()
+    .mockResolvedValue({ stats: null, leads: [], coal: 0 }),
 }));
 jest.mock('@/components/layouts/Navigation', () => () => null);
 jest.mock('@/components/layouts/Footer', () => () => null);
@@ -38,12 +40,10 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     expect(html).toContain(`/${locale}/contact`);
     expect(html).toContain('7');
     expect(html).not.toMatch(/>31<|>9</);
-    expect(html).toContain('data-mode="static"');
-    expect(html).toContain(translate(locale, 'geologyScene.disclaimer'));
-    for (const stage of [1, 2, 3]) {
-      expect(html).toContain(
-        translate(locale, `geologyScene.stage${stage}Title`)
-      );
-    }
+    // Redesign 20: silent aerial loop with a still poster, labelled as an
+    // illustration; the coal tile counts published coal finds.
+    expect(html).toContain('hero-ridges.mp4');
+    expect(html).toContain('muted');
+    expect(html).toContain(translate(locale, 'homeV2.illustration'));
   }
 );

@@ -39,8 +39,8 @@ export default function CatalogGridCard(p: GridCardProps) {
   const Heading = p.headingLevel ?? 'h2';
   const verified = Boolean(p.verifiedOn);
   return (
-    <article className="group relative flex flex-col border border-brand-line bg-brand-surface transition-colors hover:border-brand-ink">
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-brand-line bg-brand-bg">
+    <article className="group relative flex flex-col bg-brand-surface">
+      <div className="photo-tile relative aspect-[16/10] overflow-hidden bg-brand-bg">
         {p.media}
         <span
           title={t(
@@ -73,15 +73,15 @@ export default function CatalogGridCard(p: GridCardProps) {
             </span>
           )}
         </span>
-        <span className="absolute right-3 top-3 bg-brand-chalk/90 px-1.5 py-0.5 text-xs font-semibold tracking-wide text-brand-slate">
+        <span className="absolute right-3 top-3 z-10 bg-brand-chalk px-2 py-1 text-[11px] font-medium tracking-wide text-brand-slate">
           {p.code}
         </span>
       </div>
-      <div className="flex flex-1 flex-col gap-2.5 px-4 pb-4 pt-4">
+      <div className="flex flex-1 flex-col gap-3 px-5 pb-5 pt-5">
         <p className="text-xs text-brand-muted">{p.kindLabel}</p>
         <Heading
           lang={p.titleLang}
-          className="text-lg font-semibold leading-snug"
+          className="font-serif text-[22px] leading-tight"
         >
           <Link
             href={p.href}
@@ -119,7 +119,9 @@ export default function CatalogGridCard(p: GridCardProps) {
                 {f.label && (
                   <dt className="text-xs text-brand-muted">{f.label}</dt>
                 )}
-                <dd className="font-serif text-xl leading-tight">{f.value}</dd>
+                <dd className="font-serif text-[26px] leading-tight">
+                  {f.value}
+                </dd>
               </div>
             ))}
           </dl>

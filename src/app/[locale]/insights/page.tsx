@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import PageHero from '@/components/home/PageHero';
+import { SCENES } from '@/lib/brand/photos';
 import Link from 'next/link';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
@@ -59,28 +61,23 @@ export default async function InsightsPage({
           __html: JSON.stringify(collection).replace(/</g, '\\u003c'),
         }}
       />
-      <Navigation />
-      <div className="min-h-screen bg-brand-bg text-brand-ink pt-20 lg:pt-24">
-        <section className="brand-container max-w-[760px] pt-12 pb-12 lg:pt-16 lg:pb-16 border-b border-brand-line">
-          <div className="inline-flex items-center gap-2 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
-            <span className="text-xs font-semibold uppercase text-brand-muted">
-              {t('insights.eyebrow')}
-            </span>
-          </div>
-          <h1 className="font-serif font-light text-4xl lg:text-5xl tracking-tight text-brand-ink leading-[1.05]">
-            {t('insights.title')}
-          </h1>
-          <p className="mt-6 text-lg text-brand-muted leading-relaxed">
-            {t('insights.subtitle')}
+      <Navigation overlay />
+      <PageHero
+        locale={locale}
+        compact
+        src={SCENES.coreStill}
+        eyebrow={t('insights.eyebrow')}
+        title={t('insights.title')}
+        lede={t('insights.subtitle')}
+        label={t('homeV2.illustration')}
+      >
+        {fallback && (
+          <p className="mt-4 text-sm text-brand-chalk/75">
+            {t('insights.onlyRu')}
           </p>
-          {fallback && (
-            <p className="mt-4 text-sm text-brand-muted">
-              {t('insights.onlyRu')}
-            </p>
-          )}
-        </section>
-
+        )}
+      </PageHero>
+      <div className="min-h-screen bg-brand-bg text-brand-ink">
         <section className="brand-container max-w-[760px] py-14 lg:py-20">
           <ul className="border-t border-brand-line">
             {cards.map((card, index) => (

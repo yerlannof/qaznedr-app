@@ -380,7 +380,8 @@ body {
   }
 }
 
-/* Approved A3 / D2 holding system. Legacy routes migrate in sessions 5–6. */
+/* Holding system: A3 logo + D2 slate/chalk, copper accent and Geologica
+   (owner redesign 2026-10-20). Legacy routes migrate in sessions 5–6. */
 :root {
   --brand-bg: #e9ece6;
   --brand-surface: #f4f5f0;
@@ -405,13 +406,13 @@ body {
   }
   .brand-button,
   .brand-button-secondary {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-base font-semibold rounded-sm border transition-colors duration-150;
+    @apply inline-flex min-h-12 items-center justify-center gap-2.5 px-6 py-3 text-[15px] font-medium rounded-none border transition-colors duration-200;
   }
   .brand-button {
-    @apply bg-brand-accent text-brand-slate border-brand-slate hover:bg-brand-chalk;
+    @apply bg-brand-accent text-brand-slate border-transparent hover:bg-brand-accent-hi;
   }
   .brand-button-secondary {
-    @apply bg-transparent text-brand-ink border-brand-line hover:bg-brand-surface;
+    @apply bg-transparent text-brand-ink border-brand-line hover:border-brand-ink;
   }
   .brand-button:focus-visible,
   .brand-button-secondary:focus-visible {
@@ -422,10 +423,14 @@ body {
     @apply bg-brand-bg text-brand-ink;
   }
   .holding-section {
-    @apply py-14 lg:py-24 border-b border-brand-line;
+    @apply py-16 md:py-24 lg:py-32;
   }
   .holding-title {
-    @apply font-serif font-normal text-[30px] md:text-[36px] lg:text-[44px] leading-[1.12] tracking-tight;
+    @apply font-serif font-light text-[34px] md:text-[46px] lg:text-[60px] leading-[1.04] tracking-[-0.025em];
+    text-wrap: balance;
+  }
+  .holding-eyebrow {
+    @apply block text-xs font-medium uppercase tracking-[0.16em] text-brand-muted;
   }
   .holding-lead {
     @apply text-base lg:text-lg leading-relaxed text-brand-muted;
@@ -516,6 +521,198 @@ body {
   .insight-index-row:hover {
     background: var(--brand-surface);
   }
+
+  /* Header over the home hero: chalk text until the page scrolls. */
+  .nav-clear {
+    --brand-ink: #e9ece6;
+    --brand-muted: rgb(233 236 230 / 0.78);
+    --brand-line: rgb(233 236 230 / 0.45);
+  }
+  .nav-clear .brand-button {
+    background: transparent;
+    color: #e9ece6;
+    border-color: rgb(233 236 230 / 0.45);
+  }
+  .nav-clear .brand-button:hover {
+    border-color: #e9ece6;
+  }
+
+  /* Home hero: full-bleed aerial loop (generated illustration). */
+  .home-hero {
+    position: relative;
+    display: flex;
+    min-height: min(920px, 100svh);
+    overflow: hidden;
+    background: #1b2930;
+    color: #e9ece6;
+    --brand-ink: #e9ece6;
+    --brand-muted: #cad2ca;
+    --brand-line: #8fa19e;
+  }
+  .home-hero-media,
+  .home-hero-video,
+  .home-hero-scrim {
+    position: absolute;
+    inset: 0;
+  }
+  .home-hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .home-hero-scrim {
+    background:
+      linear-gradient(
+        90deg,
+        rgb(20 31 37 / 0.85) 0%,
+        rgb(20 31 37 / 0.45) 45%,
+        rgb(20 31 37 / 0) 75%
+      ),
+      linear-gradient(0deg, rgb(20 31 37 / 0.9) 0%, rgb(20 31 37 / 0) 42%),
+      linear-gradient(180deg, rgb(20 31 37 / 0.65) 0%, rgb(20 31 37 / 0) 22%);
+  }
+  .home-hero-body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 40px;
+    padding-top: 128px;
+    padding-bottom: 44px;
+  }
+  .home-hero-eyebrow {
+    color: rgb(233 236 230 / 0.75);
+  }
+  .home-hero-ghost {
+    color: #e9ece6;
+    border-color: rgb(233 236 230 / 0.45);
+  }
+  .home-hero-ghost:hover {
+    border-color: #e9ece6;
+    background: rgb(233 236 230 / 0.06);
+  }
+  .home-hero-stats {
+    display: grid;
+    border-top: 1px solid rgb(233 236 230 / 0.22);
+  }
+  .home-hero-stats > div {
+    min-width: 0;
+    padding: 18px 16px 0 0;
+  }
+  .home-hero-stats > div + div {
+    padding-left: 18px;
+    border-left: 1px solid rgb(233 236 230 / 0.22);
+  }
+  .home-hero-credit {
+    position: absolute;
+    z-index: 1;
+    right: 20px;
+    bottom: 12px;
+    font-size: 11px;
+    color: rgb(233 236 230 / 0.55);
+  }
+  .home-hero a:focus-visible {
+    outline: 2px solid #e9ece6;
+    outline-offset: 4px;
+  }
+  @media (max-width: 767px) {
+    .home-hero {
+      min-height: 760px;
+    }
+    .home-hero-scrim {
+      background:
+        linear-gradient(
+          0deg,
+          rgb(20 31 37 / 0.94) 0%,
+          rgb(20 31 37 / 0.62) 52%,
+          rgb(20 31 37 / 0.1) 80%
+        ),
+        linear-gradient(180deg, rgb(20 31 37 / 0.65) 0%, rgb(20 31 37 / 0) 24%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .home-hero-video {
+      display: none;
+    }
+  }
+
+  /* Photo-led blocks: image tiles zoom slowly on hover, no frames. */
+  .photo-tile {
+    position: relative;
+    overflow: hidden;
+    background: #1b2930;
+  }
+  .photo-tile img {
+    transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .group:hover .photo-tile img,
+  .photo-tile:hover img {
+    transform: scale(1.04);
+  }
+  .photo-chip {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    z-index: 1;
+    padding: 5px 8px;
+    font-size: 11px;
+    line-height: 1;
+    background: rgb(20 31 37 / 0.6);
+    color: #e9ece6;
+  }
+  .photo-band {
+    position: relative;
+    overflow: hidden;
+    background: #1b2930;
+    color: #e9ece6;
+    --brand-ink: #e9ece6;
+    --brand-muted: #cad2ca;
+    --brand-surface: #30434c;
+    --brand-line: #8fa19e;
+  }
+  .page-hero {
+    min-height: 560px;
+  }
+  .page-hero-compact {
+    min-height: 420px;
+  }
+  @media (max-width: 767px) {
+    .page-hero {
+      min-height: 480px;
+    }
+    .page-hero-compact {
+      min-height: 380px;
+    }
+  }
+  .photo-band-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgb(20 31 37 / 0.88) 0%,
+      rgb(20 31 37 / 0.5) 55%,
+      rgb(20 31 37 / 0.15) 100%
+    );
+  }
+  @media (max-width: 767px) {
+    .photo-band-scrim {
+      background: linear-gradient(
+        0deg,
+        rgb(20 31 37 / 0.9) 0%,
+        rgb(20 31 37 / 0.55) 100%
+      );
+    }
+  }
+  .photo-band a:focus-visible {
+    outline: 2px solid #e9ece6;
+    outline-offset: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .photo-tile img {
+      transition: none;
+    }
+  }
 }
 @media (max-width: 1023px) {
   .brand-hero-layout {
@@ -558,10 +755,34 @@ body {
     width: 170%;
   }
 }
+@layer base {
+  /* Geologica carries both UI and headings; headings are light and tight. */
+  .font-serif {
+    font-weight: 350;
+    letter-spacing: -0.015em;
+  }
+}
+/* Chinese: Latin digits keep Geologica, characters use the system CJK sans.
+   No tracking, no caps, roomier lines (zh audit §3). */
 html[lang='zh-CN'] body,
 html[lang='zh-CN'] .font-serif {
   font-family:
-    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC',
-    sans-serif;
+    var(--font-inter), 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC',
+    'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
   letter-spacing: normal;
+}
+html[lang='zh-CN'] .font-serif {
+  font-weight: 500;
+}
+html[lang='zh-CN'] body {
+  line-height: 1.75;
+}
+html[lang='zh-CN'] .uppercase {
+  text-transform: none;
+  letter-spacing: normal;
+}
+html[lang='zh-CN'] h1,
+html[lang='zh-CN'] h2,
+html[lang='zh-CN'] p {
+  line-break: strict;
 }

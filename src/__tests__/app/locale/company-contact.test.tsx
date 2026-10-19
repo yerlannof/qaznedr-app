@@ -15,6 +15,17 @@ jest.mock('@/lib/config/contacts', () => ({
     email: null,
   }),
 }));
+// Decode only percent-encoded runs: page HTML also contains literal «%»
+// (e.g. image styles), which decodeURIComponent rejects.
+const decodeUrls = (html: string) =>
+  html.replace(/(?:%[0-9A-F]{2})+/gi, (run) => {
+    try {
+      return decodeURIComponent(run);
+    } catch {
+      return run;
+    }
+  });
+
 it.each(['ru', 'kz', 'en', 'zh'])(
   'renders approved %s company copy and one localized page heading',
   async (locale) => {
@@ -38,7 +49,7 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     );
     const title = translate(locale, 'holdingServices.analytics.title');
     expect(html).toContain(title);
-    expect(decodeURIComponent(html)).toContain(title);
+    expect(decodeUrls(html)).toContain(title);
     expect(html).toContain('>' + title + '</textarea>');
     expect(html).not.toContain('<main');
   }
@@ -64,7 +75,7 @@ it.each(['ru', 'kz', 'en', 'zh'] as const)(
     );
     const title = translate(locale, 'insights.links.geologicalDueDiligence');
     expect(html).toContain(title);
-    expect(decodeURIComponent(html)).toContain(title);
+    expect(decodeUrls(html)).toContain(title);
     expect(html).toContain(`href="/${locale}/contact"`);
     expect(html).toContain(`>${title}</textarea>`);
   }

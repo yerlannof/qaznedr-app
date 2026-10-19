@@ -15,7 +15,9 @@ const p15 = getPublicPlot('QN-P15')!;
 it('formats area and dates the way licences print them', () => {
   expect(formatArea(4.96, 'ru')).toBe('4,96');
   expect(formatArea(4.7482, 'en')).toBe('4.7482');
-  expect(formatDate('2029-04-05')).toBe('05.04.2029');
+  expect(formatDate('2029-04-05', 'ru')).toBe('05.04.2029');
+  expect(formatDate('2029-04-05', 'en')).toBe('05.04.2029');
+  expect(formatDate('2029-04-05', 'zh')).toBe('2029年4月5日');
 });
 
 it('describes the place by district, region and village or plot name', () => {
@@ -44,7 +46,7 @@ it.each(['ru', 'kz', 'en', 'zh'] as const)(
     expect(first.description).toContain(p07.code);
     expect(adjacent.description).toContain('QN-P99');
     expect(first.description).not.toBe(adjacent.description);
-    expect(first.description).toContain(formatDate(p07.valid_until));
+    expect(first.description).toContain(formatDate(p07.valid_until, locale));
   }
 );
 

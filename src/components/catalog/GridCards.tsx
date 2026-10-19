@@ -66,12 +66,14 @@ export function ProspectingGridCard({
         },
         {
           label: t('prospecting.cardValidUntil'),
-          value: formatDate(plot.valid_until),
+          value: formatDate(plot.valid_until, locale),
         },
       ]}
       footLeft={
         plot.published_at
-          ? t('catalogGrid.published', { date: formatDate(plot.published_at) })
+          ? t('catalogGrid.published', {
+              date: formatDate(plot.published_at, locale),
+            })
           : ''
       }
       footRight={t('catalogGrid.shareByContract')}
@@ -125,7 +127,7 @@ export function OfferGridCard({
         return { value: value.text, label: label.text, lang: label.lang };
       })}
       footLeft={t('catalogGrid.published', {
-        date: formatDate(offer.published_at),
+        date: formatDate(offer.published_at, locale),
       })}
       footRight={
         offer.price
@@ -183,7 +185,7 @@ export function ShowcaseGridCard({
         ...caveats.map((c) => ({ text: c.text, lang: c.lang })),
         {
           text: t('showcase.rightsChecked', {
-            date: formatRightsDate(card.rights.checked_at),
+            date: formatRightsDate(card.rights.checked_at, locale),
           }),
         },
       ]}

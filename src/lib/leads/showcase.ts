@@ -110,8 +110,10 @@ export function splitHeadline(text: string): { type: string; value: string } {
     : { type: '', value: text };
 }
 
-export function formatRightsDate(iso: string): string {
+/** 2026-09-28 → 28.09.2026; Chinese readers get 2026年9月28日. */
+export function formatRightsDate(iso: string, locale: Locale): string {
   const [y, m, d] = iso.split('-');
+  if (locale === 'zh') return `${y}年${Number(m)}月${Number(d)}日`;
   return `${d}.${m}.${y}`;
 }
 

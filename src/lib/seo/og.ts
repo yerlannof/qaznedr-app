@@ -6,7 +6,7 @@ export const OG_SIZE = { width: 1200, height: 630 } as const;
 export const OG_ALT = SITE_NAME;
 export const OG_VERSION = '20260927-areas';
 
-const BRAND_PREFIX = /^QAZNEDR HOLDING\s*[—–-]\s*/;
+const BRAND_PREFIX = /^QAZNEDR HOLDING\s*[—–|｜-]\s*/;
 
 /** The approved home title (seo.home.title) without the brand prefix,
  * capitalised: after the dash it starts lower-case in ru and kz. */

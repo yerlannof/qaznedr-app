@@ -35,7 +35,7 @@ export default function ProspectingCard({
       `${formatArea(plot.area_ha, locale)} ${t('prospecting.ha')}`,
       t('prospecting.cardArea'),
     ],
-    [formatDate(plot.valid_until), t('prospecting.cardValidUntil')],
+    [formatDate(plot.valid_until, locale), t('prospecting.cardValidUntil')],
     [t('prospecting.cardShareValue'), t('prospecting.cardShare')],
   ];
   return (

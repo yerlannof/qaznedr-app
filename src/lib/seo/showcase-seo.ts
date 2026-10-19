@@ -25,7 +25,7 @@ export function showcaseSeoText(
     translate(locale, 'showcase.seoDescription', {
       headline: pickText(card.headline, locale).text,
       oblast,
-      date: formatRightsDate(card.rights.checked_at),
+      date: formatRightsDate(card.rights.checked_at, locale),
       code: card.card_id,
     })
   );

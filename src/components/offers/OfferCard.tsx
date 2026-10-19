@@ -111,7 +111,7 @@ export default function OfferCard({
             <p lang={cardLine.lang}>{cardLine.text}</p>
             <p lang={basis.lang}>
               {t('offer.rightsChecked', {
-                date: formatRightsDate(offer.rights.checked_at),
+                date: formatRightsDate(offer.rights.checked_at, locale),
                 basis: basis.text,
               })}
             </p>

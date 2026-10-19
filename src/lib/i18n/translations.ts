@@ -997,7 +997,7 @@ export const translations = {
       },
       bottom: {
         rights: '© {year} QAZNEDR. Все права защищены.',
-        city: 'Астана, Казахстан',
+        city: 'Алматы, Казахстан',
       },
     },
     catalog: {
@@ -1371,6 +1371,10 @@ export const translations = {
       resetFilters: 'Сбросить фильтры',
       back: '← Назад',
       forward: 'Вперёд →',
+    },
+    minerals: {
+      hubTitle: '{mineral} · Участки',
+      hubDescription: '{mineral}: {text}',
     },
     leadDetail: {
       transferNote:
@@ -2672,7 +2676,7 @@ export const translations = {
       },
       bottom: {
         rights: '© {year} QAZNEDR. Барлық құқықтар қорғалған.',
-        city: 'Астана, Қазақстан',
+        city: 'Алматы, Қазақстан',
       },
     },
     catalog: {
@@ -3047,6 +3051,10 @@ export const translations = {
       resetFilters: 'Сүзгілерді тазалау',
       back: '← Артқа',
       forward: 'Алға →',
+    },
+    minerals: {
+      hubTitle: '{mineral} · Учаскелер',
+      hubDescription: '{mineral}: {text}',
     },
     leadDetail: {
       transferNote:
@@ -4260,7 +4268,7 @@ export const translations = {
       },
       bottom: {
         rights: '© {year} QAZNEDR. All rights reserved.',
-        city: 'Astana, Kazakhstan',
+        city: 'Almaty, Kazakhstan',
       },
     },
     catalog: {
@@ -4633,6 +4641,10 @@ export const translations = {
       resetFilters: 'Reset filters',
       back: '← Back',
       forward: 'Forward →',
+    },
+    minerals: {
+      hubTitle: '{mineral} · Areas',
+      hubDescription: '{mineral}: {text}',
     },
     leadDetail: {
       transferNote:
@@ -5411,7 +5423,7 @@ export const translations = {
       note: '此示意图仅展示地质材料的阅读方式，不表示任何矿区的深度、比例或数据。',
       controlsLabel: '场景阶段',
       hint: '滚动或使用阶段按钮',
-      disclaimer: '示意剖面 / 非地块数据',
+      disclaimer: '示意剖面 · 非矿区数据',
       surface: '地表',
       contacts: '岩层接触',
       base: '下部地层',
@@ -5421,36 +5433,36 @@ export const translations = {
       stage1Question: '地图、档案和观察资料已告诉我们什么？',
       stage2Label: '分层',
       stage2Title: '分开地层',
-      stage2Body: '地层展开后，更容易读懂顺序与相互关系。',
+      stage2Body: '将地层分开后，层序和接触关系更容易看清。',
       stage2Question: '哪些岩层接触关系值得细看？',
       stage3Label: '核查',
       stage3Title: '选择核查点',
-      stage3Body: '关注一个接触关系，并将它作为下一步工作的问题。',
+      stage3Body: '聚焦一处岩层接触，作为下一步工作要回答的问题。',
       stage3Question: '应与哪些档案和野外资料核对？',
     },
     holdingCompany: {
-      title: 'QAZNEDR HOLDING — 面向投资者的哈萨克斯坦矿区',
+      title: 'QAZNEDR HOLDING｜面向投资者的哈萨克斯坦矿区',
       intro:
-        '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。我们就具体矿区及合作方式进行沟通，并为许可证办理、尽职调查和野外工作提供支持。',
-      team: '我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。',
+        '我们的地质师在研究地质资料的基础上筛选矿区，向投资者推介。我们的团队由哈萨克斯坦本地专家组成，其中包括从业50年的地质师。我们可就具体矿区和合作方式与您洽谈，并在许可证办理、尽职调查和野外工作中提供支持。',
+      team: '我们的团队由哈萨克斯坦本地专家组成，其中包括从业50年的地质师。',
       what: '我们的工作',
       areas:
-        '已整理的矿区。根据卡片所示日期的核查，未设矿权，地质情况已研究。项目简介公开，详细资料在签署保密协议（NDA）后提供。',
-      deal: '交易协助。可讨论以投资者名义申请许可证、由控股公司申请后再转让、合资企业或 earn-in 等方式；具体形式在会面时讨论。',
+        '精选矿区：据我们在卡片所示日期的核查，均未设矿权，地质情况已经研究。项目简介公开，详细资料在签署保密协议（NDA）后提供。',
+      deal: '交易协助：许可证可办在投资者名下，或先办在本公司名下再转让，也可采用合资或 earn-in（分期投入取得权益）模式；具体形式在会面时商定。',
       geology:
-        '地质与咨询。由我们的地质师提供专业分析、许可证办理协助及野外工作。',
+        '地质与咨询：我们的地质师提供专业评估，协助办理许可证并开展野外工作。',
       start: '如何开始',
       links: '矿区 · 联系方式 · 常见问题',
     },
     mapSupport: {
       title: '与您关注矿区相关的地质图和资料',
-      body: '您在寻找东哈萨克斯坦的金矿分布图、矿产图，或哈萨克斯坦其他地区的地质资料吗？请告诉我们您关注的区域和具体问题。我们将讨论您的工作需要哪些地图、档案和野外资料，以及我们的地质专家能提供什么帮助。',
+      body: '您在寻找东哈萨克斯坦的金矿分布图、矿产图，或哈萨克斯坦其他地区的地质资料吗？请告诉我们您关注的区域和具体问题。我们将讨论您的工作需要哪些地图、档案和野外资料，以及我们的地质师能提供什么帮助。',
       inputs:
         '首次咨询只需提供地区、关注的矿种和目标：寻找矿区、解读地图或核查地质资料。如果已有地图，请注明图名、年份和比例尺。',
       limits:
         '地图上标有某个对象，本身并不能证明储量、矿区权利或取得许可证的可能性。了解您的任务后，我们再商定工作范围和交付成果。',
       action: '讨论您的需求',
-      ctaTitle: '从地图到具体问题的讨论',
+      ctaTitle: '从地质图到具体问题',
       cta: '需要地质图或矿区评估？请说明地区和任务，我们将讨论哪些资料和分析能够提供帮助。',
       whatsapp: '通过 WhatsApp 沟通',
       wechat: '通过微信沟通',
@@ -5459,25 +5471,25 @@ export const translations = {
       licensing: {
         title: '许可证办理',
         description:
-          '面向正在选择办理路径的投资者。讨论矿区及现有资料，评估可能适用的程序，准备材料并提供流程协助。',
+          '适用于正在选择办理路径的投资者。讨论矿区及现有资料，评估可能适用的程序，准备材料并提供流程协助。',
         deliverable: '适用程序评估、现有资料清单及协助计划。',
       },
       geology: {
         title: '地质与野外工作',
         description:
-          '面向需要现场核查的团队。协商工作方案、现场踏勘、观察或取样及相关记录。',
+          '适用于需要现场核查的团队。协商工作方案、现场踏勘、观察或取样及相关记录。',
         deliverable: '经协商确定的工作方案，以及观察或取样记录。',
       },
       'due-diligence': {
         title: '矿区尽职调查',
         description:
-          '面向作出实质性决定前的投资者。明确调查问题、审阅资料，并记录限制因素及后续核查事项。',
+          '适用于即将作出实质性投资决策的投资者。明确调查问题、审阅资料，并记录限制因素及后续核查事项。',
         deliverable: '已审阅资料、限制因素及后续核查事项清单。',
       },
       analytics: {
         title: '分析',
         description:
-          '面向正在选择方向的团队。协商筛选标准、对照档案资料并准备分析材料。',
+          '适用于正在选择方向的团队。协商筛选标准、对照档案资料并准备分析材料。',
         deliverable: '经协商确定的筛选标准及供讨论的分析材料。',
       },
     },
@@ -5486,7 +5498,7 @@ export const translations = {
       text: '该页面可能已被移动或已不存在。',
       home: '返回首页',
       contact: '联系我们',
-      leads: '地块',
+      leads: '矿区',
     },
     faqPage: {
       eyebrow: '常见问题',
@@ -5507,8 +5519,8 @@ export const translations = {
       otherGuides: '更多指南',
       table: '表格',
       onlyRu: '指南目前提供俄文、英文和中文版本。',
-      ctaTitle: '想进一步了解矿区？',
-      ctaText: '查看我们准备好的矿区，或直接联系我们——一个工作日内回复。',
+      ctaTitle: '准备洽谈具体矿区？',
+      ctaText: '浏览我们展示的矿区，或直接联系我们，我们将在一个工作日内回复。',
       ctaLeads: '查看矿区',
       ctaContact: '联系我们',
       servicesHeading: '许可证与交易指南',
@@ -5519,7 +5531,7 @@ export const translations = {
         geology: '地质',
       },
       links: {
-        artisanalMining: '哈萨克斯坦手工采矿：许可证与规则',
+        artisanalMining: '哈萨克斯坦小规模采矿：许可证与规则',
         pugfn: 'PUGFN：申请前如何核查矿区',
         foreignInvestor: '外国投资者如何在哈萨克斯坦取得矿业权',
         explorationLicence: '固体矿产勘查许可证：办理流程',
@@ -5534,7 +5546,8 @@ export const translations = {
       },
       summaries: {
         artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',
-        pugfn: '区分国家地下资源基金管理计划、地图和许可证，核查区域及限制。',
+        pugfn:
+          '区分国家底土基金管理计划（PUGFN）、地图和许可证，核查区域及限制。',
         foreignInvestor:
           '谁可以成为矿业权人，以及三种进入方式：申请新许可证、收购矿业权或股权、成立合资企业。',
         explorationLicence: '申请、区块、期限、义务及转入开采。',
@@ -5542,7 +5555,7 @@ export const translations = {
           'GKZ、KAZRC/JORC 与中国 GB/T 17766 分类如何对应，以及哪些无法直接对应。',
         rightsTransfer: '哪些交易需要转让许可，以及2026年9月7日起的变化。',
         geologicalMap:
-          '区分地质图、矿化点图与矿业权地图，并核查比例尺和资料来源。',
+          '区分地质图、矿点分布图与矿业权分布图，并核查比例尺和资料来源。',
         eastKazakhstanGoldMap:
           '如何查找区域报告，并核对边界、资料质量和矿区权利状态。',
         whatIsGeology:
@@ -5562,14 +5575,14 @@ export const translations = {
           '外国投资者如何在哈萨克斯坦取得矿业权、固体矿产勘查许可证流程、储量分类对照及矿业权转让许可——附法律原文链接。',
       },
       site: {
-        title: 'QAZNEDR HOLDING — 面向投资者的哈萨克斯坦矿区',
+        title: 'QAZNEDR HOLDING｜面向投资者的哈萨克斯坦矿区',
         description:
-          '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。',
+          '我们的地质师在研究地质资料的基础上筛选矿区，向投资者推介。我们的团队由哈萨克斯坦本地专家组成，其中包括从业50年的地质师。',
       },
       home: {
-        title: 'QAZNEDR HOLDING — 面向投资者的哈萨克斯坦矿区',
+        title: 'QAZNEDR HOLDING｜面向投资者的哈萨克斯坦矿区',
         description:
-          '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。',
+          '我们的地质师在研究地质资料的基础上筛选矿区，向投资者推介。我们的团队由哈萨克斯坦本地专家组成，其中包括从业50年的地质师。',
       },
       leads: {
         title: '哈萨克斯坦矿区与出售项目：金属矿区、在产采石场',
@@ -5577,7 +5590,7 @@ export const translations = {
           '我们的地质师筛选的矿区，以及业主出售的在产采石场和矿床。可按矿种、地区和阶段筛选；状态和数据以卡片上的核查日期为准，详细资料在签署保密协议（NDA）后提供。',
       },
       services: {
-        title: '服务：探矿权办理、地质勘探、尽职调查',
+        title: '服务：勘查许可证办理、地质勘查、尽职调查',
         description:
           '协助在哈萨克斯坦办理矿产资源勘查许可证、野外地质工作、矿区尽职调查及投资分析。',
       },
@@ -5587,19 +5600,19 @@ export const translations = {
           '提供哈萨克斯坦矿区地图与资料解读、档案分析及野外工作的地质专业帮助。与 QAZNEDR HOLDING 讨论您关注的地区和任务。',
       },
       servicesLegal: {
-        title: '哈萨克斯坦矿权许可证办理',
+        title: '哈萨克斯坦底土利用许可证办理',
         description:
-          '协助办理固体矿产勘查许可证：矿区筛选、申请材料准备，通过哈萨克斯坦统一矿产资源利用平台提交。',
+          '协助办理固体矿产勘查许可证：矿区筛选、申请材料准备，通过底土利用统一平台（EPN）提交。',
       },
       servicesInvestors: {
         title: '投资者服务：进入哈萨克斯坦矿产勘查项目',
         description:
-          '合作方式：许可证直接办理在投资者名下、合资企业、分阶段投资入股（earn-in）、矿区分析报告。从选区到矿权转让审批全程陪同。',
+          '合作方式：许可证直接办理在投资者名下、合资企业、分阶段投资入股（earn-in）、矿区分析报告。从选区到矿权转让审批全程协助。',
       },
       about: {
         title: '关于 QAZNEDR HOLDING',
         description:
-          '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。',
+          '我们的地质师在研究地质资料的基础上筛选矿区，向投资者推介。我们的团队由哈萨克斯坦本地专家组成，其中包括从业50年的地质师。',
       },
       contact: {
         title: '联系我们：微信和 WhatsApp',
@@ -5620,11 +5633,11 @@ export const translations = {
         description: 'QAZNEDR HOLDING 官网 qaznedr.kz 使用条款。',
       },
       lead: {
-        title: '哈萨克斯坦{where}{mineral}矿项目 {code}',
+        title: '哈萨克斯坦{where}{mineral}矿区 {code}',
         descriptionFree:
-          '哈萨克斯坦{where}{mineral}矿区，经我方核查（{checked}）目前无矿权（空白区），已基于地质档案完成研究，可为交易协助办理探矿权。项目编号 {code}。',
+          '哈萨克斯坦{where}{mineral}矿区。据我们截至{checked}的核查，未设矿业权（空白区）；地质情况已依据地质档案报告研究，许可证将根据交易办理。项目编号 {code}。',
         descriptionOther:
-          '哈萨克斯坦{where}{mineral}矿项目，地质情况由我方地质师依据档案报告研究。项目编号 {code}。',
+          '哈萨克斯坦{where}{mineral}矿区，地质情况由我们的地质师依据地质档案报告研究。项目编号 {code}。',
         where: '{region}',
         whereNone: '',
         notFound: '未找到该项目',
@@ -5636,7 +5649,7 @@ export const translations = {
       subtitle:
         '通过微信或 WhatsApp 联系我们，或提交在线咨询，我们将在一个工作日内回复。',
       wechatTitle: '微信',
-      wechatHint: '请用微信扫描二维码添加，并注明地块编号。',
+      wechatHint: '请用微信扫描二维码添加，并注明编号（如 QN-04）。',
       wechatServiceHint: '请用微信扫描二维码添加，并注明咨询主题。',
       wechatQrAlt: 'QAZNEDR HOLDING 微信二维码',
       copy: '复制',
@@ -5664,7 +5677,7 @@ export const translations = {
       sending: '提交中…',
       successTitle: '咨询已提交',
       successText: '我们将在一个工作日内与您联系。',
-      error: '提交失败，请直接通过微信联系我们。',
+      error: '提交失败，请直接通过微信或 WhatsApp 联系我们。',
       rateLimited: '提交次数过多，请稍后再试或直接联系我们。',
       invalid: '请检查表单内容。',
       optional: '（选填）',
@@ -5689,7 +5702,7 @@ export const translations = {
       admin: '管理后台',
     },
     portal: {
-      statsRegistryLabel: '我方数据库中的矿点',
+      statsRegistryLabel: '数据库收录的矿产地',
       ctaContact: '洽谈矿区',
       ctaWechat: '添加微信咨询',
       ctaWhatsapp: '通过 WhatsApp 咨询',
@@ -5698,41 +5711,41 @@ export const translations = {
       headlineEmphasis: '哈萨克斯坦',
       headlineLine2: '矿区',
       subtitle:
-        '我们介绍由我们的地质专家研究地质资料后筛选的矿区。我们的团队有哈萨克斯坦本地专家，其中包括具有50年从业经验的地质学家。我们就具体矿区及合作方式进行沟通，并为许可证办理、尽职调查和野外工作提供支持。',
+        '我们的地质师在研究地质资料的基础上筛选矿区，向投资者推介。我们的团队由哈萨克斯坦本地专家组成，其中包括从业50年的地质师。我们可就具体矿区和合作方式与您洽谈，并在许可证办理、尽职调查和野外工作中提供支持。',
       ctaLeads: '查看矿区',
       ctaListings: '发布信息',
       statsLive: '数据一览',
-      statsLeadsLabel: '在展地块',
+      statsLeadsLabel: '展示中的矿区',
       statsListingsLabel: '活跃发布',
       statsRegionsLabel: '覆盖州数',
       statsCaption:
-        '在展地块是数据库中的精选部分。数据库由我方地质师依据档案地质报告建立。',
+        '展示的矿区精选自上述数据库；数据库由我们的地质师依据地质档案报告建立。',
       trust: {
-        verifiedTitle: '状态注明日期',
+        verifiedTitle: '权属状态注明核查日期',
         verifiedDesc:
-          '我方依据公开的矿业权分布图核查地块是否空白，核查日期见地块卡片。',
-        archiveTitle: '我方地质师的研究',
-        archiveDesc: '每个地块的地质情况均由我方地质师依据档案报告研究。',
-        gatesTitle: '详情签署保密协议后提供',
-        gatesDesc: '地块名称、坐标及资料在签署保密协议后的会面中提供。',
+          '我们对照公开的矿业权分布图核查矿区是否已设矿权，核查日期见矿区卡片。',
+        archiveTitle: '地质师的研究',
+        archiveDesc: '每个矿区的地质情况均由我们的地质师依据地质档案报告研究。',
+        gatesTitle: '签署保密协议后提供详情',
+        gatesDesc: '矿区名称、坐标及资料在签署保密协议后的会面中提供。',
         disciplineTitle: '始终注明标准',
         disciplineDesc:
-          '储量按前苏联国家储量委员会（ГКЗ）A、B、C1、C2 级别或历史估算标注。P1–P3 为预测资源量，并非储量。',
+          '储量按苏联国家储量委员会（GKZ）的 A、B、C1、C2 级标注，或注明为历史估算。P1–P3 为预测资源量，不属于储量。',
       },
     },
     dealSteps: {
       title: '合作流程',
-      step1Title: '选择地块',
+      step1Title: '选择矿区',
       step1Desc:
-        '卡片列明矿种、地区、地质情况及核查日期的状态。请通过微信或 WhatsApp 发送地块编号。',
+        '卡片列出矿种、地区、地质概况，以及截至核查日期的权属状态。请通过微信或 WhatsApp 发送矿区编号。',
       step2Title: '会面并签署保密协议',
-      step2Desc: '签署保密协议后，我们提供地块名称、坐标及我方地质师的评估。',
+      step2Desc: '签署保密协议后，我们提供矿区名称、坐标及地质师的评估意见。',
       step3Title: '选择合作方式',
       step3Desc:
-        '以贵方名义办理许可证并由我方协助；先办在控股公司名下再转让；合资或 earn-in；或仅提供分析服务。',
+        '许可证办在您名下，由我们全程协助；或先办在本公司名下再转让；合资或 earn-in；或仅委托分析服务。',
       step4Title: '办理许可证',
       step4Desc:
-        '我们复核状态、提交申请并协助至许可证颁发。最终由主管机关决定。',
+        '我们复核权属状态、提交申请，并协助直至许可证颁发。是否颁发由主管机关决定。',
     },
     audience: {
       eyebrow: '面向哪些人',
@@ -5747,25 +5760,25 @@ export const translations = {
       investor: {
         tag: '面向投资者',
         title: '出售中的许可证',
-        desc: '矿区发布信息 — 用于申请、earn-in 或收购。直接对接持牌人。',
+        desc: '矿区发布信息——用于申请、earn-in 或收购。直接对接持牌人。',
         cta: '查看发布列表',
       },
       geologist: {
         tag: '面向地质学家 / 合作伙伴',
         title: '发布您的项目',
-        desc: '您的矿区、许可证或矿点 — 在条款透明、流量真实的平台上发布。',
+        desc: '您的矿区、许可证或矿点——在条款透明、流量真实的平台上发布。',
         cta: '创建发布',
       },
     },
     leadsHero: {
-      eyebrow: '在展地块 · 状态以我方核查为准',
+      eyebrow: '矿区展示 · 权属状态以我们的核查为准',
       title: '我们地质师精选的矿区',
       subtitle:
-        '按卡片所示日期我方核查，未设矿权。如您对某矿区感兴趣，我们负责为您的项目办理许可证并协助完成交易。名称、坐标和资料在会面并签署保密协议后提供。',
-      ctaBrowse: '全部地块',
-      ctaFree: '仅看空白地块',
-      freshHeading: '最新地块',
-      freshAll: '全部地块',
+        '据我们在卡片所示日期的核查，以下矿区均未设矿业权。如您对某一矿区感兴趣，我们将为您的项目办理许可证并协助完成交易。名称、坐标和资料在会面并签署保密协议后提供。',
+      ctaBrowse: '全部矿区',
+      ctaFree: '仅看未设矿权',
+      freshHeading: '最新矿区',
+      freshAll: '全部矿区',
     },
     footerNav: {
       platform: {
@@ -5784,41 +5797,41 @@ export const translations = {
         terms: '使用条款',
       },
       bottom: {
-        rights: '© {year} QAZNEDR. 版权所有。',
-        city: '哈萨克斯坦阿斯塔纳',
+        rights: '© {year} QAZNEDR 版权所有',
+        city: '哈萨克斯坦阿拉木图',
       },
     },
     catalog: {
-      eyebrow: '展示 · 状态和数据以卡片上的核查日期为准',
+      eyebrow: '项目目录 · 权属状态和数据以卡片所示核查日期为准',
       title: '哈萨克斯坦矿区与项目',
-      lede: '我们的地质师筛选的矿区；持证人正在寻找合作伙伴的手工采矿许可证；业主出售的在产采石场和矿床。除卡片另有说明外，名称、坐标和文件在签署保密协议后提供。',
+      lede: '我们的地质师筛选的矿区；持证人正在寻找合作伙伴的小规模采矿许可证；业主出售的在产采石场和矿床。除卡片另有说明外，名称、坐标和文件在签署保密协议后提供。',
       ledeNoPlots:
         '我们的地质师筛选的矿区，以及业主出售的在产采石场和矿床。除卡片另有说明外，名称、坐标和文件在签署保密协议后提供。',
-      kindLabel: '类型',
+      kindLabel: '项目类型',
       all: '全部',
       kinds: {
         asset: '出售项目',
-        find: '我们的发现',
-        prospecting: '手工采矿',
+        find: '地质师精选',
+        prospecting: '小规模采矿',
       },
       groupsLabel: '矿产类别',
       groups: {
         metals_tpi: '金属（固体矿产）',
-        opi: '建材（普通矿产）',
+        opi: '建材（普通建筑材料矿产）',
         coal: '煤炭（固体矿产）',
       },
       commoditiesLabel: '矿种',
       regionsLabel: '地区',
       stagesLabel: '阶段',
       stages: {
-        occurrence: '矿化点',
+        occurrence: '矿点',
         deposit: '矿床（历史估算）',
-        prospecting: '手工采矿',
-        exploration: '勘探',
-        production: '在产开采',
+        prospecting: '小规模采矿',
+        exploration: '勘查',
+        production: '正在开采',
       },
       infraLabel: '基础设施',
-      infraOption: '已有设备、输电线路、住宿',
+      infraOption: '有设备、输电线路和住宿',
       filters: '筛选',
       apply: '显示{count}项',
       reset: '清除筛选',
@@ -5829,7 +5842,7 @@ export const translations = {
       sortLabel: '排序',
       sorts: {
         newest: '最新优先',
-        area_desc: '按地块面积',
+        area_desc: '按面积从大到小',
         valid_desc: '按许可证期限',
       },
       removeFilter: '移除筛选：{label}',
@@ -5843,7 +5856,7 @@ export const translations = {
       ndaHeading: '签署保密协议后提供',
       galleryHeading: '照片和视频',
       videoBadge: '视频 {duration}',
-      photoCredit: '卖方照片',
+      photoCredit: '照片由卖方提供',
       cta: '咨询{code}',
       more: '查看项目详情',
       contactHeading: '咨询项目{code}',
@@ -5855,7 +5868,7 @@ export const translations = {
       price: '价格：{price}',
     },
     prospecting: {
-      kind: '个体小规模采矿许可证',
+      kind: '小规模采矿许可证',
       statusOpen: '寻找合作伙伴',
       statusMatched: '已找到合作伙伴',
       mineral: '砂金',
@@ -5865,15 +5878,15 @@ export const translations = {
       lead: '许可证持有人正在寻找在地块上作业的合作伙伴。',
       seoTitle: '小规模采矿地块 {code}：砂金，{area} 公顷，{district}',
       seoDescription:
-        '个体小规模采矿许可证有效期至 {date}，{region}{district}。许可证持有人正在寻找在地块上作业的合作伙伴；工作依据与许可证持有人签订的合同进行。页面提供拐点坐标。',
+        '小规模采矿许可证有效期至 {date}，{region}{district}。许可证持有人正在寻找在地块上作业的合作伙伴；工作依据与许可证持有人签订的合同进行。页面提供拐点坐标。',
       breadcrumb: '小规模采矿地块',
-      note: '在地块上的工作依据与许可证持有人签订的合同进行。许可证权利不出售、不转让（《底土法》第263条）。',
+      note: '在地块上的工作依据与许可证持有人签订的合同进行。许可证权利不出售、不转让（《底土法典》第263条）。',
       factMineral: '金属',
       factArea: '面积',
       factLicense: '许可证',
       factLicenseValue: '编号 {number}，签发日期 {date}',
       factValidUntil: '有效期至',
-      factValidUntilValue: '{date}；可延期一次，期限3年',
+      factValidUntilValue: '{date}；可延期一次，延期3年',
       factShare: '合作伙伴与持有人分成',
       factShareValue: '依据与持有人的合同',
       factStatus: '状态',
@@ -5901,7 +5914,7 @@ export const translations = {
       limit1: '作业深度不超过3米',
       limit2: '不得使用化学药剂和爆炸物',
       limit3: '不得建造永久性建筑；土壤不得运出地块',
-      limit4: '砂金每年开采不超过50公斤',
+      limit4: '砂金每年开采不超过50千克',
       limit5: '作业后须复垦；不得破坏水体岸线和水底',
       limitsSource: '《底土与底土利用法典》第270–271条。',
       whoHeading: '我们寻找',
@@ -5910,13 +5923,13 @@ export const translations = {
       who3: '能够按季节出工',
       disclaimerLabel: '重要提示。',
       disclaimer:
-        '该地块不属于 QAZNEDR。底土使用权属于个体小规模采矿许可证持有人，不出售、不转让（《底土与底土利用法典》第263条）。QAZNEDR 负责介绍合作伙伴与持有人认识；工作合同由合作伙伴与持有人签订。信息依据许可证副本及持有人在所示日期的说明。不保证含金量和产量。',
+        '该地块不属于 QAZNEDR。底土利用权属于小规模采矿许可证持有人，不出售、不转让（《底土与底土利用法典》第263条）。QAZNEDR 负责介绍合作伙伴与持有人认识；工作合同由合作伙伴与持有人签订。信息依据许可证副本及持有人在所示日期的说明。不保证含金量和产量。',
       contactHeading: '洽谈地块作业',
       contactNote: '请介绍您的情况，我们会转交地块 {code} 的持有人并安排考察。',
       whatsappText:
         '您好！我们希望在小规模采矿地块 {code}（{district}）作业。我们共 … 人，均为哈萨克斯坦公民，经验：…',
       matchedNote: '该地块已找到合作伙伴。请查看其他地块。',
-      guideLink: '哈萨克斯坦个体小规模采矿许可证：如何申请、允许做什么',
+      guideLink: '哈萨克斯坦小规模采矿：许可证与规则',
       catalogLink: '在总目录中查看全部矿区与项目',
       allPlots: '全部小规模采矿地块',
       more: '详情',
@@ -5927,11 +5940,11 @@ export const translations = {
       cardShareValue: '按合同',
       indexTitle: '砂金小规模采矿地块',
       indexLead:
-        '个体小规模采矿许可证持有人正在为砂金地块寻找合作伙伴。我们介绍合作伙伴与持有人认识；工作条件依据与持有人的合同确定。每个地块页面列有坐标和许可证编号。',
+        '小规模采矿许可证持有人正在为砂金地块寻找合作伙伴。我们介绍合作伙伴与持有人认识；工作条件依据与持有人的合同确定。每个地块页面列有坐标和许可证编号。',
       indexCount: '地块数量：{count}',
       seoIndexTitle: '哈萨克斯坦小规模采矿地块：持证人寻找合作伙伴，砂金',
       seoIndexDescription:
-        '杰特苏州、江布尔州和东哈萨克斯坦州的个体小规模采矿许可证，持有人正在寻找合作伙伴。地块面积、许可证期限和坐标；依据与持有人的合同作业。',
+        '杰特苏州、江布尔州和东哈萨克斯坦州的小规模采矿许可证，持有人正在寻找合作伙伴。地块面积、许可证期限和坐标；依据与持有人的合同作业。',
       regions: {
         zhetysu: '杰特苏州',
         zhambyl: '江布尔州',
@@ -5943,46 +5956,46 @@ export const translations = {
       viewGrid: '卡片',
       viewList: '列表',
       unverified: '未核验',
-      verified: '已由 QAZNEDR 核验',
+      verified: '已经 QAZNEDR 核验',
       unverifiedHint: 'QAZNEDR 团队尚未完成对该项目及文件的全面核查',
       verifiedHint: '该项目及文件已由 QAZNEDR 团队核查',
       published: '发布于 {date}',
       priceOnRequest: '价格：面议',
       shareByContract: '分成：按合同',
       afterNda: '资料在签署保密协议后提供',
-      zoneApprox: '位置为示意',
+      zoneApprox: '位置仅为示意',
       partnerFound: '已找到合作伙伴',
     },
     showcase: {
-      rightsChecked: '核查日期 {date}，非官方摘录。',
+      rightsChecked: '核查日期：{date}（非官方证明）',
       withdrawn: '该卡片已从展示中撤下',
       disclaimer:
-        '卡片由我们的地质师根据地质档案报告编制。数值按报告原文给出，并注明数值类型（单个样品最高值、平均值、预测资源量等）；这些不是按现代标准估算的储量。权利状态为我们在所示日期对公开底土使用地图的核查结果，不是官方摘录，也不是法律意见。矿点位置为示意：矿点位于圆圈之内，圆心与矿点位置不重合。本展示不构成公开要约。矿点资料在会面后提供。',
+        '卡片由我们的地质师根据地质档案报告编制。数值按报告原文列示，并注明数值类型（单个样品最高值、平均值、预测资源量等），并非按现代标准估算的储量。权属状态为我们在所示日期对照公开矿业权分布图的核查结果，不是官方证明，也不构成法律意见。对象位置仅为示意：对象位于圆圈之内，但不在圆心。本页展示内容不构成公开要约。相关资料在会面后提供。',
       disclaimerCoal:
-        '卡片由我们的地质师根据地质档案报告和国家矿产储量平衡表编制。储量按苏联分类类别以规模区间给出，并注明标准。这不是按JORC或其他现代标准进行的估算。权利状态为我们在所示日期对公开底土使用地图的核查结果，不是官方摘录，也不是法律意见。矿点位置为示意：矿点位于圆圈之内，圆心与矿点位置不重合。本展示不构成公开要约。矿点资料在会面后提供。',
-      disclaimerLabel: '说明',
+        '卡片由我们的地质师根据地质档案报告和国家矿产储量平衡表编制。储量按苏联分类级别以规模区间列示，并注明所用标准，并非按 JORC 规范或其他现代标准进行的估算。权属状态为我们在所示日期对照公开矿业权分布图的核查结果，不是官方证明，也不构成法律意见。对象位置仅为示意：对象位于圆圈之内，但不在圆心。本页展示内容不构成公开要约。相关资料在会面后提供。',
+      disclaimerLabel: '免责说明',
       whatsappCta: '通过 WhatsApp 咨询 {code}',
       wechatCta: '咨询 {code}',
       more: '详情',
       overviewLabel: '哈萨克斯坦示意图：矿区的示意圆圈',
-      overviewCaption: '每个圆圈是一个矿区的示意位置；矿点位于圆圈之内。',
+      overviewCaption: '每个圆圈表示一个矿区的示意位置，对象位于圆圈之内。',
       cardMapLabel: '示意图：{oblast}，示意圆圈',
       cardMapCaption: '{oblast} · 位置为示意，位于圆圈内',
       detailMapCaption:
-        '位置为示意：矿点位于圆圈之内。确切位置和资料在会面后提供。',
+        '位置仅为示意：对象位于圆圈之内。确切位置和资料在会面后提供。',
       scansHeading: '报告片段',
       openScan: '查看原尺寸片段',
       rightsHeading: '权利状态',
       contactHeading: '咨询该矿区',
       contactNote:
-        '请发送卡片编号，地质师将就该矿点回复。对有意向的项目，我们负责办理许可证。',
+        '请发送卡片编号，地质师将就该矿区答复。对有合作意向的项目，许可证由我们负责办理。',
       mapCredit: '州界：© OpenStreetMap 贡献者，geoBoundaries（ODbL）',
-      seoTitle: '{commodity} — 矿区 {code}，{oblast}',
+      seoTitle: '{oblast}{commodity}矿区 {code}',
       seoDescription:
-        '{headline}。{oblast}。权利状态为我方于 {date} 对照地图的核查，非官方摘录。卡片 {code}。',
+        '{headline}。{oblast}。权属状态为我们于{date}对照矿业权分布图的核查结果，非官方证明。卡片编号 {code}。',
     },
     leadCard: {
-      badge: { sold: '已售出', free: '空闲' },
+      badge: { sold: '已成交', free: '未设矿权' },
       types: { placer: '砂矿', bedrock: '原生矿', other: '项目' },
       titleFallback: '黄金 · {region}',
       regionFallback: '哈萨克斯坦',
@@ -6033,7 +6046,7 @@ export const translations = {
     },
     listings: {
       title: '矿物资源',
-      loading: '加载中...',
+      loading: '加载中…',
       foundDeposits: '找到 {count} 个矿藏',
       depositsCount: '{count} 个矿藏',
       showingResults: '显示 {count} 个结果',
@@ -6118,11 +6131,12 @@ export const translations = {
       filters: '筛选器',
     },
     leadsCatalog: {
-      eyebrow: '在展地块 · 状态以我方核查为准',
-      title: '空白金属矿地块',
-      valueProp1: '经我方依据矿业权分布图核查为空白地块，核查日期见卡片。',
+      eyebrow: '矿区展示 · 权属状态以我们的核查为准',
+      title: '未设矿权的金属矿区',
+      valueProp1:
+        '据我们对照矿业权分布图的核查，这些矿区未设矿权；核查日期见卡片。',
       valueProp2:
-        '地质情况由我方地质师依据档案报告研究。名称、坐标及资料在签署保密协议后提供。',
+        '地质情况由我们的地质师依据地质档案报告研究。名称、坐标及资料在签署保密协议后提供。',
       foundCount: '找到：{count}',
       filters: '筛选器',
       region: '地区',
@@ -6133,72 +6147,77 @@ export const translations = {
       typeInvest: '投资项目',
       sort: '排序',
       sortNewest: '最新优先',
-      sortValueDesc: '价值更高',
-      sortConfidenceDesc: '更可靠',
-      freeOnly: '仅显示空闲',
+      sortValueDesc: '价格从高到低',
+      sortConfidenceDesc: '可靠程度从高到低',
+      freeOnly: '仅看未设矿权',
       apply: '应用',
       reset: '重置',
       emptyTitle: '没有找到合适的矿区？',
-      emptyDesc: '留下需求 — 当您关注的地区或矿种出现新地块时，我们会通知您。',
+      emptyDesc: '请留下需求。当您关注的地区或矿种出现新矿区时，我们会通知您。',
       emptyCta: '提交需求',
       resetFilters: '重置筛选',
       back: '← 上一页',
       forward: '下一页 →',
     },
+    minerals: {
+      hubTitle: '哈萨克斯坦{mineral}矿区',
+      hubDescription: '{mineral}：{text}',
+    },
     leadDetail: {
       transferNote:
-        '矿业权转让通常须经主管机关许可（《底土法》第44–45条）；固体矿产勘查许可证在有效期第一年内不得转让。',
+        '矿业权转让通常须经主管机关许可（《底土法典》第44–45条）；固体矿产勘查许可证在有效期第一年内不得转让。',
       includedHeading: '签署保密协议后会面洽谈：',
-      breadcrumbLeads: '地块',
-      badgeSold: '已售出',
-      badgeFree: '空闲',
+      breadcrumbLeads: '矿区',
+      badgeSold: '已成交',
+      badgeFree: '未设矿权',
       typeFallback: '项目',
       valueEvidenceHeading: '价值依据',
       gradeAu: '品位',
-      reserveCategories: '评估类别',
+      reserveCategories: '储量/资源量类别',
       assessmentNote:
         '标识按原始资料列示。P1–P3 为预测资源量，并非储量；标准及资料时效性在核查时确认。',
-      byproducts: '伴生矿',
+      byproducts: '伴生组分',
       fairValue: '估值',
       valueNote:
         '数据来自档案地质报告，均注明类型：平均值、最高样品值或预测值。',
       legalStatusHeading: '法律状态',
-      freeVerified: '经我方核查为空白地块 — 依据坐标比对矿业权分布图',
+      freeVerified: '据我们核查未设矿业权（按坐标对照矿业权分布图）',
       freeRegistry:
-        '经我方核查为空白地块 — 依据矿业权登记册；交易前将按坐标复核',
+        '据我们核查未设矿业权（依据底土利用登记信息）；交易前将按坐标复核',
       statusPending: '状态确认中',
       verifyDate: '核查日期：',
       howItWorksHeading: '合作流程',
-      howItWorksPoint1: '我方地质师已依据档案报告研究该地块。',
-      howItWorksPoint2: '状态已依据矿业权分布图核查，日期见上文。',
+      howItWorksPoint1: '我们的地质师已依据地质档案报告研究该矿区。',
+      howItWorksPoint2: '权属状态已对照矿业权分布图核查，日期见卡片。',
       howItWorksPoint3: '签署保密协议后会面，提供资料并确定合作方式。',
-      howItWorksPoint4: '按交易办理许可证，并协助至颁发。',
+      howItWorksPoint4: '根据交易办理许可证，并协助直至颁发。',
       locationHeading: '位置',
       locationFallback: '哈萨克斯坦',
       locationHidden: '精确坐标在签署保密协议后提供',
       priceCardLabel: '条件',
       priceFallback: '价格面议',
       includedCoords: '名称及精确坐标',
-      includedAssay: '我方地质师的评估',
+      includedAssay: '我们地质师的评估',
       includedLegal: '法律状态及取得许可证的路径',
       includedContacts: '合作方式与时间安排',
-      sold: '已售出',
-      getFullPackage: '地块资料',
+      sold: '已成交',
+      getFullPackage: '矿区资料',
       ctaNote: '资料在签署保密协议后提供',
     },
     leadLocked: {
       heading: '签署保密协议后提供的资料',
-      itemName: '地块确切名称',
+      itemName: '矿区确切名称',
       itemArea: '所在区及最近居民点',
       itemCoords: '精确坐标',
-      itemAssessment: '我方地质师的评估',
+      itemAssessment: '我们地质师的评估',
       badge: '签署保密协议后提供',
       note: '这些是交易工作资料，签署保密协议前不予公开。',
     },
     footer: {
       company: {
         name: 'QAZNEDR HOLDING',
-        description: '我们介绍由我们的地质专家研究地质资料后筛选的矿区。',
+        description:
+          '我们的地质师在研究地质资料的基础上筛选矿区，向投资者推介。',
       },
       contact: {
         address: '阿拉木图，哈萨克斯坦',
@@ -6256,7 +6275,7 @@ export const translations = {
       profile: '个人资料',
       continue: '继续',
       menu: '菜单',
-      loading: '加载中...',
+      loading: '加载中…',
       notSpecified: '未指定',
       search: '搜索',
       filter: '筛选',
@@ -6279,9 +6298,9 @@ export const translations = {
     },
     services: {
       hero: {
-        title: '地下资源利用服务',
+        title: '矿业与地质服务',
         subtitle: '哈萨克斯坦矿业的全方位专业服务。从地质勘探到投资支持。',
-        searchPlaceholder: '搜索所需的服务或供应商...',
+        searchPlaceholder: '搜索所需的服务或供应商…',
       },
       sections: {
         categories: '服务类别',
@@ -6328,7 +6347,7 @@ export const translations = {
     companies: {
       title: '公司目录',
       description: '在采矿业中寻找可靠的合作伙伴和服务提供商',
-      searchPlaceholder: '搜索公司和服务...',
+      searchPlaceholder: '搜索公司和服务…',
       stats: {
         companies: '公司',
         verified: '已验证',

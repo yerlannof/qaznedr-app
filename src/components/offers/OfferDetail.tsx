@@ -197,7 +197,7 @@ export default function OfferDetail({
             >
               <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0" />
               {t('offer.rightsChecked', {
-                date: formatRightsDate(offer.rights.checked_at),
+                date: formatRightsDate(offer.rights.checked_at, locale),
                 basis: basis.text,
               })}
             </li>

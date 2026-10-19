@@ -14,7 +14,7 @@ const lead = {
 describe('lead SEO text', () => {
   it('builds a Chinese title without Cyrillic', () => {
     const { title } = leadSeoText(lead, 'zh');
-    expect(title).toBe('哈萨克斯坦江布尔金矿项目 AU-508A4C');
+    expect(title).toBe('哈萨克斯坦江布尔州金矿区 AU-508A4C');
     expect(title).not.toMatch(/[А-Яа-яЁё]/);
   });
 
@@ -29,14 +29,14 @@ describe('lead SEO text', () => {
 
   it('resolves region spellings used by the leads export', () => {
     expect(leadRegionName('ВКО', 'en')).toBe('East Kazakhstan');
-    expect(leadRegionName('Семипалатинская/Абайская', 'zh')).toBe('阿拜');
+    expect(leadRegionName('Семипалатинская/Абайская', 'zh')).toBe('阿拜州');
     expect(leadRegionName('Костанай', 'kz')).toBe('Қостанай');
     expect(leadRegionName('Жетысуская', 'en')).toBe('Zhetysu');
   });
 
   it('never leaks an unknown Russian region into zh/en', () => {
     const x = { ...lead, region: 'Центральный Казахстан' };
-    expect(leadSeoText(x, 'zh').title).toBe('哈萨克斯坦金矿项目 AU-508A4C');
+    expect(leadSeoText(x, 'zh').title).toBe('哈萨克斯坦金矿区 AU-508A4C');
     expect(leadSeoText(x, 'en').title).toBe(
       'Gold Exploration Area AU-508A4C, Kazakhstan'
     );

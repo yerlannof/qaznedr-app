@@ -142,7 +142,11 @@ it.each(
   'uses a distinct approved %s description for %s in metadata and schema',
   async (locale, mineral) => {
     const params = Promise.resolve({ locale, mineral });
-    const expected = `${hubMineralName(mineral, locale)}: ${getServerTranslation(locale).t('leadsCatalog.valueProp2')}`;
+    const { t } = getServerTranslation(locale);
+    const expected = t('minerals.hubDescription', {
+      mineral: hubMineralName(mineral, locale),
+      text: t('leadsCatalog.valueProp2'),
+    });
     const meta = await generateMetadata({ params });
     expect(meta.description).toBe(expected);
     const html = renderToStaticMarkup(await Page({ params }));

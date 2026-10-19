@@ -101,7 +101,7 @@ export default function ShowcaseCard({
             <p lang={rights.lang}>{rights.text}</p>
             <p>
               {t('showcase.rightsChecked', {
-                date: formatRightsDate(card.rights.checked_at),
+                date: formatRightsDate(card.rights.checked_at, locale),
               })}
             </p>
           </div>

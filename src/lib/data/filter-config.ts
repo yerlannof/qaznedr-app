@@ -16,12 +16,12 @@ export const REGIONS = [
       ru: 'Мангистауская',
       kz: 'Маңғыстау',
       en: 'Mangystau',
-      zh: '曼格斯套',
+      zh: '曼吉斯套州',
     },
   },
   {
     id: 'atyrau',
-    name: { ru: 'Атырауская', kz: 'Атырау', en: 'Atyrau', zh: '阿特劳' },
+    name: { ru: 'Атырауская', kz: 'Атырау', en: 'Atyrau', zh: '阿特劳州' },
   },
   {
     id: 'karagandy',
@@ -29,7 +29,7 @@ export const REGIONS = [
       ru: 'Карагандинская',
       kz: 'Қарағанды',
       en: 'Karagandy',
-      zh: '卡拉干达',
+      zh: '卡拉干达州',
     },
   },
   {
@@ -38,7 +38,7 @@ export const REGIONS = [
       ru: 'Восточно-Казахстанская',
       kz: 'Шығыс Қазақстан',
       en: 'East Kazakhstan',
-      zh: '东哈萨克斯坦',
+      zh: '东哈萨克斯坦州',
     },
   },
   {
@@ -47,7 +47,7 @@ export const REGIONS = [
       ru: 'Костанайская',
       kz: 'Қостанай',
       en: 'Kostanay',
-      zh: '库斯塔奈',
+      zh: '科斯塔奈州',
     },
   },
   {
@@ -56,12 +56,12 @@ export const REGIONS = [
       ru: 'Павлодарская',
       kz: 'Павлодар',
       en: 'Pavlodar',
-      zh: '巴甫洛达尔',
+      zh: '巴甫洛达尔州',
     },
   },
   {
     id: 'zhambyl',
-    name: { ru: 'Жамбылская', kz: 'Жамбыл', en: 'Zhambyl', zh: '江布尔' },
+    name: { ru: 'Жамбылская', kz: 'Жамбыл', en: 'Zhambyl', zh: '江布尔州' },
   },
   {
     id: 'south-kz',
@@ -69,16 +69,16 @@ export const REGIONS = [
       ru: 'Туркестанская',
       kz: 'Түркістан',
       en: 'Turkestan',
-      zh: '突厥斯坦',
+      zh: '图尔克斯坦州',
     },
   },
   {
     id: 'akmola',
-    name: { ru: 'Акмолинская', kz: 'Ақмола', en: 'Akmola', zh: '阿克莫拉' },
+    name: { ru: 'Акмолинская', kz: 'Ақмола', en: 'Akmola', zh: '阿克莫拉州' },
   },
   {
     id: 'aktobe',
-    name: { ru: 'Актюбинская', kz: 'Ақтөбе', en: 'Aktobe', zh: '阿克托别' },
+    name: { ru: 'Актюбинская', kz: 'Ақтөбе', en: 'Aktobe', zh: '阿克托别州' },
   },
   {
     id: 'almaty-region',
@@ -95,7 +95,7 @@ export const REGIONS = [
       ru: 'Западно-Казахстанская',
       kz: 'Батыс Қазақстан',
       en: 'West Kazakhstan',
-      zh: '西哈萨克斯坦',
+      zh: '西哈萨克斯坦州',
     },
   },
   {
@@ -104,7 +104,7 @@ export const REGIONS = [
       ru: 'Кызылординская',
       kz: 'Қызылорда',
       en: 'Kyzylorda',
-      zh: '克孜勒奥尔达',
+      zh: '克孜勒奥尔达州',
     },
   },
   {
@@ -113,20 +113,20 @@ export const REGIONS = [
       ru: 'Северо-Казахстанская',
       kz: 'Солтүстік Қазақстан',
       en: 'North Kazakhstan',
-      zh: '北哈萨克斯坦',
+      zh: '北哈萨克斯坦州',
     },
   },
   {
     id: 'abai',
-    name: { ru: 'Абайская', kz: 'Абай', en: 'Abai', zh: '阿拜' },
+    name: { ru: 'Абайская', kz: 'Абай', en: 'Abai', zh: '阿拜州' },
   },
   {
     id: 'zhetysu',
-    name: { ru: 'Жетысуская', kz: 'Жетісу', en: 'Zhetysu', zh: '杰特苏' },
+    name: { ru: 'Жетысуская', kz: 'Жетісу', en: 'Zhetysu', zh: '杰特苏州' },
   },
   {
     id: 'ulytau',
-    name: { ru: 'Улытауская', kz: 'Ұлытау', en: 'Ulytau', zh: '乌勒套' },
+    name: { ru: 'Улытауская', kz: 'Ұлытау', en: 'Ulytau', zh: '乌勒套州' },
   },
 ] as const;
 

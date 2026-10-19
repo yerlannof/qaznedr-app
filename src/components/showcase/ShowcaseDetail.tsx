@@ -149,7 +149,7 @@ export default function ShowcaseDetail({
                 <p lang={rights.lang}>{rights.text}</p>
                 <p className="mt-1 text-brand-muted">
                   {t('showcase.rightsChecked', {
-                    date: formatRightsDate(card.rights.checked_at),
+                    date: formatRightsDate(card.rights.checked_at, locale),
                   })}
                 </p>
               </div>

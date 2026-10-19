@@ -31,8 +31,11 @@ export async function generateMetadata({ params }: Props) {
   return buildPageMetadata({
     locale,
     path: `/minerals/${mineral}`,
-    title: `${name} · ${t('leadDetail.breadcrumbLeads')}`,
-    description: `${name}: ${t('leadsCatalog.valueProp2')}`,
+    title: t('minerals.hubTitle', { mineral: name }),
+    description: t('minerals.hubDescription', {
+      mineral: name,
+      text: t('leadsCatalog.valueProp2'),
+    }),
   });
 }
 
@@ -43,8 +46,11 @@ export default async function MineralPage({ params }: Props) {
   const { t } = getServerTranslation(locale);
   const { leads, total } = await listPublishedLeads({ mineral, limit: 24 });
   const name = hubMineralName(mineral, locale);
-  const title = `${name} · ${t('leadDetail.breadcrumbLeads')}`;
-  const description = `${name}: ${t('leadsCatalog.valueProp2')}`;
+  const title = t('minerals.hubTitle', { mineral: name });
+  const description = t('minerals.hubDescription', {
+    mineral: name,
+    text: t('leadsCatalog.valueProp2'),
+  });
   const path = `/minerals/${mineral}`;
   const jsonLd = [
     {

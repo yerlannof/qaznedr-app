@@ -5,13 +5,13 @@ const FREE: Record<string, RegExp> = {
   ru: /свобод/i,
   kz: /(^|[^а-яёәғқңөұүһі])бос([^а-яёәғқңөұүһі]|$)/i,
   en: /\bfree\b/i,
-  zh: /空白|未设矿权/,
+  zh: /空白|未设矿(业)?权/,
 };
 const QUALIFIED: Record<string, RegExp> = {
   ru: /по нашей проверке/,
   kz: /тексеруімізше/,
   en: /per our check/,
-  zh: /我方核查/,
+  zh: /据我们.{0,16}核查/,
 };
 const KEYS = [
   'seo.site.description',

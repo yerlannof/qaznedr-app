@@ -53,13 +53,13 @@ export default function ProspectingDetail({
       t('prospecting.factLicense'),
       t('prospecting.factLicenseValue', {
         number: plot.license_number,
-        date: formatDate(plot.issued_at),
+        date: formatDate(plot.issued_at, locale),
       }),
     ],
     [
       t('prospecting.factValidUntil'),
       t('prospecting.factValidUntilValue', {
-        date: formatDate(plot.valid_until),
+        date: formatDate(plot.valid_until, locale),
       }),
     ],
     [t('prospecting.factShare'), t('prospecting.factShareValue')],
@@ -72,7 +72,7 @@ export default function ProspectingDetail({
     facts.push([
       t('prospecting.factConfirmed'),
       t('prospecting.factConfirmedValue', {
-        date: formatDate(plot.holder_confirmed_at),
+        date: formatDate(plot.holder_confirmed_at, locale),
       }),
     ]);
   }

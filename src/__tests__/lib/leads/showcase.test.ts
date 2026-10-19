@@ -112,8 +112,12 @@ describe('splitHeadline', () => {
   });
 });
 
-it('prints the rights date as DD.MM.YYYY', () => {
-  expect(formatRightsDate('2026-09-28')).toBe('28.09.2026');
+it('prints the rights date as DD.MM.YYYY, and in Chinese as Y年M月D日', () => {
+  for (const locale of ['ru', 'kz', 'en'] as const) {
+    expect(formatRightsDate('2026-09-28', locale)).toBe('28.09.2026');
+  }
+  expect(formatRightsDate('2026-09-28', 'zh')).toBe('2026年9月28日');
+  expect(formatRightsDate('2026-10-20', 'zh')).toBe('2026年10月20日');
 });
 
 describe('fail-closed showcase rows', () => {

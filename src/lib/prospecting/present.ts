@@ -22,9 +22,13 @@ export function formatArea(ha: number, locale: Locale): string {
   }).format(ha);
 }
 
-/** 2029-04-05 → 05.04.2029, as dates are printed in Kazakh licences. */
-export function formatDate(iso: string): string {
+/**
+ * 2029-04-05 → 05.04.2029, as dates are printed in Kazakh licences;
+ * Chinese readers get 2029年4月5日.
+ */
+export function formatDate(iso: string, locale: Locale): string {
   const [y, m, d] = iso.split('-');
+  if (locale === 'zh') return `${y}年${Number(m)}月${Number(d)}日`;
   return `${d}.${m}.${y}`;
 }
 
@@ -55,7 +59,7 @@ export function plotSeoText(
     area: formatArea(plot.area_ha, locale),
     district: plot.district[locale],
     region: regionName(plot, locale),
-    date: formatDate(plot.valid_until),
+    date: formatDate(plot.valid_until, locale),
   };
   return {
     title: translate(locale, 'prospecting.seoTitle', params),

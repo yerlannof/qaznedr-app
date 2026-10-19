@@ -45,7 +45,7 @@ export default function ShowcaseHomeTeaser({
       )}
       <p className="text-sm text-brand-muted mt-4">
         {t('showcase.rightsChecked', {
-          date: formatRightsDate(card.rights.checked_at),
+          date: formatRightsDate(card.rights.checked_at, locale),
         })}
       </p>
       <Link

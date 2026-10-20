@@ -30,14 +30,12 @@ export async function generateMetadata({ params }: Props) {
   const locale = toLocale(raw);
   const { t } = getServerTranslation(locale);
   const name = hubMineralName(mineral, locale);
+  const meta = { mineral: name, text: t('leadsCatalog.valueProp2') };
   return buildPageMetadata({
     locale,
     path: `/minerals/${mineral}`,
-    title: t('minerals.hubTitle', { mineral: name }),
-    description: t('minerals.hubDescription', {
-      mineral: name,
-      text: t('leadsCatalog.valueProp2'),
-    }),
+    title: t('minerals.hubMetaTitle', meta),
+    description: t('minerals.hubDescription', meta),
   });
 }
 

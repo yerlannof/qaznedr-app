@@ -1422,6 +1422,8 @@ export const translations = {
     minerals: {
       hubTitle: '{mineral} · Участки',
       hubDescription: '{mineral}: {text}',
+      hubMetaTitle:
+        '{mineral} в Казахстане: участки, отобранные нашими геологами',
     },
     leadDetail: {
       transferNote:
@@ -3151,6 +3153,7 @@ export const translations = {
     minerals: {
       hubTitle: '{mineral} · Учаскелер',
       hubDescription: '{mineral}: {text}',
+      hubMetaTitle: '{mineral}: геологтарымыз іріктеген учаскелер',
     },
     leadDetail: {
       transferNote:
@@ -4789,6 +4792,7 @@ export const translations = {
     minerals: {
       hubTitle: '{mineral} · Areas',
       hubDescription: '{mineral}: {text}',
+      hubMetaTitle: '{mineral} in Kazakhstan: areas selected by our geologists',
     },
     leadDetail: {
       transferNote:
@@ -6348,6 +6352,7 @@ export const translations = {
     minerals: {
       hubTitle: '哈萨克斯坦{mineral}矿区',
       hubDescription: '{mineral}：{text}',
+      hubMetaTitle: '哈萨克斯坦{mineral}矿区',
     },
     leadDetail: {
       transferNote:

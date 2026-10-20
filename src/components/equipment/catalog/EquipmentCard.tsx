@@ -87,8 +87,8 @@ export default function EquipmentCard({
           </span>
         </div>
       ) : (
-        // No photo: a neutral strip, never an illustration in its place.
-        <div className="flex h-16 items-center bg-brand-surface px-3">
+        // No photo: a neutral block of the same size, never an illustration.
+        <div className="flex aspect-[4/3] items-start bg-brand-surface p-3">
           <span className="bg-brand-chalk px-2.5 py-1 text-xs font-medium text-brand-deep">
             {tag}
           </span>

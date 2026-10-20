@@ -298,7 +298,7 @@ export default function EquipmentCatalog({
 
         <AutoSubmitForm
           action={base}
-          className="mt-12 grid gap-4 bg-brand-surface p-5 lg:grid-cols-[auto_1fr] lg:items-end lg:px-5 lg:py-4"
+          className="mt-12 grid gap-4 bg-brand-surface p-5"
         >
           <div
             role="group"
@@ -334,7 +334,7 @@ export default function EquipmentCatalog({
           {group && !filters.category && (
             <input type="hidden" name="group" value={group} />
           )}
-          <div className="grid gap-3 min-[560px]:grid-cols-2 lg:grid-cols-[220px_220px_auto] lg:justify-end">
+          <div className="grid gap-3 min-[560px]:grid-cols-2 lg:flex lg:flex-wrap lg:items-end lg:[&>label]:w-[240px]">
             <label className={labelClass}>
               {t('what')}
               <select

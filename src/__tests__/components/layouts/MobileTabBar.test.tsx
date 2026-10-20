@@ -123,6 +123,9 @@ describe('MobileTabBar', () => {
     '/en/dashboard',
     '/ru/equipment/new',
     '/zh/equipment/new',
+    '/ru/equipment',
+    '/kz/equipment/my',
+    '/ru/equipment/11111111-1111-4111-8111-111111111111',
   ])('is hidden on %s', (path) => {
     setPath(path);
     const { container } = render(<MobileTabBar />);

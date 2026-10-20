@@ -61,7 +61,8 @@ export default function MobileTabBar() {
     ['contact', 'admin', 'auth', 'dashboard', 'login', 'register'].includes(
       section
     ) ||
-    (section === 'equipment' && segments[2] === 'new')
+    // Marketplace pages carry their own author or WhatsApp contacts.
+    section === 'equipment'
   ) {
     return null;
   }

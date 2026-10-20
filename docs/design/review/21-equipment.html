@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body style="margin:0">
+<title>Техника и услуги QAZNEDR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300..600&display=swap">
+<style>
+/* Layout: the live site's «горный мейджор» system applied to the marketplace — photo header, frameless cards, big touch targets, sticky step bar on phones. */
+:root {
+  --bg: #E9ECE6;
+  --surface: #F4F5F0;
+  --ink: #253740;
+  --muted: #51616A;
+  --line: #64747A;
+  --hair: rgba(37, 55, 64, .16);
+  --accent: #C98A5A;
+  --accent-hi: #D9A075;
+  --on-accent: #1B2930;
+  --deep: #1B2930;
+  --chalk: #E9ECE6;
+  --ok: #3F6B55;
+  --warn: #8F5F24;
+  --bad: #A2412F;
+  --review: #30434C;
+  --font: 'Geologica', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #253740; --surface: #30434C; --ink: #E9ECE6; --muted: #CAD2CA; --line: #8FA19E;
+    --hair: rgba(233, 236, 230, .16); --ok: #8CC0A3; --warn: #E0B07A; --bad: #E59A88; --review: #1B2930;
+    color-scheme: dark;
+  }
+  :root:not([data-theme="light"]) .logo-light { display: none; }
+  :root:not([data-theme="light"]) .logo-dark { display: block; }
+}
+:root[data-theme="dark"] {
+  --bg: #253740; --surface: #30434C; --ink: #E9ECE6; --muted: #CAD2CA; --line: #8FA19E;
+  --hair: rgba(233, 236, 230, .16); --ok: #8CC0A3; --warn: #E0B07A; --bad: #E59A88; --review: #1B2930;
+  color-scheme: dark;
+}
+:root[data-theme="dark"] .logo-light { display: none; }
+:root[data-theme="dark"] .logo-dark { display: block; }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.6; font-weight: 400; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.logo-dark { display: none; }
+
+.wrap { max-width: 1264px; margin: 0 auto; padding-inline: 20px; }
+@media (min-width: 768px) { .wrap { padding-inline: 32px; } }
+
+/* Review bar — not part of the site */
+.review { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: var(--review); color: var(--chalk); }
+.review .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; padding-block: 10px; }
+.review strong { font-weight: 500; font-size: 14px; white-space: nowrap; }
+.review nav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; min-width: 0; flex: 1 1 320px; }
+.review nav a { flex: none; text-decoration: none; font-size: 13px; padding: 7px 12px; border: 1px solid rgba(233,236,230,.25); color: var(--chalk); white-space: nowrap; }
+.review nav a[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+/* Site header */
+.nav { position: relative; z-index: 5; }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px; }
+.nav img { height: 30px; width: auto; }
+.nav ul { display: none; list-style: none; gap: 28px; margin: 0; padding: 0; font-size: 14px; }
+.nav li.on { font-weight: 500; }
+.nav .right { display: flex; align-items: center; gap: 16px; font-size: 13px; }
+.nav .langs { display: none; gap: 14px; opacity: .8; }
+.nav .menu { width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; }
+@media (min-width: 1024px) { .nav ul, .nav .langs { display: flex; } .nav .menu { display: none; } }
+.nav.over { position: absolute; inset: 0 0 auto 0; color: var(--chalk); }
+.nav.over .logo-light { display: none !important; }
+.nav.over .logo-dark { display: block !important; }
+.nav.solid { border-bottom: 1px solid var(--hair); }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 22px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background .15s, border-color .15s; white-space: nowrap; }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { background: var(--accent-hi); }
+.btn-ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--ink); }
+.btn-chalk { background: transparent; border-color: rgba(233,236,230,.55); color: var(--chalk); }
+.btn-chalk:hover { border-color: var(--chalk); }
+.btn-sm { min-height: 44px; padding: 0 16px; font-size: 14px; }
+.btn-block { width: 100%; }
+.btn svg, .ic svg { width: 18px; height: 18px; stroke-width: 1.6; }
+.link { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+
+/* Type */
+.eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; color: var(--muted); margin: 0; }
+h1, h2, h3 { font-weight: 300; letter-spacing: -0.025em; text-wrap: balance; margin: 0; }
+.h1 { font-size: clamp(36px, 7vw, 64px); line-height: 1.04; }
+.h2 { font-size: clamp(28px, 4.4vw, 44px); line-height: 1.1; }
+.h3 { font-size: 22px; line-height: 1.25; font-weight: 400; letter-spacing: -0.015em; }
+.lede { color: var(--muted); font-size: 17px; max-width: 58ch; margin: 0; }
+.small { font-size: 13px; color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Photo header */
+.hero { position: relative; min-height: 460px; display: flex; color: var(--chalk); overflow: hidden; background: var(--deep); }
+.hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero .scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,41,48,.55) 0%, rgba(27,41,48,.15) 35%, rgba(27,41,48,.88) 100%); }
+.hero > .wrap { position: relative; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; gap: 18px; padding-top: 120px; padding-bottom: 44px; }
+.hero .eyebrow { color: rgba(233,236,230,.78); }
+.hero .lede { color: rgba(233,236,230,.86); }
+.hero .row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+[data-screen] { scroll-margin-top: 240px; }
+@media (max-width: 767px) { .hero .scrim { background: linear-gradient(180deg, rgba(27,41,48,.6) 0%, rgba(27,41,48,.35) 30%, rgba(27,41,48,.92) 72%); } }
+.illus { position: absolute; right: 16px; bottom: 10px; font-size: 11px; color: rgba(233,236,230,.6); z-index: 2; }
+@media (min-width: 768px) { .hero { min-height: 520px; } .hero > .wrap { padding-bottom: 64px; } }
+
+/* Sections rail */
+.sec { padding-block: 56px; }
+@media (min-width: 768px) { .sec { padding-block: 80px; } }
+.sec-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; margin-bottom: 28px; }
+.rail { display: grid; grid-auto-flow: column; grid-auto-columns: 74%; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 20px; padding-inline: 20px; margin-inline: -20px; scrollbar-width: none; }
+@media (min-width: 768px) { .rail { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; padding: 0; margin: 0; gap: 16px; } }
+.tile { position: relative; aspect-ratio: 4 / 5; overflow: hidden; color: var(--chalk); text-decoration: none; scroll-snap-align: start; background: var(--deep); max-width: 100%; }
+.tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.tile:hover img { transform: scale(1.03); }
+.tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27,41,48,0) 40%, rgba(27,41,48,.9) 100%); }
+.tile div { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 1; }
+.tile b { display: block; font-weight: 400; font-size: 22px; letter-spacing: -0.015em; line-height: 1.2; }
+.tile span { display: block; font-size: 13px; opacity: .78; margin-top: 4px; }
+.tile .count { position: absolute; top: 14px; left: 14px; right: auto; bottom: auto; z-index: 1; font-size: 12px; background: rgba(27,41,48,.6); padding: 4px 9px; }
+
+/* Filters */
+.filters { background: var(--surface); padding: 20px; display: grid; gap: 16px; }
+.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-inline: -4px; padding-inline: 4px; }
+.chip { flex: none; min-height: 44px; padding: 0 18px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--hair); background: transparent; font-size: 15px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip small { font-size: 12px; opacity: .65; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.frow .btn { grid-column: 1 / -1; }
+@media (max-width: 559px) { .frow { grid-template-columns: 1fr; } }
+@media (min-width: 900px) { .filters { grid-template-columns: auto 1fr; align-items: end; padding: 16px 20px; } .frow { grid-template-columns: 220px 220px auto; } .frow .btn { grid-column: auto; } }
+label.f { display: grid; gap: 6px; font-size: 13px; font-weight: 500; min-width: 0; }
+.select, .input, textarea.input { width: 100%; min-height: 48px; padding: 0 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 0; appearance: none; font-size: 16px; }
+textarea.input { padding: 12px 14px; min-height: 104px; resize: vertical; }
+.select { background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 20px) 21px, calc(100% - 15px) 21px; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 36px; }
+.results-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 36px 0 20px; }
+
+/* Cards */
+.grid { display: grid; gap: 36px 24px; }
+@media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+.card { display: flex; flex-direction: column; text-decoration: none; min-width: 0; }
+.card .ph { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface); max-width: 100%; }
+.card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.card:hover .ph img { transform: scale(1.03); }
+.tag { position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 500; padding: 5px 10px; background: var(--chalk); color: var(--deep); }
+.card .body { padding-top: 16px; display: grid; gap: 6px; }
+.card .cat { font-size: 13px; color: var(--muted); }
+.card h3 { font-size: 21px; font-weight: 400; letter-spacing: -0.015em; line-height: 1.25; }
+.card .facts { font-size: 14px; color: var(--muted); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
+.meta span { display: inline-flex; align-items: center; gap: 5px; }
+.meta svg { width: 15px; height: 15px; stroke-width: 1.6; }
+.card .price { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hair); padding-top: 12px; margin-top: 8px; font-size: 19px; font-weight: 500; }
+.card .price small { font-size: 13px; font-weight: 400; color: var(--muted); }
+.card .price svg { width: 20px; height: 20px; stroke-width: 1.5; color: var(--accent); }
+/* Request («Ищу») and person cards carry no photo: a dark block marks a demand, not an offer. */
+.card.seek .ph { background: var(--deep); color: var(--chalk); display: flex; flex-direction: column; justify-content: space-between; padding: 20px; }
+.card.seek .ph .tag { position: static; align-self: flex-start; background: var(--accent); color: var(--on-accent); }
+.card.seek .ph p { margin: 0; font-size: 15px; color: rgba(233,236,230,.8); }
+.card.seek .ph p b { display: block; font-size: 30px; font-weight: 300; color: var(--chalk); letter-spacing: -0.02em; line-height: 1.15; }
+.card.person .ph { background: var(--surface); display: flex; flex-direction: column; justify-content: space-between; padding: 20px; border: 1px solid var(--hair); }
+.card.person .ph .tag { position: static; align-self: flex-start; background: var(--ink); color: var(--bg); }
+.card.person .ph svg { width: 56px; height: 56px; stroke-width: 1; color: var(--muted); }
+
+/* Bands */
+.band { position: relative; color: var(--chalk); overflow: hidden; background: var(--deep); }
+.band > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.band .scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(27,41,48,.92) 0%, rgba(27,41,48,.55) 70%, rgba(27,41,48,.35) 100%); }
+.band > .wrap { position: relative; padding-block: 88px; display: grid; gap: 18px; }
+.band .lede { color: rgba(233,236,230,.85); }
+.band .row { display: flex; flex-wrap: wrap; gap: 12px; }
+.band .wa { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: rgba(233,236,230,.8); }
+.band .wa svg { width: 16px; height: 16px; }
+
+.subscribe { display: grid; gap: 16px; padding: 28px 24px; background: var(--surface); margin-top: 56px; }
+.subscribe form { display: grid; gap: 10px; }
+@media (min-width: 900px) { .subscribe { grid-template-columns: 1fr 460px; align-items: center; padding: 32px; } .subscribe form { grid-template-columns: 1fr auto; } }
+.disclaimer { font-size: 13px; color: var(--muted); max-width: 72ch; padding-block: 28px 56px; margin: 0; }
+
+.foot { border-top: 1px solid var(--hair); background: var(--surface); }
+.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; padding-block: 28px; font-size: 13px; color: var(--muted); }
+
+/* Empty */
+.empty { display: grid; gap: 28px; padding-block: 40px 8px; }
+@media (min-width: 900px) { .empty { grid-template-columns: 1.1fr 1fr; align-items: center; gap: 48px; } }
+.empty .ph { aspect-ratio: 3 / 2; overflow: hidden; position: relative; max-width: 100%; }
+.empty .ph img { width: 100%; height: 100%; object-fit: cover; }
+.empty .list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.empty .list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
+.empty .list svg { flex: none; width: 20px; height: 20px; color: var(--accent); margin-top: 2px; }
+
+/* Work pages */
+.page-head { padding-block: 40px 28px; display: grid; gap: 14px; }
+@media (min-width: 768px) { .page-head { padding-block: 56px 36px; } }
+.back { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); text-decoration: none; min-height: 44px; }
+.back svg { width: 16px; height: 16px; }
+
+/* Intake */
+.intake { display: grid; gap: 32px; padding-bottom: 120px; }
+@media (min-width: 1024px) { .intake { grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; padding-bottom: 80px; } }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.steps div { display: grid; gap: 8px; font-size: 13px; color: var(--muted); }
+.steps div::before { content: ""; height: 3px; background: var(--hair); }
+.steps div.done::before { background: var(--ink); }
+.steps div.now::before { background: var(--accent); height: 3px; }
+.steps div.now { color: var(--ink); font-weight: 500; }
+.steps span { display: none; }
+@media (min-width: 560px) { .steps span { display: inline; } }
+.panel { display: grid; gap: 28px; }
+.q { display: grid; gap: 14px; }
+.q > h3 { font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
+.group-label { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin: 8px 0 -4px; }
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (min-width: 768px) { .opts { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1200px) { .opts { grid-template-columns: repeat(4, 1fr); } }
+.opt { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 14px; min-height: 96px; padding: 14px; background: var(--surface); border: 1px solid transparent; text-align: left; cursor: pointer; font-size: 15px; line-height: 1.3; }
+.opt svg { width: 24px; height: 24px; stroke-width: 1.4; color: var(--muted); }
+.opt:hover { border-color: var(--line); }
+.opt[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.opt[aria-pressed="true"] svg { color: var(--accent); }
+.acts { display: grid; gap: 8px; }
+.act { display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 0 18px; background: var(--surface); border: 1px solid transparent; text-align: left; cursor: pointer; font-size: 17px; }
+.act svg { width: 22px; height: 22px; stroke-width: 1.5; color: var(--muted); flex: none; }
+.act .chk { margin-left: auto; width: 24px; height: 24px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; flex: none; }
+.act[aria-pressed="true"] { border-color: var(--ink); }
+.act[aria-pressed="true"] .chk { background: var(--accent); border-color: var(--accent); }
+.act[aria-pressed="true"] .chk::after { content: ""; width: 8px; height: 8px; background: var(--on-accent); border-radius: 50%; }
+.fields { display: grid; gap: 18px; }
+.two { display: grid; gap: 18px; }
+@media (min-width: 640px) { .two { grid-template-columns: 1fr 1fr; } }
+.cap { border: 1px solid var(--hair); padding: 18px; display: grid; gap: 16px; background: var(--surface); }
+.cap header { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-weight: 500; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg .chip { min-height: 44px; padding: 0 14px; font-size: 14px; }
+details.more { border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+details.more summary { list-style: none; min-height: 56px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; font-weight: 500; }
+details.more summary::-webkit-details-marker { display: none; }
+details.more summary svg { width: 18px; height: 18px; }
+.photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+@media (min-width: 640px) { .photos { grid-template-columns: repeat(4, 1fr); } }
+.photos > * { aspect-ratio: 1; position: relative; overflow: hidden; max-width: 100%; }
+.photos img { width: 100%; height: 100%; object-fit: cover; }
+.photos .first::after { content: "Обложка"; position: absolute; left: 6px; bottom: 6px; font-size: 11px; padding: 2px 6px; background: var(--chalk); color: var(--deep); }
+.photos .rm { position: absolute; top: 6px; right: 6px; width: 32px; height: 32px; display: grid; place-items: center; background: rgba(27,41,48,.7); color: var(--chalk); border: 0; }
+.photos .rm svg { width: 16px; height: 16px; }
+.photos .add { border: 1px dashed var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: transparent; font-size: 14px; cursor: pointer; }
+.photos .add svg { width: 26px; height: 26px; stroke-width: 1.3; color: var(--accent); }
+.radios { display: grid; gap: 8px; }
+.bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--bg); border-top: 1px solid var(--hair); padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); display: grid; grid-template-columns: auto 1fr; gap: 10px; }
+.bar .saved { grid-column: 1 / -1; text-align: center; font-size: 12px; color: var(--muted); margin-top: -2px; order: 3; }
+@media (min-width: 1024px) { .bar { position: static; background: transparent; padding: 24px 0 0; border-top: 1px solid var(--hair); grid-template-columns: auto auto 1fr; align-items: center; } .bar .btn-primary { justify-self: start; } .bar .saved { grid-column: auto; order: 0; text-align: right; margin: 0; } }
+.help { display: grid; gap: 14px; align-content: start; }
+.help .box { background: var(--surface); padding: 22px; display: grid; gap: 12px; }
+.help .box h3 { font-size: 17px; font-weight: 500; letter-spacing: 0; }
+.help .box p { margin: 0; font-size: 14px; color: var(--muted); }
+.wa-line { display: flex; gap: 12px; align-items: center; padding: 14px 16px; background: var(--surface); font-size: 15px; text-decoration: none; }
+.wa-line svg { width: 22px; height: 22px; color: var(--accent); flex: none; stroke-width: 1.5; }
+.wa-line span { flex: 1; }
+.wa-line .go { width: 18px; height: 18px; color: var(--muted); }
+@media (min-width: 1024px) { .wa-mobile { display: none; } }
+.help-desktop { display: none; }
+@media (min-width: 1024px) { .help-desktop { display: grid; } }
+.signin { background: var(--surface); padding: 22px; display: grid; gap: 14px; }
+.btn-google { background: var(--bg); border-color: var(--line); color: var(--ink); }
+.or { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); }
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--hair); }
+.preview { display: grid; gap: 20px; }
+@media (min-width: 768px) { .preview { grid-template-columns: 280px 1fr; } }
+dl.facts { margin: 0; display: grid; }
+dl.facts div { display: grid; grid-template-columns: minmax(120px, 40%) 1fr; gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--hair); font-size: 15px; }
+dl.facts dt { color: var(--muted); }
+dl.facts dd { margin: 0; min-width: 0; }
+.done-state { display: grid; gap: 16px; justify-items: start; padding: 32px 24px; background: var(--surface); }
+.done-state .mark { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; }
+.done-state .mark svg { width: 28px; height: 28px; stroke-width: 2; }
+
+/* Listing */
+.listing { display: grid; gap: 40px; padding-bottom: 72px; }
+@media (min-width: 1024px) { .listing { grid-template-columns: minmax(0, 1fr) 380px; gap: 56px; } .listing aside { order: 2; position: sticky; top: 84px; align-self: start; } }
+.listing main { display: grid; gap: 40px; min-width: 0; }
+.gallery { display: grid; gap: 8px; }
+.gallery .big { aspect-ratio: 3 / 2; overflow: hidden; position: relative; max-width: 100%; }
+.gallery .big img { width: 100%; height: 100%; object-fit: cover; }
+.gallery .count { position: absolute; right: 12px; bottom: 12px; font-size: 12px; padding: 4px 9px; background: rgba(27,41,48,.7); color: var(--chalk); }
+.thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.thumbs img { aspect-ratio: 1; object-fit: cover; width: 100%; opacity: .85; }
+.thumbs img:first-child { outline: 2px solid var(--accent); outline-offset: -2px; opacity: 1; }
+.block h2 { font-size: 24px; font-weight: 400; letter-spacing: -0.015em; margin-bottom: 12px; }
+.block p { margin: 0; max-width: 64ch; }
+.caps { display: grid; gap: 8px; margin-top: 4px; }
+.caps div { padding: 12px 14px; background: var(--surface); font-size: 15px; font-variant-numeric: tabular-nums; }
+.deal { display: grid; gap: 20px; }
+.deal .pricebox { display: grid; gap: 4px; }
+.deal .pricebox b { font-size: 36px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.deal .pricebox span { font-size: 14px; color: var(--muted); }
+.who { display: flex; gap: 12px; align-items: center; padding-block: 16px; border-block: 1px solid var(--hair); }
+.who .av { width: 44px; height: 44px; border-radius: 50%; background: var(--surface); display: grid; place-items: center; flex: none; }
+.who .av svg { width: 22px; height: 22px; color: var(--muted); stroke-width: 1.4; }
+.who div { font-size: 15px; line-height: 1.35; min-width: 0; }
+.who small { display: block; color: var(--muted); font-size: 13px; }
+.trust { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.trust li { display: flex; gap: 10px; align-items: center; font-size: 14px; }
+.trust svg { width: 18px; height: 18px; color: var(--ok); flex: none; stroke-width: 1.6; }
+.trust time { color: var(--muted); margin-left: auto; font-size: 13px; white-space: nowrap; }
+.offer { background: var(--surface); padding: 22px; display: grid; gap: 14px; }
+.offer p { margin: 0; font-size: 14px; color: var(--muted); }
+
+/* Cabinet */
+.cab { display: grid; gap: 40px; padding-bottom: 72px; }
+@media (min-width: 1024px) { .cab { grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; } }
+.cab-cards { display: grid; gap: 20px; }
+@media (min-width: 768px) { .cab-cards { grid-template-columns: 1fr 1fr; } }
+.lc { background: var(--surface); display: flex; flex-direction: column; min-width: 0; }
+.lc .ph { aspect-ratio: 16 / 7; overflow: hidden; position: relative; max-width: 100%; }
+.lc .ph img { width: 100%; height: 100%; object-fit: cover; }
+.lc .noph { aspect-ratio: 16 / 7; background: var(--deep); color: rgba(233,236,230,.75); display: flex; align-items: flex-end; padding: 16px; font-size: 13px; }
+.lc .in { padding: 18px; display: grid; gap: 12px; }
+.lc h3 { font-size: 19px; font-weight: 400; letter-spacing: -0.01em; line-height: 1.3; }
+.st { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 4px 9px; border: 1px solid currentColor; justify-self: start; }
+.st::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.st.pub { color: var(--ok); }
+.st.wait { color: var(--warn); }
+.st.no { color: var(--bad); }
+.st.draft { color: var(--muted); border-style: dashed; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--hair); }
+.stats div { background: var(--surface); padding: 12px 0; display: grid; }
+.stats div + div { padding-left: 14px; }
+.stats b { font-size: 26px; font-weight: 300; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.stats span { font-size: 12px; color: var(--muted); }
+.reason { border-left: 2px solid var(--bad); padding-left: 12px; font-size: 14px; }
+.reason b { display: block; font-weight: 500; color: var(--bad); font-size: 13px; }
+.resp { display: grid; gap: 8px; }
+.resp div { background: var(--bg); padding: 12px 14px; font-size: 14px; display: grid; gap: 2px; }
+.resp small { color: var(--muted); }
+.lc .actions { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
+.lc .actions .btn { min-height: 44px; padding: 0 14px; font-size: 14px; }
+.viewtoggle { display: inline-flex; border: 1px solid var(--hair); }
+.viewtoggle button { min-height: 40px; padding: 0 14px; background: transparent; border: 0; font-size: 13px; cursor: pointer; }
+.viewtoggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+/* Company */
+.company-band { background: var(--deep); color: var(--chalk); }
+.company-band > .wrap { padding-block: 120px 48px; display: grid; gap: 14px; }
+.company-band .eyebrow { color: rgba(233,236,230,.7); }
+.company-band .meta { color: rgba(233,236,230,.8); }
+.company-band p { margin: 0; max-width: 60ch; color: rgba(233,236,230,.86); }
+
+/* Other screens */
+.trio { display: grid; gap: 20px; padding-bottom: 72px; }
+@media (min-width: 900px) { .trio { grid-template-columns: repeat(3, 1fr); } }
+.screen-card { display: grid; gap: 16px; align-content: start; }
+.screen-card > .small { text-transform: uppercase; letter-spacing: .14em; font-size: 11px; }
+.mod { background: var(--surface); padding: 20px; display: grid; gap: 12px; }
+.auto { font-size: 13px; padding: 8px 10px; background: var(--bg); border-left: 2px solid var(--ok); }
+.checks { display: grid; gap: 8px; font-size: 14px; }
+.checks label { display: flex; gap: 10px; align-items: center; min-height: 44px; }
+.checks input { width: 20px; height: 20px; accent-color: var(--accent); }
+
+.note { background: var(--surface); border-left: 2px solid var(--accent); padding: 14px 18px; font-size: 14px; color: var(--muted); margin-top: 24px; }
+.note b { color: var(--ink); font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="review">
+  <div class="wrap">
+    <strong>Макет 21 · маркетплейс в новом дизайне</strong>
+    <nav aria-label="Экраны макета" id="screens">
+      <a href="#catalog">Каталог</a>
+      <a href="#empty">Пока пусто</a>
+      <a href="#intake">Подача</a>
+      <a href="#listing">Объявление</a>
+      <a href="#request">Заявка «Ищу»</a>
+      <a href="#cabinet">Кабинет</a>
+      <a href="#company">Компания</a>
+      <a href="#other">Вход, подписка, модерация</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ============ CATALOG ============ -->
+<section class="screen" id="catalog" data-screen>
+  <div class="hero">
+    <img src="../../../public/brand/photo/scene-machinery.webp" alt="">
+    <div class="scrim"></div>
+    <header class="nav over" data-nav="over"></header>
+    <div class="wrap">
+      <p class="eyebrow">Техника и услуги</p>
+      <h1 class="h1">Найти технику и&nbsp;подрядчиков для геологии</h1>
+      <p class="lede">Аренда, продажа техники и услуги показаны отдельно. Уточняйте комплектацию и условия у автора объявления до заказа.</p>
+      <div class="row">
+        <a class="btn btn-primary" href="#intake"><i data-lucide="plus"></i>Подать объявление</a>
+        <a class="btn btn-chalk" href="#cabinet">Мои объявления</a>
+      </div>
+    </div>
+    <span class="illus">Иллюстрация</span>
+  </div>
+
+  <div class="wrap">
+    <div class="sec">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Разделы</p>
+          <h2 class="h2" style="margin-top:10px">Что нужно</h2>
+        </div>
+        <span class="small">Иллюстрации, не фото из объявлений</span>
+      </div>
+      <div class="rail">
+        <a class="tile" href="#catalog"><img src="../../../public/brand/photo/scene-drill-rig.webp" alt=""><span class="count num">3</span><div><b>Техника</b><span>Буровые, спецтехника, транспорт, лагерь</span></div></a>
+        <a class="tile" href="#catalog"><img src="../../../public/brand/photo/scene-tools.webp" alt=""><span class="count num">1</span><div><b>Инструмент и приборы</b><span>Коронки, трубы, приборы</span></div></a>
+        <a class="tile" href="#catalog"><img src="../../../public/brand/photo/scene-lab.webp" alt=""><span class="count num">2</span><div><b>Услуги и работы</b><span>Бурение, геохимия, геофизика, лаборатории</span></div></a>
+        <a class="tile" href="#catalog"><img src="../../../public/brand/photo/scene-geologists.webp" alt=""><span class="count num">1</span><div><b>Люди</b><span>Специалисты и вакансии</span></div></a>
+      </div>
+
+      <div style="margin-top:48px">
+        <form class="filters" onsubmit="event.preventDefault()">
+          <div class="chips" role="group" aria-label="Тип предложения">
+            <button class="chip" type="button" aria-pressed="true">Всё <small>7</small></button>
+            <button class="chip" type="button" aria-pressed="false">Аренда <small>1</small></button>
+            <button class="chip" type="button" aria-pressed="false">Продажа <small>2</small></button>
+            <button class="chip" type="button" aria-pressed="false">Услуги <small>2</small></button>
+            <button class="chip" type="button" aria-pressed="false">Ищу <small>2</small></button>
+          </div>
+          <div class="frow">
+            <label class="f" for="f-sec">Раздел
+              <select class="select" id="f-sec"><option>Все разделы</option><option>Буровая установка</option><option>Лаборатория, анализы</option></select>
+            </label>
+            <label class="f" for="f-reg">Регион
+              <select class="select" id="f-reg"><option>Все регионы</option><option>Карагандинская обл.</option><option>ВКО</option></select>
+            </label>
+            <button class="btn btn-primary" type="submit">Показать</button>
+          </div>
+        </form>
+        <div class="results-head">
+          <h2 class="h3">Найдено: <span class="num">7</span></h2>
+          <span class="small">Объявления в макете — примеры</span>
+        </div>
+        <div class="grid" data-cards="all"></div>
+
+        <div class="subscribe">
+          <div>
+            <h2 class="h3">Сообщать о новых объявлениях</h2>
+            <p class="small" style="margin:6px 0 0">Пришлём письмо, когда по этим фильтрам появятся новые объявления. Не чаще раза в день.</p>
+          </div>
+          <form onsubmit="event.preventDefault()">
+            <input class="input" id="sub-email" type="email" placeholder="name@mail.kz" aria-label="Электронная почта">
+            <button class="btn btn-primary" type="submit">Подписаться</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <img src="../../../public/brand/photo/scene-tools.webp" alt="">
+    <div class="scrim"></div>
+    <div class="wrap">
+      <h2 class="h2">Есть своя техника или услуги?</h2>
+      <p class="lede">Разместите объявление бесплатно. Оно появится после проверки редакцией.</p>
+      <div class="row"><a class="btn btn-primary" href="#intake">Подать объявление</a></div>
+      <span class="wa"><i data-lucide="message-circle"></i>Нет времени заполнять? Пришлите фото и пару слов в WhatsApp — разместим за вас.</span>
+    </div>
+    <span class="illus">Иллюстрация</span>
+  </div>
+  <div class="wrap"><p class="disclaimer">Объявления размещают владельцы техники и подрядчики. QAZNEDR проверяет объявление перед публикацией, но не является стороной сделки и не гарантирует её результат. Отметки проверки в объявлении показывают, что именно проверено и когда.</p></div>
+  <footer class="foot" data-foot></footer>
+</section>
+
+<!-- ============ EMPTY ============ -->
+<section class="screen" id="empty" data-screen hidden>
+  <div class="hero">
+    <img src="../../../public/brand/photo/scene-machinery.webp" alt="">
+    <div class="scrim"></div>
+    <header class="nav over" data-nav="over"></header>
+    <div class="wrap">
+      <p class="eyebrow">Техника и услуги</p>
+      <h1 class="h1">Найти технику и&nbsp;подрядчиков для геологии</h1>
+      <p class="lede">Аренда, продажа техники и услуги показаны отдельно. Уточняйте комплектацию и условия у автора объявления до заказа.</p>
+      <div class="row">
+        <a class="btn btn-primary" href="#intake"><i data-lucide="plus"></i>Подать объявление</a>
+        <a class="btn btn-chalk" href="#cabinet">Мои объявления</a>
+      </div>
+    </div>
+    <span class="illus">Иллюстрация</span>
+  </div>
+  <div class="wrap">
+    <div class="empty">
+      <div style="display:grid;gap:18px">
+        <p class="eyebrow">Каталог открылся 20 октября</p>
+        <h2 class="h2">Объявлений пока нет. Ваше может стать первым</h2>
+        <p class="lede">Подача занимает около пяти минут, это бесплатно. Объявление появится после проверки редакцией.</p>
+        <ul class="list">
+          <li><i data-lucide="camera"></i>Фото с телефона загружаются как есть, до 8 штук.</li>
+          <li><i data-lucide="message-circle"></i>Нет времени заполнять — пришлите фото в WhatsApp, разместим за вас.</li>
+          <li><i data-lucide="bell"></i>Ищете технику? Подпишитесь: пришлём письмо, когда появятся объявления.</li>
+        </ul>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a class="btn btn-primary" href="#intake">Подать объявление</a>
+          <a class="btn btn-ghost" href="#request">Разместить заявку «Ищу»</a>
+        </div>
+      </div>
+      <div class="ph"><img src="../../../public/brand/photo/scene-field-camp.webp" alt=""><span class="illus">Иллюстрация</span></div>
+    </div>
+    <div class="note"><b>С фильтрами и без результатов</b> остаётся одна строка: «По этим условиям объявлений пока нет. Измените фильтры или загляните позже.» и под ней кнопки «Сбросить» и «Подписаться».</div>
+    <p class="disclaimer">Объявления размещают владельцы техники и подрядчики. QAZNEDR проверяет объявление перед публикацией, но не является стороной сделки и не гарантирует её результат.</p>
+  </div>
+  <footer class="foot" data-foot></footer>
+</section>
+
+<!-- ============ INTAKE ============ -->
+<section class="screen" id="intake" data-screen hidden>
+  <header class="nav solid" data-nav="solid"></header>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Подать объявление</p>
+      <h1 class="h1" style="font-size:clamp(34px,5.4vw,52px)">Разместить объявление</h1>
+      <p class="lede">Заполните предложение для проверки редакцией. Публикация возможна только после модерации.</p>
+    </div>
+    <div class="intake">
+      <div style="display:grid;gap:28px;min-width:0">
+        <a class="wa-line wa-mobile" href="#intake"><i data-lucide="message-circle"></i><span>Нет времени? Пришлите фото в WhatsApp — разместим за вас</span><i class="go" data-lucide="chevron-right"></i></a>
+        <div class="steps" id="steps">
+          <div class="now">Шаг 1 <span>· Раздел</span></div>
+          <div>Шаг 2 <span>· Описание</span></div>
+          <div>Шаг 3 <span>· Контакт</span></div>
+          <div>Шаг 4 <span>· Проверка</span></div>
+        </div>
+
+        <!-- step 1 -->
+        <div class="panel" data-step="1">
+          <h2 class="h2">Что хотите разместить?</h2>
+          <div class="q">
+            <p class="group-label">Техника</p>
+            <div class="opts" data-single>
+              <button class="opt" type="button" aria-pressed="true"><i data-lucide="drill"></i>Буровая установка</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="tractor"></i>Землеройная техника</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="gauge"></i>Компрессоры и насосы</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="truck"></i>Транспорт</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="tent"></i>Полевой лагерь и энергетика</button>
+            </div>
+            <p class="group-label">Инструмент и приборы</p>
+            <div class="opts" data-single>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="wrench"></i>Буровой инструмент и запчасти</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="compass"></i>Приборы и оборудование</button>
+            </div>
+            <p class="group-label">Услуги и работы</p>
+            <div class="opts" data-single>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="arrow-down-to-line"></i>Буровые работы</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="flask-conical"></i>Геохимия</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="activity"></i>Геофизика</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="microscope"></i>Лаборатория, анализы</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="map"></i>Топосъёмка и маркшейдерия</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="droplets"></i>Гидрогеология и вода</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="file-text"></i>Проекты и отчёты</button>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="layers"></i>Другие геологические работы</button>
+            </div>
+            <p class="group-label">Люди</p>
+            <div class="opts" data-single>
+              <button class="opt" type="button" aria-pressed="false"><i data-lucide="users"></i>Специалисты и вакансии</button>
+            </div>
+          </div>
+          <div class="q">
+            <h3>Что хотите сделать?</h3>
+            <div class="acts" data-single>
+              <button class="act" type="button" aria-pressed="true"><i data-lucide="key-round"></i>Сдаю в аренду<span class="chk"></span></button>
+              <button class="act" type="button" aria-pressed="false"><i data-lucide="tag"></i>Продаю<span class="chk"></span></button>
+              <button class="act" type="button" aria-pressed="false"><i data-lucide="search"></i>Ищу: хочу арендовать или купить<span class="chk"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- step 2 -->
+        <div class="panel" data-step="2" hidden>
+          <h2 class="h2">Расскажите о предложении</h2>
+          <div class="fields">
+            <label class="f" for="i-title">Название
+              <input class="input" id="i-title" value="Буровая УКБ-5П на гусеничном ходу">
+            </label>
+            <div class="two">
+              <label class="f" for="i-reg">Область *
+                <select class="select" id="i-reg"><option>Карагандинская обл.</option></select>
+              </label>
+              <label class="f" for="i-city">Город
+                <input class="input" id="i-city" placeholder="Ближайший город или посёлок" value="Караганда">
+              </label>
+            </div>
+          </div>
+          <div class="q">
+            <h3>Фото</h3>
+            <div class="photos">
+              <div class="first"><img src="../../../public/brand/photo/scene-drill-rig.webp" alt="Фото 1"><button class="rm" type="button" aria-label="Удалить фото 1"><i data-lucide="x"></i></button></div>
+              <div><img src="../../../public/brand/photo/scene-tools.webp" alt="Фото 2"><button class="rm" type="button" aria-label="Удалить фото 2"><i data-lucide="x"></i></button></div>
+              <button class="add" type="button"><i data-lucide="camera"></i>Добавить фото</button>
+            </div>
+            <p class="small" style="margin:0">Фото с телефона можно загружать как есть, до 8 штук: большие снимки уменьшим сами.</p>
+          </div>
+          <div class="q">
+            <h3>Возможности бурения</h3>
+            <div class="cap">
+              <header>Возможность 1<button class="link" type="button" style="background:none;border:0;font-size:13px">Удалить</button></header>
+              <div class="f" style="font-size:13px;font-weight:500">Метод
+                <div class="seg" data-single>
+                  <button class="chip" type="button" aria-pressed="true">Колонковое</button>
+                  <button class="chip" type="button" aria-pressed="false">Обратная циркуляция</button>
+                  <button class="chip" type="button" aria-pressed="false">Шнековое</button>
+                  <button class="chip" type="button" aria-pressed="false">Роторное</button>
+                  <button class="chip" type="button" aria-pressed="false">Пневмоударник</button>
+                  <button class="chip" type="button" aria-pressed="false">Другое</button>
+                </div>
+              </div>
+              <div class="two">
+                <label class="f" for="i-depth">Глубина, м<input class="input num" id="i-depth" inputmode="numeric" value="500"></label>
+                <label class="f" for="i-dia">Диаметр скважины, мм<input class="input num" id="i-dia" inputmode="numeric" value="96"></label>
+              </div>
+              <div class="f" style="font-size:13px;font-weight:500">Типоразмер керновой системы
+                <div class="seg" data-single>
+                  <button class="chip" type="button" aria-pressed="false">BQ</button>
+                  <button class="chip" type="button" aria-pressed="false">NQ</button>
+                  <button class="chip" type="button" aria-pressed="true">HQ</button>
+                  <button class="chip" type="button" aria-pressed="false">PQ</button>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-ghost" type="button" style="justify-self:start"><i data-lucide="plus"></i>Добавить возможность</button>
+          </div>
+          <div class="q">
+            <h3>Цена</h3>
+            <div class="two">
+              <label class="f" for="i-price">Цена, ₸<input class="input num" id="i-price" inputmode="numeric" value="180 000"></label>
+              <label class="f" for="i-unit">Единица цены<select class="select" id="i-unit"><option>За смену</option><option>За метр</option><option>За месяц</option></select></label>
+            </div>
+            <p class="small" style="margin:0">Пусто — цена по запросу.</p>
+          </div>
+          <div>
+            <details class="more"><summary>Где работаете<i data-lucide="chevron-down"></i></summary><p class="small">Весь Казахстан или список областей в два столбца.</p></details>
+            <details class="more" style="border-top:0"><summary>Назначение, траектория, площадка<i data-lucide="chevron-down"></i></summary><p class="small">Разведка, вода, инженерная геология… Вертикальная / наклонная. Поверхность / подземная.</p></details>
+            <details class="more" style="border-top:0"><summary>Дополнительные параметры<i data-lucide="chevron-down"></i></summary><p class="small">Марка, модель, ходовая, оператор, доставка.</p></details>
+            <details class="more" style="border-top:0"><summary>Добавить описание и условия<i data-lucide="chevron-down"></i></summary><p class="small">Описание, условия.</p></details>
+          </div>
+        </div>
+
+        <!-- step 3 -->
+        <div class="panel" data-step="3" hidden>
+          <h2 class="h2">Контакт и вход</h2>
+          <div class="signin">
+            <p class="small" style="margin:0">Для сохранения, фото и отправки войдите в аккаунт.</p>
+            <button class="btn btn-google btn-block" type="button"><i data-lucide="log-in"></i>Продолжить с Google</button>
+            <div class="or">или по почте, без пароля</div>
+            <label class="f" for="i-mail">Электронная почта<input class="input" id="i-mail" type="email" placeholder="name@mail.kz"></label>
+            <button class="btn btn-ghost btn-block" type="button">Прислать ссылку для входа</button>
+            <p class="small" style="margin:0">Продолжая, вы соглашаетесь на обработку данных по <a href="#intake">политике конфиденциальности</a>.</p>
+          </div>
+          <div class="fields">
+            <label class="f" for="i-name">Имя для связи *<input class="input" id="i-name" value="Ерлан"></label>
+            <label class="f" for="i-co">Компания<input class="input" id="i-co" placeholder="Необязательно"></label>
+            <label class="f" for="i-tel">Телефон *<input class="input num" id="i-tel" inputmode="tel" placeholder="8 701 123 45 67"></label>
+          </div>
+          <div class="q">
+            <h3>Показывать телефон после модерации?</h3>
+            <div class="acts" data-single>
+              <button class="act" type="button" aria-pressed="true"><i data-lucide="phone"></i>Да, в объявлении<span class="chk"></span></button>
+              <button class="act" type="button" aria-pressed="false"><i data-lucide="shield"></i>Нет, только редакции<span class="chk"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- step 4 -->
+        <div class="panel" data-step="4" hidden>
+          <h2 class="h2">Предпросмотр</h2>
+          <div class="preview">
+            <div class="card" style="pointer-events:none">
+              <div class="ph"><img src="../../../public/brand/photo/scene-drill-rig.webp" alt=""><span class="tag">Техника · Аренда</span></div>
+              <div class="body"><h3>Буровая УКБ-5П на гусеничном ходу</h3><p class="facts" style="margin:0">Колонковое · 500 м · Ø 96 мм · HQ</p><div class="price">180 000 ₸ <small>за смену</small></div></div>
+            </div>
+            <dl class="facts">
+              <div><dt>Раздел</dt><dd>Буровая установка · Сдаю в аренду</dd></div>
+              <div><dt>Где</dt><dd>Караганда, Карагандинская обл.</dd></div>
+              <div><dt>Бурение</dt><dd class="num">Колонковое · 500 м · Ø 96 мм · HQ</dd></div>
+              <div><dt>Цена</dt><dd class="num">180 000 ₸ за смену</dd></div>
+              <div><dt>Фото</dt><dd>2</dd></div>
+              <div><dt>Контакт</dt><dd>Ерлан, телефон в объявлении</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="done-state" data-step="5" hidden>
+          <span class="mark"><i data-lucide="check"></i></span>
+          <h2 class="h2">Отправлено на модерацию</h2>
+          <p class="lede">Объявление появится после проверки редакцией. Статус видно в «Моих объявлениях».</p>
+          <a class="btn btn-ghost" href="#cabinet">Мои объявления</a>
+        </div>
+
+        <div class="bar" id="bar">
+          <button class="btn btn-ghost" type="button" id="prev"><i data-lucide="arrow-left"></i><span>Назад</span></button>
+          <button class="btn btn-primary" type="button" id="next">Продолжить<i data-lucide="arrow-right"></i></button>
+          <span class="saved">Черновик сохранён</span>
+        </div>
+      </div>
+
+      <aside class="help help-desktop">
+        <div class="box">
+          <h3>Нет времени заполнять?</h3>
+          <p>Пришлите фото и пару слов в WhatsApp — разместим за вас.</p>
+          <a class="btn btn-ghost btn-sm" href="#intake"><i data-lucide="message-circle"></i>Написать в WhatsApp</a>
+        </div>
+        <div class="box">
+          <h3>Как проходит проверка</h3>
+          <p>Редакция смотрит объявление обычно до одного рабочего дня. Ответ появится в «Моих объявлениях».</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LISTING ============ -->
+<section class="screen" id="listing" data-screen hidden>
+  <header class="nav solid" data-nav="solid"></header>
+  <div class="wrap">
+    <div class="page-head">
+      <a class="back" href="#catalog"><i data-lucide="arrow-left"></i>Вернуться в каталог</a>
+      <p class="eyebrow">Техника · Аренда · Пример</p>
+      <h1 class="h1" style="font-size:clamp(32px,5vw,52px)">Буровая УКБ-5П на гусеничном ходу</h1>
+      <div class="meta"><span><i data-lucide="map-pin"></i>Караганда, Карагандинская обл.</span></div>
+    </div>
+    <div class="listing">
+      <aside class="deal">
+        <div class="pricebox"><b>180 000 ₸</b><span>за смену, 12 часов · в цену входит оператор</span></div>
+        <div class="who"><span class="av"><i data-lucide="user-round"></i></span><div>Ерлан · Сарыарка Бурение<small>Отвечает в WhatsApp</small></div></div>
+        <div style="display:grid;gap:8px">
+          <a class="btn btn-primary btn-block" href="#listing"><i data-lucide="phone"></i><span class="num">Позвонить 8 701 123 45 67</span></a>
+          <a class="btn btn-ghost btn-block" href="#listing"><i data-lucide="message-circle"></i>Написать в WhatsApp</a>
+        </div>
+        <a class="link" href="#company">Компания Сарыарка Бурение: все объявления<i data-lucide="arrow-right" style="width:16px;height:16px"></i></a>
+        <div style="display:grid;gap:12px">
+          <p class="eyebrow">Что проверила редакция</p>
+          <ul class="trust">
+            <li><i data-lucide="shield-check"></i>Телефон подтверждён<time>12.10.2026</time></li>
+            <li><i data-lucide="shield-check"></i>Документы просмотрены<time>14.10.2026</time></li>
+          </ul>
+        </div>
+        <p class="small" style="margin:0">Обновлено 18 октября 2026 · <a href="#listing">Пожаловаться на объявление</a></p>
+      </aside>
+      <main>
+        <div class="gallery">
+          <div class="big"><img src="../../../public/brand/photo/scene-drill-rig.webp" alt="Фото 1"><span class="count num">1 / 4</span></div>
+          <div class="thumbs">
+            <img src="../../../public/brand/photo/scene-drill-rig.webp" alt="Фото 1">
+            <img src="../../../public/brand/photo/scene-tools.webp" alt="Фото 2">
+            <img src="../../../public/brand/photo/scene-field-camp.webp" alt="Фото 3">
+            <img src="../../../public/brand/photo/scene-machinery.webp" alt="Фото 4">
+          </div>
+          <span class="small">В макете — иллюстрации вместо фото автора</span>
+        </div>
+        <div class="block">
+          <h2>Описание</h2>
+          <p>Установка на гусеничном ходу, обслужена в сентябре. Работаем с собственной бригадой, есть вагончик и водовоз. Выезд по Карагандинской и соседним областям.</p>
+        </div>
+        <div class="block">
+          <h2>Характеристики</h2>
+          <div class="caps"><div>Колонковое · 500 м · Ø 96 мм · HQ</div><div>Шнековое · 30 м · Ø 150 мм</div></div>
+          <dl class="facts" style="margin-top:12px">
+            <div><dt>Тип техники</dt><dd>Буровая установка</dd></div>
+            <div><dt>Ходовая</dt><dd>Гусеничная</dd></div>
+            <div><dt>Назначение работ</dt><dd>Разведка полезных ископаемых, вода</dd></div>
+            <div><dt>Оператор</dt><dd>Да</dd></div>
+            <div><dt>Доставка</dt><dd>Да</dd></div>
+            <div><dt>Доступность</dt><dd>Свободна с 1 ноября, на сезон</dd></div>
+            <div><dt>Где работает</dt><dd>Карагандинская, Улытауская, Павлодарская обл.</dd></div>
+          </dl>
+        </div>
+        <div class="block">
+          <h2>Условия</h2>
+          <p>Минимальный заказ — 10 смен. Топливо заказчика.</p>
+        </div>
+      </main>
+    </div>
+    <p class="disclaimer" style="padding-top:0">Объявления размещают владельцы техники и подрядчики. QAZNEDR проверяет объявление перед публикацией, но не является стороной сделки и не гарантирует её результат.</p>
+  </div>
+  <footer class="foot" data-foot></footer>
+</section>
+
+<!-- ============ REQUEST ============ -->
+<section class="screen" id="request" data-screen hidden>
+  <header class="nav solid" data-nav="solid"></header>
+  <div class="wrap">
+    <div class="page-head">
+      <a class="back" href="#catalog"><i data-lucide="arrow-left"></i>Вернуться в каталог</a>
+      <p class="eyebrow">Буровые работы · Ищу · Пример</p>
+      <h1 class="h1" style="font-size:clamp(32px,5vw,52px)">Нужна буровая на 500 м, Карагандинская обл.</h1>
+      <div class="meta"><span><i data-lucide="map-pin"></i>Каркаралинск, Карагандинская обл.</span><span><i data-lucide="calendar"></i>Когда нужно: с марта на 3 месяца</span></div>
+    </div>
+    <div class="listing">
+      <aside class="deal">
+        <div class="pricebox"><span>Бюджет</span><b>до 25 000 ₸</b><span>за погонный метр</span></div>
+        <div class="who"><span class="av"><i data-lucide="building-2"></i></span><div>Айгерим · ТОО «Пример Разведка»<small>Заявка размещена 16.10.2026</small></div></div>
+        <div class="offer">
+          <h2 class="h3" style="font-size:20px">Предложить</h2>
+          <p>Оставьте контакты и коротко напишите, что можете предложить. Автор заявки получит их и свяжется с вами.</p>
+          <label class="f" for="r-name">Имя или компания<input class="input" id="r-name"></label>
+          <label class="f" for="r-tel">Телефон<input class="input" id="r-tel" inputmode="tel"></label>
+          <label class="f" for="r-msg">Предложение<textarea class="input" id="r-msg" placeholder="Что можете предложить, цена, сроки"></textarea></label>
+          <button class="btn btn-primary btn-block" type="button">Отправить предложение</button>
+        </div>
+        <a class="btn btn-ghost btn-block" href="#request"><i data-lucide="message-circle"></i>Написать в WhatsApp</a>
+      </aside>
+      <main>
+        <div class="block">
+          <h2>Описание</h2>
+          <p>Разведочное колонковое бурение, 6 скважин по 500 м. Подъезд по грунтовой дороге, вода в 8 км. Нужна бригада с жильём.</p>
+        </div>
+        <div class="block">
+          <h2>Что нужно</h2>
+          <div class="caps"><div>Колонковое · 500 м · HQ</div></div>
+          <dl class="facts" style="margin-top:12px">
+            <div><dt>Назначение работ</dt><dd>Разведка полезных ископаемых</dd></div>
+            <div><dt>Траектория</dt><dd>Наклонная</dd></div>
+            <div><dt>Условия площадки</dt><dd>Поверхность</dd></div>
+            <div><dt>Когда нужно</dt><dd>С марта на 3 месяца</dd></div>
+          </dl>
+        </div>
+        <div class="note"><b>Заявка без фото.</b> В каталоге такие карточки тёмные: так покупатель и исполнитель сразу отличают спрос от предложения.</div>
+      </main>
+    </div>
+  </div>
+  <footer class="foot" data-foot></footer>
+</section>
+
+<!-- ============ CABINET ============ -->
+<section class="screen" id="cabinet" data-screen hidden>
+  <header class="nav solid" data-nav="solid"></header>
+  <div class="wrap">
+    <div class="page-head" style="grid-template-columns:1fr auto;align-items:end">
+      <div style="display:grid;gap:12px;min-width:0">
+        <p class="eyebrow">Личный кабинет</p>
+        <h1 class="h1" style="font-size:clamp(34px,5.4vw,52px)">Мои объявления</h1>
+      </div>
+      <a class="btn btn-primary" href="#intake"><i data-lucide="plus"></i><span>Новое</span></a>
+    </div>
+    <div class="cab">
+      <div style="display:grid;gap:20px;min-width:0">
+        <div class="chips" role="group" aria-label="Статус">
+          <button class="chip" type="button" aria-pressed="true">Все <small>4</small></button>
+          <button class="chip" type="button" aria-pressed="false">Черновики <small>1</small></button>
+          <button class="chip" type="button" aria-pressed="false">На проверке <small>1</small></button>
+          <button class="chip" type="button" aria-pressed="false">Опубликованы <small>2</small></button>
+          <button class="chip" type="button" aria-pressed="false">Отклонены <small>1</small></button>
+          <button class="chip" type="button" aria-pressed="false">В архиве <small>0</small></button>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <span class="small">Показано: 5</span>
+          <div class="viewtoggle" data-single><button type="button" aria-pressed="true">Карточки</button><button type="button" aria-pressed="false">Список</button></div>
+        </div>
+        <div class="cab-cards">
+          <article class="lc">
+            <div class="ph"><img src="../../../public/brand/photo/scene-drill-rig.webp" alt=""></div>
+            <div class="in">
+              <span class="st pub">Опубликовано</span>
+              <h3>Буровая УКБ-5П на гусеничном ходу</h3>
+              <span class="small">изменено 18.10.2026 · Фото: 4</span>
+              <div class="stats"><div><b>412</b><span>просмотров за 30 дней</span></div><div><b>17</b><span>нажали «связаться»</span></div></div>
+              <ul class="trust"><li><i data-lucide="shield-check"></i>Телефон подтверждён<time>12.10.2026</time></li></ul>
+              <div class="actions"><a class="btn btn-ghost" href="#listing">Открыть на сайте</a><button class="btn btn-ghost" type="button">Изменить</button><button class="btn btn-ghost" type="button"><i data-lucide="copy"></i>Разместить похожее</button></div>
+            </div>
+          </article>
+          <article class="lc">
+            <div class="noph">Заявка · Ищу</div>
+            <div class="in">
+              <span class="st pub">Опубликовано</span>
+              <h3>Нужна буровая на 500 м, Карагандинская обл.</h3>
+              <span class="small">изменено 16.10.2026</span>
+              <div class="stats"><div><b>96</b><span>просмотров за 30 дней</span></div><div><b>2</b><span>отклика</span></div></div>
+              <div class="resp">
+                <p class="eyebrow" style="margin-bottom:2px">Отклики (2)</p>
+                <div><b style="font-weight:500">Сарыарка Бурение · 8 701 123 45 67</b>Колонковое HQ, своя бригада и вагончик, 23 000 ₸/м.<small>18.10.2026</small></div>
+                <div><b style="font-weight:500">Бекзат · 8 777 000 00 00</b>Есть ЗИФ-650, могу с апреля.<small>19.10.2026</small></div>
+              </div>
+              <div class="actions"><a class="btn btn-ghost" href="#request">Открыть на сайте</a><button class="btn btn-ghost" type="button">Снять с публикации</button></div>
+            </div>
+          </article>
+          <article class="lc">
+            <div class="ph"><img src="../../../public/brand/photo/scene-machinery.webp" alt=""></div>
+            <div class="in">
+              <span class="st no">Отклонено</span>
+              <h3>Экскаватор гусеничный 21 т, 2014</h3>
+              <div class="reason"><b>Причина от редакции</b>Выбран не тот раздел или тип техники.</div>
+              <div class="actions"><button class="btn btn-primary" type="button">Исправить и отправить снова</button></div>
+            </div>
+          </article>
+          <article class="lc">
+            <div class="ph"><img src="../../../public/brand/photo/scene-tools.webp" alt=""></div>
+            <div class="in">
+              <span class="st wait">На проверке</span>
+              <h3>Коронки и колонковые трубы HQ/NQ</h3>
+              <span class="small">Проверяем объявление. Ответ появится здесь. Проверка обычно занимает до одного рабочего дня.</span>
+              <div class="actions"><button class="btn btn-ghost" type="button">Посмотреть</button></div>
+            </div>
+          </article>
+          <article class="lc">
+            <div class="noph">Черновик</div>
+            <div class="in">
+              <span class="st draft">Черновик</span>
+              <h3>Без названия</h3>
+              <span class="small">изменено 20.10.2026 · Без фото</span>
+              <div class="actions"><a class="btn btn-primary" href="#intake">Продолжить заполнение</a><button class="btn btn-ghost" type="button"><i data-lucide="archive"></i>В архив</button></div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <aside class="help">
+        <div class="box">
+          <h3>Контакт для объявлений</h3>
+          <dl class="facts">
+            <div><dt>Имя</dt><dd>Ерлан</dd></div>
+            <div><dt>Компания</dt><dd>Сарыарка Бурение</dd></div>
+            <div><dt>Телефон</dt><dd class="num">8 701 123 45 67</dd></div>
+            <div><dt>Вход</dt><dd>Google</dd></div>
+          </dl>
+          <button class="btn btn-ghost btn-sm" type="button" style="justify-self:start">Изменить контакт</button>
+        </div>
+        <div class="box">
+          <h3>Профиль компании</h3>
+          <span class="st pub">Опубликован</span>
+          <p>Страница вашей компании со всеми объявлениями: её удобно отправлять заказчикам, и её находят в поиске.</p>
+          <a class="link" href="#company">Открыть страницу компании</a>
+        </div>
+        <div class="box">
+          <h3>Нужна помощь?</h3>
+          <p>Пришлите фото и описание — разместим объявление за вас.</p>
+          <a class="btn btn-ghost btn-sm" href="#cabinet"><i data-lucide="message-circle"></i>Написать в WhatsApp</a>
+        </div>
+        <button class="link" type="button" style="background:none;border:0;justify-self:start"><i data-lucide="log-out" style="width:16px;height:16px"></i>Выйти</button>
+      </aside>
+    </div>
+  </div>
+  <footer class="foot" data-foot></footer>
+</section>
+
+<!-- ============ COMPANY ============ -->
+<section class="screen" id="company" data-screen hidden>
+  <div class="company-band" style="position:relative">
+    <header class="nav over" data-nav="over"></header>
+    <div class="wrap">
+      <a class="back" href="#catalog" style="color:rgba(233,236,230,.75)"><i data-lucide="arrow-left"></i>Вернуться в каталог</a>
+      <p class="eyebrow">Компания · Пример</p>
+      <h1 class="h1" style="font-size:clamp(34px,5.4vw,56px)">Сарыарка Бурение</h1>
+      <div class="meta"><span><i data-lucide="map-pin"></i>Караганда</span><span><i data-lucide="globe"></i>saryarka-drill.kz</span></div>
+      <p>Колонковое и шнековое бурение по Центральному Казахстану. Своя техника и бригады, работаем с 2009 года.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="sec">
+      <div class="sec-head"><h2 class="h2">Объявления (<span class="num">3</span>)</h2></div>
+      <div class="grid" data-cards="company"></div>
+    </div>
+    <p class="disclaimer" style="padding-top:0">Объявления размещают владельцы техники и подрядчики. QAZNEDR проверяет объявление перед публикацией, но не является стороной сделки и не гарантирует её результат.</p>
+  </div>
+  <footer class="foot" data-foot></footer>
+</section>
+
+<!-- ============ OTHER ============ -->
+<section class="screen" id="other" data-screen hidden>
+  <header class="nav solid" data-nav="solid"></header>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Служебные экраны</p>
+      <h1 class="h1" style="font-size:clamp(32px,5vw,48px)">Вход, подписка и модерация</h1>
+      <p class="lede">Те же токены и кнопки, без фото: это короткие рабочие экраны.</p>
+    </div>
+    <div class="trio">
+      <div class="screen-card">
+        <span class="small">Вход</span>
+        <div class="signin">
+          <h2 class="h3">Вход на QAZNEDR</h2>
+          <button class="btn btn-google btn-block" type="button"><i data-lucide="log-in"></i>Продолжить с Google</button>
+          <div class="or">или по почте, без пароля</div>
+          <label class="f" for="o-mail">Электронная почта<input class="input" id="o-mail" type="email" placeholder="name@mail.kz"></label>
+          <button class="btn btn-ghost btn-block" type="button">Прислать ссылку для входа</button>
+          <p class="small" style="margin:0">Пароль не нужен: пришлём письмо со ссылкой. Она действует 15 минут.</p>
+        </div>
+        <div class="signin">
+          <span class="mark" style="width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center"><i data-lucide="mail" style="width:22px;height:22px"></i></span>
+          <p style="margin:0">Письмо отправлено на <b style="font-weight:500">name@mail.kz</b>. Откройте его и нажмите «Войти». Если письма нет, проверьте папку «Спам».</p>
+          <button class="link" type="button" style="background:none;border:0;justify-self:start">Указать другую почту</button>
+        </div>
+      </div>
+      <div class="screen-card">
+        <span class="small">Подписка</span>
+        <div class="signin">
+          <h2 class="h3">Подписка на объявления</h2>
+          <p class="small" style="margin:0">Буровая установка · Аренда · Карагандинская обл.</p>
+          <button class="btn btn-primary btn-block" type="button">Подтвердить подписку</button>
+        </div>
+        <div class="signin">
+          <span class="mark" style="width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center"><i data-lucide="check" style="width:22px;height:22px"></i></span>
+          <p style="margin:0">Подписка подтверждена. Письма будут приходить не чаще раза в день.</p>
+          <a class="link" href="#catalog">Вернуться в каталог</a>
+        </div>
+      </div>
+      <div class="screen-card">
+        <span class="small">Модерация · /admin/equipment</span>
+        <div class="mod">
+          <div class="chips" style="margin:0"><button class="chip" type="button" aria-pressed="true">На проверке <small>1</small></button><button class="chip" type="button" aria-pressed="false">Опубликованные</button><button class="chip" type="button" aria-pressed="false">Компании</button></div>
+          <h2 class="h3" style="font-size:19px">Коронки и колонковые трубы HQ/NQ</h2>
+          <span class="small">Инструмент · Продажа · Караганда</span>
+          <div class="auto">Автопроверка: Замечаний нет <span class="small">(правила, без ИИ)</span></div>
+          <p class="eyebrow">Отметки доверия (видны клиентам с датой)</p>
+          <div class="checks">
+            <label for="m1"><input type="checkbox" id="m1" checked>Телефон подтверждён</label>
+            <label for="m2"><input type="checkbox" id="m2">Документы просмотрены</label>
+            <label for="m3"><input type="checkbox" id="m3">Проверено QAZNEDR (осмотр/видеозвонок)</label>
+          </div>
+          <label class="f" for="m-why">Причина отказа (увидит автор)<select class="select" id="m-why"><option>Готовые причины…</option></select></label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" type="button">Опубликовать</button><button class="btn btn-ghost" type="button">Отклонить</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot" data-foot></footer>
+</section>
+
+<script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+<script>
+(function () {
+  var NAV = function (over) {
+    return '<div class="wrap">' +
+      '<a href="#catalog" aria-label="QAZNEDR"><img class="logo-light" src="../../../public/brand/logo-horizontal.svg" alt="QAZNEDR HOLDING"><img class="logo-dark" src="../../../public/brand/logo-horizontal-inverse.svg" alt=""></a>' +
+      '<ul><li>Участки и объекты</li><li>Услуги</li><li class="on">Техника и услуги</li><li>Гайды</li><li>О компании</li></ul>' +
+      '<div class="right"><span class="langs"><b>RU</b><span>KZ</span><span>English</span><span>中文</span></span>' +
+      '<a class="btn btn-primary btn-sm" href="#catalog" style="display:none" data-desk>Связаться</a>' +
+      '<button class="menu" type="button" aria-label="Меню"><i data-lucide="menu"></i></button></div></div>';
+  };
+  document.querySelectorAll('[data-nav]').forEach(function (el) { el.innerHTML = NAV(el.dataset.nav === 'over'); });
+  document.querySelectorAll('[data-foot]').forEach(function (el) {
+    el.innerHTML = '<div class="wrap"><span>© 2026 QAZNEDR. Все права защищены.</span><span>Фотографии на сайте — иллюстрации, они не изображают реальные участки.</span></div>';
+  });
+  var mq = window.matchMedia('(min-width: 1024px)');
+  function desk() { document.querySelectorAll('[data-desk]').forEach(function (b) { b.style.display = mq.matches ? '' : 'none'; }); }
+  desk(); mq.addEventListener && mq.addEventListener('change', desk);
+
+  var L = [
+    { k: 'sell', img: 'scene-drill-rig', tag: 'Аренда', cat: 'Техника · Буровая установка', t: 'Буровая УКБ-5П на гусеничном ходу', f: 'Колонковое · 500 м · HQ', p: 'Караганда, Карагандинская обл.', price: '180 000 ₸', unit: 'за смену', trust: 'Телефон подтверждён', href: '#listing', co: 1 },
+    { k: 'seek', tag: 'Ищу', cat: 'Услуги · Буровые работы', t: 'Нужна буровая на 500 м, Карагандинская обл.', f: 'Колонковое · HQ · с марта на 3 месяца', p: 'Каркаралинск, Карагандинская обл.', budget: 'до 25 000 ₸', unit: 'за метр', href: '#request' },
+    { k: 'sell', img: 'scene-lab', tag: 'Услуги', cat: 'Услуги · Лаборатория, анализы', t: 'Пробирный анализ и ICP-MS', f: 'Пробоподготовка · Пробирный анализ · ICP-MS · Аккредитованная лаборатория', p: 'Алматы, Алматинская обл.', price: 'от 4 500 ₸', unit: 'за пробу', trust: 'Документы просмотрены', href: '#listing' },
+    { k: 'sell', img: 'scene-machinery', tag: 'Продажа', cat: 'Техника · Землеройная техника', t: 'Экскаватор гусеничный 21 т, 2014', f: 'Ковш 1,0 м³ · Масса 21 т · Б/у', p: 'Усть-Каменогорск, ВКО', price: 'Цена по запросу', unit: '', href: '#listing', co: 1 },
+    { k: 'sell', img: 'scene-instrument', tag: 'Услуги', cat: 'Услуги · Топосъёмка и маркшейдерия', t: 'Топосъёмка и вынос точек: тахеометр и GNSS', f: 'Топосъёмка · Вынос в натуру · Маркшейдерия', p: 'Шымкент, Туркестанская обл.', price: 'от 60 000 ₸', unit: 'за день', trust: 'Телефон подтверждён', href: '#listing' },
+    { k: 'sell', img: 'scene-tools', tag: 'Продажа', cat: 'Инструмент · Буровой инструмент и запчасти', t: 'Коронки и колонковые трубы HQ/NQ', f: 'Новые и б/у · комплектами', p: 'Караганда, Карагандинская обл.', price: 'от 85 000 ₸', unit: 'за шт.', href: '#listing', co: 1 },
+    { k: 'person', tag: 'Ищу работу', cat: 'Люди · Специалисты и вакансии', t: 'Помощник бурильщика, 6 лет опыта', f: 'Вахта · Колонковое бурение', p: 'Жезказган, Улытауская обл.', budget: 'от 350 000 ₸', unit: 'в месяц', href: '#listing' }
+  ];
+  function pin() { return '<span><i data-lucide="map-pin"></i>'; }
+  function card(l) {
+    var head;
+    if (l.k === 'seek') head = '<div class="ph"><span class="tag">' + l.tag + '</span><p>Бюджет<b class="num">' + l.budget + '</b>' + l.unit + '</p></div>';
+    else if (l.k === 'person') head = '<div class="ph"><span class="tag">' + l.tag + '</span><i data-lucide="hard-hat"></i></div>';
+    else head = '<div class="ph"><img src="../../../public/brand/photo/' + l.img + '.webp" alt=""><span class="tag">' + l.tag + '</span></div>';
+    var price = l.k === 'sell'
+      ? '<div class="price"><span class="num">' + l.price + (l.unit ? ' <small>' + l.unit + '</small>' : '') + '</span><i data-lucide="arrow-up-right"></i></div>'
+      : '<div class="price"><span class="num">' + (l.k === 'person' ? 'Оплата: ' : 'Бюджет: ') + l.budget + ' <small>' + l.unit + '</small></span><i data-lucide="arrow-up-right"></i></div>';
+    return '<a class="card ' + l.k + '" href="' + l.href + '">' + head +
+      '<div class="body"><span class="cat">' + l.cat + '</span><h3>' + l.t + '</h3><p class="facts" style="margin:0">' + l.f + '</p>' +
+      '<div class="meta">' + pin() + l.p + '</span>' + (l.trust ? '<span><i data-lucide="shield-check"></i>' + l.trust + '</span>' : '') + '</div>' + price + '</div></a>';
+  }
+  document.querySelectorAll('[data-cards]').forEach(function (el) {
+    var list = el.dataset.cards === 'company' ? L.filter(function (l) { return l.co; }) : L;
+    el.innerHTML = list.map(card).join('');
+  });
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[aria-pressed]');
+    if (!b) return;
+    var g = b.closest('[data-single], .chips, .viewtoggle');
+    if (!g) return;
+    g.querySelectorAll('[aria-pressed]').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+    b.setAttribute('aria-pressed', 'true');
+  });
+
+  var step = 1;
+  var stepEls = document.querySelectorAll('#steps > div');
+  function showStep() {
+    document.querySelectorAll('#intake [data-step]').forEach(function (p) { p.hidden = +p.dataset.step !== step; });
+    stepEls.forEach(function (s, i) { s.className = i + 1 < step ? 'done' : i + 1 === step ? 'now' : ''; });
+    document.getElementById('prev').style.visibility = step === 1 ? 'hidden' : 'visible';
+    var next = document.getElementById('next');
+    next.innerHTML = step === 4 ? 'Отправить на модерацию' : 'Продолжить<i data-lucide="arrow-right"></i>';
+    document.getElementById('bar').hidden = step === 5;
+    document.getElementById('steps').hidden = step === 5;
+    if (window.lucide) lucide.createIcons();
+  }
+  document.getElementById('next').addEventListener('click', function () { if (step < 5) { step++; showStep(); window.scrollTo(0, 0); } });
+  document.getElementById('prev').addEventListener('click', function () { if (step > 1) { step--; showStep(); window.scrollTo(0, 0); } });
+
+  var ids = Array.prototype.map.call(document.querySelectorAll('[data-screen]'), function (s) { return s.id; });
+  function route() {
+    var id = (location.hash || '').slice(1);
+    if (ids.indexOf(id) < 0) id = 'catalog';
+    document.querySelectorAll('[data-screen]').forEach(function (s) { s.hidden = s.id !== id; });
+    document.querySelectorAll('#screens a').forEach(function (a) {
+      if (a.getAttribute('href') === '#' + id) { a.setAttribute('aria-current', 'page'); a.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+      else a.removeAttribute('aria-current');
+    });
+    if (id === 'intake') { step = 1; showStep(); }
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+  route();
+  if (window.lucide) lucide.createIcons();
+})();
+</script>
+
+</body></html>

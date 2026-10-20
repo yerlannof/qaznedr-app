@@ -388,6 +388,11 @@ body {
   --brand-ink: #253740;
   --brand-muted: #51616a;
   --brand-line: #64747a;
+  /* Marketplace 21: hairlines and listing status colours. */
+  --brand-hair: rgb(37 55 64 / 0.16);
+  --brand-ok: #3f6b55;
+  --brand-warn: #8f5f24;
+  --brand-bad: #a2412f;
 }
 .dark {
   --brand-bg: #253740;
@@ -395,6 +400,10 @@ body {
   --brand-ink: #e9ece6;
   --brand-muted: #cad2ca;
   --brand-line: #8fa19e;
+  --brand-hair: rgb(233 236 230 / 0.16);
+  --brand-ok: #8cc0a3;
+  --brand-warn: #e0b07a;
+  --brand-bad: #e59a88;
 }
 @layer components {
   .brand-container {
@@ -670,6 +679,7 @@ body {
     --brand-muted: #cad2ca;
     --brand-surface: #30434c;
     --brand-line: #8fa19e;
+    --brand-hair: rgb(233 236 230 / 0.16);
   }
   .page-hero {
     min-height: 560px;

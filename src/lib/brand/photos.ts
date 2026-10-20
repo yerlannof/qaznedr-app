@@ -45,4 +45,9 @@ export const SCENES = {
   folds: '/brand/photo/folds.webp',
   geologist: '/brand/photo/geologist.webp',
   ridges: '/brand/photo/hero-ridges.webp',
+  // Marketplace 21 (Higgsfield, 2026-10-20).
+  machinery: '/brand/photo/scene-machinery.webp',
+  lab: '/brand/photo/scene-lab.webp',
+  instrument: '/brand/photo/scene-instrument.webp',
+  tools: '/brand/photo/scene-tools.webp',
 } as const;

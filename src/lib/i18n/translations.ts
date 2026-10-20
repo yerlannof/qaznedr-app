@@ -776,6 +776,8 @@ export const translations = {
         coreDrilling: 'Колонковое бурение: что показывает керн',
         satelliteGoldMap:
           'Можно ли найти золото в Казахстане по спутниковой карте?',
+        readGeologicalMap:
+          'Как читать геологическую карту: цвета, разломы и разрез',
       },
       summaries: {
         artisanalMining:
@@ -802,6 +804,8 @@ export const translations = {
           'Керн и шлам, выход образцов и документы для проверки результатов разведочного бурения.',
         satelliteGoldMap:
           'Что видно на снимке, какие признаки проверяет геолог и почему карта не подтверждает золото, запасы или права на участок.',
+        readGeologicalMap:
+          'Пошагово разбираем легенду, масштаб, границы пород, разломы, знаки залегания и геологический разрез — без выводов о месторождении по одному символу.',
       },
     },
     seo: {
@@ -2500,6 +2504,8 @@ export const translations = {
         coreDrilling: 'Керндік бұрғылау: керн нені көрсетеді',
         satelliteGoldMap:
           'Қазақстанда алтынды спутниктік картадан табуға бола ма?',
+        readGeologicalMap:
+          'Геологиялық картаны қалай оқу керек: түстер, жарылымдар және қима',
       },
       summaries: {
         artisanalMining:
@@ -2526,6 +2532,8 @@ export const translations = {
           'Керн мен бұрғылау шламы, үлгілердің шығымы және барлау бұрғылауының нәтижелерін тексеруге қажет құжаттар.',
         satelliteGoldMap:
           'Суретте не көрінеді, геолог қандай белгілерді тексереді және карта неліктен алтынды, қорды не учаскеге құқықты растамайды.',
+        readGeologicalMap:
+          'Шартты белгілерді, масштабты, тау жыныстарының шекараларын, жарылымдарды, жатыс белгілерін және геологиялық қиманы біртіндеп қарастырамыз; жалғыз таңбаға қарап кен орны туралы қорытынды жасамаймыз.',
       },
     },
     seo: {
@@ -4146,6 +4154,8 @@ export const translations = {
         geologicalDueDiligence: 'Reviewing geological materials',
         coreDrilling: 'Core drilling: what drill core can show',
         satelliteGoldMap: 'Can a satellite map reveal gold in Kazakhstan?',
+        readGeologicalMap:
+          'How to read a geological map: colours, faults and cross-sections',
       },
       summaries: {
         artisanalMining:
@@ -4172,6 +4182,8 @@ export const translations = {
           'Core and cuttings, sample recovery and records for checking exploration drilling results.',
         satelliteGoldMap:
           'What imagery can show, which signs a geologist checks and why a map cannot confirm gold, reserves or rights to an area.',
+        readGeologicalMap:
+          'A step-by-step guide to legends, scale, rock boundaries, faults, dip symbols and geological cross-sections, without inferring a deposit from one map symbol.',
       },
     },
     seo: {
@@ -5733,6 +5745,7 @@ export const translations = {
         geologicalDueDiligence: '地质资料核查',
         coreDrilling: '岩芯钻探：岩芯能说明什么',
         satelliteGoldMap: '能通过卫星地图找到哈萨克斯坦的黄金吗？',
+        readGeologicalMap: '如何阅读地质图：颜色、断层与剖面',
       },
       summaries: {
         artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',
@@ -5756,6 +5769,8 @@ export const translations = {
           '了解岩芯与钻屑、样品采取率，以及核查勘查钻探结果所需的记录。',
         satelliteGoldMap:
           '了解影像能显示哪些地表特征、地质学家如何核查，以及为什么地图不能确认黄金、储量或矿区权利。',
+        readGeologicalMap:
+          '按步骤了解图例、比例尺、岩层边界、断层、产状符号和地质剖面；不要仅凭一个地图符号推断矿床。',
       },
     },
     seo: {

@@ -33,6 +33,7 @@ export const GUIDE = {
   satelliteGoldMap: 'satellite-gold-map-guide',
   artisanalMining: 'artisanal-mining-licence-kazakhstan',
   pugfn: 'pugfn-subsoil-fund-program-kazakhstan',
+  readGeologicalMap: 'how-to-read-geological-map',
 } as const;
 
 export type GuideKey = keyof typeof GUIDE;
@@ -140,6 +141,14 @@ export const INSIGHTS: readonly InsightEntry[] = [
     updated: '2026-09-29',
     legal: true,
     lawAsOf: '2026-09-29',
+    locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.readGeologicalMap,
+    category: 'geology',
+    published: '2026-10-20',
+    updated: '2026-10-20',
+    legal: false,
     locales: WRITTEN,
   },
 ];

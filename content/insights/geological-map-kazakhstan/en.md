@@ -29,6 +29,8 @@ To select an area, start with an overview sheet and adjacent territory. Then com
 4. **Provenance.** Record the author or institution, work title, original scale and compilation sources. For a scan, establish whether it is georeferenced and how that registration was checked. [A paper published by USGS on citing digital geological maps lists the author, date and scale of the source material](https://pubs.usgs.gov/of/2000/of00-325/richard.html).
 5. **Limits of inference.** Separate observations, interpretation and forecast. A fault, anomaly or mineral occurrence calls for further investigation; it is not a ready conclusion about reserves or an area's prospects.
 
+How to work through the legend itself, contact and fault lines, orientation symbols and the cross-section is covered in [how to read a geological map](/en/insights/how-to-read-geological-map).
+
 ## What to send a geologist
 
 State the area, your task and the material you already have. For example: “We need to compare two areas for preliminary gold exploration. We have a 1:200 000 geological sheet with its year and legend; which materials would help us check the structure and known occurrences?” Include a source link, sheet name, scale, year, bounds of the area of interest and a specific question. Ask what can be concluded from the available data, what gaps remain and what should be checked in more detailed material or in the field. If you also need an opinion on licences, request a separate check dated to an official source.

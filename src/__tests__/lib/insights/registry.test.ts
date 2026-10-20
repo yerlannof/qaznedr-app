@@ -13,6 +13,18 @@ describe('insightHref', () => {
       locales: ['ru', 'en', 'zh', 'kz'],
     });
   });
+  it('registers the map reading guide in all four languages', () => {
+    expect(
+      INSIGHTS.find((entry) => entry.slug === GUIDE.readGeologicalMap)
+    ).toMatchObject({
+      slug: 'how-to-read-geological-map',
+      category: 'geology',
+      published: '2026-10-20',
+      updated: '2026-10-20',
+      legal: false,
+      locales: ['ru', 'en', 'zh', 'kz'],
+    });
+  });
   it('registers the East Kazakhstan gold data guide for all four languages', () => {
     expect(
       INSIGHTS.find((entry) => entry.slug === GUIDE.eastKazakhstanGoldMap)

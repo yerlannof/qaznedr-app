@@ -4,7 +4,7 @@ import { GUIDE, INSIGHTS } from '@/lib/insights/registry';
 import { LOCALES } from '@/lib/seo/site';
 
 describe('related guides', () => {
-  it('defines only distinct, existing neighbours for all twelve guides', () => {
+  it('defines only distinct, existing neighbours for all thirteen guides', () => {
     expect(Object.keys(RELATED_GUIDES).sort()).toEqual(
       INSIGHTS.map((entry) => entry.slug).sort()
     );
@@ -57,7 +57,7 @@ describe('related guides', () => {
       GUIDE.explorationLicence
     );
     expect(orderRelatedArticles(GUIDE.geologicalMap, cards)[0].slug).toBe(
-      GUIDE.eastKazakhstanGoldMap
+      GUIDE.readGeologicalMap
     );
   });
 });

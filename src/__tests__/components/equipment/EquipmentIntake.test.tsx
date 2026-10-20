@@ -332,7 +332,7 @@ it('uses taxonomy codes in translated selects and previews linked capability', (
     screen.getByRole('textbox', { name: 'Доступность / срок' }),
     { target: { value: 'С октября' } }
   );
-  fireEvent.click(screen.getByRole('button', { name: 'Добавить возможность' }));
+  // Drilling opens with one method row.
   fireEvent.change(screen.getByRole('combobox', { name: 'Метод' }), {
     target: { value: 'CORE' },
   });

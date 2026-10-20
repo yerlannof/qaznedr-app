@@ -175,6 +175,14 @@ function compatible(
     ] as const)
       if (!drilling && data[field] !== undefined)
         issue(field, 'Field is not relevant to category');
+    // A drilling offer without a method cannot be found by the main filter.
+    if (
+      submitted &&
+      drilling &&
+      data.offerType !== 'WANTED' &&
+      !data.capabilities?.length
+    )
+      issue('capabilities', 'Choose a drilling method');
     if (data.category === 'drillService' && data.chassis !== undefined)
       issue('chassis', 'Field is not relevant to category');
     if (

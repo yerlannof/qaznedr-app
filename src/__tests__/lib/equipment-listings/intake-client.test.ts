@@ -152,6 +152,7 @@ it('validates submission before saving and stops edits once pending', async () =
     contactName: 'Автор',
     phone: '+77001234567',
     contactVisibility: 'PRIVATE' as const,
+    capabilities: [{ method: 'CORE' as const }],
   };
   fetcher
     .mockImplementationOnce(() => reply(record(1, data), 201))

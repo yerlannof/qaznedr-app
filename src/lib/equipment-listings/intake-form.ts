@@ -226,7 +226,12 @@ export function normalizeIntake(value: IntakeValue): OwnerDraft {
   return result as OwnerDraft;
 }
 
-export function validateIntakeStep(value: IntakeValue, step: number): string[] {
+/** `draft` checks only what a saved draft needs; moving on also needs the required choices. */
+export function validateIntakeStep(
+  value: IntakeValue,
+  step: number,
+  { draft = false } = {}
+): string[] {
   const errors: string[] = [];
   if (step >= 1 && (!value.offerType || !value.category))
     errors.push('category');
@@ -259,10 +264,12 @@ export function validateIntakeStep(value: IntakeValue, step: number): string[] {
       !value.shiftHours.trim()
     )
       errors.push('shiftHours');
-    (relevantFields(value).has('capabilities')
+    const drillingRows = relevantFields(value).has('capabilities')
       ? value.capabilities
-      : []
-    ).forEach((row, index) => {
+      : [];
+    drillingRows.forEach((row, index) => {
+      // The row shown by default may stay blank; it is dropped on save.
+      if (!row.method && !row.depth.trim() && !row.diameter.trim()) return;
       if (
         !row.method ||
         !DRILLING_METHODS.includes(
@@ -279,7 +286,10 @@ export function validateIntakeStep(value: IntakeValue, step: number): string[] {
     });
     if (
       relevantFields(value).has('capabilities') &&
-      value.capabilities.length > 12
+      (value.capabilities.length > 12 ||
+        (!draft &&
+          value.offerType !== 'WANTED' &&
+          !drillingRows.some((row) => row.method)))
     )
       errors.push('capabilities');
     const parsed = ownerDraftSchema.safeParse(normalizeIntake(value));

@@ -131,9 +131,17 @@ describe('versioned equipment listing', () => {
     expect(
       ownerSubmissionSchema.safeParse({ ...base, pressure: 15 }).success
     ).toBe(false);
+    // A drilling offer must name a method; a request may leave it open.
     expect(
       ownerSubmissionSchema.safeParse({ ...base, capabilities: undefined })
         .success
+    ).toBe(false);
+    expect(
+      ownerSubmissionSchema.safeParse({
+        ...base,
+        offerType: 'WANTED',
+        capabilities: undefined,
+      }).success
     ).toBe(true);
     expect(
       ownerSubmissionSchema.safeParse({ ...base, capabilities: [] }).success

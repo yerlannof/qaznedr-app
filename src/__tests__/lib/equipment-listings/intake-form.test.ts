@@ -31,6 +31,37 @@ describe('equipment intake mapping', () => {
     expect(normalizePhone(raw)).toBe(expected);
   });
 
+  it('needs a drilling method to move on, except for a request', () => {
+    const blankRow = {
+      method: '',
+      depth: '',
+      diameter: '',
+      coreSize: '',
+      source: '',
+    };
+    const value = {
+      ...emptyIntake(),
+      offerType: 'SERVICE',
+      category: 'drillService',
+      title: 'Буровые работы',
+      region: 'abai',
+      serviceArea: ['ALL_KZ'],
+      capabilities: [blankRow],
+    };
+    expect(validateIntakeStep(value, 2)).toContain('capabilities');
+    // A draft may still be saved without it.
+    expect(validateIntakeStep(value, 2, { draft: true })).toEqual([]);
+    expect(
+      validateIntakeStep({ ...value, offerType: 'WANTED' }, 2)
+    ).not.toContain('capabilities');
+    expect(
+      validateIntakeStep(
+        { ...value, capabilities: [{ ...blankRow, method: 'RC' }] },
+        2
+      )
+    ).toEqual([]);
+  });
+
   it('accepts a local phone number at the contact step', () => {
     const value = {
       ...emptyIntake(),

@@ -272,7 +272,19 @@ export function EquipmentIntake({
           kind: '',
           accredited: '',
           accreditationNumber: '',
-          capabilities: [],
+          // Drilling shows one method row straight away.
+          capabilities:
+            category === 'drill' || category === 'drillService'
+              ? [
+                  {
+                    method: '',
+                    depth: '',
+                    diameter: '',
+                    coreSize: '',
+                    source: '',
+                  },
+                ]
+              : [],
           purposes: [],
           serviceMethods: [],
         }) as unknown as IntakeValue
@@ -425,7 +437,7 @@ export function EquipmentIntake({
       return;
     const data = normalizeIntake(value);
     if (
-      validateIntakeStep(value, 2).length ||
+      validateIntakeStep(value, 2, { draft: true }).length ||
       !ownerDraftSchema.safeParse(data).success
     )
       return;
@@ -818,7 +830,7 @@ export function EquipmentIntake({
       setNotice(t('photoError'));
       return;
     }
-    if (validateIntakeStep(value, 2).length) {
+    if (validateIntakeStep(value, 2, { draft: true }).length) {
       setNotice(t('invalid'));
       return;
     }
@@ -1288,6 +1300,14 @@ export function EquipmentIntake({
                 {drilling && (
                   <div className="space-y-4 border-t border-brand-line pt-5">
                     <h3 className="font-semibold">{t('capabilities')}</h3>
+                    {errors.includes('capabilities') && (
+                      <span
+                        role="alert"
+                        className="block text-red-700 dark:text-red-300"
+                      >
+                        {t('capabilityRequired')}
+                      </span>
+                    )}
                     {value.capabilities.map((row, index) => (
                       <div
                         key={index}

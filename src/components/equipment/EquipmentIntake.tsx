@@ -2,7 +2,40 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { ChevronLeft, MessageCircle, Plus, Trash2, Upload } from 'lucide-react';
+import {
+  Activity,
+  ArrowDownToLine,
+  ArrowLeft,
+  ArrowRight,
+  Briefcase,
+  Camera,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  Compass,
+  Drill,
+  Droplets,
+  FileText,
+  FlaskConical,
+  Gauge,
+  KeyRound,
+  Layers,
+  Map as MapIcon,
+  MessageCircle,
+  Microscope,
+  Phone,
+  Plus,
+  Search,
+  Shield,
+  Tag,
+  Tent,
+  Tractor,
+  Truck,
+  Users,
+  Wrench,
+  X,
+  type LucideIcon,
+} from 'lucide-react';
 import { whatsappLink } from '@/lib/config/contacts';
 import { translate } from '@/lib/i18n/translations';
 import {
@@ -59,6 +92,36 @@ type FieldProps = {
   required?: boolean;
 };
 const stepKey = 'qaznedr:equipment-intake:step';
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  drill: Drill,
+  excavator: Tractor,
+  compressor: Gauge,
+  transport: Truck,
+  camp: Tent,
+  tools: Wrench,
+  instruments: Compass,
+  drillService: ArrowDownToLine,
+  geochemService: FlaskConical,
+  geophysService: Activity,
+  labService: Microscope,
+  surveyService: MapIcon,
+  hydroService: Droplets,
+  designService: FileText,
+  geoService: Layers,
+  staff: Users,
+};
+const CHOICE_ICONS: Record<string, LucideIcon> = {
+  RENT: KeyRound,
+  SALE: Tag,
+  SERVICE: Briefcase,
+  WANTED: Search,
+  PUBLIC: Phone,
+  PRIVATE: Shield,
+};
+const errorClass = 'block text-sm text-brand-bad';
+const subheadClass = 'text-xl font-medium tracking-[-0.01em]';
+const summaryClass =
+  'flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 font-medium [&::-webkit-details-marker]:hidden';
 const photoTypes = new Set(['image/jpeg', 'image/png', 'image/webp']);
 const maxPhotoBytes = 3 * 1024 * 1024;
 const storageKey = 'qaznedr:equipment-intake:v2';
@@ -586,7 +649,7 @@ export function EquipmentIntake({
     required = false
   ) => (
     <fieldset>
-      <legend className="mb-2 text-sm font-semibold">
+      <legend className="mb-2 text-[13px] font-medium">
         {t(name)}
         {required ? ' *' : ''}
       </legend>
@@ -598,6 +661,7 @@ export function EquipmentIntake({
           <label key={item} className="flex min-h-11 items-center gap-3">
             <input
               type="checkbox"
+              className="h-5 w-5 shrink-0 accent-brand-accent"
               checked={value[name].includes(item)}
               onChange={(event) => toggleList(name, item, event.target.checked)}
             />
@@ -617,8 +681,9 @@ export function EquipmentIntake({
               className="mt-1"
               open={value.serviceArea.some((item) => item !== 'ALL_KZ')}
             >
-              <summary className="min-h-11 cursor-pointer py-2 font-semibold">
+              <summary className={summaryClass}>
                 {t('chooseRegions')}
+                <ChevronDown aria-hidden size={18} />
               </summary>
               <div className="grid grid-cols-2 gap-x-3 text-sm">
                 {regions.map(box)}
@@ -628,7 +693,7 @@ export function EquipmentIntake({
         );
       })()}
       {errors.includes(name) && (
-        <p role="alert" className="mt-2 text-red-700 dark:text-red-300">
+        <p role="alert" className={`mt-2 ${errorClass}`}>
           {t('required')}
         </p>
       )}
@@ -637,11 +702,62 @@ export function EquipmentIntake({
   const drilling =
     value.category === 'drill' || value.category === 'drillService';
   const inputClass =
-    'min-h-11 w-full rounded border border-brand-line bg-brand-surface px-3 py-2 text-brand-ink focus:outline-none focus:ring-2 focus:ring-brand-accent';
+    'mt-1.5 min-h-12 w-full rounded-none border border-brand-line bg-brand-bg px-3.5 py-2.5 text-base font-normal text-brand-ink focus:outline-none focus:ring-2 focus:ring-brand-accent';
   const buttonClass =
-    'min-h-12 rounded border border-brand-line px-5 py-3 font-semibold text-brand-ink disabled:opacity-50';
+    'inline-flex min-h-12 items-center justify-center gap-2.5 border border-brand-line px-5 text-[15px] font-medium text-brand-ink transition-colors hover:border-brand-ink disabled:opacity-50';
   const primaryClass =
-    'min-h-12 rounded bg-brand-accent px-6 py-3 font-semibold text-brand-slate disabled:opacity-50';
+    'inline-flex min-h-12 items-center justify-center gap-2.5 bg-brand-accent px-6 text-[15px] font-medium text-brand-slate transition-colors hover:bg-brand-accent-hi disabled:opacity-50';
+  const labelClass = 'block text-[13px] font-medium text-brand-ink';
+  const factRow =
+    'grid grid-cols-[minmax(120px,40%)_1fr] gap-3 border-b border-brand-hair py-3 text-[15px]';
+  // A choice row (action, phone visibility): 64 px, round check on the right.
+  const choiceRow = (
+    name: string,
+    choice: string,
+    label: string,
+    checked: boolean,
+    onChange: () => void
+  ) => {
+    const Icon = CHOICE_ICONS[choice];
+    return (
+      <label
+        key={choice}
+        className={`flex min-h-16 cursor-pointer items-center gap-3.5 border bg-brand-surface px-[18px] py-3 text-[17px] leading-snug transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brand-accent ${
+          checked
+            ? 'border-brand-ink'
+            : 'border-transparent hover:border-brand-line'
+        }`}
+      >
+        <input
+          type="radio"
+          className="sr-only"
+          name={name}
+          value={choice}
+          checked={checked}
+          onChange={onChange}
+        />
+        {Icon && (
+          <Icon
+            aria-hidden
+            size={22}
+            strokeWidth={1.5}
+            className="shrink-0 text-brand-muted"
+          />
+        )}
+        <span>{label}</span>
+        <span
+          aria-hidden
+          className={`ml-auto grid h-6 w-6 shrink-0 place-items-center rounded-full border ${
+            checked
+              ? 'border-brand-accent bg-brand-accent'
+              : 'border-brand-line'
+          }`}
+        >
+          {checked && <span className="h-2 w-2 rounded-full bg-brand-deep" />}
+        </span>
+      </label>
+    );
+  };
 
   const field = ({
     name,
@@ -649,7 +765,7 @@ export function EquipmentIntake({
     multiline = false,
     required = false,
   }: FieldProps) => (
-    <label className="block space-y-2 text-sm font-semibold text-brand-ink">
+    <label className={labelClass}>
       <span>
         {labelFor(name)}
         {required ? ' *' : ''}
@@ -675,7 +791,7 @@ export function EquipmentIntake({
         />
       )}
       {errors.includes(name) && (
-        <span role="alert" className="block text-red-700 dark:text-red-300">
+        <span role="alert" className={errorClass}>
           {t(value[name] ? 'invalid' : 'required')}
         </span>
       )}
@@ -690,7 +806,7 @@ export function EquipmentIntake({
     values: readonly string[];
     required?: boolean;
   }) => (
-    <label className="block space-y-2 text-sm font-semibold text-brand-ink">
+    <label className={labelClass}>
       <span>
         {labelFor(name)}
         {required ? ' *' : ''}
@@ -710,7 +826,7 @@ export function EquipmentIntake({
         ))}
       </select>
       {errors.includes(name) && (
-        <span role="alert" className="block text-red-700 dark:text-red-300">
+        <span role="alert" className={errorClass}>
           {t('required')}
         </span>
       )}
@@ -1072,743 +1188,857 @@ export function EquipmentIntake({
 
   return (
     <section
-      className="mx-auto max-w-3xl px-5 py-8 text-brand-ink"
+      className={`brand-container text-brand-ink ${
+        submitted ? 'pb-16' : 'pb-40 lg:pb-20'
+      }`}
       aria-label={t('offers')}
     >
-      <h1 className="mb-3 font-serif text-4xl">{t('title')}</h1>
-      <p className="mb-6 text-brand-muted">{t('intro')}</p>
-      {whatsappNumber && !submitted && !editingActive && step === 1 && (
-        <div className="mb-6 flex flex-col gap-3 border-l-4 border-brand-accent bg-brand-surface p-4 sm:flex-row sm:items-center sm:justify-between">
-          <p>{t('assistedText')}</p>
-          <a
-            href={whatsappLink(whatsappNumber, t('assistedMessage'))}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="brand-button-secondary brand-focus shrink-0 gap-2"
-          >
-            <MessageCircle aria-hidden size={18} />
-            {t('assistedButton')}
-          </a>
-        </div>
-      )}
-      {editingActive && (
-        <div
-          role="note"
-          className="mb-6 border-l-4 border-amber-700 bg-brand-surface p-4 text-sm dark:border-amber-300"
-        >
-          <p className="font-semibold">{t('editingActive')}</p>
-          <p>{t('photosLocked')}</p>
-        </div>
-      )}
-      {submitted ? (
-        <div
-          role="status"
-          className="space-y-3 rounded border border-brand-line bg-brand-surface p-6"
-        >
-          <h2 className="font-serif text-3xl">
-            {t(
-              listingStatus === 'ACTIVE'
-                ? 'active'
-                : listingStatus === 'ARCHIVED'
-                  ? 'archived'
-                  : 'pending'
-            )}
-          </h2>
-          <p>
-            {t(
-              listingStatus === 'ACTIVE'
-                ? 'activeHint'
-                : listingStatus === 'ARCHIVED'
-                  ? 'archivedHint'
-                  : 'pendingHint'
-            )}
-          </p>
-        </div>
-      ) : (
-        <>
-          <p className="mb-2 text-sm font-semibold">
-            {t('step', { current: step })}
-          </p>
-          <div className="mb-8 grid grid-cols-4 gap-2" aria-hidden="true">
-            {[1, 2, 3, 4].map((number) => (
-              <span
-                key={number}
-                className={`h-1 ${number <= step ? 'bg-brand-accent' : 'bg-brand-line'}`}
+      <div className="grid gap-3.5 pb-7 pt-6 md:pb-9 md:pt-10">
+        <p className="holding-eyebrow">{t('eyebrow')}</p>
+        <h1 className="font-serif text-[34px] font-light leading-[1.04] tracking-[-0.025em] sm:text-[44px] lg:text-[52px]">
+          {t('title')}
+        </h1>
+        <p className="max-w-[58ch] text-[17px] text-brand-muted">
+          {t('intro')}
+        </p>
+      </div>
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-14">
+        <div className="grid min-w-0 content-start gap-7">
+          {whatsappNumber && !submitted && !editingActive && step === 1 && (
+            <a
+              href={whatsappLink(whatsappNumber, t('assistedMessage'))}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="brand-focus flex items-center gap-3 bg-brand-surface px-4 py-3.5 text-[15px] lg:hidden"
+            >
+              <MessageCircle
+                aria-hidden
+                size={22}
+                strokeWidth={1.5}
+                className="shrink-0 text-brand-accent"
               />
-            ))}
-          </div>
-          <div className="space-y-6 rounded border border-brand-line bg-brand-surface p-5 md:p-8">
-            <h2 className="font-serif text-3xl">
-              {t(['', 'offers', 'details', 'contact', 'preview'][step])}
-            </h2>
-            {step === 1 && (
-              <div className="space-y-6">
-                <fieldset>
-                  <legend className="mb-3 font-semibold">
-                    {t('whatYouHave')}
-                  </legend>
-                  <div className="space-y-5">
-                    {(Object.keys(CATEGORY_GROUPS) as CategoryGroup[]).map(
-                      (groupKey) => (
-                        <div key={groupKey}>
-                          <p className="mb-2 text-sm font-semibold text-brand-muted">
-                            {t(`groups.${groupKey}`)}
-                          </p>
-                          <div className="grid gap-2 sm:grid-cols-2">
-                            {CATEGORY_GROUPS[groupKey].map((category) => (
-                              <label
-                                key={category}
-                                className={`${buttonClass} flex items-center gap-3`}
-                              >
-                                <input
-                                  type="radio"
-                                  name="category"
-                                  value={category}
-                                  checked={value.category === category}
-                                  onChange={() => changeCategory(category)}
-                                />
-                                {t(category)}
-                              </label>
-                            ))}
-                          </div>
-                        </div>
-                      )
-                    )}
-                  </div>
-                  {errors.includes('category') && !value.category && (
-                    <p
-                      role="alert"
-                      className="mt-2 text-red-700 dark:text-red-300"
+              <span className="flex-1">{t('assistedText')}</span>
+              <ChevronRight
+                aria-hidden
+                size={18}
+                className="shrink-0 text-brand-muted"
+              />
+            </a>
+          )}
+          {editingActive && (
+            <div
+              role="note"
+              className="border-l-2 border-brand-warn bg-brand-surface p-4 text-sm"
+            >
+              <p className="font-semibold">{t('editingActive')}</p>
+              <p>{t('photosLocked')}</p>
+            </div>
+          )}
+          {submitted ? (
+            <div
+              role="status"
+              className="grid justify-items-start gap-4 bg-brand-surface px-6 py-8"
+            >
+              <span
+                aria-hidden
+                className="grid h-14 w-14 place-items-center rounded-full bg-brand-accent text-brand-deep"
+              >
+                <Check size={28} strokeWidth={2} />
+              </span>
+              <h2 className="font-serif text-[28px] font-light leading-[1.1] tracking-[-0.025em] md:text-[40px]">
+                {t(
+                  listingStatus === 'ACTIVE'
+                    ? 'active'
+                    : listingStatus === 'ARCHIVED'
+                      ? 'archived'
+                      : 'pending'
+                )}
+              </h2>
+              <p>
+                {t(
+                  listingStatus === 'ACTIVE'
+                    ? 'activeHint'
+                    : listingStatus === 'ARCHIVED'
+                      ? 'archivedHint'
+                      : 'pendingHint'
+                )}
+              </p>
+              <a href={`/${locale}/equipment/my`} className={buttonClass}>
+                {t('myListings')}
+              </a>
+            </div>
+          ) : (
+            <>
+              <div className="grid gap-2.5">
+                <p className="text-[13px] font-medium text-brand-muted">
+                  {t('step', { current: step })}
+                </p>
+                <div className="grid grid-cols-4 gap-1.5" aria-hidden="true">
+                  {[1, 2, 3, 4].map((number) => (
+                    <div
+                      key={number}
+                      className={`grid gap-2 text-[13px] ${
+                        number === step
+                          ? 'font-medium text-brand-ink'
+                          : 'text-brand-muted'
+                      }`}
                     >
-                      {t('chooseCategory')}
-                    </p>
-                  )}
-                </fieldset>
-                {value.category && (
-                  <fieldset ref={offerRef}>
-                    <legend className="mb-2 font-semibold">
-                      {t('whatYouWant')}
-                    </legend>
-                    <div className="grid gap-2">
-                      {offerTypesFor(value.category).map((offer) => (
-                        <label
-                          key={offer}
-                          className={`${buttonClass} flex items-center gap-3`}
-                        >
-                          <input
-                            type="radio"
-                            name="offerType"
-                            value={offer}
-                            checked={value.offerType === offer}
-                            onChange={() => changeOffer(offer)}
-                          />
-                          {t(`offerChoice.${choiceGroup}.${offer}`)}
-                        </label>
-                      ))}
+                      <span
+                        className={`h-[3px] ${
+                          number === step
+                            ? 'bg-brand-accent'
+                            : number < step
+                              ? 'bg-brand-ink'
+                              : 'bg-brand-hair'
+                        }`}
+                      />
+                      <span className="truncate">
+                        {t(`stepNames.${number}`)}
+                      </span>
                     </div>
-                    {errors.includes('category') && !value.offerType && (
-                      <p
-                        role="alert"
-                        className="mt-2 text-red-700 dark:text-red-300"
-                      >
-                        {t('chooseOffer')}
-                      </p>
-                    )}
-                  </fieldset>
-                )}
+                  ))}
+                </div>
               </div>
-            )}
-            {step === 2 && (
-              <div className="space-y-5">
-                {kinds.length > 0 &&
-                  select({ name: 'kind', values: kinds, required: true })}
-                {field({ name: 'title', required: true })}
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <label className="block space-y-2 text-sm font-semibold text-brand-ink">
-                    <span>{t('region')} *</span>
-                    <select
-                      className={inputClass}
-                      value={value.region ?? ''}
-                      onChange={(event) => change('region', event.target.value)}
-                    >
-                      <option value="">{t('chooseRegion')}</option>
-                      {REGION_IDS.map((region) => (
-                        <option key={region} value={region}>
-                          {regionLabel(region, locale)}
-                        </option>
-                      ))}
-                    </select>
-                    {errors.includes('region') && (
-                      <span
-                        role="alert"
-                        className="block text-red-700 dark:text-red-300"
-                      >
-                        {t('required')}
-                      </span>
+              <div className="grid gap-7">
+                <h2 className="font-serif text-[28px] font-light leading-[1.1] tracking-[-0.025em] md:text-[44px]">
+                  {t(['', 'offers', 'details', 'contact', 'preview'][step])}
+                </h2>
+                {step === 1 && (
+                  <div className="grid gap-8">
+                    <fieldset>
+                      <legend className="sr-only">{t('whatYouHave')}</legend>
+                      <div className="grid gap-5">
+                        {(Object.keys(CATEGORY_GROUPS) as CategoryGroup[]).map(
+                          (groupKey) => (
+                            <div key={groupKey}>
+                              <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-brand-muted">
+                                {t(`groups.${groupKey}`)}
+                              </p>
+                              <div className="grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-4">
+                                {CATEGORY_GROUPS[groupKey].map((category) => {
+                                  const Icon =
+                                    CATEGORY_ICONS[category] ?? Layers;
+                                  const checked = value.category === category;
+                                  return (
+                                    <label
+                                      key={category}
+                                      className={`flex min-h-24 cursor-pointer flex-col items-start justify-between gap-3.5 border p-3.5 text-[15px] leading-tight transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brand-accent ${
+                                        checked
+                                          ? 'border-brand-ink bg-brand-ink text-brand-bg'
+                                          : 'border-transparent bg-brand-surface hover:border-brand-line'
+                                      }`}
+                                    >
+                                      <input
+                                        type="radio"
+                                        className="sr-only"
+                                        name="category"
+                                        value={category}
+                                        checked={checked}
+                                        onChange={() =>
+                                          changeCategory(category)
+                                        }
+                                      />
+                                      <Icon
+                                        aria-hidden
+                                        size={24}
+                                        strokeWidth={1.4}
+                                        className={
+                                          checked
+                                            ? 'text-brand-accent'
+                                            : 'text-brand-muted'
+                                        }
+                                      />
+                                      <span>{t(category)}</span>
+                                    </label>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )
+                        )}
+                      </div>
+                      {errors.includes('category') && !value.category && (
+                        <p role="alert" className={`mt-2 ${errorClass}`}>
+                          {t('chooseCategory')}
+                        </p>
+                      )}
+                    </fieldset>
+                    {value.category && (
+                      <fieldset ref={offerRef}>
+                        <legend className={`mb-3.5 ${subheadClass}`}>
+                          {t('whatYouWant')}
+                        </legend>
+                        <div className="grid gap-2">
+                          {offerTypesFor(value.category).map((offer) =>
+                            choiceRow(
+                              'offerType',
+                              offer,
+                              t(`offerChoice.${choiceGroup}.${offer}`),
+                              value.offerType === offer,
+                              () => changeOffer(offer)
+                            )
+                          )}
+                        </div>
+                        {errors.includes('category') && !value.offerType && (
+                          <p role="alert" className={`mt-2 ${errorClass}`}>
+                            {t('chooseOffer')}
+                          </p>
+                        )}
+                      </fieldset>
                     )}
-                  </label>
-                  {field({ name: 'city' })}
-                </div>
-                {people && (
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {field({ name: 'experienceYears', type: 'number' })}
-                    {select({ name: 'workFormat', values: WORK_FORMATS })}
                   </div>
                 )}
-                {field({ name: 'availability' })}
-                <div className="grid gap-4 sm:grid-cols-3">
-                  {field({ name: 'price', type: 'number' })}
-                  {value.price.trim() && (
-                    <>
-                      {select({
-                        name: 'currency',
-                        values: ['KZT', 'USD', 'CNY'],
-                        required: true,
-                      })}
-                      {select({
-                        name: 'priceUnit',
-                        values: priceUnits,
-                        required: true,
-                      })}
-                    </>
-                  )}
-                </div>
-                <p className="text-sm text-brand-muted">{t('priceHint')}</p>
-                {value.price.trim() &&
-                  value.priceUnit === 'SHIFT' &&
-                  field({ name: 'shiftHours', type: 'number', required: true })}
-                {value.price.trim() && field({ name: 'priceIncludes' })}
-                {serviceMethods.length > 0 &&
-                  checklist('serviceMethods', serviceMethods, labelCode, true)}
-                {value.category === 'labService' && (
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {select({ name: 'accredited', values: ['true', 'false'] })}
-                    {value.accredited === 'true' &&
-                      field({ name: 'accreditationNumber' })}
-                  </div>
-                )}
-                {value.offerType === 'SERVICE' &&
-                  !people &&
-                  select({ name: 'ownCrew', values: ['true', 'false'] })}
-                {(value.offerType === 'RENT' ||
-                  value.offerType === 'SERVICE') &&
-                  checklist('serviceArea', ['ALL_KZ', ...REGION_IDS], (item) =>
-                    item === 'ALL_KZ'
-                      ? labelCode(item)
-                      : regionLabel(item, locale)
-                  )}
-                {drilling && (
-                  <div className="space-y-4 border-t border-brand-line pt-5">
-                    <h3 className="font-semibold">{t('capabilities')}</h3>
-                    {errors.includes('capabilities') && (
-                      <span
-                        role="alert"
-                        className="block text-red-700 dark:text-red-300"
-                      >
-                        {t('capabilityRequired')}
-                      </span>
+                {step === 2 && (
+                  <div className="space-y-5">
+                    {kinds.length > 0 &&
+                      select({ name: 'kind', values: kinds, required: true })}
+                    {field({ name: 'title', required: true })}
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <label className={labelClass}>
+                        <span>{t('region')} *</span>
+                        <select
+                          className={inputClass}
+                          value={value.region ?? ''}
+                          onChange={(event) =>
+                            change('region', event.target.value)
+                          }
+                        >
+                          <option value="">{t('chooseRegion')}</option>
+                          {REGION_IDS.map((region) => (
+                            <option key={region} value={region}>
+                              {regionLabel(region, locale)}
+                            </option>
+                          ))}
+                        </select>
+                        {errors.includes('region') && (
+                          <span role="alert" className={errorClass}>
+                            {t('required')}
+                          </span>
+                        )}
+                      </label>
+                      {field({ name: 'city' })}
+                    </div>
+                    {people && (
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        {field({ name: 'experienceYears', type: 'number' })}
+                        {select({ name: 'workFormat', values: WORK_FORMATS })}
+                      </div>
                     )}
-                    {value.capabilities.map((row, index) => (
-                      <div
-                        key={index}
-                        className="space-y-3 rounded border border-brand-line p-4"
-                      >
-                        <label className="block text-sm font-semibold">
-                          {t('method')}
-                          <select
-                            className={inputClass}
-                            value={row.method}
-                            onChange={(event) =>
-                              updateCapability(
-                                index,
-                                'method',
-                                event.target.value
-                              )
-                            }
+                    {field({ name: 'availability' })}
+                    <div className="grid gap-4 sm:grid-cols-3">
+                      {field({ name: 'price', type: 'number' })}
+                      {value.price.trim() && (
+                        <>
+                          {select({
+                            name: 'currency',
+                            values: ['KZT', 'USD', 'CNY'],
+                            required: true,
+                          })}
+                          {select({
+                            name: 'priceUnit',
+                            values: priceUnits,
+                            required: true,
+                          })}
+                        </>
+                      )}
+                    </div>
+                    <p className="text-sm text-brand-muted">{t('priceHint')}</p>
+                    {value.price.trim() &&
+                      value.priceUnit === 'SHIFT' &&
+                      field({
+                        name: 'shiftHours',
+                        type: 'number',
+                        required: true,
+                      })}
+                    {value.price.trim() && field({ name: 'priceIncludes' })}
+                    {serviceMethods.length > 0 &&
+                      checklist(
+                        'serviceMethods',
+                        serviceMethods,
+                        labelCode,
+                        true
+                      )}
+                    {value.category === 'labService' && (
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        {select({
+                          name: 'accredited',
+                          values: ['true', 'false'],
+                        })}
+                        {value.accredited === 'true' &&
+                          field({ name: 'accreditationNumber' })}
+                      </div>
+                    )}
+                    {value.offerType === 'SERVICE' &&
+                      !people &&
+                      select({ name: 'ownCrew', values: ['true', 'false'] })}
+                    {(value.offerType === 'RENT' ||
+                      value.offerType === 'SERVICE') &&
+                      checklist(
+                        'serviceArea',
+                        ['ALL_KZ', ...REGION_IDS],
+                        (item) =>
+                          item === 'ALL_KZ'
+                            ? labelCode(item)
+                            : regionLabel(item, locale)
+                      )}
+                    {drilling && (
+                      <div className="grid gap-3.5">
+                        <h3 className={subheadClass}>{t('capabilities')}</h3>
+                        {errors.includes('capabilities') && (
+                          <span role="alert" className={errorClass}>
+                            {t('capabilityRequired')}
+                          </span>
+                        )}
+                        {value.capabilities.map((row, index) => (
+                          <div
+                            key={index}
+                            className="grid gap-4 border border-brand-hair bg-brand-surface p-[18px]"
                           >
-                            <option value="">{t('optional')}</option>
-                            {DRILLING_METHODS.map((method) => (
-                              <option key={method} value={method}>
-                                {t('codes.' + method)}
-                              </option>
-                            ))}
-                          </select>
-                        </label>
-                        <div className="grid gap-3 sm:grid-cols-2">
-                          {(['depth', 'diameter'] as const).map((key) => (
-                            <label
-                              key={key}
-                              className="block text-sm font-semibold"
-                            >
-                              {t(key)}
-                              <input
+                            <p className="font-medium">
+                              {t('capabilityN', { n: index + 1 })}
+                            </p>
+                            <label className={labelClass}>
+                              {t('method')}
+                              <select
                                 className={inputClass}
-                                type="number"
-                                min="0"
-                                step="any"
-                                value={row[key]}
+                                value={row.method}
                                 onChange={(event) =>
                                   updateCapability(
                                     index,
-                                    key,
+                                    'method',
                                     event.target.value
                                   )
                                 }
-                              />
+                              >
+                                <option value="">{t('optional')}</option>
+                                {DRILLING_METHODS.map((method) => (
+                                  <option key={method} value={method}>
+                                    {t('codes.' + method)}
+                                  </option>
+                                ))}
+                              </select>
                             </label>
-                          ))}
-                        </div>
-                        {row.method === 'CORE' && (
-                          <label className="block text-sm font-semibold">
-                            {t('coreSize')}
-                            <select
-                              className={inputClass}
-                              value={row.coreSize}
-                              onChange={(event) =>
-                                updateCapability(
-                                  index,
-                                  'coreSize',
-                                  event.target.value
-                                )
+                            <div className="grid gap-3 sm:grid-cols-2">
+                              {(['depth', 'diameter'] as const).map((key) => (
+                                <label key={key} className={labelClass}>
+                                  {t(key)}
+                                  <input
+                                    className={inputClass}
+                                    type="number"
+                                    min="0"
+                                    step="any"
+                                    value={row[key]}
+                                    onChange={(event) =>
+                                      updateCapability(
+                                        index,
+                                        key,
+                                        event.target.value
+                                      )
+                                    }
+                                  />
+                                </label>
+                              ))}
+                            </div>
+                            {row.method === 'CORE' && (
+                              <label className={labelClass}>
+                                {t('coreSize')}
+                                <select
+                                  className={inputClass}
+                                  value={row.coreSize}
+                                  onChange={(event) =>
+                                    updateCapability(
+                                      index,
+                                      'coreSize',
+                                      event.target.value
+                                    )
+                                  }
+                                >
+                                  <option value="">{t('optional')}</option>
+                                  {CORE_SIZES.map((code) => (
+                                    <option key={code} value={code}>
+                                      {t('codes.' + code) ===
+                                      `equipmentIntake.codes.${code}`
+                                        ? code
+                                        : t('codes.' + code)}
+                                    </option>
+                                  ))}
+                                </select>
+                              </label>
+                            )}
+                            <label className={labelClass}>
+                              {t('source')}
+                              <select
+                                className={inputClass}
+                                value={row.source}
+                                onChange={(event) =>
+                                  updateCapability(
+                                    index,
+                                    'source',
+                                    event.target.value
+                                  )
+                                }
+                              >
+                                <option value="">{t('optional')}</option>
+                                {CAPABILITY_SOURCES.map((code) => (
+                                  <option key={code} value={code}>
+                                    {t('codes.' + code) ===
+                                    `equipmentIntake.codes.${code}`
+                                      ? code
+                                      : t('codes.' + code)}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <button
+                              type="button"
+                              className="inline-flex min-h-11 items-center gap-2 justify-self-start text-sm text-brand-muted underline decoration-brand-line underline-offset-4 hover:text-brand-ink"
+                              onClick={() =>
+                                apply((old) => ({
+                                  ...old,
+                                  capabilities: old.capabilities.filter(
+                                    (_, position) => position !== index
+                                  ),
+                                }))
                               }
                             >
-                              <option value="">{t('optional')}</option>
-                              {CORE_SIZES.map((code) => (
-                                <option key={code} value={code}>
-                                  {t('codes.' + code) ===
-                                  `equipmentIntake.codes.${code}`
-                                    ? code
-                                    : t('codes.' + code)}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                        )}
-                        <label className="block text-sm font-semibold">
-                          {t('source')}
-                          <select
-                            className={inputClass}
-                            value={row.source}
-                            onChange={(event) =>
-                              updateCapability(
-                                index,
-                                'source',
-                                event.target.value
-                              )
-                            }
-                          >
-                            <option value="">{t('optional')}</option>
-                            {CAPABILITY_SOURCES.map((code) => (
-                              <option key={code} value={code}>
-                                {t('codes.' + code) ===
-                                `equipmentIntake.codes.${code}`
-                                  ? code
-                                  : t('codes.' + code)}
-                              </option>
-                            ))}
-                          </select>
-                        </label>
+                              <X aria-hidden size={16} />
+                              {t('removeCapability')}
+                            </button>
+                          </div>
+                        ))}
                         <button
                           type="button"
-                          className={buttonClass}
+                          className={`${buttonClass} justify-self-start`}
+                          disabled={value.capabilities.length >= 12}
                           onClick={() =>
                             apply((old) => ({
                               ...old,
-                              capabilities: old.capabilities.filter(
-                                (_, position) => position !== index
-                              ),
+                              capabilities: [
+                                ...old.capabilities,
+                                {
+                                  method: '',
+                                  depth: '',
+                                  diameter: '',
+                                  coreSize: '',
+                                  source: '',
+                                },
+                              ],
                             }))
                           }
                         >
-                          <Trash2
-                            aria-hidden
-                            size={18}
-                            className="mr-2 inline"
-                          />
-                          {t('removeCapability')}
+                          <Plus aria-hidden size={18} />
+                          {t('addCapability')}
                         </button>
-                      </div>
-                    ))}
-                    <button
-                      type="button"
-                      className={buttonClass}
-                      disabled={value.capabilities.length >= 12}
-                      onClick={() =>
-                        apply((old) => ({
-                          ...old,
-                          capabilities: [
-                            ...old.capabilities,
-                            {
-                              method: '',
-                              depth: '',
-                              diameter: '',
-                              coreSize: '',
-                              source: '',
-                            },
-                          ],
-                        }))
-                      }
-                    >
-                      <Plus aria-hidden size={18} className="mr-2 inline" />
-                      {t('addCapability')}
-                    </button>
-                    <details className="border-t border-brand-line pt-3">
-                      <summary className="min-h-11 cursor-pointer font-semibold">
-                        {t('drillingExtra')}
-                      </summary>
-                      <div className="mt-3 space-y-4">
-                        <fieldset>
-                          <legend className="font-semibold">
-                            {t('purposes')}
-                          </legend>
-                          <div className="grid gap-2 sm:grid-cols-2">
-                            {DRILLING_PURPOSES.map((purpose) => (
-                              <label
-                                key={purpose}
-                                className="flex min-h-11 items-center gap-2"
-                              >
-                                <input
-                                  type="checkbox"
-                                  checked={value.purposes.includes(purpose)}
-                                  onChange={(event) =>
-                                    apply((old) => ({
-                                      ...old,
-                                      purposes: event.target.checked
-                                        ? [...old.purposes, purpose]
-                                        : old.purposes.filter(
-                                            (item) => item !== purpose
-                                          ),
-                                    }))
-                                  }
-                                />
-                                {t('codes.' + purpose)}
-                              </label>
-                            ))}
+                        <details className="border-y border-brand-hair">
+                          <summary className={summaryClass}>
+                            {t('drillingExtra')}
+                            <ChevronDown aria-hidden size={18} />
+                          </summary>
+                          <div className="space-y-4 pb-5">
+                            <fieldset>
+                              <legend className="mb-2 text-[13px] font-medium">
+                                {t('purposes')}
+                              </legend>
+                              <div className="grid gap-2 sm:grid-cols-2">
+                                {DRILLING_PURPOSES.map((purpose) => (
+                                  <label
+                                    key={purpose}
+                                    className="flex min-h-11 items-center gap-2"
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      className="h-5 w-5 shrink-0 accent-brand-accent"
+                                      checked={value.purposes.includes(purpose)}
+                                      onChange={(event) =>
+                                        apply((old) => ({
+                                          ...old,
+                                          purposes: event.target.checked
+                                            ? [...old.purposes, purpose]
+                                            : old.purposes.filter(
+                                                (item) => item !== purpose
+                                              ),
+                                        }))
+                                      }
+                                    />
+                                    {t('codes.' + purpose)}
+                                  </label>
+                                ))}
+                              </div>
+                            </fieldset>
+                            <div className="grid gap-4 sm:grid-cols-2">
+                              {select({
+                                name: 'trajectory',
+                                values: DRILLING_TRAJECTORIES,
+                              })}
+                              {select({ name: 'site', values: DRILLING_SITES })}
+                            </div>
                           </div>
-                        </fieldset>
-                        <div className="grid gap-4 sm:grid-cols-2">
-                          {select({
-                            name: 'trajectory',
-                            values: DRILLING_TRAJECTORIES,
-                          })}
-                          {select({ name: 'site', values: DRILLING_SITES })}
+                        </details>
+                      </div>
+                    )}
+                    {!people && (
+                      <details className="border-y border-brand-hair">
+                        <summary className={summaryClass}>
+                          {t('technicalExtra')}
+                          <ChevronDown aria-hidden size={18} />
+                        </summary>
+                        <div className="space-y-4 pb-5">
+                          {value.category === 'excavator' && (
+                            <div className="grid gap-4 sm:grid-cols-2">
+                              {field({ name: 'bucket', type: 'number' })}
+                              {field({ name: 'mass', type: 'number' })}
+                            </div>
+                          )}
+                          {value.category === 'compressor' && (
+                            <div className="grid gap-4 sm:grid-cols-2">
+                              {field({ name: 'pressure', type: 'number' })}
+                              {field({ name: 'flow', type: 'number' })}
+                            </div>
+                          )}
+                          {value.category === 'transport' &&
+                            field({ name: 'payload', type: 'number' })}
+                          {value.category === 'camp' &&
+                            field({ name: 'powerKw', type: 'number' })}
+                          {value.offerType !== 'SERVICE' && (
+                            <>
+                              <div className="grid gap-4 sm:grid-cols-2">
+                                {field({ name: 'brand' })}
+                                {field({ name: 'model' })}
+                              </div>
+                              {['drill', 'excavator'].includes(
+                                value.category
+                              ) &&
+                                select({
+                                  name: 'chassis',
+                                  values: CHASSIS_TYPES,
+                                })}
+                              <div className="grid gap-4 sm:grid-cols-2">
+                                {select({
+                                  name: 'operator',
+                                  values: ['true', 'false'],
+                                })}
+                                {select({
+                                  name: 'delivery',
+                                  values: ['true', 'false'],
+                                })}
+                              </div>
+                            </>
+                          )}
+                          {value.offerType === 'SALE' && (
+                            <div className="grid gap-4 sm:grid-cols-2">
+                              {field({ name: 'machineYear', type: 'number' })}
+                              {select({
+                                name: 'machineCondition',
+                                values: MACHINE_CONDITIONS,
+                              })}
+                            </div>
+                          )}
                         </div>
+                      </details>
+                    )}
+                    <div className="grid gap-3.5">
+                      <h3 className={subheadClass}>{t('photos')}</h3>
+                      <input
+                        ref={fileRef}
+                        className="sr-only"
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp"
+                        multiple
+                        onChange={(event) => void upload(event.target.files)}
+                      />
+                      <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+                        {imageList.map((image, index) => (
+                          <div
+                            key={image.id}
+                            className="relative aspect-square overflow-hidden bg-brand-surface"
+                          >
+                            {imageBase && (
+                              <img
+                                alt={`${t('photos')} ${image.position + 1}`}
+                                className="h-full w-full object-cover"
+                                src={`/api/equipment-listings/${imageBase}/images/${image.id}`}
+                              />
+                            )}
+                            {index === 0 && (
+                              <span className="absolute bottom-1.5 left-1.5 bg-brand-chalk px-1.5 py-0.5 text-[11px] text-brand-deep">
+                                {t('cover')}
+                              </span>
+                            )}
+                            <button
+                              type="button"
+                              aria-label={`${t('remove')} ${image.position + 1}`}
+                              className="absolute right-1.5 top-1.5 grid h-8 w-8 place-items-center bg-brand-deep/70 text-brand-chalk disabled:opacity-50"
+                              disabled={busy || editingActive}
+                              onClick={() => void removeImage(image.id)}
+                            >
+                              <X aria-hidden size={16} />
+                            </button>
+                          </div>
+                        ))}
+                        {images.length < 8 && (
+                          <button
+                            type="button"
+                            className="flex aspect-square flex-col items-center justify-center gap-1.5 border border-dashed border-brand-line p-2 text-center text-sm transition-colors hover:border-brand-ink disabled:opacity-50"
+                            disabled={!ownerId || busy || editingActive}
+                            onClick={() => fileRef.current?.click()}
+                          >
+                            <Camera
+                              aria-hidden
+                              size={26}
+                              strokeWidth={1.3}
+                              className="text-brand-accent"
+                            />
+                            {t('upload')}
+                          </button>
+                        )}
+                      </div>
+                      <p className="text-[13px] text-brand-muted">
+                        {t('photoHint')}
+                      </p>
+                      {!ownerId && (
+                        <p className="text-sm">{t('loginRequired')}</p>
+                      )}
+                    </div>
+                    <details className="border-y border-brand-hair">
+                      <summary className={summaryClass}>
+                        {t('extra')}
+                        <ChevronDown aria-hidden size={18} />
+                      </summary>
+                      <div className="space-y-4 pb-5">
+                        {field({ name: 'description', multiline: true })}
+                        {field({ name: 'conditions', multiline: true })}
                       </div>
                     </details>
                   </div>
                 )}
-                {!people && (
-                  <details className="border-t border-brand-line pt-3">
-                    <summary className="min-h-11 cursor-pointer font-semibold">
-                      {t('technicalExtra')}
-                    </summary>
-                    <div className="mt-3 space-y-4">
-                      {value.category === 'excavator' && (
-                        <div className="grid gap-4 sm:grid-cols-2">
-                          {field({ name: 'bucket', type: 'number' })}
-                          {field({ name: 'mass', type: 'number' })}
-                        </div>
+                {step === 3 && (
+                  <div className="space-y-5">
+                    {!ownerId && (
+                      <div className="grid gap-3.5 bg-brand-surface p-[22px]">
+                        <p className="text-[13px] text-brand-muted">
+                          {t('loginRequired')}
+                        </p>
+                        <MarketplaceSignIn
+                          locale={locale}
+                          googleEnabled={googleEnabled}
+                          emailEnabled={emailEnabled}
+                          callbackUrl={
+                            typeof window === 'undefined'
+                              ? `/${locale}/equipment/new`
+                              : window.location.pathname +
+                                window.location.search
+                          }
+                        />
+                      </div>
+                    )}
+                    {field({ name: 'contactName', required: true })}
+                    {field({ name: 'company' })}
+                    {field({ name: 'phone', type: 'tel', required: true })}
+                    <fieldset>
+                      <legend className={`mb-3.5 ${subheadClass}`}>
+                        {t('contactVisibility')} *
+                      </legend>
+                      <div className="grid gap-2">
+                        {['PUBLIC', 'PRIVATE'].map((choice) =>
+                          choiceRow(
+                            'contactVisibility',
+                            choice,
+                            t(choice),
+                            value.contactVisibility === choice,
+                            () => change('contactVisibility', choice)
+                          )
+                        )}
+                      </div>
+                      {errors.includes('contactVisibility') && (
+                        <p role="alert" className={errorClass}>
+                          {t('required')}
+                        </p>
                       )}
-                      {value.category === 'compressor' && (
-                        <div className="grid gap-4 sm:grid-cols-2">
-                          {field({ name: 'pressure', type: 'number' })}
-                          {field({ name: 'flow', type: 'number' })}
-                        </div>
-                      )}
-                      {value.category === 'transport' &&
-                        field({ name: 'payload', type: 'number' })}
-                      {value.category === 'camp' &&
-                        field({ name: 'powerKw', type: 'number' })}
-                      {value.offerType !== 'SERVICE' && (
-                        <>
-                          <div className="grid gap-4 sm:grid-cols-2">
-                            {field({ name: 'brand' })}
-                            {field({ name: 'model' })}
-                          </div>
-                          {['drill', 'excavator'].includes(value.category) &&
-                            select({ name: 'chassis', values: CHASSIS_TYPES })}
-                          <div className="grid gap-4 sm:grid-cols-2">
-                            {select({
-                              name: 'operator',
-                              values: ['true', 'false'],
-                            })}
-                            {select({
-                              name: 'delivery',
-                              values: ['true', 'false'],
-                            })}
-                          </div>
-                        </>
-                      )}
-                      {value.offerType === 'SALE' && (
-                        <div className="grid gap-4 sm:grid-cols-2">
-                          {field({ name: 'machineYear', type: 'number' })}
-                          {select({
-                            name: 'machineCondition',
-                            values: MACHINE_CONDITIONS,
-                          })}
-                        </div>
-                      )}
-                    </div>
-                  </details>
+                    </fieldset>
+                  </div>
                 )}
-                <div className="border-t border-brand-line pt-5">
-                  <h3 className="mb-2 font-semibold">{t('photos')}</h3>
-                  <p className="mb-3 text-sm text-brand-muted">
-                    {t('photoHint')}
+                {step === 4 && (
+                  <div className="space-y-5">
+                    <dl className="border-t border-brand-hair">
+                      {previewRows.map(([key, content]) => (
+                        <div key={key} className={factRow}>
+                          <dt className="text-brand-muted">{labelFor(key)}</dt>
+                          <dd className="min-w-0 break-words">{content}</dd>
+                        </div>
+                      ))}
+                      {previewData.purposes?.length ? (
+                        <div className={factRow}>
+                          <dt className="text-brand-muted">{t('purposes')}</dt>
+                          <dd>
+                            {previewData.purposes.map(labelCode).join(', ')}
+                          </dd>
+                        </div>
+                      ) : null}
+                      <div className={factRow}>
+                        <dt className="text-brand-muted">{t('photos')}</dt>
+                        <dd>{images.length || t('noPhotos')}</dd>
+                      </div>
+                    </dl>
+                    {previewData.capabilities?.length ? (
+                      <div className="space-y-2">
+                        <h3 className={subheadClass}>{t('capabilities')}</h3>
+                        {previewData.capabilities.map((row, index) => (
+                          <dl
+                            key={index}
+                            className="grid grid-cols-2 gap-x-3 gap-y-1.5 bg-brand-surface px-3.5 py-3 text-[15px]"
+                          >
+                            <dt>{t('method')}</dt>
+                            <dd>{labelCode(row.method)}</dd>
+                            {row.depth && (
+                              <>
+                                <dt>{t('depth')}</dt>
+                                <dd>{row.depth}</dd>
+                              </>
+                            )}
+                            {row.diameter && (
+                              <>
+                                <dt>{t('diameter')}</dt>
+                                <dd>{row.diameter}</dd>
+                              </>
+                            )}
+                            {row.coreSize && (
+                              <>
+                                <dt>{t('coreSize')}</dt>
+                                <dd>{row.coreSize}</dd>
+                              </>
+                            )}
+                            {row.source && (
+                              <>
+                                <dt>{t('source')}</dt>
+                                <dd>{labelCode(row.source)}</dd>
+                              </>
+                            )}
+                          </dl>
+                        ))}
+                      </div>
+                    ) : null}
+                    {!ownerId && (
+                      <div className="grid gap-3.5 bg-brand-surface p-[22px]">
+                        <p className="font-medium">{t('signInToSend')}</p>
+                        <MarketplaceSignIn
+                          locale={locale}
+                          googleEnabled={googleEnabled}
+                          emailEnabled={emailEnabled}
+                          callbackUrl={
+                            typeof window === 'undefined'
+                              ? `/${locale}/equipment/new`
+                              : window.location.pathname +
+                                window.location.search
+                          }
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
+                {notice && (
+                  <p
+                    role="status"
+                    className="border-l-2 border-brand-accent bg-brand-surface px-4 py-3 text-sm"
+                  >
+                    {notice}
                   </p>
-                  <input
-                    ref={fileRef}
-                    className="sr-only"
-                    type="file"
-                    accept="image/jpeg,image/png,image/webp"
-                    multiple
-                    onChange={(event) => void upload(event.target.files)}
-                  />
+                )}
+                {conflict && ownerId && storage.get(draftKey(ownerId!)) && (
                   <button
                     type="button"
                     className={buttonClass}
-                    disabled={
-                      !ownerId || busy || editingActive || images.length >= 8
-                    }
-                    onClick={() => fileRef.current?.click()}
+                    disabled={busy}
+                    onClick={() => void reload()}
                   >
-                    <Upload aria-hidden size={18} className="mr-2 inline" />
-                    {t('upload')}
+                    {t('reload')}
                   </button>
-                  {!ownerId && (
-                    <p className="mt-2 text-sm">{t('loginRequired')}</p>
-                  )}
-                  <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                    {imageList.map((image) => (
-                      <div
-                        key={image.id}
-                        className="border border-brand-line p-2"
-                      >
-                        {imageBase && (
-                          <img
-                            alt={`${t('photos')} ${image.position + 1}`}
-                            className="aspect-square w-full object-cover"
-                            src={`/api/equipment-listings/${imageBase}/images/${image.id}`}
-                          />
-                        )}
-                        <button
-                          type="button"
-                          className={buttonClass}
-                          disabled={busy || editingActive}
-                          onClick={() => void removeImage(image.id)}
-                        >
-                          {t('remove')}
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <details className="border-t border-brand-line pt-5">
-                  <summary className="min-h-11 cursor-pointer font-semibold">
-                    {t('extra')}
-                  </summary>
-                  <div className="mt-4 space-y-4">
-                    {field({ name: 'description', multiline: true })}
-                    {field({ name: 'conditions', multiline: true })}
-                  </div>
-                </details>
-              </div>
-            )}
-            {step === 3 && (
-              <div className="space-y-5">
-                <p>{t('loginRequired')}</p>
-                {!ownerId && (
-                  <MarketplaceSignIn
-                    locale={locale}
-                    googleEnabled={googleEnabled}
-                    emailEnabled={emailEnabled}
-                    callbackUrl={
-                      typeof window === 'undefined'
-                        ? `/${locale}/equipment/new`
-                        : window.location.pathname + window.location.search
-                    }
-                  />
                 )}
-                {field({ name: 'contactName', required: true })}
-                {field({ name: 'company' })}
-                {field({ name: 'phone', type: 'tel', required: true })}
-                <fieldset>
-                  <legend className="mb-2 font-semibold">
-                    {t('contactVisibility')} *
-                  </legend>
-                  <div className="grid gap-2 sm:grid-cols-2">
-                    {['PUBLIC', 'PRIVATE'].map((choice) => (
-                      <label
-                        key={choice}
-                        className={`${buttonClass} flex items-center gap-3`}
+                {conflict && ownerId && (
+                  <button
+                    type="button"
+                    className={buttonClass}
+                    disabled={busy}
+                    onClick={() => void recover()}
+                  >
+                    {t('findDraft')}
+                  </button>
+                )}
+                {conflict && recoveryListings.length > 0 && (
+                  <div className="space-y-2">
+                    <h3 className="font-semibold">{t('chooseDraft')}</h3>
+                    {recoveryListings.map((listing) => (
+                      <button
+                        key={listing.id}
+                        type="button"
+                        className={`${buttonClass} w-full justify-start text-left`}
+                        onClick={() => void chooseRecovered(listing.id)}
                       >
-                        <input
-                          type="radio"
-                          name="contactVisibility"
-                          value={choice}
-                          checked={value.contactVisibility === choice}
-                          onChange={() => change('contactVisibility', choice)}
-                        />
-                        {t(choice)}
-                      </label>
+                        {listing.data.title || listing.id} · {listing.id}
+                      </button>
                     ))}
                   </div>
-                  {errors.includes('contactVisibility') && (
-                    <p role="alert" className="text-red-700 dark:text-red-300">
-                      {t('required')}
+                )}
+                <div className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-[auto_1fr] gap-2.5 border-t border-brand-hair bg-brand-bg px-4 pb-[calc(12px+env(safe-area-inset-bottom,0px))] pt-3 lg:static lg:z-auto lg:flex lg:items-center lg:gap-3 lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-6">
+                  {step > 1 ? (
+                    <button
+                      type="button"
+                      className={buttonClass}
+                      onClick={() => {
+                        setStep(step - 1);
+                        setErrors([]);
+                      }}
+                    >
+                      <ArrowLeft aria-hidden size={18} />
+                      {t('back')}
+                    </button>
+                  ) : (
+                    <span />
+                  )}
+                  <button
+                    type="button"
+                    className={primaryClass}
+                    disabled={busy || conflict || (step === 4 && !ownerId)}
+                    onClick={() => void nextStep()}
+                  >
+                    {step === 4
+                      ? t(editingActive ? 'resubmit' : 'submit')
+                      : t('next')}
+                    {step < 4 && <ArrowRight aria-hidden size={18} />}
+                  </button>
+                  {ownerId && savedRevision > 0 && (
+                    <p className="col-span-2 text-center text-xs text-brand-muted lg:ml-auto lg:text-right">
+                      {t('saved')}
                     </p>
                   )}
-                </fieldset>
+                </div>
               </div>
-            )}
-            {step === 4 && (
-              <div className="space-y-5">
-                <dl className="grid gap-3 sm:grid-cols-[10rem_1fr]">
-                  {previewRows.map(([key, content]) => (
-                    <div key={key} className="contents">
-                      <dt className="font-semibold">{labelFor(key)}</dt>
-                      <dd className="break-words">{content}</dd>
-                    </div>
-                  ))}
-                  {previewData.purposes?.length ? (
-                    <div className="contents">
-                      <dt className="font-semibold">{t('purposes')}</dt>
-                      <dd>{previewData.purposes.map(labelCode).join(', ')}</dd>
-                    </div>
-                  ) : null}
-                  <div className="contents">
-                    <dt className="font-semibold">{t('photos')}</dt>
-                    <dd>{images.length || t('noPhotos')}</dd>
-                  </div>
-                </dl>
-                {previewData.capabilities?.length ? (
-                  <div className="space-y-2">
-                    <h3 className="font-semibold">{t('capabilities')}</h3>
-                    {previewData.capabilities.map((row, index) => (
-                      <dl
-                        key={index}
-                        className="grid grid-cols-2 gap-2 border border-brand-line p-3"
-                      >
-                        <dt>{t('method')}</dt>
-                        <dd>{labelCode(row.method)}</dd>
-                        {row.depth && (
-                          <>
-                            <dt>{t('depth')}</dt>
-                            <dd>{row.depth}</dd>
-                          </>
-                        )}
-                        {row.diameter && (
-                          <>
-                            <dt>{t('diameter')}</dt>
-                            <dd>{row.diameter}</dd>
-                          </>
-                        )}
-                        {row.coreSize && (
-                          <>
-                            <dt>{t('coreSize')}</dt>
-                            <dd>{row.coreSize}</dd>
-                          </>
-                        )}
-                        {row.source && (
-                          <>
-                            <dt>{t('source')}</dt>
-                            <dd>{labelCode(row.source)}</dd>
-                          </>
-                        )}
-                      </dl>
-                    ))}
-                  </div>
-                ) : null}
-                {!ownerId && (
-                  <div className="space-y-3 border-t border-brand-line pt-5">
-                    <p className="font-semibold">{t('signInToSend')}</p>
-                    <MarketplaceSignIn
-                      locale={locale}
-                      googleEnabled={googleEnabled}
-                      emailEnabled={emailEnabled}
-                      callbackUrl={
-                        typeof window === 'undefined'
-                          ? `/${locale}/equipment/new`
-                          : window.location.pathname + window.location.search
-                      }
-                    />
-                  </div>
-                )}
-              </div>
-            )}
-            {notice && (
-              <p role="status" className="rounded border border-brand-line p-3">
-                {notice}
-              </p>
-            )}
-            {conflict && ownerId && storage.get(draftKey(ownerId!)) && (
-              <button
-                type="button"
-                className={buttonClass}
-                disabled={busy}
-                onClick={() => void reload()}
-              >
-                {t('reload')}
-              </button>
-            )}
-            {conflict && ownerId && (
-              <button
-                type="button"
-                className={buttonClass}
-                disabled={busy}
-                onClick={() => void recover()}
-              >
-                {t('findDraft')}
-              </button>
-            )}
-            {conflict && recoveryListings.length > 0 && (
-              <div className="space-y-2">
-                <h3 className="font-semibold">{t('chooseDraft')}</h3>
-                {recoveryListings.map((listing) => (
-                  <button
-                    key={listing.id}
-                    type="button"
-                    className={`${buttonClass} block w-full text-left`}
-                    onClick={() => void chooseRecovered(listing.id)}
-                  >
-                    {listing.data.title || listing.id} · {listing.id}
-                  </button>
-                ))}
-              </div>
-            )}
-            <div className="flex flex-wrap justify-between gap-3 border-t border-brand-line pt-5">
-              {step > 1 ? (
-                <button
-                  type="button"
-                  className={buttonClass}
-                  onClick={() => {
-                    setStep(step - 1);
-                    setErrors([]);
-                  }}
+            </>
+          )}
+        </div>
+        {!submitted && (
+          <aside className="hidden content-start gap-3.5 lg:grid">
+            {whatsappNumber && !editingActive && (
+              <div className="grid gap-3 bg-brand-surface p-[22px]">
+                <h3 className="text-[17px] font-medium">{t('helpTitle')}</h3>
+                <p className="text-sm text-brand-muted">{t('helpText')}</p>
+                <a
+                  href={whatsappLink(whatsappNumber, t('assistedMessage'))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${buttonClass} min-h-11 justify-self-start px-4 text-sm`}
                 >
-                  <ChevronLeft aria-hidden size={18} className="mr-2 inline" />
-                  {t('back')}
-                </button>
-              ) : (
-                <span />
-              )}
-              <button
-                type="button"
-                className={primaryClass}
-                disabled={busy || conflict || (step === 4 && !ownerId)}
-                onClick={() => void nextStep()}
-              >
-                {step === 4
-                  ? t(editingActive ? 'resubmit' : 'submit')
-                  : t('next')}
-              </button>
-            </div>
-            {ownerId && savedRevision > 0 && (
-              <p className="text-xs text-brand-muted">{t('saved')}</p>
+                  <MessageCircle aria-hidden size={18} />
+                  {t('assistedButton')}
+                </a>
+              </div>
             )}
-          </div>
-        </>
-      )}
+            <div className="grid gap-3 bg-brand-surface p-[22px]">
+              <h3 className="text-[17px] font-medium">{t('reviewTitle')}</h3>
+              <p className="text-sm text-brand-muted">{t('reviewText')}</p>
+            </div>
+          </aside>
+        )}
+      </div>
     </section>
   );
 }

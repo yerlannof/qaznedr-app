@@ -76,8 +76,8 @@ export default async function CompanyPage({ params }: Props) {
   };
   return (
     <>
-      <Navigation />
-      <main className="bg-brand-bg pt-20 text-brand-ink lg:pt-24">
+      <Navigation overlay />
+      <main className="bg-brand-bg text-brand-ink">
         <CompanyProfileView
           locale={locale}
           company={company}

@@ -1,4 +1,5 @@
 import { parseEquipmentSearchQuery, type EquipmentSearchQuery } from './search';
+import { CATEGORY_GROUPS, type CategoryGroup } from './taxonomy';
 
 /** Query keys the public catalogue understands; everything else is dropped. */
 const KEYS = [
@@ -63,4 +64,19 @@ export function isIndexableQuery(query: EquipmentSearchQuery): boolean {
     !query.serviceMethod &&
     query.accredited === undefined
   );
+}
+
+/**
+ * A section tile (`group`) narrows the catalogue to a group of categories.
+ * An explicit category wins over the group.
+ */
+export function parseCatalogGroup(
+  raw: Raw,
+  query: EquipmentSearchQuery
+): CategoryGroup | null {
+  const value = Array.isArray(raw.group) ? raw.group[0] : raw.group;
+  if (query.category || typeof value !== 'string') return null;
+  return Object.prototype.hasOwnProperty.call(CATEGORY_GROUPS, value)
+    ? (value as CategoryGroup)
+    : null;
 }

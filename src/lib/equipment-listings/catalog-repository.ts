@@ -231,3 +231,58 @@ export async function activeListingsOfOwner(ownerId: string) {
       updatedAt: row.updated_at,
     }));
 }
+
+const facetRow = z.object({
+  data: z
+    .object({
+      category: z.string().optional(),
+      offerType: z.string().optional(),
+      region: z.string().optional(),
+    })
+    .passthrough(),
+});
+export type CatalogFacet = {
+  category: string;
+  offerType: string;
+  region: string | null;
+};
+
+/**
+ * Section, offer type and region of every published listing, for the
+ * catalogue's section tiles and offer chips. The pilot catalogue is small;
+ * the cap keeps the read bounded.
+ */
+export async function catalogFacets(): Promise<CatalogFacet[]> {
+  const client = (await createServiceClient()) as unknown as {
+    from(table: string): {
+      select(columns: string): {
+        eq(
+          column: string,
+          value: string
+        ): {
+          limit(n: number): PromiseLike<{ data: unknown; error: unknown }>;
+        };
+      };
+    };
+  };
+  const { data, error } = await client
+    .from('equipment_listings')
+    .select('data')
+    .eq('status', 'ACTIVE')
+    .limit(5000);
+  if (error) throw new Error('Equipment catalogue unavailable');
+  return z
+    .array(facetRow)
+    .parse(data ?? [])
+    .flatMap(({ data: row }) =>
+      row.category && row.offerType
+        ? [
+            {
+              category: row.category,
+              offerType: row.offerType,
+              region: row.region ?? null,
+            },
+          ]
+        : []
+    );
+}

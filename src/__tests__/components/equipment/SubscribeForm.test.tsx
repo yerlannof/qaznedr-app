@@ -10,7 +10,7 @@ it('subscribes to the filters on screen', async () => {
       fetcher={fetcher as unknown as typeof fetch}
     />
   );
-  fireEvent.change(screen.getByLabelText(/Пришлём письмо/), {
+  fireEvent.change(screen.getByLabelText('Электронная почта'), {
     target: { value: 'a@mail.kz' },
   });
   fireEvent.click(screen.getByRole('button', { name: 'Подписаться' }));

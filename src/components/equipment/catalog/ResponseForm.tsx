@@ -6,7 +6,7 @@ import { translate } from '@/lib/i18n/translations';
 
 type Status = 'idle' | 'sending' | 'sent';
 const inputClass =
-  'brand-focus mt-1 min-h-11 w-full rounded border border-brand-line bg-brand-bg px-3 py-2 text-brand-ink';
+  'brand-focus mt-1.5 min-h-12 w-full rounded-none border border-brand-line bg-brand-bg px-3.5 py-2.5 text-base text-brand-ink';
 
 /** "Предложить" under a published request: the author receives the contact. */
 export default function ResponseForm({
@@ -25,7 +25,7 @@ export default function ResponseForm({
 
   if (status === 'sent')
     return (
-      <p role="status" className="border-l-4 border-brand-accent p-3">
+      <p role="status" className="bg-brand-surface p-[22px]">
         {t('sent')}
       </p>
     );
@@ -62,7 +62,7 @@ export default function ResponseForm({
     setStatus('idle');
   };
   const field = (name: keyof typeof form, type = 'text') => (
-    <label className="block text-sm font-semibold">
+    <label className="block text-[13px] font-medium">
       {t(name)}
       {name === 'message' ? (
         <textarea
@@ -91,8 +91,8 @@ export default function ResponseForm({
   );
 
   return (
-    <form onSubmit={submit} className="space-y-3">
-      <h2 className="font-semibold">{t('title')}</h2>
+    <form onSubmit={submit} className="grid gap-3.5 bg-brand-surface p-[22px]">
+      <h2 className="text-xl font-normal tracking-[-0.015em]">{t('title')}</h2>
       <p className="text-sm text-brand-muted">{t('text')}</p>
       {field('name')}
       {field('phone', 'tel')}

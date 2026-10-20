@@ -41,33 +41,43 @@ export default function SubscriptionAction({ locale }: { locale: string }) {
   };
 
   return (
-    <section className="brand-container max-w-2xl py-16">
-      <h1 className="holding-title">{t('pageTitle')}</h1>
-      {result === 'invalid' ? (
-        <p role="alert" className="mt-4">
-          {t('linkInvalid')}
-        </p>
-      ) : result === 'done' ? (
-        <p role="status" className="mt-4">
-          {t(action === 'confirm' ? 'confirmed' : 'unsubscribed')}
-        </p>
-      ) : (
-        action && (
-          <button
-            type="button"
-            onClick={() => void run()}
-            className="brand-button brand-focus mt-8"
+    <section className="brand-container grid max-w-2xl gap-4 pb-16 pt-10 md:pt-14">
+      <h1 className="text-[32px] font-light leading-[1.04] tracking-[-0.025em] sm:text-[40px] lg:text-[48px]">
+        {t('pageTitle')}
+      </h1>
+      <div className="mt-4 grid max-w-md gap-3.5 bg-brand-surface p-[22px]">
+        {result === 'invalid' ? (
+          <p
+            role="alert"
+            className="border-l-2 border-brand-bad pl-3 text-[15px]"
           >
-            {t(action === 'confirm' ? 'confirmButton' : 'unsubscribeButton')}
-          </button>
-        )
-      )}
-      <Link
-        href={`/${locale}/equipment`}
-        className="brand-focus mt-8 block underline"
-      >
-        {translate(locale, 'equipmentCatalog.backToCatalog')}
-      </Link>
+            {t('linkInvalid')}
+          </p>
+        ) : result === 'done' ? (
+          <p
+            role="status"
+            className="border-l-2 border-brand-ok pl-3 text-[15px]"
+          >
+            {t(action === 'confirm' ? 'confirmed' : 'unsubscribed')}
+          </p>
+        ) : (
+          action && (
+            <button
+              type="button"
+              onClick={() => void run()}
+              className={`${action === 'confirm' ? 'brand-button' : 'brand-button-secondary'} brand-focus w-full`}
+            >
+              {t(action === 'confirm' ? 'confirmButton' : 'unsubscribeButton')}
+            </button>
+          )
+        )}
+        <Link
+          href={`/${locale}/equipment`}
+          className="brand-focus inline-flex min-h-11 items-center justify-self-start text-[15px] underline decoration-brand-line underline-offset-4"
+        >
+          {translate(locale, 'equipmentCatalog.backToCatalog')}
+        </Link>
+      </div>
     </section>
   );
 }

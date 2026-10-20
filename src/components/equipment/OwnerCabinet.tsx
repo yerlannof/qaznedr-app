@@ -5,7 +5,17 @@ import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import MarketplaceSignIn from './MarketplaceSignIn';
 import CompanyProfileEditor from './CompanyProfileEditor';
-import { LayoutGrid, List, Loader2, MessageCircle, Plus } from 'lucide-react';
+import {
+  Archive,
+  Copy,
+  LayoutGrid,
+  List,
+  Loader2,
+  LogOut,
+  MessageCircle,
+  Plus,
+  ShieldCheck,
+} from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import { regionLabel } from '@/lib/data/filter-config';
 import { whatsappLink } from '@/lib/config/contacts';
@@ -26,16 +36,25 @@ type Profile = {
 // Same keys as EquipmentIntake: the intake opens whichever draft id is bound here.
 const draftKey = (ownerId: string) => `qaznedr:equipment-draft:${ownerId}`;
 const viewKey = 'qaznedr:equipment-cabinet:view';
+// Status differs by colour and by form: a dot in a 1 px frame, dashed for drafts.
 const STATUS_CLASS: Record<Status, string> = {
-  DRAFT: 'border-brand-line text-brand-muted',
-  PENDING_MODERATION:
-    'border-amber-700 text-amber-800 dark:border-amber-300 dark:text-amber-200',
-  ACTIVE: 'border-brand-accent bg-brand-accent text-brand-slate',
-  REJECTED: 'border-red-700 text-red-700 dark:border-red-300 dark:text-red-300',
-  ARCHIVED: 'border-brand-line text-brand-muted',
+  DRAFT: 'border-dashed text-brand-muted',
+  PENDING_MODERATION: 'text-brand-warn',
+  ACTIVE: 'text-brand-ok',
+  REJECTED: 'text-brand-bad',
+  ARCHIVED: 'text-brand-muted',
 };
+const primary = 'brand-button brand-focus min-h-11 px-3.5 text-sm';
+const ghost = 'brand-button-secondary brand-focus min-h-11 px-3.5 text-sm';
 
-function Thumb({ listing }: { listing: EquipmentListing }) {
+function Thumb({
+  listing,
+  label,
+}: {
+  listing: EquipmentListing;
+  /** Shown on the dark strip when the listing has no photo. */
+  label: string;
+}) {
   const [state, setState] = useState<{ cover: string | null; count: number }>();
   useEffect(() => {
     let live = true;
@@ -51,7 +70,12 @@ function Thumb({ listing }: { listing: EquipmentListing }) {
       live = false;
     };
   }, [listing.id, listing.revision]);
-  if (!state?.cover) return <div className="h-full min-h-24 bg-brand-bg" />;
+  if (!state?.cover)
+    return (
+      <div className="flex h-full items-end bg-brand-deep p-4 text-[13px] text-brand-chalk/75">
+        {label}
+      </div>
+    );
   return (
     // Private owner photo served by an authenticated route; not for next/image caching.
     // eslint-disable-next-line @next/next/no-img-element
@@ -259,10 +283,15 @@ export default function OwnerCabinet({
 
   if (authStatus !== 'authenticated')
     return (
-      <section className="brand-container max-w-2xl py-16">
-        <h1 className="holding-title">{t('signInTitle')}</h1>
-        <p className="mt-4 text-brand-muted">{t('signInText')}</p>
-        <div className="mt-8">
+      <section className="brand-container grid max-w-2xl gap-4 pb-16 pt-10 md:pt-14">
+        <p className="holding-eyebrow text-brand-muted">{t('eyebrow')}</p>
+        <h1 className="text-[34px] font-light leading-[1.04] tracking-[-0.025em] sm:text-[44px] lg:text-[52px]">
+          {t('signInTitle')}
+        </h1>
+        <p className="max-w-[58ch] text-[17px] text-brand-muted">
+          {t('signInText')}
+        </p>
+        <div className="mt-4">
           <MarketplaceSignIn
             locale={locale}
             googleEnabled={googleEnabled}
@@ -289,53 +318,41 @@ export default function OwnerCabinet({
       .filter(Boolean)
       .join(' · ');
 
-  return (
-    <div className="brand-container py-10 lg:py-14">
-      <nav aria-label={t('eyebrow')} className="flex flex-wrap gap-2">
-        <Link
-          href={`/${locale}/equipment`}
-          className="brand-button-secondary brand-focus"
-        >
-          {translate(locale, 'equipmentCatalog.tabCatalog')}
-        </Link>
-        <button
-          type="button"
-          onClick={() => openInIntake(null)}
-          className="brand-button-secondary brand-focus"
-        >
-          {translate(locale, 'equipmentCatalog.tabSubmit')}
-        </button>
-        <span
-          aria-current="page"
-          className="inline-flex min-h-11 items-center rounded border border-brand-ink bg-brand-ink px-5 font-semibold text-brand-bg"
-        >
-          {t('tab')}
-        </span>
-      </nav>
+  const stripLabel = (listing: EquipmentListing) =>
+    listing.status === 'DRAFT'
+      ? t('status_DRAFT')
+      : [
+          listing.data.category ? intake(listing.data.category) : null,
+          listing.data.offerType ? intake(listing.data.offerType) : null,
+        ]
+          .filter(Boolean)
+          .join(' · ');
 
-      <div className="mt-10 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-brand-muted">
-            {t('eyebrow')}
-          </p>
-          <h1 className="holding-title mt-3">{t('title')}</h1>
+  return (
+    <div className="brand-container pb-16">
+      <div className="flex flex-wrap items-end justify-between gap-4 pb-7 pt-10 md:pb-9 md:pt-14">
+        <div className="grid min-w-0 gap-3">
+          <p className="holding-eyebrow text-brand-muted">{t('eyebrow')}</p>
+          <h1 className="text-[34px] font-light leading-[1.04] tracking-[-0.025em] sm:text-[44px] lg:text-[52px]">
+            {t('title')}
+          </h1>
         </div>
         <button
           type="button"
           onClick={() => openInIntake(null)}
           className="brand-button brand-focus"
         >
-          <Plus aria-hidden className="size-4" />
+          <Plus aria-hidden className="size-[18px]" strokeWidth={1.6} />
           {t('new').replace(/^\+\s*/, '')}
         </button>
       </div>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_20rem] lg:items-start">
-        <section aria-label={t('title')}>
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start lg:gap-14">
+        <section aria-label={t('title')} className="grid min-w-0 gap-5">
           <div
             role="group"
             aria-label={t('title')}
-            className="flex flex-wrap gap-2 border-b border-brand-line pb-4"
+            className="-mx-1 flex gap-2 overflow-x-auto px-1 [scrollbar-width:none]"
           >
             {(['ALL', ...EQUIPMENT_STATUSES] as Filter[]).map((item) => (
               <button
@@ -343,20 +360,21 @@ export default function OwnerCabinet({
                 type="button"
                 aria-pressed={filter === item}
                 onClick={() => setFilter(item)}
-                className={`min-h-11 rounded border px-3 ${filter === item ? 'border-brand-ink bg-brand-ink text-brand-bg' : 'border-brand-line bg-brand-surface'}`}
+                className={`brand-focus inline-flex min-h-11 flex-none items-center gap-2 border px-[18px] text-[15px] ${filter === item ? 'border-brand-ink bg-brand-ink text-brand-bg' : 'border-brand-hair bg-transparent'}`}
               >
-                {item === 'ALL' ? t('all') : t(item)} <b>{counts[item]}</b>
+                {item === 'ALL' ? t('all') : t(item)}{' '}
+                <small className="text-xs opacity-65">{counts[item]}</small>
               </button>
             ))}
           </div>
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-            <span className="text-sm text-brand-muted">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="text-[13px] text-brand-muted">
               {t('shown', { count: shown.length })}
             </span>
             <div
               role="group"
               aria-label={t('view')}
-              className="inline-flex overflow-hidden rounded border border-brand-line"
+              className="inline-flex border border-brand-hair"
             >
               {(['cards', 'list'] as const).map((item) => (
                 <button
@@ -364,12 +382,12 @@ export default function OwnerCabinet({
                   type="button"
                   aria-pressed={view === item}
                   onClick={() => switchView(item)}
-                  className={`inline-flex min-h-11 items-center gap-2 px-3 ${view === item ? 'bg-brand-ink text-brand-bg' : 'bg-brand-surface'}`}
+                  className={`brand-focus inline-flex min-h-11 items-center gap-2 px-3.5 text-[13px] ${view === item ? 'bg-brand-ink text-brand-bg' : 'bg-transparent'}`}
                 >
                   {item === 'cards' ? (
-                    <LayoutGrid aria-hidden size={16} />
+                    <LayoutGrid aria-hidden size={16} strokeWidth={1.6} />
                   ) : (
-                    <List aria-hidden size={16} />
+                    <List aria-hidden size={16} strokeWidth={1.6} />
                   )}
                   {item === 'cards' ? t('viewCards') : t('viewList')}
                 </button>
@@ -377,204 +395,145 @@ export default function OwnerCabinet({
             </div>
           </div>
           {error && (
-            <p role="alert" className="mt-4 text-red-700 dark:text-red-300">
+            <p role="alert" className="text-sm font-medium text-brand-bad">
               {error}
             </p>
           )}
           {listings === null ? (
-            <p className="mt-8 flex items-center gap-2 text-brand-muted">
+            <p className="flex items-center gap-2 text-brand-muted">
               <Loader2 aria-hidden className="animate-spin" size={18} />
             </p>
           ) : shown.length === 0 ? (
-            <div className="mt-6 grid justify-items-center gap-4 border border-dashed border-brand-line p-8 text-center">
-              <p>{listings.length ? t('empty') : t('emptyAll')}</p>
+            <div className="grid justify-items-start gap-4 bg-brand-surface p-6 md:p-8">
+              <p className="text-[17px]">
+                {listings.length ? t('empty') : t('emptyAll')}
+              </p>
               <button
                 type="button"
                 onClick={() => openInIntake(null)}
                 className="brand-button brand-focus"
               >
-                {t('new')}
+                <Plus aria-hidden className="size-[18px]" strokeWidth={1.6} />
+                {t('new').replace(/^\+\s*/, '')}
               </button>
             </div>
           ) : (
             <ul
-              className={`mt-4 grid gap-4 ${view === 'cards' ? 'sm:grid-cols-2' : ''}`}
+              className={`grid gap-5 ${view === 'cards' ? 'md:grid-cols-2' : ''}`}
             >
               {shown.map((listing) => {
                 const listingMarks = marks[listing.id] ?? [];
+                const listingStats = stats[listing.id];
                 return (
                   <li
                     key={listing.id}
-                    className={`grid border border-brand-line bg-brand-surface ${view === 'list' ? 'sm:grid-cols-[8.5rem_1fr]' : 'grid-rows-[auto_1fr]'}`}
+                    className={`flex min-w-0 bg-brand-surface ${view === 'list' ? 'flex-col sm:grid sm:grid-cols-[8.5rem_minmax(0,1fr)]' : 'flex-col'}`}
                   >
                     <div
-                      className={view === 'cards' ? 'aspect-[4/3]' : 'min-h-24'}
+                      className={`overflow-hidden ${view === 'cards' ? 'aspect-[16/7]' : 'aspect-[16/7] sm:aspect-auto sm:min-h-28'}`}
                     >
-                      <Thumb listing={listing} />
+                      <Thumb listing={listing} label={stripLabel(listing)} />
                     </div>
-                    <div className="flex flex-col gap-2 p-5">
-                      <div
-                        className={`flex gap-2 ${view === 'cards' ? 'flex-col-reverse items-start' : 'flex-wrap items-center justify-between'}`}
+                    <div className="flex min-w-0 flex-1 flex-col gap-3 p-[18px]">
+                      <span
+                        className={`inline-flex items-center gap-1.5 self-start border border-current px-[9px] py-1 text-xs font-medium ${STATUS_CLASS[listing.status]}`}
                       >
-                        <h2 className="text-lg font-semibold">
-                          {listing.data.title || t('untitled')}
-                        </h2>
                         <span
-                          className={`whitespace-nowrap rounded-sm border px-2 py-0.5 text-xs font-semibold uppercase tracking-wide ${STATUS_CLASS[listing.status]}`}
-                        >
-                          {t(`status_${listing.status}`)}
-                        </span>
-                      </div>
-                      <p className="text-sm text-brand-muted">
+                          aria-hidden
+                          className="size-[7px] rounded-full bg-current"
+                        />
+                        {t(`status_${listing.status}`)}
+                      </span>
+                      <h2 className="text-[19px] font-normal leading-[1.3] tracking-[-0.01em]">
+                        {listing.data.title || t('untitled')}
+                      </h2>
+                      <p className="text-[13px] text-brand-muted">
                         {tagline(listing)}
                       </p>
                       {listing.status === 'REJECTED' &&
                         listing.moderationNotes && (
-                          <div className="border-l-4 border-red-700 bg-brand-bg p-3 text-sm dark:border-red-300">
-                            <strong className="block">
+                          <div className="border-l-2 border-brand-bad pl-3 text-sm">
+                            <strong className="block text-[13px] font-medium text-brand-bad">
                               {t('reasonTitle')}
                             </strong>
                             {listing.moderationNotes}
                           </div>
                         )}
                       {listing.status === 'PENDING_MODERATION' && (
-                        <div className="border-l-4 border-amber-700 bg-brand-bg p-3 text-sm dark:border-amber-300">
-                          <strong className="block">{t('pendingTitle')}</strong>
+                        <div className="border-l-2 border-brand-warn pl-3 text-sm text-brand-muted">
+                          <strong className="block text-[13px] font-medium text-brand-warn">
+                            {t('pendingTitle')}
+                          </strong>
                           {t('pendingText')}
+                        </div>
+                      )}
+                      {listing.status === 'ACTIVE' && (
+                        <div className="grid grid-cols-2 gap-px bg-brand-hair">
+                          <div className="grid bg-brand-surface py-3">
+                            <b className="text-[26px] font-light leading-[1.1] tabular-nums">
+                              {listingStats?.views ?? 0}
+                            </b>
+                            <span className="text-xs text-brand-muted">
+                              {t('statViews')}
+                            </span>
+                          </div>
+                          <div className="grid bg-brand-surface py-3 pl-3.5">
+                            <b className="text-[26px] font-light leading-[1.1] tabular-nums">
+                              {listingStats?.contacts ?? 0}
+                            </b>
+                            <span className="text-xs text-brand-muted">
+                              {t('statContacts')}
+                            </span>
+                          </div>
                         </div>
                       )}
                       {listing.status === 'ACTIVE' &&
                         listingMarks.length > 0 && (
-                          <p className="text-sm text-brand-muted">
-                            {listingMarks
-                              .map(
-                                (row) =>
-                                  `${t(`trust_${row.mark}`)} ${formatDate(row.setAt)}`
-                              )
-                              .join(' · ')}
-                          </p>
-                        )}
-                      <div className="mt-auto flex flex-wrap items-center gap-2 pt-2">
-                        {listing.status === 'DRAFT' && (
-                          <button
-                            type="button"
-                            onClick={() => openInIntake(listing.id)}
-                            className="brand-button brand-focus"
-                          >
-                            {t('continue')}
-                          </button>
-                        )}
-                        {listing.status === 'REJECTED' && (
-                          <button
-                            type="button"
-                            onClick={() => openInIntake(listing.id)}
-                            className="brand-button brand-focus"
-                          >
-                            {t('fix')}
-                          </button>
-                        )}
-                        {listing.status === 'PENDING_MODERATION' && (
-                          <button
-                            type="button"
-                            onClick={() => openInIntake(listing.id)}
-                            className="brand-button-secondary brand-focus"
-                          >
-                            {t('view_listing')}
-                          </button>
-                        )}
-                        {listing.status === 'ACTIVE' && (
-                          <>
-                            <Link
-                              href={`/${locale}/equipment/${listing.id}`}
-                              className="brand-button-secondary brand-focus"
-                            >
-                              {t('open')}
-                            </Link>
-                            <button
-                              type="button"
-                              onClick={() => openInIntake(listing.id, true)}
-                              className="brand-button-secondary brand-focus"
-                            >
-                              {t('edit')}
-                            </button>
-                          </>
-                        )}
-                        <button
-                          type="button"
-                          disabled={busy}
-                          onClick={() => void duplicate(listing)}
-                          className="min-h-11 px-2 text-sm font-semibold underline"
-                        >
-                          {t('duplicate')}
-                        </button>
-                        {listing.status !== 'ARCHIVED' &&
-                          (confirming === listing.id ? (
-                            <span className="flex flex-wrap items-center gap-2 text-sm">
-                              {t('confirmArchive')}
-                              <button
-                                type="button"
-                                disabled={busy}
-                                onClick={() => void archive(listing)}
-                                className="brand-button-secondary brand-focus"
+                          <ul className="grid gap-2.5">
+                            {listingMarks.map((row) => (
+                              <li
+                                key={row.mark}
+                                className="flex items-center gap-2.5 text-sm"
                               >
-                                {t('confirmYes')}
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => setConfirming(null)}
-                                className="min-h-11 px-2 underline"
-                              >
-                                {t('confirmNo')}
-                              </button>
-                            </span>
-                          ) : (
-                            <button
-                              type="button"
-                              onClick={() => setConfirming(listing.id)}
-                              className="min-h-11 px-2 text-sm font-semibold underline"
-                            >
-                              {listing.status === 'ACTIVE'
-                                ? t('unpublish')
-                                : t('archive')}
-                            </button>
-                          ))}
-                      </div>
-                      {listing.status === 'ACTIVE' && (
-                        <p className="text-sm text-brand-muted">
-                          {t('editNote')}
-                        </p>
-                      )}
-                      {listing.status === 'ACTIVE' && (
-                        <p className="text-sm font-semibold">
-                          {t('stats', {
-                            views: stats[listing.id]?.views ?? 0,
-                            contacts: stats[listing.id]?.contacts ?? 0,
-                          })}
-                        </p>
-                      )}
+                                <ShieldCheck
+                                  aria-hidden
+                                  className="size-[18px] flex-none text-brand-ok"
+                                  strokeWidth={1.6}
+                                />
+                                {t(`trust_${row.mark}`)}
+                                <time
+                                  dateTime={row.setAt}
+                                  className="ml-auto whitespace-nowrap text-[13px] text-brand-muted"
+                                >
+                                  {formatDate(row.setAt)}
+                                </time>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       {listing.data.offerType === 'WANTED' &&
                         listing.status === 'ACTIVE' && (
                           <details
-                            className="border-t border-brand-line pt-2"
+                            className="border-t border-brand-hair pt-1"
                             open={(responses[listing.id]?.length ?? 0) > 0}
                           >
-                            <summary className="min-h-11 cursor-pointer py-2 font-semibold">
+                            <summary className="brand-focus flex min-h-11 cursor-pointer items-center text-xs font-medium uppercase tracking-[0.14em] text-brand-muted">
                               {t('responses', {
                                 count: responses[listing.id]?.length ?? 0,
                               })}
                             </summary>
                             {responses[listing.id]?.length ? (
-                              <ul className="space-y-3">
+                              <ul className="grid gap-2">
                                 {responses[listing.id].map((row) => (
                                   <li
                                     key={row.id}
-                                    className="border-l-4 border-brand-accent pl-3 text-sm"
+                                    className="grid gap-0.5 bg-brand-bg px-3.5 py-3 text-sm"
                                   >
-                                    <p className="font-semibold">
+                                    <p className="font-medium">
                                       {row.name} ·{' '}
                                       <a
                                         href={`tel:${row.phone}`}
-                                        className="underline"
+                                        className="brand-focus underline underline-offset-4"
                                       >
                                         {row.phone}
                                       </a>
@@ -582,9 +541,9 @@ export default function OwnerCabinet({
                                     <p className="whitespace-pre-line">
                                       {row.message}
                                     </p>
-                                    <p className="text-brand-muted">
+                                    <small className="text-brand-muted">
                                       {formatDate(row.createdAt)}
-                                    </p>
+                                    </small>
                                   </li>
                                 ))}
                               </ul>
@@ -595,6 +554,108 @@ export default function OwnerCabinet({
                             )}
                           </details>
                         )}
+                      <div className="mt-auto flex flex-wrap items-center gap-2 pt-1">
+                        {listing.status === 'DRAFT' && (
+                          <button
+                            type="button"
+                            onClick={() => openInIntake(listing.id)}
+                            className={primary}
+                          >
+                            {t('continue')}
+                          </button>
+                        )}
+                        {listing.status === 'REJECTED' && (
+                          <button
+                            type="button"
+                            onClick={() => openInIntake(listing.id)}
+                            className={primary}
+                          >
+                            {t('fix')}
+                          </button>
+                        )}
+                        {listing.status === 'PENDING_MODERATION' && (
+                          <button
+                            type="button"
+                            onClick={() => openInIntake(listing.id)}
+                            className={ghost}
+                          >
+                            {t('view_listing')}
+                          </button>
+                        )}
+                        {listing.status === 'ACTIVE' && (
+                          <>
+                            <Link
+                              href={`/${locale}/equipment/${listing.id}`}
+                              className={ghost}
+                            >
+                              {t('open')}
+                            </Link>
+                            <button
+                              type="button"
+                              onClick={() => openInIntake(listing.id, true)}
+                              className={ghost}
+                            >
+                              {t('edit')}
+                            </button>
+                          </>
+                        )}
+                        <button
+                          type="button"
+                          disabled={busy}
+                          onClick={() => void duplicate(listing)}
+                          className={ghost}
+                        >
+                          <Copy
+                            aria-hidden
+                            className="size-4"
+                            strokeWidth={1.6}
+                          />
+                          {t('duplicate')}
+                        </button>
+                        {listing.status !== 'ARCHIVED' &&
+                          (confirming === listing.id ? (
+                            <span className="flex w-full flex-wrap items-center gap-2 text-sm">
+                              {t('confirmArchive')}
+                              <button
+                                type="button"
+                                disabled={busy}
+                                onClick={() => void archive(listing)}
+                                className={ghost}
+                              >
+                                {t('confirmYes')}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setConfirming(null)}
+                                className="brand-focus min-h-11 px-2 underline underline-offset-4"
+                              >
+                                {t('confirmNo')}
+                              </button>
+                            </span>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => setConfirming(listing.id)}
+                              className={ghost}
+                            >
+                              {listing.status !== 'ACTIVE' && (
+                                <Archive
+                                  aria-hidden
+                                  className="size-4"
+                                  strokeWidth={1.6}
+                                />
+                              )}
+                              {listing.status === 'ACTIVE'
+                                ? t('unpublish')
+                                : t('archive')}
+                            </button>
+                          ))}
+                      </div>
+                      {listing.status === 'ACTIVE' && (
+                        <p className="text-[13px] text-brand-muted">
+                          {t('editNote')}
+                        </p>
+                      )}
                     </div>
                   </li>
                 );
@@ -603,14 +664,17 @@ export default function OwnerCabinet({
           )}
         </section>
 
-        <aside className="space-y-4">
-          <div className="space-y-3 border border-brand-line bg-brand-surface p-5">
-            <h2 className="font-semibold">{t('contactTitle')}</h2>
+        <aside className="grid content-start gap-3.5">
+          <div className="grid gap-3 bg-brand-surface p-[22px]">
+            <h2 className="text-[17px] font-medium">{t('contactTitle')}</h2>
             {editing ? (
-              <div className="space-y-3">
+              <div className="grid gap-3">
                 {(['full_name', 'company_name', 'phone'] as const).map(
                   (field) => (
-                    <label key={field} className="block text-sm font-semibold">
+                    <label
+                      key={field}
+                      className="grid gap-1.5 text-[13px] font-medium"
+                    >
                       {t(
                         field === 'full_name'
                           ? 'name'
@@ -619,7 +683,7 @@ export default function OwnerCabinet({
                             : 'phone'
                       )}
                       <input
-                        className="mt-1 min-h-11 w-full rounded border border-brand-line bg-brand-bg px-3"
+                        className="brand-focus min-h-12 w-full rounded-none border border-brand-line bg-brand-bg px-3.5 text-base font-normal"
                         value={contact[field]}
                         onChange={(event) =>
                           setContact((old) => ({
@@ -631,19 +695,19 @@ export default function OwnerCabinet({
                     </label>
                   )
                 )}
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <button
                     type="button"
                     disabled={busy || !contact.full_name.trim()}
                     onClick={() => void saveContact()}
-                    className="brand-button brand-focus"
+                    className={primary}
                   >
                     {t('save')}
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditing(false)}
-                    className="brand-button-secondary brand-focus"
+                    className={ghost}
                   >
                     {t('cancel')}
                   </button>
@@ -651,17 +715,24 @@ export default function OwnerCabinet({
               </div>
             ) : (
               <>
-                <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
-                  <dt className="text-brand-muted">{t('name')}</dt>
-                  <dd>{profile?.full_name || '—'}</dd>
-                  <dt className="text-brand-muted">{t('company')}</dt>
-                  <dd>{profile?.company_name || '—'}</dd>
-                  <dt className="text-brand-muted">{t('phone')}</dt>
-                  <dd>{profile?.phone || '—'}</dd>
-                  <dt className="text-brand-muted">{t('login')}</dt>
-                  <dd className="break-all">
-                    Google · {profile?.email || session?.user?.email}
-                  </dd>
+                <dl className="grid">
+                  {[
+                    [t('name'), profile?.full_name || '—'],
+                    [t('company'), profile?.company_name || '—'],
+                    [t('phone'), profile?.phone || '—'],
+                    [
+                      t('login'),
+                      `Google · ${profile?.email || session?.user?.email || ''}`,
+                    ],
+                  ].map(([term, value]) => (
+                    <div
+                      key={term}
+                      className="grid grid-cols-[minmax(5.5rem,40%)_minmax(0,1fr)] gap-3 border-b border-brand-hair py-3 text-[15px]"
+                    >
+                      <dt className="text-brand-muted">{term}</dt>
+                      <dd className="break-words tabular-nums">{value}</dd>
+                    </div>
+                  ))}
                 </dl>
                 <button
                   type="button"
@@ -673,7 +744,7 @@ export default function OwnerCabinet({
                     });
                     setEditing(true);
                   }}
-                  className="brand-button-secondary brand-focus w-full justify-center"
+                  className={`${ghost} justify-self-start`}
                 >
                   {t('editContact')}
                 </button>
@@ -683,31 +754,34 @@ export default function OwnerCabinet({
           </div>
           <CompanyProfileEditor locale={locale} />
           {whatsappNumber && (
-            <div className="space-y-3 border border-brand-line bg-brand-surface p-5">
-              <h2 className="font-semibold">{t('helpTitle')}</h2>
+            <div className="grid gap-3 bg-brand-surface p-[22px]">
+              <h2 className="text-[17px] font-medium">{t('helpTitle')}</h2>
               <p className="text-sm text-brand-muted">{t('helpText')}</p>
               <a
                 href={whatsappLink(whatsappNumber, t('helpMessage'))}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="brand-button-secondary brand-focus w-full justify-center"
+                className={`${ghost} justify-self-start`}
               >
-                <MessageCircle aria-hidden className="size-4" />
+                <MessageCircle
+                  aria-hidden
+                  className="size-[18px]"
+                  strokeWidth={1.6}
+                />
                 {t('helpButton')}
               </a>
             </div>
           )}
-          <div className="border border-brand-line bg-brand-surface p-5 text-center">
-            <button
-              type="button"
-              onClick={() =>
-                void signOut({ callbackUrl: `/${locale}/equipment` })
-              }
-              className="min-h-11 font-semibold underline"
-            >
-              {t('signOut')}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() =>
+              void signOut({ callbackUrl: `/${locale}/equipment` })
+            }
+            className="brand-focus inline-flex min-h-11 items-center gap-1.5 justify-self-start text-[15px] underline decoration-brand-line underline-offset-4"
+          >
+            <LogOut aria-hidden className="size-4" strokeWidth={1.6} />
+            {t('signOut')}
+          </button>
         </aside>
       </div>
     </div>

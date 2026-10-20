@@ -94,7 +94,7 @@ function Photos({ listing }: { listing: EquipmentListing }) {
           key={imageId}
           src={`/api/admin/equipment-listings/${listing.id}/images/${imageId}?expectedRevision=${listing.revision}`}
           alt=""
-          className="aspect-square w-full rounded border border-brand-line object-cover"
+          className="aspect-square w-full object-cover"
         />
       ))}
     </div>
@@ -156,10 +156,16 @@ export default function AdminEquipmentPage() {
 
   if (forbidden)
     return (
-      <main className="mx-auto max-w-3xl px-5 pb-24 pt-32 text-center text-brand-ink">
+      <main className="brand-container max-w-3xl pb-24 pt-32 text-center text-brand-ink">
         <Navigation />
-        <ShieldCheck aria-hidden className="mx-auto mb-4 h-10 w-10" />
-        <h1 className="font-serif text-3xl">Доступ запрещён</h1>
+        <ShieldCheck
+          aria-hidden
+          className="mx-auto mb-4 h-10 w-10 text-brand-muted"
+          strokeWidth={1.4}
+        />
+        <h1 className="text-[32px] font-light tracking-[-0.025em]">
+          Доступ запрещён
+        </h1>
         <p className="mt-2 text-brand-muted">
           Страница доступна модераторам объявлений.
         </p>
@@ -167,26 +173,31 @@ export default function AdminEquipmentPage() {
     );
 
   return (
-    <main className="mx-auto max-w-5xl px-5 pb-10 pt-28 text-brand-ink">
+    <main className="brand-container max-w-5xl pb-16 pt-28 text-brand-ink">
       <Navigation />
       <Link
         href={`/${locale}/admin`}
-        className="inline-flex min-h-11 items-center gap-2 text-sm text-brand-muted"
+        className="brand-focus inline-flex min-h-11 items-center gap-1.5 text-sm text-brand-muted"
       >
         <ArrowLeft aria-hidden size={16} /> Админка
       </Link>
-      <h1 className="mt-2 font-serif text-4xl">Модерация техники и услуг</h1>
-      <p className="mt-2 text-brand-muted">
+      <h1 className="mt-2 text-[32px] font-light leading-[1.04] tracking-[-0.025em] sm:text-[40px] lg:text-[48px]">
+        Модерация техники и услуг
+      </h1>
+      <p className="mt-3 max-w-[58ch] text-[17px] text-brand-muted">
         Автопроверка только подсказывает. Решение принимает модератор.
       </p>
-      <div role="tablist" className="mt-6 flex flex-wrap gap-2">
+      <div
+        role="tablist"
+        className="-mx-1 mt-7 flex gap-2 overflow-x-auto px-1 [scrollbar-width:none]"
+      >
         {(['PENDING', 'ACTIVE', 'COMPANIES'] as Tab[]).map((item) => (
           <button
             key={item}
             role="tab"
             aria-selected={tab === item}
             onClick={() => setTab(item)}
-            className={`min-h-11 rounded border px-4 font-semibold ${tab === item ? 'border-brand-ink bg-brand-ink text-brand-bg' : 'border-brand-line'}`}
+            className={`brand-focus inline-flex min-h-11 flex-none items-center border px-[18px] text-[15px] ${tab === item ? 'border-brand-ink bg-brand-ink text-brand-bg' : 'border-brand-hair'}`}
           >
             {item === 'PENDING'
               ? 'На проверке'
@@ -197,7 +208,7 @@ export default function AdminEquipmentPage() {
         ))}
       </div>
       {error && (
-        <p role="alert" className="mt-4 text-red-700 dark:text-red-300">
+        <p role="alert" className="mt-4 text-sm font-medium text-brand-bad">
           {error}
         </p>
       )}
@@ -214,7 +225,7 @@ export default function AdminEquipmentPage() {
             : 'Опубликованных объявлений пока нет.'}
         </p>
       ) : (
-        <ul className="mt-6 space-y-6">
+        <ul className="mt-7 grid gap-5">
           {payload.data.map((listing) => {
             const check = payload.prechecks[listing.id];
             const marks = new Set(
@@ -224,20 +235,22 @@ export default function AdminEquipmentPage() {
             return (
               <li
                 key={listing.id}
-                className="space-y-4 rounded border border-brand-line bg-brand-surface p-5"
+                className="grid gap-4 bg-brand-surface p-5 md:p-6"
               >
                 <div>
-                  <p className="text-sm text-brand-muted">
+                  <p className="text-[13px] text-brand-muted">
                     {show('category', listing.data.category)} ·{' '}
                     {show('offerType', listing.data.offerType)}
                   </p>
-                  <h2 className="font-serif text-2xl">{listing.data.title}</h2>
+                  <h2 className="mt-1 text-[22px] font-normal leading-[1.25] tracking-[-0.015em]">
+                    {listing.data.title}
+                  </h2>
                 </div>
                 {check && (
                   <div
-                    className={`rounded border p-3 text-sm ${check.verdict === 'OK' ? 'border-brand-line' : 'border-amber-600'}`}
+                    className={`border-l-2 bg-brand-bg px-3 py-2.5 text-[13px] ${check.verdict === 'OK' ? 'border-brand-ok' : 'border-brand-warn'}`}
                   >
-                    <p className="font-semibold">
+                    <p className="font-medium">
                       Автопроверка: {VERDICTS[check.verdict]}
                       {check.model === 'rules' ? ' (правила, без ИИ)' : ''}
                     </p>
@@ -251,7 +264,7 @@ export default function AdminEquipmentPage() {
                     {check.summary && <p className="mt-1">{check.summary}</p>}
                   </div>
                 )}
-                <dl className="grid gap-x-4 gap-y-1 text-sm sm:grid-cols-[14rem_1fr]">
+                <dl className="grid gap-x-4 text-sm sm:grid-cols-[14rem_1fr] [&>div>*]:border-b [&>div>*]:border-brand-hair [&>div>*]:py-2">
                   {Object.entries(listing.data)
                     .filter(([key]) => !HIDDEN.has(key))
                     .map(([key, value]) => (
@@ -280,7 +293,7 @@ export default function AdminEquipmentPage() {
                 </dl>
                 <Photos listing={listing} />
                 <fieldset>
-                  <legend className="mb-1 text-sm font-semibold">
+                  <legend className="mb-1 text-[13px] font-medium">
                     Отметки доверия (видны клиентам с датой)
                   </legend>
                   <div className="flex flex-wrap gap-x-6">
@@ -290,6 +303,7 @@ export default function AdminEquipmentPage() {
                         className="flex min-h-11 items-center gap-2 text-sm"
                       >
                         <input
+                          className="size-5 accent-brand-accent"
                           type="checkbox"
                           checked={marks.has(mark)}
                           disabled={busy !== null}
@@ -307,11 +321,11 @@ export default function AdminEquipmentPage() {
                   </div>
                 </fieldset>
                 {listing.status === 'PENDING_MODERATION' && (
-                  <div className="space-y-3 border-t border-brand-line pt-4">
-                    <label className="block text-sm font-semibold">
+                  <div className="grid gap-3 border-t border-brand-hair pt-4">
+                    <label className="grid gap-1.5 text-[13px] font-medium">
                       Причина отказа (увидит автор)
                       <select
-                        className="mt-1 min-h-11 w-full rounded border border-brand-line bg-brand-bg px-3"
+                        className="brand-focus min-h-12 w-full rounded-none border border-brand-line bg-brand-bg px-3.5 text-base font-normal"
                         value=""
                         onChange={(event) =>
                           setReasons((old) => ({
@@ -328,7 +342,7 @@ export default function AdminEquipmentPage() {
                         ))}
                       </select>
                       <textarea
-                        className="mt-2 w-full rounded border border-brand-line bg-brand-bg px-3 py-2"
+                        className="brand-focus w-full rounded-none border border-brand-line bg-brand-bg px-3.5 py-3 text-base font-normal"
                         rows={2}
                         value={reason}
                         onChange={(event) =>
@@ -353,7 +367,7 @@ export default function AdminEquipmentPage() {
                             `${listing.id}:approve`
                           )
                         }
-                        className="inline-flex min-h-12 items-center gap-2 rounded bg-brand-accent px-6 font-semibold text-brand-slate disabled:opacity-50"
+                        className="brand-button brand-focus disabled:opacity-50"
                       >
                         <Check aria-hidden size={18} /> Опубликовать
                       </button>
@@ -371,7 +385,7 @@ export default function AdminEquipmentPage() {
                             `${listing.id}:reject`
                           )
                         }
-                        className="inline-flex min-h-12 items-center gap-2 rounded border border-brand-line px-6 font-semibold disabled:opacity-50"
+                        className="brand-button-secondary brand-focus disabled:opacity-50"
                       >
                         <X aria-hidden size={18} /> Отклонить
                       </button>

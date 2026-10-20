@@ -56,21 +56,21 @@ export default function CompanyModeration() {
 
   return (
     <section className="mt-6">
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         {(['PENDING', 'ACTIVE'] as View[]).map((item) => (
           <button
             key={item}
             type="button"
             aria-pressed={view === item}
             onClick={() => setView(item)}
-            className={`min-h-11 rounded border px-3 text-sm font-semibold ${view === item ? 'border-brand-ink' : 'border-brand-line text-brand-muted'}`}
+            className={`brand-focus inline-flex min-h-11 items-center border px-3.5 text-sm ${view === item ? 'border-brand-ink bg-brand-ink text-brand-bg' : 'border-brand-hair text-brand-muted'}`}
           >
             {item === 'PENDING' ? 'Ждут проверки' : 'Опубликованные'}
           </button>
         ))}
       </div>
       {error && (
-        <p role="alert" className="mt-4 text-red-700 dark:text-red-300">
+        <p role="alert" className="mt-4 text-sm font-medium text-brand-bad">
           {error}
         </p>
       )}
@@ -81,13 +81,15 @@ export default function CompanyModeration() {
       ) : !rows.length ? (
         <p className="mt-6 text-brand-muted">Профилей нет.</p>
       ) : (
-        <ul className="mt-6 space-y-4">
+        <ul className="mt-6 grid gap-4">
           {rows.map((company) => (
             <li
               key={company.ownerId}
-              className="space-y-2 rounded border border-brand-line bg-brand-surface p-5"
+              className="grid gap-2 bg-brand-surface p-5 md:p-6"
             >
-              <h2 className="text-xl font-semibold">{company.name}</h2>
+              <h2 className="text-[22px] font-normal leading-[1.25] tracking-[-0.015em]">
+                {company.name}
+              </h2>
               <p className="text-sm text-brand-muted">
                 {[company.city, company.website, `/${company.slug}`]
                   .filter(Boolean)
@@ -102,7 +104,7 @@ export default function CompanyModeration() {
                     type="button"
                     disabled={busy !== null}
                     onClick={() => void decide(company, 'ACTIVE')}
-                    className="inline-flex min-h-12 items-center gap-2 rounded bg-brand-accent px-6 font-semibold text-brand-slate disabled:opacity-50"
+                    className="brand-button brand-focus disabled:opacity-50"
                   >
                     <Check aria-hidden size={18} /> Опубликовать
                   </button>
@@ -111,7 +113,7 @@ export default function CompanyModeration() {
                   type="button"
                   disabled={busy !== null}
                   onClick={() => void decide(company, 'HIDDEN')}
-                  className="inline-flex min-h-12 items-center gap-2 rounded border border-brand-line px-6 font-semibold disabled:opacity-50"
+                  className="brand-button-secondary brand-focus disabled:opacity-50"
                 >
                   <EyeOff aria-hidden size={18} /> Скрыть
                 </button>

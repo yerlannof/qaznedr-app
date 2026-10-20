@@ -244,9 +244,13 @@ it('shows 30-day stats and responses to a request', async () => {
       : base(url, init)
   );
   render(<OwnerCabinet locale="ru" googleEnabled whatsappNumber={null} />);
+  // Big numbers with their labels (mockup 21).
   expect(
-    await screen.findByText('За 30 дней: просмотров 12, нажали «связаться» 3')
-  ).toBeInTheDocument();
+    (await screen.findAllByText('просмотров за 30 дней')).length
+  ).toBeGreaterThan(0);
+  expect(screen.getByText('12')).toBeInTheDocument();
+  expect(screen.getAllByText('нажали «связаться»').length).toBeGreaterThan(0);
+  expect(screen.getByText('3')).toBeInTheDocument();
   expect(screen.getByText('Отклики (1)')).toBeInTheDocument();
   expect(screen.getByRole('link', { name: '+77011234567' })).toHaveAttribute(
     'href',

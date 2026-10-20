@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { Loader2, Mail } from 'lucide-react';
+import { Loader2, LogIn, Mail } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
@@ -28,7 +28,14 @@ export default function MarketplaceSignIn({
   const [error, setError] = useState('');
 
   if (!googleEnabled && !emailEnabled)
-    return <p role="status">{t('unavailable')}</p>;
+    return (
+      <p
+        role="status"
+        className="max-w-md bg-brand-surface p-[22px] text-[15px]"
+      >
+        {t('unavailable')}
+      </p>
+    );
 
   const requestLink = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -57,50 +64,59 @@ export default function MarketplaceSignIn({
     setStatus('error');
   };
 
+  const consent = (
+    <p className="text-[13px] text-brand-muted">
+      {t('consentBefore')}
+      <a
+        href={`/${locale}/legal/privacy`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="brand-focus underline underline-offset-4"
+      >
+        {t('consentLink')}
+      </a>
+      .
+    </p>
+  );
+
   return (
-    <div className="max-w-md space-y-5">
-      <p className="text-sm text-brand-muted">
-        {t('consentBefore')}
-        <a
-          href={`/${locale}/legal/privacy`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline underline-offset-4"
-        >
-          {t('consentLink')}
-        </a>
-        .
-      </p>
+    <div className="grid max-w-md gap-3.5 bg-brand-surface p-[22px]">
       {googleEnabled && (
         <button
           type="button"
-          className="brand-button brand-focus w-full"
+          className="brand-button-secondary brand-focus w-full bg-brand-bg"
           onClick={() => void signIn('google', { callbackUrl })}
         >
+          <LogIn aria-hidden className="size-[18px]" strokeWidth={1.6} />
           {t('google')}
         </button>
       )}
       {emailEnabled &&
         (status === 'sent' ? (
-          <div
-            role="status"
-            className="border-l-4 border-brand-accent bg-brand-surface p-4"
-          >
-            <p>{t('sent', { email })}</p>
+          <div role="status" className="grid gap-3.5">
+            <span
+              aria-hidden
+              className="grid size-11 place-items-center rounded-full bg-brand-accent text-brand-slate"
+            >
+              <Mail className="size-[22px]" strokeWidth={1.6} />
+            </span>
+            <p className="text-[15px]">{t('sent', { email })}</p>
             <button
               type="button"
-              className="brand-focus mt-3 min-h-11 text-sm font-semibold underline underline-offset-4"
+              className="brand-focus inline-flex min-h-11 items-center justify-self-start text-[15px] underline decoration-brand-line underline-offset-4"
               onClick={() => setStatus('idle')}
             >
               {t('anotherEmail')}
             </button>
           </div>
         ) : (
-          <form onSubmit={requestLink} className="space-y-3" noValidate>
+          <form onSubmit={requestLink} className="grid gap-3.5" noValidate>
             {googleEnabled && (
-              <p className="text-sm text-brand-muted">{t('orEmail')}</p>
+              <p className="flex items-center gap-3 text-[13px] text-brand-muted before:h-px before:flex-1 before:bg-brand-hair before:content-[''] after:h-px after:flex-1 after:bg-brand-hair after:content-['']">
+                {t('orEmail')}
+              </p>
             )}
-            <label className="block text-sm font-semibold">
+            <label className="grid gap-1.5 text-[13px] font-medium">
               {t('emailLabel')}
               <input
                 type="email"
@@ -109,31 +125,33 @@ export default function MarketplaceSignIn({
                 inputMode="email"
                 required
                 maxLength={254}
+                placeholder="name@mail.kz"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                className="brand-focus mt-1 min-h-11 w-full rounded border border-brand-line bg-brand-surface px-3 text-brand-ink"
+                className="brand-focus min-h-12 w-full rounded-none border border-brand-line bg-brand-bg px-3.5 text-base font-normal text-brand-ink"
               />
             </label>
             <button
               type="submit"
               disabled={status === 'sending' || !email.trim()}
-              className="brand-button-secondary brand-focus w-full gap-2 disabled:opacity-60"
+              className="brand-button-secondary brand-focus w-full disabled:opacity-60"
             >
               {status === 'sending' ? (
-                <Loader2 aria-hidden className="animate-spin" size={18} />
+                <Loader2 aria-hidden className="size-[18px] animate-spin" />
               ) : (
-                <Mail aria-hidden size={18} />
+                <Mail aria-hidden className="size-[18px]" strokeWidth={1.6} />
               )}
               {t('emailButton')}
             </button>
-            <p className="text-sm text-brand-muted">{t('emailHint')}</p>
+            <p className="text-[13px] text-brand-muted">{t('emailHint')}</p>
             {error && (
-              <p role="alert" className="text-sm font-semibold">
+              <p role="alert" className="text-sm font-medium text-brand-bad">
                 {error}
               </p>
             )}
           </form>
         ))}
+      {consent}
     </div>
   );
 }

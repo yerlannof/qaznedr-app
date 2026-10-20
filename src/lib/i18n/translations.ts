@@ -129,6 +129,8 @@ export const translations = {
     },
     equipmentCabinet: {
       stats: 'За 30 дней: просмотров {views}, нажали «связаться» {contacts}',
+      statViews: 'просмотров за 30 дней',
+      statContacts: 'нажали «связаться»',
       responses: 'Отклики ({count})',
       noResponses: 'Откликов пока нет',
       duplicate: 'Разместить похожее',
@@ -1841,6 +1843,8 @@ export const translations = {
     },
     equipmentCabinet: {
       stats: '30 күнде: қаралды {views}, «хабарласу» басылды {contacts}',
+      statViews: '30 күнде қаралды',
+      statContacts: '«хабарласу» басылды',
       responses: 'Жауаптар ({count})',
       noResponses: 'Әзірге жауап жоқ',
       duplicate: 'Ұқсасын орналастыру',
@@ -3492,6 +3496,8 @@ export const translations = {
     },
     equipmentCabinet: {
       stats: 'Last 30 days: {views} views, {contacts} contact taps',
+      statViews: 'views in 30 days',
+      statContacts: 'contact taps',
       responses: 'Responses ({count})',
       noResponses: 'No responses yet',
       duplicate: 'Post a similar one',
@@ -5114,6 +5120,8 @@ export const translations = {
     },
     equipmentCabinet: {
       stats: '近 30 天：浏览 {views} 次，点击联系 {contacts} 次',
+      statViews: '近 30 天浏览',
+      statContacts: '点击联系',
       responses: '回复（{count}）',
       noResponses: '暂无回复',
       duplicate: '发布类似信息',

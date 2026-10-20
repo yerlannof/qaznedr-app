@@ -63,34 +63,43 @@ export default function EmailLinkConfirm({
   };
 
   return (
-    <section className="brand-container max-w-2xl py-16">
-      <h1 className="holding-title">{t('confirmTitle')}</h1>
-      {error ? (
-        <>
-          <p role="alert" className="mt-4">
-            {error}
-          </p>
-          <Link
-            href={`/${locale}/equipment/my`}
-            className="brand-button-secondary brand-focus mt-8"
-          >
-            {t('newLink')}
-          </Link>
-        </>
-      ) : (
-        <>
-          <p className="mt-4 text-brand-muted">{t('confirmText')}</p>
-          <button
-            type="button"
-            className="brand-button brand-focus mt-8 gap-2"
-            disabled={!token || busy}
-            onClick={() => void confirm()}
-          >
-            {busy && <Loader2 aria-hidden className="animate-spin" size={18} />}
-            {t('confirmButton')}
-          </button>
-        </>
-      )}
+    <section className="brand-container grid max-w-2xl gap-4 pb-16 pt-10 md:pt-14">
+      <h1 className="text-[32px] font-light leading-[1.04] tracking-[-0.025em] sm:text-[40px] lg:text-[48px]">
+        {t('confirmTitle')}
+      </h1>
+      <div className="mt-4 grid max-w-md gap-3.5 bg-brand-surface p-[22px]">
+        {error ? (
+          <>
+            <p
+              role="alert"
+              className="border-l-2 border-brand-bad pl-3 text-[15px]"
+            >
+              {error}
+            </p>
+            <Link
+              href={`/${locale}/equipment/my`}
+              className="brand-button-secondary brand-focus w-full"
+            >
+              {t('newLink')}
+            </Link>
+          </>
+        ) : (
+          <>
+            <p className="text-[15px] text-brand-muted">{t('confirmText')}</p>
+            <button
+              type="button"
+              className="brand-button brand-focus w-full"
+              disabled={!token || busy}
+              onClick={() => void confirm()}
+            >
+              {busy && (
+                <Loader2 aria-hidden className="animate-spin" size={18} />
+              )}
+              {t('confirmButton')}
+            </button>
+          </>
+        )}
+      </div>
     </section>
   );
 }

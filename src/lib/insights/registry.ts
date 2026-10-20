@@ -34,6 +34,7 @@ export const GUIDE = {
   artisanalMining: 'artisanal-mining-licence-kazakhstan',
   pugfn: 'pugfn-subsoil-fund-program-kazakhstan',
   readGeologicalMap: 'how-to-read-geological-map',
+  goldLicenceTypes: 'gold-licence-types-kazakhstan',
 } as const;
 
 export type GuideKey = keyof typeof GUIDE;
@@ -149,6 +150,15 @@ export const INSIGHTS: readonly InsightEntry[] = [
     published: '2026-10-20',
     updated: '2026-10-20',
     legal: false,
+    locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.goldLicenceTypes,
+    category: 'licensing',
+    published: '2026-10-20',
+    updated: '2026-10-20',
+    legal: true,
+    lawAsOf: '2026-10-20',
     locales: WRITTEN,
   },
 ];

@@ -77,6 +77,7 @@ export default async function LegalServicesPage({
               'rightsTransfer',
               'artisanalMining',
               'pugfn',
+              'goldLicenceTypes',
             ]}
           />
         </section>

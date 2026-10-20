@@ -762,6 +762,8 @@ export const translations = {
       links: {
         artisanalMining: 'Старательство в Казахстане: лицензия и правила',
         pugfn: 'ПУГФН: как проверить участок перед заявкой',
+        goldLicenceTypes:
+          'Лицензия на золото: разведка, добыча или старательство',
         foreignInvestor:
           'Как иностранному инвестору получить право недропользования',
         explorationLicence: 'Лицензия на разведку ТПИ: процесс по шагам',
@@ -784,6 +786,8 @@ export const translations = {
           'Кто может получить лицензию, ограничения работ, документы и порядок подготовки.',
         pugfn:
           'Чем программа отличается от карты и лицензии; где проверять территорию и ограничения.',
+        goldLicenceTypes:
+          'Какой режим выбрать для поиска, промышленной добычи или работы на россыпи и что проверить до заявления.',
         foreignInvestor:
           'Кто может стать недропользователем и три пути входа: новая лицензия, покупка права или доли, совместное предприятие.',
         explorationLicence:
@@ -2490,6 +2494,8 @@ export const translations = {
         artisanalMining: 'Қазақстандағы кен іздеушілік: лицензия және ережелер',
         pugfn:
           'Жер қойнауының мемлекеттік қорын басқару бағдарламасы: учаскені тексеру',
+        goldLicenceTypes:
+          'Алтынға лицензия: барлау, өндіру әлде кен іздеушілік',
         foreignInvestor: 'Шетелдік инвесторға жер қойнауын пайдалану құқығы',
         explorationLicence:
           'Қатты пайдалы қазбаларды барлау лицензиясы: қадамдар',
@@ -2512,6 +2518,8 @@ export const translations = {
           'Лицензияны кім ала алады, жұмыс шектеулері, құжаттар және дайындық тәртібі.',
         pugfn:
           'Бағдарламаның карта мен лицензиядан айырмашылығы; аумақ пен шектеулерді қайдан тексеруге болады.',
+        goldLicenceTypes:
+          'Іздеу, өнеркәсіптік өндіру немесе шашыранды кен орнындағы жұмыс үшін қай тәртіпті таңдау керек және өтінішке дейін не тексеру қажет.',
         foreignInvestor:
           'Кім жер қойнауын пайдаланушы бола алады және кірудің үш жолы: жаңа лицензия, құқықты не үлесті сатып алу, бірлескен кәсіпорын.',
         explorationLicence:
@@ -4142,6 +4150,7 @@ export const translations = {
       links: {
         artisanalMining: 'Artisanal mining in Kazakhstan: licence and rules',
         pugfn: 'PUGFN: checking an area before applying',
+        goldLicenceTypes: 'Gold licences: exploration, mining or artisanal',
         foreignInvestor: 'Subsoil use rights for foreign investors',
         explorationLicence: 'Solid-minerals exploration licence, step by step',
         reserveClassification:
@@ -4162,6 +4171,8 @@ export const translations = {
           'Who can apply, limits on operations, documents and preparation steps.',
         pugfn:
           'How the programme differs from a map or licence; where to check an area and restrictions.',
+        goldLicenceTypes:
+          'Which regime fits searching, industrial mining or placer work, and what to check before applying.',
         foreignInvestor:
           'Who can hold subsoil use rights and three ways in: a new licence, buying a right or a stake, a joint venture.',
         explorationLicence:
@@ -5735,6 +5746,7 @@ export const translations = {
       links: {
         artisanalMining: '哈萨克斯坦小规模采矿：许可证与规则',
         pugfn: 'PUGFN：申请前如何核查矿区',
+        goldLicenceTypes: '黄金许可证：勘查、开采还是小规模采矿',
         foreignInvestor: '外国投资者如何在哈萨克斯坦取得矿业权',
         explorationLicence: '固体矿产勘查许可证：办理流程',
         reserveClassification: '储量分类对照：GKZ、KAZRC/JORC、GB/T 17766',
@@ -5751,6 +5763,8 @@ export const translations = {
         artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',
         pugfn:
           '区分国家底土基金管理计划（PUGFN）、地图和许可证，核查区域及限制。',
+        goldLicenceTypes:
+          '寻找矿床、工业开采或砂矿作业分别适用哪种制度，以及申请前应核查的事项。',
         foreignInvestor:
           '谁可以成为矿业权人，以及三种进入方式：申请新许可证、收购矿业权或股权、成立合资企业。',
         explorationLicence: '申请、区块、期限、义务及转入开采。',

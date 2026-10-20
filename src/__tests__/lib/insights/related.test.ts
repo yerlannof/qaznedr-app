@@ -4,7 +4,7 @@ import { GUIDE, INSIGHTS } from '@/lib/insights/registry';
 import { LOCALES } from '@/lib/seo/site';
 
 describe('related guides', () => {
-  it('defines only distinct, existing neighbours for all thirteen guides', () => {
+  it('defines only distinct, existing neighbours for all guides', () => {
     expect(Object.keys(RELATED_GUIDES).sort()).toEqual(
       INSIGHTS.map((entry) => entry.slug).sort()
     );

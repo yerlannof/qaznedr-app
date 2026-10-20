@@ -1,7 +1,7 @@
 import type { ArticleCard } from './content';
 import { GUIDE } from './registry';
 
-/** Editorial neighbours for the thirteen published guides. The remaining cards
+/** Editorial neighbours for the published guides. The remaining cards
  * keep their registry order, so every guide remains reachable. */
 export const RELATED_GUIDES: Readonly<Record<string, readonly string[]>> = {
   [GUIDE.foreignInvestor]: [
@@ -68,6 +68,11 @@ export const RELATED_GUIDES: Readonly<Record<string, readonly string[]>> = {
     GUIDE.geologicalMap,
     GUIDE.geologicalDueDiligence,
     GUIDE.satelliteGoldMap,
+  ],
+  [GUIDE.goldLicenceTypes]: [
+    GUIDE.explorationLicence,
+    GUIDE.artisanalMining,
+    GUIDE.rightsTransfer,
   ],
 };
 

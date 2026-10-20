@@ -1,6 +1,19 @@
 import { GUIDE, INSIGHTS, insightHref } from '@/lib/insights/registry';
 
 describe('insightHref', () => {
+  it('registers the gold licence comparison in all four languages', () => {
+    expect(
+      INSIGHTS.find((entry) => entry.slug === GUIDE.goldLicenceTypes)
+    ).toMatchObject({
+      slug: 'gold-licence-types-kazakhstan',
+      category: 'licensing',
+      published: '2026-10-20',
+      updated: '2026-10-20',
+      legal: true,
+      lawAsOf: '2026-10-20',
+      locales: ['ru', 'en', 'zh', 'kz'],
+    });
+  });
   it('registers the core drilling guide in all four languages', () => {
     expect(
       INSIGHTS.find((entry) => entry.slug === GUIDE.coreDrilling)

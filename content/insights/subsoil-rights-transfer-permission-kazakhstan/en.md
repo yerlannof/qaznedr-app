@@ -59,6 +59,8 @@ A transfer of a subsoil use right or an interest in it is prohibited (Art. 40(2)
 - under an artisanal mining licence;
 - under a hydrocarbon exploration and production contract during the first three years, except in the cases specified in the Code.
 
+For how an artisanal mining licence differs from exploration and mining licences, see the [comparison of gold licences](/en/insights/gold-licence-types-kazakhstan).
+
 For hydrocarbon contracts, a transfer of stakes and shares is also prohibited during the first three years if that contract is the company's only one (Art. 42(2-1)). For solid minerals exploration licences, Art. 42 contains no such direct prohibition on transferring stakes in the first year, but a permission under Art. 44 is still required unless the transaction falls within an exemption. How the competent authority will assess such a transaction does not follow from the text of the provision — check with a lawyer. Transferring a subsoil use right into trust management is prohibited, except in cases expressly established by law (Art. 48(2)).
 
 ## The State pre-emptive right

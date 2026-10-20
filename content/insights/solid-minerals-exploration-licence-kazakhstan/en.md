@@ -122,6 +122,8 @@ The holder of an exploration licence has the exclusive right to a mining licence
 - If the exploration licence expires during the review, it remains in force for the area applied for (Art. 201(5)).
 - A mining licence is granted for up to 25 years, extendable (Art. 211); the signature bonus is 200 MCI (Tax Code Art. 762), and the fee is 450 MCI per 1 km² (Tax Code Art. 621).
 
+If it is not yet clear whether you need exploration, mining or artisanal mining, compare the regimes in the [guide to gold licences](/en/insights/gold-licence-types-kazakhstan).
+
 ## How QAZNEDR HOLDING can help
 
 - **Area selection.** Our geologists study archived geological reports and select blocks to suit the investor's objectives. The [areas on our site](/en/leads?kind=find) are free according to our check as of the date shown; the licence is applied for as part of the deal.

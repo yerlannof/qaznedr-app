@@ -128,13 +128,13 @@ export default function Navigation({
           <BrandLogo className="w-40" inverse={clear} />
         </Link>
 
-        <div className="hidden items-center gap-1 lg:flex">
+        <div className="hidden items-center gap-1 xl:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               aria-current={isActive(link.href) ? 'page' : undefined}
-              className={`brand-focus inline-flex min-h-11 items-center px-2 text-sm hover:text-brand-ink ${
+              className={`brand-focus inline-flex min-h-11 items-center whitespace-nowrap px-2 text-sm hover:text-brand-ink ${
                 isActive(link.href)
                   ? 'font-semibold text-brand-ink'
                   : 'text-brand-muted'
@@ -145,7 +145,7 @@ export default function Navigation({
           ))}
         </div>
 
-        <div className="hidden items-center gap-1 lg:flex">
+        <div className="hidden items-center gap-1 xl:flex">
           <div
             className="flex items-center"
             aria-label={t('footer.language.title')}
@@ -173,10 +173,11 @@ export default function Navigation({
             <>
               <Link
                 href={`/${locale}/admin`}
-                className="brand-focus inline-flex min-h-11 items-center gap-1 px-2 text-sm text-brand-muted hover:text-brand-ink"
+                aria-label={t('navigation.admin')}
+                title={t('navigation.admin')}
+                className="brand-focus inline-flex min-h-11 min-w-11 items-center justify-center text-brand-muted hover:text-brand-ink"
               >
                 <Shield aria-hidden="true" className="size-4" />
-                {t('navigation.admin')}
               </Link>
               <button
                 type="button"
@@ -190,13 +191,13 @@ export default function Navigation({
           )}
           <Link
             href={contactHref}
-            className="brand-button brand-focus ml-2 inline-flex min-h-11 items-center px-4 text-sm"
+            className="brand-button brand-focus ml-2 inline-flex min-h-11 items-center whitespace-nowrap px-4 text-sm"
           >
             {t('navigation.contact')}
           </Link>
         </div>
 
-        <div className="lg:hidden">
+        <div className="xl:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <button

@@ -6,6 +6,7 @@ export const DRILLING_METHODS = [
   'ROTARY',
   'DTH',
   'SONIC',
+  'AIR_CORE',
   'OTHER',
 ] as const;
 export type DrillingMethod = (typeof DRILLING_METHODS)[number];

@@ -14,6 +14,7 @@ it('keeps stable drilling codes and explicit measurement units', () => {
     'ROTARY',
     'DTH',
     'SONIC',
+    'AIR_CORE',
     'OTHER',
   ]);
   expect(DRILLING_PURPOSES).toEqual([

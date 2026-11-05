@@ -95,7 +95,7 @@ export const translations = {
       status_HIDDEN: 'Скрыт модератором. Напишите нам в WhatsApp.',
       openPage: 'Открыть страницу компании',
       eyebrow: 'Компания',
-      metaTitle: '{name}: техника и услуги | QAZNEDR',
+      metaTitle: '{name}: техника и услуги',
       metaDescription:
         'Объявления компании {name}: техника и услуги для геологоразведки в Казахстане.',
       listings: 'Объявления ({count})',
@@ -1820,7 +1820,7 @@ export const translations = {
       status_HIDDEN: 'Модератор жасырған. WhatsApp арқылы жазыңыз.',
       openPage: 'Компания бетін ашу',
       eyebrow: 'Компания',
-      metaTitle: '{name}: техника және қызметтер | QAZNEDR',
+      metaTitle: '{name}: техника және қызметтер',
       metaDescription:
         '{name} компаниясының хабарландырулары: Қазақстандағы геологиялық барлауға арналған техника мен қызметтер.',
       listings: 'Хабарландырулар ({count})',
@@ -3482,7 +3482,7 @@ export const translations = {
       status_HIDDEN: 'Hidden by a moderator. Message us on WhatsApp.',
       openPage: 'Open the company page',
       eyebrow: 'Company',
-      metaTitle: '{name}: equipment and services | QAZNEDR',
+      metaTitle: '{name}: equipment and services',
       metaDescription:
         'Listings by {name}: equipment and services for exploration in Kazakhstan.',
       listings: 'Listings ({count})',
@@ -5116,7 +5116,7 @@ export const translations = {
       status_HIDDEN: '已被审核员隐藏，请通过 WhatsApp 联系我们。',
       openPage: '打开公司主页',
       eyebrow: '公司',
-      metaTitle: '{name}：设备与服务 | QAZNEDR',
+      metaTitle: '{name}：设备与服务',
       metaDescription: '{name} 的信息：哈萨克斯坦地质勘查设备与服务。',
       listings: '信息（{count}）',
       empty: '目前没有已发布的信息。',

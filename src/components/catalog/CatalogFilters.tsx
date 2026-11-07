@@ -325,7 +325,7 @@ export default function CatalogFilters({
         )}
         <noscript>
           <button type="submit" className="brand-button mt-4 w-full">
-            {t('catalog.apply', { count: '' })}
+            {t('catalog.applyNoJs')}
           </button>
         </noscript>
         {active > 0 && (

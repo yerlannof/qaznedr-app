@@ -9,7 +9,7 @@ description: Learn what geology studies, how minerals, rocks and ore differ, wha
 
 A **mineral** is a naturally occurring solid with a defined chemical composition and an ordered atomic structure. Quartz is a mineral. A **rock** consists of one or more minerals; granite, for example, contains quartz, feldspar and mica. [USGS](https://www.usgs.gov/faqs/what-difference-between-a-rock-and-a-mineral?page=1) and [BGS](https://www.bgs.ac.uk/discovering-geology/rocks-and-minerals/) explain this distinction.
 
-**Ore** is natural material from which a useful component can be extracted economically under particular technical and economic conditions. Finding a mineral in rock therefore does not, by itself, establish a deposit or prove reserves. Evidence is needed on composition, grade, volume, continuity of mineralization and the possibility of extraction. In describing an ore deposit, [USGS considers size, grade, accessibility and profitability](https://pubs.usgs.gov/bul/b1693/html/bull1nzi.htm). Resources and reserves for a specific project are assessed under the applicable reporting standard.
+**Ore** is natural material from which a useful component can be extracted economically under particular technical and economic conditions. Finding a mineral in rock therefore does not, by itself, establish a deposit or prove reserves. Evidence is needed on composition, grade, volume, continuity of mineralisation and the possibility of extraction. In describing an ore deposit, [USGS considers size, grade, accessibility and profitability](https://pubs.usgs.gov/bul/b1693/html/bull1nzi.htm). Resources and reserves for a specific project are assessed under the applicable reporting standard.
 
 ## What does a geologist do?
 

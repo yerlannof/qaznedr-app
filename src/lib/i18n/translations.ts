@@ -1089,6 +1089,7 @@ export const translations = {
       infraOption: 'Есть техника, ЛЭП, жильё',
       filters: 'Фильтры',
       apply: 'Показать {count}',
+      applyNoJs: 'Показать',
       reset: 'Сбросить фильтры',
       resetShort: 'Сбросить',
       close: 'Закрыть фильтры',
@@ -2447,7 +2448,7 @@ export const translations = {
       analytics: {
         title: 'Талдау',
         description:
-          'Бағыт таңдап жатқан командаға арналған. Өлшемшарттарды келісеміз, архивтік мәліметтерді салыстырамыз және талдамалық материалдар дайындаймыз.',
+          'Бағыт таңдап жатқан командаға арналған. Өлшемшарттарды келісеміз, мұрағаттық мәліметтерді салыстырамыз және талдамалық материалдар дайындаймыз.',
         deliverable:
           'Келісілген өлшемшарттар және талқылауға арналған талдамалық материалдар.',
       },
@@ -2584,7 +2585,7 @@ export const translations = {
       servicesLegal: {
         title: 'Қазақстанда жер қойнауын пайдалану лицензиясы',
         description:
-          'Қатты пайдалы қазбаларды барлау лицензиясын алуды сүйемелдеу: учаскені іріктеу, өтінімді дайындау, Жер қойнауын пайдаланудың бірыңғай платформасымен жұмыс.',
+          'Қатты пайдалы қазбаларды барлау лицензиясын алуды сүйемелдеу: учаскені іріктеу, өтінішті дайындау, Бірыңғай жер қойнауын пайдалану платформасымен жұмыс.',
       },
       servicesInvestors: {
         title: 'Инвесторларға: Қазақстанның геологиялық барлау жобаларына кіру',
@@ -2619,9 +2620,9 @@ export const translations = {
       lead: {
         title: '{mineral} — {code} учаскесі, {where}',
         descriptionFree:
-          'Учаске: {mineral}, {where}. Біздің тексеруімізше ({checked}) лицензиядан бос; геологиясы архивтік есептер бойынша зерттелген, лицензияны мәміле үшін рәсімдейміз. Код {code}.',
+          'Учаске: {mineral}, {where}. Біздің тексеруімізше ({checked}) лицензиядан бос; геологиясы мұрағаттық есептер бойынша зерттелген, лицензияны мәміле үшін рәсімдейміз. Код {code}.',
         descriptionOther:
-          '{mineral}, {where}. Геологиясын геологтарымыз архивтік есептер бойынша зерттеді. Код {code}.',
+          '{mineral}, {where}. Геологиясын геологтарымыз мұрағаттық есептер бойынша зерттеді. Код {code}.',
         where: '{region}, Қазақстан',
         whereNone: 'Қазақстан',
         notFound: 'Учаске табылмады',
@@ -2738,7 +2739,7 @@ export const translations = {
         'Сіздің атыңызға лицензия, біздің сүйемелдеуімізбен; холдингке лицензия, кейін беру; БК немесе earn-in; тек талдау.',
       step4Title: 'Лицензияны рәсімдейміз',
       step4Desc:
-        'Мәртебені қайта тексеріп, өтінім береміз және берілгенге дейін сүйемелдейміз. Шешімді құзыретті орган қабылдайды.',
+        'Мәртебені қайта тексеріп, өтініш береміз және берілгенге дейін сүйемелдейміз. Шешімді құзыретті орган қабылдайды.',
     },
     audience: {
       eyebrow: 'Алаң кімге арналған',
@@ -2768,7 +2769,7 @@ export const translations = {
       eyebrow: 'Учаскелер витринасы · мәртебе біздің тексеруімізбен',
       title: 'Біздің геологтар іріктеген учаскелер',
       subtitle:
-        'Карточкадағы күнге біздің тексеруімізше бос. Учаске қызықтырса, жобаңызға лицензия ресімдеуді өзімізге аламыз және мәмілені сүйемелдейміз. Атауы, координаттары және материалдары — кездесу мен NDA-дан кейін.',
+        'Карточкадағы күнге біздің тексеруімізше бос. Учаске қызықтырса, жобаңызға лицензия рәсімдеуді өзімізге аламыз және мәмілені сүйемелдейміз. Атауы, координаттары және материалдары — кездесу мен NDA-дан кейін.',
       ctaBrowse: 'Барлық учаскелер',
       ctaFree: 'Тек бостары',
       freshHeading: 'Жаңа учаскелер',
@@ -2798,7 +2799,7 @@ export const translations = {
     catalog: {
       eyebrow: 'Витрина · мәртебе мен сандар — карточкадағы тексеру күніне',
       title: 'Қазақстанның жер қойнауы учаскелері мен нысандары',
-      lede: 'Геологтарымыз іріктеген учаскелер; ұстаушысы серіктес іздеп жүрген өндірушілік лицензиялары; иелері сатып жатқан жұмыс істеп тұрған карьерлер мен кен орындары. Атауы, координаттары мен құжаттары — карточкада басқаша айтылмаса, NDA-дан кейін.',
+      lede: 'Геологтарымыз іріктеген учаскелер; ұстаушысы серіктес іздеп жүрген кен іздеушілік лицензиялары; иелері сатып жатқан жұмыс істеп тұрған карьерлер мен кен орындары. Атауы, координаттары мен құжаттары — карточкада басқаша айтылмаса, NDA-дан кейін.',
       ledeNoPlots:
         'Геологтарымыз іріктеген учаскелер және иелері сатып жатқан жұмыс істеп тұрған карьерлер мен кен орындары. Атауы, координаттары мен құжаттары — карточкада басқаша айтылмаса, NDA-дан кейін.',
       kindLabel: 'Ұсыныс түрі',
@@ -2806,7 +2807,7 @@ export const translations = {
       kinds: {
         asset: 'Сатылатын нысандар',
         find: 'Біздің олжалар',
-        prospecting: 'Өндірушілік',
+        prospecting: 'Кен іздеушілік',
       },
       groupsLabel: 'Шикізат тобы',
       groups: {
@@ -2820,7 +2821,7 @@ export const translations = {
       stages: {
         occurrence: 'Кен білінімі',
         deposit: 'Кен орны (тарихи есептеу)',
-        prospecting: 'Өндірушілік өндіру',
+        prospecting: 'Кен іздеушілікпен өндіру',
         exploration: 'Барлау',
         production: 'Жұмыс істеп тұрған өндіру',
       },
@@ -2828,6 +2829,7 @@ export const translations = {
       infraOption: 'Техника, электр желісі, тұрғын үй бар',
       filters: 'Сүзгілер',
       apply: '{count} көрсету',
+      applyNoJs: 'Көрсету',
       reset: 'Сүзгілерді тазарту',
       resetShort: 'Тазарту',
       close: 'Сүзгілерді жабу',
@@ -2992,7 +2994,7 @@ export const translations = {
       rightsHeading: 'Құқық мәртебесі',
       contactHeading: 'Учаскені талқылау',
       contactNote:
-        'Карточка нөмірін жазыңыз — геолог объект бойынша жауап береді. Мүдделі жоба үшін лицензия ресімдеуді өзімізге аламыз.',
+        'Карточка нөмірін жазыңыз — геолог объект бойынша жауап береді. Мүдделі жоба үшін лицензия рәсімдеуді өзімізге аламыз.',
       mapCredit:
         'Облыс шекаралары: © OpenStreetMap қатысушылары, geoBoundaries (ODbL)',
       seoTitle: '{commodity} — {code} учаскесі, {oblast}',
@@ -3620,7 +3622,7 @@ export const translations = {
         'No time to fill it in? Send photos on WhatsApp and we will post it for you.',
       emptySubscribe:
         'Looking for equipment? Subscribe and we will email you when listings appear.',
-      emptyRequest: 'Post a «Wanted» request',
+      emptyRequest: 'Post a “Wanted” request',
       ctaTitle: 'Have equipment or services to offer?',
       ctaText: 'Post a listing for free. It appears after an editorial check.',
       ctaButton: 'Post a listing',
@@ -3700,7 +3702,7 @@ export const translations = {
         'Send photos and a few words on WhatsApp and we will post it for you.',
       reviewTitle: 'How the review works',
       reviewText:
-        'The editors usually review a listing within one working day. The answer appears in «My listings».',
+        'The editors usually review a listing within one working day. The answer appears in “My listings”.',
       cover: 'Cover',
       capabilityN: 'Capability {n}',
       myListings: 'My listings',
@@ -3771,7 +3773,7 @@ export const translations = {
       findDraft: 'Find my drafts',
       chooseDraft: 'Choose a draft',
       active: 'Listing published',
-      activeHint: 'The listing is available in the catalog.',
+      activeHint: 'The listing is available in the catalogue.',
       archived: 'Listing archived',
       archivedHint: 'This listing is read-only.',
 
@@ -4041,7 +4043,7 @@ export const translations = {
       stage1Label: 'Context',
       stage1Title: 'See the whole',
       stage1Body:
-        'The geologist begins with the site form and the broad position of rock units.',
+        'The geologist begins with the shape of the site and the broad position of rock units.',
       stage1Question: 'What is known from maps, archives and observation?',
       stage2Label: 'Layers',
       stage2Title: 'Separate the layers',
@@ -4073,7 +4075,7 @@ export const translations = {
       title: 'Geological maps and materials for your area',
       body: 'Looking for a gold map of East Kazakhstan, a mineral map or geological materials for another region of Kazakhstan? Tell us the area and the question you are working on. We will discuss which maps, archival and field materials your work needs and how our geologists can help.',
       inputs:
-        'For an initial enquiry, provide the region, metal of interest and your goal: finding an area, interpreting a map or reviewing geological materials. If you already have a map, include its title, year and scale.',
+        'For an initial inquiry, provide the region, metal of interest and your goal: finding an area, interpreting a map or reviewing geological materials. If you already have a map, include its title, year and scale.',
       limits:
         'An object shown on a map does not by itself confirm reserves, rights to an area or the possibility of obtaining a licence. We agree the scope and deliverable after reviewing your task.',
       action: 'Discuss your task',
@@ -4155,7 +4157,7 @@ export const translations = {
         pugfn: 'PUGFN: checking an area before applying',
         goldLicenceTypes: 'Gold licences: exploration, mining or artisanal',
         foreignInvestor: 'Subsoil use rights for foreign investors',
-        explorationLicence: 'Solid-minerals exploration licence, step by step',
+        explorationLicence: 'Solid minerals exploration licence, step by step',
         reserveClassification:
           'Reserve classifications: GKZ, KAZRC/JORC, GB/T 17766',
         rightsTransfer: 'Can you sell a subsoil licence in Kazakhstan?',
@@ -4270,7 +4272,7 @@ export const translations = {
       lead: {
         title: '{mineral} Exploration Area {code}, {where}',
         descriptionFree:
-          'Area: {mineral}, {where}. Free of licences per our check as of {checked}; geology studied from archival reports, the licence can be arranged for the deal. Code {code}.',
+          'Area: {mineral}, {where}. Free of licences per our check as of {checked}; geology studied from archival reports, and the licence can be arranged for the deal. Code {code}.',
         descriptionOther:
           '{mineral}, {where}. Geology studied by our geologists from archival reports. Code {code}.',
         where: '{region}, Kazakhstan',
@@ -4417,7 +4419,7 @@ export const translations = {
       eyebrow: 'Areas on display · status per our check',
       title: 'Areas selected by our geologists',
       subtitle:
-        'Free per our check on the date in each card. If an area interests you, we take on licensing it for your project and support the deal. Name, coordinates and materials follow a meeting and an NDA.',
+        'Free per our check on the date on each card. If an area interests you, we take on licensing it for your project and support the deal. Name, coordinates and materials follow a meeting and an NDA.',
       ctaBrowse: 'All areas',
       ctaFree: 'Free only',
       freshHeading: 'New areas',
@@ -4478,6 +4480,7 @@ export const translations = {
       infraOption: 'Equipment, power line, housing in place',
       filters: 'Filters',
       apply: 'Show {count}',
+      applyNoJs: 'Show results',
       reset: 'Reset filters',
       resetShort: 'Reset',
       close: 'Close filters',
@@ -4822,7 +4825,7 @@ export const translations = {
     },
     leadDetail: {
       transferNote:
-        "As a rule, transferring a subsoil-use right requires the competent authority's permission (Arts. 44–45 of the Subsoil Code); a solid-minerals exploration licence cannot be transferred in its first year.",
+        "As a rule, transferring a subsoil-use right requires the competent authority's permission (Arts. 44–45 of the Subsoil Code); a solid minerals exploration licence cannot be transferred in its first year.",
       includedHeading: 'At a meeting after an NDA we discuss:',
       breadcrumbLeads: 'Areas',
       badgeSold: 'SOLD',
@@ -4953,12 +4956,12 @@ export const translations = {
       type: {
         subsoilUser: 'Subsoil User',
         subsoilUserDesc:
-          'Owner of mining or exploration licenses for mineral resources',
+          'Owner of mining or exploration licences for mineral resources',
         serviceProvider: 'Service Provider',
         serviceProviderDesc:
           'Company providing services to the subsoil-use sector',
         investor: 'Investor / Buyer',
-        investorDesc: 'Investor or buyer of mineral resources and licenses',
+        investorDesc: 'Investor or buyer of mineral resources and licences',
       },
     },
     services: {
@@ -5766,7 +5769,7 @@ export const translations = {
       summaries: {
         artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',
         pugfn:
-          '区分国家底土基金管理计划（PUGFN）、地图和许可证，核查区域及限制。',
+          '区分国家底土资源管理计划（PUGFN）、地图和许可证，核查区域及限制。',
         goldLicenceTypes:
           '寻找矿床、工业开采或砂矿作业分别适用哪种制度，以及申请前应核查的事项。',
         foreignInvestor:
@@ -6057,6 +6060,7 @@ export const translations = {
       infraOption: '有设备、输电线路和住宿',
       filters: '筛选',
       apply: '显示{count}项',
+      applyNoJs: '显示结果',
       reset: '清除筛选',
       resetShort: '清除',
       close: '关闭筛选',
@@ -6103,7 +6107,7 @@ export const translations = {
       seoDescription:
         '小规模采矿许可证有效期至 {date}，{region}{district}。许可证持有人正在寻找在地块上作业的合作伙伴；工作依据与许可证持有人签订的合同进行。页面提供拐点坐标。',
       breadcrumb: '小规模采矿地块',
-      note: '在地块上的工作依据与许可证持有人签订的合同进行。许可证权利不出售、不转让（《底土法典》第263条）。',
+      note: '在地块上的工作依据与许可证持有人签订的合同进行。许可证权利不出售、不转让（《底土与底土利用法典》第263条）。',
       factMineral: '金属',
       factArea: '面积',
       factLicense: '许可证',
@@ -6114,7 +6118,7 @@ export const translations = {
       factShareValue: '依据与持有人的合同',
       factStatus: '状态',
       factConfirmed: '据持有人告知',
-      factConfirmedValue: '{date}：许可证有效，签字费已缴纳',
+      factConfirmedValue: '{date}：许可证有效，签约奖金已缴纳',
       outlineLabel: '地块 {code} 依据许可证拐点绘制的示意图',
       outlineCaption:
         '依据许可证坐标绘制的示意图。上方为北，比例尺 {scale} 米。并非实地影像。',
@@ -6208,7 +6212,7 @@ export const translations = {
         '位置仅为示意：对象位于圆圈之内。确切位置和资料在会面后提供。',
       scansHeading: '报告片段',
       openScan: '查看原尺寸片段',
-      rightsHeading: '权利状态',
+      rightsHeading: '权属状态',
       contactHeading: '咨询该矿区',
       contactNote:
         '请发送卡片编号，地质师将就该矿区答复。对有合作意向的项目，许可证由我们负责办理。',

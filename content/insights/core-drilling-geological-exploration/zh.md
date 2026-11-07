@@ -54,7 +54,7 @@ description: '解释岩芯是什么、它与钻屑有何区别，以及核查哈
 
 您可以这样开始：**“您好！我从qaznedr.kz了解到贵公司。需要咨询[地区]某区域的钻探资料。”** 团队会进一步了解任务和现有数据；文件的提供条件另行商定。
 
-可以通过[WhatsApp或WeChat](/zh/contact)联系。有关地质资料处理的更多信息，请看[地质服务页面](/zh/services/geological)。
+可以通过[WhatsApp或微信](/zh/contact)联系。有关地质资料处理的更多信息，请看[地质服务页面](/zh/services/geological)。
 
 ## 参考资料
 

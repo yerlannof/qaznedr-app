@@ -28,7 +28,7 @@ description: 在哈萨克斯坦勘查矿区前，应索取哪些报告、地图�
 
 ## 从哪里查找哈萨克斯坦的报告
 
-[哈萨克斯坦工业和建设部介绍了统一地下资源利用平台（EPN）的登记系统](https://www.gov.kz/memleket/entities/mps/press/news/details/945522?lang=ru)：平台提供地质报告信息和首册资料，首册含摘要、目录、图件附件清单及结论。打开[地质报告登记系统](https://minerals.e-qazyna.kz/ru/guest/reestr/geological-reports)，按已知的报告名称或地区名称检索。
+[哈萨克斯坦工业和建设部介绍了底土利用统一平台（EPN）的登记系统](https://www.gov.kz/memleket/entities/mps/press/news/details/945522?lang=ru)：平台提供地质报告信息和首册资料，首册含摘要、目录、图件附件清单及结论。打开[地质报告登记系统](https://minerals.e-qazyna.kz/ru/guest/reestr/geological-reports)，按已知的报告名称或地区名称检索。
 
 找到摘要只是检索的起点。应将附件清单与实际可取得的材料逐项对照：有了首册，并不等于已经取得地图、编录和全部化验结果。缺失材料及获取流程应向官方服务核实。我们讨论的是资料分析，而非出售国家档案中的地质报告。
 
@@ -38,7 +38,7 @@ description: 在哈萨克斯坦勘查矿区前，应索取哪些报告、地图�
 
 **分析结果能否溯源？** [《JORC 规范》2012 年版表 1](https://www.jorc.org/docs/JORC_code_2012.pdf)涉及取样方法及代表性、样品制备、实验室数据质量、质控样品和结果验证。这些问题有助于初步审阅资料。此处仅将 JORC 作为提出数据核查问题的参考；完成本清单并不会使材料成为符合 JORC 标准的报告，也不表示该规范对哈萨克斯坦每个项目都具有强制性。
 
-**数字的含义是否被偷换？** 单件样品的最高品位、平均品位、预测资源量和储量回答的是不同问题。先找到原始文件及数字的准确说明。不能仅靠更改名称，就将一种评价体系的结果当作另一种体系的结果；详见[ГКЗ、KAZRC 与 JORC 指南](/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766)。
+**数字的含义是否被偷换？** 单件样品的最高品位、平均品位、预测资源量和储量回答的是不同问题。先找到原始文件及数字的准确说明。不能仅靠更改名称，就将一种评价体系的结果当作另一种体系的结果；详见[GKZ、KAZRC 与 JORC 指南](/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766)。
 
 ## 示例：演示文稿写着“黄金最高 20 克/吨”
 
@@ -58,7 +58,7 @@ description: 在哈萨克斯坦勘查矿区前，应索取哪些报告、地图�
 
 可以先发送简短消息：**“您好！我从 qaznedr.kz 联系您，希望核查[地区]某矿区的地质资料。”** 然后说明任务以及现有文件；材料的交付方式另行商定。工作内容取决于现有原始资料。我们不会预先承诺储量、许可或投资吸引力方面的结论。
 
-更多信息见[地质服务](/zh/services/geological)和[交易前矿区核查](/zh/services#due-diligence)。可通过 [WhatsApp 或 WeChat](/zh/contact)联系团队。团队所介绍矿区的准确坐标及补充资料将在会面并签署 NDA 后披露。
+更多信息见[地质服务](/zh/services/geological)和[交易前矿区核查](/zh/services#due-diligence)。可通过 [WhatsApp 或微信](/zh/contact)联系团队。团队所介绍矿区的准确坐标及补充资料将在会面并签署 NDA 后披露。
 
 如果资料中包含钻探记录，请阅读[岩芯能说明什么，以及核查岩芯资料需要哪些记录](/zh/insights/core-drilling-geological-exploration)。
 
@@ -68,4 +68,4 @@ description: 在哈萨克斯坦勘查矿区前，应索取哪些报告、地图�
 - [EPN：地质报告登记系统](https://minerals.e-qazyna.kz/ru/guest/reestr/geological-reports)。
 - [《JORC 规范》2012 年版：表 1，第 1–3 节](https://www.jorc.org/docs/JORC_code_2012.pdf)。关于数据质量和结果披露的参考材料，并非哈萨克斯坦所有项目的统一强制要求。
 
-原始来源核查日期：2026 年 9 月 29 日。作出具体决定时，应重新核实区域状态和适用要求。
+原始来源核查日期：2026年9月29日。作出具体决定时，应重新核实区域状态和适用要求。

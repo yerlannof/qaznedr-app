@@ -23,7 +23,7 @@ For example, a gold occurrence on a map does not mean that the area is free, ope
 
 Article 70 of the Code on Subsoil and Subsoil Use provides for information on state geological study territories, auction territories, territories for grant to national companies, areas for mining common minerals and other purposes set out in the Code.
 
-The useful question is **which category covers your chosen area and which right-grant procedure applies**. Do not assume that solid-minerals exploration and artisanal mining follow the same regime.
+The useful question is **which category covers your chosen area and which right-grant procedure applies**. Do not assume that solid minerals exploration and artisanal mining follow the same regime.
 
 ## 1. Identify the location and purpose
 
@@ -68,7 +68,7 @@ A restriction missing from one map layer has not necessarily disappeared. If sou
 | Restrictions or conflicting information appear          | Clarify the status and whether work is allowed before spending on preparation                                              |
 | Geology is unclear                                      | Review the source materials and the scale of further study first                                                           |
 
-QAZNEDR also has guides to [solid-minerals exploration licences](/en/insights/solid-minerals-exploration-licence-kazakhstan), [transfers of subsoil rights](/en/insights/subsoil-rights-transfer-permission-kazakhstan) and [choosing a geological map](/en/insights/geological-map-kazakhstan).
+QAZNEDR also has guides to [solid minerals exploration licences](/en/insights/solid-minerals-exploration-licence-kazakhstan), [transfers of subsoil rights](/en/insights/subsoil-rights-transfer-permission-kazakhstan) and [choosing a geological map](/en/insights/geological-map-kazakhstan).
 
 ## What changed in the PUGFN formation rules in 2026?
 

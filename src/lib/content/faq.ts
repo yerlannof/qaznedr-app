@@ -71,7 +71,7 @@ const KZ: readonly FaqItem[] = [
   },
   {
     q: 'Қалай байланысуға болады?',
-    a: 'WeChat немесе WhatsApp арқылы жазып, учаске кодын көрсетіңіз немесе байланыс бетіндегі өтінімді қалдырыңыз. Жұмыс күні ішінде жауап береміз.',
+    a: 'WeChat немесе WhatsApp арқылы жазып, учаске кодын көрсетіңіз немесе байланыс бетінде өтінім қалдырыңыз. Жұмыс күні ішінде жауап береміз.',
   },
 ];
 
@@ -86,7 +86,7 @@ const EN: readonly FaqItem[] = [
   },
   {
     q: 'What deal formats are possible?',
-    a: "A licence in the investor's name with our support; a licence on the holding with a later transfer; a joint venture or earn-in; analytics only. We choose the format at a meeting.",
+    a: "A licence in the investor's name with our support; a licence in the holding’s name with a later transfer; a joint venture or earn-in; analytics only. We choose the format at a meeting.",
   },
   {
     q: 'Where does the geological data come from?',
@@ -98,7 +98,7 @@ const EN: readonly FaqItem[] = [
   },
   {
     q: 'What restrictions apply to a deal?',
-    a: 'A transfer of a subsoil use right or of shares requires permission from the competent authority (Articles 44–45 of the Subsoil Code), except in the cases listed in Article 44(2) — for example, a purchase after which the buyer holds less than 25% of the subsoil user company. A solid-minerals exploration licence cannot be transferred in its first year. We take this into account when choosing the format.',
+    a: 'A transfer of a subsoil use right or of shares requires permission from the competent authority (Articles 44–45 of the Subsoil Code), except in the cases listed in Article 44(2) — for example, a purchase after which the buyer holds less than 25% of the subsoil user company. A solid minerals exploration licence cannot be transferred in its first year. We take this into account when choosing the format.',
   },
   {
     q: 'What do you guarantee?',

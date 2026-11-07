@@ -3,7 +3,7 @@ title: Solid minerals exploration licence in Kazakhstan: the process step by ste
 description: How to apply for a solid minerals exploration licence in Kazakhstan: priority and auctions, blocks, timelines, signature bonus, minimum spend, fees, mining.
 ---
 
-In Kazakhstan, a solid minerals exploration licence is issued by the competent authority on an application filed through the unified subsoil use platform (EPN). Applications for the same block are considered in the order in which they are received; where several applications are filed for a newly free block, and on auction territories, priority is decided by an auction on the signature bonus. The licence is issued for 6 years with a single extension of up to 5 years, over an area of no more than 200 blocks. The holder bears annual minimum exploration expenditure, pays the subsoil area fee, reports by 30 April and, if a deposit is discovered, is entitled to a mining licence. The rules are stated as of 26 September 2026.
+In Kazakhstan, a solid minerals exploration licence is issued by the competent authority on an application filed through the Unified Subsoil Use Platform (EPN). Applications for the same block are considered in the order in which they are received; where several applications are filed for a newly free block, and on auction territories, priority is decided by an auction on the signature bonus. The licence is issued for 6 years with a single extension of up to 5 years, over an area of no more than 200 blocks. The holder bears annual minimum exploration expenditure, pays the subsoil area fee, reports by 30 April and, if a deposit is discovered, is entitled to a mining licence. The rules are stated as of 26 September 2026.
 
 ## What the licence gives and who issues it
 

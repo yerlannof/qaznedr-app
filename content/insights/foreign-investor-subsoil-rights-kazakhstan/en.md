@@ -36,7 +36,7 @@ An investor in an ore project needs exploration and mining licences. The holder 
 
 An exploration area is made up of blocks measuring one minute by one minute in geographic coordinates (Art. 19(2)). A single application may cover no more than 200 blocks (Art. 187(2)).
 
-- **Priority.** Applications for the same block are considered in order of receipt. The date and time of filing are recorded and published on the unified subsoil use platform on the same day (Art. 187(9)–(10), Art. 189).
+- **Priority.** Applications for the same block are considered in order of receipt. The date and time of filing are recorded and published on the Unified Subsoil Use Platform on the same day (Art. 187(9)–(10), Art. 189).
 - **Blocks that have become free again.** If several applications for such a block are filed within 15 working days after information about it is published, the order of priority is decided by auction (Art. 189-1).
 - **Review.** The authority reviews the application within 10 working days and sends a notice requiring security for the liquidation of the consequences of exploration. Art. 188(1) allows 40 working days from the date of the notice for this, but the same paragraph refers to refusal 35 working days after the notice is published. Check the exact deadline with a lawyer. Once the security is provided, the licence is issued within 5 working days.
 - **Documents.** A description of the work by year, proof of financial capacity covering the minimum expenditure for the first year, and proof of professional capacity: a geologist or geophysicist on staff or under contract (Art. 187(4)–(6)).
@@ -105,7 +105,7 @@ The state buys through a national holding or a national company at a price no le
 ## Practical steps for an investor
 
 1. Define the metal, region, budget and project timeline.
-2. Check the status of the blocks on the unified subsoil use platform and in the PUGFN: whether there is an auction, a territory reserved for the national company, or an Art. 25 prohibition (settlements, water fund lands and others).
+2. Check the status of the blocks on the Unified Subsoil Use Platform and in the PUGFN: whether there is an auction, a territory reserved for the national company, or an Art. 25 prohibition (settlements, water-fund lands and others).
 3. Assess the geology from historical data and separately find out which standard the reserves were estimated under (see the [guide to reserve classifications](/en/insights/reserve-classification-gkz-kazrc-jorc-gbt17766)).
 4. Choose the route and structure (a foreign company or an LLP in Kazakhstan, shares, stages) together with a lawyer and a tax adviser.
 5. Prepare the documents: legalisation, notarised translations into Kazakh and Russian, proof of financial and professional capacity.
@@ -115,7 +115,7 @@ The state buys through a national holding or a national company at a price no le
 ## How QAZNEDR HOLDING can help
 
 - **Area selection.** Our geologists select prospective areas based on archived geological reports. The [areas page](/en/leads?kind=find) lists areas that are free according to our check as of the date shown. A licence for such an area is applied for as part of a specific transaction; the decision to grant it rests with the state.
-- **Status check.** Before filing, we check the blocks on the unified subsoil use platform and in the PUGFN.
+- **Status check.** Before filing, we check the blocks on the Unified Subsoil Use Platform and in the PUGFN.
 - **Application support.** We prepare the document package and the work description, and track deadlines. The licence is granted by the state: we support the process but do not guarantee the outcome.
 - **Due diligence.** When you buy a right or a stake, we review the licence, the obligations and the history of the area. More on the [legal support](/en/services/legal) page.
 - **Choosing the deal structure.** We compare a new licence, an acquisition and a JV, taking permissions and timelines into account. Answers to common questions are in the [FAQ](/en/faq); to discuss a project, use the [contact page](/en/contact).

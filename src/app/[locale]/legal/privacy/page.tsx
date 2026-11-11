@@ -15,7 +15,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildPageMetadata({
     locale,
     path: '/legal/privacy',
-    title: `${privacy.heading} | QAZNEDR`,
+    // buildPageMetadata appends the brand ("| QAZNEDR HOLDING").
+    title: privacy.heading,
     description: privacy.sections[1].body[0].slice(0, 155),
     // Draft edition: kept out of search until the owner approves the final text.
     noindex: true,

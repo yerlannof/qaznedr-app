@@ -39,6 +39,7 @@ export const GUIDE = {
   licenceCosts: 'subsoil-licence-costs-kazakhstan',
   checkArea: 'check-subsoil-area-kazakhstan',
   artisanalEquipment: 'artisanal-mining-equipment-kazakhstan',
+  goldMap: 'gold-map-kazakhstan',
 } as const;
 
 export type GuideKey = keyof typeof GUIDE;
@@ -203,6 +204,15 @@ export const INSIGHTS: readonly InsightEntry[] = [
     legal: true,
     lawAsOf: '2026-11-12',
     locales: ['ru', 'kz'],
+  },
+  {
+    slug: GUIDE.goldMap,
+    category: 'geology',
+    published: '2026-11-12',
+    updated: '2026-11-12',
+    legal: true,
+    lawAsOf: '2026-11-12',
+    locales: WRITTEN,
   },
 ];
 

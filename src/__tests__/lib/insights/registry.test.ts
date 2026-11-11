@@ -1,6 +1,19 @@
 import { GUIDE, INSIGHTS, insightHref } from '@/lib/insights/registry';
 
 describe('insightHref', () => {
+  it('registers the gold map guide in all four languages', () => {
+    expect(
+      INSIGHTS.find((entry) => entry.slug === GUIDE.goldMap)
+    ).toMatchObject({
+      slug: 'gold-map-kazakhstan',
+      category: 'geology',
+      published: '2026-11-12',
+      updated: '2026-11-12',
+      legal: true,
+      lawAsOf: '2026-11-12',
+      locales: ['ru', 'en', 'zh', 'kz'],
+    });
+  });
   it('registers the placer gold guide in all four languages', () => {
     expect(
       INSIGHTS.find((entry) => entry.slug === GUIDE.placerGold)

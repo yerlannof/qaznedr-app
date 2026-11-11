@@ -36,7 +36,7 @@ How to use this list:
 - The reference book describes the situation as of 1999. Recent work and the current status of an area are checked separately.
 - A district name on a map says nothing about the gold content of a particular stream. You need samples, their location and the year of the work.
 
-For the east there are separate guides: the [East Kazakhstan gold map](/en/insights/east-kazakhstan-gold-map-guide) and the [overview of gold in Kazakhstan](/en/minerals/gold).
+For the east there are separate guides: the [East Kazakhstan gold map](/en/insights/east-kazakhstan-gold-map-guide) and the [overview of gold in Kazakhstan](/en/minerals/gold). Lode districts and well-known deposits for every region are collected in the [gold map of Kazakhstan](/en/insights/gold-map-kazakhstan) guide.
 
 ## How geologists search for placer gold
 

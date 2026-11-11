@@ -36,7 +36,7 @@ description: 介绍什么是砂金矿、砂矿有哪些类型、哈萨克斯坦�
 - 手册反映的是1999年的情况。近年的工作和区域的现行状态需要另行核查。
 - 地图上的地区名称并不能说明某条溪流的含金量。需要样品、样品位置和工作年份。
 
-关于东部地区另有专门介绍：[东哈萨克斯坦黄金地图](/zh/insights/east-kazakhstan-gold-map-guide)和[哈萨克斯坦黄金概览](/zh/minerals/gold)。
+关于东部地区另有专门介绍：[东哈萨克斯坦黄金地图](/zh/insights/east-kazakhstan-gold-map-guide)和[哈萨克斯坦黄金概览](/zh/minerals/gold)。各州的原生金矿区和已知矿床汇总见[哈萨克斯坦黄金地图](/zh/insights/gold-map-kazakhstan)指南。
 
 ## 地质学家如何寻找砂金
 

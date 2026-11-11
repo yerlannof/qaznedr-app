@@ -13,7 +13,7 @@ description: '了解如何查找东哈萨克斯坦的黄金地质资料：统一
 
 ## 先找地质底图，再找黄金资料
 
-地质图展示岩石、接触关系和构造。它有助于判断还需在哪里寻找信息，但不是许可证地图，也不能证明矿床存在。区域概览图幅适合初选地区；更详细的资料用于局部问题。[哈萨克斯坦地质委员会介绍了1:50 000地质填图的用途](https://www.gov.kz/memleket/entities/geology/press/news/details/1143562?lang=ru)。在屏幕上放大旧扫描图不会增加野外观测数据。不同地图类型和比例尺的区别见[QAZNEDR地质图通用指南](/zh/insights/geological-map-kazakhstan)。砂矿如何形成、如何寻找，见[砂金指南](/zh/insights/placer-gold-kazakhstan)。
+地质图展示岩石、接触关系和构造。它有助于判断还需在哪里寻找信息，但不是许可证地图，也不能证明矿床存在。区域概览图幅适合初选地区；更详细的资料用于局部问题。[哈萨克斯坦地质委员会介绍了1:50 000地质填图的用途](https://www.gov.kz/memleket/entities/geology/press/news/details/1143562?lang=ru)。在屏幕上放大旧扫描图不会增加野外观测数据。不同地图类型和比例尺的区别见[QAZNEDR地质图通用指南](/zh/insights/geological-map-kazakhstan)。砂矿如何形成、如何寻找，见[砂金指南](/zh/insights/placer-gold-kazakhstan)。全国其他各州的概况见[哈萨克斯坦黄金地图](/zh/insights/gold-map-kazakhstan)指南。
 
 如果地图标出了黄金矿床、矿化点、地球化学异常或预测区域，请记下**图例中符号的准确类别**。这些代表不同性质的信息。对于金属品位记录，要查明计量单位、样品数量与类型、数值范围和计算方法：单个样品的最高值不代表矿体平均品位。如果资料给出资源量或储量，还需注明评估日期及所依据的标准，如GKZ、KAZRC或另一个明确标出的标准；P1–P3预测类别不能当作储量。比较数字前，应先了解[各评估体系的区别](/zh/insights/reserve-classification-gkz-kazrc-jorc-gbt17766)。
 

@@ -1,3 +1,5 @@
+import { existsSync, readdirSync, readFileSync } from 'fs';
+import path from 'path';
 import { translate, translations } from '@/lib/i18n/translations';
 import { FAQ } from '@/lib/content/faq';
 import offers from '@/lib/offers/offers.v1.json';
@@ -7,6 +9,10 @@ import offers from '@/lib/offers/offers.v1.json';
 // 地块 only for prospecting plots with corner points.
 
 const CYRILLIC = /[Ѐ-ӿ]/;
+
+// Variants replaced by one name per legal term (interface and guides alike).
+const BANNED_ZH_TERMS =
+  /《底土法》|手工采矿|个体小规模采矿|前苏联|千立方米|公斤/;
 
 function strings(value: unknown, path: string, out: [string, string][]) {
   if (typeof value === 'string') out.push([path, value]);
@@ -61,9 +67,25 @@ it('uses one Chinese name per legal term', () => {
   const all = [...zh, ...zhFields(offers, 'offers', [])].map(([, v]) => v);
   const faq = FAQ.zh.map(({ a }) => a);
   for (const v of [...all, ...faq]) {
-    expect(v).not.toMatch(
-      /《底土法》|手工采矿|个体小规模采矿|前苏联|千立方米|公斤/
+    expect(v).not.toMatch(BANNED_ZH_TERMS);
+  }
+});
+
+it('uses the same legal terms in the Chinese guides', () => {
+  const dir = path.join(process.cwd(), 'content', 'insights');
+  const guides = readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => path.join(dir, entry.name, 'zh.md'))
+    .filter((file) => existsSync(file));
+  expect(guides.length).toBeGreaterThan(0);
+  for (const file of guides) {
+    const banned = readFileSync(file, 'utf8').match(
+      new RegExp(BANNED_ZH_TERMS.source, 'g')
     );
+    expect({ file: path.relative(dir, file), banned }).toEqual({
+      file: path.relative(dir, file),
+      banned: null,
+    });
   }
 });
 

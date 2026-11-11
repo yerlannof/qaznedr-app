@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { after, NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase/server';
 import { inquirySchema, isLikelySpam } from '@/lib/inquiries/schema';
 import { createThrottle } from '@/lib/inquiries/throttle';
-import { formatInquiryMessage, notifyTelegram } from '@/lib/inquiries/notify';
+import { formatInquiryMessage } from '@/lib/inquiries/notify';
+import { notifyTelegramWithRetry } from '@/lib/inquiries/deliver';
 
 export const dynamic = 'force-dynamic';
 
@@ -69,6 +70,17 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
   }
 
-  await notifyTelegram(formatInquiryMessage(input, data.id));
+  // The inquiry is saved; Telegram (with one retry) runs after the response.
+  const text = formatInquiryMessage(input, data.id);
+  const task = () =>
+    notifyTelegramWithRetry(text, { context: { inquiryId: data.id } }).catch(
+      () => undefined
+    );
+  try {
+    after(task);
+  } catch {
+    // Outside a request scope (tests, scripts) there is no after(); run detached.
+    void task();
+  }
   return NextResponse.json({ success: true });
 }

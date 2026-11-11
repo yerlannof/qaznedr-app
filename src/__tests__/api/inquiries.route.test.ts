@@ -2,13 +2,12 @@
 import { NextRequest } from 'next/server';
 
 jest.mock('@/lib/supabase/server', () => ({ createServiceClient: jest.fn() }));
-jest.mock('@/lib/inquiries/notify', () => ({
-  ...jest.requireActual('@/lib/inquiries/notify'),
-  notifyTelegram: jest.fn().mockResolvedValue(true),
+jest.mock('@/lib/inquiries/deliver', () => ({
+  notifyTelegramWithRetry: jest.fn().mockResolvedValue(true),
 }));
 
 import { createServiceClient } from '@/lib/supabase/server';
-import { notifyTelegram } from '@/lib/inquiries/notify';
+import { notifyTelegramWithRetry as notifyTelegram } from '@/lib/inquiries/deliver';
 import { POST } from '@/app/api/inquiries/route';
 
 const valid = {
@@ -55,6 +54,18 @@ describe('POST /api/inquiries', () => {
         locale: 'zh',
       })
     );
+    expect(notifyTelegram).toHaveBeenCalledTimes(1);
+    const [text, options] = (notifyTelegram as jest.Mock).mock.calls[0];
+    expect(text).toContain('Новая заявка с qaznedr.kz');
+    expect(text).toContain('ID: uuid-1');
+    expect(options).toEqual({ context: { inquiryId: 'uuid-1' } });
+  });
+
+  it('answers the visitor without waiting for Telegram (retry runs after the response)', async () => {
+    (notifyTelegram as jest.Mock).mockReturnValueOnce(new Promise(() => {}));
+    const res = await POST(req(valid, '10.0.0.6'));
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ success: true });
     expect(notifyTelegram).toHaveBeenCalledTimes(1);
   });
 

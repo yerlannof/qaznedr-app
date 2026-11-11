@@ -162,7 +162,11 @@ describe('public API discovery contract', () => {
     const rules = robots().rules;
     expect(Array.isArray(rules)).toBe(true);
     for (const rule of Array.isArray(rules) ? rules : [rules]) {
-      expect(rule.allow).toEqual(['/', '/api/openapi.json$']);
+      expect(rule.allow).toEqual([
+        '/',
+        '/api/openapi.json$',
+        '/api/equipment-catalog/*/images/',
+      ]);
       expect(rule.disallow).toContain('/api/');
       expect(rule.disallow).toContain('/*/leads/*/full');
     }

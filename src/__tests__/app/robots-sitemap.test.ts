@@ -48,6 +48,48 @@ describe('robots', () => {
     );
     expect(r.sitemap).toBe('https://qaznedr.kz/sitemap.xml');
   });
+
+  // Google/Yandex semantics: the longest matching rule wins, allow on a tie.
+  // A trailing $ stays an end anchor, * matches any sequence.
+  const toRegex = (rule: string) =>
+    new RegExp(
+      '^' + rule.replace(/[.+?^{}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*')
+    );
+  const allowed = (
+    rule: { allow?: string | string[]; disallow?: string | string[] },
+    url: string
+  ) => {
+    const longest = (list: string | string[] = []) =>
+      Math.max(
+        -1,
+        ...[list]
+          .flat()
+          .filter((r) => toRegex(r).test(url))
+          .map((r) => r.length)
+      );
+    return longest(rule.allow) >= longest(rule.disallow);
+  };
+
+  it('lets crawlers fetch listing photos used in structured data, not the rest of /api/', () => {
+    const r = robots();
+    const rules = Array.isArray(r.rules) ? r.rules : [r.rules];
+    const photo =
+      '/api/equipment-catalog/00000000-0000-4000-8000-000000000001/images/00000000-0000-4000-8000-000000000002';
+    for (const rule of rules) {
+      expect(allowed(rule, photo)).toBe(true);
+      expect(allowed(rule, '/api/equipment-catalog')).toBe(false);
+      expect(
+        allowed(
+          rule,
+          '/api/equipment-catalog/00000000-0000-4000-8000-000000000001'
+        )
+      ).toBe(false);
+      expect(allowed(rule, '/api/leads?limit=50')).toBe(false);
+      expect(allowed(rule, '/api/openapi.json')).toBe(true);
+      expect(allowed(rule, '/ru/admin')).toBe(false);
+      expect(allowed(rule, '/ru/leads')).toBe(true);
+    }
+  });
 });
 
 describe('sitemap', () => {

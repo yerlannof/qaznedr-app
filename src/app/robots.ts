@@ -13,13 +13,17 @@ const disallow = [
   '/*/leads/*/full',
 ];
 
+// Listing photos are the `image` of the listings' structured data and the
+// source of their /_next/image copies; the longer allow rule beats '/api/'.
+const allow = ['/', '/api/openapi.json$', '/api/equipment-catalog/*/images/'];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: '*', allow: ['/', '/api/openapi.json$'], disallow },
+      { userAgent: '*', allow, disallow },
       {
         userAgent: 'Yandex',
-        allow: ['/', '/api/openapi.json$'],
+        allow,
         disallow,
         crawlDelay: 2,
       },

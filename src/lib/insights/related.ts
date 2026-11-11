@@ -79,6 +79,11 @@ export const RELATED_GUIDES: Readonly<Record<string, readonly string[]>> = {
     GUIDE.satelliteGoldMap,
     GUIDE.eastKazakhstanGoldMap,
   ],
+  [GUIDE.licenceCosts]: [
+    GUIDE.artisanalMining,
+    GUIDE.explorationLicence,
+    GUIDE.goldLicenceTypes,
+  ],
 };
 
 export function orderRelatedArticles(

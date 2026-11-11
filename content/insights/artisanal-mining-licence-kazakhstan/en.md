@@ -71,7 +71,7 @@ The official starting point is [EPN government services](https://minerals.e-qazy
 
 The Rules set a service period of seven working days. Applications for overlapping areas are reviewed in order; an earlier application may affect your route and timing. Seven days is therefore not a promise that an area will be granted in every case.
 
-The government service is free, but other costs remain. The Code provides for a signature bonus, security for remediation of work impacts and reclamation duties. The regional executive body sets the security amount per hectare; check the final amount for the particular area and year.
+The government service is free, but other costs remain. The Code provides for a signature bonus, security for remediation of work impacts and reclamation duties. The regional executive body sets the security amount per hectare; check the final amount for the particular area and year. Amounts in tenge at the 2026 MCI are in the guide [on licence costs](/en/insights/subsoil-licence-costs-kazakhstan).
 
 Before work starts, meet the applicable conditions, including remediation security. Keep the licence, plan, conclusions and evidence that conditions were met. Production reporting is also required; the regular annual report is due by 30 January for the previous year (Article 272).
 

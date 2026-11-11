@@ -36,6 +36,7 @@ export const GUIDE = {
   readGeologicalMap: 'how-to-read-geological-map',
   goldLicenceTypes: 'gold-licence-types-kazakhstan',
   placerGold: 'placer-gold-kazakhstan',
+  licenceCosts: 'subsoil-licence-costs-kazakhstan',
 } as const;
 
 export type GuideKey = keyof typeof GUIDE;
@@ -165,6 +166,15 @@ export const INSIGHTS: readonly InsightEntry[] = [
   {
     slug: GUIDE.placerGold,
     category: 'geology',
+    published: '2026-11-11',
+    updated: '2026-11-11',
+    legal: true,
+    lawAsOf: '2026-11-11',
+    locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.licenceCosts,
+    category: 'licensing',
     published: '2026-11-11',
     updated: '2026-11-11',
     legal: true,

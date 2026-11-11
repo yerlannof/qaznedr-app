@@ -85,7 +85,7 @@ The Code allows 40 working days for the security "from the day the notice is sen
 | 61–84          | 32 (fewer than 50); 60 (from 50 to 100); 80 (from 100)        |
 | From month 85  | 60 (fewer than 30); 80 (from 30 to 80); 100 (from 80)         |
 
-The annual amount is paid by 25 February and the calculation is filed by 20 February; if the licence is granted later, the fee is calculated for the actual period (Tax Code Art. 623–624).
+The annual amount is paid by 25 February and the calculation is filed by 20 February; if the licence is granted later, the fee is calculated for the actual period (Tax Code Art. 623–624). Amounts in tenge at the 2026 MCI and a first-year budget example are in the guide [on licence costs](/en/insights/subsoil-licence-costs-kazakhstan).
 
 ## Minimum exploration expenditure
 

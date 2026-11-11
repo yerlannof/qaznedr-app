@@ -30,6 +30,8 @@ This is a [separate licence with separate rules](/en/insights/artisanal-mining-l
 3. Check boundaries and existing rights on the [EPN](https://minerals.e-qazyna.kz/ru/contracts-map), then open the page of the relevant [government service](https://minerals.e-qazyna.kz/ru/minerals/gosuslugi). A geological map shows subsoil data, but does not confirm that an area is available for licensing.
 4. If you are offered a right that has already been granted, check the licence type and its transfer rules separately: see the [guide on transferring subsoil use rights](/en/insights/subsoil-rights-transfer-permission-kazakhstan). An artisanal mining licence cannot be transferred.
 
+What the payments for an artisanal mining or exploration licence amount to is covered in the guide [on licence costs](/en/insights/subsoil-licence-costs-kazakhstan).
+
 You can study published descriptions on the [areas page](/en/leads). The status of each area must be checked as of the date shown; publishing a description does not mean that QAZNEDR holds the right to the area. The team can help review geological materials and work out which questions to ask before applying. [Describe your task](/en/contact?service=geology): region, type of gold, the materials you have and the purpose of the work.
 
 This material is for reference only. Check the right to a specific area, the documents, restrictions and the current wording of the rules before applying.

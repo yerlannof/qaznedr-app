@@ -30,6 +30,8 @@ description: 说明哈萨克斯坦黄金勘查许可证、固体矿产开采许�
 3. 通过[EPN](https://minerals.e-qazyna.kz/ru/contracts-map)核查边界和现有权利，然后打开相应[政府服务](https://minerals.e-qazyna.kz/ru/minerals/gosuslugi)的页面。地质图显示底土资料，但不能证明该矿区可申请许可证。
 4. 如果有人向您出售已办理的权利，请另行核查许可证类型及其转让规则：参见[底土利用权转让指南](/zh/insights/subsoil-rights-transfer-permission-kazakhstan)。个体小规模采矿许可证禁止转让。
 
+个体小规模采矿许可证和勘查许可证需缴纳的费用见[许可证费用指南](/zh/insights/subsoil-licence-costs-kazakhstan)。
+
 您可以在[矿区页面](/zh/leads)查看已发布的介绍。每个矿区的状态须按所示日期核查；发布介绍并不意味着该矿区的权利属于QAZNEDR。团队可以帮助分析地质资料，并确定提交申请前应提出哪些问题。[描述您的需求](/zh/contact?service=geology)：地区、黄金类型、现有资料和作业目的。
 
 本文仅供参考。提交申请前，请核查具体矿区的权利、文件、限制及现行规则文本。

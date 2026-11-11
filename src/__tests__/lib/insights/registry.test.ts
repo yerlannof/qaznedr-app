@@ -14,6 +14,19 @@ describe('insightHref', () => {
       locales: ['ru', 'en', 'zh', 'kz'],
     });
   });
+  it('registers the licence cost guide in all four languages', () => {
+    expect(
+      INSIGHTS.find((entry) => entry.slug === GUIDE.licenceCosts)
+    ).toMatchObject({
+      slug: 'subsoil-licence-costs-kazakhstan',
+      category: 'licensing',
+      published: '2026-11-11',
+      updated: '2026-11-11',
+      legal: true,
+      lawAsOf: '2026-11-11',
+      locales: ['ru', 'en', 'zh', 'kz'],
+    });
+  });
   it('registers the gold licence comparison in all four languages', () => {
     expect(
       INSIGHTS.find((entry) => entry.slug === GUIDE.goldLicenceTypes)

@@ -145,3 +145,20 @@ describe('catalogue metadata', () => {
     expect(meta.robots).toEqual({ index: true, follow: true });
   });
 });
+
+describe('catalogue pagination', () => {
+  it('lets crawlers follow later pages without pointing them at page one', async () => {
+    for (const search of [{ page: '2' }, { page: '3', category: 'drill' }]) {
+      const meta = await generateMetadata(props(search, 'ru'));
+      expect(meta.robots).toEqual({ index: false, follow: true });
+      expect(meta.alternates?.canonical).toBeUndefined();
+      expect(meta.alternates?.languages).toBeUndefined();
+    }
+  });
+
+  it('leaves filtered first pages as they were', async () => {
+    const meta = await generateMetadata(props({ offerType: 'RENT' }, 'ru'));
+    expect(meta.robots).toEqual({ index: false, follow: false });
+    expect(meta.alternates?.canonical).toBe('https://qaznedr.kz/ru/equipment');
+  });
+});

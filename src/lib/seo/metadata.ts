@@ -45,6 +45,11 @@ export interface PageMetadataInput {
   canonicalLocale?: Locale;
   /** false: no hreflang alternates, for pages without translations. */
   languageAlternates?: boolean;
+  /** false: no canonical link (noindexed later pages of a list, which must
+   * not point at page one). */
+  canonical?: boolean;
+  /** With noindex, still let crawlers follow the page's links. */
+  followLinks?: boolean;
 }
 
 export function buildPageMetadata(input: PageMetadataInput): Metadata {
@@ -74,7 +79,7 @@ export function buildPageMetadata(input: PageMetadataInput): Metadata {
     title: { absolute: fullTitle },
     description: input.description,
     alternates: {
-      canonical: url,
+      ...(input.canonical !== false && { canonical: url }),
       ...(input.languageAlternates !== false && {
         languages: buildLanguageAlternates(input.path, input.locales),
       }),
@@ -94,7 +99,7 @@ export function buildPageMetadata(input: PageMetadataInput): Metadata {
       images: [image.url],
     },
     robots: input.noindex
-      ? { index: false, follow: false }
+      ? { index: false, follow: !!input.followLinks }
       : { index: true, follow: true },
   };
 }

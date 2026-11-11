@@ -81,6 +81,14 @@ export async function generateMetadata({
     title: scope.length ? `${scope.join(', ')} — ${title}` : title,
     description: translate(locale, 'equipmentCatalog.metaDescription'),
     noindex: !enabled() || adjusted || !isIndexableQuery(query),
+    // Later pages stay out of the index but lead crawlers to the listings
+    // on them. Google advises against making page one their canonical, and
+    // they are not translations of each other either.
+    ...(query.page > 1 && {
+      followLinks: true,
+      canonical: false,
+      languageAlternates: false,
+    }),
   });
 }
 

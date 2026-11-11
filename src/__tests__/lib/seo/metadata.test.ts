@@ -144,6 +144,21 @@ describe('seo/metadata', () => {
     });
   });
 
+  it('can keep links followable and drop canonical and hreflang (later list pages)', () => {
+    const m = buildPageMetadata({
+      locale: 'ru',
+      path: '/equipment',
+      title: 't',
+      description: 'd',
+      noindex: true,
+      followLinks: true,
+      canonical: false,
+      languageAlternates: false,
+    });
+    expect(m.robots).toEqual({ index: false, follow: true });
+    expect(m.alternates).toEqual({});
+  });
+
   it('reads localized strings from translations', () => {
     const zh = buildTranslatedPageMetadata('zh', '/leads', 'leads');
     const ru = buildTranslatedPageMetadata('ru', '/leads', 'leads');

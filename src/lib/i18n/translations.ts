@@ -767,6 +767,7 @@ export const translations = {
           'Лицензия на золото: разведка, добыча или старательство',
         licenceCosts: 'Сколько стоит лицензия на старательство и разведку',
         checkArea: 'Как проверить, свободен ли участок недр',
+        artisanalEquipment: 'Техника для старательства: что разрешает лицензия',
         foreignInvestor:
           'Как иностранному инвестору получить право недропользования',
         explorationLicence: 'Лицензия на разведку ТПИ: процесс по шагам',
@@ -796,6 +797,8 @@ export const translations = {
           'Подписной бонус, плата за участок, минимальные расходы и обеспечение в тенге по МРП 2026 года.',
         checkArea:
           'Проверка участка на карте ЕПН по шагам: координаты, блоки, слои лицензий и ограничения статьи 25.',
+        artisanalEquipment:
+          'Глубина до 3 м, ковш до 0,5 м³, только своя техника, ручная работа на воде, план старательства и рекультивация.',
         foreignInvestor:
           'Кто может стать недропользователем и три пути входа: новая лицензия, покупка права или доли, совместное предприятие.',
         explorationLicence:
@@ -2510,6 +2513,8 @@ export const translations = {
           'Алтынға лицензия: барлау, өндіру әлде кен іздеушілік',
         licenceCosts: 'Кен іздеушілік пен барлау лицензиясы қанша тұрады',
         checkArea: 'Жер қойнауы учаскесінің бос екенін қалай тексеруге болады',
+        artisanalEquipment:
+          'Кен іздеушілікке арналған техника: лицензия неге рұқсат береді',
         foreignInvestor: 'Шетелдік инвесторға жер қойнауын пайдалану құқығы',
         explorationLicence:
           'Қатты пайдалы қазбаларды барлау лицензиясы: қадамдар',
@@ -2540,6 +2545,8 @@ export const translations = {
           'Қол қою бонусы, учаске үшін төлем, ең төменгі шығындар және қамтамасыз ету — 2026 жылғы АЕК бойынша теңгемен.',
         checkArea:
           'Учаскені ЕПН картасынан қадам бойынша тексеру: координаттар, блоктар, лицензия қабаттары және 25-бап шектеулері.',
+        artisanalEquipment:
+          'Тереңдігі 3 м-ге дейін, шөміш 0,5 м³-ге дейін, тек өз техникасы, судағы қол жұмысы, кен іздеушілік жоспары және рекультивация.',
         foreignInvestor:
           'Кім жер қойнауын пайдаланушы бола алады және кірудің үш жолы: жаңа лицензия, құқықты не үлесті сатып алу, бірлескен кәсіпорын.',
         explorationLicence:
@@ -4177,6 +4184,8 @@ export const translations = {
         goldLicenceTypes: 'Gold licences: exploration, mining or artisanal',
         licenceCosts: 'What artisanal and exploration licences cost',
         checkArea: 'How to check whether a subsoil area is free',
+        artisanalEquipment:
+          'Artisanal mining equipment: what the licence allows',
         foreignInvestor: 'Subsoil use rights for foreign investors',
         explorationLicence: 'Solid minerals exploration licence, step by step',
         reserveClassification:
@@ -4204,6 +4213,8 @@ export const translations = {
           'Signature bonus, area fee, minimum spend and security in tenge at the 2026 MCI.',
         checkArea:
           'Checking an area on the EPN map step by step: coordinates, blocks, licence layers and Article 25 restrictions.',
+        artisanalEquipment:
+          'Depth up to 3 m, buckets up to 0.5 m³ in total, owned machinery only, hand work on water, the mining plan and reclamation.',
         foreignInvestor:
           'Who can hold subsoil use rights and three ways in: a new licence, buying a right or a stake, a joint venture.',
         explorationLicence:
@@ -5784,6 +5795,7 @@ export const translations = {
         goldLicenceTypes: '黄金许可证：勘查、开采还是小规模采矿',
         licenceCosts: '小规模采矿与勘查许可证费用',
         checkArea: '如何核查矿区是否空闲',
+        artisanalEquipment: '小规模采矿设备：许可证允许使用什么',
         foreignInvestor: '外国投资者如何在哈萨克斯坦取得矿业权',
         explorationLicence: '固体矿产勘查许可证：办理流程',
         reserveClassification: '储量分类对照：GKZ、KAZRC/JORC、GB/T 17766',
@@ -5807,6 +5819,8 @@ export const translations = {
           '签约奖金、区块使用费、最低支出和保证金额，按2026年MRP折算为坚戈。',
         checkArea:
           '在EPN地图上逐步核查矿区：坐标、区块、许可证图层和第25条限制。',
+        artisanalEquipment:
+          '作业深度不超过3米，铲斗合计不超过0.5立方米，只能使用自有设备，水体上只能手工作业，以及作业计划和土地复垦。',
         foreignInvestor:
           '谁可以成为矿业权人，以及三种进入方式：申请新许可证、收购矿业权或股权、成立合资企业。',
         explorationLicence: '申请、区块、期限、义务及转入开采。',

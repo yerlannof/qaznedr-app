@@ -38,6 +38,7 @@ export const GUIDE = {
   placerGold: 'placer-gold-kazakhstan',
   licenceCosts: 'subsoil-licence-costs-kazakhstan',
   checkArea: 'check-subsoil-area-kazakhstan',
+  artisanalEquipment: 'artisanal-mining-equipment-kazakhstan',
 } as const;
 
 export type GuideKey = keyof typeof GUIDE;
@@ -190,6 +191,17 @@ export const INSIGHTS: readonly InsightEntry[] = [
     legal: true,
     lawAsOf: '2026-11-12',
     // Russian and Kazakh only; en and zh readers land on the ru version.
+    locales: ['ru', 'kz'],
+  },
+  {
+    // The artisanal licence is for citizens of Kazakhstan only, so Russian
+    // and Kazakh; en and zh readers land on the ru version.
+    slug: GUIDE.artisanalEquipment,
+    category: 'licensing',
+    published: '2026-11-12',
+    updated: '2026-11-12',
+    legal: true,
+    lawAsOf: '2026-11-12',
     locales: ['ru', 'kz'],
   },
 ];

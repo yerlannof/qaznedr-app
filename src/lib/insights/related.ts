@@ -89,6 +89,11 @@ export const RELATED_GUIDES: Readonly<Record<string, readonly string[]>> = {
     GUIDE.explorationLicence,
     GUIDE.pugfn,
   ],
+  [GUIDE.artisanalEquipment]: [
+    GUIDE.artisanalMining,
+    GUIDE.placerGold,
+    GUIDE.licenceCosts,
+  ],
 };
 
 export function orderRelatedArticles(

@@ -39,6 +39,10 @@ const FORBIDDEN = [
   /obtain the licen[cs]e/i,
 ];
 
+// Public behind a feature flag, so not in PUBLIC_PAGES: the equipment and
+// services catalogue (live in production since 20.10.2026).
+const FLAGGED_PUBLIC_PAGES = ['/equipment'];
+
 /**
  * Internal links, read from the rendered HTML so that every markdown form
  * (titles, references, <…>, raw <a>) is seen. A link must stay in the
@@ -70,7 +74,10 @@ function linkProblems(markdown: string, locale: string): string[] {
       }
       continue;
     }
-    if (!(PUBLIC_PAGES as readonly string[]).includes(rest)) {
+    if (
+      !(PUBLIC_PAGES as readonly string[]).includes(rest) &&
+      !FLAGGED_PUBLIC_PAGES.includes(rest)
+    ) {
       problems.push(`not a public page: ${href}`);
     }
   }

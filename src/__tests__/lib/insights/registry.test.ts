@@ -46,6 +46,25 @@ describe('insightHref', () => {
       locales: ['ru', 'en', 'zh', 'kz'],
     });
   });
+  it('registers the artisanal equipment guide in Russian and Kazakh only', () => {
+    expect(
+      INSIGHTS.find((entry) => entry.slug === GUIDE.artisanalEquipment)
+    ).toMatchObject({
+      slug: 'artisanal-mining-equipment-kazakhstan',
+      category: 'licensing',
+      published: '2026-11-12',
+      updated: '2026-11-12',
+      legal: true,
+      lawAsOf: '2026-11-12',
+      locales: ['ru', 'kz'],
+    });
+    expect(insightHref('en', GUIDE.artisanalEquipment)).toBe(
+      '/ru/insights/artisanal-mining-equipment-kazakhstan'
+    );
+    expect(insightHref('zh', GUIDE.artisanalEquipment)).toBe(
+      '/ru/insights/artisanal-mining-equipment-kazakhstan'
+    );
+  });
   it('registers the gold licence comparison in all four languages', () => {
     expect(
       INSIGHTS.find((entry) => entry.slug === GUIDE.goldLicenceTypes)

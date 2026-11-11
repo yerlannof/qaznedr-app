@@ -1,5 +1,5 @@
 import 'server-only';
-import { createClient, createServiceClient } from '@/lib/supabase/server';
+import { createPublicClient, createServiceClient } from '@/lib/supabase/server';
 import { TEASER_COLUMNS, type LeadTeaser, type LeadType } from './types';
 import { mineralHub, matchesMineral } from './minerals';
 
@@ -31,7 +31,7 @@ export interface LeadListResult {
 export async function listPublishedLeads(
   f: LeadListFilters = {}
 ): Promise<LeadListResult> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const limit = Math.min(f.limit ?? 24, 50); // hard cap — no bulk dump
   const page = Math.max(f.page ?? 1, 1);
   const offset = (page - 1) * limit;
@@ -96,7 +96,7 @@ export async function listPublishedLeads(
 export async function getPublishedLeadByCode(
   code: string
 ): Promise<LeadTeaser | null> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data, error } = await (supabase as any)
     .from('leads')
     .select(TEASER_COLUMNS)
@@ -109,7 +109,7 @@ export async function getPublishedLeadByCode(
 
 /** Distinct regions present among published leads (for filter dropdown). */
 export async function listLeadRegions(): Promise<string[]> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data } = await (supabase as any)
     .from('leads')
     .select('region')
@@ -123,7 +123,7 @@ export async function listLeadRegions(): Promise<string[]> {
 
 /** Read only public commodity labels, with stable paging; never truncate a hub. */
 async function listPublishedMinerals(): Promise<string[]> {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const values = new Set<string>();
   for (let offset = 0; offset < 20000; offset += 1000) {
     const { data, error } = await (supabase as any)

@@ -15,7 +15,7 @@ builder.then = (resolve: (v: unknown) => void) =>
 
 // The builder is thenable (awaited for the result), so the client wraps it.
 jest.mock('@/lib/supabase/server', () => ({
-  createClient: async () => ({ from: () => builder }),
+  createPublicClient: () => ({ from: () => builder }),
 }));
 
 import { listPublishedLeads } from '@/lib/leads/public-queries';

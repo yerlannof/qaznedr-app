@@ -1,5 +1,5 @@
 import { loadHomeSnapshot } from '@/lib/leads/home';
-import { toLocale } from '@/lib/seo/site';
+import { LOCALES, toLocale } from '@/lib/seo/site';
 import type { Metadata } from 'next';
 import HomePageContent from '@/components/features/HomePageContent';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
@@ -15,7 +15,12 @@ export async function generateMetadata({
   });
 }
 
-export const dynamic = 'force-dynamic';
+// Lead counts change only on import; regenerate at most every 5 minutes.
+export const revalidate = 300;
+
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
 
 export default async function Home({
   params,

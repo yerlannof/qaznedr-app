@@ -15,7 +15,12 @@ import { getContactConfig } from '@/lib/config/contacts';
 import { translate } from '@/lib/i18n/translations';
 import { regionLabel } from '@/lib/data/filter-config';
 import { buildPageMetadata } from '@/lib/seo/metadata';
-import { toLocale } from '@/lib/seo/site';
+import { localeUrl, toLocale } from '@/lib/seo/site';
+import { breadcrumbJsonLd } from '@/lib/seo/article-jsonld';
+import {
+  equipmentBreadcrumb,
+  equipmentCatalogueJsonLd,
+} from '@/lib/seo/equipment-seo';
 import {
   catalogFacets,
   coverImagesFor,
@@ -46,6 +51,19 @@ type Props = {
 
 const enabled = equipmentCatalogEnabled;
 
+/** The catalogue address search engines index: a section and/or region. */
+function canonicalPath(query: EquipmentSearchQuery): string {
+  const params = new URLSearchParams(
+    Object.fromEntries(
+      [
+        ['category', query.category],
+        ['region', query.region],
+      ].filter(([, value]) => value) as [string, string][]
+    )
+  ).toString();
+  return '/equipment' + (params ? `?${params}` : '');
+}
+
 export async function generateMetadata({
   params,
   searchParams,
@@ -57,22 +75,9 @@ export async function generateMetadata({
     query.region ? regionLabel(query.region, locale) : null,
   ].filter(Boolean);
   const title = translate(locale, 'equipmentCatalog.metaTitle');
-  const path =
-    '/equipment' +
-    (scope.length
-      ? '?' +
-        new URLSearchParams(
-          Object.fromEntries(
-            [
-              ['category', query.category],
-              ['region', query.region],
-            ].filter(([, value]) => value) as [string, string][]
-          )
-        ).toString()
-      : '');
   return buildPageMetadata({
     locale,
-    path,
+    path: canonicalPath(query),
     title: scope.length ? `${scope.join(', ')} — ${title}` : title,
     description: translate(locale, 'equipmentCatalog.metaDescription'),
     noindex: !enabled() || adjusted || !isIndexableQuery(query),
@@ -166,6 +171,29 @@ export default async function EquipmentCatalogPage({
     result = null;
   }
   const t = (key: string) => translate(locale, `equipmentCatalog.${key}`);
+  // The cards actually rendered, by their indexable URLs; no list claimed
+  // when the catalogue could not be read or the page is empty.
+  const jsonLd = [
+    ...(result?.items.length
+      ? [
+          equipmentCatalogueJsonLd({
+            locale,
+            name: t('title'),
+            description: t('metaDescription'),
+            url: localeUrl(
+              locale,
+              canonicalPath(query) +
+                (query.page > 1
+                  ? `${query.category || query.region ? '&' : '?'}page=${query.page}`
+                  : '')
+            ),
+            offset: (query.page - 1) * result.limit,
+            items: result.items,
+          }),
+        ]
+      : []),
+    breadcrumbJsonLd(equipmentBreadcrumb(locale)),
+  ];
   return (
     <>
       <Navigation overlay />
@@ -224,6 +252,15 @@ export default async function EquipmentCatalogPage({
         />
       </main>
       <Footer />
+      {jsonLd.map((data, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+          }}
+        />
+      ))}
     </>
   );
 }

@@ -67,3 +67,31 @@ it('keeps an unknown company out of the index', async () => {
   });
   await expect(Page(props('ru'))).rejects.toThrow('404');
 });
+
+it('marks up the company with breadcrumbs to its original URL', async () => {
+  const page = await Page(props('en'));
+  const scripts = (
+    page.props.children as {
+      type: unknown;
+      props: { dangerouslySetInnerHTML?: { __html: string } };
+    }[]
+  )
+    .flat()
+    .filter((child) => child?.type === 'script')
+    .map((child) => JSON.parse(child.props.dangerouslySetInnerHTML!.__html));
+  const breadcrumb = scripts.find((b) => b['@type'] === 'BreadcrumbList');
+  expect(breadcrumb.itemListElement).toEqual([
+    expect.objectContaining({ position: 1, item: 'https://qaznedr.kz/en' }),
+    expect.objectContaining({
+      position: 2,
+      item: 'https://qaznedr.kz/en/equipment',
+    }),
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Тест Бурение',
+      item: 'https://qaznedr.kz/ru/equipment/company/test-burenie',
+    },
+  ]);
+  expect(scripts.some((b) => b['@type'] === 'Organization')).toBe(true);
+});

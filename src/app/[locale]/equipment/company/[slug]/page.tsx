@@ -10,7 +10,9 @@ import {
   COMPANY_PAGE_LOCALE,
   companyCanonicalUrl,
   companyPath,
+  equipmentBreadcrumb,
 } from '@/lib/seo/equipment-seo';
+import { breadcrumbJsonLd } from '@/lib/seo/article-jsonld';
 import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 import { getActiveCompanyBySlug } from '@/lib/equipment-listings/companies';
 import {
@@ -69,7 +71,7 @@ export default async function CompanyPage({ params }: Props) {
       (rows as { mark: string }[]).map((row) => row.mark),
     ])
   );
-  const jsonLd = {
+  const organization = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: company.name,
@@ -84,6 +86,10 @@ export default async function CompanyPage({ params }: Props) {
       },
     }),
   };
+  const breadcrumb = breadcrumbJsonLd([
+    ...equipmentBreadcrumb(locale),
+    { name: company.name, url: companyCanonicalUrl(company.slug) },
+  ]);
   return (
     <>
       <Navigation overlay />
@@ -97,12 +103,15 @@ export default async function CompanyPage({ params }: Props) {
         />
       </main>
       <Footer />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
-        }}
-      />
+      {[organization, breadcrumb].map((data, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+          }}
+        />
+      ))}
     </>
   );
 }

@@ -48,6 +48,15 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     // illustration; the coal tile counts published coal finds.
     expect(html).toContain('hero-ridges.mp4');
     expect(html).toContain('muted');
+    // The still under the video is the optimised next/image copy; a poster
+    // would download the raw 124 KB file a second time. The video paints
+    // nothing until its first frame, so the still shows through instead.
+    const video = html.match(/<video\b[^>]*>/)?.[0] ?? '';
+    expect(video).toContain('class="home-hero-video"');
+    expect(video).not.toContain('poster');
+    expect(html).toMatch(
+      /<img\b[^>]*src="\/_next\/image\?url=%2Fbrand%2Fphoto%2Fhero-ridges\.webp/
+    );
     expect(html).toContain(translate(locale, 'homeV2.illustration'));
   }
 );

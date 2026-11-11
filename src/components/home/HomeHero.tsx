@@ -11,7 +11,10 @@ import { getContactConfig, primaryContactCta } from '@/lib/config/contacts';
 /**
  * Full-bleed home hero (owner redesign 2026-10-20): a slow silent aerial loop
  * under the headline. The footage is a generated illustration, labelled as
- * such; reduced motion and slow connections keep the still poster.
+ * such; reduced motion and slow connections keep the still image under it.
+ * No poster: the video paints nothing until its first frame (no background
+ * in .home-hero-video), so the optimised still shows through exactly where
+ * a poster would, without downloading the raw webp a second time.
  */
 export default function HomeHero({
   locale,
@@ -57,7 +60,6 @@ export default function HomeHero({
           loop
           playsInline
           preload="metadata"
-          poster="/brand/photo/hero-ridges.webp"
         >
           <source
             src="/brand/photo/hero-ridges-960.mp4"

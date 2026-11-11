@@ -58,6 +58,13 @@ describe('lead SEO text', () => {
     expect(leadMineralName('Au россыпь', 'ru')).toBe('Золото');
   });
 
+  it('names graphite from the other-minerals showcase package', () => {
+    expect(leadMineralName('graphite', 'ru')).toBe('Графит');
+    expect(leadMineralName('graphite', 'kz')).toBe('Графит');
+    expect(leadMineralName('graphite', 'en')).toBe('Graphite');
+    expect(leadMineralName('graphite', 'zh')).toBe('石墨');
+  });
+
   it('falls back to the raw mineral code and tolerates nulls', () => {
     expect(leadMineralName('REE', 'en')).toBe('REE');
     expect(() =>

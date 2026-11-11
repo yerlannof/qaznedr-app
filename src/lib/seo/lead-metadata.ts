@@ -37,6 +37,9 @@ const MINERALS: Record<string, Record<Locale, string>> = {
   },
   // Tuff (facing and wall stone, ОПИ); not a chemical symbol.
   TUFF: { ru: 'Туф', kz: 'Туф', en: 'Tuff', zh: '凝灰岩' },
+  // Graphite (ТПИ, non-metal) from the other-minerals showcase package
+  // (qaznedr-showcase-other-v1); not a chemical symbol.
+  GRAPHITE: { ru: 'Графит', kz: 'Графит', en: 'Graphite', zh: '石墨' },
 };
 
 // Region spellings used by the leads export that differ from filter-config.

@@ -1,18 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { headers } from 'next/headers';
-import { after } from 'next/server';
-import {
-  BOT_AGENT,
-  ownerOfActiveListing,
-  recordListingEvent,
-} from '@/lib/equipment-listings/engagement';
+import { ownerOfActiveListing } from '@/lib/equipment-listings/engagement';
 import { activeCompanyOf } from '@/lib/equipment-listings/companies';
 import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import EquipmentDetail from '@/components/equipment/catalog/EquipmentDetail';
+import ViewBeacon from '@/components/equipment/catalog/ViewBeacon';
 import { getContactConfig } from '@/lib/config/contacts';
 import { translate } from '@/lib/i18n/translations';
 import { buildPageMetadata } from '@/lib/seo/metadata';
@@ -194,16 +189,6 @@ export default async function EquipmentListingPage({ params }: Props) {
         <Footer />
       </>
     );
-  // Count real visits for the author's stats, after the page is sent.
-  if (!BOT_AGENT.test((await headers()).get('user-agent') ?? '')) {
-    const task = () =>
-      recordListingEvent(listing.id, 'view').catch(() => undefined);
-    try {
-      after(task);
-    } catch {
-      void task();
-    }
-  }
   const [images, marks, company] = await Promise.all([
     listImages(listing.id)
       .then((rows) => rows.map((row) => row.id))
@@ -219,6 +204,8 @@ export default async function EquipmentListingPage({ params }: Props) {
     <>
       <Navigation />
       <main className="bg-brand-bg pt-20 text-brand-ink lg:pt-24">
+        {/* Views are counted in the browser: once per session, no automation. */}
+        <ViewBeacon listingId={listing.id} />
         <EquipmentDetail
           listing={listing}
           locale={locale}

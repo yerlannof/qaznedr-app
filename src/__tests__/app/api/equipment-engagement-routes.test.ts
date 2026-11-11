@@ -73,7 +73,8 @@ it('counts contact taps but ignores bots and other kinds', async () => {
     ctx
   );
   expect(recordListingEvent).toHaveBeenCalledTimes(1);
-  expect((await event(req('event', { kind: 'view' }), ctx)).status).toBe(400);
+  expect((await event(req('event', { kind: 'share' }), ctx)).status).toBe(400);
+  expect(recordListingEvent).toHaveBeenCalledTimes(1);
   expect(
     (
       await event(
@@ -82,6 +83,29 @@ it('counts contact taps but ignores bots and other kinds', async () => {
       )
     ).status
   ).toBe(403);
+});
+
+it('counts views sent by the page beacon, except from bots', async () => {
+  expect((await event(req('event', { kind: 'view' }), ctx)).status).toBe(200);
+  expect(recordListingEvent).toHaveBeenCalledWith(id, 'view');
+  await event(
+    req(
+      'event',
+      { kind: 'view' },
+      { 'user-agent': 'Mozilla/5.0 Chrome-Lighthouse' }
+    ),
+    ctx
+  );
+  expect(recordListingEvent).toHaveBeenCalledTimes(1);
+  expect(
+    (
+      await event(
+        req('event', { kind: 'view' }, { origin: 'https://evil.example' }),
+        ctx
+      )
+    ).status
+  ).toBe(403);
+  expect(recordListingEvent).toHaveBeenCalledTimes(1);
 });
 
 it('saves a response and maps limits', async () => {

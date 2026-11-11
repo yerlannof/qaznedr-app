@@ -13,6 +13,7 @@ import { translate } from '@/lib/i18n/translations';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { SITE_URL, localeUrl, toLocale, type Locale } from '@/lib/seo/site';
 import {
+  appendExcerpt,
   listingCanonicalUrl,
   listingPath,
   listingSourceLocale,
@@ -64,7 +65,7 @@ async function load(
 }
 
 function describe(listing: PublicEquipmentListing, locale: Locale): string {
-  return [
+  const facts = [
     cardTag(listing, locale),
     ...keyFacts(listing, locale),
     placeText(listing, locale),
@@ -73,6 +74,7 @@ function describe(listing: PublicEquipmentListing, locale: Locale): string {
     .filter(Boolean)
     .join(' · ')
     .slice(0, 300);
+  return appendExcerpt(facts, listing.description);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

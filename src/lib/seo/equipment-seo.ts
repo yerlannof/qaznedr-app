@@ -84,3 +84,30 @@ export function equipmentCatalogueJsonLd(input: {
     },
   };
 }
+
+const SEPARATOR = ' · ';
+const ELLIPSIS = '…';
+
+/**
+ * Generated listing facts followed by the beginning of the author's own text,
+ * so listings of one company with the same facts get distinct descriptions.
+ * Whitespace is collapsed and the text cut at a word boundary to keep the
+ * whole within `max` characters; nothing else is added. Without text, or
+ * without room for one word, the prefix is returned unchanged.
+ */
+export function appendExcerpt(
+  prefix: string,
+  text: string | undefined,
+  max = 160
+): string {
+  const clean = (text ?? '').replace(/\s+/g, ' ').trim();
+  const room = max - prefix.length - SEPARATOR.length;
+  if (!clean || room <= 0) return prefix;
+  if (clean.length <= room) return prefix + SEPARATOR + clean;
+  // One character past the room shows whether the last word ends there.
+  const cut = clean.slice(0, room - ELLIPSIS.length + 1);
+  const boundary = cut.lastIndexOf(' ');
+  if (boundary <= 0) return prefix;
+  const words = cut.slice(0, boundary).replace(/[\s.,;:!?—–-]+$/, '');
+  return words ? prefix + SEPARATOR + words + ELLIPSIS : prefix;
+}

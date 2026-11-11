@@ -221,3 +221,27 @@ describe('structured data', () => {
       ]);
   });
 });
+
+describe('meta description', () => {
+  it('keeps the generated facts and adds the start of the author text', async () => {
+    (getActiveListing as jest.Mock).mockResolvedValue({
+      ...listing,
+      description: 'Экскаватор   в рабочем\nсостоянии, с оператором.',
+    });
+    const meta = await generateMetadata(props('ru'));
+    expect(meta.description).toMatch(
+      / · Экскаватор в рабочем состоянии, с оператором\.$/
+    );
+    expect(meta.description).toMatch(/^Техника · Аренда · /);
+    expect((meta.description as string).length).toBeLessThanOrEqual(160);
+  });
+
+  it('keeps the generated facts alone without author text', async () => {
+    (getActiveListing as jest.Mock).mockResolvedValue({
+      ...listing,
+      description: undefined,
+    });
+    const meta = await generateMetadata(props('ru'));
+    expect(meta.description).toMatch(/Цена по запросу$/);
+  });
+});

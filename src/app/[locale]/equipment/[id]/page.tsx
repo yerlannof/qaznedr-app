@@ -98,8 +98,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /**
- * Product for equipment, Service for contractor work. The offer is the
- * advertiser's; QAZNEDR is not named as seller or provider.
+ * Service for contractor work; Product for equipment only when it carries a
+ * price, since Google treats a Product without an offer, review or rating as
+ * invalid. The offer is the advertiser's; QAZNEDR is not named as seller or
+ * provider. Nothing goes in that the page does not show (no rating or
+ * availability).
  */
 function listingJsonLd(
   listing: PublicEquipmentListing,
@@ -162,7 +165,9 @@ function listingJsonLd(
       };
   // Requests and people are not products or services on offer.
   const describable =
-    listing.offerType !== 'WANTED' && !isPeopleCategory(listing.category);
+    listing.offerType !== 'WANTED' &&
+    !isPeopleCategory(listing.category) &&
+    (isServiceCategory(listing.category) || offer !== undefined);
   return [
     ...(describable ? [main] : []),
     {

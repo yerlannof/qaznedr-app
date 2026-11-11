@@ -153,3 +153,71 @@ describe('missing and withdrawn listings', () => {
     });
   });
 });
+
+describe('structured data', () => {
+  const types = async (data: Record<string, unknown>) => {
+    (getActiveListing as jest.Mock).mockResolvedValue({ ...listing, ...data });
+    return jsonLd(await Page(props('ru')));
+  };
+
+  it('describes equipment without a price only with breadcrumbs', async () => {
+    const blocks = await types({});
+    expect(blocks.map((b) => b['@type'])).toEqual(['BreadcrumbList']);
+    // A price without its currency is not shown as an amount either.
+    expect((await types({ price: 1000 })).map((b) => b['@type'])).toEqual([
+      'BreadcrumbList',
+    ]);
+  });
+
+  it('gives priced equipment a Product with the offer shown on the page', async () => {
+    const blocks = await types({
+      price: 150000,
+      currency: 'KZT',
+      priceUnit: 'SHIFT',
+    });
+    const product = blocks.find((b) => b['@type'] === 'Product')!;
+    expect(product.offers).toEqual(
+      expect.objectContaining({
+        '@type': 'Offer',
+        price: 150000,
+        priceCurrency: 'KZT',
+      })
+    );
+    const json = JSON.stringify(product);
+    for (const absent of ['aggregateRating', 'review', 'availability'])
+      expect(json).not.toContain(absent);
+    expect(blocks.some((b) => b['@type'] === 'BreadcrumbList')).toBe(true);
+  });
+
+  it('describes services as a Service, with an offer only when priced', async () => {
+    const unpriced = await types({
+      category: 'drillService',
+      offerType: 'SERVICE',
+    });
+    expect(unpriced.map((b) => b['@type'])).toEqual([
+      'Service',
+      'BreadcrumbList',
+    ]);
+    expect(unpriced[0]).not.toHaveProperty('offers');
+    const priced = await types({
+      category: 'drillService',
+      offerType: 'SERVICE',
+      price: 20000,
+      currency: 'KZT',
+    });
+    expect(priced[0]).toMatchObject({
+      '@type': 'Service',
+      offers: { price: 20000, priceCurrency: 'KZT' },
+    });
+  });
+
+  it('gives people and requests neither Product nor Service', async () => {
+    for (const data of [
+      { category: 'staff', offerType: 'SERVICE', price: 1, currency: 'KZT' },
+      { category: 'excavator', offerType: 'WANTED', price: 1, currency: 'KZT' },
+    ])
+      expect((await types(data)).map((b) => b['@type'])).toEqual([
+        'BreadcrumbList',
+      ]);
+  });
+});

@@ -16,13 +16,20 @@ jest.mock('next/cache', () => ({
   unstable_cache: (fn: unknown) => fn,
 }));
 
-const pageResponse = (page = 1, total = 1, codes = ['AU-508A4C']) => ({
+type Row = { code: string; mineral: string | null };
+const pageResponse = (
+  page = 1,
+  total = 1,
+  codes: Array<string | Row> = ['AU-508A4C']
+) => ({
   ok: true,
   status: 200,
   json: async () => ({
     success: true,
     data: {
-      leads: codes.map((code) => ({ code })),
+      leads: codes.map((row) =>
+        typeof row === 'string' ? { code: row, mineral: 'Au' } : row
+      ),
       page,
       limit: 50,
       total,
@@ -127,6 +134,22 @@ describe('sitemap', () => {
     ['duplicate code', pageResponse(2, 51, ['AU-0'])],
     ['wrong page', pageResponse(1, 51, ['AU-50'])],
     ['invalid code', pageResponse(2, 51, ['../admin'])],
+    [
+      'row without a mineral field',
+      {
+        ok: true,
+        json: async () => ({
+          success: true,
+          data: {
+            leads: [{ code: 'AU-50' }],
+            page: 2,
+            limit: 50,
+            total: 51,
+            totalPages: 2,
+          },
+        }),
+      },
+    ],
   ])('rejects a partial snapshot after %s on page two', async (_, second) => {
     global.fetch = jest
       .fn()
@@ -152,6 +175,34 @@ describe('sitemap', () => {
       true
     );
     expect(entries.some((e) => /\/leads\//.test(e.url))).toBe(false);
+  });
+
+  it('lists only mineral hubs that have published cards', async () => {
+    global.fetch = jest.fn().mockResolvedValue(
+      pageResponse(1, 4, [
+        { code: 'QN-04', mineral: 'Au+Zn' },
+        { code: 'QN-17', mineral: 'Pb' },
+        { code: 'QN-101', mineral: 'coal' },
+        { code: 'QN-300', mineral: null },
+      ])
+    );
+    const urls = (await sitemap()).map((e) => e.url);
+    for (const locale of ['ru', 'kz', 'en', 'zh']) {
+      expect(urls).toContain(`https://qaznedr.kz/${locale}/minerals/gold`);
+      expect(urls).toContain(`https://qaznedr.kz/${locale}/minerals/lead-zinc`);
+    }
+    expect(
+      urls.filter((u) =>
+        /\/minerals\/(copper|molybdenum|tungsten|iron)$/.test(u)
+      )
+    ).toEqual([]);
+  });
+
+  it('lists no mineral hub for an empty catalogue', async () => {
+    global.fetch = jest.fn().mockResolvedValue(pageResponse(1, 0, []));
+    const urls = (await sitemap()).map((e) => e.url);
+    expect(urls.some((u) => u.includes('/minerals/'))).toBe(false);
+    expect(urls).toContain('https://qaznedr.kz/ru/leads');
   });
 
   it('omits invented modification dates but keeps recorded article dates', async () => {

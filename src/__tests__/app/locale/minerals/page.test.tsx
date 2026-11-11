@@ -117,6 +117,11 @@ it.each(
 it.each(['gold', 'copper', 'lead-zinc', 'molybdenum', 'tungsten', 'iron'])(
   'publishes a localized indexable %s hub',
   async (mineral) => {
+    (listPublishedLeads as jest.Mock).mockResolvedValue({
+      ...emptyResult,
+      leads: [publishedGoldLead],
+      total: 1,
+    });
     const params = Promise.resolve({ locale: 'zh', mineral });
     const html = renderToStaticMarkup(await Page({ params }));
     expect(listPublishedLeads).toHaveBeenCalledWith(
@@ -131,7 +136,26 @@ it.each(['gold', 'copper', 'lead-zinc', 'molybdenum', 'tungsten', 'iron'])(
     expect(meta.alternates?.canonical).toBe(
       'https://qaznedr.kz/zh/minerals/' + mineral
     );
-    expect(meta.robots).toMatchObject({ index: true });
+    expect(meta.robots).toMatchObject({ index: true, follow: true });
+  }
+);
+it.each(
+  (['ru', 'kz', 'en', 'zh'] as const).flatMap((locale) =>
+    MINERAL_HUBS.map(({ slug }) => [locale, slug] as const)
+  )
+)(
+  'keeps the empty %s %s hub out of the index but lets crawlers follow links',
+  async (locale, mineral) => {
+    const meta = await generateMetadata({
+      params: Promise.resolve({ locale, mineral }),
+    });
+    expect(listPublishedLeads).toHaveBeenCalledWith(
+      expect.objectContaining({ mineral })
+    );
+    expect(meta.robots).toEqual({ index: false, follow: true });
+    expect(meta.alternates?.canonical).toBe(
+      `https://qaznedr.kz/${locale}/minerals/${mineral}`
+    );
   }
 );
 it.each(

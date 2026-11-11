@@ -6,7 +6,8 @@ import { prospectingEnabled } from '@/lib/prospecting/flags';
 import { listPublicPlots } from '@/lib/prospecting/plots';
 import { plotPath } from '@/lib/prospecting/present';
 import { LOCALES, localeUrl } from '@/lib/seo/site';
-import { loadSitemapLeadCodes } from '@/lib/seo/sitemap-leads';
+import { loadSitemapLeads } from '@/lib/seo/sitemap-leads';
+import { MINERAL_HUBS, matchesMineral } from '@/lib/leads/minerals';
 import { listPublishedOffers } from '@/lib/offers';
 import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 import { listActiveForSitemap } from '@/lib/equipment-listings/catalog-repository';
@@ -15,10 +16,25 @@ import { listCompanies } from '@/lib/equipment-listings/companies';
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Throw on failed initial generation/revalidation. Returning fewer URLs with
+  // 200 would replace a complete cached sitemap with a misleading success.
+  const leads = await loadSitemapLeads();
+
+  // A mineral hub without published cards is noindex (empty page), so only
+  // hubs that list at least one card from the same snapshot go in.
+  const filledHubs = new Set(
+    MINERAL_HUBS.filter(({ slug }) =>
+      leads.some((lead) => lead.mineral && matchesMineral(lead.mineral, slug))
+    ).map(({ slug }) => `/minerals/${slug}`)
+  );
+  const listed = (page: string) => {
+    if (page === '/prospecting') return prospectingEnabled();
+    if (page.startsWith('/minerals/')) return filledHubs.has(page);
+    return true;
+  };
+
   const staticEntries: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
-    PUBLIC_PAGES.filter(
-      (page) => page !== '/prospecting' || prospectingEnabled()
-    ).map((page) => ({
+    PUBLIC_PAGES.filter(listed).map((page) => ({
       url: localeUrl(locale, page),
       changeFrequency: 'weekly' as const,
       priority: page === '' ? 1.0 : 0.8,
@@ -37,10 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
   });
 
-  // Throw on failed initial generation/revalidation. Returning fewer URLs with
-  // 200 would replace a complete cached sitemap with a misleading success.
-  const codes = await loadSitemapLeadCodes();
-  const leadEntries: MetadataRoute.Sitemap = codes.flatMap((code) =>
+  const leadEntries: MetadataRoute.Sitemap = leads.flatMap(({ code }) =>
     LOCALES.map((locale) => ({
       url: localeUrl(locale, `/leads/${code}`),
       changeFrequency: 'weekly' as const,

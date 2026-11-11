@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import robots from '@/app/robots';
 import { TEASER_COLUMNS } from '@/lib/leads/types';
+import { MINERAL_HUBS } from '@/lib/leads/minerals';
+import { LOCALES } from '@/lib/seo/site';
 
 const readJson = (file: string) =>
   JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', file), 'utf8'));
@@ -26,9 +28,34 @@ it('includes all published offer kinds in the catalogue discovery summary', () =
     .split('\n')
     .find((line) => line.startsWith('- One catalogue'));
   expect(summary).toContain('our finds');
-  expect(summary).toContain('artisanal mining plots');
   expect(summary).toContain('assets for sale');
   expect(summary).toContain('https://qaznedr.kz/en/leads');
+  // Prospecting plots are switched off in production since 16 Oct
+  // (PROSPECTING_ENABLED unset), so the catalogue has no filter for them.
+  // jest.setup turns the flag on for unit tests, hence no flag check here.
+  expect(summary).not.toContain('artisanal mining plots');
+});
+
+it('lists only mineral hubs that have cards, each in every locale', () => {
+  const text = fs.readFileSync(
+    path.join(process.cwd(), 'public/llms.txt'),
+    'utf8'
+  );
+  const section = text.split('## Mineral areas')[1] ?? '';
+  const slugs = [...section.matchAll(/\/en\/minerals\/([a-z-]+)/g)].map(
+    (m) => m[1]
+  );
+  const known = MINERAL_HUBS.map(({ slug }) => slug as string);
+  for (const slug of slugs) {
+    expect(known).toContain(slug);
+    for (const locale of LOCALES)
+      expect(section).toContain(
+        `https://qaznedr.kz/${locale}/minerals/${slug}`
+      );
+  }
+  // Published cards on 12 Nov 2026: QN-04 (Au+Zn) and QN-17 (Pb). Empty hubs
+  // are noindex and out of sitemap.xml; update together with the catalogue.
+  expect(slugs).toEqual(['gold', 'lead-zinc']);
 });
 
 describe('public API discovery contract', () => {

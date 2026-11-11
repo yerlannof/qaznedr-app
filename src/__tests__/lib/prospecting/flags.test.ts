@@ -2,7 +2,7 @@ import { getPublicPlot, listPublicPlots } from '@/lib/prospecting/plots';
 import sitemap from '@/app/sitemap';
 
 jest.mock('@/lib/seo/sitemap-leads', () => ({
-  loadSitemapLeadCodes: jest.fn().mockResolvedValue([]),
+  loadSitemapLeads: jest.fn().mockResolvedValue([]),
 }));
 
 // Owner 2026-10-16: prospecting plots are off the site until further notice.

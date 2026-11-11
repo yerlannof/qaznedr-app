@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import Link from 'next/link';
 import PageHero from '@/components/home/PageHero';
 import { SCENES, SPECIMENS, type SpecimenKey } from '@/lib/brand/photos';
@@ -24,6 +25,11 @@ const GOLD_GUIDE_KEYS = [
   'satelliteGoldMap',
 ] as const;
 
+// One query per render for both the metadata and the page.
+const loadHub = cache((mineral: string) =>
+  listPublishedLeads({ mineral, limit: 24 })
+);
+
 export async function generateMetadata({ params }: Props) {
   const { locale: raw, mineral } = await params;
   if (!mineralHub(mineral)) notFound();
@@ -31,12 +37,18 @@ export async function generateMetadata({ params }: Props) {
   const { t } = getServerTranslation(locale);
   const name = hubMineralName(mineral, locale);
   const meta = { mineral: name, text: t('leadsCatalog.valueProp2') };
-  return buildPageMetadata({
+  const { total } = await loadHub(mineral);
+  const metadata = buildPageMetadata({
     locale,
     path: `/minerals/${mineral}`,
     title: t('minerals.hubMetaTitle', meta),
     description: t('minerals.hubDescription', meta),
   });
+  // A hub without published cards is an empty list: keep it out of the index
+  // (and out of sitemap.xml) but let crawlers follow its links.
+  return total > 0
+    ? metadata
+    : { ...metadata, robots: { index: false, follow: true } };
 }
 
 export default async function MineralPage({ params }: Props) {
@@ -44,7 +56,7 @@ export default async function MineralPage({ params }: Props) {
   if (!mineralHub(mineral)) notFound();
   const locale = toLocale(raw);
   const { t } = getServerTranslation(locale);
-  const { leads, total } = await listPublishedLeads({ mineral, limit: 24 });
+  const { leads, total } = await loadHub(mineral);
   const name = hubMineralName(mineral, locale);
   const title = t('minerals.hubTitle', { mineral: name });
   const description = t('minerals.hubDescription', {

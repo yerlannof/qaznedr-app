@@ -18,13 +18,22 @@ const responseSchema = z.object({
     leads: z.array(
       z.object({
         code: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$/),
+        // Required (null allowed): mineral hubs are listed from these rows, so
+        // a response without the field must fail rather than drop the hubs.
+        mineral: z.string().max(200).nullable(),
       })
     ),
   }),
 });
 
-async function fetchCompleteCodes(): Promise<string[]> {
+export interface SitemapLead {
+  code: string;
+  mineral: string | null;
+}
+
+async function fetchCompleteLeads(): Promise<SitemapLead[]> {
   const codes = new Set<string>();
+  const rows: SitemapLead[] = [];
   let total: number | undefined;
   let pages = 1;
   for (let page = 1; page <= pages; page++) {
@@ -48,19 +57,20 @@ async function fetchCompleteCodes(): Promise<string[]> {
     ) {
       throw new Error('Incomplete sitemap areas');
     }
-    for (const { code } of data.leads) {
+    for (const { code, mineral } of data.leads) {
       if (codes.has(code)) throw new Error('Duplicate sitemap area');
       codes.add(code);
+      rows.push({ code, mineral });
     }
   }
-  return [...codes];
+  return rows;
 }
 
 // Only a validated complete snapshot enters the cache. An exception during
 // revalidation preserves the last successful snapshot; never cache a partial
 // list or convert an API failure into an empty catalogue.
-export const loadSitemapLeadCodes = unstable_cache(
-  fetchCompleteCodes,
-  ['sitemap-published-lead-codes-v1'],
+export const loadSitemapLeads = unstable_cache(
+  fetchCompleteLeads,
+  ['sitemap-published-leads-v2'],
   { revalidate: 3600 }
 );

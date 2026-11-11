@@ -766,6 +766,7 @@ export const translations = {
         goldLicenceTypes:
           'Лицензия на золото: разведка, добыча или старательство',
         licenceCosts: 'Сколько стоит лицензия на старательство и разведку',
+        checkArea: 'Как проверить, свободен ли участок недр',
         foreignInvestor:
           'Как иностранному инвестору получить право недропользования',
         explorationLicence: 'Лицензия на разведку ТПИ: процесс по шагам',
@@ -793,6 +794,8 @@ export const translations = {
           'Какой режим выбрать для поиска, промышленной добычи или работы на россыпи и что проверить до заявления.',
         licenceCosts:
           'Подписной бонус, плата за участок, минимальные расходы и обеспечение в тенге по МРП 2026 года.',
+        checkArea:
+          'Проверка участка на карте ЕПН по шагам: координаты, блоки, слои лицензий и ограничения статьи 25.',
         foreignInvestor:
           'Кто может стать недропользователем и три пути входа: новая лицензия, покупка права или доли, совместное предприятие.',
         explorationLicence:
@@ -2506,6 +2509,7 @@ export const translations = {
         goldLicenceTypes:
           'Алтынға лицензия: барлау, өндіру әлде кен іздеушілік',
         licenceCosts: 'Кен іздеушілік пен барлау лицензиясы қанша тұрады',
+        checkArea: 'Жер қойнауы учаскесінің бос екенін қалай тексеруге болады',
         foreignInvestor: 'Шетелдік инвесторға жер қойнауын пайдалану құқығы',
         explorationLicence:
           'Қатты пайдалы қазбаларды барлау лицензиясы: қадамдар',
@@ -2534,6 +2538,8 @@ export const translations = {
           'Іздеу, өнеркәсіптік өндіру немесе шашыранды кен орнындағы жұмыс үшін қай тәртіпті таңдау керек және өтінішке дейін не тексеру қажет.',
         licenceCosts:
           'Қол қою бонусы, учаске үшін төлем, ең төменгі шығындар және қамтамасыз ету — 2026 жылғы АЕК бойынша теңгемен.',
+        checkArea:
+          'Учаскені ЕПН картасынан қадам бойынша тексеру: координаттар, блоктар, лицензия қабаттары және 25-бап шектеулері.',
         foreignInvestor:
           'Кім жер қойнауын пайдаланушы бола алады және кірудің үш жолы: жаңа лицензия, құқықты не үлесті сатып алу, бірлескен кәсіпорын.',
         explorationLicence:
@@ -4152,7 +4158,7 @@ export const translations = {
         'This is not legal advice. Rules are stated as of {date}; before a transaction, check the current wording on adilet.zan.kz and consult a lawyer.',
       otherGuides: 'More guides',
       table: 'Table',
-      onlyRu: 'Guides are available in Russian, English and Chinese.',
+      onlyRu: 'Some guides are available only in Russian and open in Russian.',
       ctaTitle: 'Ready to discuss an area?',
       ctaText:
         'Browse the areas we have prepared or message us — we reply within one business day.',
@@ -4170,6 +4176,7 @@ export const translations = {
         pugfn: 'PUGFN: checking an area before applying',
         goldLicenceTypes: 'Gold licences: exploration, mining or artisanal',
         licenceCosts: 'What artisanal and exploration licences cost',
+        checkArea: 'How to check whether a subsoil area is free',
         foreignInvestor: 'Subsoil use rights for foreign investors',
         explorationLicence: 'Solid minerals exploration licence, step by step',
         reserveClassification:
@@ -4195,6 +4202,8 @@ export const translations = {
           'Which regime fits searching, industrial mining or placer work, and what to check before applying.',
         licenceCosts:
           'Signature bonus, area fee, minimum spend and security in tenge at the 2026 MCI.',
+        checkArea:
+          'Checking an area on the EPN map step by step: coordinates, blocks, licence layers and Article 25 restrictions.',
         foreignInvestor:
           'Who can hold subsoil use rights and three ways in: a new licence, buying a right or a stake, a joint venture.',
         explorationLicence:
@@ -5757,7 +5766,7 @@ export const translations = {
         '本文不构成法律意见。相关规定以{date}为准；交易前请在 adilet.zan.kz 核对现行版本并咨询律师。',
       otherGuides: '更多指南',
       table: '表格',
-      onlyRu: '指南目前提供俄文、英文和中文版本。',
+      onlyRu: '部分指南目前仅有俄文版本，将以俄文打开。',
       ctaTitle: '准备洽谈具体矿区？',
       ctaText: '浏览我们展示的矿区，或直接联系我们，我们将在一个工作日内回复。',
       ctaLeads: '查看矿区',
@@ -5774,6 +5783,7 @@ export const translations = {
         pugfn: 'PUGFN：申请前如何核查矿区',
         goldLicenceTypes: '黄金许可证：勘查、开采还是小规模采矿',
         licenceCosts: '小规模采矿与勘查许可证费用',
+        checkArea: '如何核查矿区是否空闲',
         foreignInvestor: '外国投资者如何在哈萨克斯坦取得矿业权',
         explorationLicence: '固体矿产勘查许可证：办理流程',
         reserveClassification: '储量分类对照：GKZ、KAZRC/JORC、GB/T 17766',
@@ -5795,6 +5805,8 @@ export const translations = {
           '寻找矿床、工业开采或砂矿作业分别适用哪种制度，以及申请前应核查的事项。',
         licenceCosts:
           '签约奖金、区块使用费、最低支出和保证金额，按2026年MRP折算为坚戈。',
+        checkArea:
+          '在EPN地图上逐步核查矿区：坐标、区块、许可证图层和第25条限制。',
         foreignInvestor:
           '谁可以成为矿业权人，以及三种进入方式：申请新许可证、收购矿业权或股权、成立合资企业。',
         explorationLicence: '申请、区块、期限、义务及转入开采。',

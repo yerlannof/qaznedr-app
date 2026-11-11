@@ -1,7 +1,7 @@
 import { translate } from '@/lib/i18n/translations';
 import { isLocale, type Locale } from '@/lib/seo/site';
 import type { ServiceTopic } from '@/lib/services/topics';
-import { GUIDE, GUIDE_KEYS, findInsight } from './registry';
+import { GUIDE, GUIDE_KEYS, findInsight, insightHref } from './registry';
 
 /** A public guide slug only; arrays and arbitrary query text are rejected. */
 export function getGuideSlug(value: unknown): string | undefined {
@@ -13,11 +13,13 @@ export function guideTitle(locale: Locale, slug: string): string | undefined {
   return key ? translate(locale, `insights.links.${key}`) : undefined;
 }
 
+/** The guide page the reader came from: its version in their language, or
+ * the ru fallback for a guide not written in it. */
 export function guideSourcePath(
   locale: Locale,
   slug: string
 ): string | undefined {
-  return getGuideSlug(slug) ? `/${locale}/insights/${slug}` : undefined;
+  return getGuideSlug(slug) ? insightHref(locale, slug) : undefined;
 }
 
 export function guideContactHref(

@@ -37,6 +37,7 @@ export const GUIDE = {
   goldLicenceTypes: 'gold-licence-types-kazakhstan',
   placerGold: 'placer-gold-kazakhstan',
   licenceCosts: 'subsoil-licence-costs-kazakhstan',
+  checkArea: 'check-subsoil-area-kazakhstan',
 } as const;
 
 export type GuideKey = keyof typeof GUIDE;
@@ -180,6 +181,16 @@ export const INSIGHTS: readonly InsightEntry[] = [
     legal: true,
     lawAsOf: '2026-11-11',
     locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.checkArea,
+    category: 'licensing',
+    published: '2026-11-12',
+    updated: '2026-11-12',
+    legal: true,
+    lawAsOf: '2026-11-12',
+    // Russian and Kazakh only; en and zh readers land on the ru version.
+    locales: ['ru', 'kz'],
   },
 ];
 

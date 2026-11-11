@@ -9,7 +9,7 @@ import {
 import { parseFrontMatter } from '@/lib/insights/front-matter';
 import { GUIDE, INSIGHTS } from '@/lib/insights/registry';
 import { PUBLIC_PAGES } from '@/lib/seo/pages';
-import type { Locale } from '@/lib/seo/site';
+import { LOCALES, type Locale } from '@/lib/seo/site';
 
 const SOURCES_HEADING: Record<string, RegExp> = {
   ru: /^## Источники\s*$/m,
@@ -123,9 +123,11 @@ describe('guide files', () => {
     }
   });
 
-  it('every published guide is written in ru, en, zh and kz', () => {
+  it('every guide is written in ru, the fallback for its other languages', () => {
     for (const entry of INSIGHTS) {
-      expect([...entry.locales].sort()).toEqual(['en', 'kz', 'ru', 'zh']);
+      expect(entry.locales).toContain('ru');
+      expect(new Set(entry.locales).size).toBe(entry.locales.length);
+      for (const locale of entry.locales) expect(LOCALES).toContain(locale);
     }
   });
 

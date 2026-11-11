@@ -15,7 +15,7 @@ import { formatCheckDate } from '@/lib/leads/check-date';
 import { articleJsonLd } from '@/lib/seo/article-jsonld';
 import { faqJsonLd } from '@/lib/content/faq';
 import { buildPageMetadata } from '@/lib/seo/metadata';
-import { toLocale } from '@/lib/seo/site';
+import { HREFLANG, toLocale } from '@/lib/seo/site';
 
 // Prerendered for the languages each guide is written in; other languages
 // are redirected to ru by the middleware. Unknown slugs render notFound()
@@ -172,6 +172,9 @@ export default async function InsightArticlePage({
                 <li key={card.slug}>
                   <Link
                     href={`/${card.locale}/insights/${card.slug}`}
+                    lang={
+                      card.locale === locale ? undefined : HREFLANG[card.locale]
+                    }
                     className="brand-focus block py-4 text-base text-brand-ink underline underline-offset-4 decoration-brand-line hover:text-brand-muted"
                   >
                     {card.title}

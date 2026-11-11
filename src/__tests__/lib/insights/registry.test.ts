@@ -14,6 +14,25 @@ describe('insightHref', () => {
       locales: ['ru', 'en', 'zh', 'kz'],
     });
   });
+  it('registers the area check guide in Russian and Kazakh only', () => {
+    expect(
+      INSIGHTS.find((entry) => entry.slug === GUIDE.checkArea)
+    ).toMatchObject({
+      slug: 'check-subsoil-area-kazakhstan',
+      category: 'licensing',
+      published: '2026-11-12',
+      updated: '2026-11-12',
+      legal: true,
+      lawAsOf: '2026-11-12',
+      locales: ['ru', 'kz'],
+    });
+    expect(insightHref('en', GUIDE.checkArea)).toBe(
+      `/ru/insights/${GUIDE.checkArea}`
+    );
+    expect(insightHref('zh', GUIDE.checkArea)).toBe(
+      `/ru/insights/${GUIDE.checkArea}`
+    );
+  });
   it('registers the licence cost guide in all four languages', () => {
     expect(
       INSIGHTS.find((entry) => entry.slug === GUIDE.licenceCosts)

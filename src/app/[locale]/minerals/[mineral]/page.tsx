@@ -14,10 +14,19 @@ import { listPublishedLeads } from '@/lib/leads/public-queries';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/article-jsonld';
-import { toLocale, localeUrl, HREFLANG } from '@/lib/seo/site';
+import { LOCALES, toLocale, localeUrl, HREFLANG } from '@/lib/seo/site';
 import { GUIDE, insightHref } from '@/lib/insights/registry';
 
-export const dynamic = 'force-dynamic';
+// Cards change only on import; the hub reads them through the cookieless
+// public client, so it is served from the ISR cache and regenerated at most
+// every 5 minutes (as the home page).
+export const revalidate = 300;
+
+export function generateStaticParams() {
+  return LOCALES.flatMap((locale) =>
+    MINERAL_HUBS.map(({ slug }) => ({ locale, mineral: slug }))
+  );
+}
 type Props = { params: Promise<{ locale: string; mineral: string }> };
 const GOLD_GUIDE_KEYS = [
   'geologicalMap',

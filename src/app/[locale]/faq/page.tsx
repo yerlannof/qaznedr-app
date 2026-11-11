@@ -6,7 +6,7 @@ import GuideLinks from '@/components/features/GuideLinks';
 import { faqFor, faqJsonLd } from '@/lib/content/faq';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
-import { HREFLANG, toLocale } from '@/lib/seo/site';
+import { HREFLANG, LOCALES, toLocale } from '@/lib/seo/site';
 
 export async function generateMetadata({
   params,
@@ -15,6 +15,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   return buildTranslatedPageMetadata(locale, '/faq', 'faq');
+}
+
+// No cookies, query or database: prerender per locale (static HTML).
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
 }
 
 export default async function FaqPage({

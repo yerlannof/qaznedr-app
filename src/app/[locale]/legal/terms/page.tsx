@@ -4,7 +4,7 @@ import Navigation from '@/components/layouts/Navigation';
 import Footer from '@/components/layouts/Footer';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { termsFor } from '@/lib/content/terms';
-import { HREFLANG, toLocale } from '@/lib/seo/site';
+import { HREFLANG, LOCALES, toLocale } from '@/lib/seo/site';
 
 export async function generateMetadata({
   params,
@@ -13,6 +13,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   return buildTranslatedPageMetadata(locale, '/legal/terms', 'terms');
+}
+
+// No cookies, query or database: prerender per locale (static HTML).
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
 }
 
 export default async function TermsPage({

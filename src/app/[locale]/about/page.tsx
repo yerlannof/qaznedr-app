@@ -10,6 +10,7 @@ import ClosingCta from '@/components/features/ClosingCta';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { getServerTranslation } from '@/lib/i18n/translations';
 import {
+  LOCALES,
   SITE_NAME,
   SITE_URL,
   INSTAGRAM_URL,
@@ -25,6 +26,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   return buildTranslatedPageMetadata(locale, '/about', 'about');
+}
+
+// No cookies, query or database: prerender per locale (static HTML).
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
 }
 export default async function AboutPage({
   params,

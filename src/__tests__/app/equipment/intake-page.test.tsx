@@ -1,3 +1,5 @@
+// The real intake form now counts WhatsApp clicks; @vercel/analytics ships ESM only.
+jest.mock('@vercel/analytics', () => ({ track: jest.fn() }));
 jest.mock(
   '@/components/equipment/EquipmentIntake',
   () => ({ EquipmentIntake: () => null }),

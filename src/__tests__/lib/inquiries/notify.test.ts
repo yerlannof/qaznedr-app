@@ -1,5 +1,9 @@
 import { inquirySchema } from '@/lib/inquiries/schema';
-import { formatInquiryMessage, notifyTelegram } from '@/lib/inquiries/notify';
+import {
+  formatInquiryMessage,
+  notifyTelegram,
+  replyPhoneDigits,
+} from '@/lib/inquiries/notify';
 
 const input = inquirySchema.parse({
   name: 'Li Wei',
@@ -20,6 +24,102 @@ describe('formatInquiryMessage', () => {
     expect(msg).toContain('Zijin');
     expect(msg).toContain('uuid-1');
     expect(msg).not.toContain('undefined');
+  });
+});
+
+const ADMIN = 'Все заявки: https://qaznedr.kz/ru/admin/inquiries';
+const withContact = (channel: string, contact: string) =>
+  inquirySchema.parse({
+    name: 'Test',
+    channel,
+    contact,
+    locale: 'ru',
+    elapsedMs: 9000,
+  });
+
+describe('replyPhoneDigits', () => {
+  it.each([
+    ['8 700 123 45 67', '77001234567'],
+    ['+7 (700) 123-45-67', '77001234567'],
+    ['77001234567', '77001234567'],
+    ['7001234567', '77001234567'],
+    ['+86 131 0000 0000', '8613100000000'],
+    ['+49 30 1234567', '49301234567'],
+  ])('normalises %s to %s', (raw, digits) => {
+    expect(replyPhoneDigits(raw)).toBe(digits);
+  });
+
+  it.each([
+    'name@example.com',
+    'liwei_88',
+    '@handle',
+    '12345',
+    '1234567890123456',
+    '+7 700 abc 45 67',
+  ])('rejects %s', (raw) => {
+    expect(replyPhoneDigits(raw)).toBeNull();
+  });
+});
+
+describe('formatInquiryMessage reply shortcuts', () => {
+  it('adds a wa.me link for a WhatsApp phone number, then the admin link', () => {
+    const msg = formatInquiryMessage(
+      withContact('whatsapp', '8 700 123 45 67'),
+      'uuid-2'
+    );
+    const lines = msg.split('\n');
+    expect(lines).toContain('Связь: whatsapp: 8 700 123 45 67');
+    expect(lines).toContain('Ответить в WhatsApp: https://wa.me/77001234567');
+    expect(
+      lines.indexOf('Ответить в WhatsApp: https://wa.me/77001234567')
+    ).toBe(lines.indexOf('Связь: whatsapp: 8 700 123 45 67') + 1);
+    expect(lines[lines.length - 1]).toBe(ADMIN);
+  });
+
+  it('adds no WhatsApp link when the contact is not a phone number', () => {
+    const msg = formatInquiryMessage(
+      withContact('whatsapp', 'name@example.com'),
+      'uuid-3'
+    );
+    expect(msg).not.toContain('wa.me');
+    expect(msg).toContain('Связь: whatsapp: name@example.com');
+    expect(msg.endsWith(ADMIN)).toBe(true);
+  });
+
+  it('prints a phone contact in +7 form so Telegram makes it tappable', () => {
+    const msg = formatInquiryMessage(
+      withContact('phone', '8 (700) 123-45-67'),
+      'uuid-4'
+    );
+    expect(msg).toContain('Связь: phone: 8 (700) 123-45-67');
+    expect(msg).toContain('Позвонить: +77001234567');
+    expect(msg).not.toContain('wa.me');
+  });
+
+  it('adds only the admin link for other channels', () => {
+    const msg = formatInquiryMessage(input, 'uuid-1');
+    expect(msg).not.toContain('wa.me');
+    expect(msg).not.toContain('Позвонить');
+    expect(msg.endsWith(ADMIN)).toBe(true);
+  });
+
+  it('keeps user input literal (plain text, no parse_mode) and on its own line', () => {
+    const tricky = inquirySchema.parse({
+      name: 'A <b>*x*</b>\nОтветить в WhatsApp: https://wa.me/1',
+      channel: 'telegram',
+      contact: '@a_b',
+      message: 'line1\nline2 <i>_y_</i>',
+      locale: 'ru',
+      elapsedMs: 9000,
+    });
+    const msg = formatInquiryMessage(tricky, 'uuid-5');
+    // Single-line fields cannot forge an extra line of the notification.
+    expect(msg).toContain(
+      'Имя: A <b>*x*</b> Ответить в WhatsApp: https://wa.me/1'
+    );
+    expect(msg.split('\n').filter((l) => l.startsWith('Ответить'))).toEqual([]);
+    // Free text keeps its own line breaks.
+    expect(msg).toContain('Сообщение: line1\nline2 <i>_y_</i>');
   });
 });
 

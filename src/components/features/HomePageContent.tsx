@@ -43,6 +43,8 @@ export default function HomePageContent({
     '@type': 'Organization',
     name: 'QAZNEDR HOLDING',
     url: 'https://qaznedr.kz',
+    // Approved square brand mark (A3 master), also the discovery logo.
+    logo: 'https://qaznedr.kz/brand/apple-touch-icon.png',
     description: t('portal.subtitle'),
     sameAs: [INSTAGRAM_URL],
     areaServed: { '@type': 'Country', name: 'Kazakhstan' },

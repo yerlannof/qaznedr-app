@@ -17,6 +17,7 @@ import {
   type ServicePath,
 } from './contact-context';
 import { getServiceTopic } from '@/lib/services/topics';
+import type { FaqItem } from '@/lib/content/faq';
 
 // Server only (fs). Pages that use it are prerendered at build time.
 
@@ -37,6 +38,8 @@ export interface Article extends ArticleCard {
   html: string;
   toc: ArticleTocItem[];
   citations: string[];
+  /** Questions of the visible FAQ block, for FAQPage markup; [] if none. */
+  faq: FaqItem[];
 }
 
 export interface ArticleTocItem {
@@ -207,6 +210,58 @@ export function sourceCitations(markdown: string): string[] {
   return citations;
 }
 
+const FAQ_HEADINGS = new Set([
+  'Частые вопросы',
+  'Frequently asked questions',
+  'Жиі қойылатын сұрақтар',
+  '常见问题',
+]);
+
+/** Visible text of inline or block markdown (links keep their text). */
+function plainMarkdown(markdown: string): string {
+  return plainHeading(marked.parse(markdown, { async: false }) as string);
+}
+
+/**
+ * The guide's visible FAQ block (an H2 from FAQ_HEADINGS up to the next H2)
+ * as question/answer text. Two layouts are used: `**Question?** Answer` in
+ * one paragraph, or an H3 question followed by answer paragraphs.
+ */
+export function guideFaq(markdown: string): FaqItem[] {
+  const items: FaqItem[] = [];
+  let inFaq = false;
+  let open: { q: string; parts: string[] } | null = null;
+  const close = () => {
+    if (open?.parts.length) items.push({ q: open.q, a: open.parts.join(' ') });
+    open = null;
+  };
+  for (const token of marked.lexer(markdown) as unknown as SourceToken[]) {
+    if (token.type === 'heading' && (token.depth ?? 0) <= 2) {
+      close();
+      inFaq = token.depth === 2 && FAQ_HEADINGS.has(token.text?.trim() ?? '');
+      continue;
+    }
+    if (!inFaq || token.type === 'space') continue;
+    if (token.type === 'heading' && token.depth === 3) {
+      close();
+      open = { q: plainMarkdown(token.text ?? ''), parts: [] };
+      continue;
+    }
+    const raw = (token as { raw?: string }).raw ?? '';
+    const bold =
+      token.type === 'paragraph' && raw.match(/^\*\*(.+?)\*\*\s*([\s\S]*)$/);
+    if (bold) {
+      close();
+      open = { q: plainMarkdown(bold[1]), parts: [] };
+      if (bold[2].trim()) open.parts.push(plainMarkdown(bold[2]));
+      continue;
+    }
+    if (open) open.parts.push(plainMarkdown(raw));
+  }
+  close();
+  return items;
+}
+
 export function parseArticle(
   source: string,
   entry: InsightEntry,
@@ -231,6 +286,7 @@ export function parseArticle(
     updated: entry.updated,
     readingMinutes: readingMinutes(body, locale),
     citations: sourceCitations(body),
+    faq: guideFaq(body),
     html: html
       .replace(
         new RegExp(`href="/${locale}/contact(?:\\?service=([^"&]+))?"`, 'g'),

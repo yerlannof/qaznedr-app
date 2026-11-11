@@ -13,6 +13,7 @@ import { GUIDE, INSIGHTS, findInsight } from '@/lib/insights/registry';
 import { orderRelatedArticles } from '@/lib/insights/related';
 import { formatCheckDate } from '@/lib/leads/check-date';
 import { articleJsonLd } from '@/lib/seo/article-jsonld';
+import { faqJsonLd } from '@/lib/content/faq';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { toLocale } from '@/lib/seo/site';
 
@@ -77,7 +78,12 @@ export default async function InsightArticlePage({
 
   return (
     <>
-      {[jsonLd.article, jsonLd.breadcrumb].map((data, i) => (
+      {[
+        jsonLd.article,
+        jsonLd.breadcrumb,
+        // Only guides with a visible FAQ block; same questions and answers.
+        ...(article.faq.length ? [faqJsonLd(article.faq)] : []),
+      ].map((data, i) => (
         <script
           key={i}
           type="application/ld+json"

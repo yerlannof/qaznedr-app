@@ -32,6 +32,10 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     expect(organization.sameAs).toEqual([
       'https://www.instagram.com/qaznedr.kz/',
     ]);
+    // Approved square brand mark (A3 master), 180 px PNG.
+    expect(organization.logo).toBe(
+      'https://qaznedr.kz/brand/apple-touch-icon.png'
+    );
     expect(html.match(/<h1\b/g)).toHaveLength(1);
     expect(html).toContain(translate(locale, 'portal.headlineLine1'));
     expect(html).toContain(

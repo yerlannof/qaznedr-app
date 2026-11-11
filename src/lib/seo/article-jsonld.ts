@@ -1,5 +1,6 @@
 import { translate } from '@/lib/i18n/translations';
 import { HREFLANG, SITE_NAME, SITE_URL, localeUrl, type Locale } from './site';
+import { ogImageUrl } from './og';
 
 const HOLDING = { '@type': 'Organization', name: SITE_NAME, url: SITE_URL };
 
@@ -50,6 +51,8 @@ export function articleJsonLd(input: ArticleJsonLdInput) {
       dateModified: input.updated,
       mainEntityOfPage: url,
       url,
+      // The guide's own Open Graph card (same URL as og:image).
+      image: ogImageUrl(input.locale, `/insights/${input.slug}`),
       isAccessibleForFree: true,
       author: HOLDING,
       publisher: HOLDING,

@@ -28,6 +28,22 @@ const CHANNEL_KEYS: Record<InquiryChannel, string> = {
   telegram: 'inquiry.channelTelegram',
 };
 
+// Keyboard and autofill only; labels and validation copy stay as approved.
+const CONTACT_FIELD: Record<
+  InquiryChannel,
+  {
+    type: 'tel' | 'email' | 'text';
+    inputMode: 'tel' | 'email' | 'text';
+    autoComplete: string;
+  }
+> = {
+  whatsapp: { type: 'tel', inputMode: 'tel', autoComplete: 'tel' },
+  phone: { type: 'tel', inputMode: 'tel', autoComplete: 'tel' },
+  email: { type: 'email', inputMode: 'email', autoComplete: 'email' },
+  telegram: { type: 'text', inputMode: 'text', autoComplete: 'on' },
+  wechat: { type: 'text', inputMode: 'text', autoComplete: 'on' },
+};
+
 const input =
   'brand-focus w-full min-h-11 border border-brand-line bg-brand-surface px-3 py-2 text-sm text-brand-ink';
 const label = 'mb-1 block text-xs font-medium text-brand-muted';
@@ -178,6 +194,7 @@ export default function InquiryForm({
           <input
             id="inq-contact"
             name="contact"
+            {...CONTACT_FIELD[channel]}
             required
             minLength={3}
             maxLength={160}

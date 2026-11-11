@@ -179,3 +179,36 @@ it('prefills the approved service topic but allows the visitor to edit their mes
     JSON.parse((global.fetch as jest.Mock).mock.calls[0][1].body).message
   ).toBe('Licensing: please discuss the documents');
 });
+
+it('matches the contact keyboard and autofill to the chosen channel without changing any text', () => {
+  const { container } = render(<InquiryForm locale="ru" />);
+  const textBefore = container.textContent;
+  const contact = screen.getByLabelText('ID / номер / email');
+  const placeholderBefore = contact.getAttribute('placeholder');
+  const select = screen.getByLabelText('Как с вами связаться');
+  const expectField = (type: string, inputMode: string, auto: string) => {
+    expect(contact).toHaveAttribute('type', type);
+    expect(contact).toHaveAttribute('inputmode', inputMode);
+    expect(contact).toHaveAttribute('autocomplete', auto);
+  };
+
+  // WhatsApp is the default for Russian visitors.
+  expect(select).toHaveValue('whatsapp');
+  expectField('tel', 'tel', 'tel');
+  fireEvent.change(contact, { target: { value: '+7 700 000 00 00' } });
+  fireEvent.change(select, { target: { value: 'phone' } });
+  expectField('tel', 'tel', 'tel');
+  fireEvent.change(select, { target: { value: 'email' } });
+  expectField('email', 'email', 'email');
+  fireEvent.change(select, { target: { value: 'telegram' } });
+  expectField('text', 'text', 'on');
+  fireEvent.change(select, { target: { value: 'wechat' } });
+  expectField('text', 'text', 'on');
+  // The typed value survives a channel switch.
+  expect(contact).toHaveValue('+7 700 000 00 00');
+
+  // Labels, placeholder and the rest of the copy are unchanged.
+  expect(screen.getByLabelText('ID / номер / email')).toBe(contact);
+  expect(contact.getAttribute('placeholder')).toBe(placeholderBefore);
+  expect(container.textContent).toBe(textBefore);
+});

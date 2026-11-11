@@ -285,13 +285,45 @@ describe('sitemap', () => {
       const entries = await sitemap();
       const urls = entries.map((e) => e.url);
       expect(urls).toContain('https://qaznedr.kz/kz/equipment');
-      expect(urls).toContain(
-        'https://qaznedr.kz/en/equipment/company/bur-servis'
-      );
       const entry = entries.find(
-        (e) => e.url === `https://qaznedr.kz/zh/equipment/${listingId}`
+        (e) => e.url === `https://qaznedr.kz/ru/equipment/${listingId}`
       );
       expect(entry?.lastModified).toEqual(new Date('2026-10-16T08:00:00Z'));
+    });
+
+    it('lists each listing and company once, under its original language', async () => {
+      process.env.EQUIPMENT_MARKETPLACE_ENABLED = 'true';
+      process.env.EQUIPMENT_CATALOG_ENABLED = 'true';
+      const englishId = '00000000-0000-4000-8000-000000000002';
+      (listActiveForSitemap as jest.Mock).mockResolvedValue([
+        { id: listingId, updatedAt: '2026-10-16T08:00:00Z' },
+        {
+          id: englishId,
+          updatedAt: '2026-10-17T08:00:00Z',
+          sourceLanguage: 'en',
+        },
+      ]);
+      global.fetch = jest.fn().mockResolvedValue(pageResponse());
+      const entries = (await sitemap()).filter((e) =>
+        e.url.includes('/equipment/')
+      );
+      expect(entries.map((e) => e.url).sort()).toEqual(
+        [
+          'https://qaznedr.kz/ru/equipment/company/bur-servis',
+          `https://qaznedr.kz/ru/equipment/${listingId}`,
+          `https://qaznedr.kz/en/equipment/${englishId}`,
+        ].sort()
+      );
+      // No hreflang: the other locale URLs are untranslated copies.
+      for (const entry of entries) expect(entry.alternates).toBeUndefined();
+      // The catalogue itself is translated and keeps all four languages.
+      const catalogue = (await sitemap()).filter((e) =>
+        /\/equipment$/.test(e.url)
+      );
+      expect(catalogue).toHaveLength(4);
+      expect(
+        Object.keys(catalogue[0].alternates?.languages ?? {})
+      ).toHaveLength(5);
     });
 
     it('fails instead of serving a partial list', async () => {

@@ -1,0 +1,114 @@
+jest.mock('@/components/layouts/Navigation', () => () => null);
+jest.mock('@/components/layouts/Footer', () => () => null);
+jest.mock('@/components/equipment/catalog/EquipmentDetail', () => () => null);
+jest.mock('@/components/equipment/catalog/ViewBeacon', () => () => null);
+jest.mock('next/navigation', () => ({
+  notFound: jest.fn(() => {
+    throw new Error('404');
+  }),
+}));
+jest.mock('@/lib/equipment-listings/catalog-repository', () => ({
+  getActiveListing: jest.fn(),
+}));
+jest.mock('@/lib/equipment-listings/image-repository', () => ({
+  listImages: jest.fn(async () => []),
+}));
+jest.mock('@/lib/equipment-listings/moderation-repository', () => ({
+  trustMarksFor: jest.fn(async () => ({})),
+}));
+jest.mock('@/lib/equipment-listings/engagement', () => ({
+  ownerOfActiveListing: jest.fn(async () => null),
+}));
+jest.mock('@/lib/equipment-listings/companies', () => ({
+  activeCompanyOf: jest.fn(async () => null),
+}));
+
+import { isValidElement, type ReactNode } from 'react';
+import Page, { generateMetadata } from '@/app/[locale]/equipment/[id]/page';
+import { getActiveListing } from '@/lib/equipment-listings/catalog-repository';
+
+const id = '00000000-0000-4000-8000-0000000000a1';
+// Made-up listing; no real advertiser data.
+const listing = {
+  id,
+  offerType: 'RENT',
+  category: 'excavator',
+  title: 'Тестовый экскаватор',
+  description: 'Тестовое описание объявления.',
+  region: 'almaty',
+  city: 'Тестовый город',
+  updatedAt: '2026-11-01T00:00:00Z',
+};
+
+const props = (locale: string) => ({
+  params: Promise.resolve({ locale, id }),
+});
+
+/** Every JSON-LD block the page renders. */
+function jsonLd(node: ReactNode): Record<string, unknown>[] {
+  if (Array.isArray(node)) return node.flatMap(jsonLd);
+  if (!isValidElement(node)) return [];
+  const p = node.props as {
+    type?: string;
+    children?: ReactNode;
+    dangerouslySetInnerHTML?: { __html: string };
+  };
+  if (node.type === 'script' && p.type === 'application/ld+json')
+    return [JSON.parse(p.dangerouslySetInnerHTML!.__html)];
+  return jsonLd(p.children);
+}
+
+const env = process.env;
+beforeEach(() => {
+  process.env = {
+    ...env,
+    EQUIPMENT_MARKETPLACE_ENABLED: 'true',
+    EQUIPMENT_CATALOG_ENABLED: 'true',
+  };
+  jest.clearAllMocks();
+  (getActiveListing as jest.Mock).mockResolvedValue(listing);
+});
+afterAll(() => {
+  process.env = env;
+});
+
+describe('one indexable URL per listing', () => {
+  it('keeps a self-canonical without hreflang on the original language', async () => {
+    const meta = await generateMetadata(props('ru'));
+    expect(meta.alternates).toEqual({
+      canonical: `https://qaznedr.kz/ru/equipment/${id}`,
+    });
+    expect(meta.robots).toEqual({ index: true, follow: true });
+  });
+
+  it('points the untranslated copies at the original, canonical alone', async () => {
+    for (const locale of ['kz', 'en', 'zh']) {
+      const meta = await generateMetadata(props(locale));
+      expect(meta.alternates).toEqual({
+        canonical: `https://qaznedr.kz/ru/equipment/${id}`,
+      });
+      expect(meta.robots).toEqual({ index: true, follow: true });
+    }
+  });
+
+  it('follows the language the author wrote in', async () => {
+    (getActiveListing as jest.Mock).mockResolvedValue({
+      ...listing,
+      sourceLanguage: 'en',
+    });
+    const meta = await generateMetadata(props('ru'));
+    expect(meta.alternates?.canonical).toBe(
+      `https://qaznedr.kz/en/equipment/${id}`
+    );
+  });
+
+  it('names the original URL in structured data on every locale', async () => {
+    const blocks = jsonLd(await Page(props('zh')));
+    const breadcrumb = blocks.find((b) => b['@type'] === 'BreadcrumbList') as {
+      itemListElement: { item: string }[];
+    };
+    expect(breadcrumb.itemListElement[2].item).toBe(
+      `https://qaznedr.kz/ru/equipment/${id}`
+    );
+  });
+});

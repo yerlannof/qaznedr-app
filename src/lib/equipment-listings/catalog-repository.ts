@@ -143,11 +143,15 @@ export type PublicEquipmentListing = NonNullable<
 const sitemapRow = z.object({
   id: z.string().uuid(),
   updated_at: z.string().datetime({ offset: true }),
+  source_language: z.enum(['ru', 'kz', 'en', 'zh']).nullable().optional(),
 });
 
-/** Every published listing for the sitemap; throws rather than return a partial list. */
+/**
+ * Every published listing for the sitemap, with the language its author wrote
+ * it in (absent for older listings); throws rather than return a partial list.
+ */
 export async function listActiveForSitemap(): Promise<
-  { id: string; updatedAt: string }[]
+  { id: string; updatedAt: string; sourceLanguage?: string }[]
 > {
   const client = await createServiceClient();
   const { data, error } = await (
@@ -170,7 +174,7 @@ export async function listActiveForSitemap(): Promise<
     }
   )
     .from('equipment_listings')
-    .select('id,updated_at')
+    .select('id,updated_at,source_language:data->>sourceLanguage')
     .eq('status', 'ACTIVE')
     .order('updated_at', { ascending: false })
     .limit(5000);
@@ -178,7 +182,11 @@ export async function listActiveForSitemap(): Promise<
   return z
     .array(sitemapRow)
     .parse(data)
-    .map((row) => ({ id: row.id, updatedAt: row.updated_at }));
+    .map((row) => ({
+      id: row.id,
+      updatedAt: row.updated_at,
+      ...(row.source_language && { sourceLanguage: row.source_language }),
+    }));
 }
 
 /** Published listings of one author, for the company page. */

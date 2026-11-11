@@ -13,6 +13,11 @@ import { translate } from '@/lib/i18n/translations';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 import { SITE_URL, localeUrl, toLocale, type Locale } from '@/lib/seo/site';
 import {
+  listingCanonicalUrl,
+  listingPath,
+  listingSourceLocale,
+} from '@/lib/seo/equipment-seo';
+import {
   getActiveListing,
   type PublicEquipmentListing,
 } from '@/lib/equipment-listings/catalog-repository';
@@ -66,11 +71,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: translate(locale, 'equipmentCatalog.notAvailable'),
       robots: { index: false, follow: false },
     };
+  // The author's text is not translated: only the URL in its language is
+  // indexable, and no hreflang presents the other three as translations.
   return buildPageMetadata({
     locale,
-    path: `/equipment/${listing.id}`,
+    path: listingPath(listing.id),
     title: listing.title ?? '',
     description: describe(listing, locale),
+    canonicalLocale: listingSourceLocale(listing),
+    languageAlternates: false,
   });
 }
 
@@ -83,7 +92,7 @@ function listingJsonLd(
   locale: Locale,
   images: string[]
 ) {
-  const url = localeUrl(locale, `/equipment/${listing.id}`);
+  const url = listingCanonicalUrl(listing);
   const offer =
     listing.price !== undefined && listing.currency
       ? {

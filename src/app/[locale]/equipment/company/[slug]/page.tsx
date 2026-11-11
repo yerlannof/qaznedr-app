@@ -5,7 +5,12 @@ import Footer from '@/components/layouts/Footer';
 import CompanyProfileView from '@/components/equipment/catalog/CompanyProfileView';
 import { translate } from '@/lib/i18n/translations';
 import { buildPageMetadata } from '@/lib/seo/metadata';
-import { localeUrl, toLocale } from '@/lib/seo/site';
+import { toLocale } from '@/lib/seo/site';
+import {
+  COMPANY_PAGE_LOCALE,
+  companyCanonicalUrl,
+  companyPath,
+} from '@/lib/seo/equipment-seo';
 import { equipmentCatalogEnabled } from '@/lib/equipment-listings/flags';
 import { getActiveCompanyBySlug } from '@/lib/equipment-listings/companies';
 import {
@@ -28,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const company = await load(slug);
   return buildPageMetadata({
     locale,
-    path: `/equipment/company/${slug}`,
+    path: companyPath(slug),
     title: company
       ? translate(locale, 'equipmentCompany.metaTitle', { name: company.name })
       : translate(locale, 'equipmentCatalog.notAvailable'),
@@ -39,6 +44,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         }))
       : '',
     noindex: !company,
+    // The profile text is the company's own, in Russian: one indexable URL.
+    ...(company && {
+      canonicalLocale: COMPANY_PAGE_LOCALE,
+      languageAlternates: false,
+    }),
   });
 }
 
@@ -63,7 +73,7 @@ export default async function CompanyPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: company.name,
-    url: localeUrl(locale, `/equipment/company/${company.slug}`),
+    url: companyCanonicalUrl(company.slug),
     ...(company.website && { sameAs: [company.website] }),
     ...(company.description && { description: company.description }),
     ...(company.city && {

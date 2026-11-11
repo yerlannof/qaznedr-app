@@ -1,5 +1,8 @@
 import { createServiceClient } from '@/lib/supabase/server';
-import { searchEquipmentCatalog } from '@/lib/equipment-listings/catalog-repository';
+import {
+  listActiveForSitemap,
+  searchEquipmentCatalog,
+} from '@/lib/equipment-listings/catalog-repository';
 import { parseEquipmentSearchQuery } from '@/lib/equipment-listings/search';
 jest.mock('@/lib/supabase/server', () => ({ createServiceClient: jest.fn() }));
 const filters = parseEquipmentSearchQuery(
@@ -103,4 +106,40 @@ it('accepts deliberate public contacts and an empty page with a nonzero total', 
       parseEquipmentSearchQuery(new URLSearchParams('page=20'))
     )
   ).toMatchObject({ items: [], total: 100, page: 20 });
+});
+
+it('reads each published listing with its original language for the sitemap', async () => {
+  const limit = jest.fn().mockResolvedValue({
+    data: [
+      { id: row.id, updated_at: row.updated_at, source_language: null },
+      {
+        id: 'aaaaaaaa-aaaa-4aaa-aaaa-000000000002',
+        updated_at: row.updated_at,
+        source_language: 'en',
+      },
+    ],
+    error: null,
+  });
+  const select = jest.fn(() => ({
+    eq: () => ({ order: () => ({ limit }) }),
+  }));
+  (createServiceClient as jest.Mock).mockResolvedValue({
+    from: () => ({ select }),
+  });
+  expect(await listActiveForSitemap()).toEqual([
+    { id: row.id, updatedAt: row.updated_at },
+    {
+      id: 'aaaaaaaa-aaaa-4aaa-aaaa-000000000002',
+      updatedAt: row.updated_at,
+      sourceLanguage: 'en',
+    },
+  ]);
+  // Only the id, date and language leave the table, never the whole record.
+  expect(select).toHaveBeenCalledWith(
+    'id,updated_at,source_language:data->>sourceLanguage'
+  );
+  limit.mockResolvedValue({ data: null, error: { message: 'down' } });
+  await expect(listActiveForSitemap()).rejects.toThrow(
+    'Equipment catalogue unavailable'
+  );
 });

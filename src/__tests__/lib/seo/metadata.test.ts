@@ -114,6 +114,36 @@ describe('seo/metadata', () => {
     expect(m.robots).toEqual({ index: false, follow: false });
   });
 
+  it('points an untranslated copy at the original without hreflang', () => {
+    const copy = buildPageMetadata({
+      locale: 'en',
+      path: '/equipment/x',
+      title: 't',
+      description: 'd',
+      canonicalLocale: 'ru',
+      languageAlternates: false,
+    });
+    expect(copy.alternates).toEqual({
+      canonical: 'https://qaznedr.kz/ru/equipment/x',
+    });
+    expect((copy.openGraph as { url: string }).url).toBe(
+      'https://qaznedr.kz/ru/equipment/x'
+    );
+    // Canonical alone, never combined with noindex.
+    expect(copy.robots).toEqual({ index: true, follow: true });
+    const original = buildPageMetadata({
+      locale: 'ru',
+      path: '/equipment/x',
+      title: 't',
+      description: 'd',
+      canonicalLocale: 'ru',
+      languageAlternates: false,
+    });
+    expect(original.alternates).toEqual({
+      canonical: 'https://qaznedr.kz/ru/equipment/x',
+    });
+  });
+
   it('reads localized strings from translations', () => {
     const zh = buildTranslatedPageMetadata('zh', '/leads', 'leads');
     const ru = buildTranslatedPageMetadata('ru', '/leads', 'leads');

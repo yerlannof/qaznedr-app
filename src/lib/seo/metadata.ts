@@ -40,10 +40,15 @@ export interface PageMetadataInput {
   ogImagePath?: string;
   /** ISO dates of an article; switches og:type to "article". */
   article?: { published: string; modified: string };
+  /** Locale of the indexable original when this URL shows the same
+   * untranslated text (marketplace listings). Defaults to `locale`. */
+  canonicalLocale?: Locale;
+  /** false: no hreflang alternates, for pages without translations. */
+  languageAlternates?: boolean;
 }
 
 export function buildPageMetadata(input: PageMetadataInput): Metadata {
-  const url = localeUrl(input.locale, input.path);
+  const url = localeUrl(input.canonicalLocale ?? input.locale, input.path);
   // A page's own openGraph replaces the file-based card of its segment, so
   // every page names its card explicitly.
   const image = {
@@ -70,7 +75,9 @@ export function buildPageMetadata(input: PageMetadataInput): Metadata {
     description: input.description,
     alternates: {
       canonical: url,
-      languages: buildLanguageAlternates(input.path, input.locales),
+      ...(input.languageAlternates !== false && {
+        languages: buildLanguageAlternates(input.path, input.locales),
+      }),
     },
     openGraph: input.article
       ? {

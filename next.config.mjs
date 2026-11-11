@@ -37,14 +37,12 @@ const nextConfig = {
 
   // Image optimization
   images: {
-    domains: [
-      'images.unsplash.com',
-      'source.unsplash.com',
-      'picsum.photos',
-      'localhost',
-      'your-supabase-project.supabase.co', // Replace with your Supabase URL
-    ],
+    domains: ['images.unsplash.com', 'source.unsplash.com', 'localhost'],
     formats: ['image/avif', 'image/webp'],
+    // Optimised copies live at least an hour (Next default: 60 s). Sources
+    // with a longer max-age (public/brand: a day) keep theirs; listing photos
+    // send s-maxage=3600, so a moderated photo never outlives that.
+    minimumCacheTTL: 3600,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
@@ -96,15 +94,19 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/static/:path*',
+      // Public files without a content hash in the name: a day in the
+      // browser, then a background revalidation for a week. Not immutable,
+      // because a replaced file keeps its URL. (/_next/static is hashed and
+      // cached by Next itself; there is no public/static folder.)
+      ...['/brand/:path*', '/offers/:path*'].map((source) => ({
+        source,
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
           },
         ],
-      },
+      })),
     ];
   },
 

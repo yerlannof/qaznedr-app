@@ -9,6 +9,7 @@ jest.mock('next/navigation', () => ({
 }));
 jest.mock('@/lib/equipment-listings/catalog-repository', () => ({
   getActiveListing: jest.fn(),
+  listingExists: jest.fn(),
 }));
 jest.mock('@/lib/equipment-listings/image-repository', () => ({
   listImages: jest.fn(async () => []),
@@ -25,7 +26,10 @@ jest.mock('@/lib/equipment-listings/companies', () => ({
 
 import { isValidElement, type ReactNode } from 'react';
 import Page, { generateMetadata } from '@/app/[locale]/equipment/[id]/page';
-import { getActiveListing } from '@/lib/equipment-listings/catalog-repository';
+import {
+  getActiveListing,
+  listingExists,
+} from '@/lib/equipment-listings/catalog-repository';
 
 const id = '00000000-0000-4000-8000-0000000000a1';
 // Made-up listing; no real advertiser data.
@@ -110,5 +114,42 @@ describe('one indexable URL per listing', () => {
     expect(breadcrumb.itemListElement[2].item).toBe(
       `https://qaznedr.kz/ru/equipment/${id}`
     );
+  });
+});
+
+describe('missing and withdrawn listings', () => {
+  it('answers 404 for an id that is not a UUID, without reading the database', async () => {
+    const bad = { params: Promise.resolve({ locale: 'ru', id: 'not-a-uuid' }) };
+    await expect(Page(bad)).rejects.toThrow('404');
+    await expect(generateMetadata(bad)).rejects.toThrow('404');
+    expect(getActiveListing).not.toHaveBeenCalled();
+    expect(listingExists).not.toHaveBeenCalled();
+  });
+
+  it('answers 404 for a listing that never existed', async () => {
+    (getActiveListing as jest.Mock).mockResolvedValue(null);
+    (listingExists as jest.Mock).mockResolvedValue(false);
+    await expect(Page(props('ru'))).rejects.toThrow('404');
+    await expect(generateMetadata(props('ru'))).rejects.toThrow('404');
+  });
+
+  it('keeps the noindex "withdrawn" page for a listing that is no longer active', async () => {
+    (getActiveListing as jest.Mock).mockResolvedValue(null);
+    (listingExists as jest.Mock).mockResolvedValue(true);
+    const page = await Page(props('ru'));
+    expect(jsonLd(page)).toEqual([]);
+    expect((await generateMetadata(props('ru'))).robots).toEqual({
+      index: false,
+      follow: false,
+    });
+  });
+
+  it('does not answer 404 when the database cannot be read', async () => {
+    (getActiveListing as jest.Mock).mockRejectedValue(new Error('down'));
+    await expect(Page(props('ru'))).resolves.toBeTruthy();
+    expect((await generateMetadata(props('ru'))).robots).toEqual({
+      index: false,
+      follow: false,
+    });
   });
 });

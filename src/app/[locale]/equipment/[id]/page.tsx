@@ -19,6 +19,7 @@ import {
 } from '@/lib/seo/equipment-seo';
 import {
   getActiveListing,
+  listingExists,
   type PublicEquipmentListing,
 } from '@/lib/equipment-listings/catalog-repository';
 import { listImages } from '@/lib/equipment-listings/image-repository';
@@ -41,12 +42,24 @@ type Props = { params: Promise<{ locale: string; id: string }> };
 
 const enabled = equipmentCatalogEnabled;
 
-async function load(id: string): Promise<PublicEquipmentListing | null> {
-  if (!enabled()) return null;
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/**
+ * The published listing; 'withdrawn' for one that exists but is not active
+ * (archived, rejected, back in moderation); null for an address that never
+ * held a listing, which answers 404.
+ */
+async function load(
+  id: string
+): Promise<PublicEquipmentListing | 'withdrawn' | null> {
+  if (!enabled() || !UUID.test(id)) return null;
   try {
-    return await getActiveListing(id);
+    const listing = await getActiveListing(id);
+    if (listing) return listing;
+    return (await listingExists(id)) ? 'withdrawn' : null;
   } catch {
-    return null;
+    // A failed read does not prove the listing never existed: no 404.
+    return 'withdrawn';
   }
 }
 
@@ -66,7 +79,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw, id } = await params;
   const locale = toLocale(raw);
   const listing = await load(id);
-  if (!listing)
+  if (!listing) notFound();
+  if (listing === 'withdrawn')
     return {
       title: translate(locale, 'equipmentCatalog.notAvailable'),
       robots: { index: false, follow: false },
@@ -178,7 +192,8 @@ export default async function EquipmentListingPage({ params }: Props) {
   const { locale: raw, id } = await params;
   const locale = toLocale(raw);
   const listing = await load(id);
-  if (!listing)
+  if (!listing) notFound();
+  if (listing === 'withdrawn')
     return (
       <>
         <Navigation />

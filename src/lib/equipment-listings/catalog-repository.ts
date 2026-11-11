@@ -136,6 +136,36 @@ export async function getActiveListing(id: string) {
   };
 }
 
+/**
+ * Whether a listing with this id was ever created, in any status. Tells a
+ * withdrawn listing (archived, rejected, back in moderation) from an address
+ * that never existed. Only a boolean leaves this boundary.
+ */
+export async function listingExists(id: string): Promise<boolean> {
+  if (!z.string().uuid().safeParse(id).success) return false;
+  const client = await createServiceClient();
+  const { data, error } = await (
+    client as unknown as {
+      from(table: string): {
+        select(columns: string): {
+          eq(
+            column: string,
+            value: string
+          ): {
+            maybeSingle(): Promise<{ data: unknown; error: unknown }>;
+          };
+        };
+      };
+    }
+  )
+    .from('equipment_listings')
+    .select('id')
+    .eq('id', id)
+    .maybeSingle();
+  if (error) throw new Error('Equipment catalogue unavailable');
+  return data !== null;
+}
+
 export type PublicEquipmentListing = NonNullable<
   Awaited<ReturnType<typeof getActiveListing>>
 >;

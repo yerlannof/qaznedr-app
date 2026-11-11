@@ -1,6 +1,7 @@
 import { createServiceClient } from '@/lib/supabase/server';
 import {
   listActiveForSitemap,
+  listingExists,
   searchEquipmentCatalog,
 } from '@/lib/equipment-listings/catalog-repository';
 import { parseEquipmentSearchQuery } from '@/lib/equipment-listings/search';
@@ -142,4 +143,25 @@ it('reads each published listing with its original language for the sitemap', as
   await expect(listActiveForSitemap()).rejects.toThrow(
     'Equipment catalogue unavailable'
   );
+});
+
+it('tells whether a listing ever existed without reading its record', async () => {
+  const maybeSingle = jest.fn().mockResolvedValue({
+    data: { id: row.id },
+    error: null,
+  });
+  const select = jest.fn(() => ({ eq: () => ({ maybeSingle }) }));
+  const from = jest.fn(() => ({ select }));
+  (createServiceClient as jest.Mock).mockResolvedValue({ from });
+  expect(await listingExists(row.id)).toBe(true);
+  expect(select).toHaveBeenCalledWith('id');
+  maybeSingle.mockResolvedValue({ data: null, error: null });
+  expect(await listingExists(row.id)).toBe(false);
+  maybeSingle.mockResolvedValue({ data: null, error: { message: 'down' } });
+  await expect(listingExists(row.id)).rejects.toThrow(
+    'Equipment catalogue unavailable'
+  );
+  from.mockClear();
+  expect(await listingExists('not-a-uuid')).toBe(false);
+  expect(from).not.toHaveBeenCalled();
 });

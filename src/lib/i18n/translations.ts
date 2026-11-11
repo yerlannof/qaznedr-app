@@ -2537,7 +2537,7 @@ export const translations = {
         placerGold:
           'Шашыранды алтын: қайда ізделеді және заңды түрде қалай бастау керек',
         goldMap:
-          'Қазақстанның алтын картасы: облыстар бойынша аудандар мен кен орындары',
+          'Қазақстанның алтын картасы: облыстардағы аудандар мен кен орындары',
       },
       summaries: {
         artisanalMining:
@@ -5818,7 +5818,7 @@ export const translations = {
         satelliteGoldMap: '能通过卫星地图找到哈萨克斯坦的黄金吗？',
         readGeologicalMap: '如何阅读地质图：颜色、断层与剖面',
         placerGold: '砂金：在哪里寻找，如何合法起步',
-        goldMap: '哈萨克斯坦黄金地图：各州含金区与已知矿床',
+        goldMap: '哈萨克斯坦黄金地图：各州含金区与矿床',
       },
       summaries: {
         artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',

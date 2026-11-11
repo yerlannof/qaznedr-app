@@ -152,3 +152,34 @@ it('carries the current article into the services navigation link', () => {
     `/ru/services?guide=${GUIDE.geologicalMap}`
   );
 });
+
+it('shows the header contact button from 768 px, next to the burger below 1280 px', () => {
+  render(<Navigation />);
+  const contact = screen.getByRole('link', { name: 'Связаться' });
+  const burger = screen.getByRole('button', { name: 'Меню' });
+  // Hidden on phones (the floating MobileTabBar button covers < 768 px)...
+  expect(contact).toHaveClass(
+    'brand-button',
+    'brand-focus',
+    'hidden',
+    'md:inline-flex',
+    'min-h-11',
+    'items-center',
+    'whitespace-nowrap',
+    'px-4',
+    'text-sm'
+  );
+  expect(contact).not.toHaveClass('inline-flex');
+  // ...and no xl-only ancestor hides it between 768 and 1279 px.
+  let node: HTMLElement | null = contact.parentElement;
+  while (node && node.tagName !== 'NAV') {
+    expect(node.className).not.toMatch(/(^|\s)hidden(\s|$)/);
+    node = node.parentElement;
+  }
+  // Same row as the burger trigger, button first.
+  const row = contact.parentElement!;
+  expect(row).toContainElement(burger);
+  expect(
+    contact.compareDocumentPosition(burger) & Node.DOCUMENT_POSITION_FOLLOWING
+  ).toBeTruthy();
+});

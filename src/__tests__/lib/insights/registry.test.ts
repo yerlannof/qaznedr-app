@@ -1,6 +1,19 @@
 import { GUIDE, INSIGHTS, insightHref } from '@/lib/insights/registry';
 
 describe('insightHref', () => {
+  it('registers the placer gold guide in all four languages', () => {
+    expect(
+      INSIGHTS.find((entry) => entry.slug === GUIDE.placerGold)
+    ).toMatchObject({
+      slug: 'placer-gold-kazakhstan',
+      category: 'geology',
+      published: '2026-11-11',
+      updated: '2026-11-11',
+      legal: true,
+      lawAsOf: '2026-11-11',
+      locales: ['ru', 'en', 'zh', 'kz'],
+    });
+  });
   it('registers the gold licence comparison in all four languages', () => {
     expect(
       INSIGHTS.find((entry) => entry.slug === GUIDE.goldLicenceTypes)

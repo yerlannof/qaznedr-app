@@ -42,7 +42,7 @@ description: '卫星影像能向地质人员展示什么、如何识别地表岩
 
 之后可能需要查阅地质资料、开展地面调查和地球化学取样，并在有依据的情况下进行钻探，对样品作记录和分析。要评估储量，需要足够的数据，并注明评价日期、类别和适用标准，例如 GKZ 或 KAZRC。
 
-关于阅读和核查原始地图，可查看[哈萨克斯坦地质图指南](/zh/insights/geological-map-kazakhstan)。关于东哈萨克斯坦，可查看[东哈萨克斯坦黄金地质资料查找指南](/zh/insights/east-kazakhstan-gold-map-guide)。根据资料作决定前，还可参考[地质尽职调查清单](/zh/insights/geological-due-diligence-kazakhstan)；关于勘查钻探文件，可查看[岩芯钻探指南](/zh/insights/core-drilling-geological-exploration)。
+关于阅读和核查原始地图，可查看[哈萨克斯坦地质图指南](/zh/insights/geological-map-kazakhstan)。关于东哈萨克斯坦，可查看[东哈萨克斯坦黄金地质资料查找指南](/zh/insights/east-kazakhstan-gold-map-guide)。根据资料作决定前，还可参考[地质尽职调查清单](/zh/insights/geological-due-diligence-kazakhstan)；关于勘查钻探文件，可查看[岩芯钻探指南](/zh/insights/core-drilling-geological-exploration)。砂矿如何形成、如何寻找，见[砂金指南](/zh/insights/placer-gold-kazakhstan)。
 
 ## 常见问题
 

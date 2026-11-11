@@ -35,6 +35,7 @@ export const GUIDE = {
   pugfn: 'pugfn-subsoil-fund-program-kazakhstan',
   readGeologicalMap: 'how-to-read-geological-map',
   goldLicenceTypes: 'gold-licence-types-kazakhstan',
+  placerGold: 'placer-gold-kazakhstan',
 } as const;
 
 export type GuideKey = keyof typeof GUIDE;
@@ -159,6 +160,15 @@ export const INSIGHTS: readonly InsightEntry[] = [
     updated: '2026-10-20',
     legal: true,
     lawAsOf: '2026-10-20',
+    locales: WRITTEN,
+  },
+  {
+    slug: GUIDE.placerGold,
+    category: 'geology',
+    published: '2026-11-11',
+    updated: '2026-11-11',
+    legal: true,
+    lawAsOf: '2026-11-11',
     locales: WRITTEN,
   },
 ];

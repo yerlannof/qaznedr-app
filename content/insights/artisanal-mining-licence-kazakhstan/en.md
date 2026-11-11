@@ -29,7 +29,7 @@ Check with the regional akimat and current EPN information:
 
 For example, Article 264 excludes certain protected areas, settlements and an adjacent 1,000 m zone. This is not the full list. On private land, another user's land or another person's subsoil area, consider the consents required by law.
 
-A geological map helps you understand geology. Check the right to work and the area's legal status in other records. See [how to choose a geological map](/en/insights/geological-map-kazakhstan).
+A geological map helps you understand geology. Check the right to work and the area's legal status in other records. See [how to choose a geological map](/en/insights/geological-map-kazakhstan). How placers form and how geologists search for them is covered in the [placer gold guide](/en/insights/placer-gold-kazakhstan).
 
 ## 2. Decide how you will work
 

@@ -781,6 +781,7 @@ export const translations = {
           'Можно ли найти золото в Казахстане по спутниковой карте?',
         readGeologicalMap:
           'Как читать геологическую карту: цвета, разломы и разрез',
+        placerGold: 'Россыпное золото: где ищут и как начать законно',
       },
       summaries: {
         artisanalMining:
@@ -811,6 +812,8 @@ export const translations = {
           'Что видно на снимке, какие признаки проверяет геолог и почему карта не подтверждает золото, запасы или права на участок.',
         readGeologicalMap:
           'Пошагово разбираем легенду, масштаб, границы пород, разломы, знаки залегания и геологический разрез — без выводов о месторождении по одному символу.',
+        placerGold:
+          'Типы россыпей, исторически известные районы, шлиховое опробование и какая лицензия нужна, чтобы мыть золото законно.',
       },
     },
     seo: {
@@ -2515,6 +2518,8 @@ export const translations = {
           'Қазақстанда алтынды спутниктік картадан табуға бола ма?',
         readGeologicalMap:
           'Геологиялық картаны қалай оқу керек: түстер, жарылымдар және қима',
+        placerGold:
+          'Шашыранды алтын: қайда ізделеді және заңды түрде қалай бастау керек',
       },
       summaries: {
         artisanalMining:
@@ -2545,6 +2550,8 @@ export const translations = {
           'Суретте не көрінеді, геолог қандай белгілерді тексереді және карта неліктен алтынды, қорды не учаскеге құқықты растамайды.',
         readGeologicalMap:
           'Шартты белгілерді, масштабты, тау жыныстарының шекараларын, жарылымдарды, жатыс белгілерін және геологиялық қиманы біртіндеп қарастырамыз; жалғыз таңбаға қарап кен орны туралы қорытынды жасамаймыз.',
+        placerGold:
+          'Шашыранды кен орындарының түрлері, тарихи белгілі аудандар, шлихтік сынамалау және алтынды заңды жуу үшін қандай лицензия керек.',
       },
     },
     seo: {
@@ -4170,6 +4177,7 @@ export const translations = {
         satelliteGoldMap: 'Can a satellite map reveal gold in Kazakhstan?',
         readGeologicalMap:
           'How to read a geological map: colours, faults and cross-sections',
+        placerGold: 'Placer gold: where to search and how to start legally',
       },
       summaries: {
         artisanalMining:
@@ -4200,6 +4208,8 @@ export const translations = {
           'What imagery can show, which signs a geologist checks and why a map cannot confirm gold, reserves or rights to an area.',
         readGeologicalMap:
           'A step-by-step guide to legends, scale, rock boundaries, faults, dip symbols and geological cross-sections, without inferring a deposit from one map symbol.',
+        placerGold:
+          'Placer types, historically known districts, panned-concentrate sampling and which licence lets you wash gold legally.',
       },
     },
     seo: {
@@ -5765,6 +5775,7 @@ export const translations = {
         coreDrilling: '岩芯钻探：岩芯能说明什么',
         satelliteGoldMap: '能通过卫星地图找到哈萨克斯坦的黄金吗？',
         readGeologicalMap: '如何阅读地质图：颜色、断层与剖面',
+        placerGold: '砂金：在哪里寻找，如何合法起步',
       },
       summaries: {
         artisanalMining: '申请资格、作业限制、所需文件与准备步骤。',
@@ -5792,6 +5803,8 @@ export const translations = {
           '了解影像能显示哪些地表特征、地质学家如何核查，以及为什么地图不能确认黄金、储量或矿区权利。',
         readGeologicalMap:
           '按步骤了解图例、比例尺、岩层边界、断层、产状符号和地质剖面；不要仅凭一个地图符号推断矿床。',
+        placerGold:
+          '砂矿类型、历来知名的产区、重砂取样，以及合法淘金需要哪种许可证。',
       },
     },
     seo: {

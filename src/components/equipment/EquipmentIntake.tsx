@@ -36,6 +36,7 @@ import {
   X,
   type LucideIcon,
 } from 'lucide-react';
+import { safeTrack } from '@/lib/analytics/events';
 import { whatsappLink } from '@/lib/config/contacts';
 import { translate } from '@/lib/i18n/translations';
 import {
@@ -231,6 +232,8 @@ export function EquipmentIntake({
       translate(locale, `equipmentIntake.${key}`, params),
     [locale]
   );
+  const trackAssisted = () =>
+    safeTrack('click_whatsapp', { locale, place: 'equipment_intake' });
   const { data: session, status: authStatus } = useSession();
   const ownerId = session?.user?.id ?? null;
   const [value, setValue] = useState<IntakeValue>(emptyIntake);
@@ -1209,6 +1212,7 @@ export function EquipmentIntake({
               href={whatsappLink(whatsappNumber, t('assistedMessage'))}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={trackAssisted}
               className="brand-focus flex items-center gap-3 bg-brand-surface px-4 py-3.5 text-[15px] lg:hidden"
             >
               <MessageCircle
@@ -2025,6 +2029,7 @@ export function EquipmentIntake({
                   href={whatsappLink(whatsappNumber, t('assistedMessage'))}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={trackAssisted}
                   className={`${buttonClass} min-h-11 justify-self-start px-4 text-sm`}
                 >
                   <MessageCircle aria-hidden size={18} />

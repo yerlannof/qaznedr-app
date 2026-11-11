@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import { regionLabel } from '@/lib/data/filter-config';
+import { safeTrack } from '@/lib/analytics/events';
 import { whatsappLink } from '@/lib/config/contacts';
 import type { EquipmentListing } from '@/lib/equipment-listings/domain';
 import { EQUIPMENT_STATUSES } from '@/lib/equipment-listings/domain';
@@ -761,6 +762,12 @@ export default function OwnerCabinet({
                 href={whatsappLink(whatsappNumber, t('helpMessage'))}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  safeTrack('click_whatsapp', {
+                    locale,
+                    place: 'equipment_cabinet',
+                  })
+                }
                 className={`${ghost} justify-self-start`}
               >
                 <MessageCircle

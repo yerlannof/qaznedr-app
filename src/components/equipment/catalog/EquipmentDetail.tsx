@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import { whatsappLink, type ContactConfig } from '@/lib/config/contacts';
+import TrackedWhatsAppLink from '@/components/features/TrackedWhatsAppLink';
 import ContactBeacon from './ContactBeacon';
 import ResponseForm from './ResponseForm';
 import type { PublicEquipmentListing } from '@/lib/equipment-listings/catalog-repository';
@@ -142,19 +143,19 @@ export default function EquipmentDetail({
                     <Phone aria-hidden className="size-[18px]" />
                     {t('call')} {ownerPhone}
                   </a>
-                  <a
-                    data-contact
+                  <TrackedWhatsAppLink
+                    contact
                     href={whatsappLink(
                       ownerPhone.replace(/\D/g, ''),
                       t('ownerMessage', { title })
                     )}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    locale={locale}
+                    place="equipment_owner"
                     className="brand-button-secondary brand-focus w-full"
                   >
                     <MessageCircle aria-hidden className="size-[18px]" />
                     {t('whatsappOwner')}
-                  </a>
+                  </TrackedWhatsAppLink>
                 </>
               ) : (
                 <>
@@ -162,19 +163,19 @@ export default function EquipmentDetail({
                     {t('contactHidden')}
                   </p>
                   {contacts.whatsappNumber && (
-                    <a
-                      data-contact
+                    <TrackedWhatsAppLink
+                      contact
                       href={whatsappLink(
                         contacts.whatsappNumber,
                         t('teamMessage', { title, url })
                       )}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      locale={locale}
+                      place="equipment_team"
                       className={`${wanted ? 'brand-button-secondary' : 'brand-button'} brand-focus w-full`}
                     >
                       <MessageCircle aria-hidden className="size-[18px]" />
                       {t('contactTeam')}
-                    </a>
+                    </TrackedWhatsAppLink>
                   )}
                 </>
               )}
@@ -226,17 +227,17 @@ export default function EquipmentDetail({
             {contacts.whatsappNumber && (
               <>
                 {' · '}
-                <a
+                <TrackedWhatsAppLink
                   href={whatsappLink(
                     contacts.whatsappNumber,
                     t('reportMessage', { url })
                   )}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  locale={locale}
+                  place="equipment_report"
                   className="brand-focus underline underline-offset-4"
                 >
                   {t('report')}
-                </a>
+                </TrackedWhatsAppLink>
               </>
             )}
           </p>

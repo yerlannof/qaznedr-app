@@ -153,6 +153,7 @@ describe('ContactChannels', () => {
       locale: 'en',
       lead: 'AU-1',
       topic: 'licensing',
+      path: '/',
     });
   });
 

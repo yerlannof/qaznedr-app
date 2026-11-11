@@ -6,6 +6,9 @@ import {
   waitFor,
 } from '@testing-library/react';
 import EquipmentIntake from '@/components/equipment/EquipmentIntake';
+import { safeTrack } from '@/lib/analytics/events';
+
+jest.mock('@/lib/analytics/events', () => ({ safeTrack: jest.fn() }));
 import { EquipmentDraftClient } from '@/lib/equipment-listings/intake-client';
 
 let mockSessionStatus = 'unauthenticated';
@@ -490,4 +493,27 @@ it('returns a visitor to the same step with picked regions after sign-in', () =>
     screen.getByRole('checkbox', { name: 'ВП (вызванная поляризация)' })
   ).toBeChecked();
   expect(screen.getByRole('checkbox', { name: 'Улытауская' })).toBeChecked();
+});
+
+it('counts clicks on the "we will post it for you" WhatsApp links', async () => {
+  render(
+    <EquipmentIntake
+      locale="ru"
+      googleEnabled={true}
+      whatsappNumber="77000000000"
+    />
+  );
+  const links = (await screen.findAllByRole('link')).filter((a) =>
+    a.getAttribute('href')?.startsWith('https://wa.me/77000000000')
+  );
+  expect(links.length).toBeGreaterThan(0);
+  for (const link of links) {
+    link.addEventListener('click', (event) => event.preventDefault());
+    fireEvent.click(link);
+  }
+  expect(safeTrack).toHaveBeenCalledTimes(links.length);
+  expect(safeTrack).toHaveBeenLastCalledWith('click_whatsapp', {
+    locale: 'ru',
+    place: 'equipment_intake',
+  });
 });

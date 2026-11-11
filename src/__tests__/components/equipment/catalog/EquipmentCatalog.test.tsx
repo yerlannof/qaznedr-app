@@ -1,8 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import EquipmentCatalog, {
   type CatalogCounts,
 } from '@/components/equipment/catalog/EquipmentCatalog';
 import type { PublicEquipmentListing } from '@/lib/equipment-listings/catalog-repository';
+import { safeTrack } from '@/lib/analytics/events';
+
+jest.mock('@/lib/analytics/events', () => ({ safeTrack: jest.fn() }));
+beforeEach(() => jest.clearAllMocks());
 
 const zero: CatalogCounts = {
   groups: { machinery: 0, toolsInstruments: 0, services: 0, people: 0 },
@@ -101,4 +105,56 @@ it('links section tiles to a group and marks requests apart from offers', () => 
   expect(screen.getByRole('link', { name: /Нужна буровая/ })).toHaveTextContent(
     'Бюджет'
   );
+});
+
+it('counts clicks on the "we will post it for you" WhatsApp links', () => {
+  const click = (name: RegExp) => {
+    const link = screen.getByRole('link', { name });
+    expect(link.getAttribute('href')).toMatch(
+      /^https:\/\/wa\.me\/77000000000\?/
+    );
+    link.addEventListener('click', (event) => event.preventDefault());
+    fireEvent.click(link);
+  };
+  const { unmount } = render(
+    <EquipmentCatalog
+      locale="ru"
+      filters={{ page: 1 }}
+      result={{ items: [], total: 0, limit: 24 }}
+      covers={{}}
+      marks={{}}
+      counts={zero}
+      whatsappNumber="77000000000"
+    />
+  );
+  click(/пришлите фото в WhatsApp, разместим за вас/);
+  expect(safeTrack).toHaveBeenLastCalledWith('click_whatsapp', {
+    locale: 'ru',
+    place: 'equipment_assisted',
+    lead: undefined,
+  });
+  unmount();
+  render(
+    <EquipmentCatalog
+      locale="ru"
+      filters={{ page: 1 }}
+      result={{ items: [listing({})], total: 1, limit: 24 }}
+      covers={{}}
+      marks={{}}
+      counts={{
+        ...zero,
+        groups: { ...zero.groups, machinery: 1 },
+        offers: { ...zero.offers, all: 1, RENT: 1 },
+        total: 1,
+      }}
+      whatsappNumber="77000000000"
+    />
+  );
+  click(/Пришлите фото и пару слов в WhatsApp — разместим за вас/);
+  expect(safeTrack).toHaveBeenCalledTimes(2);
+  expect(safeTrack).toHaveBeenLastCalledWith('click_whatsapp', {
+    locale: 'ru',
+    place: 'equipment_assisted',
+    lead: undefined,
+  });
 });

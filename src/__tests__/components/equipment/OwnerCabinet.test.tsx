@@ -1,5 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import OwnerCabinet from '@/components/equipment/OwnerCabinet';
+import { safeTrack } from '@/lib/analytics/events';
+
+jest.mock('@/lib/analytics/events', () => ({ safeTrack: jest.fn() }));
 
 let mockStatus = 'authenticated';
 jest.mock('next-auth/react', () => ({
@@ -257,4 +260,21 @@ it('shows 30-day stats and responses to a request', async () => {
     'tel:+77011234567'
   );
   expect(screen.getByText('Есть УКБ-5')).toBeInTheDocument();
+});
+
+it('counts a click on the WhatsApp help link', async () => {
+  mockFetch();
+  render(
+    <OwnerCabinet locale="ru" googleEnabled whatsappNumber="77000000000" />
+  );
+  const link = await screen.findByRole('link', {
+    name: /Написать в WhatsApp/,
+  });
+  expect(link.getAttribute('href')).toMatch(/^https:\/\/wa\.me\/77000000000/);
+  link.addEventListener('click', (event) => event.preventDefault());
+  fireEvent.click(link);
+  expect(safeTrack).toHaveBeenCalledWith('click_whatsapp', {
+    locale: 'ru',
+    place: 'equipment_cabinet',
+  });
 });

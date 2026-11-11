@@ -4,6 +4,7 @@ import { Bell, Camera, MessageCircle } from 'lucide-react';
 import { translate } from '@/lib/i18n/translations';
 import { regionLabel } from '@/lib/data/filter-config';
 import { SCENES } from '@/lib/brand/photos';
+import TrackedWhatsAppLink from '@/components/features/TrackedWhatsAppLink';
 import { whatsappLink } from '@/lib/config/contacts';
 import type { PublicEquipmentListing } from '@/lib/equipment-listings/catalog-repository';
 import {
@@ -167,14 +168,14 @@ export default function EquipmentCatalog({
                     aria-hidden
                     className="mt-0.5 size-5 flex-none text-brand-accent"
                   />
-                  <a
+                  <TrackedWhatsAppLink
                     href={assisted}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    locale={locale}
+                    place="equipment_assisted"
                     className="brand-focus underline decoration-brand-line underline-offset-4"
                   >
                     {t('emptyWhatsapp')}
-                  </a>
+                  </TrackedWhatsAppLink>
                 </li>
               )}
               {subscribeEnabled && (
@@ -535,15 +536,15 @@ export default function EquipmentCatalog({
             </Link>
           </div>
           {assisted && (
-            <a
+            <TrackedWhatsAppLink
               href={assisted}
-              target="_blank"
-              rel="noopener noreferrer"
+              locale={locale}
+              place="equipment_assisted"
               className="brand-focus inline-flex items-center gap-2 text-sm text-brand-chalk/80 underline-offset-4 hover:underline"
             >
               <MessageCircle aria-hidden className="size-4 flex-none" />
               {translate(locale, 'equipmentIntake.assistedText')}
-            </a>
+            </TrackedWhatsAppLink>
           )}
         </div>
       </PhotoBand>

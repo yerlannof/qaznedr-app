@@ -32,6 +32,15 @@ export async function generateMetadata({
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
+// English-only "Technology" block (approved 12.11.2026 for the AWS Activate application).
+const TECHNOLOGY_EN = {
+  title: 'Technology',
+  paragraphs: [
+    "QAZNEDR builds an AI knowledge base of Kazakhstan's geological archive. We digitize Soviet-era exploration reports (over 7,000 reports and 1.3 million scanned pages processed so far), read them with OCR and large language models, and extract the facts that matter: commodity, grades, sampling results and the exact page they come from. Every figure is checked against the original scan before it is used.",
+    'The result is a map-based registry of mineral occurrences across Kazakhstan, which our geologists use to answer desk-study questions in days instead of months — for investors, licence applicants and holders.',
+  ],
+};
+
 export default async function AboutPage({
   params,
 }: {
@@ -97,6 +106,23 @@ export default async function AboutPage({
             </p>
           </div>
         </section>
+        {locale === 'en' && (
+          <section
+            id="technology"
+            className="brand-container border-t border-brand-line py-14 lg:py-20"
+          >
+            <h2 className="font-serif text-3xl lg:text-4xl">
+              {TECHNOLOGY_EN.title}
+            </h2>
+            <div className="mt-8 grid max-w-3xl gap-5">
+              {TECHNOLOGY_EN.paragraphs.map((text) => (
+                <p key={text.slice(0, 24)} className="leading-relaxed">
+                  {text}
+                </p>
+              ))}
+            </div>
+          </section>
+        )}
         <DealSteps locale={locale} />
         <section className="brand-container py-12 lg:py-20">
           <h2 className="font-serif text-3xl">{t('holdingCompany.start')}</h2>

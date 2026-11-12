@@ -21,3 +21,19 @@ it.each(['ru', 'kz', 'en', 'zh'])(
     }
   }
 );
+
+it.each([
+  ['en', true],
+  ['ru', false],
+  ['kz', false],
+  ['zh', false],
+])('shows the Technology block on %s: %s', async (locale, shown) => {
+  const html = renderToStaticMarkup(
+    await AboutPage({ params: Promise.resolve({ locale }) })
+  );
+  expect(html.includes('id="technology"')).toBe(shown);
+  if (shown) {
+    expect(html).toContain('AI knowledge base');
+    expect(html).toContain('checked against the original scan');
+  }
+});

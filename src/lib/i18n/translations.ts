@@ -1250,6 +1250,8 @@ export const translations = {
       withdrawn: 'Карточка снята с витрины',
       disclaimer:
         'Карточки подготовлены нашими геологами по фондовым геологическим отчётам. Числа приведены так, как они записаны в отчёте, с указанием типа значения (максимум отдельной пробы, среднее, прогнозные ресурсы и т. п.); это не запасы, подсчитанные по современным стандартам. Статус прав — наша проверка по публичной карте недропользования на указанную дату, не выписка и не юридическое заключение. Место объекта показано условно: он находится внутри круга, центр круга с объектом не совпадает. Витрина не является публичной офертой. Материалы по объекту — после встречи.',
+      disclaimerNoRights:
+        'Карточки подготовлены нашими геологами по фондовым геологическим отчётам. Числа приведены так, как они записаны в отчёте, с указанием типа значения (максимум отдельной пробы, среднее, прогнозные ресурсы и т. п.); это не запасы, подсчитанные по современным стандартам. Место объекта показано условно: он находится внутри круга, центр круга с объектом не совпадает. Витрина не является публичной офертой. Материалы по объекту — после встречи.',
       disclaimerCoal:
         'Карточки подготовлены нашими геологами по фондовым геологическим отчётам и Государственному балансу запасов. Запасы показаны классом размера в категориях советской классификации, с указанием стандарта. Это не оценка по JORC или иным современным стандартам. Статус прав — наша проверка по публичной карте недропользования на указанную дату, не выписка и не юридическое заключение. Место объекта показано условно: он находится внутри круга, центр круга с объектом не совпадает. Витрина не является публичной офертой. Материалы по объекту — после встречи.',
       disclaimerLabel: 'Оговорка',
@@ -1274,6 +1276,7 @@ export const translations = {
       seoTitle: '{commodity} — участок {code}, {oblast}',
       seoDescription:
         '{headline}. {oblast}. Статус прав — наша проверка по карте на {date}, не выписка. Карточка {code}.',
+      seoDescriptionNoRights: '{headline}. {oblast}. Карточка {code}.',
     },
     leadCard: {
       badge: { sold: 'ПРОДАНО', free: 'СВОБОДЕН' },
@@ -3009,6 +3012,8 @@ export const translations = {
       withdrawn: 'Карточка витринадан алынды',
       disclaimer:
         'Карточкаларды біздің геологтар қордағы геологиялық есептер бойынша дайындады. Сандар есепте жазылғандай, мән түрі көрсетіліп берілген (жеке сынаманың ең жоғары мәні, орташа мән, болжамды ресурстар және т.б.); бұл заманауи стандарттар бойынша есептелген қорлар емес. Құқық мәртебесі — көрсетілген күнгі жер қойнауын пайдаланудың жария картасы бойынша біздің тексеруіміз, үзінді көшірме де, заңгерлік қорытынды да емес. Объектінің орны шартты түрде көрсетілген: ол шеңбердің ішінде орналасқан, шеңбердің ортасы объектімен сәйкес келмейді. Витрина жария оферта болып табылмайды. Объект бойынша материалдар — кездесуден кейін.',
+      disclaimerNoRights:
+        'Карточкаларды біздің геологтар қордағы геологиялық есептер бойынша дайындады. Сандар есепте жазылғандай, мән түрі көрсетіліп берілген (жеке сынаманың ең жоғары мәні, орташа мән, болжамды ресурстар және т.б.); бұл заманауи стандарттар бойынша есептелген қорлар емес. Объектінің орны шартты түрде көрсетілген: ол шеңбердің ішінде орналасқан, шеңбердің ортасы объектімен сәйкес келмейді. Витрина жария оферта болып табылмайды. Объект бойынша материалдар — кездесуден кейін.',
       disclaimerCoal:
         'Карточкаларды біздің геологтар қордағы геологиялық есептер мен Пайдалы қазбалар қорларының мемлекеттік балансы бойынша дайындады. Қорлар кеңестік жіктеу санаттарында, стандарты көрсетіліп, көлем класымен берілген. Бұл JORC немесе басқа заманауи стандарттар бойынша бағалау емес. Құқық мәртебесі — көрсетілген күнгі жер қойнауын пайдаланудың жария картасы бойынша біздің тексеруіміз, үзінді көшірме де, заңгерлік қорытынды да емес. Объектінің орны шартты түрде көрсетілген: ол шеңбердің ішінде орналасқан, шеңбердің ортасы объектімен сәйкес келмейді. Витрина жария оферта болып табылмайды. Объект бойынша материалдар — кездесуден кейін.',
       disclaimerLabel: 'Ескерту',
@@ -3033,6 +3038,7 @@ export const translations = {
       seoTitle: '{commodity} — {code} учаскесі, {oblast}',
       seoDescription:
         '{headline}. {oblast}. Құқық мәртебесі — {date} картадағы біздің тексеруіміз, үзінді көшірме емес. Карточка {code}.',
+      seoDescriptionNoRights: '{headline}. {oblast}. Карточка {code}.',
     },
     leadCard: {
       badge: { sold: 'САТЫЛДЫ', free: 'БОС' },
@@ -4675,6 +4681,8 @@ export const translations = {
       withdrawn: 'This card has been removed from the showcase',
       disclaimer:
         'The cards were prepared by our geologists from archival geological reports. Figures are given as recorded in the report, with the type of value stated (maximum of a single sample, average, prognostic resources, etc.); they are not reserves estimated under modern standards. The rights status is our check against the public subsoil-use map on the stated date, not an official extract or a legal opinion. The location of each object is shown approximately: it lies inside the circle, and the centre of the circle does not coincide with the object. The showcase is not a public offer. Materials on an object are provided after a meeting.',
+      disclaimerNoRights:
+        'The cards were prepared by our geologists from archival geological reports. Figures are given as recorded in the report, with the type of value stated (maximum of a single sample, average, prognostic resources, etc.); they are not reserves estimated under modern standards. The location of each object is shown approximately: it lies inside the circle, and the centre of the circle does not coincide with the object. The showcase is not a public offer. Materials on an object are provided after a meeting.',
       disclaimerCoal:
         'The cards were prepared by our geologists from archival geological reports and the State Balance of Mineral Reserves. Reserves are shown as a size class in Soviet classification categories, with the standard stated. This is not an estimate under JORC or other modern standards. The rights status is our check against the public subsoil-use map on the stated date, not an official extract or a legal opinion. The location of each object is shown approximately: it lies inside the circle, and the centre of the circle does not coincide with the object. The showcase is not a public offer. Materials on an object are provided after a meeting.',
       disclaimerLabel: 'Disclaimer',
@@ -4699,6 +4707,7 @@ export const translations = {
       seoTitle: '{commodity} — area {code}, {oblast}',
       seoDescription:
         '{headline}. {oblast}. Rights status per our check against the map on {date}; not an official extract. Card {code}.',
+      seoDescriptionNoRights: '{headline}. {oblast}. Card {code}.',
     },
     leadCard: {
       badge: { sold: 'SOLD', free: 'FREE' },
@@ -6262,6 +6271,8 @@ export const translations = {
       withdrawn: '该卡片已从展示中撤下',
       disclaimer:
         '卡片由我们的地质师根据地质档案报告编制。数值按报告原文列示，并注明数值类型（单个样品最高值、平均值、预测资源量等），并非按现代标准估算的储量。权属状态为我们在所示日期对照公开矿业权分布图的核查结果，不是官方证明，也不构成法律意见。对象位置仅为示意：对象位于圆圈之内，但不在圆心。本页展示内容不构成公开要约。相关资料在会面后提供。',
+      disclaimerNoRights:
+        '卡片由我们的地质师根据地质档案报告编制。数值按报告原文列示，并注明数值类型（单个样品最高值、平均值、预测资源量等），并非按现代标准估算的储量。对象位置仅为示意：对象位于圆圈之内，但不在圆心。本页展示内容不构成公开要约。相关资料在会面后提供。',
       disclaimerCoal:
         '卡片由我们的地质师根据地质档案报告和国家矿产储量平衡表编制。储量按苏联分类级别以规模区间列示，并注明所用标准，并非按 JORC 规范或其他现代标准进行的估算。权属状态为我们在所示日期对照公开矿业权分布图的核查结果，不是官方证明，也不构成法律意见。对象位置仅为示意：对象位于圆圈之内，但不在圆心。本页展示内容不构成公开要约。相关资料在会面后提供。',
       disclaimerLabel: '免责说明',
@@ -6284,6 +6295,7 @@ export const translations = {
       seoTitle: '{oblast}{commodity}矿区 {code}',
       seoDescription:
         '{headline}。{oblast}。权属状态为我们于{date}对照矿业权分布图的核查结果，非官方证明。卡片编号 {code}。',
+      seoDescriptionNoRights: '{headline}。{oblast}。卡片编号 {code}。',
     },
     leadCard: {
       badge: { sold: '已成交', free: '未设矿权' },

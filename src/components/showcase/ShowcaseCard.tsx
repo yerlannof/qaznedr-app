@@ -37,7 +37,9 @@ export default function ShowcaseCard({
     : null;
   const headline = pickText(card.headline, locale);
   const facts = pickList(card.facts, locale);
-  const rights = pickText(card.rights.status, locale);
+  const rights = card.rights.status
+    ? pickText(card.rights.status, locale)
+    : null;
   const satellite = card.satellite ? pickList(card.satellite, locale) : null;
   const scan = card.images[0];
   const detailHref = `/${locale}/leads/${code}`;
@@ -95,17 +97,19 @@ export default function ShowcaseCard({
             ))}
           </ul>
         )}
-        <div className="mt-4 flex gap-2 text-sm text-brand-muted">
-          <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0" />
-          <div>
-            <p lang={rights.lang}>{rights.text}</p>
-            <p>
-              {t('showcase.rightsChecked', {
-                date: formatRightsDate(card.rights.checked_at, locale),
-              })}
-            </p>
+        {rights && (
+          <div className="mt-4 flex gap-2 text-sm text-brand-muted">
+            <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0" />
+            <div>
+              <p lang={rights.lang}>{rights.text}</p>
+              <p>
+                {t('showcase.rightsChecked', {
+                  date: formatRightsDate(card.rights.checked_at, locale),
+                })}
+              </p>
+            </div>
           </div>
-        </div>
+        )}
         <div className="mt-6 flex flex-wrap items-center gap-4">
           {useWhatsApp ? (
             <ShowcaseWhatsAppLink

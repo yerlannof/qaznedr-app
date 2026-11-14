@@ -103,3 +103,14 @@ it('gives each card a heading for its metals', () => {
     'Золото, медь'
   );
 });
+
+it('prints no rights line or check date for a card without rights text', () => {
+  renderCard('ru', {
+    ...fakeShowcase,
+    rights: { checked_at: fakeShowcase.rights.checked_at },
+  });
+  expect(screen.queryByText(/Проверено/)).not.toBeInTheDocument();
+  expect(
+    screen.queryByText(fakeShowcase.rights.status!.ru)
+  ).not.toBeInTheDocument();
+});

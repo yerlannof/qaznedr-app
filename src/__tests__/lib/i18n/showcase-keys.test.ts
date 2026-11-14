@@ -24,6 +24,8 @@ const KEYS = [
   'showcase.mapCredit',
   'showcase.seoTitle',
   'showcase.seoDescription',
+  'showcase.seoDescriptionNoRights',
+  'showcase.disclaimerNoRights',
 ];
 
 describe.each(['ru', 'kz', 'en', 'zh'])('%s showcase copy', (locale) => {

@@ -95,3 +95,35 @@ it('shows satellite lines only when the package has them', () => {
     screen.getByText('Снимок ASTER: у точки признаки изменения')
   ).toBeInTheDocument();
 });
+
+it('hides the rights block, its date and the rights disclaimer sentence when the card has no rights text', () => {
+  const noRights = {
+    ...fakeShowcase,
+    rights: { checked_at: fakeShowcase.rights.checked_at },
+  };
+  for (const locale of ['ru', 'en'] as const) {
+    const { unmount } = render(
+      <ShowcaseDetail showcase={noRights} locale={locale} contacts={contacts} />
+    );
+    expect(
+      screen.queryByRole('heading', {
+        name: translate(locale, 'showcase.rightsHeading'),
+      })
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/28\.09\.2026/)).not.toBeInTheDocument();
+    expect(
+      screen.getByText(translate(locale, 'showcase.disclaimerNoRights'))
+    ).toBeInTheDocument();
+    unmount();
+  }
+});
+
+it('keeps the rights block when the card has rights text', () => {
+  renderDetail();
+  expect(
+    screen.getByRole('heading', {
+      name: translate('ru', 'showcase.rightsHeading'),
+    })
+  ).toBeInTheDocument();
+  expect(screen.getByText(fakeShowcase.rights.status!.ru)).toBeInTheDocument();
+});

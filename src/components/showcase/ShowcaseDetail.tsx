@@ -39,7 +39,9 @@ export default function ShowcaseDetail({
     : null;
   const headline = pickText(card.headline, locale);
   const facts = pickList(card.facts, locale);
-  const rights = pickText(card.rights.status, locale);
+  const rights = card.rights.status
+    ? pickText(card.rights.status, locale)
+    : null;
   const source = card.source ? pickText(card.source, locale) : null;
   const satellite = card.satellite ? pickList(card.satellite, locale) : null;
   return (
@@ -141,20 +143,22 @@ export default function ShowcaseDetail({
           </figure>
         </div>
         <aside className="space-y-4">
-          <section className="border border-brand-line bg-brand-surface p-5">
-            <h2 className="font-semibold">{t('showcase.rightsHeading')}</h2>
-            <div className="mt-3 flex gap-2 text-sm">
-              <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0" />
-              <div>
-                <p lang={rights.lang}>{rights.text}</p>
-                <p className="mt-1 text-brand-muted">
-                  {t('showcase.rightsChecked', {
-                    date: formatRightsDate(card.rights.checked_at, locale),
-                  })}
-                </p>
+          {rights && (
+            <section className="border border-brand-line bg-brand-surface p-5">
+              <h2 className="font-semibold">{t('showcase.rightsHeading')}</h2>
+              <div className="mt-3 flex gap-2 text-sm">
+                <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0" />
+                <div>
+                  <p lang={rights.lang}>{rights.text}</p>
+                  <p className="mt-1 text-brand-muted">
+                    {t('showcase.rightsChecked', {
+                      date: formatRightsDate(card.rights.checked_at, locale),
+                    })}
+                  </p>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
           <section
             id="contact"
             className="scroll-mt-24 border border-brand-line bg-brand-surface p-5"

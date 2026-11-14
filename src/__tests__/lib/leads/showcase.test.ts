@@ -40,6 +40,12 @@ describe('parseShowcase', () => {
     expect(parseShowcase(valid)?.card_id).toBe('QN-98');
   });
 
+  it('accepts a card without public rights text but still needs the check date', () => {
+    const noText = { ...valid, rights: { checked_at: '2026-11-14' } };
+    expect(parseShowcase(noText)?.rights.status).toBeUndefined();
+    expect(parseShowcase({ ...valid, rights: {} })).toBeNull();
+  });
+
   it('rejects missing data instead of rendering a partial card', () => {
     expect(parseShowcase(null)).toBeNull();
     expect(parseShowcase({ ...valid, headline_type: 'grade' })).toBeNull();

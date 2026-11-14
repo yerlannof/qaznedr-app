@@ -22,12 +22,18 @@ export function showcaseSeoText(
     })
   );
   const full = clean(
-    translate(locale, 'showcase.seoDescription', {
-      headline: pickText(card.headline, locale).text,
-      oblast,
-      date: formatRightsDate(card.rights.checked_at, locale),
-      code: card.card_id,
-    })
+    translate(
+      locale,
+      card.rights.status
+        ? 'showcase.seoDescription'
+        : 'showcase.seoDescriptionNoRights',
+      {
+        headline: pickText(card.headline, locale).text,
+        oblast,
+        date: formatRightsDate(card.rights.checked_at, locale),
+        code: card.card_id,
+      }
+    )
   );
   const description =
     full.length <= 200 ? full : `${full.slice(0, 199).replace(/\s+\S*$/, '')}…`;

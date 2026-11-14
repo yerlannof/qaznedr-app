@@ -201,11 +201,15 @@ export function ShowcaseGridCard({
       ]}
       notes={[
         ...caveats.map((c) => ({ text: c.text, lang: c.lang })),
-        {
-          text: t('showcase.rightsChecked', {
-            date: formatRightsDate(card.rights.checked_at, locale),
-          }),
-        },
+        ...(card.rights.status
+          ? [
+              {
+                text: t('showcase.rightsChecked', {
+                  date: formatRightsDate(card.rights.checked_at, locale),
+                }),
+              },
+            ]
+          : []),
       ]}
       footLeft=""
       footRight={t('catalogGrid.afterNda')}

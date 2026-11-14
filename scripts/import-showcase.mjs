@@ -146,7 +146,9 @@ function validateShowcase(s) {
     if (!/^[0-9a-f]{12}$/.test(img.v)) fail('image v');
     loc(img.caption, 'image caption');
   }
-  loc(s.rights?.status, 'rights status');
+  // Rights text is optional (anonymous cards, Erlan 14.11); the check date
+  // stays required as internal data for the --publish freshness gate.
+  if (s.rights?.status !== undefined) loc(s.rights.status, 'rights status');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(s.rights?.checked_at ?? ''))
     fail('rights date');
   loc(s.whatsapp_text, 'whatsapp_text');
@@ -166,6 +168,9 @@ function localizedList(ru, t = {}) {
     if (Array.isArray(t[l]) && t[l].length === ru.length) out[l] = t[l];
   return out;
 }
+
+const hasRightsText = (card) =>
+  typeof card.rights?.status === 'string' && card.rights.status.length > 0;
 
 function buildShowcase(card, tr, trOblast, pkg) {
   const typeLine = card.facts.find((f) => f.startsWith('Тип объекта:'));
@@ -193,7 +198,9 @@ function buildShowcase(card, tr, trOblast, pkg) {
       v: img.v,
     })),
     rights: {
-      status: localized(card.rights.status, tr.rights_status),
+      ...(hasRightsText(card)
+        ? { status: localized(card.rights.status, tr.rights_status) }
+        : {}),
       checked_at: card.rights.checked_at,
     },
     whatsapp_text: localized(card.whatsapp_text, tr.whatsapp_text),
@@ -240,7 +247,9 @@ function buildRow(card, index) {
     grade_label: card.headline_type,
     byproducts_display: null,
     reserve_categories: null,
-    license_status: 'FREE_SHOWCASE_CHECKED',
+    // No public rights text → no rights claim in the column either (the
+    // catalogue "free only" filter must not list such a card).
+    license_status: hasRightsText(card) ? 'FREE_SHOWCASE_CHECKED' : null,
     last_verified: card.rights.checked_at,
     distance_band: null,
     // The circle centre is drawn on the page only; the column documents a

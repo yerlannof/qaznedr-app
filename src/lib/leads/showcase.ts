@@ -56,8 +56,10 @@ const showcaseSchema = z.object({
       v: z.string().regex(/^[0-9a-f]{12}$/),
     })
   ),
+  // status is optional: anonymous cards may carry no public rights text
+  // (Erlan 14.11). checked_at stays as internal data for the publish gate.
   rights: z.object({
-    status: localized,
+    status: localized.optional(),
     checked_at: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   }),
   whatsapp_text: localized,
@@ -110,6 +112,11 @@ export function splitHeadline(text: string): { type: string; value: string } {
     : { type: '', value: text };
 }
 
+/** The card prints a rights block (text + check date) only when it has rights text. */
+export function hasRightsText(card: Pick<Showcase, 'rights'>): boolean {
+  return Boolean(card.rights.status);
+}
+
 /** 2026-09-28 → 28.09.2026; Chinese readers get 2026年9月28日. */
 export function formatRightsDate(iso: string, locale: Locale): string {
   const [y, m, d] = iso.split('-');
@@ -153,7 +160,7 @@ export function isShowcaseRow(row: { showcase?: unknown }): boolean {
  * to agents as plain coordinates they could quote as the object location.
  * Legacy tier/exclusivity codes (internal jargon such as "TIER2_BOMB") and the
  * bare license_status code are dropped too: the card carries its own rights
- * text with the check date and caveat.
+ * text with the check date and caveat (or no rights text at all).
  */
 export function apiTeaser<
   T extends { showcase?: unknown; map_centroid?: unknown },

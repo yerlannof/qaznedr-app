@@ -12,6 +12,16 @@ it('builds title and description from the card without adding claims', () => {
   expect(description.length).toBeLessThanOrEqual(200);
 });
 
+it('drops the rights clause and date when the card has no rights text', () => {
+  const { description } = showcaseSeoText(
+    { ...fakeShowcase, rights: { checked_at: '2026-11-14' } },
+    'ru'
+  );
+  expect(description).not.toContain('Статус прав');
+  expect(description).not.toContain('14.11.2026');
+  expect(description).toContain('QN-99');
+});
+
 it('localizes when a translation exists', () => {
   expect(showcaseSeoText(fakeShowcase, 'en').title).toBe(
     'Gold, copper — area QN-99, Karaganda Region'

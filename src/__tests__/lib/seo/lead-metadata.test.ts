@@ -65,6 +65,14 @@ describe('lead SEO text', () => {
     expect(leadMineralName('graphite', 'zh')).toBe('石墨');
   });
 
+  it('names beryllium and phosphorite from the other-minerals showcase package', () => {
+    expect(leadMineralName('Be', 'ru')).toBe('Бериллий');
+    expect(leadMineralName('Be', 'zh')).toBe('铍');
+    expect(leadMineralName('phosphorite', 'ru')).toBe('Фосфориты');
+    expect(leadMineralName('phosphorite', 'en')).toBe('Phosphorite');
+    expect(leadMineralName('phosphorite', 'zh')).toBe('磷块岩');
+  });
+
   it('falls back to the raw mineral code and tolerates nulls', () => {
     expect(leadMineralName('REE', 'en')).toBe('REE');
     expect(() =>

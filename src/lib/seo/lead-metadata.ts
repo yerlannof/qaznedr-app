@@ -40,6 +40,11 @@ const MINERALS: Record<string, Record<Locale, string>> = {
   // Graphite (ТПИ, non-metal) from the other-minerals showcase package
   // (qaznedr-showcase-other-v1); not a chemical symbol.
   GRAPHITE: { ru: 'Графит', kz: 'Графит', en: 'Graphite', zh: '石墨' },
+  // Beryllium and bismuth (chemical symbols) and phosphorite (ТПИ, non-metal;
+  // not a chemical symbol) from the other-minerals showcase package.
+  BE: { ru: 'Бериллий', kz: 'Бериллий', en: 'Beryllium', zh: '铍' },
+  BI: { ru: 'Висмут', kz: 'Висмут', en: 'Bismuth', zh: '铋' },
+  PHOSPHORITE: { ru: 'Фосфориты', kz: 'Фосфорит', en: 'Phosphorite', zh: '磷块岩' },
 };
 
 // Region spellings used by the leads export that differ from filter-config.

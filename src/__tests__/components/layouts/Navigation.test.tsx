@@ -38,14 +38,14 @@ describe('Navigation', () => {
   it('shows the equipment section only after launch', () => {
     const { unmount } = render(<Navigation />);
     expect(
-      screen.queryByRole('link', { name: 'Техника и услуги' })
+      screen.queryByRole('link', { name: 'Техника и подрядчики' })
     ).not.toBeInTheDocument();
     unmount();
     process.env.NEXT_PUBLIC_EQUIPMENT_MENU = 'true';
     try {
       render(<Navigation />);
       expect(
-        screen.getByRole('link', { name: 'Техника и услуги' })
+        screen.getByRole('link', { name: 'Техника и подрядчики' })
       ).toHaveAttribute('href', '/ru/equipment');
     } finally {
       delete process.env.NEXT_PUBLIC_EQUIPMENT_MENU;

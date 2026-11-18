@@ -40,7 +40,7 @@ export function listingCanonicalUrl(listing: {
 export const companyCanonicalUrl = (slug: string) =>
   localeUrl(COMPANY_PAGE_LOCALE, companyPath(slug));
 
-/** Home → Equipment and services: the first crumbs of every marketplace page. */
+/** Home → Equipment and contractors: the first crumbs of every marketplace page. */
 export function equipmentBreadcrumb(locale: Locale) {
   return [
     { name: translate(locale, 'navigation.home'), url: localeUrl(locale) },

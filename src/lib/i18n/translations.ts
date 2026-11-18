@@ -51,7 +51,8 @@ export const translations = {
       metaTitle: 'Вход по ссылке из письма | QAZNEDR',
       metaDescription: 'Подтверждение входа в кабинет объявлений QAZNEDR.',
       mailSubject: 'Вход на QAZNEDR',
-      mailIntro: 'Вы запросили вход на qaznedr.kz в раздел «Техника и услуги».',
+      mailIntro:
+        'Вы запросили вход на qaznedr.kz в раздел «Техника и подрядчики».',
       mailButton: 'Войти',
       mailExpiry: 'Ссылка действует 15 минут и срабатывает один раз.',
       mailIgnore: 'Если вы не запрашивали вход, просто удалите это письмо.',
@@ -113,7 +114,7 @@ export const translations = {
       failed: 'Не удалось подписаться. Попробуйте ещё раз.',
       confirmSubject: 'Подтвердите подписку на QAZNEDR',
       confirmIntro:
-        'Вы подписались на новые объявления в разделе «Техника и услуги» на qaznedr.kz.',
+        'Вы подписались на новые объявления в разделе «Техника и подрядчики» на qaznedr.kz.',
       confirmButton: 'Подтвердить подписку',
       confirmIgnore: 'Если вы не подписывались, просто удалите это письмо.',
       pageTitle: 'Подписка на объявления',
@@ -210,7 +211,7 @@ export const translations = {
     equipmentCatalog: {
       vacancy: 'Вакансия',
       lookingForWork: 'Ищу работу',
-      eyebrow: 'Техника и услуги',
+      eyebrow: 'Техника и подрядчики',
       title: 'Найти технику и подрядчиков для геологии',
       intro:
         'Аренда, продажа техники и услуги показаны отдельно. Уточняйте комплектацию и условия у автора объявления до заказа.',
@@ -288,7 +289,7 @@ export const translations = {
       disclaimer:
         'Объявления размещают владельцы техники и подрядчики. QAZNEDR проверяет объявление перед публикацией, но не является стороной сделки и не гарантирует её результат. Отметки проверки в объявлении показывают, что именно проверено и когда.',
       metaTitle:
-        'Техника и услуги для геологии в Казахстане — аренда, продажа, подрядчики',
+        'Техника и подрядчики для геологии в Казахстане — аренда, продажа, бурение',
       metaDescription:
         'Буровые установки, спецтехника, геофизика, геохимия, лаборатории и другие услуги для геологоразведки в Казахстане. Объявления проверяет редакция QAZNEDR.',
       photo: 'Фото {n}',
@@ -1795,7 +1796,7 @@ export const translations = {
       metaDescription: 'QAZNEDR хабарландырулар кабинетіне кіруді растау.',
       mailSubject: 'QAZNEDR-ге кіру',
       mailIntro:
-        'Сіз qaznedr.kz сайтындағы «Техника және қызметтер» бөліміне кіруді сұрадыңыз.',
+        'Сіз qaznedr.kz сайтындағы «Техника және мердігерлер» бөліміне кіруді сұрадыңыз.',
       mailButton: 'Кіру',
       mailExpiry: 'Сілтеме 15 минут жарамды және бір рет қана жұмыс істейді.',
       mailIgnore: 'Егер кіруді сұрамаған болсаңыз, бұл хатты жойыңыз.',
@@ -1858,7 +1859,7 @@ export const translations = {
       failed: 'Жазылу мүмкін болмады. Қайталап көріңіз.',
       confirmSubject: 'QAZNEDR жазылуын растаңыз',
       confirmIntro:
-        'Сіз qaznedr.kz сайтындағы «Техника және қызметтер» бөліміндегі жаңа хабарландыруларға жазылдыңыз.',
+        'Сіз qaznedr.kz сайтындағы «Техника және мердігерлер» бөліміндегі жаңа хабарландыруларға жазылдыңыз.',
       confirmButton: 'Жазылуды растау',
       confirmIgnore: 'Егер жазылмаған болсаңыз, бұл хатты жойыңыз.',
       pageTitle: 'Хабарландыруларға жазылу',
@@ -1955,7 +1956,7 @@ export const translations = {
     equipmentCatalog: {
       vacancy: 'Бос орын',
       lookingForWork: 'Жұмыс іздеймін',
-      eyebrow: 'Техника және қызметтер',
+      eyebrow: 'Техника және мердігерлер',
       title: 'Геологияға арналған техника мен мердігерлерді табу',
       intro:
         'Жалға беру, техника сату және қызметтер бөлек көрсетілген. Тапсырыс бермес бұрын жинақтама мен шарттарды хабарландыру авторымен нақтылаңыз.',
@@ -3482,7 +3483,7 @@ export const translations = {
       metaDescription: 'Confirm sign-in to your QAZNEDR listings account.',
       mailSubject: 'Sign in to QAZNEDR',
       mailIntro:
-        'You asked to sign in to the Equipment and services section on qaznedr.kz.',
+        'You asked to sign in to the Equipment and contractors section on qaznedr.kz.',
       mailButton: 'Sign in',
       mailExpiry: 'The link works for 15 minutes and only once.',
       mailIgnore: 'If you did not ask to sign in, just delete this email.',
@@ -3543,7 +3544,7 @@ export const translations = {
       failed: 'Could not subscribe. Try again.',
       confirmSubject: 'Confirm your QAZNEDR subscription',
       confirmIntro:
-        'You subscribed to new listings in Equipment and services on qaznedr.kz.',
+        'You subscribed to new listings in Equipment and contractors on qaznedr.kz.',
       confirmButton: 'Confirm subscription',
       confirmIgnore: 'If you did not subscribe, just delete this email.',
       pageTitle: 'Listing subscription',
@@ -3639,7 +3640,7 @@ export const translations = {
     equipmentCatalog: {
       vacancy: 'Vacancy',
       lookingForWork: 'Looking for work',
-      eyebrow: 'Equipment and services',
+      eyebrow: 'Equipment and contractors',
       title: 'Find equipment and contractors for geology',
       intro:
         'Rental, equipment sales and services are listed separately. Confirm the configuration and terms with the advertiser before ordering.',
@@ -5138,7 +5139,7 @@ export const translations = {
       metaTitle: '通过邮件链接登录 | QAZNEDR',
       metaDescription: '确认登录 QAZNEDR 信息发布账户。',
       mailSubject: '登录 QAZNEDR',
-      mailIntro: '您申请登录 qaznedr.kz 的“设备与服务”栏目。',
+      mailIntro: '您申请登录 qaznedr.kz 的“设备与承包商”栏目。',
       mailButton: '登录',
       mailExpiry: '链接 15 分钟内有效，且仅可使用一次。',
       mailIgnore: '如果不是您本人申请登录，请直接删除此邮件。',
@@ -5180,8 +5181,8 @@ export const translations = {
       status_HIDDEN: '已被审核员隐藏，请通过 WhatsApp 联系我们。',
       openPage: '打开公司主页',
       eyebrow: '公司',
-      metaTitle: '{name}：设备与服务',
-      metaDescription: '{name} 的信息：哈萨克斯坦地质勘查设备与服务。',
+      metaTitle: '{name}：设备与承包商',
+      metaDescription: '{name} 的信息：哈萨克斯坦地质勘查设备与承包商。',
       listings: '信息（{count}）',
       empty: '目前没有已发布的信息。',
       allListings: '{name}：全部信息',
@@ -5196,7 +5197,7 @@ export const translations = {
       invalid: '请检查邮箱地址。',
       failed: '订阅失败，请重试。',
       confirmSubject: '确认您的 QAZNEDR 订阅',
-      confirmIntro: '您订阅了 qaznedr.kz“设备与服务”栏目的新信息。',
+      confirmIntro: '您订阅了 qaznedr.kz“设备与承包商”栏目的新信息。',
       confirmButton: '确认订阅',
       confirmIgnore: '如果不是您本人订阅，请直接删除此邮件。',
       pageTitle: '信息订阅',
@@ -5278,13 +5279,13 @@ export const translations = {
       trust_DOCUMENTS_REVIEWED: '文件已查看',
       trust_VERIFIED_QAZNEDR: 'QAZNEDR 已核实',
       updated: '更新于 {date}',
-      metaTitle: '我的信息——设备与服务',
+      metaTitle: '我的信息——设备与承包商',
       metaDescription: 'QAZNEDR 信息发布者个人中心。',
     },
     equipmentCatalog: {
       vacancy: '招聘',
       lookingForWork: '求职',
-      eyebrow: '设备与服务',
+      eyebrow: '设备与承包商',
       title: '寻找地质设备和承包商',
       intro: '租赁、设备出售和服务分开显示。下单前请与发布者确认配置和条件。',
       tabCatalog: '目录',
@@ -5351,7 +5352,7 @@ export const translations = {
       backToCatalog: '返回目录',
       disclaimer:
         '信息由设备所有者和承包商发布。QAZNEDR 在发布前审核信息，但不是交易一方，也不保证交易结果。信息中的核查标记说明具体核查了什么以及核查时间。',
-      metaTitle: '哈萨克斯坦地质设备与服务——租赁、出售、承包商',
+      metaTitle: '哈萨克斯坦地质设备与承包商——租赁、出售、钻探',
       metaDescription:
         '哈萨克斯坦地质勘探用钻机、工程机械、地球物理、地球化学、实验室及其他服务。信息经 QAZNEDR 编辑审核。',
       photo: '照片 {n}',

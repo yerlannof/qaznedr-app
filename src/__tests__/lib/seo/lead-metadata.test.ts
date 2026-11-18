@@ -73,6 +73,12 @@ describe('lead SEO text', () => {
     expect(leadMineralName('phosphorite', 'zh')).toBe('磷块岩');
   });
 
+  it('names cobalt and antimony instead of the raw symbols', () => {
+    expect(leadMineralName('Co', 'ru')).toBe('Кобальт');
+    expect(leadMineralName('Sb', 'ru')).toBe('Сурьма');
+    expect(leadMineralName('Sb', 'zh')).toBe('锑');
+  });
+
   it('falls back to the raw mineral code and tolerates nulls', () => {
     expect(leadMineralName('REE', 'en')).toBe('REE');
     expect(() =>

@@ -153,12 +153,13 @@ export function ShowcaseGridCard({
   const oblast = pickText(card.oblast, locale);
   const headline = pickText(card.headline, locale);
   const parts = splitHeadline(headline.text);
-  // The number never travels without its caveats: on the home page the one
-  // line the geobase chose (featured), elsewhere every fact of the card.
+  // The number travels with its type (figure label) and one line of geology:
+  // the fact the geobase chose (featured), else the card's first fact, cut to
+  // two lines. Every fact stays on the card page (Ерлан 18.11: too much text).
   const facts = pickList(card.facts, locale);
   const caveats = card.featured
     ? [pickText(card.featured.fact, locale)]
-    : facts.items.map((text) => ({ text, lang: facts.lang }));
+    : facts.items.slice(0, 1).map((text) => ({ text, lang: facts.lang }));
   const label = commodityLabel(card.commodity, locale, card.commodity_ru);
   const specimen = photo ? specimenFor(card.commodity) : null;
   return (
@@ -200,7 +201,11 @@ export function ShowcaseGridCard({
           : { label: '', value: headline.text, lang: headline.lang },
       ]}
       notes={[
-        ...caveats.map((c) => ({ text: c.text, lang: c.lang })),
+        ...caveats.map((c) => ({
+          text: c.text,
+          lang: c.lang,
+          lines: 2 as const,
+        })),
         ...(card.rights.status
           ? [
               {
@@ -211,7 +216,7 @@ export function ShowcaseGridCard({
             ]
           : []),
       ]}
-      footLeft=""
+      footLeft={`${t('showcase.more')} →`}
       footRight={t('catalogGrid.afterNda')}
     />
   );

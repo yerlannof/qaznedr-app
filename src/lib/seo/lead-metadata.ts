@@ -45,6 +45,9 @@ const MINERALS: Record<string, Record<Locale, string>> = {
   BE: { ru: 'Бериллий', kz: 'Бериллий', en: 'Beryllium', zh: '铍' },
   BI: { ru: 'Висмут', kz: 'Висмут', en: 'Bismuth', zh: '铋' },
   PHOSPHORITE: { ru: 'Фосфориты', kz: 'Фосфорит', en: 'Phosphorite', zh: '磷块岩' },
+  // Cobalt and antimony (chemical symbols) — filter showed raw «Co», «Sb» (18.11).
+  CO: { ru: 'Кобальт', kz: 'Кобальт', en: 'Cobalt', zh: '钴' },
+  SB: { ru: 'Сурьма', kz: 'Сурьма', en: 'Antimony', zh: '锑' },
 };
 
 // Region spellings used by the leads export that differ from filter-config.

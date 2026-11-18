@@ -81,11 +81,20 @@ it('keeps a headline without a type colon instead of dropping the number', () =>
   expect(html).toContain('Золото 5 г/т');
 });
 
-it('shows every caveat of a find that is not featured', () => {
+it('keeps a find short in the list: one fact in two lines, the rest behind «Подробнее»', () => {
+  // Ерлан 18.11: «некоторые карточки прям через чур много текста».
+  const card = {
+    ...fakeShowcase,
+    facts: { ru: ['Первый факт', 'Второй факт', 'Третий факт'] },
+  };
   const html = renderToStaticMarkup(
-    <ShowcaseGridCard card={fakeShowcase} locale="ru" />
+    <ShowcaseGridCard card={card} locale="ru" />
   );
-  for (const fact of fakeShowcase.facts.ru) expect(html).toContain(fact);
+  expect(html).toContain('Первый факт');
+  expect(html).not.toContain('Второй факт');
+  expect(html).not.toContain('Третий факт');
+  expect(html).toMatch(/line-clamp-2[^>]*>Первый факт/);
+  expect(html).toContain('Подробнее');
 });
 
 it('gives the verification hint to screen readers', () => {

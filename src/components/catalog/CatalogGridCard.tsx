@@ -27,7 +27,11 @@ export interface GridCardProps {
   commodity: { label: string; gold: boolean; lang?: string };
   figures: GridFigure[];
   /** Short caveat lines that must travel with the figures. */
-  notes?: { text: string; lang?: string }[];
+  notes?: {
+    text: string;
+    lang?: string;
+    /** Cut to N lines with «…». */ lines?: 2;
+  }[];
   footLeft: string;
   footRight: string;
   headingLevel?: 'h2' | 'h3';
@@ -130,7 +134,9 @@ export default function CatalogGridCard(p: GridCardProps) {
           <p
             key={n.text}
             lang={n.lang}
-            className="text-xs leading-relaxed text-brand-muted"
+            className={`text-xs leading-relaxed text-brand-muted ${
+              n.lines === 2 ? 'line-clamp-2' : ''
+            }`}
           >
             {n.text}
           </p>

@@ -1,4 +1,9 @@
-import { keyMatches, NOINDEX_HEADERS, OFFER_BUCKET } from '@/lib/offer-files/manifest';
+import {
+  keyMatches,
+  NOINDEX_HEADERS,
+  OFFER_BUCKET,
+  type OfferSet,
+} from '@/lib/offer-files/manifest';
 import { loadManifest, notFound, openCounts } from '@/lib/offer-files/store';
 
 export const dynamic = 'force-dynamic';
@@ -49,26 +54,41 @@ export async function GET(
       <div class="link">Скрытая ссылка: <code>${esc(`${origin}/offer/s/${manifest.keys.search}`)}</code></div></li>`);
   }
 
-  let gallery = '';
-  const status = manifest.status?.files ?? [];
-  if (status.length) {
-    const paths = status.map((f) => f.path);
-    const bucket = db.storage.from(OFFER_BUCKET);
+  const bucket = db.storage.from(OFFER_BUCKET);
+  const section = async (
+    set: OfferSet | undefined,
+    title: string,
+    hint: string,
+    media: (src: string, name: string) => string
+  ) => {
+    const files = set?.files ?? [];
+    if (!files.length) return '';
     const [view, dl] = await Promise.all([
-      bucket.createSignedUrls(paths, 3600),
-      Promise.all(status.map((f) => bucket.createSignedUrl(f.path, 3600, { download: f.name }))),
+      bucket.createSignedUrls(files.map((f) => f.path), 3600),
+      Promise.all(files.map((f) => bucket.createSignedUrl(f.path, 3600, { download: f.name }))),
     ]);
-    const cards = status.map((f, i) => {
+    const cards = files.map((f, i) => {
       const src = view.data?.[i]?.signedUrl;
       const href = dl[i]?.data?.signedUrl;
       if (!src || !href) return '';
-      return `<figure><a href="${esc(src)}"><img loading="lazy" src="${esc(src)}" alt="${esc(f.name)}"></a>
+      return `<figure>${media(esc(src), esc(f.name))}
         <figcaption><a href="${esc(href)}">Скачать</a> <span>${esc(f.name)}</span></figcaption></figure>`;
     });
-    gallery = `<h2>Картинки для статусов (${status.length}, ${esc(manifest.status!.version)})</h2>
-      <p class="meta">Нажмите «Скачать» под картинкой. Ссылки на картинки живут час, обновите страницу, если не открывается.</p>
+    return `<h2>${title} (${files.length}, ${esc(set!.version)})</h2>
+      <p class="meta">${hint} Ссылки живут час, обновите страницу, если не открывается.</p>
       <div class="grid">${cards.join('')}</div>`;
-  }
+  };
+  const picture = (src: string, name: string) =>
+    `<a href="${src}"><img loading="lazy" src="${src}" alt="${name}"></a>`;
+  const video = (src: string) =>
+    `<video controls playsinline preload="metadata" src="${src}"></video>`;
+  const gallery = (
+    await Promise.all([
+      section(manifest.status, 'Картинки для статусов', 'Нажмите «Скачать» под картинкой.', picture),
+      section(manifest.stories, 'Сторис', 'По одной позиции в день: «Скачать» под картинкой.', picture),
+      section(manifest.reels, 'Рилсы', 'Видео 12 секунд: «Скачать» под роликом.', video),
+    ])
+  ).join('');
 
   const html = `<!doctype html><html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -86,7 +106,7 @@ ul{list-style:none;padding:0;margin:16px 0 0}li{padding:14px 0;border-top:1px so
 .link{font-size:13px;color:var(--mute);margin-top:4px;word-break:break-all}code{font-size:13px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:12px}
 figure{margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-img{display:block;width:100%;height:auto;background:var(--line)}
+img,video{display:block;width:100%;height:auto;background:var(--line)}
 figcaption{padding:6px 8px;font-size:12px;color:var(--mute);word-break:break-all}
 figcaption a{color:var(--acc);font-weight:600;font-size:14px;margin-right:4px}
 </style></head><body><main>

@@ -20,10 +20,18 @@ export interface OfferFile {
   bytes: number;
 }
 
+export interface OfferSet {
+  version: string;
+  files: OfferFile[];
+}
+
 export interface OfferManifest {
   published_at: string;
   docs: Partial<Record<PublicDoc | 'search_ru', OfferFile>>;
-  status?: { version: string; files: OfferFile[] };
+  // Partner page only (never on the public /offer/ru|en|zh links).
+  status?: OfferSet;
+  stories?: OfferSet;
+  reels?: OfferSet;
   keys: { search: string; muhtar: string };
 }
 

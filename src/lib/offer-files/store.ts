@@ -24,12 +24,21 @@ export async function loadManifest(): Promise<{
 } | null> {
   const db = serviceClient();
   if (!db) return null;
-  const { data, error } = await db.storage
-    .from(OFFER_BUCKET)
-    .download(MANIFEST_PATH);
-  if (error || !data) return null;
-  const manifest = parseManifest(await data.text());
-  return manifest ? { db, manifest } : null;
+  // Direct fetch with a unique query: the storage CDN can keep serving the
+  // previous manifest for a while after an overwrite (measured 19.11).
+  const base = process.env.NEXT_PUBLIC_SUPABASE_URL!.replace(/\/$/, '');
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+  try {
+    const res = await fetch(
+      `${base}/storage/v1/object/authenticated/${OFFER_BUCKET}/${MANIFEST_PATH}?t=${Date.now()}`,
+      { headers: { Authorization: `Bearer ${key}`, apikey: key }, cache: 'no-store' }
+    );
+    if (!res.ok) return null;
+    const manifest = parseManifest(await res.text());
+    return manifest ? { db, manifest } : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function signedUrl(

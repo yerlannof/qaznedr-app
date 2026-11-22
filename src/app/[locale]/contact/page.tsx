@@ -11,6 +11,7 @@ import { getServerTranslation } from '@/lib/i18n/translations';
 import { buildTranslatedPageMetadata } from '@/lib/seo/metadata';
 import { getServiceTopic } from '@/lib/services/topics';
 import { getGuideSlug, guideTitle } from '@/lib/insights/contact-context';
+import { isBlockCode } from '@/lib/ext-block/rules';
 import {
   SITE_NAME,
   SITE_URL,
@@ -18,6 +19,13 @@ import {
   localeUrl,
   toLocale,
 } from '@/lib/seo/site';
+
+const BLOCK_ORDER: Record<string, string> = {
+  ru: 'Справка по блоку',
+  kz: 'Блок бойынша анықтама',
+  en: 'Report on block',
+  zh: '地块说明',
+};
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -36,6 +44,10 @@ export default async function ContactPage({ params, searchParams }: Props) {
   const guideSlug = getGuideSlug(query?.guide);
   const guideSubject = guideSlug ? guideTitle(locale, guideSlug) : undefined;
   const subject = topic ? t(`holdingServices.${topic}.title`) : '';
+  // From the block extension: only a code that parses as a grid block, never free text.
+  const blockParam = Array.isArray(query?.block) ? query?.block[0] : query?.block;
+  const block = blockParam && isBlockCode(blockParam) ? blockParam : undefined;
+  const blockSubject = block ? `${BLOCK_ORDER[locale] ?? BLOCK_ORDER.ru} ${block}` : undefined;
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
@@ -68,7 +80,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
               Instagram @qaznedr.kz
             </a>
           </header>
-          {(topic || guideSubject) && (
+          {(topic || guideSubject || blockSubject) && (
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-brand-line py-4">
               <p>
                 <span className="text-brand-muted">
@@ -77,7 +89,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
                   )}{' '}
                   ·{' '}
                 </span>
-                {guideSubject ?? subject}
+                {blockSubject ?? guideSubject ?? subject}
               </p>
               <Link
                 className="brand-focus inline-flex min-h-11 items-center underline underline-offset-4"
@@ -109,11 +121,11 @@ export default async function ContactPage({ params, searchParams }: Props) {
                 {t('contact.formTitle')}
               </h2>
               <InquiryForm
-                key={`${locale}-${topic ?? ''}-${guideSlug ?? ''}`}
+                key={`${locale}-${topic ?? ''}-${guideSlug ?? ''}-${block ?? ''}`}
                 locale={locale}
                 serviceTopic={topic}
                 guideSlug={guideSlug}
-                initialMessage={guideSubject ?? subject}
+                initialMessage={blockSubject ?? guideSubject ?? subject}
               />
             </section>
           </div>

@@ -115,6 +115,9 @@ export function hashKey(value: string): string {
   return createHash('sha256').update(`qz-ext-key|${value}`).digest('hex').slice(0, 40);
 }
 
+/** Pilot: keys are issued by hand (scripts/site_ext_keys.py in the data repo); self-registration is off. */
+export const OPEN_REGISTRATION = false;
+
 export const KEY_RE = /^[A-Za-z0-9_-]{32,64}$/;
 export const FP_RE = /^[a-f0-9]{16,64}$/;
 

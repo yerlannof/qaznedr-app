@@ -42,7 +42,7 @@ export async function register(request: Request): Promise<Response> {
   }
   if (!FP_RE.test(fp)) return json({ error: 'bad_request' }, 400);
   const day = almatyDay();
-  const fpHash = hashKey(e.secret, `fp|${fp}`);
+  const fpHash = hashWithDay(e.secret, 'fp', fp, 'all');
   const netDay = hashWithDay(e.secret, 'net', networkOf(clientIp(request.headers)), day);
   const since = new Date(Date.now() - 24 * 3600 * 1000).toISOString();
   const [byNet, byFp] = await Promise.all([
@@ -55,7 +55,7 @@ export async function register(request: Request): Promise<Response> {
   const key = randomBytes(24).toString('base64url');
   const { error } = await e.db
     .from('ext_installs')
-    .insert({ key_hash: hashKey(e.secret, key), fp_hash: fpHash, net_day: netDay });
+    .insert({ key_hash: hashKey(key), fp_hash: fpHash, net_day: netDay });
   if (error) return json({ error: 'unavailable' }, 503);
   return json({ key, perDay: LIMITS.keyPerDay });
 }
@@ -72,8 +72,8 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
   const fp = request.headers.get('x-qz-fp') ?? '';
   if (!KEY_RE.test(key) || !FP_RE.test(fp)) return json({ error: 'no_key' }, 401);
 
-  const keyHash = hashKey(e.secret, key);
-  const fpHash = hashKey(e.secret, `fp|${fp}`);
+  const keyHash = hashKey(key);
+  const fpHash = hashWithDay(e.secret, 'fp', fp, 'all');
   const day = almatyDay();
   const netDay = hashWithDay(e.secret, 'net', networkOf(clientIp(request.headers)), day);
 

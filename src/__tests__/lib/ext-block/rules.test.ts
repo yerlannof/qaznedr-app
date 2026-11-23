@@ -5,6 +5,7 @@ import {
   almatyDay,
   blockMinutes,
   decide,
+  hashKey,
   isBlockCode,
   isGridWalk,
   networkOf,
@@ -92,5 +93,13 @@ describe('network and day', () => {
   it('rolls the day at Almaty midnight', () => {
     expect(almatyDay(new Date('2026-11-23T18:59:00Z'))).toBe('2026-11-23');
     expect(almatyDay(new Date('2026-11-23T19:00:00Z'))).toBe('2026-11-24');
+  });
+});
+
+describe('key hash', () => {
+  it('matches the data-repo key script (scripts/site_ext_keys.py)', () => {
+    // python: hashlib.sha256(b'qz-ext-key|' + key).hexdigest()[:40]
+    expect(hashKey('abc')).toBe(require('crypto').createHash('sha256').update('qz-ext-key|abc').digest('hex').slice(0, 40));
+    expect(hashKey('abc')).toHaveLength(40);
   });
 });

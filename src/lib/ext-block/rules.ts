@@ -5,7 +5,7 @@
  * Limits are counted three ways so that many installs do not add up: per install key, per browser
  * fingerprint and per network (/24 for IPv4, /48 for IPv6). No I/O here — unit-tested.
  */
-import { createHmac } from 'crypto';
+import { createHash, createHmac } from 'crypto';
 
 export const LIMITS = {
   keyPerDay: 5, // new blocks per install
@@ -110,12 +110,10 @@ export function hashWithDay(secret: string, kind: string, value: string, day: st
   return createHmac('sha256', secret).update(`${kind}|${day}|${value}`).digest('hex').slice(0, 32);
 }
 
-export function hashKey(secret: string, value: string): string {
-  return createHmac('sha256', secret).update(`key|${value}`).digest('hex').slice(0, 40);
+/** Hash of an install/pilot key (192-bit random, so a plain hash is enough); the data-repo key script computes the same. */
+export function hashKey(value: string): string {
+  return createHash('sha256').update(`qz-ext-key|${value}`).digest('hex').slice(0, 40);
 }
-
-/** Pilot: keys are issued by hand (scripts/site_ext_keys.py in the data repo); self-registration is off. */
-export const OPEN_REGISTRATION = false;
 
 export const KEY_RE = /^[A-Za-z0-9_-]{32,64}$/;
 export const FP_RE = /^[a-f0-9]{16,64}$/;

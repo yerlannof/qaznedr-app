@@ -61,10 +61,10 @@
 
   const CSS = `
   :host{all:initial}
-  .p{position:fixed;right:24px;top:180px;width:360px;max-width:calc(100vw - 32px);z-index:2147483000;background:#fff;border-radius:14px;
+  .p{position:fixed;left:110px;top:200px;width:360px;max-width:calc(100vw - 32px);z-index:2147483000;background:#fff;border-radius:14px;
      box-shadow:0 12px 40px rgba(20,30,50,.28);overflow:hidden;border:1px solid #e1e5ec;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#16202b}
   .p.inline{position:static;width:auto;box-shadow:none;border:0;border-radius:0}
-  .h{background:#16202b;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px}
+  .h{background:#16202b;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:move;user-select:none}.inline .h{cursor:default}
   .logo{width:24px;height:24px;border-radius:50%;border:2px solid #c8962e;display:grid;place-items:center;color:#c8962e;font-weight:700;font-size:12px}
   .h b{font-size:14px;letter-spacing:.06em}.x{margin-left:auto;background:none;border:0;color:#fff;opacity:.6;font-size:20px;cursor:pointer;line-height:1}
   .b{padding:14px 16px}
@@ -104,8 +104,8 @@
     } else {
       h += `<div class="msg">${t.empty}</div>`;
     }
-    h += `<div class="r"><span>${t.reports} ${esc(d.sheet)}</span><b>${esc(d.sheetReports)}</b></div>`
-      + `<a class="btn pr" target="_blank" rel="noopener" href="${order}">${t.order}</a>`
+    if (d.sheetReports > 0) h += `<div class="r"><span>${t.reports} ${esc(d.sheet)}</span><b>${esc(d.sheetReports)}</b></div>`;
+    h += `<a class="btn pr" target="_blank" rel="noopener" href="${order}">${t.order}</a>`
       + `<a class="btn se" target="_blank" rel="noopener" href="${SITE}/${L}">${t.about}</a>`
       + `<div class="note">${t.note}</div>`
       + `<div class="f"><span>${t.left(d.left, d.perDay)}</span><span><a target="_blank" rel="noopener" href="${SITE}/${L}/legal/extension">${t.privacy}</a> · <a target="_blank" rel="noopener" href="${SITE}/${L}/contact?block=${encodeURIComponent(d.code)}">${t.broken}</a></span></div>`;
@@ -119,6 +119,26 @@
     const body = shadow.querySelector('.b');
     const x = shadow.querySelector('.x');
     if (x) x.addEventListener('click', () => { host.style.display = 'none'; });
+    if (!inline) { // drag by the header so the portal's own side list stays visible; position is remembered
+      const box = shadow.querySelector('.p');
+      const head = shadow.querySelector('.h');
+      const place = (l, t) => {
+        box.style.left = Math.max(0, Math.min(l, innerWidth - 120)) + 'px';
+        box.style.top = Math.max(0, Math.min(t, innerHeight - 60)) + 'px';
+      };
+      try { chrome.storage.local.get('pos').then((v) => { if (v.pos) place(v.pos.l, v.pos.t); }); } catch (e) { /* popup or no storage */ }
+      head.addEventListener('pointerdown', (ev) => {
+        if (ev.target.closest('.x')) return;
+        const r = box.getBoundingClientRect(); const dx = ev.clientX - r.left; const dy = ev.clientY - r.top;
+        head.setPointerCapture(ev.pointerId);
+        const move = (m) => place(m.clientX - dx, m.clientY - dy);
+        const up = () => {
+          head.removeEventListener('pointermove', move); head.removeEventListener('pointerup', up);
+          const b = box.getBoundingClientRect(); try { chrome.storage.local.set({ pos: { l: b.left, t: b.top } }); } catch (e) { /* ignore */ }
+        };
+        head.addEventListener('pointermove', move); head.addEventListener('pointerup', up);
+      });
+    }
     return {
       show(state, lang) { host.style.display = ''; body.innerHTML = bodyHtml(state, pickLang(lang)); },
     };

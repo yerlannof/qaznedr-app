@@ -27,7 +27,7 @@ const RU: PrivacyContent = {
       heading: 'Что уходит на наш сервер',
       body: [
         'Номер блока. Координата клика, адрес страницы, ваше имя, ЭЦП, БИН и любые данные кабинета не передаются.',
-        'Случайный ключ установки. Его создаёт наш сервер при первом запросе, с вашей личностью он не связан. Удалите расширение — ключ на устройстве удалится.',
+        'Ключ доступа. В закрытом пилоте мы выдаём ключ каждому участнику лично, поэтому видим, какие блоки смотрели по его ключу. Эти сведения остаются внутри QAZNEDR. Удалите расширение — ключ на устройстве удалится.',
         'Отпечаток браузера: хеш от версии браузера, языка, часового пояса и числа ядер процессора. Он не узнаёт человека, а нужен, чтобы лимит не сбрасывался переустановкой.',
         'Сеть, из которой пришёл запрос. Мы храним не адрес, а хеш сети (/24) с солью, которая меняется каждые сутки. Через двое суток и этот хеш стирается.',
       ],
@@ -35,7 +35,7 @@ const RU: PrivacyContent = {
     {
       heading: 'Зачем',
       body: [
-        'Бесплатно расширение показывает 15 новых блоков в сутки. Ключ, отпечаток и хеш сети нужны, чтобы этот лимит нельзя было обойти многими установками и чтобы базу нельзя было выкачать.',
+        'В пилоте расширение показывает 5 новых блоков в сутки. Ключ, отпечаток и хеш сети нужны, чтобы этот лимит нельзя было обойти многими установками и чтобы базу нельзя было выкачать.',
         'Сводка спроса: какие блоки и районы смотрят. Наружу, в том числе государственным органам и партнёрам, мы даём только сводку по блокам, которые смотрели не меньше трёх разных установок. Интерес конкретного человека к блоку мы считаем его коммерческой тайной, не раскрываем и не продаём.',
       ],
     },
@@ -43,7 +43,7 @@ const RU: PrivacyContent = {
       heading: 'Сроки и хранение',
       body: [
         'Просмотры (номер блока, время, хеш ключа и отпечатка) хранятся 12 месяцев, хеш сети — двое суток. Данные хранятся у наших подрядчиков хостинга (Vercel, Supabase), доступ только у QAZNEDR.',
-        'Удалить свои просмотры можно по запросу через страницу контактов: назовите номер блока и примерное время, ключ мы найдём сами.',
+        'Удалить свои просмотры можно по запросу через страницу контактов.',
       ],
     },
   ],
@@ -73,7 +73,7 @@ const EN: PrivacyContent = {
       heading: 'What reaches our server',
       body: [
         'The block number. The click coordinate, page address, your name, digital signature, company ID and any cabinet data are not sent.',
-        'A random install key created by our server on first use, not linked to who you are. Removing the extension removes the key from the device.',
+        'An access key. In the closed pilot we issue a key to each participant personally, so we can see which blocks were viewed with that key. This stays inside QAZNEDR. Removing the extension removes the key from the device.',
         'A browser fingerprint: a hash of browser version, language, time zone and CPU core count. It does not identify a person; it stops the daily limit from resetting on reinstall.',
         'The network the request came from, stored only as a hash of the /24 network with a salt that changes every day; the hash itself is erased after two days.',
       ],
@@ -81,7 +81,7 @@ const EN: PrivacyContent = {
     {
       heading: 'Why',
       body: [
-        'The free tier shows 15 new blocks a day. The key, fingerprint and network hash keep that limit from being bypassed with many installs and keep the database from being scraped.',
+        'During the pilot the extension shows 5 new blocks a day. The key, fingerprint and network hash keep that limit from being bypassed with many installs and keep the database from being scraped.',
         'Demand statistics: which blocks and districts people look at. Outside QAZNEDR, including to government bodies and partners, we share only blocks viewed by at least three different installs. A person’s interest in a block is treated as their trade secret; we do not disclose or sell it.',
       ],
     },
@@ -89,7 +89,7 @@ const EN: PrivacyContent = {
       heading: 'Retention and storage',
       body: [
         'Views (block number, time, hashes of key and fingerprint) are kept for 12 months; the network hash for two days. Data are stored with our hosting providers (Vercel, Supabase); only QAZNEDR has access.',
-        'To delete your views, write via the contact page with the block number and approximate time; we will find the key.',
+        'To delete your views, write to us via the contact page.',
       ],
     },
   ],

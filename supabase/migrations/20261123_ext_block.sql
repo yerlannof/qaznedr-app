@@ -50,3 +50,6 @@ alter table public.ext_views enable row level security;
 revoke all on public.ext_block_teaser, public.ext_sheet_reports, public.ext_installs, public.ext_views
   from anon, authenticated;
 revoke all on sequence public.ext_views_id_seq from anon, authenticated;
+
+-- Pilot: keys are issued to each person by hand, so we see whose key looked at what (T-0220, 23.11).
+alter table public.ext_installs add column if not exists label text;

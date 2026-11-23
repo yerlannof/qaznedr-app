@@ -38,14 +38,18 @@ describe('block codes', () => {
 });
 
 describe('limits', () => {
+  it('is the test-deploy limit: 5 a day per install (Erlan 23.11)', () => {
+    expect(LIMITS.keyPerDay).toBe(5);
+    expect(LIMITS.fpPerDay).toBe(5);
+  });
   const none = () => ({ key: new Set<string>(), fp: new Set<string>(), net: new Set<string>() });
   const fill = (n: number) => new Set(Array.from({ length: n }, (_, i) => codeAt(i * 7, 5)));
 
-  it('gives 15 new blocks a day, repeats are free', () => {
+  it('gives 5 new blocks a day, repeats are free', () => {
     const t = none();
     t.key = fill(LIMITS.keyPerDay);
     expect(decide(codeAt(1000, 500), t)).toEqual({ ok: false, reason: 'key_limit' });
-    expect(decide([...t.key][3], t)).toEqual({ ok: true, repeat: true });
+    expect(decide([...t.key][2], t)).toEqual({ ok: true, repeat: true });
     t.key = fill(LIMITS.keyPerDay - 1);
     expect(decide(codeAt(1000, 500), t)).toEqual({ ok: true, repeat: false });
   });

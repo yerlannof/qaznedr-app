@@ -6,6 +6,11 @@
     kz: 'Картадағы блок нөмірі немесе координата (СК-42): 48.4998 82.4115',
     en: 'Block number from the map or a coordinate (SK-42): 48.4998 82.4115',
   };
+  const KEY = {
+    ru: { hint: 'Вставьте ключ доступа, который вам прислали, и нажмите OK.', ok: 'Ключ сохранён.', bad: 'Это не похоже на ключ: проверьте, что скопировали целиком.', set: 'Ключ доступа есть', change: 'сменить' },
+    kz: { hint: 'Сізге жіберілген кілтті қойып, OK басыңыз.', ok: 'Кілт сақталды.', bad: 'Бұл кілтке ұқсамайды: толық көшірілгенін тексеріңіз.', set: 'Кілт бар', change: 'ауыстыру' },
+    en: { hint: 'Paste the access key you were sent and press OK.', ok: 'Key saved.', bad: 'This does not look like a key: check it was copied in full.', set: 'Access key is set', change: 'change' },
+  };
   let { lang } = await chrome.storage.local.get('lang');
   lang = self.QaznedrPanel.pickLang(lang);
   const panel = self.QaznedrPanel.mount(document.getElementById('panel'), true);
@@ -14,9 +19,33 @@
     document.querySelectorAll('.lang a').forEach((a) => a.classList.toggle('on', a.dataset.l === lang));
     document.getElementById('hint').textContent = HINT[lang];
   };
+  async function paintKey(msg) {
+    const { key } = await chrome.storage.local.get('key');
+    const k = KEY[lang];
+    document.getElementById('k').hidden = !!key && !msg;
+    document.getElementById('khint').textContent = msg || (key ? '' : k.hint);
+    const line = document.getElementById('keyline');
+    line.innerHTML = '';
+    if (key) {
+      line.append(`${k.set} (…${key.slice(-4)}) · `);
+      const a = document.createElement('a'); a.textContent = k.change;
+      a.addEventListener('click', () => { document.getElementById('k').hidden = false; document.getElementById('khint').textContent = k.hint; });
+      line.append(a);
+    }
+  }
   paintLang();
+  paintKey();
+  document.getElementById('k').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const v = document.getElementById('kv').value.trim();
+    if (!/^[A-Za-z0-9_-]{32,64}$/.test(v)) { paintKey(KEY[lang].bad); return; }
+    await chrome.storage.local.set({ key: v });
+    document.getElementById('kv').value = '';
+    await paintKey(KEY[lang].ok);
+    document.getElementById('k').hidden = true;
+  });
   document.querySelectorAll('.lang a').forEach((a) => a.addEventListener('click', async () => {
-    lang = a.dataset.l; await chrome.storage.local.set({ lang }); paintLang();
+    lang = a.dataset.l; await chrome.storage.local.set({ lang }); paintLang(); paintKey();
   }));
 
   function toCode(q) {

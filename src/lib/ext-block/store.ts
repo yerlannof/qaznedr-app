@@ -5,6 +5,7 @@ import {
   KEY_RE,
   LIMITS,
   NO_STORE,
+  OPEN_REGISTRATION,
   almatyDay,
   clientIp,
   decide,
@@ -30,6 +31,7 @@ export function json(body: unknown, status = 200): Response {
 
 /** POST /api/ext/register {fp} → {key}. Few installs per network and per browser per day. */
 export async function register(request: Request): Promise<Response> {
+  if (!OPEN_REGISTRATION) return json({ error: 'invite_only' }, 403);
   const e = env();
   if (!e) return json({ error: 'unavailable' }, 503);
   let fp = '';

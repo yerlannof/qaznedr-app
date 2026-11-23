@@ -1,15 +1,16 @@
 /**
  * Qaznedr block extension (T-0220): pure rules — block codes, limits, grid-walk watchdog.
- * Free tier: 15 new blocks per day per install (Erlan, 23.11). The same block again the same day is free.
+ * Test deploy: 5 new blocks per day per install (Erlan, 23.11: «даже 15 это много максимум 3-5»).
+ * The same block again the same day is free. Pilot keys are issued to each person by hand (invite only).
  * Limits are counted three ways so that many installs do not add up: per install key, per browser
  * fingerprint and per network (/24 for IPv4, /48 for IPv6). No I/O here — unit-tested.
  */
 import { createHmac } from 'crypto';
 
 export const LIMITS = {
-  keyPerDay: 15, // new blocks per install
-  fpPerDay: 15, // new blocks per browser fingerprint (reinstall does not reset it)
-  netPerDay: 45, // new blocks per network: an office of three people
+  keyPerDay: 5, // new blocks per install
+  fpPerDay: 5, // new blocks per browser fingerprint (another key in the same browser does not reset it)
+  netPerDay: 15, // new blocks per network: an office of three people
   newKeysPerNetDay: 3, // installs registered from one network per day
   newKeysPerFpDay: 2, // installs registered from one browser per day
   walkSteps: 8, // one-cell steps in one direction in a row → the key is switched off
@@ -112,6 +113,9 @@ export function hashWithDay(secret: string, kind: string, value: string, day: st
 export function hashKey(secret: string, value: string): string {
   return createHmac('sha256', secret).update(`key|${value}`).digest('hex').slice(0, 40);
 }
+
+/** Pilot: keys are issued by hand (scripts/site_ext_keys.py in the data repo); self-registration is off. */
+export const OPEN_REGISTRATION = false;
 
 export const KEY_RE = /^[A-Za-z0-9_-]{32,64}$/;
 export const FP_RE = /^[a-f0-9]{16,64}$/;

@@ -10,7 +10,7 @@
       left: (n, d) => `Осталось сегодня: ${n} из ${d}`, limit: (d) => `Бесплатно — ${d} новых блоков в сутки, на сегодня всё. Справку по блоку можно заказать.`,
       wait: 'Загружаю…', fail: 'Сервер Qaznedr не ответил. Попробуйте ещё раз.', blocked: 'Ключ этой установки отключён: блоки шли подряд по сетке. Напишите нам.',
       installs: 'Слишком много новых установок из этой сети за сутки. Попробуйте завтра.', nometal: 'металл не указан',
-      badcode: 'Не понял номер блока или координату.', privacy: 'Конфиденциальность', broken: 'Не работает?',
+      nokey: 'Нужен ключ доступа. Нажмите на значок Qaznedr справа вверху в браузере и вставьте ключ, который вам прислали.', badcode: 'Не понял номер блока или координату.', privacy: 'Конфиденциальность', broken: 'Не работает?',
       stages: { 'месторождение': 'месторождение', 'проявление': 'проявление', 'точка минерализации': 'точка минерализации' },
     },
     kz: {
@@ -21,7 +21,7 @@
       left: (n, d) => `Бүгін қалды: ${n} / ${d}`, limit: (d) => `Тегін — тәулігіне ${d} жаңа блок, бүгінге бітті. Блок бойынша анықтама тапсыруға болады.`,
       wait: 'Жүктелуде…', fail: 'Qaznedr сервері жауап бермеді. Қайталап көріңіз.', blocked: 'Бұл орнатудың кілті өшірілді: блоктар тор бойымен қатар жүрді. Бізге жазыңыз.',
       installs: 'Бұл желіден бір тәулікте жаңа орнату тым көп. Ертең көріңіз.', nometal: 'металл көрсетілмеген',
-      badcode: 'Блок нөмірі немесе координата танылмады.', privacy: 'Құпиялылық', broken: 'Жұмыс істемей ме?',
+      nokey: 'Кіру кілті керек. Браузердің оң жақ жоғарғы бұрышындағы Qaznedr белгісін басып, сізге жіберілген кілтті қойыңыз.', badcode: 'Блок нөмірі немесе координата танылмады.', privacy: 'Құпиялылық', broken: 'Жұмыс істемей ме?',
       stages: { 'месторождение': 'кен орны', 'проявление': 'кен білінісі', 'точка минерализации': 'минералдану нүктесі' },
     },
     en: {
@@ -32,7 +32,7 @@
       left: (n, d) => `Left today: ${n} of ${d}`, limit: (d) => `Free: ${d} new blocks a day, used up for today. You can order a block report.`,
       wait: 'Loading…', fail: 'The Qaznedr server did not answer. Please try again.', blocked: 'This install key is switched off: blocks went one after another along the grid. Write to us.',
       installs: 'Too many new installs from this network today. Try tomorrow.', nometal: 'commodity not stated',
-      badcode: 'Could not read the block number or coordinate.', privacy: 'Privacy', broken: 'Not working?',
+      nokey: 'An access key is needed. Click the Qaznedr icon at the top right of the browser and paste the key you were sent.', badcode: 'Could not read the block number or coordinate.', privacy: 'Privacy', broken: 'Not working?',
       stages: { 'месторождение': 'deposit', 'проявление': 'occurrence', 'точка минерализации': 'mineralisation point' },
     },
   };
@@ -89,6 +89,7 @@
     if (state.kind === 'wait') return h + `<div class="msg">${t.wait}</div>`;
     if (state.kind === 'error') {
       if (state.error === 'bad_code') return h + `<div class="msg">${t.badcode}</div>`;
+      if (state.error === 'no_key') return h + `<div class="msg">${t.nokey}</div>`;
       const m = state.error === 'limit' ? t.limit(state.perDay || 15) : state.error === 'blocked' ? t.blocked
         : state.error === 'too_many_installs' ? t.installs : t.fail;
       return h + `<div class="msg">${m}</div><a class="btn pr" target="_blank" rel="noopener" href="${order}">${t.order}</a>`;

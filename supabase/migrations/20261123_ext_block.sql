@@ -53,3 +53,7 @@ revoke all on sequence public.ext_views_id_seq from anon, authenticated;
 
 -- Pilot: keys are issued to each person by hand, so we see whose key looked at what (T-0220, 23.11).
 alter table public.ext_installs add column if not exists label text;
+
+-- Base audit 24.11 (A1, A3): best precision class of the points behind the block, and how many metals did not fit in the four chips.
+alter table public.ext_block_teaser add column if not exists more integer not null default 0;
+alter table public.ext_block_teaser add column if not exists prec text;

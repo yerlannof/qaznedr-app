@@ -4,36 +4,39 @@
   const T = {
     ru: {
       block: 'Блок', area: 'Советские отчёты, блок и 5 км вокруг', objects: 'объектов в отчётах',
-      stage: 'Высшая стадия изученности', reports: 'Отчётов фонда с объектами на листе', order: 'Заказать справку по блоку',
-      about: 'Что такое Qaznedr →', empty: 'В обработанных нами отчётах по этому месту пусто. Это не значит, что в фонде пусто — закажите поиск по листу.',
+      stage: 'Высшая стадия изученности', reports: 'Отчётов фонда с объектами на листе 1:100 000', order: 'Заказать справку по блоку',
+      about: 'Что такое Qaznedr →', empty: 'В нашей базе точек рядом нет. Это не значит, что в фонде пусто — закажите поиск по листу.', nodata: 'нет данных',
+      prec: 'Точность точек', precs: { A: 'до 0,5 км', B: 'до 3 км', C: 'грубо, 3–5 км' },
       note: 'Названия, координаты и содержания — в справке. Данные — обработка советских геологических отчётов, не сведения о правах. Qaznedr не связан с e-qazyna и Министерством.',
       left: (n, d) => `Осталось сегодня: ${n} из ${d}`, limit: (d) => `Бесплатно — ${d} новых блоков в сутки, на сегодня всё. Справку по блоку можно заказать.`,
       wait: 'Загружаю…', fail: 'Сервер Qaznedr не ответил. Попробуйте ещё раз.', blocked: 'Ключ этой установки отключён: блоки шли подряд по сетке. Напишите нам.',
       installs: 'Слишком много новых установок из этой сети за сутки. Попробуйте завтра.', nometal: 'металл не указан',
       nokey: 'Нужен ключ доступа. Нажмите на значок Qaznedr справа вверху в браузере и вставьте ключ, который вам прислали.', badcode: 'Не понял номер блока или координату.', privacy: 'Конфиденциальность', broken: 'Не работает?',
-      stages: { 'месторождение': 'месторождение', 'проявление': 'проявление', 'точка минерализации': 'точка минерализации' },
+      stages: { 'месторождение': 'месторождение', 'проявление': 'проявление', 'точка минерализации': 'точка минерализации', 'тип не определён': 'тип не определён' },
     },
     kz: {
       block: 'Блок', area: 'Кеңестік есептер, блок және 5 км айналасы', objects: 'есептердегі объектілер',
-      stage: 'Зерттелудің ең жоғары сатысы', reports: 'Парақтағы объектілері бар қор есептері', order: 'Блок бойынша анықтама тапсыру',
-      about: 'Qaznedr деген не →', empty: 'Біз өңдеген есептерде бұл жер бойынша мәлімет жоқ. Бұл қорда жоқ деген сөз емес — парақ бойынша іздеу тапсырыңыз.',
+      stage: 'Зерттелудің ең жоғары сатысы', reports: '1:100 000 парағындағы объектілері бар қор есептері', order: 'Блок бойынша анықтама тапсыру',
+      about: 'Qaznedr деген не →', empty: 'Біздің базада жақын маңда нүкте жоқ. Бұл қорда жоқ деген сөз емес — парақ бойынша іздеу тапсырыңыз.', nodata: 'дерек жоқ',
+      prec: 'Нүктелер дәлдігі', precs: { A: '0,5 км-ге дейін', B: '3 км-ге дейін', C: 'дөрекі, 3–5 км' },
       note: 'Атаулар, координаттар және құрамдар — анықтамада. Деректер — кеңестік геологиялық есептерді өңдеу, құқықтар туралы мәлімет емес. Qaznedr e-qazyna және Министрлікпен байланысты емес.',
       left: (n, d) => `Бүгін қалды: ${n} / ${d}`, limit: (d) => `Тегін — тәулігіне ${d} жаңа блок, бүгінге бітті. Блок бойынша анықтама тапсыруға болады.`,
       wait: 'Жүктелуде…', fail: 'Qaznedr сервері жауап бермеді. Қайталап көріңіз.', blocked: 'Бұл орнатудың кілті өшірілді: блоктар тор бойымен қатар жүрді. Бізге жазыңыз.',
       installs: 'Бұл желіден бір тәулікте жаңа орнату тым көп. Ертең көріңіз.', nometal: 'металл көрсетілмеген',
       nokey: 'Кіру кілті керек. Браузердің оң жақ жоғарғы бұрышындағы Qaznedr белгісін басып, сізге жіберілген кілтті қойыңыз.', badcode: 'Блок нөмірі немесе координата танылмады.', privacy: 'Құпиялылық', broken: 'Жұмыс істемей ме?',
-      stages: { 'месторождение': 'кен орны', 'проявление': 'кен білінісі', 'точка минерализации': 'минералдану нүктесі' },
+      stages: { 'месторождение': 'кен орны', 'проявление': 'кен білінісі', 'точка минерализации': 'минералдану нүктесі', 'тип не определён': 'түрі анықталмаған' },
     },
     en: {
       block: 'Block', area: 'Soviet reports, the block and 5 km around', objects: 'objects in reports',
-      stage: 'Highest stage of study', reports: 'Archive reports with objects on the sheet', order: 'Order a block report',
-      about: 'What is Qaznedr →', empty: 'Nothing here in the reports we have processed. That does not mean the archive is empty — order a sheet search.',
+      stage: 'Highest stage of study', reports: 'Archive reports with objects on the 1:100,000 sheet', order: 'Order a block report',
+      about: 'What is Qaznedr →', empty: 'No points near here in our database. That does not mean the archive is empty — order a sheet search.', nodata: 'no data',
+      prec: 'Point accuracy', precs: { A: 'within 0.5 km', B: 'within 3 km', C: 'rough, 3–5 km' },
       note: 'Names, coordinates and grades are in the report. Data come from processing Soviet geological reports, not from licence records. Qaznedr is not affiliated with e-qazyna or the Ministry.',
       left: (n, d) => `Left today: ${n} of ${d}`, limit: (d) => `Free: ${d} new blocks a day, used up for today. You can order a block report.`,
       wait: 'Loading…', fail: 'The Qaznedr server did not answer. Please try again.', blocked: 'This install key is switched off: blocks went one after another along the grid. Write to us.',
       installs: 'Too many new installs from this network today. Try tomorrow.', nometal: 'commodity not stated',
       nokey: 'An access key is needed. Click the Qaznedr icon at the top right of the browser and paste the key you were sent.', badcode: 'Could not read the block number or coordinate.', privacy: 'Privacy', broken: 'Not working?',
-      stages: { 'месторождение': 'deposit', 'проявление': 'occurrence', 'точка минерализации': 'mineralisation point' },
+      stages: { 'месторождение': 'deposit', 'проявление': 'occurrence', 'точка минерализации': 'mineralisation point', 'тип не определён': 'type not stated' },
     },
   };
   const METAL_EN = {
@@ -45,6 +48,11 @@
     'Уголь': 'Coal', 'Барит': 'Barite', 'Флюорит': 'Fluorite', 'Графит': 'Graphite', 'Кварц': 'Quartz', 'Бокситы': 'Bauxite',
     'Асбест': 'Asbestos', 'Тальк': 'Talc', 'Гипс': 'Gypsum', 'Бентонит': 'Bentonite', 'Каолин': 'Kaolin', 'Соли': 'Salts',
     'Волластонит': 'Wollastonite', 'Цеолиты': 'Zeolites', 'Вермикулит': 'Vermiculite',
+    'Германий': 'Germanium', 'Галлий': 'Gallium', 'Индий': 'Indium', 'Кадмий': 'Cadmium', 'Теллур': 'Tellurium', 'Селен': 'Selenium',
+    'Скандий': 'Scandium', 'Рубидий': 'Rubidium', 'Цезий': 'Caesium', 'Стронций': 'Strontium', 'Известняк': 'Limestone', 'Песок': 'Sand',
+    'Глины': 'Clays', 'Полиметаллы': 'Base metals', 'Мрамор': 'Marble', 'Доломит': 'Dolomite', 'Слюда': 'Mica', 'Гранат': 'Garnet',
+    'Кварциты': 'Quartzite', 'Пьезокварц': 'Piezoquartz', 'Магнезит': 'Magnesite', 'Строительный камень': 'Building stone',
+    'Алмазы': 'Diamonds', 'Корунд': 'Corundum', 'Алунит': 'Alunite', 'Андалузит': 'Andalusite', 'Огнеупорное сырьё': 'Refractory raw materials',
   };
   const METAL_KZ = {
     'Золото': 'Алтын', 'Серебро': 'Күміс', 'Медь': 'Мыс', 'Свинец': 'Қорғасын', 'Цинк': 'Мырыш', 'Железо': 'Темір',
@@ -97,14 +105,15 @@
     const d = state.data;
     h += `<div class="l">${t.area}</div>`;
     if (d.found) {
-      const chips = d.metals.length ? d.metals.map((m) => `<span class="chip">${esc(metalName(m, lang))}</span>`).join('')
-        : `<span class="chip">${t.nometal}</span>`;
+      const chips = (d.metals.length ? d.metals.map((m) => `<span class="chip">${esc(metalName(m, lang))}</span>`).join('')
+        : `<span class="chip">${t.nometal}</span>`) + (d.more > 0 ? `<span class="chip">+${esc(d.more)}</span>` : '');
       h += `<div class="big"><b>${esc(d.n)}</b><span>${t.objects}</span></div><div class="chips">${chips}</div>`
-        + `<div class="r"><span>${t.stage}</span><b>${esc(t.stages[d.stage] || d.stage)}</b></div>`;
+        + `<div class="r"><span>${t.stage}</span><b>${esc(t.stages[d.stage] || d.stage)}</b></div>`
+        + (d.prec ? `<div class="r"><span>${t.prec}</span><b>${esc(t.precs[d.prec] || d.prec)}</b></div>` : '');
     } else {
       h += `<div class="msg">${t.empty}</div>`;
     }
-    if (d.sheetReports > 0) h += `<div class="r"><span>${t.reports} ${esc(d.sheet)}</span><b>${esc(d.sheetReports)}</b></div>`;
+    h += `<div class="r"><span>${t.reports} ${esc(d.sheet)}</span><b>${d.sheetReports > 0 ? esc(d.sheetReports) : t.nodata}</b></div>`;
     h += `<a class="btn pr" target="_blank" rel="noopener" href="${order}">${t.order}</a>`
       + `<a class="btn se" target="_blank" rel="noopener" href="${SITE}/${L}">${t.about}</a>`
       + `<div class="note">${t.note}</div>`

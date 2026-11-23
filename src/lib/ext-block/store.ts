@@ -100,7 +100,7 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
   }
 
   const [{ data: t }, { data: s }] = await Promise.all([
-    e.db.from('ext_block_teaser').select('n, metals, stage').eq('code', code).maybeSingle(),
+    e.db.from('ext_block_teaser').select('n, metals, more, stage, prec').eq('code', code).maybeSingle(),
     e.db.from('ext_sheet_reports').select('reports').eq('sheet', sheetOf(code)).maybeSingle(),
   ]);
 
@@ -121,7 +121,9 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
     found: !!t,
     n: t?.n ?? null,
     metals: (t?.metals as string[] | undefined) ?? [],
+    more: t?.more ?? 0,
     stage: t?.stage ?? null,
+    prec: t?.prec ?? null,
     sheetReports: s?.reports ?? 0,
     perDay: LIMITS.keyPerDay,
     left: Math.max(0, LIMITS.keyPerDay - used),

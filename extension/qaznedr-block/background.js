@@ -20,7 +20,40 @@ async function block(code) {
   return { error: j.error || 'fail', perDay: j.perDay };
 }
 
+async function call(path, init) {
+  const { key } = await chrome.storage.local.get('key');
+  if (!key) return { error: 'no_key' };
+  const r = await fetch(`${API}${path}`, { ...init, headers: { ...(init && init.headers), 'x-qz-key': key } });
+  return r;
+}
+
+// Showcase (T-0220): overlay picture as a data URL (messages carry JSON only), chat queue.
+async function showcaseMap(code, id) {
+  const r = await call(`/showcase/${encodeURIComponent(code)}/${encodeURIComponent(id)}`);
+  if (!(r instanceof Response) || !r.ok) return { error: 'fail' };
+  const buf = new Uint8Array(await r.arrayBuffer());
+  let bin = '';
+  for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
+  return { dataUrl: 'data:image/jpeg;base64,' + btoa(bin) };
+}
+
+async function chatAsk(code, q) {
+  const r = await call('/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code, q }) });
+  if (!(r instanceof Response)) return r;
+  return r.json().catch(() => ({ error: 'fail' }));
+}
+
+async function chatGet(id) {
+  const r = await call(`/chat/${encodeURIComponent(id)}`);
+  if (!(r instanceof Response)) return r;
+  return r.json().catch(() => ({ error: 'fail' }));
+}
+
 chrome.runtime.onMessage.addListener((msg, _sender, reply) => {
+  const done = (p) => { p.then(reply, () => reply({ error: 'fail' })); return true; };
+  if (msg && msg.type === 'scmap' && typeof msg.code === 'string' && typeof msg.id === 'string') return done(showcaseMap(msg.code, msg.id));
+  if (msg && msg.type === 'chat' && typeof msg.code === 'string' && typeof msg.q === 'string') return done(chatAsk(msg.code, msg.q));
+  if (msg && msg.type === 'chatget' && (typeof msg.id === 'number' || typeof msg.id === 'string')) return done(chatGet(msg.id));
   if (msg && msg.type === 'block' && typeof msg.code === 'string') {
     block(msg.code).then(reply, () => reply({ error: 'fail' }));
     return true;

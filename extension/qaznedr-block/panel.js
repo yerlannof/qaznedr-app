@@ -75,7 +75,7 @@
   .h{background:#16202b;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:move;user-select:none}.inline .h{cursor:default}
   .logo{width:24px;height:24px;border-radius:50%;border:2px solid #c8962e;display:grid;place-items:center;color:#c8962e;font-weight:700;font-size:12px}
   .h b{font-size:14px;letter-spacing:.06em}.x{margin-left:auto;background:none;border:0;color:#fff;opacity:.6;font-size:20px;cursor:pointer;line-height:1}
-  .b{padding:14px 16px}
+  .b{padding:14px 16px;max-height:calc(100vh - 140px);overflow:auto}
   .l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6b7684}
   .c{font:600 17px/1.3 ui-monospace,Consolas,monospace;margin:2px 0 12px;user-select:all}
   .big{display:flex;align-items:baseline;gap:8px;margin:2px 0 4px}.big b{font-size:32px}.big span{color:#3b4450}
@@ -114,6 +114,7 @@
       h += `<div class="msg">${t.empty}</div>`;
     }
     h += `<div class="r"><span>${t.reports} ${esc(d.sheet)}</span><b>${d.sheetReports > 0 ? esc(d.sheetReports) : t.nodata}</b></div>`;
+    if (d.showcase && root.QaznedrShowcase) h += root.QaznedrShowcase.html(d);
     h += `<a class="btn pr" target="_blank" rel="noopener" href="${order}">${t.order}</a>`
       + `<a class="btn se" target="_blank" rel="noopener" href="${SITE}/${L}">${t.about}</a>`
       + `<div class="note">${t.note}</div>`
@@ -124,7 +125,7 @@
   /** Mount (or reuse) the panel. `inline` = inside the popup, no fixed position and no close button. */
   function mount(host, inline) {
     const shadow = host.attachShadow({ mode: 'closed' });
-    shadow.innerHTML = `<style>${CSS}</style><div class="p${inline ? ' inline' : ''}"><div class="h"><div class="logo">Q</div><b>QAZNEDR</b>${inline ? '' : '<button class="x" aria-label="close">×</button>'}</div><div class="b"></div></div>`;
+    shadow.innerHTML = `<style>${CSS}${root.QaznedrShowcase ? root.QaznedrShowcase.CSS : ''}</style><div class="p${inline ? ' inline' : ''}"><div class="h"><div class="logo">Q</div><b>QAZNEDR</b>${inline ? '' : '<button class="x" aria-label="close">×</button>'}</div><div class="b"></div></div>`;
     const body = shadow.querySelector('.b');
     const x = shadow.querySelector('.x');
     if (x) x.addEventListener('click', () => { host.style.display = 'none'; });
@@ -149,7 +150,17 @@
       });
     }
     return {
-      show(state, lang) { host.style.display = ''; body.innerHTML = bodyHtml(state, pickLang(lang)); },
+      show(state, lang) {
+        host.style.display = '';
+        const render = () => {
+          body.innerHTML = bodyHtml(state, pickLang(lang));
+          const sc = root.QaznedrShowcase;
+          if (!sc || inline) return;
+          if (state.kind === 'data' && state.data.showcase) sc.wire(body, state.data, render);
+          else sc.clear();
+        };
+        render();
+      },
     };
   }
 

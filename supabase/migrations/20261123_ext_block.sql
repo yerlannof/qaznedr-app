@@ -57,3 +57,14 @@ alter table public.ext_installs add column if not exists label text;
 -- Base audit 24.11 (A1, A3): best precision class of the points behind the block, and how many metals did not fit in the four chips.
 alter table public.ext_block_teaser add column if not exists more integer not null default 0;
 alter table public.ext_block_teaser add column if not exists prec text;
+
+-- Showcase of the full plugin on a few blocks (T-0220, 24.11): maps over the portal, rights, chat. Only keys with showcase=true.
+create table if not exists public.ext_showcase (code text primary key, payload jsonb not null, ver bigint not null);
+create table if not exists public.ext_chat (id bigserial primary key, at timestamptz not null default now(), day date not null default (now() at time zone 'Asia/Almaty')::date, key_hash text not null, code text not null, q text not null, status text not null default 'new', answer text, sources jsonb, answered_at timestamptz);
+create index if not exists ext_chat_status on public.ext_chat (status, id);
+create index if not exists ext_chat_key_day on public.ext_chat (key_hash, day);
+alter table public.ext_installs add column if not exists showcase boolean not null default false;
+alter table public.ext_showcase enable row level security;
+alter table public.ext_chat enable row level security;
+revoke all on public.ext_showcase, public.ext_chat from anon, authenticated;
+revoke all on sequence public.ext_chat_id_seq from anon, authenticated;

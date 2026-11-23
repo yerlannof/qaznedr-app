@@ -77,7 +77,7 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
   const day = almatyDay();
   const netDay = hashWithDay(e.secret, 'net', networkOf(clientIp(request.headers)), day);
 
-  const { data: inst } = await e.db.from('ext_installs').select('blocked').eq('key_hash', keyHash).maybeSingle();
+  const { data: inst } = await e.db.from('ext_installs').select('blocked, showcase').eq('key_hash', keyHash).maybeSingle();
   if (!inst) return json({ error: 'no_key' }, 401);
   if (inst.blocked) return json({ error: 'blocked' }, 403);
 
@@ -99,9 +99,12 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
     return json({ error: 'limit', reason: verdict.reason, perDay: LIMITS.keyPerDay, left: 0 }, 429);
   }
 
-  const [{ data: t }, { data: s }] = await Promise.all([
+  const [{ data: t }, { data: s }, { data: sc }] = await Promise.all([
     e.db.from('ext_block_teaser').select('n, metals, more, stage, prec').eq('code', code).maybeSingle(),
     e.db.from('ext_sheet_reports').select('reports').eq('sheet', sheetOf(code)).maybeSingle(),
+    inst.showcase
+      ? e.db.from('ext_showcase').select('payload').eq('code', code).maybeSingle()
+      : Promise.resolve({ data: null }),
   ]);
 
   let used = today.key.size;
@@ -127,5 +130,88 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
     sheetReports: s?.reports ?? 0,
     perDay: LIMITS.keyPerDay,
     left: Math.max(0, LIMITS.keyPerDay - used),
+    showcase: (sc as { payload?: unknown } | null)?.payload ?? null,
   });
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// Showcase (T-0220, 24.11): a few blocks with maps over the portal, rights and a chat. Only installs with showcase=true.
+
+type ShowcasePayload = { maps?: { id: string }[] };
+
+async function showcaseInstall(request: Request) {
+  const e = env();
+  if (!e) return { error: json({ error: 'unavailable' }, 503) };
+  const key = request.headers.get('x-qz-key') ?? '';
+  if (!KEY_RE.test(key)) return { error: json({ error: 'no_key' }, 401) };
+  const keyHash = hashKey(key);
+  const { data: inst } = await e.db.from('ext_installs').select('blocked, showcase').eq('key_hash', keyHash).maybeSingle();
+  if (!inst || inst.blocked || !inst.showcase) return { error: json({ error: 'no_showcase' }, 403) };
+  return { e, keyHash };
+}
+
+async function showcasePayload(e: { db: SupabaseClient }, code: string): Promise<ShowcasePayload | null> {
+  const { data } = await e.db.from('ext_showcase').select('payload').eq('code', code).maybeSingle();
+  return ((data as { payload?: ShowcasePayload } | null)?.payload ?? null);
+}
+
+/** GET /api/ext/showcase/<code>/<map> — the overlay picture, streamed from the private bucket. */
+export async function showcaseMap(request: Request, rawCode: string, mapId: string): Promise<Response> {
+  const s = await showcaseInstall(request);
+  if ('error' in s) return s.error as Response;
+  const code = decodeURIComponent(rawCode).trim();
+  if (!isBlockCode(code) || !/^[a-z0-9_]{3,40}$/.test(mapId)) return json({ error: 'bad_code' }, 400);
+  const p = await showcasePayload(s.e, code);
+  if (!p?.maps?.some((m) => m.id === mapId)) return json({ error: 'not_found' }, 404);
+  const { data, error } = await s.e.db.storage.from('ext-showcase').download(`${mapId}.jpg`);
+  if (error || !data) return json({ error: 'unavailable' }, 503);
+  return new Response(data, { headers: { 'Content-Type': 'image/jpeg', 'Cache-Control': 'private, max-age=600', 'X-Robots-Tag': 'noindex' } });
+}
+
+export const CHAT_PER_DAY = 20;
+
+/** POST /api/ext/chat {code, q} — puts a question in the queue; our machine answers it from the block's volumes. */
+export async function chatAsk(request: Request): Promise<Response> {
+  const s = await showcaseInstall(request);
+  if ('error' in s) return s.error as Response;
+  let body: { code?: unknown; q?: unknown } = {};
+  try {
+    body = (await request.json()) as typeof body;
+  } catch {
+    /* empty */
+  }
+  const code = String(body.code ?? '').trim();
+  const q = String(body.q ?? '').trim();
+  if (!isBlockCode(code) || q.length < 3 || q.length > 600) return json({ error: 'bad_request' }, 400);
+  if (!(await showcasePayload(s.e, code))) return json({ error: 'not_found' }, 404);
+  const day = almatyDay();
+  const { count } = await s.e.db
+    .from('ext_chat')
+    .select('id', { count: 'exact', head: true })
+    .eq('key_hash', s.keyHash)
+    .eq('day', day);
+  if ((count ?? 0) >= CHAT_PER_DAY) return json({ error: 'limit', perDay: CHAT_PER_DAY }, 429);
+  const { data, error } = await s.e.db
+    .from('ext_chat')
+    .insert({ key_hash: s.keyHash, code, q, day })
+    .select('id')
+    .single();
+  if (error || !data) return json({ error: 'unavailable' }, 503);
+  return json({ id: (data as { id: number }).id, left: CHAT_PER_DAY - (count ?? 0) - 1 });
+}
+
+/** GET /api/ext/chat/<id> — status and answer of the caller's own question. */
+export async function chatGet(request: Request, rawId: string): Promise<Response> {
+  const s = await showcaseInstall(request);
+  if ('error' in s) return s.error as Response;
+  const id = Number(rawId);
+  if (!Number.isSafeInteger(id) || id <= 0) return json({ error: 'bad_request' }, 400);
+  const { data } = await s.e.db
+    .from('ext_chat')
+    .select('status, answer, sources')
+    .eq('id', id)
+    .eq('key_hash', s.keyHash)
+    .maybeSingle();
+  if (!data) return json({ error: 'not_found' }, 404);
+  return json(data);
 }

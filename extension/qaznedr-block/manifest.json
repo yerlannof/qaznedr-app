@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Qaznedr — геология блока",
   "short_name": "Qaznedr",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Сводка советских геологических отчётов по блоку публичной карты недропользования РК. Не связано с e-qazyna и Министерством.",
   "icons": {
     "16": "icons/16.png",
@@ -37,9 +37,24 @@
       "js": [
         "block-code.js",
         "panel.js",
+        "showcase.js",
         "content.js"
       ],
       "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://minerals.e-qazyna.kz/*/contracts-map*",
+        "https://minerals-u.e-qazyna.kz/*/contracts-map*"
+      ],
+      "exclude_matches": [
+        "https://*.e-qazyna.kz/*/u/*"
+      ],
+      "js": [
+        "map-bridge.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
     }
   ],
   "homepage_url": "https://qaznedr.kz/ru/legal/extension"

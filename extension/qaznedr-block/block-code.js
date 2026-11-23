@@ -45,7 +45,18 @@
     return !!m && +m[2] >= 1 && +m[2] <= 144 && +m[3] >= 1 && +m[3] <= 25;
   }
 
-  const api = { blockCode, parseDms, isBlockCode, BLOCK_RE };
+  // Inverse of blockCode: [west, south, east, north] of the 1′ cell, in the same degrees.
+  function blockBounds(code) {
+    const m = /^([KLMN])-(\d{2})-(\d{1,3})-\(10([abvgde])-5([abvg])-(\d{1,2})\)$/.exec(code);
+    if (!m) return null;
+    const sy = ROW.indexOf(m[1]), sx = +m[2] - 38, n100 = +m[3] - 1, i10 = L10.indexOf(m[4]), i5 = L5.indexOf(m[5]), n1 = +m[6] - 1;
+    const mx = sx * 360 + (n100 % 12) * 30 + (i10 % 3) * 10 + (i5 % 2) * 5 + (n1 % 5);
+    const my = sy * 240 + (11 - Math.floor(n100 / 12)) * 20 + (1 - Math.floor(i10 / 3)) * 10 + (1 - Math.floor(i5 / 2)) * 5 + (4 - Math.floor(n1 / 5));
+    const w = 42 + mx / 60, s = 40 + my / 60;
+    return [w, s, w + 1 / 60, s + 1 / 60];
+  }
+
+  const api = { blockCode, blockBounds, parseDms, isBlockCode, BLOCK_RE };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.QaznedrBlock = api;
 })(typeof self !== 'undefined' ? self : this);

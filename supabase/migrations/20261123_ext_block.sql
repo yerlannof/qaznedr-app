@@ -68,3 +68,6 @@ alter table public.ext_showcase enable row level security;
 alter table public.ext_chat enable row level security;
 revoke all on public.ext_showcase, public.ext_chat from anon, authenticated;
 revoke all on sequence public.ext_chat_id_seq from anon, authenticated;
+
+-- Testers without daily limits (Erlan 24.11 for Mukhtar: unlimited, he is the tester). Set by hand per key.
+alter table public.ext_installs add column if not exists nolimit boolean not null default false;

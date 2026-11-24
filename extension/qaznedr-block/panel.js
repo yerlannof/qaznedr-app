@@ -118,7 +118,7 @@
     h += `<a class="btn pr" target="_blank" rel="noopener" href="${order}">${t.order}</a>`
       + `<a class="btn se" target="_blank" rel="noopener" href="${SITE}/${L}">${t.about}</a>`
       + `<div class="note">${t.note}</div>`
-      + `<div class="f"><span>${t.left(d.left, d.perDay)}</span><span><a target="_blank" rel="noopener" href="${SITE}/${L}/legal/extension">${t.privacy}</a> · <a target="_blank" rel="noopener" href="${SITE}/${L}/contact?block=${encodeURIComponent(d.code)}">${t.broken}</a></span></div>`;
+      + `<div class="f"><span>${d.unlimited ? 'Без лимита · тестировщик' : t.left(d.left, d.perDay)}</span><span><a target="_blank" rel="noopener" href="${SITE}/${L}/legal/extension">${t.privacy}</a> · <a target="_blank" rel="noopener" href="${SITE}/${L}/contact?block=${encodeURIComponent(d.code)}">${t.broken}</a></span></div>`;
     return h;
   }
 

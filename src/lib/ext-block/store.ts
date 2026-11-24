@@ -77,7 +77,11 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
   const day = almatyDay();
   const netDay = hashWithDay(e.secret, 'net', networkOf(clientIp(request.headers)), day);
 
-  const { data: inst } = await e.db.from('ext_installs').select('blocked, showcase').eq('key_hash', keyHash).maybeSingle();
+  const { data: inst } = await e.db
+    .from('ext_installs')
+    .select('blocked, showcase, nolimit')
+    .eq('key_hash', keyHash)
+    .maybeSingle();
   if (!inst) return json({ error: 'no_key' }, 401);
   if (inst.blocked) return json({ error: 'blocked' }, 403);
 
@@ -94,7 +98,8 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
     fp: new Set(rows.filter((r) => r.fp_hash === fpHash).map((r) => r.code)),
     net: new Set(rows.filter((r) => r.net_day === netDay).map((r) => r.code)),
   };
-  const verdict = decide(code, today);
+  // Testers (nolimit, set by hand: Erlan 24.11 for Mukhtar) skip the daily limits and the grid-walk watchdog.
+  const verdict = inst.nolimit ? { ok: true as const, repeat: today.key.has(code) } : decide(code, today);
   if (!verdict.ok) {
     return json({ error: 'limit', reason: verdict.reason, perDay: LIMITS.keyPerDay, left: 0 }, 429);
   }
@@ -114,7 +119,7 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
       .from('ext_views')
       .insert({ key_hash: keyHash, fp_hash: fpHash, net_day: netDay, code, found: !!t, day });
     const keyCodes = [...today.key, code];
-    if (isGridWalk(keyCodes)) {
+    if (!inst.nolimit && isGridWalk(keyCodes)) {
       await e.db.from('ext_installs').update({ blocked: 'grid_walk' }).eq('key_hash', keyHash);
     }
   }
@@ -128,8 +133,9 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
     stage: t?.stage ?? null,
     prec: t?.prec ?? null,
     sheetReports: s?.reports ?? 0,
-    perDay: LIMITS.keyPerDay,
-    left: Math.max(0, LIMITS.keyPerDay - used),
+    perDay: inst.nolimit ? '∞' : LIMITS.keyPerDay,
+    left: inst.nolimit ? '∞' : Math.max(0, LIMITS.keyPerDay - used),
+    unlimited: !!inst.nolimit,
     showcase: (sc as { payload?: unknown } | null)?.payload ?? null,
   });
 }

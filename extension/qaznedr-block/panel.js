@@ -75,7 +75,8 @@
   .h{background:#16202b;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:move;user-select:none}.inline .h{cursor:default}
   .logo{width:24px;height:24px;border-radius:50%;border:2px solid #c8962e;display:grid;place-items:center;color:#c8962e;font-weight:700;font-size:12px}
   .h b{font-size:14px;letter-spacing:.06em}.x{margin-left:auto;background:none;border:0;color:#fff;opacity:.6;font-size:20px;cursor:pointer;line-height:1}
-  .b{padding:14px 16px;max-height:calc(100vh - 140px);overflow:auto}
+  .b{padding:14px 16px;max-height:calc(100vh - 290px);overflow:auto}
+  .p.inline .b{max-height:none}
   .l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6b7684}
   .c{font:600 17px/1.3 ui-monospace,Consolas,monospace;margin:2px 0 12px;user-select:all}
   .big{display:flex;align-items:baseline;gap:8px;margin:2px 0 4px}.big b{font-size:32px}.big span{color:#3b4450}
@@ -132,10 +133,15 @@
     if (!inline) { // drag by the header so the portal's own side list stays visible; position is remembered
       const box = shadow.querySelector('.p');
       const head = shadow.querySelector('.h');
+      // the body scrolls inside the window whatever the panel's position (24.11: on an 800 px screen its bottom was cut off)
+      const fit = () => { body.style.maxHeight = Math.max(160, innerHeight - box.getBoundingClientRect().top - 70) + 'px'; };
       const place = (l, t) => {
         box.style.left = Math.max(0, Math.min(l, innerWidth - 120)) + 'px';
         box.style.top = Math.max(0, Math.min(t, innerHeight - 60)) + 'px';
+        fit();
       };
+      addEventListener('resize', fit);
+      fit();
       try { chrome.storage.local.get('pos').then((v) => { if (v.pos) place(v.pos.l, v.pos.t); }); } catch (e) { /* popup or no storage */ }
       head.addEventListener('pointerdown', (ev) => {
         if (ev.target.closest('.x')) return;

@@ -116,6 +116,7 @@
     }
     h += `<div class="r"><span>${t.reports} ${esc(d.sheet)}</span><b>${d.sheetReports > 0 ? esc(d.sheetReports) : t.nodata}</b></div>`;
     if (d.showcase && root.QaznedrShowcase) h += root.QaznedrShowcase.html(d);
+    if (d.showcase && root.QaznedrCost) h += root.QaznedrCost.html(); // calculator: showcase keys first (T-0220, 25.11)
     h += `<a class="btn pr" target="_blank" rel="noopener" href="${order}">${t.order}</a>`
       + `<a class="btn se" target="_blank" rel="noopener" href="${SITE}/${L}">${t.about}</a>`
       + `<div class="note">${t.note}</div>`
@@ -126,7 +127,7 @@
   /** Mount (or reuse) the panel. `inline` = inside the popup, no fixed position and no close button. */
   function mount(host, inline) {
     const shadow = host.attachShadow({ mode: 'closed' });
-    shadow.innerHTML = `<style>${CSS}${root.QaznedrShowcase ? root.QaznedrShowcase.CSS : ''}</style><div class="p${inline ? ' inline' : ''}"><div class="h"><div class="logo">Q</div><b>QAZNEDR</b>${inline ? '' : '<button class="x" aria-label="close">×</button>'}</div><div class="b"></div></div>`;
+    shadow.innerHTML = `<style>${CSS}${root.QaznedrShowcase ? root.QaznedrShowcase.CSS : ''}${root.QaznedrCost ? root.QaznedrCost.CSS : ''}</style><div class="p${inline ? ' inline' : ''}"><div class="h"><div class="logo">Q</div><b>QAZNEDR</b>${inline ? '' : '<button class="x" aria-label="close">×</button>'}</div><div class="b"></div></div>`;
     const body = shadow.querySelector('.b');
     const x = shadow.querySelector('.x');
     if (x) x.addEventListener('click', () => { host.style.display = 'none'; });
@@ -160,6 +161,7 @@
         host.style.display = '';
         const render = () => {
           body.innerHTML = bodyHtml(state, pickLang(lang));
+          if (root.QaznedrCost) root.QaznedrCost.wire(body, render);
           const sc = root.QaznedrShowcase;
           if (!sc || inline) return;
           if (state.kind === 'data' && state.data.showcase) sc.wire(body, state.data, render);

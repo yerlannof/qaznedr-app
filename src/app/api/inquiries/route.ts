@@ -4,6 +4,7 @@ import { inquirySchema, isLikelySpam } from '@/lib/inquiries/schema';
 import { createThrottle } from '@/lib/inquiries/throttle';
 import { formatInquiryMessage } from '@/lib/inquiries/notify';
 import { notifyTelegramWithRetry } from '@/lib/inquiries/deliver';
+import { NO_CONTACT } from '@/lib/inquiries/notify';
 
 export const dynamic = 'force-dynamic';
 
@@ -54,7 +55,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       company: input.company || null,
       country: input.country || null,
       channel: input.channel,
-      contact: input.contact,
+      contact: input.contact || NO_CONTACT, // the column is NOT NULL, 3–160 chars
       message: input.message || null,
       locale: input.locale,
       source_path: input.sourcePath || null,

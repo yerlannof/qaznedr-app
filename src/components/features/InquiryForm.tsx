@@ -189,17 +189,21 @@ export default function InquiryForm({
         </div>
         <div>
           <label htmlFor="inq-contact" className={label}>
-            {t('inquiry.contactLabel')}
+            {t('inquiry.contactLabel')} {t('inquiry.optional')}
           </label>
           <input
             id="inq-contact"
             name="contact"
             {...CONTACT_FIELD[channel]}
-            required
             minLength={3}
             maxLength={160}
+            aria-describedby="inq-contact-hint"
             className={input}
           />
+          {/* Mukhtar 25.11: the contact is optional — a soft hint instead of a block */}
+          <p id="inq-contact-hint" className="mt-1 text-xs text-brand-muted">
+            {t('inquiry.contactHint')}
+          </p>
         </div>
       </div>
       <div>

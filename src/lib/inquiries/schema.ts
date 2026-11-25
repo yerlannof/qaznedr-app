@@ -26,7 +26,10 @@ export const inquirySchema = z.object({
   company: text(160).default(''),
   country: text(80).default(''),
   channel: z.enum(INQUIRY_CHANNELS),
-  contact: text(160).min(3),
+  // Optional since 25.11 (Mukhtar): empty is allowed, anything typed is at least 3 chars.
+  contact: text(160)
+    .default('')
+    .refine((v) => v === '' || v.length >= 3),
   message: text(2000).default(''),
   leadCode: z
     .string()

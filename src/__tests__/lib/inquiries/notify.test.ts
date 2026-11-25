@@ -96,6 +96,12 @@ describe('formatInquiryMessage reply shortcuts', () => {
     expect(msg).not.toContain('wa.me');
   });
 
+  it('says plainly when the optional contact was left empty', () => {
+    const text = formatInquiryMessage(withContact('whatsapp', ''), 'id-1');
+    expect(text).toContain('Связь: контакт не указан');
+    expect(text).not.toContain('wa.me');
+  });
+
   it('adds only the admin link for other channels', () => {
     const msg = formatInquiryMessage(input, 'uuid-1');
     expect(msg).not.toContain('wa.me');

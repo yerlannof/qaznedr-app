@@ -2,6 +2,9 @@ import type { InquiryInput } from './schema';
 
 export const ADMIN_INQUIRIES_URL = 'https://qaznedr.kz/ru/admin/inquiries';
 
+/** Stored when the visitor left the optional contact empty. */
+export const NO_CONTACT = 'не указан';
+
 const PHONE_LIKE = /^\+?[\d\s().-]+$/;
 
 /**
@@ -43,7 +46,9 @@ export function formatInquiryMessage(input: InquiryInput, id: string): string {
     `Имя: ${singleLine(input.name)}`,
     input.company ? `Компания: ${singleLine(input.company)}` : null,
     input.country ? `Страна: ${singleLine(input.country)}` : null,
-    `Связь: ${input.channel}: ${singleLine(input.contact)}`,
+    input.contact
+      ? `Связь: ${input.channel}: ${singleLine(input.contact)}`
+      : 'Связь: контакт не указан — ответить можно только если напишет сам',
     replyLine(input),
     `Язык сайта: ${input.locale}`,
     input.message ? `Сообщение: ${input.message}` : null,

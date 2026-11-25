@@ -146,7 +146,7 @@ describe('InquiryForm', () => {
     fireEvent.change(screen.getByLabelText('姓名'), {
       target: { value: 'Li Wei' },
     });
-    fireEvent.change(screen.getByLabelText('微信号 / 电话 / 邮箱'), {
+    fireEvent.change(screen.getByLabelText('微信号 / 电话 / 邮箱 （选填）'), {
       target: { value: 'liwei_88' },
     });
     fireEvent.click(screen.getByRole('button', { name: '提交咨询' }));
@@ -183,7 +183,7 @@ it('prefills the approved service topic but allows the visitor to edit their mes
 it('matches the contact keyboard and autofill to the chosen channel without changing any text', () => {
   const { container } = render(<InquiryForm locale="ru" />);
   const textBefore = container.textContent;
-  const contact = screen.getByLabelText('ID / номер / email');
+  const contact = screen.getByLabelText('ID / номер / email (необязательно)');
   const placeholderBefore = contact.getAttribute('placeholder');
   const select = screen.getByLabelText('Как с вами связаться');
   const expectField = (type: string, inputMode: string, auto: string) => {
@@ -208,7 +208,9 @@ it('matches the contact keyboard and autofill to the chosen channel without chan
   expect(contact).toHaveValue('+7 700 000 00 00');
 
   // Labels, placeholder and the rest of the copy are unchanged.
-  expect(screen.getByLabelText('ID / номер / email')).toBe(contact);
+  expect(screen.getByLabelText('ID / номер / email (необязательно)')).toBe(
+    contact
+  );
   expect(contact.getAttribute('placeholder')).toBe(placeholderBefore);
   expect(container.textContent).toBe(textBefore);
 });

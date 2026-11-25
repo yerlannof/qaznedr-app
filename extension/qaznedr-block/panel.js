@@ -11,7 +11,7 @@
       left: (n, d) => `Осталось сегодня: ${n} из ${d}`, limit: (d) => `Бесплатно — ${d} новых блоков в сутки, на сегодня всё. Справку по блоку можно заказать.`,
       wait: 'Загружаю…', fail: 'Сервер Qaznedr не ответил. Попробуйте ещё раз.', blocked: 'Ключ этой установки отключён: блоки шли подряд по сетке. Напишите нам.',
       installs: 'Слишком много новых установок из этой сети за сутки. Попробуйте завтра.', nometal: 'металл не указан',
-      nokey: 'Нужен ключ доступа. Нажмите на значок Qaznedr справа вверху в браузере и вставьте ключ, который вам прислали.', badcode: 'Не понял номер блока или координату.', privacy: 'Конфиденциальность', broken: 'Не работает?',
+      nokey: 'Нужен ключ доступа. Нажмите на значок Qaznedr справа вверху в браузере и вставьте ключ, который вам прислали.', badcode: 'Не понял номер блока или координату.', privacy: 'Конфиденциальность', broken: 'Не работает?', more: 'Ещё',
       stages: { 'месторождение': 'месторождение', 'проявление': 'проявление', 'точка минерализации': 'точка минерализации', 'тип не определён': 'тип не определён' },
     },
     kz: {
@@ -23,7 +23,7 @@
       left: (n, d) => `Бүгін қалды: ${n} / ${d}`, limit: (d) => `Тегін — тәулігіне ${d} жаңа блок, бүгінге бітті. Блок бойынша анықтама тапсыруға болады.`,
       wait: 'Жүктелуде…', fail: 'Qaznedr сервері жауап бермеді. Қайталап көріңіз.', blocked: 'Бұл орнатудың кілті өшірілді: блоктар тор бойымен қатар жүрді. Бізге жазыңыз.',
       installs: 'Бұл желіден бір тәулікте жаңа орнату тым көп. Ертең көріңіз.', nometal: 'металл көрсетілмеген',
-      nokey: 'Кіру кілті керек. Браузердің оң жақ жоғарғы бұрышындағы Qaznedr белгісін басып, сізге жіберілген кілтті қойыңыз.', badcode: 'Блок нөмірі немесе координата танылмады.', privacy: 'Құпиялылық', broken: 'Жұмыс істемей ме?',
+      nokey: 'Кіру кілті керек. Браузердің оң жақ жоғарғы бұрышындағы Qaznedr белгісін басып, сізге жіберілген кілтті қойыңыз.', badcode: 'Блок нөмірі немесе координата танылмады.', privacy: 'Құпиялылық', broken: 'Жұмыс істемей ме?', more: 'Тағы',
       stages: { 'месторождение': 'кен орны', 'проявление': 'кен білінісі', 'точка минерализации': 'минералдану нүктесі', 'тип не определён': 'түрі анықталмаған' },
     },
     en: {
@@ -35,7 +35,7 @@
       left: (n, d) => `Left today: ${n} of ${d}`, limit: (d) => `Free: ${d} new blocks a day, used up for today. You can order a block report.`,
       wait: 'Loading…', fail: 'The Qaznedr server did not answer. Please try again.', blocked: 'This install key is switched off: blocks went one after another along the grid. Write to us.',
       installs: 'Too many new installs from this network today. Try tomorrow.', nometal: 'commodity not stated',
-      nokey: 'An access key is needed. Click the Qaznedr icon at the top right of the browser and paste the key you were sent.', badcode: 'Could not read the block number or coordinate.', privacy: 'Privacy', broken: 'Not working?',
+      nokey: 'An access key is needed. Click the Qaznedr icon at the top right of the browser and paste the key you were sent.', badcode: 'Could not read the block number or coordinate.', privacy: 'Privacy', broken: 'Not working?', more: 'More',
       stages: { 'месторождение': 'deposit', 'проявление': 'occurrence', 'точка минерализации': 'mineralisation point', 'тип не определён': 'type not stated' },
     },
   };
@@ -69,23 +69,23 @@
 
   const CSS = `
   :host{all:initial}
-  .p{position:fixed;left:110px;top:200px;width:360px;max-width:calc(100vw - 32px);z-index:2147483000;background:#fff;border-radius:14px;
-     box-shadow:0 12px 40px rgba(20,30,50,.28);overflow:hidden;border:1px solid #e1e5ec;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#16202b}
+  .p{position:fixed;left:110px;top:200px;width:300px;max-width:calc(100vw - 32px);z-index:2147483000;background:#fff;border-radius:14px;
+     box-shadow:0 12px 40px rgba(20,30,50,.28);overflow:hidden;border:1px solid #e1e5ec;font:13px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#16202b}
   .p.inline{position:static;width:auto;box-shadow:none;border:0;border-radius:0}
-  .h{background:#16202b;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:move;user-select:none}.inline .h{cursor:default}
-  .logo{width:24px;height:24px;border-radius:50%;border:2px solid #c8962e;display:grid;place-items:center;color:#c8962e;font-weight:700;font-size:12px}
+  .h{background:#16202b;color:#fff;padding:7px 12px;display:flex;align-items:center;gap:8px;cursor:move;user-select:none}.inline .h{cursor:default}
+  .logo{width:20px;height:20px;border-radius:50%;border:2px solid #c8962e;display:grid;place-items:center;color:#c8962e;font-weight:700;font-size:12px}
   .h b{font-size:14px;letter-spacing:.06em}.x{margin-left:auto;background:none;border:0;color:#fff;opacity:.6;font-size:20px;cursor:pointer;line-height:1}
-  .b{padding:14px 16px;max-height:calc(100vh - 290px);overflow:auto}
+  .b{padding:10px 12px;max-height:calc(100vh - 290px);overflow:auto}
   .p.inline .b{max-height:none}
   .l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6b7684}
-  .c{font:600 17px/1.3 ui-monospace,Consolas,monospace;margin:2px 0 12px;user-select:all}
-  .big{display:flex;align-items:baseline;gap:8px;margin:2px 0 4px}.big b{font-size:32px}.big span{color:#3b4450}
-  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px}.chip{padding:3px 10px;border-radius:999px;background:#f1ece2;color:#6a4b12;font-size:13px}
-  .r{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #eef0f4}
-  .btn{display:block;text-align:center;padding:10px;border-radius:9px;font-weight:600;margin-top:10px;text-decoration:none}
+  .c{font:600 15px/1.3 ui-monospace,Consolas,monospace;margin:1px 0 8px;user-select:all}
+  .big{display:flex;align-items:baseline;gap:6px;margin:0 0 2px}.big b{font-size:24px}.big span{color:#3b4450}
+  .chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 8px}.chip{padding:2px 8px;border-radius:999px;background:#f1ece2;color:#6a4b12;font-size:12px}
+  .r{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid #eef0f4}
+  .btn{display:block;text-align:center;padding:8px;border-radius:8px;font-weight:600;margin-top:8px;text-decoration:none}
   .pr{background:#c8962e;color:#fff}.se{background:#eef2f7;color:#16202b}
   .msg{margin:6px 0 4px;color:#3b4450}
-  .note{font-size:11.5px;color:#7a8592;margin-top:12px;line-height:1.45}
+  .note{font-size:11px;color:#7a8592;margin-top:8px;line-height:1.4}.more{margin-top:6px}.more summary{cursor:pointer;font-size:11.5px;color:#7a8592;list-style:none;text-align:center}.more summary::-webkit-details-marker{display:none}.more summary::after{content:' ▾'}.more[open] summary::after{content:' ▴'}
   .f{display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:space-between;font-size:11.5px;color:#7a8592;margin-top:8px}.f a{color:#7a8592}`;
 
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -118,9 +118,10 @@
     if (d.showcase && root.QaznedrShowcase) h += root.QaznedrShowcase.html(d);
     if (d.showcase && root.QaznedrCost) h += root.QaznedrCost.html(); // calculator: showcase keys first (T-0220, 25.11)
     h += `<a class="btn pr" target="_blank" rel="noopener" href="${order}">${t.order}</a>`
+      + `<details class="more"><summary>${t.more}</summary>` // Мухтар 25.11: панель компактнее — сноска, лимит и ссылки под «Ещё»
       + `<a class="btn se" target="_blank" rel="noopener" href="${SITE}/${L}">${t.about}</a>`
       + `<div class="note">${t.note}</div>`
-      + `<div class="f"><span>${d.unlimited ? 'Без лимита · тестировщик' : t.left(d.left, d.perDay)}</span><span><a target="_blank" rel="noopener" href="${SITE}/${L}/legal/extension">${t.privacy}</a> · <a target="_blank" rel="noopener" href="${SITE}/${L}/contact?block=${encodeURIComponent(d.code)}">${t.broken}</a></span></div>`;
+      + `<div class="f"><span>${d.unlimited ? 'Без лимита · тестировщик' : t.left(d.left, d.perDay)}</span><span><a target="_blank" rel="noopener" href="${SITE}/${L}/legal/extension">${t.privacy}</a> · <a target="_blank" rel="noopener" href="${SITE}/${L}/contact?block=${encodeURIComponent(d.code)}">${t.broken}</a></span></div></details>`;
     return h;
   }
 

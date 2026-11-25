@@ -20,6 +20,13 @@ describe('inquirySchema', () => {
     expect(r).toMatchObject({ company: '', message: '', website: '' });
   });
 
+  it('accepts an empty or missing contact (optional since 25.11)', () => {
+    expect(inquirySchema.parse({ ...valid, contact: '' }).contact).toBe('');
+    const { contact: _c, ...noContact } = valid;
+    expect(inquirySchema.parse(noContact).contact).toBe('');
+    expect(inquirySchema.parse({ ...valid, contact: '   ' }).contact).toBe('');
+  });
+
   it('trims text fields', () => {
     expect(inquirySchema.parse({ ...valid, name: '  Li  ' }).name).toBe('Li');
   });

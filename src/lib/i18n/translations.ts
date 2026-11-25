@@ -937,6 +937,7 @@ export const translations = {
       countryLabel: 'Страна',
       channelLabel: 'Как с вами связаться',
       contactLabel: 'ID / номер / email',
+      contactHint: 'Без контакта мы не сможем ответить.',
       messageLabel: 'Сообщение',
       messagePlaceholder: 'Какие металлы, регионы и формат сделки интересуют?',
       submit: 'Отправить заявку',
@@ -2696,6 +2697,7 @@ export const translations = {
       countryLabel: 'Ел',
       channelLabel: 'Сізбен қалай байланысамыз',
       contactLabel: 'ID / нөмір / email',
+      contactHint: 'Байланыссыз біз жауап бере алмаймыз.',
       messageLabel: 'Хабарлама',
       messagePlaceholder:
         'Қандай металдар, өңірлер және мәміле форматы қызықтырады?',
@@ -4366,6 +4368,7 @@ export const translations = {
       countryLabel: 'Country',
       channelLabel: 'How should we contact you',
       contactLabel: 'ID / number / email',
+      contactHint: 'Without a contact we cannot reply.',
       messageLabel: 'Message',
       messagePlaceholder:
         'Which metals, regions and deal format are you interested in?',
@@ -5971,6 +5974,7 @@ export const translations = {
       countryLabel: '国家',
       channelLabel: '联系方式',
       contactLabel: '微信号 / 电话 / 邮箱',
+      contactHint: '没有联系方式，我们将无法回复您。',
       messageLabel: '留言',
       messagePlaceholder: '您关注哪些矿种、地区和合作方式？',
       submit: '提交咨询',

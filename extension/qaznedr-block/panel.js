@@ -1,11 +1,14 @@
 // Panel of the Qaznedr block extension: renders into a closed Shadow DOM, never touches the host page's styles.
 (function (root) {
   const SITE = 'https://qaznedr.kz';
+  const ruPl = (n, one, few, many) => { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
   const T = {
     ru: {
       block: 'Блок', area: 'Советские отчёты, блок и 5 км вокруг', objects: 'объектов в отчётах',
       stage: 'Высшая стадия изученности', reports: 'Отчётов фонда с объектами на листе 1:100 000', order: 'Заказать справку по блоку',
       about: 'Что такое Qaznedr →', empty: 'В нашей базе точек рядом нет. Это не значит, что в фонде пусто — закажите поиск по листу.', nodata: 'нет данных',
+      vols: (n) => `${ruPl(n, 'отчёт', 'отчёта', 'отчётов')} геологов по этому листу 1:100 000`, volsWide: (n) => `${ruPl(n, 'отчёт', 'отчёта', 'отчётов')} по площади вокруг (лист 1:200 000)`,
+      soon: 'Точек рядом в нашей базе пока нет. Справку по блоку соберём по этим отчётам за 1–2 дня.',
       prec: 'Точность точек', precs: { A: 'до 0,5 км', B: 'до 3 км', C: 'грубо, 3–5 км' },
       note: 'Названия, координаты и содержания — в справке. Данные — обработка советских геологических отчётов, не сведения о правах. Qaznedr не связан с e-qazyna и Министерством.',
       left: (n, d) => `Осталось сегодня: ${n} из ${d}`, limit: (d) => `Бесплатно — ${d} новых блоков в сутки, на сегодня всё. Справку по блоку можно заказать.`,
@@ -18,6 +21,8 @@
       block: 'Блок', area: 'Кеңестік есептер, блок және 5 км айналасы', objects: 'есептердегі объектілер',
       stage: 'Зерттелудің ең жоғары сатысы', reports: '1:100 000 парағындағы объектілері бар қор есептері', order: 'Блок бойынша анықтама тапсыру',
       about: 'Qaznedr деген не →', empty: 'Біздің базада жақын маңда нүкте жоқ. Бұл қорда жоқ деген сөз емес — парақ бойынша іздеу тапсырыңыз.', nodata: 'дерек жоқ',
+      vols: () => 'осы 1:100 000 парағы бойынша геологтар есебі', volsWide: () => 'айналадағы аумақ бойынша есеп (1:200 000 парағы)',
+      soon: 'Біздің базада жақын маңда нүкте әзірге жоқ. Блок бойынша анықтаманы осы есептер негізінде 1–2 күнде дайындаймыз.',
       prec: 'Нүктелер дәлдігі', precs: { A: '0,5 км-ге дейін', B: '3 км-ге дейін', C: 'дөрекі, 3–5 км' },
       note: 'Атаулар, координаттар және құрамдар — анықтамада. Деректер — кеңестік геологиялық есептерді өңдеу, құқықтар туралы мәлімет емес. Qaznedr e-qazyna және Министрлікпен байланысты емес.',
       left: (n, d) => `Бүгін қалды: ${n} / ${d}`, limit: (d) => `Тегін — тәулігіне ${d} жаңа блок, бүгінге бітті. Блок бойынша анықтама тапсыруға болады.`,
@@ -30,6 +35,8 @@
       block: 'Block', area: 'Soviet reports, the block and 5 km around', objects: 'objects in reports',
       stage: 'Highest stage of study', reports: 'Archive reports with objects on the 1:100,000 sheet', order: 'Order a block report',
       about: 'What is Qaznedr →', empty: 'No points near here in our database. That does not mean the archive is empty — order a sheet search.', nodata: 'no data',
+      vols: (n) => `geologists’ report${n === 1 ? '' : 's'} on this 1:100,000 sheet`, volsWide: (n) => `report${n === 1 ? '' : 's'} on the surrounding area (1:200,000 sheet)`,
+      soon: 'No points near here in our database yet. We will put together a block report from these reports in 1–2 days.',
       prec: 'Point accuracy', precs: { A: 'within 0.5 km', B: 'within 3 km', C: 'rough, 3–5 km' },
       note: 'Names, coordinates and grades are in the report. Data come from processing Soviet geological reports, not from licence records. Qaznedr is not affiliated with e-qazyna or the Ministry.',
       left: (n, d) => `Left today: ${n} of ${d}`, limit: (d) => `Free: ${d} new blocks a day, used up for today. You can order a block report.`,
@@ -111,10 +118,17 @@
       h += `<div class="big"><b>${esc(d.n)}</b><span>${t.objects}</span></div><div class="chips">${chips}</div>`
         + `<div class="r"><span>${t.stage}</span><b>${esc(t.stages[d.stage] || d.stage)}</b></div>`
         + (d.prec ? `<div class="r"><span>${t.prec}</span><b>${esc(t.precs[d.prec] || d.prec)}</b></div>` : '');
+    } else if (d.sheetVolumes > 0 || d.sheetVolumesWide > 0) {
+      // Ерлан 26.11 «не пусто + по спросу»: вместо «пусто» — сколько отчётов у нас по листу и срок справки
+      const own = d.sheetVolumes > 0; const n = Number(own ? d.sheetVolumes : d.sheetVolumesWide);
+      h += `<div class="big"><b>${esc(n)}</b><span>${own ? t.vols(n) : t.volsWide(n)}</span></div>`
+        + `<div class="msg">${t.soon}</div>`;
     } else {
       h += `<div class="msg">${t.empty}</div>`;
     }
-    h += `<div class="r"><span>${t.reports} ${esc(d.sheet)}</span><b>${d.sheetReports > 0 ? esc(d.sheetReports) : t.nodata}</b></div>`;
+    if (d.found || d.sheetReports > 0) {
+      h += `<div class="r"><span>${t.reports} ${esc(d.sheet)}</span><b>${d.sheetReports > 0 ? esc(d.sheetReports) : t.nodata}</b></div>`;
+    }
     if (d.showcase && root.QaznedrShowcase) h += root.QaznedrShowcase.html(d);
     if (d.showcase && root.QaznedrCost) h += root.QaznedrCost.html(); // calculator: showcase keys first (T-0220, 25.11)
     h += `<a class="btn pr" target="_blank" rel="noopener" href="${order}">${t.order}</a>`

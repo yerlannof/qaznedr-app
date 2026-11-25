@@ -106,7 +106,7 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
 
   const [{ data: t }, { data: s }, { data: sc }] = await Promise.all([
     e.db.from('ext_block_teaser').select('n, metals, more, stage, prec').eq('code', code).maybeSingle(),
-    e.db.from('ext_sheet_reports').select('reports').eq('sheet', sheetOf(code)).maybeSingle(),
+    e.db.from('ext_sheet_reports').select('reports, volumes, volumes_wide').eq('sheet', sheetOf(code)).maybeSingle(),
     inst.showcase
       ? e.db.from('ext_showcase').select('payload').eq('code', code).maybeSingle()
       : Promise.resolve({ data: null }),
@@ -133,6 +133,8 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
     stage: t?.stage ?? null,
     prec: t?.prec ?? null,
     sheetReports: s?.reports ?? 0,
+    sheetVolumes: s?.volumes ?? 0, // our reports naming this 1:100 000 sheet or its 1:50 000 parts (Erlan 26.11, 'not empty')
+    sheetVolumesWide: s?.volumes_wide ?? 0, // reports tied only through the enclosing 1:200 000 sheet
     perDay: inst.nolimit ? '∞' : LIMITS.keyPerDay,
     left: inst.nolimit ? '∞' : Math.max(0, LIMITS.keyPerDay - used),
     unlimited: !!inst.nolimit,

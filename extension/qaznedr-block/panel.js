@@ -126,7 +126,8 @@
     } else {
       h += `<div class="msg">${t.empty}</div>`;
     }
-    if (d.found || d.sheetReports > 0) {
+    // 26.11: on an empty block the big number already says how many reports — a second, differently counted number confused
+    if (d.found || (d.sheetReports > 0 && !(d.sheetVolumes > 0 || d.sheetVolumesWide > 0))) {
       h += `<div class="r"><span>${t.reports} ${esc(d.sheet)}</span><b>${d.sheetReports > 0 ? esc(d.sheetReports) : t.nodata}</b></div>`;
     }
     if (d.showcase && root.QaznedrShowcase) h += root.QaznedrShowcase.html(d);

@@ -103,3 +103,18 @@ describe('key hash', () => {
     expect(hashKey('abc')).toHaveLength(40);
   });
 });
+
+describe('block centre in WGS84 for the Google Maps / Earth links (26.11)', () => {
+  const { centerWgs84 } = require('../../../../extension/qaznedr-block/block-code.js');
+  // Reference: research repo src/geo/coords.to_wgs84(lat, lon, 'СК-42') (pyproj EPSG:4284 → 4326) of the cell centre.
+  it.each([
+    ['M-44-129-(10g-5b-15)', 48.458786, 82.157869],
+    ['K-42-5-(10a-5a-1)', 43.9919, 68.007536],
+    ['N-41-60-(10e-5g-25)', 54.342103, 65.990551],
+  ])('%s lands within 15 m of the canonical transform', (code, lat, lon) => {
+    const c = centerWgs84(code);
+    const dy = (c.lat - lat) * 111200;
+    const dx = (c.lon - lon) * 111200 * Math.cos((lat * Math.PI) / 180);
+    expect(Math.hypot(dx, dy)).toBeLessThan(15);
+  });
+});

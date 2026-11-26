@@ -56,7 +56,28 @@
     return [w, s, w + 1 / 60, s + 1 / 60];
   }
 
-  const api = { blockCode, blockBounds, parseDms, isBlockCode, BLOCK_RE };
+  // СК-42 (Krassovsky) degrees → WGS84, three-parameter shift the portal itself uses (+towgs84=15,-130,-84).
+  // The grid is in СК-42; Google Maps / Earth want WGS84 (about 100 m apart in Kazakhstan).
+  function sk42ToWgs84(lat, lon) {
+    const rad = Math.PI / 180;
+    const a1 = 6378245, f1 = 1 / 298.3, e1 = f1 * (2 - f1);
+    const p = lat * rad, l = lon * rad;
+    const n1 = a1 / Math.sqrt(1 - e1 * Math.sin(p) ** 2);
+    const X = n1 * Math.cos(p) * Math.cos(l) + 15, Y = n1 * Math.cos(p) * Math.sin(l) - 130, Z = n1 * (1 - e1) * Math.sin(p) - 84;
+    const a2 = 6378137, f2 = 1 / 298.257223563, e2 = f2 * (2 - f2);
+    const r = Math.hypot(X, Y);
+    let q = Math.atan2(Z, r * (1 - e2));
+    for (let i = 0; i < 6; i++) q = Math.atan2(Z + e2 * (a2 / Math.sqrt(1 - e2 * Math.sin(q) ** 2)) * Math.sin(q), r);
+    return { lat: q / rad, lon: Math.atan2(Y, X) / rad };
+  }
+
+  /** Centre of the 1′ block in WGS84 — for the Google Maps / Earth links (Erlan 26.11). */
+  function centerWgs84(code) {
+    const b = blockBounds(code);
+    return b ? sk42ToWgs84((b[1] + b[3]) / 2, (b[0] + b[2]) / 2) : null;
+  }
+
+  const api = { blockCode, blockBounds, centerWgs84, sk42ToWgs84, parseDms, isBlockCode, BLOCK_RE };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.QaznedrBlock = api;
 })(typeof self !== 'undefined' ? self : this);

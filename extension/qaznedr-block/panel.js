@@ -4,7 +4,7 @@
   const ruPl = (n, one, few, many) => { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
   const T = {
     ru: {
-      block: 'Блок', area: 'Советские отчёты, блок и 5 км вокруг', objects: 'объектов в отчётах',
+      block: 'Блок', gmaps: 'Google Карты', gearth: 'Google Earth', area: 'Советские отчёты, блок и 5 км вокруг', objects: 'объектов в отчётах',
       stage: 'Высшая стадия изученности', reports: 'Отчётов фонда с объектами на листе 1:100 000', order: 'Заказать справку по блоку',
       about: 'Что такое Qaznedr →', empty: 'В нашей базе точек рядом нет. Это не значит, что в фонде пусто — закажите поиск по листу.', nodata: 'нет данных',
       vols: (n) => `${ruPl(n, 'отчёт', 'отчёта', 'отчётов')} геологов по этому листу 1:100 000`, volsWide: (n) => `${ruPl(n, 'отчёт', 'отчёта', 'отчётов')} по площади вокруг (лист 1:200 000)`,
@@ -18,7 +18,7 @@
       stages: { 'месторождение': 'месторождение', 'проявление': 'проявление', 'точка минерализации': 'точка минерализации', 'тип не определён': 'тип не определён' },
     },
     kz: {
-      block: 'Блок', area: 'Кеңестік есептер, блок және 5 км айналасы', objects: 'есептердегі объектілер',
+      block: 'Блок', gmaps: 'Google Карталар', gearth: 'Google Earth', area: 'Кеңестік есептер, блок және 5 км айналасы', objects: 'есептердегі объектілер',
       stage: 'Зерттелудің ең жоғары сатысы', reports: '1:100 000 парағындағы объектілері бар қор есептері', order: 'Блок бойынша анықтама тапсыру',
       about: 'Qaznedr деген не →', empty: 'Біздің базада жақын маңда нүкте жоқ. Бұл қорда жоқ деген сөз емес — парақ бойынша іздеу тапсырыңыз.', nodata: 'дерек жоқ',
       vols: () => 'осы 1:100 000 парағы бойынша геологтар есебі', volsWide: () => 'айналадағы аумақ бойынша есеп (1:200 000 парағы)',
@@ -32,7 +32,7 @@
       stages: { 'месторождение': 'кен орны', 'проявление': 'кен білінісі', 'точка минерализации': 'минералдану нүктесі', 'тип не определён': 'түрі анықталмаған' },
     },
     en: {
-      block: 'Block', area: 'Soviet reports, the block and 5 km around', objects: 'objects in reports',
+      block: 'Block', gmaps: 'Google Maps', gearth: 'Google Earth', area: 'Soviet reports, the block and 5 km around', objects: 'objects in reports',
       stage: 'Highest stage of study', reports: 'Archive reports with objects on the 1:100,000 sheet', order: 'Order a block report',
       about: 'What is Qaznedr →', empty: 'No points near here in our database. That does not mean the archive is empty — order a sheet search.', nodata: 'no data',
       vols: (n) => `geologists’ report${n === 1 ? '' : 's'} on this 1:100,000 sheet`, volsWide: (n) => `report${n === 1 ? '' : 's'} on the surrounding area (1:200,000 sheet)`,
@@ -90,6 +90,7 @@
   .chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 8px}.chip{padding:2px 8px;border-radius:999px;background:#f1ece2;color:#6a4b12;font-size:12px}
   .r{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid #eef0f4}
   .btn{display:block;text-align:center;padding:8px;border-radius:8px;font-weight:600;margin-top:8px;text-decoration:none}
+  .geo{display:flex;gap:6px;margin:2px 0 6px}.geo a{flex:1;text-align:center;padding:4px 6px;border-radius:7px;background:#eef2f7;color:#16202b;font-size:12px;text-decoration:none;font-weight:600}.geo a:hover{background:#e1e7ef}
   .pr{background:#c8962e;color:#fff}.se{background:#eef2f7;color:#16202b}
   .msg{margin:6px 0 4px;color:#3b4450}
   .note{font-size:11px;color:#7a8592;margin-top:8px;line-height:1.4}.more{margin-top:6px}.more summary{cursor:pointer;font-size:11.5px;color:#7a8592;list-style:none;text-align:center}.more summary::-webkit-details-marker{display:none}.more summary::after{content:' ▾'}.more[open] summary::after{content:' ▴'}
@@ -102,6 +103,13 @@
     const L = lang === 'kz' ? 'kz' : lang;
     const order = `${SITE}/${L}/contact?block=${encodeURIComponent(state.code || '')}`;
     let h = `<div class="l">${t.block}</div><div class="c">${esc(state.code || '—')}</div>`;
+    // Erlan 26.11: jump to the block in Google Maps (satellite) / Google Earth — centre of the 1′ cell, СК-42 → WGS84
+    const cw = state.code && root.QaznedrBlock && root.QaznedrBlock.isBlockCode(state.code) ? root.QaznedrBlock.centerWgs84(state.code) : null;
+    if (cw) {
+      const ll = `${cw.lat.toFixed(6)},${cw.lon.toFixed(6)}`;
+      h += `<div class="geo"><a target="_blank" rel="noopener" href="https://www.google.com/maps/place/${ll}/@${ll},2500m/data=!3m1!1e3">${t.gmaps}</a>`
+        + `<a target="_blank" rel="noopener" href="https://earth.google.com/web/search/${ll}/@${ll},600a,2500d,35y,0h,0t,0r">${t.gearth}</a></div>`;
+    }
     if (state.kind === 'wait') return h + `<div class="msg">${t.wait}</div>`;
     if (state.kind === 'error') {
       if (state.error === 'bad_code') return h + `<div class="msg">${t.badcode}</div>`;

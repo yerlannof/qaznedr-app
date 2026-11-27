@@ -18,6 +18,7 @@
       moreVols: (n) => `и ещё ${n}`, allVols: (n) => `все тома листа (${n})`, thin: 'По блоку мало: точек из отчётов в 5 км нет. Вот что есть по листу — эти тома стоит заказать.',
       none: 'По листу в нашей базе томов нет — нужен поиск по каталогу фонда.', nopages: 'страницы не размечены',
       tgf: { SEVER: 'ТГФ Север', VOSTOK: 'ТГФ Восток', ZAPAD: 'ТГФ Запад', YUG: 'ТГФ Юг', TSENTR: 'ТГФ Центр', CENTER: 'ТГФ Центр' }, book: 'кн.',
+      cav: 'Оговорки авторов', cavPg: (p) => `PDF стр. ${p} · дословно со скана`,
     },
     kz: {
       kinds: { 'описание': 'нысан сипаттамасы', 'таблица': 'кесте', 'каталог': 'каталог жолы', 'оглавление': 'мазмұны' },
@@ -31,6 +32,7 @@
       moreVols: (n) => `тағы ${n}`, allVols: (n) => `парақтың барлық томдары (${n})`, thin: 'Блок бойынша аз: 5 км ішінде есептерден нүкте жоқ. Парақ бойынша барлары — осы томдарды тапсыруға болады.',
       none: 'Біздің базада парақ бойынша том жоқ — қор каталогы бойынша іздеу керек.', nopages: 'беттер белгіленбеген',
       tgf: { SEVER: 'ТГҚ Солтүстік', VOSTOK: 'ТГҚ Шығыс', ZAPAD: 'ТГҚ Батыс', YUG: 'ТГҚ Оңтүстік', TSENTR: 'ТГҚ Орталық', CENTER: 'ТГҚ Орталық' }, book: 'кіт.',
+      cav: 'Авторлардың ескертпелері', cavPg: (p) => `PDF бет ${p} · сканнан сөзбе-сөз`,
     },
     en: {
       kinds: { 'описание': 'object description', 'таблица': 'table', 'каталог': 'catalogue entry', 'оглавление': 'contents' },
@@ -44,6 +46,7 @@
       moreVols: (n) => `and ${n} more`, allVols: (n) => `all volumes of the sheet (${n})`, thin: 'Little on this block: no report points within 5 km. Here is what the sheet has — these volumes are worth ordering.',
       none: 'No volumes on this sheet in our database — an archive catalogue search is needed.', nopages: 'pages not marked',
       tgf: { SEVER: 'TGF North', VOSTOK: 'TGF East', ZAPAD: 'TGF West', YUG: 'TGF South', TSENTR: 'TGF Centre', CENTER: 'TGF Centre' }, book: 'book',
+      cav: "Authors' caveats", cavPg: (p) => `PDF p. ${p} · verbatim from the scan`,
     },
   };
 
@@ -56,6 +59,9 @@
   .qi .om{font-size:12px;color:#3b4450;margin-top:2px}.qi .ap{color:#a2560b;font-size:11.5px}
   .qi .s{margin-top:5px;font-size:12px}.qi .s b{font-weight:600}.qi .t{color:#3b4450}
   .qi .pg{color:#6b7684;font-size:11.5px}
+  .qi .cav{margin-top:6px;padding:5px 7px;border-left:3px solid #b9773a;background:#fbf4ec;font-size:12px}
+  .qi .cav b{display:block;font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:#7a4a17;margin-bottom:2px}
+  .qi .cav q{display:block;margin:3px 0 1px;color:#26303b;quotes:'«' '»'}
   .qi blockquote{margin:4px 0 2px;padding:4px 7px;border-left:3px solid #e1d5bd;background:#faf7f1;font-size:12px;line-height:1.4;color:#26303b}
   .qi .lb{font-size:11px;color:#6b7684}.qi .lb.w{color:#a2560b}
   .qi .v{display:flex;gap:6px;padding:3px 0;border-top:1px solid #f1f3f6;font-size:12px}.qi .v .n{white-space:nowrap;font-weight:600}
@@ -86,6 +92,14 @@
     return h + '</div>';
   }
 
+  // ПЛАТФОРМА 27.11 «Оговорки авторов»: только дословная фраза автора про объект (сверена двумя читателями по скану или
+  // взята из графы «что против» Булат-страницы); нет фразы — графы нет вовсе («возражений нет» мы не мерили)
+  function cavHtml(cs, t) {
+    if (!cs || !cs.length) return '';
+    return `<div class="cav"><b>${t.cav}</b>` + cs.map((c) => `<q>${esc(c.text)}</q>`
+      + `<div class="pg">${t.vol(volNo(c.vol, t), esc(c.year || ''))} · ${t.cavPg(esc(c.page))}</div>`).join('') + '</div>';
+  }
+
   function html(d, lang, metalName, stageName) {
     const info = d && d.info;
     if (!info) return '';
@@ -106,7 +120,7 @@
       h += `<details class="o"${i === 0 ? ' open' : ''}><summary><span class="on">${esc(o.name)}</span> <span class="ok">· ${t.km(esc(o.km))}</span>`
         + `<div class="om">${[metals, esc(stageName(o.stage))].filter(Boolean).join(' · ')}`
         + `${o.approx ? ` · <span class="ap">${t.approx(esc(o.acc_km))}</span>` : ''}</div></summary>`
-        + (o.src || []).map((s) => srcHtml(s, t)).join('') + '</details>';
+        + (o.src || []).map((s) => srcHtml(s, t)).join('') + cavHtml(o.caveats, t) + '</details>';
     });
     if (info.objectsMore > 0) h += `<div class="dim">${t.moreObj(esc(info.objectsMore))}</div>`;
     const vols = info.vols || [];

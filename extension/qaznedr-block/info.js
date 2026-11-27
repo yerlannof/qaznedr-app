@@ -58,7 +58,7 @@
   }
 
   function srcHtml(s, t) {
-    let h = `<div class="s"><b>${t.vol(volNo(s.vol, t), esc(s.year || ''))}</b>`;
+    let h = `<div class="s"><b>${t.vol(volNo(s.vol, t), esc(s.year || ''))}</b>${s.author ? ` · ${esc(s.author)}` : ''}`;
     if (s.title) h += ` <span class="t">«${esc(s.title)}»</span>`;
     const pages = (s.pages || []).length ? `${t.pages} ${s.pages.map(esc).join(', ')}` : (s.map_sign ? '' : t.nopages);
     const sign = s.map_sign ? t.sign(esc(s.map_sign.n), esc(s.map_sign.sheet)) : '';

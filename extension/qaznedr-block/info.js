@@ -1,13 +1,14 @@
 // «Tap any block» (T-0220, 27.11): the block report for showcase keys — objects within 5 km with names, fund report
 // volumes, pages and a short quote, plus the volumes of the 1:100 000 sheet. The server sends `info` only to installs with
 // the showcase flag (Erlan 27.11 «Да, только ключам показа»); for everyone else it is null and nothing here renders.
-// Conditions (PLATFORM PLAN 27.11): a quote from recognised text that was not checked against the scan says so; no holder
+// Measurements 27.11 (PLATFORM PLAN rule): only quotes checked against the scan for this object are shown; others give the page and what is on it; no holder
 // names or rights text; a point less accurate than 2 km is marked «approximately».
 (function (root) {
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const T = {
     ru: {
-      withheld: (p) => `стр. PDF ${p}: там есть числа — покажем после сверки со сканом`,
+      kinds: { 'описание': 'описание объекта', 'таблица': 'таблица', 'каталог': 'строка каталога', 'оглавление': 'оглавление' },
+      pageOnly: (p, k, n) => `стр. PDF ${p} — ${k}${n ? ', есть числа' : ''}; цитату покажем после сверки со сканом`,
       cov: 'Изученность по нашей базе', lights: { green: 'много материала', yellow: 'по блоку мало, по листу есть', grey: 'по листу почти ничего' },
       orderN: (n) => `стоит заказать томов: ${n}`, blind: 'Не видно: вторые книги томов, которых нет в базе, и объекты без координат.', full: 'Полный разбор →',
       title: 'Справка по блоку — что есть в отчётах', km: (k) => `${k} км`, approx: (a) => `примерно, ±${a} км`,
@@ -19,7 +20,8 @@
       tgf: { SEVER: 'ТГФ Север', VOSTOK: 'ТГФ Восток', ZAPAD: 'ТГФ Запад', YUG: 'ТГФ Юг', TSENTR: 'ТГФ Центр', CENTER: 'ТГФ Центр' }, book: 'кн.',
     },
     kz: {
-      withheld: (p) => `PDF бет ${p}: сандар бар — сканмен салыстырған соң көрсетеміз`,
+      kinds: { 'описание': 'нысан сипаттамасы', 'таблица': 'кесте', 'каталог': 'каталог жолы', 'оглавление': 'мазмұны' },
+      pageOnly: (p, k, n) => `PDF бет ${p} — ${k}${n ? ', сандар бар' : ''}; үзіндіні сканмен салыстырған соң көрсетеміз`,
       cov: 'Біздің база бойынша зерттелуі', lights: { green: 'материал көп', yellow: 'блок бойынша аз, парақ бойынша бар', grey: 'парақ бойынша жоқтың қасы' },
       orderN: (n) => `тапсыруға тұрарлық том: ${n}`, blind: 'Көрінбейді: базада жоқ томның екінші кітаптары және координатасыз объектілер.', full: 'Толық талдау →',
       title: 'Блок бойынша анықтама — есептерде не бар', km: (k) => `${k} км`, approx: (a) => `шамамен, ±${a} км`,
@@ -31,7 +33,8 @@
       tgf: { SEVER: 'ТГҚ Солтүстік', VOSTOK: 'ТГҚ Шығыс', ZAPAD: 'ТГҚ Батыс', YUG: 'ТГҚ Оңтүстік', TSENTR: 'ТГҚ Орталық', CENTER: 'ТГҚ Орталық' }, book: 'кіт.',
     },
     en: {
-      withheld: (p) => `PDF p. ${p} has figures — shown once checked against the scan`,
+      kinds: { 'описание': 'object description', 'таблица': 'table', 'каталог': 'catalogue entry', 'оглавление': 'contents' },
+      pageOnly: (p, k, n) => `PDF p. ${p} — ${k}${n ? ', with figures' : ''}; quote shown once checked against the scan`,
       cov: 'How well our database covers it', lights: { green: 'plenty of material', yellow: 'little on the block, some on the sheet', grey: 'almost nothing on the sheet' },
       orderN: (n) => `volumes worth ordering: ${n}`, blind: 'Not visible: second books of volumes missing from the database, and objects without coordinates.', full: 'Full analysis →',
       title: 'Block report — what the reports say', km: (k) => `${k} km`, approx: (a) => `approximate, ±${a} km`,
@@ -75,7 +78,7 @@
     const pages = (s.pages || []).length ? `${t.pages} ${s.pages.map(esc).join(', ')}` : (s.map_sign ? '' : t.nopages);
     const sign = s.map_sign ? t.sign(esc(s.map_sign.n), esc(s.map_sign.sheet)) : '';
     if (pages || sign) h += `<div class="pg">${[pages, sign].filter(Boolean).join(' · ')}</div>`;
-    if (s.quote_withheld && !s.quote) h += `<div class="lb w">${t.withheld(esc(s.quote_withheld))}</div>`;
+    if (s.page_only && !s.quote) h += `<div class="lb">${t.pageOnly(esc(s.page_only.page), esc(t.kinds[s.page_only.kind] || s.page_only.kind), s.page_only.num)}</div>`;
     if (s.quote && s.quote.text) {
       h += `<blockquote>${esc(s.quote.text)}</blockquote>`
         + `<div class="lb${s.quote.scan_read ? '' : ' w'}">${s.quote.scan_read ? t.scan(esc(s.quote.page)) : t.ocr(esc(s.quote.page))}</div>`;

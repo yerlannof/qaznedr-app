@@ -83,11 +83,16 @@ async function blockReport(db: SupabaseClient, code: string) {
   if (!bm) return null;
   const lat = 40 + (bm.my + 0.5) / 60;
   const lon = 42 + (bm.mx + 0.5) / 60;
-  const [{ data: objs }, { data: sh }] = await Promise.all([
+  const [{ data: objs }, { data: sh }, { data: cov }] = await Promise.all([
     db.from('ext_info_objects').select('lat, lon, payload')
       .gte('lat', lat - 0.06).lte('lat', lat + 0.06).gte('lon', lon - 0.1).lte('lon', lon + 0.1).limit(1000),
     db.from('ext_info_sheets').select('payload').eq('sheet', sheetOf(code)).maybeSingle(),
+    // coverage light (p.3): «изученность по нашей базе»; a block row wins over its sheet row
+    db.from('ext_coverage').select('code, level, light, why_ru, why_zh, order_n, page').in('code', [code, sheetOf(code)]),
   ]);
+  type Cov = { code: string; level: string; light: string; why_ru: string; why_zh: string; order_n: number; page: string };
+  const covRows = (cov ?? []) as Cov[];
+  const light = covRows.find((r) => r.code === code) ?? covRows.find((r) => r.code === sheetOf(code)) ?? null;
   const near = ((objs ?? []) as InfoObject[])
     .map((o) => ({ km: kmBetween(lat, lon, o.lat, o.lon), ...o.payload }))
     .filter((o) => o.km <= INFO_KM)
@@ -98,6 +103,9 @@ async function blockReport(db: SupabaseClient, code: string) {
     objectsMore: Math.max(0, near.length - INFO_MAX),
     vols: vols.slice(0, VOLS_MAX),
     volsMore: Math.max(0, vols.length - VOLS_MAX),
+    light: light
+      ? { light: light.light, level: light.level, why: light.why_ru, whyZh: light.why_zh, orderN: light.order_n, page: light.page }
+      : null,
   };
 }
 

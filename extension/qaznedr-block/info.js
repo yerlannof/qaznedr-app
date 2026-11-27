@@ -7,6 +7,8 @@
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const T = {
     ru: {
+      cov: 'Изученность по нашей базе', lights: { green: 'много материала', yellow: 'по блоку мало, по листу есть', grey: 'по листу почти ничего' },
+      orderN: (n) => `стоит заказать томов: ${n}`, blind: 'Не видно: вторые книги томов, которых нет в базе, и объекты без координат.', full: 'Полный разбор →',
       title: 'Справка по блоку — что есть в отчётах', km: (k) => `${k} км`, approx: (a) => `примерно, ±${a} км`,
       vol: (n, y) => `Отчёт фонда № ${n}${y ? `, ${y}` : ''}`, pages: 'стр. PDF', sign: (n, s) => `знак № ${n} на карте ПИ ${s}`,
       scan: (p) => `стр. PDF ${p} · прочитано со скана`, ocr: (p) => `стр. PDF ${p} · текст распознавания, не сверен со сканом`,
@@ -16,6 +18,8 @@
       tgf: { SEVER: 'ТГФ Север', VOSTOK: 'ТГФ Восток', ZAPAD: 'ТГФ Запад', YUG: 'ТГФ Юг', TSENTR: 'ТГФ Центр', CENTER: 'ТГФ Центр' }, book: 'кн.',
     },
     kz: {
+      cov: 'Біздің база бойынша зерттелуі', lights: { green: 'материал көп', yellow: 'блок бойынша аз, парақ бойынша бар', grey: 'парақ бойынша жоқтың қасы' },
+      orderN: (n) => `тапсыруға тұрарлық том: ${n}`, blind: 'Көрінбейді: базада жоқ томның екінші кітаптары және координатасыз объектілер.', full: 'Толық талдау →',
       title: 'Блок бойынша анықтама — есептерде не бар', km: (k) => `${k} км`, approx: (a) => `шамамен, ±${a} км`,
       vol: (n, y) => `Қор есебі № ${n}${y ? `, ${y}` : ''}`, pages: 'PDF бет', sign: (n, s) => `${s} ПҚ картасындағы № ${n} белгі`,
       scan: (p) => `PDF бет ${p} · сканнан оқылған`, ocr: (p) => `PDF бет ${p} · танылған мәтін, сканмен салыстырылмаған`,
@@ -25,6 +29,8 @@
       tgf: { SEVER: 'ТГҚ Солтүстік', VOSTOK: 'ТГҚ Шығыс', ZAPAD: 'ТГҚ Батыс', YUG: 'ТГҚ Оңтүстік', TSENTR: 'ТГҚ Орталық', CENTER: 'ТГҚ Орталық' }, book: 'кіт.',
     },
     en: {
+      cov: 'How well our database covers it', lights: { green: 'plenty of material', yellow: 'little on the block, some on the sheet', grey: 'almost nothing on the sheet' },
+      orderN: (n) => `volumes worth ordering: ${n}`, blind: 'Not visible: second books of volumes missing from the database, and objects without coordinates.', full: 'Full analysis →',
       title: 'Block report — what the reports say', km: (k) => `${k} km`, approx: (a) => `approximate, ±${a} km`,
       vol: (n, y) => `Archive report No. ${n}${y ? `, ${y}` : ''}`, pages: 'PDF p.', sign: (n, s) => `symbol No. ${n} on the minerals map ${s}`,
       scan: (p) => `PDF p. ${p} · read from the scan`, ocr: (p) => `PDF p. ${p} · recognised text, not checked against the scan`,
@@ -47,7 +53,10 @@
   .qi blockquote{margin:4px 0 2px;padding:4px 7px;border-left:3px solid #e1d5bd;background:#faf7f1;font-size:12px;line-height:1.4;color:#26303b}
   .qi .lb{font-size:11px;color:#6b7684}.qi .lb.w{color:#a2560b}
   .qi .v{display:flex;gap:6px;padding:3px 0;border-top:1px solid #f1f3f6;font-size:12px}.qi .v .n{white-space:nowrap;font-weight:600}
-  .qi .v .w{color:#8a94a1;white-space:nowrap}.qi .vm summary{cursor:pointer;font-size:12px;color:#6a4b12;margin:4px 0}.qi .dim{color:#6b7684;font-size:12px;margin:4px 0}`;
+  .qi .v .w{color:#8a94a1;white-space:nowrap}
+  .qi .cv{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:8px;margin:2px 0 6px;font-size:12px}.qi .cv .dot{flex:0 0 12px;height:12px;border-radius:50%;margin-top:2px}
+  .qi .cv.green{background:#eaf6ee}.qi .cv.green .dot{background:#2e9b55}.qi .cv.yellow{background:#fdf6e3}.qi .cv.yellow .dot{background:#d9a21b}.qi .cv.grey{background:#f1f3f6}.qi .cv.grey .dot{background:#9aa3ae}
+  .qi .cw{color:#3b4450;margin-top:2px}.qi .cb{color:#7a8592;font-size:11px;margin-top:3px}.qi .cf{display:inline-block;margin-top:4px;color:#6a4b12;font-weight:600;text-decoration:none}.qi .vm summary{cursor:pointer;font-size:12px;color:#6a4b12;margin:4px 0}.qi .dim{color:#6b7684;font-size:12px;margin:4px 0}`;
 
   const clip = (s, n) => (s.length > n ? s.slice(0, n).replace(/\s+\S*$/, '') + '…' : s);
 
@@ -75,6 +84,16 @@
     if (!info) return '';
     const t = T[lang] || T.ru;
     let h = `<div class="qi"><h4>${t.title}</h4>`;
+    const L = info.light; // светофор БУЛАТ СТРАНИЦЫ (п.3): изученность по нашей базе, не перспективность
+    if (L && t.lights[L.light]) {
+      const why = lang === 'ru' ? L.why : '';
+      const href = L.page ? (/^https:\/\//.test(L.page) ? L.page : `https://qaznedr.kz/${String(L.page).replace(/^\/+/, '')}`) : '';
+      h += `<div class="cv ${esc(L.light)}"><span class="dot"></span><div><b>${t.cov}: ${t.lights[L.light]}</b>`
+        + (why ? `<div class="cw">${esc(why)}</div>` : '')
+        + (L.orderN > 0 ? `<div class="cw">${t.orderN(esc(L.orderN))}</div>` : '')
+        + `<div class="cb">${t.blind}</div>`
+        + (href ? `<a class="cf" target="_blank" rel="noopener" href="${esc(href)}">${t.full}</a>` : '') + '</div></div>';
+    }
     (info.objects || []).forEach((o, i) => {
       const metals = (o.metals || []).map((m) => esc(metalName(m))).join(', ');
       h += `<details class="o"${i === 0 ? ' open' : ''}><summary><span class="on">${esc(o.name)}</span> <span class="ok">· ${t.km(esc(o.km))}</span>`

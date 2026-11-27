@@ -138,6 +138,8 @@
     if (d.found || (d.sheetReports > 0 && !(d.sheetVolumes > 0 || d.sheetVolumesWide > 0))) {
       h += `<div class="r"><span>${t.reports} ${esc(d.sheet)}</span><b>${d.sheetReports > 0 ? esc(d.sheetReports) : t.nodata}</b></div>`;
     }
+    // «ткни любой блок» (T-0220, 27.11): справка со страницами — сервер шлёт info только ключам показа
+    if (d.info && root.QaznedrInfo) h += root.QaznedrInfo.html(d, lang, (m) => metalName(m, lang), (s) => t.stages[s] || s);
     if (d.showcase && root.QaznedrShowcase) h += root.QaznedrShowcase.html(d);
     if (d.showcase && root.QaznedrCost) h += root.QaznedrCost.html(); // calculator: showcase keys first (T-0220, 25.11)
     h += `<a class="btn pr" target="_blank" rel="noopener" href="${order}">${t.order}</a>`
@@ -151,7 +153,7 @@
   /** Mount (or reuse) the panel. `inline` = inside the popup, no fixed position and no close button. */
   function mount(host, inline) {
     const shadow = host.attachShadow({ mode: 'closed' });
-    shadow.innerHTML = `<style>${CSS}${root.QaznedrShowcase ? root.QaznedrShowcase.CSS : ''}${root.QaznedrCost ? root.QaznedrCost.CSS : ''}</style><div class="p${inline ? ' inline' : ''}"><div class="h"><div class="logo">Q</div><b>QAZNEDR</b>${inline ? '' : '<button class="x" aria-label="close">×</button>'}</div><div class="b"></div></div>`;
+    shadow.innerHTML = `<style>${CSS}${root.QaznedrShowcase ? root.QaznedrShowcase.CSS : ''}${root.QaznedrCost ? root.QaznedrCost.CSS : ''}${root.QaznedrInfo ? root.QaznedrInfo.CSS : ''}</style><div class="p${inline ? ' inline' : ''}"><div class="h"><div class="logo">Q</div><b>QAZNEDR</b>${inline ? '' : '<button class="x" aria-label="close">×</button>'}</div><div class="b"></div></div>`;
     const body = shadow.querySelector('.b');
     const x = shadow.querySelector('.x');
     if (x) x.addEventListener('click', () => { host.style.display = 'none'; });

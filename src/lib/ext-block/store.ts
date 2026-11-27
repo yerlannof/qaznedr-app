@@ -7,6 +7,7 @@ import {
   NO_STORE,
   OPEN_REGISTRATION,
   almatyDay,
+  blockMinutes,
   clientIp,
   decide,
   hashKey,
@@ -62,6 +63,44 @@ export async function register(request: Request): Promise<Response> {
 
 type ViewRow = { code: string; key_hash: string; fp_hash: string; net_day: string };
 
+// «Tap any block» (T-0220, 27.11): for showcase keys only (Erlan 27.11 «Да, только ключам показа»), objects within 5 km of
+// the block with names, report volumes, pages and quotes, plus the volumes of the 1:100 000 sheet. The point itself is never
+// returned, only the distance. Data: scripts/site_block_info.py in the geology repo.
+const INFO_KM = 5.75; // the 1′ block's half-diagonal on top of the 5 km ring, as in the public teaser
+const INFO_MAX = 12;
+const VOLS_MAX = 40;
+type InfoObject = { lat: number; lon: number; payload: Record<string, unknown> };
+
+function kmBetween(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const r = Math.PI / 180;
+  const a = Math.sin(((lat2 - lat1) * r) / 2) ** 2
+    + Math.cos(lat1 * r) * Math.cos(lat2 * r) * Math.sin(((lon2 - lon1) * r) / 2) ** 2;
+  return 12742 * Math.asin(Math.sqrt(a));
+}
+
+async function blockReport(db: SupabaseClient, code: string) {
+  const bm = blockMinutes(code);
+  if (!bm) return null;
+  const lat = 40 + (bm.my + 0.5) / 60;
+  const lon = 42 + (bm.mx + 0.5) / 60;
+  const [{ data: objs }, { data: sh }] = await Promise.all([
+    db.from('ext_info_objects').select('lat, lon, payload')
+      .gte('lat', lat - 0.06).lte('lat', lat + 0.06).gte('lon', lon - 0.1).lte('lon', lon + 0.1).limit(1000),
+    db.from('ext_info_sheets').select('payload').eq('sheet', sheetOf(code)).maybeSingle(),
+  ]);
+  const near = ((objs ?? []) as InfoObject[])
+    .map((o) => ({ km: kmBetween(lat, lon, o.lat, o.lon), ...o.payload }))
+    .filter((o) => o.km <= INFO_KM)
+    .sort((a, b) => a.km - b.km);
+  const vols = ((sh as { payload?: { vols?: unknown[] } } | null)?.payload?.vols ?? []);
+  return {
+    objects: near.slice(0, INFO_MAX).map((o) => ({ ...o, km: Math.round(o.km * 10) / 10 })),
+    objectsMore: Math.max(0, near.length - INFO_MAX),
+    vols: vols.slice(0, VOLS_MAX),
+    volsMore: Math.max(0, vols.length - VOLS_MAX),
+  };
+}
+
 /** GET /api/ext/block/<code> with x-qz-key and x-qz-fp. */
 export async function blockInfo(request: Request, rawCode: string): Promise<Response> {
   const e = env();
@@ -104,12 +143,13 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
     return json({ error: 'limit', reason: verdict.reason, perDay: LIMITS.keyPerDay, left: 0 }, 429);
   }
 
-  const [{ data: t }, { data: s }, { data: sc }] = await Promise.all([
+  const [{ data: t }, { data: s }, { data: sc }, info] = await Promise.all([
     e.db.from('ext_block_teaser').select('n, metals, more, stage, prec').eq('code', code).maybeSingle(),
     e.db.from('ext_sheet_reports').select('reports, volumes, volumes_wide').eq('sheet', sheetOf(code)).maybeSingle(),
     inst.showcase
       ? e.db.from('ext_showcase').select('payload').eq('code', code).maybeSingle()
       : Promise.resolve({ data: null }),
+    inst.showcase ? blockReport(e.db, code) : Promise.resolve(null),
   ]);
 
   let used = today.key.size;
@@ -139,6 +179,7 @@ export async function blockInfo(request: Request, rawCode: string): Promise<Resp
     left: inst.nolimit ? '∞' : Math.max(0, LIMITS.keyPerDay - used),
     unlimited: !!inst.nolimit,
     showcase: (sc as { payload?: unknown } | null)?.payload ?? null,
+    info, // showcase keys only; null for everyone else
   });
 }
 

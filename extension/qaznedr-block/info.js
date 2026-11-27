@@ -7,6 +7,7 @@
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const T = {
     ru: {
+      withheld: (p) => `стр. PDF ${p}: там есть числа — покажем после сверки со сканом`,
       cov: 'Изученность по нашей базе', lights: { green: 'много материала', yellow: 'по блоку мало, по листу есть', grey: 'по листу почти ничего' },
       orderN: (n) => `стоит заказать томов: ${n}`, blind: 'Не видно: вторые книги томов, которых нет в базе, и объекты без координат.', full: 'Полный разбор →',
       title: 'Справка по блоку — что есть в отчётах', km: (k) => `${k} км`, approx: (a) => `примерно, ±${a} км`,
@@ -18,6 +19,7 @@
       tgf: { SEVER: 'ТГФ Север', VOSTOK: 'ТГФ Восток', ZAPAD: 'ТГФ Запад', YUG: 'ТГФ Юг', TSENTR: 'ТГФ Центр', CENTER: 'ТГФ Центр' }, book: 'кн.',
     },
     kz: {
+      withheld: (p) => `PDF бет ${p}: сандар бар — сканмен салыстырған соң көрсетеміз`,
       cov: 'Біздің база бойынша зерттелуі', lights: { green: 'материал көп', yellow: 'блок бойынша аз, парақ бойынша бар', grey: 'парақ бойынша жоқтың қасы' },
       orderN: (n) => `тапсыруға тұрарлық том: ${n}`, blind: 'Көрінбейді: базада жоқ томның екінші кітаптары және координатасыз объектілер.', full: 'Толық талдау →',
       title: 'Блок бойынша анықтама — есептерде не бар', km: (k) => `${k} км`, approx: (a) => `шамамен, ±${a} км`,
@@ -29,6 +31,7 @@
       tgf: { SEVER: 'ТГҚ Солтүстік', VOSTOK: 'ТГҚ Шығыс', ZAPAD: 'ТГҚ Батыс', YUG: 'ТГҚ Оңтүстік', TSENTR: 'ТГҚ Орталық', CENTER: 'ТГҚ Орталық' }, book: 'кіт.',
     },
     en: {
+      withheld: (p) => `PDF p. ${p} has figures — shown once checked against the scan`,
       cov: 'How well our database covers it', lights: { green: 'plenty of material', yellow: 'little on the block, some on the sheet', grey: 'almost nothing on the sheet' },
       orderN: (n) => `volumes worth ordering: ${n}`, blind: 'Not visible: second books of volumes missing from the database, and objects without coordinates.', full: 'Full analysis →',
       title: 'Block report — what the reports say', km: (k) => `${k} km`, approx: (a) => `approximate, ±${a} km`,
@@ -72,6 +75,7 @@
     const pages = (s.pages || []).length ? `${t.pages} ${s.pages.map(esc).join(', ')}` : (s.map_sign ? '' : t.nopages);
     const sign = s.map_sign ? t.sign(esc(s.map_sign.n), esc(s.map_sign.sheet)) : '';
     if (pages || sign) h += `<div class="pg">${[pages, sign].filter(Boolean).join(' · ')}</div>`;
+    if (s.quote_withheld && !s.quote) h += `<div class="lb w">${t.withheld(esc(s.quote_withheld))}</div>`;
     if (s.quote && s.quote.text) {
       h += `<blockquote>${esc(s.quote.text)}</blockquote>`
         + `<div class="lb${s.quote.scan_read ? '' : ' w'}">${s.quote.scan_read ? t.scan(esc(s.quote.page)) : t.ocr(esc(s.quote.page))}</div>`;

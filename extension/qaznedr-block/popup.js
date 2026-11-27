@@ -5,11 +5,13 @@
     ru: 'Номер блока с карты или координата (СК-42): 48.4998 82.4115 или 48° 29′ 59″ : 82° 24′ 41″',
     kz: 'Картадағы блок нөмірі немесе координата (СК-42): 48.4998 82.4115',
     en: 'Block number from the map or a coordinate (SK-42): 48.4998 82.4115',
+    zh: '地图上的区块编号或坐标（СК-42）：48.4998 82.4115',
   };
   const KEY = {
     ru: { hint: 'Вставьте ключ доступа, который вам прислали, и нажмите OK.', ok: 'Ключ сохранён.', bad: 'Это не похоже на ключ: проверьте, что скопировали целиком.', set: 'Ключ доступа есть', change: 'сменить' },
     kz: { hint: 'Сізге жіберілген кілтті қойып, OK басыңыз.', ok: 'Кілт сақталды.', bad: 'Бұл кілтке ұқсамайды: толық көшірілгенін тексеріңіз.', set: 'Кілт бар', change: 'ауыстыру' },
     en: { hint: 'Paste the access key you were sent and press OK.', ok: 'Key saved.', bad: 'This does not look like a key: check it was copied in full.', set: 'Access key is set', change: 'change' },
+    zh: { hint: '粘贴发给您的访问密钥，然后点 OK。', ok: '密钥已保存。', bad: '这不像密钥：请检查是否完整复制。', set: '已有访问密钥', change: '更换' },
   };
   let { lang } = await chrome.storage.local.get('lang');
   lang = self.QaznedrPanel.pickLang(lang);

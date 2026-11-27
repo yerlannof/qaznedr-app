@@ -48,6 +48,20 @@
       tgf: { SEVER: 'TGF North', VOSTOK: 'TGF East', ZAPAD: 'TGF West', YUG: 'TGF South', TSENTR: 'TGF Centre', CENTER: 'TGF Centre' }, book: 'book',
       cav: "Authors' caveats", cavPg: (p) => `PDF p. ${p} · verbatim from the scan`,
     },
+    zh: {
+      kinds: { 'описание': '矿点描述', 'таблица': '表格', 'каталог': '目录条目', 'оглавление': '目录' },
+      pageOnly: (p, k, n) => `PDF 第 ${p} 页 — ${k}${n ? '，含数据' : ''}；与扫描件核对后显示引文`,
+      cov: '本库资料覆盖程度', lights: { green: '资料丰富', yellow: '区块资料少，图幅有资料', grey: '图幅几乎没有资料' },
+      orderN: (n) => `值得订购的报告卷册：${n}`, blind: '看不到的：库中缺少的卷册第二册，以及没有坐标的矿点。', full: '完整分析 →',
+      title: '区块资料 — 报告中有什么', km: (k) => `${k} 公里`, approx: (a) => `大约，±${a} 公里`,
+      vol: (n, y) => `地质资料库报告 № ${n}${y ? `，${y} 年` : ''}`, pages: 'PDF 页', sign: (n, s) => `${s} 矿产图上的 № ${n} 号符号`,
+      scan: (p) => `PDF 第 ${p} 页 · 据扫描件读出（俄文原文）`, ocr: (p) => `PDF 第 ${p} 页 · 识别文本（俄文），未与扫描件核对`,
+      moreObj: (n) => `5 公里内另有 ${n} 个`, sheet: (s) => `${s} 图幅的资料库卷册`, own: '本图幅', wide: '经 1:200 000 图幅',
+      moreVols: (n) => `另有 ${n} 卷`, allVols: (n) => `本图幅全部卷册（${n}）`, thin: '本区块资料少：5 公里内没有报告中的矿点。以下是本图幅已有资料——这些卷册值得订购。',
+      none: '本库中没有本图幅的卷册——需要按资料库目录检索。', nopages: '页码未标注',
+      tgf: { SEVER: '北部地区地质资料库', VOSTOK: '东部地区地质资料库', ZAPAD: '西部地区地质资料库', YUG: '南部地区地质资料库', TSENTR: '中部地区地质资料库', CENTER: '中部地区地质资料库' }, book: (k) => `第 ${k} 册`,
+      cav: '作者的保留意见', cavPg: (p) => `PDF 第 ${p} 页 · 扫描件逐字原文（俄文）`,
+    },
   };
 
   const CSS = `
@@ -75,7 +89,7 @@
   function volNo(v, t) {
     const m = /^rgf_(\d+)(?:_TGF_([A-Z]+))?(?:_kn(\d+))?/.exec(v || '');
     if (!m) return esc(v || '');
-    return esc(m[1]) + (m[2] ? ` (${esc(t.tgf[m[2]] || m[2])})` : '') + (m[3] ? `, ${t.book} ${esc(m[3])}` : '');
+    return esc(m[1]) + (m[2] ? ` (${esc(t.tgf[m[2]] || m[2])})` : '') + (m[3] ? `, ${typeof t.book === 'function' ? t.book(esc(m[3])) : `${t.book} ${esc(m[3])}`}` : '');
   }
 
   function srcHtml(s, t) {
@@ -107,7 +121,7 @@
     let h = `<div class="qi"><h4>${t.title}</h4>`;
     const L = info.light; // светофор БУЛАТ СТРАНИЦЫ (п.3): изученность по нашей базе, не перспективность
     if (L && t.lights[L.light]) {
-      const why = lang === 'ru' ? L.why : '';
+      const why = lang === 'ru' ? L.why : lang === 'zh' ? (L.whyZh || '') : '';
       const href = L.page ? (/^https:\/\//.test(L.page) ? L.page : `https://qaznedr.kz/${String(L.page).replace(/^\/+/, '')}`) : '';
       h += `<div class="cv ${esc(L.light)}"><span class="dot"></span><div><b>${t.cov}: ${t.lights[L.light]}</b>`
         + (why ? `<div class="cw">${esc(why)}</div>` : '')

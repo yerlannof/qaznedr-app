@@ -33,7 +33,7 @@
   async function show(code) {
     const stored = (await chrome.storage.local.get('lang')).lang;
     const seg = (location.pathname.split('/')[1] || '').toLowerCase();
-    const lang = stored || (seg === 'kk' || seg === 'kz' ? 'kz' : seg === 'en' ? 'en' : 'ru');
+    const lang = stored || (seg === 'kk' || seg === 'kz' ? 'kz' : seg === 'en' ? 'en' : seg === 'zh' ? 'zh' : 'ru');
     const p = ensurePanel();
     p.show({ kind: 'wait', code }, lang);
     const res = await chrome.runtime.sendMessage({ type: 'block', code }).catch(() => ({ error: 'fail' }));

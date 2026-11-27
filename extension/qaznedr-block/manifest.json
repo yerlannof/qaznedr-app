@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Qaznedr — геология блока",
   "short_name": "Qaznedr",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Сводка советских геологических отчётов по блоку публичной карты недропользования РК. Не связано с e-qazyna и Министерством.",
   "icons": {
     "16": "icons/16.png",

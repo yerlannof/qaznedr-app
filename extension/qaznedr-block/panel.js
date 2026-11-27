@@ -45,6 +45,21 @@
       nokey: 'An access key is needed. Click the Qaznedr icon at the top right of the browser and paste the key you were sent.', badcode: 'Could not read the block number or coordinate.', privacy: 'Privacy', broken: 'Not working?', more: 'More',
       stages: { 'месторождение': 'deposit', 'проявление': 'occurrence', 'точка минерализации': 'mineralisation point', 'тип не определён': 'type not stated' },
     },
+    zh: {
+      block: '区块', gmaps: 'Google 地图', gearth: 'Google 地球', area: '苏联地质报告：本区块及周边 5 公里', objects: '个矿点（据报告）',
+      stage: '最高研究程度', reports: '1:100 000 图幅内含矿点的地质资料库报告', order: '订购区块资料',
+      about: 'Qaznedr 是什么 →', empty: '我们的数据库中附近没有矿点。这不代表资料库里没有资料——可以订购按图幅检索。', nodata: '无数据',
+      vols: () => '份本 1:100 000 图幅的地质报告', volsWide: () => '份周边区域报告（1:200 000 图幅）',
+      soon: '我们的数据库中附近暂无矿点。我们可根据这些报告在 1–2 天内整理出区块资料。',
+      prec: '点位精度', precs: { A: '0.5 公里以内', B: '3 公里以内', C: '粗略，3–5 公里' },
+      note: '名称、坐标和品位见区块资料。数据来自苏联地质报告的整理，不是矿权信息。Qaznedr 与 e-qazyna 及哈萨克斯坦政府部门无关。',
+      left: (n, d) => `今日剩余：${n} / ${d}`, limit: (d) => `免费：每天 ${d} 个新区块，今日已用完。可以订购区块资料。`,
+      wait: '加载中…', fail: 'Qaznedr 服务器没有响应，请重试。', blocked: '此安装的密钥已停用：区块沿网格被连续查询。请联系我们。',
+      installs: '今天此网络的新安装过多，请明天再试。', nometal: '矿种未注明',
+      nokey: '需要访问密钥。请点击浏览器右上角的 Qaznedr 图标，粘贴发给您的密钥。', badcode: '无法识别区块编号或坐标。', privacy: '隐私', broken: '无法使用？', more: '更多',
+      stages: { 'месторождение': '矿床', 'проявление': '矿点', 'точка минерализации': '矿化点', 'тип не определён': '类型未定' },
+      mt: '机器翻译 · 地质报告原文为俄文，以原文为准',
+    },
   };
   const METAL_EN = {
     'Золото': 'Gold', 'Серебро': 'Silver', 'Медь': 'Copper', 'Свинец': 'Lead', 'Цинк': 'Zinc', 'Молибден': 'Molybdenum',
@@ -66,12 +81,25 @@
     'Уголь': 'Көмір', 'Уран': 'Уран', 'Вольфрам': 'Вольфрам', 'Молибден': 'Молибден', 'Олово': 'Қалайы', 'Никель': 'Никель',
     'Марганец': 'Марганец', 'Хром': 'Хром', 'Фосфориты': 'Фосфорит', 'Редкие земли': 'Сирек жерлер',
   };
-  const metalName = (m, lang) => (lang === 'en' ? METAL_EN[m] : lang === 'kz' ? METAL_KZ[m] : null) || m;
+  const METAL_ZH = {
+    'Золото': '金', 'Серебро': '银', 'Медь': '铜', 'Свинец': '铅', 'Цинк': '锌', 'Молибден': '钼', 'Вольфрам': '钨', 'Олово': '锡',
+    'Железо': '铁', 'Марганец': '锰', 'Хром': '铬', 'Никель': '镍', 'Кобальт': '钴', 'Титан': '钛', 'Ванадий': '钒', 'Уран': '铀',
+    'Ртуть': '汞', 'Сурьма': '锑', 'Мышьяк': '砷', 'Висмут': '铋', 'Бериллий': '铍', 'Тантал': '钽', 'Ниобий': '铌', 'Литий': '锂',
+    'Цирконий': '锆', 'Платина': '铂', 'Алюминий': '铝', 'Редкие земли': '稀土', 'Фосфориты': '磷块岩', 'Уголь': '煤', 'Барит': '重晶石',
+    'Флюорит': '萤石', 'Графит': '石墨', 'Кварц': '石英', 'Бокситы': '铝土矿', 'Асбест': '石棉', 'Тальк': '滑石', 'Гипс': '石膏',
+    'Бентонит': '膨润土', 'Каолин': '高岭土', 'Соли': '盐类', 'Волластонит': '硅灰石', 'Цеолиты': '沸石', 'Вермикулит': '蛭石',
+    'Германий': '锗', 'Галлий': '镓', 'Индий': '铟', 'Кадмий': '镉', 'Теллур': '碲', 'Селен': '硒', 'Скандий': '钪', 'Рубидий': '铷',
+    'Цезий': '铯', 'Стронций': '锶', 'Известняк': '石灰岩', 'Песок': '砂', 'Глины': '黏土', 'Полиметаллы': '多金属', 'Мрамор': '大理岩',
+    'Доломит': '白云岩', 'Слюда': '云母', 'Гранат': '石榴子石', 'Кварциты': '石英岩', 'Пьезокварц': '压电石英', 'Магнезит': '菱镁矿',
+    'Строительный камень': '建筑石材', 'Алмазы': '金刚石', 'Корунд': '刚玉', 'Алунит': '明矾石', 'Андалузит': '红柱石',
+    'Огнеупорное сырьё': '耐火原料',
+  };
+  const metalName = (m, lang) => (lang === 'en' ? METAL_EN[m] : lang === 'kz' ? METAL_KZ[m] : lang === 'zh' ? METAL_ZH[m] : null) || m;
 
   function pickLang(stored) {
     if (stored && T[stored]) return stored;
     const n = (navigator.language || 'ru').slice(0, 2);
-    return n === 'kk' ? 'kz' : n === 'en' ? 'en' : 'ru';
+    return n === 'kk' ? 'kz' : n === 'en' ? 'en' : n === 'zh' ? 'zh' : 'ru';
   }
 
   const CSS = `
@@ -94,6 +122,7 @@
   .pr{background:#c8962e;color:#fff}.se{background:#eef2f7;color:#16202b}
   .msg{margin:6px 0 4px;color:#3b4450}
   .note{font-size:11px;color:#7a8592;margin-top:8px;line-height:1.4}.more{margin-top:6px}.more summary{cursor:pointer;font-size:11.5px;color:#7a8592;list-style:none;text-align:center}.more summary::-webkit-details-marker{display:none}.more summary::after{content:' ▾'}.more[open] summary::after{content:' ▴'}
+  .mt{display:inline-block;margin:0 0 6px;padding:1px 7px;border-radius:6px;background:#fff4d6;color:#7a5a12;font-size:11px}
   .f{display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:space-between;font-size:11.5px;color:#7a8592;margin-top:8px}.f a{color:#7a8592}`;
 
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -102,7 +131,8 @@
     const t = T[lang];
     const L = lang === 'kz' ? 'kz' : lang;
     const order = `${SITE}/${L}/contact?block=${encodeURIComponent(state.code || '')}`;
-    let h = `<div class="l">${t.block}</div><div class="c">${esc(state.code || '—')}</div>`;
+    // кнопка Ерлана 27.11: китайский — машинный перевод с пометкой «机器翻译», носителю не даём
+    let h = (t.mt ? `<div class="mt">${t.mt}</div>` : '') + `<div class="l">${t.block}</div><div class="c">${esc(state.code || '—')}</div>`;
     // Erlan 26.11: jump to the block in Google Maps (satellite) / Google Earth — centre of the 1′ cell, СК-42 → WGS84
     const cw = state.code && root.QaznedrBlock && root.QaznedrBlock.isBlockCode(state.code) ? root.QaznedrBlock.centerWgs84(state.code) : null;
     if (cw) {
@@ -146,7 +176,7 @@
       + `<details class="more"><summary>${t.more}</summary>` // Мухтар 25.11: панель компактнее — сноска, лимит и ссылки под «Ещё»
       + `<a class="btn se" target="_blank" rel="noopener" href="${SITE}/${L}">${t.about}</a>`
       + `<div class="note">${t.note}</div>`
-      + `<div class="f"><span>${d.unlimited ? 'Без лимита · тестировщик' : t.left(d.left, d.perDay)}</span><span><a target="_blank" rel="noopener" href="${SITE}/${L}/legal/extension">${t.privacy}</a> · <a target="_blank" rel="noopener" href="${SITE}/${L}/contact?block=${encodeURIComponent(d.code)}">${t.broken}</a></span></div></details>`;
+      + `<div class="f"><span>${d.unlimited ? (lang === 'zh' ? '不限次数 · 测试' : 'Без лимита · тестировщик') : t.left(d.left, d.perDay)}</span><span><a target="_blank" rel="noopener" href="${SITE}/${L}/legal/extension">${t.privacy}</a> · <a target="_blank" rel="noopener" href="${SITE}/${L}/contact?block=${encodeURIComponent(d.code)}">${t.broken}</a></span></div></details>`;
     return h;
   }
 

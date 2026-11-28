@@ -80,48 +80,30 @@ export default function GoldShowcase({
     });
     map.current = m;
     m.on('load', () => {
-      const features = [...squares.entries()].map(([k, s]) => ({
-        type: 'Feature' as const,
-        properties: { k, n: s.n },
-        geometry: {
-          type: 'Polygon' as const,
-          coordinates: [
-            [
-              [s.lon - HALF_LON, s.lat - HALF_LAT],
-              [s.lon + HALF_LON, s.lat - HALF_LAT],
-              [s.lon + HALF_LON, s.lat + HALF_LAT],
-              [s.lon - HALF_LON, s.lat + HALF_LAT],
-              [s.lon - HALF_LON, s.lat - HALF_LAT],
-            ],
-          ],
-        },
-      }));
-      m.addSource('sq', {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features },
-      });
-      m.addLayer({
-        id: 'sq-fill',
-        type: 'fill',
-        source: 'sq',
-        paint: { 'fill-color': '#c8962e', 'fill-opacity': 0.28 },
-      });
-      m.addLayer({
-        id: 'sq-line',
-        type: 'line',
-        source: 'sq',
-        paint: { 'line-color': '#8a6414', 'line-width': 1 },
-      });
-      m.on('click', 'sq-fill', (e) => {
-        const k = e.features?.[0]?.properties?.k as string | undefined;
-        if (k) setSquare(k);
-      });
-      m.on(
-        'mouseenter',
-        'sq-fill',
-        () => (m.getCanvas().style.cursor = 'pointer')
-      );
-      m.on('mouseleave', 'sq-fill', () => (m.getCanvas().style.cursor = ''));
+      // Squares are HTML elements, not a GeoJSON layer: the site CSP has no worker-src blob:,
+      // so MapLibre cannot start the worker that GeoJSON sources need (raster tiles do not).
+      const cells: { el: HTMLDivElement; lat: number; lon: number }[] = [];
+      for (const [k, s] of squares) {
+        const el = document.createElement('div');
+        el.style.cssText =
+          'background:rgba(200,150,46,.28);border:1px solid #8a6414;cursor:pointer';
+        el.addEventListener('click', () => setSquare(k));
+        new maplibregl.Marker({ element: el })
+          .setLngLat([s.lon, s.lat])
+          .addTo(m);
+        cells.push({ el, lat: s.lat, lon: s.lon });
+      }
+      const resize = () => {
+        for (const c of cells) {
+          const a = m.project([c.lon - HALF_LON, c.lat + HALF_LAT]);
+          const b = m.project([c.lon + HALF_LON, c.lat - HALF_LAT]);
+          c.el.style.width = `${Math.max(2, b.x - a.x)}px`;
+          c.el.style.height = `${Math.max(2, b.y - a.y)}px`;
+        }
+      };
+      resize();
+      m.on('zoom', resize);
+      m.on('resize', resize);
       // the count sits on an HTML marker: the raster style has no glyphs for text labels
       for (const [k, s] of squares) {
         const el = document.createElement('button');

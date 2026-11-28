@@ -1,9 +1,9 @@
 // Types for the closed-leads feature. LeadTeaser is the ONLY shape exposed publicly —
 // it physically omits every private field. LeadPrivate is server-only (gated render).
 
-export type LeadTier = 'TIER1_PLACER' | 'TIER2_BOMB';
+export type LeadTier = 'TIER1_PLACER' | 'TIER2_BOMB' | 'GOLD_V1';
 export type LeadExclusivity = 'MASS' | 'EXCLUSIVE';
-export type LeadStatus = 'DRAFT' | 'PUBLISHED' | 'SOLD' | 'ARCHIVED';
+export type LeadStatus = 'DRAFT' | 'PUBLISHED' | 'MEMBERS' | 'SOLD' | 'ARCHIVED';
 export type LeadType = 'placer' | 'bedrock' | 'other';
 
 /** Public teaser — safe to ship to the browser and index. NO name/coords/source. */
@@ -68,6 +68,7 @@ export interface LeadPrivate {
 export const TIER_LABELS: Record<LeadTier, string> = {
   TIER1_PLACER: 'Россыпь (старателю)',
   TIER2_BOMB: 'Инвест-объект',
+  GOLD_V1: 'Золото (витрина для вошедших)',
 };
 
 export const TYPE_LABELS: Record<LeadType, string> = {

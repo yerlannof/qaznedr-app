@@ -74,6 +74,8 @@ export default function AdminLeadRequestsPage() {
           lead_id: r.lead_id,
           user_id: r.user_id,
           request_id: r.id,
+          // gold showcase: access is opened after the invoice is paid — counts as a sale on the card
+          ...(/^AU-\d{4}$/.test(r.leads?.code ?? '') ? { grant_reason: 'PAYMENT' } : {}),
         }),
       });
       const json = await res.json();
@@ -164,7 +166,7 @@ export default function AdminLeadRequestsPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 text-sm">
                       <Link
-                        href={`/${locale}/leads/${r.leads?.code ?? ''}`}
+                        href={/^AU-\d{4}$/.test(r.leads?.code ?? '') ? `/${locale}/gold/${r.leads?.code}` : `/${locale}/leads/${r.leads?.code ?? ''}`}
                         className="font-mono text-[#0A84FF] hover:underline"
                       >
                         {r.leads?.code ?? r.lead_id.slice(0, 8)}

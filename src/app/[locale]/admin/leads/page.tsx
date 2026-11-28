@@ -6,7 +6,7 @@ import Navigation from '@/components/layouts/Navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Shield, Loader2, Eye, EyeOff, Archive, Inbox } from 'lucide-react';
 
-type Tab = 'ALL' | 'DRAFT' | 'PUBLISHED' | 'SOLD' | 'ARCHIVED';
+type Tab = 'ALL' | 'DRAFT' | 'PUBLISHED' | 'MEMBERS' | 'SOLD' | 'ARCHIVED';
 
 interface LeadRow {
   id: string;
@@ -25,6 +25,7 @@ const TABS: Array<{ key: Tab; label: string }> = [
   { key: 'ALL', label: 'Все' },
   { key: 'DRAFT', label: 'Черновики' },
   { key: 'PUBLISHED', label: 'Опубликованные' },
+  { key: 'MEMBERS', label: 'Золото (для вошедших)' },
   { key: 'SOLD', label: 'Проданные' },
   { key: 'ARCHIVED', label: 'В архиве' },
 ];
@@ -147,7 +148,7 @@ export default function AdminLeadsPage() {
                     <tr key={r.id}>
                       <td className="px-4 py-3 font-mono text-xs">
                         <Link
-                          href={`/${locale}/leads/${r.code}`}
+                          href={/^AU-\d{4}$/.test(r.code) ? `/${locale}/gold/${r.code}` : `/${locale}/leads/${r.code}`}
                           className="text-[#0A84FF] hover:underline"
                         >
                           {r.code}
@@ -171,7 +172,7 @@ export default function AdminLeadsPage() {
                             <Loader2 className="w-4 h-4 animate-spin text-gray-400" />
                           ) : (
                             <>
-                              {r.status !== 'PUBLISHED' && (
+                              {r.status !== 'PUBLISHED' && r.tier !== 'GOLD_V1' && (
                                 <button
                                   onClick={() => setStatus(r.id, 'PUBLISHED')}
                                   className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded bg-green-600 text-white hover:bg-green-700"

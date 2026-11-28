@@ -34,9 +34,16 @@ export function renderGoldMd(
     // the export has no outside links; keep the words, drop the address
     return this.parser.parseInline(tokens);
   };
-  const html = marked.parse(md, { async: false, gfm: true, renderer }) as string;
+  const html = marked.parse(md, {
+    async: false,
+    gfm: true,
+    renderer,
+  }) as string;
   // the export opens each key/value table with an empty «| | |» header: drop that empty row
-  return html.replace(/<thead>\s*<tr>(?:\s*<th[^>]*>\s*<\/th>)+\s*<\/tr>\s*<\/thead>\s*/g, '');
+  return html.replace(
+    /<thead>\s*<tr>(?:\s*<th[^>]*>\s*<\/th>)+\s*<\/tr>\s*<\/thead>\s*/g,
+    ''
+  );
 }
 
 /** Rights row of the open table («| Права | 🟠 под разведкой |»): dropped once the 30-day rights check has expired. */

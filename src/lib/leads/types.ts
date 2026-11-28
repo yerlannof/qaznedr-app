@@ -3,7 +3,12 @@
 
 export type LeadTier = 'TIER1_PLACER' | 'TIER2_BOMB' | 'GOLD_V1';
 export type LeadExclusivity = 'MASS' | 'EXCLUSIVE';
-export type LeadStatus = 'DRAFT' | 'PUBLISHED' | 'MEMBERS' | 'SOLD' | 'ARCHIVED';
+export type LeadStatus =
+  | 'DRAFT'
+  | 'PUBLISHED'
+  | 'MEMBERS'
+  | 'SOLD'
+  | 'ARCHIVED';
 export type LeadType = 'placer' | 'bedrock' | 'other';
 
 /** Public teaser — safe to ship to the browser and index. NO name/coords/source. */

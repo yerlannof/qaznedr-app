@@ -31,7 +31,9 @@ export default async function GoldCardPage({
   const { locale, code } = await params;
   const session = await getServerSession(authOptions);
   if (!session?.user) {
-    redirect(`/${locale}/auth/login?callbackUrl=${encodeURIComponent(`/${locale}/gold/${code}`)}`);
+    redirect(
+      `/${locale}/auth/login?callbackUrl=${encodeURIComponent(`/${locale}/gold/${code}`)}`
+    );
   }
   const card = await getGoldCard(code);
   if (!card) notFound();
@@ -47,22 +49,39 @@ export default async function GoldCardPage({
   // after an exclusive deal the card leaves the showcase: only its buyers still open it
   if (card.status !== 'MEMBERS' && !paid) notFound();
 
-  const openHtml = renderGoldMd(fresh ? card.open_md : dropRightsRow(card.open_md), card.code);
+  const openHtml = renderGoldMd(
+    fresh ? card.open_md : dropRightsRow(card.open_md),
+    card.code
+  );
 
   return (
     <>
       <Navigation />
       <main className="min-h-screen bg-white dark:bg-[#0A0A0A] pt-16 lg:pt-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
-          {paid && <LeadWatermark label={`${session!.user!.email ?? userId} · ${paid.watermarkToken}`} />}
+          {paid && (
+            <LeadWatermark
+              label={`${session!.user!.email ?? userId} · ${paid.watermarkToken}`}
+            />
+          )}
           <div className="relative z-10">
-            <Link href={`/${locale}/gold`} className="text-sm text-[#0A84FF] hover:underline">
+            <Link
+              href={`/${locale}/gold`}
+              className="text-sm text-[#0A84FF] hover:underline"
+            >
               {t.back}
             </Link>
-            <h1 className="mt-3 text-2xl font-bold font-mono text-gray-900 dark:text-gray-50">{card.code}</h1>
-            <div className={MD} dangerouslySetInnerHTML={{ __html: openHtml }} />
+            <h1 className="mt-3 text-2xl font-bold font-mono text-gray-900 dark:text-gray-50">
+              {card.code}
+            </h1>
+            <div
+              className={MD}
+              dangerouslySetInnerHTML={{ __html: openHtml }}
+            />
             <p className="text-xs text-gray-500">
-              {fresh ? t.rightsAsOf(dmy(card.rights_date)) : t.rightsStale(dmy(card.rights_date))}
+              {fresh
+                ? t.rightsAsOf(dmy(card.rights_date))
+                : t.rightsStale(dmy(card.rights_date))}
               {card.sold > 0 && ` · ${t.sold(card.sold)}`}
             </p>
 
@@ -71,12 +90,16 @@ export default async function GoldCardPage({
                 <h2 className="text-base font-semibold mb-2">{t.paidTitle}</h2>
                 <div
                   className={MD}
-                  dangerouslySetInnerHTML={{ __html: renderGoldMd(paid.paid_md, card.code, card.crops) }}
+                  dangerouslySetInnerHTML={{
+                    __html: renderGoldMd(paid.paid_md, card.code, card.crops),
+                  }}
                 />
               </section>
             ) : (
               <section className="mt-8 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">{t.paidLocked}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                  {t.paidLocked}
+                </p>
                 <GoldRequestForm code={card.code} locale={locale} />
               </section>
             )}

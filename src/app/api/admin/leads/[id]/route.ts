@@ -31,9 +31,15 @@ export async function PATCH(request: NextRequest) {
   const svc = await createServiceClient();
   // Gold showcase rows (tier GOLD_V1) are for signed-in users only: PUBLISHED would open them to the anon RLS
   // policy and the public lists. They move only between MEMBERS, SOLD, ARCHIVED and DRAFT.
-  const { data: cur } = await (svc as any).from('leads').select('tier').eq('id', id).maybeSingle();
+  const { data: cur } = await (svc as any)
+    .from('leads')
+    .select('tier')
+    .eq('id', id)
+    .maybeSingle();
   const goldOk = ['MEMBERS', 'SOLD', 'ARCHIVED', 'DRAFT'];
-  if (cur?.tier === 'GOLD_V1' ? !goldOk.includes(status) : status === 'MEMBERS') {
+  if (
+    cur?.tier === 'GOLD_V1' ? !goldOk.includes(status) : status === 'MEMBERS'
+  ) {
     return NextResponse.json(
       { success: false, error: 'Status not allowed for this lead' },
       { status: 400 }

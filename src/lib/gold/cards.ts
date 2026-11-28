@@ -63,7 +63,10 @@ function toOpen(row: any, sold: number): GoldOpen | null {
   };
 }
 
-async function soldCounts(svc: any, ids: string[]): Promise<Map<string, number>> {
+async function soldCounts(
+  svc: any,
+  ids: string[]
+): Promise<Map<string, number>> {
   const out = new Map<string, number>();
   if (!ids.length) return out;
   const { data } = await svc
@@ -88,7 +91,10 @@ export async function listGoldCards(): Promise<GoldOpen[]> {
     .order('code', { ascending: true })
     .limit(1000);
   const rows = data ?? [];
-  const sold = await soldCounts(svc, rows.map((r: any) => r.id));
+  const sold = await soldCounts(
+    svc,
+    rows.map((r: any) => r.id)
+  );
   return rows
     .map((r: any) => toOpen(r, sold.get(r.id) ?? 0))
     .filter((x: GoldOpen | null): x is GoldOpen => x !== null);

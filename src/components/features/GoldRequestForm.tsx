@@ -4,12 +4,20 @@ import { useState } from 'react';
 import { goldUi } from '@/lib/gold/ui';
 
 // «Купить» / «Хочу эксклюзив» on a gold card → POST /api/gold/<code>/request (lead_unlock_requests).
-export default function GoldRequestForm({ code, locale }: { code: string; locale: string }) {
+export default function GoldRequestForm({
+  code,
+  locale,
+}: {
+  code: string;
+  locale: string;
+}) {
   const t = goldUi(locale);
   const [kind, setKind] = useState<'buy' | 'exclusive'>('buy');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
-  const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle');
+  const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>(
+    'idle'
+  );
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -27,7 +35,9 @@ export default function GoldRequestForm({ code, locale }: { code: string; locale
   }
 
   if (state === 'done') {
-    return <p className="text-sm text-emerald-700 dark:text-emerald-400">{t.sent}</p>;
+    return (
+      <p className="text-sm text-emerald-700 dark:text-emerald-400">{t.sent}</p>
+    );
   }
   return (
     <form onSubmit={submit} className="space-y-3">
@@ -43,7 +53,9 @@ export default function GoldRequestForm({ code, locale }: { code: string; locale
           </button>
         ))}
       </div>
-      <p className="text-xs text-gray-500">{kind === 'buy' ? t.buyHint : t.exclusiveHint}</p>
+      <p className="text-xs text-gray-500">
+        {kind === 'buy' ? t.buyHint : t.exclusiveHint}
+      </p>
       <input
         value={phone}
         onChange={(e) => setPhone(e.target.value)}

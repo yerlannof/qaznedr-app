@@ -24,7 +24,8 @@ export interface GoldRow {
 
 const HALF_LAT = 0.5;
 const HALF_LON = 0.7;
-const sqKey = (s: { lat: number; lon: number }) => `${s.lat.toFixed(2)},${s.lon.toFixed(2)}`;
+const sqKey = (s: { lat: number; lon: number }) =>
+  `${s.lat.toFixed(2)},${s.lon.toFixed(2)}`;
 
 export default function GoldShowcase({
   rows,
@@ -115,7 +116,11 @@ export default function GoldShowcase({
         const k = e.features?.[0]?.properties?.k as string | undefined;
         if (k) setSquare(k);
       });
-      m.on('mouseenter', 'sq-fill', () => (m.getCanvas().style.cursor = 'pointer'));
+      m.on(
+        'mouseenter',
+        'sq-fill',
+        () => (m.getCanvas().style.cursor = 'pointer')
+      );
       m.on('mouseleave', 'sq-fill', () => (m.getCanvas().style.cursor = ''));
       // the count sits on an HTML marker: the raster style has no glyphs for text labels
       for (const [k, s] of squares) {
@@ -126,7 +131,9 @@ export default function GoldShowcase({
         el.className =
           'rounded-full bg-[#16202b] text-white text-xs font-semibold min-w-[22px] h-[22px] px-1.5 shadow';
         el.addEventListener('click', () => setSquare(k));
-        new maplibregl.Marker({ element: el }).setLngLat([s.lon, s.lat]).addTo(m);
+        new maplibregl.Marker({ element: el })
+          .setLngLat([s.lon, s.lat])
+          .addTo(m);
       }
     });
     return () => {
@@ -145,8 +152,13 @@ export default function GoldShowcase({
   return (
     <div>
       <section className="mt-6">
-        <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">{t.mapTitle}</h2>
-        <div ref={box} className="mt-2 h-[380px] w-full rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700" />
+        <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+          {t.mapTitle}
+        </h2>
+        <div
+          ref={box}
+          className="mt-2 h-[380px] w-full rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700"
+        />
         <p className="mt-1 text-xs text-gray-500">{t.mapNote}</p>
       </section>
 
@@ -163,7 +175,11 @@ export default function GoldShowcase({
           </button>
         ))}
         {square && (
-          <button type="button" onClick={() => setSquare(null)} className="ml-2 text-[#0A84FF] hover:underline">
+          <button
+            type="button"
+            onClick={() => setSquare(null)}
+            className="ml-2 text-[#0A84FF] hover:underline"
+          >
             {t.inSquare} · {t.clear}
           </button>
         )}
@@ -187,15 +203,23 @@ export default function GoldShowcase({
           </thead>
           <tbody>
             {shown.map((r) => (
-              <tr key={r.code} className="border-t border-gray-100 dark:border-gray-800 align-top">
+              <tr
+                key={r.code}
+                className="border-t border-gray-100 dark:border-gray-800 align-top"
+              >
                 <td className="p-2 font-mono whitespace-nowrap">
-                  <Link href={`/${locale}/gold/${r.code}`} className="text-[#0A84FF] hover:underline">
+                  <Link
+                    href={`/${locale}/gold/${r.code}`}
+                    className="text-[#0A84FF] hover:underline"
+                  >
                     {r.code}
                   </Link>
                 </td>
                 <td className="p-2">
                   {r.region}
-                  {!r.square && <div className="text-xs text-gray-400">{t.noSquare}</div>}
+                  {!r.square && (
+                    <div className="text-xs text-gray-400">{t.noSquare}</div>
+                  )}
                 </td>
                 <td className="p-2">{r.type}</td>
                 <td className="p-2">{r.main_number}</td>
@@ -206,7 +230,11 @@ export default function GoldShowcase({
                 <td className="p-2 whitespace-nowrap">
                   {usd(r.price_usd)}
                   <div className="text-xs text-gray-400">{t.preliminary}</div>
-                  {r.sold > 0 && <div className="text-xs text-amber-700">{t.sold(r.sold)}</div>}
+                  {r.sold > 0 && (
+                    <div className="text-xs text-amber-700">
+                      {t.sold(r.sold)}
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}

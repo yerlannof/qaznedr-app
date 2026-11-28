@@ -23,11 +23,17 @@ export default async function GoldPage({
   const { locale } = await params;
   const session = await getServerSession(authOptions);
   if (!session?.user) {
-    redirect(`/${locale}/auth/login?callbackUrl=${encodeURIComponent(`/${locale}/gold`)}`);
+    redirect(
+      `/${locale}/auth/login?callbackUrl=${encodeURIComponent(`/${locale}/gold`)}`
+    );
   }
   const t = goldUi(locale);
   const cards = await listGoldCards();
-  const date = cards.map((c) => c.rights_date).filter(Boolean).sort()[0] ?? '';
+  const date =
+    cards
+      .map((c) => c.rights_date)
+      .filter(Boolean)
+      .sort()[0] ?? '';
   const fresh = !!date && rightsFresh(date);
   const rows: GoldRow[] = cards.map((c) => ({
     code: c.code,
@@ -47,13 +53,19 @@ export default async function GoldPage({
       <Navigation />
       <main className="min-h-screen bg-white dark:bg-[#0A0A0A] pt-16 lg:pt-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-50">{t.title}</h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">{t.lead}</p>
+          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-50">
+            {t.title}
+          </h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
+            {t.lead}
+          </p>
           <GoldShowcase
             rows={rows}
             locale={locale}
             rightsFresh={fresh}
-            rightsCaption={fresh ? t.rightsAsOf(dmy(date)) : t.rightsStale(dmy(date))}
+            rightsCaption={
+              fresh ? t.rightsAsOf(dmy(date)) : t.rightsStale(dmy(date))
+            }
           />
         </div>
       </main>
